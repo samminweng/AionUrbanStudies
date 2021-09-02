@@ -5,6 +5,7 @@ import nltk
 from nltk import word_tokenize, sent_tokenize
 from nltk import ngrams
 from nltk.corpus import words
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 class Utility:
@@ -15,7 +16,7 @@ class Utility:
         # Preprocess the sentence
         cleaned_sentences = list()  # Skip copy right sentence
         for sentence in sentences:
-            if u"\u00A9" not in sentence and 'Licensee' not in sentence:
+            if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower():
                 try:
                     cleaned_words = word_tokenize(sentence.lower())
                     # Keep alphabetic
@@ -43,9 +44,15 @@ class Utility:
 
     # Extract the terms from TFIDF
     @staticmethod
-    def extract_terms_from_TFIDF(vectorizer, document, stopwords):
+    def extract_terms_from_TFIDF(n_gram_type, corpus, stopwords):
+        if n_gram_type == '1-Words':
+            vectorizer = TfidfVectorizer(stop_words=stopwords, ngram_range=(1, 1))
+        elif n_gram_type == '2-Words':
+            vectorizer = TfidfVectorizer(ngram_range=(2, 2))
+        else:
+            vectorizer = TfidfVectorizer(ngram_range=(3, 3))
         # Compute tf-idf scores for each word in each sentence of the abstract
-        vectors = vectorizer.fit_transform(document)
+        vectors = vectorizer.fit_transform(corpus)
         feature_names = vectorizer.get_feature_names()
         dense = vectors.todense()
         dense_list = dense.tolist()
@@ -54,11 +61,12 @@ class Utility:
         # Collect all the key terms of all the sentences in the text
         for dense in dense_dict:
             # Sort the terms by score
-            sorted_tfidf_list = list(sorted(dense.items(), key=lambda item: item[1], reverse=True))
+            filter_empty_score_list = list(filter(lambda item: item[1] > 0, dense.items()))
+            sorted_tfidf_list = list(sorted(filter_empty_score_list, key=lambda item: item[1], reverse=True))
             filter_tfidf_list = list(filter(lambda item: not Utility.check_n_gram_stopwords(item[0], stopwords),
                                             sorted_tfidf_list))  # Filter words containing stop words
             # Concatenate key terms
-            key_terms = key_terms + list(map(lambda item: item[0], filter_tfidf_list))
+            key_terms.append(list(map(lambda item: item[0], filter_tfidf_list)))
         return key_terms
 
     @staticmethod

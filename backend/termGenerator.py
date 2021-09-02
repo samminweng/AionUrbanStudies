@@ -30,24 +30,27 @@ class TermGenerator:
         path = os.path.join('data', self.args.case_name + '.csv')
         text_df = pd.read_csv(path)
         # Create the vectorizers
-        word_vectorizer = TfidfVectorizer(stop_words=self.stopwords, ngram_range=(1, 1))
-        bigram_vectorizer = TfidfVectorizer(ngram_range=(2, 2))
-        trigram_vectorizer = TfidfVectorizer(ngram_range=(3, 3))
         records = list()
+        corpus = list()
         # Search all the subject words
         for i, text in text_df.iterrows():
             try:
+                document = Utility.create_document(text)
+                corpus.append(document)
                 record = {'DocId': text['DocId'], 'Cited by': text['Cited by'], 'Title': text['Title'],
                           'Abstract': text['Abstract'],
                           'Author Keywords': Utility.get_author_keywords(text['Author Keywords'])}
-                document = [Utility.create_document(text)]
-                record['Key 1-Words'] = Utility.extract_terms_from_TFIDF(word_vectorizer, document, self.stopwords)
-                record['Key 2-Words'] = Utility.extract_terms_from_TFIDF(bigram_vectorizer, document, self.stopwords)
-                record['Key 3-Words'] = Utility.extract_terms_from_TFIDF(trigram_vectorizer, document, self.stopwords)
+                # record['Key 1-Words'] = Utility.extract_terms_from_TFIDF(word_vectorizer, document, self.stopwords)
+                # record['Key 2-Words'] = Utility.extract_terms_from_TFIDF(bigram_vectorizer, document, self.stopwords)
+                # record['Key 3-Words'] = Utility.extract_terms_from_TFIDF(trigram_vectorizer, document, self.stopwords)
                 records.append(record)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
-        # Write the output to a file
+        for n_gram_type in ['1-Words', '2-Words', '3-Words']:
+            key_term_lists = Utility.extract_terms_from_TFIDF(n_gram_type, corpus, self.stopwords)
+            for index, key_terms in enumerate(key_term_lists):
+                records[index]['Key ' + n_gram_type] = key_terms
+        # # Write the output to a file
         df = pd.DataFrame(records, columns=["DocId", "Cited by", "Key 1-Words", "Key 2-Words", "Key 3-Words",
                                             "Author Keywords", "Title", "Abstract"])
         path = os.path.join('output', self.args.case_name + '_key_terms.csv')
@@ -161,6 +164,6 @@ class TermGenerator:
 # Main entry
 if __name__ == '__main__':
     termGenerator = TermGenerator()
-    # termGenerator.collect_terms_from_TFIDF()
+    termGenerator.collect_terms_from_TFIDF()
     # termGenerator.collect_term_frequency()
-    termGenerator.collect_and_rank_collocations()
+    # termGenerator.collect_and_rank_collocations()
