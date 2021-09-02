@@ -15,7 +15,7 @@ class Utility:
         # Preprocess the sentence
         cleaned_sentences = list()  # Skip copy right sentence
         for sentence in sentences:
-            if u"\u00A9" not in sentence:
+            if u"\u00A9" not in sentence and 'Licensee' not in sentence:
                 try:
                     cleaned_words = word_tokenize(sentence.lower())
                     # Keep alphabetic
@@ -116,8 +116,8 @@ class Utility:
         return col_doc_dict
 
     @staticmethod
-    def get_term_document_count(term, col_doc_dict):
-        return len(col_doc_dict[term])
+    def get_term_doc_ids(term, col_doc_dict):
+        return col_doc_dict[term]
 
     @staticmethod
     def check_word(collocation):
