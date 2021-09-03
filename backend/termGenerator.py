@@ -164,6 +164,6 @@ class TermGenerator:
 # Main entry
 if __name__ == '__main__':
     termGenerator = TermGenerator()
-    termGenerator.collect_terms_from_TFIDF()
-    # termGenerator.collect_term_frequency()
+    # termGenerator.collect_terms_from_TFIDF()
+    termGenerator.collect_term_frequency()
     # termGenerator.collect_and_rank_collocations()
