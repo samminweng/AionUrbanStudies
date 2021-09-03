@@ -45,9 +45,9 @@ class Utility:
     # Extract the terms from TFIDF
     @staticmethod
     def extract_terms_from_TFIDF(n_gram_type, corpus, stopwords):
-        if n_gram_type == '1-Words':
+        if n_gram_type == 'uni-gram':
             vectorizer = TfidfVectorizer(stop_words=stopwords, ngram_range=(1, 1))
-        elif n_gram_type == '2-Words':
+        elif n_gram_type == 'bi-gram':
             vectorizer = TfidfVectorizer(ngram_range=(2, 2))
         else:
             vectorizer = TfidfVectorizer(ngram_range=(3, 3))
@@ -139,10 +139,10 @@ class Utility:
     # Find a list of bi_grams by (1) pointwise mutual information, (2) Chi-square (3) Likelihood ratios
     # Ref: https://www.nltk.org/howto/collocations.html
     @staticmethod
-    def get_collocations(bigram_measures, finder, stopwords):
+    def get_collocations(bigram_measures, finder, stopwords, associate_measures):
         bi_grams = {}
         # Find a list of bi_grams by pointwise mutual information
-        for associate_measure in ['PMI', 'Chi_square', 'Likelihood_ratio']:
+        for associate_measure in associate_measures:
             try:
                 if associate_measure == 'PMI':
                     scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)

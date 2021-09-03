@@ -29,7 +29,10 @@ class TermGenerator:
     def collect_terms_from_TFIDF(self):
         path = os.path.join('data', self.args.case_name + '.csv')
         text_df = pd.read_csv(path)
-        # Create the vectorizers
+        # Write corpus to json file
+        path = os.path.join('output', self.args.case_name + '.json')
+        text_df.to_json(path, orient='records')
+        print('Output the corpus to ' + path)
         records = list()
         corpus = list()
         # Search all the subject words
@@ -37,22 +40,17 @@ class TermGenerator:
             try:
                 document = Utility.create_document(text)
                 corpus.append(document)
-                record = {'DocId': text['DocId'], 'Cited by': text['Cited by'], 'Title': text['Title'],
-                          'Abstract': text['Abstract'],
-                          'Author Keywords': Utility.get_author_keywords(text['Author Keywords'])}
-                # record['Key 1-Words'] = Utility.extract_terms_from_TFIDF(word_vectorizer, document, self.stopwords)
-                # record['Key 2-Words'] = Utility.extract_terms_from_TFIDF(bigram_vectorizer, document, self.stopwords)
-                # record['Key 3-Words'] = Utility.extract_terms_from_TFIDF(trigram_vectorizer, document, self.stopwords)
+                record = {'DocId': text['DocId'], 'Year': text['Year'], 'Title': text['Title'],
+                          'Abstract': text['Abstract']}
                 records.append(record)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
-        for n_gram_type in ['1-Words', '2-Words', '3-Words']:
+        for n_gram_type in ['uni-gram', 'bi-gram', 'tri-gram']:
             key_term_lists = Utility.extract_terms_from_TFIDF(n_gram_type, corpus, self.stopwords)
             for index, key_terms in enumerate(key_term_lists):
-                records[index]['Key ' + n_gram_type] = key_terms
+                records[index]['Key_' + n_gram_type] = key_terms
         # # Write the output to a file
-        df = pd.DataFrame(records, columns=["DocId", "Cited by", "Key 1-Words", "Key 2-Words", "Key 3-Words",
-                                            "Author Keywords", "Title", "Abstract"])
+        df = pd.DataFrame(records, columns=["DocId", "Year", "Key_bi-gram", "Title", "Abstract"])
         path = os.path.join('output', self.args.case_name + '_key_terms.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         # # Write to a json file
@@ -129,30 +127,30 @@ class TermGenerator:
             # Find all the bigrams from the document
             tokens = word_tokenize(document)
             documents.append(tokens)
+        # Score and rank the collocations
+        associate_measures = ['Likelihood_ratio']    # ['PMI', 'Chi_square', 'Likelihood_ratio']
         # Remove all the stop words
         finder = BigramCollocationFinder.from_documents(documents)
-        collocations = Utility.get_collocations(bigram_measures, finder, self.stopwords)
+        collocations = Utility.get_collocations(bigram_measures, finder, self.stopwords, associate_measures)
         max_length = len(collocations['Likelihood_ratio'])
         col_doc_dict = Utility.create_collocation_document_dict(collocations['Likelihood_ratio'], text_df)
         records = list()
         for i in range(max_length):
             record = {}
-            for associate_measure in ['PMI', 'Chi_square', 'Likelihood_ratio']:
+            for associate_measure in associate_measures:
                 collocation = collocations[associate_measure][i]['collocation']
                 doc_ids = Utility.get_term_doc_ids(collocation, col_doc_dict)
-                record['Collocation By ' + associate_measure] = collocation
-                record['Score By ' + associate_measure] = collocations[associate_measure][i]['score']
-                record['Document By ' + associate_measure] = len(doc_ids)
-                record['DocIDs By ' + associate_measure] = doc_ids
+                record['Collocation'] = collocation
+                record['Score'] = collocations[associate_measure][i]['score']
+                record['DocIDs'] = doc_ids
             records.append(record)
         # Write the output to a file
-        df = pd.DataFrame(records, columns=['Collocation By PMI', 'Score By PMI', 'Document By PMI',
-                                            'Collocation By Chi_square', 'Score By Chi_square',
-                                            'Document By Chi_square',
-                                            'Collocation By Likelihood_ratio', 'Score By Likelihood_ratio',
-                                            'Document By Likelihood_ratio', 'DocIDs By Likelihood_ratio'])
-        # df = pd.DataFrame(records, columns=['Collocation', 'Score',
-        #                                     'Document By Likelihood_ratio'])
+        # df = pd.DataFrame(records, columns=['Collocation By PMI', 'Score By PMI', 'Document By PMI',
+        #                                     'Collocation By Chi_square', 'Score By Chi_square',
+        #                                     'Document By Chi_square',
+        #                                     'Collocation By Likelihood_ratio', 'Score By Likelihood_ratio',
+        #                                     'Document By Likelihood_ratio', 'DocIDs By Likelihood_ratio'])
+        df = pd.DataFrame(records, columns=['Collocation', 'Score', 'DocIDs'])
         path = os.path.join('output', self.args.case_name + '_collocations.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         # # Write to a json file
@@ -164,6 +162,6 @@ class TermGenerator:
 # Main entry
 if __name__ == '__main__':
     termGenerator = TermGenerator()
-    # termGenerator.collect_terms_from_TFIDF()
-    termGenerator.collect_term_frequency()
-    # termGenerator.collect_and_rank_collocations()
+    termGenerator.collect_terms_from_TFIDF()
+    # termGenerator.collect_term_frequency()
+    termGenerator.collect_and_rank_collocations()
