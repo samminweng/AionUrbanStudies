@@ -1,3 +1,4 @@
+import json
 import os.path
 from argparse import Namespace
 import pandas as pd
@@ -128,11 +129,11 @@ class TermGenerator:
             tokens = word_tokenize(document)
             documents.append(tokens)
         # Score and rank the collocations
-        associate_measures = ['Likelihood_ratio']    # ['PMI', 'Chi_square', 'Likelihood_ratio']
+        associate_measures = ['Likelihood_ratio']  # ['PMI', 'Chi_square', 'Likelihood_ratio']
         # Remove all the stop words
         finder = BigramCollocationFinder.from_documents(documents)
         collocations = Utility.get_collocations(bigram_measures, finder, self.stopwords, associate_measures)
-        max_length = len(collocations['Likelihood_ratio'])
+        max_length = min(10, len(collocations['Likelihood_ratio']))
         col_doc_dict = Utility.create_collocation_document_dict(collocations['Likelihood_ratio'], text_df)
         records = list()
         for i in range(max_length):
@@ -142,7 +143,7 @@ class TermGenerator:
                 doc_ids = Utility.get_term_doc_ids(collocation, col_doc_dict)
                 record['Collocation'] = collocation
                 record['Score'] = collocations[associate_measure][i]['score']
-                record['DocIDs'] = doc_ids
+                record['DocIDs'] = Utility.group_doc_ids_by_year(text_df, doc_ids)
             records.append(record)
         # Write the output to a file
         # df = pd.DataFrame(records, columns=['Collocation By PMI', 'Score By PMI', 'Document By PMI',
@@ -151,6 +152,7 @@ class TermGenerator:
         #                                     'Collocation By Likelihood_ratio', 'Score By Likelihood_ratio',
         #                                     'Document By Likelihood_ratio', 'DocIDs By Likelihood_ratio'])
         df = pd.DataFrame(records, columns=['Collocation', 'Score', 'DocIDs'])
+        df = df.reset_index()
         path = os.path.join('output', self.args.case_name + '_collocations.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         # # Write to a json file
@@ -158,10 +160,46 @@ class TermGenerator:
         df.to_json(path, orient='records')
         print('Output keywords/phrases to ' + path)
 
+    # Compute the co-occurrence of terms by looking the document ids. If two terms
+    def compute_co_occurrence_terms(self):
+        # Read collocations
+        path = os.path.join('output', self.args.case_name + '_collocations.json')
+        col_df = pd.read_json(path)
+        # Get the collocations
+        collocations = col_df['Collocation']
+        occ = list()
+        for i in range(len(collocations)):
+            col_i = col_df.query('index == {id}'.format(id=i)).iloc[0]
+            doc_ids_i = col_i['DocIDs']
+            occ_i = list()  # the occurrence of collocation 'i' with other collocations
+            for j in range(len(collocations)):
+                if i == j:
+                    occ_i.append([])  # No links
+                else:
+                    col_j = col_df.query('index == {id}'.format(id=j)).iloc[0]
+                    doc_ids_j = col_j['DocIDs']
+                    year_ij = Utility.collect_doc_years(doc_ids_i, doc_ids_j)
+                    if len(year_ij) == 0:
+                        occ_i.append([])
+                    else:
+                        for year in year_ij:
+                            doc_ids_ij = set(doc_ids_i[year]).intersection(set(doc_ids_j[year]))
+                            doc_ids_ij = sorted(list(doc_ids_ij))
+                            occ_i.append(doc_ids_ij)
+            occ.append(occ_i)
+        # Store the occurrence results as a json
+        occ_json = json.dumps({'start_year': 0, 'occurrences': occ}, indent=4)
+        # Write the json to a file
+        path = os.path.join('output', self.args.case_name + '_occurrences.json')
+        with open(path, "w") as out_file:
+            out_file.write(occ_json)
+        print('Output the occurrences to ' + path)
+
 
 # Main entry
 if __name__ == '__main__':
     termGenerator = TermGenerator()
-    termGenerator.collect_terms_from_TFIDF()
+    # termGenerator.collect_terms_from_TFIDF()
     # termGenerator.collect_term_frequency()
     termGenerator.collect_and_rank_collocations()
+    termGenerator.compute_co_occurrence_terms()

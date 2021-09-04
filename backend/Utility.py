@@ -169,6 +169,29 @@ class Utility:
                 print("Error occurred! {err}".format(err=err))
         return bi_grams
 
+    # Group the document ids by article published year
+    @staticmethod
+    def group_doc_ids_by_year(text_df, doc_ids):
+        year_doc_dict = {}
+        for doc_id in doc_ids:
+            try:
+                doc = text_df.query('DocId == {id}'.format(id=doc_id))  # doc is a pd series
+                doc_year = doc.iloc[0]['Year']  # Get the year of the doc
+                if doc_year not in year_doc_dict:
+                    year_doc_dict[doc_year] = list()
+                year_doc_dict[doc_year].append(doc_id)
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
+        return year_doc_dict
+
+    # Collect the years of document 'i' and 'j'
+    @staticmethod
+    def collect_doc_years(doc_ids_i, doc_ids_j):
+        year_i = set(doc_ids_i.keys())
+        year_j = set(doc_ids_j.keys())
+        # Obtain the years that appear both term 'i' and 'j' using set intersection
+        return sorted(list(year_i.intersection(year_j)))
+
         # # Group bigrams by first word in bigram.
         # prefix_keys = collections.defaultdict(list)
         # for key, scores in scored_bi_grams:
