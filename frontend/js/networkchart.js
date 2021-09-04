@@ -2,9 +2,12 @@ function NetworkChart(_collocation_data, _occurrence_data) {
     const collocation_data = _collocation_data; // Describe the terms
     const occurrence_data = _occurrence_data; // Describe the number of document ids between two terms
     const margin = {top: 10, right: 10, left: 10, bottom: 10};
-    const width = 400 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const width = 600;
+    const height = 600;
+    const max_radius = 20;
     const {node_link_data, doc_id_set, max_doc_ides} = _create_node_link_data();
+    const links = node_link_data.links.map(d => Object.create(d));
+    const nodes = node_link_data.nodes.map(d => Object.create(d));
 
     // Convert the collocations
     function _create_node_link_data(){
@@ -59,7 +62,7 @@ function NetworkChart(_collocation_data, _occurrence_data) {
             const doc_ids = col_doc_ids[year];
             num_doc += doc_ids.length;
         }
-        let radius = num_doc / max_doc_ides * 20;
+        let radius = num_doc / max_doc_ides * max_radius;
         return Math.round(radius);  // Round the radius to the integer
     }
 
@@ -67,40 +70,36 @@ function NetworkChart(_collocation_data, _occurrence_data) {
     function _create_d3_network_chart() {
         // Add the svg node to 'term_map' div
         const svg = d3.select('#term_map')
-                        .append("svg")
-                        .attr('width', 400)
-                        .attr('height', 400)
-                        .append('g')
-                        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+                      .append("svg").attr("viewBox", [0, 0, width, height])
+                      .attr('transform', `translate(${margin.left}, ${margin.top})`);
         // Initialise the links
-        const link = svg.selectAll('line')
-            .data(node_link_data.links)
+        const link = svg.append('g').selectAll('line')
+            .data(links)
             .join("line")
             .style("stroke", '#aaa');
         // Initialise the nodes
-        const node = svg.selectAll("circle")
-                        .data(node_link_data.nodes)
+        const node = svg.append('g').selectAll("circle")
+                        .data(nodes)
                         .join("circle")
                         .attr('r', d => get_node_size(d.name))
                         .attr("fill", '#69b3a2');
+        node.append("title")
+            .text(d => d.name);
 
         // Simulation
-        const simulation = d3.forceSimulation(node_link_data.nodes)
-                             .force('link', d3.forceLink()
-                                              .id(d => d.id)
-                                              .links(node_link_data.links)
-                             )
-                            .force("charge", d3.forceManyBody().strength(-800))
-            .force('center', d3.forceCenter(width/2, height/2))
-            .on('end', ticked);
+        const simulation = d3.forceSimulation(nodes)
+                             .force('link', d3.forceLink(links).id(d => d.id))
+                             .force("charge", d3.forceManyBody().strength(-1000))
+                             .force('center', d3.forceCenter(width/3, height/3))
+                             .on('end', ticked);
 
         function ticked(){
             link.attr('x1', d => d.source.x)
                 .attr('y1', d => d.source.y)
                 .attr('x2', d => d.target.x)
                 .attr('y2', d => d.target.y);
-            node.attr('cx', d => d.x + 6)
-                .attr('cy', d => d.y - 6);
+            node.attr('cx', d => d.x)
+                .attr('cy', d => d.y);
         }
 
     }
