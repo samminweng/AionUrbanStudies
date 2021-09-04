@@ -4,15 +4,34 @@ function NetworkChart(_collocation_data, _occurrence_data) {
     const margin = {top: 10, right: 10, left: 10, bottom: 10};
     const width = 400 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
-    const node_link_data = _create_node_link_data();
+    const {node_link_data, doc_id_set, max_doc_ides} = _create_node_link_data();
+
     // Convert the collocations
     function _create_node_link_data(){
+        let doc_id_set = new Set(); // Store all the document ids
+        let max_doc_ides = 0;
         // Populate the nodes with collocation data
         let nodes = [];
         for(let collocation of collocation_data){
             let node = {'id': collocation['index'], 'name': collocation['Collocation']}
             nodes.push(node);
+            // Add the doc_ids to doc_id_sets
+            let col_doc_ids = collocation['DocIDs'];
+            let total_doc_ids = 0;
+            for(const year in col_doc_ids){
+                const doc_ids = col_doc_ids[year];
+                for(const doc_id in doc_ids){
+                    doc_id_set.add(doc_id);
+                }
+                total_doc_ids += doc_ids.length;
+            }
+            if (max_doc_ides < total_doc_ids){
+                max_doc_ides = total_doc_ids;
+            }
+
         }
+        console.log(doc_id_set);
+
         // Populate the links with occurrences
         const occurrences = occurrence_data['occurrences'];
         let links = [];
@@ -27,7 +46,21 @@ function NetworkChart(_collocation_data, _occurrence_data) {
                 }
             }
         }
-        return {'nodes': nodes, 'links': links};
+        return {node_link_data: {nodes: nodes, links: links}, doc_id_set: doc_id_set, max_doc_ides: max_doc_ides};
+    }
+
+    // Get the number of documents for a collocation node
+    function get_node_size(node_name){
+        let collocation = collocation_data.find(({Collocation}) => Collocation === node_name);
+        let col_doc_ids = collocation['DocIDs'];
+        let num_doc = 0;
+        // Get the values of 'doc_ids'
+        for(const year in col_doc_ids){
+            const doc_ids = col_doc_ids[year];
+            num_doc += doc_ids.length;
+        }
+        let radius = num_doc / max_doc_ides * 20;
+        return Math.round(radius);  // Round the radius to the integer
     }
 
     // Create the network graph using D3 library
@@ -48,7 +81,7 @@ function NetworkChart(_collocation_data, _occurrence_data) {
         const node = svg.selectAll("circle")
                         .data(node_link_data.nodes)
                         .join("circle")
-                        .attr('r', 20)
+                        .attr('r', d => get_node_size(d.name))
                         .attr("fill", '#69b3a2');
 
         // Simulation
@@ -66,8 +99,8 @@ function NetworkChart(_collocation_data, _occurrence_data) {
                 .attr('y1', d => d.source.y)
                 .attr('x2', d => d.target.x)
                 .attr('y2', d => d.target.y);
-            node.attr('cx', d => d.x + 10)
-                .attr('cy', d => d.y - 10);
+            node.attr('cx', d => d.x + 6)
+                .attr('cy', d => d.y - 6);
         }
 
     }
