@@ -7,24 +7,33 @@
     <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="lib/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="lib/d3.v7.min.js"></script>
+    <script type="text/javascript" src="lib/pagination.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.mark.min.js"></script>
     <!-- CSS styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pagination.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
     <div class="h4">Term Map for Urban Studies</div>
-    <div>Top 10 keywords (by likelihood ratios) extracted from 600 research articles about Urban study.</div>
+    <div>Top 10 keywords (by likelihood ratios) extracted from 600 research articles about Urban study.
+        The bubble represents a term and the bubble size reflects the number of documents that this term appears
+        in the corpus. The link between two terms represents the co-occurrences of these terms in the same document.
+    </div>
     <div class="row">
         <div class="col border border-3">
             <div id="term_map"></div>
         </div>
         <div class="col border border-3">
-            <div id="document_view"></div>
+            <div id="text_list_view"></div>
         </div>
     </div>
 </div>
 <!-- Our javascript -->
-<script type="text/javascript" src="js/networkchart.js"></script>
+<script type="text/javascript" src="js/document/text_view.js"></script>
+<script type="text/javascript" src="js/document/document_list_view.js"></script>
+<script type="text/javascript" src="js/utility.js"></script>
+<script type="text/javascript" src="js/network_chart.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
