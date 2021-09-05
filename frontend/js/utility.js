@@ -5,10 +5,11 @@ class Utility {
         // Collect all the document ids
         let doc_id_set = new Set();
         for(const year in col_doc_ids){
-            const doc_ids = col_doc_ids[year];
+            let doc_ids = col_doc_ids[year];
             doc_ids.forEach(doc_id => doc_id_set.add(doc_id));
         }
-        return corpus_data.filter(doc => !doc_id_set.has(doc['DocId']));
+        let documents = corpus_data.filter(doc => doc_id_set.has(doc['DocId']));    // Get the documents 
+        return documents;
     }
 
     // Convert the collocations json to the format of D3 network graph

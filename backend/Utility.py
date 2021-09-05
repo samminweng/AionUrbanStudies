@@ -1,4 +1,6 @@
 import collections
+import json
+import os
 import re
 import pandas as pd
 import nltk
@@ -107,21 +109,24 @@ class Utility:
 
     # Count how many documents in the corpus contain the term
     @staticmethod
-    def create_collocation_document_dict(collocations, text_df):
+    def create_collocation_document(collocations, text_df):
         col_doc_dict = dict()
         # GO through each collocation term and initialise the col_doc_dict
         for col in collocations:
-            term = col['collocation']
-            col_doc_dict[term] = set()
-
+            col_doc_dict[col] = set()
+        # Iterate the document
         for i, text in text_df.iterrows():
-            doc_id = text['DocId']
-            document = Utility.create_document(text)
-            for term, docIDs in col_doc_dict.items():
-                if term in document:
-                    docIDs.add(doc_id)
-            # print("DocID = " + str(doc_id) + " completed!")
+            try:
+                doc_id = text['DocId']
+                document = Utility.create_document(text)
+                for term, docIDs in col_doc_dict.items():
+                    if term in document:
+                        docIDs.add(doc_id)
+                        col_doc_dict[term] = docIDs
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
         return col_doc_dict
+
 
     @staticmethod
     def get_term_doc_ids(term, col_doc_dict):

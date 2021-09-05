@@ -133,24 +133,40 @@ class TermGenerator:
         # Remove all the stop words
         finder = BigramCollocationFinder.from_documents(documents)
         collocations = Utility.get_collocations(bigram_measures, finder, self.stopwords, associate_measures)
-        max_length = min(10, len(collocations['Likelihood_ratio']))
-        col_doc_dict = Utility.create_collocation_document_dict(collocations['Likelihood_ratio'], text_df)
         records = list()
-        for i in range(max_length):
-            record = {}
-            for associate_measure in associate_measures:
-                collocation = collocations[associate_measure][i]['collocation']
-                doc_ids = Utility.get_term_doc_ids(collocation, col_doc_dict)
-                record['Collocation'] = collocation
-                record['Score'] = collocations[associate_measure][i]['score']
-                record['DocIDs'] = Utility.group_doc_ids_by_year(text_df, doc_ids)
+        for collocation in collocations['Likelihood_ratio']:
+            record = {'Collocation': collocation['collocation'], 'Score': collocation['score']}
             records.append(record)
         # Write the output to a file
-        # df = pd.DataFrame(records, columns=['Collocation By PMI', 'Score By PMI', 'Document By PMI',
-        #                                     'Collocation By Chi_square', 'Score By Chi_square',
-        #                                     'Document By Chi_square',
-        #                                     'Collocation By Likelihood_ratio', 'Score By Likelihood_ratio',
-        #                                     'Document By Likelihood_ratio', 'DocIDs By Likelihood_ratio'])
+        df = pd.DataFrame(records, columns=['Collocation', 'Score'])
+        path = os.path.join('output', self.args.case_name + '_collocations_likelihood.csv')
+        df.to_csv(path, encoding='utf-8', index=False)
+        # # Write to a json file
+        path = os.path.join('output', self.args.case_name + '_collocations_likelihood.json')
+        df.to_json(path, orient='records')
+
+    # Collect the relation between collocations and document IDs
+    def collect_relation_between_collocation_doc_ids(self):
+        # Read the corpus
+        path = os.path.join('data', self.args.case_name + '.csv')
+        text_df = pd.read_csv(path)
+        # Read collocation
+        path = os.path.join('output', self.args.case_name + '_collocations_likelihood.json')
+        col_df = pd.read_json(path)
+        # max_length = len(col_df['Collocation'].tolist())
+        collocations = col_df['Collocation'].tolist()
+        scores = col_df['Score'].tolist()
+        col_doc_dict = Utility.create_collocation_document(collocations, text_df)
+        records = list()
+        for index, collocation in enumerate(collocations):
+            score = scores[index]
+            doc_ids = col_doc_dict[collocation]
+            doc_ids_year = Utility.group_doc_ids_by_year(text_df, doc_ids)
+            record = {'Collocation': collocation, 'Score': score,
+                      'DocIDs': doc_ids_year}
+            records.append(record)
+        records = records[:10]
+        # Write the output as a file
         df = pd.DataFrame(records, columns=['Collocation', 'Score', 'DocIDs'])
         df = df.reset_index()
         path = os.path.join('output', self.args.case_name + '_collocations.csv')
@@ -165,8 +181,9 @@ class TermGenerator:
         # Read collocations
         path = os.path.join('output', self.args.case_name + '_collocations.json')
         col_df = pd.read_json(path)
+        max_length = 10
         # Get the collocations
-        collocations = col_df['Collocation']
+        collocations = col_df['Collocation'][:max_length]
         occ = list()
         for i in range(len(collocations)):
             col_i = col_df.query('index == {id}'.format(id=i)).iloc[0]
@@ -201,5 +218,6 @@ if __name__ == '__main__':
     termGenerator = TermGenerator()
     # termGenerator.collect_terms_from_TFIDF()
     # termGenerator.collect_term_frequency()
-    termGenerator.collect_and_rank_collocations()
+    # termGenerator.collect_and_rank_collocations()
+    termGenerator.collect_relation_between_collocation_doc_ids()
     termGenerator.compute_co_occurrence_terms()
