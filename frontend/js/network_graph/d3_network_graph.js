@@ -1,5 +1,5 @@
 // Create D3 network graph
-function D3NetworkGraph(collocation_data, occurrence_data){
+function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
     const margin = {top: 10, right: 10, left: 10, bottom: 10};
     const width = 600;
     const height = 600;
@@ -12,17 +12,21 @@ function D3NetworkGraph(collocation_data, occurrence_data){
     } = Utility.create_node_link_data(collocation_data, occurrence_data);
     const links = node_link_data.links;
     const nodes = node_link_data.nodes;
+    // Get the color of collocation
+    const colors = function (collocation) {
+        let group1 = ['machine learning', 'neural network', 'random forest', 'artificial intelligence', 'big data',
+            'deep learning'];
+        if (group1.includes(collocation)) {
+            return d3.schemeCategory10[1];
+        }
+        return d3.schemeCategory10[0];
+        // let scale = d3.scaleOrdinal(d3.schemeCategory10);
+        // return d => scale(d.group);
+    }
 
     // Get the number of documents for a collocation node
     function get_node_size(node_name) {
-        let collocation = collocation_data.find(({Collocation}) => Collocation === node_name);
-        let col_doc_ids = collocation['DocIDs'];
-        let num_doc = 0;
-        // Get the values of 'doc_ids'
-        for (const year in col_doc_ids) {
-            const doc_ids = col_doc_ids[year];
-            num_doc += doc_ids.length;
-        }
+        let num_doc = Utility.get_number_of_documents(node_name, collocation_data);
         let radius = num_doc / max_doc_ides * max_radius;
         return Math.max(Math.round(radius), 5);  // Round the radius to the integer
     }
@@ -35,8 +39,21 @@ function D3NetworkGraph(collocation_data, occurrence_data){
         return Math.sqrt(occ.length);
     }
 
+    // Get the link color
+    function get_link_color(link) {
+        let source = link.source;
+        let target = link.target;
+        let source_color = colors(source.name);
+        let target_color = colors(target.name);
+        if (source_color !== target_color) {
+            // Scale the color
+            return '#999';
+        }
+        return source_color;
+    }
+
     // Drag event function
-    const drag = function(simulation) {
+    const drag = function (simulation) {
 
         function dragstarted(event) {
             if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -60,62 +77,62 @@ function D3NetworkGraph(collocation_data, occurrence_data){
             .on("drag", dragged)
             .on("end", dragended);
     }
-    const colors = function (d) {
-        return d3.schemeCategory10[0];
-        // let scale = d3.scaleOrdinal(d3.schemeCategory10);
-        // return d => scale(d.group);
-    }
+
+
     // Create the network graph using D3 library
     function _createUI() {
         $('#term_map').empty(); // Clear the SVG graph
 
         // Simulation
         const simulation = d3.forceSimulation(nodes)
-            .force('link', d3.forceLink(links).id(d => d.id).distance(100))
-            .force("charge", d3.forceManyBody().strength(-400))
-            .force('center', d3.forceCenter(width / 3, height / 3));
+            .force('link', d3.forceLink(links).id(d => d.id).distance(200))
+            .force("charge", d3.forceManyBody().strength(-600))
+            .force('center', d3.forceCenter(width / 2 - 50, height / 2));
 
         // Add the svg node to 'term_map' div
         const svg = d3.select('#term_map')
             .append("svg").attr("viewBox", [0, 0, width, height])
-            .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            // .attr('transform', `translate(${margin.left}, ${margin.top})`)
+            .style("font", "16px sans-serif");
+
         // Initialise the links
         const link = svg.append('g')
-            .attr("stroke", "#999")
-            .attr("stroke-opacity", 0.3)
             .selectAll('line')
             .data(links)
             .join("line")
-            .attr("stroke-width", d => get_link_size(d));
+            .attr("stroke", d => get_link_color(d))
+            .attr("stroke-width", d => get_link_size(d))
+            .attr("stroke-opacity", 0.2);
         // Initialise the nodes
         const node = svg.append('g')
-            .attr("stroke", "#fff")
             .attr("stroke-width", 1.5)
-            .selectAll("circle")
+            .selectAll("g")
             .data(nodes)
-            .join("circle")
-            .attr("r", 5)
-            .attr("fill", d => colors(d))
+            .join("g")
+            .on("click", function (d, n) {// Add the onclick event
+                console.log(n.name);
+                let doc_list_view = new DocumentListView(n.name, collocation_data, corpus_data);
+            })
             .call(drag(simulation));
+
         // Add the circles
-        // node.append("circle")
-        //     .attr('r', d => get_node_size(d.name))
-        //     .attr("fill", '#69b3a2');
-        // Add the onclick event
-        // node.on("click", function (d) {
-        //     _create_collocation_document_list_view(d);
-        // });
+        node.append("circle")
+            .attr("stroke", "#aaa")
+            .attr("stroke-width", 1.5)
+            .attr("r", d => get_node_size(d.name))
+            .attr("fill", d => colors(d.name));
+
         // Add node label
         node.append("text")
+            .attr("class", "lead")
             .attr('x', 8)
             .attr('y', "0.31em")
-            .text(d => function(d){
-                console.log(d);
+            .text(d => {
                 return d.name;
-            })
-        // Tip tip
+            });
+        // Tooltip
         node.append("title")
-            .text(d => d.name);
+            .text(d => "'" + d.name + "' has " + Utility.get_number_of_documents(d.name, collocation_data) + " articles");
 
         // Simulate the tick event
         simulation.on('tick', () => {
@@ -123,9 +140,9 @@ function D3NetworkGraph(collocation_data, occurrence_data){
                 .attr('y1', d => d.source.y)
                 .attr('x2', d => d.target.x)
                 .attr('y2', d => d.target.y);
-            node.attr('cx', d => d.x)
-                .attr('cy', d => d.y);
+            node.attr("transform", d => `translate(${d.x},${d.y})`);
         });
     }
+
     _createUI();
 }

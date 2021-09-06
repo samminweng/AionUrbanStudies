@@ -5,7 +5,7 @@ function TextView(_document, collocation){
         "separateWordSearch": false,
         "accuracy": {
             "value": "exactly",
-            "limiters": [",", ".", "'s"]
+            "limiters": [",", ".", "'s", "/"]
         },
         "className": "keyword",
     }

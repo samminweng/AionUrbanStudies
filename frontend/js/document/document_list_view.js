@@ -1,6 +1,7 @@
 // Display a list of texts
-function DocumentListView(_documents) {
-    const documents = _documents;
+function DocumentListView(key_term, collocation_data, corpus_data) {
+    const collocation = collocation_data.find(({Collocation}) => Collocation === key_term);
+    const documents = Utility.collect_documents(collocation, corpus_data);
     // Container
     function createPagination(docTable){
         // Create the table
@@ -30,30 +31,9 @@ function DocumentListView(_documents) {
                     row.append(col);
                     // Add the title
                     col = $('<td class="col-11"></td>');
-                    let textView = new TextView(document, "machine learning");
+                    let textView = new TextView(document, key_term);
                     col.append(textView.get_container());
                     row.append(col);
-
-                    // let doc_container = $('<div class="container"></div>');
-                    // Story View
-                    // let storyView;
-                    // let storyPattern = storyPatterns.find(d => d['storyId'] === story['id']);
-                    // // Get the story dep
-                    // if (storyPattern && storyPattern['matchedPatterns'].length>0) {
-                    //     let pattern = storyPattern['matchedPatterns'][0]
-                    //     let matchedWords = pattern['matchedWords'];
-                    //     let mode = Utility.mapPatternMode(pattern['pattern']);
-                    //     // console.log(matchedWords);
-                    //     storyView = new HighlightStoryView(story, matchedWords, mode);
-                    // } else {
-                    //     storyView = new HighlightStoryView(story, [], 'object');
-                    // }
-                    // storyContainer.append($('<div class="row"></div>').append(storyView.getContainer()));
-                    // // Category div
-                    // let categoryView = new CategoryView(story);
-                    // storyContainer.append($('<div class="row"></div>').append(categoryView.getContainer()));
-                    // col.append(storyContainer);
-                    // row.append(col);
                     docTable.find('tbody').append(row);
                 }
             }
@@ -81,8 +61,6 @@ function DocumentListView(_documents) {
         container.append(documentTable);
 
         $('#text_list_view').append(container);
-
-
 
     }
 

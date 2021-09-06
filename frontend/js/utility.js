@@ -60,4 +60,19 @@ class Utility {
         return {node_link_data: {nodes: nodes, links: links}, doc_id_set: doc_id_set,
             max_doc_ides: max_doc_ides, max_link_length: max_link_length};
     }
+
+    // Get the total number of document for a collocation name
+    static get_number_of_documents(collocation_name, collocation_data){
+        let collocation = collocation_data.find(({Collocation}) => Collocation === collocation_name);
+        let col_doc_ids = collocation['DocIDs'];
+        let num_doc = 0;
+        // Get the values of 'doc_ids'
+        for (const year in col_doc_ids) {
+            const doc_ids = col_doc_ids[year];
+            num_doc += doc_ids.length;
+        }
+
+        return num_doc;
+    }
+
 }
