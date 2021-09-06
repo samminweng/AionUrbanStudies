@@ -63,7 +63,6 @@ function DocumentListView(_documents) {
     }
 
 
-
     function _createUI() {
         $('#text_list_view').empty();
         let container = $('<div class="container"></div>');
@@ -72,7 +71,6 @@ function DocumentListView(_documents) {
             '<tr class="d-flex">' +
             '    <th class="col-1">Year</th>' +
             '    <th class="col-11">Text</th>' +
-            // '    <th class="col-5">Abstract</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody></tbody></table>');

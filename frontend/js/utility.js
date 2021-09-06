@@ -8,7 +8,9 @@ class Utility {
             let doc_ids = col_doc_ids[year];
             doc_ids.forEach(doc_id => doc_id_set.add(doc_id));
         }
-        let documents = corpus_data.filter(doc => doc_id_set.has(doc['DocId']));    // Get the documents 
+        let documents = corpus_data.filter(doc => doc_id_set.has(doc['DocId']));    // Get the documents
+        // Sort the documents by year in a descending order
+        documents.sort((a, b) => b['Year'] - a['Year']);
         return documents;
     }
 
