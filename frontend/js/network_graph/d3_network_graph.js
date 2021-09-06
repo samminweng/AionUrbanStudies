@@ -43,7 +43,7 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
         let target_color = colors(target.name);
         if (source_color !== target_color) {
             // Scale the color
-            return '#999';
+            return d3.schemeCategory10[7];
         }
         return source_color;
     }
@@ -83,7 +83,7 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
         const simulation = d3.forceSimulation(nodes)
             .force('link', d3.forceLink(links).id(d => d.id).distance(250))
             .force("charge", d3.forceManyBody().strength(-400))
-            .force('center', d3.forceCenter(width / 2 - 80, height / 2));
+            .force('center', d3.forceCenter(width / 2, height / 2));
 
         // Add the svg node to 'term_map' div
         const svg = d3.select('#term_map')
@@ -97,7 +97,7 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
             .join("line")
             .attr("stroke", d => get_link_color(d))
             .attr("stroke-width", d => get_link_size(d))
-            .attr("stroke-opacity", 0.2);
+            .attr("stroke-opacity", 0.1);
 
         // Initialise the nodes
         const node = svg.append('g')
