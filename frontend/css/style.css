@@ -1,5 +1,10 @@
-/* Word Color Palette*/
-.keyword {
+/* Collocation Color Palette*/
+.keyword-group-0 {
+    background: #1f77b4;
+    color: whitesmoke;
+}
+.keyword-group-1 {
     background: orange;
     color: black;
 }
+

@@ -14,12 +14,8 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
     const nodes = node_link_data.nodes;
     // Get the color of collocation
     const colors = function (collocation) {
-        let group1 = ['machine learning', 'neural network', 'random forest', 'artificial intelligence', 'big data',
-            'deep learning'];
-        if (group1.includes(collocation)) {
-            return d3.schemeCategory10[1];
-        }
-        return d3.schemeCategory10[0];
+        let group = Utility.get_group_number(collocation)
+        return d3.schemeCategory10[group];
         // let scale = d3.scaleOrdinal(d3.schemeCategory10);
         // return d => scale(d.group);
     }
@@ -36,7 +32,7 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
         let source = link.source;
         let target = link.target;
         let occ = occurrence_data['occurrences'][source.id][target.id];
-        return Math.sqrt(occ.length);
+        return Math.max(1.5, Math.sqrt(occ.length));
     }
 
     // Get the link color
@@ -85,14 +81,13 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
 
         // Simulation
         const simulation = d3.forceSimulation(nodes)
-            .force('link', d3.forceLink(links).id(d => d.id).distance(200))
-            .force("charge", d3.forceManyBody().strength(-600))
-            .force('center', d3.forceCenter(width / 2 - 50, height / 2));
+            .force('link', d3.forceLink(links).id(d => d.id).distance(250))
+            .force("charge", d3.forceManyBody().strength(-400))
+            .force('center', d3.forceCenter(width / 2 - 80, height / 2));
 
         // Add the svg node to 'term_map' div
         const svg = d3.select('#term_map')
             .append("svg").attr("viewBox", [0, 0, width, height])
-            // .attr('transform', `translate(${margin.left}, ${margin.top})`)
             .style("font", "16px sans-serif");
 
         // Initialise the links
@@ -102,7 +97,14 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
             .join("line")
             .attr("stroke", d => get_link_color(d))
             .attr("stroke-width", d => get_link_size(d))
-            .attr("stroke-opacity", 0.2);
+            .attr("stroke-opacity", 0.2)
+            .on('click', function(d, n){
+                // console.log(d);
+                // console.log(n);
+                let source = d.source;
+                let target = d.target;
+                alert("You have clicked the link between '"+ source.name + "' and '" + target.name + "'");
+            });
         // Initialise the nodes
         const node = svg.append('g')
             .attr("stroke-width", 1.5)

@@ -74,5 +74,15 @@ class Utility {
 
         return num_doc;
     }
+    // Get the group number
+    static get_group_number(collocation){
+        let group0 = ['machine learning', 'neural network', 'random forest', 'artificial intelligence', 'big data',
+            'deep learning'];
+        if (group0.includes(collocation)) {
+            return 0;
+        }
+        return 1;
+
+    }
 
 }

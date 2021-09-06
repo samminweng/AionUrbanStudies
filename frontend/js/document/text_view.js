@@ -1,13 +1,13 @@
 // Create a title view
-function TextView(_document, collocation){
-    const document = _document;
+function TextView(document, collocation){
+    const group = Utility.get_group_number(collocation);
     const mark_options ={
         "separateWordSearch": false,
         "accuracy": {
             "value": "exactly",
             "limiters": [",", ".", "'s", "/"]
         },
-        "className": "keyword",
+        "className": "keyword-group-" + group,
     }
     let container = $('<div class="small"></div>');
     this.get_container = function(){
