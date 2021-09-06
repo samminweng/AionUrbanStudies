@@ -97,14 +97,8 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
             .join("line")
             .attr("stroke", d => get_link_color(d))
             .attr("stroke-width", d => get_link_size(d))
-            .attr("stroke-opacity", 0.2)
-            .on('click', function(d, n){
-                // console.log(d);
-                // console.log(n);
-                let source = d.source;
-                let target = d.target;
-                alert("You have clicked the link between '"+ source.name + "' and '" + target.name + "'");
-            });
+            .attr("stroke-opacity", 0.2);
+
         // Initialise the nodes
         const node = svg.append('g')
             .attr("stroke-width", 1.5)

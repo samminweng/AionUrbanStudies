@@ -5,7 +5,7 @@ function TextView(document, collocation){
         "separateWordSearch": false,
         "accuracy": {
             "value": "exactly",
-            "limiters": [",", ".", "'s", "/"]
+            "limiters": [",", ".", "'s", "/", ";"]
         },
         "className": "keyword-group-" + group,
     }
@@ -26,6 +26,12 @@ function TextView(document, collocation){
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span>' + document['Abstract'] +'</span>'));
         abstract_div.mark(collocation, mark_options);
         container.append(abstract_div);
+        // Add the author keywords
+        let author_keyword_div = $('<div></div>');
+        author_keyword_div.append($('<span class="fw-bold">Author Keywords: </span><span>' + document['Author Keywords'] +'</span>'));
+        author_keyword_div.mark(collocation, mark_options);
+        container.append(author_keyword_div);
+
     }
 
     _createUI();

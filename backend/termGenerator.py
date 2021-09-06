@@ -186,21 +186,21 @@ class TermGenerator:
         collocations = col_df['Collocation'][:max_length]
         occ = list()
         for i in range(len(collocations)):
-            col_i = col_df.query('index == {id}'.format(id=i)).iloc[0]
-            doc_ids_i = col_i['DocIDs']
+            col_i = col_df.query('index == {i}'.format(i=i)).iloc[0]
             occ_i = list()  # the occurrence of collocation 'i' with other collocations
             for j in range(len(collocations)):
                 if i == j:
                     occ_i.append([])  # No links
                 else:
-                    col_j = col_df.query('index == {id}'.format(id=j)).iloc[0]
-                    doc_ids_j = col_j['DocIDs']
-                    year_ij = Utility.collect_doc_years(doc_ids_i, doc_ids_j)
-                    if len(year_ij) == 0:
-                        occ_i.append([])
-                    else:
-                        for year in year_ij:
-                            doc_ids_ij = set(doc_ids_i[year]).intersection(set(doc_ids_j[year]))
+                    col_j = col_df.query('index == {j}'.format(j=j)).iloc[0]
+                    # Find the documents between collocation 'i' and collocation 'j'
+                    for year in sorted(col_i['DocIDs'].keys(), reverse=True):
+                        if year not in col_j['DocIDs']:
+                            occ_i.append([])
+                        else:
+                            doc_id_i = col_i['DocIDs'][year]
+                            doc_id_j = col_j['DocIDs'][year]
+                            doc_ids_ij = set(doc_id_i).intersection(set(doc_id_j))
                             doc_ids_ij = sorted(list(doc_ids_ij))
                             occ_i.append(doc_ids_ij)
             occ.append(occ_i)
@@ -219,5 +219,5 @@ if __name__ == '__main__':
     # termGenerator.collect_terms_from_TFIDF()
     # termGenerator.collect_term_frequency()
     # termGenerator.collect_and_rank_collocations()
-    termGenerator.collect_relation_between_collocation_doc_ids()
+    # termGenerator.collect_relation_between_collocation_doc_ids()
     termGenerator.compute_co_occurrence_terms()
