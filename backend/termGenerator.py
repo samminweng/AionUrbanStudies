@@ -184,32 +184,39 @@ class TermGenerator:
         max_length = 10
         # Get the collocations
         collocations = col_df['Collocation'][:max_length]
-        occ = list()
-        for i in range(len(collocations)):
-            col_i = col_df.query('index == {i}'.format(i=i)).iloc[0]
-            occ_i = list()  # the occurrence of collocation 'i' with other collocations
-            for j in range(len(collocations)):
-                if i == j:
-                    occ_i.append([])  # No links
-                else:
-                    col_j = col_df.query('index == {j}'.format(j=j)).iloc[0]
-                    # Find the documents between collocation 'i' and collocation 'j'
-                    for year in sorted(col_i['DocIDs'].keys(), reverse=True):
-                        if year not in col_j['DocIDs']:
-                            occ_i.append([])
-                        else:
-                            doc_id_i = col_i['DocIDs'][year]
-                            doc_id_j = col_j['DocIDs'][year]
-                            doc_ids_ij = set(doc_id_i).intersection(set(doc_id_j))
-                            doc_ids_ij = sorted(list(doc_ids_ij))
-                            occ_i.append(doc_ids_ij)
-            occ.append(occ_i)
-        # Store the occurrence results as a json
-        occ_json = json.dumps({'start_year': 0, 'occurrences': occ}, indent=4)
+        records = list()
+        # Filter the co-occurrences
+        for starting_year in [0, 2010, 2015]:
+            occ = list()
+            for i in range(len(collocations)):
+                col_i = col_df.query('index == {i}'.format(i=i)).iloc[0]
+                occ_i = list()  # the occurrence of collocation 'i' with other collocations
+                for j in range(len(collocations)):
+                    if i == j:
+                        occ_i.append([])  # No links
+                    else:
+                        col_j = col_df.query('index == {j}'.format(j=j)).iloc[0]
+                        years = sorted(list(filter(lambda y: int(y) > starting_year, (col_i['DocIDs'].keys()))),
+                                       reverse=True)
+                        # Find the documents between collocation 'i' and collocation 'j'
+                        for year in years:
+                            if year not in col_j['DocIDs']:
+                                occ_i.append([])
+                            else:
+                                doc_id_i = col_i['DocIDs'][year]
+                                doc_id_j = col_j['DocIDs'][year]
+                                doc_ids_ij = set(doc_id_i).intersection(set(doc_id_j))
+                                doc_ids_ij = sorted(list(doc_ids_ij))
+                                occ_i.append(doc_ids_ij)
+                occ.append(occ_i)
+            # Store the occurrence results as a json
+            occ_json = {'starting_year': starting_year, 'occurrences': occ}
+            records.append(occ_json)
+        # Sort the records by starting year
         # Write the json to a file
         path = os.path.join('output', self.args.case_name + '_occurrences.json')
         with open(path, "w") as out_file:
-            out_file.write(occ_json)
+            out_file.write(json.dumps(records, indent=4))
         print('Output the occurrences to ' + path)
 
 
