@@ -8,7 +8,8 @@ function NetworkChart(_corpus_data, _collocation_data, _occurrence_data, _ending
          // Create the nodes and links of term occurrences.
         let d3_network_graph = new D3NetworkGraph(collocation_data, occurrence_data, corpus_data);
         // Create a document list view for a collocation
-        let doc_list_view = new DocumentListView('machine learning', collocation_data, corpus_data);
+        let doc_list_view = new DocumentListView('machine learning', 'urban planning',
+                                                collocation_data, corpus_data);
     }
 
     _createUI();

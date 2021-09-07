@@ -1,7 +1,13 @@
-// Display a list of texts
-function DocumentListView(key_term, collocation_data, corpus_data) {
-    const collocation = collocation_data.find(({Collocation}) => Collocation === key_term);
-    const documents = Utility.collect_documents(collocation, corpus_data);
+// Display a list of research articles for key term 1 and key term 2.
+function DocumentListView(key_term_1, key_term_2, collocation_data, corpus_data) {
+    const collocation_1 = collocation_data.find(({Collocation}) => Collocation === key_term_1);
+    const collocation_2 = collocation_data.find(({Collocation}) => Collocation === key_term_2);
+    const documents_1 = new Set(Utility.collect_documents(collocation_1, corpus_data));
+    const documents_2 = new Set(Utility.collect_documents(collocation_2, corpus_data));
+    // Use the set intersection to find
+    const document_set = new Set([...documents_1].filter(doc => documents_2.has(doc)));
+    const documents = [...document_set];
+    console.log(documents);
     // Container
     function createPagination(docTable){
         // Create the table
@@ -31,7 +37,7 @@ function DocumentListView(key_term, collocation_data, corpus_data) {
                     row.append(col);
                     // Add the title
                     col = $('<td class="col-11"></td>');
-                    let textView = new TextView(document, key_term);
+                    let textView = new TextView(document, [key_term_1, key_term_2]);
                     col.append(textView.get_container());
                     row.append(col);
                     docTable.find('tbody').append(row);
@@ -61,6 +67,16 @@ function DocumentListView(key_term, collocation_data, corpus_data) {
         container.append(documentTable);
 
         $('#text_list_view').append(container);
+
+        // Set the clicked terms
+        let group_1 = Utility.get_group_number(key_term_1);
+        $('#selected_term_1')
+            .attr('class', 'keyword-group-'+ group_1)
+            .text(key_term_1);
+        let group_2 = Utility.get_group_number(key_term_2);
+        $('#selected_term_2')
+            .attr('class', 'keyword-group-'+ group_2)
+            .text(key_term_2);
 
     }
 
