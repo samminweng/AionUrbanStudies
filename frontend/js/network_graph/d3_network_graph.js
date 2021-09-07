@@ -1,9 +1,11 @@
 // Create D3 network graph
-function D3NetworkGraph(collocation_data, occurrence_data, corpus_data, starting_year) {
-    const margin = {top: 10, right: 10, left: 10, bottom: 10};
+function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
+    // const margin = {top: 10, right: 10, left: 10, bottom: 10};
     const width = 600;
     const height = 600;
-    const max_radius = 20;
+    const max_radius = 30;
+    const distance = 200;
+    const strength = -400;
     const {node_link_data, max_doc_ids} = Utility.create_node_link_data(collocation_data, occurrence_data);
     const links = node_link_data.links;
     const nodes = node_link_data.nodes;
@@ -18,8 +20,9 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data, starting
     // Get the number of documents for a collocation node
     function get_node_size(node_name) {
         let num_doc = Utility.get_number_of_documents(node_name, collocation_data);
-        let radius = num_doc / max_doc_ids * max_radius;
-        return Math.max(Math.round(radius), 5);  // Round the radius to the integer
+        let radius = Math.sqrt(num_doc);
+        // let radius = num_doc / max_doc_ids * max_radius;
+        return Math.round(radius);  // Round the radius to the integer
     }
 
     // Get the number of documents for a link (between two terms
@@ -76,8 +79,8 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data, starting
 
         // Simulation
         const simulation = d3.forceSimulation(nodes)
-            .force('link', d3.forceLink(links).id(d => d.id).distance(250))
-            .force("charge", d3.forceManyBody().strength(-400))
+            .force('link', d3.forceLink(links).id(d => d.id).distance(distance))
+            .force("charge", d3.forceManyBody().strength(strength))
             .force('center', d3.forceCenter(width / 2, height / 2));
 
         // Add the svg node to 'term_map' div
@@ -102,7 +105,8 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data, starting
             .join("g")
             .on("click", function (d, n) {// Add the onclick event
                 console.log(n.name);
-                let doc_list_view = new DocumentListView(n.name, collocation_data, corpus_data);
+                let collocation = n.name;
+                let doc_list_view = new DocumentListView(collocation, collocation_data, corpus_data);
             })
             .call(drag(simulation));
 

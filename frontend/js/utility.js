@@ -83,19 +83,16 @@ class Utility {
 
     }
     // Filter the collocation's doc ids with starting year
-    static filter_collocation_data(collocation_data, starting_year){
-        if(starting_year === 0){
-            return collocation_data;
-        }
+    static filter_collocation_data(collocation_data, ending_year){
         let updated_collocation_data = [];
         // Filter out the document published year < starting year and Update the collocation data
         for(const collocation of collocation_data){
             let update_collocation = Object.assign({}, collocation);
             let doc_ids = collocation['DocIDs'];
             let filtered_doc_ids = {};
-            // Filter out the years < starting_year
+            // Filter out the years < ending_year
             for(const year in doc_ids){
-                if (year >= starting_year){
+                if (year <= ending_year){
                     filtered_doc_ids[year] = doc_ids[year];
                 }
             }

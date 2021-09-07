@@ -12,26 +12,25 @@ $(function () {
         const corpus_data = result1[0];
         const collocation_data = result2[0];
         const occurrence_data = result3[0];
-        const starting_year = 0;
+        const ending_year = 2021;
         // console.log(collocation_data);
-        let network_chart = new NetworkChart(corpus_data, collocation_data, occurrence_data, starting_year);
+        let network_chart = new NetworkChart(corpus_data, collocation_data, occurrence_data, ending_year);
         // Add event to the year range
         $('#year_range').on('change', function(e){
             let value = e.target.value;
-            let text = 'No limits';
-            let starting_year = 0;
-            if(value === "1") {
-                text = "2010";
-                starting_year = 2010;
+            let ending_year = 0;
+            if(value === "0") {
+                ending_year = 2010;
+            }else if(value === "1") {
+                ending_year = 2015;
             }else if(value === "2"){
-                text = "2015";
-                starting_year = 2015;
-            }else if(value === "3"){
-                text = "2020";
-                starting_year = 2020;
+                ending_year = 2018;
+            }else if(value === "3") {
+                ending_year = 2021;
             }
-            let network_chart = new NetworkChart(corpus_data, collocation_data, occurrence_data, starting_year);
-            $('#year_range_label').text(text);
+            $('#year_range_label').text(ending_year);
+            let network_chart = new NetworkChart(corpus_data, collocation_data, occurrence_data, ending_year);
+
             // console.log(value);
         });
     });
