@@ -117,6 +117,7 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
                     $('#selected_term_1')
                         .attr('class', 'keyword-group-' + group_1)
                         .text(key_term);
+                    let doc_list_view = new DocumentListView([key_term], collocation_data, corpus_data);
                     return;
                 }
                 // Update the selected_term_2

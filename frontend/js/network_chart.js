@@ -8,6 +8,15 @@ function NetworkChart(_corpus_data, _collocation_data, _occurrence_data, _ending
          // Create the nodes and links of term occurrences.
         let d3_network_graph = new D3NetworkGraph(collocation_data, occurrence_data, corpus_data);
         let key_terms = ['machine learning', 'urban planning'];
+        // Update the selected key terms
+        const group_1 = Utility.get_group_number(key_terms[0]);
+        $('#selected_term_1')
+            .attr('class', 'keyword-group-' + group_1)
+            .text(key_terms[0]);
+        const group_2 = Utility.get_group_number(key_terms[1]);
+        $('#selected_term_2')
+            .attr('class', 'keyword-group-' + group_2)
+            .text(key_terms[1]);
         // Create a document list view for a collocation
         let doc_list_view = new DocumentListView(key_terms, collocation_data, corpus_data);
     }

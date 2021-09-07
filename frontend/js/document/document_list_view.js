@@ -19,7 +19,7 @@ function DocumentListView(key_terms, collocation_data, corpus_data) {
             totalNumber: documents.length,
             pageSize: 5,
             showNavigator: true,
-            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> texts',
+            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> documents',
             position: 'top',
             showGoInput: true,
             showGoButton: true,
@@ -51,7 +51,7 @@ function DocumentListView(key_terms, collocation_data, corpus_data) {
             '<thead class="thead-light">' +
             '<tr class="d-flex">' +
             '    <th class="col-1">Year</th>' +
-            '    <th class="col-11">Text</th>' +
+            '    <th class="col-11">Documents</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody></tbody></table>');
@@ -62,16 +62,6 @@ function DocumentListView(key_terms, collocation_data, corpus_data) {
         container.append(documentTable);
 
         $('#text_list_view').append(container);
-
-        // // Set the clicked terms
-        // let group_1 = Utility.get_group_number(key_term_1);
-        // $('#selected_term_1')
-        //     .attr('class', 'keyword-group-' + group_1)
-        //     .text(key_term_1);
-        // let group_2 = Utility.get_group_number(key_term_2);
-        // $('#selected_term_2')
-        //     .attr('class', 'keyword-group-' + group_2)
-        //     .text(key_term_2);
 
     }
 
