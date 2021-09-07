@@ -30,9 +30,17 @@ $(function () {
             }
             $('#year_range_label').text(ending_year);
             let network_chart = new NetworkChart(corpus_data, collocation_data, occurrence_data, ending_year);
-
             // console.log(value);
         });
+        // Add the event to clear the selected key terms
+        $('#clear-label').on('click', function(d){
+            // Clear the select items and list view
+            $('#selected_term_1').empty();
+            $('#selected_term_2').empty();
+            $('#text_list_view').empty();
+        })
+
+
     });
 
 

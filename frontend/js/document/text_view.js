@@ -12,7 +12,7 @@ function TextView(document, key_terms){
             const mark_options ={
                 "separateWordSearch": false,
                 "accuracy": {
-                    "value": "exactly",
+                    "value": "complementary",
                     "limiters": [",", ".", "'s", "/", ";"]
                 },
                 "className": "keyword-group-" + group,

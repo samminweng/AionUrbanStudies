@@ -105,8 +105,27 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
             .join("g")
             .on("click", function (d, n) {// Add the onclick event
                 console.log(n.name);
-                let collocation = n.name;
-                let doc_list_view = new DocumentListView(collocation, collocation_data, corpus_data);
+                let key_term = n.name;
+                // Check if the selected item
+                if (!$('#selected_term_1').is(':empty') && !$('#selected_term_2').is(':empty')) {
+                    alert("Please clear the terms");
+                    return;
+                }
+                // Update the selected_term_1
+                if ($('#selected_term_1').is(':empty')) {
+                    const group_1 = Utility.get_group_number(key_term);
+                    $('#selected_term_1')
+                        .attr('class', 'keyword-group-' + group_1)
+                        .text(key_term);
+                    return;
+                }
+                // Update the selected_term_2
+                const group_2 = Utility.get_group_number(key_term);
+                $('#selected_term_2').attr('class', 'keyword-group-' + group_2).text(key_term);
+                // Get the key term 1 and key term 2
+                let collocation_1 = $('#selected_term_1').text();
+                let collocation_2 = $('#selected_term_2').text();
+                let doc_list_view = new DocumentListView(collocation_1, collocation_2, collocation_data, corpus_data);
             })
             .call(drag(simulation));
 
