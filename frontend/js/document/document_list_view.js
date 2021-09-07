@@ -1,15 +1,10 @@
 // Display a list of research articles for key term 1 and key term 2.
-function DocumentListView(key_term_1, key_term_2, collocation_data, corpus_data) {
-    const collocation_1 = collocation_data.find(({Collocation}) => Collocation === key_term_1);
-    const collocation_2 = collocation_data.find(({Collocation}) => Collocation === key_term_2);
-    const documents_1 = new Set(Utility.collect_documents(collocation_1, corpus_data));
-    const documents_2 = new Set(Utility.collect_documents(collocation_2, corpus_data));
-    // Use the set intersection to find
-    const document_set = new Set([...documents_1].filter(doc => documents_2.has(doc)));
-    const documents = [...document_set];
+function DocumentListView(key_terms, collocation_data, corpus_data) {
+    const documents = Utility.collect_documents_by_key_terms(key_terms, collocation_data, corpus_data);
     console.log(documents);
+
     // Container
-    function createPagination(docTable){
+    function createPagination(docTable) {
         // Create the table
         let pagination = $("<div></div>");
         // Pagination
@@ -33,11 +28,11 @@ function DocumentListView(key_term_1, key_term_2, collocation_data, corpus_data)
                 for (let document of documents) {
                     let row = $('<tr class="d-flex"></tr>');
                     // Add the year
-                    let col = $('<td class="col-1">' + document['Year']+'</td>');
+                    let col = $('<td class="col-1">' + document['Year'] + '</td>');
                     row.append(col);
                     // Add the title
                     col = $('<td class="col-11"></td>');
-                    let textView = new TextView(document, [key_term_1, key_term_2]);
+                    let textView = new TextView(document, key_terms);
                     col.append(textView.get_container());
                     row.append(col);
                     docTable.find('tbody').append(row);
@@ -68,15 +63,15 @@ function DocumentListView(key_term_1, key_term_2, collocation_data, corpus_data)
 
         $('#text_list_view').append(container);
 
-        // Set the clicked terms
-        let group_1 = Utility.get_group_number(key_term_1);
-        $('#selected_term_1')
-            .attr('class', 'keyword-group-'+ group_1)
-            .text(key_term_1);
-        let group_2 = Utility.get_group_number(key_term_2);
-        $('#selected_term_2')
-            .attr('class', 'keyword-group-'+ group_2)
-            .text(key_term_2);
+        // // Set the clicked terms
+        // let group_1 = Utility.get_group_number(key_term_1);
+        // $('#selected_term_1')
+        //     .attr('class', 'keyword-group-' + group_1)
+        //     .text(key_term_1);
+        // let group_2 = Utility.get_group_number(key_term_2);
+        // $('#selected_term_2')
+        //     .attr('class', 'keyword-group-' + group_2)
+        //     .text(key_term_2);
 
     }
 

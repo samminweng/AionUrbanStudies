@@ -1,4 +1,24 @@
 class Utility {
+    // Collect the documents associated with key terms
+    static collect_documents_by_key_terms(key_terms, collocation_data, corpus_data){
+        let document_set = new Set();
+        //
+        for(let key_term of key_terms){
+            const collocation =  collocation_data.find(({Collocation}) => Collocation === key_term);
+            // Get the documents mentioning the collocation
+            const col_documents = new Set(Utility.collect_documents(collocation, corpus_data));
+            if(document_set.size === 0){
+                document_set = col_documents;
+            }else{
+                // Filter the documents using the set intersection
+                document_set = new Set([...document_set].filter(doc => col_documents.has(doc)));
+            }
+        }
+        const documents = [...document_set]; // Convert the set to the list
+        return documents;
+    }
+
+
     // Collect all the document ids for a collocation
     static collect_documents(collocation, corpus_data){
         let col_doc_ids = collocation['DocIDs'];

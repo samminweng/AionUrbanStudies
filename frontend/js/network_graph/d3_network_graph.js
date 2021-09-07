@@ -125,7 +125,8 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
                 // Get the key term 1 and key term 2
                 let collocation_1 = $('#selected_term_1').text();
                 let collocation_2 = $('#selected_term_2').text();
-                let doc_list_view = new DocumentListView(collocation_1, collocation_2, collocation_data, corpus_data);
+                let key_terms = [collocation_1, collocation_2]
+                let doc_list_view = new DocumentListView(key_terms, collocation_data, corpus_data);
             })
             .call(drag(simulation));
 
