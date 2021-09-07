@@ -17,7 +17,7 @@ class Utility {
     // Convert the collocations json to the format of D3 network graph
     static create_node_link_data(collocation_data, occurrence_data){
         let doc_id_set = new Set(); // Store all the document ids
-        let max_doc_ides = 0;
+        let max_doc_ids = 0;
         // Populate the nodes with collocation data
         let nodes = [];
         for(let collocation of collocation_data){
@@ -33,8 +33,8 @@ class Utility {
                 }
                 total_doc_ids += doc_ids.length;
             }
-            if (max_doc_ides < total_doc_ids){
-                max_doc_ides = total_doc_ids;
+            if (max_doc_ids < total_doc_ids){
+                max_doc_ids = total_doc_ids;
             }
         }
         // console.log(doc_id_set);
@@ -57,8 +57,7 @@ class Utility {
                 }
             }
         }
-        return {node_link_data: {nodes: nodes, links: links}, doc_id_set: doc_id_set,
-            max_doc_ides: max_doc_ides, max_link_length: max_link_length};
+        return {node_link_data: {nodes: nodes, links: links}, max_doc_ids: max_doc_ids};
     }
 
     // Get the total number of document for a collocation name
@@ -83,5 +82,27 @@ class Utility {
         return 1;
 
     }
-
+    // Filter the collocation's doc ids with starting year
+    static filter_collocation_data(collocation_data, starting_year){
+        if(starting_year === 0){
+            return collocation_data;
+        }
+        let updated_collocation_data = [];
+        // Filter out the document published year < starting year and Update the collocation data
+        for(const collocation of collocation_data){
+            let update_collocation = Object.assign({}, collocation);
+            let doc_ids = collocation['DocIDs'];
+            let filtered_doc_ids = {};
+            // Filter out the years < starting_year
+            for(const year in doc_ids){
+                if (year >= starting_year){
+                    filtered_doc_ids[year] = doc_ids[year];
+                }
+            }
+            // Update the updated collocation with the filtered doc ids
+            update_collocation['DocIDs'] = filtered_doc_ids;
+            updated_collocation_data.push(update_collocation);
+        }
+        return updated_collocation_data;
+    }
 }

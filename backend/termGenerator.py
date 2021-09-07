@@ -186,7 +186,7 @@ class TermGenerator:
         collocations = col_df['Collocation'][:max_length]
         records = list()
         # Filter the co-occurrences
-        for starting_year in [0, 2010, 2015]:
+        for starting_year in [0, 2010, 2015, 2020]:
             occ = list()
             for i in range(len(collocations)):
                 col_i = col_df.query('index == {i}'.format(i=i)).iloc[0]

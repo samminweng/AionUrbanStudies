@@ -1,15 +1,10 @@
 // Create D3 network graph
-function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
+function D3NetworkGraph(collocation_data, occurrence_data, corpus_data, starting_year) {
     const margin = {top: 10, right: 10, left: 10, bottom: 10};
     const width = 600;
     const height = 600;
     const max_radius = 20;
-    const {
-        node_link_data,
-        doc_id_set,
-        max_doc_ides,
-        max_link_length
-    } = Utility.create_node_link_data(collocation_data, occurrence_data);
+    const {node_link_data, max_doc_ids} = Utility.create_node_link_data(collocation_data, occurrence_data);
     const links = node_link_data.links;
     const nodes = node_link_data.nodes;
     // Get the color of collocation
@@ -23,7 +18,7 @@ function D3NetworkGraph(collocation_data, occurrence_data, corpus_data) {
     // Get the number of documents for a collocation node
     function get_node_size(node_name) {
         let num_doc = Utility.get_number_of_documents(node_name, collocation_data);
-        let radius = num_doc / max_doc_ides * max_radius;
+        let radius = num_doc / max_doc_ids * max_radius;
         return Math.max(Math.round(radius), 5);  // Round the radius to the integer
     }
 

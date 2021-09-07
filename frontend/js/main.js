@@ -15,24 +15,27 @@ $(function () {
         const starting_year = 0;
         // console.log(collocation_data);
         let network_chart = new NetworkChart(corpus_data, collocation_data, occurrence_data, starting_year);
+        // Add event to the year range
+        $('#year_range').on('change', function(e){
+            let value = e.target.value;
+            let text = 'No limits';
+            let starting_year = 0;
+            if(value === "1") {
+                text = "2010";
+                starting_year = 2010;
+            }else if(value === "2"){
+                text = "2015";
+                starting_year = 2015;
+            }else if(value === "3"){
+                text = "2020";
+                starting_year = 2020;
+            }
+            let network_chart = new NetworkChart(corpus_data, collocation_data, occurrence_data, starting_year);
+            $('#year_range_label').text(text);
+            // console.log(value);
+        });
     });
-    // Add event to the year range
-    $('#year_range').on('change', function(e){
-        let value = e.target.value;
-        let text = 'No limits';
-        let starting_year = 0;
-        if(value === "1") {
-            text = "2010";
-        }else if(value === "2"){
-            text = "2015";
-        }else if(value === "3"){
-            $('#year_range').val('0');
-            alert("Cannot select starting year > 2015");
-        }
-        $('#year_range_label').text(text);
 
-        // console.log(value);
-    })
 
 
 
