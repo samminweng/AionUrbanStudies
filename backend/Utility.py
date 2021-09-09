@@ -35,18 +35,18 @@ class Utility:
         document = ' '.join(cleaned_sentences)
         return document
 
-    # Check if n_gram contains a stop word
+    # Check if n_gram contains any word
     @staticmethod
-    def check_n_gram_stopwords(n_gram, stopwords):
-        words = n_gram.split(" ")
-        for word in words:
-            if word in stopwords:
+    def check_words(n_gram, filter_words):
+        n_gram_words = n_gram.split(" ")
+        for word in n_gram_words:
+            if word in filter_words:  # check if the word is in the filtered words.
                 return True
         return False
 
     # Extract the terms from TFIDF
     @staticmethod
-    def extract_terms_from_TFIDF(n_gram_type, corpus, stopwords):
+    def extract_terms_from_TFIDF(n_gram_type, corpus, stopwords, function_words):
         if n_gram_type == 'uni-gram':
             vectorizer = TfidfVectorizer(stop_words=stopwords, ngram_range=(1, 1))
         elif n_gram_type == 'bi-gram':
@@ -63,12 +63,14 @@ class Utility:
         # Collect all the key terms of all the sentences in the text
         for dense in dense_dict:
             # Sort the terms by score
-            filter_empty_score_list = list(filter(lambda item: item[1] > 0, dense.items()))
-            sorted_tfidf_list = list(sorted(filter_empty_score_list, key=lambda item: item[1], reverse=True))
-            filter_tfidf_list = list(filter(lambda item: not Utility.check_n_gram_stopwords(item[0], stopwords),
-                                            sorted_tfidf_list))  # Filter words containing stop words
+            filter_list = list(filter(lambda item: item[1] > 0, dense.items()))
+            # Filter words containing stop words
+            filter_list = list(filter(lambda item: not Utility.check_words(item[0], stopwords), filter_list))
+            # Filter words containing function words
+            filter_list = list(filter(lambda item: not Utility.check_words(item[0], function_words), filter_list))
+            sorted_list = list(sorted(filter_list, key=lambda item: item[1], reverse=True))
             # Concatenate key terms
-            key_terms.append(list(map(lambda item: item[0], filter_tfidf_list)))
+            key_terms.append(list(map(lambda item: item[0], sorted_list)))
         return key_terms
 
     @staticmethod
@@ -127,13 +129,12 @@ class Utility:
                 print("Error occurred! {err}".format(err=err))
         return col_doc_dict
 
-
     @staticmethod
     def get_term_doc_ids(term, col_doc_dict):
         return col_doc_dict[term]
 
     @staticmethod
-    def check_word(collocation):
+    def is_alpha(collocation):
         # english_check = re.compile(r'[a-z]')
         terms = collocation.split(" ")
         for term in terms:
@@ -144,35 +145,36 @@ class Utility:
     # Find a list of bi_grams by (1) pointwise mutual information, (2) Chi-square (3) Likelihood ratios
     # Ref: https://www.nltk.org/howto/collocations.html
     @staticmethod
-    def get_collocations(bigram_measures, finder, stopwords, associate_measures):
-        bi_grams = {}
-        # Find a list of bi_grams by pointwise mutual information
-        for associate_measure in associate_measures:
-            try:
-                if associate_measure == 'PMI':
-                    scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
-                elif associate_measure == 'Chi_square':
-                    scored_bi_grams = finder.score_ngrams(bigram_measures.chi_sq)
-                else:
-                    scored_bi_grams = finder.score_ngrams(bigram_measures.likelihood_ratio)
-                # Convert bi_gram object to a list of dictionaries
-                bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
-                                                          'score': bi_gram[1]}, scored_bi_grams))
-                # Filter out bi_grams containing stopwords
-                filtered_bi_grams_stopwords = list(filter(lambda bi_gram:
-                                                          not Utility.check_n_gram_stopwords(bi_gram['collocation'],
-                                                                                             stopwords),
-                                                          bi_grams_list))
-                # Filter out bi_grams containing non-English words
-                filtered_bi_grams_alphas = list(filter(lambda bi_gram:
-                                                        Utility.check_word(bi_gram['collocation']),
-                                                        filtered_bi_grams_stopwords))
-                # Sort the bi-grams by scores
-                sorted_bi_grams = sorted(filtered_bi_grams_alphas, key=lambda bi_gram: bi_gram['score'], reverse=True)
-                bi_grams[associate_measure] = sorted_bi_grams
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-        return bi_grams
+    def get_collocations(bigram_measures, finder, stopwords, function_words):
+        associate_measures = ['Likelihood_ratio']  # ['PMI', 'Chi_square', 'Likelihood_ratio']
+        try:
+            # if associate_measure == 'PMI':
+            #     scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
+            # elif associate_measure == 'Chi_square':
+            #     scored_bi_grams = finder.score_ngrams(bigram_measures.chi_sq)
+            # else:
+            # Find a list of bi_grams by likelihood collocations
+            scored_bi_grams = finder.score_ngrams(bigram_measures.likelihood_ratio)
+            # Convert bi_gram object to a list of dictionaries
+            bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
+                                                      'score': bi_gram[1]}, scored_bi_grams))
+            # Filter out bi_grams containing stopwords
+            filtered_bi_grams = list(
+                filter(lambda bi_gram: not Utility.check_words(bi_gram['collocation'], stopwords), bi_grams_list))
+            # Filter out bi_gram containing function words
+            filtered_bi_grams = list(
+                filter(lambda bi_gram: not Utility.check_words(bi_gram['collocation'], function_words),
+                       filtered_bi_grams))
+            # Filter out bi_grams containing non-English words
+            filtered_bi_grams = list(filter(lambda bi_gram:
+                                            Utility.is_alpha(bi_gram['collocation']),
+                                            filtered_bi_grams))
+            # Sort the bi-grams by scores
+            sorted_bi_grams = sorted(filtered_bi_grams, key=lambda bi_gram: bi_gram['score'], reverse=True)
+            return sorted_bi_grams
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
 
     # Group the document ids by article published year
     @staticmethod

@@ -7,14 +7,14 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from Utility import Utility
 import nltk
-
-
+path = os.path.join('/Scratch', 'mweng', 'nltk_data')   # Specify the path of NLTK data
 # Download all the necessary NLTK data
-# nltk.download('stopwords')
-# nltk.download('punkt')
-# nltk.download('wordnet')
-# nltk.download('averaged_perceptron_tagger')
-# nltk.download('words')
+nltk.download('stopwords', download_dir=path)
+nltk.download('punkt', download_dir=path)
+nltk.download('wordnet', download_dir=path)
+nltk.download('averaged_perceptron_tagger', download_dir=path)
+nltk.download('words', download_dir=path)
+nltk.data.path.append(path)
 
 class TermGenerator:
     def __init__(self):
@@ -24,7 +24,11 @@ class TermGenerator:
         )
         self.stopwords = list(stopwords.words('english'))
         self.stopwords.append("also")  # add extra stop words
-        # self.lemmatizer = WordNetLemmatizer()
+        # Load the function word
+        path = os.path.join('data', 'Function_Words.csv')
+        df = pd.read_csv(path)
+        self.function_words = df['Function Word'].tolist()
+        # print(self.function_words)
 
     # Extract important words from scikit TFIDF
     def collect_terms_from_TFIDF(self):
@@ -42,20 +46,21 @@ class TermGenerator:
                 document = Utility.create_document(text)
                 corpus.append(document)
                 record = {'DocId': text['DocId'], 'Year': text['Year'], 'Title': text['Title'],
-                          'Abstract': text['Abstract']}
+                          'Abstract': text['Abstract'], 'Author Keywords': text['Author Keywords']}
                 records.append(record)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
-        for n_gram_type in ['uni-gram', 'bi-gram', 'tri-gram']:
-            key_term_lists = Utility.extract_terms_from_TFIDF(n_gram_type, corpus, self.stopwords)
+        for n_gram_type in ['bi-gram']:
+            key_term_lists = Utility.extract_terms_from_TFIDF(n_gram_type, corpus, self.stopwords, self.function_words)
             for index, key_terms in enumerate(key_term_lists):
-                records[index]['Key_' + n_gram_type] = key_terms
-        # # Write the output to a file
-        df = pd.DataFrame(records, columns=["DocId", "Year", "Key_bi-gram", "Title", "Abstract"])
-        path = os.path.join('output', self.args.case_name + '_key_terms.csv')
+                records[index]['TF-IDF_Key_Term'] = key_terms
+
+        # Write the output to a file
+        df = pd.DataFrame(records, columns=["DocId", "Year", "TF-IDF_Key_Term", "Title", "Abstract", 'Author Keywords'])
+        path = os.path.join('output', self.args.case_name + '_tfidf_key_terms.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         # # Write to a json file
-        path = os.path.join('output', self.args.case_name + '_key_terms.json')
+        path = os.path.join('output', self.args.case_name + '_tfidf_key_terms.json')
         df.to_json(path, orient='records')
         print('Output keywords/phrases to ' + path)
 
@@ -129,12 +134,10 @@ class TermGenerator:
             tokens = word_tokenize(document)
             documents.append(tokens)
         # Score and rank the collocations
-        associate_measures = ['Likelihood_ratio']  # ['PMI', 'Chi_square', 'Likelihood_ratio']
-        # Remove all the stop words
         finder = BigramCollocationFinder.from_documents(documents)
-        collocations = Utility.get_collocations(bigram_measures, finder, self.stopwords, associate_measures)
+        collocations = Utility.get_collocations(bigram_measures, finder, self.stopwords, self.function_words)
         records = list()
-        for collocation in collocations['Likelihood_ratio']:
+        for collocation in collocations:
             record = {'Collocation': collocation['collocation'], 'Score': collocation['score']}
             records.append(record)
         # Write the output to a file
@@ -153,7 +156,6 @@ class TermGenerator:
         # Read collocation
         path = os.path.join('output', self.args.case_name + '_collocations_likelihood.json')
         col_df = pd.read_json(path)
-        # max_length = len(col_df['Collocation'].tolist())
         collocations = col_df['Collocation'].tolist()
         scores = col_df['Score'].tolist()
         col_doc_dict = Utility.create_collocation_document(collocations, text_df)
@@ -163,12 +165,12 @@ class TermGenerator:
             doc_ids = col_doc_dict[collocation]
             doc_ids_year = Utility.group_doc_ids_by_year(text_df, doc_ids)
             record = {'Collocation': collocation, 'Score': score,
-                      'DocIDs': doc_ids_year}
+                      'DocIDs': doc_ids_year, 'Num_Docs': len(doc_ids)}
             records.append(record)
-        records = records[:10]
+        # Sort the records by the number of document
         # Write the output as a file
-        df = pd.DataFrame(records, columns=['Collocation', 'Score', 'DocIDs'])
-        df = df.reset_index()
+        df = pd.DataFrame(records, columns=['Collocation', 'Score', 'Num_Docs', 'DocIDs'])
+        # df = df.reset_index()
         path = os.path.join('output', self.args.case_name + '_collocations.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         # # Write to a json file
@@ -222,8 +224,8 @@ class TermGenerator:
 # Main entry
 if __name__ == '__main__':
     termGenerator = TermGenerator()
-    # termGenerator.collect_terms_from_TFIDF()
+    termGenerator.collect_terms_from_TFIDF()
     # termGenerator.collect_term_frequency()
     # termGenerator.collect_and_rank_collocations()
     # termGenerator.collect_relation_between_collocation_doc_ids()
-    termGenerator.compute_co_occurrence_terms()
+    # termGenerator.compute_co_occurrence_terms()

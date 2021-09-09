@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>TF-IDF Term Detail Chart</title>
+    <meta charset="utf-8">
+    <!-- All the third party libraries-->
+    <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="lib/d3.v6.js"></script>
+    <script type="text/javascript" src="lib/pagination.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.mark.min.js"></script>
+    <!-- CSS styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pagination.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="h4">TF-IDF Term Chart</div>
+    <div>The bubble represents a term and the bubble size reflects the number of documents that this term appears
+        in the corpus. The link between two terms represents the co-occurrences of these terms.
+    </div>
+    <div class="row m-3">
+        <div class="h5">Conditions</div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <label>Infrastructure:</label>
+                    <select class="form-select">
+                        <option value="hard" selected>Hard</option>
+                        <!--                <option value="soft" >Soft</option>-->
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Category:</label>
+                    <select class="form-select">
+                        <option value="transport" selected>Transport</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Key Term:</label>
+                    <select class="form-select">
+                        <option value="transport" selected>Public Transport</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col border border-3">
+            <div id="term_chart"></div>
+        </div>
+        <div class="col border border-3">
+            <div id="text_list_view"></div>
+        </div>
+    </div>
+</div>
+<!-- Our javascript -->
+
+</body>
+</html>

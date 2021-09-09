@@ -1,8 +1,8 @@
 'use strict';
 const corpus = 'UrbanStudyCorpus';
-const corpus_file_path = 'data/' + corpus + '.json';
-const collocation_file_path = 'data/' + corpus + '_collocations.json';
-const occurrence_file_path = 'data/' + corpus + '_occurrences.json';
+const corpus_file_path = 'data/term_occurrence/' + corpus + '.json';
+const collocation_file_path = 'data/term_occurrence/' + corpus + '_collocations.json';
+const occurrence_file_path = 'data/term_occurrence/' + corpus + '_occurrences.json';
 // Document ready event
 $(function () {
     // Load collocations
