@@ -4,7 +4,7 @@ function TermChart(searched_term, collocation_data, doc_term_data){
     // console.log(collocation);
     const documents = Utility.collect_documents_by_doc_ids(collocation, doc_term_data);
     // console.log(documents);
-    const term_map = Utility.group_documents_key_terms(documents);
+    const term_map = doc_term_data.find({});
     console.log(term_map);
 
     function _createUI(){

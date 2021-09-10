@@ -163,16 +163,19 @@ class TermGenerator:
         scores = col_df['Score'].tolist()
         col_doc_dict = Utility.create_collocation_document(collocations, text_df)
         records = list()
-        max_length = 100
+        max_length = 15     # Max number of term map
+        min_occurrence = 3  # Mininal number of paper that a collocation appears in the corpus
         for index, collocation in enumerate(collocations):
             score = scores[index]
             doc_ids = col_doc_dict[collocation]
-            doc_ids_year = Utility.group_doc_ids_by_year(text_df, doc_ids)
-            term_map = Utility.compute_term_map(doc_term_df, doc_ids)
-            record = {'Collocation': collocation, 'Score': score,
-                      'DocIDs': doc_ids_year, 'Num_Docs': len(doc_ids),
-                      'TermMap': term_map[:100]}
-            records.append(record)
+            num_docs = len(doc_ids)
+            if num_docs >= min_occurrence:
+                doc_ids_year = Utility.group_doc_ids_by_year(text_df, doc_ids)
+                term_map = Utility.compute_term_map(doc_term_df, doc_ids)
+                record = {'Collocation': collocation, 'Score': score,
+                          'DocIDs': doc_ids_year, 'Num_Docs': len(doc_ids),
+                          'TermMap': term_map[:max_length]}
+                records.append(record)
         # Sort the records by the number of document
         # Write the output as a file
         df = pd.DataFrame(records, columns=['Collocation', 'Score', 'Num_Docs', 'DocIDs', 'TermMap'])
