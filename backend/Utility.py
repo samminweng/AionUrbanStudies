@@ -182,14 +182,32 @@ class Utility:
         year_doc_dict = {}
         for doc_id in doc_ids:
             try:
-                doc = text_df.query('DocId == {id}'.format(id=doc_id))  # doc is a pd series
-                doc_year = doc.iloc[0]['Year']  # Get the year of the doc
+                doc = text_df.query('DocId == {id}'.format(id=doc_id)).iloc[0]  # doc is a pd series
+                doc_year = doc['Year']  # Get the year of the doc
                 if doc_year not in year_doc_dict:
                     year_doc_dict[doc_year] = list()
                 year_doc_dict[doc_year].append(doc_id)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
         return year_doc_dict
+
+    # # Compute the top co-occurred terms (extracted from TF-IDF) within documents
+    @staticmethod
+    def compute_term_map(doc_term_df, doc_ids):
+        term_doc_dict = {}
+        for doc_id in doc_ids:
+            try:
+                doc_term = doc_term_df.query('DocId == {id}'.format(id=doc_id)).iloc[0]
+                key_terms = doc_term['KeyTerms']
+                for key_term in key_terms:
+                    if key_term not in term_doc_dict:
+                        term_doc_dict[key_term] = set()
+                    term_doc_dict[key_term].add(doc_id)
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
+        # Sort the dictionary by the number of documents (by value)
+        sorted_term_doc_list = list(sorted(term_doc_dict.items(), key=lambda item: len(item[1]), reverse=True))
+        return sorted_term_doc_list
 
     # Collect the years of document 'i' and 'j'
     @staticmethod
@@ -199,16 +217,5 @@ class Utility:
         # Obtain the years that appear both term 'i' and 'j' using set intersection
         return sorted(list(year_i.intersection(year_j)))
 
-        # # Group bigrams by first word in bigram.
-        # prefix_keys = collections.defaultdict(list)
-        # for key, scores in scored_bi_grams:
-        #     prefix_keys[key[0]].append((key[1], scores))
-        #
-        # for key in prefix_keys:
-        #     prefix_keys[key].sort(key=lambda x: -x[1])
-        # if len(prefix_keys['machine']) > 0:
-        #     print(prefix_keys['machine'])
-        # # Filter out the bi-gram containing stop words
-        # filter_bi_grams = list(filter(lambda bi_gram: bi_gram[0][0] not in stopwords and
-        #                                               bi_gram[0][1] not in stopwords, scored_bi_grams))
-        # Convert the n_gram to a list of bi_grams
+
+
