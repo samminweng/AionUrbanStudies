@@ -169,16 +169,17 @@ class TermGenerator:
             score = scores[index]
             doc_ids = col_doc_dict[collocation]
             num_docs = len(doc_ids)
-            if num_docs >= min_occurrence:
+            if num_docs > min_occurrence:
                 doc_ids_year = Utility.group_doc_ids_by_year(text_df, doc_ids)
-                term_map = Utility.compute_term_map(doc_term_df, doc_ids)
+                term_map = Utility.compute_term_map(doc_term_df, doc_ids)[:max_length]  # Store top frequent terms
+                occurrences = Utility.compute_co_occurrence_terms(term_map)
                 record = {'Collocation': collocation, 'Score': score,
-                          'DocIDs': doc_ids_year, 'Num_Docs': len(doc_ids),
-                          'TermMap': term_map[:max_length]}
+                          'DocIDs': doc_ids_year, 'Num_Docs': num_docs,
+                          'TermMap': term_map, 'Occurrences': occurrences}
                 records.append(record)
         # Sort the records by the number of document
         # Write the output as a file
-        df = pd.DataFrame(records, columns=['Collocation', 'Score', 'Num_Docs', 'DocIDs', 'TermMap'])
+        df = pd.DataFrame(records, columns=['Collocation', 'Score', 'Num_Docs', 'DocIDs', 'TermMap', 'Occurrences'])
         # df = df.reset_index()
         path = os.path.join('output', self.args.case_name + '_collocations.csv')
         df.to_csv(path, encoding='utf-8', index=False)
@@ -187,48 +188,6 @@ class TermGenerator:
         df.to_json(path, orient='records')
         print('Output keywords/phrases to ' + path)
 
-    # Compute the co-occurrence of terms by looking the document ids. If two terms
-    def compute_co_occurrence_terms(self):
-        # Read collocations
-        path = os.path.join('output', self.args.case_name + '_collocations.json')
-        col_df = pd.read_json(path)
-        max_length = 10
-        # Get the collocations
-        collocations = col_df['Collocation'][:max_length]
-        records = list()
-        # Filter the co-occurrences
-        for ending_year in [2010, 2015, 2018, 2021]:
-            occ = list()
-            for i in range(len(collocations)):
-                col_i = col_df.query('index == {i}'.format(i=i)).iloc[0]
-                occ_i = list()  # the occurrence of collocation 'i' with other collocations
-                for j in range(len(collocations)):
-                    occ_ij = []
-                    if i != j:
-                        col_j = col_df.query('index == {j}'.format(j=j)).iloc[0]
-                        years = sorted(list(filter(lambda y: int(y) <= ending_year, (col_i['DocIDs'].keys()))),
-                                       reverse=True)
-                        if len(years) > 0:
-                            # Find the documents between collocation 'i' and collocation 'j'
-                            for year in years:
-                                if year in col_j['DocIDs']:
-                                    doc_id_i = col_i['DocIDs'][year]
-                                    doc_id_j = col_j['DocIDs'][year]
-                                    doc_ids_ij = set(doc_id_i).intersection(set(doc_id_j))
-                                    doc_ids_ij = sorted(list(doc_ids_ij))
-                                    occ_ij = occ_ij + doc_ids_ij
-                    occ_i.append(occ_ij)
-                occ.append(occ_i)
-            # Store the occurrence results as a json
-            occ_json = {'ending_year': ending_year, 'occurrences': occ}
-            records.append(occ_json)
-        # Sort the records by starting year
-        # Write the json to a file
-        path = os.path.join('output', self.args.case_name + '_occurrences.json')
-        with open(path, "w") as out_file:
-            out_file.write(json.dumps(records, indent=4))
-        print('Output the occurrences to ' + path)
-
 
 # Main entry
 if __name__ == '__main__':
@@ -236,5 +195,5 @@ if __name__ == '__main__':
     # termGenerator.collect_terms_from_TFIDF()
     # termGenerator.collect_term_frequency()
     termGenerator.collect_collocation_doc_ids()
-    # termGenerator.collect_relation_between_collocation_doc_ids()
-    # termGenerator.compute_co_occurrence_terms()
+
+

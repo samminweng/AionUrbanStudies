@@ -217,5 +217,53 @@ class Utility:
         # Obtain the years that appear both term 'i' and 'j' using set intersection
         return sorted(list(year_i.intersection(year_j)))
 
-
+    @staticmethod
+    # Compute the co-occurrence of terms by looking the document ids. If two terms
+    def compute_co_occurrence_terms(term_map):
+        # Read collocations
+        occurrences = list()
+        # Iterate the key term at 'i' loop
+        for i, term_map_i in enumerate(term_map):
+            occ_i = list()  # the occurrence of collocation 'i' with other collocations
+            for j, term_map_j in enumerate(term_map):
+                if i != j:
+                    doc_id_i = term_map_i[1]
+                    doc_id_j = term_map_j[1]
+                    doc_id_ij = set(doc_id_i).intersection(set(doc_id_j))    # Find the intersection of two document ids
+                    doc_id_ij = sorted(list(doc_id_ij))
+                    occ_i.append(doc_id_ij)
+                else:
+                    occ_i.append([])
+            occurrences.append(occ_i)
+        return occurrences
+        # occ = list()
+        #     for i in range(len(collocations)):
+        #         col_i = col_df.query('index == {i}'.format(i=i)).iloc[0]
+        #         occ_i = list()  # the occurrence of collocation 'i' with other collocations
+        #         for j in range(len(collocations)):
+        #             occ_ij = []
+        #             if i != j:
+        #                 col_j = col_df.query('index == {j}'.format(j=j)).iloc[0]
+        #                 years = sorted(list(filter(lambda y: int(y) <= ending_year, (col_i['DocIDs'].keys()))),
+        #                                reverse=True)
+        #                 if len(years) > 0:
+        #                     # Find the documents between collocation 'i' and collocation 'j'
+        #                     for year in years:
+        #                         if year in col_j['DocIDs']:
+        #                             doc_id_i = col_i['DocIDs'][year]
+        #                             doc_id_j = col_j['DocIDs'][year]
+        #                             doc_ids_ij = set(doc_id_i).intersection(set(doc_id_j))
+        #                             doc_ids_ij = sorted(list(doc_ids_ij))
+        #                             occ_ij = occ_ij + doc_ids_ij
+        #             occ_i.append(occ_ij)
+        #         occ.append(occ_i)
+        #     # Store the occurrence results as a json
+        #     occ_json = {'ending_year': ending_year, 'occurrences': occ}
+        #     records.append(occ_json)
+        # # Sort the records by starting year
+        # # Write the json to a file
+        # path = os.path.join('output', self.args.case_name + '_occurrences.json')
+        # with open(path, "w") as out_file:
+        #     out_file.write(json.dumps(records, indent=4))
+        # print('Output the occurrences to ' + path)
 

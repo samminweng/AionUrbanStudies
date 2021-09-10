@@ -1,14 +1,12 @@
 // Draw the term chart and document list
 function TermChart(searched_term, collocation_data, doc_term_data){
     const collocation = collocation_data.find(({Collocation}) => Collocation === searched_term);
-    // console.log(collocation);
-    const documents = Utility.collect_documents_by_doc_ids(collocation, doc_term_data);
-    // console.log(documents);
-    const term_map = doc_term_data.find({});
-    console.log(term_map);
+    const documents = TermChartUtility.collect_documents_by_doc_ids(collocation, doc_term_data);
+    const term_map = collocation['TermMap'];
+    const occurrences = collocation['Occurrences'];
 
     function _createUI(){
-
+        let network_graph = new D3NetworkGraph(searched_term, term_map, occurrences);
     }
 
     _createUI();
