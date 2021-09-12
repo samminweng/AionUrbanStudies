@@ -163,7 +163,7 @@ class TermGenerator:
         scores = col_df['Score'].tolist()
         col_doc_dict = Utility.create_collocation_document(collocations, text_df)
         records = list()
-        max_length = 15     # Max number of term map
+        max_length = 10     # Max number of term map
         min_occurrence = 3  # Mininal number of paper that a collocation appears in the corpus
         for index, collocation in enumerate(collocations):
             score = scores[index]

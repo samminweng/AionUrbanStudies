@@ -48,7 +48,12 @@
     </div>
     <div class="row">
         <div class="col border border-3">
-            <div id="term_chart"></div>
+            <div class="row">
+                <div class="col-1" id="year_control"></div>
+                <div class="col-11">
+                    <div id="term_chart"></div>
+                </div>
+            </div>
         </div>
         <div class="col border border-3">
             <div id="text_list_view"></div>
@@ -56,7 +61,10 @@
     </div>
 </div>
 <!-- Our javascript -->
+<script type="text/javascript" src="js/tfidf_term/document_view/text_view.js"></script>
+<script type="text/javascript" src="js/tfidf_term/document_view/document_list_view.js"></script>
 <script type="text/javascript" src="js/tfidf_term/network_graph/d3_network_graph.js"></script>
+<script type="text/javascript" src="js/tfidf_term/network_graph/year_control.js"></script>
 <script type="text/javascript" src="js/tfidf_term/term_chart_utility.js"></script>
 <script type="text/javascript" src="js/tfidf_term/term_chart.js"></script>
 <script type="text/javascript" src="js/tfidf_term/main.js"></script>

@@ -7,3 +7,31 @@
     background: orange;
     color: black;
 }
+
+/* Highlight searched terms*/
+.search_term {
+    background: transparent;
+    font-weight: bold;
+    color: #1f77b4;
+}
+.key_term {
+    font-style: italic;
+    color: black;
+}
+
+
+/** Network style */
+.controls {
+    flex-basis: 300px;
+    padding: 0 5px;
+}
+
+.controls .force {
+    background-color:#eee;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.controls .force p label { margin-right: .5em; font-size: 120%; font-weight: bold;}
+.controls input[type="range"] { margin: 0 5% 0.5em 5%; width: 90%; }

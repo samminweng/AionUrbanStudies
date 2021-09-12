@@ -4,39 +4,33 @@ function D3NetworkGraph(searched_term, term_map, occurrences) {
     const height = 600;
     const max_radius = 30;
     const font_size = 12;
-    const distance = 100;
-    const strength = -1000;
-    const {nodes, links} = TermChartUtility.create_node_link_data(term_map, occurrences);
+    const distance = 200;
+    const strength = -400;
+    const {nodes, links} = TermChartUtility.create_node_link_data(searched_term, term_map, occurrences);
     const max_node_size = TermChartUtility.get_max_node_size(nodes);
     console.log(nodes);
     console.log(links);
     // Get the color of collocation
-    const colors = function (collocation) {
-        if(collocation === searched_term){
-            return d3.schemeCategory10[0];
-        }
-        return d3.schemeCategory10[1];
-        // let scale = d3.scaleOrdinal(d3.schemeCategory10);
-        // return d => scale(d.group);
+    const colors = function (d) {
+        return d3.schemeCategory10[d.group];
     }
-
-    // Get the
 
     // Get the number of documents for a collocation node
     function get_node_size(node_name) {
         let tm = term_map.find(tm => tm[0] === node_name);
         let num_doc = tm[1].length;
+        return Math.min(num_doc*2, max_radius);
         // let radius = Math.sqrt(num_doc);
-        let radius = num_doc / max_node_size * max_radius;
-        return Math.round(radius);  // Round the radius to the integer
+        // let radius = num_doc / max_node_size * max_radius;
+        // return Math.round(radius);  // Round the radius to the integer
     }
 
     // Get the link color
     function get_link_color(link) {
         let source = link.source;
         let target = link.target;
-        let source_color = colors(source.name);
-        let target_color = colors(target.name);
+        let source_color = colors(source);
+        let target_color = colors(target);
         if (source_color !== target_color) {
             // Scale the color
             return d3.schemeCategory10[7];
@@ -79,16 +73,15 @@ function D3NetworkGraph(searched_term, term_map, occurrences) {
 
         // Initialise the links
         const link = svg.append('g')
+            .attr("stroke-opacity", 0.1)
             .selectAll('line')
             .data(links)
             .join("line")
             .attr("stroke", d => get_link_color(d))
-            .attr("stroke-width", d => d.value)
-            .attr("stroke-opacity", 0.1);
+            .attr("stroke-width", d => d.value);
 
         // Initialise the nodes
         const node = svg.append('g')
-            .attr("stroke-width", 1.5)
             .selectAll("g")
             .data(nodes)
             .join("g")
@@ -121,15 +114,15 @@ function D3NetworkGraph(searched_term, term_map, occurrences) {
 
         // Add the circles
         node.append("circle")
-            .attr("stroke", "#aaa")
+            .attr("stroke", "white")
             .attr("stroke-width", 1.5)
             .attr("r", d => get_node_size(d.name))
-            .attr("fill", d => colors(d.name));
+            .attr("fill", d => colors(d));
 
         // Add node label
         node.append("text")
             .attr("class", "lead")
-            .attr('x', 8)
+            .attr('x', 10)
             .attr('y', "0.31em")
             .text(d => {
                 return d.name;
@@ -151,7 +144,7 @@ function D3NetworkGraph(searched_term, term_map, occurrences) {
 
     // Create the network graph using D3 library
     function _createUI() {
-        $('#term_map').empty(); // Clear the SVG graph
+        $('#term_chart').empty(); // Clear the SVG graph
         try {
             // Add the svg node to 'term_map' div
             const svg = d3.select('#term_chart')
