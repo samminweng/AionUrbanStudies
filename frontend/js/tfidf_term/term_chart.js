@@ -7,7 +7,7 @@ function TermChart(searched_term, collocation_data, doc_term_data){
 
     function _createUI(){
         let network_graph = new D3NetworkGraph(searched_term, term_map, occurrences, doc_term_data);   // Network graph
-        let selected_term_view = new SelectedTermView(searched_term);
+        let selected_term_view = new SelectedTermView(searched_term, documents);
         let doc_list_view = new DocumentListView([searched_term], [], documents);
         let year_control = new YearControl(searched_term, documents, term_map, occurrences);
     }
