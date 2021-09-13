@@ -1,7 +1,7 @@
 // Create a title view
 function TextView(document, searched_term, complementary_terms) {
     // console.log(document);
-    const key_terms = document['KeyTerms'].filter(term => searched_term !== term && !complementary_terms.includes(term)).slice(0, 5);
+    let key_terms = document['KeyTerms'].filter(term => term !== searched_term && !complementary_terms.includes(term)).slice(0, 5);
     console.log(key_terms);
     let container = $('<div class="small"></div>');
     this.get_container = function () {

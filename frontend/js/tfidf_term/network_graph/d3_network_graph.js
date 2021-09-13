@@ -1,5 +1,5 @@
 // Create D3 network graph using collocation and
-function D3NetworkGraph(searched_term, term_map, occurrences, doc_term_data) {
+function D3NetworkGraph(searched_term, term_map, occurrences, documents) {
     const width = 600;
     const height = 600;
     const max_radius = 30;
@@ -7,9 +7,9 @@ function D3NetworkGraph(searched_term, term_map, occurrences, doc_term_data) {
     const distance = 200;
     const strength = -400;
     const {nodes, links} = TermChartUtility.create_node_link_data(searched_term, term_map, occurrences);
-    const max_node_size = TermChartUtility.get_max_node_size(nodes);
-    console.log(nodes);
-    console.log(links);
+    // const max_node_size = TermChartUtility.get_max_node_size(nodes);
+    // console.log(nodes);
+    // console.log(links);
     // Get the color of collocation
     const colors = function (d) {
         return d3.schemeCategory10[d.group];
@@ -102,7 +102,7 @@ function D3NetworkGraph(searched_term, term_map, occurrences, doc_term_data) {
                 });
                 console.log(complementary_terms);
                 const filtered_documents = TermChartUtility.filter_documents_by_key_terms(searched_term,
-                                                                complementary_terms, term_map, doc_term_data);
+                                                                complementary_terms, term_map, documents);
                 console.log(filtered_documents);
                 // Create the document list view
                 let doc_list_view = new DocumentListView(searched_term, complementary_terms, filtered_documents);
@@ -147,6 +147,9 @@ function D3NetworkGraph(searched_term, term_map, occurrences, doc_term_data) {
                 .append("svg").attr("viewBox", [0, 0, width, height])
                 .style("font", font_size + "px sans-serif");
             _create_d3_network_graph(svg);
+            let selected_term_view = new SelectedTermView(searched_term, documents);
+            let doc_list_view = new DocumentListView(searched_term, [], documents);
+
         } catch (error) {
             console.error(error);
         }

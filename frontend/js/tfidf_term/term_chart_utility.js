@@ -48,14 +48,15 @@ class TermChartUtility {
     }
 
     // Filter term map by the year
-    static filter_term_map(year, documents, term_map){
-        let filter_doc_ids = documents.filter(doc => doc['Year'] <= year).map(doc => doc['DocId']);
-        console.log(filter_doc_ids);
+    static filter_term_map(documents, term_map){
+        // let filter_doc_ids = documents.filter(doc => doc['Year'] <= year).map(doc => doc['DocId']);
+        const filterred_doc_ids = documents.map(doc => doc['DocId']);
+        console.log(filterred_doc_ids);
         let filtered_term_map = [];
         // Filter out term map
         for (const tm of term_map){
             const collocation = tm[0];
-            const filtered_doc_ids = tm[1].filter(doc_id => filter_doc_ids.includes(doc_id));
+            const filtered_doc_ids = tm[1].filter(doc_id => filterred_doc_ids.includes(doc_id));
             if(filtered_doc_ids.length > 0){
                 filtered_term_map.push([collocation, filtered_doc_ids]);
             }
@@ -84,7 +85,7 @@ class TermChartUtility {
         return { filtered_term_map: filtered_term_map, filtered_occurrences: filtered_occurrences}
     }
     // Filter the documents by key terms
-    static filter_documents_by_key_terms(searched_term, complementary_terms, term_map, doc_term_data){
+    static filter_documents_by_key_terms(searched_term, complementary_terms, term_map, documents){
         // console.log(term_map);
         let doc_id_s = term_map.find(term => term[0] === searched_term)[1];
         let intersection = new Set(doc_id_s);
@@ -93,7 +94,7 @@ class TermChartUtility {
             intersection = new Set([...intersection].filter(doc_id => doc_id_c.includes(doc_id)));
         }
         console.log(intersection);
-        const filtered_documents = doc_term_data.filter(doc => intersection.has(doc['DocId']));
+        const filtered_documents = documents.filter(doc => intersection.has(doc['DocId']));
         // Sort the document by year
         filtered_documents.sort((a, b) => b['Year'] - a['Year']);
         return filtered_documents;

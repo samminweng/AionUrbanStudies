@@ -17,7 +17,7 @@ function DocumentListView(searched_term, complementary_terms, documents) {
             totalNumber: documents.length,
             pageSize: 5,
             showNavigator: true,
-            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> documents',
+            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> articles',
             position: 'top',
             showGoInput: true,
             showGoButton: true,
