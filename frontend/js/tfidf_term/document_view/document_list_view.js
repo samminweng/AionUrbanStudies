@@ -1,5 +1,5 @@
 // Display a list of research articles for key term 1 and key term 2.
-function DocumentListView(searched_terms, collocation_data, documents) {
+function DocumentListView(searched_term, complementary_terms, documents) {
 
     // Container
     function createPagination(docTable) {
@@ -30,7 +30,7 @@ function DocumentListView(searched_terms, collocation_data, documents) {
                     row.append(col);
                     // Add the title
                     col = $('<td class="col-11"></td>');
-                    let textView = new TextView(document, searched_terms);
+                    let textView = new TextView(document, searched_term, complementary_terms);
                     col.append(textView.get_container());
                     row.append(col);
                     docTable.find('tbody').append(row);
@@ -45,13 +45,6 @@ function DocumentListView(searched_terms, collocation_data, documents) {
     function _createUI() {
         $('#text_list_view').empty();
         let container = $('<div class="container"></div>');
-        // Add the selected terms
-        let selected_term_div = $('<div class="col">' +
-            '<label class="form-label">Selected key terms:</label>' +
-            '<span id="selected_term_1" class="search_term"> ' + searched_terms[0] + '</span>' +
-            '</div>');
-        container.append($('<div class="row"></div>').append(selected_term_div));
-
         let documentTable = $('<table class="table table-striped">' +
             '<thead class="thead-light">' +
             '<tr class="d-flex">' +

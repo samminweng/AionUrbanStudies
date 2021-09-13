@@ -1,5 +1,5 @@
 // Create D3 network graph using collocation and
-function D3NetworkGraph(searched_term, term_map, occurrences) {
+function D3NetworkGraph(searched_term, term_map, occurrences, doc_term_data) {
     const width = 600;
     const height = 600;
     const max_radius = 30;
@@ -19,7 +19,7 @@ function D3NetworkGraph(searched_term, term_map, occurrences) {
     function get_node_size(node_name) {
         let tm = term_map.find(tm => tm[0] === node_name);
         let num_doc = tm[1].length;
-        return Math.min(num_doc*2, max_radius);
+        return Math.min(num_doc * 2, max_radius);
         // let radius = Math.sqrt(num_doc);
         // let radius = num_doc / max_node_size * max_radius;
         // return Math.round(radius);  // Round the radius to the integer
@@ -87,29 +87,25 @@ function D3NetworkGraph(searched_term, term_map, occurrences) {
             .join("g")
             .on("click", function (d, n) {// Add the onclick event
                 // console.log(n.name);
-                // let key_term = n.name;
-                // // Check if the selected item
-                // if (!$('#selected_term_1').is(':empty') && !$('#selected_term_2').is(':empty')) {
-                //     alert("Please clear the terms");
-                //     return;
-                // }
-                // // Update the selected_term_1
-                // if ($('#selected_term_1').is(':empty')) {
-                //     const group_1 = Utility.get_group_number(key_term);
-                //     $('#selected_term_1')
-                //         .attr('class', 'keyword-group-' + group_1)
-                //         .text(key_term);
-                //     // let doc_list_view = new DocumentListView([key_term], collocation_data, corpus_data);
-                //     return;
-                // }
-                // // Update the selected_term_2
-                // const group_2 = Utility.get_group_number(key_term);
-                // $('#selected_term_2').attr('class', 'keyword-group-' + group_2).text(key_term);
-                // // Get the key term 1 and key term 2
-                // let collocation_1 = $('#selected_term_1').text();
-                // let collocation_2 = $('#selected_term_2').text();
-                // let key_terms = [collocation_1, collocation_2]
-                // let doc_list_view = new DocumentListView(key_terms, collocation_data, corpus_data);
+                let key_term = n.name;
+                if (key_term === searched_term) {
+                    alert("Please select another term.");
+                    return;
+                }
+                // Check if the selected item
+                $('#complementary_term').append($('<span class="complementary_term p-2"></span>').text(key_term));
+
+                // Update the selected_term_2
+                const complementary_terms = [];
+                $('#complementary_term').children(".complementary_term").each(function(){
+                    complementary_terms.push(this.textContent);
+                });
+                console.log(complementary_terms);
+                const filtered_documents = TermChartUtility.filter_documents_by_key_terms(searched_term,
+                                                                complementary_terms, term_map, doc_term_data);
+                console.log(filtered_documents);
+                // Create the document list view
+                let doc_list_view = new DocumentListView(searched_term, complementary_terms, filtered_documents);
             }).call(drag(simulation));
 
         // Add the circles

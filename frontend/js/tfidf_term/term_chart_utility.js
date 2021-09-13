@@ -2,7 +2,7 @@ class TermChartUtility {
     // Collect all the document
     static collect_documents_by_doc_ids(collocation, doc_term_data){
         const doc_ids = Object.values(collocation['DocIDs']).flat();
-        console.log(doc_ids);
+        // console.log(doc_ids);
         return doc_term_data.filter(doc_term => doc_ids.includes(doc_term['DocId']));
     }
     // Get the maximal doc length
@@ -43,14 +43,7 @@ class TermChartUtility {
         // Return
         return {nodes: nodes, links: links};
     }
-    // static group_0 = ['machine learning', 'neural network', 'random forest', 'artificial intelligence', 'deep learning'];
-    // // Get the group number
-    // static get_group_number(collocation){
-    //     if (this.group_0.includes(collocation)) {
-    //         return 1;
-    //     }
-    //     return 0;
-    // }
+
     // Filter term map by the year
     static filter_term_map(year, documents, term_map){
         let filter_doc_ids = documents.filter(doc => doc['Year'] <= year).map(doc => doc['DocId']);
@@ -87,7 +80,19 @@ class TermChartUtility {
         console.log(filtered_occurrences);
         return { filtered_term_map: filtered_term_map, filtered_occurrences: filtered_occurrences}
     }
-
+    // Filter the documents by key terms
+    static filter_documents_by_key_terms(searched_term, complementary_terms, term_map, doc_term_data){
+        // console.log(term_map);
+        let doc_id_s = term_map.find(term => term[0] === searched_term)[1];
+        let intersection = new Set(doc_id_s);
+        for(let complementary_term of complementary_terms){
+            let doc_id_c = term_map.find(term => term[0] === complementary_term)[1];
+            intersection = new Set([...intersection].filter(doc_id => doc_id_c.includes(doc_id)));
+        }
+        console.log(intersection);
+        const filtered_documents = doc_term_data.filter(doc => intersection.has(doc['DocId']));
+        return filtered_documents;
+    }
 
 
 }

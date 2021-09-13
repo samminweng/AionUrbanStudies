@@ -14,6 +14,12 @@
     font-weight: bold;
     color: #1f77b4;
 }
+.complementary_term{
+    background: transparent;
+    font-weight: bold;
+    color: orange;
+}
+
 .key_term {
     font-style: italic;
     color: black;
