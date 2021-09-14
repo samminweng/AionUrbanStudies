@@ -1,28 +1,39 @@
 // Create D3 network graph using collocation and
-function D3NetworkGraph(searched_term, term_map, occurrences, documents) {
+function D3NetworkGraph(searched_term, term_map, documents) {
     const width = 600;
     const height = 600;
-    const max_radius = 30;
-    const font_size = 12;
-    const distance = 200;
-    const strength = -400;
-    const {nodes, links} = TermChartUtility.create_node_link_data(searched_term, term_map, occurrences);
-    // const max_node_size = TermChartUtility.get_max_node_size(nodes);
-    // console.log(nodes);
-    // console.log(links);
+    const max_radius = 10;
+    const image_path = 'images/outline_article_black_48dp.png';
+    const distance = 120;
+    const strength = -1000;
+    const {nodes, links} = TermChartUtility.create_node_link_data(searched_term, term_map, documents);
+    console.log(nodes);
+    console.log(links);
     // Get the color of collocation
     const colors = function (d) {
         return d3.schemeCategory10[d.group];
     }
+    // Get font size
+    function get_font_size(node){
+        if(node.name === searched_term){
+            return "20";
+        }
+        return "14";
+    }
+
+    // Get the image_path
+    function get_image_path(node){
+        // if(node.name !== searched_term){
+        //     return 'images/baseline_article_black_48dp.png';
+        // }
+        return 'images/outline_article_black_48dp.png';
+    }
 
     // Get the number of documents for a collocation node
-    function get_node_size(node_name) {
-        let tm = term_map.find(tm => tm[0] === node_name);
-        let num_doc = tm[1].length;
-        return Math.min(num_doc * 2, max_radius);
-        // let radius = Math.sqrt(num_doc);
-        // let radius = num_doc / max_node_size * max_radius;
-        // return Math.round(radius);  // Round the radius to the integer
+    function get_node_size(node) {
+        let num_doc = node['doc_ids'].length;
+        return Math.round(Math.sqrt(num_doc * 100)) + max_radius;
+        // return Math.min(num_doc * 10, max_radius);
     }
 
     // Get the link color
@@ -89,37 +100,43 @@ function D3NetworkGraph(searched_term, term_map, occurrences, documents) {
                 // console.log(n.name);
                 let key_term = n.name;
                 if (key_term === searched_term) {
-                    alert("Please select another term.");
+                    $('#complementary_term').text("");
+                    let doc_list_view = new DocumentListView(searched_term, [], documents);
                     return;
                 }
-                // Check if the selected item
-                $('#complementary_term').append($('<span class="complementary_term p-2"></span>').text(key_term));
-
-                // Update the selected_term_2
-                const complementary_terms = [];
-                $('#complementary_term').children(".complementary_term").each(function(){
-                    complementary_terms.push(this.textContent);
-                });
-                console.log(complementary_terms);
+                $('#complementary_term').text(key_term);
+                // console.log(complementary_terms);
                 const filtered_documents = TermChartUtility.filter_documents_by_key_terms(searched_term,
-                                                                complementary_terms, term_map, documents);
+                    [key_term], term_map, documents);
                 console.log(filtered_documents);
                 // Create the document list view
-                let doc_list_view = new DocumentListView(searched_term, complementary_terms, filtered_documents);
+                let doc_list_view = new DocumentListView(searched_term, [key_term], filtered_documents);
             }).call(drag(simulation));
 
         // Add the circles
-        node.append("circle")
+        // node.append("circle")
+        //     .attr("stroke", "white")
+        //     .attr("stroke-width", 1.5)
+        //     .attr("r", d => get_node_size(d.name))
+        //     .attr("fill", d => colors(d));
+        node.append("image")
+            .attr('href', d => get_image_path(d))
+            .attr('x', d => -1 * get_node_size(d)/2 )
+            .attr('y', d => -1 * get_node_size(d)/2)
             .attr("stroke", "white")
             .attr("stroke-width", 1.5)
-            .attr("r", d => get_node_size(d.name))
-            .attr("fill", d => colors(d));
+            .attr("width", d => get_node_size(d))
+            .attr("height", d => get_node_size(d))
+            .attr('rx', "3")
+            .attr("color", d => colors(d));
+
 
         // Add node label
         node.append("text")
             .attr("class", "lead")
-            .attr('x', 10)
-            .attr('y', "0.31em")
+            .attr('x', "0.8em")
+            .attr('y', "0.3em")
+            .style("font", d => get_font_size(d) + "px sans-serif")
             .text(d => {
                 return d.name;
             });
@@ -144,8 +161,8 @@ function D3NetworkGraph(searched_term, term_map, occurrences, documents) {
         try {
             // Add the svg node to 'term_map' div
             const svg = d3.select('#term_chart')
-                .append("svg").attr("viewBox", [0, 0, width, height])
-                .style("font", font_size + "px sans-serif");
+                .append("svg").attr("viewBox", [0, 0, width, height]);
+                // .style("font", font_size + "px sans-serif");
             _create_d3_network_graph(svg);
             let selected_term_view = new SelectedTermView(searched_term, documents);
             let doc_list_view = new DocumentListView(searched_term, [], documents);

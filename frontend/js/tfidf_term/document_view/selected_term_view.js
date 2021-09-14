@@ -9,7 +9,7 @@ function SelectedTermView(searched_term, documents){
             '<span id="selected_term" class="search_term p-2">' + searched_term + '</span>' +
             '</div>');
         // Complementary terms
-        let complementary_term_span = $('<span id="complementary_term"></span>');
+        let complementary_term_span = $('<span id="complementary_term" class="complementary_term p-2"></span>');
         selected_term_div.append(complementary_term_span);
         // Clear button to clear complementary terms
         let button = $('<button type="button" class="btn btn-link">Clear</button>');

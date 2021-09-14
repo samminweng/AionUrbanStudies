@@ -193,18 +193,27 @@ class Utility:
 
     # # Compute the top co-occurred terms (extracted from TF-IDF) within documents
     @staticmethod
-    def compute_term_map(doc_term_df, doc_ids):
+    def compute_term_map(collocation, doc_ids, doc_term_df):
         term_doc_dict = {}
-        for doc_id in doc_ids:
+        for doc_id in doc_ids:  # Go through each document
             try:
                 doc_term = doc_term_df.query('DocId == {id}'.format(id=doc_id)).iloc[0]
-                key_terms = doc_term['KeyTerms']
+                key_terms = doc_term['KeyTerms'][:5]
+                # Check if any key term appear in term_doc_dict
+                is_found = False
                 for key_term in key_terms:
-                    if key_term not in term_doc_dict:
-                        term_doc_dict[key_term] = set()
+                    if is_found is False and key_term in term_doc_dict:
+                        term_doc_dict[key_term].add(doc_id)
+                        is_found = True
+                # That indicates no common term is found
+                if is_found is False:
+                    key_term = key_terms[0]     # Get the first term
+                    term_doc_dict[key_term] = set()
                     term_doc_dict[key_term].add(doc_id)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
+        # Add the collocation to term map
+        term_doc_dict[collocation] = set(doc_ids)
         # Sort the dictionary by the number of documents (by value)
         sorted_term_doc_list = list(sorted(term_doc_dict.items(), key=lambda item: len(item[1]), reverse=True))
         return sorted_term_doc_list

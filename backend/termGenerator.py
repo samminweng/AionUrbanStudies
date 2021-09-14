@@ -171,15 +171,15 @@ class TermGenerator:
             num_docs = len(doc_ids)
             if num_docs > min_occurrence:
                 doc_ids_year = Utility.group_doc_ids_by_year(text_df, doc_ids)
-                term_map = Utility.compute_term_map(doc_term_df, doc_ids)[:max_length]  # Store top frequent terms
-                occurrences = Utility.compute_co_occurrence_terms(term_map)
+                term_map = Utility.compute_term_map(collocation, doc_ids, doc_term_df)   # Store top frequent terms
+                # occurrences = Utility.compute_co_occurrence_terms(term_map)
                 record = {'Collocation': collocation, 'Score': score,
                           'DocIDs': doc_ids_year, 'Num_Docs': num_docs,
-                          'TermMap': term_map, 'Occurrences': occurrences}
+                          'TermMap': term_map}
                 records.append(record)
         # Sort the records by the number of document
         # Write the output as a file
-        df = pd.DataFrame(records, columns=['Collocation', 'Score', 'Num_Docs', 'DocIDs', 'TermMap', 'Occurrences'])
+        df = pd.DataFrame(records, columns=['Collocation', 'Score', 'Num_Docs', 'DocIDs', 'TermMap'])
         # df = df.reset_index()
         path = os.path.join('output', self.args.case_name + '_collocations.csv')
         df.to_csv(path, encoding='utf-8', index=False)
