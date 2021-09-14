@@ -1,4 +1,4 @@
-function YearControl(searched_term, term_map, occurrences, documents){
+function YearControl(searched_term, term_map, documents){
     let container = $('#year_control').attr('class', 'controls');
 
     function _createUI(){
@@ -28,9 +28,9 @@ function YearControl(searched_term, term_map, occurrences, documents){
             year_output.text(ending_year);
             const filtered_documents = documents.filter(doc => doc['Year'] <= ending_year);
             // Get the filtered term map and occurrences
-            const {filtered_term_map, filtered_occurrences} = TermChartUtility.filter_term_map(filtered_documents, term_map, occurrences);
+            const filtered_term_map = TermChartUtility.filter_term_map(filtered_documents, term_map);
             // Create a network work graph
-            let network_graph = new D3NetworkGraph(searched_term, filtered_term_map, filtered_occurrences, filtered_documents);
+            let network_graph = new D3NetworkGraph(searched_term, filtered_term_map, filtered_documents);
         });
 
         label.append(year_output);

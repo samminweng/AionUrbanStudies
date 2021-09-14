@@ -130,7 +130,6 @@ function D3NetworkGraph(searched_term, term_map, documents) {
             .attr('rx', "3")
             .attr("color", d => colors(d));
 
-
         // Add node label
         node.append("text")
             .attr("class", "lead")
