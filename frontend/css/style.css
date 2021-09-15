@@ -13,17 +13,19 @@
     background: transparent;
     font-weight: bold;
     color: #1f77b4;
+    padding: 0px;
 }
 .complementary_term{
     background: transparent;
     font-weight: bold;
     color: orange;
+    padding: 0px;
 }
 
 .key_term {
     /*background: transparent;*/
-    /*font-style: italic;*/
-    text-decoration: underline;
+    font-style: italic;
+    /*text-decoration: underline;*/
     padding: 0px;
     /*color: black;*/
 }
@@ -38,9 +40,18 @@
 .controls .force {
     background-color:#eee;
     border-radius: 3px;
-    padding: 5px;
-    margin: 5px 0;
+    /*padding: 5px;*/
+    /*margin: 5px 0;*/
 }
 
 .controls .force p label { margin-right: .5em; font-size: 120%; font-weight: bold;}
-.controls input[type="range"] { margin: 0 5% 0.5em 5%; width: 90%; }
+/*.controls input[type="range"] { margin: 0 5% 0.5em 5%; width: 90%; }*/
+
+#custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+}

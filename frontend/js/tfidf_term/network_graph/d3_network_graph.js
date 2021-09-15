@@ -3,7 +3,6 @@ function D3NetworkGraph(searched_term, term_map, documents) {
     const width = 600;
     const height = 600;
     const max_radius = 10;
-    const image_path = 'images/outline_article_black_48dp.png';
     const distance = 120;
     const strength = -1000;
     const {nodes, links} = TermChartUtility.create_node_link_data(searched_term, term_map, documents);
@@ -16,16 +15,13 @@ function D3NetworkGraph(searched_term, term_map, documents) {
     // Get font size
     function get_font_size(node){
         if(node.name === searched_term){
-            return "20";
+            return "24";
         }
-        return "14";
+        return "12";
     }
 
     // Get the image_path
     function get_image_path(node){
-        // if(node.name !== searched_term){
-        //     return 'images/baseline_article_black_48dp.png';
-        // }
         return 'images/outline_article_black_48dp.png';
     }
 
@@ -80,7 +76,7 @@ function D3NetworkGraph(searched_term, term_map, documents) {
         const simulation = d3.forceSimulation(nodes)
             .force('link', d3.forceLink(links).id(d => d.id).distance(distance))
             .force("charge", d3.forceManyBody().strength(strength))
-            .force('center', d3.forceCenter(width / 2, height / 2));
+            .force('center', d3.forceCenter(width / 2 - 40, height / 2));
 
         // Initialise the links
         const link = svg.append('g')
@@ -133,8 +129,8 @@ function D3NetworkGraph(searched_term, term_map, documents) {
         // Add node label
         node.append("text")
             .attr("class", "lead")
-            .attr('x', "0.8em")
-            .attr('y', "0.3em")
+            .attr('x', "1em")
+            .attr('y', "0.5em")
             .style("font", d => get_font_size(d) + "px sans-serif")
             .text(d => {
                 return d.name;

@@ -1,42 +1,43 @@
-function YearControl(searched_term, term_map, documents){
-    let container = $('#year_control').attr('class', 'controls');
+// Create a range slider
+// Ref: https://slawomir-zaziablo.github.io/range-slider/
+function YearControl(searched_term, term_map, documents) {
+    const year_ranges = {"0": 2000, "1": 2010, "2": 2015, "3": 2018, "4": 2021}
 
-    function _createUI(){
-        container.empty();
-        //
-        let div = $('<div class="force"></div>');
-        div.append($('<p><label>Year</label>Shift the year to view the trend</p>'));
-        // Label
-        let label = $('<label for="year_range" class="form-label"></label>');
-        // Output
-        let year_output = $('<output>2021</output>');
-        // Input range
-        let year_range = $('<input type="range" min=0 max=3 step=1 value=3>');
-        // Set onchange event
-        year_range.on('change', function(e) {
-            let value = e.target.value;
-            let ending_year = 0;
-            if (value === "0") {
-                ending_year = 2010;
-            } else if (value === "1") {
-                ending_year = 2015;
-            } else if (value === "2") {
-                ending_year = 2018;
-            } else if (value === "3") {
-                ending_year = 2021;
+    function _createUI() {
+        let handler = $('#custom-handle');
+        $('#year_range').slider({
+            value: 4,
+            min: 0,
+            max: 4,
+            step: 1,
+            create: function () {
+                handler.text(year_ranges[$(this).slider("value")]);
+            },
+            slide: function (event, ui) {
+                let ending_year = year_ranges[ui.value];
+                handler.text(ending_year);
+                const filtered_documents = documents.filter(doc => doc['Year'] <= ending_year);
+                // Get the filtered term map and occurrences
+                const filtered_term_map = TermChartUtility.filter_term_map(filtered_documents, term_map);
+                // Create a network work graph
+                let network_graph = new D3NetworkGraph(searched_term, filtered_term_map, filtered_documents);
             }
-            year_output.text(ending_year);
-            const filtered_documents = documents.filter(doc => doc['Year'] <= ending_year);
-            // Get the filtered term map and occurrences
-            const filtered_term_map = TermChartUtility.filter_term_map(filtered_documents, term_map);
-            // Create a network work graph
-            let network_graph = new D3NetworkGraph(searched_term, filtered_term_map, filtered_documents);
         });
+        // // Set onchange event
+        // $('#year_range').on('change', function(e) {
+        //     let value = e.target.value;
+        //     let ending_year = year_ranges[value];
+        //     $('#year_output').text(ending_year);
+        //     const filtered_documents = documents.filter(doc => doc['Year'] <= ending_year);
+        //     // Get the filtered term map and occurrences
+        //     const filtered_term_map = TermChartUtility.filter_term_map(filtered_documents, term_map);
+        //     // Create a network work graph
+        //     let network_graph = new D3NetworkGraph(searched_term, filtered_term_map, filtered_documents);
+        // });
+        // // Reset the year range
+        // $('#year_range').val("4");
+        // $('#year_output').text(2021);
 
-        label.append(year_output);
-        label.append(year_range);
-        div.append(label);
-        container.append(div);
     }
 
     _createUI();
