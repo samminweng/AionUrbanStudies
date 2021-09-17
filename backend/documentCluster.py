@@ -10,8 +10,7 @@ from nltk.tokenize import sent_tokenize
 import umap     # (UMAP) is a dimension reduction technique https://umap-learn.readthedocs.io/en/latest/
 import hdbscan
 from sklearn.cluster import KMeans
-# import matplotlib.pyplot as plt
-# from sklearn.datasets import fetch_20newsgroups
+import matplotlib.pyplot as plt
 from TopicCreator import TopicCreator
 
 logging.basicConfig(level=logging.INFO)
@@ -46,35 +45,53 @@ class DocumentCluster:
         try:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
             model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
-            embeddings = model.encode(self.data, show_progress_bar=True)
+            doc_embeddings = model.encode(self.data, show_progress_bar=True)
             umap_embeddings = umap.UMAP(n_neighbors=15,
                                         n_components=5,
-                                        metric='cosine').fit_transform(embeddings)
+                                        metric='cosine').fit_transform(doc_embeddings)
             # Cluster the documents by using HDBSCAN
             # cluster = hdbscan.HDBSCAN(min_cluster_size=60, min_samples=1,   # alpha=1.3,
             #                           metric='euclidean',
             #                           # cluster_selection_method='eom'
             #                           ).fit(umap_embeddings)
             # We use the k-means clustering technique to group 600 documents into 5 groups
-            cluster = KMeans(n_clusters=5, random_state=0).fit(umap_embeddings)
-            # # Prepare data and visualise the result
-            # umap_data = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(embeddings)
-            # result = pd.DataFrame(umap_data, columns=['x', 'y'])
-            # result['labels'] = cluster.labels_
+            cluster = KMeans(n_clusters=5, random_state=42).fit(umap_embeddings)
+            # Write out the cluster results
             docs_df = pd.DataFrame(self.data, columns=["Text"])
             docs_df['Cluster'] = cluster.labels_
             docs_df['DocId'] = range(len(docs_df))
+            # # Prepare data and visualise the result
+            # Map the document embeddings to 2d for visualisation.
+            umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
+                doc_embeddings)
+            result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
+            docs_df['x'] = result_df['x']
+            docs_df['y'] = result_df['y']
             # Re-order columns
-            docs_df = docs_df[['Cluster', 'DocId', 'Text']]
+            docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
             # Write the result to csv and json file
             path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.csv')
             docs_df.to_csv(path, encoding='utf-8', index=False)
             # # Write to a json file
             path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.json')
             docs_df.to_json(path, orient='records')
-            print('Output keywords/phrases to ' + path)
+            print('Output cluster results and 2D data points to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+    # Visualise the data points
+    def visual_data_point(self):
+        path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.json')
+        doc_cluster_df = pd.read_json(path)
+        # Get the max and min of 'x' and 'y'
+        max_x = doc_cluster_df['x'].max()
+        max_y = doc_cluster_df['y'].max()
+        fig, ax = plt.subplots(figsize=(5, 5))
+        clustered = doc_cluster_df.loc[doc_cluster_df.Cluster != -1, :]
+        plt.scatter(clustered.X, clustered.Y, c=clustered.Cluster, s=0.05, cmap='hsv_r')
+        plt.colorbar()
+        plt.show()
+        # plt.savefig('cluster.png')
 
 
     # Derive the topic
@@ -108,10 +125,9 @@ class DocumentCluster:
         print('Output keywords/phrases to ' + path)
 
 
-
-
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    # docCluster.get_sentence_embedding_cluster_sentence()
-    docCluster.derive_topic_from_cluster_docs()
+    docCluster.get_sentence_embedding_cluster_sentence()
+    # docCluster.visual_data_point()
+    # docCluster.derive_topic_from_cluster_docs()
