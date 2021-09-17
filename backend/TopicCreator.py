@@ -19,5 +19,13 @@ class TopicCreator:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-
-    # def extract_top_n_words_per_topics
+    # Obtain top collocation per topic
+    @staticmethod
+    def extract_top_n_words_per_topic(tf_idf, count, docs_per_topic, n=20):
+        collocations = count.get_feature_names()
+        labels = list(docs_per_topic['Cluster'])
+        tf_idf_transposed = tf_idf.T
+        indices = tf_idf_transposed.argsort()[:, -n:]
+        top_n_words = {label: [(collocations[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
+                       enumerate(labels)}
+        return top_n_words

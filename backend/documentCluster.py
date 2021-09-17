@@ -12,7 +12,7 @@ import hdbscan
 from sklearn.cluster import KMeans
 # import matplotlib.pyplot as plt
 # from sklearn.datasets import fetch_20newsgroups
-import TopicCreator
+from TopicCreator import TopicCreator
 
 logging.basicConfig(level=logging.INFO)
 path = os.path.join('/Scratch', 'mweng', 'anaconda3', 'envs', 'tf_gpu', 'nltk_data')
@@ -66,7 +66,6 @@ class DocumentCluster:
             docs_df['DocId'] = range(len(docs_df))
             # Re-order columns
             docs_df = docs_df[['Cluster', 'DocId', 'Text']]
-
             # Write the result to csv and json file
             path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.csv')
             docs_df.to_csv(path, encoding='utf-8', index=False)
@@ -77,43 +76,42 @@ class DocumentCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+
     # Derive the topic
     def derive_topic_from_cluster_docs(self):
         # Load the cluster
         path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.json')
         docs_df = pd.read_json(path)
         # Group the documents by topics
-        docs_per_topic = docs_df.groupby(['Topic'], as_index=False).agg({'Doc': ' '.join})
+        docs_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'Text': ' '.join})
         # compute the tf-idf scores for each cluster
-        tf_idf, count = TopicCreator.TopicCreator.compute_c_tf_idf_score(docs_per_topic['Doc'].values, len(docs_df))
-        print(tf_idf)
-    # def tokenize(self):
-    #     embeddings = []
-    #     # Search all the subject words
-    #     for i, text in self.text_df.iterrows():
-    #         try:
-    #             doc_id = text['DocId']
-    #             title = text['Title']
-    #             abstract = text['Abstract']
-    #             sentences = [title] + sent_tokenize(abstract)
-    #             # Removed license sentences such as '© 1980-2012 IEEE'
-    #             clean_sentences = list(filter(lambda sentence: u"\u00A9" not in sentence.lower() and
-    #                                                            'licensee' not in sentence.lower(), sentences))
-    #             # Sentence are encoded by sentence transformer
-    #             sentence_embeddings = self.model.encode(clean_sentences, show_progress_bar=True)
-    #             # Lower the dimension of sentence embeddings
-    #             # n_component is the dimensionality of 5; the size of local neighbors at 15;
-    #             umap_embeddings = umap.UMAP(n_neighbors=15, n_components=5, metric='cosine').fit_transform(sentence_embeddings)
-    #
-    #
-    #             #embeddings.append({'DocId': doc_id, 'sentence_embeddings': })
-    #
-    #         except Exception as err:
-    #             print("Error occurred! {err}".format(err=err))
+        tf_idf, count = TopicCreator.compute_c_tf_idf_score(docs_per_cluster['Text'].values, len(docs_df))
+        # print(tf_idf)
+        # 'top_words' is a dictionary
+        top_words = TopicCreator.extract_top_n_words_per_topic(tf_idf, count, docs_per_cluster)
+        # print(top_words)
+        doc_ids_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'DocId': lambda doc_id: list(doc_id)})
+        # Combine 'doc_id_per_cluster' and 'top_collocations' into the results
+        results = []
+        for i, cluster in doc_ids_per_cluster.iterrows():
+            top_words_per_cluster = list(map(lambda word: word[0],top_words[i]))
+            result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
+                      "TopWords": top_words_per_cluster}
+            results.append(result)
+        # Write the result to csv and json file
+        cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords'])
+        path = os.path.join('output', 'cluster', self.args.case_name + '_top_words_clusters.csv')
+        cluster_df.to_csv(path, encoding='utf-8', index=False)
+        # # Write to a json file
+        path = os.path.join('output', 'cluster', self.args.case_name + '_top_words_clusters.json')
+        cluster_df.to_json(path, orient='records')
+        print('Output keywords/phrases to ' + path)
+
+
 
 
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    docCluster.get_sentence_embedding_cluster_sentence()
-    # docCluster.derive_topic_from_cluster_docs()
+    # docCluster.get_sentence_embedding_cluster_sentence()
+    docCluster.derive_topic_from_cluster_docs()
