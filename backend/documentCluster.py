@@ -42,12 +42,11 @@ class DocumentCluster:
         # print(self.data)
 
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
-    def get_sentence_embedding_cluster_sentence(self):
+    def get_sentence_embedding_cluster_doc(self):
         try:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
             model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
             doc_embeddings = model.encode(self.data, show_progress_bar=True)
-            np.random.seed(42)      # Set the random seed
             umap_embeddings = umap.UMAP(n_neighbors=15,
                                         n_components=5,
                                         metric='cosine').fit_transform(doc_embeddings)
@@ -57,7 +56,8 @@ class DocumentCluster:
             #                           # cluster_selection_method='eom'
             #                           ).fit(umap_embeddings)
             # We use the k-means clustering technique to group 600 documents into 5 groups
-            cluster = KMeans(n_clusters=5, random_state=42).fit(umap_embeddings)
+            # random_state is the random seed
+            cluster = KMeans(n_clusters=5, n_init=25, max_iter=600, random_state=42).fit(umap_embeddings)
             # Write out the cluster results
             docs_df = pd.DataFrame(self.data, columns=["Text"])
             docs_df['Cluster'] = cluster.labels_
@@ -133,6 +133,6 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    # docCluster.get_sentence_embedding_cluster_sentence()
-    docCluster.visual_doc_cluster()
-    docCluster.derive_topic_from_cluster_docs()
+    docCluster.get_sentence_embedding_cluster_doc()
+    # docCluster.visual_doc_cluster()
+    # docCluster.derive_topic_from_cluster_docs()
