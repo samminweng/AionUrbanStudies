@@ -92,7 +92,7 @@ class DocumentCluster:
         min_y = doc_cluster_df['y'].min()
         fig, ax = plt.subplots(figsize=(10, 10))
         clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
-        plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=0.5, cmap='hsv_r')
+        plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=1.0, cmap='hsv_r')
         plt.colorbar()
         plt.show()
         # plt.savefig('cluster.png')
@@ -132,5 +132,5 @@ class DocumentCluster:
 if __name__ == '__main__':
     docCluster = DocumentCluster()
     docCluster.get_sentence_embedding_cluster_doc()
-    # docCluster.visual_doc_cluster()
-    # docCluster.derive_topic_from_cluster_docs()
+    docCluster.visual_doc_cluster()
+    docCluster.derive_topic_from_cluster_docs()
