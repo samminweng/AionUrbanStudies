@@ -7,6 +7,7 @@ import nltk
 # # https://www.sbert.net/index.html
 from sentence_transformers import SentenceTransformer
 from nltk.tokenize import sent_tokenize
+import numpy as np
 import umap     # (UMAP) is a dimension reduction technique https://umap-learn.readthedocs.io/en/latest/
 import hdbscan
 from sklearn.cluster import KMeans
@@ -46,6 +47,7 @@ class DocumentCluster:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
             model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
             doc_embeddings = model.encode(self.data, show_progress_bar=True)
+            np.random.seed(42)      # Set the random seed
             umap_embeddings = umap.UMAP(n_neighbors=15,
                                         n_components=5,
                                         metric='cosine').fit_transform(doc_embeddings)
@@ -67,6 +69,8 @@ class DocumentCluster:
             result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
             docs_df['x'] = result_df['x']
             docs_df['y'] = result_df['y']
+            # Round up data point 'x' and 'y' to 2 decimal
+            docs_df = docs_df.round({'x': 2, 'y': 2})
             # Re-order columns
             docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
             # Write the result to csv and json file
@@ -80,19 +84,20 @@ class DocumentCluster:
             print("Error occurred! {err}".format(err=err))
 
     # Visualise the data points
-    def visual_data_point(self):
+    def visual_doc_cluster(self):
         path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.json')
         doc_cluster_df = pd.read_json(path)
         # Get the max and min of 'x' and 'y'
         max_x = doc_cluster_df['x'].max()
         max_y = doc_cluster_df['y'].max()
-        fig, ax = plt.subplots(figsize=(5, 5))
-        clustered = doc_cluster_df.loc[doc_cluster_df.Cluster != -1, :]
-        plt.scatter(clustered.X, clustered.Y, c=clustered.Cluster, s=0.05, cmap='hsv_r')
+        min_x = doc_cluster_df['x'].min()
+        min_y = doc_cluster_df['y'].min()
+        fig, ax = plt.subplots(figsize=(10, 10))
+        clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
+        plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=0.5, cmap='hsv_r')
         plt.colorbar()
         plt.show()
         # plt.savefig('cluster.png')
-
 
     # Derive the topic
     def derive_topic_from_cluster_docs(self):
@@ -128,6 +133,6 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    docCluster.get_sentence_embedding_cluster_sentence()
-    # docCluster.visual_data_point()
-    # docCluster.derive_topic_from_cluster_docs()
+    # docCluster.get_sentence_embedding_cluster_sentence()
+    docCluster.visual_doc_cluster()
+    docCluster.derive_topic_from_cluster_docs()

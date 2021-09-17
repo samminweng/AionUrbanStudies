@@ -13,7 +13,7 @@ class TopicCreator:
             w = t.sum(axis=1)
             tf = np.divide(t.T, w)
             sum_t = t.sum(axis=0)
-            idf = np.log(np.divide(total_number_documents, sum_t)).reshape(-1, 1)    #
+            idf = np.log(np.divide(total_number_documents, sum_t)).reshape(-1, 1)  #
             tf_idf = np.multiply(tf, idf)
             return tf_idf, count
         except Exception as err:
