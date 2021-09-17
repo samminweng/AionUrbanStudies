@@ -12,8 +12,6 @@ $(function () {
         const collocation_data = result1[0];
         const doc_term_data = result2[0];
         const searched_term = $('#searched_term').val();
-
-
         // console.log(searched_term);
         let term_chart = new TermChart(searched_term, collocation_data, doc_term_data);
         // Collect all collocations
