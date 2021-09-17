@@ -25,7 +25,8 @@ class DocumentCluster:
     def __init__(self):
         self.args = Namespace(
             case_name='UrbanStudyCorpus',
-            path='data'
+            path='data',
+            num_clusters=[5, 10, 15]
         )
         path = os.path.join('data', self.args.case_name + '.csv')
         text_df = pd.read_csv(path)
@@ -50,6 +51,10 @@ class DocumentCluster:
             umap_embeddings = umap.UMAP(n_neighbors=15,
                                         n_components=5,
                                         metric='cosine').fit_transform(doc_embeddings)
+            # Map the document embeddings to 2d for visualisation.
+            umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
+                doc_embeddings)
+            result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
             # Cluster the documents by using HDBSCAN
             # cluster = hdbscan.HDBSCAN(min_cluster_size=60, min_samples=1,   # alpha=1.3,
             #                           metric='euclidean',
@@ -57,80 +62,78 @@ class DocumentCluster:
             #                           ).fit(umap_embeddings)
             # We use the k-means clustering technique to group 600 documents into 5 groups
             # random_state is the random seed
-            cluster = KMeans(n_clusters=5, random_state=42).fit(umap_embeddings)
-            # Write out the cluster results
-            docs_df = pd.DataFrame(self.data, columns=["Text"])
-            docs_df['Cluster'] = cluster.labels_
-            docs_df['DocId'] = range(len(docs_df))
-            # # Prepare data and visualise the result
-            # Map the document embeddings to 2d for visualisation.
-            umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(doc_embeddings)
-            result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
-            # Round up data point 'x' and 'y' to 2 decimal
-            docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
-            docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
-            # Re-order columns
-            docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
-            # Write the result to csv and json file
-            path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.csv')
-            docs_df.to_csv(path, encoding='utf-8', index=False)
-            # # Write to a json file
-            path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.json')
-            docs_df.to_json(path, orient='records')
-            print('Output cluster results and 2D data points to ' + path)
+            for num_cluster in self.args.num_clusters:
+                cluster = KMeans(n_clusters=num_cluster, random_state=42).fit(umap_embeddings)
+                # Write out the cluster results
+                docs_df = pd.DataFrame(self.data, columns=["Text"])
+                docs_df['Cluster'] = cluster.labels_
+                docs_df['DocId'] = range(len(docs_df))
+                # Round up data point 'x' and 'y' to 2 decimal
+                docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
+                docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
+                # Re-order columns
+                docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
+                # Write the result to csv and json file
+                path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.csv')
+                docs_df.to_csv(path, encoding='utf-8', index=False)
+                # # Write to a json file
+                path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
+                docs_df.to_json(path, orient='records')
+                print('Output cluster results and 2D data points to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
     # Visualise the data points
     def visual_doc_cluster(self):
-        path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.json')
-        doc_cluster_df = pd.read_json(path)
-        # Get the max and min of 'x' and 'y'
-        max_x = doc_cluster_df['x'].max()
-        max_y = doc_cluster_df['y'].max()
-        min_x = doc_cluster_df['x'].min()
-        min_y = doc_cluster_df['y'].min()
-        fig, ax = plt.subplots(figsize=(10, 10))
-        clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
-        plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=1.0, cmap='hsv_r')
-        plt.colorbar()
-        plt.show()
+        for num_cluster in self.args.num_clusters:
+            path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
+            doc_cluster_df = pd.read_json(path)
+            # Get the max and min of 'x' and 'y'
+            max_x = doc_cluster_df['x'].max()
+            max_y = doc_cluster_df['y'].max()
+            min_x = doc_cluster_df['x'].min()
+            min_y = doc_cluster_df['y'].min()
+            fig, ax = plt.subplots(figsize=(10, 10))
+            clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
+            plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=2.0, cmap='hsv_r')
+            plt.colorbar()
+            plt.show()
         # plt.savefig('cluster.png')
 
     # Derive the topic
     def derive_topic_from_cluster_docs(self):
-        # Load the cluster
-        path = os.path.join('output', 'cluster', self.args.case_name + '_doc_clusters.json')
-        docs_df = pd.read_json(path)
-        # Group the documents by topics
-        docs_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'Text': ' '.join})
-        # compute the tf-idf scores for each cluster
-        tf_idf, count = TopicCreator.compute_c_tf_idf_score(docs_per_cluster['Text'].values, len(docs_df))
-        # print(tf_idf)
-        # 'top_words' is a dictionary
-        top_words = TopicCreator.extract_top_n_words_per_topic(tf_idf, count, docs_per_cluster)
-        # print(top_words)
-        doc_ids_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'DocId': lambda doc_id: list(doc_id)})
-        # Combine 'doc_id_per_cluster' and 'top_collocations' into the results
-        results = []
-        for i, cluster in doc_ids_per_cluster.iterrows():
-            top_words_per_cluster = list(map(lambda word: word[0],top_words[i]))
-            result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
-                      "TopWords": top_words_per_cluster}
-            results.append(result)
-        # Write the result to csv and json file
-        cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords'])
-        path = os.path.join('output', 'cluster', self.args.case_name + '_top_words_clusters.csv')
-        cluster_df.to_csv(path, encoding='utf-8', index=False)
-        # # Write to a json file
-        path = os.path.join('output', 'cluster', self.args.case_name + '_top_words_clusters.json')
-        cluster_df.to_json(path, orient='records')
-        print('Output keywords/phrases to ' + path)
+        # Go through different cluster number
+        for num_cluster in self.args.num_clusters:
+            # Load the cluster
+            path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
+            docs_df = pd.read_json(path)
+            # Group the documents by topics
+            docs_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'Text': ' '.join})
+            # compute the tf-idf scores for each cluster
+            tf_idf, count = TopicCreator.compute_c_tf_idf_score(docs_per_cluster['Text'].values, len(docs_df))
+            # 'top_words' is a dictionary
+            top_words = TopicCreator.extract_top_n_words_per_topic(tf_idf, count, docs_per_cluster)
+            doc_ids_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'DocId': lambda doc_id: list(doc_id)})
+            # Combine 'doc_id_per_cluster' and 'top_collocations' into the results
+            results = []
+            for i, cluster in doc_ids_per_cluster.iterrows():
+                top_words_per_cluster = list(map(lambda word: word[0], top_words[i]))
+                result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
+                          "TopWords": top_words_per_cluster}
+                results.append(result)
+            # Write the result to csv and json file
+            cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords'])
+            path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_top_words_clusters.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            # # Write to a json file
+            path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_top_words_clusters.json')
+            cluster_df.to_json(path, orient='records')
+            print('Output keywords/phrases to ' + path)
 
 
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    docCluster.get_sentence_embedding_cluster_doc()
+    # docCluster.get_sentence_embedding_cluster_doc()
     docCluster.visual_doc_cluster()
-    docCluster.derive_topic_from_cluster_docs()
+    # docCluster.derive_topic_from_cluster_docs()
