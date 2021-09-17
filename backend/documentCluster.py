@@ -57,20 +57,18 @@ class DocumentCluster:
             #                           ).fit(umap_embeddings)
             # We use the k-means clustering technique to group 600 documents into 5 groups
             # random_state is the random seed
-            cluster = KMeans(n_clusters=5, n_init=25, max_iter=600, random_state=42).fit(umap_embeddings)
+            cluster = KMeans(n_clusters=5, random_state=42).fit(umap_embeddings)
             # Write out the cluster results
             docs_df = pd.DataFrame(self.data, columns=["Text"])
             docs_df['Cluster'] = cluster.labels_
             docs_df['DocId'] = range(len(docs_df))
             # # Prepare data and visualise the result
             # Map the document embeddings to 2d for visualisation.
-            umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
-                doc_embeddings)
+            umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(doc_embeddings)
             result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
-            docs_df['x'] = result_df['x']
-            docs_df['y'] = result_df['y']
             # Round up data point 'x' and 'y' to 2 decimal
-            docs_df = docs_df.round({'x': 2, 'y': 2})
+            docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
+            docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
             # Re-order columns
             docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
             # Write the result to csv and json file
