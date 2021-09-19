@@ -29,3 +29,5 @@ class TopicCreator:
         top_n_words = {label: [(collocations[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
                        enumerate(labels)}
         return top_n_words
+
+

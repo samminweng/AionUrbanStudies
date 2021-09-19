@@ -97,11 +97,11 @@ class DocumentCluster:
             clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
             plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=2.0, cmap='hsv_r')
             plt.colorbar()
-            plt.show()
-        # plt.savefig('cluster.png')
+            path = os.path.join('images', 'cluster', self.args.case_name + '_' + str(num_cluster) + "_cluster.png")
+            plt.savefig(path)
 
-    # Derive the topic
-    def derive_topic_from_cluster_docs(self):
+    # Derive the topic words from each cluster of documents
+    def derive_topic_words_from_cluster_docs(self):
         # Go through different cluster number
         for num_cluster in self.args.num_clusters:
             # Load the cluster
@@ -123,17 +123,27 @@ class DocumentCluster:
                 results.append(result)
             # Write the result to csv and json file
             cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords'])
-            path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_top_words_clusters.csv')
+            path = os.path.join('output', 'cluster', 'result', self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             # # Write to a json file
-            path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_top_words_clusters.json')
+            path = os.path.join('output', 'cluster', 'result', self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.json')
             cluster_df.to_json(path, orient='records')
             print('Output keywords/phrases to ' + path)
+            # Removed the texts from doc_cluster to reduce the file size for better speed
+            docs_df.drop('Text', inplace=True, axis=1)  # axis=1 indicates the removal of 'Text' columns.
+            # Save the doc cluster to another file
+            path = os.path.join('output', 'cluster', 'result',
+                                self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.csv')
+            docs_df.to_csv(path, encoding='utf-8', index=False)
+            # # Write to a json file
+            path = os.path.join('output', 'cluster', 'result',
+                                self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.json')
+            docs_df.to_json(path, orient='records')
 
 
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
     # docCluster.get_sentence_embedding_cluster_doc()
-    docCluster.visual_doc_cluster()
-    # docCluster.derive_topic_from_cluster_docs()
+    # docCluster.visual_doc_cluster()
+    docCluster.derive_topic_words_from_cluster_docs()
