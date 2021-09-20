@@ -1,12 +1,6 @@
 class Utility {
     static cluster_topic_words_dict = {};   // The map between clustered documents to topic words
     static corpus_data = [];
-    // Get topic words for each cluster
-    static get_topic_words_cluster(total_clusters, cluster_no){
-        const dict = Utility.cluster_topic_words_dict[total_clusters];
-        const cluster = dict.find(c => c['Cluster'] === cluster_no);
-        return cluster['TopWords'];
-    }
     // Get the clustered documents
     static get_cluster_documents(total_clusters, cluster_no){
         const dict = Utility.cluster_topic_words_dict[total_clusters];

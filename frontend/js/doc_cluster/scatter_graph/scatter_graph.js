@@ -54,9 +54,9 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
                     borderwidth: 3,
                     borderpad: 4,
                     text: '<b>Cluster ' + cluster_no + '</b><br>' +
-                        '<i>' + topic_words[0] + '</i><br>' +
-                        '<i>' + topic_words[1] + '</i>'};
-                Plotly.relayout('doc_cluster', 'annotations['+cluster_no+']', new_annotation);
+                        '<i>' + topic_words[0]['topic'] + '</i><br>' +
+                        '<i>' + topic_words[1]['topic'] + '</i>'};
+                Plotly.relayout('doc_cluster', 'annotations[0]', new_annotation);
             // }
             // console.log(topic_words);
             // Display the clustered documents

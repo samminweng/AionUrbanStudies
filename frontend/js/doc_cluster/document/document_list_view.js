@@ -1,5 +1,5 @@
 // Display a list of research articles for key term 1 and key term 2.
-function DocumentListView(cluster_no, topic_word, documents) {
+function DocumentListView(cluster_no, topic, documents) {
     // Container
     function createPagination(docTable) {
         // Create the table
@@ -29,7 +29,7 @@ function DocumentListView(cluster_no, topic_word, documents) {
                     row.append(col);
                     // Add the title
                     col = $('<td class="col-11"></td>');
-                    let textView = new TextView(document, topic_word);
+                    let textView = new TextView(document, topic);
                     col.append(textView.get_container());
                     row.append(col);
                     docTable.find('tbody').append(row);
@@ -44,7 +44,7 @@ function DocumentListView(cluster_no, topic_word, documents) {
         let container = $('<div class="container p-3"></div>');
         // A summary of cluster documents
         let topic_div = $('<h3 class="col">' +
-            '<h5>' + documents.length + ' articles contain ' + topic_word + '</h5>' +
+            '<h5>' + documents.length + ' articles contain "' + topic + '"</h5>' +
             '</div>');
         container.append($('<div class="row"></div>').append(topic_div));
         // A list of cluster documents

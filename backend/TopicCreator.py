@@ -1,5 +1,9 @@
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
+from nltk.util import ngrams
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
+from Utility import Utility
 
 
 class TopicCreator:
@@ -30,4 +34,22 @@ class TopicCreator:
                        enumerate(labels)}
         return top_n_words
 
-
+    @staticmethod
+    def get_doc_ids_by_topic_words(text_df, doc_ids, topic_word):
+        topic_doc_ids = []
+        for i, doc in text_df.iterrows():
+            try:
+                doc_id = doc['DocId']
+                if doc_id in doc_ids:
+                    text = doc['Title'] + ". " + doc['Abstract']
+                    sentences = sent_tokenize(text.lower())
+                    sentences = Utility.clean_sentence(sentences)
+                    tokenizes = word_tokenize(' '.join(sentences))
+                    bi_grams = list(ngrams(tokenizes, 2))
+                    bi_grams = list(map(lambda bi_gram: bi_gram[0] + " " + bi_gram[1], bi_grams))
+                    # Check if topic word in bi_grams
+                    if topic_word in bi_grams:
+                        topic_doc_ids.append(doc_id)
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
+        return topic_doc_ids

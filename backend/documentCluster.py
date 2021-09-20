@@ -29,15 +29,15 @@ class DocumentCluster:
             num_clusters=[5, 10, 15]
         )
         path = os.path.join('data', self.args.case_name + '.csv')
-        text_df = pd.read_csv(path)
-        self.data = list()
+        self.text_df = pd.read_csv(path)
+        self.documents = list()
         # Search all the subject words
-        for i, text in text_df.iterrows():
+        for i, text in self.text_df.iterrows():
             try:
                 sentences = sent_tokenize(text['Abstract'])
                 sentences = list(filter(lambda s: u"\u00A9" not in s.lower() and 'licensee' not in s, sentences))
                 paragraph = text['Title'] + ". " + " ".join(sentences)
-                self.data.append(paragraph)
+                self.documents.append(paragraph)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
         # print(self.data)
@@ -47,7 +47,7 @@ class DocumentCluster:
         try:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
             model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
-            doc_embeddings = model.encode(self.data, show_progress_bar=True)
+            doc_embeddings = model.encode(self.documents, show_progress_bar=True)
             umap_embeddings = umap.UMAP(n_neighbors=15,
                                         n_components=5,
                                         metric='cosine').fit_transform(doc_embeddings)
@@ -65,7 +65,7 @@ class DocumentCluster:
             for num_cluster in self.args.num_clusters:
                 cluster = KMeans(n_clusters=num_cluster, random_state=42).fit(umap_embeddings)
                 # Write out the cluster results
-                docs_df = pd.DataFrame(self.data, columns=["Text"])
+                docs_df = pd.DataFrame(self.documents, columns=["Text"])
                 docs_df['Cluster'] = cluster.labels_
                 docs_df['DocId'] = range(len(docs_df))
                 # Round up data point 'x' and 'y' to 2 decimal
@@ -118,8 +118,14 @@ class DocumentCluster:
             results = []
             for i, cluster in doc_ids_per_cluster.iterrows():
                 top_words_per_cluster = list(map(lambda word: word[0], top_words[i]))
+                topic_words = []
+                for topic_word in top_words_per_cluster:
+                    topic_doc_ids = TopicCreator.get_doc_ids_by_topic_words(self.text_df, cluster['DocId'], topic_word)
+                    if len(topic_doc_ids) > 0:
+                        topic_words.append({'topic': topic_word, 'doc_ids': topic_doc_ids})
+                topic_words = topic_words[:10]      # Get top 10 topics
                 result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
-                          "TopWords": top_words_per_cluster}
+                          "TopWords": topic_words}
                 results.append(result)
             # Write the result to csv and json file
             cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords'])
