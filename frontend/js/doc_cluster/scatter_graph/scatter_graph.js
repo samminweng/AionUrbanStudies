@@ -13,12 +13,14 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
         let data = [];
         for (let cluster_no = 0; cluster_no < total_clusters; cluster_no++) {
             const cluster_data = doc_cluster_data.filter(d => d['Cluster'] === cluster_no);
+            // const topic_words = Utility.get_topic_words_cluster(total_clusters, cluster_no);
             let data_point = {'x': [], 'y': [], 'label': []};
             for (const dot of cluster_data) {
                 data_point['x'].push(dot.x);
                 data_point['y'].push(dot.y);
-                data_point['label'].push(" Doc id: " + dot.DocId);   // Tooltip label
+                data_point['label'].push("Doc id: " + dot.DocId);   // Tooltip label
             }
+
             let trace = {
                 'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
                 'name': 'Cluster ' + cluster_no, 'mode': 'markers', 'type': 'scatter'
@@ -27,24 +29,39 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
         }
         // Define the layout
         let layout = {
-            xaxis: { range: [2, 10]},
-            yaxis: { range: [2, 10]},
+            xaxis: { range: [0, 10]},
+            yaxis: { range: [0, 10]},
+            annotations: []
         }
 
         // Get the cluster number
         Plotly.newPlot('doc_cluster', data, layout);
         // Add event
-        let doc_cluster_div = document.getElementById('doc_cluster');
+        const doc_cluster_div = document.getElementById('doc_cluster');
         doc_cluster_div.on('plotly_click', function(data){
+            const point = data.points[0];
             // Get the doc id from text
-            const doc_id = parseInt(data.points[0].text.split(":")[1]);
-            const doc_cluster = doc_cluster_data.find(d => d['DocId'] === doc_id);
-            console.log(doc_cluster);
-            // Get the cluster no
-            // Utility.get_cluster_by_doc_id(doc_id);
-            // console.log(data);
-        });
+            const cluster_no = parseInt(point.data.name.split(" ")[1]);
+            // Get cluster documents
+            const {topic_words, documents} = Utility.get_cluster_documents(total_clusters, cluster_no);
 
+            const doc_cluster_div = document.getElementById('doc_cluster');
+            console.log(doc_cluster_div.layout.annotations)
+            // Add an annotation to the clustered dots.
+            // if(doc_cluster_div.layout.annotations.length < total_clusters){
+                const new_annotation = {x: point.xaxis.d2l(point.x), y: point.yaxis.d2l(point.y),
+                    bordercolor: point.fullData.marker.color,
+                    borderwidth: 3,
+                    borderpad: 4,
+                    text: '<b>Cluster ' + cluster_no + '</b><br>' +
+                        '<i>' + topic_words[0] + '</i><br>' +
+                        '<i>' + topic_words[1] + '</i>'};
+                Plotly.relayout('doc_cluster', 'annotations['+cluster_no+']', new_annotation);
+            // }
+            // console.log(topic_words);
+            // Display the clustered documents
+            // const doc_list_view = new DocumentListView(cluster_no, topic_words, documents);
+        });
     }
 
 

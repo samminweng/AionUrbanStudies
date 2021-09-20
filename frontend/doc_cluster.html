@@ -22,24 +22,10 @@
     <div class="h4">Article Cluster Chart for Urban Studies</div>
     <div>We cluster 600 urban study research articles into 5, 10 or 15 groups using Topic 2 Vector approach (citation:
         Angelov, D. (2020). Top2Vec: Distributed Representations of Topics. arXiv preprint
-        <a href="https://arxiv.org/abs/2008.09470">arXiv:2008.09470</a>
-        <a href="https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6">Link to the tutorial</a>)
+        <a target="_blank" href="https://arxiv.org/abs/2008.09470">arXiv:2008.09470</a>
+        <a target="_blank" href="https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6">Link to the tutorial</a>)
         The dot represents an article and the dot color reflects the cluster.
     </div>
-<!--    <div class="row m-3">-->
-<!--        <div class="h5">Conditions</div>-->
-<!--        <div class="col">-->
-<!--            <span>Year: </span>-->
-<!--            <input type="range" id="year_range" name="year_range" min="0" max="3" step="1" value="3">-->
-<!--            <label for="year_range" class="form-label" id="year_range_label">2021</label>-->
-<!--        </div>-->
-<!--        <div class="col">-->
-<!--            <label class="form-label">Selected key terms:</label>-->
-<!--            <span id="selected_term_1" class="keyword-group-0">machine learning</span>-->
-<!--            <span id="selected_term_2" class="keyword-group-1">urban planning</span>-->
-<!--            <button id="clear-label" type="button" class="btn btn-link">Clear</button>-->
-<!--        </div>-->
-<!--    </div>-->
     <div class="row">
         <div class="col border border-3">
             <div class="row p-3">
@@ -61,14 +47,34 @@
             </div>
         </div>
         <div class="col border border-3">
-            <div id="text_list_view"></div>
+            <div class="row">
+                <div class="col">
+                    <div id="cluster_list_view"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col border border-3">
+            <div id="cluster_tabs">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div id="topic_list_view"></div>
+                </div>
+                <div class="col">
+                    <div id="document_list_view"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <!-- Our javascript -->
 <script type="text/javascript" src="js/doc_cluster/scatter_graph/scatter_graph.js"></script>
-<!--<script type="text/javascript" src="js/term_occurrence/document/text_view.js"></script>-->
-<!--<script type="text/javascript" src="js/term_occurrence/document/document_list_view.js"></script>-->
+<script type="text/javascript" src="js/doc_cluster/document/text_view.js"></script>
+<script type="text/javascript" src="js/doc_cluster/document/document_list_view.js"></script>
+<script type="text/javascript" src="js/doc_cluster/document/topic_list_view.js"></script>
+<script type="text/javascript" src="js/doc_cluster/document/cluster_list_view.js"></script>
 <script type="text/javascript" src="js/doc_cluster/utility.js"></script>
 <script type="text/javascript" src="js/doc_cluster/chart_doc_view.js"></script>
 <script type="text/javascript" src="js/doc_cluster/main.js"></script>

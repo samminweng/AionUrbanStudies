@@ -30,6 +30,12 @@
     /*color: black;*/
 }
 
+.topic_word {
+    /*background: transparent;*/
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 0px;
+}
 
 /** Network style */
 .controls {

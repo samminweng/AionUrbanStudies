@@ -1,8 +1,5 @@
 // Display a list of research articles for key term 1 and key term 2.
-function DocumentListView(key_terms, collocation_data, corpus_data) {
-    const documents = Utility.collect_documents_by_key_terms(key_terms, collocation_data, corpus_data);
-    console.log(documents);
-
+function DocumentListView(cluster_no, topic_word, documents) {
     // Container
     function createPagination(docTable) {
         // Create the table
@@ -11,15 +8,15 @@ function DocumentListView(key_terms, collocation_data, corpus_data) {
         pagination.pagination({
             dataSource: function (done) {
                 let result = [];
-                for (let i = 1; i <= documents.length; i++) {
-                    result.push(documents[i - 1]);
+                for (let i = 0; i < documents.length; i++) {
+                    result.push(documents[i]);
                 }
                 done(result);
             },
             totalNumber: documents.length,
             pageSize: 5,
             showNavigator: true,
-            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> documents',
+            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> articles',
             position: 'top',
             showGoInput: true,
             showGoButton: true,
@@ -32,36 +29,40 @@ function DocumentListView(key_terms, collocation_data, corpus_data) {
                     row.append(col);
                     // Add the title
                     col = $('<td class="col-11"></td>');
-                    let textView = new TextView(document, key_terms);
+                    let textView = new TextView(document, topic_word);
                     col.append(textView.get_container());
                     row.append(col);
                     docTable.find('tbody').append(row);
                 }
             }
         });
-
         return pagination;
     }
 
-
     function _createUI() {
-        $('#text_list_view').empty();
-        let container = $('<div class="container"></div>');
+        $('#document_list_view').empty();
+        let container = $('<div class="container p-3"></div>');
+        // A summary of cluster documents
+        let topic_div = $('<h3 class="col">' +
+            '<h5>' + documents.length + ' articles contain ' + topic_word + '</h5>' +
+            '</div>');
+        container.append($('<div class="row"></div>').append(topic_div));
+        // A list of cluster documents
         let documentTable = $('<table class="table table-striped">' +
             '<thead class="thead-light">' +
             '<tr class="d-flex">' +
             '    <th class="col-1">Year</th>' +
-            '    <th class="col-11">Documents</th>' +
+            '    <th class="col-11">Articles</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody></tbody></table>');
 
-        let pagination = createPagination(documentTable);
+        let pagination = $('<div class="col"></div>').append(createPagination(documentTable));
         // // Add the pagination
-        container.append(pagination);
+        container.append($('<div class="row"></div>').append(pagination));
         container.append(documentTable);
 
-        $('#text_list_view').append(container);
+        $('#document_list_view').append(container);
 
     }
 
