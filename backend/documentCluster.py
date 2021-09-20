@@ -15,6 +15,7 @@ from pathlib import Path
 
 logging.basicConfig(level=logging.INFO)
 path = os.path.join('/Scratch', 'mweng', 'anaconda3', 'envs', 'tf_gpu', 'nltk_data')
+Path(path).mkdir(parents=True, exist_ok=True)
 nltk.download('punkt', download_dir=path)
 
 # Cluster the document using BERT model
@@ -52,6 +53,7 @@ class DocumentCluster:
     def get_sentence_embedding_cluster_doc(self):
         try:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
+            Path(path).mkdir(parents=True, exist_ok=True)
             # 'distilbert-base-nli-mean-tokens' is depreciated
             # https://huggingface.co/sentence-transformers/distilbert-base-nli-mean-tokens
             #model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
