@@ -7,9 +7,7 @@ import nltk
 # # https://www.sbert.net/index.html
 from sentence_transformers import SentenceTransformer
 from nltk.tokenize import sent_tokenize
-import numpy as np
 import umap     # (UMAP) is a dimension reduction technique https://umap-learn.readthedocs.io/en/latest/
-import hdbscan
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from TopicCreator import TopicCreator
@@ -69,11 +67,6 @@ class DocumentCluster:
             umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
                 doc_embeddings)
             result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
-            # Cluster the documents by using HDBSCAN
-            # cluster = hdbscan.HDBSCAN(min_cluster_size=60, min_samples=1,   # alpha=1.3,
-            #                           metric='euclidean',
-            #                           # cluster_selection_method='eom'
-            #                           ).fit(umap_embeddings)
             # We use the k-means clustering technique to group 600 documents into 5 groups
             # random_state is the random seed
             for num_cluster in self.args.num_clusters:
