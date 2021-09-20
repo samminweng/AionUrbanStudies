@@ -13,6 +13,7 @@ import hdbscan
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from TopicCreator import TopicCreator
+from pathlib import Path
 
 logging.basicConfig(level=logging.INFO)
 path = os.path.join('/Scratch', 'mweng', 'anaconda3', 'envs', 'tf_gpu', 'nltk_data')
@@ -26,8 +27,15 @@ class DocumentCluster:
         self.args = Namespace(
             case_name='UrbanStudyCorpus',
             path='data',
-            num_clusters=[5, 10, 15]
+            num_clusters=[5, 10, 15],
+            dimension=384
         )
+        # Create the folder path for output files (csv and json)
+        self.folder_path = os.path.join('output', 'cluster', 'd_' + str(self.args.dimension))
+        Path(self.folder_path).mkdir(parents=True, exist_ok=True)
+        # Create the image path for image files
+        self.image_path = os.path.join('images', 'cluster', 'd_' + str(self.args.dimension))
+        Path(self.image_path).mkdir(parents=True, exist_ok=True)
         path = os.path.join('data', self.args.case_name + '.csv')
         self.text_df = pd.read_csv(path)
         self.documents = list()
@@ -46,10 +54,16 @@ class DocumentCluster:
     def get_sentence_embedding_cluster_doc(self):
         try:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
-            model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
+            # 'distilbert-base-nli-mean-tokens' is depreciated
+            # https://huggingface.co/sentence-transformers/distilbert-base-nli-mean-tokens
+            #model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
+            # As such we switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
+            # 384 dimensional dense vectors
+            # https://huggingface.co/sentence-transformers/all-mpnet-base-v2
+            model = SentenceTransformer('all-mpnet-base-v2', cache_folder=path)
             doc_embeddings = model.encode(self.documents, show_progress_bar=True)
             umap_embeddings = umap.UMAP(n_neighbors=15,
-                                        n_components=5,
+                                        n_components=self.args.dimension,
                                         metric='cosine').fit_transform(doc_embeddings)
             # Map the document embeddings to 2d for visualisation.
             umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
@@ -73,11 +87,12 @@ class DocumentCluster:
                 docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
                 # Re-order columns
                 docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
+
                 # Write the result to csv and json file
-                path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.csv')
+                path = os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.csv')
                 docs_df.to_csv(path, encoding='utf-8', index=False)
                 # # Write to a json file
-                path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
+                path = os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
                 docs_df.to_json(path, orient='records')
                 print('Output cluster results and 2D data points to ' + path)
         except Exception as err:
@@ -86,18 +101,18 @@ class DocumentCluster:
     # Visualise the data points
     def visual_doc_cluster(self):
         for num_cluster in self.args.num_clusters:
-            path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
+            path = os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
             doc_cluster_df = pd.read_json(path)
-            # Get the max and min of 'x' and 'y'
-            max_x = doc_cluster_df['x'].max()
-            max_y = doc_cluster_df['y'].max()
-            min_x = doc_cluster_df['x'].min()
-            min_y = doc_cluster_df['y'].min()
+            # # Get the max and min of 'x' and 'y'
+            # max_x = doc_cluster_df['x'].max()
+            # max_y = doc_cluster_df['y'].max()
+            # min_x = doc_cluster_df['x'].min()
+            # min_y = doc_cluster_df['y'].min()
             fig, ax = plt.subplots(figsize=(10, 10))
             clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
             plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=2.0, cmap='hsv_r')
             plt.colorbar()
-            path = os.path.join('images', 'cluster', self.args.case_name + '_' + str(num_cluster) + "_cluster.png")
+            path = os.path.join(self.image_path, self.args.case_name + '_' + str(num_cluster) + "_cluster.png")
             plt.savefig(path)
 
     # Derive the topic words from each cluster of documents
@@ -124,6 +139,7 @@ class DocumentCluster:
                     if len(topic_doc_ids) > 0:
                         topic_words.append({'topic': topic_word, 'doc_ids': topic_doc_ids})
                 topic_words = topic_words[:10]      # Get top 10 topics
+                topic_words = sorted(topic_words, key=lambda item: len(item['doc_ids']), reverse=True)
                 result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
                           "TopWords": topic_words}
                 results.append(result)
@@ -150,6 +166,6 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    # docCluster.get_sentence_embedding_cluster_doc()
-    # docCluster.visual_doc_cluster()
-    docCluster.derive_topic_words_from_cluster_docs()
+    docCluster.get_sentence_embedding_cluster_doc()
+    #docCluster.visual_doc_cluster()
+    # docCluster.derive_topic_words_from_cluster_docs()
