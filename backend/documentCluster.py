@@ -14,8 +14,9 @@ from TopicCreator import TopicCreator
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO)
-path = os.path.join('/Scratch', 'mweng', 'anaconda3', 'envs', 'tf_gpu', 'nltk_data')
+path = os.path.join('/Scratch', 'mweng', 'nltk_data')
 Path(path).mkdir(parents=True, exist_ok=True)
+nltk.data.path.append(path)
 nltk.download('punkt', download_dir=path)
 
 # Cluster the document using BERT model
