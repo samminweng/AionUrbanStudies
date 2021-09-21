@@ -33,6 +33,16 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
         }
         // Define the layout
         let layout = {
+            autosize: false,
+            width: width,
+            height: height,
+            margin: {
+                l: 50,
+                r: 50,
+                b: 100,
+                t: 100,
+                pad: 3
+            },
             xaxis: {range: [0, 10]},
             yaxis: {range: [0, 10]},
             annotations: []

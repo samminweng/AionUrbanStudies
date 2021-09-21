@@ -138,12 +138,12 @@ class DocumentCluster:
                     topic_words_likelihood = TopicUtility.derive_topic_words('likelihood', cluster_documents)
                     # Collect the result
                     result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
-                              "TopWords_chi": topic_words_chi, 'TopWords_likelihood': topic_words_likelihood,
-                              "TopWords_pmi": topic_words_pmi}
+                              "Topic_Words_chi": topic_words_chi, 'Topic_Words_likelihood': topic_words_likelihood,
+                              "Topic_Words_pmi": topic_words_pmi}
                     results.append(result)
                 # Write the result to csv and json file
-                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords_chi',
-                                                            'TopWords_likelihood', 'TopWords_pmi'])
+                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'Topic_Words_chi',
+                                                            'Topic_Words_likelihood', 'Topic_Words_pmi'])
                 path = os.path.join(self.topic_path,
                                     self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)

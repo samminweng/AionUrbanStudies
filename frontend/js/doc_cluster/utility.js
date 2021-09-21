@@ -14,7 +14,7 @@ class Utility {
     static get_cluster_topic_words(total_clusters, cluster_no, rank){
         const dict = Utility.cluster_topic_words_dict[total_clusters];
         const cluster = dict.find(c => c['Cluster'] === cluster_no);
-        const topic_words = cluster['Topic_words_'+rank];
+        const topic_words = cluster['Topic_Words_'+rank];
         return topic_words
     }
 
