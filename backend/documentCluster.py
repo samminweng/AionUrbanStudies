@@ -30,14 +30,20 @@ class DocumentCluster:
             num_clusters=[5, 10, 15],
             dimension=384
         )
-        # Create the folder path for output files (csv and json)
+        # Create the folder path for output clustering files (csv and json)
         self.folder_path = os.path.join('output', 'cluster', 'd_' + str(self.args.dimension))
         Path(self.folder_path).mkdir(parents=True, exist_ok=True)
         # Create the image path for image files
         self.image_path = os.path.join('images', 'cluster', 'd_' + str(self.args.dimension))
         Path(self.image_path).mkdir(parents=True, exist_ok=True)
+        # Create the topic path for visualisation
+        self.topic_path = os.path.join('output', 'cluster', 'd_' + str(self.args.dimension), 'topic')
+        Path(self.topic_path).mkdir(parents=True, exist_ok=True)
         path = os.path.join('data', self.args.case_name + '.csv')
         self.text_df = pd.read_csv(path)
+        # Save the text_df to JSON file
+        self.text_df.to_json(os.path.join('data', self.args.case_name + '.json'), orient='records')
+
         self.documents = list()
         # Search all the subject words
         for i, text in self.text_df.iterrows():
@@ -116,8 +122,8 @@ class DocumentCluster:
         # Go through different cluster number
         for num_cluster in self.args.num_clusters:
             # Load the cluster
-            path = os.path.join('output', 'cluster', self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
-            docs_df = pd.read_json(path)
+            docs_df = pd.read_json(
+                os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json'))
             # Group the documents by topics
             docs_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'Text': ' '.join})
             # compute the tf-idf scores for each cluster
@@ -141,27 +147,25 @@ class DocumentCluster:
                 results.append(result)
             # Write the result to csv and json file
             cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords'])
-            path = os.path.join('output', 'cluster', 'result', self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.csv')
+            path = os.path.join(self.topic_path, self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             # # Write to a json file
-            path = os.path.join('output', 'cluster', 'result', self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.json')
+            path = os.path.join(self.topic_path, self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.json')
             cluster_df.to_json(path, orient='records')
             print('Output keywords/phrases to ' + path)
             # Removed the texts from doc_cluster to reduce the file size for better speed
             docs_df.drop('Text', inplace=True, axis=1)  # axis=1 indicates the removal of 'Text' columns.
             # Save the doc cluster to another file
-            path = os.path.join('output', 'cluster', 'result',
-                                self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.csv')
+            path = os.path.join(self.topic_path, self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.csv')
             docs_df.to_csv(path, encoding='utf-8', index=False)
             # # Write to a json file
-            path = os.path.join('output', 'cluster', 'result',
-                                self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.json')
+            path = os.path.join(self.topic_path, self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.json')
             docs_df.to_json(path, orient='records')
 
 
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    docCluster.get_sentence_embedding_cluster_doc()
-    #docCluster.visual_doc_cluster()
-    # docCluster.derive_topic_words_from_cluster_docs()
+    # docCluster.get_sentence_embedding_cluster_doc()
+    # docCluster.visual_doc_cluster()
+    docCluster.derive_topic_words_from_cluster_docs()

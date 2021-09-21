@@ -3,9 +3,12 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
     const width = 600;
     const height = 600;
     // Get the color of collocation
-    const colors = function (cluster) {
-        // let group = Utility.get_group_number(collocation)
-        return d3.schemeCategory10[cluster];
+    const colors = function (cluster_no) {
+        const color_plates = [
+            "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd",
+            "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d",
+            "#17becf", "#9edae5"];
+        return color_plates[cluster_no];
     }
 
     // Draw google chart
@@ -23,14 +26,15 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
 
             let trace = {
                 'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
-                'name': 'Cluster ' + cluster_no, 'mode': 'markers', 'type': 'scatter'
+                'name': 'Cluster ' + cluster_no, 'mode': 'markers', 'type': 'scatter',
+                'marker': {color: colors(cluster_no)}
             };
             data.push(trace);
         }
         // Define the layout
         let layout = {
-            xaxis: { range: [0, 10]},
-            yaxis: { range: [0, 10]},
+            xaxis: {range: [0, 10]},
+            yaxis: {range: [0, 10]},
             annotations: []
         }
 
@@ -38,7 +42,7 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
         Plotly.newPlot('doc_cluster', data, layout);
         // Add event
         const doc_cluster_div = document.getElementById('doc_cluster');
-        doc_cluster_div.on('plotly_click', function(data){
+        doc_cluster_div.on('plotly_click', function (data) {
             const point = data.points[0];
             // Get the doc id from text
             const cluster_no = parseInt(point.data.name.split(" ")[1]);
@@ -46,17 +50,19 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
             const {topic_words, documents} = Utility.get_cluster_documents(total_clusters, cluster_no);
 
             const doc_cluster_div = document.getElementById('doc_cluster');
-            console.log(doc_cluster_div.layout.annotations)
+            // console.log(doc_cluster_div.layout.annotations)
             // Add an annotation to the clustered dots.
             // if(doc_cluster_div.layout.annotations.length < total_clusters){
-                const new_annotation = {x: point.xaxis.d2l(point.x), y: point.yaxis.d2l(point.y),
-                    bordercolor: point.fullData.marker.color,
-                    borderwidth: 3,
-                    borderpad: 4,
-                    text: '<b>Cluster ' + cluster_no + '</b><br>' +
-                        '<i>' + topic_words[0]['topic'] + '</i><br>' +
-                        '<i>' + topic_words[1]['topic'] + '</i>'};
-                Plotly.relayout('doc_cluster', 'annotations[0]', new_annotation);
+            const new_annotation = {
+                x: point.xaxis.d2l(point.x), y: point.yaxis.d2l(point.y),
+                bordercolor: point.fullData.marker.color,
+                borderwidth: 3,
+                borderpad: 4,
+                text: '<b>Cluster ' + cluster_no + '</b><br>' +
+                    '<i>' + topic_words[0]['topic'] + '</i><br>' +
+                    '<i>' + topic_words[1]['topic'] + '</i>'
+            };
+            Plotly.relayout('doc_cluster', 'annotations[0]', new_annotation);
             // }
             // console.log(topic_words);
             // Display the clustered documents
@@ -75,6 +81,7 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
 
     _createUI();
 }
+
 // // Get the number of documents for a collocation node
 // function get_node_size(node_name) {
 //     let num_doc = Utility.get_number_of_documents(node_name, collocation_data);
