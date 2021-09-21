@@ -23,7 +23,6 @@ nltk.download('stopwords', download_dir=path)
 
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
-# Ref: https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/
 class DocumentCluster:
     def __init__(self):
         self.args = Namespace(
@@ -70,9 +69,9 @@ class DocumentCluster:
             # https://huggingface.co/sentence-transformers/all-mpnet-base-v2
             model = SentenceTransformer('all-mpnet-base-v2', cache_folder=path)
             doc_embeddings = model.encode(self.documents, show_progress_bar=True)
-            umap_embeddings = umap.UMAP(n_neighbors=15,
-                                        n_components=self.args.dimension,
-                                        metric='cosine').fit_transform(doc_embeddings)
+            # umap_embeddings = umap.UMAP(n_neighbors=15,
+            #                             n_components=self.args.dimension,
+            #                             metric='cosine').fit_transform(doc_embeddings)
             # Map the document embeddings to 2d for visualisation.
             umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
                 doc_embeddings)
@@ -80,7 +79,7 @@ class DocumentCluster:
             # We use the k-means clustering technique to group 600 documents into 5 groups
             # random_state is the random seed
             for num_cluster in self.args.num_clusters:
-                cluster = KMeans(n_clusters=num_cluster, random_state=42).fit(umap_embeddings)
+                cluster = KMeans(n_clusters=num_cluster, random_state=42).fit(doc_embeddings)
                 # Write out the cluster results
                 docs_df = pd.DataFrame(self.documents, columns=["Text"])
                 docs_df['Cluster'] = cluster.labels_
@@ -170,6 +169,6 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    # docCluster.get_sentence_embedding_cluster_doc()
-    # docCluster.visual_doc_cluster()
-    docCluster.derive_topic_words_from_cluster_docs()
+    docCluster.get_sentence_embedding_cluster_doc()
+    docCluster.visual_doc_cluster()
+    # docCluster.derive_topic_words_from_cluster_docs()

@@ -33,6 +33,7 @@ class TopicUtility:
             # Score and rank the collocations
             finder = BigramCollocationFinder.from_documents(documents)
             finder.apply_freq_filter(5)
+            finder.apply_word_filter(lambda w: w.lower() in TopicUtility.stop_words)
             # Find a list of bi_grams by likelihood collocations
             if associate_measure == 'pmi':
                 scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
@@ -46,10 +47,10 @@ class TopicUtility:
             # Convert bi_gram object to a list of
             bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
                                                       'score': bi_gram[1]}, sorted_bi_grams))
-            # Filter out bi_grams containing stopwords
-            filtered_bi_grams = list(filter(lambda bi_gram:
-                                            not Utility.check_words(bi_gram['collocation'], TopicUtility.stop_words),
-                                            bi_grams_list))
+            # # Filter out bi_grams containing stopwords
+            # filtered_bi_grams = list(filter(lambda bi_gram:
+            #                                 not Utility.check_words(bi_gram['collocation'], TopicUtility.stop_words),
+            #                                 bi_grams_list))
             # Filter out bi_gram containing function words
             filtered_bi_grams = list(filter(lambda bi_gram:
                                             not Utility.check_words(bi_gram['collocation'],
