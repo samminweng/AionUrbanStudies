@@ -47,26 +47,16 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
             // Get the doc id from text
             const cluster_no = parseInt(point.data.name.split(" ")[1]);
             // Get cluster documents
-            const {topic_words, documents} = Utility.get_cluster_documents(total_clusters, cluster_no);
-
-            const doc_cluster_div = document.getElementById('doc_cluster');
+            const documents = Utility.get_cluster_documents(total_clusters, cluster_no);
             // console.log(doc_cluster_div.layout.annotations)
             // Add an annotation to the clustered dots.
-            // if(doc_cluster_div.layout.annotations.length < total_clusters){
             const new_annotation = {
                 x: point.xaxis.d2l(point.x), y: point.yaxis.d2l(point.y),
                 bordercolor: point.fullData.marker.color,
-                borderwidth: 3,
-                borderpad: 4,
-                text: '<b>Cluster ' + cluster_no + '</b><br>' +
-                    '<i>' + topic_words[0]['topic'] + '</i><br>' +
-                    '<i>' + topic_words[1]['topic'] + '</i>'
+                text: '<b>Cluster ' + cluster_no + '</b> <br>' +
+                    '<i>' + documents.length + ' articles</i><br>'
             };
             Plotly.relayout('doc_cluster', 'annotations[0]', new_annotation);
-            // }
-            // console.log(topic_words);
-            // Display the clustered documents
-            // const doc_list_view = new DocumentListView(cluster_no, topic_words, documents);
         });
     }
 

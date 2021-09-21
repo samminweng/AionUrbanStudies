@@ -3,21 +3,23 @@ from argparse import Namespace
 import logging
 import pandas as pd
 import nltk
-# # Sentence Transformer
-# # https://www.sbert.net/index.html
+# # Sentence Transformer (https://www.sbert.net/index.html)
 from sentence_transformers import SentenceTransformer
 from nltk.tokenize import sent_tokenize
-import umap     # (UMAP) is a dimension reduction technique https://umap-learn.readthedocs.io/en/latest/
+import umap  # (UMAP) is a dimension reduction technique https://umap-learn.readthedocs.io/en/latest/
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
-from TopicCreator import TopicCreator
 from pathlib import Path
+from TopicUtility import TopicUtility
 
 logging.basicConfig(level=logging.INFO)
 path = os.path.join('/Scratch', 'mweng', 'nltk_data')
 Path(path).mkdir(parents=True, exist_ok=True)
 nltk.data.path.append(path)
 nltk.download('punkt', download_dir=path)
+# Download all the necessary NLTK data
+nltk.download('stopwords', download_dir=path)
+
 
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
@@ -43,7 +45,6 @@ class DocumentCluster:
         self.text_df = pd.read_csv(path)
         # Save the text_df to JSON file
         self.text_df.to_json(os.path.join('data', self.args.case_name + '.json'), orient='records')
-
         self.documents = list()
         # Search all the subject words
         for i, text in self.text_df.iterrows():
@@ -63,7 +64,7 @@ class DocumentCluster:
             Path(path).mkdir(parents=True, exist_ok=True)
             # 'distilbert-base-nli-mean-tokens' is depreciated
             # https://huggingface.co/sentence-transformers/distilbert-base-nli-mean-tokens
-            #model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
+            # model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
             # As such we switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
             # 384 dimensional dense vectors
             # https://huggingface.co/sentence-transformers/all-mpnet-base-v2
@@ -91,10 +92,12 @@ class DocumentCluster:
                 docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
 
                 # Write the result to csv and json file
-                path = os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.csv')
+                path = os.path.join(self.folder_path,
+                                    self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.csv')
                 docs_df.to_csv(path, encoding='utf-8', index=False)
                 # # Write to a json file
-                path = os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
+                path = os.path.join(self.folder_path,
+                                    self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
                 docs_df.to_json(path, orient='records')
                 print('Output cluster results and 2D data points to ' + path)
         except Exception as err:
@@ -105,11 +108,6 @@ class DocumentCluster:
         for num_cluster in self.args.num_clusters:
             path = os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
             doc_cluster_df = pd.read_json(path)
-            # # Get the max and min of 'x' and 'y'
-            # max_x = doc_cluster_df['x'].max()
-            # max_y = doc_cluster_df['y'].max()
-            # min_x = doc_cluster_df['x'].min()
-            # min_y = doc_cluster_df['y'].min()
             fig, ax = plt.subplots(figsize=(10, 10))
             clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
             plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=2.0, cmap='hsv_r')
@@ -119,48 +117,54 @@ class DocumentCluster:
 
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
-        # Go through different cluster number
-        for num_cluster in self.args.num_clusters:
-            # Load the cluster
-            docs_df = pd.read_json(
-                os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json'))
-            # Group the documents by topics
-            docs_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'Text': ' '.join})
-            # compute the tf-idf scores for each cluster
-            tf_idf, count = TopicCreator.compute_c_tf_idf_score(docs_per_cluster['Text'].values, len(docs_df))
-            # 'top_words' is a dictionary
-            top_words = TopicCreator.extract_top_n_words_per_topic(tf_idf, count, docs_per_cluster)
-            doc_ids_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg({'DocId': lambda doc_id: list(doc_id)})
-            # Combine 'doc_id_per_cluster' and 'top_collocations' into the results
-            results = []
-            for i, cluster in doc_ids_per_cluster.iterrows():
-                top_words_per_cluster = list(map(lambda word: word[0], top_words[i]))
-                topic_words = []
-                for topic_word in top_words_per_cluster:
-                    topic_doc_ids = TopicCreator.get_doc_ids_by_topic_words(self.text_df, cluster['DocId'], topic_word)
-                    if len(topic_doc_ids) > 0:
-                        topic_words.append({'topic': topic_word, 'doc_ids': topic_doc_ids})
-                topic_words = topic_words[:10]      # Get top 10 topics
-                topic_words = sorted(topic_words, key=lambda item: len(item['doc_ids']), reverse=True)
-                result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
-                          "TopWords": topic_words}
-                results.append(result)
-            # Write the result to csv and json file
-            cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords'])
-            path = os.path.join(self.topic_path, self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.csv')
-            cluster_df.to_csv(path, encoding='utf-8', index=False)
-            # # Write to a json file
-            path = os.path.join(self.topic_path, self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.json')
-            cluster_df.to_json(path, orient='records')
-            print('Output keywords/phrases to ' + path)
-            # Removed the texts from doc_cluster to reduce the file size for better speed
-            docs_df.drop('Text', inplace=True, axis=1)  # axis=1 indicates the removal of 'Text' columns.
-            # Save the doc cluster to another file
-            path = os.path.join(self.topic_path, self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.csv')
-            docs_df.to_csv(path, encoding='utf-8', index=False)
-            # # Write to a json file
-            path = os.path.join(self.topic_path, self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.json')
-            docs_df.to_json(path, orient='records')
+        try:
+            # Go through different cluster number
+            for num_cluster in self.args.num_clusters:
+                # Load the cluster
+                docs_df = pd.read_json(
+                    os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json'))
+                # Group the documents by topics
+                doc_ids_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg(
+                    {'DocId': lambda doc_id: list(doc_id)})
+                results = []
+                for i, cluster in doc_ids_per_cluster.iterrows():
+                    cluster_doc_ids = cluster['DocId']
+                    # Collect a list of clustered document where each document is a list of tokens
+                    cluster_documents = TopicUtility.collect_docs_by_cluster(self.text_df, cluster_doc_ids)
+                    # Derive top 10 topic words (collocations) through Chi-square
+                    topic_words_chi = TopicUtility.derive_topic_words('chi', cluster_documents)
+                    # Derive top 10 topic words through PMI (pointwise mutual information)
+                    topic_words_pmi = TopicUtility.derive_topic_words('pmi', cluster_documents)
+                    # Derive topic words through likelihood
+                    topic_words_likelihood = TopicUtility.derive_topic_words('likelihood', cluster_documents)
+                    # Collect the result
+                    result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
+                              "TopWords_chi": topic_words_chi, 'TopWords_likelihood': topic_words_likelihood,
+                              "TopWords_pmi": topic_words_pmi}
+                    results.append(result)
+                # Write the result to csv and json file
+                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopWords_chi',
+                                                            'TopWords_likelihood', 'TopWords_pmi'])
+                path = os.path.join(self.topic_path,
+                                    self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.csv')
+                cluster_df.to_csv(path, encoding='utf-8', index=False)
+                # # Write to a json file
+                path = os.path.join(self.topic_path,
+                                    self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.json')
+                cluster_df.to_json(path, orient='records')
+                print('Output keywords/phrases to ' + path)
+                # Removed the texts from doc_cluster to reduce the file size for better speed
+                docs_df.drop('Text', inplace=True, axis=1)  # axis=1 indicates the removal of 'Text' columns.
+                # Save the doc cluster to another file
+                path = os.path.join(self.topic_path,
+                                    self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.csv')
+                docs_df.to_csv(path, encoding='utf-8', index=False)
+                # # Write to a json file
+                path = os.path.join(self.topic_path,
+                                    self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.json')
+                docs_df.to_json(path, orient='records')
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
 
 # Main entry
