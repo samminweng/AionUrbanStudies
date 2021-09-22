@@ -57,7 +57,7 @@ function ClusterListView(total_clusters) {
         $('#cluster_overview').text(total_clusters + " clusters are extracted from 600 articles " +
             "using BERT-based Sentence Transformer + KMeans clustering technique.")
         // Create a pagination and display topic words by Chi-square test
-        createPagination('chi');
+        createPagination('likelihood');
         // // Create a tab to display the clustered documents
         const select_rank = $('#cluster_table').find('select');
         select_rank.on("change", function(){

@@ -1,6 +1,6 @@
 // Display a list of topic words for a cluster
 function TopicListView(cluster_no, topic_words, documents){
-    topic_words = topic_words.slice(0, 10);
+    // topic_words = topic_words.slice(0, 10);
     function _createUI(){
         $('#topic_list_view').empty();
         // Go through each topic word to sum up all the documents

@@ -51,11 +51,6 @@ class TopicUtility:
             # Convert bi_gram object to a list of
             bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
                                                       'score': bi_gram[1]}, sorted_bi_grams))
-
-            # # Filter out bi_grams containing non-English words
-            # filtered_bi_grams = list(filter(lambda bi_gram:
-            #                                 Utility.is_alpha(bi_gram['collocation']),
-            #                                 bi_grams_list))
             # Collect the doc ids that each collocation appears
             topic_words = []
             for bi_gram in bi_grams_list:
@@ -72,7 +67,7 @@ class TopicUtility:
                         topic_doc_ids.append(doc_id)
                 topic_words.append({'collocation': collocation, 'score': score, 'doc_ids': topic_doc_ids})
             # limit the top 10 topic words
-            topic_words = topic_words[:20]
+            topic_words = topic_words[:30]
             # Sort the topic_words by the number of docs
             topic_words = sorted(topic_words, key=lambda topic_word: len(topic_word), reverse=True)
             return topic_words
