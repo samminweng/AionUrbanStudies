@@ -11,7 +11,7 @@ function TextView(document, topic_word) {
             "separateWordSearch": false,
             "accuracy": {
                 "value": "exactly",
-                "limiters": [",", ".", "'s", "/", ";"]
+                "limiters": [",", ".", "'s", "/", ";", ":"]
             },
             "acrossElements": true,
             "ignorePunctuation": ":;.,-–—‒_(){}[]!'\"+=".split(""),
@@ -34,6 +34,15 @@ function TextView(document, topic_word) {
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span>' + document['Abstract'] + '</span>'));
         abstract_div = mark_key_terms(abstract_div);
         container.append(abstract_div);
+        // Add the author keyowrds
+        let author_keyword_div = $('<div class="col"></div>');
+        let author_keywords = (document['Author Keywords'] === null)? "": document['Author Keywords'];
+        author_keyword_div.append($('<span class="fw-bold">Author Keywords: </span><span>' + author_keywords + '</span>'));
+        author_keyword_div = mark_key_terms(author_keyword_div);
+        container.append(author_keyword_div);
+        // author_keyword_div = mark_key_terms(author_keyword_div, [searched_term], 'search_term');
+        // author_keyword_div = mark_key_terms(author_keyword_div, complementary_terms, 'complementary_term');
+
     }
 
     _createUI();

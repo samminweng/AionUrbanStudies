@@ -33,7 +33,7 @@ function ClusterListView(total_clusters) {
                         const documents = Utility.get_cluster_documents(total_clusters, cluster_no);
                         const topic_words = Utility.get_cluster_topic_words(total_clusters, cluster_no, rank);
                         console.log(topic_words);
-                        // const topicListView = new TopicListView(cluster_no, topic_words, documents);
+                        const topicListView = new TopicListView(cluster_no, topic_words, documents);
                     });
                     const cluster_div = $('<th scope="row" style="width:15%"></th>');
                     cluster_div.append(cluster_btn);
@@ -61,6 +61,9 @@ function ClusterListView(total_clusters) {
         // // Create a tab to display the clustered documents
         const select_rank = $('#cluster_table').find('select');
         select_rank.on("change", function(){
+            // Clear the detailed cluster-topic/document view
+            $('#topic_list_view').empty();
+            $('#document_list_view').empty();
             // alert("rank" + this.value);
             const rank = this.value;
             // Create a new table and pagination

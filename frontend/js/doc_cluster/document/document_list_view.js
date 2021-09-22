@@ -43,10 +43,10 @@ function DocumentListView(cluster_no, topic, documents) {
         $('#document_list_view').empty();
         let container = $('<div class="container p-3"></div>');
         // A summary of cluster documents
-        let topic_div = $('<h3 class="col">' +
-            '<h5>' + documents.length + ' articles contain "' + topic + '"</h5>' +
+        let topic_div = $('<div class="col">' +
+            '<span>' + documents.length + ' articles contain "' + topic + '"</span>' +
             '</div>');
-        container.append($('<div class="row"></div>').append(topic_div));
+        container.append($('<div class="row p-3"></div>').append(topic_div));
         // A list of cluster documents
         let documentTable = $('<table class="table table-striped">' +
             '<thead class="thead-light">' +
@@ -59,7 +59,7 @@ function DocumentListView(cluster_no, topic, documents) {
 
         let pagination = $('<div class="col"></div>').append(createPagination(documentTable));
         // // Add the pagination
-        container.append($('<div class="row"></div>').append(pagination));
+        container.append($('<div class="row p-3"></div>').append(pagination));
         container.append(documentTable);
 
         $('#document_list_view').append(container);
