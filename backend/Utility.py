@@ -18,7 +18,8 @@ class Utility:
         # Preprocess the sentence
         cleaned_sentences = list()  # Skip copy right sentence
         for sentence in sentences:
-            if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower():
+            if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
+                    and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
                 try:
                     cleaned_words = word_tokenize(sentence.lower())
                     # Keep alphabetic

@@ -32,14 +32,18 @@ class TopicUtility:
             documents = list(map(lambda doc: doc['tokens'], cluster_documents))
             # Score and rank the collocations
             finder = BigramCollocationFinder.from_documents(documents)
-            finder.apply_freq_filter(5)
-            finder.apply_word_filter(lambda w: w.lower() in TopicUtility.stop_words)
+            finder.apply_freq_filter(4)
+            # # # Filter out bi_grams containing stopwords or function words
+            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in TopicUtility.function_words or
+                                                     w2.lower() in TopicUtility.function_words)
+            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in TopicUtility.stop_words or
+                                                     w2.lower() in TopicUtility.stop_words)
             # Find a list of bi_grams by likelihood collocations
             if associate_measure == 'pmi':
                 scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
             elif associate_measure == 'chi':
                 scored_bi_grams = finder.score_ngrams(bigram_measures.chi_sq)
-            else:   # likelihood
+            else:  # likelihood
                 scored_bi_grams = finder.score_ngrams(bigram_measures.likelihood_ratio)
 
             # Sort bi_grams by scores from high to low
@@ -47,22 +51,14 @@ class TopicUtility:
             # Convert bi_gram object to a list of
             bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
                                                       'score': bi_gram[1]}, sorted_bi_grams))
-            # # Filter out bi_grams containing stopwords
-            filtered_bi_grams = list(filter(lambda bi_gram:
-                                            not Utility.check_words(bi_gram['collocation'], TopicUtility.stop_words),
-                                            bi_grams_list))
-            # Filter out bi_gram containing function words
-            filtered_bi_grams = list(filter(lambda bi_gram:
-                                            not Utility.check_words(bi_gram['collocation'],
-                                                                    TopicUtility.function_words),
-                                            filtered_bi_grams))
-            # Filter out bi_grams containing non-English words
-            filtered_bi_grams = list(filter(lambda bi_gram:
-                                            Utility.is_alpha(bi_gram['collocation']),
-                                            filtered_bi_grams))
+
+            # # Filter out bi_grams containing non-English words
+            # filtered_bi_grams = list(filter(lambda bi_gram:
+            #                                 Utility.is_alpha(bi_gram['collocation']),
+            #                                 bi_grams_list))
             # Collect the doc ids that each collocation appears
             topic_words = []
-            for bi_gram in filtered_bi_grams:
+            for bi_gram in bi_grams_list:
                 collocation = bi_gram['collocation']
                 score = bi_gram['score']
                 topic_doc_ids = []
@@ -76,7 +72,7 @@ class TopicUtility:
                         topic_doc_ids.append(doc_id)
                 topic_words.append({'collocation': collocation, 'score': score, 'doc_ids': topic_doc_ids})
             # limit the top 10 topic words
-            topic_words = topic_words[:10]
+            topic_words = topic_words[:20]
             # Sort the topic_words by the number of docs
             topic_words = sorted(topic_words, key=lambda topic_word: len(topic_word), reverse=True)
             return topic_words
