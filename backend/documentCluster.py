@@ -2,6 +2,7 @@ import os
 from argparse import Namespace
 import logging
 import pandas as pd
+import numpy as np
 import nltk
 # # Sentence Transformer (https://www.sbert.net/index.html)
 from sentence_transformers import SentenceTransformer
@@ -30,7 +31,7 @@ class DocumentCluster:
             case_name='UrbanStudyCorpus',
             path='data',
             cluster='KMeans',
-            # num_clusters=[15, 30, 50],
+            n_neighbours=[15, 20, 50, 100],
             dimension=384,
         )
         # Create the folder path for output clustering files (csv and json)
@@ -121,23 +122,41 @@ class DocumentCluster:
                     #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
                     # docs_df.to_json(path, orient='records')
                     # print('Output cluster results and 2D data points to ' + path)
-            # Output SSE to csv and json file
-            sse_df = pd.DataFrame(sum_of_squared_distances, columns=['n_neighbour', 'cluster', 'sse'])
-            path = os.path.join(self.folder_path,
-                                self.args.case_name + '_' + str(n_neighbour) + '_doc_clusters.csv')
-            sse_df.to_csv(path, encoding='utf-8', index=False)
-            # # Write to a json file
-            path = os.path.join(self.folder_path,
-                                self.args.case_name + '_' + str(n_neighbour) + '_doc_clusters.json')
-            sse_df.to_json(path, orient='records')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
     # # Use 'elbow method' to vary cluster number for selecting an optimal K value
-    # # The point of inflection is the optimal K value
-    # def find_optimal_number_cluster_for_KMean(self):
+    # # The elbow point of the curve is the optimal K value
+    def draw_optimal_cluster_for_KMean(self):
+        path = os.path.join(self.folder_path, 'k_values', self.args.case_name + '_k_value_cluster.json')
+        sse_df = pd.read_json(path)
+        clusters = range(1, 100)
+        #
+        # fig, axs = plt.subplots(nrows=1, ncols=3)
+        try:
+            for i, n_neighbour in enumerate([15, 50, 100]):
+                fig, ax = plt.subplots()
+                data_points = sse_df.query('n_neighbour == @n_neighbour')
+                sse_values = data_points['sse'].tolist()[:100]
+                clusters = data_points['cluster'].tolist()[:100]
+                ax.plot(clusters, sse_values)
+                ax.set_xlim(0, 100)
+                ax.set_ylim(0, 2500)
+                ax.set_xticks(np.arange(0, 101, 5))
+                ax.set_xlabel('Number of Clusters')
+                ax.set_ylabel('Sum of Square Distances')
+                ax.set_title('KMean Value Curve (UMAP neighbour = ' + str(n_neighbour) + ")")
+                ax.scatter(5, round(sse_values[5]), marker="x")
+                ax.scatter(10, round(sse_values[10]), marker="x")
+                ax.scatter(15, round(sse_values[15]), marker="x")
+                ax.scatter(20, round(sse_values[20]), marker="x")
+                # plt.grid(True)
+                fig.show()
+                path = os.path.join(self.image_path, "elbow_curve", "neighbour_" + str(n_neighbour) + ".png")
+                fig.savefig(path)
 
-
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     # Visualise the data points
     def visual_doc_cluster(self):
@@ -210,6 +229,7 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    docCluster.get_sentence_embedding_cluster_doc_by_KMeans()
+    # docCluster.get_sentence_embedding_cluster_doc_by_KMeans()
+    docCluster.draw_optimal_cluster_for_KMean()
     # docCluster.visual_doc_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()
