@@ -169,6 +169,6 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    docCluster.get_sentence_embedding_cluster_doc()
+    docCluster.get_sentence_embedding_cluster_doc_by_KMeans()
     # docCluster.visual_doc_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()
