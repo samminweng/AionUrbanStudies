@@ -11,6 +11,7 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from pathlib import Path
 from TopicUtility import TopicUtility
+from Utility import Utility
 
 logging.basicConfig(level=logging.INFO)
 path = os.path.join('/Scratch', 'mweng', 'nltk_data')
@@ -50,13 +51,34 @@ class DocumentCluster:
         # Search all the subject words
         for i, text in self.text_df.iterrows():
             try:
-                sentences = sent_tokenize(text['Abstract'])
-                sentences = list(filter(lambda s: u"\u00A9" not in s.lower() and 'licensee' not in s, sentences))
-                paragraph = text['Title'] + ". " + " ".join(sentences)
+                sentences = sent_tokenize(text['Title'] + ". " + text['Abstract'])
+                sentences = Utility.clean_sentence(sentences)
+                paragraph = " ".join(sentences)
                 self.documents.append(paragraph)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
         # print(self.data)
+
+    # Get the sentence embedding and cluster doc by hdbscan (https://hdbscan.readthedocs.io/en/latest/index.html)
+    def get_sentence_embedding_cluster_doc_by_hdbscan(self):
+        try:
+            path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
+            Path(path).mkdir(parents=True, exist_ok=True)
+            model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
+            doc_embeddings = model.encode(self.documents, show_progress_bar=True)
+            for n_neighbour in self.args.neighbours:
+                # We increase the neighbors
+                umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
+                                            n_components=self.args.dimension,
+                                            metric='cosine').fit_transform(doc_embeddings)
+                # Map the document embeddings to 2d for visualisation.
+                umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0,
+                                             metric='cosine').fit_transform(doc_embeddings)
+                result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
+
+
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
     def get_sentence_embedding_cluster_doc_by_KMeans(self):
@@ -74,7 +96,7 @@ class DocumentCluster:
                                             n_components=self.args.dimension,
                                             metric='cosine').fit_transform(doc_embeddings)
                 # Map the document embeddings to 2d for visualisation.
-                umap_data_points = umap.UMAP(n_neighbors=100, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
+                umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
                     doc_embeddings)
                 result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
                 # We use the k-means clustering technique to group 600 documents into 5 groups
@@ -104,15 +126,19 @@ class DocumentCluster:
 
     # Visualise the data points
     def visual_doc_cluster(self):
-        for num_cluster in self.args.num_clusters:
-            path = os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
-            doc_cluster_df = pd.read_json(path)
-            fig, ax = plt.subplots(figsize=(10, 10))
-            clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
-            plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=2.0, cmap='hsv_r')
-            plt.colorbar()
-            path = os.path.join(self.image_path, self.args.case_name + '_' + str(num_cluster) + "_cluster.png")
-            plt.savefig(path)
+        for n_neighbour in self.args.neighbours:
+            for num_cluster in self.args.num_clusters:
+                path = os.path.join(self.folder_path,
+                                    self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
+                doc_cluster_df = pd.read_json(path)
+                fig, ax = plt.subplots(figsize=(10, 10))
+                clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
+                plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=2.0, cmap='hsv_r')
+                plt.colorbar()
+                path = os.path.join(self.image_path, self.args.case_name + '_' + str(num_cluster) + '_'
+                                    + str(n_neighbour) + "_cluster.png")
+                plt.savefig(path)
+
 
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
