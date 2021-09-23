@@ -28,17 +28,19 @@ class DocumentCluster:
         self.args = Namespace(
             case_name='UrbanStudyCorpus',
             path='data',
-            num_clusters=[5, 10, 15],
-            dimension=384
+            cluster='KMeans',
+            num_clusters=[15, 30, 50],
+            dimension=384,
+            neighbours=[15, 20, 50, 100, 200]
         )
         # Create the folder path for output clustering files (csv and json)
-        self.folder_path = os.path.join('output', 'cluster', 'd_' + str(self.args.dimension))
+        self.folder_path = os.path.join('output', 'cluster', self.args.cluster + '_d_' + str(self.args.dimension))
         Path(self.folder_path).mkdir(parents=True, exist_ok=True)
         # Create the image path for image files
-        self.image_path = os.path.join('images', 'cluster', 'd_' + str(self.args.dimension))
+        self.image_path = os.path.join('images', 'cluster', self.args.cluster + '_d_' + str(self.args.dimension))
         Path(self.image_path).mkdir(parents=True, exist_ok=True)
         # Create the topic path for visualisation
-        self.topic_path = os.path.join('output', 'cluster', 'd_' + str(self.args.dimension), 'topic')
+        self.topic_path = os.path.join('output', 'cluster', self.args.cluster + '_d_' + str(self.args.dimension), 'topic')
         Path(self.topic_path).mkdir(parents=True, exist_ok=True)
         path = os.path.join('data', self.args.case_name + '.csv')
         self.text_df = pd.read_csv(path)
@@ -57,48 +59,46 @@ class DocumentCluster:
         # print(self.data)
 
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
-    def get_sentence_embedding_cluster_doc(self):
+    def get_sentence_embedding_cluster_doc_by_KMeans(self):
         try:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
             Path(path).mkdir(parents=True, exist_ok=True)
-            # 'distilbert-base-nli-mean-tokens' is depreciated
-            # https://huggingface.co/sentence-transformers/distilbert-base-nli-mean-tokens
-            # model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
-            # As such we switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
+            # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
             # 384 dimensional dense vectors
             # https://huggingface.co/sentence-transformers/all-mpnet-base-v2
             model = SentenceTransformer('all-mpnet-base-v2', cache_folder=path)
             doc_embeddings = model.encode(self.documents, show_progress_bar=True)
-            umap_embeddings = umap.UMAP(n_neighbors=15,
-                                        n_components=self.args.dimension,
-                                        metric='cosine').fit_transform(doc_embeddings)
-            # Map the document embeddings to 2d for visualisation.
-            umap_data_points = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
-                doc_embeddings)
-            result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
-            # We use the k-means clustering technique to group 600 documents into 5 groups
-            # random_state is the random seed
-            for num_cluster in self.args.num_clusters:
-                cluster = KMeans(n_clusters=num_cluster, random_state=42).fit(umap_embeddings)
-                # Write out the cluster results
-                docs_df = pd.DataFrame(self.documents, columns=["Text"])
-                docs_df['Cluster'] = cluster.labels_
-                docs_df['DocId'] = range(len(docs_df))
-                # Round up data point 'x' and 'y' to 2 decimal
-                docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
-                docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
-                # Re-order columns
-                docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
-
-                # Write the result to csv and json file
-                path = os.path.join(self.folder_path,
-                                    self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.csv')
-                docs_df.to_csv(path, encoding='utf-8', index=False)
-                # # Write to a json file
-                path = os.path.join(self.folder_path,
-                                    self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json')
-                docs_df.to_json(path, orient='records')
-                print('Output cluster results and 2D data points to ' + path)
+            for n_neighbour in self.args.neighbours:
+                # We increase the neighbors
+                umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
+                                            n_components=self.args.dimension,
+                                            metric='cosine').fit_transform(doc_embeddings)
+                # Map the document embeddings to 2d for visualisation.
+                umap_data_points = umap.UMAP(n_neighbors=100, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
+                    doc_embeddings)
+                result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
+                # We use the k-means clustering technique to group 600 documents into 5 groups
+                # random_state is the random seed
+                for num_cluster in self.args.num_clusters:
+                    cluster = KMeans(n_clusters=num_cluster, random_state=42).fit(umap_embeddings)
+                    # Write out the cluster results
+                    docs_df = pd.DataFrame(self.documents, columns=["Text"])
+                    docs_df['Cluster'] = cluster.labels_
+                    docs_df['DocId'] = range(len(docs_df))
+                    # Round up data point 'x' and 'y' to 2 decimal
+                    docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
+                    docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
+                    # Re-order columns
+                    docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
+                    # Write the result to csv and json file
+                    path = os.path.join(self.folder_path,
+                                        self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.csv')
+                    docs_df.to_csv(path, encoding='utf-8', index=False)
+                    # # Write to a json file
+                    path = os.path.join(self.folder_path,
+                                        self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
+                    docs_df.to_json(path, orient='records')
+                    print('Output cluster results and 2D data points to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -169,6 +169,6 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    # docCluster.get_sentence_embedding_cluster_doc()
+    docCluster.get_sentence_embedding_cluster_doc()
     # docCluster.visual_doc_cluster()
-    docCluster.derive_topic_words_from_cluster_docs()
+    # docCluster.derive_topic_words_from_cluster_docs()
