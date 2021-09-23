@@ -17,28 +17,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/cluster/d_384/UrbanStudyCorpus_5_doc_clusters.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/d_384/topic/UrbanStudyCorpus_10_cluster_topic_words.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/d_384/topic/UrbanStudyCorpus_15_cluster_topic_words.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/d_384/topic/UrbanStudyCorpus_5_cluster_topic_words.csv">
+        <entry key="/output/cluster/KMeans_d_384/UrbanStudyCorpus_100_doc_clusters.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -30,9 +30,8 @@ class DocumentCluster:
             case_name='UrbanStudyCorpus',
             path='data',
             cluster='KMeans',
-            num_clusters=[15, 30, 50],
+            # num_clusters=[15, 30, 50],
             dimension=384,
-            neighbours=[15, 20, 50, 100, 200]
         )
         # Create the folder path for output clustering files (csv and json)
         self.folder_path = os.path.join('output', 'cluster', self.args.cluster + '_d_' + str(self.args.dimension))
@@ -76,7 +75,6 @@ class DocumentCluster:
                                              metric='cosine').fit_transform(doc_embeddings)
                 result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
 
-
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -86,43 +84,60 @@ class DocumentCluster:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
             Path(path).mkdir(parents=True, exist_ok=True)
             # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
-            # 384 dimensional dense vectors
-            # https://huggingface.co/sentence-transformers/all-mpnet-base-v2
+            # 384 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
+            # model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
             model = SentenceTransformer('all-mpnet-base-v2', cache_folder=path)
             doc_embeddings = model.encode(self.documents, show_progress_bar=True)
-            for n_neighbour in self.args.neighbours:
-                # We increase the neighbors
+            sum_of_squared_distances = []  # Hold the SSE value for each K value
+            for n_neighbour in [15, 20, 50, 100]:       # Experiment different n_neighbour parameters for UMap
+                # Use UMap as preprocessing step for clustering https://umap-learn.readthedocs.io/en/latest/clustering.html
                 umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
                                             n_components=self.args.dimension,
                                             metric='cosine').fit_transform(doc_embeddings)
-                # Map the document embeddings to 2d for visualisation.
-                umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
-                    doc_embeddings)
-                result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
+                # # Map the document embeddings to 2d for visualisation.
+                # umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
+                #     doc_embeddings)
+                # result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
                 # We use the k-means clustering technique to group 600 documents into 5 groups
                 # random_state is the random seed
-                for num_cluster in self.args.num_clusters:
+                for num_cluster in range(1, 150):
                     cluster = KMeans(n_clusters=num_cluster, random_state=42).fit(umap_embeddings)
-                    # Write out the cluster results
-                    docs_df = pd.DataFrame(self.documents, columns=["Text"])
-                    docs_df['Cluster'] = cluster.labels_
-                    docs_df['DocId'] = range(len(docs_df))
-                    # Round up data point 'x' and 'y' to 2 decimal
-                    docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
-                    docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
-                    # Re-order columns
-                    docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
-                    # Write the result to csv and json file
-                    path = os.path.join(self.folder_path,
-                                        self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.csv')
-                    docs_df.to_csv(path, encoding='utf-8', index=False)
-                    # # Write to a json file
-                    path = os.path.join(self.folder_path,
-                                        self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
-                    docs_df.to_json(path, orient='records')
-                    print('Output cluster results and 2D data points to ' + path)
+                    sum_of_squared_distances.append({'n_neighbour': n_neighbour, 'cluster': num_cluster, 'sse': cluster.inertia_})
+                    # # Write out the cluster results
+                    # docs_df = pd.DataFrame(self.documents, columns=["Text"])
+                    # docs_df['Cluster'] = cluster.labels_
+                    # docs_df['DocId'] = range(len(docs_df))
+                    # # Round up data point 'x' and 'y' to 2 decimal
+                    # docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
+                    # docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
+                    # # Re-order columns
+                    # docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
+                    # # Write the result to csv and json file
+                    # path = os.path.join(self.folder_path,
+                    #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.csv')
+                    # docs_df.to_csv(path, encoding='utf-8', index=False)
+                    # # # Write to a json file
+                    # path = os.path.join(self.folder_path,
+                    #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
+                    # docs_df.to_json(path, orient='records')
+                    # print('Output cluster results and 2D data points to ' + path)
+            # Output SSE to csv and json file
+            sse_df = pd.DataFrame(sum_of_squared_distances, columns=['n_neighbour', 'cluster', 'sse'])
+            path = os.path.join(self.folder_path,
+                                self.args.case_name + '_' + str(n_neighbour) + '_doc_clusters.csv')
+            sse_df.to_csv(path, encoding='utf-8', index=False)
+            # # Write to a json file
+            path = os.path.join(self.folder_path,
+                                self.args.case_name + '_' + str(n_neighbour) + '_doc_clusters.json')
+            sse_df.to_json(path, orient='records')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+    # # Use 'elbow method' to vary cluster number for selecting an optimal K value
+    # # The point of inflection is the optimal K value
+    # def find_optimal_number_cluster_for_KMean(self):
+
+
 
     # Visualise the data points
     def visual_doc_cluster(self):
