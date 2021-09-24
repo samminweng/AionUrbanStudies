@@ -15,15 +15,18 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from TopicUtility import TopicUtility
 from Utility import Utility
+import pickle
 
 logging.basicConfig(level=logging.INFO)
-path = os.path.join('/Scratch', 'mweng', 'nltk_data')
-Path(path).mkdir(parents=True, exist_ok=True)
-nltk.data.path.append(path)
-nltk.download('punkt', download_dir=path)
+nltk_path = os.path.join('/Scratch', 'mweng', 'nltk_data')
+Path(nltk_path).mkdir(parents=True, exist_ok=True)
+nltk.data.path.append(nltk_path)
+nltk.download('punkt', download_dir=nltk_path)
 # Download all the necessary NLTK data
-nltk.download('stopwords', download_dir=path)
-
+nltk.download('stopwords', download_dir=nltk_path)
+# Sentence Transformer
+sentence_transformers_path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
+Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
@@ -39,90 +42,93 @@ class DocumentCluster:
             # cluster='KMeans',
             cluster='HDBSAN',
             # n_neighbours=[200],
-            n_neighbours=[15, 20, 50, 100, 150, 200],
-            dimensions=[50, 100, 200, 300],
+            n_neighbours=[200],
+            dimensions=[2],
             dimension=384,
         )
         # Create the folder path for output clustering files (csv and json)
-        self.folder_path = os.path.join('output', 'cluster', self.args.cluster + '_d_' + str(self.args.dimension))
-        Path(self.folder_path).mkdir(parents=True, exist_ok=True)
+        self.output_path = os.path.join('output', 'cluster')
+        Path(self.output_path).mkdir(parents=True, exist_ok=True)
         # Create the image path for image files
-        self.image_path = os.path.join('images', 'cluster', self.args.cluster + '_d_' + str(self.args.dimension))
+        self.image_path = os.path.join('images', 'cluster')
         Path(self.image_path).mkdir(parents=True, exist_ok=True)
+
+        # print(self.data)
+
+    # Get the sentence embedding and cluster doc by hdbscan (https://hdbscan.readthedocs.io/en/latest/index.html)
+    def get_sentence_embedding(self):
         # Create the topic path for visualisation
-        self.topic_path = os.path.join('output', 'cluster', self.args.cluster + '_d_' + str(self.args.dimension), 'topic')
-        Path(self.topic_path).mkdir(parents=True, exist_ok=True)
         path = os.path.join('data', self.args.case_name + '.csv')
-        self.text_df = pd.read_csv(path)
-        # Save the text_df to JSON file
-        self.text_df.to_json(os.path.join('data', self.args.case_name + '.json'), orient='records')
-        self.documents = list()
+        text_df = pd.read_csv(path)
+        documents = list()
         # Search all the subject words
-        for i, text in self.text_df.iterrows():
+        for i, text in text_df.iterrows():
             try:
                 sentences = sent_tokenize(text['Title'] + ". " + text['Abstract'])
                 sentences = Utility.clean_sentence(sentences)
                 paragraph = " ".join(sentences)
-                self.documents.append(paragraph)
+                documents.append(paragraph)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
-        # print(self.data)
+
+        # Load Sentence Transformer
+        model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path)
+        sentences_embeddings = model.encode(documents, show_progress_bar=True)
+        path = os.path.join(self.output_path, self.args.model_name + '_embeddings.pkl')
+        # Store sentences & embeddings on disc
+        with open(path, "wb") as fOut:
+            pickle.dump({'documents': documents, 'embeddings': sentences_embeddings}, fOut, protocol=pickle.HIGHEST_PROTOCOL)
 
     # Get the sentence embedding and cluster doc by hdbscan (https://hdbscan.readthedocs.io/en/latest/index.html)
-    def get_sentence_embedding_cluster_doc_by_hdbscan(self):
+    def cluster_doc_by_hdbscan(self, sentences_embeddings):
         try:
-            path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
-            Path(path).mkdir(parents=True, exist_ok=True)
-            model = SentenceTransformer(self.args.model_name, cache_folder=path)
-            doc_embeddings = model.encode(self.documents, show_progress_bar=True)
+            # Store the results
+            result_df = pd.DataFrame()
+            result_df['x'] = sentences_embeddings[:, 0]
+            result_df['y'] = sentences_embeddings[:, 1]
             # Experiment the dimension parameter
             for dimension in self.args.dimensions:
                 for n_neighbour in self.args.n_neighbours:
-                    # We increase the neighbors
+                    # Map the document embeddings to lower dimension dense vectors for clustering
                     umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
                                                 n_components=dimension,
-                                                metric='cosine').fit_transform(doc_embeddings)
-                    # Map the document embeddings to 2d for visualisation.
-                    umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0,
-                                                 metric='cosine').fit_transform(doc_embeddings)
-                    result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
+                                                min_dist=0.0,
+                                                metric='cosine').fit_transform(sentences_embeddings)
                     # Cluster the documents with minimal cluster size using HDBSCAN
                     # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
-                    min_cluster = 5
-                    clusters = hdbscan.HDBSCAN(min_samples=1, metric='euclidean', min_cluster_size=min_cluster).fit(umap_embeddings)
+                    min_cluster = 15
+                    # min_sample = 15
+                    clusters = hdbscan.HDBSCAN().fit(umap_embeddings)
                     max_cluster_number = max(clusters.labels_)
                     result_df['labels'] = clusters.labels_
                     # # Visualise clusters
                     outliers = result_df.loc[result_df['labels'] == -1, :]
                     clusterers = result_df.loc[result_df['labels'] != -1, :]
-                    plt.scatter(outliers.x, outliers.y, color='red', s=2.0)
-                    plt.scatter(clusterers.x, clusterers.y, color='gray', s=2.0)
-                    path = os.path.join(self.image_path, 'dimension_' + str(dimension) + '_neighbour_' + str(n_neighbour)
-                                        + "_cluster_" + str(max_cluster_number) + "_outlier_" + str(len(outliers)) + ".png")
-                    plt.savefig(path)
+                    fig, ax = plt.subplots()
+                    ax.scatter(outliers.x, outliers.y, color='red', s=2.0)
+                    ax.scatter(clusterers.x, clusterers.y, color='gray', s=2.0)
+                    path = os.path.join(self.image_path, "_cluster_" + str(max_cluster_number)
+                                        + "_outlier_" + str(len(outliers)) + ".png")
+                    fig.savefig(path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
-    def get_sentence_embedding_cluster_doc_by_KMeans(self):
+    def cluster_doc_by_KMeans(self, sentences_embeddings):
         try:
-            path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
-            Path(path).mkdir(parents=True, exist_ok=True)
-
-            model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
-            doc_embeddings = model.encode(self.documents, show_progress_bar=True)
+            # # Map the document embeddings to 2d for visualisation.
+            result_df = pd.DataFrame()
+            result_df['x'] = sentences_embeddings[:, 0]
+            result_df['y'] = sentences_embeddings[:, 1]
             sum_of_squared_distances = []  # Hold the SSE value for each K value
             for dimension in self.args.dimensions:
                 for n_neighbour in self.args.n_neighbours:       # Experiment different n_neighbour parameters for UMap
                     # Use UMap as preprocessing step for clustering https://umap-learn.readthedocs.io/en/latest/clustering.html
                     umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
-                                                n_components=self.args.dimension,
-                                                metric='cosine').fit_transform(doc_embeddings)
-                    num_document = doc_embeddings.shape[0]
-                    # # Map the document embeddings to 2d for visualisation.
-                    umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
-                        doc_embeddings)
-                    result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
+                                                n_components=dimension,
+                                                min_dist=0.0,
+                                                metric='cosine').fit_transform(sentences_embeddings)
+
                     # We use the k-means clustering technique to group 600 documents into 5 groups
                     # random_state is the random seed
                     num_cluster = 10
@@ -245,8 +251,9 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    docCluster.get_sentence_embedding_cluster_doc_by_hdbscan()
-    # docCluster.get_sentence_embedding_cluster_doc_by_KMeans()
+    docCluster.get_sentence_embedding()
+    # docCluster.cluster_doc_by_hdbscan(sentence_embeddings)
+
     # docCluster.get_sentence_embedding_cluster_doc_by_KMeans()
     # docCluster.draw_optimal_cluster_for_KMean()
     # docCluster.visual_doc_cluster()
