@@ -1,6 +1,8 @@
 import os
 from argparse import Namespace
 import logging
+
+import hdbscan
 import pandas as pd
 import numpy as np
 import nltk
@@ -30,8 +32,15 @@ class DocumentCluster:
         self.args = Namespace(
             case_name='UrbanStudyCorpus',
             path='data',
-            cluster='KMeans',
-            n_neighbours=[15, 20, 50, 100],
+            # model_name='distilbert-base-nli-mean-tokens',
+            # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
+            # 384 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
+            model_name='all-mpnet-base-v2',
+            # cluster='KMeans',
+            cluster='HDBSAN',
+            # n_neighbours=[200],
+            n_neighbours=[15, 20, 50, 100, 150, 200],
+            dimensions=[50, 100, 200, 300],
             dimension=384,
         )
         # Create the folder path for output clustering files (csv and json)
@@ -64,18 +73,33 @@ class DocumentCluster:
         try:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
             Path(path).mkdir(parents=True, exist_ok=True)
-            model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
+            model = SentenceTransformer(self.args.model_name, cache_folder=path)
             doc_embeddings = model.encode(self.documents, show_progress_bar=True)
-            for n_neighbour in self.args.neighbours:
-                # We increase the neighbors
-                umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
-                                            n_components=self.args.dimension,
-                                            metric='cosine').fit_transform(doc_embeddings)
-                # Map the document embeddings to 2d for visualisation.
-                umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0,
-                                             metric='cosine').fit_transform(doc_embeddings)
-                result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
-
+            # Experiment the dimension parameter
+            for dimension in self.args.dimensions:
+                for n_neighbour in self.args.n_neighbours:
+                    # We increase the neighbors
+                    umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
+                                                n_components=dimension,
+                                                metric='cosine').fit_transform(doc_embeddings)
+                    # Map the document embeddings to 2d for visualisation.
+                    umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0,
+                                                 metric='cosine').fit_transform(doc_embeddings)
+                    result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
+                    # Cluster the documents with minimal cluster size using HDBSCAN
+                    # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
+                    min_cluster = 5
+                    clusters = hdbscan.HDBSCAN(min_samples=1, metric='euclidean', min_cluster_size=min_cluster).fit(umap_embeddings)
+                    max_cluster_number = max(clusters.labels_)
+                    result_df['labels'] = clusters.labels_
+                    # # Visualise clusters
+                    outliers = result_df.loc[result_df['labels'] == -1, :]
+                    clusterers = result_df.loc[result_df['labels'] != -1, :]
+                    plt.scatter(outliers.x, outliers.y, color='red', s=2.0)
+                    plt.scatter(clusterers.x, clusterers.y, color='gray', s=2.0)
+                    path = os.path.join(self.image_path, 'dimension_' + str(dimension) + '_neighbour_' + str(n_neighbour)
+                                        + "_cluster_" + str(max_cluster_number) + "_outlier_" + str(len(outliers)) + ".png")
+                    plt.savefig(path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -84,44 +108,52 @@ class DocumentCluster:
         try:
             path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
             Path(path).mkdir(parents=True, exist_ok=True)
-            # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
-            # 384 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
-            # model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
-            model = SentenceTransformer('all-mpnet-base-v2', cache_folder=path)
+
+            model = SentenceTransformer('distilbert-base-nli-mean-tokens', cache_folder=path)
             doc_embeddings = model.encode(self.documents, show_progress_bar=True)
             sum_of_squared_distances = []  # Hold the SSE value for each K value
-            for n_neighbour in [15, 20, 50, 100]:       # Experiment different n_neighbour parameters for UMap
-                # Use UMap as preprocessing step for clustering https://umap-learn.readthedocs.io/en/latest/clustering.html
-                umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
-                                            n_components=self.args.dimension,
-                                            metric='cosine').fit_transform(doc_embeddings)
-                # # Map the document embeddings to 2d for visualisation.
-                # umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
-                #     doc_embeddings)
-                # result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
-                # We use the k-means clustering technique to group 600 documents into 5 groups
-                # random_state is the random seed
-                for num_cluster in range(1, 150):
-                    cluster = KMeans(n_clusters=num_cluster, random_state=42).fit(umap_embeddings)
-                    sum_of_squared_distances.append({'n_neighbour': n_neighbour, 'cluster': num_cluster, 'sse': cluster.inertia_})
-                    # # Write out the cluster results
-                    # docs_df = pd.DataFrame(self.documents, columns=["Text"])
-                    # docs_df['Cluster'] = cluster.labels_
-                    # docs_df['DocId'] = range(len(docs_df))
-                    # # Round up data point 'x' and 'y' to 2 decimal
-                    # docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
-                    # docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
-                    # # Re-order columns
-                    # docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
-                    # # Write the result to csv and json file
-                    # path = os.path.join(self.folder_path,
-                    #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.csv')
-                    # docs_df.to_csv(path, encoding='utf-8', index=False)
-                    # # # Write to a json file
-                    # path = os.path.join(self.folder_path,
-                    #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
-                    # docs_df.to_json(path, orient='records')
-                    # print('Output cluster results and 2D data points to ' + path)
+            for dimension in self.args.dimensions:
+                for n_neighbour in self.args.n_neighbours:       # Experiment different n_neighbour parameters for UMap
+                    # Use UMap as preprocessing step for clustering https://umap-learn.readthedocs.io/en/latest/clustering.html
+                    umap_embeddings = umap.UMAP(n_neighbors=n_neighbour,
+                                                n_components=self.args.dimension,
+                                                metric='cosine').fit_transform(doc_embeddings)
+                    num_document = doc_embeddings.shape[0]
+                    # # Map the document embeddings to 2d for visualisation.
+                    umap_data_points = umap.UMAP(n_neighbors=n_neighbour, n_components=2, min_dist=0.0, metric='cosine').fit_transform(
+                        doc_embeddings)
+                    result_df = pd.DataFrame(umap_data_points, columns=['x', 'y'])
+                    # We use the k-means clustering technique to group 600 documents into 5 groups
+                    # random_state is the random seed
+                    num_cluster = 10
+                    clusters = KMeans(n_clusters=num_cluster, random_state=42).fit(doc_embeddings)
+                    result_df['labels'] = clusters.labels_
+                    sum_of_squared_distances.append({'n_neighbour': n_neighbour, 'cluster': num_cluster, 'sse': clusters.inertia_})
+                    # # Visualise clusters
+                    clusterers = result_df.loc[result_df['labels'] != -1, :]
+                    # plt.scatter(outliers.x, outliers.y, color='red', s=2.0)
+                    plt.scatter(clusterers.x, clusterers.y, c=clusterers.labels, s=5.0)
+                    path = os.path.join(self.image_path, 'dimension_' + str(dimension) + '_neighbour_' + str(n_neighbour)
+                                        + "_cluster_" + str(num_cluster) + ".png")
+                    plt.savefig(path)
+                # # Write out the cluster results
+                # docs_df = pd.DataFrame(self.documents, columns=["Text"])
+                # docs_df['Cluster'] = cluster.labels_
+                # docs_df['DocId'] = range(len(docs_df))
+                # # Round up data point 'x' and 'y' to 2 decimal
+                # docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
+                # docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
+                # # Re-order columns
+                # docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
+                # # Write the result to csv and json file
+                # path = os.path.join(self.folder_path,
+                #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.csv')
+                # docs_df.to_csv(path, encoding='utf-8', index=False)
+                # # # Write to a json file
+                # path = os.path.join(self.folder_path,
+                #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
+                # docs_df.to_json(path, orient='records')
+                # print('Output cluster results and 2D data points to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -157,22 +189,6 @@ class DocumentCluster:
 
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-
-    # Visualise the data points
-    def visual_doc_cluster(self):
-        for n_neighbour in self.args.neighbours:
-            for num_cluster in self.args.num_clusters:
-                path = os.path.join(self.folder_path,
-                                    self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
-                doc_cluster_df = pd.read_json(path)
-                fig, ax = plt.subplots(figsize=(10, 10))
-                clustered = doc_cluster_df.loc[doc_cluster_df['Cluster'] != -1, :]
-                plt.scatter(clustered['x'], clustered['y'], c=clustered['Cluster'], s=2.0, cmap='hsv_r')
-                plt.colorbar()
-                path = os.path.join(self.image_path, self.args.case_name + '_' + str(num_cluster) + '_'
-                                    + str(n_neighbour) + "_cluster.png")
-                plt.savefig(path)
-
 
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
@@ -229,7 +245,9 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
+    docCluster.get_sentence_embedding_cluster_doc_by_hdbscan()
     # docCluster.get_sentence_embedding_cluster_doc_by_KMeans()
-    docCluster.draw_optimal_cluster_for_KMean()
+    # docCluster.get_sentence_embedding_cluster_doc_by_KMeans()
+    # docCluster.draw_optimal_cluster_for_KMean()
     # docCluster.visual_doc_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()

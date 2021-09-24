@@ -17,13 +17,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/cluster/KMeans_d_384/UrbanStudyCorpus_100_doc_clusters.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
       </map>
     </option>
   </component>
