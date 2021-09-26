@@ -29,6 +29,7 @@ nltk.download('stopwords', download_dir=nltk_path)
 sentence_transformers_path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
 Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
+
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
 class DocumentCluster:
@@ -63,6 +64,13 @@ class DocumentCluster:
         ).fit_transform(self.document_embeddings)
         plt.style.use('bmh')
 
+        # Store the clustering results
+        self.result_df = pd.DataFrame(columns=['DocId', 'Text', 'x', 'y'])
+        self.result_df['DocId'] = self.documents['DocId']
+        self.result_df['Text'] = self.documents['document']
+        self.result_df['x'] = list(map(lambda x: round(x, 2), self.clusterable_embedding[:, 0]))
+        self.result_df['y'] = list(map(lambda x: round(x, 2), self.clusterable_embedding[:, 1]))
+
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
     def get_sentence_embedding(self):
@@ -87,16 +95,12 @@ class DocumentCluster:
         path = os.path.join(self.output_path, self.args.model_name + '_embeddings.pkl')
         # Store sentences & embeddings on disc
         with open(path, "wb") as fOut:
-            pickle.dump({'documents': documents, 'embeddings': sentences_embeddings}, fOut, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump({'documents': documents, 'embeddings': sentences_embeddings}, fOut,
+                        protocol=pickle.HIGHEST_PROTOCOL)
 
     # Get the sentence embedding and cluster doc by hdbscan (https://hdbscan.readthedocs.io/en/latest/index.html)
     def cluster_doc_by_hdbscan(self):
         try:
-            # Store the clustering results
-            result_df = pd.DataFrame()
-            result_df['DocId'] = self.documents['DocId']
-            result_df['x'] = self.clusterable_embedding[:, 0]
-            result_df['y'] = self.clusterable_embedding[:, 1]
             # Cluster the documents with minimal cluster size using HDBSCAN
             # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
             min_cluster_size = 5
@@ -106,13 +110,9 @@ class DocumentCluster:
                                        metric='euclidean').fit(self.clusterable_embedding)
 
             # clusters.condensed_tree_.plot()
-            result_df['labels'] = clusters.labels_
-
-
-            return result_df
+            self.result_df['HDBSCAN_Cluster'] = clusters.labels_
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-
 
     def cluster_doc_by_agglomerative(self):
         # Normalize the embeddings to unit length
@@ -121,81 +121,30 @@ class DocumentCluster:
         clustering_model = AgglomerativeClustering(n_clusters=None, distance_threshold=1.5)
         clustering_model.fit(self.clusterable_embedding)
         clusters = clustering_model.labels_
-        max_cluster = max(clusters)
-        print("Agglomerative cluster produces " + str(max_cluster) + " clusters")
-        result_df = pd.DataFrame()
-        result_df['x'] = self.clusterable_embedding[:, 0]
-        result_df['y'] = self.clusterable_embedding[:, 1]
-        result_df['labels'] = clusters
-        return result_df
-
+        self.result_df['Agglomerative_Cluster'] = clusters
 
     # Cluster document embedding by KMeans clustering
     def cluster_doc_by_KMeans(self):
         try:
-            # Store the clustering results
-            result_df = pd.DataFrame()
-            result_df['x'] = self.clusterable_embedding[:, 0]
-            result_df['y'] = self.clusterable_embedding[:, 1]
-            sum_of_squared_distances = []  # Hold the SSE value for each K value
+            # sum_of_squared_distances = []  # Hold the SSE value for each K value
             # We use the k-means clustering technique to group 600 documents into 5 groups
             # random_state is the random seed
             num_cluster = 10
+            # for num_cluster in range(1, 150):
             clusters = KMeans(n_clusters=num_cluster, random_state=42).fit(self.clusterable_embedding)
-            result_df['labels'] = clusters.labels_
-            sum_of_squared_distances.append({'cluster': num_cluster, 'sse': clusters.inertia_})
-            return result_df
-            # # Write out the cluster results
-            # docs_df = pd.DataFrame(self.documents, columns=["Text"])
-            # docs_df['Cluster'] = cluster.labels_
-            # docs_df['DocId'] = range(len(docs_df))
-            # # Round up data point 'x' and 'y' to 2 decimal
-            # docs_df['x'] = result_df['x'].apply(lambda x: round(x, 2))
-            # docs_df['y'] = result_df['y'].apply(lambda y: round(y, 2))
-            # # Re-order columns
-            # docs_df = docs_df[['Cluster', 'DocId', 'Text', 'x', 'y']]
+            self.result_df['KMeans_Cluster'] = clusters.labels_
+            # Re-order
+            self.result_df = self.result_df.reindex(
+                columns=['KMeans_Cluster', 'HDBSCAN_Cluster', 'Agglomerative_Cluster',
+                         'DocId', 'Text', 'x', 'y'])
             # # Write the result to csv and json file
-            # path = os.path.join(self.folder_path,
-            #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.csv')
-            # docs_df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(self.output_path, self.args.case_name + '_clusters.csv')
+            self.result_df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            # path = os.path.join(self.folder_path,
-            #                     self.args.case_name + '_' + str(num_cluster) + '_' + str(n_neighbour) + '_doc_clusters.json')
-            # docs_df.to_json(path, orient='records')
-            # print('Output cluster results and 2D data points to ' + path)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
-    # # Use 'elbow method' to vary cluster number for selecting an optimal K value
-    # # The elbow point of the curve is the optimal K value
-    def draw_optimal_cluster_for_KMean(self):
-        path = os.path.join(self.folder_path, 'k_values', self.args.case_name + '_k_value_cluster.json')
-        sse_df = pd.read_json(path)
-        clusters = range(1, 100)
-        #
-        # fig, axs = plt.subplots(nrows=1, ncols=3)
-        try:
-            for i, n_neighbour in enumerate([15, 50, 100]):
-                fig, ax = plt.subplots()
-                data_points = sse_df.query('n_neighbour == @n_neighbour')
-                sse_values = data_points['sse'].tolist()[:100]
-                clusters = data_points['cluster'].tolist()[:100]
-                ax.plot(clusters, sse_values)
-                ax.set_xlim(0, 100)
-                ax.set_ylim(0, 2500)
-                ax.set_xticks(np.arange(0, 101, 5))
-                ax.set_xlabel('Number of Clusters')
-                ax.set_ylabel('Sum of Square Distances')
-                ax.set_title('KMean Value Curve (UMAP neighbour = ' + str(n_neighbour) + ")")
-                ax.scatter(5, round(sse_values[5]), marker="x")
-                ax.scatter(10, round(sse_values[10]), marker="x")
-                ax.scatter(15, round(sse_values[15]), marker="x")
-                ax.scatter(20, round(sse_values[20]), marker="x")
-                # plt.grid(True)
-                fig.show()
-                path = os.path.join(self.image_path, "elbow_curve", "neighbour_" + str(n_neighbour) + ".png")
-                fig.savefig(path)
-
+            path = os.path.join(self.output_path, self.args.case_name + '_clusters.json')
+            self.result_df.to_json(path, orient='records')
+            print('Output cluster results and 2D data points to ' + path)
+            # sum_of_squared_distances.append({'cluster': num_cluster, 'sse': clusters.inertia_})
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -254,10 +203,11 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    docCluster.get_sentence_embedding()
-    # hdbscan_result_df = docCluster.cluster_doc_by_hdbscan()
-    # kmeans_result_df = docCluster.cluster_doc_by_KMeans()
-    # agglomerative_result_df = docCluster.cluster_doc_by_agglomerative()
-    # TopicUtility.visualise_cluster_results(hdbscan_result_df, kmeans_result_df, agglomerative_result_df)
+    # docCluster.get_sentence_embedding()
+    # docCluster.cluster_doc_by_hdbscan()
+    # docCluster.cluster_doc_by_agglomerative()
+    # docCluster.cluster_doc_by_KMeans()
+    # TopicUtility.visual_KMean_results()
+    TopicUtility.visualise_cluster_results()
     # docCluster.visual_doc_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()

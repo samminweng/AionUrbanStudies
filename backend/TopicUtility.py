@@ -17,6 +17,7 @@ nltk.data.path.append(path)
 
 # Utility for deriving the topics from each cluster of documents.
 class TopicUtility:
+    case_name = 'UrbanStudyCorpus'
     # Static variable
     stop_words = list(stopwords.words('english'))
     # Load function words
@@ -24,45 +25,71 @@ class TopicUtility:
     function_words = df['Function Word'].tolist()
     # Image path
     image_path = os.path.join('images', 'cluster')
+    # Output path
+    output_path = os.path.join('output', 'cluster')
+    # # Use 'elbow method' to vary cluster number for selecting an optimal K value
+    # # The elbow point of the curve is the optimal K value
+    @staticmethod
+    def visual_KMean_results(sse_df):
+        try:
+            fig, ax = plt.subplots()
+            # data_points = sse_df.query('n_neighbour == @n_neighbour')
+            sse_values = sse_df['sse'].tolist()[:150]
+            clusters = sse_df['cluster'].tolist()[:150]
+            ax.plot(clusters, sse_values)
+            ax.set_xlim(0, 100)
+            ax.set_ylim(0, 2500)
+            ax.set_xticks(np.arange(0, 101, 5))
+            ax.set_xlabel('Number of Clusters')
+            ax.set_ylabel('Sum of Square Distances')
+            ax.set_title('KMean Value Curve')
+            ax.scatter(5, round(sse_values[5]), marker="x")
+            ax.scatter(10, round(sse_values[10]), marker="x")
+            ax.scatter(15, round(sse_values[15]), marker="x")
+            ax.scatter(20, round(sse_values[20]), marker="x")
+            # plt.grid(True)
+            fig.show()
+            path = os.path.join(TopicUtility.image_path, "elbow_curve.png")
+            fig.savefig(path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     @staticmethod
-    def visualise_cluster_results(hdbscan_result_df, kmeans_result_df, agglomerative_result_df):
+    def visualise_cluster_results():
+        path = os.path.join(TopicUtility.output_path, TopicUtility.case_name + '_clusters.json')
+        cluster_result_df = pd.read_json(path)
         fig, ((ax0, ax1), (ax2, ax3)) = plt.subplots(2, 2)
-        clusterers = kmeans_result_df.loc[kmeans_result_df['labels'] != -1, :]
+        # # Visualise HDBScan Outliers
+        outliers = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] == -1, :]
+        clusterers = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] != -1, :]
+        max_cluster_number = max(clusterers['HDBSCAN_Cluster'])
+        ax0.scatter(outliers.x, outliers.y, color='red', linewidth=0, s=5.0, marker="X")
         ax0.scatter(clusterers.x, clusterers.y, color='gray', linewidth=0, s=5.0)
-        ax0.set_title('Original')
-        # Visualise Outliers
-        outliers = hdbscan_result_df.loc[hdbscan_result_df['labels'] == -1, :]
-        clusterers = hdbscan_result_df.loc[hdbscan_result_df['labels'] != -1, :]
-        max_cluster_number = max(clusterers['labels'])
-        ax1.scatter(outliers.x, outliers.y, color='red', linewidth=0, s=5.0, marker="X")
-        ax1.scatter(clusterers.x, clusterers.y, color='gray', linewidth=0, s=5.0)
-        ax1.set_title('Outliers (Red)')
-        # ax1.legend()
-        # Visualise clustered dots using HDBScan
-        ax2.scatter(clusterers.x, clusterers.y, c=clusterers.labels, linewidth=0, s=5.0, cmap='Spectral')
-        ax2.set_title('HDBSCan')
-        ax2.legend()
-        # Visualise clustered dots using agglomerative
-        clusterers = agglomerative_result_df.loc[agglomerative_result_df['labels'] != -1, :]
-        max_clusters = agglomerative_result_df['labels'].max()
-        # cluster_labels = agglomerative_result_df.loc[agglomerative_result_df['labels'] != label, :]
-        ax3_scatters = ax3.scatter(clusterers.x, clusterers.y, c=clusterers.labels, label=clusterers.labels,
-                    linewidth=0, s=5.0, cmap='Spectral')
+        ax0.set_title('Outliers (Red)')
+        # # Visualise clustered dots using HDBScan
+        ax1.scatter(clusterers.x, clusterers.y, c=clusterers['HDBSCAN_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
+        ax1.set_title('HDBSCan')
+        #
+        # # Visualise KMeans
+        clusterers = cluster_result_df.loc[cluster_result_df['KMeans_Cluster'] != -1, :]
+        ax2.scatter(clusterers.x, clusterers.y, c=clusterers['KMeans_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
+        ax2.set_title('KMeans')
+        # # Visualise clustered dots using agglomerative
+        clusterers = cluster_result_df.loc[cluster_result_df['Agglomerative_Cluster'] != -1, :]
+        max_clusters = cluster_result_df['Agglomerative_Cluster'].max()
+        ax3_scatters = ax3.scatter(clusterers.x, clusterers.y, c=clusterers['Agglomerative_Cluster'],
+                                   label=clusterers['Agglomerative_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
         box = ax3.get_position()
         ax3.set_position([box.x0, box.y0, box.width * 0.9, box.height])
-
-        # Produce the legends
-        ax3.legend(*ax3_scatters.legend_elements(), loc='center left', bbox_to_anchor=(1, 0.5))
-        # legend1 = ax3.legend(*ax3_scatters.legend_elements(), loc="lower left", title="Clusters")
-        # ax3.add_artist(legend1)
-
-        ax3.grid(True)
-        ax3.set_title('agglomerative')
-        # ax3.legend()
+        #
+        # # Produce the legends
+        # ax3.legend(*ax3_scatters.legend_elements(), loc='center left', bbox_to_anchor=(1, 0.5))
+        #
+        # ax3.set_title('agglomerative')
+        # # ax3.legend()
         path = os.path.join(TopicUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
                             + str(len(outliers)) + ".png")
-        fig.savefig(path, dpi=600)
+        fig.savefig(path, dpi=1200)
 
     @staticmethod
     def derive_topic_words(associate_measure, cluster_documents):
