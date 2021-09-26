@@ -27,6 +27,7 @@ class TopicUtility:
     image_path = os.path.join('images', 'cluster')
     # Output path
     output_path = os.path.join('output', 'cluster')
+
     # # Use 'elbow method' to vary cluster number for selecting an optimal K value
     # # The elbow point of the curve is the optimal K value
     @staticmethod
@@ -55,7 +56,7 @@ class TopicUtility:
             print("Error occurred! {err}".format(err=err))
 
     @staticmethod
-    def visualise_cluster_results():
+    def visualise_cluster_results(min_cluster_size):
         path = os.path.join(TopicUtility.output_path, TopicUtility.case_name + '_clusters.json')
         cluster_result_df = pd.read_json(path)
         fig, ((ax0, ax1), (ax2, ax3)) = plt.subplots(2, 2)
@@ -79,8 +80,8 @@ class TopicUtility:
         max_clusters = cluster_result_df['Agglomerative_Cluster'].max()
         ax3_scatters = ax3.scatter(clusterers.x, clusterers.y, c=clusterers['Agglomerative_Cluster'],
                                    label=clusterers['Agglomerative_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
-        box = ax3.get_position()
-        ax3.set_position([box.x0, box.y0, box.width * 0.9, box.height])
+        # box = ax3.get_position()
+        # ax3.set_position([box.x0, box.y0, box.width * 0.9, box.height])
         #
         # # Produce the legends
         # ax3.legend(*ax3_scatters.legend_elements(), loc='center left', bbox_to_anchor=(1, 0.5))
@@ -88,8 +89,9 @@ class TopicUtility:
         # ax3.set_title('agglomerative')
         # # ax3.legend()
         path = os.path.join(TopicUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
-                            + str(len(outliers)) + ".png")
+                            + str(len(outliers)) + "_min_cluster_size_" + str(min_cluster_size) + ".png")
         fig.savefig(path, dpi=1200)
+        print("Output image to " + path)
 
     @staticmethod
     def derive_topic_words(associate_measure, cluster_documents):
@@ -141,20 +143,6 @@ class TopicUtility:
             return topic_words
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-
-    @staticmethod
-    def collect_docs_by_cluster(text_df, cluster_doc_ids):
-        docs = []
-        # Select the documents from doc_ids
-        for j, text in text_df.iterrows():
-            doc_id = text['DocId']
-            if doc_id in cluster_doc_ids:
-                sentences = sent_tokenize(text['Title'] + ". " + text['Abstract'])
-                sentences = Utility.clean_sentence(sentences)
-                doc_text = ' '.join(sentences)
-                tokens = word_tokenize(doc_text)
-                docs.append({"doc_id": doc_id, "tokens": tokens})
-        return docs
 
     # Compute the class-level TF-IDF scores for each cluster of documents
     @staticmethod

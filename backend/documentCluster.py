@@ -8,7 +8,7 @@ import numpy as np
 import nltk
 # # Sentence Transformer (https://www.sbert.net/index.html)
 from sentence_transformers import SentenceTransformer
-from nltk.tokenize import sent_tokenize
+from nltk.tokenize import sent_tokenize, word_tokenize
 import umap  # (UMAP) is a dimension reduction technique https://umap-learn.readthedocs.io/en/latest/
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
@@ -40,7 +40,8 @@ class DocumentCluster:
             # model_name='distilbert-base-nli-mean-tokens',
             # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
             # 384 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
-            model_name='all-mpnet-base-v2'
+            model_name='all-mpnet-base-v2',
+            min_cluster_size=10
         )
         # Create the folder path for output clustering files (csv and json)
         self.output_path = os.path.join('output', 'cluster')
@@ -103,10 +104,7 @@ class DocumentCluster:
         try:
             # Cluster the documents with minimal cluster size using HDBSCAN
             # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
-            min_cluster_size = 5
-            min_samples = 3
-            # min_sample = 15
-            clusters = hdbscan.HDBSCAN(min_samples=min_samples, min_cluster_size=min_cluster_size, leaf_size=40,
+            clusters = hdbscan.HDBSCAN(min_samples=1, min_cluster_size=self.args.min_cluster_size, # leaf_size=40,
                                        metric='euclidean').fit(self.clusterable_embedding)
 
             # clusters.condensed_tree_.plot()
@@ -151,51 +149,43 @@ class DocumentCluster:
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
         try:
-            # Go through different cluster number
-            for num_cluster in self.args.num_clusters:
-                # Load the cluster
-                docs_df = pd.read_json(
-                    os.path.join(self.folder_path, self.args.case_name + '_' + str(num_cluster) + '_doc_clusters.json'))
-                # Group the documents by topics
-                doc_ids_per_cluster = docs_df.groupby(['Cluster'], as_index=False).agg(
-                    {'DocId': lambda doc_id: list(doc_id)})
+            # Load the cluster
+            docs_df = pd.read_json(
+                os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
+            # Cluster the documents by
+            for cluster_approach in ['KMeans_Cluster', 'HDBSCAN_Cluster', 'Agglomerative_Cluster']:
+                # Group the documents and doc_id by clusters
+                docs_per_cluster = docs_df.groupby([cluster_approach], as_index=False).agg(
+                    {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
                 results = []
-                for i, cluster in doc_ids_per_cluster.iterrows():
-                    cluster_doc_ids = cluster['DocId']
+                for i, cluster in docs_per_cluster.iterrows():
+                    cluster_no = cluster[cluster_approach]
+                    doc_ids = cluster['DocId']
+                    doc_texts = cluster['Text']
+                    # print(docs)
                     # Collect a list of clustered document where each document is a list of tokens
-                    cluster_documents = TopicUtility.collect_docs_by_cluster(self.text_df, cluster_doc_ids)
-                    # Derive top 10 topic words (collocations) through Chi-square
-                    topic_words_chi = TopicUtility.derive_topic_words('chi', cluster_documents)
-                    # Derive top 10 topic words through PMI (pointwise mutual information)
-                    topic_words_pmi = TopicUtility.derive_topic_words('pmi', cluster_documents)
-                    # Derive topic words through likelihood
-                    topic_words_likelihood = TopicUtility.derive_topic_words('likelihood', cluster_documents)
-                    # Collect the result
-                    result = {"Cluster": i, 'NumDocs': len(cluster['DocId']), 'DocIds': cluster['DocId'],
-                              "Topic_Words_chi": topic_words_chi, 'Topic_Words_likelihood': topic_words_likelihood,
-                              "Topic_Words_pmi": topic_words_pmi}
+                    cluster_docs = []
+                    # Select the documents from doc_ids
+                    for index, doc_text in enumerate(doc_texts):
+                        tokens = word_tokenize(doc_text)
+                        cluster_docs.append({"doc_id": doc_ids[index], "tokens": tokens})
+                    # print(cluster_docs)
+                    # # Derive topic words through likelihood
+                    topic_words_likelihood = TopicUtility.derive_topic_words('likelihood', cluster_docs)
+                    # # Collect the result
+                    result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
+                              'TopicWords': topic_words_likelihood}
                     results.append(result)
                 # Write the result to csv and json file
-                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'Topic_Words_chi',
-                                                            'Topic_Words_likelihood', 'Topic_Words_pmi'])
-                path = os.path.join(self.topic_path,
-                                    self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.csv')
+                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'TopicWords'])
+                path = os.path.join(self.output_path,
+                                    self.args.case_name + '_' + cluster_approach + '_topic_words.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)
-                # # Write to a json file
-                path = os.path.join(self.topic_path,
-                                    self.args.case_name + '_' + str(num_cluster) + '_cluster_topic_words.json')
+                # # # Write to a json file
+                path = os.path.join(self.output_path,
+                                    self.args.case_name + '_' + cluster_approach + '_topic_words.json')
                 cluster_df.to_json(path, orient='records')
                 print('Output keywords/phrases to ' + path)
-                # Removed the texts from doc_cluster to reduce the file size for better speed
-                docs_df.drop('Text', inplace=True, axis=1)  # axis=1 indicates the removal of 'Text' columns.
-                # Save the doc cluster to another file
-                path = os.path.join(self.topic_path,
-                                    self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.csv')
-                docs_df.to_csv(path, encoding='utf-8', index=False)
-                # # Write to a json file
-                path = os.path.join(self.topic_path,
-                                    self.args.case_name + '_' + str(num_cluster) + '_simplified_cluster_doc.json')
-                docs_df.to_json(path, orient='records')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -208,6 +198,5 @@ if __name__ == '__main__':
     # docCluster.cluster_doc_by_agglomerative()
     # docCluster.cluster_doc_by_KMeans()
     # TopicUtility.visual_KMean_results()
-    TopicUtility.visualise_cluster_results()
-    # docCluster.visual_doc_cluster()
-    # docCluster.derive_topic_words_from_cluster_docs()
+    # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
+    docCluster.derive_topic_words_from_cluster_docs()
