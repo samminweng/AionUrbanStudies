@@ -1,7 +1,7 @@
 import os
-
 import nltk
 import numpy as np
+from matplotlib import pyplot as plt
 from nltk import BigramCollocationFinder
 from sklearn.feature_extraction.text import CountVectorizer
 from nltk.util import ngrams
@@ -22,6 +22,47 @@ class TopicUtility:
     # Load function words
     df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
     function_words = df['Function Word'].tolist()
+    # Image path
+    image_path = os.path.join('images', 'cluster')
+
+    @staticmethod
+    def visualise_cluster_results(hdbscan_result_df, kmeans_result_df, agglomerative_result_df):
+        fig, ((ax0, ax1), (ax2, ax3)) = plt.subplots(2, 2)
+        clusterers = kmeans_result_df.loc[kmeans_result_df['labels'] != -1, :]
+        ax0.scatter(clusterers.x, clusterers.y, color='gray', linewidth=0, s=5.0)
+        ax0.set_title('Original')
+        # Visualise Outliers
+        outliers = hdbscan_result_df.loc[hdbscan_result_df['labels'] == -1, :]
+        clusterers = hdbscan_result_df.loc[hdbscan_result_df['labels'] != -1, :]
+        max_cluster_number = max(clusterers['labels'])
+        ax1.scatter(outliers.x, outliers.y, color='red', linewidth=0, s=5.0, marker="X")
+        ax1.scatter(clusterers.x, clusterers.y, color='gray', linewidth=0, s=5.0)
+        ax1.set_title('Outliers (Red)')
+        # ax1.legend()
+        # Visualise clustered dots using HDBScan
+        ax2.scatter(clusterers.x, clusterers.y, c=clusterers.labels, linewidth=0, s=5.0, cmap='Spectral')
+        ax2.set_title('HDBSCan')
+        ax2.legend()
+        # Visualise clustered dots using agglomerative
+        clusterers = agglomerative_result_df.loc[agglomerative_result_df['labels'] != -1, :]
+        max_clusters = agglomerative_result_df['labels'].max()
+        # cluster_labels = agglomerative_result_df.loc[agglomerative_result_df['labels'] != label, :]
+        ax3_scatters = ax3.scatter(clusterers.x, clusterers.y, c=clusterers.labels, label=clusterers.labels,
+                    linewidth=0, s=5.0, cmap='Spectral')
+        box = ax3.get_position()
+        ax3.set_position([box.x0, box.y0, box.width * 0.9, box.height])
+
+        # Produce the legends
+        ax3.legend(*ax3_scatters.legend_elements(), loc='center left', bbox_to_anchor=(1, 0.5))
+        # legend1 = ax3.legend(*ax3_scatters.legend_elements(), loc="lower left", title="Clusters")
+        # ax3.add_artist(legend1)
+
+        ax3.grid(True)
+        ax3.set_title('agglomerative')
+        # ax3.legend()
+        path = os.path.join(TopicUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
+                            + str(len(outliers)) + ".png")
+        fig.savefig(path, dpi=600)
 
     @staticmethod
     def derive_topic_words(associate_measure, cluster_documents):
