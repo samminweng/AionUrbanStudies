@@ -162,16 +162,9 @@ class DocumentCluster:
                     cluster_no = cluster[cluster_approach]
                     doc_ids = cluster['DocId']
                     doc_texts = cluster['Text']
-                    # print(docs)
-                    # Collect a list of clustered document where each document is a list of tokens
-                    cluster_docs = []
-                    # Select the documents from doc_ids
-                    for index, doc_text in enumerate(doc_texts):
-                        tokens = word_tokenize(doc_text)
-                        cluster_docs.append({"doc_id": doc_ids[index], "tokens": tokens})
-                    # print(cluster_docs)
-                    # # Derive topic words through likelihood
-                    topic_words_likelihood = TopicUtility.derive_topic_words('likelihood', cluster_docs)
+                    # # Derive topic words through collocation likelihood
+                    topic_words_likelihood = TopicUtility.derive_topic_words_using_collocations('likelihood',
+                                                                                                doc_ids, doc_texts)
                     # # Collect the result
                     result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
                               'TopicWords': topic_words_likelihood}

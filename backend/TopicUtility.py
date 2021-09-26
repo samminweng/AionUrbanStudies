@@ -94,12 +94,19 @@ class TopicUtility:
         print("Output image to " + path)
 
     @staticmethod
-    def derive_topic_words(associate_measure, cluster_documents):
+    def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):
         try:
+            # Collect a list of clustered document where each document is a list of tokens
+            cluster_docs = []
+            # Select the documents from doc_ids
+            for index, doc_text in enumerate(doc_texts):
+                tokens = word_tokenize(doc_text)
+                cluster_docs.append({"doc_id": doc_ids[index], "tokens": tokens})
+
             # Create NLTK bigram object
             bigram_measures = nltk.collocations.BigramAssocMeasures()
             # Map the cluster documents to a list of document where each doc is represented with a list of tokens
-            documents = list(map(lambda doc: doc['tokens'], cluster_documents))
+            documents = list(map(lambda doc: doc['tokens'], cluster_docs))
             # Score and rank the collocations
             finder = BigramCollocationFinder.from_documents(documents)
             finder.apply_freq_filter(4)
@@ -127,7 +134,7 @@ class TopicUtility:
                 collocation = bi_gram['collocation']
                 score = bi_gram['score']
                 topic_doc_ids = []
-                for doc in cluster_documents:
+                for doc in cluster_docs:
                     doc_id = doc['doc_id']
                     doc_tokens = doc['tokens']
                     doc_bi_grams = list(ngrams(doc_tokens, 2))
