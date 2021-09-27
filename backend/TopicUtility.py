@@ -142,14 +142,11 @@ class TopicUtility:
                 docs_per_term[top_term].append(doc_id)
         # # Sort the docs_per_term by the number of associated articles
         sorted_docs_per_term = dict(sorted(docs_per_term.items(), key=lambda item: len(item[1]), reverse=True))
-        topic_doc_ids = set()
+        # Convert the derived topic words into json format
         topic_words = []
         for term, term_doc_ids in sorted_docs_per_term.items():
             # check if term_doc_ids is in topic_doc_ids:
-            topic_term_doc_id = [term_doc_id for term_doc_id in term_doc_ids if term_doc_id not in topic_doc_ids]
-            if len(topic_term_doc_id):
-                topic_words.append({'topic_words': term, 'score': len(term_doc_ids), 'doc_ids': term_doc_ids})
-                topic_doc_ids.update(term_doc_ids)
+            topic_words.append({'topic_words': term, 'score': len(term_doc_ids), 'doc_ids': term_doc_ids})
         return topic_words
 
     @staticmethod

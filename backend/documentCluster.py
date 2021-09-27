@@ -133,8 +133,7 @@ class DocumentCluster:
             self.result_df['KMeans_Cluster'] = clusters.labels_
             # Re-order
             self.result_df = self.result_df.reindex(
-                columns=['KMeans_Cluster', 'HDBSCAN_Cluster', 'Agglomerative_Cluster',
-                         'DocId', 'Text', 'x', 'y'])
+                columns=['KMeans_Cluster', 'HDBSCAN_Cluster', 'DocId', 'Text', 'x', 'y'])
             # # Write the result to csv and json file
             path = os.path.join(self.output_path, self.args.case_name + '_clusters.csv')
             self.result_df.to_csv(path, encoding='utf-8', index=False)
@@ -148,7 +147,7 @@ class DocumentCluster:
 
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
-        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster', 'Agglomerative_Cluster']
+        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
         try:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
@@ -210,7 +209,7 @@ class DocumentCluster:
     def collect_tf_idf_terms_by_cluster(self):
         # Read corpus df
         corpus_df = pd.read_json(os.path.join('data', self.args.case_name + ".json"))
-        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster', 'Agglomerative_Cluster']
+        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
         try:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
@@ -236,12 +235,11 @@ class DocumentCluster:
             # Write the result to csv and json file
             update_corpus_df = corpus_df.reindex(columns=['DocId', 'Year', 'Title', 'Abstract', 'AuthorKeywords',
                                                           'KMeans_Cluster_KeyTerms',
-                                                          'HDBSCAN_Cluster_KeyTerms',
-                                                          'Agglomerative_Cluster_KeyTerms'])
-            path = os.path.join(self.output_path, self.args.case_name + '_' + '_doc_terms.csv')
+                                                          'HDBSCAN_Cluster_KeyTerms'])
+            path = os.path.join(self.output_path, self.args.case_name + '_doc_terms.csv')
             update_corpus_df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            path = os.path.join(self.output_path, self.args.case_name + '_' + '_doc_terms.json')
+            path = os.path.join(self.output_path, self.args.case_name + '_doc_terms.json')
             update_corpus_df.to_json(path, orient='records')
             print('Output keywords/phrases to ' + path)
 
@@ -254,9 +252,7 @@ if __name__ == '__main__':
     docCluster = DocumentCluster()
     # docCluster.get_sentence_embedding()
     # docCluster.cluster_doc_by_hdbscan()
-    # docCluster.cluster_doc_by_agglomerative()
     # docCluster.cluster_doc_by_KMeans()
-    # TopicUtility.visual_KMean_results()
-    TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
+    # # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
     # docCluster.derive_topic_words_from_cluster_docs()
-    # docCluster.collect_tf_idf_terms_by_cluster()
+    docCluster.collect_tf_idf_terms_by_cluster()
