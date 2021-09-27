@@ -99,9 +99,9 @@ class TopicUtility:
             # Collect a list of clustered document where each document is a list of tokens
             cluster_docs = []
             # Select the documents from doc_ids
-            for index, doc_text in enumerate(doc_texts):
+            for doc_id, doc_text in zip(doc_ids, doc_texts):
                 tokens = word_tokenize(doc_text)
-                cluster_docs.append({"doc_id": doc_ids[index], "tokens": tokens})
+                cluster_docs.append({"doc_id": doc_id, "tokens": tokens})
 
             # Create NLTK bigram object
             bigram_measures = nltk.collocations.BigramAssocMeasures()
@@ -142,9 +142,9 @@ class TopicUtility:
                     # Check if topic word in bi_grams
                     if collocation in doc_bi_grams:
                         topic_doc_ids.append(doc_id)
-                topic_words.append({'collocation': collocation, 'score': score, 'doc_ids': topic_doc_ids})
-            # limit the top 10 topic words
-            topic_words = topic_words[:30]
+                topic_words.append({'topic_words': collocation, 'score': score, 'doc_ids': topic_doc_ids})
+            # limit the top 20 topic words
+            topic_words = topic_words[:20]
             # Sort the topic_words by the number of docs
             topic_words = sorted(topic_words, key=lambda topic_word: len(topic_word), reverse=True)
             return topic_words
@@ -153,8 +153,11 @@ class TopicUtility:
 
     # Compute the class-level TF-IDF scores for each cluster of documents
     @staticmethod
-    def compute_c_tf_idf_score(clustered_documents, total_number_documents):
+    def compute_c_tf_idf_score(doc_texts_per_cluster, total_number_documents):
         try:
+            # Aggregate every doc in a cluster as a single text
+            clustered_documents = list(map(lambda doc: " ".join(doc), doc_texts_per_cluster))
+            # Vectorize the clustered doc text
             count = CountVectorizer(ngram_range=(2, 2), stop_words="english").fit(clustered_documents)
             t = count.transform(clustered_documents).toarray()
             w = t.sum(axis=1)
@@ -168,9 +171,9 @@ class TopicUtility:
 
     # Obtain top collocation per topic
     @staticmethod
-    def extract_top_n_words_per_topic(tf_idf, count, docs_per_topic, n=20):
+    def extract_top_n_words_per_topic(tf_idf, count, clusters, n=20):
         collocations = count.get_feature_names()
-        labels = list(docs_per_topic['Cluster'])
+        labels = clusters
         tf_idf_transposed = tf_idf.T
         indices = tf_idf_transposed.argsort()[:, -n:]
         top_n_words = {label: [(collocations[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
@@ -178,21 +181,23 @@ class TopicUtility:
         return top_n_words
 
     @staticmethod
-    def get_doc_ids_by_topic_words(text_df, doc_ids, topic_word):
-        topic_doc_ids = []
-        for i, doc in text_df.iterrows():
-            try:
-                doc_id = doc['DocId']
-                if doc_id in doc_ids:
-                    text = doc['Title'] + ". " + doc['Abstract']
-                    sentences = sent_tokenize(text.lower())
-                    sentences = Utility.clean_sentence(sentences)
-                    tokenizes = word_tokenize(' '.join(sentences))
+    def group_docs_by_topic_words(doc_ids, doc_texts, topic_words_per_cluster):
+        docs_per_topic_words = []
+        try:
+            # For each topic word, find out the document ids that contain the topic word
+            for topic_words, score in topic_words_per_cluster:
+                doc_ids_per_topic = []
+                for doc_id, doc_text in zip(doc_ids, doc_texts):
+                    # Convert the document text to bi-grams
+                    tokenizes = word_tokenize(doc_text)
                     bi_grams = list(ngrams(tokenizes, 2))
                     bi_grams = list(map(lambda bi_gram: bi_gram[0] + " " + bi_gram[1], bi_grams))
-                    # Check if topic word in bi_grams
-                    if topic_word in bi_grams:
-                        topic_doc_ids.append(doc_id)
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-        return topic_doc_ids
+                    # Find if the topic words appear in the bi-grams
+                    if topic_words in bi_grams:
+                        doc_ids_per_topic.append(doc_id)
+                if len(doc_ids_per_topic) > 0:
+                    docs_per_topic_words.append({'topic_words': topic_words, 'score': round(score * 100, 1),
+                                                 'doc_ids': doc_ids_per_topic})
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+        return docs_per_topic_words
