@@ -6,9 +6,11 @@ import pandas as pd
 import nltk
 from nltk import word_tokenize, sent_tokenize
 from nltk import ngrams
-from nltk.corpus import words
+from nltk.corpus import words, stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
-
+path = os.path.join('/Scratch', 'mweng', 'nltk_data')  # Specify the path of NLTK data
+nltk.download('stopwords', download_dir=path)
+nltk.data.path.append(path)
 
 class Utility:
 
@@ -47,7 +49,7 @@ class Utility:
 
     # Extract the terms from TFIDF
     @staticmethod
-    def extract_terms_from_TFIDF(n_gram_type, corpus, stopwords, function_words):
+    def extract_terms_from_TFIDF(n_gram_type, corpus, function_words):
         if n_gram_type == 'uni-gram':
             vectorizer = TfidfVectorizer(stop_words=stopwords, ngram_range=(1, 1))
         elif n_gram_type == 'bi-gram':

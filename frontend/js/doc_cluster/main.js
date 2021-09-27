@@ -17,22 +17,22 @@ $(function () {
         $.getJSON(cluster_word_5_file_path),$.getJSON(cluster_word_10_file_path),$.getJSON(cluster_word_15_file_path),
         $.getJSON(corpus_file_path)
     ).done(function (result1, result2, result3, result4, result5, result6, result7){
-        const doc_cluster_data_dict = {5: result1[0], 10: result2[0], 15: result3[0]};
-        // Initialise the dictionary that store topic words for each cluster
-        Utility.cluster_topic_words_dict = {5: result4[0], 10: result5[0], 15: result6[0]};
-        // Initialise the corpus data
-        Utility.corpus_data = result7[0];
-        // console.log(Utility.corpus_data);
-        let total_clusters = $('#cluster').val();
-        // Load cluster data and render scatter plot
-        let chart_doc_view = new ChartDocView(total_clusters, doc_cluster_data_dict[total_clusters]);
-        $('#cluster').selectmenu({
-            change: function (event, data){
-                let total_clusters = data.item.value;
-                let chart_doc_view = new ChartDocView(total_clusters, doc_cluster_data_dict[total_clusters]);
-                // alert(cluster);
-            }
-        })
+        // const doc_cluster_data_dict = {5: result1[0], 10: result2[0], 15: result3[0]};
+        // // Initialise the dictionary that store topic words for each cluster
+        // Utility.cluster_topic_words_dict = {5: result4[0], 10: result5[0], 15: result6[0]};
+        // // Initialise the corpus data
+        // Utility.corpus_data = result7[0];
+        // // console.log(Utility.corpus_data);
+        // let total_clusters = $('#cluster').val();
+        // // Load cluster data and render scatter plot
+        // let chart_doc_view = new ChartDocView(total_clusters, doc_cluster_data_dict[total_clusters]);
+        // $('#cluster').selectmenu({
+        //     change: function (event, data){
+        //         let total_clusters = data.item.value;
+        //         let chart_doc_view = new ChartDocView(total_clusters, doc_cluster_data_dict[total_clusters]);
+        //         // alert(cluster);
+        //     }
+        // })
     });
 
 

@@ -3,7 +3,7 @@ import nltk
 import numpy as np
 from matplotlib import pyplot as plt
 from nltk import BigramCollocationFinder
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from nltk.util import ngrams
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
@@ -21,12 +21,14 @@ class TopicUtility:
     # Static variable
     stop_words = list(stopwords.words('english'))
     # Load function words
-    df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
-    function_words = df['Function Word'].tolist()
+    _df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
+    function_words = _df['Function Word'].tolist()
     # Image path
     image_path = os.path.join('images', 'cluster')
     # Output path
     output_path = os.path.join('output', 'cluster')
+    # TF-IDF Term path
+    term_path = os.path.join('output', 'term')
 
     # # Use 'elbow method' to vary cluster number for selecting an optimal K value
     # # The elbow point of the curve is the optimal K value
@@ -94,6 +96,61 @@ class TopicUtility:
         print("Output image to " + path)
 
     @staticmethod
+    def extract_terms_by_TFIDF(doc_ids, doc_texts):
+        vectorizer = TfidfVectorizer(ngram_range=(2, 2))
+        # Compute tf-idf scores for each word in each sentence of the abstract
+        vectors = vectorizer.fit_transform(doc_texts)
+        feature_names = vectorizer.get_feature_names()
+        dense = vectors.todense()
+        dense_list = dense.tolist()
+        dense_dict = pd.DataFrame(dense_list, columns=feature_names).to_dict(orient='records')
+        key_terms = list()
+        # Collect all the key terms of all the sentences in the text
+        for index, dense in enumerate(dense_dict):
+            # Sort the terms by score
+            filter_list = list(filter(lambda item: item[1] > 0, dense.items()))
+            # Filter words containing stop words
+            filter_list = list(
+                filter(lambda item: not Utility.check_words(item[0], TopicUtility.stop_words), filter_list))
+            # Filter words containing function words
+            filter_list = list(
+                filter(lambda item: not Utility.check_words(item[0], TopicUtility.function_words), filter_list))
+            sorted_list = list(sorted(filter_list, key=lambda item: item[1], reverse=True))
+            # Include the key terms
+            key_terms.append({
+                'doc_id': doc_ids[index],
+                'key_terms': list(map(lambda item: item[0], sorted_list))
+            })
+        return key_terms
+
+    # Obtain the tf-idf terms for each individual document in a cluster
+    # Select top 2 key term as the representative topics for
+    @staticmethod
+    def derive_topic_words_tf_idf(doc_ids, doc_texts):
+        # Obtain the TF-IDF terms for each individual articles in the clustered documents
+        key_terms = TopicUtility.extract_terms_by_TFIDF(doc_ids, doc_texts)
+        docs_per_term = {}
+        for doc_id, doc_text in zip(doc_ids, doc_texts):
+            # Get the top 2 TF-IDF terms
+            doc_key_terms = list(filter(lambda k: k['doc_id'] == doc_id, key_terms))[0]['key_terms']
+            top_terms = doc_key_terms[:2]
+            for top_term in top_terms:
+                if top_term not in docs_per_term:
+                    docs_per_term[top_term] = []
+                docs_per_term[top_term].append(doc_id)
+        # # Sort the docs_per_term by the number of associated articles
+        sorted_docs_per_term = dict(sorted(docs_per_term.items(), key=lambda item: len(item[1]), reverse=True))
+        topic_doc_ids = set()
+        topic_words = []
+        for term, term_doc_ids in sorted_docs_per_term.items():
+            # check if term_doc_ids is in topic_doc_ids:
+            topic_term_doc_id = [term_doc_id for term_doc_id in term_doc_ids if term_doc_id not in topic_doc_ids]
+            if len(topic_term_doc_id):
+                topic_words.append({'topic_words': term, 'score': len(term_doc_ids), 'doc_ids': term_doc_ids})
+                topic_doc_ids.update(term_doc_ids)
+        return topic_words
+
+    @staticmethod
     def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):
         try:
             # Collect a list of clustered document where each document is a list of tokens
@@ -144,7 +201,7 @@ class TopicUtility:
                         topic_doc_ids.append(doc_id)
                 topic_words.append({'topic_words': collocation, 'score': score, 'doc_ids': topic_doc_ids})
             # limit the top 20 topic words
-            topic_words = topic_words[:20]
+            topic_words = topic_words
             # Sort the topic_words by the number of docs
             topic_words = sorted(topic_words, key=lambda topic_word: len(topic_word), reverse=True)
             return topic_words
