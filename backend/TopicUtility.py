@@ -61,27 +61,28 @@ class TopicUtility:
     def visualise_cluster_results(min_cluster_size):
         path = os.path.join(TopicUtility.output_path, TopicUtility.case_name + '_clusters.json')
         cluster_result_df = pd.read_json(path)
-        fig, ((ax0, ax1), (ax2, ax3)) = plt.subplots(2, 2)
+        fig, (ax0, ax1, ax2) = plt.subplots(1, 3)
+        # # Visualise KMeans
+        clusterers = cluster_result_df.loc[cluster_result_df['KMeans_Cluster'] != -1, :]
+        ax0.scatter(clusterers.x, clusterers.y, c=clusterers['KMeans_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
+        ax0.set_title('KMeans')
         # # Visualise HDBScan Outliers
         outliers = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] == -1, :]
         clusterers = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] != -1, :]
         max_cluster_number = max(clusterers['HDBSCAN_Cluster'])
-        ax0.scatter(outliers.x, outliers.y, color='red', linewidth=0, s=5.0, marker="X")
-        ax0.scatter(clusterers.x, clusterers.y, color='gray', linewidth=0, s=5.0)
-        ax0.set_title('Outliers (Red)')
+        ax1.scatter(outliers.x, outliers.y, color='red', linewidth=0, s=5.0, marker="X")
+        ax1.scatter(clusterers.x, clusterers.y, color='gray', linewidth=0, s=5.0)
+        ax1.set_title('Outliers (Red)')
         # # Visualise clustered dots using HDBScan
-        ax1.scatter(clusterers.x, clusterers.y, c=clusterers['HDBSCAN_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
-        ax1.set_title('HDBSCan')
+        ax2.scatter(clusterers.x, clusterers.y, c=clusterers['HDBSCAN_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
+        ax2.set_title('HDBSCAN')
         #
-        # # Visualise KMeans
-        clusterers = cluster_result_df.loc[cluster_result_df['KMeans_Cluster'] != -1, :]
-        ax2.scatter(clusterers.x, clusterers.y, c=clusterers['KMeans_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
-        ax2.set_title('KMeans')
-        # # Visualise clustered dots using agglomerative
-        clusterers = cluster_result_df.loc[cluster_result_df['Agglomerative_Cluster'] != -1, :]
-        max_clusters = cluster_result_df['Agglomerative_Cluster'].max()
-        ax3_scatters = ax3.scatter(clusterers.x, clusterers.y, c=clusterers['Agglomerative_Cluster'],
-                                   label=clusterers['Agglomerative_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
+
+        # # # Visualise clustered dots using agglomerative
+        # clusterers = cluster_result_df.loc[cluster_result_df['Agglomerative_Cluster'] != -1, :]
+        # max_clusters = cluster_result_df['Agglomerative_Cluster'].max()
+        # ax3_scatters = ax3.scatter(clusterers.x, clusterers.y, c=clusterers['Agglomerative_Cluster'],
+        #                            label=clusterers['Agglomerative_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
         # box = ax3.get_position()
         # ax3.set_position([box.x0, box.y0, box.width * 0.9, box.height])
         #
@@ -92,7 +93,8 @@ class TopicUtility:
         # # ax3.legend()
         path = os.path.join(TopicUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
                             + str(len(outliers)) + "_min_cluster_size_" + str(min_cluster_size) + ".png")
-        fig.savefig(path, dpi=1200)
+        fig.set_size_inches(10, 5)
+        fig.savefig(path, dpi=600)
         print("Output image to " + path)
 
     @staticmethod

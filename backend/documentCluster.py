@@ -127,7 +127,7 @@ class DocumentCluster:
             # sum_of_squared_distances = []  # Hold the SSE value for each K value
             # We use the k-means clustering technique to group 600 documents into 5 groups
             # random_state is the random seed
-            num_cluster = 10
+            num_cluster = 15
             # for num_cluster in range(1, 150):
             clusters = KMeans(n_clusters=num_cluster, random_state=42).fit(self.clusterable_embedding)
             self.result_df['KMeans_Cluster'] = clusters.labels_
@@ -257,6 +257,6 @@ if __name__ == '__main__':
     # docCluster.cluster_doc_by_agglomerative()
     # docCluster.cluster_doc_by_KMeans()
     # TopicUtility.visual_KMean_results()
-    # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
+    TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
     # docCluster.derive_topic_words_from_cluster_docs()
-    docCluster.collect_tf_idf_terms_by_cluster()
+    # docCluster.collect_tf_idf_terms_by_cluster()
