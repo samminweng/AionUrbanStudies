@@ -150,8 +150,6 @@ class DocumentCluster:
     def derive_topic_words_from_cluster_docs(self):
         cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster', 'Agglomerative_Cluster']
         try:
-            # Load the corpus
-            corpus_df = pd.read_json(os.path.join('data', self.args.case_name + '.json'))
             # Load the document cluster
             doc_clusters_df = pd.read_json(
                 os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
@@ -175,7 +173,8 @@ class DocumentCluster:
                         doc_texts = cluster['Text']
                         # Derive topic words through collocation likelihood
                         topic_words_collocations = TopicUtility.derive_topic_words_using_collocations('likelihood',
-                                                                                                      doc_ids, doc_texts)
+                                                                                                      doc_ids,
+                                                                                                      doc_texts)
                         # Derive topic words using C-TF-IDF
                         topic_words_ctf_idf = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
                                                                                      top_n_words[cluster_no])
@@ -207,6 +206,48 @@ class DocumentCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Collect the tf-idf terms by cluster
+    def collect_tf_idf_terms_by_cluster(self):
+        # Read corpus df
+        corpus_df = pd.read_json(os.path.join('data', self.args.case_name + ".json"))
+        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster', 'Agglomerative_Cluster']
+        try:
+            # Load the document cluster
+            doc_clusters_df = pd.read_json(
+                os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
+            # Cluster the documents by
+            for cluster_approach in cluster_approaches:
+                # Group the documents and doc_id by clusters
+                docs_per_cluster = doc_clusters_df.groupby([cluster_approach], as_index=False).agg(
+                    {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+                results = []
+                for i, cluster in docs_per_cluster.iterrows():
+                    try:
+                        doc_ids = cluster['DocId']
+                        doc_texts = cluster['Text']
+                        key_terms = TopicUtility.extract_terms_by_TFIDF(doc_ids, doc_texts)
+                        results.extend(key_terms)
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+                # Sort the results by doc_id
+                sorted_results = sorted(results, key=lambda item: item['doc_id'])
+                cluster_key_terms = list(map(lambda r: r['key_terms'], sorted_results))
+                corpus_df[cluster_approach + "_KeyTerms"] = cluster_key_terms
+            # Write the result to csv and json file
+            update_corpus_df = corpus_df.reindex(columns=['DocId', 'Year', 'Title', 'Abstract', 'AuthorKeywords',
+                                                          'KMeans_Cluster_KeyTerms',
+                                                          'HDBSCAN_Cluster_KeyTerms',
+                                                          'Agglomerative_Cluster_KeyTerms'])
+            path = os.path.join(self.output_path, self.args.case_name + '_' + '_doc_terms.csv')
+            update_corpus_df.to_csv(path, encoding='utf-8', index=False)
+            # # # Write to a json file
+            path = os.path.join(self.output_path, self.args.case_name + '_' + '_doc_terms.json')
+            update_corpus_df.to_json(path, orient='records')
+            print('Output keywords/phrases to ' + path)
+
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
 
 # Main entry
 if __name__ == '__main__':
@@ -217,4 +258,5 @@ if __name__ == '__main__':
     # docCluster.cluster_doc_by_KMeans()
     # TopicUtility.visual_KMean_results()
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
-    docCluster.derive_topic_words_from_cluster_docs()
+    # docCluster.derive_topic_words_from_cluster_docs()
+    docCluster.collect_tf_idf_terms_by_cluster()
