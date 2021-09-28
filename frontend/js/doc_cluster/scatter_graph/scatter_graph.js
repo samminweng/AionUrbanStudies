@@ -86,7 +86,7 @@ function ScatterGraph(is_hide, cluster_approach, cluster_chart_data, cluster_top
         doc_cluster_div.on('plotly_click', function (data) {
             const point = data.points[0];
             // Get the doc id from text
-            const cluster_no = parseInt(point.data.name.split(" ")[1]);
+            const cluster_no = parseInt(point.data.name.split("#")[1]);
             // Get cluster documents
             const num_docs = clusters.find(c => c['Cluster'] === cluster_no)['NumDocs'];
             // Add an annotation to the clustered dots.

@@ -222,12 +222,13 @@ class DocumentCluster:
                                                                                      top_n_words[cluster_no])
                         # Derive topic words using TF-IDF
                         topic_words_tf_idf = TopicUtility.derive_topic_words_tf_idf(tf_idf_df, doc_ids)
-
-                        # # Collect the result
+                        # We use the number of TF-IDF terms as the limitation
+                        max_length = len(topic_words_tf_idf)
+                        # Collect the result
                         result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
-                                  'TopicWords_by_Collocations': topic_words_collocations[:50],
-                                  'TopicWords_by_CTF-IDF': topic_words_ctf_idf[:50],
-                                  'TopicWords_by_TF-IDF': topic_words_tf_idf[:50]
+                                  'TopicWords_by_Collocations': topic_words_collocations[:max_length],
+                                  'TopicWords_by_CTF-IDF': topic_words_ctf_idf[:max_length],
+                                  'TopicWords_by_TF-IDF': topic_words_tf_idf
                                   }
                         results.append(result)
                     except Exception as err:
