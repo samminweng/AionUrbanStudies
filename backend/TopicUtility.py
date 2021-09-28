@@ -128,26 +128,36 @@ class TopicUtility:
     # Obtain the tf-idf terms for each individual document in a cluster
     # Select top 2 key term as the representative topics for
     @staticmethod
-    def derive_topic_words_tf_idf(doc_ids, doc_texts):
+    def derive_topic_words_tf_idf(tf_idf_df, doc_ids):
         # Obtain the TF-IDF terms for each individual articles in the clustered documents
-        key_terms = TopicUtility.extract_terms_by_TFIDF(doc_ids, doc_texts)
-        docs_per_term = {}
-        for doc_id, doc_text in zip(doc_ids, doc_texts):
-            # Get the top 2 TF-IDF terms
-            doc_key_terms = list(filter(lambda k: k['doc_id'] == doc_id, key_terms))[0]['key_terms']
-            top_terms = doc_key_terms[:2]
-            for top_term in top_terms:
-                if top_term not in docs_per_term:
-                    docs_per_term[top_term] = []
-                docs_per_term[top_term].append(doc_id)
-        # # Sort the docs_per_term by the number of associated articles
-        sorted_docs_per_term = dict(sorted(docs_per_term.items(), key=lambda item: len(item[1]), reverse=True))
-        # Convert the derived topic words into json format
         topic_words = []
-        for term, term_doc_ids in sorted_docs_per_term.items():
-            # check if term_doc_ids is in topic_doc_ids:
-            topic_words.append({'topic_words': term, 'score': len(term_doc_ids), 'doc_ids': term_doc_ids})
-        return topic_words
+        for doc_id in doc_ids:
+            try:
+                # Get the top 2 TF-IDF terms
+                doc = tf_idf_df.query("DocId == @doc_id")
+                if not doc.empty:
+                    doc_key_terms = doc.iloc[0]['HDBSCAN_Cluster_KeyTerms']
+                    top_terms = doc_key_terms[:2]
+                    for top_term in top_terms:
+                        found_topics = [topic for topic in topic_words if topic['topic_words'] == top_term]
+                        if len(found_topics) == 0:
+                            found_topic = {'topic_words': top_term, 'doc_ids': set()}
+                            found_topic['doc_ids'].add(doc_id)
+                            topic_words.append(found_topic)
+                        else:
+                            found_topic = found_topics[0]
+                            found_topic['doc_ids'].add(doc_id)
+                else:
+                    print("Can not find doc id = " + str(doc_id))
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
+        # Convert the doc_ids to list type and add the score
+        for topic in topic_words:
+            topic['doc_ids'] = list(topic['doc_ids'])
+            topic['score'] = len(topic['doc_ids'])
+        # # Sort the topic_words by score
+        sorted_topic_words = sorted(topic_words, key=lambda item: item['score'], reverse=True)
+        return sorted_topic_words
 
     @staticmethod
     def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):

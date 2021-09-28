@@ -37,12 +37,12 @@ function ScatterGraph(is_hide, cluster_approach, cluster_chart_data, cluster_top
                 for (const dot of cluster_data) {
                     data_point['x'].push(dot.x);
                     data_point['y'].push(dot.y);
-                    data_point['label'].push('Cluster: ' + cluster_no + ' Doc id: ' + dot.DocId);   // Tooltip label
+                    data_point['label'].push('Cluster #' + cluster_no + ' Doc id: ' + dot.DocId);   // Tooltip label
                 }
 
                 let trace = {
                     'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
-                    'name': 'Cluster ' + cluster_no, 'mode': 'markers', 'type': 'scatter',
+                    'name': 'Cluster #' + cluster_no, 'mode': 'markers', 'type': 'scatter',
                     'marker': {color: colors(cluster_no)}, opacity: opacity(cluster_no)
                 };
                 data.push(trace);

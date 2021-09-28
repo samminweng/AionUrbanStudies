@@ -1,5 +1,5 @@
 // Display a list of research articles for key term 1 and key term 2.
-function DocumentListView(cluster_no, topic, documents) {
+function DocumentListView(documents, topic) {
     // Container
     function createPagination(docTable) {
         // Create the table
@@ -42,11 +42,6 @@ function DocumentListView(cluster_no, topic, documents) {
     function _createUI() {
         $('#document_list_view').empty();
         let container = $('<div class="container p-3"></div>');
-        // A summary of cluster documents
-        let topic_div = $('<div class="col">' +
-            '<span>' + documents.length + ' articles contain "' + topic + '"</span>' +
-            '</div>');
-        container.append($('<div class="row p-3"></div>').append(topic_div));
         // A list of cluster documents
         let documentTable = $('<table class="table table-striped">' +
             '<thead class="thead-light">' +

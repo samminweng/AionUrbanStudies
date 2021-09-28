@@ -85,7 +85,7 @@ class DocumentCluster:
                 sentences = sent_tokenize(text['Title'] + ". " + text['Abstract'])
                 sentences = Utility.clean_sentence(sentences)
                 document = " ".join(sentences)
-                documents.append({"DocId": i, "document": document})
+                documents.append({"DocId": i+1, "document": document})
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
 
@@ -145,66 +145,6 @@ class DocumentCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Derive the topic words from each cluster of documents
-    def derive_topic_words_from_cluster_docs(self):
-        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        try:
-            # Load the document cluster
-            doc_clusters_df = pd.read_json(
-                os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
-            # Cluster the documents by
-            for cluster_approach in cluster_approaches:
-                # Group the documents and doc_id by clusters
-                docs_per_cluster = doc_clusters_df.groupby([cluster_approach], as_index=False).agg(
-                    {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
-                # Derive topic words using C-TF-IDF
-                tf_idf, count = TopicUtility.compute_c_tf_idf_score(docs_per_cluster['Text'], len(doc_clusters_df))
-                # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
-                top_n_words = TopicUtility.extract_top_n_words_per_topic(tf_idf, count,
-                                                                         docs_per_cluster[cluster_approach],
-                                                                         n=50)
-                # print(top_n_words)
-                results = []
-                for i, cluster in docs_per_cluster.iterrows():
-                    try:
-                        cluster_no = cluster[cluster_approach]
-                        doc_ids = cluster['DocId']
-                        doc_texts = cluster['Text']
-                        # Derive topic words through collocation likelihood
-                        topic_words_collocations = TopicUtility.derive_topic_words_using_collocations('likelihood',
-                                                                                                      doc_ids,
-                                                                                                      doc_texts)
-                        # Derive topic words using C-TF-IDF
-                        topic_words_ctf_idf = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
-                                                                                     top_n_words[cluster_no])
-                        # Derive topic words using TF-IDF
-                        topic_words_tf_idf = TopicUtility.derive_topic_words_tf_idf(doc_ids, doc_texts)
-
-                        # # Collect the result
-                        result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
-                                  'TopicWords_by_Collocations': topic_words_collocations[:50],
-                                  'TopicWords_by_CTF-IDF': topic_words_ctf_idf[:50],
-                                  'TopicWords_by_TF-IDF': topic_words_tf_idf[:50]
-                                  }
-                        results.append(result)
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
-                # Write the result to csv and json file
-                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
-                                                            'TopicWords_by_TF-IDF',
-                                                            'TopicWords_by_CTF-IDF',
-                                                            'TopicWords_by_Collocations'])
-                path = os.path.join(self.output_path,
-                                    self.args.case_name + '_' + cluster_approach + '_topic_words.csv')
-                cluster_df.to_csv(path, encoding='utf-8', index=False)
-                # # # Write to a json file
-                path = os.path.join(self.output_path,
-                                    self.args.case_name + '_' + cluster_approach + '_topic_words.json')
-                cluster_df.to_json(path, orient='records')
-                print('Output keywords/phrases to ' + path)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
     # Collect the tf-idf terms by cluster
     def collect_tf_idf_terms_by_cluster(self):
         # Read corpus df
@@ -246,13 +186,77 @@ class DocumentCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Derive the topic words from each cluster of documents
+    def derive_topic_words_from_cluster_docs(self):
+        path = os.path.join(self.output_path, self.args.case_name + '_doc_terms.json')
+        tf_idf_df = pd.read_json(path)
+        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
+        try:
+            # Load the document cluster
+            doc_clusters_df = pd.read_json(
+                os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
+            # Cluster the documents by
+            for cluster_approach in cluster_approaches:
+                # Group the documents and doc_id by clusters
+                docs_per_cluster = doc_clusters_df.groupby([cluster_approach], as_index=False).agg(
+                    {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+                # Derive topic words using C-TF-IDF
+                tf_idf, count = TopicUtility.compute_c_tf_idf_score(docs_per_cluster['Text'], len(doc_clusters_df))
+                # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
+                top_n_words = TopicUtility.extract_top_n_words_per_topic(tf_idf, count,
+                                                                         docs_per_cluster[cluster_approach],
+                                                                         n=50)
+                # print(top_n_words)
+                results = []
+                for i, cluster in docs_per_cluster.iterrows():
+                    try:
+                        cluster_no = cluster[cluster_approach]
+                        doc_ids = cluster['DocId']
+                        doc_texts = cluster['Text']
+                        # Derive topic words through collocation likelihood
+                        topic_words_collocations = TopicUtility.derive_topic_words_using_collocations('likelihood',
+                                                                                                      doc_ids,
+                                                                                                      doc_texts)
+                        # Derive topic words using C-TF-IDF
+                        topic_words_ctf_idf = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
+                                                                                     top_n_words[cluster_no])
+                        # Derive topic words using TF-IDF
+                        topic_words_tf_idf = TopicUtility.derive_topic_words_tf_idf(tf_idf_df, doc_ids)
+
+                        # # Collect the result
+                        result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
+                                  'TopicWords_by_Collocations': topic_words_collocations[:50],
+                                  'TopicWords_by_CTF-IDF': topic_words_ctf_idf[:50],
+                                  'TopicWords_by_TF-IDF': topic_words_tf_idf[:50]
+                                  }
+                        results.append(result)
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+                # Write the result to csv and json file
+                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
+                                                            'TopicWords_by_TF-IDF',
+                                                            'TopicWords_by_CTF-IDF',
+                                                            'TopicWords_by_Collocations'])
+                path = os.path.join(self.output_path,
+                                    self.args.case_name + '_' + cluster_approach + '_topic_words.csv')
+                cluster_df.to_csv(path, encoding='utf-8', index=False)
+                # # # Write to a json file
+                path = os.path.join(self.output_path,
+                                    self.args.case_name + '_' + cluster_approach + '_topic_words.json')
+                cluster_df.to_json(path, orient='records')
+                print('Output keywords/phrases to ' + path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+
+
 
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    # docCluster.get_sentence_embedding()
+    docCluster.get_sentence_embedding()
     # docCluster.cluster_doc_by_hdbscan()
     # docCluster.cluster_doc_by_KMeans()
     # # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
+    # docCluster.collect_tf_idf_terms_by_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()
-    docCluster.collect_tf_idf_terms_by_cluster()
