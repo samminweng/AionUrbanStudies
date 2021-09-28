@@ -1,5 +1,5 @@
 // Create scatter graph
-function ScatterGraph(cluster_approach, cluster_chart_data, cluster_topic_words) {
+function ScatterGraph(is_hide, cluster_approach, cluster_chart_data, cluster_topic_words) {
     const width = 600;
     const height = 650;
     // Find the maximal cluster number as total number of clusters
@@ -18,30 +18,43 @@ function ScatterGraph(cluster_approach, cluster_chart_data, cluster_topic_words)
 
     // Get the color of collocation
     const colors = function (cluster_no) {
-        return color_plates[cluster_no];
+        return (cluster_no < 0) ? "gray": color_plates[cluster_no];
     }
+    // Determine the opacity based on the outlier or cluster
+    const opacity = function(cluster_no){
+        return (cluster_no < 0) ? 0.2: 1.0;
+    }
+
+    // Convert the json data to Plotly js data format
+    function convert_cluster_data_to_chart_format(){
+        let data = [];
+        const initial_cluster = (is_hide)? 0: -1;
+        // Convert the clustered data into the format for Plotly js chart
+        for (let cluster_no = initial_cluster; cluster_no <= total_clusters; cluster_no++) {
+            const cluster_data = cluster_chart_data.filter(d => d[cluster_approach+'_Cluster'] === cluster_no);
+            if(cluster_data.length >0){
+                let data_point = {'x': [], 'y': [], 'label': []};
+                for (const dot of cluster_data) {
+                    data_point['x'].push(dot.x);
+                    data_point['y'].push(dot.y);
+                    data_point['label'].push('Cluster: ' + cluster_no + ' Doc id: ' + dot.DocId);   // Tooltip label
+                }
+
+                let trace = {
+                    'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
+                    'name': 'Cluster ' + cluster_no, 'mode': 'markers', 'type': 'scatter',
+                    'marker': {color: colors(cluster_no)}, opacity: opacity(cluster_no)
+                };
+                data.push(trace);
+            }
+        }
+        return data;
+    }
+
 
     // Draw google chart
     function drawChart() {
-        let data = [];
-        // Convert the clustered data into the format for Plotly js chart
-        for (let cluster_no = 0; cluster_no <= total_clusters; cluster_no++) {
-            const cluster_data = cluster_chart_data.filter(d => d[cluster_approach+'_Cluster'] === cluster_no);
-            // const topic_words = Utility.get_topic_words_cluster(total_clusters, cluster_no);
-            let data_point = {'x': [], 'y': [], 'label': []};
-            for (const dot of cluster_data) {
-                data_point['x'].push(dot.x);
-                data_point['y'].push(dot.y);
-                data_point['label'].push('Cluster: ' + cluster_no + ' Doc id: ' + dot.DocId);   // Tooltip label
-            }
-
-            let trace = {
-                'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
-                'name': 'Cluster ' + cluster_no, 'mode': 'markers', 'type': 'scatter',
-                'marker': {color: colors(cluster_no)}
-            };
-            data.push(trace);
-        }
+        const data = convert_cluster_data_to_chart_format();
         // Define the layout
         let layout = {
             // colorway: color_plates,
@@ -57,11 +70,9 @@ function ScatterGraph(cluster_approach, cluster_chart_data, cluster_topic_words)
             },
             // Plot the legend outside the
             showlegend: true,
+            // Display the legend horizontally
             legend: {
                 "orientation": "h"
-                // x: 1,
-                // xanchor: 'right',
-                // y: 1
             },
             xaxis: {range: [7.2, 13.2]},
             yaxis: {range: [-0.2, 5.2]},
@@ -78,7 +89,6 @@ function ScatterGraph(cluster_approach, cluster_chart_data, cluster_topic_words)
             const cluster_no = parseInt(point.data.name.split(" ")[1]);
             // Get cluster documents
             const num_docs = clusters.find(c => c['Cluster'] === cluster_no)['NumDocs'];
-            // console.log(doc_cluster_div.layout.annotations)
             // Add an annotation to the clustered dots.
             const new_annotation = {
                 x: point.xaxis.d2l(point.x), y: point.yaxis.d2l(point.y),
@@ -86,7 +96,21 @@ function ScatterGraph(cluster_approach, cluster_chart_data, cluster_topic_words)
                 text: '<b>Cluster ' + cluster_no + '</b> <br>' +
                     '<i>' + num_docs + ' articles</i><br>'
             };
-            Plotly.relayout('doc_cluster', 'annotations[0]', new_annotation);
+
+            // Add onclick event to show/hide annotation of the cluster.
+            const div = document.getElementById('doc_cluster');
+            const newIndex = (div.layout.annotations || []).length;
+            if(newIndex >0){
+                // Find if any annnotation of the cluster appears before.
+                // If so, remove the annotation.
+                div.layout.annotations.forEach((ann, index) => {
+                    if(ann.text === new_annotation.text){
+                        Plotly.relayout('doc_cluster', 'annotations[' + index + ']', 'remove');
+                        return;
+                    }
+                });
+            }
+            Plotly.relayout('doc_cluster', 'annotations['+newIndex+']', new_annotation);
         });
     }
 
@@ -96,7 +120,6 @@ function ScatterGraph(cluster_approach, cluster_chart_data, cluster_topic_words)
         $('#doc_cluster').empty();
         $('#doc_cluster').css('width', width).css('height', height);
         drawChart();
-
     }
 
     _createUI();

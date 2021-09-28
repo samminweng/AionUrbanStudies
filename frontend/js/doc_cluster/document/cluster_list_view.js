@@ -71,17 +71,20 @@ function ClusterListView(cluster_approach, cluster_topic_words_data) {
         $('#cluster_overview').html(overview);
         // Create a pagination to display topic words for each cluster
         createPagination('TF-IDF');
-        // // // Create a tab to display the clustered documents
-        // const select_rank = $('#cluster_table').find('select');
-        // select_rank.on("change", function(){
-        //     // Clear the detailed cluster-topic/document view
-        //     $('#topic_list_view').empty();
-        //     $('#document_list_view').empty();
-        //     // alert("rank" + this.value);
-        //     const rank = this.value;
-        //     // Create a new table and pagination
-        //     createPagination(rank);
-        // });
+        // Set the default ranking
+        $('#rank').val('TF-IDF');
+        // Create a tab to display the topic words ranked by different keyword extraction approach
+        $('#rank').selectmenu({
+            width: 150,
+            change: function (event, data) {
+                // Clear the detailed cluster-topic/document view
+                $('#topic_list_view').empty();
+                $('#document_list_view').empty();
+                const rank = this.value;
+                createPagination(rank); // Create a new table and pagination for the ranked topic words
+            }
+        });
+
     }
 
     _createUI();

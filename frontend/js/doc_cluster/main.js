@@ -20,18 +20,25 @@ $(function () {
         const cluster_chart_data = result1[0];
         const doc_key_terms = result2[0];
         const cluster_topic_words_data = {"KMeans": result3[0], "HDBSCAN": result4[0]};
-        const cluster_approach = "KMeans";
-        // console.log(cluster_topic_words);
-        const chart_doc_view = new ChartDocView(cluster_approach, cluster_chart_data, cluster_topic_words_data);
+        const cluster_approach = "HDBSCAN";
+        const is_hide = true;
+        // Draw the chart and list the clusters/topic words
+        const chart_doc_view = new ChartDocView(is_hide, cluster_approach, cluster_chart_data, cluster_topic_words_data);
         // Add event to the selection of clustering approach
         $('#cluster_approach').selectmenu({
             change: function (event, data){
                 const cluster_approach = data.item.value;
-                Utility.cluster_approach = cluster_approach;
-                const chart_doc_view = new ChartDocView(cluster_approach, cluster_chart_data, cluster_topic_words_data);
-                // alert(cluster);
+                const is_hide = $("#hide_outliers").is(':checked');// Show/hide outliers
+                const chart_doc_view = new ChartDocView(is_hide, cluster_approach, cluster_chart_data, cluster_topic_words_data);
             }
         });
+        // Add event to hide or show outlier
+        $("#hide_outliers").checkboxradio({});
+        $('#hide_outliers').bind("change", function(){
+            const is_hide = $("#hide_outliers").is(':checked');
+            const chart_doc_view = new ChartDocView(is_hide, cluster_approach, cluster_chart_data, cluster_topic_words_data);
+            // alert(is_hide);
+        })
     });
 
 });
