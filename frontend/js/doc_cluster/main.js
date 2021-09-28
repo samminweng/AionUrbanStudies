@@ -2,42 +2,36 @@
 const corpus = 'UrbanStudyCorpus';
 // Document ready event
 $(function () {
-    const doc_cluster_5_file_path = 'data/doc_cluster/' + corpus + '_5_simplified_cluster_doc.json';
-    const doc_cluster_10_file_path = 'data/doc_cluster/' + corpus + '_10_simplified_cluster_doc.json';
-    const doc_cluster_15_file_path = 'data/doc_cluster/' + corpus + '_15_simplified_cluster_doc.json';
-    // Load the map between cluster and documents
-    const cluster_word_5_file_path = 'data/doc_cluster/' + corpus + '_5_cluster_topic_words.json';
-    const cluster_word_10_file_path = 'data/doc_cluster/' + corpus + '_10_cluster_topic_words.json';
-    const cluster_word_15_file_path = 'data/doc_cluster/' + corpus + '_15_cluster_topic_words.json';
-    // Urban study corpus
-    const corpus_file_path = 'data/' + corpus + '.json';
+    // Clustering chart data
+    const cluster_chart_data_file_path = 'data/doc_cluster/' + corpus + '_clusters.json';
+    // Document (article abstract and title) and key terms data
+    const doc_key_terms_file_path = 'data/doc_cluster/' + corpus + '_doc_terms.json';
+    // KMeans cluster and topic words data
+    const kmeans_cluster_topic_words_file_path = 'data/doc_cluster/' + corpus + '_KMeans_Cluster_topic_words.json';
+    // HDBSCAN cluster and topic words data
+    const hdbscan_cluster_topic_words_file_path = 'data/doc_cluster/' + corpus + '_HDBSCAN_Cluster_topic_words.json';
     // Load collocations
     $.when(
-        $.getJSON(doc_cluster_5_file_path),$.getJSON(doc_cluster_10_file_path),$.getJSON(doc_cluster_15_file_path),
-        $.getJSON(cluster_word_5_file_path),$.getJSON(cluster_word_10_file_path),$.getJSON(cluster_word_15_file_path),
-        $.getJSON(corpus_file_path)
-    ).done(function (result1, result2, result3, result4, result5, result6, result7){
-        // const doc_cluster_data_dict = {5: result1[0], 10: result2[0], 15: result3[0]};
-        // // Initialise the dictionary that store topic words for each cluster
-        // Utility.cluster_topic_words_dict = {5: result4[0], 10: result5[0], 15: result6[0]};
-        // // Initialise the corpus data
-        // Utility.corpus_data = result7[0];
-        // // console.log(Utility.corpus_data);
-        // let total_clusters = $('#cluster').val();
-        // // Load cluster data and render scatter plot
-        // let chart_doc_view = new ChartDocView(total_clusters, doc_cluster_data_dict[total_clusters]);
-        // $('#cluster').selectmenu({
-        //     change: function (event, data){
-        //         let total_clusters = data.item.value;
-        //         let chart_doc_view = new ChartDocView(total_clusters, doc_cluster_data_dict[total_clusters]);
-        //         // alert(cluster);
-        //     }
-        // })
+        $.getJSON(cluster_chart_data_file_path),
+        $.getJSON(doc_key_terms_file_path),
+        $.getJSON(kmeans_cluster_topic_words_file_path),
+        $.getJSON(hdbscan_cluster_topic_words_file_path),
+    ).done(function (result1, result2, result3, result4){
+        const cluster_chart_data = result1[0];
+        const doc_key_terms = result2[0];
+        const cluster_topic_words_data = {"KMeans": result3[0], "HDBSCAN": result4[0]};
+        const cluster_approach = "KMeans";
+        // console.log(cluster_topic_words);
+        const chart_doc_view = new ChartDocView(cluster_approach, cluster_chart_data, cluster_topic_words_data);
+        // Add event to the selection of clustering approach
+        $('#cluster_approach').selectmenu({
+            change: function (event, data){
+                const cluster_approach = data.item.value;
+                Utility.cluster_approach = cluster_approach;
+                const chart_doc_view = new ChartDocView(cluster_approach, cluster_chart_data, cluster_topic_words_data);
+                // alert(cluster);
+            }
+        });
     });
-
-
-    // Add event to cluster
-
-
 
 });

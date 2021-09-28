@@ -1,27 +1,38 @@
 // Create scatter graph
-function ScatterGraph(total_clusters, doc_cluster_data) {
+function ScatterGraph(cluster_approach, cluster_chart_data, cluster_topic_words) {
     const width = 600;
-    const height = 600;
+    const height = 650;
+    // Find the maximal cluster number as total number of clusters
+    const total_clusters = cluster_chart_data.map(c => c[cluster_approach+ '_Cluster']).reduce((p_value, c_value)=>{
+        return (p_value >= c_value) ? p_value: c_value;
+    }, 0);
+    const clusters = cluster_topic_words[cluster_approach];
+
+    // Optimal color pallets for 27 clusters
+    // ref: https://mokole.com/palette.html
+    const color_plates =[
+        "#556b2f", "#8b4513", "#228b22", "#483d8b", "#008b8b", "#4682b4", "#000080", "#9acd32", "#daa520", "#8b008b",
+        "#ff0000", "#ffff00", "#00ff00", "#8a2be2", "#00ff7f", "#dc143c", "#00ffff", "#0000ff", "#ff7f50", "#ff00ff",
+        "#1e90ff", "#db7093", "#b0e0e6", "#ff1493", "#ee82ee", "#ffdab9"
+    ];
+
     // Get the color of collocation
     const colors = function (cluster_no) {
-        const color_plates = [
-            "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd",
-            "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d",
-            "#17becf", "#9edae5"];
         return color_plates[cluster_no];
     }
 
     // Draw google chart
     function drawChart() {
         let data = [];
-        for (let cluster_no = 0; cluster_no < total_clusters; cluster_no++) {
-            const cluster_data = doc_cluster_data.filter(d => d['Cluster'] === cluster_no);
+        // Convert the clustered data into the format for Plotly js chart
+        for (let cluster_no = 0; cluster_no <= total_clusters; cluster_no++) {
+            const cluster_data = cluster_chart_data.filter(d => d[cluster_approach+'_Cluster'] === cluster_no);
             // const topic_words = Utility.get_topic_words_cluster(total_clusters, cluster_no);
             let data_point = {'x': [], 'y': [], 'label': []};
             for (const dot of cluster_data) {
                 data_point['x'].push(dot.x);
                 data_point['y'].push(dot.y);
-                data_point['label'].push("Doc id: " + dot.DocId);   // Tooltip label
+                data_point['label'].push('Cluster: ' + cluster_no + ' Doc id: ' + dot.DocId);   // Tooltip label
             }
 
             let trace = {
@@ -33,38 +44,47 @@ function ScatterGraph(total_clusters, doc_cluster_data) {
         }
         // Define the layout
         let layout = {
-            autosize: false,
+            // colorway: color_plates,
+            autosize: true,
             width: width,
             height: height,
             margin: {
                 l: 50,
                 r: 50,
-                b: 100,
-                t: 100,
+                b: 10,
+                t: 10,
                 pad: 3
             },
-            xaxis: {range: [0, 10]},
-            yaxis: {range: [0, 10]},
+            // Plot the legend outside the
+            showlegend: true,
+            legend: {
+                "orientation": "h"
+                // x: 1,
+                // xanchor: 'right',
+                // y: 1
+            },
+            xaxis: {range: [7.2, 13.2]},
+            yaxis: {range: [-0.2, 5.2]},
             annotations: []
         }
 
         // Get the cluster number
         Plotly.newPlot('doc_cluster', data, layout);
-        // Add event
+        // Add onclick event to the chart to display the cluster number
         const doc_cluster_div = document.getElementById('doc_cluster');
         doc_cluster_div.on('plotly_click', function (data) {
             const point = data.points[0];
             // Get the doc id from text
             const cluster_no = parseInt(point.data.name.split(" ")[1]);
             // Get cluster documents
-            const documents = Utility.get_cluster_documents(total_clusters, cluster_no);
+            const num_docs = clusters.find(c => c['Cluster'] === cluster_no)['NumDocs'];
             // console.log(doc_cluster_div.layout.annotations)
             // Add an annotation to the clustered dots.
             const new_annotation = {
                 x: point.xaxis.d2l(point.x), y: point.yaxis.d2l(point.y),
                 bordercolor: point.fullData.marker.color,
                 text: '<b>Cluster ' + cluster_no + '</b> <br>' +
-                    '<i>' + documents.length + ' articles</i><br>'
+                    '<i>' + num_docs + ' articles</i><br>'
             };
             Plotly.relayout('doc_cluster', 'annotations[0]', new_annotation);
         });

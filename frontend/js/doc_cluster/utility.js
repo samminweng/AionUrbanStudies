@@ -1,6 +1,5 @@
 class Utility {
-    static cluster_topic_words_dict = {};   // The map between clustered documents to topic words
-    static corpus_data = [];
+
     // Get the clustered documents
     static get_cluster_documents(total_clusters, cluster_no){
         const dict = Utility.cluster_topic_words_dict[total_clusters];
