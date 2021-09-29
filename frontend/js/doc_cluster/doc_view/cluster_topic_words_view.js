@@ -11,7 +11,7 @@ function ClusterTopicWordsView(cluster){
             dataSource: function (done) {
                 let results = [];
                 for (let i = 0; i < topics_tf_idf.length; i++) {
-                    const tf_idf_term = topics_tf_idf[i]['topic_words'];
+                    const tf_idf_term = topics_tf_idf[i];
                     const collocation = (i < topics_collocation.length)? topics_collocation[i]['topic_words']: "";
                     const topic2vec = (i < topics_topic2vec.length)? topics_topic2vec[i]['topic_words']: "";
                     results.push({"TF-IDF": tf_idf_term, "collocation": collocation,
@@ -28,10 +28,20 @@ function ClusterTopicWordsView(cluster){
             showGoButton: false,
             callback: function (topics, pagination) {
                 docTable.find('tbody').empty();
-                for (let topic of topics) {
-                    let row = $('<tr></tr>');
-                    // TF-IDF term
-                    row.append( $('<td>' + topic['TF-IDF'] + '</td>'));
+                for (const topic of topics) {
+                    const row = $('<tr></tr>');
+                    // TF-IDF term link
+                    const term_link = $('<a href="#">' + topic['TF-IDF']['topic_words']
+                        + ' (' + topic['TF-IDF']['score']+ ')</a>');
+                    term_link.on("click", function(event){
+                       // Display the document list view of topic-related articles
+                        // Display all documents of the cluster
+                        const topic_docs = Utility.get_documents_by_doc_ids(topic['TF-IDF']['doc_ids']);
+                        const doc_list_view = new DocumentListView(topic_docs, [topic['TF-IDF']['topic_words']]);
+                        return false;
+                    });
+
+                    row.append($('<td></td>').append(term_link));
                     // Collocation
                     row.append( $('<td>' + topic['collocation'] + '</td>'));
                     //

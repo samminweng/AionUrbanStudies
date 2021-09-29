@@ -1,6 +1,6 @@
 // Display a list of research articles for key term 1 and key term 2.
 function DocumentListView(documents, topic) {
-    // Container
+    // Create a pagination to show the documents
     function createPagination(docTable) {
         // Create the table
         let pagination = $("<div></div>");
@@ -41,9 +41,14 @@ function DocumentListView(documents, topic) {
 
     function _createUI() {
         $('#document_list_view').empty();
-        let container = $('<div class="container p-3"></div>');
+        const container = $('<div class="container p-3"></div>');
+        // If the topic is passed to the doc list view, display a summary
+        if(topic.length> 0){
+            const heading = $('<div class="h5 mb-3">' + documents.length + ' articles mention '+ topic[0] + '</div>');
+            container.append($('<div class="row p-3"><div class="col"></div></div>').find(".col").append(heading));
+        }
         // A list of cluster documents
-        let documentTable = $('<table class="table table-striped">' +
+        const documentTable = $('<table class="table table-striped">' +
             '<thead class="thead-light">' +
             '<tr class="d-flex">' +
             '    <th class="col-1">Year</th>' +
@@ -51,12 +56,10 @@ function DocumentListView(documents, topic) {
             '</tr>' +
             '</thead>' +
             '<tbody></tbody></table>');
-
-        let pagination = $('<div class="col"></div>').append(createPagination(documentTable));
-        // // Add the pagination
-        container.append($('<div class="row p-3"></div>').append(pagination));
-        container.append(documentTable);
-
+        const pagination = createPagination(documentTable);
+        // Add the pagination
+        container.append($('<div class="row p-3"><div class="col"></div></div>').find(".col").append(pagination));
+        container.append($('<div class="row p-3"><div class="col"></div></div>').find(".col").append(documentTable));
         $('#document_list_view').append(container);
 
     }
