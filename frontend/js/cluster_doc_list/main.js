@@ -21,18 +21,14 @@ $(function () {
             }
             $('#cluster_no').append(option);
         }
-
-
         // Change the cluster
         $('#cluster_no').selectmenu({
                 change: function (event, data){
                     const cluster_no = parseInt($('#cluster_no').val());
-                    const topic_btn = new TopicBtn(cluster_no, cluster_topic_words, doc_key_terms);
+                    const topic_btn = new TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms);
                 }
         });
-        // Set the cluster #2
-
-        const topic_btn = new TopicBtn(2, cluster_topic_words, doc_key_terms);
-
+        // Set the cluster #2 as default cluster
+        const topic_btn = new TopicBtnListView(2, cluster_topic_words, doc_key_terms);
     })
 });

@@ -227,8 +227,8 @@ class DocumentCluster:
                         max_length = len(topic_words_tf_idf)
                         # Collect the result
                         result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
-                                  'TopicWords_by_Collocations': topic_words_collocations[:max_length],
-                                  'TopicWords_by_CTF-IDF': topic_words_ctf_idf[:max_length],
+                                  'TopicWords_by_Collocation': topic_words_collocations[:max_length],
+                                  'TopicWords_by_Topic2Vec': topic_words_ctf_idf[:max_length],
                                   'TopicWords_by_TF-IDF': topic_words_tf_idf
                                   }
                         results.append(result)
@@ -237,8 +237,8 @@ class DocumentCluster:
                 # Write the result to csv and json file
                 cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
                                                             'TopicWords_by_TF-IDF',
-                                                            'TopicWords_by_CTF-IDF',
-                                                            'TopicWords_by_Collocations'])
+                                                            'TopicWords_by_Topic2Vec',
+                                                            'TopicWords_by_Collocation'])
                 path = os.path.join(self.output_path,
                                     self.args.case_name + '_' + cluster_approach + '_topic_words.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)
@@ -260,5 +260,5 @@ if __name__ == '__main__':
     # docCluster.cluster_doc_by_hdbscan()
     # docCluster.cluster_doc_by_KMeans()
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
-    docCluster.collect_tf_idf_terms_by_cluster()
+    # docCluster.collect_tf_idf_terms_by_cluster()
     docCluster.derive_topic_words_from_cluster_docs()
