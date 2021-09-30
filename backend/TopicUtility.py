@@ -99,7 +99,9 @@ class TopicUtility:
 
     @staticmethod
     def extract_terms_by_TFIDF(doc_ids, doc_texts):
-        vectorizer = TfidfVectorizer(ngram_range=(2, 2))
+        # filter_words = TopicUtility.stop_words + TopicUtility.function_words
+        # Filter words containing stop words
+        vectorizer = TfidfVectorizer(ngram_range=(2, 2), stop_words=None)
         # Compute tf-idf scores for each word in each sentence of the abstract
         vectors = vectorizer.fit_transform(doc_texts)
         feature_names = vectorizer.get_feature_names()
@@ -111,10 +113,10 @@ class TopicUtility:
         for index, dense in enumerate(dense_dict):
             # Sort the terms by score
             filter_list = list(filter(lambda item: item[1] > 0, dense.items()))
-            # Filter words containing stop words
+            # Filter topics containing stop words
             filter_list = list(
                 filter(lambda item: not Utility.check_words(item[0], TopicUtility.stop_words), filter_list))
-            # Filter words containing function words
+            # Filter topics containing function words
             filter_list = list(
                 filter(lambda item: not Utility.check_words(item[0], TopicUtility.function_words), filter_list))
             sorted_list = list(sorted(filter_list, key=lambda item: item[1], reverse=True))

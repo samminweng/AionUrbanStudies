@@ -173,7 +173,8 @@ class DocumentCluster:
                 cluster_key_terms = list(map(lambda r: r['key_terms'], sorted_results))
                 corpus_df[cluster_approach + "_KeyTerms"] = cluster_key_terms
             # Write the result to csv and json file
-            update_corpus_df = corpus_df.reindex(columns=['DocId', 'Year', 'Title', 'Abstract', 'AuthorKeywords',
+            update_corpus_df = corpus_df.reindex(columns=['DocId', 'Year', 'Title', 'Abstract', 'Author Keywords',
+                                                          'Authors', 'Cited by', 'DOI', 'Link',
                                                           'KMeans_Cluster_KeyTerms',
                                                           'HDBSCAN_Cluster_KeyTerms'])
             path = os.path.join(self.output_path, self.args.case_name + '_doc_terms.csv')
@@ -259,5 +260,5 @@ if __name__ == '__main__':
     # docCluster.cluster_doc_by_hdbscan()
     # docCluster.cluster_doc_by_KMeans()
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
-    # docCluster.collect_tf_idf_terms_by_cluster()
+    docCluster.collect_tf_idf_terms_by_cluster()
     docCluster.derive_topic_words_from_cluster_docs()

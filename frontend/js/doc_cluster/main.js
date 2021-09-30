@@ -10,7 +10,7 @@ $(function () {
     const kmeans_cluster_topic_words_file_path = 'data/doc_cluster/' + corpus + '_KMeans_Cluster_topic_words.json';
     // HDBSCAN cluster and topic words data
     const hdbscan_cluster_topic_words_file_path = 'data/doc_cluster/' + corpus + '_HDBSCAN_Cluster_topic_words.json';
-    // Load collocations
+    // Load data
     $.when(
         $.getJSON(cluster_chart_data_file_path),
         $.getJSON(doc_key_terms_file_path),
