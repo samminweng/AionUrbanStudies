@@ -27,12 +27,10 @@ function DocumentListView(cluster_topics, documents, topic) {
                 for (let i = 0; i < documents.length; i++) {
                     const doc = documents[i];
                     const row = $('<tr class="d-flex"></tr>');
-                    // Add the number
-                    row.append($('<td style="width:5%">' + (i + 1) + '</td>'))
                     // Add the year
-                    row.append($('<td style="width:5%">' + doc['Year'] + '</td>'));
+                    row.append($('<td class="col-1">' + doc['Year'] + '</td>'));
                     // Add the title
-                    const col = $('<td style="width:90%"></td>');
+                    const col = $('<td class="col-11"></td>');
                     let textView = new TextView(doc, topic);
                     col.append(textView.get_container());
                     row.append(col);
@@ -47,7 +45,7 @@ function DocumentListView(cluster_topics, documents, topic) {
 
     function _createUI() {
         $('#document_list_view').empty();
-        const container = $('<div class="container p-3"></div>');
+        const container = $('<div class="container"></div>');
         const heading_text = 'Cluster #' + cluster_no + ' has ' + documents.length + ' articles '
             + ((topic.length > 0)? "about <span class='search_term'> " + topic[0] + "</span>": "");
         // Display a summary
@@ -56,17 +54,16 @@ function DocumentListView(cluster_topics, documents, topic) {
 
         // A list of cluster documents
         const documentTable = $('<table class="table table-striped">' +
-            '<thead class="thead-light">' +
+            '<thead>' +
             '<tr class="d-flex">' +
-            '    <th style="width:5%">No</th>' +
-            '    <th style="width:5%">Year</th>' +
-            '    <th style="width:90%">Articles</th>' +
+            '    <th class="col-1">Year</th>' +
+            '    <th class="col-11">Articles</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody></tbody></table>');
         const pagination = createPagination(documentTable);
         // Add the table to display the list of documents.
-        container.append($('<div class="row p-3"><div class="col"></div></div>').find(".col").append(documentTable));
+        container.append($('<div class="row"><div class="col"></div></div>').find(".col").append(documentTable));
         $('#document_list_view').append(container);
 
     }

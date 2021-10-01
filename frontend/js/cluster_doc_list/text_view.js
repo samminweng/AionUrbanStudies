@@ -62,19 +62,14 @@ function TextView(doc, topics) {
         container.append(author_keyword_div);
 
         // Add author
-        let author_div = $('<div class="col"></div>');
-        author_div.append($('<span class="fw-bold">Author: </span><span>' + doc['Authors'] + '</span> ' +
-            '<span class="p-3"><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>' +
-            '<span class="p-3"><a target="_blank" href="' + doc['Link'] + '">Link to article</a></span>'
-            ));
+        const author_div = $('<div class="col"></div>');
+        author_div.append($('<span class="fw-bold">Author: </span><span>' + doc['Authors'] + '</span> '));
         container.append(author_div);
-        // Add a link
-        let link_div = $('<div class="col"></div>');
-        link_div.append($())
-        container.append(link_div);
-
-
-
+        // Add a citation div
+        const citation_div = $('<div class="col"></div>');
+        citation_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>' +
+            '<span class="p-3"><a target="_blank" href="' + doc['Link'] + '">Link to Article in Scopus</a></span>'));
+        container.append(citation_div);
     }
 
     _createUI();

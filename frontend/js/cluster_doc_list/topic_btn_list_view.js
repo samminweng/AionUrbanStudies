@@ -29,6 +29,7 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
     // Create a list view of topics derived by three approaches (TF-IDF, Topic2Vec, Collocations)
     function createTopicListView() {
         $('#topic_list_view').empty();
+        const container = $('<div class="container"></div>');
         // Display the topics derived by TF-IDF, Topic2Vec and Collocations
         for(const approach of ['TF-IDF', 'Topic2Vec', 'Collocation']){
             const topics = cluster_topics['TopicWords_by_' + approach];
@@ -49,8 +50,9 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
                     active: 2
                 });
             }
-            $('#topic_list_view').append(key_term_div);
+            container.append($("<div class='row'><div class='col'></div></div>").find(".col").append(key_term_div));
         }
+        $('#topic_list_view').append(container);
     }
 
 

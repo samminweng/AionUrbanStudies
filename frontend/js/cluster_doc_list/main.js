@@ -30,5 +30,11 @@ $(function () {
         });
         // Set the cluster #2 as default cluster
         const topic_btn = new TopicBtnListView(2, cluster_topic_words, doc_key_terms);
+        // Set up print /download as a pdf
+        $('#download_as_pdf').button();
+        $('#download_as_pdf').click(function(event){
+            window.print();
+        });
+
     })
 });
