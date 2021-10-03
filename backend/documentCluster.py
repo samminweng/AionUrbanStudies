@@ -19,14 +19,17 @@ import pickle
 from sklearn.cluster import AgglomerativeClustering
 
 logging.basicConfig(level=logging.INFO)
-nltk_path = os.path.join('/Scratch', 'mweng', 'nltk_data')
+# nltk_path = os.path.join('/Scratch', 'mweng', 'nltk_data')
+# Windows path
+nltk_path = os.path.join("C:", os.sep, "Users", "sam", "nltk_data")
 Path(nltk_path).mkdir(parents=True, exist_ok=True)
 nltk.data.path.append(nltk_path)
 nltk.download('punkt', download_dir=nltk_path)
 # Download all the necessary NLTK data
 nltk.download('stopwords', download_dir=nltk_path)
 # Sentence Transformer
-sentence_transformers_path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
+# sentence_transformers_path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
+sentence_transformers_path = os.path.join("C:", os.sep, "Users", "sam", "SentenceTransformer")
 Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 
@@ -85,7 +88,7 @@ class DocumentCluster:
                 sentences = sent_tokenize(text['Title'] + ". " + text['Abstract'])
                 sentences = Utility.clean_sentence(sentences)
                 document = " ".join(sentences)
-                documents.append({"DocId": i+1, "document": document})
+                documents.append({"DocId": i + 1, "document": document})
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
 
@@ -222,7 +225,7 @@ class DocumentCluster:
                                                                                                       doc_texts)
                         # Derive topic words using topic2vec
                         topic_words_topic2vec = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
-                                                                                     top_n_words[cluster_no])
+                                                                                       top_n_words[cluster_no])
                         # Derive topic words using TF-IDF
                         topic_words_tf_idf = TopicUtility.derive_topic_words_tf_idf(tf_idf_df, doc_ids)
                         # We use the number of TF-IDF terms as the limitation
@@ -232,7 +235,7 @@ class DocumentCluster:
                                   'TopicWords_by_Collocation': topic_words_collocations[:max_length],
                                   'TopicWords_by_Topic2Vec': topic_words_topic2vec[:max_length],
                                   'TopicWords_by_TF-IDF': topic_words_tf_idf,
-                                  'TopicWords_by_Bag_of_Words': topic_bag_of_words[:max_length*2]
+                                  'TopicWords_by_Bag_of_Words': topic_bag_of_words[:max_length * 2]
                                   }
                         results.append(result)
                     except Exception as err:
@@ -253,8 +256,6 @@ class DocumentCluster:
                 print('Output keywords/phrases to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-
-
 
 
 # Main entry

@@ -8,9 +8,12 @@ from nltk import word_tokenize, sent_tokenize
 from nltk import ngrams
 from nltk.corpus import words, stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
-path = os.path.join('/Scratch', 'mweng', 'nltk_data')  # Specify the path of NLTK data
-nltk.download('stopwords', download_dir=path)
-nltk.data.path.append(path)
+
+# path = os.path.join('/Scratch', 'mweng', 'nltk_data')  # Specify the path of NLTK data
+nltk_path = os.path.join("C:", os.sep, "Users", "sam", "nltk_data")
+nltk.download('stopwords', download_dir=nltk_path)
+nltk.data.path.append(nltk_path)
+
 
 class Utility:
 
@@ -178,7 +181,6 @@ class Utility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-
     # Group the document ids by article published year
     @staticmethod
     def group_doc_ids_by_year(text_df, doc_ids):
@@ -210,7 +212,7 @@ class Utility:
                         is_found = True
                 # That indicates no common term is found
                 if is_found is False:
-                    key_term = key_terms[0]     # Get the first term
+                    key_term = key_terms[0]  # Get the first term
                     term_doc_dict[key_term] = set()
                     term_doc_dict[key_term].add(doc_id)
             except Exception as err:
@@ -241,7 +243,7 @@ class Utility:
                 if i != j:
                     doc_id_i = term_map_i[1]
                     doc_id_j = term_map_j[1]
-                    doc_id_ij = set(doc_id_i).intersection(set(doc_id_j))    # Find the intersection of two document ids
+                    doc_id_ij = set(doc_id_i).intersection(set(doc_id_j))  # Find the intersection of two document ids
                     doc_id_ij = sorted(list(doc_id_ij))
                     occ_i.append(doc_id_ij)
                 else:
@@ -278,4 +280,3 @@ class Utility:
         # with open(path, "w") as out_file:
         #     out_file.write(json.dumps(records, indent=4))
         # print('Output the occurrences to ' + path)
-
