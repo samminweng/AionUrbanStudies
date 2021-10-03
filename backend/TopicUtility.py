@@ -98,6 +98,35 @@ class TopicUtility:
         print("Output image to " + path)
 
     @staticmethod
+    def derive_bag_of_words(doc_ids, doc_texts):
+        try:
+            vec = CountVectorizer(stop_words=TopicUtility.stop_words)
+            bag_of_words = vec.fit_transform(doc_texts)      # Return a bag of words
+            # A bag of words is a matrix. Each row is the document. Each column is a word in vocabulary
+            # bag_of_words[i, j] is the occurrence of word 'i' in the document 'j'
+            bag_of_words_df = pd.DataFrame(bag_of_words.toarray(), columns=vec.get_feature_names())
+            bag_of_words_df['doc_id'] = doc_ids
+            # print(counts)
+            words_freq = []
+            # We go through the vocabulary of bag of words where index is the word at bag of words
+            for word, index in vec.vocabulary_.items():
+                # Collect all the doc ids that contains the words
+                selected_rows = bag_of_words_df[bag_of_words_df[word] > 0]
+                # Aggregate doc_ids to a list
+                word_doc_ids = list()
+                for i, row in selected_rows.iterrows():
+                    word_doc_ids.append(row['doc_id'])
+                words_freq.append({'topic_words': word, 'doc_ids': word_doc_ids, 'score': len(word_doc_ids)})
+            # filter the number of words < 5
+            filter_words_freq = list(filter(lambda w: w['score'] >= 5, words_freq))
+            # Sort the words_freq by score
+            sorted_words_freq = sorted(filter_words_freq, key=lambda w: w['score'], reverse=True)
+
+            return sorted_words_freq
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    @staticmethod
     def extract_terms_by_TFIDF(doc_ids, doc_texts):
         # filter_words = TopicUtility.stop_words + TopicUtility.function_words
         # Filter words containing stop words

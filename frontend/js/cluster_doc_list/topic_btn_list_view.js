@@ -31,13 +31,13 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
         $('#topic_list_view').empty();
         const container = $('<div class="container"></div>');
         // Display the topics derived by TF-IDF, Topic2Vec and Collocations
-        for(const approach of ['TF-IDF', 'Topic2Vec', 'Collocation']){
+        for(const approach of ['Bag_of_Words', 'TF-IDF', 'Topic2Vec', 'Collocation']){
             const topics = cluster_topics['TopicWords_by_' + approach];
             const key_term_div = $('<div><h3><span class="fw-bold">Topics by '+ approach + ': </span></h3>' +
                 '<div class="topic_words"></div>' +
                 '</div>');
             key_term_div.find(".topic_words").append(createTopicParagraphs(topics));
-            if(approach === 'TF-IDF'){
+            if(approach === 'Bag_of_Words'){
                 // Show the topics for TF-IDF
                 key_term_div.accordion({
                     collapsible: true,

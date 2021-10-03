@@ -214,12 +214,14 @@ class DocumentCluster:
                         cluster_no = cluster[cluster_approach]
                         doc_ids = cluster['DocId']
                         doc_texts = cluster['Text']
+                        # Derive key words spanning across the articles in a cluster
+                        topic_bag_of_words = TopicUtility.derive_bag_of_words(doc_ids, doc_texts)
                         # Derive topic words through collocation likelihood
                         topic_words_collocations = TopicUtility.derive_topic_words_using_collocations('likelihood',
                                                                                                       doc_ids,
                                                                                                       doc_texts)
-                        # Derive topic words using C-TF-IDF
-                        topic_words_ctf_idf = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
+                        # Derive topic words using topic2vec
+                        topic_words_topic2vec = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
                                                                                      top_n_words[cluster_no])
                         # Derive topic words using TF-IDF
                         topic_words_tf_idf = TopicUtility.derive_topic_words_tf_idf(tf_idf_df, doc_ids)
@@ -228,14 +230,16 @@ class DocumentCluster:
                         # Collect the result
                         result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
                                   'TopicWords_by_Collocation': topic_words_collocations[:max_length],
-                                  'TopicWords_by_Topic2Vec': topic_words_ctf_idf[:max_length],
-                                  'TopicWords_by_TF-IDF': topic_words_tf_idf
+                                  'TopicWords_by_Topic2Vec': topic_words_topic2vec[:max_length],
+                                  'TopicWords_by_TF-IDF': topic_words_tf_idf,
+                                  'TopicWords_by_Bag_of_Words': topic_bag_of_words[:max_length*2]
                                   }
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 # Write the result to csv and json file
                 cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
+                                                            'TopicWords_by_Bag_of_Words',
                                                             'TopicWords_by_TF-IDF',
                                                             'TopicWords_by_Topic2Vec',
                                                             'TopicWords_by_Collocation'])

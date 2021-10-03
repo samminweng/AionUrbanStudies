@@ -27,10 +27,11 @@ function DocumentListView(cluster_topics, documents, topic) {
                 for (let i = 0; i < documents.length; i++) {
                     const doc = documents[i];
                     const row = $('<tr class="d-flex"></tr>');
+                    row.append($('<td class="col-1">' + (i+1) + '</td>'));
                     // Add the year
                     row.append($('<td class="col-1">' + doc['Year'] + '</td>'));
                     // Add the title
-                    const col = $('<td class="col-11"></td>');
+                    const col = $('<td class="col-10"></td>');
                     let textView = new TextView(doc, topic);
                     col.append(textView.get_container());
                     row.append(col);
@@ -56,8 +57,9 @@ function DocumentListView(cluster_topics, documents, topic) {
         const documentTable = $('<table class="table table-striped">' +
             '<thead>' +
             '<tr class="d-flex">' +
+            '    <th class="col-1">No</th>' +
             '    <th class="col-1">Year</th>' +
-            '    <th class="col-11">Articles</th>' +
+            '    <th class="col-10">Articles</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody></tbody></table>');
