@@ -21,13 +21,21 @@
     <div class="h4">Article Cluster List of AI on Urban Studies</div>
     <div class="row p-3">
         <div class="col">
-            <div class="form-inline m-auto">
+            <div class="form p-3">
                 <!-- Download PDF button --->
                 <button id="download_as_pdf" type="button" class="btn btn-outline-primary btn-lg">
                     <i class="bi bi-printer"></i>
                 </button>
                 <!-- Cluster Number -->
                 <div class="form-group">
+                    <label for="cluster_approach">Select a Cluster Approach</label>
+                    <select name="cluster_approach" id="cluster_approach">
+                        <option value="HDBSCAN" selected="selected">HDBSCAN</option>
+                        <option value="KMeans">KMeans</option>
+                    </select>
+                </div>
+                <!-- Cluster Number -->
+                <div class="form-group" >
                     <label for="cluster_no">Select a Cluster</label>
                     <select name="cluster_no" id="cluster_no"></select>
                 </div>
