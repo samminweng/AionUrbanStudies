@@ -38,9 +38,16 @@ function ClusterListView(cluster_approach, cluster_topic_words_data) {
                     const cluster_btn = $('<button type="button" class="btn btn-link">Cluster #' + cluster_no + '</button>');
                     // // Onclick event to display the topic words results
                     cluster_btn.on("click", function () {
-                        const cluster = clusters.find(c => c['Cluster'] === cluster_no);
+                        // Open the Cluster article list tab
+                        const win = window.open('cluster_doc_list.html?cluster='+ cluster_no);
+                        if(win){
+                            win.focus();    // Focus on new tab
+                        }else{
+                            alert('Please allow pop ups for this website');
+                        }
+                        // const cluster = clusters.find(c => c['Cluster'] === cluster_no);
                         // Create a topic words view to display the relevant topic words of a cluster
-                        const topicListView = new ClusterTopicWordsView(cluster);
+                        // const topicListView = new ClusterTopicWordsView(cluster);
                     });
                     const cluster_div = $('<th scope="row" style="width:15%"></th>');
                     cluster_div.append(cluster_btn);

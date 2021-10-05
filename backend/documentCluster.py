@@ -223,8 +223,8 @@ class DocumentCluster:
                         topic_words_collocations = TopicUtility.derive_topic_words_using_collocations('likelihood',
                                                                                                       doc_ids,
                                                                                                       doc_texts)
-                        # Derive topic words using topic2vec
-                        topic_words_topic2vec = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
+                        # Derive topic words using BERTopic
+                        topic_words_bert_topic = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
                                                                                        top_n_words[cluster_no])
                         # Derive topic words using TF-IDF
                         topic_words_tf_idf = TopicUtility.derive_topic_words_tf_idf(tf_idf_df, doc_ids)
@@ -233,7 +233,7 @@ class DocumentCluster:
                         # Collect the result
                         result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
                                   'TopicWords_by_Collocation': topic_words_collocations[:max_length],
-                                  'TopicWords_by_Topic2Vec': topic_words_topic2vec[:max_length],
+                                  'TopicWords_by_BERTopic': topic_words_bert_topic[:max_length],
                                   'TopicWords_by_TF-IDF': topic_words_tf_idf,
                                   'TopicWords_by_Bag_of_Words': topic_bag_of_words[:max_length * 2]
                                   }
@@ -244,7 +244,7 @@ class DocumentCluster:
                 cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
                                                             'TopicWords_by_Bag_of_Words',
                                                             'TopicWords_by_TF-IDF',
-                                                            'TopicWords_by_Topic2Vec',
+                                                            'TopicWords_by_BERTopic',
                                                             'TopicWords_by_Collocation'])
                 path = os.path.join(self.output_path,
                                     self.args.case_name + '_' + cluster_approach + '_topic_words.csv')
