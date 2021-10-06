@@ -208,8 +208,7 @@ class DocumentCluster:
                 tf_idf, count = TopicUtility.compute_c_tf_idf_score(docs_per_cluster['Text'], len(doc_clusters_df))
                 # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
                 top_n_words = TopicUtility.extract_top_n_words_per_topic(tf_idf, count,
-                                                                         docs_per_cluster[cluster_approach],
-                                                                         n=50)
+                                                                         docs_per_cluster[cluster_approach])
                 # print(top_n_words)
                 results = []
                 for i, cluster in docs_per_cluster.iterrows():

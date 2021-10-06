@@ -206,7 +206,7 @@ class TopicUtility:
             documents = list(map(lambda doc: doc['tokens'], cluster_docs))
             # Score and rank the collocations
             finder = BigramCollocationFinder.from_documents(documents)
-            finder.apply_freq_filter(4)
+            # finder.apply_freq_filter(4)
             # # # Filter out bi_grams containing stopwords or function words
             finder.apply_ngram_filter(lambda w1, w2: w1.lower() in TopicUtility.function_words or
                                                      w2.lower() in TopicUtility.function_words)
@@ -268,7 +268,7 @@ class TopicUtility:
 
     # Obtain top collocation per topic
     @staticmethod
-    def extract_top_n_words_per_topic(tf_idf, count, clusters, n=20):
+    def extract_top_n_words_per_topic(tf_idf, count, clusters, n=150):
         collocations = count.get_feature_names()
         labels = clusters
         tf_idf_transposed = tf_idf.T
@@ -279,8 +279,8 @@ class TopicUtility:
 
     @staticmethod
     def group_docs_by_topic_words(doc_ids, doc_texts, topic_words_per_cluster):
-        docs_per_topic_words = []
         try:
+            docs_per_topic_words = []
             # For each topic word, find out the document ids that contain the topic word
             for topic_words, score in topic_words_per_cluster:
                 doc_ids_per_topic = []
@@ -293,8 +293,11 @@ class TopicUtility:
                     if topic_words in bi_grams:
                         doc_ids_per_topic.append(doc_id)
                 if len(doc_ids_per_topic) > 0:
-                    docs_per_topic_words.append({'topic_words': topic_words, 'score': round(score * 100, 1),
+                    docs_per_topic_words.append({'topic_words': topic_words, 'score': score,
                                                  'doc_ids': doc_ids_per_topic})
+            # Sort topic words by score
+            sorted_docs_per_topic_words = sorted(docs_per_topic_words, key=lambda t: t['score'], reverse=True)
+            return sorted_docs_per_topic_words
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-        return docs_per_topic_words
+
