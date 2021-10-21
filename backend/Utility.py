@@ -27,7 +27,7 @@ class Utility:
                     and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
                 try:
                     cleaned_words = word_tokenize(sentence.lower())
-                    # Keep alphabetic
+                    # Keep alphabetic characters only and remove the punctuation
                     cleaned_words = list(filter(lambda word: re.match(r'[^\W\d]*$', word), cleaned_words))
                     cleaned_sentences.append(" ".join(cleaned_words))  # merge tokenized words into sentence
                 except Exception as err:

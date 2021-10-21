@@ -127,12 +127,14 @@ class TopicUtility:
             print("Error occurred! {err}".format(err=err))
 
     @staticmethod
-    def extract_terms_by_TFIDF(doc_ids, doc_texts):
+    def extract_terms_by_TFIDF(doc_ids, texts):
+        cleaned_texts = list(map(lambda text: TopicUtility.preprocess_text(text), texts))
+
         # filter_words = TopicUtility.stop_words + TopicUtility.function_words
         # Filter words containing stop words
         vectorizer = TfidfVectorizer(ngram_range=(2, 2), stop_words=None)
         # Compute tf-idf scores for each word in each sentence of the abstract
-        vectors = vectorizer.fit_transform(doc_texts)
+        vectors = vectorizer.fit_transform(cleaned_texts)
         feature_names = vectorizer.get_feature_names()
         dense = vectors.todense()
         dense_list = dense.tolist()
@@ -248,15 +250,49 @@ class TopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Process and clean the text by converting plural nouns to singular nouns
+    # Avoid license sentences
+    @staticmethod
+    def preprocess_text(text):
+        try:
+            # Split the text into sentence
+            sentences = sent_tokenize(text)
+            clean_sentences = []
+            # Tokenize the text
+            for sentence in sentences:
+                # Remove all the license relevant sentences.
+                if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
+                        and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
+                    words = word_tokenize(sentence)
+                    # Tag the words with part-of-speech tags
+                    pos_tags = nltk.pos_tag(words)
+                    # Convert plural word to singular
+                    singular_words = []
+                    for pos_tag in pos_tags:
+                        word = pos_tag[0]
+                        if pos_tag[1] == 'NNS':
+                            singular_word = word.rstrip('s')
+                            singular_words.append(singular_word)
+                        else:
+                            singular_words.append(word)
+                    # Merge all the words to a sentence
+                    clean_sentences.append(" ".join(singular_words))
+            # Merge all the sentences to a text
+            clean_text = " ".join(clean_sentences)
+            return clean_text
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
     # Compute the class-level TF-IDF scores for each cluster of documents
     @staticmethod
     def compute_c_tf_idf_score(doc_texts_per_cluster, total_number_documents):
         try:
             # Aggregate every doc in a cluster as a single text
-            clustered_documents = list(map(lambda doc: " ".join(doc), doc_texts_per_cluster))
+            clustered_texts = list(map(lambda doc: " ".join(doc), doc_texts_per_cluster))
+            clean_texts = [TopicUtility.preprocess_text(text) for text in clustered_texts]
             # Vectorize the clustered doc text
-            count = CountVectorizer(ngram_range=(2, 2), stop_words="english").fit(clustered_documents)
-            t = count.transform(clustered_documents).toarray()
+            count = CountVectorizer(ngram_range=(2, 2), stop_words="english").fit(clean_texts)
+            t = count.transform(clean_texts).toarray()
             w = t.sum(axis=1)
             tf = np.divide(t.T, w)
             sum_t = t.sum(axis=0)
