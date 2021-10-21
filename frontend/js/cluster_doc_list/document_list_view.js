@@ -27,7 +27,7 @@ function DocumentListView(cluster_topics, documents, topic) {
                 for (let i = 0; i < documents.length; i++) {
                     const doc = documents[i];
                     const row = $('<tr class="d-flex"></tr>');
-                    row.append($('<td class="col-1">' + (i+1) + '</td>'));
+                    row.append($('<td class="col-1">' + doc['DocId'] + '</td>'));
                     // Add the year
                     row.append($('<td class="col-1">' + doc['Year'] + '</td>'));
                     // Add the title
@@ -57,7 +57,7 @@ function DocumentListView(cluster_topics, documents, topic) {
         const documentTable = $('<table class="table table-striped">' +
             '<thead>' +
             '<tr class="d-flex">' +
-            '    <th class="col-1">No</th>' +
+            '    <th class="col-1">DocID</th>' +
             '    <th class="col-1">Year</th>' +
             '    <th class="col-10">Articles</th>' +
             '</tr>' +

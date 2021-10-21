@@ -15,7 +15,7 @@ function TextView(doc, topics) {
                 "separateWordSearch": false,
                 "accuracy": {
                     "value": "exactly",
-                    "limiters": [",", ".", "'s", "/", ";", ":"]
+                    "limiters": [",", ".", "'s", "/", ";", ":", '(', ')', '‘', '’']
                 },
                 "acrossElements": true,
                 "ignorePunctuation": ":;.,-–—‒_(){}[]!'\"+=".split(""),
