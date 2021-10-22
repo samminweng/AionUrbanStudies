@@ -306,19 +306,37 @@ class TopicUtility:
     @staticmethod
     def get_n_gram_topic_words(approach, docs_per_cluster, total):
         cluster_labels = docs_per_cluster[approach]
-        topic_words = []
+        topic_word_list = []
         for n_gram in [1, 2, 3]:
             # Derive topic words using C-TF-IDF
             tf_idf, count = TopicUtility.compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'],
                                                                 total)
             # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
             # Get 100 topic words per cluster
-            top_words = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels)
-            topic_words.append({
+            topic_words = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels)
+            topic_word_list.append({
                 'n_gram': n_gram,
-                'top_words': top_words
+                'topic_words': topic_words
             })
-        topic_words_df = pd.DataFrame(topic_words, columns=['n_gram', 'top_words'])
+        # Concatenate all the topic words of 1, 2, 3 grams
+        topic_word_mix = {}
+        for topic_words in topic_word_list:
+            for cluster_no, words in topic_words['topic_words'].items():
+                if cluster_no not in topic_word_mix:
+                    topic_word_mix[cluster_no] = words
+                else:
+                    # Concatenate all the topic words
+                    exiting_words = topic_word_mix.get(cluster_no)
+                    topic_word_mix[cluster_no] = exiting_words + words
+        # Sort the words by the score and Limit top 50 words for each cluster
+        for cluster_no, words in topic_word_mix.items():
+            sorted_words = sorted(words, key=lambda word: word[1], reverse=True)
+            topic_word_mix[cluster_no] = sorted_words[:50]
+        topic_word_list.append({
+            'n_gram': -1,   # -1 indicate the mixed grams
+            'topic_words': topic_word_mix
+        })
+        topic_words_df = pd.DataFrame(topic_word_list, columns=['n_gram', 'topic_words'])
         # Write the results to
         path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topic_words.csv')
         topic_words_df.to_csv(path, encoding='utf-8', index=False)
