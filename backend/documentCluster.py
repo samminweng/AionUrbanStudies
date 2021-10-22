@@ -191,49 +191,47 @@ class DocumentCluster:
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        cluster_approaches = ['HDBSCAN_Cluster']
+        cluster_approaches = ['KMeans_Cluster']
         try:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
                 os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
+            total = len(doc_clusters_df)    # Total number of articles
             # Cluster the documents by
-            for cluster_approach in cluster_approaches:
+            for approach in cluster_approaches:
                 # Group the documents and doc_id by clusters
-                docs_per_cluster = doc_clusters_df.groupby([cluster_approach], as_index=False).agg(
-                    {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
-                cluster_labels = docs_per_cluster[cluster_approach]
-                topic_words = {}
-                for n_gram in [1, 2, 3]:
-                    # Derive topic words using C-TF-IDF
-                    tf_idf, count = TopicUtility.compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'],
-                                                                        len(doc_clusters_df))
-                    # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
-                    # Get 100 topic words per cluster
-                    topic_words[n_gram] = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels)
-                max_length = 100
+                docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False)\
+                    .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+                topic_words_df = TopicUtility.get_n_gram_topic_words(approach, docs_per_cluster, total)
+                print(topic_words_df)
+                max_length = 50
                 results = []
                 for i, cluster in docs_per_cluster.iterrows():
                     try:
-                        cluster_no = cluster[cluster_approach]
+                        cluster_no = cluster[approach]
                         doc_ids = cluster['DocId']
                         doc_texts = cluster['Text']
                         result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
-                        # Derive topic words using BERTopic
-                        topic_words_bert_topic = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
-                                                                                        topic_words[2][cluster_no])
-                        result['Topic_2_Grams'] = topic_words_bert_topic[:max_length]
+                        # Collect the topics of 1 gram, 2 gram and 3 gram
+                        for n_gram in [1, 2, 3]:
+                            n_gram_row = topic_words_df[topic_words_df['n_gram'] == n_gram].iloc[0]
+                            cluster_topic_words = n_gram_row['top_words'][cluster_no]
+                            # Derive topic words using BERTopic
+                            topic_words_bert_topic = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
+                                                                                            cluster_topic_words)
+                            result['Topic_'+str(n_gram)+'_Grams'] = topic_words_bert_topic[:max_length]
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 # Write the result to csv and json file
-                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
-                                                            'Topic_2_Grams'])
+                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'Topic_1_Grams',
+                                                            'Topic_2_Grams', 'Topic_3_Grams'])
                 path = os.path.join(self.output_path,
-                                    self.args.case_name + '_' + cluster_approach + '_topic_words.csv')
+                                    self.args.case_name + '_' + approach + '_topic_words.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)
                 # # # Write to a json file
                 path = os.path.join(self.output_path,
-                                    self.args.case_name + '_' + cluster_approach + '_topic_words.json')
+                                    self.args.case_name + '_' + approach + '_topic_words.json')
                 cluster_df.to_json(path, orient='records')
                 print('Output keywords/phrases to ' + path)
         except Exception as err:

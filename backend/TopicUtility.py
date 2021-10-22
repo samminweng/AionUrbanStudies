@@ -302,9 +302,34 @@ class TopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Get topic word (n_grams) by using c-TF-IDF
+    @staticmethod
+    def get_n_gram_topic_words(approach, docs_per_cluster, total):
+        cluster_labels = docs_per_cluster[approach]
+        topic_words = []
+        for n_gram in [1, 2, 3]:
+            # Derive topic words using C-TF-IDF
+            tf_idf, count = TopicUtility.compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'],
+                                                                total)
+            # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
+            # Get 100 topic words per cluster
+            top_words = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels)
+            topic_words.append({
+                'n_gram': n_gram,
+                'top_words': top_words
+            })
+        topic_words_df = pd.DataFrame(topic_words, columns=['n_gram', 'top_words'])
+        # Write the results to
+        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topic_words.csv')
+        topic_words_df.to_csv(path, encoding='utf-8', index=False)
+        # # # Write to a json file
+        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topic_words.json')
+        topic_words_df.to_json(path, orient='records')
+        return topic_words_df
+
     # Obtain top 100 topic words ranked by c-tf-idf
     @staticmethod
-    def extract_top_n_words_per_cluster(tf_idf, count, clusters, n=100):
+    def extract_top_n_words_per_cluster(tf_idf, count, clusters, n=50):
         n_grams = count.get_feature_names()
         labels = clusters
         tf_idf_transposed = tf_idf.T
