@@ -190,8 +190,8 @@ class DocumentCluster:
 
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
-        # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        cluster_approaches = ['HDBSCAN_Cluster']
+        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
+        # cluster_approaches = ['HDBSCAN_Cluster']
         try:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
@@ -245,7 +245,7 @@ if __name__ == '__main__':
     # docCluster.cluster_doc_by_KMeans()
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
     # docCluster.collect_tf_idf_terms_by_cluster()
-    # docCluster.derive_topic_words_from_cluster_docs()
+    docCluster.derive_topic_words_from_cluster_docs()
 
 
 
