@@ -190,8 +190,8 @@ class DocumentCluster:
 
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
-        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        # cluster_approaches = ['HDBSCAN_Cluster']
+        # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
+        cluster_approaches = ['HDBSCAN_Cluster']
         try:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
@@ -201,11 +201,15 @@ class DocumentCluster:
                 # Group the documents and doc_id by clusters
                 docs_per_cluster = doc_clusters_df.groupby([cluster_approach], as_index=False).agg(
                     {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
-                # Derive topic words using C-TF-IDF
-                tf_idf, count = TopicUtility.compute_c_tf_idf_score(docs_per_cluster['Text'], len(doc_clusters_df))
-                # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
-                top_n_words = TopicUtility.extract_top_n_words_per_topic(tf_idf, count,
-                                                                         docs_per_cluster[cluster_approach])
+                cluster_labels = docs_per_cluster[cluster_approach]
+                topic_words = {}
+                for n_gram in [1, 2, 3]:
+                    # Derive topic words using C-TF-IDF
+                    tf_idf, count = TopicUtility.compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'],
+                                                                        len(doc_clusters_df))
+                    # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
+                    # Get 100 topic words per cluster
+                    topic_words[n_gram] = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels)
                 max_length = 100
                 results = []
                 for i, cluster in docs_per_cluster.iterrows():
@@ -213,18 +217,17 @@ class DocumentCluster:
                         cluster_no = cluster[cluster_approach]
                         doc_ids = cluster['DocId']
                         doc_texts = cluster['Text']
+                        result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
                         # Derive topic words using BERTopic
                         topic_words_bert_topic = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
-                                                                                       top_n_words[cluster_no])
-                        result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids,
-                                  'TopicWords_by_BERTopic': topic_words_bert_topic[:max_length]
-                                  }
+                                                                                        topic_words[2][cluster_no])
+                        result['Topic_2_Grams'] = topic_words_bert_topic[:max_length]
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 # Write the result to csv and json file
                 cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
-                                                            'TopicWords_by_BERTopic'])
+                                                            'Topic_2_Grams'])
                 path = os.path.join(self.output_path,
                                     self.args.case_name + '_' + cluster_approach + '_topic_words.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)

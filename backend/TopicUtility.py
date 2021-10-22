@@ -285,13 +285,13 @@ class TopicUtility:
 
     # Compute the class-level TF-IDF scores for each cluster of documents
     @staticmethod
-    def compute_c_tf_idf_score(doc_texts_per_cluster, total_number_documents):
+    def compute_c_tf_idf_score(n, doc_texts_per_cluster, total_number_documents):
         try:
             # Aggregate every doc in a cluster as a single text
             clustered_texts = list(map(lambda doc: " ".join(doc), doc_texts_per_cluster))
             clean_texts = [TopicUtility.preprocess_text(text) for text in clustered_texts]
             # Vectorize the clustered doc text
-            count = CountVectorizer(ngram_range=(2, 2), stop_words="english").fit(clean_texts)
+            count = CountVectorizer(ngram_range=(n, n), stop_words="english").fit(clean_texts)
             t = count.transform(clean_texts).toarray()
             w = t.sum(axis=1)
             tf = np.divide(t.T, w)
@@ -302,14 +302,14 @@ class TopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Obtain top collocation per topic
+    # Obtain top 100 topic words ranked by c-tf-idf
     @staticmethod
-    def extract_top_n_words_per_topic(tf_idf, count, clusters, n=150):
-        collocations = count.get_feature_names()
+    def extract_top_n_words_per_cluster(tf_idf, count, clusters, n=100):
+        n_grams = count.get_feature_names()
         labels = clusters
         tf_idf_transposed = tf_idf.T
         indices = tf_idf_transposed.argsort()[:, -n:]
-        top_n_words = {label: [(collocations[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
+        top_n_words = {label: [(n_grams[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
                        enumerate(labels)}
         return top_n_words
 
