@@ -191,7 +191,7 @@ class DocumentCluster:
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        cluster_approaches = ['KMeans_Cluster']
+        cluster_approaches = ['HDBSCAN_Cluster']
         try:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
@@ -202,7 +202,7 @@ class DocumentCluster:
                 # Group the documents and doc_id by clusters
                 docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
                     .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
-                topic_words_df = TopicUtility.get_n_gram_topics(approach, docs_per_cluster, total, True)
+                topic_words_df = TopicUtility.get_n_gram_topics(approach, docs_per_cluster, total)
                 # print(topic_words_df)
                 max_length = 50
                 results = []
@@ -215,7 +215,7 @@ class DocumentCluster:
                         # Collect the topics of 1 gram, 2 gram and 3 gram
                         for n_gram in [1, 2, 3]:
                             n_gram_row = topic_words_df[topic_words_df['n_gram'] == n_gram].iloc[0]
-                            cluster_topics = n_gram_row['topics'][str(cluster_no)]
+                            cluster_topics = n_gram_row['topics'][cluster_no]
                             # Derive topic words using BERTopic
                             topic_words_bert_topic = TopicUtility.group_docs_by_topics(n_gram, doc_ids, doc_texts,
                                                                                        cluster_topics)
@@ -234,7 +234,7 @@ class DocumentCluster:
                 path = os.path.join(self.output_path,
                                     self.args.case_name + '_' + approach + '_topic_words.json')
                 cluster_df.to_json(path, orient='records')
-                print('Output keywords/phrases to ' + path)
+                print('Output topics per cluster to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

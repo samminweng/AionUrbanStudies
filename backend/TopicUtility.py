@@ -264,19 +264,22 @@ class TopicUtility:
                 if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
                         and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
                     words = word_tokenize(sentence)
-                    # Tag the words with part-of-speech tags
-                    pos_tags = nltk.pos_tag(words)
-                    # Convert plural word to singular
-                    singular_words = []
-                    for pos_tag in pos_tags:
-                        word = pos_tag[0]
-                        if pos_tag[1] == 'NNS':
-                            singular_word = word.rstrip('s')
-                            singular_words.append(singular_word)
-                        else:
-                            singular_words.append(word)
-                    # Merge all the words to a sentence
-                    clean_sentences.append(" ".join(singular_words))
+                    if len(words) > 0:
+                        words[0] = words[0].lower()     # Make the 1st word of a sentence lowercase
+                        # Tag the words with part-of-speech tags
+                        pos_tags = nltk.pos_tag(words)
+                        # Convert plural word to singular
+                        singular_words = []
+                        for pos_tag in pos_tags:
+                            word = pos_tag[0]
+                            # NNS indicates plural nouns
+                            if pos_tag[1] == 'NNS':
+                                singular_word = word.rstrip('s')
+                                singular_words.append(singular_word)
+                            else:
+                                singular_words.append(word)
+                        # Merge all the words to a sentence
+                        clean_sentences.append(" ".join(singular_words))
             # Merge all the sentences to a text
             clean_text = " ".join(clean_sentences)
             return clean_text
@@ -290,8 +293,8 @@ class TopicUtility:
             # Aggregate every doc in a cluster as a single text
             clustered_texts = list(map(lambda doc: " ".join(doc), doc_texts_per_cluster))
             clean_texts = [TopicUtility.preprocess_text(text) for text in clustered_texts]
-            # Vectorize the clustered doc text
-            count = CountVectorizer(ngram_range=(n, n), stop_words="english").fit(clean_texts)
+            # Vectorized the clustered doc text and Keep the Word case unchanged
+            count = CountVectorizer(ngram_range=(n, n), stop_words="english", lowercase=False).fit(clean_texts)
             t = count.transform(clean_texts).toarray()
             w = t.sum(axis=1)
             tf = np.divide(t.T, w)
@@ -365,8 +368,8 @@ class TopicUtility:
             docs_per_topic = []
             # Go through each article and find if each topic appear in the article
             for doc_id, doc_text in zip(doc_ids, doc_texts):
-                # Convert the document text to n_grams
-                tokenizes = word_tokenize(doc_text)
+                # Convert the preprocessed text to n_grams
+                tokenizes = word_tokenize(TopicUtility.preprocess_text(doc_text))
                 # Obtain the n-grams from the text
                 n_grams = list(ngrams(tokenizes, n_gram_type))
                 n_grams = list(map(lambda n_gram: " ".join(n_gram), n_grams))
