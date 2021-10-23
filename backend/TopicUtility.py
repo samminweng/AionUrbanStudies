@@ -101,7 +101,7 @@ class TopicUtility:
     def derive_bag_of_words(doc_ids, doc_texts):
         try:
             vec = CountVectorizer(stop_words=TopicUtility.stop_words)
-            bag_of_words = vec.fit_transform(doc_texts)      # Return a bag of words
+            bag_of_words = vec.fit_transform(doc_texts)  # Return a bag of words
             # A bag of words is a matrix. Each row is the document. Each column is a word in vocabulary
             # bag_of_words[i, j] is the occurrence of word 'i' in the document 'j'
             bag_of_words_df = pd.DataFrame(bag_of_words.toarray(), columns=vec.get_feature_names())
@@ -302,46 +302,49 @@ class TopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Get topic word (n_grams) by using c-TF-IDF
+    # Get topics (n_grams) by using c-TF-IDF
     @staticmethod
-    def get_n_gram_topic_words(approach, docs_per_cluster, total):
+    def get_n_gram_topics(approach, docs_per_cluster, total, is_load=False):
+        if is_load:
+            path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json')
+            return pd.read_json(path)
+        # Extract top 50 topic words
         cluster_labels = docs_per_cluster[approach]
-        topic_word_list = []
+        topics_list = []
         for n_gram in [1, 2, 3]:
             # Derive topic words using C-TF-IDF
-            tf_idf, count = TopicUtility.compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'],
-                                                                total)
+            tf_idf, count = TopicUtility.compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'], total)
             # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
             # Get 100 topic words per cluster
-            topic_words = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels)
-            topic_word_list.append({
+            topics = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels)
+            topics_list.append({
                 'n_gram': n_gram,
-                'topic_words': topic_words
+                'topics': topics
             })
-        # Concatenate all the topic words of 1, 2, 3 grams
-        topic_word_mix = {}
-        for topic_words in topic_word_list:
-            for cluster_no, words in topic_words['topic_words'].items():
-                if cluster_no not in topic_word_mix:
-                    topic_word_mix[cluster_no] = words
+        # Combine topics of 1, 2, 3 grams into a list of n_grams
+        topic_n_grams = {}
+        for topic in topics_list:
+            for cluster_no, words in topic['topics'].items():
+                if cluster_no not in topic_n_grams:
+                    topic_n_grams[cluster_no] = words
                 else:
                     # Concatenate all the topic words
-                    exiting_words = topic_word_mix.get(cluster_no)
-                    topic_word_mix[cluster_no] = exiting_words + words
+                    exiting_words = topic_n_grams.get(cluster_no)
+                    topic_n_grams[cluster_no] = exiting_words + words
         # Sort the words by the score and Limit top 50 words for each cluster
-        for cluster_no, words in topic_word_mix.items():
+        for cluster_no, words in topic_n_grams.items():
             sorted_words = sorted(words, key=lambda word: word[1], reverse=True)
-            topic_word_mix[cluster_no] = sorted_words[:50]
-        topic_word_list.append({
-            'n_gram': -1,   # -1 indicate the mixed grams
-            'topic_words': topic_word_mix
+            topic_n_grams[cluster_no] = sorted_words[:50]
+        topics_list.append({
+            'n_gram': -1,  # -1 indicate the mixed grams
+            'topics': topic_n_grams
         })
-        topic_words_df = pd.DataFrame(topic_word_list, columns=['n_gram', 'topic_words'])
+        topic_words_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
         # Write the results to
-        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topic_words.csv')
+        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.csv')
         topic_words_df.to_csv(path, encoding='utf-8', index=False)
         # # # Write to a json file
-        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topic_words.json')
+        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json')
         topic_words_df.to_json(path, orient='records')
         return topic_words_df
 
@@ -357,26 +360,30 @@ class TopicUtility:
         return top_n_words
 
     @staticmethod
-    def group_docs_by_topic_words(doc_ids, doc_texts, topic_words_per_cluster):
+    def group_docs_by_topics(n_gram_type, doc_ids, doc_texts, topics_per_cluster):
         try:
-            docs_per_topic_words = []
-            # For each topic word, find out the document ids that contain the topic word
-            for topic_words, score in topic_words_per_cluster:
-                doc_ids_per_topic = []
-                for doc_id, doc_text in zip(doc_ids, doc_texts):
-                    # Convert the document text to bi-grams
-                    tokenizes = word_tokenize(doc_text)
-                    bi_grams = list(ngrams(tokenizes, 2))
-                    bi_grams = list(map(lambda bi_gram: bi_gram[0] + " " + bi_gram[1], bi_grams))
-                    # Find if the topic words appear in the bi-grams
-                    if topic_words in bi_grams:
-                        doc_ids_per_topic.append(doc_id)
-                if len(doc_ids_per_topic) > 0:
-                    docs_per_topic_words.append({'topic_words': topic_words, 'score': score,
-                                                 'doc_ids': doc_ids_per_topic})
+            docs_per_topic = []
+            # Go through each article and find if each topic appear in the article
+            for doc_id, doc_text in zip(doc_ids, doc_texts):
+                # Convert the document text to n_grams
+                tokenizes = word_tokenize(doc_text)
+                # Obtain the n-grams from the text
+                n_grams = list(ngrams(tokenizes, n_gram_type))
+                n_grams = list(map(lambda n_gram: " ".join(n_gram), n_grams))
+                # For each topic, find out the document ids that contain the topic
+                for topic, score in topics_per_cluster:
+                    # The topic appears in the article
+                    if topic in n_grams:
+                        # Check if docs_per_topic contains the doc id
+                        doc_topic = next((d for d in docs_per_topic if d['topic'] == topic), None)
+                        # Include the doc ids of the topics mentioned in the articles
+                        if doc_topic:
+                            doc_topic['doc_ids'].append(doc_id)
+                        else:
+                            docs_per_topic.append({'topic': topic, 'score': score,
+                                                   'doc_ids': [doc_id]})
             # Sort topic words by score
-            sorted_docs_per_topic_words = sorted(docs_per_topic_words, key=lambda t: t['score'], reverse=True)
-            return sorted_docs_per_topic_words
+            sorted_docs_per_topics = sorted(docs_per_topic, key=lambda t: t['score'], reverse=True)
+            return sorted_docs_per_topics
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-

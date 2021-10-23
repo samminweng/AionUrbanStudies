@@ -90,7 +90,7 @@ class DocumentCluster:
         for i, text in text_df.iterrows():
             try:
                 sentences = sent_tokenize(text['Title'] + ". " + text['Abstract'])
-                sentences = Utility.clean_sentence(sentences)   # Clean the sentences
+                sentences = Utility.clean_sentence(sentences)  # Clean the sentences
                 document = " ".join(sentences)
                 documents.append({"DocId": text['DocId'], "document": document})
             except Exception as err:
@@ -196,14 +196,14 @@ class DocumentCluster:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
                 os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
-            total = len(doc_clusters_df)    # Total number of articles
+            total = len(doc_clusters_df)  # Total number of articles
             # Cluster the documents by
             for approach in cluster_approaches:
                 # Group the documents and doc_id by clusters
-                docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False)\
+                docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
                     .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
-                topic_words_df = TopicUtility.get_n_gram_topic_words(approach, docs_per_cluster, total)
-                print(topic_words_df)
+                topic_words_df = TopicUtility.get_n_gram_topics(approach, docs_per_cluster, total, True)
+                # print(topic_words_df)
                 max_length = 50
                 results = []
                 for i, cluster in docs_per_cluster.iterrows():
@@ -215,17 +215,18 @@ class DocumentCluster:
                         # Collect the topics of 1 gram, 2 gram and 3 gram
                         for n_gram in [1, 2, 3]:
                             n_gram_row = topic_words_df[topic_words_df['n_gram'] == n_gram].iloc[0]
-                            cluster_topic_words = n_gram_row['top_words'][cluster_no]
+                            cluster_topics = n_gram_row['topics'][str(cluster_no)]
                             # Derive topic words using BERTopic
-                            topic_words_bert_topic = TopicUtility.group_docs_by_topic_words(doc_ids, doc_texts,
-                                                                                            cluster_topic_words)
-                            result['Topic_'+str(n_gram)+'_Grams'] = topic_words_bert_topic[:max_length]
+                            topic_words_bert_topic = TopicUtility.group_docs_by_topics(n_gram, doc_ids, doc_texts,
+                                                                                       cluster_topics)
+                            n_gram_type = 'Topic' + str(n_gram) + 'Grams' if n_gram > 0 else 'TopicNGrams'
+                            result[n_gram_type] = topic_words_bert_topic[:max_length]
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 # Write the result to csv and json file
-                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'Topic_1_Grams',
-                                                            'Topic_2_Grams', 'Topic_3_Grams'])
+                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'Topic1Grams',
+                                                            'Topic2Grams', 'Topic3Grams', 'TopicNGrams'])
                 path = os.path.join(self.output_path,
                                     self.args.case_name + '_' + approach + '_topic_words.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)
@@ -248,9 +249,6 @@ if __name__ == '__main__':
     # docCluster.collect_tf_idf_terms_by_cluster()
     docCluster.derive_topic_words_from_cluster_docs()
 
-
-
-
 # # Derive topic words using TF-IDF
 # topic_words_tf_idf = TopicUtility.derive_topic_words_tf_idf(tf_idf_df, doc_ids)
 # We use the number of TF-IDF terms as the limitation
@@ -263,10 +261,10 @@ if __name__ == '__main__':
 #                                                                               doc_ids,
 #                                                                               doc_texts)
 # def cluster_doc_by_agglomerative(self):
-    #     # Normalize the embeddings to unit length
-    #     # corpus_embeddings = self.document_embeddings / np.linalg.norm(self.document_embeddings, axis=1, keepdims=True)
-    #     # Perform Agglomerative clustering
-    #     clustering_model = AgglomerativeClustering(n_clusters=None, distance_threshold=1.5)
-    #     clustering_model.fit(self.clusterable_embedding)
-    #     clusters = clustering_model.labels_
-    #     self.result_df['Agglomerative_Cluster'] = clusters
+#     # Normalize the embeddings to unit length
+#     # corpus_embeddings = self.document_embeddings / np.linalg.norm(self.document_embeddings, axis=1, keepdims=True)
+#     # Perform Agglomerative clustering
+#     clustering_model = AgglomerativeClustering(n_clusters=None, distance_threshold=1.5)
+#     clustering_model.fit(self.clusterable_embedding)
+#     clusters = clustering_model.labels_
+#     self.result_df['Agglomerative_Cluster'] = clusters
