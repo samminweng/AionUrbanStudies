@@ -29,6 +29,18 @@ class TopicUtility:
     output_path = os.path.join('output', 'cluster')
     # TF-IDF Term path
     term_path = os.path.join('output', 'term')
+    # Load the lemma.n file to store the mapping of singular to plural nouns
+    lemma_nouns = {}
+    path = os.path.join('data', 'lemma.n')
+    f = open(path, 'r')
+    lines = f.readlines()
+    for line in lines:
+        words = line.rstrip().split("->")   # Remove trailing new line char and split by '->'
+        plural_word = words[1]
+        if '.,' in plural_word:     # Handle multiple plural forms and get the last one as default plural form
+            plural_word = plural_word.split('.,')[-1]
+        singular_word = words[0]
+        lemma_nouns[plural_word] = singular_word
 
     # # Use 'elbow method' to vary cluster number for selecting an optimal K value
     # # The elbow point of the curve is the optimal K value
@@ -265,7 +277,7 @@ class TopicUtility:
                         and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
                     words = word_tokenize(sentence)
                     if len(words) > 0:
-                        words[0] = words[0].lower()     # Make the 1st word of a sentence lowercase
+                        words[0] = words[0].lower()  # Make the 1st word of a sentence lowercase
                         # Tag the words with part-of-speech tags
                         pos_tags = nltk.pos_tag(words)
                         # Convert plural word to singular
@@ -275,6 +287,8 @@ class TopicUtility:
                             # NNS indicates plural nouns
                             if pos_tag[1] == 'NNS':
                                 singular_word = word.rstrip('s')
+                                if word in TopicUtility.lemma_nouns:
+                                    singular_word = TopicUtility.lemma_nouns[word]
                                 singular_words.append(singular_word)
                             else:
                                 singular_words.append(word)
@@ -362,6 +376,20 @@ class TopicUtility:
                        enumerate(labels)}
         return top_n_words
 
+    # Convert the singular topic into the topic in plural form
+    @staticmethod
+    def get_topic_in_plural_form(topic):
+        # Get plural nouns of topic
+        words = topic.split(" ")
+        last_word = words[-1]
+        plural_word = last_word + "s"
+        for plural, singular in TopicUtility.lemma_nouns.items():
+            if singular == last_word:
+                plural_word = plural
+                break
+        plural_topic = words[:-1] + [plural_word]
+        return " ".join(plural_topic)
+
     @staticmethod
     def group_docs_by_topics(n_gram_type, doc_ids, doc_texts, topics_per_cluster):
         try:
@@ -384,8 +412,9 @@ class TopicUtility:
                             doc_topic['doc_ids'].append(doc_id)
                         else:
                             docs_per_topic.append({'topic': topic, 'score': score,
+                                                   'plural': TopicUtility.get_topic_in_plural_form(topic),
                                                    'doc_ids': [doc_id]})
-            # Sort topic words by score
+            # Sort topics by score
             sorted_docs_per_topics = sorted(docs_per_topic, key=lambda t: t['score'], reverse=True)
             return sorted_docs_per_topics
         except Exception as err:

@@ -32,7 +32,7 @@ function load_cluster_data_display_results(cluster_approach, cluster_topic_words
 
 // Document ready event
 $(function () {
-    // Update the progress bar asynchronously 
+    // Update the progress bar asynchronously
     $('#progressbar').progressbar({
         value: 0,
         complete: function() {
@@ -58,7 +58,6 @@ $(function () {
         $.getJSON(doc_key_terms_file_path), $.getJSON(hdbscan_cluster_topic_words_file_path),
         $.getJSON(kmeans_cluster_topic_words_file_path),
     ).done(function (result1, result2, result3) {
-
         const doc_key_terms = result1[0];
         const cluster_topic_words = {"HDBSCAN": result2[0], "KMeans": result3[0]};
         // Change the cluster approach

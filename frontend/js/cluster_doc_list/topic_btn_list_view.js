@@ -2,12 +2,13 @@
 function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
     // Fill out the topic using TF-IDF
     const cluster_topics = cluster_topic_words.find(c => c['Cluster'] === cluster_no);
-    const n_gram_topics = cluster_topics['Topic1Grams'].concat(cluster_topics['Topic2Grams'], cluster_topics['Topic2Grams']);
+    const n_gram_topics = cluster_topics['Topic1Grams'].concat(cluster_topics['Topic2Grams'], cluster_topics['Topic3Grams']);
     // Sort the topics by scores
     n_gram_topics.sort((a, b) => b['score'] - a['score']);
     const available_topics = n_gram_topics.map(t => t['topic']);
     const cluster_doc_ids = cluster_topics['DocIds'];
     const cluster_docs = doc_key_terms.filter(d => cluster_doc_ids.includes(parseInt(d['DocId'])));
+
 
     // Create a list of topics
     function createTopicParagraphs(topics){
