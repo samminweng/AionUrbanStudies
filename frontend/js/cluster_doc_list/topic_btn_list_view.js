@@ -22,7 +22,7 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
                 $('#topics').val(topic['topics']);
                 // // Get the documents about the topic
                 const topic_docs = doc_key_terms.filter(d => topic['doc_ids'].includes(parseInt(d['DocId'])));
-                const doc_list_view = new DocumentListView(cluster_topics, topic_docs, [topic['topic']]);
+                const doc_list_view = new DocumentListView(cluster_topics, topic_docs, topic);
             });
             p_div.append(link);
         }
@@ -104,21 +104,21 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
             const topic = n_gram_topics.find(t => t['topic'] === select_topic);
             // Get the articles related to the selected topic.
             const topic_docs = doc_key_terms.filter(d => topic['doc_ids'].includes(parseInt(d['DocId'])));
-            const doc_list_view = new DocumentListView(cluster_topics, topic_docs, [topic['topic']]);
+            const doc_list_view = new DocumentListView(cluster_topics, topic_docs, topic);
         });
         // Clear button to clearn search input and display all the articles
         $('#clear').button();
         $('#clear').click(function(event){
             $( "#topics" ).val("")
             // Display all the articles in a cluster
-            const doc_list_view = new DocumentListView(cluster_topics, cluster_docs, []);
+            const doc_list_view = new DocumentListView(cluster_topics, cluster_docs, null);
         });
 
         // Create a list of topics
         createTopicListView();
 
         // Display all the articles in a cluster
-        const doc_list_view = new DocumentListView(cluster_topics, cluster_docs, []);
+        const doc_list_view = new DocumentListView(cluster_topics, cluster_docs, null);
     }
     _createUI();
 }

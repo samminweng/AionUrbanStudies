@@ -48,7 +48,7 @@ function DocumentListView(cluster_topics, documents, topic) {
         $('#document_list_view').empty();
         const container = $('<div class="container"></div>');
         const heading_text = 'Cluster #' + cluster_no + ' has ' + documents.length + ' articles '
-            + ((topic.length > 0)? "about <span class='search_term'> " + topic[0] + "</span>": "");
+            + ((topic !== null)? "about <span class='search_term'> " + topic['topic'] + "</span>": "");
         // Display a summary
         const heading = $('<div class="h5 mb-3">' + heading_text + '</div>');
         container.append($('<div class="row p-3"><div class="col"></div></div>').find(".col").append(heading));
