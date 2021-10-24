@@ -191,7 +191,7 @@ class DocumentCluster:
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        cluster_approaches = ['HDBSCAN_Cluster']
+        cluster_approaches = ['KMeans_Cluster']
         try:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
@@ -226,7 +226,7 @@ class DocumentCluster:
                         print("Error occurred! {err}".format(err=err))
                 # Write the result to csv and json file
                 cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'Topic1Grams',
-                                                            'Topic2Grams', 'Topic3Grams', 'TopicNGrams'])
+                                                            'Topic2Grams', 'Topic3Grams'])
                 path = os.path.join(self.output_path,
                                     self.args.case_name + '_' + approach + '_topic_words.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)
