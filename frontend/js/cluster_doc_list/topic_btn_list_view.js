@@ -2,9 +2,8 @@
 function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
     // Fill out the topic using TF-IDF
     const cluster_topics = cluster_topic_words.find(c => c['Cluster'] === cluster_no);
-    const n_gram_topics = cluster_topics['Topic1-gram'].concat(cluster_topics['Topic2-gram'], cluster_topics['Topic3-gram']);
-
-    const available_topics = n_gram_topics.map(t => t['topic']);
+    const available_topics = cluster_topics['Topic1-gram'].concat(cluster_topics['Topic2-gram'], cluster_topics['Topic3-gram']);
+    // Get the articles in cluster #no
     const cluster_doc_ids = cluster_topics['DocIds'];
     const cluster_docs = doc_key_terms.filter(d => cluster_doc_ids.includes(parseInt(d['DocId'])));
 
@@ -32,12 +31,11 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
     function createTopicListView() {
         $('#topic_list_view').empty();
         const container = $('<div class="container"></div>');
-        // const display_names = {'1Grams': '1-gram', '2Grams': '2-gram', '3Grams': '3-gram', 'N-gram': 'N-gram'};
+        container.append($('<div class="h3">Cluster #' + cluster_no+' has ' + cluster_docs.length + ' articles in total</div>'));
+        const Max_Length = 50;
         // Display the topics of 1 gram, 2 grams and 3 grams
         for(const n_gram of ['1-gram', '2-gram', '3-gram', 'N-gram']){
-            const topics = n_gram !== 'N-gram' ? cluster_topics['Topic' + n_gram] : n_gram_topics;
-            // Sort the topics by count (default)
-            topics.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
+            const topics = cluster_topics['Topic' + n_gram];
             const key_term_div = $('<div><h3><span class="fw-bold">'+ n_gram + ' Topics </span> ' +
                 '</h3>' +
                 '<div class="topics">' +
@@ -48,20 +46,22 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
                 '<span>Sort by </span>'+
                 '<div class="form-check form-check-inline">' +
                 '   <label class="form-check-label" for="score">Score</label>' +
-                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="score">' +
+                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="score" checked>' +
                 '</div>' +
                 '<div class="form-check form-check-inline">' +
                 '   <label class="form-check-label" for="count">Count</label>' +
-                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="count" checked>' +
+                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="count" >' +
                 '</div>' +
                 '</div>');
+            // Sort the topics by count (default)
+            topics.sort((a, b) => b['score'] - a['score']);
             // Add a radio button to sort topics by scores or range
             key_term_div.find(".topics").append(sort_widget);
-            key_term_div.find(".topics").append(createTopicParagraphs(topics.slice(0, 50))); // Show top 50 topics
+            key_term_div.find(".topics").append(createTopicParagraphs(topics.slice(0, Max_Length))); // Show top 50 topics
             // Add the on click event to radio button
             sort_widget.find('input[name='+sort_btn_name+']').change(function(){
                 const sorted_index = sort_widget.find('input[name='+sort_btn_name+']:checked').val();
-                const sorted_topic = n_gram !== 'N-gram' ? cluster_topics['Topic' + n_gram] : n_gram_topics;
+                const sorted_topic = cluster_topics['Topic' + n_gram];
                 if(sorted_index === 'count'){
                     // Sort the topic by count
                     sorted_topic.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length );
@@ -70,10 +70,10 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
                 }
                 // console.log(topics);
                 key_term_div.find(".topic_list").remove();
-                key_term_div.find(".topics").append(createTopicParagraphs(sorted_topic.slice(0, 50)));
+                key_term_div.find(".topics").append(createTopicParagraphs(sorted_topic.slice(0, Max_Length)));
             });
 
-
+            // Display n-gram topics by default
             if(n_gram === 'N-gram'){
                 // Show the topics for TF-IDF
                 key_term_div.accordion({
@@ -95,14 +95,15 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
 
     function _createUI(){
         $('#topics').empty();   // Clean the topics
+        // Initialise the auto-complete topic with all topics
         $( "#topics" ).autocomplete({
-            source: available_topics
+            source: available_topics.map(t => t['topic'])
         });
         // Search topic within a cluster
         $('#search').button();
         $('#search').click(function(event){
             const select_topic = $('#topics').val();
-            const topic = n_gram_topics.find(t => t['topic'] === select_topic);
+            const topic = available_topics.find(t => t['topic'] === select_topic);
             // Get the articles related to the selected topic.
             const topic_docs = doc_key_terms.filter(d => topic['doc_ids'].includes(parseInt(d['DocId'])));
             const doc_list_view = new DocumentListView(cluster_topics, topic_docs, topic);

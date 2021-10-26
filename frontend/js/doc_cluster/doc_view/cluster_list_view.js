@@ -57,13 +57,9 @@ function ClusterListView(cluster_approach, cluster_topic_words_data) {
                     // Topic words
                     // Display top 5 topic words extracted from chi-square
                     let n_gram_topics;
-                    if (rank === 'N-gram'){
-                        n_gram_topics = cluster['Topic1-gram'].concat(cluster['Topic2-gram'], cluster['Topic3-gram']);
-                    }else{
-                        n_gram_topics = cluster['Topic'+ rank];
-                    }
+                    n_gram_topics = cluster['Topic'+ rank];
                     // Sort the topics by count
-                    n_gram_topics.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
+                    n_gram_topics.sort((a, b) => b['score'] - a['score']);
                     // Get top 10 relevant topic derived from articles using c-TF-IDF
                     const topic_words = n_gram_topics.slice(0, 10).map(w => w['topic'] + ' ('+ w['doc_ids'].length +')' )
                     const topic_words_div = $('<td style="width:70%"><span>' + topic_words.join(" ") + '</span></div>');
