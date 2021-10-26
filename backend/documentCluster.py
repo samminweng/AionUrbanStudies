@@ -191,7 +191,7 @@ class DocumentCluster:
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        cluster_approaches = ['HDBSCAN_Cluster']
+        cluster_approaches = ['KMeans_Cluster']
         try:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
@@ -202,9 +202,9 @@ class DocumentCluster:
                 # Group the documents and doc_id by clusters
                 docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
                     .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+                # Get top 100 topics (1, 2, 3 grams) for each cluster
                 topic_words_df = TopicUtility.get_n_gram_topics(approach, docs_per_cluster, total)
                 # print(topic_words_df)
-                max_length = 50
                 results = []
                 for i, cluster in docs_per_cluster.iterrows():
                     try:
@@ -212,21 +212,24 @@ class DocumentCluster:
                         doc_ids = cluster['DocId']
                         doc_texts = cluster['Text']
                         result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
+                        n_gram_topics = {}
                         # Collect the topics of 1 gram, 2 gram and 3 gram
                         for n_gram in [1, 2, 3]:
                             n_gram_row = topic_words_df[topic_words_df['n_gram'] == n_gram].iloc[0]
-                            cluster_topics = n_gram_row['topics'][cluster_no]
+                            cluster_topics = n_gram_row['topics'][str(cluster_no)]
                             # Derive topic words using BERTopic
                             topic_words_bert_topic = TopicUtility.group_docs_by_topics(n_gram, doc_ids, doc_texts,
                                                                                        cluster_topics)
-                            n_gram_type = 'Topic' + str(n_gram) + 'Grams' if n_gram > 0 else 'TopicNGrams'
-                            result[n_gram_type] = topic_words_bert_topic[:max_length]
+                            n_gram_type = 'Topic' + str(n_gram) + '-gram'
+                            result[n_gram_type] = topic_words_bert_topic
+                            n_gram_topics[n_gram_type] = topic_words_bert_topic
+                        result['TopicN-gram'] = TopicUtility.merge_and_rank_n_gram_topic(n_gram_topics)
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 # Write the result to csv and json file
-                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'Topic1Grams',
-                                                            'Topic2Grams', 'Topic3Grams'])
+                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds', 'Topic1-gram',
+                                                            'Topic2-gram', 'Topic3-gram', 'TopicN-gram'])
                 path = os.path.join(self.output_path,
                                     self.args.case_name + '_' + approach + '_topic_words.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)

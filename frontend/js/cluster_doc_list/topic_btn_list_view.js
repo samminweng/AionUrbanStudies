@@ -2,9 +2,8 @@
 function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
     // Fill out the topic using TF-IDF
     const cluster_topics = cluster_topic_words.find(c => c['Cluster'] === cluster_no);
-    const n_gram_topics = cluster_topics['Topic1Grams'].concat(cluster_topics['Topic2Grams'], cluster_topics['Topic3Grams']);
-    // Sort the topics by scores
-    n_gram_topics.sort((a, b) => b['score'] - a['score']);
+    const n_gram_topics = cluster_topics['Topic1-gram'].concat(cluster_topics['Topic2-gram'], cluster_topics['Topic3-gram']);
+
     const available_topics = n_gram_topics.map(t => t['topic']);
     const cluster_doc_ids = cluster_topics['DocIds'];
     const cluster_docs = doc_key_terms.filter(d => cluster_doc_ids.includes(parseInt(d['DocId'])));
@@ -33,11 +32,13 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
     function createTopicListView() {
         $('#topic_list_view').empty();
         const container = $('<div class="container"></div>');
-        const display_names = {'1Grams': '1-gram', '2Grams': '2-gram', '3Grams': '3-gram', 'N-gram': 'N-gram'};
+        // const display_names = {'1Grams': '1-gram', '2Grams': '2-gram', '3Grams': '3-gram', 'N-gram': 'N-gram'};
         // Display the topics of 1 gram, 2 grams and 3 grams
-        for(const n_gram of ['1Grams', '2Grams', '3Grams', 'N-gram']){
+        for(const n_gram of ['1-gram', '2-gram', '3-gram', 'N-gram']){
             const topics = n_gram !== 'N-gram' ? cluster_topics['Topic' + n_gram] : n_gram_topics;
-            const key_term_div = $('<div><h3><span class="fw-bold">'+ display_names[n_gram] + ' Topics </span> ' +
+            // Sort the topics by count (default)
+            topics.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
+            const key_term_div = $('<div><h3><span class="fw-bold">'+ n_gram + ' Topics </span> ' +
                 '</h3>' +
                 '<div class="topics">' +
                 '</div>' +
@@ -47,11 +48,11 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
                 '<span>Sort by </span>'+
                 '<div class="form-check form-check-inline">' +
                 '   <label class="form-check-label" for="score">Score</label>' +
-                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="score" checked>' +
+                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="score">' +
                 '</div>' +
                 '<div class="form-check form-check-inline">' +
                 '   <label class="form-check-label" for="count">Count</label>' +
-                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="count">' +
+                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="count" checked>' +
                 '</div>' +
                 '</div>');
             // Add a radio button to sort topics by scores or range

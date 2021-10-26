@@ -1,3 +1,4 @@
+import json
 import os
 import nltk
 import numpy as np
@@ -35,9 +36,9 @@ class TopicUtility:
     f = open(path, 'r')
     lines = f.readlines()
     for line in lines:
-        words = line.rstrip().split("->")   # Remove trailing new line char and split by '->'
+        words = line.rstrip().split("->")  # Remove trailing new line char and split by '->'
         plural_word = words[1]
-        if '.,' in plural_word:     # Handle multiple plural forms and get the last one as default plural form
+        if '.,' in plural_word:  # Handle multiple plural forms and get the last one as default plural form
             plural_word = plural_word.split('.,')[-1]
         singular_word = words[0]
         lemma_nouns[plural_word] = singular_word
@@ -319,12 +320,15 @@ class TopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Get topics (n_grams) by using c-TF-IDF
+    # Get topics (n_grams) by using c-TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_topics(approach, docs_per_cluster, total, is_load=False):
+    def get_n_gram_topics(approach, docs_per_cluster, total, max_length=100, is_load=False):
         if is_load:
             path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json')
-            return pd.read_json(path)
+            # Convert number of gram from string to integer
+            topic_df = pd.read_json(path)
+            return topic_df
+
         # Extract top 50 topic words
         cluster_labels = docs_per_cluster[approach]
         topics_list = []
@@ -333,29 +337,12 @@ class TopicUtility:
             tf_idf, count = TopicUtility.compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'], total)
             # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
             # Get 100 topic words per cluster
-            topics = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels)
+            topics = TopicUtility.extract_top_n_words_per_cluster(tf_idf, count, cluster_labels, max_length)
             topics_list.append({
                 'n_gram': n_gram,
                 'topics': topics
             })
-        # Combine topics of 1, 2, 3 grams into a list of n_grams
-        topic_n_grams = {}
-        for topic in topics_list:
-            for cluster_no, words in topic['topics'].items():
-                if cluster_no not in topic_n_grams:
-                    topic_n_grams[cluster_no] = words
-                else:
-                    # Concatenate all the topic words
-                    exiting_words = topic_n_grams.get(cluster_no)
-                    topic_n_grams[cluster_no] = exiting_words + words
-        # Sort the words by the score and Limit top 50 words for each cluster
-        for cluster_no, words in topic_n_grams.items():
-            sorted_words = sorted(words, key=lambda word: word[1], reverse=True)
-            topic_n_grams[cluster_no] = sorted_words[:50]
-        topics_list.append({
-            'n_gram': -1,  # -1 indicate the mixed grams
-            'topics': topic_n_grams
-        })
+
         topic_words_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
         # Write the results to
         path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.csv')
@@ -367,12 +354,13 @@ class TopicUtility:
 
     # Obtain top 100 topic words ranked by c-tf-idf
     @staticmethod
-    def extract_top_n_words_per_cluster(tf_idf, count, clusters, n=50):
+    def extract_top_n_words_per_cluster(tf_idf, count, clusters, n=100):
         n_grams = count.get_feature_names()
         labels = clusters
         tf_idf_transposed = tf_idf.T
         indices = tf_idf_transposed.argsort()[:, -n:]
-        top_n_words = {label: [(n_grams[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
+        # top_n_words is a dictionary where key is a string of cluster no, and value is a tuple (n_gram, score)
+        top_n_words = {str(label): [(n_grams[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
                        enumerate(labels)}
         return top_n_words
 
@@ -417,5 +405,47 @@ class TopicUtility:
             # Sort topics by score
             sorted_docs_per_topics = sorted(docs_per_topic, key=lambda t: t['score'], reverse=True)
             return sorted_docs_per_topics
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # Merge the overlapping topics of mix-grams (1, 2, 3) in a cluster, e.g. 'air' and 'air temperature' can be merged
+    # if they appear in the same set of articles
+    @staticmethod
+    def merge_and_rank_n_gram_topic(n_gram_topics):
+        # Merge n-1 grams into n_grams if n-1 gram share similar set of doc ids
+        def merge_overlapped_n_1_grams(n_grams, n_1_grams):
+            def check_if_overlapped_gram(gram_n, gram_n_1):
+                doc_ids_n = set(gram_n['doc_ids'])
+                doc_ids_n_1 = set(gram_n_1['doc_ids'])
+                # Check if the difference is within the acceptable range (<=2)
+                # And n-1 gram is a sub-string of n-gram
+                if gram_n_1['topic'] in gram_n['topic'] and len(doc_ids_n) - len(doc_ids_n_1) <= 2:
+                    return True  # n_gram overlaps n-1 gram
+                return False
+
+            # Collect all the overlapping n_1_grams
+            overlapped_topics = set()
+            # Collect the uni_grams that share similar set of doc ids and can be merged to bi_grams
+            for n_gram in n_grams:
+                # Find if any 1-gram has similar doc_ids
+                for n_1_gram in n_1_grams:
+                    if check_if_overlapped_gram(n_gram, n_1_gram):
+                        overlapped_topics.add(n_1_gram['topic'])
+            # Filter all the overlapping n-1 grams
+            n_1_grams = list(filter(lambda gram: gram['topic'] not in overlapped_topics, n_1_grams))
+            return n_1_grams
+
+        try:
+            # Merge 1-gram topic to 2-gram
+            uni_grams = n_gram_topics.get('Topic1-gram')
+            bi_grams = n_gram_topics.get('Topic2-gram')
+            tri_grams = n_gram_topics.get('Topic3-gram')
+            uni_grams = merge_overlapped_n_1_grams(bi_grams, uni_grams)
+            bi_grams = merge_overlapped_n_1_grams(tri_grams, bi_grams)
+            # Collect all the n-grams to topic
+            all_n_grams = uni_grams + bi_grams + tri_grams
+            # Sort n-grams by score
+            sorted_n_grams = sorted(all_n_grams, key=lambda n_gram: n_gram['score'], reverse=True)
+            return sorted_n_grams
         except Exception as err:
             print("Error occurred! {err}".format(err=err))

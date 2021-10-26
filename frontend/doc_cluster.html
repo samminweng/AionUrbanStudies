@@ -29,7 +29,7 @@
     <div class="row mt-3">
         <div class="col border border-3">
             <div class="row p-3">
-                <div class="col align-text-bottom" >
+                <div class="col align-text-bottom">
                     <label for="cluster_approach">Select</label>
                     <select name="cluster_approach" id="cluster_approach">
                         <option value="KMeans">KMeans Clustering</option>
@@ -63,12 +63,13 @@
                                     <tr>
                                         <th></th>
                                         <th>Articles</th>
-                                        <th>Most Relevant Topics by
+                                        <th>Frequent Topics by
                                             <span>
                                                 <select id="rank" name="rank">
-                                                     <option value="TF-IDF" selected>TF-IDF</option>
-                                                     <option value="Collocations">Collocation</option>
-                                                     <option value="CTF-IDF">Topic2Vec</option>
+                                                     <option value="N-gram" selected>N-gram</option>
+                                                     <option value="1-gram">1-gram</option>
+                                                     <option value="2-gram">2-gram</option>
+                                                     <option value="3-gram">3-gram</option>
                                                 </select>
                                             </span>
                                         </th>
@@ -84,27 +85,22 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col border border-3">
-            <div id="cluster_tabs">
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div id="topic_list_view">
-                    </div>
-                </div>
-                <div class="col">
-                    <div id="document_list_view" class="p-3"></div>
-                </div>
-            </div>
+    <!-- footer -->
+    <footer class="py-1 my-1">
+        <!-- Copyright -->
+        <div class="text-center">
+            <!--        © 2021 Copyright:-->
+            <!--        <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>-->
         </div>
-    </div>
+    </footer >
 </div>
+
+
 <!-- Our javascript -->
 <script type="text/javascript" src="js/doc_cluster/scatter_graph/scatter_graph.js"></script>
-<script type="text/javascript" src="js/doc_cluster/doc_view/text_view.js"></script>
-<script type="text/javascript" src="js/doc_cluster/doc_view/document_list_view.js"></script>
-<script type="text/javascript" src="js/doc_cluster/doc_view/cluster_topic_words_view.js"></script>
+<!--<script type="text/javascript" src="js/doc_cluster/doc_view/text_view.js"></script>-->
+<!--<script type="text/javascript" src="js/doc_cluster/doc_view/document_list_view.js"></script>-->
+<!--<script type="text/javascript" src="js/doc_cluster/doc_view/cluster_topic_words_view.js"></script>-->
 <script type="text/javascript" src="js/doc_cluster/doc_view/cluster_list_view.js"></script>
 <script type="text/javascript" src="js/doc_cluster/utility.js"></script>
 <script type="text/javascript" src="js/doc_cluster/chart_doc_view.js"></script>
