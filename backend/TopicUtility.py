@@ -451,6 +451,23 @@ class TopicUtility:
             all_n_grams += update_bi_grams + update_tri_grams
             # Sort n-grams by score
             sorted_n_grams = sorted(all_n_grams, key=lambda n_gram: n_gram['score'], reverse=True)
-            return sorted_n_grams
+            duplicate_topics = []
+            # Scan sored n_gram and merge duplicated topics to another topic
+            for n_gram in sorted_n_grams:
+                doc_ids = set(n_gram['doc_ids'])
+                topic = n_gram['topic']
+                relevant_topics = list(filter(lambda n_gram: topic in n_gram['topic'] and n_gram['topic'] != topic,
+                                              sorted_n_grams))
+                if len(relevant_topics) > 0:
+                    relevant_ids = set()
+                    for relevant_topic in relevant_topics:
+                        relevant_ids = relevant_ids.union(set(relevant_topic['doc_ids']))
+                    # Check if the articles about a topic and articles about all relevant topics <=1
+                    overlap = doc_ids - relevant_ids
+                    if len(overlap) <= 1:
+                        duplicate_topics.append(topic)
+            # Filter out duplicated topics
+            filter_sorted_n_grams = list(filter(lambda n_gram: n_gram['topic'] not in duplicate_topics, sorted_n_grams))
+            return filter_sorted_n_grams
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
