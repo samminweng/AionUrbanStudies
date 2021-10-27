@@ -1,3 +1,4 @@
+import copy
 import json
 import os
 import nltk
@@ -414,10 +415,10 @@ class TopicUtility:
             def check_if_overlapped_gram(gram_n, gram_n_1):
                 doc_ids_n = set(gram_n['doc_ids'])
                 doc_ids_n_1 = set(gram_n_1['doc_ids'])
-                # Check if the difference is within the acceptable range (<=2)
+                # Check if the difference is within the acceptable range (<=1)
                 overlap_doc_ids = doc_ids_n.intersection(doc_ids_n_1)
                 # And n-1 gram is a sub-string of n-gram
-                if gram_n_1['topic'] in gram_n['topic'] and abs(len(doc_ids_n) - len(doc_ids_n_1)) <= 2\
+                if gram_n_1['topic'] in gram_n['topic'] and abs(len(doc_ids_n) - len(doc_ids_n_1)) <= 1\
                         and len(overlap_doc_ids) > 0:
                     return True  # n_gram overlaps n-1 gram
                 return False
@@ -431,20 +432,23 @@ class TopicUtility:
                     if check_if_overlapped_gram(n_gram, n_1_gram):
                         # if n_1_gram['topic'] == 'LST':    # Debugging only
                         #     print("LST")
+                        # Update the scores
+                        n_gram['score'] += n_1_gram['score']
                         overlapped_topics.add(n_1_gram['topic'])
             # Filter all the overlapping n-1 grams
             n_1_grams = list(filter(lambda gram: gram['topic'] not in overlapped_topics, n_1_grams))
-            return n_1_grams
+            return n_grams, n_1_grams
 
         try:
-            # Merge 1-gram topic to 2-gram
+            # Merge 1-gram topic to 2-gram and make a deep copy of original n-gram results
             uni_grams = n_gram_topics.get('Topic1-gram')
             bi_grams = n_gram_topics.get('Topic2-gram')
             tri_grams = n_gram_topics.get('Topic3-gram')
-            uni_grams = merge_overlapped_n_1_grams(bi_grams, uni_grams)
-            bi_grams = merge_overlapped_n_1_grams(tri_grams, bi_grams)
+            update_bi_grams, update_uni_grams = merge_overlapped_n_1_grams(copy.deepcopy(bi_grams), copy.deepcopy(uni_grams))
+            all_n_grams = update_uni_grams
+            update_tri_grams, update_bi_grams = merge_overlapped_n_1_grams(copy.deepcopy(tri_grams), copy.deepcopy(bi_grams))
             # Collect all the n-grams to topic
-            all_n_grams = uni_grams + bi_grams + tri_grams
+            all_n_grams += update_bi_grams + update_tri_grams
             # Sort n-grams by score
             sorted_n_grams = sorted(all_n_grams, key=lambda n_gram: n_gram['score'], reverse=True)
             return sorted_n_grams

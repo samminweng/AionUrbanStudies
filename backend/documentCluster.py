@@ -203,7 +203,7 @@ class DocumentCluster:
                 docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
                     .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
                 # Get top 100 topics (1, 2, 3 grams) for each cluster
-                topic_words_df = TopicUtility.get_n_gram_topics(approach, docs_per_cluster, total, is_load=False)
+                topic_words_df = TopicUtility.get_n_gram_topics(approach, docs_per_cluster, total, is_load=True)
                 # print(topic_words_df)
                 results = []
                 for i, cluster in docs_per_cluster.iterrows():
@@ -223,8 +223,8 @@ class DocumentCluster:
                             n_gram_type = 'Topic' + str(n_gram) + '-gram'
                             result[n_gram_type] = topic_words_bert_topic
                             n_gram_topics[n_gram_type] = topic_words_bert_topic
-                        # if cluster_no == 2:       # Debugging only
-                        #     print("Cluster 2")
+                        if cluster_no == 2:       # Debugging only
+                            print("Cluster 2")
                         result['TopicN-gram'] = TopicUtility.merge_n_gram_topic(n_gram_topics)
                         results.append(result)
                     except Exception as err:
@@ -243,6 +243,46 @@ class DocumentCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Flatten the topics
+    def flatten_topics(self):
+        path = os.path.join(self.output_path,
+                            self.args.case_name + '_HDBSCAN_Cluster_topic_words.json')
+        cluster_df = pd.read_json(path)
+        cluster = cluster_df[cluster_df['Cluster'] == 2].iloc[0]
+        uni_grams = cluster['Topic1-gram'][:50]
+        bi_grams = cluster['Topic2-gram'][:50]
+        tri_grams = cluster['Topic3-gram'][:50]
+        mix_grams = cluster['TopicN-gram'][:50]
+        n_grams = []
+        for i in range(50):
+            n_gram = {'1-gram': "", '1-gram-score': 0, '1-gram-count': 0, '2-gram': "", '2-gram-score': 0,
+                      '2-gram-count': 0, '3-gram': "", '3-gram-score': 0, '3-gram-count': 0}
+            if i < len(uni_grams):
+                n_gram['1-gram'] = uni_grams[i]['topic']
+                n_gram['1-gram-score'] = uni_grams[i]['score']
+                n_gram['1-gram-count'] = len(uni_grams[i]['doc_ids'])
+            if i < len(bi_grams):
+                n_gram['2-gram'] = bi_grams[i]['topic']
+                n_gram['2-gram-score'] = bi_grams[i]['score']
+                n_gram['2-gram-count'] = len(bi_grams[i]['doc_ids'])
+            if i < len(tri_grams) :
+                n_gram['3-gram'] = tri_grams[i]['topic']
+                n_gram['3-gram-score'] = tri_grams[i]['score']
+                n_gram['3-gram-count'] = len(tri_grams[i]['doc_ids'])
+            if i < len(mix_grams) :
+                n_gram['N-gram'] = mix_grams[i]['topic']
+                n_gram['N-gram-score'] = mix_grams[i]['score']
+                n_gram['N-gram-count'] = len(mix_grams[i]['doc_ids'])
+            n_grams.append(n_gram)
+        n_gram_df = pd.DataFrame(n_grams, columns=['1-gram', '1-gram-score', '1-gram-count',
+                                                   '2-gram', '2-gram-score', '2-gram-count',
+                                                   '3-gram', '3-gram-score', '3-gram-count',
+                                                   'N-gram', 'N-gram-score', 'N-gram-count'])
+        path = os.path.join(self.output_path, 'temp',
+                            self.args.case_name + '_HDBSCAN_Cluster_2_topic_words_.csv')
+        n_gram_df.to_csv(path, encoding='utf-8', index=False)
+        print('Output topics per cluster to ' + path)
+
 
 # Main entry
 if __name__ == '__main__':
@@ -253,6 +293,10 @@ if __name__ == '__main__':
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
     # docCluster.collect_tf_idf_terms_by_cluster()
     docCluster.derive_topic_words_from_cluster_docs()
+    docCluster.flatten_topics()
+
+
+
 
 # # Derive topic words using TF-IDF
 # topic_words_tf_idf = TopicUtility.derive_topic_words_tf_idf(tf_idf_df, doc_ids)
