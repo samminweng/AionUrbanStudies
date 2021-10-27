@@ -445,10 +445,10 @@ class TopicUtility:
             bi_grams = n_gram_topics.get('Topic2-gram')
             tri_grams = n_gram_topics.get('Topic3-gram')
             update_bi_grams, update_uni_grams = merge_overlapped_n_1_grams(copy.deepcopy(bi_grams), copy.deepcopy(uni_grams))
-            all_n_grams = update_uni_grams
+            all_n_grams = update_uni_grams + update_bi_grams
             update_tri_grams, update_bi_grams = merge_overlapped_n_1_grams(copy.deepcopy(tri_grams), copy.deepcopy(bi_grams))
             # Collect all the n-grams to topic
-            all_n_grams += update_bi_grams + update_tri_grams
+            all_n_grams += update_tri_grams
             # Sort n-grams by score
             sorted_n_grams = sorted(all_n_grams, key=lambda n_gram: n_gram['score'], reverse=True)
             duplicate_topics = []
