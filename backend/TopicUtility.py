@@ -1,6 +1,9 @@
 import copy
 import json
+import math
 import os
+import re
+
 import nltk
 import numpy as np
 from matplotlib import pyplot as plt
@@ -141,72 +144,6 @@ class TopicUtility:
             print("Error occurred! {err}".format(err=err))
 
     @staticmethod
-    def extract_terms_by_TFIDF(doc_ids, texts):
-        cleaned_texts = list(map(lambda text: TopicUtility.preprocess_text(text), texts))
-
-        # filter_words = TopicUtility.stop_words + TopicUtility.function_words
-        # Filter words containing stop words
-        vectorizer = TfidfVectorizer(ngram_range=(2, 2), stop_words=None)
-        # Compute tf-idf scores for each word in each sentence of the abstract
-        vectors = vectorizer.fit_transform(cleaned_texts)
-        feature_names = vectorizer.get_feature_names()
-        dense = vectors.todense()
-        dense_list = dense.tolist()
-        dense_dict = pd.DataFrame(dense_list, columns=feature_names).to_dict(orient='records')
-        key_terms = list()
-        # Collect all the key terms of all the sentences in the text
-        for index, dense in enumerate(dense_dict):
-            # Sort the terms by score
-            filter_list = list(filter(lambda item: item[1] > 0, dense.items()))
-            # Filter topics containing stop words
-            filter_list = list(
-                filter(lambda item: not Utility.check_words(item[0], TopicUtility.stop_words), filter_list))
-            # Filter topics containing function words
-            filter_list = list(
-                filter(lambda item: not Utility.check_words(item[0], TopicUtility.function_words), filter_list))
-            sorted_list = list(sorted(filter_list, key=lambda item: item[1], reverse=True))
-            # Include the key terms
-            key_terms.append({
-                'doc_id': doc_ids[index],
-                'key_terms': list(map(lambda item: item[0], sorted_list))
-            })
-        return key_terms
-
-    # Obtain the tf-idf terms for each individual document in a cluster
-    # Select top 2 key term as the representative topics for
-    @staticmethod
-    def derive_topic_words_tf_idf(tf_idf_df, doc_ids):
-        # Obtain the TF-IDF terms for each individual articles in the clustered documents
-        topic_words = []
-        for doc_id in doc_ids:
-            try:
-                # Get the top 2 TF-IDF terms
-                doc = tf_idf_df.query("DocId == @doc_id")
-                if not doc.empty:
-                    doc_key_terms = doc.iloc[0]['HDBSCAN_Cluster_KeyTerms']
-                    top_terms = doc_key_terms[:2]
-                    for top_term in top_terms:
-                        found_topics = [topic for topic in topic_words if topic['topic_words'] == top_term]
-                        if len(found_topics) == 0:
-                            found_topic = {'topic_words': top_term, 'doc_ids': set()}
-                            found_topic['doc_ids'].add(doc_id)
-                            topic_words.append(found_topic)
-                        else:
-                            found_topic = found_topics[0]
-                            found_topic['doc_ids'].add(doc_id)
-                else:
-                    print("Can not find doc id = " + str(doc_id))
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-        # Convert the doc_ids to list type and add the score
-        for topic in topic_words:
-            topic['doc_ids'] = list(topic['doc_ids'])
-            topic['score'] = len(topic['doc_ids'])
-        # # Sort the topic_words by score
-        sorted_topic_words = sorted(topic_words, key=lambda item: item['score'], reverse=True)
-        return sorted_topic_words
-
-    @staticmethod
     def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):
         try:
             # Collect a list of clustered document where each document is a list of tokens
@@ -302,82 +239,254 @@ class TopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Get topics (n_grams) by using c-TF-IDF and the number of topic is max_length
+    # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_topics(approach, docs_per_cluster, total, is_load=False, max_length=100):
-        def compute_c_tf_idf_score(n, doc_texts_per_cluster, total_number_documents):
+    def get_n_gram_topics(approach, docs_per_cluster, is_load=False):
+        if is_load:
+            n_gram_topics_df = pd.read_json(os.path.join('output', 'cluster',
+                                                         'temp',
+                                                         'UrbanStudyCorpus_' + approach + '_n_topics.json'))
+            return n_gram_topics_df.to_dict("records")
+
+        # Convert the texts of all clusters into a list of document (a list of sentences) for deriving n-grams
+        def _collect_cluster_docs(_docs_per_cluster):
+            # Get the clustered texts
+            clusters = _docs_per_cluster[approach]
+            doc_texts_per_cluster = docs_per_cluster['Text']
+            _docs = []
+            for i, doc_texts in doc_texts_per_cluster.items():
+                doc_id = clusters[i]  # doc id is cluster id
+                doc = []
+                for doc_text in doc_texts:
+                    text = TopicUtility.preprocess_text(doc_text.strip())
+                    sentences = sent_tokenize(text)
+                    doc.extend(sentences)
+                _docs.append({'cluster': doc_id, 'doc': doc})  # doc: a list of sentences
+            # Convert the frequency matrix to data frame
+            df = pd.DataFrame(_docs, columns=['cluster', 'doc'])
+            # Write to temp output for validation
+            df.to_csv(os.path.join('output', 'cluster', 'temp', approach, 'Step_1_UrbanStudyCorpus_cluster_doc.csv'),
+                      encoding='utf-8', index=False)
+            df.to_json(os.path.join('output', 'cluster', 'temp', approach, 'Step_1_UrbanStudyCorpus_cluster_doc.json'),
+                       orient='records')
+            return _docs
+
+        # Create frequency matrix to track the frequencies of a n-gram in
+        def _create_frequency_matrix(_docs, _num):
+            # Generate n-gram of a text and avoid stop
+            def _generate_ngrams(_words, _num):
+                _n_grams = list(ngrams(_words, _num))
+                # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
+                r_list = []
+                for _n_gram in _n_grams:
+                    is_qualified = True
+                    for word in _n_gram:
+                        # Each word in 'n-gram' must not be stop words and must be a alphabet or number
+                        if word.lower() in TopicUtility.stop_words or \
+                                re.search('\d|[^\w]', word.lower()):
+                            is_qualified = False
+                            break
+                    if is_qualified:
+                        r_list.append(" ".join(_n_gram))  # Convert n_gram (a list of words) to a string
+                return r_list
+
+            # Vectorized the clustered doc text and Keep the Word case unchanged
+            frequency_matrix = []
+            for doc in docs:
+                doc_id = doc['cluster']  # doc id is the cluster no
+                doc_texts = doc['doc']
+                freq_table = {}
+                for sent in doc_texts:
+                    words = word_tokenize(sent)
+                    n_grams = _generate_ngrams(words, _num)
+                    for ngram in n_grams:
+                        if ngram in freq_table:
+                            freq_table[ngram] += 1
+                        else:
+                            freq_table[ngram] = 1
+                frequency_matrix.append({'cluster': doc_id, 'freq_table': freq_table})
+            # Convert the frequency matrix to data frame
+            df = pd.DataFrame(frequency_matrix, columns=['cluster', 'freq_table'])
+            # Write to temp output for validation
+            df.to_csv(os.path.join('output', 'cluster', 'temp', approach,
+                                   'Step_2_UrbanStudyCorpus_frequency_matrix.csv'),
+                      encoding='utf-8', index=False)
+            df.to_json(os.path.join('output', 'cluster', 'temp', approach,
+                                    'Step_2_UrbanStudyCorpus_frequency_matrix.json'),
+                       orient='records')
+            print('Output topics per cluster to ' + os.path.join('output', 'cluster', 'temp',
+                                                                 'Step2_UrbanStudyCorpus_frequency_matrix.json'))
+            return frequency_matrix
+
+        # Compute TF score
+        def _compute_tf_matrix(_freq_matrix):
+            _tf_matrix = {}
+            # Compute tf score for each cluster (doc) in the corpus
+            for row in freq_matrix:
+                doc_id = row['cluster']  # Doc id is the cluster no
+                freq_table = row['freq_table']  # Store the frequencies of each word in the doc
+                _tf_table = {}  # TF score of each word (1,2,3-grams) in the doc
+                _total_words_in_doc = len(freq_table)  # Adjusted for total number of words in doc
+                for word, freq in freq_table.items():
+                    # frequency of a word in doc / total number of words in doc
+                    _tf_table[word] = freq / _total_words_in_doc
+                _tf_matrix[doc_id] = _tf_table
+            return _tf_matrix
+
+        # Collect the table to store the mapping between word to a list of documents (clusters)
+        def _create_docs_per_word(_freq_matrix):
+            word_doc_table = {}  # Store the mapping between a word and its doc ids
+            for row in _freq_matrix:
+                doc_id = row['cluster']  # Doc id is the cluster no
+                freq_table = row['freq_table']  # Store the frequencies of each word in the doc
+                for word, count in freq_table.items():
+                    if word in word_doc_table:  # Add the table if the word appears in the doc
+                        word_doc_table[word].append(doc_id)
+                    else:
+                        word_doc_table[word] = [doc_id]
+
+                # Convert the doc per word table (a dictionary) to data frame
+                df = pd.DataFrame(list(word_doc_table.items()))
+                # Write to temp output for validation
+                df.to_csv(os.path.join('output', 'cluster', 'temp', approach,
+                                       'Step_3_UrbanStudyCorpus_word_doc_table.csv'),
+                          encoding='utf-8', index=False)
+                df.to_json(os.path.join('output', 'cluster', 'temp', approach,
+                                        'Step_3_UrbanStudyCorpus_word_doc_table.json'),
+                           orient='records')
+            return word_doc_table
+
+        # Compute IDF scores
+        def _compute_idf_matrix(_freq_matrix, _doc_per_words):
+            _total_dos = len(_freq_matrix)  # Total number of clusters in the corpus
+            _idf_matrix = {}  # Store idf scores for each doc
+            for row in _freq_matrix:
+                doc_id = row['cluster']  # Doc id is the cluster no
+                freq_table = row['freq_table']  # Store the frequencies of each word in the doc
+                idf_table = {}
+                for word in freq_table.keys():
+                    counts = len(_doc_per_words[word])  # Number of documents (clusters) the word appears
+                    idf_table[word] = math.log10(_total_dos / float(counts))
+                _idf_matrix[doc_id] = idf_table  # Idf table stores each word's idf scores
+            return _idf_matrix
+
+        # Compute tf-idf score matrix
+        def _compute_tf_idf_matrix(_tf_matrix, _idf_matrix, _freq_matrix, _docs_per_word):
+            _tf_idf_matrix = {}
+            # Compute tf-idf score for each cluster
+            for doc_id, tf_table in tf_matrix.items():
+                # Compute tf-idf score of each word in the cluster
+                idf_table = idf_matrix[doc_id]  # idf table stores idf scores of the doc (doc_id)
+                # Get freq table of the cluster
+                freq_table = next(f for f in _freq_matrix if f['cluster'] == doc_id)['freq_table']
+                tf_idf_list = []
+                for word, tf_score in tf_table.items():  # key is word, value is tf score
+                    try:
+                        idf_score = idf_table[word]  # Get idf score of the word
+                        freq = freq_table[word]  # Get the frequencies of the word in cluster doc_id
+                        cluster_ids = _docs_per_word[word]  # Get the clusters that the word appears
+                        tf_idf_list.append({'topic': word, 'score': float(tf_score * idf_score), 'freq': freq,
+                                            'cluster_ids': cluster_ids})
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+                # Sort the tf_idf_list
+                sorted_tf_idf_list = sorted(tf_idf_list, key=lambda t: t['score'], reverse=True)
+                # Store tf-idf scores of the document
+                _tf_idf_matrix[str(doc_id)] = sorted_tf_idf_list
+            return _tf_idf_matrix
+
+        # Step 1. Convert each cluster of documents (one or more articles) into a single document
+        docs = _collect_cluster_docs(docs_per_cluster)
+        topics_list = []
+        for n_gram_num in [1, 2, 3]:
             try:
-                # Aggregate every doc in a cluster as a single text
-                clustered_texts = list(map(lambda doc: " ".join(doc), doc_texts_per_cluster))
-                clean_texts = [TopicUtility.preprocess_text(text) for text in clustered_texts]
-                # Vectorized the clustered doc text and Keep the Word case unchanged
-                count = CountVectorizer(ngram_range=(n, n), stop_words="english", lowercase=False).fit(clean_texts)
-                t = count.transform(clean_texts).toarray()
-                w = t.sum(axis=1)
-                tf = np.divide(t.T, w)
-                sum_t = t.sum(axis=0)
-                idf = np.log(np.divide(total_number_documents, sum_t)).reshape(-1, 1)  #
-                tf_idf = np.multiply(tf, idf)
-                return tf_idf, count
+                # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
+                freq_matrix = _create_frequency_matrix(docs, n_gram_num)
+                # 3. Compute Term Frequency (TF) and generate a matrix
+                # Term frequency (TF) is the frequency of a word in a document divided by total number of words in the document.
+                tf_matrix = _compute_tf_matrix(freq_matrix)
+                # 4. Create the table to map the word to a list of documents
+                docs_per_word = _create_docs_per_word(freq_matrix)
+                # 5. Compute IDF (how common or rare a word is) and output the results as a matrix
+                idf_matrix = _compute_idf_matrix(freq_matrix, docs_per_word)
+                # Compute tf-idf matrix
+                tf_idf_matrix = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, docs_per_word)
+                # print(tf_idf_matrix)
+                # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
+                topics_list.append({
+                    'n_gram': n_gram_num,
+                    'topics': tf_idf_matrix
+                })
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
 
-        def extract_top_n_words_per_cluster(tf_idf, count, clusters, n=100):
-            n_grams = count.get_feature_names()
-            labels = clusters
-            tf_idf_transposed = tf_idf.T
-            indices = tf_idf_transposed.argsort()[:, -n:]
-            # top_n_words is a dictionary where key is a string of cluster no, and value is a tuple (n_gram, score)
-            top_n_words = {str(label): [(n_grams[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
-                           enumerate(labels)}
-            return top_n_words
-
-        if is_load:
-            path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json')
-            # Convert number of gram from string to integer
-            topic_df = pd.read_json(path)
-            return topic_df
-
-        # Extract top 50 topic words
-        cluster_labels = docs_per_cluster[approach]
-        topics_list = []
-        for n_gram in [1, 2, 3]:
-            # Derive topic words using C-TF-IDF
-            tf_idf, count = compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'], total)
-            # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
-            # Get 100 topic words per cluster
-            topics = extract_top_n_words_per_cluster(tf_idf, count, cluster_labels, max_length)
-            topics_list.append({
-                'n_gram': n_gram,
-                'topics': topics
-            })
-
         topic_words_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
         # Write the results to
-        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.csv')
-        topic_words_df.to_csv(path, encoding='utf-8', index=False)
+        topic_words_df.to_csv(
+            os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.csv'),
+            encoding='utf-8', index=False)
         # # # Write to a json file
-        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json')
-        topic_words_df.to_json(path, orient='records')
-        return topic_words_df
+        topic_words_df.to_json(
+            os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json'),
+            orient='records')
+        return topics_list  # Return a list of dicts
 
-
-    # Convert the singular topic into the topic in plural form
+    # Flatten the topics
     @staticmethod
-    def get_topic_in_plural_form(topic):
-        # Get plural nouns of topic
-        words = topic.split(" ")
-        last_word = words[-1]
-        plural_word = last_word + "s"
-        for plural, singular in TopicUtility.lemma_nouns.items():
-            if singular == last_word:
-                plural_word = plural
-                break
-        plural_topic = words[:-1] + [plural_word]
-        return " ".join(plural_topic)
+    def flatten_topics(approach):
+        cluster_df = pd.read_json(
+            os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_Cluster_n_topics.json'))
+        clusters = cluster_df.to_dict("record")
+        # cluster = next(cluster for cluster in clusters if cluster['n_gram'] ==
+        # uni_grams = cluster['Topic1-gram'][:50]
+        # bi_grams = cluster['Topic2-gram'][:50]
+        # tri_grams = cluster['Topic3-gram'][:50]
+        # # mix_grams = cluster['TopicN-gram'][:50]
+        # n_grams = []
+        # for i in range(50):
+        #     n_gram = {'1-gram': "", '1-gram-score': 0, '1-gram-count': 0, '2-gram': "", '2-gram-score': 0,
+        #               '2-gram-count': 0, '3-gram': "", '3-gram-score': 0, '3-gram-count': 0}
+        #     if i < len(uni_grams):
+        #         n_gram['1-gram'] = uni_grams[i]['topic']
+        #         n_gram['1-gram-score'] = uni_grams[i]['score']
+        #         n_gram['1-gram-count'] = len(uni_grams[i]['doc_ids'])
+        #     if i < len(bi_grams):
+        #         n_gram['2-gram'] = bi_grams[i]['topic']
+        #         n_gram['2-gram-score'] = bi_grams[i]['score']
+        #         n_gram['2-gram-count'] = len(bi_grams[i]['doc_ids'])
+        #     if i < len(tri_grams):
+        #         n_gram['3-gram'] = tri_grams[i]['topic']
+        #         n_gram['3-gram-score'] = tri_grams[i]['score']
+        #         n_gram['3-gram-count'] = len(tri_grams[i]['doc_ids'])
+        #     # if i < len(mix_grams):
+        #     #     n_gram['N-gram'] = mix_grams[i]['topic']
+        #     #     n_gram['N-gram-score'] = mix_grams[i]['score']
+        #     #     n_gram['N-gram-count'] = len(mix_grams[i]['doc_ids'])
+        #     n_grams.append(n_gram)
+        # n_gram_df = pd.DataFrame(n_grams, columns=['1-gram', '1-gram-score', '1-gram-count',
+        #                                            '2-gram', '2-gram-score', '2-gram-count',
+        #                                            '3-gram', '3-gram-score', '3-gram-count',
+        #                                            'N-gram', 'N-gram-score', 'N-gram-count'])
+        # path = os.path.join('output', 'cluster', 'temp', '_HDBSCAN_Cluster_2_topic_words_.csv')
+        # n_gram_df.to_csv(path, encoding='utf-8', index=False)
+        # print('Output topics per cluster to ' + path)
 
+    # Group the doc (articles) by individual topic
     @staticmethod
-    def group_docs_by_topics(n_gram_type, doc_ids, doc_texts, topics_per_cluster):
+    def group_docs_by_topics(n_gram_num, doc_ids, doc_texts, topics_per_cluster):
+        # Convert the singular topic into the topic in plural form
+        def get_plural_topic_form(_topic):
+            # Get plural nouns of topic
+            words = _topic.split(" ")
+            last_word = words[-1]
+            plural_word = last_word + "s"
+            for plural, singular in TopicUtility.lemma_nouns.items():
+                if singular == last_word:
+                    plural_word = plural
+                    break
+            plural_topic = words[:-1] + [plural_word]
+            return " ".join(plural_topic)
+
         try:
             docs_per_topic = []
             # Go through each article and find if each topic appear in the article
@@ -385,10 +494,14 @@ class TopicUtility:
                 # Convert the preprocessed text to n_grams
                 tokenizes = word_tokenize(TopicUtility.preprocess_text(doc_text))
                 # Obtain the n-grams from the text
-                n_grams = list(ngrams(tokenizes, n_gram_type))
+                n_grams = list(ngrams(tokenizes, n_gram_num))
                 n_grams = list(map(lambda n_gram: " ".join(n_gram), n_grams))
                 # For each topic, find out the document ids that contain the topic
-                for topic, score in topics_per_cluster:
+                for item in topics_per_cluster:
+                    topic = item['topic']
+                    score = item['score']
+                    freq = item['freq']  # Total number of frequencies in this cluster
+                    cluster_ids = item['cluster_ids']  # A list of cluster that topic appears
                     # The topic appears in the article
                     if topic in n_grams:
                         # Check if docs_per_topic contains the doc id
@@ -397,8 +510,9 @@ class TopicUtility:
                         if doc_topic:
                             doc_topic['doc_ids'].append(doc_id)
                         else:
-                            docs_per_topic.append({'topic': topic, 'score': score,
-                                                   'plural': TopicUtility.get_topic_in_plural_form(topic),
+                            docs_per_topic.append({'topic': topic, 'score': score, 'freq': freq,
+                                                   'cluster_ids': cluster_ids,
+                                                   'plural': get_plural_topic_form(topic),
                                                    'doc_ids': [doc_id]})
             # Sort topics by score
             sorted_docs_per_topics = sorted(docs_per_topic, key=lambda t: t['score'], reverse=True)
@@ -406,68 +520,99 @@ class TopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Merge the overlapping topics of mix-grams (1, 2, 3) in a cluster, e.g. 'air' and 'air temperature' can be merged
-    # if they appear in the same set of articles
+    # Filter the overlapping topics of mix-grams (1, 2, 3) in a cluster, e.g. 'air' and 'air temperature' can be merged
+    # if they appear in the same set of articles and the same set of clusters. 'air' topic can be merged to 'air temperature'
     @staticmethod
     def merge_n_gram_topic(n_gram_topics):
-        # Merge n-1 grams into n_grams if n-1 gram share similar set of doc ids
-        def merge_overlapped_n_1_grams(n_grams, n_1_grams):
-            def check_if_overlapped_gram(gram_n, gram_n_1):
-                doc_ids_n = set(gram_n['doc_ids'])
-                doc_ids_n_1 = set(gram_n_1['doc_ids'])
-                # Check if the difference is within the acceptable range (<=1)
-                overlap_doc_ids = doc_ids_n.intersection(doc_ids_n_1)
-                # And n-1 gram is a sub-string of n-gram
-                if gram_n_1['topic'] in gram_n['topic'] and abs(len(doc_ids_n) - len(doc_ids_n_1)) <= 1\
-                        and len(overlap_doc_ids) > 0:
-                    return True  # n_gram overlaps n-1 gram
-                return False
-
-            # Collect all the overlapping n_1_grams
-            overlapped_topics = set()
-            # Collect the uni_grams that share similar set of doc ids and can be merged to bi_grams
-            for n_gram in n_grams:
-                # Find if any 1-gram has similar doc_ids
-                for n_1_gram in n_1_grams:
-                    if check_if_overlapped_gram(n_gram, n_1_gram):
-                        # if n_1_gram['topic'] == 'LST':    # Debugging only
-                        #     print("LST")
-                        # Update the scores
-                        n_gram['score'] += n_1_gram['score']
-                        overlapped_topics.add(n_1_gram['topic'])
-            # Filter all the overlapping n-1 grams
-            n_1_grams = list(filter(lambda gram: gram['topic'] not in overlapped_topics, n_1_grams))
-            return n_grams, n_1_grams
-
         try:
-            # Merge 1-gram topic to 2-gram and make a deep copy of original n-gram results
-            uni_grams = n_gram_topics.get('Topic1-gram')
-            bi_grams = n_gram_topics.get('Topic2-gram')
-            tri_grams = n_gram_topics.get('Topic3-gram')
-            update_bi_grams, update_uni_grams = merge_overlapped_n_1_grams(copy.deepcopy(bi_grams), copy.deepcopy(uni_grams))
-            all_n_grams = update_uni_grams + update_bi_grams
-            update_tri_grams, update_bi_grams = merge_overlapped_n_1_grams(copy.deepcopy(tri_grams), copy.deepcopy(bi_grams))
-            # Collect all the n-grams to topic
-            all_n_grams += update_tri_grams
             # Sort n-grams by score
-            sorted_n_grams = sorted(all_n_grams, key=lambda n_gram: n_gram['score'], reverse=True)
-            duplicate_topics = []
-            # Scan sored n_gram and merge duplicated topics to another topic
-            for n_gram in sorted_n_grams:
-                doc_ids = set(n_gram['doc_ids'])
-                topic = n_gram['topic']
-                relevant_topics = list(filter(lambda n_gram: topic in n_gram['topic'] and n_gram['topic'] != topic,
-                                              sorted_n_grams))
-                if len(relevant_topics) > 0:
-                    relevant_ids = set()
-                    for relevant_topic in relevant_topics:
-                        relevant_ids = relevant_ids.union(set(relevant_topic['doc_ids']))
-                    # Check if the articles about a topic and articles about all relevant topics <=1
-                    overlap = doc_ids - relevant_ids
-                    if len(overlap) <= 1:
-                        duplicate_topics.append(topic)
-            # Filter out duplicated topics
-            filter_sorted_n_grams = list(filter(lambda n_gram: n_gram['topic'] not in duplicate_topics, sorted_n_grams))
-            return filter_sorted_n_grams
+            sorted_n_grams = sorted(n_gram_topics, key=lambda _n_gram: _n_gram['score'], reverse=True)
+            duplicate_topics = set()
+            # Scan the mixed n_gram_topic and find duplicated topics to another topic
+            for n_gram_topic in sorted_n_grams:
+                topic = n_gram_topic['topic']
+                score = n_gram_topic['score']
+                freq = n_gram_topic['freq']
+                cluster_ids = n_gram_topic['cluster_ids']
+                # Scan if any other sub topic have the same score, freq and cluster_ids and share similar topics
+                # The topic (such as 'air') is a substring of another topic ('air temperature') so 'air' is duplicated
+                relevant_topics = list(
+                    filter(lambda _n_gram: _n_gram['topic'] != topic and topic in _n_gram['topic'] and
+                                           (_n_gram['score'] - score <= 0.00000001) and
+                                           (_n_gram['freq'] == freq) and
+                                           (len(_n_gram['cluster_ids']) == len(cluster_ids)),
+                           sorted_n_grams))
+                if len(relevant_topics) > 0:    # We have found other relevant topics that can cover this topic
+                    duplicate_topics.add(topic)
+            # Removed duplicated topics
+            filter_topics = list(
+                filter(lambda _n_gram: _n_gram['topic'] not in duplicate_topics, sorted_n_grams))
+            # Sort by the score and  The resulting topics are mostly 2 or 3 grams
+            filter_sorted_topics = sorted(filter_topics, key=lambda _n_gram: _n_gram['score'], reverse=True)
+            return filter_sorted_topics[:300]   # Get top 300 topics
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+# # Get topics (n_grams) by using c-TF-IDF and the number of topic is max_length
+#    @staticmethod
+#    def get_n_gram_topics_old(approach, docs_per_cluster, total, is_load=False, max_length=100):
+#        def compute_c_tf_idf_score(n, doc_texts_per_cluster, total_number_documents):
+#            try:
+#                # Aggregate every doc in a cluster as a single text
+#                clustered_texts = list(map(lambda doc: " ".join(doc), doc_texts_per_cluster))
+#                clean_texts = [TopicUtility.preprocess_text(text) for text in clustered_texts]
+#                # Vectorized the clustered doc text and Keep the Word case unchanged
+#                count = CountVectorizer(ngram_range=(n, n), stop_words="english", lowercase=False).fit(clean_texts)
+#                t = count.transform(clean_texts).toarray()
+#                w = t.sum(axis=1)
+#                tf = np.divide(t.T, w)
+#                sum_t = t.sum(axis=0)
+#                idf = np.log(np.divide(total_number_documents, sum_t)).reshape(-1, 1)  #
+#                tf_idf = np.multiply(tf, idf)
+#                return tf_idf, count
+#            except Exception as err:
+#                print("Error occurred! {err}".format(err=err))
+#
+#        def extract_top_n_words_per_cluster(tf_idf, count, clusters, n=100):
+#            n_grams = count.get_feature_names()
+#            labels = clusters
+#            tf_idf_transposed = tf_idf.T
+#            indices = tf_idf_transposed.argsort()[:, -n:]
+#            # top_n_words is a dictionary where key is a string of cluster no, and value is a tuple (n_gram, score)
+#            top_n_words = {str(label): [(n_grams[j], tf_idf_transposed[i][j]) for j in indices[i]][::-1] for i, label in
+#                           enumerate(labels)}
+#            return top_n_words
+#
+#        if is_load:
+#            path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json')
+#            # Convert number of gram from string to integer
+#            topic_df = pd.read_json(path)
+#            return topic_df
+#
+#        # Extract top 50 topic words
+#        cluster_labels = docs_per_cluster[approach]
+#        topics_list = []
+#        for n_gram in [1, 2, 3]:
+#            # Derive topic words using C-TF-IDF
+#            tf_idf, count = compute_c_tf_idf_score(n_gram, docs_per_cluster['Text'], total)
+#            # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
+#            # Get 100 topic words per cluster
+#            topics = extract_top_n_words_per_cluster(tf_idf, count, cluster_labels, max_length)
+#            topics_list.append({
+#                'n_gram': n_gram,
+#                'topics': topics
+#            })
+#
+#        topic_words_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
+#        # Write the results to
+#        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.csv')
+#        topic_words_df.to_csv(path, encoding='utf-8', index=False)
+#        # # # Write to a json file
+#        path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json')
+#        topic_words_df.to_json(path, orient='records')
+#        return topic_words_df.
+# if is_load:
+#     path = os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json')
+#     # Convert number of gram from string to integer
+#     topic_df = pd.read_json(path)
+#     return topic_df
