@@ -222,7 +222,7 @@ perceived visual quality,[-1]
 experienced urban designer,[-1]
 provide full coverage,[-1]
 Baidu Street View,[-1]
-machine learning algorithm,"[-1, 0, 1, 2, 3, 4, 7, 10, 11, 13, 14, 16, 18, 20, 21, 22, 24, 25, 26]"
+machine learning algorithm,"[-1, 0, 1, 2, 3, 4, 7, 10, 13, 14, 16, 18, 20, 21, 22, 24, 25, 26]"
 pixel representing key,[-1]
 representing key element,[-1]
 key element affecting,[-1]
@@ -1051,11 +1051,11 @@ citizen substantially improves,[-1]
 predicting missing data,[-1]
 open government data,[-1]
 mitigate climate change,"[-1, 21]"
-open access article,"[-1, 1, 8, 15, 19]"
-access article distributed,"[-1, 8, 15, 19]"
-Creative Commons Attribution,"[-1, 8, 15, 19]"
-Commons Attribution License,"[-1, 8, 15, 19]"
-permits unrestricted use,"[-1, 8, 15, 19]"
+open access article,"[-1, 1, 8, 19]"
+access article distributed,"[-1, 8, 19]"
+Creative Commons Attribution,"[-1, 8, 19]"
+Commons Attribution License,"[-1, 8, 19]"
+permits unrestricted use,"[-1, 8, 19]"
 Analyzing Human Interactions,[-1]
 collect vast amount,"[-1, 16]"
 scientifically challenging proposition,[-1]
@@ -3481,7 +3481,7 @@ air quality evaluator,[3]
 vehicle sensor data,[3]
 sensor data integration,[3]
 integrated big data,[3]
-big data processing,"[3, 4, 11, 22]"
+big data processing,"[3, 4, 22]"
 human activity recognition,[3]
 activity recognition using,[3]
 recognition using accelerometer,[3]
@@ -6792,27 +6792,6 @@ benefit urban study,[11]
 enable urban stakeholder,[11]
 provide better service,[11]
 three main domain,[11]
-data processing flow,[11]
-clarifying big data,[11]
-big data driven,[11]
-data driven prediction,[11]
-driven prediction model,[11]
-graph based representative,[11]
-based representative keyword,[11]
-representative keyword extraction,[11]
-keyword extraction model,[11]
-novel pattern search,[11]
-pattern search engine,[11]
-time series supporting,[11]
-series supporting dynamic,[11]
-supporting dynamic expected,[11]
-dynamic expected pattern,[11]
-expected pattern within,[11]
-tool wear compensation,[11]
-wear compensation parameter,[11]
-compensation parameter recommendation,[11]
-domain knowledge based,[11]
-leading software industry,[11]
 urban human mobility,"[12, 19]"
 human mobility data,"[12, 19, 20]"
 mobility data mining,[12]

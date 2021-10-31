@@ -193,9 +193,15 @@ class DocumentCluster:
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
         cluster_approaches = ['HDBSCAN_Cluster']
         try:
+            # Get the duplicate articles. Note the original Scopus file contain duplicated articles (titles are the same)
+            duplicate_doc_ids = TopicUtility.scan_duplicate_articles()
+            print("Duplicated articles in " + self.args.case_name + ":")
+            print(*duplicate_doc_ids, sep=", ")
             # Load the document cluster
             doc_clusters_df = pd.read_json(
                 os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
+            # Drop the documents that are not in the list of duplicated articles
+            doc_clusters_df = doc_clusters_df[~doc_clusters_df['DocId'].isin(duplicate_doc_ids)]
             # Cluster the documents by
             for approach in cluster_approaches:
                 # Group the documents and doc_id by clusters
@@ -255,8 +261,8 @@ if __name__ == '__main__':
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
     # docCluster.collect_tf_idf_terms_by_cluster()
     docCluster.derive_topic_words_from_cluster_docs()
-    # Output top 50 topics by 1, 2 and 3-grams
-    TopicUtility.flatten_topics('HDBSCAN', 2)  # Cluster 2 topics
-    TopicUtility.flatten_topics('HDBSCAN', 10)  # Cluster 10 topics
-    TopicUtility.flatten_topics('HDBSCAN', 12)  # Cluster 12 topics
+    # # Output top 50 topics by 1, 2 and 3-grams
+    # TopicUtility.flatten_topics('HDBSCAN', 2)  # Cluster 2 topics
+    # # TopicUtility.flatten_topics('HDBSCAN', 10)  # Cluster 10 topics
+    # TopicUtility.flatten_topics('HDBSCAN', 12)  # Cluster 12 topics
 

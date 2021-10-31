@@ -374,9 +374,9 @@ class TopicUtility:
         def _compute_tf_idf_matrix(_tf_matrix, _idf_matrix, _freq_matrix, _docs_per_word):
             _tf_idf_matrix = {}
             # Compute tf-idf score for each cluster
-            for doc_id, tf_table in tf_matrix.items():
+            for doc_id, tf_table in _tf_matrix.items():
                 # Compute tf-idf score of each word in the cluster
-                idf_table = idf_matrix[doc_id]  # idf table stores idf scores of the doc (doc_id)
+                idf_table = _idf_matrix[doc_id]  # idf table stores idf scores of the doc (doc_id)
                 # Get freq table of the cluster
                 freq_table = next(f for f in _freq_matrix if f['cluster'] == doc_id)['freq_table']
                 tf_idf_list = []
@@ -546,6 +546,24 @@ class TopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    @staticmethod
+    def scan_duplicate_articles():
+        try:
+            corpus_df = pd.read_csv(os.path.join('data', 'UrbanStudyCorpus.csv'))
+            corpus = corpus_df.to_dict("records")
+            duplicate_doc_ids = set()
+            for article in corpus:
+                doc_id = article['DocId']
+                title = article['Title']
+                # Find if other article has the same title and author names
+                same_articles = list(filter(lambda a: a['Title'].lower().strip() == title.lower().strip() and
+                                                      a['DocId'] > doc_id , corpus))
+                if len(same_articles):
+                    for sa in same_articles:
+                        duplicate_doc_ids.add(sa['DocId'])
+            return list(duplicate_doc_ids)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 # # Get topics (n_grams) by using c-TF-IDF and the number of topic is max_length
 #    @staticmethod
 #    def get_n_gram_topics_old(approach, docs_per_cluster, total, is_load=False, max_length=100):
