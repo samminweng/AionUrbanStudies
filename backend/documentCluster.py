@@ -202,7 +202,7 @@ class DocumentCluster:
                 docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
                     .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
                 # Get top 100 topics (1, 2, 3 grams) for each cluster
-                n_gram_topic_list = TopicUtility.get_n_gram_topics(approach, docs_per_cluster, is_load=False)
+                n_gram_topic_list = TopicUtility.get_n_gram_topics(approach, docs_per_cluster)
                 # print(topic_words_df)
                 results = []
                 for i, cluster in docs_per_cluster.iterrows():
@@ -241,6 +241,7 @@ class DocumentCluster:
                                     self.args.case_name + '_' + approach + '_topic_words.json')
                 cluster_df.to_json(path, orient='records')
                 print('Output topics per cluster to ' + path)
+
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -254,12 +255,8 @@ if __name__ == '__main__':
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
     # docCluster.collect_tf_idf_terms_by_cluster()
     docCluster.derive_topic_words_from_cluster_docs()
+    # Output top 50 topics by 1, 2 and 3-grams
+    TopicUtility.flatten_topics('HDBSCAN', 2)  # Cluster 2 topics
+    TopicUtility.flatten_topics('HDBSCAN', 10)  # Cluster 10 topics
+    TopicUtility.flatten_topics('HDBSCAN', 12)  # Cluster 12 topics
 
-# def cluster_doc_by_agglomerative(self):
-#     # Normalize the embeddings to unit length
-#     # corpus_embeddings = self.document_embeddings / np.linalg.norm(self.document_embeddings, axis=1, keepdims=True)
-#     # Perform Agglomerative clustering
-#     clustering_model = AgglomerativeClustering(n_clusters=None, distance_threshold=1.5)
-#     clustering_model.fit(self.clusterable_embedding)
-#     clusters = clustering_model.labels_
-#     self.result_df['Agglomerative_Cluster'] = clusters

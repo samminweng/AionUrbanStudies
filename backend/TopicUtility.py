@@ -431,45 +431,37 @@ class TopicUtility:
             orient='records')
         return topics_list  # Return a list of dicts
 
-    # Flatten the topics
+    # Output the cluster topics as a csv file
     @staticmethod
-    def flatten_topics(approach):
-        cluster_df = pd.read_json(
-            os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_Cluster_n_topics.json'))
-        clusters = cluster_df.to_dict("record")
-        # cluster = next(cluster for cluster in clusters if cluster['n_gram'] ==
-        # uni_grams = cluster['Topic1-gram'][:50]
-        # bi_grams = cluster['Topic2-gram'][:50]
-        # tri_grams = cluster['Topic3-gram'][:50]
-        # # mix_grams = cluster['TopicN-gram'][:50]
-        # n_grams = []
-        # for i in range(50):
-        #     n_gram = {'1-gram': "", '1-gram-score': 0, '1-gram-count': 0, '2-gram': "", '2-gram-score': 0,
-        #               '2-gram-count': 0, '3-gram': "", '3-gram-score': 0, '3-gram-count': 0}
-        #     if i < len(uni_grams):
-        #         n_gram['1-gram'] = uni_grams[i]['topic']
-        #         n_gram['1-gram-score'] = uni_grams[i]['score']
-        #         n_gram['1-gram-count'] = len(uni_grams[i]['doc_ids'])
-        #     if i < len(bi_grams):
-        #         n_gram['2-gram'] = bi_grams[i]['topic']
-        #         n_gram['2-gram-score'] = bi_grams[i]['score']
-        #         n_gram['2-gram-count'] = len(bi_grams[i]['doc_ids'])
-        #     if i < len(tri_grams):
-        #         n_gram['3-gram'] = tri_grams[i]['topic']
-        #         n_gram['3-gram-score'] = tri_grams[i]['score']
-        #         n_gram['3-gram-count'] = len(tri_grams[i]['doc_ids'])
-        #     # if i < len(mix_grams):
-        #     #     n_gram['N-gram'] = mix_grams[i]['topic']
-        #     #     n_gram['N-gram-score'] = mix_grams[i]['score']
-        #     #     n_gram['N-gram-count'] = len(mix_grams[i]['doc_ids'])
-        #     n_grams.append(n_gram)
-        # n_gram_df = pd.DataFrame(n_grams, columns=['1-gram', '1-gram-score', '1-gram-count',
-        #                                            '2-gram', '2-gram-score', '2-gram-count',
-        #                                            '3-gram', '3-gram-score', '3-gram-count',
-        #                                            'N-gram', 'N-gram-score', 'N-gram-count'])
-        # path = os.path.join('output', 'cluster', 'temp', '_HDBSCAN_Cluster_2_topic_words_.csv')
-        # n_gram_df.to_csv(path, encoding='utf-8', index=False)
-        # print('Output topics per cluster to ' + path)
+    def flatten_topics(approach, cluster_no):
+        try:
+            cluster_df = pd.read_json(
+                os.path.join('output', 'cluster', 'UrbanStudyCorpus_' + approach + '_Cluster_topic_words.json'))
+            clusters = cluster_df.to_dict("records")
+            cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
+            records = []
+            for i in range(50):
+                record = {'1-gram': "", '1-gram-score': 0, '1-gram-freq': 0, '1-gram-docs': 0, '1-gram-clusters': 0,
+                          '2-gram': "", '2-gram-score': 0, '2-gram-freq': 0, '2-gram-docs': 0, '2-gram-clusters': 0,
+                          '3-gram': "", '3-gram-score': 0, '3-gram-freq': 0, '3-gram-docs': 0, '3-gram-clusters': 0,
+                          'N-gram': "", 'N-gram-score': 0, 'N-gram-freq': 0, 'N-gram-docs': 0, 'N-gram-clusters': 0,
+                          }
+                for n_gram_num in ['1-gram', '2-gram', '3-gram', 'N-gram']:
+                    if i < len(cluster['Topic' + n_gram_num]):
+                        n_gram = cluster['Topic' + n_gram_num][i]
+                        record[n_gram_num] = n_gram['topic']
+                        record[n_gram_num + '-score'] = n_gram['score']
+                        record[n_gram_num + '-freq'] = n_gram['freq']
+                        record[n_gram_num + '-docs'] = len(n_gram['doc_ids'])
+                        record[n_gram_num + '-clusters'] = len(n_gram['cluster_ids'])
+                records.append(record)
+            n_gram_df = pd.DataFrame(records)
+            _path = os.path.join('output', 'cluster', 'temp',
+                                 'UrbanStudyCorpus_HDBSCAN_Cluster_' + str(cluster_no) + '_topics.csv')
+            n_gram_df.to_csv(_path, encoding='utf-8', index=False)
+            print('Output topics per cluster to ' + _path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     # Group the doc (articles) by individual topic
     @staticmethod
@@ -533,23 +525,24 @@ class TopicUtility:
                 topic = n_gram_topic['topic']
                 score = n_gram_topic['score']
                 freq = n_gram_topic['freq']
-                cluster_ids = n_gram_topic['cluster_ids']
-                # Scan if any other sub topic have the same score, freq and cluster_ids and share similar topics
+                cluster_ids = set(n_gram_topic['cluster_ids'])  # a set of cluster ids
+                doc_ids = set(n_gram_topic['doc_ids'])
+                # Scan if any other sub topic have the same freq and cluster_ids and share similar topics
                 # The topic (such as 'air') is a substring of another topic ('air temperature') so 'air' is duplicated
                 relevant_topics = list(
                     filter(lambda _n_gram: _n_gram['topic'] != topic and topic in _n_gram['topic'] and
-                                           (_n_gram['score'] - score <= 0.00000001) and
-                                           (_n_gram['freq'] == freq) and
-                                           (len(_n_gram['cluster_ids']) == len(cluster_ids)),
+                                           _n_gram['freq'] == freq and
+                                           len(set(_n_gram['doc_ids']) - doc_ids) == 0 and
+                                           len(set(_n_gram['cluster_ids']) - cluster_ids) == 0,
                            sorted_n_grams))
-                if len(relevant_topics) > 0:    # We have found other relevant topics that can cover this topic
+                if len(relevant_topics) > 0:  # We have found other relevant topics that can cover this topic
                     duplicate_topics.add(topic)
             # Removed duplicated topics
             filter_topics = list(
                 filter(lambda _n_gram: _n_gram['topic'] not in duplicate_topics, sorted_n_grams))
             # Sort by the score and  The resulting topics are mostly 2 or 3 grams
             filter_sorted_topics = sorted(filter_topics, key=lambda _n_gram: _n_gram['score'], reverse=True)
-            return filter_sorted_topics[:300]   # Get top 300 topics
+            return filter_sorted_topics[:300]  # Get top 300 topics
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

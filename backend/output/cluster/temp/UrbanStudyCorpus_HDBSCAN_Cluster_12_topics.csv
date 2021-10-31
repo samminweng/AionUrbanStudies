@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+travel,0.0342796863,31,6,6,travel pattern,0.0371860736,12,4,1,smart card data,0.0484694077,7,3,1,smart card data,0.0484694077,7,3,1
+transit,0.0219978828,27,5,9,card data,0.0216918763,7,3,1,urban human mobility,0.043870929600000004,8,1,2,urban human mobility,0.043870929600000004,8,1,2
+card,0.015155412000000002,8,3,2,vehicle ownership,0.0216918763,7,1,1,complex public transit,0.0276968044,4,2,1,travel pattern,0.0371860736,12,4,1
+ownership,0.013260985500000001,7,1,2,urban human,0.019633885,8,1,2,public transit travel,0.0276968044,4,2,1,travel,0.0342796863,31,6,6
+CDR,0.009472132500000001,5,1,2,smart card,0.019633885,8,3,2,transit travel pattern,0.0276968044,4,2,1,complex public transit,0.0276968044,4,2,1
+mobility,0.0089562643,18,3,14,transit travel,0.0185930368,6,2,1,travel carbon emission,0.0207726033,3,1,1,public transit travel,0.0276968044,4,2,1
+ridership,0.0080168329,5,1,3,carbon emission,0.0147254137,6,1,2,random forest MLA,0.0207726033,3,1,1,transit travel pattern,0.0276968044,4,2,1
+buffered,0.0071759902,3,1,1,human mobility,0.014325627,10,3,6,human mobility data,0.0185652972,4,1,3,transit,0.0219978828,27,5,9
+j,0.0071759902,3,1,1,complex public,0.0123953579,4,2,1,advanced machine learning,0.0185652972,4,2,3,vehicle ownership,0.0216918763,7,1,1
+MLA,0.0071759902,3,1,1,transit network,0.0123953579,4,2,1,public transport commuter,0.0138484022,2,1,1,travel carbon emission,0.0207726033,3,1,1
+carbon,0.006634778,6,1,6,discovered travel,0.0123953579,4,2,1,integrating geovisual analytic,0.0138484022,2,2,1,random forest MLA,0.0207726033,3,1,1
+intercity,0.0064134663,4,1,3,express service,0.0123953579,4,1,1,mobility pattern discovery,0.0138484022,2,2,1,smart card,0.019633885,8,3,2
+amenity,0.0061833721,5,1,5,mobility pattern,0.0108577907,6,2,4,understanding human movement,0.0138484022,2,2,1,transit travel,0.0185930368,6,2,1
+discovered,0.0055874251000000005,4,2,4,mobility model,0.0092965184,3,1,1,examine complex public,0.0138484022,2,2,1,human mobility data,0.0185652972,4,1,3
+express,0.0055874251000000005,4,1,4,transit ridership,0.0092965184,3,1,1,discovered travel pattern,0.0138484022,2,2,1,advanced machine learning,0.0185652972,4,2,3
+emission,0.0053957161000000005,6,1,8,travel carbon,0.0092965184,3,1,1,study leverages advanced,0.0138484022,2,2,1,carbon emission,0.0147254137,6,1,2
+service,0.0050103797,18,3,19,forest MLA,0.0092965184,3,1,1,leverages advanced machine,0.0138484022,2,2,1,human mobility,0.014325627,10,3,6
+cell,0.004946697700000001,4,1,5,service network,0.0092965184,3,1,1,proposed approach delivers,0.0138484022,2,2,1,public transport commuter,0.0138484022,2,1,1
+radius,0.0048100997,3,1,3,public transit,0.0090481589,5,3,4,visualize complex public,0.0138484022,2,2,1,integrating geovisual analytic,0.0138484022,2,2,1
+commuter,0.0048100997,3,1,3,advanced machine,0.0083086662,4,2,3,approach first fuses,0.0138484022,2,2,1,mobility pattern discovery,0.0138484022,2,2,1
+RCs,0.0047839935,2,1,1,service facility,0.0073627069,3,2,2,first fuses smart,0.0138484022,2,2,1,understanding human movement,0.0138484022,2,2,1
+geovisual,0.0047839935,2,2,1,travel behavior,0.0064084628000000005,4,2,5,fuses smart card,0.0138484022,2,2,1,examine complex public,0.0138484022,2,2,1
+primarymobility,0.0047839935,2,2,1,public transport,0.0062314996,3,2,3,reconstruct original transit,0.0138484022,2,2,1,discovered travel pattern,0.0138484022,2,2,1
+algorithmto,0.0047839935,2,2,1,quantitative relationship,0.0062314996,3,1,3,use two machine,0.0138484022,2,2,1,study leverages advanced,0.0138484022,2,2,1
+corporate,0.0047839935,2,1,1,ridership begins,0.006197678900000001,2,1,1,extract transit corridor,0.0138484022,2,2,1,leverages advanced machine,0.0138484022,2,2,1
+mainland,0.0047839935,2,1,1,travel block,0.006197678900000001,2,1,1,represent primarymobility connection,0.0138484022,2,2,1,proposed approach delivers,0.0138484022,2,2,1
+vehicle,0.0042575826,7,1,12,hotspot analysis,0.006197678900000001,2,1,1,algorithmto discover hierarchical,0.0138484022,2,2,1,visualize complex public,0.0138484022,2,2,1
+hotspot,0.0041905688,3,1,4,traditional survey,0.006197678900000001,2,2,1,discover hierarchical mobility,0.0138484022,2,2,1,approach first fuses,0.0138484022,2,2,1
+visitor,0.0041905688,3,1,4,transport commuter,0.006197678900000001,2,1,1,hierarchical mobility community,0.0138484022,2,2,1,first fuses smart,0.0138484022,2,2,1
+bus,0.0039805619,4,3,7,integrating geovisual,0.006197678900000001,2,2,1,also devise compact,0.0138484022,2,2,1,fuses smart card,0.0138484022,2,2,1
+household,0.0039805619,4,1,7,geovisual analytic,0.006197678900000001,2,2,1,discovered travel behavior,0.0138484022,2,2,1,reconstruct original transit,0.0138484022,2,2,1
+begins,0.0037888530000000004,2,1,2,understanding human,0.006197678900000001,2,2,1,travel behavior dynamic,0.0138484022,2,2,1,use two machine,0.0138484022,2,2,1
+trip,0.0037888530000000004,2,2,2,fundamental importance,0.006197678900000001,2,2,1,integrate advanced machine,0.0138484022,2,2,1,extract transit corridor,0.0138484022,2,2,1
+delivers,0.0037888530000000004,2,2,2,examine complex,0.006197678900000001,2,2,1,characterize transit travel,0.0138484022,2,2,1,represent primarymobility connection,0.0138484022,2,2,1
+devise,0.0037888530000000004,2,2,2,challenging since,0.006197678900000001,2,2,1,transit travel behavior,0.0138484022,2,2,1,algorithmto discover hierarchical,0.0138484022,2,2,1
+gt,0.0037888530000000004,2,1,2,involves thousand,0.006197678900000001,2,2,1,travel behavior pattern,0.0138484022,2,2,1,discover hierarchical mobility,0.0138484022,2,2,1
+inferential,0.0037888530000000004,2,1,2,transit passenger,0.006197678900000001,2,2,1,enable visual exploration,0.0138484022,2,2,1,hierarchical mobility community,0.0138484022,2,2,1
+MLAs,0.0037888530000000004,2,1,2,efficient representation,0.006197678900000001,2,2,1,transit network data,0.0138484022,2,2,1,also devise compact,0.0138484022,2,2,1
+treated,0.0037888530000000004,2,1,2,difficult given,0.006197678900000001,2,2,1,proposed visual analytic,0.0138484022,2,2,1,discovered travel behavior,0.0138484022,2,2,1
+transport,0.0036493565,6,2,12,transit trip,0.006197678900000001,2,2,1,visual analytic approach,0.0138484022,2,2,1,travel behavior dynamic,0.0138484022,2,2,1
+facility,0.0032589456000000003,4,2,9,study leverages,0.006197678900000001,2,2,1,analytic approach offers,0.0138484022,2,2,1,integrate advanced machine,0.0138484022,2,2,1
+prototype,0.0032589456000000003,4,2,9,leverages advanced,0.006197678900000001,2,2,1,discovering meaningful travel,0.0138484022,2,2,1,characterize transit travel,0.0138484022,2,2,1
+operator,0.0032067331000000003,2,2,3,comprehensive solution,0.006197678900000001,2,2,1,meaningful travel pattern,0.0138484022,2,2,1,transit travel behavior,0.0138484022,2,2,1
+Interactive,0.0032067331000000003,2,2,3,visualize complex,0.006197678900000001,2,2,1,travel pattern across,0.0138484022,2,2,1,travel behavior pattern,0.0138484022,2,2,1
+fuses,0.0032067331000000003,2,2,3,approach first,0.006197678900000001,2,2,1,pattern across large,0.0138484022,2,2,1,enable visual exploration,0.0138484022,2,2,1
+reconstruct,0.0032067331000000003,2,2,3,first fuses,0.006197678900000001,2,2,1,across large metropolitan,0.0138484022,2,2,1,transit network data,0.0138484022,2,2,1
+Ai,0.0032067331000000003,2,1,3,fuses smart,0.006197678900000001,2,2,1,model vehicle ownership,0.0138484022,2,1,1,proposed visual analytic,0.0138484022,2,2,1
+false,0.0032067331000000003,2,1,3,reconstruct original,0.006197678900000001,2,2,1,intercity corporate network,0.0138484022,2,1,1,visual analytic approach,0.0138484022,2,2,1
+visualization,0.0029854214,6,2,14,original transit,0.006197678900000001,2,2,1,quantitative relationship model,0.0138484022,2,1,1,analytic approach offers,0.0138484022,2,2,1
+predictor,0.0029564167,4,2,10,use two,0.006197678900000001,2,2,1,express service network,0.0138484022,2,1,1,discovering meaningful travel,0.0138484022,2,2,1
