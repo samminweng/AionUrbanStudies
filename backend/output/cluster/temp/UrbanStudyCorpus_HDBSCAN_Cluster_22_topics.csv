@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+cover,0.0183057591,59,14,12,land cover,0.0268466057,54,12,7,land cover classification,0.0226871957,16,4,4,land cover,0.0268466057,54,12,7
+optical,0.012562954900000001,13,3,2,cover classification,0.0111656223,16,4,4,urban land cover,0.021153369800000002,11,4,2,land cover classification,0.0226871957,16,4,4
+SAR,0.0114506871,14,3,3,image classification,0.010496390500000001,19,8,6,data weighting method,0.014568705000000001,6,1,1,urban land cover,0.021153369800000002,11,4,2
+GEE,0.0097616056,8,3,1,urban forest,0.010410741900000001,11,1,2,land cover mapping,0.0115382017,6,4,2,cover,0.0183057591,59,14,12
+land,0.0093756725,89,15,21,data weighting,0.0095600861,8,1,1,eight machine learning,0.00971247,4,1,1,data weighting method,0.014568705000000001,6,1,1
+image,0.0093715788,66,19,19,classification accuracy,0.0071817408,13,6,6,colour infrared image,0.00971247,4,1,1,optical,0.012562954900000001,13,3,2
+hyperspectral,0.0086974303,9,1,2,optical data,0.0071700646000000005,6,2,1,urban slum area,0.00971247,4,1,1,land cover mapping,0.0115382017,6,4,2
+imaging,0.0086974303,9,1,2,weighting method,0.0071700646000000005,6,1,1,overall classification accuracy,0.0096151681,5,4,2,SAR,0.0114506871,14,3,3
+LULC,0.0078381774,11,2,4,cover mapping,0.0066250175,7,4,2,Google Earth Engine,0.0096151681,5,3,2,image classification,0.010496390500000001,19,8,6
+weighting,0.0077310491,8,1,2,urban land,0.0062771978,17,6,10,land use land,0.0076921345,4,2,2,urban forest,0.010410741900000001,11,1,2
+Sentinel,0.006764668000000001,7,3,2,Overall Accuracy,0.0059750538,5,2,1,use land cover,0.0076921345,4,2,2,GEE,0.0097616056,8,3,1
+OA,0.006764668000000001,7,4,2,colour infrared,0.0059750538,5,1,1,big data analysis,0.0075320942000000005,6,2,5,eight machine learning,0.00971247,4,1,1
+spectral,0.0065993085000000005,13,7,7,urban slum,0.0059750538,5,1,1,different land cover,0.007284352500000001,3,2,1,colour infrared image,0.00971247,4,1,1
+Dhaka,0.0061010035,5,1,1,Earth Engine,0.0056785865,6,3,2,Root Mean Squared,0.007284352500000001,3,2,1,urban slum area,0.00971247,4,1,1
+MT,0.0061010035,5,1,1,Google Earth,0.0056071490000000005,7,4,3,Rio de Janeiro,0.007284352500000001,3,1,1,overall classification accuracy,0.0096151681,5,4,2
+Overall,0.0061010035,5,2,1,maximum likelihood,0.004780043,4,3,1,land cover change,0.0070897487000000006,5,4,4,Google Earth Engine,0.0096151681,5,3,2
+band,0.0057004927,8,6,4,SAR data,0.004780043,4,2,1,land use classification,0.0065103139,4,1,3,data weighting,0.0095600861,8,1,1
+Earth,0.0056408666,10,5,6,decision level,0.004780043,4,1,1,synthetic aperture radar,0.0057691009,3,3,2,land,0.0093756725,89,15,21
+Landsat,0.0055840303,11,7,7,central tendency,0.004780043,4,1,1,remotely sensed data,0.0057691009,3,3,2,image,0.0093715788,66,19,19
+forest,0.005256775500000001,23,8,15,eight machine,0.004780043,4,1,1,Mean Absolute Error,0.0057691009,3,2,2,hyperspectral,0.0086974303,9,1,2
+UAV,0.004987931100000001,7,1,4,Decision tree,0.004780043,4,1,1,Mean Squared Error,0.0057691009,3,2,2,imaging,0.0086974303,9,1,2
+RF,0.0049013949,13,6,10,overall classification,0.0047321554,5,4,2,change detection analysis,0.0057691009,3,1,2,LULC,0.0078381774,11,2,4
+InterIMAGE,0.0048808028,4,1,1,coastal area,0.0047321554,5,1,2,support vector machine,0.0049622368,6,5,9,land use land,0.0076921345,4,2,2
+perennial,0.0048808028,4,1,1,change detection,0.0041871084,6,3,4,image classification method,0.0048827355,3,2,3,use land cover,0.0076921345,4,2,2
+colour,0.0048319057,5,1,2,overall accuracy,0.0040617162,11,9,10,dense time stack,0.004856235,2,1,1,big data analysis,0.0075320942000000005,6,2,5
+imagery,0.0044953076,16,9,13,use land,0.0037857243,4,2,2,maximum likelihood method,0.004856235,2,2,1,different land cover,0.007284352500000001,3,2,1
+kappa,0.0044159496,7,6,5,infrared image,0.0037857243,4,1,2,land cover using,0.004856235,2,2,1,Root Mean Squared,0.007284352500000001,3,2,1
+texture,0.0042753695,6,2,4,slum area,0.0037857243,4,1,2,image classification approach,0.004856235,2,2,1,Rio de Janeiro,0.007284352500000001,3,1,1
+Engine,0.0042753695,6,3,4,Landsat data,0.0035850323000000003,3,2,1,annual growth rate,0.004856235,2,1,1,classification accuracy,0.0071817408,13,6,6
+vegetation,0.0041561174,10,5,9,integration level,0.0035850323000000003,3,1,1,new data weighting,0.004856235,2,1,1,optical data,0.0071700646000000005,6,2,1
+infrared,0.0040895311,5,1,3,vegetation mapping,0.0035850323000000003,3,1,1,different urban land,0.004856235,2,1,1,land cover change,0.0070897487000000006,5,4,4
+coastal,0.0040895311,5,1,3,NN ge,0.0035850323000000003,3,2,1,recommended data weighting,0.004856235,2,1,1,Sentinel,0.006764668000000001,7,3,2
+slum,0.0040895311,5,1,3,Simple Logistic,0.0035850323000000003,3,2,1,central tendency belonging,0.004856235,2,1,1,OA,0.006764668000000001,7,4,2
+classification,0.0040669192000000005,98,19,25,imaging platform,0.0035850323000000003,3,1,1,SVM classification algorithms,0.004856235,2,1,1,cover mapping,0.0066250175,7,4,2
+tendency,0.0038655246,4,1,2,Rio de,0.0035850323000000003,3,1,1,classification accuracy obtained,0.004856235,2,1,1,spectral,0.0065993085000000005,13,7,7
+belonging,0.0038655246,4,1,2,de Janeiro,0.0035850323000000003,3,1,1,urban vegetation mapping,0.004856235,2,1,1,land use classification,0.0065103139,4,1,3
+drainage,0.0038655246,4,1,2,Sentinel image,0.0035850323000000003,3,2,1,cover mapping using,0.004856235,2,2,1,urban land,0.0062771978,17,6,10
+Forest,0.0037232052000000003,12,8,12,extract LULC,0.0035850323000000003,3,1,1,including Random Forest,0.004856235,2,2,1,Dhaka,0.0061010035,5,1,1
+mapping,0.0036963247,30,13,20,perennial drainage,0.0035850323000000003,3,1,1,image classification based,0.004856235,2,2,1,MT,0.0061010035,5,1,1
+fusion,0.0036699362,8,4,8,commercial increment,0.0035850323000000003,3,1,1,deciduous tree specie,0.004856235,2,1,1,Overall Accuracy,0.0059750538,5,2,1
+northern,0.0036606021000000002,3,3,1,small satellite,0.0035850323000000003,3,1,1,spectral property extracted,0.004856235,2,1,1,colour infrared,0.0059750538,5,1,1
+DTNB,0.0036606021000000002,3,2,1,classification algorithms,0.0034892570000000004,5,3,4,urban forest cover,0.004856235,2,1,1,urban slum,0.0059750538,5,1,1
+ge,0.0036606021000000002,3,2,1,remote sensing,0.0034801156,14,12,14,scale SP value,0.004856235,2,1,1,synthetic aperture radar,0.0057691009,3,3,2
+Simple,0.0036606021000000002,3,2,1,kappa coefficient,0.0032040851,4,3,3,traditional remote sensing,0.004856235,2,1,1,remotely sensed data,0.0057691009,3,3,2
+deciduous,0.0036606021000000002,3,2,1,use classification,0.0032040851,4,1,3,sensing image classification,0.004856235,2,1,1,Mean Absolute Error,0.0057691009,3,2,2
+nm,0.0036606021000000002,3,2,1,classification using,0.0032040851,4,3,3,land cover zone,0.004856235,2,1,1,Mean Squared Error,0.0057691009,3,2,2
+Rio,0.0036606021000000002,3,1,1,cover change,0.0030891331,5,4,5,image using machine,0.004856235,2,1,1,change detection analysis,0.0057691009,3,1,2
+de,0.0036606021000000002,3,1,1,Random Forest,0.0030155971,9,8,11,downstream space activity,0.004856235,2,1,1,band,0.0057004927,8,6,4
+Janeiro,0.0036606021000000002,3,1,1,synthetic aperture,0.0028392932,3,3,2,long data acquisition,0.004856235,2,1,1,Earth Engine,0.0056785865,6,3,2
+SP,0.0036606021000000002,3,1,1,aperture radar,0.0028392932,3,3,2,data acquisition cycle,0.004856235,2,1,1,Earth,0.0056408666,10,5,6

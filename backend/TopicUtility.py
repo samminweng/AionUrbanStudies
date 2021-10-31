@@ -76,43 +76,29 @@ class TopicUtility:
 
     @staticmethod
     def visualise_cluster_results(min_cluster_size):
-        path = os.path.join(TopicUtility.output_path, TopicUtility.case_name + '_clusters.json')
-        cluster_result_df = pd.read_json(path)
+        plt.style.use('bmh')  # Use black white background
+        _path = os.path.join(TopicUtility.output_path, TopicUtility.case_name + '_clusters.json')
+        cluster_result_df = pd.read_json(_path)
         fig, (ax0, ax1, ax2) = plt.subplots(1, 3)
         # # Visualise KMeans
-        clusterers = cluster_result_df.loc[cluster_result_df['KMeans_Cluster'] != -1, :]
-        ax0.scatter(clusterers.x, clusterers.y, c=clusterers['KMeans_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
+        clusters = cluster_result_df.loc[cluster_result_df['KMeans_Cluster'] != -1, :]
+        ax0.scatter(clusters.x, clusters.y, c=clusters['KMeans_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
         ax0.set_title('KMeans')
         # # Visualise HDBScan Outliers
         outliers = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] == -1, :]
-        clusterers = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] != -1, :]
-        max_cluster_number = max(clusterers['HDBSCAN_Cluster'])
+        clusters = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] != -1, :]
+        max_cluster_number = max(clusters['HDBSCAN_Cluster'])
         ax1.scatter(outliers.x, outliers.y, color='red', linewidth=0, s=5.0, marker="X")
-        ax1.scatter(clusterers.x, clusterers.y, color='gray', linewidth=0, s=5.0)
+        ax1.scatter(clusters.x, clusters.y, color='gray', linewidth=0, s=5.0)
         ax1.set_title('Outliers (Red)')
         # # Visualise clustered dots using HDBScan
-        ax2.scatter(clusterers.x, clusterers.y, c=clusterers['HDBSCAN_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
+        ax2.scatter(clusters.x, clusters.y, c=clusters['HDBSCAN_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
         ax2.set_title('HDBSCAN')
-        #
-
-        # # # Visualise clustered dots using agglomerative
-        # clusterers = cluster_result_df.loc[cluster_result_df['Agglomerative_Cluster'] != -1, :]
-        # max_clusters = cluster_result_df['Agglomerative_Cluster'].max()
-        # ax3_scatters = ax3.scatter(clusterers.x, clusterers.y, c=clusterers['Agglomerative_Cluster'],
-        #                            label=clusterers['Agglomerative_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
-        # box = ax3.get_position()
-        # ax3.set_position([box.x0, box.y0, box.width * 0.9, box.height])
-        #
-        # # Produce the legends
-        # ax3.legend(*ax3_scatters.legend_elements(), loc='center left', bbox_to_anchor=(1, 0.5))
-        #
-        # ax3.set_title('agglomerative')
-        # # ax3.legend()
-        path = os.path.join(TopicUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
-                            + str(len(outliers)) + "_min_cluster_size_" + str(min_cluster_size) + ".png")
+        _path = os.path.join(TopicUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
+                             + str(len(outliers)) + "_min_cluster_size_" + str(min_cluster_size) + ".png")
         fig.set_size_inches(10, 5)
-        fig.savefig(path, dpi=600)
-        print("Output image to " + path)
+        fig.savefig(_path, dpi=600)
+        print("Output image to " + _path)
 
     @staticmethod
     def derive_bag_of_words(doc_ids, doc_texts):
@@ -537,9 +523,9 @@ class TopicUtility:
                            sorted_n_grams))
                 if len(relevant_topics) > 0:  # We have found other relevant topics that can cover this topic
                     duplicate_topics.add(topic)
-            # Removed duplicated topics
+            # Removed duplicated topics and single char (such as 'j')
             filter_topics = list(
-                filter(lambda _n_gram: _n_gram['topic'] not in duplicate_topics, sorted_n_grams))
+                filter(lambda _n_gram: len(_n_gram['topic']) > 1 and _n_gram['topic'] not in duplicate_topics, sorted_n_grams))
             # Sort by the score and  The resulting topics are mostly 2 or 3 grams
             filter_sorted_topics = sorted(filter_topics, key=lambda _n_gram: _n_gram['score'], reverse=True)
             return filter_sorted_topics[:300]  # Get top 300 topics
@@ -557,7 +543,7 @@ class TopicUtility:
                 title = article['Title']
                 # Find if other article has the same title and author names
                 same_articles = list(filter(lambda a: a['Title'].lower().strip() == title.lower().strip() and
-                                                      a['DocId'] > doc_id , corpus))
+                                                      a['DocId'] > doc_id, corpus))
                 if len(same_articles):
                     for sa in same_articles:
                         duplicate_doc_ids.add(sa['DocId'])
