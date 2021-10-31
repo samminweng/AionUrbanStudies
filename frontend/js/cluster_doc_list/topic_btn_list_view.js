@@ -19,8 +19,8 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
             link.click(function (event) {
                 $('#topics').val(topic['topics']);
                 // // Get the documents about the topic
-                const topic_docs = doc_key_terms.filter(d => topic['doc_ids'].includes(parseInt(d['DocId'])));
-                const doc_list_view = new DocumentListView(cluster_topics, topic_docs, topic);
+                const doc_list_heading = new DocumentListHeading(cluster_topics, cluster_docs, topic);
+
             });
             p.append(link);
         }
@@ -135,23 +135,22 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
         $('#search').click(function(event){
             const select_topic = $('#topics').val();
             const topic = available_topics.find(t => t['topic'] === select_topic);
-            // Get the articles related to the selected topic.
-            const topic_docs = doc_key_terms.filter(d => topic['doc_ids'].includes(parseInt(d['DocId'])));
-            const doc_list_view = new DocumentListView(cluster_topics, topic_docs, topic);
+            const doc_list_heading = new DocumentListHeading(cluster_topics, cluster_docs, topic);
         });
         // Clear button to clearn search input and display all the articles
         $('#clear').button();
         $('#clear').click(function(event){
-            $( "#topics" ).val("")
+            $( "#topics" ).val("");
             // Display all the articles in a cluster
-            const doc_list_view = new DocumentListView(cluster_topics, cluster_docs, null);
+            const doc_list_heading = new DocumentListHeading(cluster_topics, cluster_docs, null);
         });
 
         // Create a list of topics
         createTopicListView();
 
         // Display all the articles in a cluster
-        const doc_list_view = new DocumentListView(cluster_topics, cluster_docs, null);
+        const doc_list_heading = new DocumentListHeading(cluster_topics, cluster_docs, null);
+
     }
     _createUI();
 }
