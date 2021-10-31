@@ -7,23 +7,54 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
     const cluster_doc_ids = cluster_topics['DocIds'];
     const cluster_docs = doc_key_terms.filter(d => cluster_doc_ids.includes(parseInt(d['DocId'])));
 
-
-    // Create a list of topics
-    function createTopicParagraphs(topics){
-        const p_div = $('<p class="topic_list"></p>');
-        for(let i=0; i< topics.length; i++){
+    // Populate the topic list with given length
+    function populateTopicList(topics, max_length, p_div){
+        const p = p_div.find('p');
+        p.empty();
+        for(let i=0; i< max_length; i++) {
             const topic = topics[i];
             const link = $('<button type="button" class="btn btn-link">'
                 + topic['topic'] + ' (' + topic['doc_ids'].length + ') </button>');
             link.button();
-            link.click(function(event){
+            link.click(function (event) {
                 $('#topics').val(topic['topics']);
                 // // Get the documents about the topic
                 const topic_docs = doc_key_terms.filter(d => topic['doc_ids'].includes(parseInt(d['DocId'])));
                 const doc_list_view = new DocumentListView(cluster_topics, topic_docs, topic);
             });
-            p_div.append(link);
+            p.append(link);
         }
+    }
+
+    // Create a list of topics
+    function createTopicParagraphs(topics){
+        const p_div = $('<div class="topic_list""><p></p></div>');
+        populateTopicList(topics, 30, p_div);   // Display top 30 topics
+        // Add the view more button
+        const view_more_btn = $('<button>View More <span class="ui-icon ui-icon-plus"></button>');
+        const view_less_btn = $('<button>View Less <span class="ui-icon ui-icon-minus"></button>');
+        view_more_btn.button();
+        view_less_btn.button();
+        // By default, display 'view more' and hide 'view less'
+        view_less_btn.hide();
+        p_div.append(view_more_btn);
+        p_div.append(view_less_btn);
+        // Define view more btn click event
+        view_more_btn.click(function(event){
+            // Display top 100 topics
+            populateTopicList(topics, 100, p_div);
+            // Hide view more
+            view_more_btn.hide();
+            view_less_btn.show();
+        });
+        // Define view less btn click event
+        view_less_btn.click(function (event){
+            // Display top 30 topics
+            populateTopicList(topics, 30, p_div);
+            // Hide view more
+            view_more_btn.show();
+            view_less_btn.hide();
+        });
         return p_div;
     }
 
@@ -32,7 +63,7 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
         $('#topic_list_view').empty();
         const container = $('<div class="container"></div>');
         container.append($('<div class="h3">Cluster #' + cluster_no+' has ' + cluster_docs.length + ' articles in total</div>'));
-        const Max_Length = 50;
+
         // Display the topics of 1 gram, 2 grams and 3 grams
         for(const n_gram of ['1-gram', '2-gram', '3-gram', 'N-gram']){
             const topics = cluster_topics['Topic' + n_gram];
@@ -57,20 +88,20 @@ function TopicBtnListView(cluster_no, cluster_topic_words, doc_key_terms){
             topics.sort((a, b) => b['score'] - a['score']);
             // Add a radio button to sort topics by scores or range
             key_term_div.find(".topics").append(sort_widget);
-            key_term_div.find(".topics").append(createTopicParagraphs(topics.slice(0, Max_Length))); // Show top 50 topics
+            key_term_div.find(".topics").append(createTopicParagraphs(topics)); // Show topics
             // Add the on click event to radio button
             sort_widget.find('input[name='+sort_btn_name+']').change(function(){
                 const sorted_index = sort_widget.find('input[name='+sort_btn_name+']:checked').val();
                 const sorted_topic = cluster_topics['Topic' + n_gram];
                 if(sorted_index === 'count'){
                     // Sort the topic by count
-                    sorted_topic.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length );
+                    sorted_topic.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
                 }else{
                     sorted_topic.sort((a, b) => b['score'] - a['score'] );// Sort by score
                 }
                 // console.log(topics);
                 key_term_div.find(".topic_list").remove();
-                key_term_div.find(".topics").append(createTopicParagraphs(sorted_topic.slice(0, Max_Length)));
+                key_term_div.find(".topics").append(createTopicParagraphs(sorted_topic));
             });
 
             // Display n-gram topics by default
