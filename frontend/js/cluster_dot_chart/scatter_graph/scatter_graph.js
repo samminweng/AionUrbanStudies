@@ -74,8 +74,8 @@ function ScatterGraph(is_hide, cluster_approach, cluster_chart_data, cluster_top
             legend: {
                 "orientation": "h"
             },
-            xaxis: {range: [7.2, 13.2]},
-            yaxis: {range: [-0.2, 5.2]},
+            // xaxis: {range: [7.2, 13.2]},
+            // yaxis: {range: [-0.2, 5.2]},
             annotations: []
         }
 

@@ -47,18 +47,6 @@ function DocumentListView(cluster_topics, documents, topic) {
     function _createUI() {
         $('#document_list_view').empty();
         const container = $('<div class="container"></div>');
-        // const heading_text = 'Cluster #' + cluster_no + ' has ' + documents.length + ' articles '
-        //     + ((topic !== null)? "about <span class='search_term'> " + topic['topic'] + "</span>": "");
-        // // Display a summary on the heading
-        // const heading = $('<div class="h5 mb-3">' + heading_text + '</div>');
-        // // Add the reset button
-        // if (topic !== null){
-        //     const reset_btn = $('<button><span class="ui-icon ui-icon-closethick"></span></button>');
-        //     heading.find('.search_term').append(reset_btn);
-        // }
-        //
-        // container.append($('<div class="row p-3"><div class="col"></div></div>').find(".col").append(heading));
-
         // A list of cluster documents
         const documentTable = $('<table class="table table-striped">' +
             '<thead>' +

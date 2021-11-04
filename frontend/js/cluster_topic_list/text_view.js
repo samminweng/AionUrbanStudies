@@ -1,6 +1,6 @@
 // Create a title view
 function TextView(doc, topic) {
-    const topic_words = (topic === null)? [] : [topic['topic'], topic['plural']];   // Highlight singular and plural topics
+    const topic_words = (topic === null) ? [] : [topic['topic'], topic['plural']];   // Highlight singular and plural topics
     const container = $('<div></div>');
     this.get_container = function () {
         return container;
@@ -9,7 +9,7 @@ function TextView(doc, topic) {
     // Highlight key terms
     function mark_key_terms(div, terms, class_name) {
         // Check if the topic is not empty
-        for(const term of terms){
+        for (const term of terms) {
             // Mark the topic
             const mark_options = {
                 "separateWordSearch": false,
@@ -30,7 +30,7 @@ function TextView(doc, topic) {
         // Key terms
         let key_terms = doc['HDBSCAN_Cluster_KeyTerms'].slice(0, 5);
         const key_term_div = $('<div><h3><span class="fw-bold">Top 5 key terms: </span>' + key_terms.join("; ") + '</h3>' +
-            '<div><p>' + doc['HDBSCAN_Cluster_KeyTerms'].join("; ")+ '</p></div>' +
+            '<div><p>' + doc['HDBSCAN_Cluster_KeyTerms'].join("; ") + '</p></div>' +
             '</div>');
         key_term_div.accordion({
             icons: null,
@@ -55,20 +55,23 @@ function TextView(doc, topic) {
         abstract_div = mark_key_terms(abstract_div, key_terms, 'key_term');
         abstract_div = mark_key_terms(abstract_div, topic_words, 'search_term');
         container.append(abstract_div);
-        // // Add the author keyowrds
+        // Add author keywords
         let author_keyword_div = $('<div class="col"></div>');
-        let author_keywords = (doc['Author Keywords'] === null)? "": doc['Author Keywords'];
+        let author_keywords = (doc['Author Keywords'] === null) ? "" : doc['Author Keywords'];
         author_keyword_div.append($('<span class="fw-bold">Author Keywords: </span><span>' + author_keywords + '</span>'));
         container.append(author_keyword_div);
-
         // Add author
         const author_div = $('<div class="col"></div>');
         author_div.append($('<span class="fw-bold">Author: </span><span>' + doc['Authors'] + '</span> '));
         container.append(author_div);
-        // Add a citation div
+        // Add citation
         const citation_div = $('<div class="col"></div>');
-        citation_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>' +
-            '<span class="p-3"><a target="_blank" href="' + doc['Link'] + '">Link to Article in Scopus</a></span>'));
+        citation_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>'));
+        // Add DOI link
+        const doi_link = $('<span class="p-3">' +
+            '<a target="_blank" href="https://doi.org/' + doc['DOI'] + '">' + doc['DOI'] + '</a>' +
+            '</span>');
+        citation_div.append(doi_link);
         container.append(citation_div);
     }
 
