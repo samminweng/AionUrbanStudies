@@ -1,10 +1,8 @@
 import os
 from argparse import Namespace
 import logging
-
 import hdbscan
 import pandas as pd
-import numpy as np
 import nltk
 # # Sentence Transformer (https://www.sbert.net/index.html)
 from sentence_transformers import SentenceTransformer
@@ -17,7 +15,6 @@ from TopicUtility import TopicUtility
 from Utility import Utility
 import pickle
 import seaborn as sns  # statistical graph library
-from sklearn.cluster import AgglomerativeClustering
 
 logging.basicConfig(level=logging.INFO)
 # nltk_path = os.path.join('/Scratch', 'mweng', 'nltk_data')
@@ -44,8 +41,7 @@ class DocumentCluster:
             # model_name='distilbert-base-nli-mean-tokens',
             # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
             # 384 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
-            model_name='all-mpnet-base-v2',
-            min_cluster_size=10
+            model_name='all-mpnet-base-v2'
         )
         # Create the folder path for output clustering files (csv and json)
         self.output_path = os.path.join('output', 'cluster')
@@ -107,31 +103,51 @@ class DocumentCluster:
                         protocol=pickle.HIGHEST_PROTOCOL)
 
     # Get the sentence embedding and cluster doc by hdbscan (https://hdbscan.readthedocs.io/en/latest/index.html)
-    def cluster_doc_by_hdbscan(self):
+    def cluster_doc_by_hdbscan(self, is_graph=False, min_cluster_size=10, min_samples=1,
+                               cluster_selection_epsilon=0.0,
+                               cluster_selection_method='eom'):
         try:
             # Cluster the documents with minimal cluster size using HDBSCAN
             # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
-            clusters = hdbscan.HDBSCAN(min_samples=1, min_cluster_size=self.args.min_cluster_size,  # leaf_size=40,
-                                       metric='euclidean').fit(self.clusterable_embedding)
-            condense_tree = clusters.condensed_tree_
-
-            # clusters.condensed_tree_.plot()
+            clusters = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
+                                       min_samples=min_samples,
+                                       cluster_selection_epsilon=cluster_selection_epsilon,
+                                       metric='euclidean',
+                                       cluster_selection_method=cluster_selection_method
+                                       ).fit(self.clusterable_embedding)
+            # Update the cluster to 'cluster_df'
             self.cluster_df['HDBSCAN_Cluster'] = clusters.labels_
-            # Save HDBSCAN cluster to 'temp' folder
-            path = os.path.join(self.output_path, 'temp', self.args.case_name + '_clusters.csv')
-            self.cluster_df.to_csv(path, encoding='utf-8', index=False)
-            # Save condense tree to csv
-            tree_df = condense_tree.to_pandas()
-            path = os.path.join(self.output_path, 'temp', self.args.case_name + '_clusters_tree.csv')
-            tree_df.to_csv(path, encoding='utf-8')
-
-            condense_tree.plot(select_clusters=True,
-                               selection_palette=sns.color_palette('deep', 25),
-                               label_clusters=True,
-                               max_rectangles_per_icicle=100)
-            image_path = os.path.join(self.image_path, 'HDBSCAN_clusters.png')
-            plt.savefig(image_path)
-            print("Output HDBSCAN clustering image to " + image_path)
+            cluster_number = max(self.cluster_df['HDBSCAN_Cluster'])
+            outliers = self.cluster_df.loc[self.cluster_df['HDBSCAN_Cluster'] == -1, :]
+            if is_graph:
+                # Save HDBSCAN cluster to 'temp' folder
+                path = os.path.join(self.output_path, 'temp', self.args.case_name + '_clusters.csv')
+                self.cluster_df.to_csv(path, encoding='utf-8', index=False)
+                # Output condense tree
+                condense_tree = clusters.condensed_tree_
+                # Save condense tree to csv
+                tree_df = condense_tree.to_pandas()
+                path = os.path.join(self.output_path, 'temp', self.args.case_name + '_clusters_tree.csv')
+                tree_df.to_csv(path, encoding='utf-8')
+                # Plot condense tree graph
+                condense_tree.plot(select_clusters=True,
+                                   selection_palette=sns.color_palette('deep', 40),
+                                   label_clusters=True,
+                                   max_rectangles_per_icicle=150)
+                image_path = os.path.join(self.image_path, 'HDBSCAN' +
+                                          '_min_cluster_size_' + str(min_cluster_size) +
+                                          '_cluster_num_' + str(cluster_number) +
+                                          '_outlier_' + str(len(outliers)) +
+                                          '.png')
+                plt.savefig(image_path)
+                print("Output HDBSCAN clustering image to " + image_path)
+            return {"min_cluster_size": min_cluster_size,
+                    "min_samples": min_samples,
+                    "cluster_selection_epsilon": cluster_selection_epsilon,
+                    "cluster_selection_method": cluster_selection_method,
+                    "cluster_num": cluster_number,
+                    "outliers": len(outliers)
+                    }
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -207,7 +223,7 @@ class DocumentCluster:
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        cluster_approaches = ['KMeans_Cluster']
+        cluster_approaches = ['HDBSCAN_Cluster']
         try:
             # Get the duplicate articles. Note the original Scopus file contain duplicated articles (titles are the same)
             duplicate_doc_ids = TopicUtility.scan_duplicate_articles()
@@ -274,12 +290,13 @@ class DocumentCluster:
 if __name__ == '__main__':
     docCluster = DocumentCluster()
     # # docCluster.get_sentence_embedding()
-    # docCluster.cluster_doc_by_hdbscan()
+    # docCluster.cluster_doc_by_hdbscan(is_graph=True)
     # docCluster.cluster_doc_by_KMeans()
-    TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
-    # # docCluster.collect_tf_idf_terms_by_cluster()
-    docCluster.derive_topic_words_from_cluster_docs()
+    # TopicUtility.visualise_cluster_results()
+    # # # docCluster.collect_tf_idf_terms_by_cluster()
+    # docCluster.derive_topic_words_from_cluster_docs()
     # # Output top 50 topics by 1, 2 and 3-grams
-    # TopicUtility.flatten_topics('HDBSCAN', 2)  # topics in Cluster 2
-    # TopicUtility.flatten_topics('HDBSCAN', 12)  # topics in Cluster 12
-    # TopicUtility.flatten_topics('HDBSCAN', 22)  # topics in Cluster 22
+    TopicUtility.flatten_topics('HDBSCAN', 4)  # topics in Cluster 4
+    TopicUtility.flatten_topics('HDBSCAN', 5)  # topics in Cluster 5
+    TopicUtility.flatten_topics('HDBSCAN', 17)  # topics in Cluster 17
+

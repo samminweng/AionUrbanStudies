@@ -16,9 +16,6 @@ from Utility import Utility
 from nltk.corpus import stopwords
 import pandas as pd
 
-path = os.path.join('/Scratch', 'mweng', 'nltk_data')
-nltk.data.path.append(path)
-
 
 # Utility for deriving the topics from each cluster of documents.
 class TopicUtility:
@@ -75,7 +72,7 @@ class TopicUtility:
             print("Error occurred! {err}".format(err=err))
 
     @staticmethod
-    def visualise_cluster_results(min_cluster_size):
+    def visualise_cluster_results():
         plt.style.use('bmh')  # Use black white background
         _path = os.path.join(TopicUtility.output_path, TopicUtility.case_name + '_clusters.json')
         cluster_result_df = pd.read_json(_path)
@@ -95,7 +92,7 @@ class TopicUtility:
         ax2.scatter(clusters.x, clusters.y, c=clusters['HDBSCAN_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
         ax2.set_title('HDBSCAN')
         _path = os.path.join(TopicUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
-                             + str(len(outliers)) + "_min_cluster_size_" + str(min_cluster_size) + ".png")
+                             + str(len(outliers)) + ".png")
         fig.set_size_inches(10, 5)
         fig.savefig(_path, dpi=600)
         print("Output image to " + _path)
@@ -442,7 +439,7 @@ class TopicUtility:
                         record[n_gram_num + '-clusters'] = len(n_gram['cluster_ids'])
                 records.append(record)
             n_gram_df = pd.DataFrame(records)
-            _path = os.path.join('output', 'cluster', 'temp',
+            _path = os.path.join('output', 'cluster', 'topics',
                                  'UrbanStudyCorpus_HDBSCAN_Cluster_' + str(cluster_no) + '_topics.csv')
             n_gram_df.to_csv(_path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + _path)
@@ -525,7 +522,8 @@ class TopicUtility:
                     duplicate_topics.add(topic)
             # Removed duplicated topics and single char (such as 'j')
             filter_topics = list(
-                filter(lambda _n_gram: len(_n_gram['topic']) > 1 and _n_gram['topic'] not in duplicate_topics, sorted_n_grams))
+                filter(lambda _n_gram: len(_n_gram['topic']) > 1 and _n_gram['topic'] not in duplicate_topics,
+                       sorted_n_grams))
             # Sort by the score and  The resulting topics are mostly 2 or 3 grams
             filter_sorted_topics = sorted(filter_topics, key=lambda _n_gram: _n_gram['score'], reverse=True)
             return filter_sorted_topics[:300]  # Get top 300 topics
