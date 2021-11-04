@@ -207,7 +207,7 @@ class DocumentCluster:
     # Derive the topic words from each cluster of documents
     def derive_topic_words_from_cluster_docs(self):
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        cluster_approaches = ['HDBSCAN_Cluster']
+        cluster_approaches = ['KMeans_Cluster']
         try:
             # Get the duplicate articles. Note the original Scopus file contain duplicated articles (titles are the same)
             duplicate_doc_ids = TopicUtility.scan_duplicate_articles()
@@ -216,6 +216,8 @@ class DocumentCluster:
             # Load the document cluster
             doc_clusters_df = pd.read_json(
                 os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
+            # Update text column
+            doc_clusters_df['Text'] = self.cluster_df['Text']
             # Drop the documents that are not in the list of duplicated articles
             doc_clusters_df = doc_clusters_df[~doc_clusters_df['DocId'].isin(duplicate_doc_ids)]
             # Cluster the documents by
