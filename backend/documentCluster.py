@@ -273,7 +273,7 @@ if __name__ == '__main__':
     docCluster = DocumentCluster()
     # # docCluster.get_sentence_embedding()
     docCluster.cluster_doc_by_hdbscan()
-    # # docCluster.cluster_doc_by_KMeans()
+    docCluster.cluster_doc_by_KMeans()
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
     # # docCluster.collect_tf_idf_terms_by_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()
