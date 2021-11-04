@@ -16,6 +16,7 @@ from pathlib import Path
 from TopicUtility import TopicUtility
 from Utility import Utility
 import pickle
+import seaborn as sns  # statistical graph library
 from sklearn.cluster import AgglomerativeClustering
 
 logging.basicConfig(level=logging.INFO)
@@ -58,7 +59,7 @@ class DocumentCluster:
             stored_data = pickle.load(fIn)
             document_embeddings = stored_data['embeddings']
         # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
-        clusterable_embedding = umap.UMAP(
+        self.clusterable_embedding = umap.UMAP(
             n_neighbors=100,
             min_dist=0.0,
             n_components=2,
@@ -75,8 +76,8 @@ class DocumentCluster:
         self.cluster_df = pd.DataFrame(columns=['DocId', 'Text', 'x', 'y'])
         self.cluster_df['DocId'] = text_df['DocId']
         self.cluster_df['Text'] = text_df['Text']
-        self.cluster_df['x'] = list(map(lambda x: round(x, 2), clusterable_embedding[:, 0]))
-        self.cluster_df['y'] = list(map(lambda x: round(x, 2), clusterable_embedding[:, 1]))
+        self.cluster_df['x'] = list(map(lambda x: round(x, 2), self.clusterable_embedding[:, 0]))
+        self.cluster_df['y'] = list(map(lambda x: round(x, 2), self.clusterable_embedding[:, 1]))
 
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
@@ -112,9 +113,25 @@ class DocumentCluster:
             # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
             clusters = hdbscan.HDBSCAN(min_samples=1, min_cluster_size=self.args.min_cluster_size,  # leaf_size=40,
                                        metric='euclidean').fit(self.clusterable_embedding)
+            condense_tree = clusters.condensed_tree_
 
             # clusters.condensed_tree_.plot()
             self.cluster_df['HDBSCAN_Cluster'] = clusters.labels_
+            # Save HDBSCAN cluster to 'temp' folder
+            path = os.path.join(self.output_path, 'temp', self.args.case_name + '_clusters.csv')
+            self.cluster_df.to_csv(path, encoding='utf-8', index=False)
+            # Save condense tree to csv
+            tree_df = condense_tree.to_pandas()
+            path = os.path.join(self.output_path, 'temp', self.args.case_name + '_clusters_tree.csv')
+            tree_df.to_csv(path, encoding='utf-8')
+
+            condense_tree.plot(select_clusters=True,
+                               selection_palette=sns.color_palette('deep', 25),
+                               label_clusters=True,
+                               max_rectangles_per_icicle=100)
+            image_path = os.path.join(self.image_path, 'HDBSCAN_clusters.png')
+            plt.savefig(image_path)
+            print("Output HDBSCAN clustering image to " + image_path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -255,12 +272,12 @@ class DocumentCluster:
 if __name__ == '__main__':
     docCluster = DocumentCluster()
     # # docCluster.get_sentence_embedding()
-    # # docCluster.cluster_doc_by_hdbscan()
+    docCluster.cluster_doc_by_hdbscan()
     # # docCluster.cluster_doc_by_KMeans()
     # TopicUtility.visualise_cluster_results(docCluster.args.min_cluster_size)
     # # docCluster.collect_tf_idf_terms_by_cluster()
-    docCluster.derive_topic_words_from_cluster_docs()
+    # docCluster.derive_topic_words_from_cluster_docs()
     # # Output top 50 topics by 1, 2 and 3-grams
-    TopicUtility.flatten_topics('HDBSCAN', 2)  # topics in Cluster 2
-    TopicUtility.flatten_topics('HDBSCAN', 12)  # topics in Cluster 12
-    TopicUtility.flatten_topics('HDBSCAN', 22)  # topics in Cluster 22
+    # TopicUtility.flatten_topics('HDBSCAN', 2)  # topics in Cluster 2
+    # TopicUtility.flatten_topics('HDBSCAN', 12)  # topics in Cluster 12
+    # TopicUtility.flatten_topics('HDBSCAN', 22)  # topics in Cluster 22
