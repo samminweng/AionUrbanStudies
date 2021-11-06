@@ -43,44 +43,16 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div id="doc_cluster"></div>
+                    <div id="hover_info" class="container" style="height: 100px"></div>
+                    <div id="cluster_dot_chart"></div>
                 </div>
             </div>
         </div>
-        <div class="col border border-3">
+        <div class="col border border-3 p-3">
             <div class="row">
                 <div class="col">
-                    <div id="cluster_list_view" class="container">
-                        <div class="row">
-                            <div class="col p-3">
-                                <span id="cluster_overview"></span>
-                            </div>
-                        </div>
-                        <div class="row align-bottom">
-                            <div class="col">
-                                <table id="cluster_table" class="table">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Articles</th>
-                                        <th>Relevant Topics by
-                                            <span>
-                                                <select id="rank" name="rank">
-                                                     <option value="N-gram" selected>N-gram</option>
-                                                     <option value="1-gram">1-gram</option>
-                                                     <option value="2-gram">2-gram</option>
-                                                     <option value="3-gram">3-gram</option>
-                                                </select>
-                                            </span>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                                <div id="pagination"></div>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="cluster_doc_list" class="container"></div>
+                    <div id="doc_list" class="container"></div>
                 </div>
             </div>
         </div>
@@ -92,13 +64,42 @@
         </div>
     </footer >
 </div>
-
-
 <!-- Our javascript -->
-<script type="text/javascript" src="js/cluster_dot_chart/scatter_graph/scatter_graph.js"></script>
-<script type="text/javascript" src="js/cluster_dot_chart/doc_view/cluster_list_view.js"></script>
-<script type="text/javascript" src="js/cluster_dot_chart/utility.js"></script>
-<script type="text/javascript" src="js/cluster_dot_chart/chart_doc_view.js"></script>
+<script type="text/javascript" src="js/cluster_dot_chart/doc_view/text_view.js"></script>
+<script type="text/javascript" src="js/cluster_dot_chart/doc_view/doc_list.js"></script>
+<script type="text/javascript" src="js/cluster_dot_chart/doc_view/cluster_doc_list.js"></script>
+<script type="text/javascript" src="js/cluster_dot_chart/scatter_graph.js"></script>
 <script type="text/javascript" src="js/cluster_dot_chart/main.js"></script>
 </body>
 </html>
+<!--                    <div id="cluster_list_view" class="container">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col p-3">-->
+<!--                                <span id="cluster_overview"></span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row align-bottom">-->
+<!--                            <div class="col">-->
+<!--                                <table id="cluster_table" class="table">-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th></th>-->
+<!--                                        <th>Articles</th>-->
+<!--                                        <th>Relevant Topics by-->
+<!--                                            <span>-->
+<!--                                                <select id="rank" name="rank">-->
+<!--                                                     <option value="N-gram" selected>N-gram</option>-->
+<!--                                                     <option value="1-gram">1-gram</option>-->
+<!--                                                     <option value="2-gram">2-gram</option>-->
+<!--                                                     <option value="3-gram">3-gram</option>-->
+<!--                                                </select>-->
+<!--                                            </span>-->
+<!--                                        </th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody></tbody>-->
+<!--                                </table>-->
+<!--                                <div id="pagination"></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->

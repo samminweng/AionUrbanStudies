@@ -16,29 +16,29 @@ $(function () {
         $.getJSON(doc_key_terms_file_path),
         $.getJSON(kmeans_cluster_topic_words_file_path),
         $.getJSON(hdbscan_cluster_topic_words_file_path),
-    ).done(function (result1, result2, result3, result4){
+    ).done(function (result1, result2, result3, result4) {
         const cluster_chart_data = result1[0];
-        const doc_key_terms = result2[0];
-        const cluster_topic_words_data = {"KMeans": result3[0], "HDBSCAN": result4[0]};
+        const doc_data = result2[0];
+        const cluster_topics = {"KMeans": result3[0], "HDBSCAN": result4[0]};
         const cluster_approach = "HDBSCAN";
         const is_hide = true;
-        Utility.doc_key_terms = doc_key_terms;
         // Draw the chart and list the clusters/topic words
-        const chart_doc_view = new ChartDocView(is_hide, cluster_approach, cluster_chart_data, cluster_topic_words_data);
+        const chart = new ScatterGraph(is_hide, cluster_approach, cluster_chart_data, cluster_topics, doc_data);
         // Add event to the selection of clustering approach
         $('#cluster_approach').selectmenu({
-            change: function (event, data){
+            change: function (event, data) {
                 const cluster_approach = data.item.value;
                 const is_hide = $("#hide_outliers").is(':checked');// Show/hide outliers
-                const chart_doc_view = new ChartDocView(is_hide, cluster_approach, cluster_chart_data, cluster_topic_words_data);
+                const chart = new ScatterGraph(is_hide, cluster_approach, cluster_chart_data,
+                    cluster_topics, doc_data);
             }
         });
         // Add event to hide or show outlier
         $("#hide_outliers").checkboxradio({});
-        $('#hide_outliers').bind("change", function(){
+        $('#hide_outliers').bind("change", function () {
             const is_hide = $("#hide_outliers").is(':checked');
-            const chart_doc_view = new ChartDocView(is_hide, cluster_approach, cluster_chart_data, cluster_topic_words_data);
-            // alert(is_hide);
+            const chart_doc_view = new ScatterGraph(is_hide, cluster_approach, cluster_chart_data,
+                cluster_topics, doc_data);
         })
     });
 

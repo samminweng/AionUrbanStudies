@@ -39,7 +39,7 @@ function ClusterListView(cluster_approach, cluster_topic_words_data) {
                     // // Onclick event to display the topic words results
                     cluster_btn.on("click", function () {
                         // Open the Cluster article list tab
-                        const win = window.open('cluster_doc_list.html?cluster='+ cluster_no);
+                        const win = window.open('cluster_topic_list.html?cluster='+ cluster_no);
                         if(win){
                             win.focus();    // Focus on new tab
                         }else{
