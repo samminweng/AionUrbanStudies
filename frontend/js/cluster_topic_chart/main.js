@@ -4,16 +4,20 @@ const corpus = 'UrbanStudyCorpus';
 // Document ready event
 $(function () {
     // Document (article abstract and title) and key terms data
-    const doc_key_terms_file_path = 'data/doc_cluster/' + corpus + '_doc_terms.json';
+    const doc_file_path = 'data/doc_cluster/' + corpus + '_doc_terms.json';
     // HDBSCAN cluster and topic words data
-    const hdbscan_cluster_topic_words_file_path = 'data/doc_cluster/' + corpus + '_HDBSCAN_Cluster_topic_words.json';
+    const cluster_topics_file_path = 'data/doc_cluster/' + corpus + '_HDBSCAN_Cluster_topic_words.json';
+    // Get the cluster groups
+    const cluster_group_file_path = 'data/doc_cluster/' + corpus + '_cluster_groups.json';
     $.when(
-        $.getJSON(doc_key_terms_file_path), $.getJSON(hdbscan_cluster_topic_words_file_path)
-    ).done(function (result1, result2) {
-        const doc_term_data = result1[0];
-        const cluster_topic_data = result2[0];
+        $.getJSON(doc_file_path), $.getJSON(cluster_topics_file_path),
+        $.getJSON(cluster_group_file_path)
+    ).done(function (result1, result2, result3) {
+        const doc_data = result1[0];
+        const cluster_data = result2[0];
+        const cluster_groups = result3[0];
         // console.log(doc_key_terms);
-        const chart = new WordTree(cluster_topic_data, doc_term_data);
+        const chart = new WordTree(cluster_groups, cluster_data, doc_data);
     });
 
 

@@ -18,8 +18,9 @@
 </head>
 <body>
 <div class="container">
-    <div class="h4">Article Cluster Chart for Urban Studies</div>
-    <div>We cluster 600 urban study research articles into using BERT-based Sentence Transformer + HDBSCAN clustering
+    <div class="h4">Cluster Dot Chart</div>
+    <div>600 urban study-related research articles are grouped into 22  clusters (97 articles as outliers) using
+        BERT-based Sentence Transformer + HDBSCAN clustering
         + TF-IDF topic extraction, which is similar to
         <a target="_blank" href="https://maartengr.github.io/BERTopic/">BERTopic approach</a>
         <a target="_blank" href="https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6">Link to the
@@ -48,11 +49,18 @@
                 </div>
             </div>
         </div>
-        <div class="col border border-3 p-3">
+        <div class="col border border-3 ">
             <div class="row">
-                <div class="col">
-                    <div id="cluster_doc_list" class="container"></div>
-                    <div id="doc_list" class="container"></div>
+                <div class="col container">
+                    <div class="row mt-3">
+                        <div id="cluster_doc_heading" class="col h5"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div id="cluster_doc_topic" class="col"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div id="doc_list" class="col"></div>
+                    </div>
                 </div>
             </div>
         </div>
