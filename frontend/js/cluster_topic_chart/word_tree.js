@@ -5,6 +5,8 @@ function WordTree(cluster_groups, cluster_data, doc_data) {
     let data_table;// Store the relation between clusters and topics
     let available_topics = []; // Store all the top 10 cluster topics
     let word_tree;  // word tree chart
+
+
     // Convert cluster topic to data table for Google chart
     function convert_cluster_topics_data_table() {
         data_table = new google.visualization.DataTable();
@@ -43,7 +45,7 @@ function WordTree(cluster_groups, cluster_data, doc_data) {
                     rows.push(topic_node);
                 }
                 // Concatenate the cluster topics to available topics
-                available_topics = available_topics.concat(cluster_topics);
+                available_topics.push({cluster_no: cluster_no, cluster_topics: cluster_topics});
             }
             rows.push(group_node);
         }
@@ -63,14 +65,28 @@ function WordTree(cluster_groups, cluster_data, doc_data) {
             // console.log("Cluster no = " + cluster_no );
         } else {
             // Topic
-            const selected_topic = available_topics.find(t => t['topic'] === word);
+            let selected_topic = null;
+            let cluster_no = null;
+            for (let i=0; i < available_topics.length; i++) {
+                const available_topic = available_topics[i];
+                const cluster_topics = available_topic['cluster_topics'];
+                selected_topic = cluster_topics.find(t => t['topic'] === word)
+                if(selected_topic){
+                    cluster_no = available_topic['cluster_no'];     // cluster number of selected topic
+                    break;
+                }
+            }
+            console.log(selected_topic);
             if (selected_topic) {
-                // console.log("Topic = " + topic);
-                // console.log(doc_data);
-                const doc_ids = selected_topic['doc_ids'];
-                const topic_docs = doc_data.filter(d => doc_ids.includes(d['DocId']));
-                console.log(topic_docs);
-                const doc_list = new DocList(topic_docs, selected_topic);
+                const cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
+                // Get the documents within a cluster
+                const cluster_docs = doc_data.filter(d => cluster['DocIds'].includes(d['DocId']));
+                // Get top 30 topics of a cluster
+                const cluster_topics = cluster['TopicN-gram'].slice(0, 30);
+                // Get the documents containing the topic
+                const topic_docs = doc_data.filter(d => selected_topic['doc_ids'].includes(d['DocId']));
+                // Display a list of doc matching with topic
+                const doc_list = new DocList(topic_docs, cluster_topics, selected_topic, cluster_docs);
             }
         }
 
@@ -98,27 +114,12 @@ function WordTree(cluster_groups, cluster_data, doc_data) {
 
     }
 
-    // Add the instruction dialog
-    function _createDialog(){
-        $('#instruction').empty();
-        $('#instruction').append($('<p>Clicking on a topic (green words) displays the associated articles within the cluster.</p>'));
-        $('#instruction').dialog({
-            modal: true,
-            buttons: {
-                Ok: function () {
-                    $(this).dialog("close");
-                }
-            }
-        });
-        $("#opener").on("click", function () {
-            $("#instruction").dialog("open");
-        });
-    }
-
     function _createUI() {
-        _createDialog();
+        $('#cluster_topic_chart').empty();
         // Set width and height
         $('#cluster_topic_chart').width(width).height(height);
+
+
 
         // Create the word tree
         google.charts.load('current', {packages: ['wordtree']});

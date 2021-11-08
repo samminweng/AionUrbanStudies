@@ -45,15 +45,15 @@ function DocList(docs, cluster_topics, selected_topics, cluster_docs) {
         if(selected_topics){
             $('#topic_doc_list').append($('<div class="h5">'+ docs.length+ ' articles contains' +
                 ' <span class="search_term">' + selected_topics['topic']+ '</span></div>'));
-            // Add the reset button to display all the cluster articles
-            const reset_btn = $('<button class="mx-1">' +
-                '<span class="ui-icon ui-icon-closethick"></span></button>');
-            reset_btn.button();
-            reset_btn.click(function (event) {
-                const topic_list = new TopicList(cluster_topics, cluster_docs);
-                const doc_list = new DocList(cluster_docs, cluster_topics, null, cluster_docs);
-            });
-            $('#topic_doc_list').find('.search_term').append(reset_btn);
+            // // Add the reset button to display all the cluster articles
+            // const reset_btn = $('<button class="mx-1">' +
+            //     '<span class="ui-icon ui-icon-closethick"></span></button>');
+            // reset_btn.button();
+            // reset_btn.click(function (event) {
+            //     const topic_list = new TopicList(cluster_topics, cluster_docs);
+            //     const doc_list = new DocList(cluster_docs, cluster_topics, null, cluster_docs);
+            // });
+            // $('#topic_doc_list').find('.search_term').append(reset_btn);
         }
         // A list of cluster documents
         const doc_table = $('<table class="table table-striped table-sm">' +

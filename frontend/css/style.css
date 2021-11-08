@@ -11,30 +11,16 @@
 /* Highlight searched terms*/
 .search_term {
     background: transparent;
-    font-style: italic;
-    font-weight: bold;
-    color: #1f77b4;
-    padding: 0;
-}
-.complementary_term {
-    background: transparent;
-    font-weight: bold;
-    color: orange;
-    padding: 0;
-}
-
-.key_term {
-    font-weight: bold;
-    font-style: italic;
-    padding: 0;
-}
-
-.topic {
-    font-style: italic;
     font-weight: bold;
     color: green;
     padding: 0;
 }
+.key_term {
+    /*background: transparent;*/
+    font-weight: normal;
+    padding: 0;
+}
+
 
 /** Network style */
 .controls {

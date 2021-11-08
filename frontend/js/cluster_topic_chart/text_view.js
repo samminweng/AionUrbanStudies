@@ -21,6 +21,7 @@ function TextView(doc, cluster_topics, selected_topics) {
                     "limiters": [",", ".", "'s", "/", ";", ":", '(', ')', '‘', '’', '%']
                 },
                 "acrossElements": true,
+                "caseSensitive": false,
                 "ignorePunctuation": ":;.,-–—‒_(){}[]!'\"+=".split(""),
                 "className": class_name
             }
@@ -34,14 +35,14 @@ function TextView(doc, cluster_topics, selected_topics) {
         let title_div = $('<div></div>');
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));
         // Mark the collocations on title div
-        title_div = mark_key_terms(title_div, search_terms, 'key_term');
-        title_div = mark_key_terms(title_div, topic_words, 'topic');
+        title_div = mark_key_terms(title_div, topic_words, 'key_term');
+        title_div = mark_key_terms(title_div, search_terms, 'search_term');
         container.append(title_div);
         // Add the abstract
         let abstract_div = $('<div class="col"></div>');
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span>' + doc['Abstract'] + '</span>'));
-        abstract_div = mark_key_terms(abstract_div, search_terms, 'key_term');
-        abstract_div = mark_key_terms(abstract_div, topic_words, 'topic');
+        abstract_div = mark_key_terms(abstract_div, topic_words, 'key_term');
+        abstract_div = mark_key_terms(abstract_div, search_terms, 'search_term');
         container.append(abstract_div);
         // Add author keywords
         let author_keyword_div = $('<div class="col"></div>');

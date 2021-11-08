@@ -27,9 +27,12 @@
             tutorial</a>)
         The dot represents an article and the dot color reflects the cluster.
     </div>
-    <button id="opener">Open Instructions</button>
-    <div id="instruction" title="Instructions"></div>
-    <div id="progressbar"><div class="progress-label">Loading...</div></div>
+    <div>
+        <button id="opener">Open Instructions</button>
+        <div id="instruction" title="Instructions"></div>
+        <div id="progressbar"><div class="progress-label">Loading...</div></div>
+    </div>
+    <!-- Chart and doc list -->
     <div class="row mt-3">
         <div class="col border border-3">
             <div class="row p-3">
@@ -76,6 +79,7 @@
     </footer >
 </div>
 <!-- Our javascript -->
+<script type="text/javascript" src="js/cluster_dot_chart/instruction_dialog.js"></script>
 <script type="text/javascript" src="js/cluster_dot_chart/doc_view/text_view.js"></script>
 <script type="text/javascript" src="js/cluster_dot_chart/doc_view/doc_list.js"></script>
 <script type="text/javascript" src="js/cluster_dot_chart/doc_view/cluster_doc_list.js"></script>
@@ -83,34 +87,3 @@
 <script type="text/javascript" src="js/cluster_dot_chart/main.js"></script>
 </body>
 </html>
-<!--                    <div id="cluster_list_view" class="container">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col p-3">-->
-<!--                                <span id="cluster_overview"></span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row align-bottom">-->
-<!--                            <div class="col">-->
-<!--                                <table id="cluster_table" class="table">-->
-<!--                                    <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th></th>-->
-<!--                                        <th>Articles</th>-->
-<!--                                        <th>Relevant Topics by-->
-<!--                                            <span>-->
-<!--                                                <select id="rank" name="rank">-->
-<!--                                                     <option value="N-gram" selected>N-gram</option>-->
-<!--                                                     <option value="1-gram">1-gram</option>-->
-<!--                                                     <option value="2-gram">2-gram</option>-->
-<!--                                                     <option value="3-gram">3-gram</option>-->
-<!--                                                </select>-->
-<!--                                            </span>-->
-<!--                                        </th>-->
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                    <tbody></tbody>-->
-<!--                                </table>-->
-<!--                                <div id="pagination"></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->

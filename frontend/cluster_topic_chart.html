@@ -25,9 +25,22 @@
     <div>22 clusters are extracted from 600 research articles relating to Urban Study,
         and then grouped into six categories based on the cluster dot chart.<br>
     </div>
-    <button id="opener">Open Instructions</button>
-    <div id="instruction" title="Instructions"></div>
     <div id="progressbar"><div class="progress-label">Loading...</div></div>
+    <div class="row m-3">
+        <div class="col-4">
+            <div id="chart_select">
+                Select a chart:
+                <select name="chart_type" id="chart_type">
+                    <option value="sunburst" selected>Sunburst</option>
+                    <option value="wordtree">Word Tree</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-2">
+            <button id="opener">Open Instructions</button>
+            <div id="instruction" title="Instructions"></div>
+        </div>
+    </div>
     <div class="row m-3">
         <div class="col border border-3">
             <div>
@@ -42,6 +55,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/cluster_topic_chart/instruction_dialog.js"></script>
 <script type="text/javascript" src="js/cluster_topic_chart/text_view.js"></script>
 <script type="text/javascript" src="js/cluster_topic_chart/topic_list.js"></script>
 <script type="text/javascript" src="js/cluster_topic_chart/doc_list.js"></script>

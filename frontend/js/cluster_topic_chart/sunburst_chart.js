@@ -61,7 +61,10 @@ function SunburstChart(cluster_groups, cluster_data, doc_data){
 
     function _createUI(){
         // Set width and height
+        $('#cluster_topic_chart').empty();
         $('#cluster_topic_chart').width(width).height(height);
+
+        // Draw sunburst chart
         const data_table = convert_to_data_table();
         const options = {
             margin: {l: 30, r: 30, b: 30, t: 30},
