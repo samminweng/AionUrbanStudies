@@ -1,7 +1,9 @@
 // Create a text view to display the content of the article
-function TextView(doc, selected_topics) {
+function TextView(doc, cluster_topics, selected_topics) {
     // Highlight singular and plural topics
     const search_terms = (selected_topics === null) ? [] : [selected_topics['topic'], selected_topics['plural']];
+    const topic_words = cluster_topics.map(t => [t['topic'], t['plural']]).reduce((pre, cur) => pre.concat(cur), []);
+    console.log(topic_words);
     const container = $('<div></div>');
     this.get_container = function () {
         return container;
@@ -28,17 +30,18 @@ function TextView(doc, selected_topics) {
     }
 
     function _createUI() {
-
         // Add the title
         let title_div = $('<div></div>');
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));
         // Mark the collocations on title div
-        title_div = mark_key_terms(title_div, search_terms, 'search_term');
+        title_div = mark_key_terms(title_div, search_terms, 'key_term');
+        title_div = mark_key_terms(title_div, topic_words, 'topic');
         container.append(title_div);
         // Add the abstract
         let abstract_div = $('<div class="col"></div>');
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span>' + doc['Abstract'] + '</span>'));
-        abstract_div = mark_key_terms(abstract_div, search_terms, 'search_term');
+        abstract_div = mark_key_terms(abstract_div, search_terms, 'key_term');
+        abstract_div = mark_key_terms(abstract_div, topic_words, 'topic');
         container.append(abstract_div);
         // Add author keywords
         let author_keyword_div = $('<div class="col"></div>');

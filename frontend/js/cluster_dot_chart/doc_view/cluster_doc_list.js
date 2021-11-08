@@ -27,7 +27,8 @@ function ClusterDocList(cluster, doc_data) {
                 $('#cluster_doc_heading').empty();
                 $('#cluster_doc_heading').append(cluster_link);
                 $('#cluster_doc_heading').append(
-                    $('<span> has ' + selected_topic['doc_ids'].length + ' articles about ' + selected_topic['topic'] + '</span>'));
+                    $('<span> has ' + selected_topic['doc_ids'].length + ' articles about '
+                        + '<span class="search_term">' + selected_topic['topic'] + '</span></span>'));
                 // Add the reset button to display all the cluster articles
                 const reset_btn = $('<button class="mx-1">' +
                     '<span class="ui-icon ui-icon-closethick"></span></button>');

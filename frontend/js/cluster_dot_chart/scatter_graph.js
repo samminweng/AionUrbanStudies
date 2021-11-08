@@ -90,6 +90,7 @@ function ScatterGraph(is_hide, approach, cluster_chart_data, cluster_topics, doc
             },
             annotations: [],
             hovermode: 'closest',
+            config: { responsive: true }
         }
 
         // Get the cluster number

@@ -13,7 +13,7 @@
     background: transparent;
     font-style: italic;
     font-weight: bold;
-    color: green;
+    color: #1f77b4;
     padding: 0;
 }
 .complementary_term {
@@ -24,15 +24,15 @@
 }
 
 .key_term {
-    font-weight: normal;
+    font-weight: bold;
     font-style: italic;
     padding: 0;
 }
 
-.topic_word {
-    /*background: transparent;*/
+.topic {
+    font-style: italic;
     font-weight: bold;
-    text-decoration: underline;
+    color: green;
     padding: 0;
 }
 

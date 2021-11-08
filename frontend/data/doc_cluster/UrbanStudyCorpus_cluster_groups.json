@@ -1,11 +1,12 @@
 [
-  {"group":"1️⃣","clusters":[0]},
-  {"group":"2️⃣","clusters":[1, 5, 6]},
-  {"group":"3️⃣","clusters":[2, 13]},
-  {"group":"4️⃣","clusters":[3, 10]},
-  {"group":"5️⃣","clusters":[4, 7, 8]},
-  {"group":"6️⃣","clusters":[9, 17, 19]},
-  {"group":"7️⃣","clusters":[11, 14, 18]},
-  {"group":"8️⃣","clusters":[12, 15, 16]},
-  {"group":"9️⃣","clusters":[20, 21, 22]}
+  {"group":"Category 1️⃣","clusters":[0]},
+  {"group":"Category 2️⃣","clusters":[1, 5, 6]},
+  {"group":"Category 3️⃣","clusters":[2, 13]},
+  {"group":"Category 4️⃣","clusters":[3, 10, 11]},
+  {"group":"Category 5️⃣","clusters":[4, 7, 8]},
+  {"group":"Category 6️⃣","clusters":[9, 17, 19]},
+  {"group":"Category 7️⃣","clusters":[14, 18]},
+  {"group":"Category 8️⃣","clusters":[12, 15, 16]},
+  {"group":"Category 9️⃣","clusters":[20, 21, 22]},
+  {"group":"Outliers","clusters":[-1]}
 ]

@@ -1,7 +1,47 @@
 'use strict';
 const corpus = 'UrbanStudyCorpus';
+// Add the instruction dialog
+function _createDialog(){
+    $('#instruction').empty();
+    $('#instruction').append($('<p>' +
+        '<div><b>Mouse over a dot</b> to display top 5 topics of a cluster. </div>' +
+        '<div><b>Click on a dot</b> to display the cluster, top topics and associated articles within the cluster.' +
+        '</div></p>'));
+    $('#instruction').dialog({
+        modal: true,
+        buttons: {
+            Ok: function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+    $("#opener").on("click", function () {
+        $("#instruction").dialog("open");
+    });
+}
+// Add the progress bar
+function _createProgressBar(){
+    // Update the progress bar asynchronously
+    $('#progressbar').progressbar({
+        value: 0,
+        complete: function() {
+            $( ".progress-label" ).text( "Complete!" );
+        }
+    });
+    let counter = 0;
+    (function asyncLoop() {
+        $('#progressbar').progressbar("value", counter++);
+        if (counter <= 100) {
+            setTimeout(asyncLoop, 100);
+        }
+    })();
+}
+
+
+
 // Document ready event
 $(function () {
+    _createProgressBar();
     // Clustering chart data
     const cluster_chart_data_file_path = 'data/doc_cluster/' + corpus + '_clusters.json';
     // Document (article abstract and title) and key terms data
@@ -39,7 +79,10 @@ $(function () {
             const is_hide = $("#hide_outliers").is(':checked');
             const chart_doc_view = new ScatterGraph(is_hide, cluster_approach, cluster_chart_data,
                 cluster_topics, doc_data);
-        })
+        });
+        _createDialog();
+        // Remove the progress bar
+        $('#progressbar').remove();
     });
 
 });
