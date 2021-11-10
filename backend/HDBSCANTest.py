@@ -1,5 +1,5 @@
 import os
-from documentCluster import DocumentCluster
+from DocumentCluster import DocumentCluster
 import pandas as pd
 
 

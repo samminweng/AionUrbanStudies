@@ -11,7 +11,7 @@ import umap  # (UMAP) is a dimension reduction technique https://umap-learn.read
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from pathlib import Path
-from TopicUtility import TopicUtility
+from ClusterUtility import TopicUtility
 from Utility import Utility
 import pickle
 import seaborn as sns  # statistical graph library
@@ -296,7 +296,7 @@ if __name__ == '__main__':
     # # # docCluster.collect_tf_idf_terms_by_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()
     # # Output top 50 topics by 1, 2 and 3-grams
-    TopicUtility.flatten_topics('HDBSCAN', 4)  # topics in Cluster 4
-    TopicUtility.flatten_topics('HDBSCAN', 5)  # topics in Cluster 5
-    TopicUtility.flatten_topics('HDBSCAN', 17)  # topics in Cluster 17
+    TopicUtility.flatten_topics('HDBSCAN', 15)  # topics in Cluster 15
+    TopicUtility.flatten_topics('HDBSCAN', 16)  # topics in Cluster 16
+    TopicUtility.flatten_topics('HDBSCAN', 12)  # topics in Cluster 12
 

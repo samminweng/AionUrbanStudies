@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+landscape,0.0227702176,59,9,12,landscape pattern,0.0419588354,25,6,2,land cover pattern,0.0241295672,5,2,1,landscape pattern,0.0419588354,25,6,2
+dust,0.0176950159,10,1,1,sediment yield,0.0171721461,8,1,1,urban greenness space,0.0241295672,5,1,1,land cover pattern,0.0241295672,5,2,1
+sediment,0.015925514300000002,9,1,1,urban greenness,0.0171721461,8,1,1,various land cover,0.0193036537,4,1,1,urban greenness space,0.0241295672,5,1,1
+watershed,0.0138936921,12,1,3,soil erosion,0.013426827300000001,8,1,2,watershed soil erosion,0.0144777403,3,1,1,landscape,0.0227702176,59,9,12
+concentration,0.0138936921,18,4,6,landscape indice,0.0128791096,6,3,1,ecosystem service value,0.0144777403,3,1,1,various land cover,0.0193036537,4,1,1
+erosion,0.0124520913,9,1,2,land cover,0.0118723796,16,3,8,urban agglomeration scale,0.0144777403,3,1,1,dust,0.0176950159,10,1,1
+ESV,0.0123865111,7,2,1,landscape metric,0.0117484739,7,4,2,land cover class,0.0126306292,4,1,3,sediment yield,0.0171721461,8,1,1
+greenness,0.0110685256,8,1,2,urban agglomeration,0.0117484739,7,2,2,patch cohesion index,0.0096518269,2,2,1,urban greenness,0.0171721461,8,1,1
+SHDI,0.010617009600000001,6,4,1,cover pattern,0.0107325913,5,2,1,landscape pattern change,0.0096518269,2,2,1,sediment,0.015925514300000002,9,1,1
+PD,0.0096849599,7,2,2,dust storm,0.0107325913,5,1,1,four landscape metric,0.0096518269,2,2,1,watershed soil erosion,0.0144777403,3,1,1
+agglomeration,0.0081046537,7,2,3,greenness space,0.0107325913,5,1,1,urban arid environment,0.0096518269,2,1,1,ecosystem service value,0.0144777403,3,1,1
+soil,0.0079810385,8,1,4,aggregation index,0.0100701205,6,6,2,environment experience high,0.0096518269,2,1,1,urban agglomeration scale,0.0144777403,3,1,1
+storm,0.0079810385,8,1,4,ecosystem service,0.009681508600000001,8,3,4,level whose origin,0.0096518269,2,1,1,watershed,0.0138936921,12,1,3
+cover,0.007818889800000001,18,4,11,diversity index,0.008391767100000001,5,4,2,whose origin lies,0.0096518269,2,1,1,concentration,0.0138936921,18,4,6
+Shannon,0.0070780064000000005,4,4,1,urban form,0.0066247081000000005,10,1,9,regional dust event,0.0096518269,2,1,1,soil erosion,0.013426827300000001,8,1,2
+suburb,0.0070780064000000005,4,1,1,watershed soil,0.0064395548,3,1,1,potential urban planning,0.0096518269,2,1,1,landscape indice,0.0128791096,6,3,1
+index,0.0066023468000000005,22,7,14,four landscape,0.0064395548,3,3,1,landscape shape index,0.0096518269,2,2,1,land cover class,0.0126306292,4,1,3
+yield,0.0061749743,8,1,6,service value,0.0064395548,3,1,1,spatially varied impact,0.0096518269,2,1,1,erosion,0.0124520913,9,1,2
+ecosystem,0.0061743831,9,3,7,total ESV,0.0064395548,3,1,1,urban development pattern,0.0094729719,3,1,3,ESV,0.0123865111,7,2,1
+aggregation,0.0061137034,7,6,5,agglomeration scale,0.0064395548,3,1,1,geographically weighted regression,0.0081624257,3,2,4,land cover,0.0118723796,16,3,8
+patch,0.0061137034,7,4,5,economic value,0.0064395548,3,1,1,fine particulate matter,0.0075467220000000005,2,2,2,landscape metric,0.0117484739,7,4,2
+ED,0.0055342628,4,2,2,cover class,0.0056179781000000005,4,1,3,urban form metric,0.0075467220000000005,2,1,2,urban agglomeration,0.0117484739,7,2,2
+winter,0.0055342628,4,2,2,various land,0.0056179781000000005,4,1,3,land use change,0.005441617100000001,2,1,4,dust storm,0.0107325913,5,1,1
+seasonal,0.0055342628,4,2,2,Beijing City,0.0050350602,3,1,2,geomorphological process related,0.0048259134,1,1,1,SHDI,0.010617009600000001,6,4,1
+ES,0.0055342628,4,1,2,fine particulate,0.0050350602,3,3,2,erosion within watershed,0.0048259134,1,1,1,aggregation index,0.0100701205,6,6,2
+CNY,0.005308504800000001,3,1,1,within watershed,0.0042930365,2,1,1,used multivariate regression,0.0048259134,1,1,1,PD,0.0096849599,7,2,2
+Changsha,0.005308504800000001,3,1,1,thus leading,0.0042930365,2,2,1,multivariate regression technique,0.0048259134,1,1,1,ecosystem service,0.009681508600000001,8,3,4
+particulate,0.0046312307,4,4,3,landscape characteristic,0.0042930365,2,1,1,many landscape metric,0.0048259134,1,1,1,patch cohesion index,0.0096518269,2,2,1
+metric,0.0044377982,13,6,13,patch cohesion,0.0042930365,2,2,1,otherwise biased parameter,0.0048259134,1,1,1,landscape pattern change,0.0096518269,2,2,1
+LULC,0.004366931,5,2,5,cohesion index,0.0042930365,2,2,1,biased parameter estimate,0.0048259134,1,1,1,four landscape metric,0.0096518269,2,2,1
+pollution,0.0042452948,11,4,12,landscape planning,0.0042930365,2,2,1,landscape pattern within,0.0048259134,1,1,1,urban arid environment,0.0096518269,2,1,1
+GWR,0.0039905192,4,2,4,urbanization impact,0.0042930365,2,1,1,pattern within watershed,0.0048259134,1,1,1,environment experience high,0.0096518269,2,1,1
+indice,0.0039094449000000005,9,3,11,pattern change,0.0042930365,2,2,1,Upper Du River,0.0048259134,1,1,1,level whose origin,0.0096518269,2,1,1
+pattern,0.0038575479,38,8,20,social economy,0.0042930365,2,1,1,Du River watershed,0.0048259134,1,1,1,whose origin lies,0.0096518269,2,1,1
+urbanization,0.0038442688000000004,24,6,18,patch density,0.0042930365,2,2,1,watershed using hydrological,0.0048259134,1,1,1,regional dust event,0.0096518269,2,1,1
+diversity,0.0038227963,7,5,9,outer suburb,0.0042930365,2,1,1,using hydrological modeling,0.0048259134,1,1,1,potential urban planning,0.0096518269,2,1,1
+PLSR,0.0035390032000000003,2,1,1,mode made,0.0042930365,2,1,1,primary metric controlling,0.0048259134,1,1,1,landscape shape index,0.0096518269,2,2,1
+interspersion,0.0035390032000000003,2,2,1,urban arid,0.0042930365,2,1,1,watershed could account,0.0048259134,1,1,1,spatially varied impact,0.0096518269,2,1,1
+outer,0.0035390032000000003,2,1,1,arid environment,0.0042930365,2,1,1,patch land cover,0.0048259134,1,1,1,urban development pattern,0.0094729719,3,1,3
+gwr,0.0035390032000000003,2,2,1,background value,0.0042930365,2,1,1,cover type may,0.0048259134,1,1,1,diversity index,0.008391767100000001,5,4,2
+yr,0.0035390032000000003,2,1,1,net contribution,0.0042930365,2,1,1,type may significantly,0.0048259134,1,1,1,geographically weighted regression,0.0081624257,3,2,4
+F_PLAND,0.0035390032000000003,2,1,1,strongest storm,0.0042930365,2,1,1,may significantly accelerate,0.0048259134,1,1,1,storm,0.0079810385,8,1,4
+C_PLAND,0.0035390032000000003,2,1,1,occurred mainly,0.0042930365,2,1,1,significantly accelerate soilerosion,0.0048259134,1,1,1,cover,0.007818889800000001,18,4,11
+LPIs,0.0035390032000000003,2,1,1,environment experience,0.0042930365,2,1,1,increase sediment export,0.0048259134,1,1,1,fine particulate matter,0.0075467220000000005,2,2,2
+ESVs,0.0035390032000000003,2,1,1,experience high,0.0042930365,2,1,1,providing quantitative information,0.0048259134,1,1,1,urban form metric,0.0075467220000000005,2,1,2
+LSI,0.0035390032000000003,2,2,1,level whose,0.0042930365,2,1,1,allow decision maker,0.0048259134,1,1,1,Shannon,0.0070780064000000005,4,4,1
+PLADJ,0.0035390032000000003,2,2,1,whose origin,0.0042930365,2,1,1,make better choice,0.0048259134,1,1,1,suburb,0.0070780064000000005,4,1,1
+seasonally,0.0035390032000000003,2,1,1,origin lies,0.0042930365,2,1,1,better choice regarding,0.0048259134,1,1,1,urban form,0.0066247081000000005,10,1,9
+autumn,0.0035390032000000003,2,2,1,regional dust,0.0042930365,2,1,1,choice regarding landscape,0.0048259134,1,1,1,index,0.0066023468000000005,22,7,14
+Weifang,0.0035390032000000003,2,1,1,dust event,0.0042930365,2,1,1,regarding landscape planning,0.0048259134,1,1,1,four landscape,0.0064395548,3,3,1
