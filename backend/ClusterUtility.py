@@ -1,5 +1,3 @@
-import copy
-import json
 import math
 import os
 import re
@@ -12,7 +10,6 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from nltk.util import ngrams
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
-from Utility import Utility
 from nltk.corpus import stopwords
 import pandas as pd
 
