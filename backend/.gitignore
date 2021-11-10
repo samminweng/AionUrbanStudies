@@ -4,3 +4,5 @@ __pycache__/
 # C extensions
 *.so
 *.pyc
+# Ignore model folder that contains temporaral model files
+model/

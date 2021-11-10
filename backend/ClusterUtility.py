@@ -18,7 +18,7 @@ import pandas as pd
 
 
 # Utility for deriving the topics from each cluster of documents.
-class TopicUtility:
+class ClusterUtility:
     case_name = 'UrbanStudyCorpus'
     # Static variable
     stop_words = list(stopwords.words('english'))
@@ -66,7 +66,7 @@ class TopicUtility:
             ax.scatter(20, round(sse_values[20]), marker="x")
             # plt.grid(True)
             fig.show()
-            path = os.path.join(TopicUtility.image_path, "elbow_curve.png")
+            path = os.path.join(ClusterUtility.image_path, "elbow_curve.png")
             fig.savefig(path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -74,7 +74,7 @@ class TopicUtility:
     @staticmethod
     def visualise_cluster_results():
         plt.style.use('bmh')  # Use black white background
-        _path = os.path.join(TopicUtility.output_path, TopicUtility.case_name + '_clusters.json')
+        _path = os.path.join(ClusterUtility.output_path, ClusterUtility.case_name + '_clusters.json')
         cluster_result_df = pd.read_json(_path)
         fig, (ax0, ax1, ax2) = plt.subplots(1, 3)
         # # Visualise KMeans
@@ -91,7 +91,7 @@ class TopicUtility:
         # # Visualise clustered dots using HDBScan
         ax2.scatter(clusters.x, clusters.y, c=clusters['HDBSCAN_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
         ax2.set_title('HDBSCAN')
-        _path = os.path.join(TopicUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
+        _path = os.path.join(ClusterUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
                              + str(len(outliers)) + ".png")
         fig.set_size_inches(10, 5)
         fig.savefig(_path, dpi=600)
@@ -100,7 +100,7 @@ class TopicUtility:
     @staticmethod
     def derive_bag_of_words(doc_ids, doc_texts):
         try:
-            vec = CountVectorizer(stop_words=TopicUtility.stop_words)
+            vec = CountVectorizer(stop_words=ClusterUtility.stop_words)
             bag_of_words = vec.fit_transform(doc_texts)  # Return a bag of words
             # A bag of words is a matrix. Each row is the document. Each column is a word in vocabulary
             # bag_of_words[i, j] is the occurrence of word 'i' in the document 'j'
@@ -144,10 +144,10 @@ class TopicUtility:
             finder = BigramCollocationFinder.from_documents(documents)
             # finder.apply_freq_filter(4)
             # # # Filter out bi_grams containing stopwords or function words
-            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in TopicUtility.function_words or
-                                                     w2.lower() in TopicUtility.function_words)
-            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in TopicUtility.stop_words or
-                                                     w2.lower() in TopicUtility.stop_words)
+            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in ClusterUtility.function_words or
+                                                     w2.lower() in ClusterUtility.function_words)
+            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in ClusterUtility.stop_words or
+                                                     w2.lower() in ClusterUtility.stop_words)
             # Find a list of bi_grams by likelihood collocations
             if associate_measure == 'pmi':
                 scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
@@ -209,8 +209,8 @@ class TopicUtility:
                             # NNS indicates plural nouns
                             if pos_tag[1] == 'NNS':
                                 singular_word = word.rstrip('s')
-                                if word in TopicUtility.lemma_nouns:
-                                    singular_word = TopicUtility.lemma_nouns[word]
+                                if word in ClusterUtility.lemma_nouns:
+                                    singular_word = ClusterUtility.lemma_nouns[word]
                                 singular_words.append(singular_word)
                             else:
                                 singular_words.append(word)
@@ -241,7 +241,7 @@ class TopicUtility:
                 doc_id = clusters[i]  # doc id is cluster id
                 doc = []
                 for doc_text in doc_texts:
-                    text = TopicUtility.preprocess_text(doc_text.strip())
+                    text = ClusterUtility.preprocess_text(doc_text.strip())
                     sentences = sent_tokenize(text)
                     doc.extend(sentences)
                 _docs.append({'cluster': doc_id, 'doc': doc})  # doc: a list of sentences
@@ -265,7 +265,7 @@ class TopicUtility:
                     is_qualified = True
                     for word in _n_gram:
                         # Each word in 'n-gram' must not be stop words and must be a alphabet or number
-                        if word.lower() in TopicUtility.stop_words or \
+                        if word.lower() in ClusterUtility.stop_words or \
                                 re.search('\d|[^\w]', word.lower()):
                             is_qualified = False
                             break
@@ -455,7 +455,7 @@ class TopicUtility:
             words = _topic.split(" ")
             last_word = words[-1]
             plural_word = last_word + "s"
-            for plural, singular in TopicUtility.lemma_nouns.items():
+            for plural, singular in ClusterUtility.lemma_nouns.items():
                 if singular == last_word:
                     plural_word = plural
                     break
@@ -467,7 +467,7 @@ class TopicUtility:
             # Go through each article and find if each topic appear in the article
             for doc_id, doc_text in zip(doc_ids, doc_texts):
                 # Convert the preprocessed text to n_grams
-                tokenizes = word_tokenize(TopicUtility.preprocess_text(doc_text))
+                tokenizes = word_tokenize(ClusterUtility.preprocess_text(doc_text))
                 # Obtain the n-grams from the text
                 n_grams = list(ngrams(tokenizes, n_gram_num))
                 n_grams = list(map(lambda n_gram: " ".join(n_gram), n_grams))

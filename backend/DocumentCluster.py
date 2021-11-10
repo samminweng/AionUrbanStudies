@@ -11,7 +11,7 @@ import umap  # (UMAP) is a dimension reduction technique https://umap-learn.read
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from pathlib import Path
-from ClusterUtility import TopicUtility
+from ClusterUtility import ClusterUtility
 from Utility import Utility
 import pickle
 import seaborn as sns  # statistical graph library
@@ -197,7 +197,7 @@ class DocumentCluster:
                     try:
                         doc_ids = cluster['DocId']
                         doc_text = cluster['Text']
-                        key_terms = TopicUtility.extract_terms_by_TFIDF(doc_ids, doc_text)
+                        key_terms = ClusterUtility.extract_terms_by_TFIDF(doc_ids, doc_text)
                         results.extend(key_terms)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
@@ -226,7 +226,7 @@ class DocumentCluster:
         cluster_approaches = ['HDBSCAN_Cluster']
         try:
             # Get the duplicate articles. Note the original Scopus file contain duplicated articles (titles are the same)
-            duplicate_doc_ids = TopicUtility.scan_duplicate_articles()
+            duplicate_doc_ids = ClusterUtility.scan_duplicate_articles()
             print("Duplicated articles in " + self.args.case_name + ":")
             print(*duplicate_doc_ids, sep=", ")
             # Load the document cluster
@@ -242,7 +242,7 @@ class DocumentCluster:
                 docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
                     .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
                 # Get top 100 topics (1, 2, 3 grams) for each cluster
-                n_gram_topic_list = TopicUtility.get_n_gram_topics(approach, docs_per_cluster)
+                n_gram_topic_list = ClusterUtility.get_n_gram_topics(approach, docs_per_cluster)
                 # print(topic_words_df)
                 results = []
                 for i, cluster in docs_per_cluster.iterrows():
@@ -259,14 +259,14 @@ class DocumentCluster:
                             # Collect top 300 topics of a cluster
                             cluster_topics = n_gram_topic['topics'][str(cluster_no)][:300]
                             # Create a mapping between the topic and its associated articles (doc)
-                            doc_per_topic = TopicUtility.group_docs_by_topics(n_gram_num, doc_ids, doc_texts,
-                                                                              cluster_topics)
+                            doc_per_topic = ClusterUtility.group_docs_by_topics(n_gram_num, doc_ids, doc_texts,
+                                                                                cluster_topics)
                             n_gram_type = 'Topic' + str(n_gram_num) + '-gram'
                             result[n_gram_type] = doc_per_topic
                             n_gram_topics += doc_per_topic
                         if cluster_no == 2:  # Debugging only
                             print("Cluster 2")
-                        result['TopicN-gram'] = TopicUtility.merge_n_gram_topic(n_gram_topics)
+                        result['TopicN-gram'] = ClusterUtility.merge_n_gram_topic(n_gram_topics)
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
@@ -296,7 +296,7 @@ if __name__ == '__main__':
     # # # docCluster.collect_tf_idf_terms_by_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()
     # # Output top 50 topics by 1, 2 and 3-grams
-    TopicUtility.flatten_topics('HDBSCAN', 15)  # topics in Cluster 15
-    TopicUtility.flatten_topics('HDBSCAN', 16)  # topics in Cluster 16
-    TopicUtility.flatten_topics('HDBSCAN', 12)  # topics in Cluster 12
+    ClusterUtility.flatten_topics('HDBSCAN', 15)  # topics in Cluster 15
+    ClusterUtility.flatten_topics('HDBSCAN', 16)  # topics in Cluster 16
+    ClusterUtility.flatten_topics('HDBSCAN', 12)  # topics in Cluster 12
 
