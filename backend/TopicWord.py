@@ -7,9 +7,10 @@ import nltk
 import pandas as pd
 import logging
 from nltk.corpus import stopwords
+import csv
 # Set logging level
 from TopicWordUtility import TopicWordUtility
-
+import gensim.downloader as api
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 nltk_path = os.path.join("C:", os.sep, "Users", "sam", "nltk_data")
 Path(nltk_path).mkdir(parents=True, exist_ok=True)
@@ -34,7 +35,8 @@ class TopicWord:
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_topic_words.json")
         df = pd.read_json(path)
         self.clusters = df.to_dict("records")  # Convert to a list of dictionaries
-        self.wv = TopicWordUtility.obtain_keyed_vectors(self.args.model_name, is_load=True)
+        self.model = TopicWordUtility.obtain_keyed_vectors(self.args.model_name, is_load=True)
+        # self.model = api.load(self.args.model_name)
         # Static variable
         self.stop_words = list(stopwords.words('english'))
 
@@ -47,47 +49,48 @@ class TopicWord:
             # Get cluster 15
             cluster = list(filter(lambda c: c['Cluster'] == cluster_no, self.clusters))[0]
             results = []
-            for n_gram_type in [2]:
+            for n_gram_type in [2, 3]:
                 n_gram_results = []
                 # Get top 30 bi-gram topics
                 for n_gram in cluster['Topic'+str(n_gram_type)+ '-gram'][:30]:
                     try:
                         topic = n_gram['topic']
-                        topic_words = list(filter(lambda w: w in self.wv, topic.split(" ")))
+                        topic_words = list(filter(lambda w: w.lower() in self.model, topic.split(" ")))
                         # Check both words must in model
                         if len(topic_words) == n_gram_type:
                             # add up the word vectors
-                            vector_1 = self.wv[topic_words[0]] + self.wv[topic_words[1]]
                             vectors = []
                             for _word in topic_words:
-                                vectors.append(self.wv[_word])
-                            word_vector = np.add.reduce(vectors)
-                            # avg_vector = np.true_divide(vector, n_gram_type)
+                                vectors.append(self.model[_word.lower()])
+                            # Add up the vectors
+                            # word_vector = np.add.reduce(vectors)
+                            # Average the word vector
+                            word_vector = np.mean(vectors, axis=0)
+                            # Get max of vectors
+                            # word_vector = np.amax(vectors, axis=0)
                             # Find top 100 similar words by vector
-                            similar_words = self.wv.similar_by_vector(word_vector, topn=100)
+                            similar_words = self.model.similar_by_vector(word_vector, topn=100)
+                            # similar_words_1 = self.model.most_simliar(positive=topic_words, topn=100)
                             # Filter out no-word, duplicated topic words and stop words from similar words
                             similar_words = list(filter(lambda w: not re.search('[^\\w]', w[0].lower()), similar_words))
                             similar_words = list(filter(lambda w: w[0].lower() not in self.stop_words, similar_words))
                             # Filter out duplicated noun words
                             similar_words = TopicWordUtility.filter_duplicated_words(similar_words, topic)
-                            # Get top 20 similar words
-                            N = 20
+                            # Get top 15 similar words
+                            N = 15
                             result = {"topic": topic}
                             for i, w in enumerate(similar_words[:N]):
-                                similarity = int(round(w[1] * 100))
                                 result['top_' + str(i) + "_similar_word"] = w[0]
+                                result['top_' + str(i) + "_similar_word_score"] = float("{:.2f}".format(w[1]))
                             n_gram_results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 # List top 10 n-gram topic
                 results += n_gram_results[:10]
-            # Write the output as a csv or json file
-            topic_word_df = pd.DataFrame(results)
-            path = os.path.join('output', 'topic', self.args.case_name + '_' + self.args.approach + '_topic_similar_words.csv')
-            topic_word_df.to_csv(path, encoding='utf-8', index=False)
-            # # # Write to a json file
-            path = os.path.join('output', 'topic', self.args.case_name + '_' + self.args.approach + '_topic_similar_words.json')
-            topic_word_df.to_json(path, orient='records')
+            df = pd.DataFrame(results)
+            path = os.path.join('output', 'topic',
+                                self.args.case_name + '_' + self.args.approach + '_topic_similar_words.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
             # compute cosine similarity
             # score = self.wv.similarity('france', 'spain')
             # print(score)

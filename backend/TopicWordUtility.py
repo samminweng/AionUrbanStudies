@@ -1,29 +1,24 @@
+import csv
 import os
+from functools import reduce
 from pathlib import Path
 import nltk
 from nltk.stem import PorterStemmer
 import gensim.downloader as api
 from gensim.models import KeyedVectors
+import pandas as pd
 
 
-def load_lemma_word_list():
+# Load function words
+def load_function_word_list():
     # Load the lemma.n file to store the mapping of singular to plural nouns
-    _lemma_nouns = {}
-    path = os.path.join('data', 'lemma.n')
-    f = open(path, 'r')
-    lines = f.readlines()
-    for line in lines:
-        _words = line.rstrip().split("->")  # Remove trailing new line char and split by '->'
-        _plural_word = _words[1]
-        if '.,' in _plural_word:  # Handle multiple plural forms and get the last one as default plural form
-            _plural_word = _plural_word.split('.,')[-1]
-        singular_word = _words[0]
-        _lemma_nouns[_plural_word] = singular_word
-    return _lemma_nouns
+    _df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
+    function_words = _df['Function Word'].tolist()
+    return function_words
 
 
 class TopicWordUtility:
-    lemma_nouns = load_lemma_word_list()  # Store the mapping between singular and plural nouns
+    function_words = load_function_word_list()  # Store the mapping between singular and plural nouns
 
     # # Convert plural word (multiple words) to singular noun
     @staticmethod
@@ -37,7 +32,9 @@ class TopicWordUtility:
                 lemma_word = ps.stem(similar_word[0].lower())
                 # pos_tag = nltk.pos_tag([similar_word[0].lower()])
                 # Check if the word is not a substring of topic and the word is a noun
-                if lemma_word not in topic:
+                if similar_word[0].lower() not in topic.lower() and\
+                   lemma_word not in topic.lower() and\
+                   lemma_word not in TopicWordUtility.function_words:
                     # Check if the word exists
                     exist_words = list(filter(lambda w: ps.stem(w[0].lower()) == lemma_word, filter_similar_words))
                     if len(exist_words) == 0:
@@ -65,3 +62,4 @@ class TopicWordUtility:
             return KeyedVectors.load(model_path, mmap='r')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
