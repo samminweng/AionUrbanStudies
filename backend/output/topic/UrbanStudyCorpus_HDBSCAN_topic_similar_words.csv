@@ -1,11 +1,11 @@
-topic,top_0_similar_word,top_1_similar_word,top_2_similar_word,top_3_similar_word,top_4_similar_word
-land cover,large,small,entire,covered,except
-image classification,characteristics,model,color,forms,unique
-data weighting,measurement,indicator,component,tracking,calculated
-cover classification,types,standard,forms,categories,available
-optical data,measurement,digital,imaging,electronic,systems
-weighting method,calculation,measurement,calculating,calculations,calculated
-cover mapping,maps,data,material,search,using
-colour infrared,color,wavelengths,imagery,sensor,laser
-urban slum,slums,neighborhoods,dwellers,neighborhood,rural
-maximum likelihood,increases,minimum,limit,reduced,threshold
+topic,top_0_similar_word,top_1_similar_word,top_2_similar_word,top_3_similar_word,top_4_similar_word,top_5_similar_word,top_6_similar_word,top_7_similar_word,top_8_similar_word,top_9_similar_word,top_10_similar_word,top_11_similar_word,top_12_similar_word,top_13_similar_word,top_14_similar_word,top_15_similar_word,top_16_similar_word,top_17_similar_word,top_18_similar_word,top_19_similar_word
+land cover,area,property,part,acres,farmland,territory,surrounding,use,large,well,would,purchase,hectares,intended,allow,water,without,around,sell,take
+image classification,description,picture,characteristics,system,type,defined,particular,definition,color,context,perception,example,contrast,hence,method,uses,standard,reference,category,generally
+data weighting,measurements,analysis,index,calculated,indicators,tracking,statistics,analyses,database,information,analyzing,estimation,numbers,allocation,sample,forecasts,parameters,stocks,components,value
+cover classification,description,types,scheme,defined,specific,categories,generally,used,subject,features,standard,system,particular,variety,different,given,included,example,specified,depending
+optical data,measurements,digital,imaging,devices,infrared,systems,components,information,analysis,computer,scanning,tracking,applications,electronic,technology,sensors,using,software,equipment,networking
+weighting method,technique,calculation,proportional,measurement,methodology,estimation,using,optimal,determining,sampling,algorithm,probability,simplest,approximation,variation,parameter,involves,applying,numerical,allocation
+cover mapping,detailed,using,surface,provide,information,data,features,images,defined,surveying,extensive,analysis,areas,capabilities,includes,search,available,allows,specific,involves
+colour infrared,color,wavelengths,ultraviolet,laser,optical,sensors,uv,brightness,telescopes,spectral,monochrome,light,monochromatic,radar,metallic,images,fluorescence,measurements,emitted,reddish
+urban slum,dwellers,neighborhoods,shantytown,suburbs,rural,suburban,sprawl,residential,areas,outskirts,neighbourhood,teeming,countryside,residents,populated,housing,cities,communities,squatter,shanty
+maximum likelihood,minimum,limit,probability,increases,risk,reduced,amount,reasonable,decreases,exceeds,possible,minimal,severity,exceed,reduction,potential,greater,duration,sufficient,rate

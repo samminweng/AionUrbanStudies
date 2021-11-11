@@ -26,9 +26,9 @@ class TopicWord:
             case_name='UrbanStudyCorpus',
             approach='HDBSCAN',
             # Model name ref: https://github.com/RaRe-Technologies/gensim-data
-            model_name="glove-wiki-gigaword-50"  # small model for developing
-            # model_name = "glove-wiki-gigaword-300"        # Larger GloVe model
-            # model_name = "word2vec-google-news-300"       # Google news model
+            # model_name="glove-wiki-gigaword-50"  # small model for developing
+            model_name="glove-wiki-gigaword-300"        # Larger GloVe model
+            # model_name="word2vec-google-news-300"       # Google news model
         )
         # Load the cluster results as dataframe
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_topic_words.json")
@@ -53,25 +53,33 @@ class TopicWord:
                 for n_gram in cluster['Topic'+str(n_gram_type)+ '-gram'][:30]:
                     try:
                         topic = n_gram['topic']
-                        topic_words = list(filter(lambda word: word in self.wv, topic.split(" ")))
+                        topic_words = list(filter(lambda w: w in self.wv, topic.split(" ")))
                         # Check both words must in model
                         if len(topic_words) == n_gram_type:
                             # add up the word vectors
-                            vector = np.add(self.wv[topic_words[0]], self.wv[topic_words[1]])
-                            # Find top 50 similar words by vector
-                            similar_words = self.wv.similar_by_vector(vector, topn=50)
-                            similar_words = list(map(lambda w: w[0], similar_words))
+                            vector_1 = self.wv[topic_words[0]] + self.wv[topic_words[1]]
+                            vectors = []
+                            for _word in topic_words:
+                                vectors.append(self.wv[_word])
+                            word_vector = np.add.reduce(vectors)
+                            # avg_vector = np.true_divide(vector, n_gram_type)
+                            # Find top 100 similar words by vector
+                            similar_words = self.wv.similar_by_vector(word_vector, topn=100)
                             # Filter out no-word, duplicated topic words and stop words from similar words
-                            similar_words = list(filter(lambda w: not re.search('[^\\w]', w.lower()), similar_words))
-                            similar_words = list(filter(lambda w: w.lower() not in self.stop_words and
-                                                                  w.lower() not in topic, similar_words))
-                            # Get top 5 similar words
+                            similar_words = list(filter(lambda w: not re.search('[^\\w]', w[0].lower()), similar_words))
+                            similar_words = list(filter(lambda w: w[0].lower() not in self.stop_words, similar_words))
+                            # Filter out duplicated noun words
+                            similar_words = TopicWordUtility.filter_duplicated_words(similar_words, topic)
+                            # Get top 20 similar words
+                            N = 20
                             result = {"topic": topic}
-                            for i, similar_word in enumerate(similar_words[:5]):
-                                result['top_' + str(i) + "_similar_word"] = similar_word
+                            for i, w in enumerate(similar_words[:N]):
+                                similarity = int(round(w[1] * 100))
+                                result['top_' + str(i) + "_similar_word"] = w[0]
                             n_gram_results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
+                # List top 10 n-gram topic
                 results += n_gram_results[:10]
             # Write the output as a csv or json file
             topic_word_df = pd.DataFrame(results)
