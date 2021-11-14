@@ -1,16 +1,17 @@
 import os.path
 import re
 from argparse import Namespace
+from itertools import combinations, permutations
 from pathlib import Path
 import numpy as np
 import nltk
 import pandas as pd
 import logging
 from nltk.corpus import stopwords
-import csv
-# Set logging level
 from TopicWordUtility import TopicWordUtility
-import gensim.downloader as api
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Set logging level
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 nltk_path = os.path.join("C:", os.sep, "Users", "sam", "nltk_data")
 Path(nltk_path).mkdir(parents=True, exist_ok=True)
@@ -28,7 +29,7 @@ class TopicWord:
             approach='HDBSCAN',
             # Model name ref: https://github.com/RaRe-Technologies/gensim-data
             # model_name="glove-wiki-gigaword-50"  # small model for developing
-            model_name="glove-wiki-gigaword-300"        # Larger GloVe model
+            model_name="glove-wiki-gigaword-300"  # Larger GloVe model
             # model_name="word2vec-google-news-300"       # Google news model
         )
         # Load the cluster results as dataframe
@@ -39,7 +40,6 @@ class TopicWord:
         # self.model = api.load(self.args.model_name)
         # Static variable
         self.stop_words = list(stopwords.words('english'))
-
         # print(vector)
 
     #
@@ -51,8 +51,9 @@ class TopicWord:
             results = []
             for n_gram_type in [2, 3]:
                 n_gram_results = []
+                n_gram_topics = cluster['Topic' + str(n_gram_type) + '-gram'][:30]
                 # Get top 30 bi-gram topics
-                for n_gram in cluster['Topic'+str(n_gram_type)+ '-gram'][:30]:
+                for n_gram in n_gram_topics:
                     try:
                         topic = n_gram['topic']
                         topic_words = list(filter(lambda w: w.lower() in self.model, topic.split(" ")))
@@ -66,6 +67,10 @@ class TopicWord:
                             # word_vector = np.add.reduce(vectors)
                             # Average the word vector
                             word_vector = np.mean(vectors, axis=0)
+                            # Substract the word vectors
+                            # word_vector = np.subtract(vectors[0], vectors[1])
+                            # if len(vectors) == 3:
+                            #     word_vector = np.subtract(word_vector, vectors[2])
                             # Get max of vectors
                             # word_vector = np.amax(vectors, axis=0)
                             # Find top 100 similar words by vector
@@ -88,17 +93,95 @@ class TopicWord:
                 # List top 10 n-gram topic
                 results += n_gram_results[:10]
             df = pd.DataFrame(results)
-            path = os.path.join('output', 'topic',
-                                self.args.case_name + '_' + self.args.approach + '_topic_similar_words.csv')
+            path = os.path.join('output', 'topic', 'similar_words',
+                                self.args.case_name + '_' + self.args.approach + '_topic_similar_words_' +
+                                str(cluster_no) + '.csv')
             df.to_csv(path, encoding='utf-8', index=False)
-            # compute cosine similarity
-            # score = self.wv.similarity('france', 'spain')
-            # print(score)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # Measure the similarity of cluster topics
+    # Ref: https://radimrehurek.com/gensim/models/keyedvectors.html#what-can-i-do-with-word-vectors
+    def compute_similarity(self):
+        # Get average word of a topic
+        def get_average_word_vector(_model, _topic_word):
+            tokens = _topic_word.split(" ")
+            # add up the word vectors
+            vectors = []
+            for token in tokens:
+                vectors.append(_model[token.lower()])
+            # Average the word vector
+            avg_word_vector = np.mean(vectors, axis=0)
+            return avg_word_vector
+
+        top_n = 10  # Number of top topics
+        cluster_no_list = [15, 16, 12, 7]
+        try:
+            clusters = list(filter(lambda c: c['Cluster'] in cluster_no_list, self.clusters))
+            # Collect all the top N topics (words and vectors)
+            cluster_topics = []
+            for cluster in clusters:
+                cluster_no = cluster['Cluster']
+                cluster_topic_words = TopicWordUtility.collect_top_n_cluster_topics(cluster, self.model,
+                                                                                    self.stop_words, top_n=top_n)
+                # Collect all topics and the topic vectors
+                topics = []
+                vectors = []
+                for topic_word in cluster_topic_words:
+                    vector = get_average_word_vector(self.model, topic_word)
+                    topics.append(topic_word.lower())
+                    vectors.append(vector)
+                # Get the average vectors of all top N topics within the cluster
+                cluster_vector = np.mean(vectors, axis=0)
+                # cluster_vector = np.add.reduce(vectors)
+                cluster_topics.append({'cluster_no': cluster_no,
+                                       'topics': topics,
+                                       'cluster_vector': cluster_vector,
+                                       'topic_vectors': vectors,
+                                       })
+            # Create a matrix to store cluster similarities
+            cluster_sim_matrix = np.zeros((len(cluster_no_list), len(cluster_no_list)))
+            for i, c1 in enumerate(cluster_no_list):
+                for j, c2 in enumerate(cluster_no_list):
+                    ct_1 = next(ct for ct in cluster_topics if ct['cluster_no'] == c1)
+                    ct_2 = next(ct for ct in cluster_topics if ct['cluster_no'] == c2)
+                    # compute the similarity matrix of cluster #15 and cluster #16 topics
+                    matrix = TopicWordUtility.compute_similarity_matrix_topics(ct_1, ct_2)
+                    matrix_mean = matrix.mean()
+                    print("Similarity matrix between cluster #{c1} and #{c2} = {sum}".format(
+                        c1=c1, c2=c2, sum=matrix_mean))
+                    cluster_sim_matrix[i, j] = matrix_mean
+            # Write out cluster similarity matrix
+            sim_df = pd.DataFrame(cluster_sim_matrix, index=cluster_no_list, columns=cluster_no_list)
+            sim_df = sim_df.round(2)  # Round each similarity to 2 decimal
+            # Write to out
+            path = os.path.join('output', 'topic',
+                                "UrbanStudyCorpus" + '_HDBSCAN_cluster_similarity_matrix.csv')
+            sim_df.to_csv(path, encoding='utf-8')
+
+            # Write out the cluster topic information
+            # Updated the formats of topic vectors
+            for cluster_topic in cluster_topics:
+                for i, v in enumerate(cluster_topic['topic_vectors']):
+                    cluster_topic['topic_vectors'][i] = np.array2string(v, precision=3,
+                                                                        formatter={'float_kind': lambda x: "%.2f" % x})
+            # Write output to csv
+            df = pd.DataFrame(cluster_topics, columns=['cluster_no', 'topics', 'cluster_vector', 'topic_vectors'])
+            df['cluster_vector'] = df['cluster_vector'].apply(lambda v: np.array2string(v, precision=3,
+                                                                                        formatter={'float_kind': lambda
+                                                                                            x: "%.2f" % x}))
+
+            path = os.path.join('output', 'topic',
+                                self.args.case_name + '_' + self.args.approach + '_topic_vectors.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
 
 # Main entry
 if __name__ == '__main__':
-    topic_word = TopicWord()
-    topic_word.compute_topics()
+    tw = TopicWord()
+    # tw.compute_topics(cluster_no=0)
+    tw.compute_similarity()
+    # Test the similarity function
+    # TopicWordUtility.compute_similarity_by_words('land cover', 'land use', tw.model)
