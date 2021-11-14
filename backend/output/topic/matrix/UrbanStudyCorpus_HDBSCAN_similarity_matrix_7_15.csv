@@ -1,0 +1,11 @@
+,land cover,image classification,data weighting,cover classification,optical data,weighting method,cover mapping,overall accuracy,colour infrared,urban slum
+carbon emission,0.16,0.21,0.27,0.19,0.34,0.27,0.19,0.19,0.36,0.1
+air quality,0.39,0.31,0.23,0.29,0.34,0.16,0.32,0.47,0.3,0.21
+climate change,0.34,0.4,0.24,0.41,0.26,0.16,0.33,0.3,0.2,0.2
+upscaling urban,0.12,0.1,0.08,0.09,0.1,0.07,0.16,0.09,0.05,0.56
+climate solution,0.29,0.34,0.2,0.33,0.29,0.22,0.33,0.26,0.19,0.2
+change mitigation,0.31,0.27,0.26,0.3,0.24,0.23,0.35,0.29,0.18,0.19
+air pollutant,0.21,0.12,0.15,0.15,0.13,0.13,0.15,0.19,0.19,0.17
+energy resource,0.28,0.2,0.33,0.19,0.38,0.17,0.3,0.27,0.14,0.12
+urban climate,0.38,0.34,0.2,0.38,0.22,0.11,0.33,0.24,0.14,0.6
+data science,0.28,0.38,0.56,0.35,0.7,0.23,0.44,0.38,0.26,0.12

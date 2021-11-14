@@ -1,0 +1,11 @@
+,land cover,image classification,data weighting,cover classification,optical data,weighting method,cover mapping,overall accuracy,colour infrared,urban slum
+land cover,1.0,0.23,0.09,0.53,0.16,0.04,0.62,0.22,0.16,0.31
+image classification,0.23,1.0,0.37,0.73,0.4,0.36,0.38,0.38,0.39,0.13
+data weighting,0.09,0.37,1.0,0.32,0.68,0.72,0.3,0.4,0.31,0.1
+cover classification,0.53,0.73,0.32,1.0,0.28,0.32,0.59,0.36,0.28,0.15
+optical data,0.16,0.4,0.68,0.28,1.0,0.36,0.42,0.37,0.5,0.04
+weighting method,0.04,0.36,0.72,0.32,0.36,1.0,0.22,0.35,0.28,0.1
+cover mapping,0.62,0.38,0.3,0.59,0.42,0.22,1.0,0.29,0.37,0.16
+overall accuracy,0.22,0.38,0.4,0.36,0.37,0.35,0.29,1.0,0.22,0.05
+colour infrared,0.16,0.39,0.31,0.28,0.5,0.28,0.37,0.22,1.0,0.02
+urban slum,0.31,0.13,0.1,0.15,0.04,0.1,0.16,0.05,0.02,1.0

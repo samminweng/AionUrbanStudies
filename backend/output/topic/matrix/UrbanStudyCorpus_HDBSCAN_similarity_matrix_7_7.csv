@@ -1,0 +1,11 @@
+,carbon emission,air quality,climate change,upscaling urban,climate solution,change mitigation,air pollutant,energy resource,urban climate,data science
+carbon emission,1.0,0.34,0.41,0.06,0.4,0.42,0.49,0.38,0.35,0.24
+air quality,0.34,1.0,0.35,0.11,0.35,0.31,0.71,0.34,0.36,0.4
+climate change,0.41,0.35,1.0,0.18,0.81,0.74,0.28,0.42,0.8,0.41
+upscaling urban,0.06,0.11,0.18,1.0,0.16,0.23,0.09,0.13,0.53,0.12
+climate solution,0.4,0.35,0.81,0.16,1.0,0.6,0.29,0.43,0.71,0.37
+change mitigation,0.42,0.31,0.74,0.23,0.6,1.0,0.27,0.41,0.58,0.32
+air pollutant,0.49,0.71,0.28,0.09,0.29,0.27,1.0,0.24,0.31,0.17
+energy resource,0.38,0.34,0.42,0.13,0.43,0.41,0.24,1.0,0.42,0.5
+urban climate,0.35,0.36,0.8,0.53,0.71,0.58,0.31,0.42,1.0,0.41
+data science,0.24,0.4,0.41,0.12,0.37,0.32,0.17,0.5,0.41,1.0

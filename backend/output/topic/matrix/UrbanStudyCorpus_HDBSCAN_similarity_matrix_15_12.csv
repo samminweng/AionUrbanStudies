@@ -1,0 +1,11 @@
+,landscape pattern,sediment yield,urban greenness,soil erosion,landscape indice,land cover,landscape metric,urban agglomeration,cover pattern,dust storm
+land cover,0.31,0.23,0.21,0.38,0.1,1.0,0.26,0.16,0.6,0.34
+image classification,0.41,0.12,0.11,0.24,0.16,0.23,0.33,0.13,0.35,0.17
+data weighting,0.15,0.29,0.13,0.12,0.03,0.09,0.23,0.15,0.21,0.06
+cover classification,0.33,0.19,0.14,0.26,0.07,0.53,0.25,0.15,0.6,0.24
+optical data,0.28,0.23,0.08,0.19,0.02,0.16,0.28,0.12,0.31,0.17
+weighting method,0.16,0.27,0.12,0.12,0.02,0.04,0.2,0.1,0.2,0.01
+cover mapping,0.37,0.24,0.2,0.33,0.1,0.62,0.33,0.13,0.63,0.26
+overall accuracy,0.24,0.28,0.15,0.21,-0.01,0.22,0.22,0.05,0.3,0.14
+colour infrared,0.33,0.13,0.12,0.16,0.03,0.16,0.24,0.02,0.35,0.18
+urban slum,0.22,0.05,0.66,0.21,0.2,0.31,0.21,0.68,0.12,0.19
