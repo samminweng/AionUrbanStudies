@@ -109,41 +109,30 @@ class TopicWord:
             clusters = list(filter(lambda c: c['Cluster'] in cluster_no_list, self.clusters))
             # Collect all the top N topics (words and vectors)
             cluster_topics = TopicWordUtility.get_cluster_topics(clusters, self.model, top_n=top_n)
-            # Create a matrix to store cluster similarities
+            # # Create a matrix to store cluster similarities
             cluster_sim_matrix = np.zeros((len(cluster_no_list), len(cluster_no_list)))
             for i, c1 in enumerate(cluster_no_list):
                 for j, c2 in enumerate(cluster_no_list):
                     ct_1 = next(ct for ct in cluster_topics if ct['cluster_no'] == c1)
                     ct_2 = next(ct for ct in cluster_topics if ct['cluster_no'] == c2)
+                    # Compute the similarity of cluster vectors by using cosine similarity
+                    cv_1 = ct_1['cluster_vectors']
+                    cv_2 = ct_2['cluster_vectors']
+                    sim = cosine_similarity([cv_1, cv_2])[0][1]
+                    cluster_sim_matrix[i, j] = sim
                     # compute the similarity matrix of cluster #15 and cluster #16 topics
-                    matrix = TopicWordUtility.compute_similarity_matrix_topics(ct_1, ct_2)
-                    matrix_mean = matrix.mean()
-                    print("Similarity matrix between cluster #{c1} and #{c2} = {sum}".format(
-                        c1=c1, c2=c2, sum=matrix_mean))
-                    cluster_sim_matrix[i, j] = matrix_mean
-            # Write out cluster similarity matrix
+                    # matrix = TopicWordUtility.compute_similarity_matrix_topics(ct_1, ct_2)
+                    # matrix_mean = matrix.mean()
+                    # print("Similarity matrix between cluster #{c1} and #{c2} = {sum}".format(
+                    #     c1=c1, c2=c2, sum=matrix_mean))
+                    # cluster_sim_matrix[i, j] = matrix_mean
+            # rite out cluster similarity matrix
             sim_df = pd.DataFrame(cluster_sim_matrix, index=cluster_no_list, columns=cluster_no_list)
             sim_df = sim_df.round(2)  # Round each similarity to 2 decimal
             # Write to out
             path = os.path.join('output', 'topic',
-                                "UrbanStudyCorpus" + '_HDBSCAN_cluster_similarity_matrix.csv')
+                                "UrbanStudyCorpus" + '_HDBSCAN_cluster_vector_similarity.csv')
             sim_df.to_csv(path, encoding='utf-8')
-
-            # Write out the cluster topic information
-            # Updated the formats of topic vectors
-            for cluster_topic in cluster_topics:
-                for i, v in enumerate(cluster_topic['topic_vectors']):
-                    cluster_topic['topic_vectors'][i] = np.array2string(v, precision=3,
-                                                                        formatter={'float_kind': lambda x: "%.2f" % x})
-            # Write output to csv
-            df = pd.DataFrame(cluster_topics, columns=['cluster_no', 'topics', 'cluster_vector', 'topic_vectors'])
-            df['cluster_vector'] = df['cluster_vector'].apply(lambda v: np.array2string(v, precision=3,
-                                                                                        formatter={'float_kind': lambda
-                                                                                            x: "%.2f" % x}))
-
-            path = os.path.join('output', 'topic',
-                                self.args.case_name + '_' + self.args.approach + '_topic_vectors.csv')
-            df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
