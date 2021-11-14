@@ -5,4 +5,5 @@ __pycache__/
 *.so
 *.pyc
 # Ignore model folder that contains temporaral model files
-model/
+*.kv
+*.npy

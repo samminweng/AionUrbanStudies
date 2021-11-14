@@ -1,3 +1,4 @@
+import json
 import os
 import re
 from pathlib import Path
@@ -64,26 +65,6 @@ class TopicWordUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Obtain top N (2-grams or 3-gram) topics of a cluster
-    @staticmethod
-    def collect_top_n_cluster_topics(cluster, model, stop_words, top_n=10, n_gram_type="2"):
-        # Check if the topic words appear in the model
-        def is_topic_qualified(topic):
-            tokens = topic.split(" ")
-            # Check if topic word is a word and not a stop word and exists in the model
-            topic_words = list(filter(lambda t: bool(re.search('^[a-z]', t.lower()) and
-                                                t.lower() not in stop_words and
-                                                t.lower() in model), tokens))
-            if len(tokens) == len(topic_words):
-                return True
-            return False
-        n_gram_topics = cluster['Topic'+n_gram_type+'-gram'][:50]
-        # Get top 10 cluster topics
-        cluster_topics = list(filter(lambda w: is_topic_qualified(w['topic']), n_gram_topics))[:top_n]
-        # Return a list of topic words
-        return list(map(lambda t: t['topic'], cluster_topics))
-
-
     @staticmethod
     def compute_similarity_matrix_topics(cluster_topics1, cluster_topics2):
         c_no_1 = cluster_topics1['cluster_no']
@@ -103,13 +84,11 @@ class TopicWordUtility:
                 #                                                             t2=cluster_topics2['topics'][j],
                 #                                                             sim=sim))
         sim_df = pd.DataFrame(similarity_matrix, index=cluster_topics1['topics'], columns=cluster_topics2['topics'])
-        sim_df = sim_df.round(2)     # Round each similarity to 2 decimal
+        sim_df = sim_df.round(2)  # Round each similarity to 2 decimal
         # Write to out
-        path = os.path.join('output', 'topic', 'matrix',
-                            "UrbanStudyCorpus" + '_HDBSCAN_similarity_matrix_' +
-                            str(c_no_1) + '_' + str(c_no_2) + '.csv')
-        sim_df.to_csv(path, encoding='utf-8')
-
+        _path = os.path.join('output', 'topic', 'matrix',
+                             'UrbanStudyCorpus_HDBSCAN_similarity_matrix_' + str(c_no_1) + '_' + str(c_no_2) + '.csv')
+        sim_df.to_csv(_path, encoding='utf-8')
         return similarity_matrix
 
     @staticmethod
@@ -145,3 +124,67 @@ class TopicWordUtility:
         print("Similarity between '{w1}' and '{w2}' = {sim:.2f}".format(
             w1=w1, w2=w2, sim=sim))
 
+    # Get the pretrained models
+    @staticmethod
+    def get_gensim_info():
+        info = api.info()  # Output the gensim corpus and pretrained model as JSON
+        df = pd.DataFrame(info['models'])
+        df_t = df.transpose()
+        # print(df)
+        # Write to out
+        path = os.path.join('model', 'Gensim_pretrained_models.csv')
+        df_t.to_csv(path_or_buf=path, encoding='utf-8')
+
+    # Get the cluster topics
+    @staticmethod
+    def get_cluster_topics(clusters, model, top_n):
+        # Get average word of a topic
+        def get_average_word_vector(_model, _topic_word):
+            tokens = _topic_word.split(" ")
+            # add up the word vectors
+            _vectors = []
+            for token in tokens:
+                _vectors.append(_model[token.lower()])
+            # Average the word vector
+            avg_word_vector = np.mean(_vectors, axis=0)
+            return avg_word_vector
+
+        # Collect top N topics of a cluster
+        def collect_top_n_cluster_topics(_cluster, _model, _top_n=10, n_gram_type="2"):
+            # Check if the topic words appear in the model
+            def is_topic_qualified(topic):
+                tokens = topic.split(" ")
+                # Check if topic word is a word and not a stop word and exists in the model
+                topic_words = list(filter(lambda t: bool(re.search('^[a-z]', t.lower()) and
+                                                         t.lower() in model), tokens))
+                if len(tokens) == len(topic_words):
+                    return True
+                return False
+
+            n_gram_topics = cluster['Topic' + n_gram_type + '-gram'][:50]
+            # Get top 10 cluster topics
+            _cluster_topics = list(filter(lambda w: is_topic_qualified(w['topic']), n_gram_topics))[:_top_n]
+            # Return a list of topic words
+            return list(map(lambda t: t['topic'], _cluster_topics))
+
+        # Collect all the top N topics (words and vectors)
+        cluster_topics = []
+        for cluster in clusters:
+            cluster_no = cluster['Cluster']
+            cluster_topic_words = collect_top_n_cluster_topics(cluster, model, _top_n=top_n)
+            # Collect all topics and the topic vectors
+            topics = []
+            vectors = []
+            for topic_word in cluster_topic_words:
+                vector = get_average_word_vector(model, topic_word)
+                topics.append(topic_word.lower())
+                vectors.append(vector)
+            # Get the average vectors of all top N topics within the cluster
+            cluster_vector = np.mean(vectors, axis=0)
+            # cluster_vector = np.add.reduce(vectors)
+            cluster_topics.append({'cluster_no': cluster_no,
+                                   'topics': topics,
+                                   'cluster_vector': cluster_vector,
+                                   'topic_vectors': vectors,
+                                   })
+        return cluster_topics

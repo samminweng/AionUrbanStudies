@@ -103,42 +103,12 @@ class TopicWord:
     # Measure the similarity of cluster topics
     # Ref: https://radimrehurek.com/gensim/models/keyedvectors.html#what-can-i-do-with-word-vectors
     def compute_similarity(self):
-        # Get average word of a topic
-        def get_average_word_vector(_model, _topic_word):
-            tokens = _topic_word.split(" ")
-            # add up the word vectors
-            vectors = []
-            for token in tokens:
-                vectors.append(_model[token.lower()])
-            # Average the word vector
-            avg_word_vector = np.mean(vectors, axis=0)
-            return avg_word_vector
-
         top_n = 10  # Number of top topics
         cluster_no_list = [15, 16, 12, 7]
         try:
             clusters = list(filter(lambda c: c['Cluster'] in cluster_no_list, self.clusters))
             # Collect all the top N topics (words and vectors)
-            cluster_topics = []
-            for cluster in clusters:
-                cluster_no = cluster['Cluster']
-                cluster_topic_words = TopicWordUtility.collect_top_n_cluster_topics(cluster, self.model,
-                                                                                    self.stop_words, top_n=top_n)
-                # Collect all topics and the topic vectors
-                topics = []
-                vectors = []
-                for topic_word in cluster_topic_words:
-                    vector = get_average_word_vector(self.model, topic_word)
-                    topics.append(topic_word.lower())
-                    vectors.append(vector)
-                # Get the average vectors of all top N topics within the cluster
-                cluster_vector = np.mean(vectors, axis=0)
-                # cluster_vector = np.add.reduce(vectors)
-                cluster_topics.append({'cluster_no': cluster_no,
-                                       'topics': topics,
-                                       'cluster_vector': cluster_vector,
-                                       'topic_vectors': vectors,
-                                       })
+            cluster_topics = TopicWordUtility.get_cluster_topics(clusters, self.model, top_n=top_n)
             # Create a matrix to store cluster similarities
             cluster_sim_matrix = np.zeros((len(cluster_no_list), len(cluster_no_list)))
             for i, c1 in enumerate(cluster_no_list):
@@ -181,7 +151,8 @@ class TopicWord:
 # Main entry
 if __name__ == '__main__':
     tw = TopicWord()
-    # tw.compute_topics(cluster_no=0)
+    # # tw.compute_topics(cluster_no=0)
     tw.compute_similarity()
     # Test the similarity function
     # TopicWordUtility.compute_similarity_by_words('land cover', 'land use', tw.model)
+    # TopicWordUtility.get_gensim_info()
