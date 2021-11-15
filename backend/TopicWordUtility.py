@@ -199,6 +199,10 @@ class TopicWordUtility:
                                                                     formatter={'float_kind': lambda x: "%.2f" % x}))
             _path = os.path.join('output', 'topic', 'UrbanStudyCorpus_HDBSCAN_topic_vectors.csv')
             df.to_csv(_path, encoding='utf-8', index=False)
+            # Write JSON path
+            _path = os.path.join('output', 'topic', 'UrbanStudyCorpus_HDBSCAN_topic_vectors.json')
+            df.to_json(_path, orient='records')
+
             return cluster_topics
         except Exception as err:
             print("Error occurred! {err}".format(err=err))

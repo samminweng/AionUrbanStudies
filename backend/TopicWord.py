@@ -130,12 +130,16 @@ class TopicWord:
                     #     c1=c1, c2=c2, sum=matrix_mean))
                     # cluster_sim_matrix[i, j] = matrix_mean
             # rite out cluster similarity matrix
-            sim_df = pd.DataFrame(cluster_sim_matrix, index=cluster_no_list, columns=cluster_no_list)
-            sim_df = sim_df.round(5)  # Round each similarity to 2 decimal
+            df = pd.DataFrame(cluster_sim_matrix, index=cluster_no_list, columns=cluster_no_list)
+            df = df.round(3)  # Round each similarity to 3 decimal
             # Write to out
             path = os.path.join('output', 'topic',
                                 self.args.case_name + '_HDBSCAN_cluster_vector_similarity.csv')
-            sim_df.to_csv(path, encoding='utf-8')
+            df.to_csv(path, encoding='utf-8')
+            # Write JSON path
+            path = os.path.join('output', 'topic',
+                                self.args.case_name + '_HDBSCAN_cluster_vector_similarity.json')
+            df.to_json(path, orient='records')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -144,7 +148,7 @@ class TopicWord:
 if __name__ == '__main__':
     tw = TopicWord()
     tw.compute_topic_vectors_and_similar_words(cluster_no=15)
-    # tw.compute_cluster_vector_and_cluster_similarity()
+    tw.compute_cluster_vector_and_cluster_similarity()
     # Test the similarity function
     # TopicWordUtility.compute_similarity_by_words('land cover', 'land use', tw.model)
     # TopicWordUtility.get_gensim_info()
