@@ -10,13 +10,13 @@ function ScatterGraph(is_hide, approach, cluster_chart_data, cluster_topics, doc
 
     // Get the color of collocation
     const colors = function (cluster_no) {
-        // Optimal color pallets for 27 clusters
-        // ref: https://mokole.com/palette.html
-        const color_plates = [
-            "#556b2f", "#8b4513", "#228b22", "#483d8b", "#008b8b", "#4682b4", "#000080", "#9acd32", "#daa520", "#8b008b",
-            "#ff0000", "#ffff00", "#00ff00", "#8a2be2", "#00ff7f", "#dc143c", "#00ffff", "#0000ff", "#ff7f50", "#ff00ff",
-            "#1e90ff", "#db7093", "#b0e0e6", "#ff1493", "#ee82ee", "#ffdab9"
-        ];
+        // Optimal color pallets for 23 clusters
+        // ref: http://vrl.cs.brown.edu/color
+        const color_plates = ["rgb(104,175,252)", "rgb(79,40,175)", "rgb(153,109,219)", "rgb(47,66,133)", "rgb(62,234,239)",
+            "rgb(37,115,139)", "rgb(179,228,103)", "rgb(39,122,53)", "rgb(103,240,89)", "rgb(117,72,25)",
+            "rgb(252,206,106)", "rgb(179,65,108)", "rgb(196,145,150)", "rgb(192,0,24)", "rgb(254,133,173)",
+            "rgb(248,35,135)", "rgb(254,143,6)", "rgb(169,190,175)", "rgb(178,139,40)", "rgb(239,102,240)",
+            "#1e90ff", "#db7093", "#b0e0e6"];;
         return (cluster_no < 0) ? "gray" : color_plates[cluster_no];
     }
     // Determine the opacity based on the outlier or cluster
