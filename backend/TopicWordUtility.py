@@ -138,26 +138,15 @@ class TopicWordUtility:
     # Get the cluster topics
     @staticmethod
     def get_cluster_topics(clusters, model, top_n):
-        # Get average word of a topic
-        def get_average_word_vector(_model, _topic_words):
-            tokens = _topic_words.split(" ")
-            # add up the word vectors
-            _vectors = []
-            for token in tokens:
-                _vectors.append(_model[token.lower()])
-            # Average the word vector
-            avg_word_vector = np.mean(_vectors, axis=0)
-            return avg_word_vector
-
         # Collect top N topics of a cluster
         def collect_top_n_cluster_topics(_cluster, _model, _top_n=10,):
             # Check if the topic words appear in the model
             def is_topic_qualified(topic):
                 tokens = topic.split(" ")
                 # Check if topic word is a word, not capitalised (such as LST) and exists in the model
-                topic_words = list(filter(lambda t: not t[0].isupper() and bool(re.search('^[a-z]', t.lower()) and
+                _topic_words = list(filter(lambda t: not t[0].isupper() and bool(re.search('^[a-z]', t.lower()) and
                                                          t.lower() in model), tokens))
-                if len(tokens) == len(topic_words):
+                if len(tokens) == len(_topic_words):
                     return True
                 return False
 
@@ -169,6 +158,17 @@ class TopicWordUtility:
             # Return a list of topic words
             return _cluster_topics
 
+        # Get average word of a topic
+        def get_topic_vector(_model, _topic_words):
+            tokens = _topic_words.split(" ")
+            # add up the word vectors
+            _vectors = []
+            for token in tokens:
+                _vectors.append(_model[token.lower()])
+            # Average the word vector
+            avg_word_vector = np.mean(_vectors, axis=0)
+            return avg_word_vector
+
         try:
             # Collect all the top N topics (words and vectors)
             cluster_topics = []
@@ -178,28 +178,23 @@ class TopicWordUtility:
                 top_n_cluster_topics = collect_top_n_cluster_topics(cluster, model, _top_n=top_n)
                 # Collect all topics and the topic vectors
                 topics = []
-                vectors = []
+                topic_vectors = []
                 for cluster_topic in top_n_cluster_topics:
                     topic_words = cluster_topic['topic'].lower()
-                    vector = get_average_word_vector(model, topic_words)
+                    topic_vector = get_topic_vector(model, topic_words)
                     topics.append(topic_words)
-                    vectors.append(vector)
+                    topic_vectors.append(topic_vector)
                 # Get the average vectors of all top N topics within the cluster
-                cluster_vector = np.mean(vectors, axis=0)
-                # cluster_vector = np.add.reduce(vectors)
+                cluster_vector = np.mean(topic_vectors, axis=0)
+                # Get the cluster vector by adding up all topic vectors
+                # cluster_vector = np.add.reduce(topic_vectors)
                 cluster_topics.append({'cluster_no': cluster_no,
                                        'topics': topics,
                                        'cluster_vectors': cluster_vector,
-                                       'topic_vectors': vectors,
+                                       'topic_vectors': topic_vectors,
                                        })
-            # # Updated the formats of topic vectors
-            # for cluster_topic in cluster_topics:
-            #     for i, v in enumerate(cluster_topic['topic_vectors']):
-            #         cluster_topic['topic_vectors'][i] = np.array2string(v, precision=3,
-            #                                                             formatter={
-            #                                                                 'float_kind': lambda x: "%.2f" % x})
             # Write out the cluster topic information
-            df = pd.DataFrame(cluster_topics, columns=['cluster_no', 'topics', 'cluster_vectors', 'topic_vectors'])
+            df = pd.DataFrame(cluster_topics, columns=['cluster_no', 'topics', 'cluster_vectors'])
             df['cluster_vectors'] = df['cluster_vectors'].apply(lambda v: np.array2string(v, precision=3,
                                                                     formatter={'float_kind': lambda x: "%.2f" % x}))
             _path = os.path.join('output', 'topic', 'UrbanStudyCorpus_HDBSCAN_topic_vectors.csv')

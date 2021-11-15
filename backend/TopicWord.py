@@ -44,57 +44,59 @@ class TopicWord:
 
     #
     # Ref: https://github.com/stanfordnlp/GloVe
-    def compute_topics(self, cluster_no=15):
+    def compute_topic_vectors_and_similar_words(self, cluster_no=15):
         try:
             # Get cluster 15
             cluster = list(filter(lambda c: c['Cluster'] == cluster_no, self.clusters))[0]
-            results = []
-            for n_gram_type in [2, 3]:
-                n_gram_results = []
-                n_gram_topics = cluster['Topic' + str(n_gram_type) + '-gram'][:30]
-                # Get top 30 bi-gram topics
-                for n_gram in n_gram_topics:
-                    try:
-                        topic = n_gram['topic']
-                        topic_words = list(filter(lambda w: w.lower() in self.model, topic.split(" ")))
-                        # Check both words must in model
-                        if len(topic_words) == n_gram_type:
-                            # add up the word vectors
-                            vectors = []
-                            for _word in topic_words:
-                                vectors.append(self.model[_word.lower()])
-                            # Add up the vectors
-                            # word_vector = np.add.reduce(vectors)
-                            # Average the word vector
-                            word_vector = np.mean(vectors, axis=0)
-                            # Substract the word vectors
-                            # word_vector = np.subtract(vectors[0], vectors[1])
-                            # if len(vectors) == 3:
-                            #     word_vector = np.subtract(word_vector, vectors[2])
-                            # Get max of vectors
-                            # word_vector = np.amax(vectors, axis=0)
-                            # Find top 100 similar words by vector
-                            similar_words = self.model.similar_by_vector(word_vector, topn=100)
-                            # similar_words_1 = self.model.most_simliar(positive=topic_words, topn=100)
-                            # Filter out no-word, duplicated topic words and stop words from similar words
-                            similar_words = list(filter(lambda w: not re.search('[^\\w]', w[0].lower()), similar_words))
-                            similar_words = list(filter(lambda w: w[0].lower() not in self.stop_words, similar_words))
-                            # Filter out duplicated noun words
-                            similar_words = TopicWordUtility.filter_duplicated_words(similar_words, topic)
-                            # Get top 15 similar words
-                            N = 15
-                            result = {"topic": topic}
-                            for i, w in enumerate(similar_words[:N]):
-                                result['top_' + str(i) + "_similar_word"] = w[0]
-                                result['top_' + str(i) + "_similar_word_score"] = float("{:.2f}".format(w[1]))
-                            n_gram_results.append(result)
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
-                # List top 10 n-gram topic
-                results += n_gram_results[:10]
-            df = pd.DataFrame(results)
-            path = os.path.join('output', 'topic', 'similar_words',
-                                self.args.case_name + '_' + self.args.approach + '_topic_similar_words_' +
+            n_gram_results = []
+            n_gram_topics = cluster['TopicN-gram'][:50]
+            # Get top 30 bi-gram topics
+            for n_gram in n_gram_topics:
+                try:
+                    topic = n_gram['topic']
+                    topic_words = list(filter(lambda w: not w[0].isupper() and w.lower() in self.model,
+                                              topic.split(" ")))
+                    if len(topic_words) == len(topic.split(" ")):
+                        # add up the word vectors
+                        vectors = []
+                        for _word in topic_words:
+                            vectors.append(self.model[_word.lower()])
+                        # Add up the vectors
+                        # topic_vector = np.add.reduce(vectors)
+                        # Average the word vector
+                        topic_vector = np.mean(vectors, axis=0)
+                        # Substract the word vectors
+                        # if len(vectors) == 2:
+                        #     topic_vector = np.subtract(vectors[0], vectors[1])
+                        # elif len(vectors) == 3:
+                        #     topic_vector = np.subtract(vectors[0], vectors[1])
+                        #     topic_vector = np.subtract(topic_vector, vectors[2])
+                        # else:
+                        #     topic_vector = vectors[0]
+                        # Get top 100 similar words by vector
+                        similar_words = self.model.similar_by_vector(topic_vector, topn=100)
+                        # Filter out no-word, duplicated topic words and stop words from similar words
+                        similar_words = list(filter(lambda w: not re.search('[^\\w]', w[0].lower()), similar_words))
+                        similar_words = list(filter(lambda w: w[0].lower() not in self.stop_words, similar_words))
+                        # Filter out duplicated noun words
+                        similar_words = TopicWordUtility.filter_duplicated_words(similar_words, topic)
+                        # Get top 15 similar words
+                        N = 15
+                        result = {"topic": topic, 'topic_vector': topic_vector }
+                        for i, w in enumerate(similar_words[:N]):
+                            result['top_' + str(i) + "_similar_word"] = w[0]
+                            result['top_' + str(i) + "_similar_word_score"] = float("{:.2f}".format(w[1]))
+                        n_gram_results.append(result)
+                except Exception as err:
+                    print("Error occurred! {err}".format(err=err))
+            # Write the topic vectors to csv file
+            n_gram_results = n_gram_results[:10]
+            df = pd.DataFrame(n_gram_results)
+            df['topic_vector'] = df['topic_vector'].apply(lambda v: np.array2string(v, precision=3,
+                                                                                       formatter={'float_kind': lambda
+                                                                                                  x: "%.2f" % x}))
+            path = os.path.join('output', 'topic', 'topic_vector',
+                                self.args.case_name + '_' + self.args.approach + '_topic_vector_similar_words_' +
                                 str(cluster_no) + '.csv')
             df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
@@ -102,9 +104,10 @@ class TopicWord:
 
     # Measure the similarity of cluster topics
     # Ref: https://radimrehurek.com/gensim/models/keyedvectors.html#what-can-i-do-with-word-vectors
-    def compute_similarity(self):
+    def compute_cluster_vector_and_cluster_similarity(self):
         top_n = 10  # Number of top topics
-        cluster_no_list = [15, 16, 12, 7]
+        # cluster_no_list = [15, 16, 12, 7]
+        cluster_no_list = [c_no for c_no in range(0, 23)]
         try:
             clusters = list(filter(lambda c: c['Cluster'] in cluster_no_list, self.clusters))
             # Collect all the top N topics (words and vectors)
@@ -128,10 +131,10 @@ class TopicWord:
                     # cluster_sim_matrix[i, j] = matrix_mean
             # rite out cluster similarity matrix
             sim_df = pd.DataFrame(cluster_sim_matrix, index=cluster_no_list, columns=cluster_no_list)
-            sim_df = sim_df.round(2)  # Round each similarity to 2 decimal
+            sim_df = sim_df.round(5)  # Round each similarity to 2 decimal
             # Write to out
             path = os.path.join('output', 'topic',
-                                "UrbanStudyCorpus" + '_HDBSCAN_cluster_vector_similarity.csv')
+                                self.args.case_name + '_HDBSCAN_cluster_vector_similarity.csv')
             sim_df.to_csv(path, encoding='utf-8')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -140,8 +143,8 @@ class TopicWord:
 # Main entry
 if __name__ == '__main__':
     tw = TopicWord()
-    # # tw.compute_topics(cluster_no=0)
-    tw.compute_similarity()
+    tw.compute_topic_vectors_and_similar_words(cluster_no=15)
+    # tw.compute_cluster_vector_and_cluster_similarity()
     # Test the similarity function
     # TopicWordUtility.compute_similarity_by_words('land cover', 'land use', tw.model)
     # TopicWordUtility.get_gensim_info()
