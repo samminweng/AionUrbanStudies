@@ -20,21 +20,7 @@ function _createProgressBar(){
 }
 
 
-// Convert the similarity matrix as square matrix
-function convert_to_square_matrix(cluster_sim_matrix){
-    const square_matrix = [];
-    for (const c_row of cluster_sim_matrix){
-        let row = []
-        for(const c_no in c_row){
-            const sim = c_row[c_no];
-            const percent = Math.round(sim * 100);
-            row.push(percent);
-        }
-        square_matrix.push(row);
-    }
-    // console.log(square_matrix);
-    return square_matrix;
-}
+
 
 
 // Document ready event
@@ -54,12 +40,12 @@ $(function () {
     ).done(function (result1, result2, result3, result4) {
         const doc_data = result1[0];
         const cluster_topic_words = result2[0];
-        const cluster_sim_matrix = convert_to_square_matrix(result3[0]);
+        const cluster_sim_data = result3[0];
         const cluster_topics = result4[0];
         // Display sunburst chart as default
         // const chart = new SunburstChart(cluster_groups, cluster_data, doc_data);
         // Display a chord chart
-        const chart = new ChordChart(cluster_sim_matrix, cluster_topics);
+        const chart = new ChordChart(cluster_sim_data, cluster_topics);
         // const dialog = new InstructionDialog('sunburst', true);
         // Remove the progress bar
         $('#progressbar').remove();

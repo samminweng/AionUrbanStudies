@@ -54,3 +54,11 @@ tfoot { display:table-footer-group }
 
 
 .google-visualization-tooltip { display: none;}
+
+/** Chord chart tooltip **/
+.tooltip{
+    position: absolute;
+    z-index: 10;
+    visibility: hidden;
+    background: white;
+}
