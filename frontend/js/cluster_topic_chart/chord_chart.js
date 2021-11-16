@@ -1,6 +1,6 @@
 // Create a chord chart to display the similarity
 // Ref: https://www.d3-graph-gallery.com/graph/chord_basic.html
-function ChordChart(cluster_sim_data, cluster_topics) {
+function ChordChart(cluster_sim_data, cluster_topics, cluster_topic_words, doc_data) {
     const width = 600;
     const height = 700;
     // const cluster_names = cluster_topics.map(c => "#" + c['cluster_no']);
@@ -17,11 +17,13 @@ function ChordChart(cluster_sim_data, cluster_topics) {
     // Create a tooltip div
     const tooltip = d3.select("body")
         .append("div")
-        .style("max-width", width/5)
+        // .attr("class", "tooltip")
+        .style("width", width/5)
         .style("position", "absolute")
         .style("z-index", "10")
         .style("visibility", "hidden")
-        .style("background", "white");
+        .style("background", "white")
+        .style("opacity", 0.9);
 
     // .text("a simple tooltip");
     // Convert the similarity matrix as square matrix
@@ -66,6 +68,16 @@ function ChordChart(cluster_sim_data, cluster_topics) {
             .style("opacity", 1);
     }
 
+    // Sort the topic words
+    function sort_topic_words(a_topic, b_topic){
+        if (a_topic < b_topic){
+            return -1;
+        } else if (a_topic > b_topic){
+            return 1;
+        }
+        return 0;
+    }
+
     // Get the cluster topic and similarity
     function show_tooltip(top, left, src, target, sim){
         try{
@@ -76,24 +88,74 @@ function ChordChart(cluster_sim_data, cluster_topics) {
             const tooltip_div = $('<div class="small"></div>');
             tooltip_div.append($("<div class='h5'>" + sim + '% of similarity between Cluster #' + src + ' and #' + target + "</div>"))
             // Get top 10 topics of source cluster
-            const src_cluster_topics = cluster_topics.find(c => c['cluster_no'] === src)['topics'].join(", ");
-            tooltip_div.append($("<div class='p3'>Cluster #" + src+ "  Top 10 topics</div>")
-                                .append($("<div class='small'>" + src_cluster_topics+"</div>")));
+            const src_cluster_topics = cluster_topics.find(c => c['cluster_no'] === src)['topics'];
+            // Sort the topics
+            src_cluster_topics.sort((a, b) => sort_topic_words(a, b));
             // Get top 10 topics of target cluster
-            const target_cluster_topics =  cluster_topics.find(c => c['cluster_no'] === target)['topics'].join(", ");
-            tooltip_div.append($("<div class='p3'> Cluster #" + target+ " Top 10 topics</div>")
-                .append($("<div class='small'>" + target_cluster_topics+"</div>")));
-
+            const target_cluster_topics = cluster_topics.find(c => c['cluster_no'] === target)['topics'];
+            target_cluster_topics.sort((a, b) => sort_topic_words(a, b));
+            // Append common topics of two clusters
+            const common_topics = src_cluster_topics.filter(t => target_cluster_topics.includes(t));
+            if(common_topics.length === 0){
+                tooltip_div.append($("<div class='lead'>Identical Cluster topics</div>"));
+                tooltip_div.append($("<div>None</div>"));
+            }else{
+                tooltip_div.append($("<div class='lead'>Identical Cluster topics</div>"));
+                tooltip_div.append($("<div>" + common_topics.join(", ") +"</div>"));
+            }
+            // Append topics of cluster src
+            tooltip_div.append($("<div class='lead'>Cluster #" + src+ "  Top 10 topics</div>"));
+            tooltip_div.append($("<div>" + src_cluster_topics.join(", ") +"</div>"));
+            // Append topics of cluster target
+            tooltip_div.append($("<div class='lead'> Cluster #" + target+ " Top 10 topics</div>"));
+            tooltip_div.append($("<div>" + target_cluster_topics.join(", ") +"</div>"));
             tooltip.html(tooltip_div.html());
         }catch (error) {
             console.error(error);
         }
-
-        // Set top and left position of tooltip
-        // tooltip.css({top: (e.pageY-10)+"px" , left: (e.pageX+10) + "px", position:'absolute'});
     }
 
+    function display_articles(d){
+        // Get the cluster topic words
+        function get_cluster_topic_words_doc_ids(cluster_no){
+            const _cluster_topics = cluster_topics.find(c => c['cluster_no'] === cluster_no)['topics'];
+            // Get the doc ids of cluster topics
+            const _n_gram_topics = cluster_topic_words.find(c => c['Cluster'] === cluster_no)['TopicN-gram'];
+            const _cluster_topic_words = _n_gram_topics.filter(t => _cluster_topics.includes(t['topic'].toLowerCase()));
+            // Aggregate the dod ids of _top_topics
+            const _doc_ids = _cluster_topic_words.reduce((pre, cur) => pre.concat(cur['doc_ids']), []);
+            // Remove the duplicated doc ids
+            const _topic_doc_ids = Array.from(new Set(_doc_ids));
+            // Sort the doc ids
+            _topic_doc_ids.sort((a, b) => a - b);
+            // Return top 10 cluster topic words and
+            return [_cluster_topic_words, _topic_doc_ids];
+        }
+        // console.log(d);
+        const src = d.source.index;
+        const target = d.target.index;
+        // const similarity = d.source.value;
+        const [src_topics, src_doc_ids] = get_cluster_topic_words_doc_ids(src);
+        const [target_topics, target_doc_ids] = get_cluster_topic_words_doc_ids(target);
+        console.log(src_topics);
+        console.log(target_topics);
+        const topics = src_topics.concat(target_topics);
+        // Sort the topics
+        topics.sort((a, b) => sort_topic_words(a['topic'].toLowerCase(), b['topic'].toLowerCase()));
+        console.log(topics);
+        // Get the articles relevant to
+        const topic_doc_ids = Array.from(new Set(src_doc_ids.concat(target_doc_ids)));
+        // Sort the doc ids
+        topic_doc_ids.sort((a, b) => a - b);
+        // Get all relevant topic docs
+        const topic_docs = doc_data.filter(d => topic_doc_ids.includes(d['DocId']));
+        console.log(topic_docs);
+        // Display all the topics
+        const topic_list = new TopicList(topics, topic_docs, src, target);
 
+    }
+
+    // Create the chord chart
     function createChordChart() {
         try {
             const svg = d3.select("#cluster_topic_chart").append("svg")
@@ -172,6 +234,10 @@ function ChordChart(cluster_sim_data, cluster_topics) {
                 .on('mouseout', d => {
                     reset_links(svg);
                     tooltip.style("visibility", "hidden");
+                })
+                .on('click', function(e, d){
+                    display_articles(d);
+                   // console.log(d);
                 });
                 // .append("title")    // Add tooltip
                 // .text(function(d){

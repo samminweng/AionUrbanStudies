@@ -42,10 +42,8 @@ $(function () {
         const cluster_topic_words = result2[0];
         const cluster_sim_data = result3[0];
         const cluster_topics = result4[0];
-        // Display sunburst chart as default
-        // const chart = new SunburstChart(cluster_groups, cluster_data, doc_data);
         // Display a chord chart
-        const chart = new ChordChart(cluster_sim_data, cluster_topics);
+        const chart = new ChordChart(cluster_sim_data, cluster_topics, cluster_topic_words, doc_data);
         // const dialog = new InstructionDialog('sunburst', true);
         // Remove the progress bar
         $('#progressbar').remove();
@@ -55,24 +53,3 @@ $(function () {
 
 })
 
-// // Switch between sunburst chart and word tree chart
-// $('#chart_type').selectmenu({
-//     change: function( event, data ) {
-//         const item = data.item.value;
-//         console.log(item);
-//         // Clear right panel
-//         $('#topic_doc_heading').empty();
-//         $('#topic_list').empty();
-//         $('#topic_doc_list').empty();
-//         // Display the chart on the left panel
-//         if(item === 'wordtree'){
-//             const chart = new WordTree(cluster_groups, cluster_data, doc_data);
-//             // Create the instruction dialog
-//             const dialog = new InstructionDialog('wordtree', false);
-//         }else{
-//             const chart = new SunburstChart(cluster_groups, cluster_data, doc_data);
-//             // Create the instruction dialog
-//             const dialog = new InstructionDialog('sunburst', false);
-//         }
-//     }
-// });
