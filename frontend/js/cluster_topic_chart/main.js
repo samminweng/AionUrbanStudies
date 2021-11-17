@@ -44,7 +44,7 @@ $(function () {
         const cluster_topics = result4[0];
         // Display a chord chart
         const chart = new ChordChart(cluster_sim_data, cluster_topics, cluster_topic_words, doc_data);
-        // const dialog = new InstructionDialog('sunburst', true);
+        const dialog = new InstructionDialog(true);
         // Remove the progress bar
         $('#progressbar').remove();
     });

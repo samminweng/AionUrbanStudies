@@ -17,8 +17,8 @@ function ChordChart(cluster_sim_data, cluster_topics, cluster_topic_words, doc_d
     // Create a tooltip div
     const tooltip = d3.select("body")
         .append("div")
-        // .attr("class", "tooltip")
-        .style("width", width/5)
+        .attr("class", "text-wrap")
+        .style("width", "30rem")
         .style("position", "absolute")
         .style("z-index", "10")
         .style("visibility", "hidden")
@@ -97,10 +97,10 @@ function ChordChart(cluster_sim_data, cluster_topics, cluster_topic_words, doc_d
             // Append common topics of two clusters
             const common_topics = src_cluster_topics.filter(t => target_cluster_topics.includes(t));
             if(common_topics.length === 0){
-                tooltip_div.append($("<div class='lead'>Identical Cluster topics</div>"));
+                tooltip_div.append($("<div class='lead'>Common Cluster topics</div>"));
                 tooltip_div.append($("<div>None</div>"));
             }else{
-                tooltip_div.append($("<div class='lead'>Identical Cluster topics</div>"));
+                tooltip_div.append($("<div class='lead'>Common Cluster topics</div>"));
                 tooltip_div.append($("<div>" + common_topics.join(", ") +"</div>"));
             }
             // Append topics of cluster src

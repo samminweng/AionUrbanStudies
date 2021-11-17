@@ -1,12 +1,7 @@
 // Display the instruction
-function InstructionDialog(chart_type, auto_open){
-    let instruction_text;
-    if(chart_type === 'wordtree'){
-        instruction_text = 'Clicking on a topic (green words) displays the articles associated within the topic.';
-    }else{
-        instruction_text = '1. <b>Mouse over a cluster (outer circle)</b> display top 10 topics within the cluster.<br>' +
-            '2. <b>Clicking on a cluster</b> displays the articles within the cluster.';
-    }
+function InstructionDialog(auto_open){
+    let instruction_text = '1. <b>Mouse over a link </b> displays the similarity between two clusters and cluster topics<br>' +
+            '2. <b>Clicking on a link</b> displays the articles relevant the topics of two clusters';
 
     $('#instruction').empty();
     $('#instruction').append($('<p>'+ instruction_text+'</p>'));
