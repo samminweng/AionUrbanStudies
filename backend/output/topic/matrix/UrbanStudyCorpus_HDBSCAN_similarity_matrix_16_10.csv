@@ -1,0 +1,11 @@
+,park accessibility,densification,spatial pattern metric,land policy,mapping urban form,city block level,open space area,park accessibility change,predict building height,land readjustment policy
+land cover,0.28,-0.26,0.17,0.73,0.43,0.42,0.57,0.39,0.36,0.55
+land cover change,0.31,-0.26,0.26,0.79,0.49,0.5,0.58,0.57,0.47,0.61
+cropland,0.04,0.15,0.09,0.15,-0.04,-0.12,0.01,0.01,-0.04,0.2
+cover,0.17,-0.2,0.12,0.34,0.28,0.31,0.39,0.27,0.28,0.24
+land cover map,0.3,-0.26,0.31,0.69,0.55,0.44,0.59,0.43,0.4,0.53
+annual,0.11,-0.11,0.13,0.25,0.24,0.33,0.29,0.21,0.25,0.17
+impervious surface,0.1,0.06,0.21,0.13,0.32,0.18,0.26,0.16,0.23,0.14
+green area,0.37,-0.31,0.18,0.46,0.42,0.54,0.66,0.45,0.37,0.28
+land use change,0.35,-0.25,0.33,0.81,0.54,0.53,0.58,0.61,0.5,0.64
+annual growth rate,0.15,-0.08,0.26,0.42,0.36,0.44,0.36,0.32,0.43,0.36

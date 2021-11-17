@@ -1,0 +1,11 @@
+,travel,traffic,urban human mobility,mobility,human mobility,bike,transit,transportation mode recognition,trajectory,human mobility data
+traffic,0.39,1.0,0.35,0.21,0.27,0.25,0.46,0.42,0.08,0.36
+traffic light control,0.36,0.8,0.44,0.24,0.37,0.25,0.41,0.53,0.11,0.48
+road traffic safety,0.43,0.81,0.4,0.22,0.34,0.36,0.42,0.46,0.09,0.4
+traffic control,0.37,0.85,0.43,0.25,0.36,0.21,0.4,0.5,0.11,0.46
+traffic control system,0.36,0.75,0.47,0.27,0.4,0.22,0.44,0.59,0.14,0.53
+routing,0.1,0.29,0.03,0.11,0.02,0.05,0.22,0.23,0.08,0.15
+light control,0.26,0.46,0.4,0.2,0.36,0.18,0.28,0.48,0.1,0.45
+traffic safety,0.4,0.83,0.42,0.24,0.37,0.26,0.4,0.47,0.06,0.45
+pedestrian,0.15,0.53,0.25,0.18,0.15,0.37,0.3,0.24,0.06,0.13
+congestion,0.25,0.62,0.29,0.23,0.17,0.18,0.36,0.28,0.01,0.2

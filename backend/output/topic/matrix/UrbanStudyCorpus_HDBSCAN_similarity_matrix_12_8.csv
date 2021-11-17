@@ -1,0 +1,11 @@
+,stream water quality,carbon sequestration potential,flood,complexity science research,automata,land use change,mosquito,analog,cellular automata,urban land growth
+landscape pattern,0.35,0.16,0.17,0.29,0.01,0.42,0.03,0.15,0.09,0.42
+land cover pattern,0.47,0.22,0.29,0.29,-0.09,0.76,0.13,0.16,0.02,0.64
+urban greenness space,0.38,0.21,0.18,0.42,0.02,0.4,0.11,0.16,0.11,0.6
+landscape,0.31,0.12,0.18,0.28,-0.04,0.34,-0.05,0.03,0.04,0.4
+various land cover,0.48,0.24,0.31,0.36,-0.12,0.76,0.09,0.11,0.01,0.63
+dust,0.34,0.26,0.24,0.1,-0.09,0.21,0.15,0.14,-0.03,0.2
+sediment yield,0.45,0.37,0.21,0.23,-0.03,0.26,0.14,0.16,0.07,0.29
+urban greenness,0.27,0.12,0.14,0.2,0.04,0.2,0.14,0.05,0.08,0.54
+sediment,0.42,0.31,0.26,0.1,-0.02,0.12,0.19,0.1,0.03,0.16
+watershed soil erosion,0.54,0.34,0.4,0.21,-0.11,0.42,0.16,0.1,-0.01,0.44

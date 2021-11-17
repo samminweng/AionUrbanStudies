@@ -1,0 +1,11 @@
+,landscape pattern,land cover pattern,urban greenness space,landscape,various land cover,dust,sediment yield,urban greenness,sediment,watershed soil erosion
+stream water quality,0.35,0.47,0.38,0.31,0.48,0.34,0.45,0.27,0.42,0.54
+carbon sequestration potential,0.16,0.22,0.21,0.12,0.24,0.26,0.37,0.12,0.31,0.34
+flood,0.17,0.29,0.18,0.18,0.31,0.24,0.21,0.14,0.26,0.4
+complexity science research,0.29,0.29,0.42,0.28,0.36,0.1,0.23,0.2,0.1,0.21
+automata,0.01,-0.09,0.02,-0.04,-0.12,-0.09,-0.03,0.04,-0.02,-0.11
+land use change,0.42,0.76,0.4,0.34,0.76,0.21,0.26,0.2,0.12,0.42
+mosquito,0.03,0.13,0.11,-0.05,0.09,0.15,0.14,0.14,0.19,0.16
+analog,0.15,0.16,0.16,0.03,0.11,0.14,0.16,0.05,0.1,0.1
+cellular automata,0.09,0.02,0.11,0.04,0.01,-0.03,0.07,0.08,0.03,-0.01
+urban land growth,0.42,0.64,0.6,0.4,0.63,0.2,0.29,0.54,0.16,0.44

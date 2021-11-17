@@ -1,11 +1,11 @@
-,land cover,nile delta,impervious surface,green area,coastal area,cover change,growth rate,greater mankato,upper awash,awash basin
-landscape pattern,0.31,0.11,0.31,0.41,0.33,0.43,0.26,0.13,0.22,0.21
-sediment yield,0.23,0.21,0.38,0.12,0.21,0.22,0.38,0.11,0.16,0.26
-urban greenness,0.21,0.03,0.24,0.29,0.29,0.15,0.2,0.12,0.12,0.13
-soil erosion,0.38,0.15,0.47,0.27,0.4,0.34,0.3,0.12,0.2,0.24
-landscape indice,0.1,0.02,0.2,0.11,0.19,0.08,0.02,-0.06,0.06,0.16
-land cover,1.0,0.19,0.27,0.55,0.51,0.7,0.3,0.11,0.22,0.2
-landscape metric,0.26,-0.05,0.22,0.3,0.26,0.25,0.21,0.09,0.15,0.22
-urban agglomeration,0.16,-0.01,0.2,0.26,0.3,0.1,0.22,0.21,0.06,0.16
-cover pattern,0.6,0.15,0.32,0.42,0.27,0.75,0.33,0.11,0.16,0.13
-dust storm,0.34,0.14,0.32,0.27,0.33,0.34,0.13,0.06,0.14,0.19
+,land cover,land cover change,cropland,cover,land cover map,annual,impervious surface,green area,land use change,annual growth rate
+landscape pattern,0.31,0.43,0.05,0.25,0.43,0.11,0.31,0.41,0.42,0.24
+land cover pattern,0.88,0.87,0.15,0.7,0.83,0.27,0.34,0.56,0.76,0.39
+urban greenness space,0.39,0.41,0.07,0.25,0.4,0.14,0.3,0.41,0.4,0.25
+landscape,0.31,0.37,0.1,0.18,0.39,0.06,0.25,0.39,0.34,0.12
+various land cover,0.91,0.87,0.1,0.72,0.83,0.31,0.25,0.56,0.76,0.36
+dust,0.29,0.29,0.05,0.31,0.27,0.08,0.36,0.22,0.21,0.1
+sediment yield,0.23,0.27,0.23,0.16,0.26,0.14,0.38,0.12,0.26,0.34
+urban greenness,0.21,0.21,0.15,0.11,0.19,0.04,0.24,0.29,0.2,0.17
+sediment,0.12,0.14,0.18,0.09,0.14,0.01,0.4,0.09,0.12,0.11
+watershed soil erosion,0.37,0.42,0.27,0.18,0.37,0.16,0.41,0.32,0.42,0.28

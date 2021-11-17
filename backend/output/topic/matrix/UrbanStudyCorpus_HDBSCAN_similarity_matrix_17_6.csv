@@ -1,0 +1,11 @@
+,binary urban footprint,urban land expansion,building height,driving force,urban footprint,land price,expansion,main driving force,body mass index,residential land price
+travel,0.1,0.29,0.22,0.31,0.17,0.29,0.23,0.33,0.25,0.31
+traffic,0.2,0.33,0.28,0.44,0.26,0.25,0.2,0.48,0.23,0.31
+urban human mobility,0.48,0.63,0.32,0.36,0.63,0.34,0.33,0.39,0.4,0.41
+mobility,0.25,0.26,0.17,0.31,0.33,0.14,0.18,0.25,0.18,0.16
+human mobility,0.28,0.36,0.27,0.34,0.36,0.26,0.24,0.35,0.4,0.25
+bike,0.12,0.15,0.17,0.22,0.21,0.17,-0.02,0.23,0.14,0.19
+transit,0.16,0.35,0.16,0.19,0.23,0.2,0.29,0.26,0.19,0.25
+transportation mode recognition,0.35,0.42,0.3,0.37,0.31,0.32,0.34,0.42,0.33,0.36
+trajectory,0.16,0.12,0.13,0.13,0.1,0.13,0.15,0.12,0.16,0.13
+human mobility data,0.37,0.39,0.28,0.35,0.37,0.33,0.29,0.37,0.48,0.33

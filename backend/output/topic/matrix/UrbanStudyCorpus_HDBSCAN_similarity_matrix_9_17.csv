@@ -1,0 +1,11 @@
+,travel,traffic,urban human mobility,mobility,human mobility,bike,transit,transportation mode recognition,trajectory,human mobility data
+crash,0.2,0.37,0.1,-0.01,0.11,0.24,0.09,0.21,0.17,0.18
+vehicle ownership,0.3,0.38,0.36,0.31,0.31,0.29,0.28,0.42,0.16,0.37
+crime,0.15,0.32,0.35,0.08,0.27,0.08,0.17,0.24,0.06,0.31
+ownership,0.2,0.15,0.25,0.19,0.2,0.07,0.16,0.26,0.01,0.24
+waterlogging,-0.19,0.06,-0.09,0.0,-0.1,-0.1,-0.1,-0.14,0.0,-0.16
+opportunistic,-0.08,-0.05,0.06,0.06,0.12,-0.11,-0.05,-0.03,0.06,0.09
+public transportation route,0.48,0.59,0.41,0.22,0.32,0.29,0.62,0.63,0.08,0.4
+scale urban problem,0.24,0.39,0.65,0.28,0.41,0.19,0.29,0.48,0.14,0.46
+real world data,0.37,0.36,0.46,0.19,0.42,0.18,0.19,0.45,0.13,0.67
+game abstraction framework,0.12,0.13,0.33,0.22,0.32,0.03,0.11,0.42,0.15,0.39

@@ -1,0 +1,11 @@
+,smart infrastructure system,smart infrastructure,infrastructure system,outbreak,smart city network,data sharing,governance,smart,urban governance,air quality
+travel,0.3,0.28,0.25,0.18,0.4,0.26,0.04,0.24,0.14,0.3
+traffic,0.37,0.31,0.38,0.17,0.42,0.34,0.09,0.17,0.25,0.42
+urban human mobility,0.51,0.47,0.5,0.16,0.46,0.35,0.37,0.27,0.67,0.44
+mobility,0.34,0.35,0.31,-0.01,0.24,0.21,0.17,0.23,0.26,0.33
+human mobility,0.41,0.37,0.41,0.15,0.33,0.35,0.33,0.22,0.39,0.4
+bike,0.2,0.18,0.17,-0.06,0.23,0.14,-0.06,0.16,0.08,0.11
+transit,0.37,0.29,0.4,0.07,0.4,0.23,0.06,0.13,0.22,0.24
+transportation mode recognition,0.6,0.5,0.61,0.06,0.45,0.43,0.27,0.28,0.39,0.44
+trajectory,0.07,-0.01,0.08,-0.01,-0.02,0.09,0.04,0.01,0.06,0.05
+human mobility data,0.51,0.42,0.51,0.17,0.41,0.67,0.34,0.26,0.4,0.46

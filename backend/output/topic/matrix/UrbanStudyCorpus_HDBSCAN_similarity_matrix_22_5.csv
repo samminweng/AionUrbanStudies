@@ -1,0 +1,11 @@
+,aerial,point cloud,detection,deep,cloud,object,building detection,segmentation,semantic segmentation,airborne
+person detection method,0.24,0.38,0.75,0.21,0.25,0.49,0.69,0.21,0.28,0.26
+freeway,0.13,0.1,0.07,0.02,0.03,-0.0,0.17,0.03,0.05,0.01
+task scheduling algorithm,0.13,0.17,0.29,0.03,0.07,0.25,0.28,0.23,0.35,0.08
+sustainable smart city,0.09,0.3,0.12,0.17,0.16,0.14,0.37,-0.08,-0.08,0.01
+urban data management,0.19,0.37,0.26,0.22,0.26,0.27,0.41,0.07,0.13,0.12
+smart city application,0.15,0.37,0.22,0.19,0.26,0.27,0.44,-0.02,0.01,0.09
+urban freeway corridor,0.15,0.2,0.07,0.14,0.1,0.08,0.26,0.01,0.01,0.06
+anomaly detection,0.13,0.26,0.86,0.14,0.23,0.28,0.63,0.23,0.31,0.22
+person detection,0.2,0.36,0.8,0.21,0.25,0.44,0.71,0.15,0.23,0.31
+freeway corridor,0.13,0.18,0.07,0.09,0.09,0.05,0.22,0.03,0.04,0.04

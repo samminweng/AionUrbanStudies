@@ -1,0 +1,11 @@
+,person detection method,freeway,task scheduling algorithm,sustainable smart city,urban data management,smart city application,urban freeway corridor,anomaly detection,person detection,freeway corridor
+positive deviance,0.22,-0.01,0.08,0.11,0.15,0.07,-0.02,0.19,0.2,-0.04
+urban planning firm,0.26,0.15,0.24,0.61,0.76,0.56,0.47,0.01,0.2,0.22
+personality,0.28,-0.01,0.11,0.18,0.16,0.26,-0.0,0.16,0.3,-0.05
+social media data,0.44,0.05,0.31,0.41,0.74,0.49,0.22,0.23,0.4,0.09
+tweet,0.01,-0.02,-0.05,-0.06,-0.13,-0.04,-0.15,0.03,0.02,-0.12
+player,0.25,-0.0,0.13,0.22,0.21,0.32,0.02,0.02,0.25,-0.03
+input excerpt must,0.39,-0.0,0.36,0.28,0.37,0.37,0.07,0.13,0.34,0.02
+six possible personality,0.5,0.04,0.27,0.39,0.35,0.47,0.12,0.22,0.51,0.07
+possible personality class,0.52,0.09,0.3,0.39,0.38,0.48,0.19,0.24,0.5,0.11
+media data analysis,0.5,0.07,0.35,0.33,0.73,0.46,0.19,0.32,0.44,0.11

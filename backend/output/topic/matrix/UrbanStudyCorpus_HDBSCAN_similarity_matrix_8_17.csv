@@ -1,0 +1,11 @@
+,travel,traffic,urban human mobility,mobility,human mobility,bike,transit,transportation mode recognition,trajectory,human mobility data
+stream water quality,0.23,0.39,0.43,0.21,0.35,0.16,0.24,0.37,0.08,0.44
+carbon sequestration potential,0.11,0.17,0.24,0.17,0.23,0.08,0.16,0.28,0.09,0.3
+flood,0.11,0.28,0.16,-0.06,0.08,0.03,0.06,0.13,-0.02,0.15
+complexity science research,0.23,0.15,0.48,0.23,0.45,0.04,0.09,0.4,0.13,0.55
+automata,-0.08,-0.02,0.07,0.13,0.11,0.02,-0.02,0.03,-0.03,0.06
+land use change,0.39,0.35,0.52,0.24,0.44,0.22,0.28,0.5,0.15,0.5
+mosquito,0.03,0.03,0.11,0.03,0.08,0.02,0.02,-0.0,-0.02,0.06
+analog,-0.01,0.15,0.13,0.08,0.13,-0.0,0.06,0.23,0.12,0.24
+cellular automata,0.03,0.13,0.22,0.24,0.26,0.08,0.06,0.19,-0.01,0.25
+urban land growth,0.29,0.37,0.67,0.29,0.41,0.19,0.3,0.43,0.2,0.46

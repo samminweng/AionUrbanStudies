@@ -1,0 +1,11 @@
+,traffic,traffic light control,road traffic safety,traffic control,traffic control system,routing,light control,traffic safety,pedestrian,congestion
+land cover,0.25,0.43,0.35,0.38,0.41,0.02,0.45,0.3,0.1,0.15
+land cover change,0.31,0.53,0.41,0.46,0.51,0.08,0.55,0.37,0.1,0.2
+cropland,-0.03,-0.04,-0.05,-0.01,-0.04,0.06,-0.03,-0.03,0.05,0.03
+cover,0.17,0.3,0.24,0.22,0.24,0.0,0.32,0.26,0.07,0.11
+land cover map,0.28,0.45,0.38,0.4,0.44,0.1,0.46,0.31,0.12,0.14
+annual,0.2,0.22,0.21,0.2,0.22,-0.04,0.19,0.21,0.02,0.09
+impervious surface,0.14,0.24,0.15,0.18,0.21,0.12,0.25,0.13,0.16,0.12
+green area,0.29,0.46,0.44,0.35,0.37,0.06,0.47,0.36,0.25,0.16
+land use change,0.35,0.59,0.44,0.54,0.61,0.15,0.62,0.41,0.12,0.22
+annual growth rate,0.28,0.34,0.27,0.33,0.36,-0.01,0.31,0.28,0.08,0.21

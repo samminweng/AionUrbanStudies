@@ -124,7 +124,7 @@ class TopicWord:
                     sim = cosine_similarity([cv_1, cv_2])[0][1]
                     cluster_sim_matrix[i, j] = sim
                     # compute the similarity matrix of cluster #15 and cluster #16 topics
-                    # matrix = TopicWordUtility.compute_similarity_matrix_topics(ct_1, ct_2)
+                    matrix = TopicWordUtility.compute_similarity_matrix_topics(ct_1, ct_2)
                     # matrix_mean = matrix.mean()
                     # print("Similarity matrix between cluster #{c1} and #{c2} = {sum}".format(
                     #     c1=c1, c2=c2, sum=matrix_mean))

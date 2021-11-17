@@ -1,0 +1,11 @@
+,travel,traffic,urban human mobility,mobility,human mobility,bike,transit,transportation mode recognition,trajectory,human mobility data
+travel,1.0,0.39,0.3,0.2,0.28,0.26,0.36,0.37,0.09,0.31
+traffic,0.39,1.0,0.35,0.21,0.27,0.25,0.46,0.42,0.08,0.36
+urban human mobility,0.3,0.35,1.0,0.68,0.89,0.21,0.29,0.5,0.16,0.81
+mobility,0.2,0.21,0.68,1.0,0.74,0.23,0.2,0.38,0.24,0.64
+human mobility,0.28,0.27,0.89,0.74,1.0,0.16,0.21,0.44,0.18,0.88
+bike,0.26,0.25,0.21,0.23,0.16,1.0,0.27,0.27,0.16,0.15
+transit,0.36,0.46,0.29,0.2,0.21,0.27,1.0,0.44,0.07,0.25
+transportation mode recognition,0.37,0.42,0.5,0.38,0.44,0.27,0.44,1.0,0.15,0.52
+trajectory,0.09,0.08,0.16,0.24,0.18,0.16,0.07,0.15,1.0,0.22
+human mobility data,0.31,0.36,0.81,0.64,0.88,0.15,0.25,0.52,0.22,1.0

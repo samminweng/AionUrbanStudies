@@ -1,0 +1,11 @@
+,person detection method,freeway,task scheduling algorithm,sustainable smart city,urban data management,smart city application,urban freeway corridor,anomaly detection,person detection,freeway corridor
+landscape pattern,0.26,0.04,0.18,0.28,0.38,0.25,0.24,0.2,0.2,0.11
+land cover pattern,0.39,0.11,0.21,0.36,0.46,0.39,0.31,0.19,0.35,0.2
+urban greenness space,0.19,0.17,0.15,0.38,0.57,0.33,0.53,0.12,0.16,0.28
+landscape,0.08,0.05,0.02,0.28,0.31,0.24,0.26,0.05,0.05,0.11
+various land cover,0.33,0.1,0.17,0.39,0.48,0.44,0.31,0.09,0.31,0.19
+dust,0.23,0.07,-0.01,0.11,0.17,0.16,0.14,0.2,0.22,0.1
+sediment yield,0.24,0.04,0.11,0.13,0.28,0.08,0.1,0.15,0.15,0.07
+urban greenness,0.04,0.17,0.03,0.32,0.45,0.2,0.5,0.03,0.0,0.22
+sediment,0.11,0.04,0.08,0.01,0.21,0.0,0.1,0.09,0.04,0.06
+watershed soil erosion,0.2,0.04,0.11,0.17,0.34,0.08,0.2,0.18,0.15,0.09

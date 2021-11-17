@@ -1,0 +1,11 @@
+,land cover,land cover change,cropland,cover,land cover map,annual,impervious surface,green area,land use change,annual growth rate
+travel,0.33,0.37,-0.17,0.28,0.36,0.26,0.02,0.27,0.39,0.27
+traffic,0.25,0.31,-0.03,0.17,0.28,0.2,0.14,0.29,0.35,0.28
+urban human mobility,0.37,0.46,-0.01,0.2,0.38,0.2,0.27,0.35,0.52,0.37
+mobility,0.11,0.18,-0.01,0.03,0.12,0.06,0.2,0.11,0.24,0.2
+human mobility,0.26,0.36,-0.04,0.14,0.27,0.16,0.23,0.18,0.44,0.29
+bike,0.17,0.2,-0.05,0.12,0.22,0.12,0.08,0.22,0.22,0.13
+transit,0.2,0.21,-0.03,0.11,0.25,0.12,0.08,0.27,0.28,0.19
+transportation mode recognition,0.31,0.42,-0.07,0.24,0.37,0.22,0.1,0.34,0.5,0.34
+trajectory,0.07,0.15,0.04,0.04,0.15,0.04,0.29,-0.01,0.15,0.24
+human mobility data,0.3,0.41,-0.09,0.19,0.35,0.24,0.23,0.22,0.5,0.42

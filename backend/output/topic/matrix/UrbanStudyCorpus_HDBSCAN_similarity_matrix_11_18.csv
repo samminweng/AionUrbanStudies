@@ -1,0 +1,11 @@
+,topic modeling,retail store placement,store placement problem,syntactic,store,leisure,heterogeneous urban data,store placement,business,functional region
+soundscape,0.02,-0.1,-0.16,0.08,-0.09,0.03,0.17,-0.08,-0.17,-0.04
+perception,0.31,0.14,0.29,0.15,0.07,0.06,0.27,0.13,0.22,0.27
+street,0.04,0.34,0.29,-0.18,0.37,0.07,0.14,0.29,0.37,0.07
+greenery,-0.06,0.08,0.03,0.13,0.04,0.15,0.1,0.08,-0.11,0.01
+public space,0.31,0.39,0.46,-0.06,0.32,0.32,0.42,0.36,0.44,0.31
+street greenery,-0.01,0.32,0.25,-0.05,0.31,0.15,0.17,0.28,0.21,0.06
+human perception,0.34,0.15,0.33,0.11,0.11,0.05,0.33,0.15,0.28,0.38
+perceptual,0.16,-0.02,0.02,0.45,-0.03,0.08,0.16,-0.01,-0.09,0.19
+pedestrian,-0.0,0.2,0.16,0.02,0.19,0.22,0.21,0.18,0.03,0.13
+street view image,0.25,0.37,0.45,-0.08,0.37,0.12,0.29,0.35,0.46,0.27

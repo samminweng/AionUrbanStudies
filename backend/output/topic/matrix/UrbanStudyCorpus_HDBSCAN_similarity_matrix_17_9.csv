@@ -1,0 +1,11 @@
+,crash,vehicle ownership,crime,ownership,waterlogging,opportunistic,public transportation route,scale urban problem,real world data,game abstraction framework
+travel,0.2,0.3,0.15,0.2,-0.19,-0.08,0.48,0.24,0.37,0.12
+traffic,0.37,0.38,0.32,0.15,0.06,-0.05,0.59,0.39,0.36,0.13
+urban human mobility,0.1,0.36,0.35,0.25,-0.09,0.06,0.41,0.65,0.46,0.33
+mobility,-0.01,0.31,0.08,0.19,0.0,0.06,0.22,0.28,0.19,0.22
+human mobility,0.11,0.31,0.27,0.2,-0.1,0.12,0.32,0.41,0.42,0.32
+bike,0.24,0.29,0.08,0.07,-0.1,-0.11,0.29,0.19,0.18,0.03
+transit,0.09,0.28,0.17,0.16,-0.1,-0.05,0.62,0.29,0.19,0.11
+transportation mode recognition,0.21,0.42,0.24,0.26,-0.14,-0.03,0.63,0.48,0.45,0.42
+trajectory,0.17,0.16,0.06,0.01,0.0,0.06,0.08,0.14,0.13,0.15
+human mobility data,0.18,0.37,0.31,0.24,-0.16,0.09,0.4,0.46,0.67,0.39

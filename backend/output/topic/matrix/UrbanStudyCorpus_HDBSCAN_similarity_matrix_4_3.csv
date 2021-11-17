@@ -1,0 +1,11 @@
+,road traffic noise,urban form indicator,interface network,interface network connectivity,classical urban design,housing estate,greenway suitability analysis,using network analysis,economic assessment using,assessment using machine
+temperature,0.26,0.31,0.14,0.15,0.17,0.04,0.14,0.23,0.24,0.27
+thermal,0.16,0.19,0.15,0.2,0.19,0.03,0.09,0.21,0.18,0.24
+cooling,0.21,0.25,0.17,0.17,0.18,0.21,0.06,0.22,0.28,0.25
+surface temperature,0.33,0.37,0.22,0.22,0.24,0.09,0.16,0.32,0.28,0.34
+energy,0.2,0.28,0.18,0.18,0.26,0.23,0.14,0.34,0.42,0.27
+land surface temperature,0.4,0.44,0.23,0.23,0.3,0.29,0.18,0.37,0.36,0.39
+urban heat island,0.43,0.56,0.24,0.23,0.52,0.36,0.09,0.36,0.38,0.33
+ventilation,0.23,0.14,0.18,0.19,0.13,0.08,0.08,0.11,0.07,0.17
+thermal comfort,0.22,0.26,0.19,0.25,0.27,0.1,0.12,0.25,0.26,0.27
+comfort,0.18,0.22,0.15,0.2,0.23,0.15,0.1,0.17,0.23,0.18

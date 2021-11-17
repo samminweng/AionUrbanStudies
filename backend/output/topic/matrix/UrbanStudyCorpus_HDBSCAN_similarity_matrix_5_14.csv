@@ -1,0 +1,11 @@
+,positive deviance,urban planning firm,personality,social media data,tweet,player,input excerpt must,six possible personality,possible personality class,media data analysis
+aerial,0.09,0.17,0.02,0.21,0.02,0.1,0.11,0.18,0.14,0.26
+point cloud,0.16,0.27,0.14,0.41,-0.01,0.28,0.21,0.4,0.34,0.38
+detection,0.13,0.08,0.08,0.26,0.01,0.02,0.16,0.22,0.23,0.37
+deep,-0.03,0.22,0.15,0.24,-0.08,0.14,0.18,0.33,0.31,0.2
+cloud,0.07,0.14,0.1,0.28,0.04,0.12,0.02,0.2,0.19,0.26
+object,0.16,0.15,0.22,0.37,0.0,0.2,0.31,0.32,0.38,0.37
+building detection,0.12,0.33,0.13,0.38,-0.06,0.09,0.2,0.39,0.37,0.42
+segmentation,0.07,-0.03,0.09,0.06,0.0,-0.11,0.11,-0.06,-0.01,0.13
+semantic segmentation,0.11,-0.02,0.15,0.18,0.03,-0.11,0.18,0.02,0.09,0.24
+airborne,0.01,0.09,0.0,0.08,0.1,0.07,0.06,0.12,0.12,0.12

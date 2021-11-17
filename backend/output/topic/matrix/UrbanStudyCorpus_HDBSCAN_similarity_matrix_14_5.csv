@@ -1,0 +1,11 @@
+,aerial,point cloud,detection,deep,cloud,object,building detection,segmentation,semantic segmentation,airborne
+positive deviance,0.09,0.16,0.13,-0.03,0.07,0.16,0.12,0.07,0.11,0.01
+urban planning firm,0.17,0.27,0.08,0.22,0.14,0.15,0.33,-0.03,-0.02,0.09
+personality,0.02,0.14,0.08,0.15,0.1,0.22,0.13,0.09,0.15,0.0
+social media data,0.21,0.41,0.26,0.24,0.28,0.37,0.38,0.06,0.18,0.08
+tweet,0.02,-0.01,0.01,-0.08,0.04,0.0,-0.06,0.0,0.03,0.1
+player,0.1,0.28,0.02,0.14,0.12,0.2,0.09,-0.11,-0.11,0.07
+input excerpt must,0.11,0.21,0.16,0.18,0.02,0.31,0.2,0.11,0.18,0.06
+six possible personality,0.18,0.4,0.22,0.33,0.2,0.32,0.39,-0.06,0.02,0.12
+possible personality class,0.14,0.34,0.23,0.31,0.19,0.38,0.37,-0.01,0.09,0.12
+media data analysis,0.26,0.38,0.37,0.2,0.26,0.37,0.42,0.13,0.24,0.12

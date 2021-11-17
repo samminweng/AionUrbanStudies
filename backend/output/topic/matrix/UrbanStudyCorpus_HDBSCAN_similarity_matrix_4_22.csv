@@ -1,0 +1,11 @@
+,person detection method,freeway,task scheduling algorithm,sustainable smart city,urban data management,smart city application,urban freeway corridor,anomaly detection,person detection,freeway corridor
+temperature,0.34,0.07,0.12,0.12,0.21,0.16,0.12,0.31,0.3,0.1
+thermal,0.32,-0.03,0.08,0.12,0.19,0.13,0.06,0.36,0.29,0.02
+cooling,0.24,0.09,0.07,0.14,0.23,0.15,0.1,0.25,0.18,0.08
+surface temperature,0.42,0.12,0.15,0.15,0.27,0.2,0.2,0.35,0.37,0.16
+energy,0.2,0.0,0.16,0.4,0.41,0.3,0.16,0.12,0.17,0.09
+land surface temperature,0.43,0.16,0.15,0.28,0.38,0.31,0.31,0.3,0.39,0.23
+urban heat island,0.29,0.19,0.09,0.44,0.53,0.41,0.47,0.1,0.25,0.25
+ventilation,0.28,0.1,0.16,0.08,0.14,0.11,0.14,0.31,0.26,0.14
+thermal comfort,0.35,-0.03,0.12,0.19,0.26,0.17,0.11,0.32,0.33,0.05
+comfort,0.22,-0.02,0.12,0.19,0.22,0.13,0.13,0.1,0.22,0.07

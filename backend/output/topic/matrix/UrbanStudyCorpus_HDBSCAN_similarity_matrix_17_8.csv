@@ -1,0 +1,11 @@
+,stream water quality,carbon sequestration potential,flood,complexity science research,automata,land use change,mosquito,analog,cellular automata,urban land growth
+travel,0.23,0.11,0.11,0.23,-0.08,0.39,0.03,-0.01,0.03,0.29
+traffic,0.39,0.17,0.28,0.15,-0.02,0.35,0.03,0.15,0.13,0.37
+urban human mobility,0.43,0.24,0.16,0.48,0.07,0.52,0.11,0.13,0.22,0.67
+mobility,0.21,0.17,-0.06,0.23,0.13,0.24,0.03,0.08,0.24,0.29
+human mobility,0.35,0.23,0.08,0.45,0.11,0.44,0.08,0.13,0.26,0.41
+bike,0.16,0.08,0.03,0.04,0.02,0.22,0.02,-0.0,0.08,0.19
+transit,0.24,0.16,0.06,0.09,-0.02,0.28,0.02,0.06,0.06,0.3
+transportation mode recognition,0.37,0.28,0.13,0.4,0.03,0.5,-0.0,0.23,0.19,0.43
+trajectory,0.08,0.09,-0.02,0.13,-0.03,0.15,-0.02,0.12,-0.01,0.2
+human mobility data,0.44,0.3,0.15,0.55,0.06,0.5,0.06,0.24,0.25,0.46

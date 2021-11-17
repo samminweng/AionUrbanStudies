@@ -1,0 +1,11 @@
+,signal,positioning,positioning accuracy,multipath,path loss,localization,positioning performance,receiver,reception,fingerprint
+positive deviance,0.27,-0.02,0.05,0.17,0.14,0.11,0.19,-0.01,0.21,0.06
+urban planning firm,0.18,0.19,0.17,-0.19,0.27,0.07,0.31,0.02,0.11,0.02
+personality,0.08,0.12,0.16,-0.01,0.1,-0.04,0.27,0.09,0.11,0.1
+social media data,0.32,0.26,0.32,-0.09,0.31,0.08,0.43,0.1,0.21,0.2
+tweet,0.04,-0.0,0.01,0.12,-0.08,0.06,-0.03,-0.04,-0.07,0.01
+player,0.13,0.12,0.15,-0.06,0.25,0.02,0.31,0.39,0.07,0.02
+input excerpt must,0.42,0.17,0.24,-0.01,0.26,0.11,0.3,0.21,0.11,0.17
+six possible personality,0.28,0.18,0.24,-0.15,0.42,-0.05,0.38,0.17,0.16,0.07
+possible personality class,0.29,0.18,0.23,-0.08,0.36,-0.01,0.38,0.18,0.12,0.06
+media data analysis,0.37,0.32,0.41,-0.11,0.28,0.15,0.47,0.12,0.2,0.3

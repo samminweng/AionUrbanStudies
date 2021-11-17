@@ -1,0 +1,11 @@
+,positive deviance,urban planning firm,personality,social media data,tweet,player,input excerpt must,six possible personality,possible personality class,media data analysis
+positive deviance,1.0,0.04,0.27,0.31,0.16,0.08,0.25,0.26,0.28,0.26
+urban planning firm,0.04,1.0,0.1,0.54,-0.15,0.16,0.21,0.36,0.36,0.5
+personality,0.27,0.1,1.0,0.33,0.01,0.28,0.14,0.64,0.65,0.28
+social media data,0.31,0.54,0.33,1.0,-0.03,0.24,0.44,0.51,0.51,0.88
+tweet,0.16,-0.15,0.01,-0.03,1.0,-0.02,0.1,-0.08,-0.08,-0.04
+player,0.08,0.16,0.28,0.24,-0.02,1.0,0.3,0.45,0.41,0.21
+input excerpt must,0.25,0.21,0.14,0.44,0.1,0.3,1.0,0.37,0.38,0.46
+six possible personality,0.26,0.36,0.64,0.51,-0.08,0.45,0.37,1.0,0.81,0.47
+possible personality class,0.28,0.36,0.65,0.51,-0.08,0.41,0.38,0.81,1.0,0.45
+media data analysis,0.26,0.5,0.28,0.88,-0.04,0.21,0.46,0.47,0.45,1.0

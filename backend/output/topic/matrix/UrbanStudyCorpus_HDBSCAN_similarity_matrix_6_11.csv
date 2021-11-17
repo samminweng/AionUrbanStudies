@@ -1,0 +1,11 @@
+,soundscape,perception,street,greenery,public space,street greenery,human perception,perceptual,pedestrian,street view image
+binary urban footprint,0.15,0.22,0.02,0.22,0.3,0.16,0.25,0.2,0.18,0.24
+urban land expansion,-0.04,0.16,0.24,0.15,0.5,0.29,0.29,-0.11,0.22,0.35
+building height,-0.22,0.16,0.35,0.15,0.46,0.36,0.26,-0.04,0.27,0.43
+driving force,-0.18,0.21,0.25,-0.15,0.33,0.1,0.27,-0.07,0.12,0.33
+urban footprint,0.16,0.23,0.12,0.27,0.36,0.27,0.28,0.08,0.28,0.28
+land price,-0.22,0.15,0.25,0.1,0.42,0.26,0.26,-0.13,0.04,0.35
+expansion,-0.07,0.12,0.19,-0.07,0.35,0.1,0.2,-0.1,0.11,0.27
+main driving force,-0.24,0.22,0.34,-0.12,0.41,0.19,0.31,-0.08,0.19,0.41
+body mass index,-0.18,0.25,0.25,-0.04,0.37,0.17,0.43,0.0,0.05,0.36
+residential land price,-0.19,0.09,0.34,0.18,0.47,0.37,0.2,-0.17,0.18,0.37

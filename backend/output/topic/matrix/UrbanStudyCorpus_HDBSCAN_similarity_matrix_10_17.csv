@@ -1,0 +1,11 @@
+,travel,traffic,urban human mobility,mobility,human mobility,bike,transit,transportation mode recognition,trajectory,human mobility data
+park accessibility,0.27,0.28,0.33,0.29,0.27,0.29,0.27,0.3,0.02,0.26
+densification,-0.19,-0.03,-0.05,0.07,-0.05,-0.13,-0.04,-0.06,0.08,-0.1
+spatial pattern metric,0.06,0.24,0.31,0.23,0.31,0.08,0.18,0.32,0.3,0.43
+land policy,0.33,0.26,0.46,0.18,0.37,0.11,0.23,0.39,0.12,0.41
+mapping urban form,0.28,0.31,0.67,0.32,0.45,0.18,0.27,0.48,0.18,0.54
+city block level,0.34,0.44,0.44,0.15,0.33,0.2,0.34,0.42,0.05,0.39
+open space area,0.37,0.35,0.47,0.22,0.35,0.25,0.28,0.39,0.12,0.44
+park accessibility change,0.35,0.35,0.45,0.33,0.38,0.3,0.28,0.43,0.12,0.39
+predict building height,0.26,0.31,0.33,0.16,0.3,0.16,0.14,0.32,0.24,0.36
+land readjustment policy,0.19,0.18,0.42,0.26,0.32,0.07,0.19,0.31,0.18,0.33

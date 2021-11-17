@@ -1,11 +1,11 @@
-,landscape pattern,sediment yield,urban greenness,soil erosion,landscape indice,land cover,landscape metric,urban agglomeration,cover pattern,dust storm
-landscape pattern,1.0,0.21,0.31,0.39,0.48,0.31,0.55,0.21,0.68,0.26
-sediment yield,0.21,1.0,0.12,0.51,0.11,0.23,0.31,0.06,0.23,0.28
-urban greenness,0.31,0.12,1.0,0.21,0.27,0.21,0.25,0.69,0.16,0.08
-soil erosion,0.39,0.51,0.21,1.0,0.15,0.38,0.3,0.15,0.3,0.33
-landscape indice,0.48,0.11,0.27,0.15,1.0,0.1,0.37,0.17,0.06,0.14
-land cover,0.31,0.23,0.21,0.38,0.1,1.0,0.26,0.16,0.6,0.34
-landscape metric,0.55,0.31,0.25,0.3,0.37,0.26,1.0,0.16,0.24,0.2
-urban agglomeration,0.21,0.06,0.69,0.15,0.17,0.16,0.16,1.0,0.08,0.1
-cover pattern,0.68,0.23,0.16,0.3,0.06,0.6,0.24,0.08,1.0,0.34
-dust storm,0.26,0.28,0.08,0.33,0.14,0.34,0.2,0.1,0.34,1.0
+,landscape pattern,land cover pattern,urban greenness space,landscape,various land cover,dust,sediment yield,urban greenness,sediment,watershed soil erosion
+landscape pattern,1.0,0.63,0.34,0.81,0.35,0.26,0.21,0.31,0.2,0.4
+land cover pattern,0.63,1.0,0.39,0.37,0.84,0.33,0.28,0.23,0.17,0.4
+urban greenness space,0.34,0.39,1.0,0.37,0.39,0.23,0.16,0.79,0.14,0.26
+landscape,0.81,0.37,0.37,1.0,0.32,0.21,0.14,0.36,0.17,0.4
+various land cover,0.35,0.84,0.39,0.32,1.0,0.28,0.22,0.2,0.12,0.35
+dust,0.26,0.33,0.23,0.21,0.28,1.0,0.33,0.1,0.41,0.26
+sediment yield,0.21,0.28,0.16,0.14,0.22,0.33,1.0,0.12,0.74,0.49
+urban greenness,0.31,0.23,0.79,0.36,0.2,0.1,0.12,1.0,0.14,0.25
+sediment,0.2,0.17,0.14,0.17,0.12,0.41,0.74,0.14,1.0,0.55
+watershed soil erosion,0.4,0.4,0.26,0.4,0.35,0.26,0.49,0.25,0.55,1.0

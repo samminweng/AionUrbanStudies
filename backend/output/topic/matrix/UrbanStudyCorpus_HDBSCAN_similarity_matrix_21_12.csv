@@ -1,0 +1,11 @@
+,landscape pattern,land cover pattern,urban greenness space,landscape,various land cover,dust,sediment yield,urban greenness,sediment,watershed soil erosion
+smart infrastructure system,0.28,0.39,0.37,0.25,0.42,0.11,0.12,0.24,0.06,0.2
+smart infrastructure,0.21,0.3,0.36,0.25,0.35,0.09,0.09,0.28,0.02,0.12
+infrastructure system,0.29,0.4,0.36,0.26,0.45,0.1,0.16,0.23,0.13,0.3
+outbreak,0.05,0.16,0.04,-0.02,0.15,0.12,0.04,0.03,0.02,0.14
+smart city network,0.24,0.35,0.33,0.24,0.42,0.16,0.04,0.21,-0.03,0.1
+data sharing,0.19,0.34,0.29,0.06,0.37,0.12,0.27,0.08,0.16,0.18
+governance,0.21,0.18,0.18,0.17,0.2,-0.03,0.11,0.23,0.1,0.28
+smart,0.13,0.17,0.19,0.12,0.16,0.09,-0.02,0.12,-0.11,-0.09
+urban governance,0.37,0.35,0.58,0.38,0.37,0.09,0.13,0.64,0.14,0.36
+air quality,0.26,0.4,0.39,0.21,0.45,0.31,0.26,0.2,0.18,0.32

@@ -1,0 +1,11 @@
+,park accessibility,densification,spatial pattern metric,land policy,mapping urban form,city block level,open space area,park accessibility change,predict building height,land readjustment policy
+land use category,0.31,-0.27,0.29,0.67,0.53,0.5,0.57,0.45,0.44,0.5
+essential urban land,0.35,-0.15,0.24,0.73,0.68,0.53,0.56,0.48,0.39,0.62
+urban functional zone,0.31,-0.13,0.35,0.38,0.67,0.5,0.55,0.39,0.34,0.36
+urban land use,0.38,-0.19,0.27,0.75,0.7,0.54,0.62,0.5,0.41,0.61
+urban poverty,0.21,-0.03,0.19,0.44,0.61,0.41,0.34,0.32,0.24,0.39
+functional zone classification,0.24,-0.12,0.43,0.26,0.49,0.38,0.42,0.33,0.3,0.23
+urban functional area,0.42,-0.17,0.36,0.44,0.73,0.55,0.65,0.49,0.39,0.39
+identify urban poverty,0.22,-0.1,0.25,0.45,0.63,0.44,0.38,0.36,0.32,0.39
+poverty,0.09,-0.04,0.17,0.35,0.35,0.29,0.17,0.21,0.18,0.3
+urban functional,0.32,-0.05,0.39,0.32,0.73,0.4,0.46,0.41,0.3,0.35

@@ -1,0 +1,11 @@
+,smart infrastructure system,smart infrastructure,infrastructure system,outbreak,smart city network,data sharing,governance,smart,urban governance,air quality
+land use category,0.52,0.44,0.5,0.13,0.45,0.38,0.17,0.3,0.36,0.44
+essential urban land,0.54,0.5,0.55,0.15,0.49,0.34,0.34,0.25,0.7,0.44
+urban functional zone,0.48,0.42,0.48,0.1,0.44,0.31,0.28,0.23,0.63,0.37
+urban land use,0.55,0.48,0.55,0.14,0.53,0.35,0.25,0.29,0.62,0.46
+urban poverty,0.39,0.36,0.43,0.15,0.35,0.23,0.38,0.12,0.76,0.26
+functional zone classification,0.4,0.27,0.43,0.05,0.25,0.33,0.24,0.13,0.35,0.29
+urban functional area,0.48,0.43,0.5,0.12,0.47,0.3,0.28,0.21,0.67,0.38
+identify urban poverty,0.45,0.41,0.48,0.21,0.4,0.33,0.38,0.18,0.72,0.31
+poverty,0.26,0.22,0.33,0.17,0.16,0.21,0.37,0.01,0.51,0.15
+urban functional,0.48,0.45,0.48,0.02,0.39,0.27,0.33,0.25,0.71,0.33

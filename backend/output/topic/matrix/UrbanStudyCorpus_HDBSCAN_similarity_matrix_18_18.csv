@@ -1,0 +1,11 @@
+,topic modeling,retail store placement,store placement problem,syntactic,store,leisure,heterogeneous urban data,store placement,business,functional region
+topic modeling,1.0,0.26,0.42,0.14,0.13,0.11,0.36,0.29,0.36,0.29
+retail store placement,0.26,1.0,0.81,-0.01,0.79,0.3,0.31,0.92,0.53,0.21
+store placement problem,0.42,0.81,1.0,0.05,0.69,0.13,0.34,0.88,0.48,0.35
+syntactic,0.14,-0.01,0.05,1.0,-0.06,0.01,0.12,0.05,-0.1,0.13
+store,0.13,0.79,0.69,-0.06,1.0,0.19,0.19,0.78,0.37,0.17
+leisure,0.11,0.3,0.13,0.01,0.19,1.0,0.2,0.17,0.4,0.17
+heterogeneous urban data,0.36,0.31,0.34,0.12,0.19,0.2,1.0,0.24,0.29,0.38
+store placement,0.29,0.92,0.88,0.05,0.78,0.17,0.24,1.0,0.39,0.2
+business,0.36,0.53,0.48,-0.1,0.37,0.4,0.29,0.39,1.0,0.3
+functional region,0.29,0.21,0.35,0.13,0.17,0.17,0.38,0.2,0.3,1.0
