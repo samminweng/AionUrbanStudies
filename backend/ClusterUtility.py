@@ -1,7 +1,7 @@
 import math
 import os
 import re
-
+import logging
 import nltk
 import numpy as np
 from matplotlib import pyplot as plt
@@ -11,8 +11,19 @@ from nltk.util import ngrams
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+import getpass
 import pandas as pd
-
+# Set logging level
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+# Set NLTK data path
+nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
+if os.name == 'nt':
+    nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+# Append NTLK data path
+nltk.data.path.append(nltk_path)
+nltk.download('punkt', download_dir=nltk_path)
+# Download all the necessary NLTK data
+nltk.download('stopwords', download_dir=nltk_path)
 
 # Utility for deriving the topics from each cluster of documents.
 class ClusterUtility:

@@ -15,19 +15,23 @@ from ClusterUtility import ClusterUtility
 from Utility import Utility
 import pickle
 import seaborn as sns  # statistical graph library
+import getpass
 
-logging.basicConfig(level=logging.INFO)
-# nltk_path = os.path.join('/Scratch', 'mweng', 'nltk_data')
-# Windows path
-nltk_path = os.path.join("C:", os.sep, "Users", "sam", "nltk_data")
-Path(nltk_path).mkdir(parents=True, exist_ok=True)
+# Set logging level
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+# Set NLTK data path
+nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
+if os.name == 'nt':
+    nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+# Append NTLK data path
 nltk.data.path.append(nltk_path)
 nltk.download('punkt', download_dir=nltk_path)
 # Download all the necessary NLTK data
 nltk.download('stopwords', download_dir=nltk_path)
-# Sentence Transformer
-# sentence_transformers_path = os.path.join('/Scratch', 'mweng', 'SentenceTransformer')
-sentence_transformers_path = os.path.join("C:", os.sep, "Users", "sam", "SentenceTransformer")
+# Set Sentence Transformer path
+sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
+if os.name == 'nt':
+    sentence_transformers_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "SentenceTransformer")
 Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 

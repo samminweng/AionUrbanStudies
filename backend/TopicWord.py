@@ -10,10 +10,14 @@ import logging
 from nltk.corpus import stopwords
 from TopicWordUtility import TopicWordUtility
 from sklearn.metrics.pairwise import cosine_similarity
-
+import getpass
 # Set logging level
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-nltk_path = os.path.join("C:", os.sep, "Users", "sam", "nltk_data")
+# Set NLTK data path
+nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
+if os.name == 'nt':
+    nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+
 Path(nltk_path).mkdir(parents=True, exist_ok=True)
 nltk.data.path.append(nltk_path)
 nltk.download('punkt', download_dir=nltk_path)
@@ -36,7 +40,7 @@ class TopicWord:
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_topic_words.json")
         df = pd.read_json(path)
         self.clusters = df.to_dict("records")  # Convert to a list of dictionaries
-        self.model = TopicWordUtility.obtain_keyed_vectors(self.args.model_name, is_load=True)
+        self.model = TopicWordUtility.obtain_keyed_vectors(self.args.model_name)
         # self.model = api.load(self.args.model_name)
         # Static variable
         self.stop_words = list(stopwords.words('english'))

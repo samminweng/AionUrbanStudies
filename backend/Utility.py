@@ -8,11 +8,14 @@ from nltk import word_tokenize, sent_tokenize
 from nltk import ngrams
 from nltk.corpus import words, stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
-
-# path = os.path.join('/Scratch', 'mweng', 'nltk_data')  # Specify the path of NLTK data
-nltk_path = os.path.join("C:", os.sep, "Users", "sam", "nltk_data")
-nltk.download('stopwords', download_dir=nltk_path)
+import getpass
+# Set NLTK data path
+nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
+if os.name == 'nt':
+    nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+# Append NTLK data path
 nltk.data.path.append(nltk_path)
+nltk.download('stopwords', download_dir=nltk_path)
 
 
 class Utility:

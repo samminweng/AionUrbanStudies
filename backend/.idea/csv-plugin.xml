@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/UrbanStudyCorpus_HDBSCAN_Cluster_topic_words.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
