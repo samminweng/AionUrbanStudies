@@ -7,6 +7,7 @@ import numpy as np
 from sentence_transformers import util
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 # Helper function for cluster Similarity
 class ClusterSimilarityUtility:
     @staticmethod
@@ -99,7 +100,7 @@ class ClusterSimilarityUtility:
                                          target_docs))
                 # Perform semantic search (cosine similarity) to find top K (30) similar titles in corpus
                 src_vector = model.encode(clean_sentence(src_doc['Title'] + ". " + src_doc['Abstract']))
-                target_vectors = model.encode(target_titles)    # convert_to_tensor=True
+                target_vectors = model.encode(target_titles)  # convert_to_tensor=True
                 hits = util.semantic_search(src_vector, target_vectors, top_k=top_k)[0]
                 # Collect top five similar titles for 'src_title'
                 result = {"DocId": src_doc_id, "Title": src_doc['Title'], "Vector": src_vector.cpu().numpy()}

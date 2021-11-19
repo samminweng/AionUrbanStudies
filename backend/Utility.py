@@ -13,9 +13,10 @@ import getpass
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
 if os.name == 'nt':
     nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+nltk.download('stopwords', download_dir=nltk_path)
 # Append NTLK data path
 nltk.data.path.append(nltk_path)
-nltk.download('stopwords', download_dir=nltk_path)
+
 
 
 class Utility:
