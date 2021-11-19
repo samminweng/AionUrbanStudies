@@ -1,26 +1,14 @@
 import csv
 import os
-import re
-from pathlib import Path
-
-import torch
 from nltk import word_tokenize, sent_tokenize
-from nltk.stem import PorterStemmer
-import gensim.downloader as api
-from gensim.models import KeyedVectors
 import pandas as pd
 import numpy as np
-
 # Load function words
 from sentence_transformers import util
 from sklearn.metrics.pairwise import cosine_similarity
 
-
 # Helper function for cluster Similarity
 class ClusterSimilarityUtility:
-
-
-
     @staticmethod
     def compute_similarity_matrix_topics(cluster_topics1, cluster_topics2):
         c_no_1 = cluster_topics1['cluster_no']
