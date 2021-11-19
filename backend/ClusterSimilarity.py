@@ -30,7 +30,6 @@ class ClusterSimilarity:
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_topic_words.json")
         df = pd.read_json(path)
         self.clusters = df.to_dict("records")  # Convert to a list of dictionaries
-
         # Load the published paper text data
         path = os.path.join('data', self.args.case_name + '.json')
         corpus_doc_df = pd.read_json(path)
@@ -42,8 +41,7 @@ class ClusterSimilarity:
         top_k = 30
         # cluster_no_list = [c_no for c_no in range(0, 23)]
         try:
-            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-                                        device=self.args.device)  # Load sentence transformer model
+            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path)  # Load sentence transformer model
             ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
                                                               top_k=top_k)
             ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
