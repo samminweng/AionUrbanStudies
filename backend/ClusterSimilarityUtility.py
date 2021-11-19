@@ -1,12 +1,22 @@
 import csv
+import getpass
 import os
+
+import nltk
 from nltk import word_tokenize, sent_tokenize
 import pandas as pd
 import numpy as np
 # Load function words
 from sentence_transformers import util
 from sklearn.metrics.pairwise import cosine_similarity
-
+# Set NLTK data path
+nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
+if os.name == 'nt':
+    nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+nltk.download('punkt', download_dir=nltk_path)
+nltk.download('stopwords', download_dir=nltk_path)
+# Append NTLK data path
+nltk.data.path.append(nltk_path)
 
 # Helper function for cluster Similarity
 class ClusterSimilarityUtility:

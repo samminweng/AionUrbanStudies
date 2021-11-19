@@ -23,11 +23,11 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
 if os.name == 'nt':
     nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+# Download all the necessary NLTK data
+nltk.download('punkt', download_dir=nltk_path)
+nltk.download('stopwords', download_dir=nltk_path)
 # Append NTLK data path
 nltk.data.path.append(nltk_path)
-nltk.download('punkt', download_dir=nltk_path)
-# Download all the necessary NLTK data
-nltk.download('stopwords', download_dir=nltk_path)
 # Set Sentence Transformer path
 sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
 if os.name == 'nt':

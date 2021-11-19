@@ -6,13 +6,14 @@ import pandas as pd
 import nltk
 from nltk import word_tokenize, sent_tokenize
 from nltk import ngrams
-from nltk.corpus import words, stopwords
+from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 import getpass
 # Set NLTK data path
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
 if os.name == 'nt':
     nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+nltk.download('punkt', download_dir=nltk_path)
 nltk.download('stopwords', download_dir=nltk_path)
 # Append NTLK data path
 nltk.data.path.append(nltk_path)
