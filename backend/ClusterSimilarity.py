@@ -24,7 +24,7 @@ class ClusterSimilarity:
             approach='HDBSCAN',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
-            device='cuda'
+            device='cpu'
         )
         # Load the cluster results as dataframe
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_topic_words.json")
@@ -41,7 +41,8 @@ class ClusterSimilarity:
         top_k = 30
         # cluster_no_list = [c_no for c_no in range(0, 23)]
         try:
-            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path)  # Load sentence transformer model
+            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                        device=self.args.device)  # Load sentence transformer model
             ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
                                                               top_k=top_k)
             ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)

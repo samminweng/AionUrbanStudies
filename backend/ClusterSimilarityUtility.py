@@ -1,7 +1,6 @@
 import csv
 import getpass
 import os
-
 import nltk
 from nltk import word_tokenize, sent_tokenize
 import pandas as pd
@@ -9,6 +8,7 @@ import numpy as np
 # Load function words
 from sentence_transformers import util
 from sklearn.metrics.pairwise import cosine_similarity
+
 # Set NLTK data path
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
 if os.name == 'nt':
@@ -17,6 +17,7 @@ nltk.download('punkt', download_dir=nltk_path)
 nltk.download('stopwords', download_dir=nltk_path)
 # Append NTLK data path
 nltk.data.path.append(nltk_path)
+
 
 # Helper function for cluster Similarity
 class ClusterSimilarityUtility:
@@ -109,11 +110,12 @@ class ClusterSimilarityUtility:
                 target_titles = list(map(lambda d: clean_sentence(d['Title'] + ". " + d['Abstract']),
                                          target_docs))
                 # Perform semantic search (cosine similarity) to find top K (30) similar titles in corpus
-                src_vector = model.encode(clean_sentence(src_doc['Title'] + ". " + src_doc['Abstract']))
-                target_vectors = model.encode(target_titles)  # convert_to_tensor=True
+                src_vector = model.encode(clean_sentence(src_doc['Title'] + ". " + src_doc['Abstract']),
+                                          convert_to_tensor=True)
+                target_vectors = model.encode(target_titles, convert_to_tensor=True)
                 hits = util.semantic_search(src_vector, target_vectors, top_k=top_k)[0]
                 # Collect top five similar titles for 'src_title'
-                result = {"DocId": src_doc_id, "Title": src_doc['Title'], "Vector": src_vector.cpu().numpy()}
+                result = {"DocId": src_doc_id, "Title": src_doc['Title']}
                 similar_titles = []
                 for hit in hits:
                     t_id = hit['corpus_id']
