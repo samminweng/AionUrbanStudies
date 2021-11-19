@@ -31,7 +31,7 @@ class Utility:
                 try:
                     cleaned_words = word_tokenize(sentence.lower())
                     # Keep alphabetic characters only and remove the punctuation
-                    cleaned_words = list(filter(lambda word: re.match(r'[^\W\d]*$', word), cleaned_words))
+                    # cleaned_words = list(filter(lambda word: re.match(r'[^\W\d]*$', word), cleaned_words))
                     cleaned_sentences.append(" ".join(cleaned_words))  # merge tokenized words into sentence
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
