@@ -138,8 +138,8 @@ class ClusterSimilarityUtility:
         # # Write out the similarity title information
         df = pd.DataFrame(results)
         # # Write to out
-        path = os.path.join('output', 'similarity', 'title',
-                            'UrbanStudyCorpus_HDBSCAN_title_similarity_' + str(cluster_no) + '.json')
+        path = os.path.join('output', 'similarity', 'cluster',
+                            'UrbanStudyCorpus_HDBSCAN_paper_similarity_' + str(cluster_no) + '.json')
         df.to_json(path, orient='records')
         return results
 
@@ -147,8 +147,8 @@ class ClusterSimilarityUtility:
     @staticmethod
     def write_to_title_csv_file(cluster_no, top_k=30):
         # Load
-        path = os.path.join('output', 'similarity', 'title',
-                            'UrbanStudyCorpus_HDBSCAN_title_similarity_' + str(cluster_no) + '.json')
+        path = os.path.join('output', 'similarity', 'cluster',
+                            'UrbanStudyCorpus_HDBSCAN_paper_similarity_' + str(cluster_no) + '.json')
         df = pd.read_json(path)
         results = df.to_dict("records")
         # Sort results by the most similar score from low to high
