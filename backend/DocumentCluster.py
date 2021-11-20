@@ -229,7 +229,8 @@ class DocumentCluster:
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
         cluster_approaches = ['HDBSCAN_Cluster']
         try:
-            # Get the duplicate articles. Note the original Scopus file contain duplicated articles (titles are the same)
+            # Get the duplicate articles.
+            # Note the original Scopus file contain duplicated articles (titles are the same)
             duplicate_doc_ids = ClusterUtility.scan_duplicate_articles()
             print("Duplicated articles in " + self.args.case_name + ":")
             print(*duplicate_doc_ids, sep=", ")

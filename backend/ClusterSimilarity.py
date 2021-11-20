@@ -8,6 +8,8 @@ from ClusterSimilarityUtility import ClusterSimilarityUtility
 import getpass
 
 # Set logging level
+from ClusterUtility import ClusterUtility
+
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 # Set Sentence Transformer path
 sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
@@ -24,7 +26,7 @@ class ClusterSimilarity:
             approach='HDBSCAN',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
-            device='cpu'
+            device='cuda'
         )
         # Load the cluster results as dataframe
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_topic_words.json")
@@ -34,17 +36,20 @@ class ClusterSimilarity:
         path = os.path.join('data', self.args.case_name + '.json')
         corpus_doc_df = pd.read_json(path)
         self.corpus_docs = corpus_doc_df.to_dict("records")
+        duplicate_doc_ids = ClusterUtility.scan_duplicate_articles()
+        # Remove duplicated doc
+        self.corpus_docs = list(filter(lambda d: d['DocId'] not in duplicate_doc_ids, self.corpus_docs))
 
     # Measure the similarity of cluster articles
     def compute_cluster_similarity(self):
-        cluster_no = 15
+        cluster_no = -1
         top_k = 30
         # cluster_no_list = [c_no for c_no in range(0, 23)]
         try:
-            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-                                        device=self.args.device)  # Load sentence transformer model
-            ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
-                                                              top_k=top_k)
+            # model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+            #                             device=self.args.device)  # Load sentence transformer model
+            # ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
+            #                                                   top_k=top_k)
             ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
 
             # Collect all the top N topics (words and vectors)
