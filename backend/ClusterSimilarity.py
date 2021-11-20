@@ -40,16 +40,14 @@ class ClusterSimilarity:
         # Remove duplicated doc
         self.corpus_docs = list(filter(lambda d: d['DocId'] not in duplicate_doc_ids, self.corpus_docs))
 
-    # Measure the similarity of cluster articles
-    def compute_cluster_similarity(self):
-        cluster_no = -1
-        top_k = 30
+    # Find top 30 similar papers for each article in a cluster
+    def find_top_similar_paper_in_corpus(self, cluster_no=-1, top_k=30):
         # cluster_no_list = [c_no for c_no in range(0, 23)]
         try:
-            # model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-            #                             device=self.args.device)  # Load sentence transformer model
-            # ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
-            #                                                   top_k=top_k)
+            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                        device=self.args.device)  # Load sentence transformer model
+            ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
+                                                              top_k=top_k)
             ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
 
             # Collect all the top N topics (words and vectors)
@@ -89,8 +87,7 @@ class ClusterSimilarity:
 # Main entry
 if __name__ == '__main__':
     tw = ClusterSimilarity()
-    # tw.compute_topic_vectors_and_similar_words(cluster_no=15)
-    tw.compute_cluster_similarity()
+    tw.find_top_similar_paper_in_corpus()
     # Test the similarity function
     # TopicWordUtility.compute_similarity_by_words('land cover', 'land use', tw.model)
 # #
