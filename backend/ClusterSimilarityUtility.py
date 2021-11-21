@@ -110,28 +110,28 @@ class ClusterSimilarityUtility:
                 src_doc_id = src_doc['DocId']
                 # Get the all the docs except for 'src' doc id
                 target_docs = list(filter(lambda d: d['DocId'] != src_doc_id, corpus_docs))
-                target_titles = list(map(lambda d: clean_sentence(d['Title'] + ". " + d['Abstract']),
+                target_texts = list(map(lambda d: clean_sentence(d['Title'] + ". " + d['Abstract']),
                                          target_docs))
                 # Perform semantic search (cosine similarity) to find top K (30) similar titles in corpus
                 src_vector = model.encode(clean_sentence(src_doc['Title'] + ". " + src_doc['Abstract']),
                                           convert_to_tensor=True)
-                target_vectors = model.encode(target_titles, convert_to_tensor=True)
+                target_vectors = model.encode(target_texts, convert_to_tensor=True)
                 hits = util.semantic_search(src_vector, target_vectors, top_k=top_k)[0]
                 # Collect top five similar titles for 'src_title'
                 result = {"DocId": src_doc_id, "Title": src_doc['Title']}
-                similar_titles = []
+                similar_papers = []
                 for hit in hits:
                     t_id = hit['corpus_id']
                     target_doc = target_docs[t_id]
                     score = hit['score']
                     target_doc_id = target_doc["DocId"]
-                    similar_titles.append({
+                    similar_papers.append({
                         'DocId': target_doc_id,
                         'Cluster': get_cluster_no_doc(target_doc_id, clusters),
                         'Title': target_doc['Title'],
                         'Score': round(score, 2)
                     })
-                result['Similar_Titles'] = similar_titles
+                result['Similar_Papers'] = similar_papers
                 results.append(result)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
@@ -146,20 +146,24 @@ class ClusterSimilarityUtility:
     # Write the results to a csv file
     @staticmethod
     def write_to_title_csv_file(cluster_no, top_k=30):
+        # # Get the most occurring clusters
+        # def get_most_occurring_cluster():
+
+
         # Load
         path = os.path.join('output', 'similarity', 'cluster',
                             'UrbanStudyCorpus_HDBSCAN_paper_similarity_' + str(cluster_no) + '.json')
         df = pd.read_json(path)
         results = df.to_dict("records")
         # Sort results by the most similar score from low to high
-        sorted_results = sorted(results, key=lambda r: r['Similar_Titles'][0]['Score'])
-        out_path = os.path.join('output', 'similarity', 'title',
+        sorted_results = sorted(results, key=lambda r: r['Similar_Papers'][0]['Score'])
+        out_path = os.path.join('output', 'similarity', 'cluster',
                                 'UrbanStudyCorpus_HDBSCAN_similar_titles_' + str(cluster_no) + '_short.csv')
         # Specify utf-8 as encoding
         # csv_file = open(out_path, "w", newline='', encoding='utf-8')
         # rows = list()
         cluster_no_set = set()
-        top_similar_titles = []
+        top_similar_papers = []
         # Header
         for item in sorted_results:
             top_st = item['Similar_Titles'][0]
@@ -170,25 +174,28 @@ class ClusterSimilarityUtility:
             similar_cluster_no = top_st['Cluster']
             similar_title = top_st['Title']
             cluster_no_set.add(similar_cluster_no)
-            top_similar_titles.append({
+            top_similar_papers.append({
                             'doc_id': doc_id, 'title': title,
                             'score': score, 'cluster': similar_cluster_no,
                             'similar_doc_id': similar_doc_id,
                             'similar_title': similar_title})
         # Write the summary
-        df = pd.DataFrame(top_similar_titles)
+        df = pd.DataFrame(top_similar_papers)
         df.to_csv(out_path, index=False, encoding='utf-8')
         # Display the cluster no list
         cluster_no_list = list(cluster_no_set)
         cluster_no_list.sort()
         print(cluster_no_list)
-            # rows.append([doc_id, title, score, similar_cluster_no,
-            #              similar_doc_id, similar_title])
-            # for _i in range(1, top_k):
-            #     st = item['Similar_Titles'][_i]
-            #     rows.append(["", "", "{:.2f}".format(st['Score']), st['Cluster'], st['DocId'], st['Title']])
-            # Add blank row
-            # rows.append([])
+
+
+
+        # rows.append([doc_id, title, score, similar_cluster_no,
+        #              similar_doc_id, similar_title])
+        # for _i in range(1, top_k):
+        #     st = item['Similar_Titles'][_i]
+        #     rows.append(["", "", "{:.2f}".format(st['Score']), st['Cluster'], st['DocId'], st['Title']])
+        # Add blank row
+        # rows.append([])
         # # Write row to csv_file
         # writer = csv.writer(csv_file)
         # for row in rows:
