@@ -111,7 +111,7 @@ class ClusterSimilarityUtility:
                 # Get the all the docs except for 'src' doc id
                 target_docs = list(filter(lambda d: d['DocId'] != src_doc_id, corpus_docs))
                 target_texts = list(map(lambda d: clean_sentence(d['Title'] + ". " + d['Abstract']),
-                                         target_docs))
+                                        target_docs))
                 # Perform semantic search (cosine similarity) to find top K (30) similar titles in corpus
                 src_vector = model.encode(clean_sentence(src_doc['Title'] + ". " + src_doc['Abstract']),
                                           convert_to_tensor=True)
@@ -147,8 +147,22 @@ class ClusterSimilarityUtility:
     @staticmethod
     def write_to_title_csv_file(cluster_no, top_k=30):
         # # Get the most occurring clusters
-        # def get_most_occurring_cluster():
-
+        def get_most_occurring_cluster(_similar_papers):
+            _cluster_occ = list()
+            for _similar_paper in _similar_papers:
+                _c_no = _similar_paper['Cluster']
+                _doc_id = _similar_paper['DocId']
+                _c_occ = list(filter(lambda _occ: _occ['Cluster'] == _c_no, _cluster_occ))
+                if len(_c_occ) == 0:
+                    _doc_ids = list()
+                    _doc_ids.append(_doc_id)
+                    _cluster_occ.append({'Cluster': _c_no, "DocIds": _doc_ids})
+                else:
+                    _occ = _c_occ[0]
+                    _occ['DocIds'].append(_doc_id)
+            # Sort cluster occ by the number
+            _sorted_cluster_occ = sorted(_cluster_occ, key=lambda _occ: len(_occ['DocIds']), reverse=True)
+            return _sorted_cluster_occ
 
         # Load
         path = os.path.join('output', 'similarity', 'cluster',
@@ -157,50 +171,52 @@ class ClusterSimilarityUtility:
         results = df.to_dict("records")
         # Sort results by the most similar score from low to high
         sorted_results = sorted(results, key=lambda r: r['Similar_Papers'][0]['Score'])
-        out_path = os.path.join('output', 'similarity', 'cluster',
-                                'UrbanStudyCorpus_HDBSCAN_similar_titles_' + str(cluster_no) + '_short.csv')
         # Specify utf-8 as encoding
         # csv_file = open(out_path, "w", newline='', encoding='utf-8')
         # rows = list()
-        cluster_no_set = set()
+        # cluster_no_set = set()
         top_similar_papers = []
         # Header
         for item in sorted_results:
-            top_st = item['Similar_Titles'][0]
+            top_st = item['Similar_Papers'][0]
             doc_id = item['DocId']
             title = item['Title']
             score = "{:.2f}".format(top_st['Score'])
             similar_doc_id = top_st['DocId']
             similar_cluster_no = top_st['Cluster']
             similar_title = top_st['Title']
-            cluster_no_set.add(similar_cluster_no)
-            top_similar_papers.append({
-                            'doc_id': doc_id, 'title': title,
-                            'score': score, 'cluster': similar_cluster_no,
-                            'similar_doc_id': similar_doc_id,
-                            'similar_title': similar_title})
-        # Write the summary
+            # cluster_no_set.add(similar_cluster_no)
+            cluster_occ = get_most_occurring_cluster(item['Similar_Papers'])
+            assert len(cluster_occ) >= 3
+            result = {
+                'doc_id': doc_id, 'title': title,
+                'score': score, 'cluster': "#" + str(similar_cluster_no),
+                'similar_doc_id': similar_doc_id,
+                'similar_title': similar_title,
+                'top1_occ_cluster': "#" + str(cluster_occ[0]['Cluster']), 'top1_count': len(cluster_occ[0]['DocIds']),
+                'top2_occ_cluster': "#" + str(cluster_occ[1]['Cluster']), 'top2_count': len(cluster_occ[1]['DocIds']),
+                'top3_occ_cluster': "#" + str(cluster_occ[2]['Cluster']), 'top3_count': len(cluster_occ[2]['DocIds'])}
+            top_similar_papers.append(result)
+            # Write the summary
         df = pd.DataFrame(top_similar_papers)
+        out_path = os.path.join('output', 'similarity',
+                                'UrbanStudyCorpus_HDBSCAN_similar_papers_' + str(cluster_no) + '_short.csv')
         df.to_csv(out_path, index=False, encoding='utf-8')
-        # Display the cluster no list
-        cluster_no_list = list(cluster_no_set)
-        cluster_no_list.sort()
-        print(cluster_no_list)
+        # # Display the cluster no list
+        # cluster_no_list = list(cluster_no_set)
+        # cluster_no_list.sort()
+        # print(cluster_no_list)
 
-
-
-        # rows.append([doc_id, title, score, similar_cluster_no,
-        #              similar_doc_id, similar_title])
-        # for _i in range(1, top_k):
-        #     st = item['Similar_Titles'][_i]
-        #     rows.append(["", "", "{:.2f}".format(st['Score']), st['Cluster'], st['DocId'], st['Title']])
-        # Add blank row
-        # rows.append([])
-        # # Write row to csv_file
-        # writer = csv.writer(csv_file)
-        # for row in rows:
-        #     writer.writerow(row)
-        # csv_file.close()
-        # Give a summary
-
-
+            # rows.append([doc_id, title, score, similar_cluster_no,
+            #              similar_doc_id, similar_title])
+            # for _i in range(1, top_k):
+            #     st = item['Similar_Titles'][_i]
+            #     rows.append(["", "", "{:.2f}".format(st['Score']), st['Cluster'], st['DocId'], st['Title']])
+            # Add blank row
+            # rows.append([])
+            # # Write row to csv_file
+            # writer = csv.writer(csv_file)
+            # for row in rows:
+            #     writer.writerow(row)
+            # csv_file.close()
+            # Give a summary
