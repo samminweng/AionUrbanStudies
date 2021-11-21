@@ -187,6 +187,7 @@ class ClusterSimilarityUtility:
             similar_title = top_st['Title']
             # cluster_no_set.add(similar_cluster_no)
             cluster_occ = get_most_occurring_cluster(item['Similar_Papers'])
+            is_match = bool(similar_cluster_no == cluster_occ[0]['Cluster'])
             assert len(cluster_occ) >= 3
             result = {
                 'doc_id': doc_id, 'title': title,
@@ -195,7 +196,8 @@ class ClusterSimilarityUtility:
                 'similar_title': similar_title,
                 'top1_occ_cluster': "#" + str(cluster_occ[0]['Cluster']), 'top1_count': len(cluster_occ[0]['DocIds']),
                 'top2_occ_cluster': "#" + str(cluster_occ[1]['Cluster']), 'top2_count': len(cluster_occ[1]['DocIds']),
-                'top3_occ_cluster': "#" + str(cluster_occ[2]['Cluster']), 'top3_count': len(cluster_occ[2]['DocIds'])}
+                'top3_occ_cluster': "#" + str(cluster_occ[2]['Cluster']), 'top3_count': len(cluster_occ[2]['DocIds']),
+                'is_match': is_match}
             top_similar_papers.append(result)
             # Write the summary
         df = pd.DataFrame(top_similar_papers)

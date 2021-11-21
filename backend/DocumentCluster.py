@@ -107,7 +107,7 @@ class DocumentCluster:
                         protocol=pickle.HIGHEST_PROTOCOL)
 
     # Get the sentence embedding and cluster doc by hdbscan (https://hdbscan.readthedocs.io/en/latest/index.html)
-    def cluster_doc_by_hdbscan(self, is_graph=False, min_cluster_size=10, min_samples=1,
+    def cluster_doc_by_hdbscan(self, is_graph=False, min_cluster_size=10, min_samples=3,
                                cluster_selection_epsilon=0.0,
                                cluster_selection_method='eom'):
         try:
@@ -161,7 +161,7 @@ class DocumentCluster:
             # sum_of_squared_distances = []  # Hold the SSE value for each K value
             # We use the k-means clustering technique to group 600 documents into 5 groups
             # random_state is the random seed
-            num_cluster = 15
+            num_cluster = 11
             # for num_cluster in range(1, 150):
             clusters = KMeans(n_clusters=num_cluster, random_state=42).fit(self.clusterable_embedding)
             self.cluster_df['KMeans_Cluster'] = clusters.labels_
@@ -294,14 +294,14 @@ class DocumentCluster:
 # Main entry
 if __name__ == '__main__':
     docCluster = DocumentCluster()
-    # # docCluster.get_sentence_embedding()
+    docCluster.get_sentence_embedding()
     # docCluster.cluster_doc_by_hdbscan(is_graph=True)
     # docCluster.cluster_doc_by_KMeans()
-    # TopicUtility.visualise_cluster_results()
+    # ClusterUtility.visualise_cluster_results()
     # # # docCluster.collect_tf_idf_terms_by_cluster()
     # docCluster.derive_topic_words_from_cluster_docs()
     # # Output top 50 topics by 1, 2 and 3-grams
-    ClusterUtility.flatten_topics('HDBSCAN', 15)  # topics in Cluster 15
-    ClusterUtility.flatten_topics('HDBSCAN', 16)  # topics in Cluster 16
-    ClusterUtility.flatten_topics('HDBSCAN', 12)  # topics in Cluster 12
+    # ClusterUtility.flatten_topics('HDBSCAN', 15)  # topics in Cluster 15
+    # ClusterUtility.flatten_topics('HDBSCAN', 16)  # topics in Cluster 16
+    # ClusterUtility.flatten_topics('HDBSCAN', 12)  # topics in Cluster 12
 
