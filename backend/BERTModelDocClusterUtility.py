@@ -6,13 +6,13 @@ import nltk
 import numpy as np
 from matplotlib import pyplot as plt
 from nltk import BigramCollocationFinder
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from nltk.util import ngrams
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import getpass
 import pandas as pd
+import plotly.express as px
 
 # Set logging level
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -82,13 +82,13 @@ class BERTModelDocClusterUtility:
             print("Error occurred! {err}".format(err=err))
 
     @staticmethod
-    def visualise_cluster_results():
+    def visualise_cluster_results_by_methods():
         plt.style.use('bmh')  # Use black white background
         _path = os.path.join(BERTModelDocClusterUtility.output_path,
                              BERTModelDocClusterUtility.case_name + '_clusters.json')
         cluster_result_df = pd.read_json(_path)
         fig, (ax0, ax1, ax2) = plt.subplots(1, 3)
-        # # Visualise KMeans
+        # # Visualise
         clusters = cluster_result_df.loc[cluster_result_df['KMeans_Cluster'] != -1, :]
         ax0.scatter(clusters.x, clusters.y, c=clusters['KMeans_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
         ax0.set_title('KMeans')
@@ -108,34 +108,37 @@ class BERTModelDocClusterUtility:
         fig.savefig(_path, dpi=600)
         print("Output image to " + _path)
 
+    # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
-    def derive_bag_of_words(doc_ids, doc_texts):
-        try:
-            vec = CountVectorizer(stop_words=BERTModelDocClusterUtility.stop_words)
-            bag_of_words = vec.fit_transform(doc_texts)  # Return a bag of words
-            # A bag of words is a matrix. Each row is the document. Each column is a word in vocabulary
-            # bag_of_words[i, j] is the occurrence of word 'i' in the document 'j'
-            bag_of_words_df = pd.DataFrame(bag_of_words.toarray(), columns=vec.get_feature_names())
-            bag_of_words_df['doc_id'] = doc_ids
-            # print(counts)
-            words_freq = []
-            # We go through the vocabulary of bag of words where index is the word at bag of words
-            for word, index in vec.vocabulary_.items():
-                # Collect all the doc ids that contains the words
-                selected_rows = bag_of_words_df[bag_of_words_df[word] > 0]
-                # Aggregate doc_ids to a list
-                word_doc_ids = list()
-                for i, row in selected_rows.iterrows():
-                    word_doc_ids.append(row['doc_id'])
-                words_freq.append({'topic_words': word, 'doc_ids': word_doc_ids, 'score': len(word_doc_ids)})
-            # filter the number of words < 5
-            filter_words_freq = list(filter(lambda w: w['score'] >= 5, words_freq))
-            # Sort the words_freq by score
-            sorted_words_freq = sorted(filter_words_freq, key=lambda w: w['score'], reverse=True)
+    def visualise_cluster_results_by_cluster_number(cno_list):
 
-            return sorted_words_freq
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
+        for i, c_no in enumerate(cno_list):
+            try:
+                # Load clustering results
+                _path = os.path.join('output', 'cluster', 'experiments', 'HDBSCAN_cluster_num_' + str(c_no) + '.csv')
+                cluster_result_df = pd.read_csv(_path)
+                # Visualise HDBSCAN clustering results using dot chart
+                cluster_df = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] != -1, :]
+                cluster_list = cluster_df.to_dict("records")
+                # Sort the
+                cluster_list = sorted(cluster_list, key=lambda c: c['HDBSCAN_Cluster'])
+                df = pd.DataFrame(cluster_list, columns=['x', 'y', 'HDBSCAN_Cluster'])
+                df["HDBSCAN_Cluster"] = df["HDBSCAN_Cluster"].astype(str)   # Convert the cluster as a string
+                fig = px.scatter(df, y="y", x="x", color="HDBSCAN_Cluster", symbol="HDBSCAN_Cluster",
+                                 width=600, height=800)
+                fig.update_traces(mode='markers', marker=dict(line_width=1, symbol='circle', size=5))
+                fig.update_layout(title="Cluster " + str(c_no),
+                                  legend=dict(
+                                      yanchor="top",
+                                      y=0.99,
+                                      x=-0.3),
+                                  margin=dict(l=20, r=20, t=30, b=20),
+                                  paper_bgcolor="LightSteelBlue",
+                                  )
+                fig.show()
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
+
 
     @staticmethod
     def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):

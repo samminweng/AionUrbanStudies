@@ -12,7 +12,6 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from pathlib import Path
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
-from Utility import Utility
 import pickle
 import seaborn as sns  # statistical graph library
 import getpass
@@ -82,6 +81,21 @@ class BERTModelDocCluster:
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
     def get_sentence_embedding(self):
+        def clean_sentence(_sentences):
+            # Preprocess the sentence
+            cleaned_sentences = list()  # Skip copy right sentence
+            for sentence in _sentences:
+                if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
+                        and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
+                    try:
+                        cleaned_words = word_tokenize(sentence.lower())
+                        # Keep alphabetic characters only and remove the punctuation
+                        # cleaned_words = list(filter(lambda word: re.match(r'[^\W\d]*$', word), cleaned_words))
+                        cleaned_sentences.append(" ".join(cleaned_words))  # merge tokenized words into sentence
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+            return cleaned_sentences
+
         # Create the topic path for visualisation
         path = os.path.join('data', self.args.case_name + '.csv')
         text_df = pd.read_csv(path)
@@ -90,7 +104,7 @@ class BERTModelDocCluster:
         for i, text in text_df.iterrows():
             try:
                 sentences = sent_tokenize(text['Title'] + ". " + text['Abstract'])
-                sentences = Utility.clean_sentence(sentences)  # Clean the sentences
+                sentences = clean_sentence(sentences)  # Clean the sentences
                 document = " ".join(sentences)
                 documents.append({"DocId": text['DocId'], "document": document})
             except Exception as err:
@@ -131,10 +145,10 @@ class BERTModelDocCluster:
                           "outliers": len(outliers)
                           }
             print(parameters)
+            # Save HDBSCAN cluster to 'temp' folder
+            _path = os.path.join(self.output_path, 'temp', 'HDBSCAN_cluster_num_' + str(cluster_number) + '.csv')
+            self.cluster_df.to_csv(_path, encoding='utf-8', index=False)
             if is_graph:
-                # Save HDBSCAN cluster to 'temp' folder
-                path = os.path.join(self.output_path, 'temp', self.args.case_name + '_clusters.csv')
-                self.cluster_df.to_csv(path, encoding='utf-8', index=False)
                 # Output condense tree
                 condense_tree = clusters.condensed_tree_
                 # Save condense tree to csv
@@ -180,53 +194,8 @@ class BERTModelDocCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Collect the tf-idf terms for each article in a cluster
-    # Note the TF-IDF terms are computed based on all the articles in a cluster, not the entire corpus
-    def collect_tf_idf_terms_by_cluster(self):
-        # Read corpus df
-        corpus_df = pd.read_json(os.path.join('data', self.args.case_name + ".json"))
-        cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
-        try:
-            path = os.path.join(self.output_path, self.args.case_name + '_clusters.json')
-            # Load the document cluster
-            doc_clusters_df = pd.read_json(path)
-            # Update text column
-            doc_clusters_df['Text'] = self.cluster_df['Text']
-            # Cluster the texts by cluster id
-            for cluster_approach in cluster_approaches:
-                # Group the documents and doc_id by clusters
-                docs_per_cluster = doc_clusters_df.groupby([cluster_approach], as_index=False).agg(
-                    {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
-                results = []
-                for i, cluster in docs_per_cluster.iterrows():
-                    try:
-                        doc_ids = cluster['DocId']
-                        doc_text = cluster['Text']
-                        key_terms = BERTModelDocClusterUtility.extract_terms_by_TFIDF(doc_ids, doc_text)
-                        results.extend(key_terms)
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
-                # Sort the results by doc_id
-                sorted_results = sorted(results, key=lambda item: item['doc_id'])
-                cluster_key_terms = list(map(lambda r: r['key_terms'], sorted_results))
-                corpus_df[cluster_approach + "_KeyTerms"] = cluster_key_terms
-            # Write the result to csv and json file
-            update_corpus_df = corpus_df.reindex(columns=['DocId', 'Year', 'Title', 'Abstract', 'Author Keywords',
-                                                          'Authors', 'Cited by', 'DOI', 'Link',
-                                                          'KMeans_Cluster_KeyTerms',
-                                                          'HDBSCAN_Cluster_KeyTerms'])
-            path = os.path.join(self.output_path, self.args.case_name + '_doc_terms.csv')
-            update_corpus_df.to_csv(path, encoding='utf-8', index=False)
-            # # # Write to a json file
-            path = os.path.join(self.output_path, self.args.case_name + '_doc_terms.json')
-            update_corpus_df.to_json(path, orient='records')
-            print('Output keywords/phrases to ' + path)
-
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
     # Derive the topic words from each cluster of documents
-    def derive_topic_words_from_cluster_docs(self):
+    def derive_topics_from_cluster_docs_by_TF_IDF(self):
         # cluster_approaches = ['KMeans_Cluster', 'HDBSCAN_Cluster']
         cluster_approaches = ['HDBSCAN_Cluster']
         try:
@@ -297,11 +266,10 @@ class BERTModelDocCluster:
 if __name__ == '__main__':
     mdc = BERTModelDocCluster()
     # mdc.get_sentence_embedding()
-    mdc.cluster_doc_by_hdbscan(is_graph=False)
-    mdc.cluster_doc_by_KMeans()
-    BERTModelDocClusterUtility.visualise_cluster_results()
-    # # # docCluster.collect_tf_idf_terms_by_cluster()
-    # docCluster.derive_topic_words_from_cluster_docs()
+    # mdc.cluster_doc_by_hdbscan(is_graph=False)
+    # mdc.cluster_doc_by_KMeans()
+    BERTModelDocClusterUtility.visualise_cluster_results_by_cluster_number([21])
+    # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
     # # Output top 50 topics by 1, 2 and 3-grams
     # ClusterUtility.flatten_topics('HDBSCAN', 15)  # topics in Cluster 15
     # ClusterUtility.flatten_topics('HDBSCAN', 16)  # topics in Cluster 16

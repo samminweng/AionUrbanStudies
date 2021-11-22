@@ -1,3 +1,4 @@
+import getpass
 import json
 import os.path
 from argparse import Namespace
@@ -8,14 +9,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from Utility import Utility
 import nltk
 
-path = os.path.join('/Scratch', 'mweng', 'nltk_data')  # Specify the path of NLTK data
+# Set NLTK data path
+nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
+if os.name == 'nt':
+    nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+nltk.data.path.append(nltk_path)
 # Download all the necessary NLTK data
-nltk.download('stopwords', download_dir=path)
-nltk.download('punkt', download_dir=path)
-nltk.download('wordnet', download_dir=path)
-nltk.download('averaged_perceptron_tagger', download_dir=path)
-nltk.download('words', download_dir=path)
-nltk.data.path.append(path)
+
 
 
 class TermGenerator:
