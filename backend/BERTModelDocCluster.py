@@ -264,7 +264,36 @@ class BERTModelDocCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-
+    # Combine TF-IDF and BERT key phrase extraction Topics into a single file
+    def combine_topics_from_clusters(self):
+        cluster_approach = 'HDBSCAN_Cluster'
+        try:
+            _path = os.path.join(self.output_path, 'topics',
+                                 self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
+            tf_idf_df = pd.read_json(_path)
+            tf_ids_dict = tf_idf_df.to_dict("records")
+            results = list()
+            for topic in tf_ids_dict:
+                result = {
+                    'Cluster': topic['Cluster'],
+                    'NumDocs': topic['NumDocs'],
+                    'DocIds': topic['DocIds'],
+                    'TF-IDF-Topics': topic['Topic-N-gram']
+                }
+                results.append(result)
+            # Write out to csv and json file
+            cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
+                                                        'TF-IDF-Topics'])
+            _path = os.path.join(self.output_path,
+                                 self.args.case_name + '_' + cluster_approach + '_topic_words.csv')
+            cluster_df.to_csv(_path, encoding='utf-8', index=False)
+            # # # Write to a json file
+            _path = os.path.join(self.output_path,
+                                 self.args.case_name + '_' + cluster_approach + '_topic_words.json')
+            cluster_df.to_json(_path, orient='records')
+            print('Output topics per cluster to ' + _path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 # Main entry
 if __name__ == '__main__':
     mdc = BERTModelDocCluster()
@@ -273,6 +302,7 @@ if __name__ == '__main__':
     # mdc.cluster_doc_by_KMeans()
     # BERTModelDocClusterUtility.visualise_cluster_results_by_methods()
     # BERTModelDocClusterUtility.visualise_cluster_results_by_cluster_number(9)
-    mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+    # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+    mdc.combine_topics_from_clusters()
 
 

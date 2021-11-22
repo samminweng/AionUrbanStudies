@@ -20,7 +20,7 @@
 <body>
 <div class="container">
     <div class="h4">Cluster Dot Chart</div>
-    <div>600 urban study-related research articles are grouped into 22  clusters (97 articles as outliers) using
+    <div>600 urban study-related research articles are grouped into 10 clusters (57 articles as outliers) using
         BERT-based Sentence Transformer + HDBSCAN clustering
         + TF-IDF topic extraction, which is similar to
         <a target="_blank" href="https://maartengr.github.io/BERTopic/">BERTopic approach</a>
@@ -39,9 +39,8 @@
             <div class="row p-3">
                 <div class="col align-text-bottom">
                     <label for="cluster_approach">Select</label>
-                    <select name="cluster_approach" id="cluster_approach">
-                        <option value="KMeans">KMeans Clustering</option>
-                        <option value="HDBSCAN" selected="selected">HDBSCAN Clustering</option>
+                    <select name="key_extraction" id="cluster_approach">
+                        <option value="TF-IDF" selected="selected">TF-IDF</option>
                     </select>
                 </div>
                 <div class="col align-text-bottom" id="outlier-col">

@@ -1,6 +1,7 @@
 function ClusterDocList(cluster, doc_data) {
     const cluster_no = cluster['Cluster'];
-    const cluster_topics = cluster['TopicN-gram'].slice(0, 30);
+    const key_extraction = 'TF-IDF';
+    const cluster_topics = cluster[key_extraction + '-Topics'].slice(0, 30);
     const cluster_docs = doc_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
     const cluster_link = $('<a target="_blank" href="cluster_topic_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
 

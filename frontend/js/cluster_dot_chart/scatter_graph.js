@@ -1,22 +1,18 @@
 // Create scatter graph
-function ScatterGraph(is_hide, approach, cluster_chart_data, cluster_topics, doc_data) {
+function ScatterGraph(is_hide, cluster_chart_data, cluster_topics, doc_data) {
     const width = 600;
     const height = 500;
+    const cluster_approach = 'HDBSCAN';
+    const key_extraction = 'TF-IDF';
     // Find the maximal cluster number as total number of clusters
-    const total_clusters = cluster_chart_data.map(c => c[approach + '_Cluster']).reduce((p_value, c_value) => {
+    const total_clusters = cluster_chart_data.map(c => c[cluster_approach + '_Cluster']).reduce((p_value, c_value) => {
         return (p_value >= c_value) ? p_value : c_value;
     }, 0);
-    const clusters = cluster_topics[approach];
+    const clusters = cluster_topics;
 
     // Get the color of collocation
     const colors = function (cluster_no) {
-        // Optimal color pallets for 23 clusters
-        // ref: http://vrl.cs.brown.edu/color
-        // const color_plates = ["rgb(104,175,252)", "rgb(79,40,175)", "rgb(153,109,219)", "rgb(47,66,133)", "rgb(62,234,239)",
-        //     "rgb(37,115,139)", "rgb(179,228,103)", "rgb(39,122,53)", "rgb(103,240,89)", "rgb(117,72,25)",
-        //     "rgb(252,206,106)", "rgb(179,65,108)", "rgb(196,145,150)", "rgb(192,0,24)", "rgb(254,133,173)",
-        //     "rgb(248,35,135)", "rgb(254,143,6)", "rgb(169,190,175)", "rgb(178,139,40)", "rgb(239,102,240)",
-        //     "#1e90ff", "#db7093", "#b0e0e6"];
+        // Optimal color pallets for 10 colors
         const color_plates = d3.schemeCategory10;
         return (cluster_no < 0) ? "gray" : color_plates[cluster_no];
     }
@@ -28,7 +24,7 @@ function ScatterGraph(is_hide, approach, cluster_chart_data, cluster_topics, doc
     // Get top N topics of a cluster
     function get_cluster_topics(cluster_no, n) {
         // Cluster top 5 topics
-        const topics = clusters.find(c => c['Cluster'] === cluster_no)['TopicN-gram'].slice(0, n);
+        const topics = clusters.find(c => c['Cluster'] === cluster_no)[key_extraction + '-Topics'].slice(0, n);
         return topics;
     }
 
@@ -39,7 +35,7 @@ function ScatterGraph(is_hide, approach, cluster_chart_data, cluster_topics, doc
         const initial_cluster = (is_hide) ? 0 : -1;
         // Convert the clustered data into the format for Plotly js chart
         for (let cluster_no = initial_cluster; cluster_no <= total_clusters; cluster_no++) {
-            const cluster_data = cluster_chart_data.filter(d => d[approach + '_Cluster'] === cluster_no);
+            const cluster_data = cluster_chart_data.filter(d => d[cluster_approach + '_Cluster'] === cluster_no);
             if (cluster_data.length > 0) {
                 let data_point = {'x': [], 'y': [], 'label': []};
                 for (const dot of cluster_data) {
