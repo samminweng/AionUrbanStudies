@@ -32,15 +32,8 @@ class BERTModelDocClusterUtility:
     case_name = 'UrbanStudyCorpus'
     # Static variable
     stop_words = list(stopwords.words('english'))
-    # Load function words
-    _df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
-    function_words = _df['Function Word'].tolist()
-    # Image path
-    image_path = os.path.join('images', 'cluster')
     # Output path
     output_path = os.path.join('output', 'cluster')
-    # TF-IDF Term path
-    term_path = os.path.join('output', 'term')
     # Load the lemma.n file to store the mapping of singular to plural nouns
     lemma_nouns = {}
     path = os.path.join('data', 'lemma.n')
@@ -76,7 +69,7 @@ class BERTModelDocClusterUtility:
             ax.scatter(20, round(sse_values[20]), marker="x")
             # plt.grid(True)
             fig.show()
-            path = os.path.join(BERTModelDocClusterUtility.image_path, "elbow_curve.png")
+            path = os.path.join('images', "elbow_curve.png")
             fig.savefig(path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -102,47 +95,47 @@ class BERTModelDocClusterUtility:
         # # Visualise clustered dots using HDBScan
         ax2.scatter(clusters.x, clusters.y, c=clusters['HDBSCAN_Cluster'], linewidth=0, s=5.0, cmap='Spectral')
         ax2.set_title('HDBSCAN')
-        _path = os.path.join(BERTModelDocClusterUtility.image_path, "cluster_" + str(max_cluster_number) + "_outlier_"
-                             + str(len(outliers)) + ".png")
+        _path = os.path.join('images', "cluster_" + str(max_cluster_number) + "_outlier_" + str(len(outliers)) + ".png")
         fig.set_size_inches(10, 5)
         fig.savefig(_path, dpi=600)
         print("Output image to " + _path)
 
     # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
-    def visualise_cluster_results_by_cluster_number(cno_list):
+    def visualise_cluster_results_by_cluster_number(c_no):
+        try:
+            # Load clustering results
+            _path = os.path.join('output', 'cluster', 'experiments', 'HDBSCAN_cluster_num_' + str(c_no) + '.csv')
+            cluster_result_df = pd.read_csv(_path)
+            # Visualise HDBSCAN clustering results using dot chart
+            cluster_df = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] != -1, :]
+            cluster_list = cluster_df.to_dict("records")
+            # Sort the
+            cluster_list = sorted(cluster_list, key=lambda c: c['HDBSCAN_Cluster'])
+            df = pd.DataFrame(cluster_list, columns=['x', 'y', 'HDBSCAN_Cluster'])
+            df["HDBSCAN_Cluster"] = df["HDBSCAN_Cluster"].astype(str)  # Convert the cluster as a string
+            fig = px.scatter(df, y="y", x="x", color="HDBSCAN_Cluster", symbol="HDBSCAN_Cluster",
+                             width=600, height=800)
+            fig.update_traces(mode='markers', marker=dict(line_width=1, symbol='circle', size=5))
+            fig.update_layout(title="Cluster " + str(c_no),
+                              legend=dict(
+                                  yanchor="top",
+                                  y=0.99,
+                                  x=-0.3),
+                              margin=dict(l=20, r=20, t=30, b=20),
+                              paper_bgcolor="LightSteelBlue",
+                              )
+            fig.show()
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
-        for i, c_no in enumerate(cno_list):
-            try:
-                # Load clustering results
-                _path = os.path.join('output', 'cluster', 'experiments', 'HDBSCAN_cluster_num_' + str(c_no) + '.csv')
-                cluster_result_df = pd.read_csv(_path)
-                # Visualise HDBSCAN clustering results using dot chart
-                cluster_df = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] != -1, :]
-                cluster_list = cluster_df.to_dict("records")
-                # Sort the
-                cluster_list = sorted(cluster_list, key=lambda c: c['HDBSCAN_Cluster'])
-                df = pd.DataFrame(cluster_list, columns=['x', 'y', 'HDBSCAN_Cluster'])
-                df["HDBSCAN_Cluster"] = df["HDBSCAN_Cluster"].astype(str)   # Convert the cluster as a string
-                fig = px.scatter(df, y="y", x="x", color="HDBSCAN_Cluster", symbol="HDBSCAN_Cluster",
-                                 width=600, height=800)
-                fig.update_traces(mode='markers', marker=dict(line_width=1, symbol='circle', size=5))
-                fig.update_layout(title="Cluster " + str(c_no),
-                                  legend=dict(
-                                      yanchor="top",
-                                      y=0.99,
-                                      x=-0.3),
-                                  margin=dict(l=20, r=20, t=30, b=20),
-                                  paper_bgcolor="LightSteelBlue",
-                                  )
-                fig.show()
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-
-
+    # Use collection 'PMI' 'Chi-test' or 'likelihood' to obtain the topics from the texts
     @staticmethod
     def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):
         try:
+            # Load function words
+            _df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
+            function_words = _df['Function Word'].tolist()
             # Collect a list of clustered document where each document is a list of tokens
             cluster_docs = []
             # Select the documents from doc_ids
@@ -158,8 +151,8 @@ class BERTModelDocClusterUtility:
             finder = BigramCollocationFinder.from_documents(documents)
             # finder.apply_freq_filter(4)
             # # # Filter out bi_grams containing stopwords or function words
-            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in BERTModelDocClusterUtility.function_words or
-                                                     w2.lower() in BERTModelDocClusterUtility.function_words)
+            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in function_words or
+                                                     w2.lower() in function_words)
             finder.apply_ngram_filter(lambda w1, w2: w1.lower() in BERTModelDocClusterUtility.stop_words or
                                                      w2.lower() in BERTModelDocClusterUtility.stop_words)
             # Find a list of bi_grams by likelihood collocations
@@ -428,12 +421,13 @@ class BERTModelDocClusterUtility:
             orient='records')
         return topics_list  # Return a list of dicts
 
-    # Output the cluster topics as a csv file
+    # Output the cluster topics extracted by TF-IDF as a csv file
     @staticmethod
-    def flatten_topics(approach, cluster_no):
+    def flatten_tf_idf_topics(cluster_no, _cluster="HDBSCAN_Cluster", _key_extract="TF-IDF"):
         try:
-            cluster_df = pd.read_json(
-                os.path.join('output', 'cluster', 'UrbanStudyCorpus_' + approach + '_Cluster_topic_words.json'))
+            _path = os.path.join('output', 'cluster', 'topics', 'UrbanStudyCorpus_' + _cluster + '_' +
+                                 _key_extract + '_topic_words.json')
+            cluster_df = pd.read_json(_path)
             clusters = cluster_df.to_dict("records")
             cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
             records = []
@@ -444,8 +438,8 @@ class BERTModelDocClusterUtility:
                           'N-gram': "", 'N-gram-score': 0, 'N-gram-freq': 0, 'N-gram-docs': 0, 'N-gram-clusters': 0,
                           }
                 for n_gram_num in ['1-gram', '2-gram', '3-gram', 'N-gram']:
-                    if i < len(cluster['Topic' + n_gram_num]):
-                        n_gram = cluster['Topic' + n_gram_num][i]
+                    if i < len(cluster['Topic-' + n_gram_num]):
+                        n_gram = cluster['Topic-' + n_gram_num][i]
                         record[n_gram_num] = n_gram['topic']
                         record[n_gram_num + '-score'] = n_gram['score']
                         record[n_gram_num + '-freq'] = n_gram['freq']
@@ -453,8 +447,9 @@ class BERTModelDocClusterUtility:
                         record[n_gram_num + '-clusters'] = len(n_gram['cluster_ids'])
                 records.append(record)
             n_gram_df = pd.DataFrame(records)
-            _path = os.path.join('output', 'cluster', 'topics',
-                                 'UrbanStudyCorpus_HDBSCAN_Cluster_' + str(cluster_no) + '_topics.csv')
+            _path = os.path.join('output', 'cluster', 'topics', _key_extract,
+                                 'UrbanStudyCorpus_' + _cluster + '_' + _key_extract + '_' + str(
+                                     cluster_no) + '_topics.csv')
             n_gram_df.to_csv(_path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + _path)
         except Exception as err:
