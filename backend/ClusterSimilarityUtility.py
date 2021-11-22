@@ -159,7 +159,7 @@ class ClusterSimilarityUtility:
         # # Write out the similarity title information
         df = pd.DataFrame(results)
         # # Write to out
-        path = os.path.join('output', 'similarity', 'cluster',
+        path = os.path.join('output', 'similarity', 'similar_papers',
                             'UrbanStudyCorpus_HDBSCAN_paper_similarity_' + str(cluster_no) + '.json')
         df.to_json(path, orient='records')
         return results
@@ -186,7 +186,7 @@ class ClusterSimilarityUtility:
             return _sorted_cluster_occ
 
         # Load
-        path = os.path.join('output', 'similarity', 'cluster',
+        path = os.path.join('output', 'similarity', 'similar_papers',
                             'UrbanStudyCorpus_HDBSCAN_paper_similarity_' + str(cluster_no) + '.json')
         df = pd.read_json(path)
         results = df.to_dict("records")
@@ -222,7 +222,7 @@ class ClusterSimilarityUtility:
             top_similar_papers.append(result)
             # Write the summary
         df = pd.DataFrame(top_similar_papers)
-        out_path = os.path.join('output', 'similarity',
+        out_path = os.path.join('output', 'similarity', 'similar_papers',
                                 'UrbanStudyCorpus_HDBSCAN_similar_papers_' + str(cluster_no) + '_short.csv')
         df.to_csv(out_path, index=False, encoding='utf-8')
         # # Display the cluster no list
