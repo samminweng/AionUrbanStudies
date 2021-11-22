@@ -21,6 +21,27 @@ nltk.data.path.append(nltk_path)
 
 # Helper function for cluster Similarity
 class ClusterSimilarityUtility:
+
+    # Find the duplicate papers in the corpus
+    @staticmethod
+    def scan_duplicate_articles():
+        try:
+            corpus_df = pd.read_csv(os.path.join('data', 'UrbanStudyCorpus.csv'))
+            corpus = corpus_df.to_dict("records")
+            duplicate_doc_ids = set()
+            for article in corpus:
+                doc_id = article['DocId']
+                title = article['Title']
+                # Find if other article has the same title and author names
+                same_articles = list(filter(lambda a: a['Title'].lower().strip() == title.lower().strip() and
+                                                      a['DocId'] > doc_id, corpus))
+                if len(same_articles):
+                    for sa in same_articles:
+                        duplicate_doc_ids.add(sa['DocId'])
+            return list(duplicate_doc_ids)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
     @staticmethod
     def compute_similarity_matrix_topics(cluster_topics1, cluster_topics2):
         c_no_1 = cluster_topics1['cluster_no']

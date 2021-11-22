@@ -8,8 +8,6 @@ from ClusterSimilarityUtility import ClusterSimilarityUtility
 import getpass
 
 # Set logging level
-from ClusterUtility import ClusterUtility
-
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 # Set Sentence Transformer path
 sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
@@ -36,7 +34,7 @@ class ClusterSimilarity:
         path = os.path.join('data', self.args.case_name + '.json')
         corpus_doc_df = pd.read_json(path)
         self.corpus_docs = corpus_doc_df.to_dict("records")
-        duplicate_doc_ids = ClusterUtility.scan_duplicate_articles()
+        duplicate_doc_ids = ClusterSimilarityUtility.scan_duplicate_articles()
         # Remove duplicated doc
         self.corpus_docs = list(filter(lambda d: d['DocId'] not in duplicate_doc_ids, self.corpus_docs))
 
@@ -45,15 +43,15 @@ class ClusterSimilarity:
         # cluster_no_list = [c_no for c_no in range(-1, 23)]
         cluster_no_list = [-1]
         try:
-            # model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-            #                             device=self.args.device)  # Load sentence transformer model
+            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                        device=self.args.device)  # Load sentence transformer model
             # # Find top 30 similar papers of each paper in a cluster
-            # for cluster_no in cluster_no_list:
-            #     ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
-            #                                                       top_k=top_k)
-            # # Summarize the similar paper results
             for cluster_no in cluster_no_list:
-                ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
+                ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
+                                                                  top_k=top_k)
+            # # # Summarize the similar paper results
+            # for cluster_no in cluster_no_list:
+            #     ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
 
             # Collect all the top N topics (words and vectors)
             # cluster_topics = TopicWordUtility.get_cluster_topics(clusters, self.model, top_n=top_n)
