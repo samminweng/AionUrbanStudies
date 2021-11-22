@@ -294,6 +294,8 @@ class BERTModelDocCluster:
             print('Output topics per cluster to ' + _path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+
 # Main entry
 if __name__ == '__main__':
     mdc = BERTModelDocCluster()

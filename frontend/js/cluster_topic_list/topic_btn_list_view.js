@@ -2,7 +2,7 @@
 function TopicBtnListView(cluster_no, cluster_topic_words, corpus_data){
     // Fill out the topic using TF-IDF
     const cluster_topics = cluster_topic_words.find(c => c['Cluster'] === cluster_no);
-    const available_topics = cluster_topics['Topic1-gram'].concat(cluster_topics['Topic2-gram'], cluster_topics['Topic3-gram']);
+    const available_topics = cluster_topics['TF-IDF-Topics'];
     // Get the articles in cluster #no
     const cluster_doc_ids = cluster_topics['DocIds'];
     const cluster_docs = corpus_data.filter(d => cluster_doc_ids.includes(parseInt(d['DocId'])));
@@ -64,15 +64,15 @@ function TopicBtnListView(cluster_no, cluster_topic_words, corpus_data){
         const container = $('<div class="container"></div>');
         container.append($('<div class="h3">Cluster #' + cluster_no+' has ' + cluster_docs.length + ' articles in total</div>'));
 
-        // Display the topics
-        for(const n_gram of ['N-gram']){
-            const topics = cluster_topics['Topic' + n_gram];
-            const key_term_div = $('<div><h3><span class="fw-bold">'+ n_gram + ' Topics </span> ' +
-                '</h3>' +
-                '<div class="topics">' +
-                '</div>' +
+
+        // Display the topics by keyword extraction
+        for(const extraction of ['TF-IDF']){
+            const topics = cluster_topics[extraction+'-Topics'];
+            const key_term_div = $('<div>' +
+                '<h3><span class="fw-bold">'+ extraction + ' Topics </span></h3>' +
+                '<div class="topics"></div>' +
                 '</div>');
-            const sort_btn_name = 'sort'+n_gram;
+            const sort_btn_name = 'sort-'+extraction;
             const sort_widget = $('<div>' +
                 '<span>Sort by </span>'+
                 '<div class="form-check form-check-inline">' +
@@ -92,7 +92,7 @@ function TopicBtnListView(cluster_no, cluster_topic_words, corpus_data){
             // Add the on click event to radio button
             sort_widget.find('input[name='+sort_btn_name+']').change(function(){
                 const sorted_index = sort_widget.find('input[name='+sort_btn_name+']:checked').val();
-                const sorted_topic = cluster_topics['Topic' + n_gram];
+                const sorted_topic = cluster_topics[extraction + '-Topics'];
                 if(sorted_index === 'count'){
                     // Sort the topic by count
                     sorted_topic.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
@@ -105,7 +105,7 @@ function TopicBtnListView(cluster_no, cluster_topic_words, corpus_data){
             });
 
             // Display n-gram topics by default
-            if(n_gram === 'N-gram'){
+            if(extraction === 'TF-IDF'){
                 // Show the topics for TF-IDF
                 key_term_div.accordion({
                     collapsible: true,
