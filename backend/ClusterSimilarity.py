@@ -38,6 +38,11 @@ class ClusterSimilarity:
         # Remove duplicated doc
         self.corpus_docs = list(filter(lambda d: d['DocId'] not in duplicate_doc_ids, self.corpus_docs))
 
+    # # Use the BERT model to extract long key phrases
+    # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
+    # def extract_key_phrases_by_clusters(self):
+    #     # Extract phrases candidates
+
     # Find top 30 similar papers for each article in a cluster
     def find_top_similar_paper_in_corpus(self, top_k=30):
         # cluster_no_list = [c_no for c_no in range(-1, 23)]
@@ -49,9 +54,8 @@ class ClusterSimilarity:
             for cluster_no in cluster_no_list:
                 ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
                                                                   top_k=top_k)
-            # # # Summarize the similar paper results
-            # for cluster_no in cluster_no_list:
-            #     ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
+                # # # Summarize the similar paper results
+                ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
 
             # Collect all the top N topics (words and vectors)
             # cluster_topics = TopicWordUtility.get_cluster_topics(clusters, self.model, top_n=top_n)
