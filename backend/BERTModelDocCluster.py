@@ -289,7 +289,7 @@ class BERTModelDocCluster:
             cluster_df.to_csv(_path, encoding='utf-8', index=False)
             # # # Write to a json file
             _path = os.path.join(self.output_path,
-                                 self.args.case_name + '_' + cluster_approach + '_TF-IDF-topic_words.json')
+                                 self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
             cluster_df.to_json(_path, orient='records')
             print('Output topics per cluster to ' + _path)
         except Exception as err:

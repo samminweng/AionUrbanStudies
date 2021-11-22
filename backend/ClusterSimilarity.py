@@ -27,7 +27,7 @@ class ClusterSimilarity:
             device='cuda'
         )
         # Load the cluster results as dataframe
-        path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_topic_words.json")
+        path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_TF-IDF_topic_words.json")
         df = pd.read_json(path)
         self.clusters = df.to_dict("records")  # Convert to a list of dictionaries
         # Load the published paper text data
