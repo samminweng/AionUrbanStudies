@@ -1,5 +1,6 @@
 import itertools
 import os.path
+import re
 from argparse import Namespace
 from functools import reduce
 from sklearn.metrics.pairwise import cosine_similarity
@@ -53,10 +54,12 @@ class ClusterSimilarity:
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     def extract_key_phrases_by_clusters(self):
         # Get the cluster vectors by averaging the vectors of each paper in the cluster
-        def get_cluster_vector(_model, _cluster_texts, _candidates, _is_load=False):
+        def get_cluster_vector(_model, _cluster_no, _cluster_texts, _candidates, _is_load=False):
             if _is_load:
-                _cluster_vector = np.load(Path(os.path.join('output', 'similarity', 'temp', 'cluster_vector.npy')))
-                _candidate_vectors = np.load(Path(os.path.join('output', 'similarity', 'temp', 'candidate_vectors.npy')))
+                _path = Path(os.path.join('output', 'similarity', 'temp', 'cluster_vector_' + str(_cluster_no) + '.npy'))
+                _cluster_vector = np.load(_path)
+                _path = Path(os.path.join('output', 'similarity', 'temp', 'candidate_vectors_' + str(_cluster_no) + '.npy'))
+                _candidate_vectors = np.load(_path)
                 return _cluster_vector, _candidate_vectors
 
             # Compute the cluster vector and key phrase vectors
@@ -67,48 +70,64 @@ class ClusterSimilarity:
             _folder = os.path.join('output', 'similarity', 'temp')
             Path(_folder).mkdir(parents=True, exist_ok=True)
             # Write cluster vector 
-            _out_path = os.path.join('output', 'similarity', 'temp', 'cluster_vector.npy')
-            np.save(_out_path, _cluster_vector) 
+            _out_path = os.path.join('output', 'similarity', 'temp', 'cluster_vector_' + str(_cluster_no) + '.npy')
+            np.save(_out_path, _cluster_vector)
             print("Output cluster vector results to " + _out_path)
             # Write candidate vectors
-            _out_path = os.path.join('output', 'similarity', 'temp', 'candidate_vectors.npy')
+            _out_path = os.path.join('output', 'similarity', 'temp', 'candidate_vectors_' + str(_cluster_no) + '.npy')
             np.save(_out_path, _candidate_vectors)
             print("Output candidate vectors to " + _out_path)
             return _cluster_vector, _candidate_vectors
         try:
-            cluster_no = 5
-            cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
-            cluster_df = pd.DataFrame(cluster_docs)
-            # Clean the texts to lowercase the words, remove punctuations and convert plural to singular nouns
-            cluster_df['Text'] = cluster_df['Text'].apply(lambda text: ClusterSimilarityUtility.clean_sentence(text))
-            # Concatenate all the texts in this cluster as the cluster doc
-            cluster_texts = cluster_df['Text'].to_list()
-            cluster_doc = reduce(lambda a, b: a + " " + b, cluster_texts)
-            # Extract phrases candidates using N-gram model
-            n_gram_range = (3, 3)
-            count = CountVectorizer(ngram_range=n_gram_range, stop_words="english").fit([cluster_doc])
-            candidates = count.get_feature_names()
-            # Encode cluster_doc and candidates as BERT embedding
-            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-                                        device=self.args.device)
-            # Encode cluster doc and keyword candidates into vectors for comparing the similarity
-            cluster_vector, candidate_vectors = get_cluster_vector(model, cluster_texts, candidates, _is_load=False)
-            top_keywords = ClusterSimilarityUtility.most_similar_candidate(cluster_no, cluster_vector, candidate_vectors,
-                                                                           candidates, top_n=30)
-            # top_n = 30
-            # for r in range(2, 20):
-            #     num_candidate = r * top_n
-            #     # # Compute the similarity between keyword and cluster vector
-            #     top_keywords = ClusterSimilarityUtility.maximize_sum_similarity(cluster_vector, candidate_vectors,
-            #                                                                     candidates, top_n=top_n,
-            #                                                                     num_candidates=num_candidate)
-            top_n = 30
-            for r in range(0, 10):
-                diversity = r * 0.1
-                top_keywords = ClusterSimilarityUtility.maximal_marginal_relevance(cluster_no, cluster_vector, candidate_vectors,
-                                                                                   candidates, top_n=top_n,
-                                                                                   diversity=diversity)
-                print(top_keywords)
+            _is_load = False
+            for cluster_no in [5]:
+                cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
+                cluster_df = pd.DataFrame(cluster_docs)
+                # Clean the texts to lowercase the words, remove punctuations and convert plural to singular nouns
+                cluster_df['Text'] = cluster_df['Text'].apply(
+                    lambda text: ClusterSimilarityUtility.clean_sentence(text))
+                # Concatenate all the texts in this cluster as the cluster doc
+                cluster_texts = cluster_df['Text'].to_list()
+                cluster_doc = reduce(lambda a, b: a + " " + b, cluster_texts)
+                for n_gram_range in [(2, 2), (3, 3)]:
+                    # Extract phrases candidates using N-gram model
+                    try:
+                        # Use N-gram model to obtain all the n-gram key phrase candidates
+                        vectorizer = CountVectorizer(ngram_range=n_gram_range).fit([cluster_doc])
+                        candidates = vectorizer.get_feature_names()
+                        # Filter out all candidate containing numbers
+                        candidates = list(filter(lambda k: not bool(re.search(r'\d', k)), candidates))
+                        # Encode cluster_doc and candidates as BERT embedding
+                        model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                                    device=self.args.device)
+                        # Encode cluster doc and keyword candidates into vectors for comparing the similarity
+                        cluster_vector, candidate_vectors = get_cluster_vector(model, cluster_no, cluster_texts,
+                                                                               candidates, _is_load=_is_load)
+                        best_key_phrases = None
+                        top_n = 30
+                        df = pd.DataFrame()
+                        for diversity in [0.0, 0.1, 0.3, 0.5, 0.7, 0.9]:
+                            key_phrases = ClusterSimilarityUtility.maximal_marginal_relevance(cluster_vector,
+                                                                                              candidate_vectors,
+                                                                                              candidates,
+                                                                                              top_n=top_n,
+                                                                                              diversity=diversity)
+                            df[str(diversity) + '_score'] = list(map(lambda k: k['score'], key_phrases))
+                            df[str(diversity) + '_keyword'] = list(map(lambda k: k['keyword'], key_phrases))
+                        # Write key phrases to output
+                        path = os.path.join('output', 'similarity', 'key_phrases',
+                                            'mmr_top_key_phrases_cluster_' + str(cluster_no) +
+                                                                    '_n_gram_' + str(n_gram_range[0]) + '.csv')
+                        df.to_csv(path, encoding='utf-8', index=False)
+                        # # # Write to a json file
+                        path = os.path.join('output', 'similarity', 'key_phrases',
+                                            'mmr_top_key_phrases_cluster_' + str(cluster_no) +
+                                            '_n_gram_' + str(n_gram_range[0]) + '.json')
+                        df.to_json(path, orient='records')
+                        print('Output key phrases to ' + path)
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

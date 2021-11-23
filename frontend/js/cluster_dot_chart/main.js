@@ -19,8 +19,6 @@ function _createProgressBar(){
     })();
 }
 
-
-
 // Document ready event
 $(function () {
     _createProgressBar();
@@ -43,21 +41,11 @@ $(function () {
         const is_hide = true;
         // Draw the chart and list the clusters/topic words
         const chart = new ScatterGraph(is_hide, cluster_chart_data, cluster_topics, corpus_data);
-        // // Add event to the selection of clustering approach
-        // $('#cluster_approach').selectmenu({
-        //     change: function (event, data) {
-        //         const cluster_approach = data.item.value;
-        //         const is_hide = $("#hide_outliers").is(':checked');// Show/hide outliers
-        //         const chart = new ScatterGraph(is_hide, cluster_approach, cluster_chart_data,
-        //             cluster_topics, corpus_data);
-        //     }
-        // });
         // Add event to hide or show outlier
         $("#hide_outliers").checkboxradio({});
         $('#hide_outliers').bind("change", function () {
             const is_hide = $("#hide_outliers").is(':checked');
-            const chart_doc_view = new ScatterGraph(is_hide, cluster_approach, cluster_chart_data,
-                cluster_topics, corpus_data);
+            const chart_doc_view = new ScatterGraph(is_hide, cluster_chart_data, cluster_topics, corpus_data);
         });
         const dialog = new InstructionDialog(true);
         // Remove the progress bar

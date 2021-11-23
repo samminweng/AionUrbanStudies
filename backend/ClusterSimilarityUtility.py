@@ -12,6 +12,7 @@ import numpy as np
 from sentence_transformers import util
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem import WordNetLemmatizer
+
 # Set NLTK data path
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
 if os.name == 'nt':
@@ -19,7 +20,7 @@ if os.name == 'nt':
 nltk.download('punkt', download_dir=nltk_path)
 nltk.download('wordnet', download_dir=nltk_path)
 nltk.download('stopwords', download_dir=nltk_path)
-nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)     # POS tags
+nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
 # Append NTLK data path
 nltk.data.path.append(nltk_path)
 
@@ -59,13 +60,12 @@ class ClusterSimilarityUtility:
                 try:
                     words = word_tokenize(sentence)
                     if len(words) > 0:
-                        # Keep alphabetic characters only and remove the punctuation
-                        cleaned_words = list(filter(lambda w: re.match(r'[^\W\d]*$', w), words))
-                        cleaned_words = convert_singular_words(cleaned_words, lemmatizer)
+                        # Convert the plural words into singular words
+                        cleaned_words = convert_singular_words(words, lemmatizer)
                         cleaned_sentences.append(" ".join(cleaned_words))  # merge tokenized words into sentence
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
-        return " ".join(cleaned_sentences)      # Convert a list of clean sentences to the text
+        return " ".join(cleaned_sentences)  # Convert a list of clean sentences to the text
 
     # Find the duplicate papers in the corpus
     @staticmethod
@@ -191,7 +191,7 @@ class ClusterSimilarityUtility:
             for _doc in _sorted_results:
                 most_similar_paper = _doc['Similar_Papers'][0]
                 rows.append([_doc['DocId'], _doc['Title'], "{:.4f}".format(most_similar_paper['Score']),
-                            most_similar_paper['Cluster'], most_similar_paper['DocId'], most_similar_paper['Title']])
+                             most_similar_paper['Cluster'], most_similar_paper['DocId'], most_similar_paper['Title']])
                 # Display the remaining 30
                 for _i in range(1, top_k):
                     st = _doc['Similar_Papers'][_i]
@@ -291,46 +291,45 @@ class ClusterSimilarityUtility:
             top_keywords.reverse()
             # Write the top_keywords as a csv file
             df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
-            path = os.path.join('output', 'similarity', 'keywords', 'mss_top_keywords_cluster_'+str(num_candidates)+'.csv')
+            path = os.path.join('output', 'similarity', 'keywords',
+                                'mss_top_keywords_cluster_' + str(num_candidates) + '.csv')
             df.to_csv(path, encoding='utf-8')
             return top_keywords
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 
     @staticmethod
-    def maximal_marginal_relevance(cluster_no, cluster_vector, c_vectors, candidates, top_n=5, diversity=0.2):
+    def maximal_marginal_relevance(cluster_vector, c_vectors, candidates,
+                                   top_n=30, diversity=0.5):
+        try:
+            # Extract similarity within words, and between words and the document
+            word_doc_similarity = cosine_similarity(c_vectors, [cluster_vector])
+            word_similarity = cosine_similarity(c_vectors, c_vectors)
 
-        # Extract similarity within words, and between words and the document
-        word_doc_similarity = cosine_similarity(c_vectors, [cluster_vector])
-        word_similarity = cosine_similarity(c_vectors)
+            # Initialize candidates and already choose best keyword/key phrase
+            keywords_idx = [np.argmax(word_doc_similarity)]
+            candidates_idx = [i for i in range(len(candidates)) if i != keywords_idx[0]]
+            # Re-rank the candidate key words
+            for _ in range(top_n - 1):
+                # Extract similarities within candidates and
+                # between candidates and selected keywords/phrases
+                candidate_similarities = word_doc_similarity[candidates_idx, :]
+                target_similarities = np.max(word_similarity[candidates_idx][:, keywords_idx], axis=1)
 
-        # Initialize candidates and already choose best keyword/keyphras
-        keywords_idx = [np.argmax(word_doc_similarity)]
-        candidates_idx = [i for i in range(len(candidates)) if i != keywords_idx[0]]
+                # Calculate MMR
+                mmr = (1 - diversity) * candidate_similarities - diversity * target_similarities.reshape(-1, 1)
+                mmr_idx = candidates_idx[np.argmax(mmr)]
 
-        for _ in range(top_n - 1):
-            # Extract similarities within candidates and
-            # between candidates and selected keywords/phrases
-            candidate_similarities = word_doc_similarity[candidates_idx, :]
-            target_similarities = np.max(word_similarity[candidates_idx][:, keywords_idx], axis=1)
+                # Update keywords & candidates
+                keywords_idx.append(mmr_idx)
+                candidates_idx.remove(mmr_idx)
 
-            # Calculate MMR
-            mmr = (1 - diversity) * candidate_similarities - diversity * target_similarities.reshape(-1, 1)
-            mmr_idx = candidates_idx[np.argmax(mmr)]
-
-            # Update keywords & candidates
-            keywords_idx.append(mmr_idx)
-            candidates_idx.remove(mmr_idx)
-
-        # Collect all the top keywords
-        top_keywords = list()
-        for idx in keywords_idx:
-            keyword = candidates[idx]
-            score = word_doc_similarity[idx][0]
-            top_keywords.append({'keyword': keyword, 'score': score})
-        # Write the
-        df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
-        path = os.path.join('output', 'similarity', 'keywords', 'mmr_top_keywords_cluster_' + str(cluster_no) +
-                            "_" + str(round(diversity, 1)) + '.csv')
-        df.to_csv(path, encoding='utf-8', index=False)
-        return top_keywords
+            # Collect all the top keywords
+            top_keywords = list()
+            for idx in keywords_idx:
+                keyword = candidates[idx]
+                score = word_doc_similarity[idx][0]
+                top_keywords.append({'score': score, 'keyword': keyword})
+            return top_keywords
+        except Exception as _err:
+            print("Error occurred! {err}".format(err=_err))
