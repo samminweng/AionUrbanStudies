@@ -1,7 +1,7 @@
 import os.path
 from argparse import Namespace
 from functools import reduce
-
+from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
@@ -54,26 +54,42 @@ class ClusterSimilarity:
         # Get the cluster vectors by averaging the vectors of each paper in the cluster
         def get_cluster_vector(_model, _cluster_texts, _candidates, _is_load=False):
             if _is_load:
-                _path = os.path.join('output', 'similarity', 'temp', 'Cluster_vector_Candidate_vectors.json')
-                _df = pd.read_json(_path)
-                _dict = _df.to_dict("records")[0]
-                return _dict['cluster_vector'], _dict['candidate_vectors']
+                _cluster_vector = np.load(Path(os.path.join('output', 'similarity', 'temp', 'cluster_vector.npy')))
+                _candidate_vectors = np.load(Path(os.path.join('output', 'similarity', 'temp', 'candidate_vectors.npy')))
+                return _cluster_vector, _candidate_vectors
 
             # Compute the cluster vector and key phrase vectors
-            _np_vectors = _model.encode(_cluster_texts).numpy()  # Convert the numpy array
+            _np_vectors = _model.encode(_cluster_texts, convert_to_numpy=True)  # Convert the numpy array
             _cluster_vector = np.mean(_np_vectors, axis=0)
-            _candidate_vectors = _model.encode(_candidates).numpy()
-            # Write the vector data to a json file
-            _results = list()
-            _results.append({'cluster_vector': _cluster_vector, 'candidate_vectors': _candidate_vectors})
-            _df = pd.DataFrame(_results)
+            _candidate_vectors = _model.encode(_candidates, convert_to_numpy=True)
             # Create a 'temp' folder
-            _folder_path = os.path.join('output', 'similarity', 'temp')
-            Path(_folder_path).mkdir(parents=True, exist_ok=True)
-            _path = os.path.join('output', 'similarity', 'temp', 'Cluster_vector_Candidate_vectors.json')
-            _df.to_json(_path, orient='records')
-            print("Output the vector results to " + _path)
+            _folder = os.path.join('output', 'similarity', 'temp')
+            Path(_folder).mkdir(parents=True, exist_ok=True)
+            # Write cluster vector 
+            _out_path = os.path.join('output', 'similarity', 'temp', 'cluster_vector.npy')
+            np.save(_out_path, _cluster_vector) 
+            print("Output cluster vector results to " + _out_path)
+            # Write candidate vectors
+            _out_path = os.path.join('output', 'similarity', 'temp', 'candidate_vectors.npy')
+            np.save(_out_path, _candidate_vectors)
+            print("Output candidate vectors to " + _out_path)
             return _cluster_vector, _candidate_vectors
+
+        # Max Sum Similarity
+        def max_sum_sim(_cluster_vector, _c_vectors, _candidates, _top_n=30, nr_candidates=20):
+            try:
+                # Compute the similarity between cluster vector and each candidate vector
+                cluster_similarity = cosine_similarity([_cluster_vector], _c_vectors)
+                # Compute the similarity between candidate vectors
+                candidate_similarity = cosine_similarity(_c_vectors, _c_vectors)
+                # Get nr_candidates words as candidates based on cosine similarity of cluster vector
+                c_indexes = list(cluster_similarity.argsort()[0][-nr_candidates:])
+                candidate_words = [_candidates[index] for index in c_indexes]
+                similarity_candidates = candidate_similarity[np.ix_(c_indexes, c_indexes)]
+                print(candidate_words)
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+
 
         try:
             cluster_no = 5
@@ -83,17 +99,29 @@ class ClusterSimilarity:
             cluster_df['Text'] = cluster_df['Text'].apply(lambda text: ClusterSimilarityUtility.clean_sentence(text))
             # Concatenate all the texts in this cluster as the cluster doc
             cluster_texts = cluster_df['Text'].to_list()
-            cluster_doc = reduce(lambda a, b: a + b, cluster_texts)
+            cluster_doc = reduce(lambda a, b: a + " " + b, cluster_texts)
             # Extract phrases candidates using N-gram model
             n_gram_range = (3, 3)
-            count = CountVectorizer(ngram_range=n_gram_range).fit([cluster_doc])
+            count = CountVectorizer(ngram_range=n_gram_range, stop_words="english").fit([cluster_doc])
             candidates = count.get_feature_names()
             # Encode cluster_doc and candidates as BERT embedding
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                         device=self.args.device)
             # Encode cluster doc and keyword candidates into vectors for comparing the similarity
-            cluster_vector, candidates_vectors = get_cluster_vector(model, cluster_texts, candidates, _is_load=False)
-            print(candidates_vectors)
+            cluster_vector, candidate_vectors = get_cluster_vector(model, cluster_texts, candidates, _is_load=False)
+            # # Compute the similarity between keyword and cluster vector
+            # top_n = 30
+            # keywords = []
+            # for candidate, c_vector in zip(candidates, candidate_vectors):
+            #     similarity = cosine_similarity([cluster_vector], [c_vector])[0, 0]  # Get cosine similarity
+            #     keywords.append({'keyword': candidate, 'score': similarity})
+            # # Sort the keywords by score
+            # keywords = sorted(keywords, key=lambda k: k['score'], reverse=True)
+            # top_keywords = keywords[:30]
+            # print(top_keywords)
+            # max_sum_sim(cluster_vector, candidate_vectors, candidates)
+
+
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

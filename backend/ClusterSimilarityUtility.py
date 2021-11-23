@@ -36,17 +36,16 @@ class ClusterSimilarityUtility:
             # Convert plural word to singular
             singular_words = []
             for pos_tag in pos_tags:
-                word = pos_tag[0]
+                _word = pos_tag[0]
                 # NNS indicates plural nouns
                 if pos_tag[1] == 'NNS':
                     try:
-                        singular_word = _lemmatiser.lemmatize(word)
+                        singular_word = _lemmatiser.lemmatize(_word)
+                        singular_words.append(singular_word)
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
-                        singular_word = word.rstrip('s')
-                    singular_words.append(singular_word)
                 else:
-                    singular_words.append(word)
+                    singular_words.append(_word)
             # Return all lemmatized words
             return singular_words
 
@@ -60,9 +59,9 @@ class ClusterSimilarityUtility:
                 try:
                     words = word_tokenize(sentence.lower())
                     if len(words) > 0:
-                        cleaned_words = convert_singular_words(words, lemmatizer)
                         # Keep alphabetic characters only and remove the punctuation
-                        cleaned_words = list(filter(lambda w: re.match(r'[^\W\d]*$', w), cleaned_words))
+                        cleaned_words = list(filter(lambda w: re.match(r'[^\W\d]*$', w), words))
+                        cleaned_words = convert_singular_words(cleaned_words, lemmatizer)
                         cleaned_sentences.append(" ".join(cleaned_words))  # merge tokenized words into sentence
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
