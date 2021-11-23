@@ -244,6 +244,21 @@ class ClusterSimilarityUtility:
         df.to_csv(out_path, index=False, encoding='utf-8')
         # # Display the cluster no list
 
+    @staticmethod
+    def most_similar_candidate(cluster_no, cluster_vector, c_vectors, candidates, top_n=5):
+        keywords = []
+        for index, (candidate, c_vector) in enumerate(zip(candidates, c_vectors)):
+            score = cosine_similarity([cluster_vector], [c_vector])[0, 0]  # Get cosine similarity
+            keywords.append({'keyword': candidate, 'score': score})
+        # Sort the keywords by score
+        keywords = sorted(keywords, key=lambda k: k['score'], reverse=True)
+        top_keywords = keywords[:top_n]
+        # Write the top_keywords as a csv file
+        df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
+        path = os.path.join('output', 'similarity', 'keywords', 'msc_top_keywords_cluster_' + str(cluster_no) + '.csv')
+        df.to_csv(path, encoding='utf-8', index=False)
+        return top_keywords
+
     # Find the best combination that produce the lower similarity among keywords
     @staticmethod
     def maximize_sum_similarity(cluster_vector, c_vectors, candidates, top_n=5, num_candidates=20):
@@ -275,15 +290,15 @@ class ClusterSimilarityUtility:
             top_keywords = [keyword_candidates[index] for index in best_comb]
             top_keywords.reverse()
             # Write the top_keywords as a csv file
-            df = pd.DataFrame(top_keywords, columns=['index', 'score', 'keyword'])
-            path = os.path.join('output', 'similarity', 'temp', 'mss_top_keywords_'+str(num_candidates)+'.csv')
+            df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
+            path = os.path.join('output', 'similarity', 'keywords', 'mss_top_keywords_cluster_'+str(num_candidates)+'.csv')
             df.to_csv(path, encoding='utf-8')
             return top_keywords
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 
     @staticmethod
-    def maximal_marginal_relevance(cluster_vector, c_vectors, candidates, top_n=5, diversity=0.2):
+    def maximal_marginal_relevance(cluster_no, cluster_vector, c_vectors, candidates, top_n=5, diversity=0.2):
 
         # Extract similarity within words, and between words and the document
         word_doc_similarity = cosine_similarity(c_vectors, [cluster_vector])
@@ -315,6 +330,7 @@ class ClusterSimilarityUtility:
             top_keywords.append({'keyword': keyword, 'score': score})
         # Write the
         df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
-        path = os.path.join('output', 'similarity', 'temp', 'mmr_top_keywords_' + str(round(diversity, 1)) + '.csv')
+        path = os.path.join('output', 'similarity', 'keywords', 'mmr_top_keywords_cluster_' + str(cluster_no) +
+                            "_" + str(round(diversity, 1)) + '.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         return top_keywords

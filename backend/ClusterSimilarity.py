@@ -93,6 +93,8 @@ class ClusterSimilarity:
                                         device=self.args.device)
             # Encode cluster doc and keyword candidates into vectors for comparing the similarity
             cluster_vector, candidate_vectors = get_cluster_vector(model, cluster_texts, candidates, _is_load=False)
+            top_keywords = ClusterSimilarityUtility.most_similar_candidate(cluster_no, cluster_vector, candidate_vectors,
+                                                                           candidates, top_n=30)
             # top_n = 30
             # for r in range(2, 20):
             #     num_candidate = r * top_n
@@ -101,9 +103,9 @@ class ClusterSimilarity:
             #                                                                     candidates, top_n=top_n,
             #                                                                     num_candidates=num_candidate)
             top_n = 30
-            for r in range(1, 10):
+            for r in range(0, 10):
                 diversity = r * 0.1
-                top_keywords = ClusterSimilarityUtility.maximal_marginal_relevance(cluster_vector, candidate_vectors,
+                top_keywords = ClusterSimilarityUtility.maximal_marginal_relevance(cluster_no, cluster_vector, candidate_vectors,
                                                                                    candidates, top_n=top_n,
                                                                                    diversity=diversity)
                 print(top_keywords)
