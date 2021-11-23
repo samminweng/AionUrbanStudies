@@ -1,3 +1,4 @@
+import itertools
 import os.path
 from argparse import Namespace
 from functools import reduce
@@ -28,7 +29,7 @@ class ClusterSimilarity:
             approach='HDBSCAN',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
-            device='cuda'
+            device='cpu'
         )
         # Load the cluster results as dataframe
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_TF-IDF_topic_words.json")
@@ -74,23 +75,6 @@ class ClusterSimilarity:
             np.save(_out_path, _candidate_vectors)
             print("Output candidate vectors to " + _out_path)
             return _cluster_vector, _candidate_vectors
-
-        # Max Sum Similarity
-        def max_sum_sim(_cluster_vector, _c_vectors, _candidates, _top_n=30, nr_candidates=20):
-            try:
-                # Compute the similarity between cluster vector and each candidate vector
-                cluster_similarity = cosine_similarity([_cluster_vector], _c_vectors)
-                # Compute the similarity between candidate vectors
-                candidate_similarity = cosine_similarity(_c_vectors, _c_vectors)
-                # Get nr_candidates words as candidates based on cosine similarity of cluster vector
-                c_indexes = list(cluster_similarity.argsort()[0][-nr_candidates:])
-                candidate_words = [_candidates[index] for index in c_indexes]
-                similarity_candidates = candidate_similarity[np.ix_(c_indexes, c_indexes)]
-                print(candidate_words)
-            except Exception as _err:
-                print("Error occurred! {err}".format(err=_err))
-
-
         try:
             cluster_no = 5
             cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
@@ -109,18 +93,13 @@ class ClusterSimilarity:
                                         device=self.args.device)
             # Encode cluster doc and keyword candidates into vectors for comparing the similarity
             cluster_vector, candidate_vectors = get_cluster_vector(model, cluster_texts, candidates, _is_load=False)
-            # # Compute the similarity between keyword and cluster vector
-            # top_n = 30
-            # keywords = []
-            # for candidate, c_vector in zip(candidates, candidate_vectors):
-            #     similarity = cosine_similarity([cluster_vector], [c_vector])[0, 0]  # Get cosine similarity
-            #     keywords.append({'keyword': candidate, 'score': similarity})
-            # # Sort the keywords by score
-            # keywords = sorted(keywords, key=lambda k: k['score'], reverse=True)
-            # top_keywords = keywords[:30]
-            # print(top_keywords)
-            # max_sum_sim(cluster_vector, candidate_vectors, candidates)
-
+            top_n = 30
+            for r in range(2, 20):
+                num_candidate = r * top_n
+                # # Compute the similarity between keyword and cluster vector
+                top_keywords = ClusterSimilarityUtility.max_sum_sim(cluster_vector, candidate_vectors, candidates,
+                                                                    top_n=top_n, num_candidates=num_candidate)
+                # print(top_keywords)
 
         except Exception as err:
             print("Error occurred! {err}".format(err=err))

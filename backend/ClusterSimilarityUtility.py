@@ -1,5 +1,6 @@
 import csv
 import getpass
+import itertools
 import os
 import re
 
@@ -40,8 +41,7 @@ class ClusterSimilarityUtility:
                 # NNS indicates plural nouns
                 if pos_tag[1] == 'NNS':
                     try:
-                        singular_word = _lemmatiser.lemmatize(_word)
-                        singular_words.append(singular_word)
+                        singular_words.append(_lemmatiser.lemmatize(_word))
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
                 else:
@@ -57,7 +57,7 @@ class ClusterSimilarityUtility:
             if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
                     and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
                 try:
-                    words = word_tokenize(sentence.lower())
+                    words = word_tokenize(sentence)
                     if len(words) > 0:
                         # Keep alphabetic characters only and remove the punctuation
                         cleaned_words = list(filter(lambda w: re.match(r'[^\W\d]*$', w), words))
@@ -243,5 +243,43 @@ class ClusterSimilarityUtility:
                                 'UrbanStudyCorpus_HDBSCAN_similar_papers_' + str(cluster_no) + '_short.csv')
         df.to_csv(out_path, index=False, encoding='utf-8')
         # # Display the cluster no list
+
+    # Find the best combination that produce the lower similarity among keywords
+    @staticmethod
+    def max_sum_sim(cluster_vector, c_vectors, candidates, top_n=5, num_candidates=20):
+        try:
+            # Compute the similarity between cluster vector and each candidate vector
+            keywords = []
+            for index, (candidate, c_vector) in enumerate(zip(candidates, c_vectors)):
+                score = cosine_similarity([cluster_vector], [c_vector])[0, 0]  # Get cosine similarity
+                keywords.append({'keyword': candidate, 'score': score, 'index': index,
+                                 'vector': c_vector})
+            # Sort the keywords by score
+            keywords = sorted(keywords, key=lambda k: k['score'], reverse=True)
+            keyword_candidates = keywords[:num_candidates]
+            # Compute the similarity between candidate vectors
+            kc_vectors = list(map(lambda k: k['vector'], keyword_candidates))
+            # Get top number of candidate as potential keywords based on cosine similarity of cluster vector
+            # Similarity between top keywords words
+            kc_similarity = cosine_similarity(kc_vectors, kc_vectors)
+            # Calculate the combination of words that are the least similar to each other
+            min_sim = np.inf  # Start positive infinity
+            best_comb = None
+            for combination in itertools.combinations(range(len(keyword_candidates)), top_n):
+                # Sum up the similarity of top keywords
+                total_sim = sum([kc_similarity[i][j] for i in combination for j in combination if i != j])
+                if total_sim < min_sim:  # if the combination has the lower similarity
+                    best_comb = combination
+                    min_sim = total_sim
+            # Return a list of top and reverse the list
+            top_keywords = [keyword_candidates[index] for index in best_comb]
+            top_keywords.reverse()
+            # Write the top_keywords as a csv file
+            df = pd.DataFrame(top_keywords, columns=['index', 'score', 'keyword'])
+            path = os.path.join('output', 'similarity', 'temp', 'top_keywords_'+str(num_candidates)+'.csv')
+            df.to_csv(path, encoding='utf-8')
+            return top_keywords
+        except Exception as _err:
+            print("Error occurred! {err}".format(err=_err))
 
 
