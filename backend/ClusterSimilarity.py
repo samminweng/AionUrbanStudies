@@ -60,6 +60,9 @@ class ClusterSimilarity:
             _results = list()
             _results.append({'cluster_vector': _cluster_vector, 'candidate_vectors': _candidate_vectors})
             _df = pd.DataFrame(_results)
+            # Create a 'temp' folder
+            _folder_path = os.path.join('output', 'similarity', 'temp')
+            Path(_folder_path).mkdir(parents=True, exist_ok=True)
             _path = os.path.join('output', 'similarity', 'temp', 'Cluster_vector_Candidate_vectors.json')
             _df.to_json(_path, orient='records')
             return _cluster_vector, _candidate_vectors
