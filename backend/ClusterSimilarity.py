@@ -52,10 +52,17 @@ class ClusterSimilarity:
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     def extract_key_phrases_by_clusters(self):
         # Get the cluster vectors by averaging the vectors of each paper in the cluster
-        def get_cluster_vector(_model, _cluster_texts, _candidates, _is_load=True):
-            _vectors = _model.encode(_cluster_texts)
-            _cluster_vector = np.mean(_vectors)
-            _candidate_vectors = _model.encode(_candidates)
+        def get_cluster_vector(_model, _cluster_texts, _candidates, _is_load=False):
+            if _is_load:
+                _path = os.path.join('output', 'similarity', 'temp', 'Cluster_vector_Candidate_vectors.json')
+                _df = pd.read_json(_path)
+                _dict = _df.to_dict("records")[0]
+                return _dict['cluster_vector'], _dict['candidate_vectors']
+
+            # Compute the cluster vector and key phrase vectors
+            _np_vectors = _model.encode(_cluster_texts).numpy()  # Convert the numpy array
+            _cluster_vector = np.mean(_np_vectors, axis=0)
+            _candidate_vectors = _model.encode(_candidates).numpy()
             # Write the vector data to a json file
             _results = list()
             _results.append({'cluster_vector': _cluster_vector, 'candidate_vectors': _candidate_vectors})
@@ -65,6 +72,7 @@ class ClusterSimilarity:
             Path(_folder_path).mkdir(parents=True, exist_ok=True)
             _path = os.path.join('output', 'similarity', 'temp', 'Cluster_vector_Candidate_vectors.json')
             _df.to_json(_path, orient='records')
+            print("Output the vector results to " + _path)
             return _cluster_vector, _candidate_vectors
 
         try:
@@ -84,7 +92,7 @@ class ClusterSimilarity:
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                         device=self.args.device)
             # Encode cluster doc and keyword candidates into vectors for comparing the similarity
-            cluster_vector, candidates_vectors = get_cluster_vector(model, cluster_texts, candidates)
+            cluster_vector, candidates_vectors = get_cluster_vector(model, cluster_texts, candidates, _is_load=False)
             print(candidates_vectors)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
