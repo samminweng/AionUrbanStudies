@@ -1,0 +1,1712 @@
+doc_id,title,score,similar_cluster_no,similar_doc_id,similar_title
+10,"Urbanization impact on landscape patterns in Beijing City, China: A spatial heterogeneity perspective",0.8900,-1,345,"Exploring the dynamics of urban greenness space and their driving factors using geographically weighted regression: A case study in Wuhan Metropolis, China"
+,,0.88,4,49,"The spatial characteristics and relationships between landscape pattern and ecosystem service value along an urban-rural gradient in Xi'an city, China"
+,,0.83,4,407,"Effects of urbanization on spatiotemporal changes of land cover pattern: A case of Changsha, China"
+,,0.76,5,42,Scale- and region-dependence in landscape-PM2.5 correlation: Implications for urban planning
+,,0.73,5,297,Sensing Mixed Urban Land-Use Patterns Using Municipal Water Consumption Time Series
+,,0.73,-1,234,Night on South Korea: Unraveling the relationship between urban development patterns and DMSP-OLS night-time lights
+,,0.73,4,332,Using satellite image fusion to evaluate the impact of land use changes on ecosystem services and their economic values
+,,0.71,5,70,Driving forces analysis of urban expansion based on boosted regression trees and Logistic regression
+,,0.71,5,157,How does the urban form-PM2.5 concentration relationship change seasonally in Chinese cities? A comparative analysis between national and urban agglomeration scales
+,,0.71,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.70,5,36,Mapping urban form and function at city block level using spatial metrics
+,,0.69,5,98,Analysis on spatiotemporal changes of urban thermal landscape pattern in the context of urbanisation: A case study of Xiamen City
+,,0.69,4,5,Partial least-squares regression for linking land-cover patterns to soil erosion and sediment yield in watersheds
+,,0.68,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.66,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.66,6,91,Daily accessed street greenery and housing price: Measuring economic performance of human-scale streetscapes via new urban data
+,,0.66,5,222,Estimating quality of life dimensions from urban spatial pattern metrics
+,,0.66,4,488,Estimating Socio-Economic Parameters via Machine Learning Methods Using Luojia1-01 Nighttime Light Remotely Sensed Images at Multiple Scales of China in 2018
+,,0.66,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.65,5,145,Impact of community deprivation on urban park access over time: Understanding the relative role of contributors for urban planning
+,,0.65,4,17,Land-cover change and environmental impact analysis in the Greater Mankato area of Minnesota using remote sensing and GIS modelling
+,,0.64,5,160,"Machine learning-assisted evaluation of land use policies and plans in a rapidly urbanizing district in Chongqing, China"
+,,0.64,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.64,4,204,Understanding the spatial distribution of urban forests in China using Sentinel-2 images with Google Earth Engine
+,,0.64,4,176,"Landscape Transformations in Rapidly Developing Peri-urban Areas of Accra, Ghana: Results of 30 years"
+,,0.63,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.63,5,421,"Evaluation of the environmental impacts of urbanization from the viewpoint of increased skin temperatures: a case study from Istanbul, Turkey"
+,,0.63,5,143,Coupling cellular automata with area partitioning and spatiotemporal convolution for dynamic land use change simulation
+,,0.63,5,39,Turning down the heat: An enhanced understanding of the relationship between urban vegetation and surface temperature at the city scale
+,,0.63,5,257,Investigation of the impact of land-use distribution on pm2.5 in weifang: Seasonal variations
+345,"Exploring the dynamics of urban greenness space and their driving factors using geographically weighted regression: A case study in Wuhan Metropolis, China",0.8900,-1,10,"Urbanization impact on landscape patterns in Beijing City, China: A spatial heterogeneity perspective"
+,,0.83,4,49,"The spatial characteristics and relationships between landscape pattern and ecosystem service value along an urban-rural gradient in Xi'an city, China"
+,,0.78,4,407,"Effects of urbanization on spatiotemporal changes of land cover pattern: A case of Changsha, China"
+,,0.77,5,42,Scale- and region-dependence in landscape-PM2.5 correlation: Implications for urban planning
+,,0.75,5,297,Sensing Mixed Urban Land-Use Patterns Using Municipal Water Consumption Time Series
+,,0.74,6,27,Measuring daily accessed street greenery: A human-scale approach for informing better urban planning practices
+,,0.74,5,222,Estimating quality of life dimensions from urban spatial pattern metrics
+,,0.74,6,91,Daily accessed street greenery and housing price: Measuring economic performance of human-scale streetscapes via new urban data
+,,0.73,4,332,Using satellite image fusion to evaluate the impact of land use changes on ecosystem services and their economic values
+,,0.72,4,521,"Remote sensing and GIS approach for environmental green areas planning using Landsat satellite imagery, Dubai-UAE"
+,,0.72,5,145,Impact of community deprivation on urban park access over time: Understanding the relative role of contributors for urban planning
+,,0.72,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.71,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.71,5,70,Driving forces analysis of urban expansion based on boosted regression trees and Logistic regression
+,,0.71,5,36,Mapping urban form and function at city block level using spatial metrics
+,,0.70,4,17,Land-cover change and environmental impact analysis in the Greater Mankato area of Minnesota using remote sensing and GIS modelling
+,,0.70,-1,234,Night on South Korea: Unraveling the relationship between urban development patterns and DMSP-OLS night-time lights
+,,0.69,5,157,How does the urban form-PM2.5 concentration relationship change seasonally in Chinese cities? A comparative analysis between national and urban agglomeration scales
+,,0.69,5,160,"Machine learning-assisted evaluation of land use policies and plans in a rapidly urbanizing district in Chongqing, China"
+,,0.69,5,39,Turning down the heat: An enhanced understanding of the relationship between urban vegetation and surface temperature at the city scale
+,,0.68,5,98,Analysis on spatiotemporal changes of urban thermal landscape pattern in the context of urbanisation: A case study of Xiamen City
+,,0.68,5,340,Do land policies make a difference? A data-driven approach to trace effects on urban form in France and Germany
+,,0.68,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.68,5,424,Assessing the cooling efficiency of urban parks using data envelopment analysis and remote sensing data
+,,0.68,4,488,Estimating Socio-Economic Parameters via Machine Learning Methods Using Luojia1-01 Nighttime Light Remotely Sensed Images at Multiple Scales of China in 2018
+,,0.68,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.67,5,247,Predicting stream water quality under different urban development pattern scenarios with an interpretable machine learning approach
+,,0.67,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.67,5,474,Analysis of built-up areas of small polish cities with the use of deep learning and geographically weighted regression
+,,0.67,5,329,Modeling fine-scale residential land price distribution: An experimental study using open data and machine learning
+472,"Mapping essential urban land use categories (EULUC) using geospatial big data: Progress, challenges, and opportunities",0.8700,4,324,Mapping essential urban land use categories with open big data: Results for five metropolitan areas in the United States of America
+,,0.81,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.78,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.77,4,537,Integrating activity-based geographic information and long-term remote sensing to characterize urban land use change
+,,0.74,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.73,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.72,5,52,Upscaling urban data science for global climate solutions
+,,0.72,5,297,Sensing Mixed Urban Land-Use Patterns Using Municipal Water Consumption Time Series
+,,0.72,6,410,Street view imagery in urban analytics and GIS: A review
+,,0.71,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.71,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.70,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.70,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.70,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.70,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.69,9,512,Region2vec: An Approach for Urban Land Use Detection by Fusing multiple Features
+,,0.69,4,77,Urban land cover and land use classification of an informal settlement area using the open-source knowledge-based system InterIMAGE
+,,0.68,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.68,5,202,Spatiotemporal modeling of urban growth using machine learning
+,,0.68,4,17,Land-cover change and environmental impact analysis in the Greater Mankato area of Minnesota using remote sensing and GIS modelling
+,,0.68,6,427,"Panoramic street-level imagery in data-driven urban research: A comprehensive global review of applications, techniques, and practical considerations"
+,,0.67,5,340,Do land policies make a difference? A data-driven approach to trace effects on urban form in France and Germany
+,,0.67,4,64,Land Classification Using Remotely Sensed Data: Going Multilabel
+,,0.67,4,300,Spatiotemporal dynamics of urbanization and cropland in the Nile Delta of Egypt using machine learning and satellite big data: implications for sustainable development
+,,0.67,5,36,Mapping urban form and function at city block level using spatial metrics
+,,0.67,5,222,Estimating quality of life dimensions from urban spatial pattern metrics
+,,0.66,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+,,0.66,8,140,How should urban planners be trained to handle big data?
+,,0.66,5,474,Analysis of built-up areas of small polish cities with the use of deep learning and geographically weighted regression
+,,0.66,4,204,Understanding the spatial distribution of urban forests in China using Sentinel-2 images with Google Earth Engine
+174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China",0.8400,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.83,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.74,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.74,4,30,From land cover-graphs to urban structure types
+,,0.74,9,203,Automatic identification of the social functions of areas of interest (AOIS) using the standard hour-day-spectrum approach
+,,0.74,5,329,Modeling fine-scale residential land price distribution: An experimental study using open data and machine learning
+,,0.73,5,172,Analyzing the spatial factors related to the distributions of building heights in urban areas: A comparative case study in Guangzhou and Shenzhen
+,,0.73,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.73,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.73,4,324,Mapping essential urban land use categories with open big data: Results for five metropolitan areas in the United States of America
+,,0.72,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.72,4,228,Population spatialization in Beijing city based on machine learning and multisource remote sensing data
+,,0.72,6,390,Holistic visual data representation for built environment assessment
+,,0.71,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.70,5,70,Driving forces analysis of urban expansion based on boosted regression trees and Logistic regression
+,,0.70,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+,,0.70,-1,85,Identification of low-carbon travel block based on GIS hotspot analysis using spatial distribution learning algorithm
+,,0.70,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.70,4,497,Urban population distribution mapping with multisource geospatial data based on zonal strategy
+,,0.70,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.69,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.69,4,488,Estimating Socio-Economic Parameters via Machine Learning Methods Using Luojia1-01 Nighttime Light Remotely Sensed Images at Multiple Scales of China in 2018
+,,0.69,5,445,Local and application-specific geodemographics for data-led urban decision making
+,,0.69,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.69,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.69,5,526,Characterizing air quality in urban areas with mobile measurement and high resolution open spatial data: Comparison of different machine-learning approaches using a visual interface
+,,0.68,4,540,Machine Learning for Strategic Urban Planning
+,,0.68,4,204,Understanding the spatial distribution of urban forests in China using Sentinel-2 images with Google Earth Engine
+,,0.68,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.68,4,109,Comparative assessment of machine learning methods for urban vegetation mapping using multitemporal Sentinel-1 imagery
+184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources,0.8400,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.83,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.79,4,30,From land cover-graphs to urban structure types
+,,0.78,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.77,6,390,Holistic visual data representation for built environment assessment
+,,0.76,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.75,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.75,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.75,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.74,4,20,Building type classification using spatial and landscape attributes derived from LiDAR remote sensing data
+,,0.74,4,324,Mapping essential urban land use categories with open big data: Results for five metropolitan areas in the United States of America
+,,0.74,5,172,Analyzing the spatial factors related to the distributions of building heights in urban areas: A comparative case study in Guangzhou and Shenzhen
+,,0.74,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.73,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+,,0.73,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.73,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.73,4,532,Comparison of performance of artificial neural network (ANN) and random forest (RF) in the classification of land cover zones of urban slum region
+,,0.72,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.72,4,251,Remote measurement of building usable floor area – Algorithms fusion
+,,0.72,4,242,Urban areas extraction from multi sensor data based on machine learning and data fusion
+,,0.72,9,587,2nd International Workshop on Mining Urban Data (Preface)
+,,0.72,5,329,Modeling fine-scale residential land price distribution: An experimental study using open data and machine learning
+,,0.72,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.72,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.72,4,540,Machine Learning for Strategic Urban Planning
+,,0.71,9,203,Automatic identification of the social functions of areas of interest (AOIS) using the standard hour-day-spectrum approach
+,,0.71,4,401,Comparison of different machine learning classifiers for building extraction in LiDAR-derived datasets
+,,0.71,3,429,Improving intelligent decision making in urban planning: Using machine learning algorithms
+,,0.71,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.71,4,455,Fusion of airborne lidar point clouds and aerial images for heterogeneous land-use urban mapping
+88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics,0.8300,2,483,AI and Deep Learning for Urban Computing
+,,0.78,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.77,6,546,Variational beauty of space: Machine intuition and non-linear neural aggregations
+,,0.76,6,43,StreetVizor: Visual Exploration of Human-Scale Urban Forms Based on Street Views
+,,0.75,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.75,7,386,Machine learning for real-time urban metrics and design recommendations
+,,0.74,6,427,"Panoramic street-level imagery in data-driven urban research: A comprehensive global review of applications, techniques, and practical considerations"
+,,0.74,-1,536,Urban street contexts classification using convolutional neural networks and streets imagery
+,,0.73,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.73,6,410,Street view imagery in urban analytics and GIS: A review
+,,0.73,6,16,Measuring visual enclosure for street walkability: Using machine learning algorithms and Google Street View imagery
+,,0.72,6,239,Deep CNN-based methods to evaluate neighborhood-scale urban valuation through street scenes perception
+,,0.72,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+,,0.72,7,482,Introduction to Urban Computing
+,,0.72,9,507,A deep learning approach to urban street functionality prediction based on centrality measures and stacked denoising autoencoder
+,,0.72,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.72,6,15,A machine learning-based method for the large-scale evaluation of the qualities of the urban environment
+,,0.71,4,389,Understanding Historical Cityscapes from Aerial Imagery Through Machine Learning
+,,0.71,6,557,The Social Life of Small Urban Spaces 2.0: Three Experiments in Computational Urban Studies
+,,0.71,6,59,A human-machine adversarial scoring framework for urban perception assessment using street-view images
+,,0.70,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.70,7,4,"On big data, artificial intelligence and smart cities"
+,,0.70,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.70,7,563,"Proceedings of the 1st ACM SIGSPATIAL International Workshop on Advances in Resilient and Intelligent Cities, ARIC 2018"
+,,0.70,4,144,Aerial point cloud classification with deep learning and machine learning algorithms
+,,0.70,5,50,Mining transition rules of cellular automata for simulating urban expansion by using the deep learning techniques
+,,0.70,5,138,Machine learning for geographically differentiated climate change mitigation in urban areas
+,,0.69,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.69,5,202,Spatiotemporal modeling of urban growth using machine learning
+,,0.69,6,470,Evolution of historical urban landscape with computer vision and machine learning: A case study of Berlin
+342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data,0.8300,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.83,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.81,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.80,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.79,4,30,From land cover-graphs to urban structure types
+,,0.78,4,540,Machine Learning for Strategic Urban Planning
+,,0.78,4,324,Mapping essential urban land use categories with open big data: Results for five metropolitan areas in the United States of America
+,,0.77,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.77,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.77,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.76,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.76,4,242,Urban areas extraction from multi sensor data based on machine learning and data fusion
+,,0.76,4,548,Land cover classification and change detection analysis of multispectral satellite images using machine learning
+,,0.76,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.76,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.75,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.75,4,84,Modeling Urban Land Use Changes Using Support Vector Machines
+,,0.75,6,390,Holistic visual data representation for built environment assessment
+,,0.75,9,203,Automatic identification of the social functions of areas of interest (AOIS) using the standard hour-day-spectrum approach
+,,0.75,4,537,Integrating activity-based geographic information and long-term remote sensing to characterize urban land use change
+,,0.74,9,512,Region2vec: An Approach for Urban Land Use Detection by Fusing multiple Features
+,,0.74,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.74,4,77,Urban land cover and land use classification of an informal settlement area using the open-source knowledge-based system InterIMAGE
+,,0.74,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.73,4,481,Virtual design of urban planning based on GIS big data and machine learning
+,,0.73,4,228,Population spatialization in Beijing city based on machine learning and multisource remote sensing data
+,,0.73,5,12,Mining urban land-use patterns from volunteered geographic information by means of genetic algorithms and artificial neural networks
+,,0.73,5,74,Performance analysis of radial basis function networks and multi-layer perceptron networks in modeling urban change: a case study
+,,0.73,4,63,Support Vector Machine accuracy assessment for extracting green urban areas in towns
+,,0.73,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+463,Machine Learning Predictors for Sustainable Urban Planning,0.8200,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.80,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.78,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.78,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.78,5,446,Investigation of urban climates and built environment relations by using machine learning
+,,0.77,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.77,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.77,6,390,Holistic visual data representation for built environment assessment
+,,0.76,3,293,Design of machine learning model for Urban planning and management improvement
+,,0.76,6,518,Modeling and evaluating the residential urban environment perception
+,,0.76,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.76,3,429,Improving intelligent decision making in urban planning: Using machine learning algorithms
+,,0.75,7,386,Machine learning for real-time urban metrics and design recommendations
+,,0.75,5,172,Analyzing the spatial factors related to the distributions of building heights in urban areas: A comparative case study in Guangzhou and Shenzhen
+,,0.75,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.75,5,440,"Towards low carbon cities: A machine learning method for predicting urban blocks carbon emissions (UBCE) based on built environment factors (BEF) in Changxing City, China"
+,,0.75,5,160,"Machine learning-assisted evaluation of land use policies and plans in a rapidly urbanizing district in Chongqing, China"
+,,0.74,5,74,Performance analysis of radial basis function networks and multi-layer perceptron networks in modeling urban change: a case study
+,,0.74,5,138,Machine learning for geographically differentiated climate change mitigation in urban areas
+,,0.74,5,329,Modeling fine-scale residential land price distribution: An experimental study using open data and machine learning
+,,0.74,5,50,Mining transition rules of cellular automata for simulating urban expansion by using the deep learning techniques
+,,0.74,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.74,-1,394,Analysis of relationship between road traffic noise and urban form indicators through machine learning method
+,,0.73,6,51,"Impacts of land use and amenities on public transport use, urban planning and design"
+,,0.73,5,202,Spatiotemporal modeling of urban growth using machine learning
+,,0.73,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.73,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.73,6,252,A data-informed analytical approach to human-scale greenway planning: Integrating multi-sourced urban data with machine learning algorithms
+,,0.73,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.73,5,206,Investigating important urban characteristics in the formation of urban heat islands: a machine learning approach
+551,Exploring different combinations of data and methods for urban land use analysis: A survey,0.8200,4,324,Mapping essential urban land use categories with open big data: Results for five metropolitan areas in the United States of America
+,,0.81,-1,472,"Mapping essential urban land use categories (EULUC) using geospatial big data: Progress, challenges, and opportunities"
+,,0.81,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.79,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.78,4,537,Integrating activity-based geographic information and long-term remote sensing to characterize urban land use change
+,,0.77,5,12,Mining urban land-use patterns from volunteered geographic information by means of genetic algorithms and artificial neural networks
+,,0.77,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.77,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.76,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.75,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.75,9,512,Region2vec: An Approach for Urban Land Use Detection by Fusing multiple Features
+,,0.75,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.75,4,77,Urban land cover and land use classification of an informal settlement area using the open-source knowledge-based system InterIMAGE
+,,0.75,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.74,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.74,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.74,-1,595,Developing methodologies of knowledge discovery and data mining to investigate metropolitan land use evolution
+,,0.74,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.74,4,251,Remote measurement of building usable floor area – Algorithms fusion
+,,0.73,4,30,From land cover-graphs to urban structure types
+,,0.73,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.72,9,587,2nd International Workshop on Mining Urban Data (Preface)
+,,0.72,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.72,4,84,Modeling Urban Land Use Changes Using Support Vector Machines
+,,0.72,5,474,Analysis of built-up areas of small polish cities with the use of deep learning and geographically weighted regression
+,,0.72,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.72,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.71,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+,,0.71,4,539,EVALUATION of ADVANCED DATA MINING ALGORITHMS in LAND USE/LAND COVER MAPPING
+,,0.71,5,202,Spatiotemporal modeling of urban growth using machine learning
+595,Developing methodologies of knowledge discovery and data mining to investigate metropolitan land use evolution,0.8100,5,167,Urban Data Mining using emergent SOM
+,,0.78,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.75,3,306,Comparative review of methods supporting decision-making in urban development and land management
+,,0.75,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.75,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.74,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.73,5,399,Systematic data mining into land consumption in Germany
+,,0.72,3,429,Improving intelligent decision making in urban planning: Using machine learning algorithms
+,,0.72,5,12,Mining urban land-use patterns from volunteered geographic information by means of genetic algorithms and artificial neural networks
+,,0.72,3,48,Can expert systems help with planning?
+,,0.71,5,594,Research on application of intelligent computation - Based LUCC model in urbanization process
+,,0.71,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.71,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.71,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.71,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.71,3,293,Design of machine learning model for Urban planning and management improvement
+,,0.70,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+,,0.70,5,583,Feature selection and knowledge extraction from buppu 2000 and 2010 censuses using artificial intelligence
+,,0.70,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.70,3,322,Knowledge and reasoning in development control and urban design: an expert systems approach
+,,0.69,3,183,The promise of expert systems for urban planning
+,,0.69,3,596,A knowledge-based creation of mathematical programming for GIS problem solving
+,,0.69,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.69,5,340,Do land policies make a difference? A data-driven approach to trace effects on urban form in France and Germany
+,,0.69,3,558,Application of AI in urban design
+,,0.69,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.68,4,182,A comparative analysis of the urban web of the greater athens agglomeration for the last 20-years period on the basis of landsat imagery
+,,0.68,5,155,Improving land-use change modeling by integrating ANN with Cellular Automata-Markov Chain model
+,,0.68,3,241,An information system for judicial and public administration using artificial intelligence and geospatial data
+,,0.67,5,474,Analysis of built-up areas of small polish cities with the use of deep learning and geographically weighted regression
+189,Detecting Transportation Modes Based on LightGBM Classifier from GPS Trajectory Data,0.8000,-1,400,A comparison among various classification algorithms for travel mode detection using sensors' data collected by smartphones
+,,0.70,-1,207,A fuzzy logic based transport mode detection framework in urban environment
+,,0.69,2,161,Toward Transportation Mode Recognition Using Deep Convolutional and Long Short-Term Memory Recurrent Neural Networks
+,,0.66,2,18,Citywide Traffic Volume Estimation Using Trajectory Data
+,,0.65,2,225,Dynamic spatial-temporal feature optimization with ERI big data for Short-term traffic flow prediction
+,,0.64,2,302,Data-driven next destination prediction and ETA improvement for urban delivery fleets
+,,0.64,9,529,Transaction-Driven Mobility Analysis for Travel Mode Choices
+,,0.63,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.62,1,80,"Intelligent GPS L1 LOS/multipath/NLOS classifiers based on correlator-, RINEX- and NMEA-level measurements"
+,,0.61,2,388,Data mining techniques for smart mobility—a survey
+,,0.61,9,33,Urban human mobility data mining: An overview
+,,0.61,9,87,IVizTRANS: Interactive visual learning for home and work place detection from massive public transportation data
+,,0.61,9,334,A generic paradigm for mining human mobility patterns based on the GPS trajectory data using complex network analysis
+,,0.61,9,40,Analyzing large-scale human mobility data: a survey of machine learning methods and applications
+,,0.60,-1,85,Identification of low-carbon travel block based on GIS hotspot analysis using spatial distribution learning algorithm
+,,0.60,2,158,Trajectory clustering of road traffic in urban environments using incremental machine learning in combination with hyperdimensional computing
+,,0.59,2,461,Optimal logistics transportation and route planning based on fpga processor real-time system and machine learning
+,,0.59,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.59,9,118,Automated urban travel interpretation: A bottom-up approach for trajectory segmentation
+,,0.58,9,203,Automatic identification of the social functions of areas of interest (AOIS) using the standard hour-day-spectrum approach
+,,0.58,9,260,Integrating geovisual analytics with machine learning for human mobility pattern discovery
+,,0.58,7,597,The design of urban geographical information system for transportation
+,,0.57,9,397,Data mining tourism patterns
+,,0.57,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.57,2,335,Research on the big data of traditional taxi and online car-hailing: A systematic review
+,,0.57,9,193,Characterization of behavioral patterns exploiting description of geographical areas
+,,0.57,2,108,Strategway: Web solutions for building public transportation routes using big geodata analysis
+,,0.57,9,550,Latent Flow Patterns Discovery by Dockless Bike Trajectory Data for Demand Analysis
+,,0.56,1,280,Improving GPS Code Phase Positioning Accuracy in Urban Environments Using Machine Learning
+,,0.56,9,442,Interpretation of contextual influences with explanatory tools: Travel mode likelihood mapping using GPS trajectories
+263,"Mapping poverty and slums using multiple methodologies in Accra, Ghana",0.8000,-1,438,Identifying urban poverty using high-resolution satellite imagery and machine learning approaches: Implications for housing inequality
+,,0.72,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+,,0.71,4,531,Mapping Urban Slum Settlements Using Very High-Resolution Imagery and Land Boundary Data
+,,0.71,4,110,Deprivation pockets through the lens of convolutional neural networks
+,,0.67,4,224,Assessing urban growth in Ghana using machine learning and intensity analysis: A case study of the New Juaben Municipality
+,,0.66,5,221,"Urban Water Demand Modeling Using Machine Learning Techniques: Case Study of Fortaleza, Brazil"
+,,0.65,5,222,Estimating quality of life dimensions from urban spatial pattern metrics
+,,0.64,5,432,Sustainable development scale of housing estates: An economic assessment using machine learning approach
+,,0.63,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.63,4,347,Analysing urban development patterns in a conflict zone: A case study of kabul
+,,0.62,4,324,Mapping essential urban land use categories with open big data: Results for five metropolitan areas in the United States of America
+,,0.62,5,462,A glimpse into the future of exposure and vulnerabilities in cities? Modelling of residential location choice of urban population with random forest
+,,0.62,4,300,Spatiotemporal dynamics of urbanization and cropland in the Nile Delta of Egypt using machine learning and satellite big data: implications for sustainable development
+,,0.62,9,491,Predicting and mapping neighborhood-scale health outcomes: A machine learning approach
+,,0.62,9,107,Structure of 311 service requests as a signature of urban location
+,,0.61,4,176,"Landscape Transformations in Rapidly Developing Peri-urban Areas of Accra, Ghana: Results of 30 years"
+,,0.61,4,488,Estimating Socio-Economic Parameters via Machine Learning Methods Using Luojia1-01 Nighttime Light Remotely Sensed Images at Multiple Scales of China in 2018
+,,0.61,5,201,"High-resolution spatiotemporal measurement of air and environmental noise pollution in Sub-Saharan African cities: Pathways to Equitable Health Cities Study protocol for Accra, Ghana"
+,,0.61,5,329,Modeling fine-scale residential land price distribution: An experimental study using open data and machine learning
+,,0.61,7,466,Visual Analytics of Urban Informality and Infrastructure Planning with Tableau for Sustainable Urban Design Research Strategies in Lagos Metropolis
+,,0.61,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.61,5,474,Analysis of built-up areas of small polish cities with the use of deep learning and geographically weighted regression
+,,0.61,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.61,6,390,Holistic visual data representation for built environment assessment
+,,0.60,9,341,Applying machine learning and geolocation techniques to social media data (Twitter) to develop a resource for urban planning
+,,0.60,5,202,Spatiotemporal modeling of urban growth using machine learning
+,,0.60,6,557,The Social Life of Small Urban Spaces 2.0: Three Experiments in Computational Urban Studies
+,,0.59,-1,472,"Mapping essential urban land use categories (EULUC) using geospatial big data: Progress, challenges, and opportunities"
+,,0.59,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.59,4,139,Patterns of historical and future urban expansion in Nepal
+400,A comparison among various classification algorithms for travel mode detection using sensors' data collected by smartphones,0.8000,-1,189,Detecting Transportation Modes Based on LightGBM Classifier from GPS Trajectory Data
+,,0.74,-1,207,A fuzzy logic based transport mode detection framework in urban environment
+,,0.66,2,388,Data mining techniques for smart mobility—a survey
+,,0.66,2,161,Toward Transportation Mode Recognition Using Deep Convolutional and Long Short-Term Memory Recurrent Neural Networks
+,,0.64,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.64,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.64,2,133,A comparison of machine learning methods for the prediction of traffic speed in Urban places
+,,0.61,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.61,9,193,Characterization of behavioral patterns exploiting description of geographical areas
+,,0.61,1,80,"Intelligent GPS L1 LOS/multipath/NLOS classifiers based on correlator-, RINEX- and NMEA-level measurements"
+,,0.60,2,225,Dynamic spatial-temporal feature optimization with ERI big data for Short-term traffic flow prediction
+,,0.60,-1,85,Identification of low-carbon travel block based on GIS hotspot analysis using spatial distribution learning algorithm
+,,0.60,2,302,Data-driven next destination prediction and ETA improvement for urban delivery fleets
+,,0.59,9,87,IVizTRANS: Interactive visual learning for home and work place detection from massive public transportation data
+,,0.58,9,40,Analyzing large-scale human mobility data: a survey of machine learning methods and applications
+,,0.58,9,33,Urban human mobility data mining: An overview
+,,0.58,9,203,Automatic identification of the social functions of areas of interest (AOIS) using the standard hour-day-spectrum approach
+,,0.58,7,597,The design of urban geographical information system for transportation
+,,0.58,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.57,9,529,Transaction-Driven Mobility Analysis for Travel Mode Choices
+,,0.57,9,381,Dimensionality Reduction to Reveal Urban Truck Driver Activity Patterns
+,,0.57,9,404,Automated urban location annotation on mobile records
+,,0.57,7,464,Smart Urban Mobility: When Mobility Systems Meet Smart Data
+,,0.57,2,158,Trajectory clustering of road traffic in urban environments using incremental machine learning in combination with hyperdimensional computing
+,,0.57,1,152,NLOS multipath detection by using machine learning in urban environments
+,,0.56,9,334,A generic paradigm for mining human mobility patterns based on the GPS trajectory data using complex network analysis
+,,0.56,-1,394,Analysis of relationship between road traffic noise and urban form indicators through machine learning method
+,,0.56,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.56,2,18,Citywide Traffic Volume Estimation Using Trajectory Data
+,,0.55,9,270,Cell-to-cell activity prediction for smart cities
+438,Identifying urban poverty using high-resolution satellite imagery and machine learning approaches: Implications for housing inequality,0.8000,-1,263,"Mapping poverty and slums using multiple methodologies in Accra, Ghana"
+,,0.76,4,531,Mapping Urban Slum Settlements Using Very High-Resolution Imagery and Land Boundary Data
+,,0.75,4,110,Deprivation pockets through the lens of convolutional neural networks
+,,0.74,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+,,0.72,4,488,Estimating Socio-Economic Parameters via Machine Learning Methods Using Luojia1-01 Nighttime Light Remotely Sensed Images at Multiple Scales of China in 2018
+,,0.72,5,329,Modeling fine-scale residential land price distribution: An experimental study using open data and machine learning
+,,0.71,6,390,Holistic visual data representation for built environment assessment
+,,0.70,5,432,Sustainable development scale of housing estates: An economic assessment using machine learning approach
+,,0.68,4,540,Machine Learning for Strategic Urban Planning
+,,0.68,6,427,"Panoramic street-level imagery in data-driven urban research: A comprehensive global review of applications, techniques, and practical considerations"
+,,0.68,5,222,Estimating quality of life dimensions from urban spatial pattern metrics
+,,0.68,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.68,4,228,Population spatialization in Beijing city based on machine learning and multisource remote sensing data
+,,0.68,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.67,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.67,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.67,5,172,Analyzing the spatial factors related to the distributions of building heights in urban areas: A comparative case study in Guangzhou and Shenzhen
+,,0.66,4,324,Mapping essential urban land use categories with open big data: Results for five metropolitan areas in the United States of America
+,,0.66,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.66,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.66,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.66,5,474,Analysis of built-up areas of small polish cities with the use of deep learning and geographically weighted regression
+,,0.66,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.66,6,410,Street view imagery in urban analytics and GIS: A review
+,,0.65,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.65,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.65,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.65,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.65,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.65,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+480,Measuring sustainability and urban data operationalization: An integrated computational framework to evaluate and interpret the performance of the urban form,0.8000,5,149,"Generative design and performance modeling for relationships between urban built forms, sky opening, solar radiation and energy"
+,,0.75,6,43,StreetVizor: Visual Exploration of Human-Scale Urban Forms Based on Street Views
+,,0.74,7,386,Machine learning for real-time urban metrics and design recommendations
+,,0.73,5,146,Multivariate relationships between campus design parameters and energy performance using reinforcement learning and parametric modeling
+,,0.73,3,218,Procedural lot generation for evolutionary urban layout optimization in urban regeneration decision support
+,,0.73,6,27,Measuring daily accessed street greenery: A human-scale approach for informing better urban planning practices
+,,0.71,6,252,A data-informed analytical approach to human-scale greenway planning: Integrating multi-sourced urban data with machine learning algorithms
+,,0.69,6,557,The Social Life of Small Urban Spaces 2.0: Three Experiments in Computational Urban Studies
+,,0.68,5,101,Identifying urban geometric types as energy performance patterns
+,,0.68,5,287,Learning from urban form to predict building heights
+,,0.68,7,555,"Algorithms, AI and architecture"
+,,0.67,7,357,Viewpoint: City Information Modelling (CIM) and Digitizing Urban Design Practices
+,,0.67,5,36,Mapping urban form and function at city block level using spatial metrics
+,,0.67,6,16,Measuring visual enclosure for street walkability: Using machine learning algorithms and Google Street View imagery
+,,0.67,7,556,"18th International Conference on Computer-Aided Architectural Design Futures, CAAD Futures 2019"
+,,0.67,6,62,The visual quality of streets: A human-centred continuous measurement based on machine learning algorithms and street view images
+,,0.67,6,470,Evolution of historical urban landscape with computer vision and machine learning: A case study of Berlin
+,,0.67,5,119,"A data-driven approach for multi-scale GIS-based building energy modeling for analysis, planning and support decision making"
+,,0.66,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.66,7,317,Towards typogenetic tools for generative urban aesthetics
+,,0.66,-1,259,Machine Learning Assisted Urban Filling
+,,0.66,5,479,Estimating the influence of building and urban form on the thermal loads of urban dwellings in the Mediterranean climate using machine learning
+,,0.66,7,569,Designing with citizens: Challenges and evaluation methods for crowd-sourced urban layouts
+,,0.66,7,282,Towards the collaborative development of machine learning techniques in planning support systems – a Sydney example
+,,0.66,6,115,A systematic measurement of street quality through multi-sourced Urban data: A human-oriented analysis
+,,0.66,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.65,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.65,6,15,A machine learning-based method for the large-scale evaluation of the qualities of the urban environment
+,,0.65,7,466,Visual Analytics of Urban Informality and Infrastructure Planning with Tableau for Sustainable Urban Design Research Strategies in Lagos Metropolis
+,,0.65,7,482,Introduction to Urban Computing
+536,Urban street contexts classification using convolutional neural networks and streets imagery,0.7900,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.75,-1,194,Classification of sidewalks in street view images
+,,0.74,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.73,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.72,6,239,Deep CNN-based methods to evaluate neighborhood-scale urban valuation through street scenes perception
+,,0.72,6,546,Variational beauty of space: Machine intuition and non-linear neural aggregations
+,,0.72,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.71,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.70,4,428,Comparing three machine learning techniques for building extraction from a digital surface model
+,,0.70,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.70,4,81,Building extraction from LiDAR data applying deep convolutional neural networks
+,,0.70,9,507,A deep learning approach to urban street functionality prediction based on centrality measures and stacked denoising autoencoder
+,,0.70,2,483,AI and Deep Learning for Urban Computing
+,,0.70,4,3,Building detection in very high resolution multispectral data with deep learning features
+,,0.69,6,59,A human-machine adversarial scoring framework for urban perception assessment using street-view images
+,,0.69,4,389,Understanding Historical Cityscapes from Aerial Imagery Through Machine Learning
+,,0.69,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+,,0.68,2,106,Urban traffic flow analysis based on deep learning car detection from cctv image series
+,,0.68,4,156,A locally-constrained YOLO framework for detecting small and densely-distributed building footprints
+,,0.68,-1,217,Classification of urban scenes from georeferenced images in urban street-view context
+,,0.67,4,256,A generalized multi-task learning approach to stereo DSM filtering in urban areas
+,,0.67,4,460,Use of deep learning models in street-level images to classify one-story unreinforced masonry buildings based on roof diaphragms
+,,0.67,4,125,Object-based detection of vehicles using combined optical and elevation data
+,,0.67,4,148,Self-supervised feature learning for semantic segmentation of overhead imagery
+,,0.67,4,144,Aerial point cloud classification with deep learning and machine learning algorithms
+,,0.67,4,220,Attention-Gate-Based Encoder-Decoder Network for Automatical Building Extraction
+,,0.67,4,110,Deprivation pockets through the lens of convolutional neural networks
+,,0.67,4,249,Deep learning-based multi-feature semantic segmentation in building extraction from images of UAV photogrammetry
+,,0.66,6,423,Subjectively measured streetscape perceptions to inform urban design strategies for Shanghai
+,,0.66,-1,314,Detecting advertising on building façades with computer vision
+44,Citizen-centered big data analysis-driven governance intelligence framework for smart cities,0.7800,-1,250,A value of civic voices for smart city: A big data analysis of civic queries posed by Seoul citizens
+,,0.75,7,4,"On big data, artificial intelligence and smart cities"
+,,0.74,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.73,7,305,Participatory AI: Reducing AI bias and developing socially responsible AI in smart cities
+,,0.71,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.71,8,140,How should urban planners be trained to handle big data?
+,,0.70,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.70,7,482,Introduction to Urban Computing
+,,0.69,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.68,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.68,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+,,0.68,7,94,Smart cities and a data-driven response to COVID-19
+,,0.67,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.67,9,574,"Processing, mining and visualizing massive urban data"
+,,0.66,8,164,Social media data analysis in urban e-planning
+,,0.66,5,52,Upscaling urban data science for global climate solutions
+,,0.65,-1,519,IFDaD 2020 - Proceedings of the 1st International Forum on Digital and Democracy. Towards A Sustainable Evolution 2020
+,,0.65,7,7,On the coronavirus (Covid-19) outbreak and the smart city network: Universal data sharing standards coupled with artificial intelligence (ai) to benefit urban health monitoring and management
+,,0.65,-1,187,Kadaster knowledge graph: Beyond the fifth star of open data
+,,0.64,7,282,Towards the collaborative development of machine learning techniques in planning support systems – a Sydney example
+,,0.64,7,47,Semantic framework of internet of things for smart cities: Case studies
+,,0.64,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.64,7,464,Smart Urban Mobility: When Mobility Systems Meet Smart Data
+,,0.63,-1,129,Artificial intelligence technologies and related urban planning and development concepts: How are they perceived and utilized in Australia?
+,,0.63,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.63,8,170,Automated classification of social network messages into Smart Cities dimensions
+,,0.63,7,433,Nordic Cities Meet Artificial Intelligence
+,,0.63,8,312,An AI Approach to Collecting and Analyzing Human Interactions with Urban Environments
+,,0.63,7,500,"Evaluation of Smart Infrastructure Systems and Novel UV-Oriented Solution for Integration, Resilience, Inclusiveness, and Sustainability"
+,,0.63,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+250,A value of civic voices for smart city: A big data analysis of civic queries posed by Seoul citizens,0.7800,-1,44,Citizen-centered big data analysis-driven governance intelligence framework for smart cities
+,,0.74,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+,,0.72,8,164,Social media data analysis in urban e-planning
+,,0.71,8,208,Game-based crowdsourcing to support collaborative customization of the definition of sustainability
+,,0.70,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.70,-1,129,Artificial intelligence technologies and related urban planning and development concepts: How are they perceived and utilized in Australia?
+,,0.69,7,4,"On big data, artificial intelligence and smart cities"
+,,0.69,9,578,STA: A spatio-temporal thematic analytics framework for urban ground sensing
+,,0.68,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.68,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.68,7,305,Participatory AI: Reducing AI bias and developing socially responsible AI in smart cities
+,,0.67,8,170,Automated classification of social network messages into Smart Cities dimensions
+,,0.67,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.67,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.66,8,312,An AI Approach to Collecting and Analyzing Human Interactions with Urban Environments
+,,0.66,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.66,7,515,Smart urban futures: Outlining the smart city planning project
+,,0.65,9,574,"Processing, mining and visualizing massive urban data"
+,,0.65,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.64,7,433,Nordic Cities Meet Artificial Intelligence
+,,0.64,9,107,Structure of 311 service requests as a signature of urban location
+,,0.64,8,140,How should urban planners be trained to handle big data?
+,,0.64,7,482,Introduction to Urban Computing
+,,0.63,9,370,Crowdsensed Data Learning-Driven Prediction of Local Businesses Attractiveness in Smart Cities
+,,0.63,-1,187,Kadaster knowledge graph: Beyond the fifth star of open data
+,,0.63,7,495,The City of the Future: The Urban (Un) Seen Connecting Citizens and Spaces via Community Sensing
+,,0.61,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+,,0.61,9,233,Topic modeling to discover the thematic structure and spatial-temporal patterns of building renovation and adaptive reuse in cities
+,,0.61,6,567,Investigating Customer Satisfaction Patterns in a Community Livability Context: An Efficiency-Oriented Decision-Making Approach
+,,0.61,2,108,Strategway: Web solutions for building public transportation routes using big geodata analysis
+259,Machine Learning Assisted Urban Filling,0.7800,-1,412,A generative architectural and urban design method through artificial neural networks
+,,0.70,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+,,0.70,7,357,Viewpoint: City Information Modelling (CIM) and Digitizing Urban Design Practices
+,,0.69,3,558,Application of AI in urban design
+,,0.68,6,62,The visual quality of streets: A human-centred continuous measurement based on machine learning algorithms and street view images
+,,0.68,7,386,Machine learning for real-time urban metrics and design recommendations
+,,0.66,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.66,6,15,A machine learning-based method for the large-scale evaluation of the qualities of the urban environment
+,,0.66,5,149,"Generative design and performance modeling for relationships between urban built forms, sky opening, solar radiation and energy"
+,,0.66,6,43,StreetVizor: Visual Exploration of Human-Scale Urban Forms Based on Street Views
+,,0.66,-1,480,Measuring sustainability and urban data operationalization: An integrated computational framework to evaluate and interpret the performance of the urban form
+,,0.65,5,287,Learning from urban form to predict building heights
+,,0.65,7,555,"Algorithms, AI and architecture"
+,,0.65,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.65,6,59,A human-machine adversarial scoring framework for urban perception assessment using street-view images
+,,0.64,3,218,Procedural lot generation for evolutionary urban layout optimization in urban regeneration decision support
+,,0.63,6,390,Holistic visual data representation for built environment assessment
+,,0.63,7,402,Will AI ever support design thinking?
+,,0.63,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.63,7,317,Towards typogenetic tools for generative urban aesthetics
+,,0.62,7,523,Comparative Study on Urban Virtual Modeling Platforms for Urban Planning and Design Practice
+,,0.62,6,379,Development of generating system for architectural color icons using google map platform and tensorflow-segmentation
+,,0.62,5,146,Multivariate relationships between campus design parameters and energy performance using reinforcement learning and parametric modeling
+,,0.62,6,423,Subjectively measured streetscape perceptions to inform urban design strategies for Shanghai
+,,0.61,6,470,Evolution of historical urban landscape with computer vision and machine learning: A case study of Berlin
+,,0.61,7,569,Designing with citizens: Challenges and evaluation methods for crowd-sourced urban layouts
+,,0.61,4,428,Comparing three machine learning techniques for building extraction from a digital surface model
+,,0.61,6,546,Variational beauty of space: Machine intuition and non-linear neural aggregations
+,,0.61,6,457,4D building reconstruction with machine learning and historical maps
+,,0.61,7,556,"18th International Conference on Computer-Aided Architectural Design Futures, CAAD Futures 2019"
+391,Artificial Neural Networks as an Architectural Design Tool-Generating New Detail Forms Based on the Roman Corinthian Order Capital,0.7800,-1,412,A generative architectural and urban design method through artificial neural networks
+,,0.57,3,558,Application of AI in urban design
+,,0.57,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+,,0.56,-1,259,Machine Learning Assisted Urban Filling
+,,0.55,7,556,"18th International Conference on Computer-Aided Architectural Design Futures, CAAD Futures 2019"
+,,0.55,7,555,"Algorithms, AI and architecture"
+,,0.54,7,402,Will AI ever support design thinking?
+,,0.53,7,357,Viewpoint: City Information Modelling (CIM) and Digitizing Urban Design Practices
+,,0.53,7,559,ACM International Conference Proceeding Series
+,,0.53,4,367,Application of satellite image segmentation for urban planning optimization
+,,0.52,6,379,Development of generating system for architectural color icons using google map platform and tensorflow-segmentation
+,,0.51,5,572,"Combined gis, cfd and neural network multi-zone model for urban planning and building simulation"
+,,0.50,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.50,6,366,Digital excavation of mediatized urban heritage: Automated recognition of buildings in image sources
+,,0.50,7,317,Towards typogenetic tools for generative urban aesthetics
+,,0.50,3,596,A knowledge-based creation of mathematical programming for GIS problem solving
+,,0.49,5,146,Multivariate relationships between campus design parameters and energy performance using reinforcement learning and parametric modeling
+,,0.49,5,318,AI Technologies in Green Architecture Field: Statistical Comparative Analysis
+,,0.48,6,457,4D building reconstruction with machine learning and historical maps
+,,0.48,5,149,"Generative design and performance modeling for relationships between urban built forms, sky opening, solar radiation and energy"
+,,0.47,3,322,Knowledge and reasoning in development control and urban design: an expert systems approach
+,,0.47,3,48,Can expert systems help with planning?
+,,0.47,4,444,"Machine learning approach to extract building footprint from high-resolution images: The case study of Makkah, Saudi Arabia"
+,,0.47,6,62,The visual quality of streets: A human-centred continuous measurement based on machine learning algorithms and street view images
+,,0.47,4,481,Virtual design of urban planning based on GIS big data and machine learning
+,,0.47,3,218,Procedural lot generation for evolutionary urban layout optimization in urban regeneration decision support
+,,0.46,6,546,Variational beauty of space: Machine intuition and non-linear neural aggregations
+,,0.46,4,428,Comparing three machine learning techniques for building extraction from a digital surface model
+,,0.46,7,192,Concept of interactive machine learning in urban design problems
+,,0.46,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+412,A generative architectural and urban design method through artificial neural networks,0.7800,-1,259,Machine Learning Assisted Urban Filling
+,,0.78,-1,391,Artificial Neural Networks as an Architectural Design Tool-Generating New Detail Forms Based on the Roman Corinthian Order Capital
+,,0.69,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+,,0.68,7,556,"18th International Conference on Computer-Aided Architectural Design Futures, CAAD Futures 2019"
+,,0.68,7,357,Viewpoint: City Information Modelling (CIM) and Digitizing Urban Design Practices
+,,0.65,7,555,"Algorithms, AI and architecture"
+,,0.65,5,146,Multivariate relationships between campus design parameters and energy performance using reinforcement learning and parametric modeling
+,,0.64,5,287,Learning from urban form to predict building heights
+,,0.64,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.64,3,558,Application of AI in urban design
+,,0.64,5,149,"Generative design and performance modeling for relationships between urban built forms, sky opening, solar radiation and energy"
+,,0.63,6,457,4D building reconstruction with machine learning and historical maps
+,,0.63,7,402,Will AI ever support design thinking?
+,,0.63,3,218,Procedural lot generation for evolutionary urban layout optimization in urban regeneration decision support
+,,0.61,4,428,Comparing three machine learning techniques for building extraction from a digital surface model
+,,0.60,-1,480,Measuring sustainability and urban data operationalization: An integrated computational framework to evaluate and interpret the performance of the urban form
+,,0.59,5,572,"Combined gis, cfd and neural network multi-zone model for urban planning and building simulation"
+,,0.59,7,523,Comparative Study on Urban Virtual Modeling Platforms for Urban Planning and Design Practice
+,,0.59,4,81,Building extraction from LiDAR data applying deep convolutional neural networks
+,,0.59,6,308,Rapid and automated urban modeling techniques for UAS applications
+,,0.59,7,317,Towards typogenetic tools for generative urban aesthetics
+,,0.58,6,62,The visual quality of streets: A human-centred continuous measurement based on machine learning algorithms and street view images
+,,0.58,7,192,Concept of interactive machine learning in urban design problems
+,,0.58,6,546,Variational beauty of space: Machine intuition and non-linear neural aggregations
+,,0.58,4,460,Use of deep learning models in street-level images to classify one-story unreinforced masonry buildings based on roof diaphragms
+,,0.58,7,386,Machine learning for real-time urban metrics and design recommendations
+,,0.57,5,479,Estimating the influence of building and urban form on the thermal loads of urban dwellings in the Mediterranean climate using machine learning
+,,0.57,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.56,5,101,Identifying urban geometric types as energy performance patterns
+,,0.56,6,390,Holistic visual data representation for built environment assessment
+580,Algorithm for modeling agricultural land cover classification and land surface temperature,0.7800,5,330,Proposing an effective and inexpensive tool to detect urban surface temperature changes associated with urbanization processes in small cities
+,,0.75,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.74,4,77,Urban land cover and land use classification of an informal settlement area using the open-source knowledge-based system InterIMAGE
+,,0.74,4,113,Evaluation and comparison of eight machine learning models in land use/land cover mapping using Landsat 8 OLI: a case study of the northern region of Iran
+,,0.73,5,98,Analysis on spatiotemporal changes of urban thermal landscape pattern in the context of urbanisation: A case study of Xiamen City
+,,0.73,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.72,4,102,Automatic classification of high resolution land cover using a new data weighting procedure: The combination of k-means clustering algorithm and central tendency measures (KMC-CTM)
+,,0.72,4,53,Land-cover classification and analysis of change using machine-learning classifiers and multi-temporal remote sensing imagery
+,,0.72,4,539,EVALUATION of ADVANCED DATA MINING ALGORITHMS in LAND USE/LAND COVER MAPPING
+,,0.72,5,421,"Evaluation of the environmental impacts of urbanization from the viewpoint of increased skin temperatures: a case study from Istanbul, Turkey"
+,,0.72,4,521,"Remote sensing and GIS approach for environmental green areas planning using Landsat satellite imagery, Dubai-UAE"
+,,0.71,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.71,4,147,Geographic object based image analysis of world view-3 imagery for urban hydrologic modelling at the catchment scale
+,,0.71,5,414,Evaluating the role of urban fabric on surface urban heat island: The case of Istanbul
+,,0.71,5,45,The effect of multi-dimensional indicators on urban thermal conditions
+,,0.71,4,245,Accuracy comparison of land cover mapping using the object-oriented image classification with machine learning algorithms
+,,0.71,4,17,Land-cover change and environmental impact analysis in the Greater Mankato area of Minnesota using remote sensing and GIS modelling
+,,0.70,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.70,4,407,"Effects of urbanization on spatiotemporal changes of land cover pattern: A case of Changsha, China"
+,,0.70,4,84,Modeling Urban Land Use Changes Using Support Vector Machines
+,,0.70,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.70,4,548,Land cover classification and change detection analysis of multispectral satellite images using machine learning
+,,0.70,4,90,"Spatiotemporal detection of land use/land cover change in the large basin using integrated approaches of remote sensing and GIS in the Upper Awash basin, Ethiopia"
+,,0.70,4,166,Analysis of land use and land cover change in a coastal area of Rio de Janeiro using high-resolution remotely sensed data
+,,0.69,5,356,Evaluating multivariable statistical methods for downscaling nighttime land surface temperature in urban areas
+,,0.69,4,112,Regional mapping of essential urban land use categories in China: A segmentation-based approach
+,,0.68,4,182,A comparative analysis of the urban web of the greater athens agglomeration for the last 20-years period on the basis of landsat imagery
+,,0.68,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.68,5,206,Investigating important urban characteristics in the formation of urban heat islands: a machine learning approach
+,,0.68,4,540,Machine Learning for Strategic Urban Planning
+85,Identification of low-carbon travel block based on GIS hotspot analysis using spatial distribution learning algorithm,0.7600,5,440,"Towards low carbon cities: A machine learning method for predicting urban blocks carbon emissions (UBCE) based on built environment factors (BEF) in Changxing City, China"
+,,0.74,5,253,"GIS-enabled digital twin system for sustainable evaluation of carbon emissions: A case study of Jeonju city, south Korea"
+,,0.73,6,252,A data-informed analytical approach to human-scale greenway planning: Integrating multi-sourced urban data with machine learning algorithms
+,,0.73,6,51,"Impacts of land use and amenities on public transport use, urban planning and design"
+,,0.71,5,73,Examining threshold effects of built environment elements on travel-related carbon-dioxide emissions
+,,0.71,9,203,Automatic identification of the social functions of areas of interest (AOIS) using the standard hour-day-spectrum approach
+,,0.71,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.70,2,335,Research on the big data of traditional taxi and online car-hailing: A systematic review
+,,0.70,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.69,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.69,9,419,Unveiling transit mobility structure towards sustainable cities: An integrated graph embedding approach
+,,0.68,9,191,Why do people move? Enhancing human mobility prediction using local functions based on public records and SNS data
+,,0.67,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.67,9,258,Identifying the Structure of Cities by Clustering Using a New Similarity Measure Based on Smart Card Data
+,,0.66,9,33,Urban human mobility data mining: An overview
+,,0.66,-1,345,"Exploring the dynamics of urban greenness space and their driving factors using geographically weighted regression: A case study in Wuhan Metropolis, China"
+,,0.66,5,571,Multi-scale modeling of territorial dynamics of geospatial anthropogenic energy consumption
+,,0.66,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.65,9,541,Quantitative relationship model of express service network and service facilities in Beijing
+,,0.65,9,574,"Processing, mining and visualizing massive urban data"
+,,0.65,9,529,Transaction-Driven Mobility Analysis for Travel Mode Choices
+,,0.65,5,297,Sensing Mixed Urban Land-Use Patterns Using Municipal Water Consumption Time Series
+,,0.65,5,526,Characterizing air quality in urban areas with mobile measurement and high resolution open spatial data: Comparison of different machine-learning approaches using a visual interface
+,,0.65,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.64,5,222,Estimating quality of life dimensions from urban spatial pattern metrics
+,,0.64,6,27,Measuring daily accessed street greenery: A human-scale approach for informing better urban planning practices
+,,0.64,6,115,A systematic measurement of street quality through multi-sourced Urban data: A human-oriented analysis
+,,0.64,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.64,2,108,Strategway: Web solutions for building public transportation routes using big geodata analysis
+,,0.64,6,336,Delineation of an Urban Community Life Circle Based on a Machine-Learning Estimation of Spatiotemporal Behavioral Demand
+129,Artificial intelligence technologies and related urban planning and development concepts: How are they perceived and utilized in Australia?,0.7600,7,433,Nordic Cities Meet Artificial Intelligence
+,,0.74,7,489,"AI urbanism: a design framework for governance, program, and platform cognition"
+,,0.74,7,4,"On big data, artificial intelligence and smart cities"
+,,0.73,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.73,8,164,Social media data analysis in urban e-planning
+,,0.73,7,495,The City of the Future: The Urban (Un) Seen Connecting Citizens and Spaces via Community Sensing
+,,0.73,7,282,Towards the collaborative development of machine learning techniques in planning support systems – a Sydney example
+,,0.72,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.72,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+,,0.71,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.71,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+,,0.71,7,305,Participatory AI: Reducing AI bias and developing socially responsible AI in smart cities
+,,0.70,7,515,Smart urban futures: Outlining the smart city planning project
+,,0.70,-1,250,A value of civic voices for smart city: A big data analysis of civic queries posed by Seoul citizens
+,,0.70,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.69,8,140,How should urban planners be trained to handle big data?
+,,0.69,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.68,-1,426,Intelligent control systems in urban planning conflicts: Social media users’ perception
+,,0.68,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.68,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.67,7,482,Introduction to Urban Computing
+,,0.66,7,354,Urban Experiment: Taking Off on the Wind of Al
+,,0.66,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.66,-1,519,IFDaD 2020 - Proceedings of the 1st International Forum on Digital and Democracy. Towards A Sustainable Evolution 2020
+,,0.66,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.65,3,48,Can expert systems help with planning?
+,,0.65,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.65,7,377,The future city ecosystem
+,,0.64,8,170,Automated classification of social network messages into Smart Cities dimensions
+,,0.64,9,341,Applying machine learning and geolocation techniques to social media data (Twitter) to develop a resource for urban planning
+194,Classification of sidewalks in street view images,0.7500,-1,536,Urban street contexts classification using convolutional neural networks and streets imagery
+,,0.70,6,15,A machine learning-based method for the large-scale evaluation of the qualities of the urban environment
+,,0.69,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.69,6,16,Measuring visual enclosure for street walkability: Using machine learning algorithms and Google Street View imagery
+,,0.69,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.69,6,62,The visual quality of streets: A human-centred continuous measurement based on machine learning algorithms and street view images
+,,0.68,4,30,From land cover-graphs to urban structure types
+,,0.68,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.67,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.67,6,410,Street view imagery in urban analytics and GIS: A review
+,,0.67,6,423,Subjectively measured streetscape perceptions to inform urban design strategies for Shanghai
+,,0.67,6,43,StreetVizor: Visual Exploration of Human-Scale Urban Forms Based on Street Views
+,,0.67,6,427,"Panoramic street-level imagery in data-driven urban research: A comprehensive global review of applications, techniques, and practical considerations"
+,,0.66,-1,217,Classification of urban scenes from georeferenced images in urban street-view context
+,,0.66,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.65,-1,314,Detecting advertising on building façades with computer vision
+,,0.65,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.64,6,59,A human-machine adversarial scoring framework for urban perception assessment using street-view images
+,,0.64,4,428,Comparing three machine learning techniques for building extraction from a digital surface model
+,,0.64,6,390,Holistic visual data representation for built environment assessment
+,,0.64,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.63,6,27,Measuring daily accessed street greenery: A human-scale approach for informing better urban planning practices
+,,0.63,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.63,9,507,A deep learning approach to urban street functionality prediction based on centrality measures and stacked denoising autoencoder
+,,0.63,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.63,4,364,A Self-Supervised Learning Framework for Road Centerline Extraction from High-Resolution Remote Sensing Images
+,,0.63,6,470,Evolution of historical urban landscape with computer vision and machine learning: A case study of Berlin
+,,0.62,4,111,Road centerline extraction from very-high-resolution aerial image and LiDAR data based on road connectivity
+,,0.62,4,451,Machine Learning Methods for Road Edge Detection on Fused Airborne Hyperspectral and LIDAR Data
+,,0.62,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+435,Designing roadside green infrastructure to mitigate traffic-related air pollution using machine learning,0.7500,5,526,Characterizing air quality in urban areas with mobile measurement and high resolution open spatial data: Comparison of different machine-learning approaches using a visual interface
+,,0.69,5,257,Investigation of the impact of land-use distribution on pm2.5 in weifang: Seasonal variations
+,,0.66,5,425,Demystifying uncertainty in PM10 susceptibility mapping using variable drop-off in extreme-gradient boosting (XGB) and random forest (RF) algorithms
+,,0.65,5,255,Predicting urban cold-air paths using boosted regression trees
+,,0.65,5,440,"Towards low carbon cities: A machine learning method for predicting urban blocks carbon emissions (UBCE) based on built environment factors (BEF) in Changxing City, China"
+,,0.65,2,133,A comparison of machine learning methods for the prediction of traffic speed in Urban places
+,,0.64,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.64,5,39,Turning down the heat: An enhanced understanding of the relationship between urban vegetation and surface temperature at the city scale
+,,0.64,5,247,Predicting stream water quality under different urban development pattern scenarios with an interpretable machine learning approach
+,,0.64,5,83,"Using a gradient boosting model to improve the performance of low-cost aerosol monitors in a dense, heterogeneous urban environment"
+,,0.63,5,446,Investigation of urban climates and built environment relations by using machine learning
+,,0.62,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.62,4,109,Comparative assessment of machine learning methods for urban vegetation mapping using multitemporal Sentinel-1 imagery
+,,0.62,5,213,An Evaluation Index for Cross Ventilation Based on CFD Simulations and Ventilation Prediction Model Using Machine Learning algorithms
+,,0.62,5,499,Combining CityGML files and data-driven models for microclimate simulations in a tropical city
+,,0.62,6,27,Measuring daily accessed street greenery: A human-scale approach for informing better urban planning practices
+,,0.62,5,414,Evaluating the role of urban fabric on surface urban heat island: The case of Istanbul
+,,0.60,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.60,-1,415,Smart environment design planning for smart city based on deep learning
+,,0.59,5,138,Machine learning for geographically differentiated climate change mitigation in urban areas
+,,0.59,5,527,Mining and Analysis of Air Quality Data to Aid Climate Change
+,,0.59,6,252,A data-informed analytical approach to human-scale greenway planning: Integrating multi-sourced urban data with machine learning algorithms
+,,0.59,5,28,Estimation of daily maximum and minimum air temperatures in urban landscapes using MODIS time series satellite data
+,,0.59,4,31,Land-use-change modeling using unbalanced support-vector machines
+,,0.59,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.59,5,206,Investigating important urban characteristics in the formation of urban heat islands: a machine learning approach
+,,0.59,7,386,Machine learning for real-time urban metrics and design recommendations
+,,0.59,4,382,Application of machine learning in urban greenery land cover extraction
+,,0.59,4,53,Land-cover classification and analysis of change using machine-learning classifiers and multi-temporal remote sensing imagery
+,,0.59,5,114,Data-driven model for cross ventilation potential in high-density cities based on coupled CFD simulation and machine learning
+503,On the development of a novel approach for identifying perennial drainage in Southern Brazil: A study case integrating sentinel-2 and high-resolution digital elevation models with machine learning techniques,0.7500,4,166,Analysis of land use and land cover change in a coastal area of Rio de Janeiro using high-resolution remotely sensed data
+,,0.73,4,147,Geographic object based image analysis of world view-3 imagery for urban hydrologic modelling at the catchment scale
+,,0.71,0,154,"Urban pluvial flooding prediction by machine learning approaches – a case study of Shenzhen city, China"
+,,0.70,4,26,Combining Pixel-and Object-Based Machine Learning for Identification of Water-Body Types from Urban High-Resolution Remote-Sensing Imagery
+,,0.69,4,53,Land-cover classification and analysis of change using machine-learning classifiers and multi-temporal remote sensing imagery
+,,0.68,4,540,Machine Learning for Strategic Urban Planning
+,,0.67,5,221,"Urban Water Demand Modeling Using Machine Learning Techniques: Case Study of Fortaleza, Brazil"
+,,0.67,4,109,Comparative assessment of machine learning methods for urban vegetation mapping using multitemporal Sentinel-1 imagery
+,,0.66,0,6,Urban flood risk mapping using the GARP and QUEST models: A comparative study of machine learning techniques
+,,0.66,0,168,"Rainfall-induced shallow landslide detachment, transit and runout susceptibility mapping by integrating machine learning techniques and gis-based approaches"
+,,0.66,4,113,Evaluation and comparison of eight machine learning models in land use/land cover mapping using Landsat 8 OLI: a case study of the northern region of Iran
+,,0.66,4,77,Urban land cover and land use classification of an informal settlement area using the open-source knowledge-based system InterIMAGE
+,,0.66,4,300,Spatiotemporal dynamics of urbanization and cropland in the Nile Delta of Egypt using machine learning and satellite big data: implications for sustainable development
+,,0.65,4,68,Analyzing land cover change and urban growth trajectories of the mega-urban region of Dhaka using remotely sensed data and an ensemble classifier
+,,0.64,4,76,A Random Forests classification method for urban land-use mapping integrating spatial metrics and texture analysis
+,,0.64,4,17,Land-cover change and environmental impact analysis in the Greater Mankato area of Minnesota using remote sensing and GIS modelling
+,,0.63,0,67,"Spatial prediction of landslide susceptibility using GIS-based statistical and machine learning models in Wanzhou County, Three Gorges Reservoir, China"
+,,0.63,5,493,Fine scale surface climate in complex terrain using machine learning
+,,0.63,5,247,Predicting stream water quality under different urban development pattern scenarios with an interpretable machine learning approach
+,,0.63,4,90,"Spatiotemporal detection of land use/land cover change in the large basin using integrated approaches of remote sensing and GIS in the Upper Awash basin, Ethiopia"
+,,0.63,4,382,Application of machine learning in urban greenery land cover extraction
+,,0.63,4,548,Land cover classification and change detection analysis of multispectral satellite images using machine learning
+,,0.62,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.62,4,84,Modeling Urban Land Use Changes Using Support Vector Machines
+,,0.62,4,324,Mapping essential urban land use categories with open big data: Results for five metropolitan areas in the United States of America
+,,0.62,4,224,Assessing urban growth in Ghana using machine learning and intensity analysis: A case study of the New Juaben Municipality
+,,0.61,5,202,Spatiotemporal modeling of urban growth using machine learning
+,,0.61,4,313,Multi-scale correlation-based feature selection and random forest classification for LULC mapping from the integration of SAR and optical Sentinel images
+,,0.61,4,30,From land cover-graphs to urban structure types
+,,0.61,4,531,Mapping Urban Slum Settlements Using Very High-Resolution Imagery and Land Boundary Data
+519,IFDaD 2020 - Proceedings of the 1st International Forum on Digital and Democracy. Towards A Sustainable Evolution 2020,0.7500,7,305,Participatory AI: Reducing AI bias and developing socially responsible AI in smart cities
+,,0.66,7,433,Nordic Cities Meet Artificial Intelligence
+,,0.66,-1,129,Artificial intelligence technologies and related urban planning and development concepts: How are they perceived and utilized in Australia?
+,,0.65,-1,44,Citizen-centered big data analysis-driven governance intelligence framework for smart cities
+,,0.65,7,4,"On big data, artificial intelligence and smart cities"
+,,0.64,7,495,The City of the Future: The Urban (Un) Seen Connecting Citizens and Spaces via Community Sensing
+,,0.64,7,489,"AI urbanism: a design framework for governance, program, and platform cognition"
+,,0.63,7,231,City brains and smart urbanization: regulating ‘sharing economy’ innovation in China
+,,0.61,-1,250,A value of civic voices for smart city: A big data analysis of civic queries posed by Seoul citizens
+,,0.60,7,7,On the coronavirus (Covid-19) outbreak and the smart city network: Universal data sharing standards coupled with artificial intelligence (ai) to benefit urban health monitoring and management
+,,0.59,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.59,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.58,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.58,-1,187,Kadaster knowledge graph: Beyond the fifth star of open data
+,,0.57,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.56,7,515,Smart urban futures: Outlining the smart city planning project
+,,0.56,-1,426,Intelligent control systems in urban planning conflicts: Social media users’ perception
+,,0.56,7,581,Conference on Human Factors in Computing Systems - Proceedings
+,,0.55,7,584,International series on information systems and management in creative eMedia
+,,0.55,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+,,0.55,8,188,"Positive deviance, big data, and development: A systematic literature review"
+,,0.55,7,482,Introduction to Urban Computing
+,,0.55,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.54,7,377,The future city ecosystem
+,,0.54,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.54,7,502,The art of learnin
+,,0.53,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.53,6,366,Digital excavation of mediatized urban heritage: Automated recognition of buildings in image sources
+,,0.53,-1,487,"AVI 2020 Workshop on Road Mapping Infrastructures for Artificial Intelligence Supporting Advanced Visual Big Data Analysis, AVI-BDA 2020 and 2nd Italian Workshop on Visualization and Visual Analytics, ITAVIS 2020"
+,,0.53,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+207,A fuzzy logic based transport mode detection framework in urban environment,0.7400,-1,400,A comparison among various classification algorithms for travel mode detection using sensors' data collected by smartphones
+,,0.70,-1,189,Detecting Transportation Modes Based on LightGBM Classifier from GPS Trajectory Data
+,,0.65,7,464,Smart Urban Mobility: When Mobility Systems Meet Smart Data
+,,0.65,9,118,Automated urban travel interpretation: A bottom-up approach for trajectory segmentation
+,,0.65,7,597,The design of urban geographical information system for transportation
+,,0.64,9,40,Analyzing large-scale human mobility data: a survey of machine learning methods and applications
+,,0.63,2,18,Citywide Traffic Volume Estimation Using Trajectory Data
+,,0.62,2,302,Data-driven next destination prediction and ETA improvement for urban delivery fleets
+,,0.62,2,388,Data mining techniques for smart mobility—a survey
+,,0.62,2,161,Toward Transportation Mode Recognition Using Deep Convolutional and Long Short-Term Memory Recurrent Neural Networks
+,,0.62,9,334,A generic paradigm for mining human mobility patterns based on the GPS trajectory data using complex network analysis
+,,0.62,7,240,Inference of vehicular traffic in smart cities using machine learning with the internet of things
+,,0.61,9,529,Transaction-Driven Mobility Analysis for Travel Mode Choices
+,,0.61,7,215,Intelligent driver assist system for urban driving
+,,0.60,9,87,IVizTRANS: Interactive visual learning for home and work place detection from massive public transportation data
+,,0.59,2,158,Trajectory clustering of road traffic in urban environments using incremental machine learning in combination with hyperdimensional computing
+,,0.59,9,33,Urban human mobility data mining: An overview
+,,0.59,1,80,"Intelligent GPS L1 LOS/multipath/NLOS classifiers based on correlator-, RINEX- and NMEA-level measurements"
+,,0.58,2,351,Development of people mass movement simulation framework based on reinforcement learning
+,,0.58,2,141,Joint prediction of road-Traffic and parking occupancy over a city with representation learning
+,,0.58,1,280,Improving GPS Code Phase Positioning Accuracy in Urban Environments Using Machine Learning
+,,0.57,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.57,2,108,Strategway: Web solutions for building public transportation routes using big geodata analysis
+,,0.57,9,260,Integrating geovisual analytics with machine learning for human mobility pattern discovery
+,,0.57,9,442,Interpretation of contextual influences with explanatory tools: Travel mode likelihood mapping using GPS trajectories
+,,0.57,1,152,NLOS multipath detection by using machine learning in urban environments
+,,0.57,9,193,Characterization of behavioral patterns exploiting description of geographical areas
+,,0.57,9,404,Automated urban location annotation on mobile records
+,,0.56,9,397,Data mining tourism patterns
+,,0.56,-1,85,Identification of low-carbon travel block based on GIS hotspot analysis using spatial distribution learning algorithm
+394,Analysis of relationship between road traffic noise and urban form indicators through machine learning method,0.7400,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.69,5,440,"Towards low carbon cities: A machine learning method for predicting urban blocks carbon emissions (UBCE) based on built environment factors (BEF) in Changxing City, China"
+,,0.67,5,172,Analyzing the spatial factors related to the distributions of building heights in urban areas: A comparative case study in Guangzhou and Shenzhen
+,,0.66,6,518,Modeling and evaluating the residential urban environment perception
+,,0.66,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.65,3,558,Application of AI in urban design
+,,0.65,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.65,3,293,Design of machine learning model for Urban planning and management improvement
+,,0.64,5,70,Driving forces analysis of urban expansion based on boosted regression trees and Logistic regression
+,,0.64,5,446,Investigation of urban climates and built environment relations by using machine learning
+,,0.64,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.64,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.64,2,133,A comparison of machine learning methods for the prediction of traffic speed in Urban places
+,,0.63,5,286,Thermal comfort prediction by applying supervised machine learning in green sidewalks of Tehran
+,,0.63,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.62,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.62,6,69,A tool for urban soundscape evaluation applying Support Vector Machines for developing a soundscape classification model
+,,0.62,2,561,"Highway traffic volume prediction via stacking KNN, SVR, MLP, RNN"
+,,0.62,-1,85,Identification of low-carbon travel block based on GIS hotspot analysis using spatial distribution learning algorithm
+,,0.61,9,507,A deep learning approach to urban street functionality prediction based on centrality measures and stacked denoising autoencoder
+,,0.61,5,526,Characterizing air quality in urban areas with mobile measurement and high resolution open spatial data: Comparison of different machine-learning approaches using a visual interface
+,,0.61,6,390,Holistic visual data representation for built environment assessment
+,,0.61,6,252,A data-informed analytical approach to human-scale greenway planning: Integrating multi-sourced urban data with machine learning algorithms
+,,0.61,6,51,"Impacts of land use and amenities on public transport use, urban planning and design"
+,,0.61,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.60,6,115,A systematic measurement of street quality through multi-sourced Urban data: A human-oriented analysis
+,,0.60,7,559,ACM International Conference Proceeding Series
+,,0.60,5,50,Mining transition rules of cellular automata for simulating urban expansion by using the deep learning techniques
+,,0.60,5,75,Simulation of urban expansion via integrating artificial neural network with Markov chain–cellular automata
+,,0.60,5,576,Urban inefficient industrial land recognition system based on augmented learning model
+426,Intelligent control systems in urban planning conflicts: Social media users’ perception,0.7400,8,164,Social media data analysis in urban e-planning
+,,0.68,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+,,0.68,-1,129,Artificial intelligence technologies and related urban planning and development concepts: How are they perceived and utilized in Australia?
+,,0.67,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.67,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.66,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.66,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+,,0.64,3,322,Knowledge and reasoning in development control and urban design: an expert systems approach
+,,0.64,8,208,Game-based crowdsourcing to support collaborative customization of the definition of sustainability
+,,0.64,3,48,Can expert systems help with planning?
+,,0.63,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.63,3,293,Design of machine learning model for Urban planning and management improvement
+,,0.63,8,170,Automated classification of social network messages into Smart Cities dimensions
+,,0.62,3,306,Comparative review of methods supporting decision-making in urban development and land management
+,,0.62,3,558,Application of AI in urban design
+,,0.61,6,200,GIS-based emotional computing: A review of quantitative approaches to measure the emotion layer of human–environment relationships
+,,0.61,-1,595,Developing methodologies of knowledge discovery and data mining to investigate metropolitan land use evolution
+,,0.61,7,515,Smart urban futures: Outlining the smart city planning project
+,,0.61,-1,250,A value of civic voices for smart city: A big data analysis of civic queries posed by Seoul citizens
+,,0.60,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.60,5,197,Comparing machine learning classification schemes - A GIS approach
+,,0.60,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.59,8,140,How should urban planners be trained to handle big data?
+,,0.59,3,183,The promise of expert systems for urban planning
+,,0.59,3,429,Improving intelligent decision making in urban planning: Using machine learning algorithms
+,,0.59,5,167,Urban Data Mining using emergent SOM
+,,0.59,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.59,7,508,BISTRO: Berkeley Integrated System for Transportation Optimization
+,,0.59,6,518,Modeling and evaluating the residential urban environment perception
+,,0.59,5,594,Research on application of intelligent computation - Based LUCC model in urbanization process
+234,Night on South Korea: Unraveling the relationship between urban development patterns and DMSP-OLS night-time lights,0.7300,-1,10,"Urbanization impact on landscape patterns in Beijing City, China: A spatial heterogeneity perspective"
+,,0.70,-1,345,"Exploring the dynamics of urban greenness space and their driving factors using geographically weighted regression: A case study in Wuhan Metropolis, China"
+,,0.67,4,488,Estimating Socio-Economic Parameters via Machine Learning Methods Using Luojia1-01 Nighttime Light Remotely Sensed Images at Multiple Scales of China in 2018
+,,0.66,5,474,Analysis of built-up areas of small polish cities with the use of deep learning and geographically weighted regression
+,,0.65,5,222,Estimating quality of life dimensions from urban spatial pattern metrics
+,,0.65,4,407,"Effects of urbanization on spatiotemporal changes of land cover pattern: A case of Changsha, China"
+,,0.64,5,330,Proposing an effective and inexpensive tool to detect urban surface temperature changes associated with urbanization processes in small cities
+,,0.63,4,49,"The spatial characteristics and relationships between landscape pattern and ecosystem service value along an urban-rural gradient in Xi'an city, China"
+,,0.63,5,98,Analysis on spatiotemporal changes of urban thermal landscape pattern in the context of urbanisation: A case study of Xiamen City
+,,0.63,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.63,5,36,Mapping urban form and function at city block level using spatial metrics
+,,0.62,5,297,Sensing Mixed Urban Land-Use Patterns Using Municipal Water Consumption Time Series
+,,0.62,6,27,Measuring daily accessed street greenery: A human-scale approach for informing better urban planning practices
+,,0.61,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.61,5,421,"Evaluation of the environmental impacts of urbanization from the viewpoint of increased skin temperatures: a case study from Istanbul, Turkey"
+,,0.61,5,45,The effect of multi-dimensional indicators on urban thermal conditions
+,,0.61,4,182,A comparative analysis of the urban web of the greater athens agglomeration for the last 20-years period on the basis of landsat imagery
+,,0.60,6,91,Daily accessed street greenery and housing price: Measuring economic performance of human-scale streetscapes via new urban data
+,,0.60,4,459,"Using satellite data to analyse raw material consumption in Hanoi, Vietnam"
+,,0.60,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.60,5,202,Spatiotemporal modeling of urban growth using machine learning
+,,0.60,5,70,Driving forces analysis of urban expansion based on boosted regression trees and Logistic regression
+,,0.60,4,228,Population spatialization in Beijing city based on machine learning and multisource remote sensing data
+,,0.60,6,470,Evolution of historical urban landscape with computer vision and machine learning: A case study of Berlin
+,,0.60,9,203,Automatic identification of the social functions of areas of interest (AOIS) using the standard hour-day-spectrum approach
+,,0.59,5,485,Analyzing the spatiotemporal uncertainty in urbanization predictions
+,,0.59,5,414,Evaluating the role of urban fabric on surface urban heat island: The case of Istanbul
+,,0.59,5,315,A multiscale clustering of the urban morphology for use in quantitative models
+,,0.59,9,159,Reversed urbanism: Inferring urban performance through behavioral patterns in temporal telecom data
+,,0.59,4,347,Analysing urban development patterns in a conflict zone: A case study of kabul
+383,Can we predict the scenic beauty of locations from geo-tagged Flickr images?,0.7300,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.70,6,15,A machine learning-based method for the large-scale evaluation of the qualities of the urban environment
+,,0.70,9,227,The big picture of cities: Analysing Flickr photos of 222 cities worldwide
+,,0.70,9,566,Ballparking the Urban placeness: A case study of analyzing starbucks posts on instagram
+,,0.69,6,93,Explaining subjective perceptions of public spaces as a function of the built environment: A massive data approach
+,,0.68,9,124,Where to go and what to do: Extracting leisure activity potentials from Web data on urban space
+,,0.66,9,13,Exploiting foursquare and cellular data to infer user activity in urban environments
+,,0.65,6,212,Multiple images of the city: Unveiling group-specific urban perceptions through a crowdsourcing game
+,,0.65,6,423,Subjectively measured streetscape perceptions to inform urban design strategies for Shanghai
+,,0.65,9,370,Crowdsensed Data Learning-Driven Prediction of Local Businesses Attractiveness in Smart Cities
+,,0.64,9,496,From PIace2Vec to Multi-Scale Built-Environment Representation: A General-Purpose Distributional Embedding for Urban Data Analysis
+,,0.64,6,14,Using image recognition to automate assessment of cultural ecosystem services from social media photographs
+,,0.64,6,492,Investigating sense of place of the Las Vegas Strip using online reviews and machine learning approaches
+,,0.63,6,59,A human-machine adversarial scoring framework for urban perception assessment using street-view images
+,,0.62,6,470,Evolution of historical urban landscape with computer vision and machine learning: A case study of Berlin
+,,0.62,9,180,A business zone recommender system based on facebook and urban planning data
+,,0.61,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.60,6,390,Holistic visual data representation for built environment assessment
+,,0.60,9,511,Learning Semantic Relationships of Geographical Areas based on Trajectories
+,,0.60,6,239,Deep CNN-based methods to evaluate neighborhood-scale urban valuation through street scenes perception
+,,0.60,6,542,"A LARGE SCALE CLASSIFICATION of PUBLIC SPACES USING A STUDY of PERCEPTION and PUBLIC DATA from INEGI of the CITY of PUEBLA, SAN PEDRO CHOLULA and SAN ANDRES CHOLULA"
+,,0.59,9,404,Automated urban location annotation on mobile records
+,,0.59,6,16,Measuring visual enclosure for street walkability: Using machine learning algorithms and Google Street View imagery
+,,0.59,6,346,Predicting human perception of the urban environment in a spatiotemporal urban setting using locally acquired street view images and audio clips
+,,0.59,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.59,9,494,Using Social Media to Understand City-wide Movement Patterns and Behaviours
+,,0.58,6,62,The visual quality of streets: A human-centred continuous measurement based on machine learning algorithms and street view images
+,,0.58,-1,194,Classification of sidewalks in street view images
+,,0.58,9,577,"1st Asia-Pacific Web and Web-Age Information Management Joint Conference on Web and Big Data, APWeb-WAIM 2017 held in Conjuction with the International Workshop on Mobile Web Data Analytics, MWDA 2017, International Workshop on Hot Topics in Big Spatial Data and Urban Computing, HotSpatial 2017, International Workshop on Graph Data Management and Analysis, GDMA 2017, 2nd International Workshop on Data Driven Crowdsourcing, DDC 2017, 2nd International Workshop on Spatio-temporal Data Management and Analytics, SDMA 2017 and International Workshop on Mobility Analytics from Spatial and Social Data, MASS 2017"
+,,0.58,6,375,City safety perception model based on visual content of street images
+403,A reasoning approach for modelling and predicting terroristic attacks in urban environments,0.7300,7,281,Research on urban anti-terrorism intelligence perception system from the perspective of Internet of things application
+,,0.64,-1,552,Intelligence augmentation for urban warfare operation planning using deep reinforcement learning
+,,0.62,-1,320,Risk management systems must provide automatic decisions according to crisis computable algebras
+,,0.60,9,127,Using abstractions to solve opportunistic crime security games at scale
+,,0.60,9,417,A data-driven agent-based simulation to predict crime patterns in an urban environment
+,,0.58,7,387,Robust anomaly detection in urban environments using sensor and information fusion and a camera network
+,,0.57,2,301,ADMSv2: A modern architecture for transportation data management and analysis
+,,0.57,3,183,The promise of expert systems for urban planning
+,,0.56,7,563,"Proceedings of the 1st ACM SIGSPATIAL International Workshop on Advances in Resilient and Intelligent Cities, ARIC 2018"
+,,0.56,2,483,AI and Deep Learning for Urban Computing
+,,0.56,7,47,Semantic framework of internet of things for smart cities: Case studies
+,,0.56,3,48,Can expert systems help with planning?
+,,0.55,-1,585,"European Conference on Machine Learning and Knowledge Discovery in Databases, ECML PKDD 2016"
+,,0.55,2,302,Data-driven next destination prediction and ETA improvement for urban delivery fleets
+,,0.54,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.54,7,261,Utilizing Big Data for Enhancing Passenger Safety in Railway Stations
+,,0.54,3,429,Improving intelligent decision making in urban planning: Using machine learning algorithms
+,,0.54,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.54,-1,46,Forecasting smog-related health hazard based on social media and physical sensor
+,,0.53,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.53,7,500,"Evaluation of Smart Infrastructure Systems and Novel UV-Oriented Solution for Integration, Resilience, Inclusiveness, and Sustainability"
+,,0.53,3,241,An information system for judicial and public administration using artificial intelligence and geospatial data
+,,0.52,7,240,Inference of vehicular traffic in smart cities using machine learning with the internet of things
+,,0.52,3,322,Knowledge and reasoning in development control and urban design: an expert systems approach
+,,0.52,9,82,Mining large-scale human mobility data for long-term crime prediction
+,,0.51,7,305,Participatory AI: Reducing AI bias and developing socially responsible AI in smart cities
+,,0.51,7,549,"15th European Conference on Ambient Intelligence, AmI 2019"
+,,0.51,7,94,Smart cities and a data-driven response to COVID-19
+,,0.50,7,7,On the coronavirus (Covid-19) outbreak and the smart city network: Universal data sharing standards coupled with artificial intelligence (ai) to benefit urban health monitoring and management
+,,0.50,3,23,Artificial intelligence solutions for urban land dynamics: A review
+415,Smart environment design planning for smart city based on deep learning,0.7300,2,483,AI and Deep Learning for Urban Computing
+,,0.72,5,440,"Towards low carbon cities: A machine learning method for predicting urban blocks carbon emissions (UBCE) based on built environment factors (BEF) in Changxing City, China"
+,,0.70,7,219,Effective task scheduling algorithm with deep learning for Internet of Health Things (IoHT) in sustainable smart cities
+,,0.70,2,352,Taxi Demand Prediction using an LSTM-Based Deep Sequence Model and Points of Interest
+,,0.69,5,446,Investigation of urban climates and built environment relations by using machine learning
+,,0.69,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.69,5,226,Deep neural network analyses of water quality time series associated with water sensitive urban design (WSUD) features
+,,0.67,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.67,5,526,Characterizing air quality in urban areas with mobile measurement and high resolution open spatial data: Comparison of different machine-learning approaches using a visual interface
+,,0.67,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.67,5,50,Mining transition rules of cellular automata for simulating urban expansion by using the deep learning techniques
+,,0.66,-1,46,Forecasting smog-related health hazard based on social media and physical sensor
+,,0.65,5,527,Mining and Analysis of Air Quality Data to Aid Climate Change
+,,0.65,7,530,Theoretical design and experimental study for urban data management using energy-saved IoT big data
+,,0.65,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.65,7,4,"On big data, artificial intelligence and smart cities"
+,,0.64,5,138,Machine learning for geographically differentiated climate change mitigation in urban areas
+,,0.64,7,386,Machine learning for real-time urban metrics and design recommendations
+,,0.64,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.64,5,185,Building Energy Information: Demand and Consumption Prediction with Machine Learning Models for Sustainable and Smart Cities
+,,0.63,4,99,Local climate zone mapping as remote sensing scene classification using deep learning: A case study of metropolitan China
+,,0.63,9,507,A deep learning approach to urban street functionality prediction based on centrality measures and stacked denoising autoencoder
+,,0.62,5,420,Meta-regression framework for energy consumption prediction in a smart city: A case study of Songdo in South Korea
+,,0.62,7,47,Semantic framework of internet of things for smart cities: Case studies
+,,0.62,7,490,Evaluating the Performance of Reinforcement Learning Signalling Strategies for Sustainable Urban Road Networks
+,,0.61,5,119,"A data-driven approach for multi-scale GIS-based building energy modeling for analysis, planning and support decision making"
+,,0.61,5,83,"Using a gradient boosting model to improve the performance of low-cost aerosol monitors in a dense, heterogeneous urban environment"
+,,0.60,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.60,-1,384,Towards a deep learning powered query engine for urban planning
+,,0.60,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+46,Forecasting smog-related health hazard based on social media and physical sensor,0.7100,5,527,Mining and Analysis of Air Quality Data to Aid Climate Change
+,,0.70,8,328,Online urban-waterlogging monitoring based on a recurrent neural network for classification of microblogging text
+,,0.68,5,526,Characterizing air quality in urban areas with mobile measurement and high resolution open spatial data: Comparison of different machine-learning approaches using a visual interface
+,,0.67,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+,,0.66,-1,415,Smart environment design planning for smart city based on deep learning
+,,0.64,9,528,Harnessing Social Interactions on Twitter for Smart Transportation Using Machine Learning
+,,0.63,8,170,Automated classification of social network messages into Smart Cities dimensions
+,,0.63,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.63,9,341,Applying machine learning and geolocation techniques to social media data (Twitter) to develop a resource for urban planning
+,,0.62,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.62,5,416,DTEx: A dynamic urban thermal exposure index based on human mobility patterns
+,,0.61,9,33,Urban human mobility data mining: An overview
+,,0.60,-1,585,"European Conference on Machine Learning and Knowledge Discovery in Databases, ECML PKDD 2016"
+,,0.60,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.60,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.60,5,138,Machine learning for geographically differentiated climate change mitigation in urban areas
+,,0.60,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.60,5,348,A hybrid air pollutant concentration prediction model combining secondary decomposition and sequence reconstruction
+,,0.60,5,446,Investigation of urban climates and built environment relations by using machine learning
+,,0.59,-1,573,"ESANN 2017 - Proceedings, 25th European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning"
+,,0.59,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.58,5,52,Upscaling urban data science for global climate solutions
+,,0.58,5,83,"Using a gradient boosting model to improve the performance of low-cost aerosol monitors in a dense, heterogeneous urban environment"
+,,0.58,2,483,AI and Deep Learning for Urban Computing
+,,0.58,7,545,Internet of things and statistical analysis
+,,0.58,9,494,Using Social Media to Understand City-wide Movement Patterns and Behaviours
+,,0.57,9,577,"1st Asia-Pacific Web and Web-Age Information Management Joint Conference on Web and Big Data, APWeb-WAIM 2017 held in Conjuction with the International Workshop on Mobile Web Data Analytics, MWDA 2017, International Workshop on Hot Topics in Big Spatial Data and Urban Computing, HotSpatial 2017, International Workshop on Graph Data Management and Analysis, GDMA 2017, 2nd International Workshop on Data Driven Crowdsourcing, DDC 2017, 2nd International Workshop on Spatio-temporal Data Management and Analytics, SDMA 2017 and International Workshop on Mobility Analytics from Spatial and Social Data, MASS 2017"
+,,0.57,5,199,Urban ambient air temperature estimation using hyperlocal data from smart vehicle-borne sensors
+,,0.57,9,574,"Processing, mining and visualizing massive urban data"
+,,0.57,5,253,"GIS-enabled digital twin system for sustainable evaluation of carbon emissions: A case study of Jeonju city, south Korea"
+134,Transparency in practice: Using visualization to enhance the interpretability of open data,0.7100,-1,487,"AVI 2020 Workshop on Road Mapping Infrastructures for Artificial Intelligence Supporting Advanced Visual Big Data Analysis, AVI-BDA 2020 and 2nd Italian Workshop on Visualization and Visual Analytics, ITAVIS 2020"
+,,0.71,6,43,StreetVizor: Visual Exploration of Human-Scale Urban Forms Based on Street Views
+,,0.70,8,140,How should urban planners be trained to handle big data?
+,,0.68,9,574,"Processing, mining and visualizing massive urban data"
+,,0.67,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.67,7,466,Visual Analytics of Urban Informality and Infrastructure Planning with Tableau for Sustainable Urban Design Research Strategies in Lagos Metropolis
+,,0.66,9,260,Integrating geovisual analytics with machine learning for human mobility pattern discovery
+,,0.64,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.64,9,87,IVizTRANS: Interactive visual learning for home and work place detection from massive public transportation data
+,,0.63,7,282,Towards the collaborative development of machine learning techniques in planning support systems – a Sydney example
+,,0.62,9,107,Structure of 311 service requests as a signature of urban location
+,,0.62,-1,187,Kadaster knowledge graph: Beyond the fifth star of open data
+,,0.62,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.62,5,167,Urban Data Mining using emergent SOM
+,,0.61,-1,44,Citizen-centered big data analysis-driven governance intelligence framework for smart cities
+,,0.61,8,142,Predictive analytics can facilitate proactive property vacancy policies for cities
+,,0.61,9,393,Multiscale spatio-temporal data aggregation and mapping for urban data exploration
+,,0.61,9,587,2nd International Workshop on Mining Urban Data (Preface)
+,,0.61,7,482,Introduction to Urban Computing
+,,0.61,9,159,Reversed urbanism: Inferring urban performance through behavioral patterns in temporal telecom data
+,,0.59,6,16,Measuring visual enclosure for street walkability: Using machine learning algorithms and Google Street View imagery
+,,0.59,6,390,Holistic visual data representation for built environment assessment
+,,0.59,5,445,Local and application-specific geodemographics for data-led urban decision making
+,,0.59,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.59,9,409,Street context of various demographic groups in their daily mobility
+,,0.59,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.59,-1,585,"European Conference on Machine Learning and Knowledge Discovery in Databases, ECML PKDD 2016"
+,,0.59,8,164,Social media data analysis in urban e-planning
+,,0.59,9,341,Applying machine learning and geolocation techniques to social media data (Twitter) to develop a resource for urban planning
+,,0.58,6,557,The Social Life of Small Urban Spaces 2.0: Three Experiments in Computational Urban Studies
+285,Planning the Future of Smart Cities with Swarms of Fully Autonomous Unmanned Aerial Vehicles Using a Novel Framework,0.7100,-1,434,Neural Network Based Algorithm for Multi-UAV Coverage Path Planning
+,,0.69,-1,516,Intelligent Unmanned Aerial Vehicle Technology in Urban Environments
+,,0.64,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.62,6,308,Rapid and automated urban modeling techniques for UAS applications
+,,0.61,7,240,Inference of vehicular traffic in smart cities using machine learning with the internet of things
+,,0.61,7,514,Algorithmic Urban IoT Context and Convergence of Services Sensing and Planning Units (PUs)
+,,0.60,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.59,7,500,"Evaluation of Smart Infrastructure Systems and Novel UV-Oriented Solution for Integration, Resilience, Inclusiveness, and Sustainability"
+,,0.59,-1,320,Risk management systems must provide automatic decisions according to crisis computable algebras
+,,0.59,7,273,Automated planning for urban traffic control: Strategic vehicle routing to respect air quality limitations
+,,0.58,7,464,Smart Urban Mobility: When Mobility Systems Meet Smart Data
+,,0.58,7,230,Drone Futures: UAS in landscape and urban design
+,,0.57,7,4,"On big data, artificial intelligence and smart cities"
+,,0.56,7,281,Research on urban anti-terrorism intelligence perception system from the perspective of Internet of things application
+,,0.55,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.55,7,515,Smart urban futures: Outlining the smart city planning project
+,,0.55,7,60,Hierarchical multi-agent control of traffic lights based on collective learning
+,,0.55,7,490,Evaluating the Performance of Reinforcement Learning Signalling Strategies for Sustainable Urban Road Networks
+,,0.54,4,535,Urban Intelligent Navigator for Drone Using Convolutional Neural Network (CNN)
+,,0.54,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.53,2,483,AI and Deep Learning for Urban Computing
+,,0.53,7,47,Semantic framework of internet of things for smart cities: Case studies
+,,0.53,7,533,"2nd Ibero-American Congress of Smart Cities, ICSC-CITIES 2019"
+,,0.52,7,563,"Proceedings of the 1st ACM SIGSPATIAL International Workshop on Advances in Resilient and Intelligent Cities, ARIC 2018"
+,,0.52,2,123,Smart mobile crowdsensing with urban vehicles: A deep reinforcement learning perspective
+,,0.52,3,558,Application of AI in urban design
+,,0.52,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.52,7,495,The City of the Future: The Urban (Un) Seen Connecting Citizens and Spaces via Community Sensing
+,,0.51,1,55,Air-to-Air Path Loss Prediction Based on Machine Learning Methods in Urban Environments
+,,0.51,7,508,BISTRO: Berkeley Integrated System for Transportation Optimization
+434,Neural Network Based Algorithm for Multi-UAV Coverage Path Planning,0.7100,-1,285,Planning the Future of Smart Cities with Swarms of Fully Autonomous Unmanned Aerial Vehicles Using a Novel Framework
+,,0.63,6,308,Rapid and automated urban modeling techniques for UAS applications
+,,0.59,-1,516,Intelligent Unmanned Aerial Vehicle Technology in Urban Environments
+,,0.59,4,535,Urban Intelligent Navigator for Drone Using Convolutional Neural Network (CNN)
+,,0.57,-1,552,Intelligence augmentation for urban warfare operation planning using deep reinforcement learning
+,,0.56,2,123,Smart mobile crowdsensing with urban vehicles: A deep reinforcement learning perspective
+,,0.56,1,55,Air-to-Air Path Loss Prediction Based on Machine Learning Methods in Urban Environments
+,,0.54,-1,320,Risk management systems must provide automatic decisions according to crisis computable algebras
+,,0.53,7,273,Automated planning for urban traffic control: Strategic vehicle routing to respect air quality limitations
+,,0.50,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.48,-1,34,Artificial intelligence technologies for robot assisted urban search and rescue
+,,0.48,2,483,AI and Deep Learning for Urban Computing
+,,0.48,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.48,4,238,Context-Based Filtering of Noisy Labels for Automatic Basemap Updating from UAV Data
+,,0.47,7,210,Deep neural network dynamic traffic routing system for vehicles
+,,0.47,3,306,Comparative review of methods supporting decision-making in urban development and land management
+,,0.47,4,532,Comparison of performance of artificial neural network (ANN) and random forest (RF) in the classification of land cover zones of urban slum region
+,,0.47,7,60,Hierarchical multi-agent control of traffic lights based on collective learning
+,,0.46,4,486,UVid-Net: Enhanced Semantic Segmentation of UAV Aerial Videos by Embedding Temporal Information
+,,0.46,4,481,Virtual design of urban planning based on GIS big data and machine learning
+,,0.46,7,122,Safe reinforcement learning with scene decomposition for navigating complex urban environments
+,,0.46,2,302,Data-driven next destination prediction and ETA improvement for urban delivery fleets
+,,0.45,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.45,3,294,"Systematizing heterogeneous expert knowledge, scenarios and goals via a goal-reasoning artificial intelligence agent for democratic urban land use planning"
+,,0.45,4,361,Land cover classification based on machine learning using UAV multi-spectral images
+,,0.45,7,490,Evaluating the Performance of Reinforcement Learning Signalling Strategies for Sustainable Urban Road Networks
+,,0.45,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.45,5,9,Simulating land-use dynamics under planning policies by integrating artificial immune systems with cellular automata
+,,0.44,7,543,Pedestrians Walking on Reachable Sets and Manifolds
+,,0.44,7,230,Drone Futures: UAS in landscape and urban design
+487,"AVI 2020 Workshop on Road Mapping Infrastructures for Artificial Intelligence Supporting Advanced Visual Big Data Analysis, AVI-BDA 2020 and 2nd Italian Workshop on Visualization and Visual Analytics, ITAVIS 2020",0.7100,-1,134,Transparency in practice: Using visualization to enhance the interpretability of open data
+,,0.64,9,260,Integrating geovisual analytics with machine learning for human mobility pattern discovery
+,,0.64,-1,585,"European Conference on Machine Learning and Knowledge Discovery in Databases, ECML PKDD 2016"
+,,0.62,6,43,StreetVizor: Visual Exploration of Human-Scale Urban Forms Based on Street Views
+,,0.62,9,87,IVizTRANS: Interactive visual learning for home and work place detection from massive public transportation data
+,,0.62,7,282,Towards the collaborative development of machine learning techniques in planning support systems – a Sydney example
+,,0.61,7,4,"On big data, artificial intelligence and smart cities"
+,,0.60,7,581,Conference on Human Factors in Computing Systems - Proceedings
+,,0.59,8,140,How should urban planners be trained to handle big data?
+,,0.59,7,563,"Proceedings of the 1st ACM SIGSPATIAL International Workshop on Advances in Resilient and Intelligent Cities, ARIC 2018"
+,,0.58,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.58,6,200,GIS-based emotional computing: A review of quantitative approaches to measure the emotion layer of human–environment relationships
+,,0.58,-1,129,Artificial intelligence technologies and related urban planning and development concepts: How are they perceived and utilized in Australia?
+,,0.58,-1,187,Kadaster knowledge graph: Beyond the fifth star of open data
+,,0.58,6,16,Measuring visual enclosure for street walkability: Using machine learning algorithms and Google Street View imagery
+,,0.58,7,549,"15th European Conference on Ambient Intelligence, AmI 2019"
+,,0.58,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.58,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.58,7,482,Introduction to Urban Computing
+,,0.58,9,574,"Processing, mining and visualizing massive urban data"
+,,0.57,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.57,8,312,An AI Approach to Collecting and Analyzing Human Interactions with Urban Environments
+,,0.57,2,108,Strategway: Web solutions for building public transportation routes using big geodata analysis
+,,0.56,9,393,Multiscale spatio-temporal data aggregation and mapping for urban data exploration
+,,0.56,9,341,Applying machine learning and geolocation techniques to social media data (Twitter) to develop a resource for urban planning
+,,0.56,7,305,Participatory AI: Reducing AI bias and developing socially responsible AI in smart cities
+,,0.56,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.56,7,354,Urban Experiment: Taking Off on the Wind of Al
+,,0.55,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.55,7,559,ACM International Conference Proceeding Series
+516,Intelligent Unmanned Aerial Vehicle Technology in Urban Environments,0.7000,6,308,Rapid and automated urban modeling techniques for UAS applications
+,,0.69,-1,285,Planning the Future of Smart Cities with Swarms of Fully Autonomous Unmanned Aerial Vehicles Using a Novel Framework
+,,0.66,7,230,Drone Futures: UAS in landscape and urban design
+,,0.60,4,565,"The technical and commercial increment of the fusion of big data analysis, artificial intelligence and earth observation"
+,,0.60,4,535,Urban Intelligent Navigator for Drone Using Convolutional Neural Network (CNN)
+,,0.59,7,597,The design of urban geographical information system for transportation
+,,0.59,-1,434,Neural Network Based Algorithm for Multi-UAV Coverage Path Planning
+,,0.58,7,500,"Evaluation of Smart Infrastructure Systems and Novel UV-Oriented Solution for Integration, Resilience, Inclusiveness, and Sustainability"
+,,0.58,4,532,Comparison of performance of artificial neural network (ANN) and random forest (RF) in the classification of land cover zones of urban slum region
+,,0.58,4,238,Context-Based Filtering of Noisy Labels for Automatic Basemap Updating from UAV Data
+,,0.58,4,251,Remote measurement of building usable floor area – Algorithms fusion
+,,0.57,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.57,-1,320,Risk management systems must provide automatic decisions according to crisis computable algebras
+,,0.56,4,182,A comparative analysis of the urban web of the greater athens agglomeration for the last 20-years period on the basis of landsat imagery
+,,0.56,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.56,4,361,Land cover classification based on machine learning using UAV multi-spectral images
+,,0.56,4,538,THE POTENTIAL of BUILDING DETECTION from SAR and LIDAR USING DEEP LEARNING
+,,0.55,4,242,Urban areas extraction from multi sensor data based on machine learning and data fusion
+,,0.55,3,558,Application of AI in urban design
+,,0.55,4,367,Application of satellite image segmentation for urban planning optimization
+,,0.55,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.55,-1,266,Structural health monitoring installation scheme using utility computing model
+,,0.55,7,547,Space for urban innovation: A global approach to downstream sector
+,,0.54,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.54,9,574,"Processing, mining and visualizing massive urban data"
+,,0.54,4,521,"Remote sensing and GIS approach for environmental green areas planning using Landsat satellite imagery, Dubai-UAE"
+,,0.54,4,481,Virtual design of urban planning based on GIS big data and machine learning
+,,0.54,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.54,7,495,The City of the Future: The Urban (Un) Seen Connecting Citizens and Spaces via Community Sensing
+,,0.54,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+217,Classification of urban scenes from georeferenced images in urban street-view context,0.6900,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.69,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.68,-1,536,Urban street contexts classification using convolutional neural networks and streets imagery
+,,0.66,-1,194,Classification of sidewalks in street view images
+,,0.65,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.63,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.63,6,15,A machine learning-based method for the large-scale evaluation of the qualities of the urban environment
+,,0.63,-1,314,Detecting advertising on building façades with computer vision
+,,0.62,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.61,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.61,6,427,"Panoramic street-level imagery in data-driven urban research: A comprehensive global review of applications, techniques, and practical considerations"
+,,0.61,6,375,City safety perception model based on visual content of street images
+,,0.61,6,390,Holistic visual data representation for built environment assessment
+,,0.61,9,496,From PIace2Vec to Multi-Scale Built-Environment Representation: A General-Purpose Distributional Embedding for Urban Data Analysis
+,,0.61,4,54,Building detection from orthophotos using a machine learning approach: An empirical study on image segmentation and descriptors
+,,0.60,4,575,A support vector machine approach on object based image analysis for feature extraction from high resolution images
+,,0.60,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.60,9,227,The big picture of cities: Analysing Flickr photos of 222 cities worldwide
+,,0.60,6,410,Street view imagery in urban analytics and GIS: A review
+,,0.60,6,59,A human-machine adversarial scoring framework for urban perception assessment using street-view images
+,,0.59,4,385,Building detection from orthophotos using binary feature classification
+,,0.59,4,504,A NOVEL SELF-TAUGHT LEARNING FRAMEWORK USING SPATIAL PYRAMID MATCHING for SCENE CLASSIFICATION
+,,0.58,4,30,From land cover-graphs to urban structure types
+,,0.58,4,26,Combining Pixel-and Object-Based Machine Learning for Identification of Water-Body Types from Urban High-Resolution Remote-Sensing Imagery
+,,0.58,9,32,Beyond Word2vec: An approach for urban functional region extraction and identification by combining Place2vec and POIs
+,,0.58,6,423,Subjectively measured streetscape perceptions to inform urban design strategies for Shanghai
+,,0.58,-1,383,Can we predict the scenic beauty of locations from geo-tagged Flickr images?
+,,0.57,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.57,4,63,Support Vector Machine accuracy assessment for extracting green urban areas in towns
+,,0.57,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+384,Towards a deep learning powered query engine for urban planning,0.6900,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.67,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.67,2,483,AI and Deep Learning for Urban Computing
+,,0.66,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.66,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.66,9,496,From PIace2Vec to Multi-Scale Built-Environment Representation: A General-Purpose Distributional Embedding for Urban Data Analysis
+,,0.65,-1,132,A deep learning architecture for semantic address matching
+,,0.65,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.65,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.65,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+,,0.65,3,48,Can expert systems help with planning?
+,,0.64,5,50,Mining transition rules of cellular automata for simulating urban expansion by using the deep learning techniques
+,,0.64,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.63,-1,536,Urban street contexts classification using convolutional neural networks and streets imagery
+,,0.63,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+,,0.63,7,386,Machine learning for real-time urban metrics and design recommendations
+,,0.62,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.62,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.62,-1,551,Exploring different combinations of data and methods for urban land use analysis: A survey
+,,0.62,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.61,5,119,"A data-driven approach for multi-scale GIS-based building energy modeling for analysis, planning and support decision making"
+,,0.61,7,482,Introduction to Urban Computing
+,,0.61,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+,,0.61,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.61,3,293,Design of machine learning model for Urban planning and management improvement
+,,0.61,3,183,The promise of expert systems for urban planning
+,,0.61,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.61,8,140,How should urban planners be trained to handle big data?
+,,0.60,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.60,9,578,STA: A spatio-temporal thematic analytics framework for urban ground sensing
+441,Learning with self-attention for rental market spatial dynamics in the Atlanta metropolitan area,0.6900,6,239,Deep CNN-based methods to evaluate neighborhood-scale urban valuation through street scenes perception
+,,0.68,9,296,Learning geo-contextual embeddings for commuting flow prediction
+,,0.68,5,329,Modeling fine-scale residential land price distribution: An experimental study using open data and machine learning
+,,0.63,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.63,2,352,Taxi Demand Prediction using an LSTM-Based Deep Sequence Model and Points of Interest
+,,0.62,8,142,Predictive analytics can facilitate proactive property vacancy policies for cities
+,,0.61,6,390,Holistic visual data representation for built environment assessment
+,,0.61,9,496,From PIace2Vec to Multi-Scale Built-Environment Representation: A General-Purpose Distributional Embedding for Urban Data Analysis
+,,0.59,5,119,"A data-driven approach for multi-scale GIS-based building energy modeling for analysis, planning and support decision making"
+,,0.59,-1,384,Towards a deep learning powered query engine for urban planning
+,,0.58,9,107,Structure of 311 service requests as a signature of urban location
+,,0.58,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.58,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.57,9,78,Predicting neighborhoods' socioeconomic attributes using restaurant data
+,,0.57,2,205,Attention based stack resnet for citywide traffic accident prediction
+,,0.57,5,172,Analyzing the spatial factors related to the distributions of building heights in urban areas: A comparative case study in Guangzhou and Shenzhen
+,,0.57,2,339,EquiTensors: Learning Fair Integrations of Heterogeneous Urban Data
+,,0.57,5,143,Coupling cellular automata with area partitioning and spatiotemporal convolution for dynamic land use change simulation
+,,0.57,9,511,Learning Semantic Relationships of Geographical Areas based on Trajectories
+,,0.57,2,483,AI and Deep Learning for Urban Computing
+,,0.56,-1,415,Smart environment design planning for smart city based on deep learning
+,,0.56,5,50,Mining transition rules of cellular automata for simulating urban expansion by using the deep learning techniques
+,,0.56,5,326,An ensemble energy consumption forecasting model based on spatial-temporal clustering analysis in residential buildings
+,,0.56,5,432,Sustainable development scale of housing estates: An economic assessment using machine learning approach
+,,0.55,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+,,0.55,4,110,Deprivation pockets through the lens of convolutional neural networks
+,,0.55,-1,132,A deep learning architecture for semantic address matching
+,,0.55,5,131,"An agent-based learning-embedded model (ABM-learning) for urban land use planning: A case study of residential land growth simulation in Shenzhen, China"
+,,0.55,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.55,9,374,Learning task-specific city region partition
+585,"European Conference on Machine Learning and Knowledge Discovery in Databases, ECML PKDD 2016",0.6900,9,577,"1st Asia-Pacific Web and Web-Age Information Management Joint Conference on Web and Big Data, APWeb-WAIM 2017 held in Conjuction with the International Workshop on Mobile Web Data Analytics, MWDA 2017, International Workshop on Hot Topics in Big Spatial Data and Urban Computing, HotSpatial 2017, International Workshop on Graph Data Management and Analysis, GDMA 2017, 2nd International Workshop on Data Driven Crowdsourcing, DDC 2017, 2nd International Workshop on Spatio-temporal Data Management and Analytics, SDMA 2017 and International Workshop on Mobility Analytics from Spatial and Social Data, MASS 2017"
+,,0.69,9,87,IVizTRANS: Interactive visual learning for home and work place detection from massive public transportation data
+,,0.69,9,260,Integrating geovisual analytics with machine learning for human mobility pattern discovery
+,,0.67,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.66,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.66,9,494,Using Social Media to Understand City-wide Movement Patterns and Behaviours
+,,0.66,9,587,2nd International Workshop on Mining Urban Data (Preface)
+,,0.65,2,158,Trajectory clustering of road traffic in urban environments using incremental machine learning in combination with hyperdimensional computing
+,,0.64,9,265,Nonnegative coupled matrix tensor factorization for smart city spatiotemporal pattern mining
+,,0.64,9,574,"Processing, mining and visualizing massive urban data"
+,,0.64,9,65,Temporal decomposition and semantic enrichment of mobility flows
+,,0.64,-1,487,"AVI 2020 Workshop on Road Mapping Infrastructures for Artificial Intelligence Supporting Advanced Visual Big Data Analysis, AVI-BDA 2020 and 2nd Italian Workshop on Visualization and Visual Analytics, ITAVIS 2020"
+,,0.64,8,170,Automated classification of social network messages into Smart Cities dimensions
+,,0.64,9,341,Applying machine learning and geolocation techniques to social media data (Twitter) to develop a resource for urban planning
+,,0.63,2,295,Crosstown traffic - supervised prediction of impact of planned special events on urban traffic
+,,0.63,7,563,"Proceedings of the 1st ACM SIGSPATIAL International Workshop on Advances in Resilient and Intelligent Cities, ARIC 2018"
+,,0.62,9,528,Harnessing Social Interactions on Twitter for Smart Transportation Using Machine Learning
+,,0.62,9,13,Exploiting foursquare and cellular data to infer user activity in urban environments
+,,0.62,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+,,0.62,2,108,Strategway: Web solutions for building public transportation routes using big geodata analysis
+,,0.62,7,545,Internet of things and statistical analysis
+,,0.61,2,301,ADMSv2: A modern architecture for transportation data management and analysis
+,,0.61,9,40,Analyzing large-scale human mobility data: a survey of machine learning methods and applications
+,,0.61,9,511,Learning Semantic Relationships of Geographical Areas based on Trajectories
+,,0.61,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.61,9,334,A generic paradigm for mining human mobility patterns based on the GPS trajectory data using complex network analysis
+,,0.61,7,261,Utilizing Big Data for Enhancing Passenger Safety in Railway Stations
+,,0.61,7,549,"15th European Conference on Ambient Intelligence, AmI 2019"
+,,0.60,-1,46,Forecasting smog-related health hazard based on social media and physical sensor
+,,0.60,9,193,Characterization of behavioral patterns exploiting description of geographical areas
+314,Detecting advertising on building façades with computer vision,0.6800,6,15,A machine learning-based method for the large-scale evaluation of the qualities of the urban environment
+,,0.66,-1,536,Urban street contexts classification using convolutional neural networks and streets imagery
+,,0.65,-1,194,Classification of sidewalks in street view images
+,,0.63,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.63,-1,217,Classification of urban scenes from georeferenced images in urban street-view context
+,,0.62,6,410,Street view imagery in urban analytics and GIS: A review
+,,0.62,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.62,6,59,A human-machine adversarial scoring framework for urban perception assessment using street-view images
+,,0.61,4,156,A locally-constrained YOLO framework for detecting small and densely-distributed building footprints
+,,0.61,4,54,Building detection from orthophotos using a machine learning approach: An empirical study on image segmentation and descriptors
+,,0.61,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.61,6,43,StreetVizor: Visual Exploration of Human-Scale Urban Forms Based on Street Views
+,,0.61,6,427,"Panoramic street-level imagery in data-driven urban research: A comprehensive global review of applications, techniques, and practical considerations"
+,,0.60,6,390,Holistic visual data representation for built environment assessment
+,,0.60,6,16,Measuring visual enclosure for street walkability: Using machine learning algorithms and Google Street View imagery
+,,0.60,9,227,The big picture of cities: Analysing Flickr photos of 222 cities worldwide
+,,0.59,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.59,4,385,Building detection from orthophotos using binary feature classification
+,,0.59,6,239,Deep CNN-based methods to evaluate neighborhood-scale urban valuation through street scenes perception
+,,0.59,6,375,City safety perception model based on visual content of street images
+,,0.59,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.58,6,360,An investigation of the visual features of urban street vitality using a convolutional neural network
+,,0.58,4,428,Comparing three machine learning techniques for building extraction from a digital surface model
+,,0.58,4,460,Use of deep learning models in street-level images to classify one-story unreinforced masonry buildings based on roof diaphragms
+,,0.58,4,3,Building detection in very high resolution multispectral data with deep learning features
+,,0.58,6,62,The visual quality of streets: A human-centred continuous measurement based on machine learning algorithms and street view images
+,,0.58,4,389,Understanding Historical Cityscapes from Aerial Imagery Through Machine Learning
+,,0.57,7,563,"Proceedings of the 1st ACM SIGSPATIAL International Workshop on Advances in Resilient and Intelligent Cities, ARIC 2018"
+,,0.57,4,367,Application of satellite image segmentation for urban planning optimization
+,,0.56,6,423,Subjectively measured streetscape perceptions to inform urban design strategies for Shanghai
+363,Predicting the environment of a neighborhood: A use case for France,0.6800,5,340,Do land policies make a difference? A data-driven approach to trace effects on urban form in France and Germany
+,,0.67,6,390,Holistic visual data representation for built environment assessment
+,,0.64,9,496,From PIace2Vec to Multi-Scale Built-Environment Representation: A General-Purpose Distributional Embedding for Urban Data Analysis
+,,0.64,6,518,Modeling and evaluating the residential urban environment perception
+,,0.63,4,20,Building type classification using spatial and landscape attributes derived from LiDAR remote sensing data
+,,0.63,8,142,Predictive analytics can facilitate proactive property vacancy policies for cities
+,,0.63,6,470,Evolution of historical urban landscape with computer vision and machine learning: A case study of Berlin
+,,0.63,5,12,Mining urban land-use patterns from volunteered geographic information by means of genetic algorithms and artificial neural networks
+,,0.63,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.63,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.62,6,542,"A LARGE SCALE CLASSIFICATION of PUBLIC SPACES USING A STUDY of PERCEPTION and PUBLIC DATA from INEGI of the CITY of PUEBLA, SAN PEDRO CHOLULA and SAN ANDRES CHOLULA"
+,,0.62,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+,,0.62,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.62,9,107,Structure of 311 service requests as a signature of urban location
+,,0.61,6,239,Deep CNN-based methods to evaluate neighborhood-scale urban valuation through street scenes perception
+,,0.60,5,445,Local and application-specific geodemographics for data-led urban decision making
+,,0.60,5,172,Analyzing the spatial factors related to the distributions of building heights in urban areas: A comparative case study in Guangzhou and Shenzhen
+,,0.60,6,15,A machine learning-based method for the large-scale evaluation of the qualities of the urban environment
+,,0.60,5,315,A multiscale clustering of the urban morphology for use in quantitative models
+,,0.60,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.60,5,167,Urban Data Mining using emergent SOM
+,,0.59,9,587,2nd International Workshop on Mining Urban Data (Preface)
+,,0.59,6,557,The Social Life of Small Urban Spaces 2.0: Three Experiments in Computational Urban Studies
+,,0.59,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.59,6,290,The shape of segregation: The role of urban form in immigrant assimilation
+,,0.59,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.59,9,32,Beyond Word2vec: An approach for urban functional region extraction and identification by combining Place2vec and POIs
+,,0.59,6,93,Explaining subjective perceptions of public spaces as a function of the built environment: A massive data approach
+,,0.59,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.59,5,119,"A data-driven approach for multi-scale GIS-based building energy modeling for analysis, planning and support decision making"
+132,A deep learning architecture for semantic address matching,0.6500,-1,384,Towards a deep learning powered query engine for urban planning
+,,0.64,9,496,From PIace2Vec to Multi-Scale Built-Environment Representation: A General-Purpose Distributional Embedding for Urban Data Analysis
+,,0.61,9,404,Automated urban location annotation on mobile records
+,,0.59,-1,536,Urban street contexts classification using convolutional neural networks and streets imagery
+,,0.57,2,483,AI and Deep Learning for Urban Computing
+,,0.55,-1,441,Learning with self-attention for rental market spatial dynamics in the Atlanta metropolitan area
+,,0.54,9,512,Region2vec: An Approach for Urban Land Use Detection by Fusing multiple Features
+,,0.54,6,436,Urban morphological feature extraction and multi-dimensional similarity analysis based on deep learning approaches
+,,0.54,9,296,Learning geo-contextual embeddings for commuting flow prediction
+,,0.54,6,271,Urban land use information retrieval based on scene classification of Google Street View images
+,,0.53,4,19,Using convolutional networks and satellite imagery to identify patterns in urban environments at a large scale
+,,0.53,9,511,Learning Semantic Relationships of Geographical Areas based on Trajectories
+,,0.53,9,32,Beyond Word2vec: An approach for urban functional region extraction and identification by combining Place2vec and POIs
+,,0.53,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.52,6,239,Deep CNN-based methods to evaluate neighborhood-scale urban valuation through street scenes perception
+,,0.52,8,328,Online urban-waterlogging monitoring based on a recurrent neural network for classification of microblogging text
+,,0.52,9,284,GCN2CDD: A Commercial District Discovery Framework via Embedding Space Clustering on Graph Convolution Networks
+,,0.51,2,205,Attention based stack resnet for citywide traffic accident prediction
+,,0.51,9,33,Urban human mobility data mining: An overview
+,,0.51,2,352,Taxi Demand Prediction using an LSTM-Based Deep Sequence Model and Points of Interest
+,,0.50,4,41,Building block level urban land-use information retrieval based on Google Street View images
+,,0.50,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.50,9,520,Recognition of implicit geographic movement in text
+,,0.49,7,597,The design of urban geographical information system for transportation
+,,0.49,9,577,"1st Asia-Pacific Web and Web-Age Information Management Joint Conference on Web and Big Data, APWeb-WAIM 2017 held in Conjuction with the International Workshop on Mobile Web Data Analytics, MWDA 2017, International Workshop on Hot Topics in Big Spatial Data and Urban Computing, HotSpatial 2017, International Workshop on Graph Data Management and Analysis, GDMA 2017, 2nd International Workshop on Data Driven Crowdsourcing, DDC 2017, 2nd International Workshop on Spatio-temporal Data Management and Analytics, SDMA 2017 and International Workshop on Mobility Analytics from Spatial and Social Data, MASS 2017"
+,,0.49,-1,217,Classification of urban scenes from georeferenced images in urban street-view context
+,,0.49,2,339,EquiTensors: Learning Fair Integrations of Heterogeneous Urban Data
+,,0.49,6,546,Variational beauty of space: Machine intuition and non-linear neural aggregations
+,,0.49,6,309,Using Random Forests on Real-World City Data for Urban Planning in a Visual Semantic Decision Support System
+,,0.48,9,227,The big picture of cities: Analysing Flickr photos of 222 cities worldwide
+187,Kadaster knowledge graph: Beyond the fifth star of open data,0.6500,-1,44,Citizen-centered big data analysis-driven governance intelligence framework for smart cities
+,,0.63,7,433,Nordic Cities Meet Artificial Intelligence
+,,0.63,-1,250,A value of civic voices for smart city: A big data analysis of civic queries posed by Seoul citizens
+,,0.62,-1,134,Transparency in practice: Using visualization to enhance the interpretability of open data
+,,0.61,9,92,Cyber Cities: Social Media as a Tool for Understanding Cities
+,,0.60,7,305,Participatory AI: Reducing AI bias and developing socially responsible AI in smart cities
+,,0.60,-1,129,Artificial intelligence technologies and related urban planning and development concepts: How are they perceived and utilized in Australia?
+,,0.59,8,164,Social media data analysis in urban e-planning
+,,0.58,9,405,Urban computing and smart cities: Opportunities and challenges in modelling large-scale aggregated human behavior
+,,0.58,-1,487,"AVI 2020 Workshop on Road Mapping Infrastructures for Artificial Intelligence Supporting Advanced Visual Big Data Analysis, AVI-BDA 2020 and 2nd Italian Workshop on Visualization and Visual Analytics, ITAVIS 2020"
+,,0.58,-1,519,IFDaD 2020 - Proceedings of the 1st International Forum on Digital and Democracy. Towards A Sustainable Evolution 2020
+,,0.57,8,248,A framework to simplify pre-processing location-based social media big data for sustainable urban planning and management
+,,0.57,2,108,Strategway: Web solutions for building public transportation routes using big geodata analysis
+,,0.57,8,208,Game-based crowdsourcing to support collaborative customization of the definition of sustainability
+,,0.57,7,482,Introduction to Urban Computing
+,,0.57,7,4,"On big data, artificial intelligence and smart cities"
+,,0.57,8,140,How should urban planners be trained to handle big data?
+,,0.56,8,344,Opportunities and challenges of geospatial analysis for promoting urban livability in the era of big data and machine learning
+,,0.56,-1,585,"European Conference on Machine Learning and Knowledge Discovery in Databases, ECML PKDD 2016"
+,,0.56,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.56,9,574,"Processing, mining and visualizing massive urban data"
+,,0.56,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.55,9,577,"1st Asia-Pacific Web and Web-Age Information Management Joint Conference on Web and Big Data, APWeb-WAIM 2017 held in Conjuction with the International Workshop on Mobile Web Data Analytics, MWDA 2017, International Workshop on Hot Topics in Big Spatial Data and Urban Computing, HotSpatial 2017, International Workshop on Graph Data Management and Analysis, GDMA 2017, 2nd International Workshop on Data Driven Crowdsourcing, DDC 2017, 2nd International Workshop on Spatio-temporal Data Management and Analytics, SDMA 2017 and International Workshop on Mobility Analytics from Spatial and Social Data, MASS 2017"
+,,0.55,3,48,Can expert systems help with planning?
+,,0.55,7,282,Towards the collaborative development of machine learning techniques in planning support systems – a Sydney example
+,,0.55,7,94,Smart cities and a data-driven response to COVID-19
+,,0.55,8,170,Automated classification of social network messages into Smart Cities dimensions
+,,0.55,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.55,8,312,An AI Approach to Collecting and Analyzing Human Interactions with Urban Environments
+,,0.55,9,341,Applying machine learning and geolocation techniques to social media data (Twitter) to develop a resource for urban planning
+338,Shanghai’s regenerated industrial waterfronts: Urban lab for sustainability transitions?,0.6500,7,377,The future city ecosystem
+,,0.60,5,418,Geospatial simulation of urban neighbourhood densification potentials
+,,0.60,7,231,City brains and smart urbanization: regulating ‘sharing economy’ innovation in China
+,,0.59,7,515,Smart urban futures: Outlining the smart city planning project
+,,0.58,-1,480,Measuring sustainability and urban data operationalization: An integrated computational framework to evaluate and interpret the performance of the urban form
+,,0.58,7,466,Visual Analytics of Urban Informality and Infrastructure Planning with Tableau for Sustainable Urban Design Research Strategies in Lagos Metropolis
+,,0.57,-1,10,"Urbanization impact on landscape patterns in Beijing City, China: A spatial heterogeneity perspective"
+,,0.57,-1,345,"Exploring the dynamics of urban greenness space and their driving factors using geographically weighted regression: A case study in Wuhan Metropolis, China"
+,,0.56,5,36,Mapping urban form and function at city block level using spatial metrics
+,,0.56,5,432,Sustainable development scale of housing estates: An economic assessment using machine learning approach
+,,0.55,3,218,Procedural lot generation for evolutionary urban layout optimization in urban regeneration decision support
+,,0.55,7,357,Viewpoint: City Information Modelling (CIM) and Digitizing Urban Design Practices
+,,0.55,5,588,Study on traditional architectural features of JIN-ai under the influence of silk road commerce
+,,0.55,7,4,"On big data, artificial intelligence and smart cities"
+,,0.55,7,354,Urban Experiment: Taking Off on the Wind of Al
+,,0.54,5,254,Systematizing and upscaling urban climate change mitigation
+,,0.54,5,98,Analysis on spatiotemporal changes of urban thermal landscape pattern in the context of urbanisation: A case study of Xiamen City
+,,0.54,4,49,"The spatial characteristics and relationships between landscape pattern and ecosystem service value along an urban-rural gradient in Xi'an city, China"
+,,0.54,5,456,Optimization of a novel urban growth simulation model integrating an artificial fish swarm algorithm and cellular automata for a smart city
+,,0.54,5,467,Planning Support Systems for Long-Term Climate Resilience: A Critical Review
+,,0.54,7,547,Space for urban innovation: A global approach to downstream sector
+,,0.54,5,173,Investigation of the likelihood of green infrastructure (GI)enhancement along linear waterways or on derelict sites (DS)using machine learning
+,,0.54,7,495,The City of the Future: The Urban (Un) Seen Connecting Citizens and Spaces via Community Sensing
+,,0.54,6,470,Evolution of historical urban landscape with computer vision and machine learning: A case study of Berlin
+,,0.54,7,489,"AI urbanism: a design framework for governance, program, and platform cognition"
+,,0.54,4,431,"Identifying different types of urban land use dynamics using Point-of-interest (POI) and Random Forest algorithm: The case of Huizhou, China"
+,,0.53,5,96,Predicting multiple land use transitions under rapid urbanization and implications for land management and urban planning: The case of Zhanggong District in central China
+,,0.53,5,594,Research on application of intelligent computation - Based LUCC model in urbanization process
+,,0.53,6,91,Daily accessed street greenery and housing price: Measuring economic performance of human-scale streetscapes via new urban data
+,,0.53,5,160,"Machine learning-assisted evaluation of land use policies and plans in a rapidly urbanizing district in Chongqing, China"
+266,Structural health monitoring installation scheme using utility computing model,0.6400,7,500,"Evaluation of Smart Infrastructure Systems and Novel UV-Oriented Solution for Integration, Resilience, Inclusiveness, and Sustainability"
+,,0.61,0,229,Machine learning-based and 3d kinematic models for rockfall hazard assessment using LiDAR Data and GIS
+,,0.60,0,121,Allocation of emergency response centres in response to pluvial flooding-prone demand points using integrated multiple layer perceptron and maximum coverage location problem models
+,,0.59,7,563,"Proceedings of the 1st ACM SIGSPATIAL International Workshop on Advances in Resilient and Intelligent Cities, ARIC 2018"
+,,0.58,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.57,7,261,Utilizing Big Data for Enhancing Passenger Safety in Railway Stations
+,,0.57,9,574,"Processing, mining and visualizing massive urban data"
+,,0.57,4,251,Remote measurement of building usable floor area – Algorithms fusion
+,,0.56,-1,394,Analysis of relationship between road traffic noise and urban form indicators through machine learning method
+,,0.56,0,6,Urban flood risk mapping using the GARP and QUEST models: A comparative study of machine learning techniques
+,,0.56,4,411,Automated classification of building structures for urban built environment identification using machine learning
+,,0.56,7,281,Research on urban anti-terrorism intelligence perception system from the perspective of Internet of things application
+,,0.56,7,525,"5th EAI International Smart City 360 Summit, 2019"
+,,0.55,4,223,Using GIS and machine learning to classify residential status of urban buildings in low and middle income settings
+,,0.55,-1,516,Intelligent Unmanned Aerial Vehicle Technology in Urban Environments
+,,0.55,0,325,"GIS-based comparative study of Bayes network, Hoeffding tree and logistic model tree for landslide susceptibility modeling"
+,,0.55,7,524,"AI application on LID stormwater management and urban planning in Guam, USA, and Southern China, PRC"
+,,0.54,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.54,5,286,Thermal comfort prediction by applying supervised machine learning in green sidewalks of Tehran
+,,0.53,3,558,Application of AI in urban design
+,,0.53,5,253,"GIS-enabled digital twin system for sustainable evaluation of carbon emissions: A case study of Jeonju city, south Korea"
+,,0.52,5,185,Building Energy Information: Demand and Consumption Prediction with Machine Learning Models for Sustainable and Smart Cities
+,,0.52,0,396,Applicability of support vector machines in landslide susceptibility mapping
+,,0.52,0,130,"Comparison of random forest model and frequency ratio model for landslide susceptibility mapping (LSM) in Yunyang county (Chongqing, China)"
+,,0.52,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+,,0.52,-1,400,A comparison among various classification algorithms for travel mode detection using sensors' data collected by smartphones
+,,0.52,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.52,6,390,Holistic visual data representation for built environment assessment
+,,0.52,4,465,Using 3D Convolution and Multimodal Architecture For Earthquake Damage Detection Based on Satellite Imagery and Digital Urban Data
+,,0.52,5,119,"A data-driven approach for multi-scale GIS-based building energy modeling for analysis, planning and support decision making"
+552,Intelligence augmentation for urban warfare operation planning using deep reinforcement learning,0.6400,-1,403,A reasoning approach for modelling and predicting terroristic attacks in urban environments
+,,0.61,2,483,AI and Deep Learning for Urban Computing
+,,0.58,-1,320,Risk management systems must provide automatic decisions according to crisis computable algebras
+,,0.57,-1,434,Neural Network Based Algorithm for Multi-UAV Coverage Path Planning
+,,0.56,2,123,Smart mobile crowdsensing with urban vehicles: A deep reinforcement learning perspective
+,,0.56,-1,34,Artificial intelligence technologies for robot assisted urban search and rescue
+,,0.55,3,294,"Systematizing heterogeneous expert knowledge, scenarios and goals via a goal-reasoning artificial intelligence agent for democratic urban land use planning"
+,,0.55,7,281,Research on urban anti-terrorism intelligence perception system from the perspective of Internet of things application
+,,0.54,9,127,Using abstractions to solve opportunistic crime security games at scale
+,,0.53,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.53,3,48,Can expert systems help with planning?
+,,0.53,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.53,7,502,The art of learnin
+,,0.53,4,481,Virtual design of urban planning based on GIS big data and machine learning
+,,0.52,7,60,Hierarchical multi-agent control of traffic lights based on collective learning
+,,0.52,4,21,Urban land use and land cover classification using remotely sensed sar data through deep belief networks
+,,0.51,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+,,0.51,7,582,Procedural urban environments for FPS games
+,,0.51,-1,285,Planning the Future of Smart Cities with Swarms of Fully Autonomous Unmanned Aerial Vehicles Using a Novel Framework
+,,0.50,7,210,Deep neural network dynamic traffic routing system for vehicles
+,,0.50,7,498,An AI-based approach for arterial signal control in heterogeneous traffic
+,,0.50,3,558,Application of AI in urban design
+,,0.49,-1,415,Smart environment design planning for smart city based on deep learning
+,,0.49,3,183,The promise of expert systems for urban planning
+,,0.49,9,417,A data-driven agent-based simulation to predict crime patterns in an urban environment
+,,0.49,5,50,Mining transition rules of cellular automata for simulating urban expansion by using the deep learning techniques
+,,0.49,4,535,Urban Intelligent Navigator for Drone Using Convolutional Neural Network (CNN)
+,,0.49,-1,88,Understanding cities with machine eyes: A review of deep computer vision in urban analytics
+,,0.49,7,490,Evaluating the Performance of Reinforcement Learning Signalling Strategies for Sustainable Urban Road Networks
+,,0.49,2,351,Development of people mass movement simulation framework based on reinforcement learning
+573,"ESANN 2017 - Proceedings, 25th European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning",0.6300,5,526,Characterizing air quality in urban areas with mobile measurement and high resolution open spatial data: Comparison of different machine-learning approaches using a visual interface
+,,0.61,2,483,AI and Deep Learning for Urban Computing
+,,0.61,7,289,Machine learning technologies for sustainability in smart cities in the post-covid era
+,,0.61,7,545,Internet of things and statistical analysis
+,,0.60,5,138,Machine learning for geographically differentiated climate change mitigation in urban areas
+,,0.60,5,527,Mining and Analysis of Air Quality Data to Aid Climate Change
+,,0.59,-1,585,"European Conference on Machine Learning and Knowledge Discovery in Databases, ECML PKDD 2016"
+,,0.59,-1,46,Forecasting smog-related health hazard based on social media and physical sensor
+,,0.59,9,491,Predicting and mapping neighborhood-scale health outcomes: A machine learning approach
+,,0.59,-1,463,Machine Learning Predictors for Sustainable Urban Planning
+,,0.58,9,587,2nd International Workshop on Mining Urban Data (Preface)
+,,0.58,-1,415,Smart environment design planning for smart city based on deep learning
+,,0.57,5,420,Meta-regression framework for energy consumption prediction in a smart city: A case study of Songdo in South Korea
+,,0.57,5,452,Review of machine learning techniques for mosquito control in urban environments
+,,0.57,2,339,EquiTensors: Learning Fair Integrations of Heterogeneous Urban Data
+,,0.57,5,446,Investigation of urban climates and built environment relations by using machine learning
+,,0.57,5,522,A Machine Learning-Based Method for Predicting Urban Land Use
+,,0.57,9,33,Urban human mobility data mining: An overview
+,,0.56,0,475,Development of a novel hybrid multi-boosting neural network model for spatial prediction of urban flood
+,,0.56,6,79,Machine learning approaches to understand the influence of urban environments on human's physiological response
+,,0.55,5,425,Demystifying uncertainty in PM10 susceptibility mapping using variable drop-off in extreme-gradient boosting (XGB) and random forest (RF) algorithms
+,,0.55,9,270,Cell-to-cell activity prediction for smart cities
+,,0.55,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.55,-1,342,Classification of Urban Functional Areas from Remote Sensing Images and Time-Series User Behavior Data
+,,0.55,9,507,A deep learning approach to urban street functionality prediction based on centrality measures and stacked denoising autoencoder
+,,0.55,6,11,Measuring human perceptions of a large-scale urban region using machine learning
+,,0.54,6,390,Holistic visual data representation for built environment assessment
+,,0.54,7,219,Effective task scheduling algorithm with deep learning for Internet of Health Things (IoHT) in sustainable smart cities
+,,0.54,4,21,Urban land use and land cover classification using remotely sensed sar data through deep belief networks
+,,0.54,-1,174,"Comparison of approaches for urban functional zones classification based on multi-source geospatial data: A case study in Yuzhong District, Chongqing, China"
+320,Risk management systems must provide automatic decisions according to crisis computable algebras,0.6200,-1,403,A reasoning approach for modelling and predicting terroristic attacks in urban environments
+,,0.59,-1,34,Artificial intelligence technologies for robot assisted urban search and rescue
+,,0.59,-1,285,Planning the Future of Smart Cities with Swarms of Fully Autonomous Unmanned Aerial Vehicles Using a Novel Framework
+,,0.58,-1,552,Intelligence augmentation for urban warfare operation planning using deep reinforcement learning
+,,0.57,-1,516,Intelligent Unmanned Aerial Vehicle Technology in Urban Environments
+,,0.55,3,322,Knowledge and reasoning in development control and urban design: an expert systems approach
+,,0.55,3,183,The promise of expert systems for urban planning
+,,0.54,-1,434,Neural Network Based Algorithm for Multi-UAV Coverage Path Planning
+,,0.52,7,281,Research on urban anti-terrorism intelligence perception system from the perspective of Internet of things application
+,,0.50,3,48,Can expert systems help with planning?
+,,0.49,7,500,"Evaluation of Smart Infrastructure Systems and Novel UV-Oriented Solution for Integration, Resilience, Inclusiveness, and Sustainability"
+,,0.48,3,596,A knowledge-based creation of mathematical programming for GIS problem solving
+,,0.46,3,294,"Systematizing heterogeneous expert knowledge, scenarios and goals via a goal-reasoning artificial intelligence agent for democratic urban land use planning"
+,,0.46,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.46,7,478,Methods and Guidelines for Incorporating Human Factors Requirements in Automated Vehicles Development
+,,0.46,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.45,7,275,Modelling space perception in urban planning: A cognitive Ai-based approach
+,,0.45,3,558,Application of AI in urban design
+,,0.45,3,306,Comparative review of methods supporting decision-making in urban development and land management
+,,0.45,7,592,Understanding townscapes through AI approaches to the study of human living in space
+,,0.45,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.45,7,230,Drone Futures: UAS in landscape and urban design
+,,0.44,-1,426,Intelligent control systems in urban planning conflicts: Social media users’ perception
+,,0.44,7,514,Algorithmic Urban IoT Context and Convergence of Services Sensing and Planning Units (PUs)
+,,0.44,6,308,Rapid and automated urban modeling techniques for UAS applications
+,,0.44,7,196,The cooperative conceptualization of urban spaces in ai-assisted environmental planning
+,,0.44,3,241,An information system for judicial and public administration using artificial intelligence and geospatial data
+,,0.43,7,433,Nordic Cities Meet Artificial Intelligence
+,,0.43,7,502,The art of learnin
+,,0.42,7,279,Framework for smart city model composition: Choice of component design models and risks
+165,Studying spatial and temporal changes of aridity in Iran,0.6000,5,421,"Evaluation of the environmental impacts of urbanization from the viewpoint of increased skin temperatures: a case study from Istanbul, Turkey"
+,,0.58,4,471,"Object-Oriented Approach for Urbanization Growth by Using Remote Sensing and GIS Techniques: A Case Study in Hilla City, Babylon Governorate, Iraq"
+,,0.58,5,45,The effect of multi-dimensional indicators on urban thermal conditions
+,,0.57,5,330,Proposing an effective and inexpensive tool to detect urban surface temperature changes associated with urbanization processes in small cities
+,,0.57,5,98,Analysis on spatiotemporal changes of urban thermal landscape pattern in the context of urbanisation: A case study of Xiamen City
+,,0.57,4,407,"Effects of urbanization on spatiotemporal changes of land cover pattern: A case of Changsha, China"
+,,0.56,-1,580,Algorithm for modeling agricultural land cover classification and land surface temperature
+,,0.56,4,90,"Spatiotemporal detection of land use/land cover change in the large basin using integrated approaches of remote sensing and GIS in the Upper Awash basin, Ethiopia"
+,,0.55,4,521,"Remote sensing and GIS approach for environmental green areas planning using Landsat satellite imagery, Dubai-UAE"
+,,0.55,4,300,Spatiotemporal dynamics of urbanization and cropland in the Nile Delta of Egypt using machine learning and satellite big data: implications for sustainable development
+,,0.54,4,113,Evaluation and comparison of eight machine learning models in land use/land cover mapping using Landsat 8 OLI: a case study of the northern region of Iran
+,,0.54,4,126,Semi-automatic mapping of anthropogenic impervious surfaces in an urban/suburban area using Landsat 8 satellite data
+,,0.53,0,6,Urban flood risk mapping using the GARP and QUEST models: A comparative study of machine learning techniques
+,,0.52,5,155,Improving land-use change modeling by integrating ANN with Cellular Automata-Markov Chain model
+,,0.52,5,564,"Urban sprawl modeling of Lahore, Pakistan using machine learning techniques"
+,,0.52,4,102,Automatic classification of high resolution land cover using a new data weighting procedure: The combination of k-means clustering algorithm and central tendency measures (KMC-CTM)
+,,0.52,-1,10,"Urbanization impact on landscape patterns in Beijing City, China: A spatial heterogeneity perspective"
+,,0.52,5,414,Evaluating the role of urban fabric on surface urban heat island: The case of Istanbul
+,,0.51,-1,345,"Exploring the dynamics of urban greenness space and their driving factors using geographically weighted regression: A case study in Wuhan Metropolis, China"
+,,0.51,4,49,"The spatial characteristics and relationships between landscape pattern and ecosystem service value along an urban-rural gradient in Xi'an city, China"
+,,0.50,4,182,A comparative analysis of the urban web of the greater athens agglomeration for the last 20-years period on the basis of landsat imagery
+,,0.50,5,42,Scale- and region-dependence in landscape-PM2.5 correlation: Implications for urban planning
+,,0.50,5,424,Assessing the cooling efficiency of urban parks using data envelopment analysis and remote sensing data
+,,0.49,5,297,Sensing Mixed Urban Land-Use Patterns Using Municipal Water Consumption Time Series
+,,0.49,4,139,Patterns of historical and future urban expansion in Nepal
+,,0.49,4,224,Assessing urban growth in Ghana using machine learning and intensity analysis: A case study of the New Juaben Municipality
+,,0.49,5,35,Urban water resource management for sustainable environment planning using artificial intelligence techniques
+,,0.49,5,499,Combining CityGML files and data-driven models for microclimate simulations in a tropical city
+,,0.49,5,28,Estimation of daily maximum and minimum air temperatures in urban landscapes using MODIS time series satellite data
+,,0.49,5,89,Quantifying the effects of urban form on land surface temperature in subtropical high-density urban areas using machine learning
+34,Artificial intelligence technologies for robot assisted urban search and rescue,0.5900,-1,320,Risk management systems must provide automatic decisions according to crisis computable algebras
+,,0.57,3,48,Can expert systems help with planning?
+,,0.56,-1,552,Intelligence augmentation for urban warfare operation planning using deep reinforcement learning
+,,0.55,3,183,The promise of expert systems for urban planning
+,,0.55,3,322,Knowledge and reasoning in development control and urban design: an expert systems approach
+,,0.53,-1,516,Intelligent Unmanned Aerial Vehicle Technology in Urban Environments
+,,0.52,3,23,Artificial intelligence solutions for urban land dynamics: A review
+,,0.50,3,596,A knowledge-based creation of mathematical programming for GIS problem solving
+,,0.50,3,558,Application of AI in urban design
+,,0.49,6,308,Rapid and automated urban modeling techniques for UAS applications
+,,0.49,-1,403,A reasoning approach for modelling and predicting terroristic attacks in urban environments
+,,0.49,0,121,Allocation of emergency response centres in response to pluvial flooding-prone demand points using integrated multiple layer perceptron and maximum coverage location problem models
+,,0.49,0,229,Machine learning-based and 3d kinematic models for rockfall hazard assessment using LiDAR Data and GIS
+,,0.49,-1,266,Structural health monitoring installation scheme using utility computing model
+,,0.48,-1,434,Neural Network Based Algorithm for Multi-UAV Coverage Path Planning
+,,0.48,4,481,Virtual design of urban planning based on GIS big data and machine learning
+,,0.47,3,244,Selecting artificial intelligence urban models using waves of complexity
+,,0.46,7,500,"Evaluation of Smart Infrastructure Systems and Novel UV-Oriented Solution for Integration, Resilience, Inclusiveness, and Sustainability"
+,,0.46,-1,285,Planning the Future of Smart Cities with Swarms of Fully Autonomous Unmanned Aerial Vehicles Using a Novel Framework
+,,0.45,7,276,The automated vacuum waste collection optimization problem
+,,0.45,7,592,Understanding townscapes through AI approaches to the study of human living in space
+,,0.45,7,555,"Algorithms, AI and architecture"
+,,0.45,4,538,THE POTENTIAL of BUILDING DETECTION from SAR and LIDAR USING DEEP LEARNING
+,,0.45,3,306,Comparative review of methods supporting decision-making in urban development and land management
+,,0.45,3,294,"Systematizing heterogeneous expert knowledge, scenarios and goals via a goal-reasoning artificial intelligence agent for democratic urban land use planning"
+,,0.45,7,402,Will AI ever support design thinking?
+,,0.44,7,337,A Review of AI for Urban Planning: Towards Building Sustainable Smart Cities
+,,0.44,3,429,Improving intelligent decision making in urban planning: Using machine learning algorithms
+,,0.44,4,251,Remote measurement of building usable floor area – Algorithms fusion
+,,0.43,3,509,Urban Planning Reform Trend Based on Artificial Intelligence
+272,Optimization and evaluation of the human fall detection system,0.5500,-1,400,A comparison among various classification algorithms for travel mode detection using sensors' data collected by smartphones
+,,0.49,-1,266,Structural health monitoring installation scheme using utility computing model
+,,0.48,2,161,Toward Transportation Mode Recognition Using Deep Convolutional and Long Short-Term Memory Recurrent Neural Networks
+,,0.48,0,229,Machine learning-based and 3d kinematic models for rockfall hazard assessment using LiDAR Data and GIS
+,,0.48,7,549,"15th European Conference on Ambient Intelligence, AmI 2019"
+,,0.48,7,219,Effective task scheduling algorithm with deep learning for Internet of Health Things (IoHT) in sustainable smart cities
+,,0.47,9,193,Characterization of behavioral patterns exploiting description of geographical areas
+,,0.46,-1,189,Detecting Transportation Modes Based on LightGBM Classifier from GPS Trajectory Data
+,,0.46,6,79,Machine learning approaches to understand the influence of urban environments on human's physiological response
+,,0.45,7,368,Intrusion Detection System as Audit in IoT Infrastructure using Ensemble Learning and SMOTE Method
+,,0.44,6,181,Automatic sound recognition of urban environment events
+,,0.44,0,396,Applicability of support vector machines in landslide susceptibility mapping
+,,0.43,9,265,Nonnegative coupled matrix tensor factorization for smart city spatiotemporal pattern mining
+,,0.43,0,325,"GIS-based comparative study of Bayes network, Hoeffding tree and logistic model tree for landslide susceptibility modeling"
+,,0.43,7,387,Robust anomaly detection in urban environments using sensor and information fusion and a camera network
+,,0.42,7,534,"4th Future Technologies Conference, FTC 2019"
+,,0.42,9,404,Automated urban location annotation on mobile records
+,,0.42,-1,207,A fuzzy logic based transport mode detection framework in urban environment
+,,0.41,9,40,Analyzing large-scale human mobility data: a survey of machine learning methods and applications
+,,0.41,-1,184,A machine learning-based classification system for urban built-up areas using multiple classifiers and data sources
+,,0.41,7,281,Research on urban anti-terrorism intelligence perception system from the perspective of Internet of things application
+,,0.41,9,270,Cell-to-cell activity prediction for smart cities
+,,0.41,1,80,"Intelligent GPS L1 LOS/multipath/NLOS classifiers based on correlator-, RINEX- and NMEA-level measurements"
+,,0.41,7,545,Internet of things and statistical analysis
+,,0.41,8,162,Analyzing Objective and Subjective Data in Social Sciences: Implications for Smart Cities
+,,0.41,6,103,Capturing impressions of pedestrian landscapes used for healing purposes with decision tree learning
+,,0.41,0,67,"Spatial prediction of landslide susceptibility using GIS-based statistical and machine learning models in Wanzhou County, Three Gorges Reservoir, China"
+,,0.41,9,13,Exploiting foursquare and cellular data to infer user activity in urban environments
+,,0.40,9,512,Region2vec: An Approach for Urban Land Use Detection by Fusing multiple Features
+,,0.40,7,581,Conference on Human Factors in Computing Systems - Proceedings
+

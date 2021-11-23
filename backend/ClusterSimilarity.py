@@ -1,11 +1,15 @@
 import os.path
 from argparse import Namespace
+from functools import reduce
+
+import numpy as np
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 import pandas as pd
 import logging
 from ClusterSimilarityUtility import ClusterSimilarityUtility
 import getpass
+from sklearn.feature_extraction.text import CountVectorizer
 
 # Set logging level
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -32,16 +36,55 @@ class ClusterSimilarity:
         self.clusters = df.to_dict("records")  # Convert to a list of dictionaries
         # Load the published paper text data
         path = os.path.join('data', self.args.case_name + '.json')
-        corpus_doc_df = pd.read_json(path)
-        self.corpus_docs = corpus_doc_df.to_dict("records")
+        corpus_df = pd.read_json(path)
+        corpus_df['Text'] = corpus_df['Title'] + ". " + corpus_df['Abstract']
+        # Load HDBSCAN cluster
+        path = os.path.join('output', 'cluster', self.args.case_name + "_clusters.json")
+        hdbscan_cluster_df = pd.read_json(path)
+        # Update corpus data with hdbscan cluster results
+        corpus_df['Cluster'] = hdbscan_cluster_df['HDBSCAN_Cluster']
+        self.corpus_docs = corpus_df.to_dict("records")
         duplicate_doc_ids = ClusterSimilarityUtility.scan_duplicate_articles()
         # Remove duplicated doc
         self.corpus_docs = list(filter(lambda d: d['DocId'] not in duplicate_doc_ids, self.corpus_docs))
 
     # # Use the BERT model to extract long key phrases
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
-    # def extract_key_phrases_by_clusters(self):
-    #     # Extract phrases candidates
+    def extract_key_phrases_by_clusters(self):
+        # Get the cluster vectors by averaging the vectors of each paper in the cluster
+        def get_cluster_vector(_model, _cluster_texts, _candidates, _is_load=True):
+            _vectors = _model.encode(_cluster_texts)
+            _cluster_vector = np.mean(_vectors)
+            _candidate_vectors = _model.encode(_candidates)
+            # Write the vector data to a json file
+            _results = list()
+            _results.append({'cluster_vector': _cluster_vector, 'candidate_vectors': _candidate_vectors})
+            _df = pd.DataFrame(_results)
+            _path = os.path.join('output', 'similarity', 'temp', 'Cluster_vector_Candidate_vectors.json')
+            _df.to_json(_path, orient='records')
+            return _cluster_vector, _candidate_vectors
+
+        try:
+            cluster_no = 5
+            cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
+            cluster_df = pd.DataFrame(cluster_docs)
+            # Clean the texts to lowercase the words, remove punctuations and convert plural to singular nouns
+            cluster_df['Text'] = cluster_df['Text'].apply(lambda text: ClusterSimilarityUtility.clean_sentence(text))
+            # Concatenate all the texts in this cluster as the cluster doc
+            cluster_texts = cluster_df['Text'].to_list()
+            cluster_doc = reduce(lambda a, b: a + b, cluster_texts)
+            # Extract phrases candidates using N-gram model
+            n_gram_range = (3, 3)
+            count = CountVectorizer(ngram_range=n_gram_range).fit([cluster_doc])
+            candidates = count.get_feature_names()
+            # Encode cluster_doc and candidates as BERT embedding
+            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                        device=self.args.device)
+            # Encode cluster doc and keyword candidates into vectors for comparing the similarity
+            cluster_vector, candidates_vectors = get_cluster_vector(model, cluster_texts, candidates)
+            print(candidates_vectors)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     # Find top 30 similar papers for each article in a cluster
     def find_top_similar_paper_in_corpus(self, top_k=30):
@@ -94,47 +137,5 @@ class ClusterSimilarity:
 # Main entry
 if __name__ == '__main__':
     tw = ClusterSimilarity()
-    tw.find_top_similar_paper_in_corpus()
-    # Test the similarity function
-    # TopicWordUtility.compute_similarity_by_words('land cover', 'land use', tw.model)
-# #
-# # Ref: https://github.com/stanfordnlp/GloVe
-# def compute_topic_vectors_and_similar_words(self, cluster_no=15):
-#     try:
-#         # Get cluster 15
-#         cluster = list(filter(lambda c: c['Cluster'] == cluster_no, self.clusters))[0]
-#         n_gram_results = []
-#         n_gram_topics = cluster['TopicN-gram'][:50]
-#         # Get top 30 bi-gram topics
-#         for n_gram in n_gram_topics:
-#             try:
-#                 topic = n_gram['topic']
-#                 self.model()
-#                 # # Get top 100 similar words by vector
-#                 # similar_words = self.model.similar_by_vector(topic_vector, topn=100)
-#                 # # Filter out no-word, duplicated topic words and stop words from similar words
-#                 # similar_words = list(filter(lambda w: not re.search('[^\\w]', w[0].lower()), similar_words))
-#                 # similar_words = list(filter(lambda w: w[0].lower() not in self.stop_words, similar_words))
-#                 # # Filter out duplicated noun words
-#                 # similar_words = TopicWordUtility.filter_duplicated_words(similar_words, topic)
-#                 # # Get top 15 similar words
-#                 # N = 15
-#                 # result = {"topic": topic, 'topic_vector': topic_vector}
-#                 # for i, w in enumerate(similar_words[:N]):
-#                 #     result['top_' + str(i) + "_similar_word"] = w[0]
-#                 #     result['top_' + str(i) + "_similar_word_score"] = float("{:.2f}".format(w[1]))
-#                 # n_gram_results.append(result)
-#             except Exception as err:
-#                 print("Error occurred! {err}".format(err=err))
-#         # Write the topic vectors to csv file
-#         n_gram_results = n_gram_results[:10]
-#         df = pd.DataFrame(n_gram_results)
-#         df['topic_vector'] = df['topic_vector'].apply(lambda v: np.array2string(v, precision=3,
-#                                                                                    formatter={'float_kind': lambda
-#                                                                                               x: "%.2f" % x}))
-#         path = os.path.join('output', 'topic', 'topic_vector',
-#                             self.args.case_name + '_' + self.args.approach + '_topic_vector_similar_words_' +
-#                             str(cluster_no) + '.csv')
-#         df.to_csv(path, encoding='utf-8', index=False)
-#     except Exception as err:
-#         print("Error occurred! {err}".format(err=err))
+    # tw.find_top_similar_paper_in_corpus()
+    tw.extract_key_phrases_by_clusters()
