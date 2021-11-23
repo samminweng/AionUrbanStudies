@@ -246,7 +246,7 @@ class ClusterSimilarityUtility:
 
     # Find the best combination that produce the lower similarity among keywords
     @staticmethod
-    def max_sum_sim(cluster_vector, c_vectors, candidates, top_n=5, num_candidates=20):
+    def maximize_sum_similarity(cluster_vector, c_vectors, candidates, top_n=5, num_candidates=20):
         try:
             # Compute the similarity between cluster vector and each candidate vector
             keywords = []
@@ -276,10 +276,45 @@ class ClusterSimilarityUtility:
             top_keywords.reverse()
             # Write the top_keywords as a csv file
             df = pd.DataFrame(top_keywords, columns=['index', 'score', 'keyword'])
-            path = os.path.join('output', 'similarity', 'temp', 'top_keywords_'+str(num_candidates)+'.csv')
+            path = os.path.join('output', 'similarity', 'temp', 'mss_top_keywords_'+str(num_candidates)+'.csv')
             df.to_csv(path, encoding='utf-8')
             return top_keywords
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 
+    @staticmethod
+    def maximal_marginal_relevance(cluster_vector, c_vectors, candidates, top_n=5, diversity=0.2):
 
+        # Extract similarity within words, and between words and the document
+        word_doc_similarity = cosine_similarity(c_vectors, [cluster_vector])
+        word_similarity = cosine_similarity(c_vectors)
+
+        # Initialize candidates and already choose best keyword/keyphras
+        keywords_idx = [np.argmax(word_doc_similarity)]
+        candidates_idx = [i for i in range(len(candidates)) if i != keywords_idx[0]]
+
+        for _ in range(top_n - 1):
+            # Extract similarities within candidates and
+            # between candidates and selected keywords/phrases
+            candidate_similarities = word_doc_similarity[candidates_idx, :]
+            target_similarities = np.max(word_similarity[candidates_idx][:, keywords_idx], axis=1)
+
+            # Calculate MMR
+            mmr = (1 - diversity) * candidate_similarities - diversity * target_similarities.reshape(-1, 1)
+            mmr_idx = candidates_idx[np.argmax(mmr)]
+
+            # Update keywords & candidates
+            keywords_idx.append(mmr_idx)
+            candidates_idx.remove(mmr_idx)
+
+        # Collect all the top keywords
+        top_keywords = list()
+        for idx in keywords_idx:
+            keyword = candidates[idx]
+            score = word_doc_similarity[idx][0]
+            top_keywords.append({'keyword': keyword, 'score': score})
+        # Write the
+        df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
+        path = os.path.join('output', 'similarity', 'temp', 'mmr_top_keywords_' + str(round(diversity, 1)) + '.csv')
+        df.to_csv(path, encoding='utf-8', index=False)
+        return top_keywords

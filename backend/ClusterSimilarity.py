@@ -93,14 +93,20 @@ class ClusterSimilarity:
                                         device=self.args.device)
             # Encode cluster doc and keyword candidates into vectors for comparing the similarity
             cluster_vector, candidate_vectors = get_cluster_vector(model, cluster_texts, candidates, _is_load=False)
+            # top_n = 30
+            # for r in range(2, 20):
+            #     num_candidate = r * top_n
+            #     # # Compute the similarity between keyword and cluster vector
+            #     top_keywords = ClusterSimilarityUtility.maximize_sum_similarity(cluster_vector, candidate_vectors,
+            #                                                                     candidates, top_n=top_n,
+            #                                                                     num_candidates=num_candidate)
             top_n = 30
-            for r in range(2, 20):
-                num_candidate = r * top_n
-                # # Compute the similarity between keyword and cluster vector
-                top_keywords = ClusterSimilarityUtility.max_sum_sim(cluster_vector, candidate_vectors, candidates,
-                                                                    top_n=top_n, num_candidates=num_candidate)
-                # print(top_keywords)
-
+            for r in range(1, 10):
+                diversity = r * 0.1
+                top_keywords = ClusterSimilarityUtility.maximal_marginal_relevance(cluster_vector, candidate_vectors,
+                                                                                   candidates, top_n=top_n,
+                                                                                   diversity=diversity)
+                print(top_keywords)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
