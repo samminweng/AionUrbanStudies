@@ -7,3 +7,5 @@ __pycache__/
 # Ignore model folder that contains temporaral model files
 *.kv
 *.npy
+# Ignore the temp vector data
+/output/similarity/temp/*.json
