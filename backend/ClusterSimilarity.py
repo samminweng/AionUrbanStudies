@@ -80,7 +80,7 @@ class ClusterSimilarity:
             return _cluster_vector, _candidate_vectors
         try:
             _is_load = False
-            for cluster_no in [5]:
+            for cluster_no in [5, 7, 9]:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
                 cluster_df = pd.DataFrame(cluster_docs)
                 # Clean the texts to lowercase the words, remove punctuations and convert plural to singular nouns
