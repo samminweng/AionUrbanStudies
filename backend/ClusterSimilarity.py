@@ -106,7 +106,7 @@ class ClusterSimilarity:
                         best_key_phrases = None
                         top_n = 30
                         df = pd.DataFrame()
-                        for diversity in [0.0, 0.1, 0.3, 0.5, 0.7, 0.9]:
+                        for diversity in [0.0, 0.1, 0.3, 0.5, 0.7, 0.9, 1.0]:
                             key_phrases = ClusterSimilarityUtility.maximal_marginal_relevance(cluster_vector,
                                                                                               candidate_vectors,
                                                                                               candidates,

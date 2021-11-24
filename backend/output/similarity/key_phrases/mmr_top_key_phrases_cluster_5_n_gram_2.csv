@@ -1,31 +1,31 @@
-0.0_score,0.0_keyword,0.1_score,0.1_keyword,0.3_score,0.3_keyword,0.5_score,0.5_keyword,0.7_score,0.7_keyword,0.9_score,0.9_keyword
-0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization
-0.6806427,urbanization prediction,0.6806427,urbanization prediction,0.5597196,sustainable urban,0.28729206,reduce greenhouse,0.06347137,novel cooling,0.06347137,novel cooling
-0.64885426,forecasting urban,0.64885426,forecasting urban,0.5672728,land prediction,0.27304792,artificial neural,0.0648415,account artificial,-0.026062604,set is
-0.6165222,predicting urban,0.6009229,city modelling,0.64885426,forecasting urban,0.402407,environmental data,0.16824546,landsat archive,0.03429877,role path
-0.6009229,city modelling,0.6165222,predicting urban,0.6009229,city modelling,0.4352746,forest modeling,0.08852561,safety coefficient,0.07296172,control dengue
-0.59342724,analyse urban,0.58325213,urban ecosystem,0.58288425,urban climate,0.49198404,gis computational,0.17225578,tree height,0.088729955,evaluating multivariable
-0.5892575,modelling urban,0.5672728,land prediction,0.5267096,predicting building,0.46116748,urban ventilation,0.015340934,and wash,-0.027786773,patch cohesion
-0.58808047,urban planning,0.59342724,analyse urban,0.59342724,analyse urban,0.50690645,modelling residential,0.16233972,methodology approach,0.029155957,annually because
-0.58325213,urban ecosystem,0.58808047,urban planning,0.48649243,pollutant prediction,0.46040428,sustainable planning,0.031363696,accessibility change,0.06457114,uhi definition
-0.58288425,urban climate,0.58288425,urban climate,0.58234733,urbanizing area,0.46270677,climate prediction,0.093787946,mapping distinct,0.13618322,xgboost and
-0.58234733,urbanizing area,0.58234733,urbanizing area,0.6806427,urbanization prediction,0.5672728,land prediction,0.062575005,path dependency,0.017530672,photographs sludge
-0.57680655,planning urban,0.5892575,modelling urban,0.58808047,urban planning,0.5058347,urban vegetation,0.175531,cellular automation,0.046174783,develop sensitivity
-0.57171196,mapping urban,0.5686198,urban sustainability,0.58325213,urban ecosystem,0.11609495,index surged,0.14053994,understand turbulent,0.06584057,morphology external
-0.5707311,modelling city,0.560287,optimizing urban,0.6165222,predicting urban,0.39035,smart cities,0.3924098,sustainable architecture,0.024204876,great influence
-0.5686198,urban sustainability,0.57171196,mapping urban,0.560287,optimizing urban,0.31549552,classification index,0.18834345,xgboost algorithm,0.09268693,learning technology
-0.56799483,analyze urbanization,0.56799483,analyze urbanization,0.57171196,mapping urban,0.24611992,china compared,0.15750949,daytime average,0.07676857,distribution binary
-0.56734216,manage urbanization,0.57680655,planning urban,0.4784318,spatial regression,0.3138618,multivariate analysis,0.2101782,shape index,0.09481236,grid resolution
-0.5672728,land prediction,0.56734216,manage urbanization,0.50690645,modelling residential,0.3237074,sq km,0.06457114,uhi definition,0.043842986,then land
-0.56470513,analysing urban,0.55614686,urban spatial,0.43448973,random forests,0.10186586,lesson learned,0.18027115,yangtze river,0.1367322,pca decomposition
-0.56050915,sustainable urbanization,0.5267096,predicting building,0.49198404,gis computational,0.41373298,spatial relationship,0.1568556,zone using,0.04060686,qgis plug
-0.560287,optimizing urban,0.55223906,simulation urbanization,0.4812907,geospatial analysis,0.560287,optimizing urban,0.053831927,matrix of,0.09451842,maximum carbon
-0.5597196,sustainable urban,0.5542359,urban typology,0.5399356,heterogeneous urban,0.4417293,zoning information,0.20399806,good hyperparameters,0.0050459867,anonymized smartphone
-0.55614686,urban spatial,0.56050915,sustainable urbanization,0.53556484,urban data,0.4291888,sprawl modeling,0.22629029,emission modelling,-0.013544157,middle european
-0.5542359,urban typology,0.5707311,modelling city,0.46270677,climate prediction,0.23634364,overfitting importance,0.0277544,they will,0.20250112,protecting farmland
-0.5541235,urban geography,0.5470047,accelerated urbanization,0.53682667,urbanization indicator,0.2920919,complex predictor,0.065181464,current food,0.06522055,difference between
-0.55223906,simulation urbanization,0.54661846,urban environment,0.52413565,urban footprint,0.29178026,svm algorithms,0.08849327,comparative role,0.010345263,price rlps
-0.54984295,designing urban,0.5541235,urban geography,0.48008657,residential density,0.23421998,quantile mapping,0.080874234,cost air,0.016381674,populating post
-0.5470047,accelerated urbanization,0.56470513,analysing urban,0.55223906,simulation urbanization,0.52413565,urban footprint,0.098017864,compactness adjacency,0.0035918914,it does
-0.5467206,sustainable urbanisation,0.5597196,sustainable urban,0.54178405,future urbanization,0.48649243,pollutant prediction,0.11823577,year driving,0.057300813,sequences by
-0.54661846,urban environment,0.53556484,urban data,0.5542359,urban typology,0.18730074,application value,0.054156415,sheva negev,0.077788495,winter park
+0.0_score,0.0_keyword,0.1_score,0.1_keyword,0.3_score,0.3_keyword,0.5_score,0.5_keyword,0.7_score,0.7_keyword,0.9_score,0.9_keyword,1.0_score,1.0_keyword
+0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization,0.69103336,predicting urbanization
+0.6806427,urbanization prediction,0.6806427,urbanization prediction,0.5597196,sustainable urban,0.28729206,reduce greenhouse,0.06347137,novel cooling,0.06347137,novel cooling,-0.13052502,presents cross
+0.64885426,forecasting urban,0.64885426,forecasting urban,0.5672728,land prediction,0.27304792,artificial neural,0.0648415,account artificial,-0.026062604,set is,0.085498095,expensive cfd
+0.6165222,predicting urban,0.6009229,city modelling,0.64885426,forecasting urban,0.402407,environmental data,0.16824546,landsat archive,0.03429877,role path,0.022687135,physiological equivalent
+0.6009229,city modelling,0.6165222,predicting urban,0.6009229,city modelling,0.4352746,forest modeling,0.08852561,safety coefficient,0.07296172,control dengue,0.0061162785,but should
+0.59342724,analyse urban,0.58325213,urban ecosystem,0.58288425,urban climate,0.49198404,gis computational,0.17225578,tree height,0.088729955,evaluating multivariable,0.0093274675,configuration shapley
+0.5892575,modelling urban,0.5672728,land prediction,0.5267096,predicting building,0.46116748,urban ventilation,0.015340934,and wash,-0.027786773,patch cohesion,0.057306275,largest range
+0.58808047,urban planning,0.59342724,analyse urban,0.59342724,analyse urban,0.50690645,modelling residential,0.16233972,methodology approach,0.029155957,annually because,0.030502172,fragmented ownership
+0.58325213,urban ecosystem,0.58808047,urban planning,0.48649243,pollutant prediction,0.46040428,sustainable planning,0.031363696,accessibility change,0.06457114,uhi definition,-0.047626913,there are
+0.58288425,urban climate,0.58288425,urban climate,0.58234733,urbanizing area,0.46270677,climate prediction,0.093787946,mapping distinct,0.13618322,xgboost and,0.077974014,ovitrap index
+0.58234733,urbanizing area,0.58234733,urbanizing area,0.6806427,urbanization prediction,0.5672728,land prediction,0.062575005,path dependency,0.017530672,photographs sludge,-0.036042854,gcm output
+0.57680655,planning urban,0.5892575,modelling urban,0.58808047,urban planning,0.5058347,urban vegetation,0.175531,cellular automation,0.046174783,develop sensitivity,0.08691241,natural surface
+0.57171196,mapping urban,0.5686198,urban sustainability,0.58325213,urban ecosystem,0.11609495,index surged,0.14053994,understand turbulent,0.06584057,morphology external,0.11258582,automata with
+0.5707311,modelling city,0.560287,optimizing urban,0.6165222,predicting urban,0.39035,smart cities,0.3924098,sustainable architecture,0.024204876,great influence,0.06930898,meaningful integration
+0.5686198,urban sustainability,0.57171196,mapping urban,0.560287,optimizing urban,0.31549552,classification index,0.18834345,xgboost algorithm,0.09268693,learning technology,0.06769894,dengue incidence
+0.56799483,analyze urbanization,0.56799483,analyze urbanization,0.57171196,mapping urban,0.24611992,china compared,0.15750949,daytime average,0.07676857,distribution binary,-0.021502594,practice focusing
+0.56734216,manage urbanization,0.57680655,planning urban,0.4784318,spatial regression,0.3138618,multivariate analysis,0.2101782,shape index,0.09481236,grid resolution,0.07350136,install lid
+0.5672728,land prediction,0.56734216,manage urbanization,0.50690645,modelling residential,0.3237074,sq km,0.06457114,uhi definition,0.043842986,then land,0.10150467,emission understanding
+0.56470513,analysing urban,0.55614686,urban spatial,0.43448973,random forests,0.10186586,lesson learned,0.18027115,yangtze river,0.1367322,pca decomposition,0.014542623,generally was
+0.56050915,sustainable urbanization,0.5267096,predicting building,0.49198404,gis computational,0.41373298,spatial relationship,0.1568556,zone using,0.04060686,qgis plug,0.11727097,retrofit campaign
+0.560287,optimizing urban,0.55223906,simulation urbanization,0.4812907,geospatial analysis,0.560287,optimizing urban,0.053831927,matrix of,0.09451842,maximum carbon,0.13526306,average temperature
+0.5597196,sustainable urban,0.5542359,urban typology,0.5399356,heterogeneous urban,0.4417293,zoning information,0.20399806,good hyperparameters,0.0050459867,anonymized smartphone,0.07977223,squared correlation
+0.55614686,urban spatial,0.56050915,sustainable urbanization,0.53556484,urban data,0.4291888,sprawl modeling,0.22629029,emission modelling,-0.013544157,middle european,0.03519388,force affecting
+0.5542359,urban typology,0.5707311,modelling city,0.46270677,climate prediction,0.23634364,overfitting importance,0.0277544,they will,0.20250112,protecting farmland,0.036173344,italy the
+0.5541235,urban geography,0.5470047,accelerated urbanization,0.53682667,urbanization indicator,0.2920919,complex predictor,0.065181464,current food,0.06522055,difference between,0.007636413,testing procedure
+0.55223906,simulation urbanization,0.54661846,urban environment,0.52413565,urban footprint,0.29178026,svm algorithms,0.08849327,comparative role,0.010345263,price rlps,-0.0009974004,file to
+0.54984295,designing urban,0.5541235,urban geography,0.48008657,residential density,0.23421998,quantile mapping,0.080874234,cost air,0.016381674,populating post,-0.012153152,pafrac interspersion
+0.5470047,accelerated urbanization,0.56470513,analysing urban,0.55223906,simulation urbanization,0.52413565,urban footprint,0.098017864,compactness adjacency,0.0035918914,it does,0.04872488,outlet water
+0.5467206,sustainable urbanisation,0.5597196,sustainable urban,0.54178405,future urbanization,0.48649243,pollutant prediction,0.11823577,year driving,0.057300813,sequences by,-0.0195733,period daily
+0.54661846,urban environment,0.53556484,urban data,0.5542359,urban typology,0.18730074,application value,0.054156415,sheva negev,0.077788495,winter park,0.1012878,tehran purpose
