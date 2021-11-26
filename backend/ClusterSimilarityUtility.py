@@ -3,12 +3,14 @@ import getpass
 import itertools
 import os
 import re
+import string
 
 import nltk
-from nltk import word_tokenize, sent_tokenize
+from nltk import word_tokenize, sent_tokenize, ngrams
 import pandas as pd
 import numpy as np
 # Load function words
+from nltk.corpus import stopwords
 from sentence_transformers import util
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem import WordNetLemmatizer
@@ -25,28 +27,76 @@ nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
 nltk.data.path.append(nltk_path)
 
 
+# Load the lemma.n file to store the mapping of singular to plural nouns
+def load_lemma_nouns():
+    _lemma_nouns = {}
+    path = os.path.join('data', 'lemma.n')
+    f = open(path, 'r')
+    lines = f.readlines()
+    for line in lines:
+        words = line.rstrip().split("->")  # Remove trailing new line char and split by '->'
+        plural_word = words[1]
+        if '.,' in plural_word:  # Handle multiple plural forms and get the last one as default plural form
+            plural_word = plural_word.split('.,')[-1]
+        singular_word = words[0]
+        _lemma_nouns[plural_word] = singular_word
+    return _lemma_nouns
+
+
+stop_words = list(stopwords.words('english'))
+lemma_nouns = load_lemma_nouns()
+
+
 # Helper function for cluster Similarity
 class ClusterSimilarityUtility:
-
     # Clean licence statement texts
     @staticmethod
     def clean_sentence(text):
+        # Split the words 'within/near'
+        def split_words(_words):
+            _out_words = list()
+            for _word in _words:
+                if matches := re.match(r'(\w+)/(\w+)', _word):
+                    _out_words.append(matches.group(1))
+                    _out_words.append(matches.group(2))
+                elif re.match(r"('\w+)|(\w+')", _word):
+                    _out_words.append(_word.replace("'", ""))
+                else:
+                    _out_words.append(_word)
+            return _out_words
+
         # Change plural nouns to singular nouns using lemmatizer
         def convert_singular_words(_words, _lemmatiser):
             # Tag the words with part-of-speech tags
-            pos_tags = nltk.pos_tag(_words)
+            _pos_tags = nltk.pos_tag(list(map(lambda w: w.lower(), _words)))
             # Convert plural word to singular
             singular_words = []
-            for pos_tag in pos_tags:
-                _word = pos_tag[0]
-                # NNS indicates plural nouns
-                if pos_tag[1] == 'NNS':
-                    try:
-                        singular_words.append(_lemmatiser.lemmatize(_word))
-                    except Exception as _err:
-                        print("Error occurred! {err}".format(err=_err))
-                else:
-                    singular_words.append(_word)
+            for i, (_word, _pos_tag) in enumerate(zip(_words, _pos_tags)):
+                try:
+                    # Lowercase 1st word
+                    if i == 0:
+                        if len(words) > 1:
+                            _word = _word[0].lower() + _word[1:len(_word)]
+                        else:
+                            _word = _word[0]
+                    # NNS indicates plural nouns and convert the plural noun to singular noun
+                    if _pos_tag[1] == 'NNS':
+                        singular_word = _lemmatiser.lemmatize(_word.lower())
+                        if _word[0].isupper():  # Restore the uppercase
+                            singular_word = singular_word[0].upper() + singular_word[1:len(singular_word)]
+                        singular_words.append(singular_word)
+                    else:
+                        # Check if the word in lemma list
+                        if _word.lower() in lemma_nouns:
+                            try:
+                                singular_word = lemma_nouns[_word.lower()]
+                                singular_words.append(singular_word)
+                            except Exception as _err:
+                                print("Error occurred! {err}".format(err=_err))
+                        else:
+                            singular_words.append(_word)
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
             # Return all lemmatized words
             return singular_words
 
@@ -58,14 +108,80 @@ class ClusterSimilarityUtility:
             if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
                     and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
                 try:
-                    words = word_tokenize(sentence)
+                    words = split_words(word_tokenize(sentence))
                     if len(words) > 0:
                         # Convert the plural words into singular words
                         cleaned_words = convert_singular_words(words, lemmatizer)
-                        cleaned_sentences.append(" ".join(cleaned_words))  # merge tokenized words into sentence
+                        cleaned_sentences.append(cleaned_words)  # merge tokenized words into sentence
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
-        return " ".join(cleaned_sentences)  # Convert a list of clean sentences to the text
+        return cleaned_sentences  # Convert a list of clean sentences to the text
+
+    @staticmethod
+    # Generate n-gram of a text and avoid stop
+    def generate_n_gram_candidates(sentences, n_gram_range):
+        def _is_qualified(_n_gram):
+            try:
+                qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
+                # # Check if there is any noun
+                nouns = list(filter(lambda _n: _n.split("___")[1].startswith('NN'), _n_gram))
+                if len(nouns) == 0:
+                    return False
+                # Check the last word is a nn or nns
+                if _n_gram[-1].split('___')[1] not in ['NN', 'NNS']:
+                    return False
+                # Check if all words are not stop word or punctuation or non-words
+                for _i, _n in enumerate(_n_gram):
+                    _word = _n.split('___')[0]
+                    _pos_tag = _n.split('___')[1]
+                    if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
+                            _word.lower() in stop_words or _pos_tag not in qualified_tags:
+                        return False
+                # n-gram is qualified
+                return True
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
+
+        candidates = list()
+        # Extract n_gram from each sentence
+        for i, sentence in enumerate(sentences):
+            pos_tags = nltk.pos_tag(sentence)
+            # Convert pos tag tuple (word, pos-tag) to each word token of 'sentence
+            word_pos_tags = list(map(lambda tag: tag[0] + "___" + tag[1], pos_tags))
+            n_grams = list(ngrams(word_pos_tags, n_gram_range))
+            # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
+            for n_gram in n_grams:
+                if _is_qualified(n_gram):
+                    n_gram_text = " ".join(list(map(lambda t: t.split('___')[0], n_gram)))
+                    # Check if candidates exist in the list
+                    found = next((c for c in candidates if c.lower() == n_gram_text.lower()), None)
+                    if not found:
+                        candidates.append(n_gram_text)  # Convert n_gram (a list of words) to a string
+        return candidates
+
+    # Find top K key phrase similar to the paper
+    # Ref: https://www.sbert.net/examples/applications/semantic-search/README.html
+    @staticmethod
+    def get_top_key_phrases(model, doc_text, candidates, top_k=5):
+        try:
+            # Encode cluster doc and keyword candidates into vectors for comparing the similarity
+            candidate_vectors = model.encode(candidates, convert_to_numpy=True)
+            doc_vector = model.encode([doc_text], convert_to_numpy=True)  # Convert the numpy array
+            # Compute the distance of doc vector and each candidate vector
+            distances = cosine_similarity(doc_vector, candidate_vectors)
+            # Select top key phrases based on the distance score
+            top_key_phrases = list()
+            for index in distances.argsort()[0][-top_k:]:
+                candidate = candidates[index]
+                distance = distances[0][index]
+                vector = candidate_vectors[index]
+                top_key_phrases.append({'key-phrase': candidate, 'score': distance})
+            # Sort the phrases by scores
+            top_key_phrases = sorted(top_key_phrases, key=lambda k: k['score'], reverse=True)
+            # Output to key phrase (word-only)
+            return list(map(lambda k: k['key-phrase'], top_key_phrases))
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     # Find the duplicate papers in the corpus
     @staticmethod
