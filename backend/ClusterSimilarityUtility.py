@@ -6,7 +6,7 @@ import re
 import string
 
 import nltk
-from nltk import word_tokenize, sent_tokenize, ngrams
+from nltk import word_tokenize, sent_tokenize, ngrams, pos_tag
 import pandas as pd
 import numpy as np
 # Load function words
@@ -120,20 +120,20 @@ class ClusterSimilarityUtility:
     @staticmethod
     # Generate n-gram of a text and avoid stop
     def generate_n_gram_candidates(sentences, n_gram_range):
-        def _is_qualified(_n_gram):
+        def _is_qualified(_n_gram):     # _n_gram is a list of tuple (word, tuple)
             try:
                 qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
                 # # Check if there is any noun
-                nouns = list(filter(lambda _n: _n.split("___")[1].startswith('NN'), _n_gram))
+                nouns = list(filter(lambda _n: _n[1].startswith('NN'), _n_gram))
                 if len(nouns) == 0:
                     return False
                 # Check the last word is a nn or nns
-                if _n_gram[-1].split('___')[1] not in ['NN', 'NNS']:
+                if _n_gram[-1][1] not in ['NN', 'NNS']:
                     return False
                 # Check if all words are not stop word or punctuation or non-words
                 for _i, _n in enumerate(_n_gram):
-                    _word = _n.split('___')[0]
-                    _pos_tag = _n.split('___')[1]
+                    _word = _n[0]
+                    _pos_tag = _n[1]
                     if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
                             _word.lower() in stop_words or _pos_tag not in qualified_tags:
                         return False
@@ -145,14 +145,16 @@ class ClusterSimilarityUtility:
         candidates = list()
         # Extract n_gram from each sentence
         for i, sentence in enumerate(sentences):
-            pos_tags = nltk.pos_tag(sentence)
-            # Convert pos tag tuple (word, pos-tag) to each word token of 'sentence
-            word_pos_tags = list(map(lambda tag: tag[0] + "___" + tag[1], pos_tags))
+            pos_tags = pos_tag(sentence)
+            # Convert pos tag tuple (word, pos-tag) to the tag of each word token in 'sentence
+            pos_tags = list(map(lambda p: p[1], pos_tags))
+            # Combine word and tags together
+            word_pos_tags = zip(sentence, pos_tags)
             n_grams = list(ngrams(word_pos_tags, n_gram_range))
             # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
             for n_gram in n_grams:
                 if _is_qualified(n_gram):
-                    n_gram_text = " ".join(list(map(lambda t: t.split('___')[0], n_gram)))
+                    n_gram_text = " ".join(list(map(lambda n: n[0], n_gram)))
                     # Check if candidates exist in the list
                     found = next((c for c in candidates if c.lower() == n_gram_text.lower()), None)
                     if not found:
