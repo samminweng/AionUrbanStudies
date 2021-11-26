@@ -68,28 +68,27 @@ class ClusterSimilarityUtility:
         # Change plural nouns to singular nouns using lemmatizer
         def convert_singular_words(_words, _lemmatiser):
             # Tag the words with part-of-speech tags
-            _pos_tags = nltk.pos_tag(list(map(lambda w: w.lower(), _words)))
+            _pos_tags = nltk.pos_tag(_words)
             # Convert plural word to singular
             singular_words = []
-            for i, (_word, _pos_tag) in enumerate(zip(_words, _pos_tags)):
+            for i, (_word, _pos_tag) in enumerate(_pos_tags):
                 try:
-                    # Lowercase 1st word
+                    # Lowercase 1st char of the firs word
                     if i == 0:
-                        if len(words) > 1:
-                            _word = _word[0].lower() + _word[1:len(_word)]
-                        else:
-                            _word = _word[0]
+                        _word = _word[0].lower() + _word[1:len(_word)]
                     # NNS indicates plural nouns and convert the plural noun to singular noun
-                    if _pos_tag[1] == 'NNS':
+                    if _pos_tag == 'NNS':
                         singular_word = _lemmatiser.lemmatize(_word.lower())
                         if _word[0].isupper():  # Restore the uppercase
-                            singular_word = singular_word[0].upper() + singular_word[1:len(singular_word)]
+                            singular_word = singular_word.capitalize()      # Upper case the first character
                         singular_words.append(singular_word)
                     else:
                         # Check if the word in lemma list
                         if _word.lower() in lemma_nouns:
                             try:
                                 singular_word = lemma_nouns[_word.lower()]
+                                if _word[0].isupper():  # Restore the uppercase
+                                    singular_word = singular_word.capitalize()  # Upper case the first character
                                 singular_words.append(singular_word)
                             except Exception as _err:
                                 print("Error occurred! {err}".format(err=_err))
@@ -146,11 +145,8 @@ class ClusterSimilarityUtility:
         # Extract n_gram from each sentence
         for i, sentence in enumerate(sentences):
             pos_tags = pos_tag(sentence)
-            # Convert pos tag tuple (word, pos-tag) to the tag of each word token in 'sentence
-            pos_tags = list(map(lambda p: p[1], pos_tags))
-            # Combine word and tags together
-            word_pos_tags = zip(sentence, pos_tags)
-            n_grams = list(ngrams(word_pos_tags, n_gram_range))
+            # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
+            n_grams = list(ngrams(pos_tags, n_gram_range))
             # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
             for n_gram in n_grams:
                 if _is_qualified(n_gram):
