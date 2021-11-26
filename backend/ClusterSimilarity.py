@@ -53,19 +53,19 @@ class ClusterSimilarity:
     # # Use the BERT model to extract long key phrases
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     def extract_key_phrases_by_clusters(self):
-        # Get a list of key phrases from all papers
-        def get_key_phrase_list(_results):
-            key_phrase_list = list()
-            for _result in _results:
-                key_phrase_list = key_phrase_list + _result['']
-            key_phrase_list = reduce(lambda r1, r2: r1 + r2, list(map(lambda r: r['key-phrases'], _results)))
+        # Get a list of unique key phrases from all papers
+        def get_key_phrase_list(_doc_key_phrases):
+            _key_phrases = list()
+            for _d in _doc_key_phrases:
+                for _dkp in _d['key-phrases']:
+                    # find if key phrase exist in the key_phrases
+                    found = [_kp for _kp in _key_phrases if _kp['key-phrase'].lower() == _dkp['key-phrase'].lower()]
+                    if len(found) == 0:
+                        _key_phrases.append(_dkp)
+                    else:
+                        print("Duplicated: " + found[0]['key-phrase'])
+            return _key_phrases
 
-            for key_phrase in key_phrase_list:
-                if key_phrase.lower() not in c_key_phrases:
-
-                    c_key_phrases.append(key_phrase)
-            # Sort the list by alphabetic
-            return sorted(c_key_phrases)
 
         try:
             # # Encode cluster_doc and candidates as BERT embedding
@@ -73,7 +73,7 @@ class ClusterSimilarity:
                                         device=self.args.device)
             for cluster_no in [4]:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))[0:4]
-                results = list()
+                doc_key_phrases = list()
                 for doc in cluster_docs:
                     doc_id = doc['DocId']
                     # Get the first doc
@@ -88,19 +88,20 @@ class ClusterSimilarity:
                             n_gram_candidates = ClusterSimilarityUtility.generate_n_gram_candidates(sentences,
                                                                                                     n_gram_range)
                             # Fine top k key phrases similar to a paper
-                            top_n_gram_key_phrases = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text, n_gram_candidates, top_k=30)
+                            top_n_gram_key_phrases = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text,
+                                                                                                  n_gram_candidates, top_k=30)
                             result[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
-                            candidates = candidates + top_n_gram_key_phrases
+                            candidates = candidates + list(map(lambda p: p['key-phrase'], top_n_gram_key_phrases))
                         except Exception as err:
                             print("Error occurred! {err}".format(err=err))
                     # Get all the n-gram key phrases of a doc
-                    result['key-phrases'] = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text, candidates,
-                                                                                         top_k=10)
-                    results.append(result)
-
+                    result['key-phrases'] = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text,
+                                                                                         candidates, top_k=10)
+                    doc_key_phrases.append(result)
                 # Concatenate the key phrases of all papers to produce a list
-                cluster_key_phrases = get_key_phrase_list(results)
-                ClusterSimilarityUtility.cluster_key_phrases_by_HDBSCAN(cluster_key_phrases, model)
+                key_phrases = get_key_phrase_list(doc_key_phrases)
+                # print(cluster_key_phrases)
+                ClusterSimilarityUtility.cluster_key_phrases_by_HDBSCAN(key_phrases, model)
 
                 # # # # Write key phrases to output
                 # df = pd.DataFrame(results, columns=['Cluster', 'DocId', 'key-phrases', '1-gram-key-phrases',

@@ -187,36 +187,30 @@ class ClusterSimilarityUtility:
 
     # Cluster key phrases
     @staticmethod
-    def cluster_key_phrases_by_HDBSCAN(key_phrases, model, min_cluster_size=6, min_samples=2):
+    def cluster_key_phrases_by_HDBSCAN(key_phrases, model, min_cluster_size=6, min_samples=1, epsilon=0.2):
         # Convert the key phrases to vectors
-        key_phrase_vectors = model.encode(key_phrases)
-        # # Reduce the vectors of key
-        reduced_vectors = umap.UMAP(
-            # n_neighbors=100,
-            min_dist=0.0,
-            n_components=2,
-            random_state=42,
-            metric='cosine'
-        ).fit_transform(key_phrase_vectors)
-        # print(reduced_vectors)
+        key_phrase_word_only = list(map(lambda kp: kp['key-phrase'], key_phrases))
+        key_phrase_vectors = model.encode(key_phrase_word_only)
+        # Pass key phrase vector for grouping
         clusters = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
                                    min_samples=min_samples,
-                                   # cluster_selection_epsilon=cluster_selection_epsilon,
+                                   cluster_selection_epsilon=epsilon,
                                    metric='euclidean',
                                    cluster_selection_method='eom'
-                                   ).fit(reduced_vectors)
+                                   ).fit(key_phrase_vectors)
         results = list()
         for key_phrase, c_label in zip(key_phrases, clusters.labels_):
-            result = {'key-phrase': key_phrase, 'group': c_label}
-            results.append(result)
-        df = pd.DataFrame(results)
-        df = df.sort_values(by=['group'], ascending=True)     # Sort key phrases by group
-        df = df.groupby(by=['group']).agg({'key-phrase': lambda k: list(k)})
+            key_phrase['group'] = c_label
+            results.append(key_phrase)
+        # Sort the key phrases by group and score
+        results = sorted(results, key=lambda r: (r['group'], -r['score']))
+        df = pd.DataFrame(results, columns=['group', 'score', 'key-phrase'])
+        # df = df.sort_values(by=['group'], ascending=True)     # Sort key phrases by group
+        # df = df.groupby(by=['group']).agg({'key-phrase': lambda k: list(k)})
         folder = os.path.join('output', 'similarity', 'key_phrases')
         Path(folder).mkdir(parents=True, exist_ok=True)
         path = os.path.join(folder, 'top_key_phrases_grouping.csv')
-        df.to_csv(path, encoding='utf-8')
-
+        df.to_csv(path, encoding='utf-8', index=False)
 
     # Find the duplicate papers in the corpus
     @staticmethod
