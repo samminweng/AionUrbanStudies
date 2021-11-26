@@ -1,0 +1,6 @@
+group,key-phrase
+-1,['image classification']
+0,"['watershed soil erosion', 'geomorphological process', 'land cover', 'land cover change', 'land cover pattern', 'land cover type', 'hydrological modeling', 'landscape characteristic', 'monitoring land cover', 'new urban land', 'patch land cover', 'soil erosion', 'urban land', 'monitoring land', 'watershed soil']"
+1,"['satellite image', 'single satellite image', 'hyperspectral imagery', 'Landsat data', 'hyperspectral image classification', 'Landsat imagery', 'Landsat satellite data', 'hyperspectral image']"
+2,"['automated building', 'automated building detection', 'building detection framework', 'building detection', 'change detection', 'change detection technique', 'building extraction']"
+3,"['backpropagation', 'residual network', 'convolutional neural network', 'deep learning', 'deep learning feature', 'supervised deep learning', 'deep learning framework', 'deep learning model']"

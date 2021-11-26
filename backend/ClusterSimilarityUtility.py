@@ -4,8 +4,11 @@ import itertools
 import os
 import re
 import string
+from pathlib import Path
 
+import hdbscan
 import nltk
+import umap
 from nltk import word_tokenize, sent_tokenize, ngrams, pos_tag
 import pandas as pd
 import numpy as np
@@ -80,7 +83,7 @@ class ClusterSimilarityUtility:
                     if _pos_tag == 'NNS':
                         singular_word = _lemmatiser.lemmatize(_word.lower())
                         if _word[0].isupper():  # Restore the uppercase
-                            singular_word = singular_word.capitalize()      # Upper case the first character
+                            singular_word = singular_word.capitalize()  # Upper case the first character
                         singular_words.append(singular_word)
                     else:
                         # Check if the word in lemma list
@@ -119,7 +122,7 @@ class ClusterSimilarityUtility:
     @staticmethod
     # Generate n-gram of a text and avoid stop
     def generate_n_gram_candidates(sentences, n_gram_range):
-        def _is_qualified(_n_gram):     # _n_gram is a list of tuple (word, tuple)
+        def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
             try:
                 qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
                 # # Check if there is any noun
@@ -176,10 +179,44 @@ class ClusterSimilarityUtility:
                 top_key_phrases.append({'key-phrase': candidate, 'score': distance})
             # Sort the phrases by scores
             top_key_phrases = sorted(top_key_phrases, key=lambda k: k['score'], reverse=True)
+            return top_key_phrases
             # Output to key phrase (word-only)
-            return list(map(lambda k: k['key-phrase'], top_key_phrases))
+            # return list(map(lambda k: k['key-phrase'], top_key_phrases))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+    # Cluster key phrases
+    @staticmethod
+    def cluster_key_phrases_by_HDBSCAN(key_phrases, model, min_cluster_size=6, min_samples=2):
+        # Convert the key phrases to vectors
+        key_phrase_vectors = model.encode(key_phrases)
+        # # Reduce the vectors of key
+        reduced_vectors = umap.UMAP(
+            # n_neighbors=100,
+            min_dist=0.0,
+            n_components=2,
+            random_state=42,
+            metric='cosine'
+        ).fit_transform(key_phrase_vectors)
+        # print(reduced_vectors)
+        clusters = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
+                                   min_samples=min_samples,
+                                   # cluster_selection_epsilon=cluster_selection_epsilon,
+                                   metric='euclidean',
+                                   cluster_selection_method='eom'
+                                   ).fit(reduced_vectors)
+        results = list()
+        for key_phrase, c_label in zip(key_phrases, clusters.labels_):
+            result = {'key-phrase': key_phrase, 'group': c_label}
+            results.append(result)
+        df = pd.DataFrame(results)
+        df = df.sort_values(by=['group'], ascending=True)     # Sort key phrases by group
+        df = df.groupby(by=['group']).agg({'key-phrase': lambda k: list(k)})
+        folder = os.path.join('output', 'similarity', 'key_phrases')
+        Path(folder).mkdir(parents=True, exist_ok=True)
+        path = os.path.join(folder, 'top_key_phrases_grouping.csv')
+        df.to_csv(path, encoding='utf-8')
+
 
     # Find the duplicate papers in the corpus
     @staticmethod

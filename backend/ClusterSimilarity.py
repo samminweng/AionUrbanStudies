@@ -2,6 +2,7 @@ import itertools
 import os.path
 import re
 from argparse import Namespace
+from functools import reduce
 
 import umap
 from sentence_transformers import util
@@ -52,6 +53,20 @@ class ClusterSimilarity:
     # # Use the BERT model to extract long key phrases
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     def extract_key_phrases_by_clusters(self):
+        # Get a list of key phrases from all papers
+        def get_key_phrase_list(_results):
+            key_phrase_list = list()
+            for _result in _results:
+                key_phrase_list = key_phrase_list + _result['']
+            key_phrase_list = reduce(lambda r1, r2: r1 + r2, list(map(lambda r: r['key-phrases'], _results)))
+
+            for key_phrase in key_phrase_list:
+                if key_phrase.lower() not in c_key_phrases:
+
+                    c_key_phrases.append(key_phrase)
+            # Sort the list by alphabetic
+            return sorted(c_key_phrases)
+
         try:
             # # Encode cluster_doc and candidates as BERT embedding
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
@@ -73,53 +88,27 @@ class ClusterSimilarity:
                             n_gram_candidates = ClusterSimilarityUtility.generate_n_gram_candidates(sentences,
                                                                                                     n_gram_range)
                             # Fine top k key phrases similar to a paper
-                            # Get the key phrase words only
                             top_n_gram_key_phrases = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text, n_gram_candidates, top_k=30)
                             result[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
                             candidates = candidates + top_n_gram_key_phrases
                         except Exception as err:
                             print("Error occurred! {err}".format(err=err))
                     # Get all the n-gram key phrases of a doc
-                    doc_top_key_phrases = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text, candidates, top_k=10)
-                    result['key-phrases'] = doc_top_key_phrases
+                    result['key-phrases'] = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text, candidates,
+                                                                                         top_k=10)
                     results.append(result)
-                # # # Write key phrases to output
-                df = pd.DataFrame(results, columns=['Cluster', 'DocId', 'key-phrases', '1-gram-key-phrases',
-                                                    '2-gram-key-phrases', '3-gram-key-phrases'])
-                folder = os.path.join('output', 'similarity', 'key_phrases')
-                Path(folder).mkdir(parents=True, exist_ok=True)
-                path = os.path.join(folder, 'mmr_top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
-                df.to_csv(path, encoding='utf-8', index=False)
-                # Load to a data frame
-                # reduce(lambda r1, r2: r1 + r2, list(map(lambda r: r['key-phrase'], results)))
 
+                # Concatenate the key phrases of all papers to produce a list
+                cluster_key_phrases = get_key_phrase_list(results)
+                ClusterSimilarityUtility.cluster_key_phrases_by_HDBSCAN(cluster_key_phrases, model)
 
-
-                # key_phrase_vector = model.encode(key_phrase_df['key'])
-                # # Reduce the vectors of key
-                # reduced_vectors = umap.UMAP(
-                #     n_neighbors=100,
-                #     min_dist=0.0,
-                #     n_components=2,
-                #     random_state=42,
-                #     metric='cosine'
-                # ).fit_transform(key_phrase_df['vector'].to_list())
-                # print(reduced_vectors)
-
-
-
-
-
-
-                #         # # # Write to a json file
-                #         path = os.path.join('output', 'similarity', 'key_phrases',
-                #                             'mmr_top_key_phrases_cluster_' + str(cluster_no) +
-                #                             '_n_gram_' + str(n_gram_range[0]) + '.json')
-                #         df.to_json(path, orient='records')
-                #         print('Output key phrases to ' + path)
-
-                #
-
+                # # # # Write key phrases to output
+                # df = pd.DataFrame(results, columns=['Cluster', 'DocId', 'key-phrases', '1-gram-key-phrases',
+                #                                     '2-gram-key-phrases', '3-gram-key-phrases'])
+                # folder = os.path.join('output', 'similarity', 'key_phrases')
+                # Path(folder).mkdir(parents=True, exist_ok=True)
+                # path = os.path.join(folder, 'mmr_top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
+                # df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
