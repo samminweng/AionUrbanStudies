@@ -51,7 +51,7 @@ lemma_nouns = load_lemma_nouns()
 
 
 # Helper function for cluster Similarity
-class ClusterSimilarityUtility:
+class KeyPhraseUtility:
     # Clean licence statement texts
     @staticmethod
     def clean_sentence(text):
@@ -163,7 +163,7 @@ class ClusterSimilarityUtility:
     # Find top K key phrase similar to the paper
     # Ref: https://www.sbert.net/examples/applications/semantic-search/README.html
     @staticmethod
-    def get_top_key_phrases(model, doc_text, candidates, top_k=5):
+    def collect_top_key_phrases(model, doc_text, candidates, top_k=5):
         try:
             # Encode cluster doc and keyword candidates into vectors for comparing the similarity
             candidate_vectors = model.encode(candidates, convert_to_numpy=True)
@@ -180,14 +180,17 @@ class ClusterSimilarityUtility:
             # Sort the phrases by scores
             top_key_phrases = sorted(top_key_phrases, key=lambda k: k['score'], reverse=True)
             return top_key_phrases
-            # Output to key phrase (word-only)
-            # return list(map(lambda k: k['key-phrase'], top_key_phrases))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
     # Cluster key phrases
     @staticmethod
-    def cluster_key_phrases_by_HDBSCAN(key_phrases, model, min_cluster_size=6, min_samples=1, epsilon=0.2):
+    def cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model, ):
+        parameters = {0: {'min_cluster_size': 10, 'min_samples': 3, 'epsilon': 0.0}
+                     }
+        min_cluster_size = parameters[cluster_no]['min_cluster_size']
+        min_samples = parameters[cluster_no]['min_samples']
+        epsilon = parameters[cluster_no]['epsilon']
         # Convert the key phrases to vectors
         key_phrase_word_only = list(map(lambda kp: kp['key-phrase'], key_phrases))
         key_phrase_vectors = model.encode(key_phrase_word_only)
@@ -207,10 +210,11 @@ class ClusterSimilarityUtility:
         df = pd.DataFrame(results, columns=['group', 'score', 'key-phrase'])
         # df = df.sort_values(by=['group'], ascending=True)     # Sort key phrases by group
         # df = df.groupby(by=['group']).agg({'key-phrase': lambda k: list(k)})
-        folder = os.path.join('output', 'similarity', 'key_phrases')
+        folder = os.path.join('output', 'key_phrases', 'cluster')
         Path(folder).mkdir(parents=True, exist_ok=True)
-        path = os.path.join(folder, 'top_key_phrases_grouping.csv')
+        path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping.csv')
         df.to_csv(path, encoding='utf-8', index=False)
+        return df
 
     # Find the duplicate papers in the corpus
     @staticmethod
@@ -326,7 +330,7 @@ class ClusterSimilarityUtility:
 
         # Write long version of paper similar
         def write_paper_similarity_long_version(_sorted_results):
-            _path = os.path.join('output', 'similarity', 'similar_papers',
+            _path = os.path.join('output', 'key_phrases', 'similar_papers',
                                  'UrbanStudyCorpus_HDBSCAN_similar_papers_' + str(cluster_no) + '_long.csv')
             # Specify utf-8 as encoding
             csv_file = open(_path, "w", newline='', encoding='utf-8')
@@ -350,7 +354,7 @@ class ClusterSimilarityUtility:
             csv_file.close()
 
         # Load
-        path = os.path.join('output', 'similarity', 'similar_papers',
+        path = os.path.join('output', 'key_phrases', 'similar_papers',
                             'UrbanStudyCorpus_HDBSCAN_paper_similarity_' + str(cluster_no) + '.json')
         df = pd.read_json(path)
         results = df.to_dict("records")
@@ -384,7 +388,7 @@ class ClusterSimilarityUtility:
             top_similar_papers.append(result)
             # Write the summary
         df = pd.DataFrame(top_similar_papers)
-        out_path = os.path.join('output', 'similarity', 'similar_papers',
+        out_path = os.path.join('output', 'key_phrases', 'similar_papers',
                                 'UrbanStudyCorpus_HDBSCAN_similar_papers_' + str(cluster_no) + '_short.csv')
         df.to_csv(out_path, index=False, encoding='utf-8')
         # # Display the cluster no list
@@ -400,48 +404,9 @@ class ClusterSimilarityUtility:
         top_keywords = keywords[:top_n]
         # Write the top_keywords as a csv file
         df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
-        path = os.path.join('output', 'similarity', 'keywords', 'msc_top_keywords_cluster_' + str(cluster_no) + '.csv')
+        path = os.path.join('output', 'key_phrases', 'keywords', 'msc_top_keywords_cluster_' + str(cluster_no) + '.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         return top_keywords
-
-    # Find the best combination that produce the lower similarity among keywords
-    @staticmethod
-    def maximize_sum_similarity(cluster_vector, c_vectors, candidates, top_n=5, num_candidates=20):
-        try:
-            # Compute the similarity between cluster vector and each candidate vector
-            keywords = []
-            for index, (candidate, c_vector) in enumerate(zip(candidates, c_vectors)):
-                score = cosine_similarity([cluster_vector], [c_vector])[0, 0]  # Get cosine similarity
-                keywords.append({'keyword': candidate, 'score': score, 'index': index,
-                                 'vector': c_vector})
-            # Sort the keywords by score
-            keywords = sorted(keywords, key=lambda k: k['score'], reverse=True)
-            keyword_candidates = keywords[:num_candidates]
-            # Compute the similarity between candidate vectors
-            kc_vectors = list(map(lambda k: k['vector'], keyword_candidates))
-            # Get top number of candidate as potential keywords based on cosine similarity of cluster vector
-            # Similarity between top keywords words
-            kc_similarity = cosine_similarity(kc_vectors, kc_vectors)
-            # Calculate the combination of words that are the least similar to each other
-            min_sim = np.inf  # Start positive infinity
-            best_comb = None
-            for combination in itertools.combinations(range(len(keyword_candidates)), top_n):
-                # Sum up the similarity of top keywords
-                total_sim = sum([kc_similarity[i][j] for i in combination for j in combination if i != j])
-                if total_sim < min_sim:  # if the combination has the lower similarity
-                    best_comb = combination
-                    min_sim = total_sim
-            # Return a list of top and reverse the list
-            top_keywords = [keyword_candidates[index] for index in best_comb]
-            top_keywords.reverse()
-            # Write the top_keywords as a csv file
-            df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
-            path = os.path.join('output', 'similarity', 'keywords',
-                                'mss_top_keywords_cluster_' + str(num_candidates) + '.csv')
-            df.to_csv(path, encoding='utf-8')
-            return top_keywords
-        except Exception as _err:
-            print("Error occurred! {err}".format(err=_err))
 
     @staticmethod
     def maximal_marginal_relevance(cluster_vector, c_vectors, candidates,

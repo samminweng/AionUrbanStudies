@@ -1,40 +1,21 @@
 group,score,key-phrase
--1,0.43446696,hydrological modeling
-0,0.56822556,building detection
-0,0.54088485,automated building detection
-0,0.49500847,building detection framework
-0,0.45045856,building extraction
-0,0.40819973,change detection technique
-0,0.40665305,automated building
-0,0.4061461,change detection
-1,0.56836134,watershed soil erosion
-1,0.5251416,soil erosion
-1,0.5246825,land cover change
-1,0.51981676,land cover pattern
-1,0.50169206,monitoring land cover
-1,0.48007333,land cover
-1,0.46346754,new urban land
-1,0.4444821,land cover type
-1,0.4422055,geomorphological process
-1,0.41914466,monitoring land
-1,0.414678,watershed soil
-1,0.41138628,patch land cover
-1,0.41072252,urban land
-1,0.40995228,landscape characteristic
-2,0.63837296,hyperspectral image classification
-2,0.5532316,hyperspectral imagery
-2,0.52618635,hyperspectral image
-2,0.4172169,Landsat imagery
-2,0.41687942,Landsat data
-2,0.41508624,Landsat satellite data
-2,0.36464554,single satellite image
-2,0.35151476,satellite image
-2,0.3426675,image classification
-3,0.47594488,residual network
-3,0.39367515,supervised deep learning
-3,0.39037937,deep learning
-3,0.3833632,deep learning feature
-3,0.37810317,convolutional neural network
-3,0.3761453,deep learning model
-3,0.33250147,backpropagation
-3,0.3264199,deep learning framework
+-1,0.63837296,hyperspectral image classification
+-1,0.56836134,watershed soil erosion
+-1,0.56822556,building detection
+-1,0.5532316,hyperspectral imagery
+-1,0.54088485,automated building detection
+-1,0.52618635,hyperspectral image
+-1,0.5251416,soil erosion
+-1,0.5246825,land cover change
+-1,0.51981676,land cover pattern
+-1,0.50169206,monitoring land cover
+-1,0.49500847,building detection framework
+-1,0.48007333,land cover
+-1,0.47594488,residual network
+-1,0.46346754,new urban land
+-1,0.45045856,building extraction
+-1,0.4444821,land cover type
+-1,0.41914466,monitoring land
+-1,0.4172169,Landsat imagery
+-1,0.40665305,automated building
+-1,0.39367515,supervised deep learning

@@ -1,16 +1,10 @@
-import itertools
 import os.path
-import re
 from argparse import Namespace
-from functools import reduce
-
-import umap
-from sentence_transformers import util
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 import pandas as pd
 import logging
-from ClusterSimilarityUtility import ClusterSimilarityUtility
+from KeyPhraseUtility import KeyPhraseUtility
 import getpass
 
 # Set logging level
@@ -46,7 +40,7 @@ class ClusterSimilarity:
         # Update corpus data with hdbscan cluster results
         corpus_df['Cluster'] = hdbscan_cluster_df['HDBSCAN_Cluster']
         self.corpus_docs = corpus_df.to_dict("records")
-        duplicate_doc_ids = ClusterSimilarityUtility.scan_duplicate_articles()
+        duplicate_doc_ids = KeyPhraseUtility.scan_duplicate_articles()
         # Remove duplicated doc
         self.corpus_docs = list(filter(lambda d: d['DocId'] not in duplicate_doc_ids, self.corpus_docs))
 
@@ -54,7 +48,7 @@ class ClusterSimilarity:
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     def extract_key_phrases_by_clusters(self):
         # Get a list of unique key phrases from all papers
-        def get_key_phrase_list(_doc_key_phrases):
+        def _get_unique_key_phrases(_doc_key_phrases):
             _key_phrases = list()
             for _d in _doc_key_phrases:
                 for _dkp in _d['key-phrases']:
@@ -66,50 +60,58 @@ class ClusterSimilarity:
                         print("Duplicated: " + found[0]['key-phrase'])
             return _key_phrases
 
+        # Write the key phrases of each cluster to a csv file
+        def _write_key_phrases_by_cluster(_key_phrase_list):
+            try:
+                df = pd.DataFrame(_key_phrase_list, columns=['Cluster', 'DocId'])
+                # Map the list of key phrases (dict) to a list of strings
+                # Map the nested dict to a list of key phrases (string only)
+                df['key-phrases'] = list(map(lambda k: [kp['key-phrase'] for kp in k['key-phrases']], _key_phrase_list))
+                folder = os.path.join('output', 'key_phrases', 'cluster')
+                Path(folder).mkdir(parents=True, exist_ok=True)
+                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
+                df.to_csv(_path, encoding='utf-8', index=False)
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
 
         try:
             # # Encode cluster_doc and candidates as BERT embedding
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                         device=self.args.device)
-            for cluster_no in [4]:
-                cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))[0:4]
-                doc_key_phrases = list()
+            for cluster_no in [0]:
+                cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
+                key_phrase_list = list()
                 for doc in cluster_docs:
                     doc_id = doc['DocId']
                     # Get the first doc
                     doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
-                    sentences = ClusterSimilarityUtility.clean_sentence(doc['Text'])
+                    sentences = KeyPhraseUtility.clean_sentence(doc['Text'])
                     doc_text = " ".join(list(map(lambda s: " ".join(s), sentences)))
-                    result = {'Cluster': cluster_no, 'DocId': doc_id}
+                    doc_key_phrases = {'Cluster': cluster_no, 'DocId': doc_id}
                     candidates = []
                     for n_gram_range in [1, 2, 3]:
                         try:
                             # Extract key phrase candidates using n-gram
-                            n_gram_candidates = ClusterSimilarityUtility.generate_n_gram_candidates(sentences,
-                                                                                                    n_gram_range)
-                            # Fine top k key phrases similar to a paper
-                            top_n_gram_key_phrases = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text,
-                                                                                                  n_gram_candidates, top_k=30)
-                            result[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
+                            n_gram_candidates = KeyPhraseUtility.generate_n_gram_candidates(sentences,
+                                                                                            n_gram_range)
+                            # find and collect top 30 key phrases similar to a paper
+                            top_n_gram_key_phrases = KeyPhraseUtility.collect_top_key_phrases(model, doc_text,
+                                                                                              n_gram_candidates,
+                                                                                              top_k=30)
+                            doc_key_phrases[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
                             candidates = candidates + list(map(lambda p: p['key-phrase'], top_n_gram_key_phrases))
                         except Exception as err:
                             print("Error occurred! {err}".format(err=err))
                     # Get all the n-gram key phrases of a doc
-                    result['key-phrases'] = ClusterSimilarityUtility.get_top_key_phrases(model, doc_text,
-                                                                                         candidates, top_k=10)
-                    doc_key_phrases.append(result)
+                    doc_key_phrases['key-phrases'] = KeyPhraseUtility.collect_top_key_phrases(model, doc_text,
+                                                                                              candidates, top_k=5)
+                    key_phrase_list.append(doc_key_phrases)
+                _write_key_phrases_by_cluster(key_phrase_list)
                 # Concatenate the key phrases of all papers to produce a list
-                key_phrases = get_key_phrase_list(doc_key_phrases)
+                key_phrases = _get_unique_key_phrases(key_phrase_list)
                 # print(cluster_key_phrases)
-                ClusterSimilarityUtility.cluster_key_phrases_by_HDBSCAN(key_phrases, model)
-
+                KeyPhraseUtility.cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model)
                 # # # # Write key phrases to output
-                # df = pd.DataFrame(results, columns=['Cluster', 'DocId', 'key-phrases', '1-gram-key-phrases',
-                #                                     '2-gram-key-phrases', '3-gram-key-phrases'])
-                # folder = os.path.join('output', 'similarity', 'key_phrases')
-                # Path(folder).mkdir(parents=True, exist_ok=True)
-                # path = os.path.join(folder, 'mmr_top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
-                # df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -122,41 +124,10 @@ class ClusterSimilarity:
                                         device=self.args.device)  # Load sentence transformer model
             # # Find top 30 similar papers of each paper in a cluster
             for cluster_no in cluster_no_list:
-                ClusterSimilarityUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
-                                                                  top_k=top_k)
+                KeyPhraseUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
+                                                          top_k=top_k)
                 # # # Summarize the similar paper results
-                ClusterSimilarityUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
-
-            # Collect all the top N topics (words and vectors)
-            # cluster_topics = TopicWordUtility.get_cluster_topics(clusters, self.model, top_n=top_n)
-            # # # Create a matrix to store cluster similarities
-            # cluster_sim_matrix = np.zeros((len(cluster_no_list), len(cluster_no_list)))
-            # for i, c1 in enumerate(cluster_no_list):
-            #     for j, c2 in enumerate(cluster_no_list):
-            #         ct_1 = next(ct for ct in cluster_topics if ct['cluster_no'] == c1)
-            #         ct_2 = next(ct for ct in cluster_topics if ct['cluster_no'] == c2)
-            #         # Compute the similarity of cluster vectors by using cosine similarity
-            #         cv_1 = ct_1['cluster_vectors']
-            #         cv_2 = ct_2['cluster_vectors']
-            #         sim = cosine_similarity([cv_1, cv_2])[0][1]
-            #         cluster_sim_matrix[i, j] = sim
-            #         # compute the similarity matrix of cluster #15 and cluster #16 topics
-            #         matrix = TopicWordUtility.compute_similarity_matrix_topics(ct_1, ct_2)
-            #         # matrix_mean = matrix.mean()
-            #         # print("Similarity matrix between cluster #{c1} and #{c2} = {sum}".format(
-            #         #     c1=c1, c2=c2, sum=matrix_mean))
-            #         # cluster_sim_matrix[i, j] = matrix_mean
-            # # rite out cluster similarity matrix
-            # df = pd.DataFrame(cluster_sim_matrix, index=cluster_no_list, columns=cluster_no_list)
-            # df = df.round(3)  # Round each similarity to 3 decimal
-            # # Write to out
-            # path = os.path.join('output', 'topic',
-            #                     self.args.case_name + '_HDBSCAN_cluster_vector_similarity.csv')
-            # df.to_csv(path, encoding='utf-8')
-            # # Write JSON path
-            # path = os.path.join('output', 'topic',
-            #                     self.args.case_name + '_HDBSCAN_cluster_vector_similarity.json')
-            # df.to_json(path, orient='records')
+                KeyPhraseUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -166,3 +137,7 @@ if __name__ == '__main__':
     tw = ClusterSimilarity()
     # tw.find_top_similar_paper_in_corpus()
     tw.extract_key_phrases_by_clusters()
+
+
+
+
