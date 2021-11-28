@@ -185,35 +185,40 @@ class KeyPhraseUtility:
 
     # Cluster key phrases
     @staticmethod
-    def cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model, ):
-        parameters = {0: {'min_cluster_size': 10, 'min_samples': 3, 'epsilon': 0.0}
-                     }
-        min_cluster_size = parameters[cluster_no]['min_cluster_size']
-        min_samples = parameters[cluster_no]['min_samples']
-        epsilon = parameters[cluster_no]['epsilon']
+    def cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model):
+        parameter = {'min_cluster_size': 10, 'min_samples': 3, 'epsilon': 0.0}      # Default parameter
+        parameters = {0: {'min_cluster_size': 10, 'min_samples': 1, 'epsilon': 0.3}}
+        if cluster_no in parameters:
+            parameter = parameters[cluster_no]
         # Convert the key phrases to vectors
         key_phrase_word_only = list(map(lambda kp: kp['key-phrase'], key_phrases))
         key_phrase_vectors = model.encode(key_phrase_word_only)
         # Pass key phrase vector for grouping
-        clusters = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
-                                   min_samples=min_samples,
-                                   cluster_selection_epsilon=epsilon,
+        clusters = hdbscan.HDBSCAN(min_cluster_size=parameter['min_cluster_size'],
+                                   min_samples=parameter['min_samples'],
+                                   cluster_selection_epsilon=parameter['epsilon'],
                                    metric='euclidean',
                                    cluster_selection_method='eom'
                                    ).fit(key_phrase_vectors)
         results = list()
         for key_phrase, c_label in zip(key_phrases, clusters.labels_):
+            key_phrase['cluster'] = "#" + str(cluster_no)
             key_phrase['group'] = c_label
             results.append(key_phrase)
         # Sort the key phrases by group and score
         results = sorted(results, key=lambda r: (r['group'], -r['score']))
-        df = pd.DataFrame(results, columns=['group', 'score', 'key-phrase'])
-        # df = df.sort_values(by=['group'], ascending=True)     # Sort key phrases by group
-        # df = df.groupby(by=['group']).agg({'key-phrase': lambda k: list(k)})
+        # Write out the results to a csv file
+        df = pd.DataFrame(results, columns=['cluster', 'group', 'score', 'key-phrase'])
         folder = os.path.join('output', 'key_phrases', 'cluster')
         Path(folder).mkdir(parents=True, exist_ok=True)
         path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping.csv')
         df.to_csv(path, encoding='utf-8', index=False)
+        # Summarize the results
+        group_df = df.groupby(by=['group']).agg({'key-phrase': lambda k: list(k)})
+        group_list = group_df.to_dict("records")
+        print("Parameters : {p}".format(p=parameter))
+        for i, group in enumerate(group_list):
+            print("{g}\t{c}\t{kp}...".format(g=i-1, c=len(group['key-phrase']), kp=", ".join(group['key-phrase'][:5])))
         return df
 
     # Find the duplicate papers in the corpus
