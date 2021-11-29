@@ -245,34 +245,35 @@ class KeyPhraseUtility:
                 # Output the grouped key phrases
                 group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
             results = list()
-            for min_cluster_size in range(5, 11):
-                for min_samples in [None] + list(range(1, 21)):
-                    try:
-                        parameter['min_cluster_size'] = min_cluster_size
-                        parameter['min_samples'] = min_samples
-                        all_group_list = group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases)
-                        result = {'cluster': "#" + str(cluster_no),
-                                  'min_cluster_size': parameter['min_cluster_size'],
-                                  'min_samples': str(parameter['min_samples']),
-                                  'epsilon': parameter['epsilon'],
-                                  'total_groups': len(all_group_list)}
-                        # Check if any outliers
-                        outlier = next((group for group in all_group_list if group['group'] == -1), None)
-                        if not outlier:  # Add outlier groups
-                            result['outlier_count'] = 0
-                            result['outlier_key_phrase'] = ""
-                        else:
-                            result['outlier_count'] = len(outlier['key-phrase'])
-                            result['outlier_key_phrase'] = ", ".join(outlier['key-phrase'])
-                        # Group number starts from -1 up to the length of groups
-                        group_list = list(filter(lambda g: g['group'] != -1, all_group_list))
-                        for group in group_list:
-                            g_no = group['group']
-                            result['group_' + str(g_no) + '_count'] = len(group['key-phrase'])
-                            result['group_' + str(g_no) + '_key_phrase'] = ", ".join(group['key-phrase'])
-                        results.append(result)
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
+            for min_cluster_size in [5]:
+                for min_samples in [5]:
+                    for epsilon in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
+                        try:
+                            parameter['min_cluster_size'] = min_cluster_size
+                            parameter['min_samples'] = min_samples
+                            all_group_list = group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases)
+                            result = {'cluster': "#" + str(cluster_no),
+                                      'min_cluster_size': parameter['min_cluster_size'],
+                                      'min_samples': str(parameter['min_samples']),
+                                      'epsilon': parameter['epsilon'],
+                                      'total_groups': len(all_group_list)}
+                            # Check if any outliers
+                            outlier = next((group for group in all_group_list if group['group'] == -1), None)
+                            if not outlier:  # Add outlier groups
+                                result['outlier_count'] = 0
+                                result['outlier_key_phrase'] = ""
+                            else:
+                                result['outlier_count'] = len(outlier['key-phrase'])
+                                result['outlier_key_phrase'] = ", ".join(outlier['key-phrase'])
+                            # Group number starts from -1 up to the length of groups
+                            group_list = list(filter(lambda g: g['group'] != -1, all_group_list))
+                            for group in group_list:
+                                g_no = group['group']
+                                result['group_' + str(g_no) + '_count'] = len(group['key-phrase'])
+                                result['group_' + str(g_no) + '_key_phrase'] = ", ".join(group['key-phrase'])
+                            results.append(result)
+                        except Exception as err:
+                            print("Error occurred! {err}".format(err=err))
             r_df = pd.DataFrame(results)
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
             r_df.to_csv(path, encoding='utf-8', index=False)
