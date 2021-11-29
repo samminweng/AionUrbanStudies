@@ -1,0 +1,61 @@
+group,score,key-phrase
+0,0.5960869,path loss prediction
+0,0.491484,prediction path loss
+0,0.48444557,loss prediction
+0,0.47034067,path loss dataset
+0,0.4666615,path loss model
+0,0.45411032,path loss
+0,0.42261356,path loss information
+1,0.60097206,RF fingerprint localization
+1,0.5575981,GNSS signal detection
+1,0.52955484,GPS signal
+1,0.5269932,RF fingerprint database
+1,0.5217335,RF fingerprint
+1,0.50626266,fingerprint localization
+1,0.50450784,effective localization method
+1,0.49386773,global positioning system
+1,0.49045575,raw GPS measurement
+1,0.48816285,navigation satellite
+1,0.48610303,GPS measurement
+1,0.48525515,positioning accuracy
+1,0.47677144,navigation satellite system
+1,0.47458178,robust GNSS positioning
+1,0.47123918,GNSS satellite
+1,0.46741635,localization accuracy
+1,0.46683306,navigation system
+1,0.46489894,positioning system
+1,0.46369308,conventional GNSS positioning
+1,0.4631097,distance localization
+1,0.4567661,GNSS positioning
+1,0.45455965,global navigation satellite
+1,0.44960985,GNSS signal
+1,0.449149,receiver location
+1,0.4400161,GNSS receiver
+1,0.43252525,attenuate GPS signal
+1,0.4231161,mean distance localization
+1,0.3944042,average localization accuracy
+1,0.3863343,distance localization error
+1,0.37796205,positioning performance
+1,0.36473835,source localization
+1,0.36027244,satellite
+1,0.3587499,visible satellite
+1,0.31910196,position solution
+2,0.5177536,nLOS multipath detection
+2,0.49450082,sVM model
+2,0.49034524,NLOS classifier
+2,0.48546994,signal reception classifier
+2,0.4718005,LOS multipath classifier
+2,0.45181698,support vector
+2,0.44809777,multipath classifier
+2,0.4125813,NLOS signal
+2,0.4110404,signal classification method
+-1,0.5200013,UAV communication
+-1,0.5123501,reliable UAV communication
+-1,0.47663498,urban propagation environment
+-1,0.4479257,urban propagation
+-1,0.4389017,radio propagation model
+-1,0.43370184,LTE network
+-1,0.42708942,cellular tower
+-1,0.40298304,unmanned aerial vehicle
+-1,0.38360056,cellular base transceiver
+-1,0.33801836,urban environment

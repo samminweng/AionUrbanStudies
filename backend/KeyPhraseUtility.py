@@ -191,8 +191,8 @@ class KeyPhraseUtility:
     # Cluster key phrases
     @staticmethod
     def cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model):
-        # Cluster key phrases with parameters
-        def _cluster_key_phrases(_parameter, _key_phrases, is_output=False):
+        # Group key phrases with parameters
+        def group_key_phrases_by_best_parameter(_cluster_no, _parameter, _key_phrases, is_output=False):
             # Convert the key phrases to vectors
             key_phrase_word_only = list(map(lambda kp: kp['key-phrase'], _key_phrases))
             key_phrase_vectors = model.encode(key_phrase_word_only)
@@ -212,16 +212,25 @@ class KeyPhraseUtility:
             group_key_phrases = sorted(group_key_phrases, key=lambda r: (r['group'], -r['score']))
             # Load grouped key phrases
             df = pd.DataFrame(group_key_phrases, columns=['group', 'score', 'key-phrase'])
-            if is_output:
-                outlier_df = df[df['group'] == -1]
-                group_df = df[df['group'] >= 0]
-                result_df = pd.concat([group_df, outlier_df])
-                # Write out the results to a csv file
-                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
-                result_df.to_csv(_path, encoding='utf-8', index=False)
+            # Reorder the groups and put outlier at last index
+            outlier_df = df[df['group'] == -1]
+            cluster_df = df[df['group'] >= 0]
+            df = pd.concat([cluster_df, outlier_df])
             # group the key phrases and Summarize the results
             group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrase': lambda k: list(k)})
-            return group_df.to_dict("records")
+            _all_group_list = group_df.to_dict("records")
+            if is_output:
+                # Output the results to a csv file
+                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping_flatten.csv')
+                df.to_csv(_path, encoding='utf-8', index=False)
+                # Output the summary results to a csv file
+                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
+                group_df['count'] = group_df['key-phrase'].apply(len)
+                group_df['key-phrase'] = [', '.join(kp) for kp in group_df['key-phrase']]
+                group_df = group_df[['group', 'count', 'key-phrase']]     # Re-order the column list
+                group_df.to_csv(_path, encoding='utf-8', index=False)
+            # Return a list of grouped key phrases (key-phrase, score)
+            return _all_group_list
 
         try:
             folder = os.path.join('output', 'key_phrases', 'cluster')
@@ -233,14 +242,15 @@ class KeyPhraseUtility:
                                2: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0}}
             if cluster_no in best_parameters:
                 parameter = best_parameters[cluster_no]      # Get the optimal parameters
-                _cluster_key_phrases(parameter, key_phrases, is_output=True)        # Output the cluster results to
+                # Output the grouped key phrases
+                group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
             results = list()
             for min_cluster_size in range(5, 11):
                 for min_samples in [None] + list(range(1, 21)):
                     try:
                         parameter['min_cluster_size'] = min_cluster_size
                         parameter['min_samples'] = min_samples
-                        all_group_list = _cluster_key_phrases(parameter, key_phrases)
+                        all_group_list = group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases)
                         result = {'cluster': "#" + str(cluster_no),
                                   'min_cluster_size': parameter['min_cluster_size'],
                                   'min_samples': str(parameter['min_samples']),

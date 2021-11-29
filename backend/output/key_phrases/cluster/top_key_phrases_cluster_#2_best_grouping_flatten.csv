@@ -1,0 +1,166 @@
+group,score,key-phrase
+0,0.61232334,automobile choice
+0,0.6073862,household automobile choice
+0,0.59467876,vehicle choice problem
+0,0.56634116,household vehicle choice
+0,0.5411973,vehicle choice
+0,0.52993935,vehicle ownership
+0,0.4543431,vehicle
+0,0.4337144,car
+0,0.40407443,vehicle selection algorithm
+1,0.5429703,data mining technique
+1,0.5266805,deep learning car
+1,0.5005839,learning car detection
+1,0.4976666,LSTM model
+1,0.49365872,machine learning method
+1,0.49364567,Deep Model
+1,0.46957523,machine learning
+1,0.46572858,CNN model
+1,0.46243548,deep learning model
+1,0.4569701,data mining
+1,0.45529985,autoencoders
+1,0.44381273,prediction methodology
+1,0.4415475,deep learning method
+1,0.43839937,different prediction methodology
+1,0.43749717,deep learning
+1,0.4315663,deep sequence
+1,0.4309864,vanilla LSTM model
+1,0.4301058,predictive accuracy
+1,0.4262374,LSTM network
+1,0.41705585,deep reinforcement
+1,0.36504817,online machine learning
+2,0.62904704,taxi demand
+2,0.6143396,exploratory taxi fleet
+2,0.5875573,city taxi service
+2,0.56993175,exploratory taxi
+2,0.5530398,city taxi
+2,0.530524,electric taxi
+2,0.5200132,traditional taxi
+2,0.513573,taxi
+2,0.41676614,taxi fleet
+2,0.38658515,taxicab
+3,0.75021875,crowd density estimation
+3,0.66878307,crowd density
+3,0.5475124,crowd surveillance
+3,0.49111348,crowd analysis
+3,0.47235316,crowd analysis benchmark
+3,0.44616097,density estimation
+3,0.43816718,citywide crowd
+3,0.43633902,crowd
+4,0.5567861,urban freight transportation
+4,0.53526735,urban logistics system
+4,0.50124645,freight transportation system
+4,0.46600172,city operation system
+4,0.46413332,city operation
+4,0.46312618,urban planning
+4,0.45852643,urban freight
+4,0.45472002,friendly urban freight
+5,0.63859046,bus route planning
+5,0.61673665,state transportation planning
+5,0.601876,transportation planning
+5,0.57983,bus dynamic routing
+5,0.55958825,transportation route planning
+5,0.52773106,bus route
+5,0.52572465,public transportation route
+5,0.51667047,dynamic route planning
+5,0.4826851,route planning
+6,0.6908045,traffic volume prediction
+6,0.6430725,traffic volume estimation
+6,0.64219,traffic flow forecasting
+6,0.63755196,traffic prediction
+6,0.6284821,traffic accident prediction
+6,0.61967456,citywide Traffic Volume
+6,0.61287165,destination prediction
+6,0.6049195,traffic flow prediction
+6,0.60081923,road traffic prediction
+6,0.5979621,road traffic image
+6,0.58852243,travel demand prediction
+6,0.5860642,traffic sensor data
+6,0.58296156,large urban police
+6,0.5823184,traffic simulation
+6,0.5802293,traffic forecast feature
+6,0.5790381,traffic monitoring
+6,0.5761839,next destination prediction
+6,0.570771,urban emergency police
+6,0.5692749,traffic simulation technology
+6,0.5668578,traffic forecast
+6,0.56256664,citywide traffic
+6,0.5563911,traffic profiling
+6,0.55629474,traffic congestion detection
+6,0.54619825,Traffic Volume
+6,0.5457287,traffic image
+6,0.5438565,accident prediction
+6,0.5431589,urban police
+6,0.5427958,traffic forecasting
+6,0.537189,urban road traffic
+6,0.5223321,time traffic forecast
+6,0.51830345,next destination predictor
+6,0.5092452,traffic monitoring device
+6,0.50661284,urban police jurisdiction
+6,0.49766895,intelligent traffic management
+6,0.49636543,destination predictor
+6,0.4960272,urban traffic flow
+6,0.48726836,flow forecasting
+6,0.4869194,travel demand model
+6,0.48471773,urban traffic
+6,0.47457856,road traffic management
+6,0.46554047,emergency police operation
+6,0.45519352,adaptive traffic control
+6,0.45152366,urban safety
+6,0.4472494,traffic management system
+6,0.439285,traffic speed
+6,0.43582278,crosstown traffic
+6,0.43047848,highway traffic volume
+6,0.41987476,urban traffic management
+6,0.41773877,traffic management
+6,0.40459174,flow prediction
+6,0.3679899,traffic flow
+7,0.61602527,transportation mode recognition
+7,0.6005913,transportation data management
+7,0.58763975,transportation data
+7,0.57641447,transportation network data
+7,0.5316907,bus trajectory data
+7,0.5133537,human mobility dataset
+7,0.51081157,mobility data
+7,0.50187,urban prediction
+7,0.47317788,urban prediction problem
+7,0.4580848,transportation mode information
+7,0.44593266,mobility dataset
+7,0.43877396,household travel survey
+7,0.42643172,urban data collection
+7,0.4227372,travel survey data
+7,0.40063164,urban data
+-1,0.6217429,transportation impact
+-1,0.6175565,transportation infrastructure development
+-1,0.60009825,transportation efficiency
+-1,0.59078443,urban computing
+-1,0.5703287,smart mobility
+-1,0.5485797,urban area smart
+-1,0.5373864,big geodata analysis
+-1,0.5296463,urban event cause
+-1,0.52894616,smart city
+-1,0.5168319,trajectory clustering
+-1,0.51467097,extreme learning machine
+-1,0.4977669,passenger service market
+-1,0.4888028,unsupervised incremental learning
+-1,0.48715052,trajectory dataset
+-1,0.4787086,big geodata
+-1,0.47396362,mobile crowdsensing
+-1,0.4722694,citywide traffic accident
+-1,0.45549276,transportation congestion
+-1,0.45299697,image descriptor
+-1,0.45095515,urban event
+-1,0.45094734,genetic algorithm
+-1,0.44052327,compressed sensing
+-1,0.42747837,event data
+-1,0.42590934,event impact
+-1,0.4211985,enhanced urban clustering
+-1,0.41599995,spatial temporal coverage
+-1,0.41423976,urban clustering
+-1,0.40329635,biased data
+-1,0.40084225,heterogeneous datasets
+-1,0.3988372,intelligent transportation system
+-1,0.36874032,principal component analysis
+-1,0.36047068,clustering protocol
+-1,0.34467086,available clustering protocol
+-1,0.3438697,image processing

@@ -69,10 +69,12 @@ class ClusterSimilarity:
         # Write the key phrases of each cluster to a csv file
         def _write_key_phrases_by_cluster(_key_phrase_list):
             try:
-                df = pd.DataFrame(_key_phrase_list, columns=['Cluster', 'DocId'])
+                df = pd.DataFrame(_key_phrase_list, columns=['DocId'])
+                df['No'] = range(1, len(df)+1)
                 # Map the list of key phrases (dict) to a list of strings
                 # Map the nested dict to a list of key phrases (string only)
                 df['key-phrases'] = list(map(lambda k: [kp['key-phrase'] for kp in k['key-phrases']], _key_phrase_list))
+                df = df[['No', 'DocId', 'key-phrases']]     # Re-order the columns
                 folder = os.path.join('output', 'key_phrases', 'cluster')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
@@ -84,7 +86,7 @@ class ClusterSimilarity:
             # # Encode cluster_doc and candidates as BERT embedding
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                         device=self.args.device)
-            for cluster_no in [0, 1]:
+            for cluster_no in [0, 1, 2]:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
                 results = list()
                 all_key_phrases = list()    # Store all the key phrases

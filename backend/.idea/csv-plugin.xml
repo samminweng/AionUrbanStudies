@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_best_grouping_flatten.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_grouping.csv">
           <value>
             <Attribute>
@@ -67,6 +74,13 @@
           </value>
         </entry>
         <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#2_best_grouping.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
