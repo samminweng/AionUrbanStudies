@@ -48,17 +48,23 @@ class ClusterSimilarity:
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     def extract_key_phrases_by_clusters(self):
         # Get a list of unique key phrases from all papers
-        def _get_unique_key_phrases(_doc_key_phrases):
-            _key_phrases = list()
-            for _d in _doc_key_phrases:
-                for _dkp in _d['key-phrases']:
-                    # find if key phrase exist in the key_phrases
-                    found = [_kp for _kp in _key_phrases if _kp['key-phrase'].lower() == _dkp['key-phrase'].lower()]
-                    if len(found) == 0:
-                        _key_phrases.append(_dkp)
+        def _get_unique_doc_key_phrases(_doc_key_phrases, _all_key_phrases, _top_k=5):
+            try:
+                _unique_key_phrases = list()
+                for _key_phrase in _doc_key_phrases:
+                    # find if key phrase exist in all key phrase list
+                    _found_key_phrases = [_kp for _kp in _all_key_phrases
+                                          if _kp['key-phrase'].lower() == _key_phrase['key-phrase'].lower()]
+                    if len(_found_key_phrases) == 0:
+                        _unique_key_phrases.append(_key_phrase)
                     else:
-                        print("Duplicated: " + found[0]['key-phrase'])
-            return _key_phrases
+                        print("Duplicated: " + _found_key_phrases[0]['key-phrase'])
+                # Get top 5 key phrase
+                _unique_key_phrases = _unique_key_phrases[:_top_k]
+                assert len(_unique_key_phrases) == _top_k
+                return _unique_key_phrases
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
 
         # Write the key phrases of each cluster to a csv file
         def _write_key_phrases_by_cluster(_key_phrase_list):
@@ -80,14 +86,15 @@ class ClusterSimilarity:
                                         device=self.args.device)
             for cluster_no in [0]:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
-                key_phrase_list = list()
+                results = list()
+                all_key_phrases = list()    # Store all the key phrases
                 for doc in cluster_docs:
                     doc_id = doc['DocId']
                     # Get the first doc
                     doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
                     sentences = KeyPhraseUtility.clean_sentence(doc['Text'])
                     doc_text = " ".join(list(map(lambda s: " ".join(s), sentences)))
-                    doc_key_phrases = {'Cluster': cluster_no, 'DocId': doc_id}
+                    result = {'Cluster': cluster_no, 'DocId': doc_id}
                     candidates = []
                     for n_gram_range in [1, 2, 3]:
                         try:
@@ -98,20 +105,23 @@ class ClusterSimilarity:
                             top_n_gram_key_phrases = KeyPhraseUtility.collect_top_key_phrases(model, doc_text,
                                                                                               n_gram_candidates,
                                                                                               top_k=30)
-                            doc_key_phrases[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
+                            result[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
                             candidates = candidates + list(map(lambda p: p['key-phrase'], top_n_gram_key_phrases))
                         except Exception as err:
                             print("Error occurred! {err}".format(err=err))
-                    # Get all the n-gram key phrases of a doc
-                    doc_key_phrases['key-phrases'] = KeyPhraseUtility.collect_top_key_phrases(model, doc_text,
-                                                                                              candidates, top_k=5)
-                    key_phrase_list.append(doc_key_phrases)
-                _write_key_phrases_by_cluster(key_phrase_list)
-                # Concatenate the key phrases of all papers to produce a list
-                key_phrases = _get_unique_key_phrases(key_phrase_list)
-                # print(cluster_key_phrases)
-                KeyPhraseUtility.cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model)
-                # # # # Write key phrases to output
+                    # Combine all the n-gram key phrases in a doc
+                    # Get top 5 key phrase unique to all key phrase list
+                    top_doc_key_phrases = _get_unique_doc_key_phrases(
+                                        KeyPhraseUtility.collect_top_key_phrases(model, doc_text, candidates, top_k=10),
+                                        all_key_phrases, _top_k=5)
+                    # Write top five key phrases to 'doc_key_phrases'
+                    result['key-phrases'] = top_doc_key_phrases
+                    all_key_phrases = all_key_phrases + top_doc_key_phrases      # Concatenate all key phrases of a doc
+                    results.append(result)
+                # Write key phrases to csv file
+                _write_key_phrases_by_cluster(results)
+                # Cluster all key phrases by using HDBSCAN
+                KeyPhraseUtility.cluster_key_phrases_by_HDBSCAN(all_key_phrases, cluster_no, model)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -124,8 +134,8 @@ class ClusterSimilarity:
                                         device=self.args.device)  # Load sentence transformer model
             # # Find top 30 similar papers of each paper in a cluster
             for cluster_no in cluster_no_list:
-                KeyPhraseUtility.find_top_n_similar_title(cluster_no, self.corpus_docs, self.clusters, model,
-                                                          top_k=top_k)
+                KeyPhraseUtility.find_top_n_similar_papers(cluster_no, self.corpus_docs, self.clusters, model,
+                                                           top_k=top_k)
                 # # # Summarize the similar paper results
                 KeyPhraseUtility.write_to_title_csv_file(cluster_no, top_k=top_k)
         except Exception as err:

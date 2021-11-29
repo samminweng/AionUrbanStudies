@@ -17,7 +17,49 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/cluster/UrbanStudyCorpus_HDBSCAN_Cluster_topic_words.csv">
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_best_grouping.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_grouping.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#4.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#4_grouping.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
