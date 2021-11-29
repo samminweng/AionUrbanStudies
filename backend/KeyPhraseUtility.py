@@ -245,12 +245,13 @@ class KeyPhraseUtility:
                 # Output the grouped key phrases
                 group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
             results = list()
-            for min_cluster_size in [5]:
-                for min_samples in [5]:
+            for min_cluster_size in [10]:
+                for min_samples in [2]:
                     for epsilon in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
                         try:
                             parameter['min_cluster_size'] = min_cluster_size
                             parameter['min_samples'] = min_samples
+                            parameter['epsilon'] = epsilon
                             all_group_list = group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases)
                             result = {'cluster': "#" + str(cluster_no),
                                       'min_cluster_size': parameter['min_cluster_size'],
