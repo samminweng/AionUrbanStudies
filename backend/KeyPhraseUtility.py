@@ -213,9 +213,12 @@ class KeyPhraseUtility:
             # Load grouped key phrases
             df = pd.DataFrame(group_key_phrases, columns=['group', 'score', 'key-phrase'])
             if is_output:
+                outlier_df = df[df['group'] == -1]
+                group_df = df[df['group'] >= 0]
+                result_df = pd.concat([group_df, outlier_df])
                 # Write out the results to a csv file
                 _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
-                df.to_csv(_path, encoding='utf-8', index=False)
+                result_df.to_csv(_path, encoding='utf-8', index=False)
             # group the key phrases and Summarize the results
             group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrase': lambda k: list(k)})
             return group_df.to_dict("records")
@@ -225,7 +228,9 @@ class KeyPhraseUtility:
             Path(folder).mkdir(parents=True, exist_ok=True)
             parameter = {'min_cluster_size': 10, 'min_samples': None, 'epsilon': 0.0}      # Default parameter
             # Get the best parameters
-            best_parameters = {0: {'min_cluster_size': 10, 'min_samples': 2, 'epsilon': 0.0}}
+            best_parameters = {0: {'min_cluster_size': 10, 'min_samples': 2, 'epsilon': 0.0},
+                               1: {'min_cluster_size': 7, 'min_samples': 2, 'epsilon': 0.0},
+                               2: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0}}
             if cluster_no in best_parameters:
                 parameter = best_parameters[cluster_no]      # Get the optimal parameters
                 _cluster_key_phrases(parameter, key_phrases, is_output=True)        # Output the cluster results to

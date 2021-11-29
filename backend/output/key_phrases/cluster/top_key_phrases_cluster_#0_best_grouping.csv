@@ -1,20 +1,4 @@
 group,score,key-phrase
--1,0.6277701,rockfall hazard assessment
--1,0.5809785,support vector machine
--1,0.56718993,comprehensive rockfall hazard
--1,0.547613,landslide data
--1,0.50938237,rockfall hazard
--1,0.50573516,SVMs algorithm
--1,0.4969569,support vector
--1,0.4950456,SVMs model
--1,0.47640827,wildfire burnt area
--1,0.47513354,rockfall kinematic model
--1,0.47326484,rockfall probability
--1,0.4430732,location problem model
--1,0.44217932,location allocation model
--1,0.40354618,landslide inventory
--1,0.397523,burnt catchment
--1,0.3688189,frequent natural disaster
 0,0.69199526,flooding prediction
 0,0.6847876,flood risk mapping
 0,0.66528684,flood hazard determination
@@ -54,3 +38,19 @@ group,score,key-phrase
 1,0.43107235,landslide worldwide
 1,0.38986772,landslide
 1,0.3598429,historical landslide
+-1,0.6277701,rockfall hazard assessment
+-1,0.5809785,support vector machine
+-1,0.56718993,comprehensive rockfall hazard
+-1,0.547613,landslide data
+-1,0.50938237,rockfall hazard
+-1,0.50573516,SVMs algorithm
+-1,0.4969569,support vector
+-1,0.4950456,SVMs model
+-1,0.47640827,wildfire burnt area
+-1,0.47513354,rockfall kinematic model
+-1,0.47326484,rockfall probability
+-1,0.4430732,location problem model
+-1,0.44217932,location allocation model
+-1,0.40354618,landslide inventory
+-1,0.397523,burnt catchment
+-1,0.3688189,frequent natural disaster

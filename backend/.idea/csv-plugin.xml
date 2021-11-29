@@ -45,7 +45,35 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#1_best_grouping.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#1_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#2_grouping_experiments.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

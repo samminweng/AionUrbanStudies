@@ -1,0 +1,13 @@
+Cluster,DocId,key-phrases
+1,55,"['UAV communication', 'reliable UAV communication', 'path loss model', 'path loss', 'unmanned aerial vehicle']"
+1,80,"['global positioning system', 'signal reception classifier', 'LOS multipath classifier', 'positioning system', 'multipath classifier']"
+1,152,"['nLOS multipath detection', 'NLOS classifier', 'navigation satellite', 'navigation satellite system', 'support vector']"
+1,163,"['distance localization', 'cellular tower', 'mean distance localization', 'distance localization error', 'cellular base transceiver']"
+1,214,"['localization accuracy', 'receiver location', 'average localization accuracy', 'source localization', 'urban environment']"
+1,267,"['RF fingerprint localization', 'RF fingerprint database', 'RF fingerprint', 'fingerprint localization', 'effective localization method']"
+1,280,"['GPS signal', 'raw GPS measurement', 'GPS measurement', 'positioning accuracy', 'attenuate GPS signal']"
+1,291,"['path loss prediction', 'prediction path loss', 'loss prediction', 'path loss dataset', 'LTE network']"
+1,358,"['GNSS satellite', 'GNSS positioning', 'global navigation satellite', 'GNSS signal', 'GNSS receiver']"
+1,359,"['GNSS signal detection', 'robust GNSS positioning', 'conventional GNSS positioning', 'NLOS signal', 'signal classification method']"
+1,362,"['sVM model', 'urban propagation environment', 'urban propagation', 'radio propagation model', 'path loss information']"
+1,510,"['navigation system', 'positioning performance', 'satellite', 'visible satellite', 'position solution']"

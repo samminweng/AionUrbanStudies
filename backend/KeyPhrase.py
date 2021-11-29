@@ -84,7 +84,7 @@ class ClusterSimilarity:
             # # Encode cluster_doc and candidates as BERT embedding
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                         device=self.args.device)
-            for cluster_no in [0]:
+            for cluster_no in [0, 1]:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
                 results = list()
                 all_key_phrases = list()    # Store all the key phrases
