@@ -1,0 +1,316 @@
+group,score,key-phrase
+0,0.55612236,deep convolutional network
+0,0.4624802,deep learning model
+0,0.45808163,deep learning
+0,0.40748227,machine learning model
+0,0.4017406,machine learning
+0,0.3591125,machine learning technique
+0,0.35772336,machine learning method
+1,0.654134,Transit urban design
+1,0.49270475,public transit ridership
+1,0.48385867,transit ridership
+1,0.4832842,public transportation demand
+1,0.4680829,Towards sustainable transit
+1,0.46126986,predicted ridership
+2,0.61297244,city safety perception
+2,0.5627528,city safety
+2,0.5321697,people safety perception
+2,0.51873046,safety perception model
+2,0.51528037,safety perception measurement
+2,0.5117855,city safety security
+2,0.47371215,safe city
+2,0.39970303,safety perception
+3,0.7475276,urban emotion measurement
+3,0.6171666,emotional computing technics
+3,0.60703707,urban emotion
+3,0.59335804,emotion information
+3,0.5848177,emotional computing concept
+3,0.5818138,emotional computing
+3,0.5609988,emotion measurement
+3,0.52860916,emotion measurement tool
+3,0.5050581,human emotion recognition
+4,0.7015443,urban segregation
+4,0.64313316,residential segregation
+4,0.6034781,ethnoracial residential segregation
+4,0.5881107,spatial segregation
+4,0.53016245,reduced residential segregation
+4,0.4961353,segregation
+5,0.5576153,auditory perception map
+5,0.52459806,auditory perception
+5,0.51160073,auditory data
+5,0.47737467,perception map
+5,0.43655878,human perception
+5,0.40088278,heterogeneous perception
+5,0.37488842,subjective perception
+5,0.33511934,perception
+6,0.63068426,visible street greenery
+6,0.6281073,urban greenery
+6,0.61845267,accessed street greenery
+6,0.59134585,street greenery
+6,0.5790833,urban greening
+6,0.5706631,urban greening policy
+7,0.7347198,urban public space
+7,0.7195462,urban environment perception
+7,0.6929036,urban landscape perception
+7,0.681936,residential urban environment
+7,0.67594254,artificial urban modeling
+7,0.67556214,historical urban landscape
+7,0.67439246,streetscape perception
+7,0.67077446,urban morphological feature
+7,0.66204566,automated urban modeling
+7,0.6496428,artificial urban environment
+7,0.64960665,urban perception datasets
+7,0.63829494,urban vitality feature
+7,0.6346024,crowdsourced street view
+7,0.63298595,proposed urban modeling
+7,0.6306823,urban morphology contributes
+7,0.6262934,urban street vitality
+7,0.6237609,urban space quality
+7,0.6229925,urban modeling technique
+7,0.61474085,urban perception assessment
+7,0.6002058,conventional urban data
+7,0.59351945,urban morphology
+7,0.5925793,urban visual experience
+7,0.59209394,urban scene quality
+7,0.589911,urban analysis
+7,0.5846369,urban analytics
+7,0.5840064,landscape design
+7,0.5839327,landscape architecture system
+7,0.5826057,urban modelling
+7,0.5819717,urban street landscape
+7,0.57946837,urban landscape
+7,0.56863433,landscape architecture
+7,0.5637611,street image evaluation
+7,0.56258595,urban land use
+7,0.5583955,streetscape view
+7,0.55253696,streetscape improvement
+7,0.5524318,urban data source
+7,0.55217934,urban policy
+7,0.5475862,urban scene data
+7,0.54349726,urban planning
+7,0.5422906,streetscape view index
+7,0.5420008,street design
+7,0.5381019,geospatial data
+7,0.53219664,urbanising city
+7,0.5320292,urban environment
+7,0.5318816,mediatized urban heritage
+7,0.531803,geospatial data collection
+7,0.529935,urban perception derivation
+7,0.52880573,landscape architecture art
+7,0.5284885,city planning
+7,0.52467185,city appearance
+7,0.5234848,Street View imagery
+7,0.5230221,global urban data
+7,0.520993,urban amenity
+7,0.52084714,urban land
+7,0.5200592,urban perception
+7,0.5121241,urban identity
+7,0.5108897,city life
+7,0.509908,urban design quality
+7,0.5090797,complex urban feature
+7,0.5089392,new urban pattern
+7,0.50690866,urban design dimension
+7,0.50552297,urban pattern
+7,0.5049503,urban space
+7,0.50436944,urban heritage
+7,0.5040682,urban community life
+7,0.50262845,urban design theory
+7,0.5022875,city modelling
+7,0.5006859,environment perception
+7,0.5003048,local urban perception
+7,0.4975961,urban habitat
+7,0.49701986,street space image
+7,0.4957381,urban plan
+7,0.495629,streetscapes
+7,0.49120456,Urban data
+7,0.49047434,urban research method
+7,0.48799348,urban community
+7,0.48741618,garden landscape
+7,0.48574883,complex urban environment
+7,0.48420382,crowdsourced street
+7,0.48310858,city image
+7,0.4816495,urban design
+7,0.48093632,urban data framework
+7,0.47603258,urban planning policy
+7,0.47481358,urban sociology
+7,0.4703745,urban research
+7,0.4671804,street imagery data
+7,0.46398306,streetscape
+7,0.45977962,street imagery
+7,0.45921153,city planning process
+7,0.45292476,street image
+7,0.44930214,intricate urban matrix
+7,0.44871497,street space
+7,0.44640964,urbanity
+7,0.44224015,urban area
+7,0.4413659,established urban research
+7,0.4402368,urban location
+7,0.43821043,urban feature
+7,0.43476644,large street imagery
+7,0.4318417,street view
+7,0.43049473,street view image
+7,0.42757574,new urban data
+7,0.42340574,urban context
+7,0.42339635,city planning professional
+7,0.42231616,urban public life
+7,0.41121864,different urban location
+7,0.4079088,urban planning practice
+7,0.40591666,open urban area
+7,0.3939327,public space
+7,0.38804698,spatial data
+7,0.3678523,landscape
+7,0.36372718,urban design strategy
+7,0.31061286,public place
+8,0.7810992,urban sound recognition
+8,0.7746887,soundscape classification model
+8,0.77439713,soundscape recognition
+8,0.7676995,soundscape classification
+8,0.7204213,soundscape assessment
+8,0.7204179,urban soundscape evaluation
+8,0.68829954,comprehensive urban soundscape
+8,0.6796172,urban soundscapes
+8,0.6763092,soundscape recognition aim
+8,0.6713996,urban soundscape mapping
+8,0.64465934,soundscape mapping
+8,0.6141603,urban soundscape
+8,0.6138384,soundscapes
+8,0.6025745,soundscape
+8,0.5930557,future soundscape mapping
+-1,0.6677022,urban multisensory laboratory
+-1,0.6506697,public transportation accessibility
+-1,0.64087206,urban valuation estimation
+-1,0.63570416,urban valuation
+-1,0.63478535,generative urban network
+-1,0.6339892,urban multisensory
+-1,0.6223497,pedestrian accessibility level
+-1,0.6199403,gaze analysis system
+-1,0.6198748,architectural color icon
+-1,0.6183399,visual gaze analysis
+-1,0.6081288,sound recognition
+-1,0.60576916,urban sensory lab
+-1,0.6037835,multidimensional livability
+-1,0.6032034,pedestrian accessibility
+-1,0.6030571,urban sensory
+-1,0.60118824,gaze analysis
+-1,0.60106385,autoencoders
+-1,0.6003398,audio descriptor
+-1,0.5960882,land use mapping
+-1,0.59152055,automatic sound recognizer
+-1,0.59086335,automatic sound recognition
+-1,0.5897136,architectural color
+-1,0.5892948,transportation accessibility
+-1,0.5883416,greenway planning
+-1,0.5866213,land use information
+-1,0.58471584,livability management
+-1,0.584328,multidimensional livability index
+-1,0.5840712,sound recognition task
+-1,0.57979906,human emotion
+-1,0.5778074,convolutional variational autoencoders
+-1,0.57761776,optimized greenway suitability
+-1,0.57274973,urban greenway network
+-1,0.5685873,spatial network
+-1,0.56449366,livability index
+-1,0.55852365,pedestrian landscape
+-1,0.55180746,pedestrian environment
+-1,0.5464833,land use map
+-1,0.5432374,greenway suitability analysis
+-1,0.5414156,street walkability
+-1,0.540223,common wild bee
+-1,0.53251576,urban infrastructure
+-1,0.5295384,gaze vector
+-1,0.5293477,street view pattern
+-1,0.527529,perceived walkability
+-1,0.526533,building reconstruction
+-1,0.525644,good pedestrian landscape
+-1,0.51591957,holistic visual data
+-1,0.51557624,urban infrastructure investment
+-1,0.5111532,street quality
+-1,0.5108337,urban form
+-1,0.5106107,visual gaze
+-1,0.5062417,visual quality
+-1,0.5056251,perceived visual quality
+-1,0.50366914,tree planting policy
+-1,0.5032145,property assessment
+-1,0.5028018,land value
+-1,0.5019579,participatory planning
+-1,0.49924988,color icon creation
+-1,0.49800676,livability
+-1,0.49733704,Visual Exploration
+-1,0.49404895,cluster dynamic analysis
+-1,0.4906533,visual analytics
+-1,0.48932806,multisensory laboratory
+-1,0.48715168,place sentiment
+-1,0.48609164,participatory planning process
+-1,0.4845568,walkability
+-1,0.4821816,tree location data
+-1,0.47843486,auditory landscape
+-1,0.4774909,pedestrian space
+-1,0.4752943,sociodemographics
+-1,0.47288436,spatial evaluation
+-1,0.47209272,habitat selection
+-1,0.47107863,tree planting
+-1,0.46935508,sonic environment
+-1,0.46909136,immigrant assimilation
+-1,0.46888342,tree placement
+-1,0.46869045,solitary bee
+-1,0.46334353,bee
+-1,0.46072358,cultural ecosystem service
+-1,0.45950603,morphological feature
+-1,0.45872402,crowdsourcing game
+-1,0.45556557,environmental evaluation
+-1,0.4552038,urban scene
+-1,0.45240515,cultural ecosystem
+-1,0.45098022,inclusive planning
+-1,0.45086765,nature photograph
+-1,0.4478807,decision tree
+-1,0.4455163,satellite image
+-1,0.4449473,street accessibility
+-1,0.44493195,visual image interpretation
+-1,0.44490254,quantitative morphological description
+-1,0.44480166,street renewal
+-1,0.44221163,visitor experience
+-1,0.44155693,ecosystem service assessment
+-1,0.43951243,historical preservation
+-1,0.4365952,Random Forest model
+-1,0.43585888,efficient street renewal
+-1,0.4354936,environmental sensor
+-1,0.43448913,digital excavation
+-1,0.43003738,streetlife intensity
+-1,0.4297539,life circle planning
+-1,0.42644525,mapping
+-1,0.42522907,color icon
+-1,0.42427245,experienced urban designer
+-1,0.42290288,interactive visual analytics
+-1,0.42214853,elevation data
+-1,0.42167088,tree location
+-1,0.41118592,social medium photograph
+-1,0.40710965,public space management
+-1,0.40684688,human physiological change
+-1,0.40611494,height data
+-1,0.40201437,architectural beauty
+-1,0.3983581,google map
+-1,0.39474294,semantic information
+-1,0.39116776,location selection
+-1,0.3878727,big data
+-1,0.3873183,image recognition
+-1,0.38606203,height prediction
+-1,0.38047948,signal processing
+-1,0.38026336,feature selection
+-1,0.37989837,novel semantic model
+-1,0.3798102,activity space estimation
+-1,0.37790278,street
+-1,0.37272555,transit node
+-1,0.3721796,classification
+-1,0.37147403,city census
+-1,0.3650987,city
+-1,0.36279994,assimilation
+-1,0.36232263,sentiment
+-1,0.36220884,level semantic information
+-1,0.35229105,historical site
+-1,0.34399125,tourism
+-1,0.34339458,feature extraction
+-1,0.33016375,city census information
+-1,0.32985032,perceptual variable
+-1,0.30769098,Shanghai city
+-1,0.30361512,clustering
+-1,0.29849777,data

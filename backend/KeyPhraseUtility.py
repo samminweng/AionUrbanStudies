@@ -239,23 +239,25 @@ class KeyPhraseUtility:
             # Get the best parameters
             best_parameters = {0: {'min_cluster_size': 10, 'min_samples': 2, 'epsilon': 0.0},
                                1: {'min_cluster_size': 7, 'min_samples': 2, 'epsilon': 0.0},
-                               2: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0}}
+                               2: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0},
+                               6: {'min_cluster_size': 6, 'min_samples': 2, 'epsilon': 0.0}
+                               }
             if cluster_no in best_parameters:
                 parameter = best_parameters[cluster_no]      # Get the optimal parameters
                 # Output the grouped key phrases
                 group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
             results = list()
-            for min_cluster_size in [10]:
-                for min_samples in [2]:
-                    for epsilon in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
+            for min_samples in [None, 1, 2, 3, 4, 5]:
+                for min_cluster_size in range(5, 31):
+                    for epsilon in [0.0]:
                         try:
                             parameter['min_cluster_size'] = min_cluster_size
                             parameter['min_samples'] = min_samples
                             parameter['epsilon'] = epsilon
                             all_group_list = group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases)
                             result = {'cluster': "#" + str(cluster_no),
-                                      'min_cluster_size': parameter['min_cluster_size'],
                                       'min_samples': str(parameter['min_samples']),
+                                      'min_cluster_size': parameter['min_cluster_size'],
                                       'epsilon': parameter['epsilon'],
                                       'total_groups': len(all_group_list)}
                             # Check if any outliers

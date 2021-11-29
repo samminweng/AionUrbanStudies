@@ -86,7 +86,7 @@ class ClusterSimilarity:
             # # Encode cluster_doc and candidates as BERT embedding
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                         device=self.args.device)
-            for cluster_no in [4]:
+            for cluster_no in [2]:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
                 results = list()
                 all_key_phrases = list()    # Store all the key phrases
@@ -98,7 +98,7 @@ class ClusterSimilarity:
                     doc_text = " ".join(list(map(lambda s: " ".join(s), sentences)))
                     result = {'Cluster': cluster_no, 'DocId': doc_id}
                     candidates = []
-                    for n_gram_range in [1, 2, 3]:
+                    for n_gram_range in [4]:
                         try:
                             # Extract key phrase candidates using n-gram
                             n_gram_candidates = KeyPhraseUtility.generate_n_gram_candidates(sentences,

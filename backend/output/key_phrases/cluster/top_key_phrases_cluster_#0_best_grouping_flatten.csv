@@ -1,56 +1,56 @@
 group,score,key-phrase
-0,0.69199526,flooding prediction
-0,0.6847876,flood risk mapping
-0,0.66528684,flood hazard determination
-0,0.65537894,pluvial flooding prediction
-0,0.646799,flood risk map
-0,0.6158625,urban flood susceptibility
-0,0.61065805,urban flood risk
+0,0.6919953,flooding prediction
+0,0.68478763,flood risk mapping
+0,0.66528714,flood hazard determination
+0,0.655379,pluvial flooding prediction
+0,0.6467991,flood risk map
+0,0.61586267,urban flood susceptibility
+0,0.61065817,urban flood risk
 0,0.5989101,flood vulnerability map
-0,0.5715709,flood susceptibility mapping
-0,0.5595094,flood susceptibility map
+0,0.571571,flood susceptibility mapping
+0,0.5595095,flood susceptibility map
 0,0.5502807,urban pluvial flooding
 0,0.51151,urban pluvial flood
-0,0.50447273,flood susceptibility
-0,0.4977613,realistic flood susceptibility
-0,0.49587214,flood occurrence
-0,0.4826704,pluvial flood event
-0,0.4554469,pluvial flood vulnerability
+0,0.504473,flood susceptibility
+0,0.49776134,realistic flood susceptibility
+0,0.49587217,flood occurrence
+0,0.4826705,pluvial flood event
+0,0.45544702,pluvial flood vulnerability
 0,0.44230992,flood vulnerability
-1,0.6669997,landslide susceptibility mapping
-1,0.6638505,landslide susceptibility model
-1,0.6538762,landslide susceptibility assessment
-1,0.6497804,landslide susceptibility prediction
+1,0.6669995,landslide susceptibility mapping
+1,0.6638506,landslide susceptibility model
+1,0.65387625,landslide susceptibility assessment
+1,0.64978045,landslide susceptibility prediction
 1,0.6379435,landslide susceptibility evaluation
-1,0.63774633,landslide hazard
-1,0.6356771,shallow landslide susceptibility
-1,0.6243079,landslide susceptibility map
+1,0.6377465,landslide hazard
+1,0.63567734,shallow landslide susceptibility
+1,0.624308,landslide susceptibility map
 1,0.6133852,landslide susceptibility modeling
-1,0.6080226,landslide risk management
-1,0.6008062,landslide susceptibility simulation
-1,0.58151966,landslide susceptibility
+1,0.60802275,landslide risk management
+1,0.60080624,landslide susceptibility simulation
+1,0.5815197,landslide susceptibility
 1,0.5758366,potential landslide runout
-1,0.55330753,potential landslide
-1,0.5496245,landslide risk
-1,0.5377243,high landslide risk
-1,0.52747005,landslide susceptibility zone
-1,0.52079713,landslide prevention
-1,0.43107235,landslide worldwide
+1,0.5533076,potential landslide
+1,0.5496244,landslide risk
+1,0.53772426,high landslide risk
+1,0.5274701,landslide susceptibility zone
+1,0.5207968,landslide prevention
+1,0.43107226,landslide worldwide
 1,0.38986772,landslide
 1,0.3598429,historical landslide
--1,0.6277701,rockfall hazard assessment
--1,0.5809785,support vector machine
--1,0.56718993,comprehensive rockfall hazard
--1,0.547613,landslide data
--1,0.50938237,rockfall hazard
--1,0.50573516,SVMs algorithm
--1,0.4969569,support vector
--1,0.4950456,SVMs model
--1,0.47640827,wildfire burnt area
--1,0.47513354,rockfall kinematic model
--1,0.47326484,rockfall probability
+-1,0.6277703,rockfall hazard assessment
+-1,0.58097845,support vector machine
+-1,0.5671902,comprehensive rockfall hazard
+-1,0.5476131,landslide data
+-1,0.50938255,rockfall hazard
+-1,0.505735,SVMs algorithm
+-1,0.49695683,support vector
+-1,0.49504542,SVMs model
+-1,0.47640842,wildfire burnt area
+-1,0.47513375,rockfall kinematic model
+-1,0.47326493,rockfall probability
 -1,0.4430732,location problem model
--1,0.44217932,location allocation model
--1,0.40354618,landslide inventory
--1,0.397523,burnt catchment
--1,0.3688189,frequent natural disaster
+-1,0.44217935,location allocation model
+-1,0.4035458,landslide inventory
+-1,0.3975229,burnt catchment
+-1,0.36881858,frequent natural disaster
