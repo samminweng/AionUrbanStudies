@@ -1,0 +1,286 @@
+group,score,key-phrase
+0,0.69967073,wearable fall detection
+0,0.6884084,fall detection
+0,0.6739447,human fall detection
+0,0.6572308,fall detection system
+0,0.63327,automatic wearable fall
+1,0.53791094,smog severity observation
+1,0.53041553,pollution quality prediction
+1,0.4942602,Smog disaster
+1,0.47862574,smog observation
+1,0.4779039,smog severity
+1,0.44441798,air pollution measurement
+1,0.44374686,influence air pollution
+1,0.4349711,air pollution quality
+1,0.40812808,health monitoring
+1,0.40520123,carbon emission assessment
+1,0.36960316,environmental monitoring
+1,0.3688371,environmental monitoring task
+2,0.67866766,Iran arid area
+2,0.66678816,aridity index
+2,0.6331711,compatible aridity index
+2,0.585389,Iq aridity index
+2,0.5812721,aridity trend
+2,0.50655985,typical landscape index
+3,0.6908215,government knowledge graph
+3,0.6646701,intelligent unmanned technology
+3,0.6605823,urban greenness space
+3,0.6460587,transportation mode classification
+3,0.63758206,urban territorial planning
+3,0.62967956,urban land use
+3,0.62459195,sustainable urban transition
+3,0.6199715,sustainable urban development
+3,0.6127329,land cover classification
+3,0.6100849,land use analysis
+3,0.6012219,urban greenness coverage
+3,0.582383,sustainable urban planning
+3,0.58190703,understanding city
+3,0.58110505,essential urban land
+3,0.5810637,Urban greenness
+3,0.5801553,open data
+3,0.57405186,land use information
+3,0.5721166,urban ecological management
+3,0.5719503,urban development classification
+3,0.57169676,urban regeneration
+3,0.5716262,scene classification
+3,0.5708531,semantic image classification
+3,0.56839186,unmanned technology
+3,0.5679749,smart city
+3,0.56769806,open urban data
+3,0.5666801,travel mode detection
+3,0.5636911,urban planning machine
+3,0.5587965,urban analytics
+3,0.55723065,urban data operationalization
+3,0.553223,image classification
+3,0.55294687,urban land
+3,0.55195487,urban functional area
+3,0.5497186,visual Analytics
+3,0.5495852,slum area
+3,0.54899275,urban visual environment
+3,0.5472466,generative architectural
+3,0.54636836,collaborative urban governance
+3,0.5461948,geospatial big data
+3,0.5445365,urban design plan
+3,0.54257464,intelligent transportation
+3,0.53976005,Urban data
+3,0.5397502,urban governance
+3,0.539292,urban landscape pattern
+3,0.53876746,urban system
+3,0.53564864,deep reinforcement
+3,0.53529006,urban landscape
+3,0.5346112,governance intelligence
+3,0.5326569,data mining
+3,0.5316029,urban design task
+3,0.53069896,intelligent urban data
+3,0.53054845,classification algorithm
+3,0.5299165,metropolitan land use
+3,0.5287396,urban governance issue
+3,0.5277637,urban functional zone
+3,0.52751625,neighbourhood
+3,0.5266279,area intelligent classification
+3,0.52639425,agricultural land cover
+3,0.5261549,sidewalk design
+3,0.5252807,urban development model
+3,0.52458346,urban poverty
+3,0.5240115,deep reinforcement learning
+3,0.52275693,urban development pattern
+3,0.5211358,land cover
+3,0.5200373,urban design
+3,0.5197814,urban warfare operation
+3,0.51882225,various classification algorithm
+3,0.51525664,different classification algorithm
+3,0.5143577,urban layout
+3,0.5100509,neighborhood
+3,0.5095303,perceives AI technology
+3,0.5092629,urban development
+3,0.50862104,AI system
+3,0.50851524,fuzzy reasoning
+3,0.5077372,urban road traffic
+3,0.5072571,slum
+3,0.504668,AI application area
+3,0.50269324,artificial neural network
+3,0.5004468,urban system management
+3,0.5002055,generated design
+3,0.5000056,urban design method
+3,0.49518427,data exploration
+3,0.49443054,neural network algorithm
+3,0.49342948,deep computer vision
+3,0.49314672,urban data set
+3,0.4925783,street view image
+3,0.49094403,new urban development
+3,0.49072394,real estate market
+3,0.49055785,territorial planning process
+3,0.48936838,urban planner assess
+3,0.48867872,visualization
+3,0.4874233,reinforcement learning
+3,0.48698795,urbanization index
+3,0.48569304,urban transition
+3,0.4851623,market spatial dynamic
+3,0.4848742,mode classification method
+3,0.48463976,Poverty rate
+3,0.4842455,zone classification approach
+3,0.48406512,Urbanization impact
+3,0.4832133,territorial planning
+3,0.48218364,urbanization process
+3,0.4816805,urban area
+3,0.48145998,urban data monitoring
+3,0.4810515,land cover type
+3,0.47963583,random forest
+3,0.47963047,expert system prototype
+3,0.47912344,architectural design
+3,0.47643632,street view
+3,0.47368467,architectural form
+3,0.47260082,fuzzy reasoning scheme
+3,0.47238615,deep computer
+3,0.47215766,mode classification
+3,0.47189713,rental housing market
+3,0.4680683,unmanned aerial vehicle
+3,0.46595737,roadside vegetation barrier
+3,0.46572992,intelligent classification
+3,0.46380502,city planning
+3,0.46286997,land use
+3,0.4622572,effective urban system
+3,0.45955953,decision tree
+3,0.45924637,big data analysis
+3,0.4588469,different transportation mode
+3,0.45872754,transportation mode
+3,0.4579186,intelligence technology
+3,0.4570225,smart city development
+3,0.4552093,convolutional neural network
+3,0.45203906,expert system
+3,0.45092827,automatic design
+3,0.44989222,big data
+3,0.44923759,related urban planning
+3,0.4489768,monetary poverty
+3,0.44889444,popular AI technology
+3,0.4479518,urban space
+3,0.44527942,inspires urban designer
+3,0.4431297,multiple classifier
+3,0.4428934,complex planning
+3,0.4425463,urban environment
+3,0.44248313,urban form
+3,0.44185498,poverty
+3,0.44097692,street imagery
+3,0.43881693,urban planning
+3,0.4362067,roadside vegetation
+3,0.43566135,housing market
+3,0.43397278,automatic classification
+3,0.43278104,artificial network
+3,0.43245628,land use evolution
+3,0.43076515,Artificial intelligence technology
+3,0.42679703,neural network
+3,0.42486328,roadside green infrastructure
+3,0.42296743,machine learning method
+3,0.42019522,AI technology
+3,0.41921845,unplanned urban expansion
+3,0.41611636,vegetation design
+3,0.4106732,participatory planning
+3,0.40398693,neural network model
+3,0.402533,poverty level
+3,0.39926195,global urbanization
+3,0.39199913,Analytics
+3,0.3904431,complex planning process
+3,0.38956252,urban scene
+3,0.3891774,UAVs device
+3,0.3884558,machine learning
+3,0.3795005,urban expansion
+3,0.37557518,geographical insight
+3,0.3694473,planning domain
+3,0.33998665,land
+3,0.33719912,deep learning
+3,0.30276236,complex urban area
+3,0.27440697,neural network learns
+4,0.6161866,semantic address matching
+4,0.61092645,address matching
+4,0.59917927,address match
+4,0.5921904,unstructured address data
+4,0.57262856,unstructured address record
+-1,0.6795519,street context classification
+-1,0.6609479,Kadaster knowledge graph
+-1,0.64731,knowledge graph
+-1,0.6365055,terrorist attack prediction
+-1,0.60847545,French neighbourhood
+-1,0.60254383,health hazard forecasting
+-1,0.59728086,attack prediction system
+-1,0.5850506,Structural health monitoring
+-1,0.580726,intelligent transportation system
+-1,0.58069986,road traffic noise
+-1,0.56443834,traffic noise
+-1,0.54329395,digital society
+-1,0.5431093,open government knowledge
+-1,0.53011894,attack prediction
+-1,0.52535784,smart city lie
+-1,0.5234821,visualization technique
+-1,0.517931,generated design data
+-1,0.51238906,GIS hotspot analysis
+-1,0.51161176,advertising construction
+-1,0.5037992,reasoning layer
+-1,0.5027206,real estate search
+-1,0.49907455,detected advertising object
+-1,0.49880219,fuzzy logic
+-1,0.4983059,land surface temperature
+-1,0.49745786,terroristic attack
+-1,0.49514526,semantic image
+-1,0.48986268,travel carbon emission
+-1,0.48804787,swarm intelligence
+-1,0.48756668,cluster analysis
+-1,0.4862948,greenness space
+-1,0.48183995,democracy
+-1,0.47938088,former industrial waterfront
+-1,0.47777265,scenic beauty
+-1,0.47710562,Outdoor advertising
+-1,0.47676313,robotic system
+-1,0.474269,housing inequality
+-1,0.47373247,imbalanced datasets
+-1,0.47242898,functional zone classification
+-1,0.47214875,vegetation barrier design
+-1,0.47032982,distance metric learning
+-1,0.46692392,representative democracy
+-1,0.46650857,metric learning
+-1,0.4661586,advertising object
+-1,0.46422392,digital revolution
+-1,0.45853484,health monitoring installation
+-1,0.4574814,digital social contract
+-1,0.45174906,civic query data
+-1,0.4459056,dynamic flight plan
+-1,0.4429883,XGBoost classification
+-1,0.44182378,civic participation platform
+-1,0.43551415,aerial vehicle
+-1,0.43370494,spatial dynamic model
+-1,0.42983314,harmonious smart ecosystem
+-1,0.42866385,zone classification
+-1,0.42769137,perennial drainage
+-1,0.42733145,smart ecosystem
+-1,0.42718828,hydrologic risk
+-1,0.42357564,biomedical data analysis
+-1,0.42113602,relabel street
+-1,0.420744,CNN architecture
+-1,0.4201988,drainage network
+-1,0.41894558,landscape metric model
+-1,0.41587844,Structural health
+-1,0.41290745,housing affordability
+-1,0.40873617,noise level
+-1,0.4060598,surface water runoff
+-1,0.40567622,satellite imagery
+-1,0.4018268,floodplain
+-1,0.3981961,aesthetic rating
+-1,0.3942128,epistemological quadriptych
+-1,0.38230872,social metadata
+-1,0.38016844,military operation
+-1,0.3795009,hotspot analysis
+-1,0.3761592,Paris dataset
+-1,0.37593478,biomedical data
+-1,0.37515262,Health Monitoring utility
+-1,0.3697369,query engine
+-1,0.36908698,Flickr image
+-1,0.35658678,Social medium user
+-1,0.3539694,network model
+-1,0.34363312,natural language
+-1,0.3249203,spatial concept
+-1,0.30169433,geography
+-1,0.28888714,Crime Detection
+-1,0.28619096,collision avoidance
+-1,0.2533947,exploration strategy
+-1,0.24048793,map
+-1,0.23115648,intelligent
+-1,0.21400727,recognition

@@ -1,0 +1,350 @@
+group,score,key-phrase
+0,0.56426126,graph machine learning
+0,0.55537117,Graph convolutional network
+0,0.4746361,graph convolution network
+0,0.45165214,graph attention network
+0,0.38316238,graph machine
+1,0.5017513,tensor factorization
+1,0.48495603,matrix tensor factorization
+1,0.4527013,nonnegative matrix factorization
+1,0.41381484,matrix factorization
+1,0.40759856,joint matrix factorization
+2,0.4908714,topic modeling
+2,0.48890197,latent Dirichlet allocation
+2,0.48310935,topic modeling extraction
+2,0.4743236,topic identification
+2,0.45777392,Dirichlet allocation
+2,0.4379369,probabilistic topic
+2,0.42116994,probabilistic topic model
+2,0.36998725,topic probability
+3,0.7611406,Data mining tourism
+3,0.75221586,Spatial crime simulation
+3,0.7456572,human mobility analysis
+3,0.72432137,mobility data mining
+3,0.71419,crime prediction
+3,0.7123051,business zone recommender
+3,0.7121422,urban data exploration
+3,0.71101016,human mobility prediction
+3,0.7085372,human mobility data
+3,0.69789755,crime simulation
+3,0.6958798,Urban computing
+3,0.6884916,crime simulation contribute
+3,0.68767905,urban activity inference
+3,0.68107235,Traditional crime prediction
+3,0.6779152,crime prediction model
+3,0.6763509,location semantic predicting
+3,0.6630585,crime security game
+3,0.659495,Urban placeness
+3,0.65856755,urban location annotation
+3,0.6545156,urban mobility structure
+3,0.65037566,geographical cluster
+3,0.64391327,impact pedestrian activity
+3,0.6415539,mobility prediction model
+3,0.63931227,Urban human mobility
+3,0.6322437,zone recommender system
+3,0.63080394,massive urban data
+3,0.62936497,mobility prediction
+3,0.6236103,location annotation
+3,0.6232838,transit mobility structure
+3,0.617324,mobility data
+3,0.616307,opportunistic crime security
+3,0.6136365,Human mobility pattern
+3,0.6128996,meaningful transit mobility
+3,0.61212546,mobility data set
+3,0.6106627,Extracting leisure activity
+3,0.6106018,Inferring urban performance
+3,0.6075208,urban network analysis
+3,0.60587764,spatiotemporal pattern mining
+3,0.6013315,smart city
+3,0.6007867,mobility pattern discovery
+3,0.5999898,zone recommender
+3,0.5998844,big transit data
+3,0.5997075,local pedestrian activity
+3,0.5991894,zone recommendation system
+3,0.59783137,city region partitioning
+3,0.59660244,human urban behavior
+3,0.59208894,travel behavior interpretation
+3,0.5900626,urban health
+3,0.58814085,transit mobility pattern
+3,0.5877829,geovisual analytics
+3,0.5873107,street functionality prediction
+3,0.5871379,massive urban datasets
+3,0.58648145,influence pedestrian activity
+3,0.5829029,Geographical measure
+3,0.58110964,pedestrian behavior modeling
+3,0.581053,land use detection
+3,0.5807558,mining tourism pattern
+3,0.57844806,urban space
+3,0.5780974,urban walkability
+3,0.57704115,mobility analysis
+3,0.57659537,urban mobility
+3,0.5762689,Semantic location
+3,0.57615316,Automated urban travel
+3,0.57344604,street functionality classification
+3,0.5729841,tourism pattern
+3,0.5697024,crime pattern
+3,0.56619513,modern smart city
+3,0.56553864,human mobility
+3,0.5646794,transit network data
+3,0.56423974,Spatial crime
+3,0.5638336,urban datasets
+3,0.56340194,discrete urban space
+3,0.5631323,various urban feature
+3,0.5619329,public transportation data
+3,0.56154805,urban design
+3,0.56133604,urban morphology
+3,0.560892,urban network path
+3,0.55888474,placeness
+3,0.5567239,bike trajectory data
+3,0.5567017,massive spatiotemporal data
+3,0.55455863,city region partition
+3,0.5504204,urban land use
+3,0.55005515,urban travel interpretation
+3,0.5499885,urban redevelopment
+3,0.5494499,urban environment
+3,0.548177,urban human activity
+3,0.54532474,mobile phone activity
+3,0.54491174,urban street functionality
+3,0.53958714,street context distribution
+3,0.53902465,urban planning
+3,0.5365947,travel activity pattern
+3,0.5360545,urban leisure
+3,0.5360209,Twitter data
+3,0.53545547,geographic knowledge graph
+3,0.5349895,Semantic location name
+3,0.5307596,understanding urban space
+3,0.5300118,individual travel behavior
+3,0.52650267,geographic information retrieval
+3,0.5252896,commercial district discovery
+3,0.52338624,urban science
+3,0.5230706,urban system
+3,0.5214931,heterogeneous urban data
+3,0.51969457,many urban planning
+3,0.5191591,urban functional region
+3,0.5190454,intercity corporate network
+3,0.5188304,travel pattern
+3,0.5175972,taxi journey dataset
+3,0.5146682,transit mobility
+3,0.51414347,geographic movement
+3,0.51347506,travel mode choice
+3,0.51256514,local urban context
+3,0.5121269,city spatiotemporal pattern
+3,0.512022,clustering process
+3,0.5119435,urban behavior
+3,0.5115196,clustering
+3,0.510829,travel mode detection
+3,0.50984,urban crime
+3,0.5069244,city image
+3,0.5062043,location category
+3,0.5037818,urban population distribution
+3,0.49928325,urban street network
+3,0.49921113,urban study
+3,0.4991431,socioeconomic data
+3,0.4980811,specific urban activity
+3,0.49670064,street context type
+3,0.4966682,transportation data
+3,0.4942083,unsupervised commercial district
+3,0.49293274,crime data
+3,0.49019155,spatiotemporal data
+3,0.48839533,urban location
+3,0.4877786,urban data analysis
+3,0.48575795,distinctive activity pattern
+3,0.4853857,transportation information
+3,0.4847477,urban land
+3,0.48453742,random forest
+3,0.48419842,distinguish geographical proximity
+3,0.48371398,city experience
+3,0.4813313,big data
+3,0.48131877,urban activity
+3,0.48088783,urban data
+3,0.48064655,big data mining
+3,0.48000735,urban region
+3,0.47953096,Support vector machine
+3,0.47944638,urban population
+3,0.4789642,urban functional zoning
+3,0.47820336,urban science framework
+3,0.47711653,text mining
+3,0.4755934,urban place detection
+3,0.47390988,travel behavior
+3,0.4737052,business zone
+3,0.47366154,clustering result
+3,0.4736309,intercity network
+3,0.47310814,mobile phone trajectory
+3,0.4724136,geographic knowledge
+3,0.47099403,crowdsensed datasets
+3,0.47061735,urban neighborhood
+3,0.46983734,Support vector
+3,0.46971458,phone activity
+3,0.46881184,urban function
+3,0.46874055,GPS trajectory data
+3,0.4687355,city branding
+3,0.46765962,geographic contextual information
+3,0.4666049,urban place
+3,0.46615767,modern city
+3,0.46531954,place detection
+3,0.46336508,location data
+3,0.46279508,semantic proximity
+3,0.46179873,thematic analytics
+3,0.4614485,city region
+3,0.46104968,visual analytics
+3,0.46100467,different street context
+3,0.46048456,geospatial information
+3,0.4591551,urban network
+3,0.45793742,bike flow pattern
+3,0.4570707,neighborhood level
+3,0.45519102,tourism research
+3,0.45410147,data exploration
+3,0.4532848,flow pattern discovery
+3,0.45288518,land use algorithm
+3,0.45141774,public transport commuter
+3,0.45134833,network analysis
+3,0.45125228,mobile phone dataset
+3,0.44962546,land use classification
+3,0.44927344,trajectory data
+3,0.44869798,hierarchical clustering
+3,0.44826272,neighborhood disorder
+3,0.44784266,urban road
+3,0.44570512,bike activity
+3,0.44557542,accessible urban data
+3,0.44480997,geographic context problem
+3,0.44176114,transport commuter
+3,0.44108838,phone data
+3,0.44079518,urban infrastructure
+3,0.4407862,geodemographic classification
+3,0.44035944,various urban task
+3,0.43972903,mobility pattern
+3,0.4379875,travel type
+3,0.43387598,mobile phone data
+3,0.43088278,geotagging
+3,0.43049705,geographical space
+3,0.42978203,transportation
+3,0.4271835,land use type
+3,0.42707938,spatial clustering
+3,0.4249249,travel mode
+3,0.4240833,mobility information
+3,0.42053363,smart city field
+3,0.4160183,network big data
+3,0.4153387,complex network analysis
+3,0.4152994,decision tree
+3,0.40900746,complex network
+3,0.4088394,geographic context
+3,0.4083308,data mining technology
+3,0.40714192,connectivity cluster
+3,0.40601316,place
+3,0.40598464,locational model
+3,0.40598333,machine learning algorithm
+3,0.40052885,urban planner
+3,0.3993573,geographical proximity
+3,0.39831918,transportation system
+3,0.39829564,social network
+3,0.39615053,traffic data
+3,0.39423168,Travel mode likelihood
+3,0.39136755,city
+3,0.39118677,geography
+3,0.3884762,taxi trajectory
+3,0.3839701,network model
+3,0.38334736,population movement pattern
+3,0.37575436,urban decision
+3,0.36818764,taxicab platform
+3,0.36501193,social medium
+3,0.36362827,urban area
+3,0.3616406,data
+3,0.36123496,mobility flow
+3,0.35342997,trajectory
+3,0.35247487,traffic
+3,0.3520457,intelligent taxi
+3,0.3511085,city level
+3,0.3479587,data mining technique
+3,0.3261268,data mining
+3,0.3209148,geospatial feature
+3,0.3106587,machine learning
+3,0.30813658,metropolitan area
+3,0.29956043,urban setting
+4,0.46413615,predictive feature
+4,0.43014425,predictive model
+4,0.42782843,prediction challenging
+4,0.40016633,prediction
+4,0.3992078,prediction capability
+-1,0.5911006,optimal police
+-1,0.57438374,restaurant data
+-1,0.57029974,urban traffic gravity
+-1,0.55999625,implicit geographic movement
+-1,0.54191977,trajectory segmentation
+-1,0.5364157,traffic incident analysis
+-1,0.53496486,police strategy
+-1,0.5341566,population map
+-1,0.52808213,community detection algorithm
+-1,0.5243156,retail store placement
+-1,0.5238948,traffic gravity model
+-1,0.52073157,social medium data
+-1,0.51767534,Graph input representation
+-1,0.5129918,city image dimension
+-1,0.5054546,foursquare
+-1,0.50062466,leisure ontology
+-1,0.4903938,logistics service network
+-1,0.48968136,activity prediction
+-1,0.4893787,commute
+-1,0.48448718,Foursquare place category
+-1,0.47921184,traffic crash location
+-1,0.4744371,census feature
+-1,0.47023082,itinerary request dataset
+-1,0.46823853,redevelopment
+-1,0.46430773,timely socioeconomic data
+-1,0.4635194,safer parking
+-1,0.4634971,building information
+-1,0.46153086,driver survey data
+-1,0.4586619,leisure activity potential
+-1,0.45841014,community detection
+-1,0.45716316,socioeconomic indicator
+-1,0.45522827,logistics service
+-1,0.4538977,socioeconomic status
+-1,0.4530778,district discovery framework
+-1,0.44730005,Twitter interaction
+-1,0.44650322,dimensionality reduction
+-1,0.44646275,route recommendation
+-1,0.44580823,Yelp hierarchical dataset
+-1,0.44472498,principal component analysis
+-1,0.44449037,urban ground sensing
+-1,0.44410026,bike flow
+-1,0.44285434,available crowdsensed datasets
+-1,0.44191608,neighborhood scale
+-1,0.44107527,citation network
+-1,0.4390365,topological connectivity
+-1,0.43567884,mobile crowdsensing
+-1,0.43550313,popular place
+-1,0.43048346,latent semantic relationship
+-1,0.42354202,store placement
+-1,0.42052692,word embedding
+-1,0.41760892,word embeddings
+-1,0.4168464,geolocated dataset
+-1,0.4113003,corpus training
+-1,0.40928006,learned embeddings
+-1,0.40759522,natural language processing
+-1,0.40719473,animal migration
+-1,0.40694478,embeddings
+-1,0.40471974,collaborative heterogeneous information
+-1,0.40385303,crowdsensing
+-1,0.4029322,store placement problem
+-1,0.4019324,prospective retail store
+-1,0.3958208,placement recommendation
+-1,0.38904414,region extraction
+-1,0.38804972,flow prediction
+-1,0.38695467,thematic analytics framework
+-1,0.3867373,Twitter
+-1,0.38616002,social activity
+-1,0.38233584,contextual information
+-1,0.3822673,social recommendation
+-1,0.37962765,interface network consist
+-1,0.36852258,similarity computation
+-1,0.36733204,several subject area
+-1,0.35001945,corporate network
+-1,0.34463167,chain store
+-1,0.33603907,urban stakeholder
+-1,0.32824776,new store
+-1,0.32241395,smart meter
+-1,0.31671488,recommendation
+-1,0.29286093,learning model
+-1,0.14559911,workshop
+-1,0.13235866,overview
+-1,0.04640624,conjunction
+-1,0.02432872,paper

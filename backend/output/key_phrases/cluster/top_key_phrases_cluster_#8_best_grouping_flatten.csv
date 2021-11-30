@@ -1,0 +1,71 @@
+group,score,key-phrase
+0,0.66827846,personality classification method
+0,0.65836847,personality classification task
+0,0.58221096,player personality behavior
+0,0.5752857,personality classification
+0,0.55481374,player personality
+0,0.5045618,personality behavior
+0,0.50110203,possible personality class
+1,0.5576547,Social medium data
+1,0.5296932,unstructured community input
+1,0.46175644,microblogging data
+1,0.4599504,Computational social medium
+1,0.4284668,unstructured community
+1,0.3995632,social network message
+2,0.67297506,urban data science
+2,0.66532165,urban informatics
+2,0.6486169,urban analytics
+2,0.6358307,urban analysis
+2,0.5837184,understand urban dynamic
+2,0.5794561,Urban planning
+2,0.56104076,Urban planning student
+2,0.5364947,urban planner
+2,0.5107485,participatory urban planning
+2,0.50271595,planning education
+2,0.49328548,urban environment
+2,0.460693,collaborative city planning
+2,0.45331854,collaborative city
+2,0.431035,sustainable urban planning
+2,0.42854717,urban green space
+2,0.40103424,city structure
+2,0.39446414,urban data
+2,0.38323456,urban dynamic
+3,0.54380745,AI data collection
+3,0.50784665,big data
+3,0.5061678,data mining technique
+3,0.48701918,AI data
+3,0.47927815,data mining
+3,0.45651487,data collection
+3,0.4427455,machine learning
+3,0.43420467,data science technique
+3,0.43049145,big data mining
+3,0.42048055,data science
+3,0.42043713,data
+3,0.367894,medium big data
+3,0.35818195,data analysis
+-1,0.54609287,Predictive analytics
+-1,0.51970774,proactive property vacancy
+-1,0.5156436,prevent vacant property
+-1,0.5136555,property vacancy policy
+-1,0.5035734,collaborative chat
+-1,0.49953824,urban waterlogging
+-1,0.49645036,property vacancy
+-1,0.48888162,natural language processing
+-1,0.4861536,urban flood
+-1,0.4836055,Smart City dimension
+-1,0.46981278,computational linguistics
+-1,0.46627405,subjective data
+-1,0.46411425,crowdsourcing
+-1,0.46344414,recurrent neural network
+-1,0.46014553,urban flood disaster
+-1,0.4565811,interactive data
+-1,0.4407616,international development
+-1,0.4336396,natural language
+-1,0.42802697,novel computational linguistics
+-1,0.42550278,classifier
+-1,0.4216748,Positive deviance
+-1,0.41596258,positive deviance face
+-1,0.41231215,city service dimension
+-1,0.3841933,development impact
+-1,0.38322467,unstructured data
+-1,0.37711298,online educational game

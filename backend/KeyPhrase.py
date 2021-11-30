@@ -83,6 +83,8 @@ class ClusterSimilarity:
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
                 df.to_csv(_path, encoding='utf-8', index=False)
+                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
+                df.to_json(_path, orient='records')
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
@@ -103,8 +105,7 @@ class ClusterSimilarity:
                         sentences = KeyPhraseUtility.clean_sentence(doc['Text'])
                         doc_text = " ".join(list(map(lambda s: " ".join(s), sentences)))
                         result = {'Cluster': cluster_no, 'DocId': doc_id}
-                        if doc_id == 587:
-                            print("Found")
+                        # Collect all the key phrases of a doc
                         candidates = []
                         for n_gram_range in [1, 2, 3]:
                             try:

@@ -197,7 +197,7 @@ class KeyPhraseUtility:
 
     # Cluster key phrases
     @staticmethod
-    def cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model):
+    def cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model, is_experimented=False):
         # Group key phrases with parameters
         def group_key_phrases_by_best_parameter(_cluster_no, _parameter, _key_phrases, is_output=False):
             # Convert the key phrases to vectors
@@ -236,6 +236,10 @@ class KeyPhraseUtility:
                 group_df['key-phrase'] = [', '.join(kp) for kp in group_df['key-phrase']]
                 group_df = group_df[['group', 'count', 'key-phrase']]     # Re-order the column list
                 group_df.to_csv(_path, encoding='utf-8', index=False)
+                # Output best grouped key phrases to a json file
+                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
+                group_df.to_json(_path, orient='records')
+                
             # Return a list of grouped key phrases (key-phrase, score)
             return _all_group_list
 
@@ -251,12 +255,19 @@ class KeyPhraseUtility:
                                5: {'min_cluster_size': 13, 'min_samples': 5, 'epsilon': 0.0},
                                6: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0},
                                7: {'min_cluster_size': 7, 'min_samples': 2, 'epsilon': 0.0},
-                               
+                               8: {'min_cluster_size': 5, 'min_samples': 2, 'epsilon': 0.0},
+                               9: {'min_cluster_size': 5, 'min_samples': 4, 'epsilon': 0.0},
+                               -1: {'min_cluster_size': 5, 'min_samples': 5, 'epsilon': 0.0}
                                }
             if cluster_no in best_parameters:
                 parameter = best_parameters[cluster_no]      # Get the optimal parameters
                 # Output the grouped key phrases
                 group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
+
+            if not is_experimented:
+                return 
+            
+                
             results = list()
             for min_samples in [None] + list(range(1, 11)):
                 for min_cluster_size in [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20, 25, 30]:
