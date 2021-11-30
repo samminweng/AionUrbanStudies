@@ -140,7 +140,17 @@ class ClusterSimilarity:
 
     # Combine all the key phrases results
     def combine_key_phrases(self):
+        # List top 10 key phrase of each group
+        def summary_group_key_phrases(_group_key_phrases):
+            summary = list()
+            for _no, _group in enumerate(_group_key_phrases):
+                top_key_phrases = _group['key-phrase'].split(", ")[:10]
+                g_summary = "({no})\t{s}".format(no=_no+1, s=", ".join(top_key_phrases))
+                summary.append(g_summary)
+            return "\n".join(summary)
+
         try:
+            # Output key phrases of each paper
             in_folder = os.path.join('output', 'key_phrases', 'cluster')
             out_folder = os.path.join('output', 'key_phrases')
             # Combine all the key phrases of each paper to a json file
@@ -154,9 +164,9 @@ class ClusterSimilarity:
             sorted_key_phrases = sorted(key_phrases, key=lambda k: k['DocId'])
             # Aggregated all the key phrases of each individual article
             df = pd.DataFrame(sorted_key_phrases, columns=['DocId', 'key-phrases'])
-            path = os.path.join(out_folder, 'doc_key_phrases.csv')
+            path = os.path.join(out_folder, self.args.case_name + '_' + self.args.approach + '_Cluster_doc_key_phrases.csv')
             df.to_csv(path, index=False, encoding='utf-8')
-            path = os.path.join(out_folder, 'doc_key_phrases.json')
+            path = os.path.join(out_folder, self.args.case_name + '_' + self.args.approach + '_Cluster_doc_key_phrases.json')
             df.to_json(path, orient='records')
             print('Output key phrases per doc to ' + path)
 
@@ -185,6 +195,16 @@ class ClusterSimilarity:
                                 self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases.json')
             cluster_df.to_json(path, orient='records')
             print('Output key phrases per cluster to ' + path)
+            # Output a summary of top 10 Topics and grouped key phrases of each cluster
+            clusters = cluster_df.to_dict("records")
+            summary_df = cluster_df
+            summary_df['topics'] = list(map(lambda c: ", ".join(list(map(lambda t: t['topic'], c['TF-IDF-Topics'][:10]))), clusters))
+            summary_df['key-phrases'] = list(map(lambda c: summary_group_key_phrases(c['Grouped_Key_Phrases']), clusters))
+            path = os.path.join(out_folder,
+                                self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases_summary.csv')
+            summary_df = summary_df.drop(columns=['TF-IDF-Topics', 'DocIds', 'Grouped_Key_Phrases'])
+            summary_df.to_csv(path, encoding='utf-8', index=False)
+            print('Output summary of topics and key phrases per cluster to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -210,8 +230,8 @@ class ClusterSimilarity:
 if __name__ == '__main__':
     tw = ClusterSimilarity()
     # tw.find_top_similar_paper_in_corpus()
-    tw.extract_key_phrases_by_clusters()
-    # tw.combine_key_phrases()
+    # tw.extract_key_phrases_by_clusters()
+    tw.combine_key_phrases()
 
 
 
