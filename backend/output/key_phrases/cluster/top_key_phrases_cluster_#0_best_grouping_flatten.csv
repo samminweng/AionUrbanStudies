@@ -1,15 +1,15 @@
 group,score,key-phrase
 0,0.6919954,flooding prediction
-0,0.6847876,flood risk mapping
+0,0.6847876,Flood risk mapping
 0,0.665287,flood hazard determination
 0,0.6553792,pluvial flooding prediction
 0,0.64679915,flood risk map
 0,0.6158625,urban flood susceptibility
-0,0.61065805,urban flood risk
+0,0.61065805,Urban flood risk
 0,0.5989101,flood vulnerability map
 0,0.5715709,flood susceptibility mapping
 0,0.5595095,flood susceptibility map
-0,0.5502806,urban pluvial flooding
+0,0.5502806,Urban pluvial flooding
 0,0.51151,urban pluvial flood
 0,0.50447273,flood susceptibility
 0,0.49776122,realistic flood susceptibility
@@ -17,9 +17,9 @@ group,score,key-phrase
 0,0.48267022,pluvial flood event
 0,0.4554469,pluvial flood vulnerability
 0,0.44230986,flood vulnerability
-1,0.6669997,landslide susceptibility mapping
+1,0.6669997,Landslide susceptibility mapping
 1,0.6638504,landslide susceptibility model
-1,0.65387625,landslide susceptibility assessment
+1,0.65387625,Landslide susceptibility assessment
 1,0.64978033,landslide susceptibility prediction
 1,0.6379434,landslide susceptibility evaluation
 1,0.63774633,landslide hazard

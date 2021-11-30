@@ -77,8 +77,8 @@ class KeyPhraseUtility:
             for i, (_word, _pos_tag) in enumerate(_pos_tags):
                 try:
                     # Lowercase 1st char of the firs word
-                    if i == 0:
-                        _word = _word[0].lower() + _word[1:len(_word)]
+                    #if i == 0:
+                    #    _word = _word[0].lower() + _word[1:len(_word)]
                     # NNS indicates plural nouns and convert the plural noun to singular noun
                     if _pos_tag == 'NNS':
                         singular_word = _lemmatiser.lemmatize(_word.lower())
@@ -240,7 +240,8 @@ class KeyPhraseUtility:
             best_parameters = {0: {'min_cluster_size': 15, 'min_samples': 2, 'epsilon': 0.0},
                                1: {'min_cluster_size': 7, 'min_samples': 2, 'epsilon': 0.0},
                                2: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0},
-                               6: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0}
+                               6: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0},
+                               7: {'min_cluster_size': 7, 'min_samples': 2, 'epsilon': 0.0}
                                }
             if cluster_no in best_parameters:
                 parameter = best_parameters[cluster_no]      # Get the optimal parameters
@@ -249,7 +250,7 @@ class KeyPhraseUtility:
             results = list()
             for min_samples in [None] + list(range(1, 11)):
                 for min_cluster_size in [5, 6, 7, 8, 9, 10, 15, 20, 25, 30]:
-                    for epsilon in [0.0]:
+                    for epsilon in [0.0]: #[0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
                         try:
                             parameter['min_cluster_size'] = min_cluster_size
                             parameter['min_samples'] = min_samples

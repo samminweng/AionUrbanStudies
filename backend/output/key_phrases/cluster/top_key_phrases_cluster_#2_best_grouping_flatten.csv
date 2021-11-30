@@ -8,7 +8,7 @@ group,score,key-phrase
 0,0.45434314,vehicle
 0,0.43371436,car
 0,0.4040745,vehicle selection algorithm
-1,0.5429704,data mining technique
+1,0.5429704,Data mining technique
 1,0.5266805,deep learning car
 1,0.500584,learning car detection
 1,0.49766654,LSTM model
@@ -17,7 +17,7 @@ group,score,key-phrase
 1,0.46957532,machine learning
 1,0.46572852,CNN model
 1,0.46243536,deep learning model
-1,0.4569701,data mining
+1,0.4569701,Data mining
 1,0.45529988,autoencoders
 1,0.44381264,prediction methodology
 1,0.44154754,deep learning method
@@ -38,7 +38,7 @@ group,score,key-phrase
 2,0.52001333,traditional taxi
 2,0.513573,taxi
 2,0.4167662,taxi fleet
-2,0.38658512,taxicab
+2,0.38658512,Taxicab
 3,0.7502187,crowd density estimation
 3,0.66878307,crowd density
 3,0.5475124,crowd surveillance
@@ -65,11 +65,11 @@ group,score,key-phrase
 5,0.5166706,dynamic route planning
 5,0.4826851,route planning
 6,0.6908045,traffic volume prediction
-6,0.64307237,traffic volume estimation
+6,0.64307237,Traffic volume estimation
 6,0.64219,traffic flow forecasting
 6,0.6375522,traffic prediction
 6,0.62848216,traffic accident prediction
-6,0.61967444,citywide Traffic Volume
+6,0.61967444,Citywide Traffic Volume
 6,0.6128716,destination prediction
 6,0.60491955,traffic flow prediction
 6,0.6008193,road traffic prediction
@@ -99,18 +99,18 @@ group,score,key-phrase
 6,0.50661284,urban police jurisdiction
 6,0.4976689,intelligent traffic management
 6,0.4963655,destination predictor
-6,0.49602717,urban traffic flow
+6,0.49602717,Urban traffic flow
 6,0.4872684,flow forecasting
 6,0.48691937,travel demand model
-6,0.48471767,urban traffic
+6,0.48471767,Urban traffic
 6,0.47457862,road traffic management
 6,0.4655406,emergency police operation
 6,0.4551935,adaptive traffic control
 6,0.4515236,urban safety
 6,0.44724956,traffic management system
 6,0.43928522,traffic speed
-6,0.43582278,crosstown traffic
-6,0.4304785,highway traffic volume
+6,0.43582278,Crosstown traffic
+6,0.4304785,Highway traffic volume
 6,0.4198748,urban traffic management
 6,0.41773883,traffic management
 6,0.4045917,flow prediction
@@ -138,14 +138,14 @@ group,score,key-phrase
 -1,0.5485797,urban area smart
 -1,0.53738636,big geodata analysis
 -1,0.5296463,urban event cause
--1,0.52894604,smart city
--1,0.5168319,trajectory clustering
+-1,0.52894604,Smart city
+-1,0.5168319,Trajectory clustering
 -1,0.5146709,extreme learning machine
 -1,0.49776694,passenger service market
 -1,0.48880276,unsupervised incremental learning
 -1,0.48715058,trajectory dataset
 -1,0.47870854,big geodata
--1,0.47396368,mobile crowdsensing
+-1,0.47396368,Mobile crowdsensing
 -1,0.47226945,citywide traffic accident
 -1,0.4554928,transportation congestion
 -1,0.45299703,image descriptor
@@ -154,7 +154,7 @@ group,score,key-phrase
 -1,0.4405232,compressed sensing
 -1,0.42747855,event data
 -1,0.42590928,event impact
--1,0.42119855,enhanced urban clustering
+-1,0.42119855,Enhanced urban clustering
 -1,0.4159999,spatial temporal coverage
 -1,0.41423982,urban clustering
 -1,0.40329647,biased data

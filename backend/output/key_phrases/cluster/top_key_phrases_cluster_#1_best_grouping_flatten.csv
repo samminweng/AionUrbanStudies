@@ -40,8 +40,8 @@ group,score,key-phrase
 1,0.36027247,satellite
 1,0.35874984,visible satellite
 1,0.31910196,position solution
-2,0.5177536,nLOS multipath detection
-2,0.49450085,sVM model
+2,0.5177536,NLOS multipath detection
+2,0.49450085,SVM model
 2,0.4903452,NLOS classifier
 2,0.48546985,signal reception classifier
 2,0.47180054,LOS multipath classifier
