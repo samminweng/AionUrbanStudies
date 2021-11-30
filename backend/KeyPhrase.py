@@ -24,7 +24,7 @@ class ClusterSimilarity:
             approach='HDBSCAN',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
-            device='cpu'
+            device='cuda'
         )
         # Load the cluster results as dataframe
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_TF-IDF_topic_words.json")
@@ -90,7 +90,7 @@ class ClusterSimilarity:
             # # Encode cluster_doc and candidates as BERT embedding
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                         device=self.args.device)
-            cluster_no_list = [9]
+            cluster_no_list = list(range(-1, 10))
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
                 results = list()
