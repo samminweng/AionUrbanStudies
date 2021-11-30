@@ -24,7 +24,7 @@ class ClusterSimilarity:
             approach='HDBSCAN',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
-            device='cuda'
+            device='cpu'
         )
         # Load the cluster results as dataframe
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_TF-IDF_topic_words.json")
@@ -50,6 +50,9 @@ class ClusterSimilarity:
         # Get a list of unique key phrases from all papers
         def _get_unique_doc_key_phrases(_doc_key_phrases, _all_key_phrases, _top_k=5):
             try:
+                if len(_doc_key_phrases) < _top_k:
+                    return _doc_key_phrases
+
                 _unique_key_phrases = list()
                 for _key_phrase in _doc_key_phrases:
                     # find if key phrase exist in all key phrase list
@@ -59,9 +62,10 @@ class ClusterSimilarity:
                         _unique_key_phrases.append(_key_phrase)
                     else:
                         print("Duplicated: " + _found_key_phrases[0]['key-phrase'])
+
                 # Get top 5 key phrase
                 _unique_key_phrases = _unique_key_phrases[:_top_k]
-                assert len(_unique_key_phrases) == _top_k
+                # assert len(_unique_key_phrases) == _top_k
                 return _unique_key_phrases
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
@@ -86,41 +90,46 @@ class ClusterSimilarity:
             # # Encode cluster_doc and candidates as BERT embedding
             model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                         device=self.args.device)
-            cluster_no_list = [8]
+            cluster_no_list = [9]
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
                 results = list()
                 all_key_phrases = list()    # Store all the key phrases
                 for doc in cluster_docs:
-                    doc_id = doc['DocId']
-                    # Get the first doc
-                    doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
-                    sentences = KeyPhraseUtility.clean_sentence(doc['Text'])
-                    doc_text = " ".join(list(map(lambda s: " ".join(s), sentences)))
-                    result = {'Cluster': cluster_no, 'DocId': doc_id}
-                    candidates = []
-                    for n_gram_range in [1, 2, 3]:
-                        try:
-                            # Extract key phrase candidates using n-gram
-                            n_gram_candidates = KeyPhraseUtility.generate_n_gram_candidates(sentences,
-                                                                                            n_gram_range)
-                            # find and collect top 30 key phrases similar to a paper
-                            top_n_gram_key_phrases = KeyPhraseUtility.collect_top_key_phrases(model, doc_text,
-                                                                                              n_gram_candidates,
-                                                                                              top_k=30)
-                            result[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
-                            candidates = candidates + list(map(lambda p: p['key-phrase'], top_n_gram_key_phrases))
-                        except Exception as err:
-                            print("Error occurred! {err}".format(err=err))
-                    # Combine all the n-gram key phrases in a doc
-                    # Get top 5 key phrase unique to all key phrase list
-                    top_doc_key_phrases = _get_unique_doc_key_phrases(
-                                        KeyPhraseUtility.collect_top_key_phrases(model, doc_text, candidates, top_k=30),
-                                        all_key_phrases, _top_k=5)
-                    # Write top five key phrases to 'doc_key_phrases'
-                    result['key-phrases'] = top_doc_key_phrases
-                    all_key_phrases = all_key_phrases + top_doc_key_phrases      # Concatenate all key phrases of a doc
-                    results.append(result)
+                    try:
+                        doc_id = doc['DocId']
+                        # Get the first doc
+                        doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
+                        sentences = KeyPhraseUtility.clean_sentence(doc['Text'])
+                        doc_text = " ".join(list(map(lambda s: " ".join(s), sentences)))
+                        result = {'Cluster': cluster_no, 'DocId': doc_id}
+                        if doc_id == 587:
+                            print("Found")
+                        candidates = []
+                        for n_gram_range in [1, 2, 3]:
+                            try:
+                                # Extract key phrase candidates using n-gram
+                                n_gram_candidates = KeyPhraseUtility.generate_n_gram_candidates(sentences,
+                                                                                                n_gram_range)
+                                # find and collect top 30 key phrases similar to a paper
+                                top_n_gram_key_phrases = KeyPhraseUtility.collect_top_key_phrases(model, doc_text,
+                                                                                                  n_gram_candidates,
+                                                                                                  top_k=30)
+                                result[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
+                                candidates = candidates + list(map(lambda p: p['key-phrase'], top_n_gram_key_phrases))
+                            except Exception as err:
+                                print("Error occurred! {err}".format(err=err))
+                        # Combine all the n-gram key phrases in a doc
+                        # Get top 5 key phrase unique to all key phrase list
+                        top_doc_key_phrases = _get_unique_doc_key_phrases(
+                                            KeyPhraseUtility.collect_top_key_phrases(model, doc_text, candidates, top_k=30),
+                                            all_key_phrases, _top_k=5)
+                        # Write top five key phrases to 'doc_key_phrases'
+                        result['key-phrases'] = top_doc_key_phrases
+                        all_key_phrases = all_key_phrases + top_doc_key_phrases      # Concatenate all key phrases of a doc
+                        results.append(result)
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
                 # Write key phrases to csv file
                 _write_key_phrases_by_cluster(results)
                 # Cluster all key phrases by using HDBSCAN

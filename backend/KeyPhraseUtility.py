@@ -147,17 +147,20 @@ class KeyPhraseUtility:
         candidates = list()
         # Extract n_gram from each sentence
         for i, sentence in enumerate(sentences):
-            pos_tags = pos_tag(sentence)
-            # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
-            n_grams = list(ngrams(pos_tags, n_gram_range))
-            # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
-            for n_gram in n_grams:
-                if _is_qualified(n_gram):
-                    n_gram_text = " ".join(list(map(lambda n: n[0], n_gram)))
-                    # Check if candidates exist in the list
-                    found = next((c for c in candidates if c.lower() == n_gram_text.lower()), None)
-                    if not found:
-                        candidates.append(n_gram_text)  # Convert n_gram (a list of words) to a string
+            try:
+                pos_tags = pos_tag(sentence)
+                # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
+                n_grams = list(ngrams(pos_tags, n_gram_range))
+                # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
+                for n_gram in n_grams:
+                    if _is_qualified(n_gram):
+                        n_gram_text = " ".join(list(map(lambda n: n[0], n_gram)))
+                        # Check if candidates exist in the list
+                        found = next((c for c in candidates if c.lower() == n_gram_text.lower()), None)
+                        if not found:
+                            candidates.append(n_gram_text)  # Convert n_gram (a list of words) to a string
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
         return candidates
 
     # Find top K key phrase similar to the paper
@@ -165,6 +168,9 @@ class KeyPhraseUtility:
     @staticmethod
     def collect_top_key_phrases(model, doc_text, candidates, top_k=5):
         try:
+            if len(candidates) == 0:
+                return []
+
             # Encode cluster doc and keyword candidates into vectors for comparing the similarity
             candidate_vectors = model.encode(candidates, convert_to_numpy=True)
             doc_vector = model.encode([doc_text], convert_to_numpy=True)  # Convert the numpy array
@@ -172,8 +178,9 @@ class KeyPhraseUtility:
             distances = cosine_similarity(doc_vector, candidate_vectors)
             # Select top key phrases based on the distance score
             top_key_phrases = list()
+            min_length = min(len(candidates), top_k)    # Get the minimal
             # Get 2*k top distances
-            top_distances = distances.argsort()[0][-top_k:]
+            top_distances = distances.argsort()[0][-min_length:]
             for c_index in top_distances:
                 candidate = candidates[c_index]
                 distance = distances[0][c_index]
