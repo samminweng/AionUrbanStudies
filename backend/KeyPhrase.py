@@ -134,9 +134,60 @@ class ClusterSimilarity:
                 # Write key phrases to csv file
                 _write_key_phrases_by_cluster(results)
                 # Cluster all key phrases by using HDBSCAN
-                KeyPhraseUtility.cluster_key_phrases_by_HDBSCAN(all_key_phrases, cluster_no, model)
+                KeyPhraseUtility.cluster_key_phrases_by_HDBSCAN(all_key_phrases, cluster_no, model, is_experimented=True)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+    # Combine all the key phrases results
+    def combine_key_phrases(self):
+        try:
+            in_folder = os.path.join('output', 'key_phrases', 'cluster')
+            out_folder = os.path.join('output', 'key_phrases')
+            # Combine all the key phrases of each paper to a json file
+            key_phrases = list()
+            for cluster_no in list(range(-1, 10)):
+                path = os.path.join(in_folder, 'top_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
+                df = pd.read_json(path, orient='records')
+                doc_key_phrases = df.to_dict("records")
+                key_phrases = key_phrases + doc_key_phrases
+            # Sort key phrases by DocId
+            sorted_key_phrases = sorted(key_phrases, key=lambda k: k['DocId'])
+            # Aggregated all the key phrases of each individual article
+            df = pd.DataFrame(sorted_key_phrases, columns=['DocId', 'key-phrases'])
+            path = os.path.join(out_folder, 'doc_key_phrases.csv')
+            df.to_csv(path, index=False, encoding='utf-8')
+            path = os.path.join(out_folder, 'doc_key_phrases.json')
+            df.to_json(path, orient='records')
+            print('Output key phrases per doc to ' + path)
+
+            # Combine all the key phrases of each cluster and TF-IDF topics to a json file
+            # Load TF-IDF topics
+            path = os.path.join('output', 'cluster', self.args.case_name + '_' + self.args.approach +
+                                '_Cluster_TF-IDF_topic_words.json')
+            df = pd.read_json(path)
+            clusters = df.to_dict("records")
+            # Combine all best grouped key phrases of each cluster
+            for cluster_no in list(range(-1, 10)):
+                try:
+                    path = os.path.join(in_folder, 'top_key_phrases_cluster_#{c}_best_grouping.json'.format(c=cluster_no))
+                    df = pd.read_json(path, orient='records')
+                    grouped_key_phrases = df.to_dict("records")
+                    cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
+                    cluster['Grouped_Key_Phrases'] = grouped_key_phrases
+                except Exception as err:
+                    print("Error occurred! {err}".format(err=err))
+            # Output to csv and json file
+            cluster_df = pd.DataFrame(clusters, columns=['Cluster', 'NumDocs', 'DocIds',
+                                                         'TF-IDF-Topics', 'Grouped_Key_Phrases'])
+            path = os.path.join(out_folder, self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(out_folder,
+                                self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases.json')
+            cluster_df.to_json(path, orient='records')
+            print('Output key phrases per cluster to ' + path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
 
     # Find top 30 similar papers for each article in a cluster
     def find_top_similar_paper_in_corpus(self, top_k=30):
@@ -160,6 +211,7 @@ if __name__ == '__main__':
     tw = ClusterSimilarity()
     # tw.find_top_similar_paper_in_corpus()
     tw.extract_key_phrases_by_clusters()
+    # tw.combine_key_phrases()
 
 
 

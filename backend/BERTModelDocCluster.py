@@ -292,23 +292,6 @@ class BERTModelDocCluster:
                                  self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
             cluster_df.to_json(_path, orient='records')
             print('Output topics per cluster to ' + _path)
-            # # Display top 10 topics of each cluster
-            # top_n = 10
-            # results = list()
-            # for topic in tf_ids_dict:
-            #     top_30_topics = topic['Topic-N-gram'][:top_n]
-            #     top_30_topics = list(map(lambda t: t['topic'], top_30_topics))
-            #     result = {
-            #         'Cluster': topic['Cluster'],
-            #         'NumDocs': topic['NumDocs'],
-            #         'TF-IDF-Topics': ", ".join(top_30_topics)
-            #     }
-            #     results.append(result)
-            # # cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'TF-IDF-Topics'])
-            # # _path = os.path.join(self.output_path,
-            # #                      self.args.case_name + '_' + cluster_approach + '_TF-IDF_top_' + str(top_n) +
-            # #                      '_topic_words.csv')
-            # # cluster_df.to_csv(_path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

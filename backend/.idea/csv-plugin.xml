@@ -17,6 +17,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/UrbanStudyCorpus_HDBSCAN_Cluster_topic_key_phrases.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0.csv">
           <value>
             <Attribute>
@@ -101,6 +115,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#4_best_grouping.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#4_grouping.csv">
           <value>
             <Attribute>
@@ -137,6 +158,13 @@
           </value>
         </entry>
         <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#9_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/key_phrases/doc_key_phrases.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

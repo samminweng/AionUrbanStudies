@@ -251,6 +251,7 @@ class KeyPhraseUtility:
             best_parameters = {0: {'min_cluster_size': 15, 'min_samples': 2, 'epsilon': 0.0},
                                1: {'min_cluster_size': 7, 'min_samples': 2, 'epsilon': 0.0},
                                2: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0},
+                               3: {'min_cluster_size': 14, 'min_samples': 2, 'epsilon': 0.0},
                                4: {'min_cluster_size': 13, 'min_samples': 2, 'epsilon': 0.0},
                                5: {'min_cluster_size': 13, 'min_samples': 5, 'epsilon': 0.0},
                                6: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0},
@@ -263,11 +264,10 @@ class KeyPhraseUtility:
                 parameter = best_parameters[cluster_no]      # Get the optimal parameters
                 # Output the grouped key phrases
                 group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
-
+            # Specify if we need to run all the experiments
             if not is_experimented:
                 return 
-            
-                
+
             results = list()
             for min_samples in [None] + list(range(1, 11)):
                 for min_cluster_size in [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20, 25, 30]:
