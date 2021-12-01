@@ -1,15 +1,14 @@
 // Create scatter graph
-function ScatterGraph(is_hide, cluster_chart_data, cluster_topics, doc_data) {
+function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, corpus_data, corpus_key_phrases) {
     const width = 600;
-    const height = 500;
+    const height = 600;
     const cluster_approach = 'HDBSCAN';
-    const key_extraction = 'TF-IDF';
     // Find the maximal cluster number as total number of clusters
     const total_clusters = cluster_chart_data.map(c => c[cluster_approach + '_Cluster']).reduce((p_value, c_value) => {
         return (p_value >= c_value) ? p_value : c_value;
     }, 0);
-    const clusters = cluster_topics;
-
+    const clusters = cluster_topic_key_phrases;
+    console.log(clusters);
     // Get the color of collocation
     const colors = function (cluster_no) {
         // Optimal color pallets for 10 colors
@@ -24,7 +23,7 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topics, doc_data) {
     // Get top N topics of a cluster
     function get_cluster_topics(cluster_no, n) {
         // Cluster top 5 topics
-        const topics = clusters.find(c => c['Cluster'] === cluster_no)[key_extraction + '-Topics'].slice(0, n);
+        const topics = clusters.find(c => c['Cluster'] === cluster_no)['TF-IDF-Topics'].slice(0, n);
         return topics;
     }
 
@@ -91,19 +90,19 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topics, doc_data) {
         }
 
         // Get the cluster number
-        Plotly.newPlot('cluster_dot_chart', data, option);
+        Plotly.newPlot('cluster_chart', data, option);
         let is_lock = false;
-        const cluster_dot_chart = document.getElementById('cluster_dot_chart');
+        const cluster_chart = document.getElementById('cluster_chart');
         // Add chart onclick to toggle annotation
-        cluster_dot_chart.on('plotly_click', function (data) {
+        cluster_chart.on('plotly_click', function (data) {
             const point = data.points[0];
             // Get the doc id from text
             const cluster_no = parseInt(point.data.name.split("#")[1]);
             // Create a list of cluster doc
             const cluster = clusters.find(c => c['Cluster'] === cluster_no);
-            const cluster_doc_list = new ClusterDocList(cluster, doc_data);
+            const cluster_doc_list = new ClusterDocList(cluster, corpus_data, corpus_key_phrases);
 
-            // Add an annotation to the clustered dots.
+            // Add an annotation to the clustered dots
             const new_annotation = {
                 x: point.xaxis.d2l(point.x),
                 y: point.yaxis.d2l(point.y),
@@ -112,23 +111,23 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topics, doc_data) {
             };
 
             // Add onclick event to show/hide annotation of the cluster.
-            const div = document.getElementById('cluster_dot_chart');
+            const div = document.getElementById('cluster_chart');
             const newIndex = (div.layout.annotations || []).length;
             if (newIndex > 0) {
                 // Find if any annotation of the cluster appears before.
                 // If so, remove the annotation.
                 div.layout.annotations.forEach((ann, index) => {
                     if (ann.text === new_annotation.text) {
-                        Plotly.relayout('cluster_dot_chart', 'annotations[' + index + ']', 'remove');
+                        Plotly.relayout('cluster_chart', 'annotations[' + index + ']', 'remove');
                         return;
                     }
                 });
             }
-            Plotly.relayout('cluster_dot_chart', 'annotations[' + newIndex + ']', new_annotation);
+            Plotly.relayout('cluster_chart', 'annotations[' + newIndex + ']', new_annotation);
         });
 
         // Add chart hover over event to display cluster infor
-        cluster_dot_chart.on('plotly_hover', function (data) {
+        cluster_chart.on('plotly_hover', function (data) {
             if (data.points.length > 0) {
                 $('#hover_info').empty();
                 const n = 10;
@@ -142,7 +141,7 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topics, doc_data) {
             }
         });
         // Add unhover event to clear the text
-        cluster_dot_chart.on('plotly_unhover', function (data) {
+        cluster_chart.on('plotly_unhover', function (data) {
             $('#hover_info').empty();
         });
     }
@@ -150,8 +149,8 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topics, doc_data) {
 
     // Create the network graph using D3 library
     function _createUI() {
-        $('#cluster_dot_chart').empty();
-        $('#cluster_dot_chart').css('width', width).css('height', height);
+        $('#cluster_chart').empty();
+        $('#cluster_chart').css('width', width).css('height', height);
         drawChart();
     }
 

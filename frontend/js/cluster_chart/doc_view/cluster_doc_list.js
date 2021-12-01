@@ -1,16 +1,12 @@
-function ClusterDocList(cluster, doc_data) {
+function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
     const cluster_no = cluster['Cluster'];
-    const key_extraction = 'TF-IDF';
-    const cluster_topics = cluster[key_extraction + '-Topics'].slice(0, 30);
-    const cluster_docs = doc_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
+    const cluster_topics = cluster['TF-IDF-Topics'].slice(0, 30);
+    const cluster_key_phrases = cluster['Grouped_Key_Phrases'];
+    const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
     const cluster_link = $('<a target="_blank" href="cluster_topic_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
 
-    function _createUI() {
-        // Create a div to display
-        $('#cluster_doc_heading').empty();
-        $('#cluster_doc_heading').append(cluster_link);
-        $('#cluster_doc_heading').append($('<span> has ' +cluster_docs.length+ ' articles</span>'));
-
+    // Create a Top 10 Topic region
+    function create_cluster_top_topic_div(){
         // Create a div to display a list of topic (a link)
         $('#cluster_doc_topic').empty();
         const topic_text = cluster_topics.slice(0, 10).map(topic => topic['topic'] + ' (' + topic['doc_ids'].length + ')').join(" ");
@@ -56,9 +52,21 @@ function ClusterDocList(cluster, doc_data) {
             active: 2
         });
         $('#cluster_doc_topic').append(topic_div);
+    }
+
+
+
+    function _createUI() {
+        // Create a div to display
+        $('#cluster_doc_heading').empty();
+        $('#cluster_doc_heading').append(cluster_link);
+        $('#cluster_doc_heading').append($('<span> has ' +cluster_docs.length+ ' articles</span>'));
+
+        // Create a div to display top 10 Topic of a cluster
+        create_cluster_top_topic_div();
 
         // Create doc list
-        const doc_list = new DocList(cluster_docs, cluster_topics, null);
+        const doc_list = new DocList(cluster_docs, cluster_topics, null, corpus_key_phrases);
     }
 
     _createUI();

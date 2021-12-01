@@ -164,9 +164,9 @@ class ClusterSimilarity:
             sorted_key_phrases = sorted(key_phrases, key=lambda k: k['DocId'])
             # Aggregated all the key phrases of each individual article
             df = pd.DataFrame(sorted_key_phrases, columns=['DocId', 'key-phrases'])
-            path = os.path.join(out_folder, self.args.case_name + '_' + self.args.approach + '_Cluster_doc_key_phrases.csv')
+            path = os.path.join(out_folder, self.args.case_name + '_doc_key_phrases.csv')
             df.to_csv(path, index=False, encoding='utf-8')
-            path = os.path.join(out_folder, self.args.case_name + '_' + self.args.approach + '_Cluster_doc_key_phrases.json')
+            path = os.path.join(out_folder, self.args.case_name + '_doc_key_phrases.json')
             df.to_json(path, orient='records')
             print('Output key phrases per doc to ' + path)
 

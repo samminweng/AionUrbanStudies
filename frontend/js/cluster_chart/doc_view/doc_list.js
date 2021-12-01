@@ -1,5 +1,5 @@
 // Display a list of research articles
-function DocList(cluster_docs, cluster_topics, selected_topics) {
+function DocList(cluster_docs, cluster_topics, selected_topics, corpus_key_phrases) {
 
     // Create a pagination to show the documents
     function createPagination(docTable) {
@@ -25,11 +25,13 @@ function DocList(cluster_docs, cluster_topics, selected_topics) {
                 docTable.find('tbody').empty();
                 for (let i = 0; i < docs.length; i++) {
                     const doc = docs[i];
+                    console.log(doc);
                     const row = $('<tr class="d-flex"></tr>');
                     // Add the title
                     const col = $('<td class="col"></td>');
-                    let textView = new TextView(doc, cluster_topics, selected_topics);
-                    col.append(textView.get_container());
+                    const doc_key_phrases = corpus_key_phrases.find(c => c['DocId'] === doc['DocId'])['key-phrases'];
+                    const doc_view = new DocView(doc, doc_key_phrases, cluster_topics, selected_topics);
+                    col.append(doc_view.get_container());
                     row.append(col);
                     docTable.find('tbody').append(row);
                 }
