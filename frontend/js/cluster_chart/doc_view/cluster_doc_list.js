@@ -6,14 +6,13 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
     const cluster_link = $('<a target="_blank" href="cluster_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
 
     // Create a Top 10 Topic region
-    function create_cluster_top_topic_div(){
+    function create_cluster_topic_key_phrases(){
         // Create a div to display a list of topic (a link)
-        $('#cluster_doc_topic').empty();
+        $('#cluster_topic_key_phrases').empty();
         const topic_text = cluster_topics.slice(0, 10).map(topic => topic['topic'] + ' (' + topic['doc_ids'].length + ')').join(" ");
-        const topic_div = $('<div>' +
-            '<h3><span class="fw-bold">Top 10 topics: </span>' + topic_text + '</h3>' +
-            '<div><p></p></div></div>');
-        const topic_p = topic_div.find("p");
+        const accordion_div = $('<div></div>');
+        const topic_heading = $('<h3><span class="fw-bold">Top 10 topics: </span>' + topic_text + '</h3>');
+        const topic_p = $('<div><p></p></div>');
         // Add top 30 topics (each topic as a link)
         for (const selected_topic of cluster_topics) {
             const link = $('<button type="button" class="btn btn-link btn-sm"> '
@@ -39,18 +38,29 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
                 const topic_docs = cluster_docs.filter(d => selected_topic['doc_ids'].includes(d['DocId']));
                 // Create a list of articles associated with topic
                 const doc_list = new DocList(topic_docs, cluster_topics, selected_topic, corpus_key_phrases);
-
             });
             topic_p.append(link);
         }
+
+        // Append topic heading and paragraph to accordion
+        accordion_div.append(topic_heading);
+        accordion_div.append(topic_p);
+        // Add the key phrases grouped by similarity
+        const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, accordion_div);
         // Set accordion
-        topic_div.accordion({
-            icons: null,
+        accordion_div.accordion({
+            // icons: null,
             collapsible: true,
             heightStyle: "fill",
             active: 2
         });
-        $('#cluster_doc_topic').append(topic_div);
+        $('#cluster_topic_key_phrases').append(accordion_div);
+    }
+
+    function create_key_phrases(){
+
+
+
     }
 
 
@@ -62,7 +72,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         $('#cluster_doc_heading').append($('<span> has ' +cluster_docs.length+ ' articles</span>'));
 
         // Create a div to display top 10 Topic of a cluster
-        create_cluster_top_topic_div();
+        create_cluster_topic_key_phrases();
 
         // Create doc list
         const doc_list = new DocList(cluster_docs, cluster_topics, null, corpus_key_phrases);
