@@ -34,7 +34,7 @@ function DocView(doc, doc_key_phrases, cluster_topics, selected_topics) {
             '<div class="card-body">' +
             '<p class="card-text"><span class="fw-bold">Key Phrases: </span>' + doc_key_phrases.join(", ") + '</p>' +
             '</div></div>');
-        container.append(key_phrase_div)
+        container.append(key_phrase_div);
         // Add the title
         let title_div = $('<div></div>');
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));

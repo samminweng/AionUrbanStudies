@@ -25,7 +25,7 @@ function DocList(cluster_docs, cluster_topics, selected_topics, corpus_key_phras
                 docTable.find('tbody').empty();
                 for (let i = 0; i < docs.length; i++) {
                     const doc = docs[i];
-                    console.log(doc);
+                    // console.log(doc);
                     const row = $('<tr class="d-flex"></tr>');
                     // Add the title
                     const col = $('<td class="col"></td>');
@@ -48,11 +48,6 @@ function DocList(cluster_docs, cluster_topics, selected_topics, corpus_key_phras
 
         // A list of cluster documents
         const doc_table = $('<table class="table table-striped table-sm">' +
-            // '<thead>' +
-            // '<tr class="d-flex">' +
-            // '    <th class="col">Articles</th>' +
-            // '</tr>' +
-            // '</thead>' +
             '<tbody></tbody></table>');
         const pagination = createPagination(doc_table);
         // Add the table to display the list of documents.

@@ -18,7 +18,7 @@ $(function () {
         $.getJSON(cluster_chart_data_file_path),
         $.getJSON(corpus_file_path),
         $.getJSON(cluster_topic_key_phrase_file_path),
-        $.getJSON(key_phrase_file_path),
+        $.getJSON(key_phrase_file_path)
     ).done(function (result1, result2, result3, result4) {
         const cluster_chart_data = result1[0];
         const corpus_data = result2[0];

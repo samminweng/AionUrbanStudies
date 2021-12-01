@@ -1,6 +1,6 @@
 // Create a title view
-function TextView(doc, topic) {
-    const topic_words = (topic === null) ? [] : [topic['topic'], topic['plural']];   // Highlight singular and plural topics
+function DocView(doc, selected_topic, doc_key_phrases) {
+    const topic_words = (selected_topic === null) ? [] : [selected_topic['topic'], selected_topic['plural']];   // Highlight singular and plural topics
     const container = $('<div></div>');
     this.get_container = function () {
         return container;
@@ -27,32 +27,24 @@ function TextView(doc, topic) {
     }
 
     function _createUI() {
-        // Key terms
-        // let key_terms = doc['HDBSCAN_Cluster_KeyTerms'].slice(0, 5);
-        // const key_term_div = $('<div><h3><span class="fw-bold">Top 5 key terms: </span>' + key_terms.join("; ") + '</h3>' +
-        //     '<div><p>' + doc['HDBSCAN_Cluster_KeyTerms'].join("; ") + '</p></div>' +
-        //     '</div>');
-        // key_term_div.accordion({
-        //     icons: null,
-        //     collapsible: true,
-        //     heightStyle: "fill",
-        //     active: 2
-        // });
-        // container.append(key_term_div);
-        // if(topics.length>0){
-        //     key_terms = key_terms.filter(term => term !== topics[0]);// Remove the topic term
-        // }
+        // Add Key Phrase
+        let key_phrase_div = $('<div class="card border-info">' +
+            '<div class="card-body">' +
+            '<p class="card-text"><span class="fw-bold">Key Phrases: </span>' + doc_key_phrases.join(", ") + '</p>' +
+            '</div></div>');
+        container.append(key_phrase_div);
+
         // Add the title
         let title_div = $('<div></div>');
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));
         // Mark the collocations on title div
-        // title_div = mark_key_terms(title_div, key_terms, 'key_term');
+        title_div = mark_key_terms(title_div, doc_key_phrases, 'key_term');
         title_div = mark_key_terms(title_div, topic_words, 'search_term');
         container.append(title_div);
         // Add the abstract
         let abstract_div = $('<div class="col"></div>');
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span>' + doc['Abstract'] + '</span>'));
-        // abstract_div = mark_key_terms(abstract_div, key_terms, 'key_term');
+        abstract_div = mark_key_terms(abstract_div, doc_key_phrases, 'key_term');
         abstract_div = mark_key_terms(abstract_div, topic_words, 'search_term');
         container.append(abstract_div);
         // Add author keywords

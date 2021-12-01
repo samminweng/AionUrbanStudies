@@ -1,5 +1,5 @@
 // Create an auto-complete
-function TopicBtnListView(cluster_no, cluster_topic_words, corpus_data){
+function TopicListView(cluster_no, cluster_topic_words, corpus_data, corpus_key_phrases){
     // Fill out the topic using TF-IDF
     const cluster_topics = cluster_topic_words.find(c => c['Cluster'] === cluster_no);
     const available_topics = cluster_topics['TF-IDF-Topics'];
@@ -19,7 +19,7 @@ function TopicBtnListView(cluster_no, cluster_topic_words, corpus_data){
             link.click(function (event) {
                 $('#topics').val(topic['topics']);
                 // // Get the documents about the topic
-                const doc_list_heading = new DocumentListHeading(cluster_topics, cluster_docs, topic);
+                const heading = new ClusterDocHeading(cluster_topics, cluster_docs, topic, corpus_key_phrases);
 
             });
             p.append(link);
@@ -64,62 +64,61 @@ function TopicBtnListView(cluster_no, cluster_topic_words, corpus_data){
         const container = $('<div class="container"></div>');
         container.append($('<div class="h3">Cluster #' + cluster_no+' has ' + cluster_docs.length + ' articles in total</div>'));
 
-
         // Display the topics by keyword extraction
-        for(const extraction of ['TF-IDF']){
-            const topics = cluster_topics[extraction+'-Topics'];
-            const key_term_div = $('<div>' +
-                '<h3><span class="fw-bold">'+ extraction + ' Topics </span></h3>' +
-                '<div class="topics"></div>' +
-                '</div>');
-            const sort_btn_name = 'sort-'+extraction;
-            const sort_widget = $('<div>' +
-                '<span>Sort by </span>'+
-                '<div class="form-check form-check-inline">' +
-                '   <label class="form-check-label" for="score">Score</label>' +
-                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="score" checked>' +
-                '</div>' +
-                '<div class="form-check form-check-inline">' +
-                '   <label class="form-check-label" for="count">Count</label>' +
-                '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="count" >' +
-                '</div>' +
-                '</div>');
-            // Sort the topics by count (default)
-            topics.sort((a, b) => b['score'] - a['score']);
-            // Add a radio button to sort topics by scores or range
-            key_term_div.find(".topics").append(sort_widget);
-            key_term_div.find(".topics").append(createTopicParagraphs(topics)); // Show topics
-            // Add the on click event to radio button
-            sort_widget.find('input[name='+sort_btn_name+']').change(function(){
-                const sorted_index = sort_widget.find('input[name='+sort_btn_name+']:checked').val();
-                const sorted_topic = cluster_topics[extraction + '-Topics'];
-                if(sorted_index === 'count'){
-                    // Sort the topic by count
-                    sorted_topic.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
-                }else{
-                    sorted_topic.sort((a, b) => b['score'] - a['score'] );// Sort by score
-                }
-                // console.log(topics);
-                key_term_div.find(".topic_list").remove();
-                key_term_div.find(".topics").append(createTopicParagraphs(sorted_topic));
-            });
-
-            // Display n-gram topics by default
-            if(extraction === 'TF-IDF'){
-                // Show the topics for TF-IDF
-                key_term_div.accordion({
-                    collapsible: true,
-                    heightStyle: "fill"
-                });
+        const extraction = 'TF-IDF';
+        const topics = cluster_topics[extraction+'-Topics'];
+        const key_term_div = $('<div>' +
+            '<h3><span class="fw-bold">'+ extraction + ' Topics </span></h3>' +
+            '<div class="topics"></div>' +
+            '</div>');
+        const sort_btn_name = 'sort-'+extraction;
+        const sort_widget = $('<div>' +
+            '<span>Sort by </span>'+
+            '<div class="form-check form-check-inline">' +
+            '   <label class="form-check-label" for="score">Score</label>' +
+            '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="score" checked>' +
+            '</div>' +
+            '<div class="form-check form-check-inline">' +
+            '   <label class="form-check-label" for="count">Count</label>' +
+            '   <input class="form-check-input" type="radio" name="'+sort_btn_name + '" value="count" >' +
+            '</div>' +
+            '</div>');
+        // Sort the topics by count (default)
+        topics.sort((a, b) => b['score'] - a['score']);
+        // Add a radio button to sort topics by scores or range
+        key_term_div.find(".topics").append(sort_widget);
+        key_term_div.find(".topics").append(createTopicParagraphs(topics)); // Show topics
+        // Add the on click event to radio button
+        sort_widget.find('input[name='+sort_btn_name+']').change(function(){
+            const sorted_index = sort_widget.find('input[name='+sort_btn_name+']:checked').val();
+            const sorted_topic = cluster_topics[extraction + '-Topics'];
+            if(sorted_index === 'count'){
+                // Sort the topic by count
+                sorted_topic.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
             }else{
-                key_term_div.accordion({
-                    collapsible: true,
-                    heightStyle: "fill",
-                    active: 2
-                });
+                sorted_topic.sort((a, b) => b['score'] - a['score'] );// Sort by score
             }
-            container.append($("<div class='row'><div class='col'></div></div>").find(".col").append(key_term_div));
+            // console.log(topics);
+            key_term_div.find(".topic_list").remove();
+            key_term_div.find(".topics").append(createTopicParagraphs(sorted_topic));
+        });
+
+        // Display n-gram topics by default
+        if(extraction === 'TF-IDF'){
+            // Show the topics for TF-IDF
+            key_term_div.accordion({
+                collapsible: true,
+                heightStyle: "fill"
+            });
+        }else{
+            key_term_div.accordion({
+                collapsible: true,
+                heightStyle: "fill",
+                active: 2
+            });
         }
+        container.append($("<div class='row'><div class='col'></div></div>").find(".col").append(key_term_div));
+
         $('#topic_list_view').append(container);
     }
 
@@ -135,21 +134,21 @@ function TopicBtnListView(cluster_no, cluster_topic_words, corpus_data){
         $('#search').click(function(event){
             const select_topic = $('#topics').val();
             const topic = available_topics.find(t => t['topic'] === select_topic);
-            const doc_list_heading = new DocumentListHeading(cluster_topics, cluster_docs, topic);
+            const heading = new ClusterDocHeading(cluster_topics, cluster_docs, topic, corpus_key_phrases);
         });
         // Clear button to clearn search input and display all the articles
         $('#clear').button();
         $('#clear').click(function(event){
             $( "#topics" ).val("");
             // Display all the articles in a cluster
-            const doc_list_heading = new DocumentListHeading(cluster_topics, cluster_docs, null);
+            const heading = new ClusterDocHeading(cluster_topics, cluster_docs, null, corpus_key_phrases);
         });
 
         // Create a list of topics
         createTopicListView();
 
         // Display all the articles in a cluster
-        const doc_list_heading = new DocumentListHeading(cluster_topics, cluster_docs, null);
+        const heading = new ClusterDocHeading(cluster_topics, cluster_docs, null, corpus_key_phrases);
 
     }
     _createUI();

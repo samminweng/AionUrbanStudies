@@ -1,17 +1,16 @@
 'use strict';
 const corpus = 'UrbanStudyCorpus';
 const params = new URLSearchParams(window.location.search);
-
+const cluster_approach = 'HDBSCAN';
 // Load cluster data and display the results
-function load_cluster_data_display_results(cluster_approach, cluster_topics, corpus_data) {
+function load_cluster_data_display_results(cluster_topic_key_phrases, corpus_data, corpus_key_phrases) {
     // Select cluster number
     let selected_cluster_no = 4;
     if (params.has('cluster')) {
         selected_cluster_no = parseInt(params.get('cluster'));
     }
-
     // Populate the cluster list
-    const cluster_no_list = cluster_topics.map(c => c['Cluster']);
+    const cluster_no_list = cluster_topic_key_phrases.map(c => c['Cluster']);
     $('#cluster_no').empty();
     // Fill in the cluster no options
     for (const cluster_no of cluster_no_list) {
@@ -22,52 +21,32 @@ function load_cluster_data_display_results(cluster_approach, cluster_topics, cor
         $('#cluster_no').append(option);
     }
     // Set the cluster #2 as default cluster
-    const topic_btn = new TopicBtnListView(selected_cluster_no, cluster_topics, corpus_data);
+    const topic_list_view = new TopicListView(selected_cluster_no, cluster_topic_key_phrases, corpus_data, corpus_key_phrases);
     // Bind the change to cluster no
     $('#cluster_no').on('change', function (event) {
         const cluster_number = parseInt(this.value);
-        const topic_btn = new TopicBtnListView(cluster_number, cluster_topics, corpus_data);
+        const topic_list_view = new TopicListView(cluster_number, cluster_topic_key_phrases, corpus_data, corpus_key_phrases);
     });
 }
 
 // Document ready event
 $(function () {
-    // Update the progress bar asynchronously
-    $('#progressbar').progressbar({
-        value: 0,
-        complete: function() {
-            $( ".progress-label" ).text( "Complete!" );
-        }
-    });
-    let counter = 0;
-    (function asyncLoop() {
-        $('#progressbar').progressbar("value", counter++);
-        if (counter <= 100) {
-            setTimeout(asyncLoop, 100);
-        }
-    })();
-
-
+    const progress_bar = new ProgressBar();
     // Document (article abstract and title) and key terms data
     const corpus_file_path = 'data/' + corpus + '.json';
     // HDBSCAN cluster and topic words data
-    const hdbscan_cluster_topic_words_file_path = 'data/doc_cluster/' + corpus + '_HDBSCAN_Cluster_topic_words.json';
-    // // KMeans cluster and topic words data
-    // const kmeans_cluster_topic_words_file_path = 'data/doc_cluster/' + corpus + '_KMeans_Cluster_topic_words.json';
+    const cluster_topic_key_phrases_file_path = 'data/doc_cluster/' + corpus + '_HDBSCAN_Cluster_topic_key_phrases.json';
+    // Document key phrase data
+    const key_phrase_file_path = 'data/doc_cluster/' + corpus + '_doc_key_phrases.json';
     $.when(
-        $.getJSON(corpus_file_path), $.getJSON(hdbscan_cluster_topic_words_file_path)
-    ).done(function (result1, result2) {
+        $.getJSON(corpus_file_path), $.getJSON(cluster_topic_key_phrases_file_path),
+        $.getJSON(key_phrase_file_path)
+    ).done(function (result1, result2, result3) {
         const corpus_data = result1[0];
-        const cluster_topics = result2[0];
-        // Change the cluster approach
-        $('#cluster_approach').selectmenu({
-            change: function (event, data) {
-                const cluster_approach = data.item.value;
-                load_cluster_data_display_results(cluster_approach, cluster_topics, corpus_data);
-            }
-        });
+        const cluster_topic_key_phrases = result2[0];
+        const corpus_key_phrases = result3[0];
         // Load the cluster and display the results
-        load_cluster_data_display_results('HDBSCAN', cluster_topics, corpus_data);
+        load_cluster_data_display_results(cluster_topic_key_phrases, corpus_data, corpus_key_phrases);
         // Set up print /download as a pdf
         $('#download_as_pdf').button();
         $('#download_as_pdf').click(function (event) {

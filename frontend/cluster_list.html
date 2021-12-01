@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Cluster Topic List</title>
+    <title>Cluster List</title>
     <meta charset="utf-8">
     <!-- All the third party libraries-->
     <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
@@ -21,24 +21,16 @@
     <div class="h4">Cluster Topic List</div>
     <div class="row p-3">
         <div class="col">
-            <div>The topic lists of a cluster in the Urban Study Corpus (600 urban study research articles) extracted with
-                BERT-based Sentence Transformer + HDBSCAN clustering + TF-IDF topic extraction, which is similar to
-                <a target="_blank" href="https://maartengr.github.io/BERTopic/">BERTopic approach</a>
-                 (<a target="_blank" href="https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6">tutorial</a>)
+            <div>600 urban study-related research articles are grouped into 10 clusters (57 articles as outliers) using
+                BERT-based Sentence Transformer + HDBSCAN clustering + TF-IDF topic identification + BERT-based key phrase extraction.
+                Our approach is similar to <a target="_blank" href="https://maartengr.github.io/BERTopic/">BERTopic approach</a>
+                (<a target="_blank" href="https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6">Link</a>)<br>
             </div>
             <div class="form p-3">
                 <!-- Download PDF button --->
                 <button id="download_as_pdf" type="button" class="btn btn-outline-primary btn-lg">
                     <i class="bi bi-printer"></i>
                 </button>
-                <!-- Cluster Number -->
-                <div class="form-group">
-                    <label for="cluster_approach">Select a Cluster Approach</label>
-                    <select name="cluster_approach" id="cluster_approach">
-                        <option value="HDBSCAN" selected="selected">HDBSCAN</option>
-                        <option value="KMeans">KMeans</option>
-                    </select>
-                </div>
                 <!-- Cluster Number -->
                 <div class="form-group" >
                     <label for="cluster_no">Select a Cluster</label>
@@ -64,18 +56,19 @@
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <div id="document_list_heading"></div>
-                    <div id="document_list_view"></div>
+                    <div id="doc_list_heading"></div>
+                    <div id="doc_list_view"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Our javascript -->
-<script type="text/javascript" src="js/cluster_list/text_view.js"></script>
-<script type="text/javascript" src="js/cluster_list/document_list_heading.js"></script>
-<script type="text/javascript" src="js/cluster_list/document_list_view.js"></script>
-<script type="text/javascript" src="js/cluster_list/topic_btn_list_view.js"></script>
+<script type="text/javascript" src="js/cluster_list/doc_view/doc_view.js"></script>
+<script type="text/javascript" src="js/cluster_list/doc_view/cluster_doc_heading.js"></script>
+<script type="text/javascript" src="js/cluster_list/doc_view/doc_list.js"></script>
+<script type="text/javascript" src="js/cluster_list/topic_list_view.js"></script>
+<script type="text/javascript" src="js/cluster_list/progress_bar.js"></script>
 <script type="text/javascript" src="js/cluster_list/main.js"></script>
 </body>
 
