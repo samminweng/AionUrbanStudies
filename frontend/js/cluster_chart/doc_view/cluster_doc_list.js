@@ -10,7 +10,6 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         // Create a div to display a list of topic (a link)
         $('#cluster_doc_topic').empty();
         const topic_text = cluster_topics.slice(0, 10).map(topic => topic['topic'] + ' (' + topic['doc_ids'].length + ')').join(" ");
-
         const topic_div = $('<div>' +
             '<h3><span class="fw-bold">Top 10 topics: </span>' + topic_text + '</h3>' +
             '<div><p></p></div></div>');
@@ -32,14 +31,14 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
                 reset_btn.button();
                 reset_btn.click(function (event) {
                     // // Get the documents about the topic
-                    const doc_list_heading = new ClusterDocList(cluster, cluster_docs);
+                    const cluster_doc_list = new ClusterDocList(cluster, cluster_docs, corpus_key_phrases);
                 });
                 // Update the heading
                 $('#cluster_doc_heading').append(reset_btn);
                 // Get a list of docs in relation to the selected topic
                 const topic_docs = cluster_docs.filter(d => selected_topic['doc_ids'].includes(d['DocId']));
                 // Create a list of articles associated with topic
-                const doc_list = new DocList(topic_docs, cluster_topics, selected_topic);
+                const doc_list = new DocList(topic_docs, cluster_topics, selected_topic, corpus_key_phrases);
 
             });
             topic_p.append(link);
