@@ -133,7 +133,7 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
                 const n = 10;
                 const cluster_no = parseInt(data.points[0].data.name.split("#")[1]);
                 const topics = get_cluster_topics(cluster_no, n);      // Get top 10 cluster topics
-                const topic_text = topics.map(t => t['topic'] + ' (' + t['doc_ids'].length + ')' ).join(" ");
+                const topic_text = topics.map(t => t['topic']).join("; ");
                 // Add the cluster heading
                 $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' topics</div>'));
                 $('#hover_info').append($('<div>' + topic_text + '</div>'));

@@ -9,7 +9,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
     function create_cluster_topic_key_phrases(){
         // Create a div to display a list of topic (a link)
         $('#cluster_topic_key_phrases').empty();
-        const topic_text = cluster_topics.slice(0, 10).map(topic => topic['topic'] + ' (' + topic['doc_ids'].length + ')').join(" ");
+        const topic_text = cluster_topics.slice(0, 10).map(topic => topic['topic']).join("; ");
         const accordion_div = $('<div></div>');
         const topic_heading = $('<h3><span class="fw-bold">Top 10 topics: </span>' + topic_text + '</h3>');
         const topic_p = $('<div><p></p></div>');
@@ -52,18 +52,10 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
             // icons: null,
             collapsible: true,
             heightStyle: "fill",
-            active: 2
+            active: 1
         });
         $('#cluster_topic_key_phrases').append(accordion_div);
     }
-
-    function create_key_phrases(){
-
-
-
-    }
-
-
 
     function _createUI() {
         // Create a div to display

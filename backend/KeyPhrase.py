@@ -142,6 +142,7 @@ class ClusterSimilarity:
     def combine_key_phrases(self):
         # List top 10 key phrase of each group
         def summary_group_key_phrases(_group_key_phrases):
+            _group_key_phrases = sorted(_group_key_phrases, key= lambda _g: _g['group'], reverse=True)
             summary = list()
             for _no, _group in enumerate(_group_key_phrases):
                 top_key_phrases = _group['key-phrase'].split(", ")[:10]
@@ -198,6 +199,8 @@ class ClusterSimilarity:
             # Output a summary of top 10 Topics and grouped key phrases of each cluster
             clusters = cluster_df.to_dict("records")
             summary_df = cluster_df
+            total = summary_df['NumDocs'].sum()
+            summary_df['percent'] = list(map(lambda c: c['NumDocs']/total, clusters))
             summary_df['topics'] = list(map(lambda c: ", ".join(list(map(lambda t: t['topic'], c['TF-IDF-Topics'][:10]))), clusters))
             summary_df['key-phrases'] = list(map(lambda c: summary_group_key_phrases(c['Grouped_Key_Phrases']), clusters))
             path = os.path.join(out_folder,
