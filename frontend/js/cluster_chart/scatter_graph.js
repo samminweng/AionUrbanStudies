@@ -107,7 +107,7 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
                 x: point.xaxis.d2l(point.x),
                 y: point.yaxis.d2l(point.y),
                 bordercolor: point.fullData.marker.color,
-                text: '<b>Cluster ' + cluster_no + '</b>'
+                text: '<b>Cluster #' + cluster_no + '</b>'
             };
 
             // Add onclick event to show/hide annotation of the cluster.
@@ -140,7 +140,7 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
                 $('#hover_info').focus();
             }
         });
-        // Add unhover event to clear the text
+        // // Add unhover event to clear the text
         cluster_chart.on('plotly_unhover', function (data) {
             $('#hover_info').empty();
         });

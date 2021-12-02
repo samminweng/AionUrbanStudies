@@ -1,8 +1,9 @@
 // Create a div to display the grouped key phrases
-function ClusterKeyPhrase(cluster_key_phrases, accordion_div){
-
+function ClusterKeyPhrase(cluster_key_phrases){
+    let container = $('<div></div>');
     function _createUI(){
-        const heading = $('<h3><span class="fw-bold">Key Phrases: </span></h3>');
+
+        const heading = $('<h5><span class="fw-bold">Key Phrases: </span></h5>');
         const p = $('<p></p>');
         const list = $('<ol class="list-group list-group-flush list-group-numbered"></ol>');
         // Re-order the groups of key phrases
@@ -10,7 +11,7 @@ function ClusterKeyPhrase(cluster_key_phrases, accordion_div){
         const total = grouped_key_phrases.reduce((pre, cur) => pre + cur['count'], 0);
         for(const group of grouped_key_phrases){
             const key_phrases = group['key-phrase'].split(", ");
-            const top_key_phrases = key_phrases.slice(0, 5);
+            const top_key_phrases = key_phrases.slice(0, 10);
             const item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>');
             const item_div = $('<div class="ms-2 me-auto">' +
                 '<div class="key_phrases">' +
@@ -59,8 +60,10 @@ function ClusterKeyPhrase(cluster_key_phrases, accordion_div){
         }
 
         p.append(list);
-        accordion_div.append(heading);
-        accordion_div.append($('<div></div>').append(p));
+        container.append(heading);
+        container.append(p);
+        $('#cluster_key_phrases').empty();
+        $('#cluster_key_phrases').append(container);
     }
 
 
