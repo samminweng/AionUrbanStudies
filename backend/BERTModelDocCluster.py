@@ -121,7 +121,7 @@ class BERTModelDocCluster:
                         protocol=pickle.HIGHEST_PROTOCOL)
 
     # Experiment UMAP dimension reduction and evaluate reduced vectors with clustering evaluation metrics
-    def evaluate_UMAP_cluster_quality(self, is_experiment=True):
+    def evaluate_UMAP_cluster_quality(self, is_experiment=True, is_output=True):
         def collect_cluster_results(_cluster_labels):
             _cluster_results = []
             for _cluster_no in range(-1, max(_cluster_labels) + 1):
@@ -135,6 +135,8 @@ class BERTModelDocCluster:
         try:
             # Store experiment results
             results = list()
+            # Reduce the doc vectors with standard UMAP dimension reduction
+            standard_vectors = umap.UMAP(random_state=42).fit_transform(self.doc_vectors)
             # Cluster doc vectors without using UMAP dimension reduction
             baseline_labels = hdbscan.HDBSCAN().fit_predict(self.doc_vectors).tolist()
             baseline_results, baseline_outliers = collect_cluster_results(baseline_labels)
@@ -144,29 +146,12 @@ class BERTModelDocCluster:
                             'adjusted_mutual_info_score': adjusted_mutual_info_score(baseline_labels, baseline_labels),
                             'cluster_results': baseline_results
                             })
-            BERTModelDocClusterUtility.visualise_cluster_results(baseline_labels, self.doc_vectors, 'No_UMAP')
-
-            best_parameters = [{'n_neighbors': 200, 'n_components': 50, 'min_dist': 0.0},
-                               {'n_neighbors': 200, 'n_components': 5, 'min_dist': 0.0},
-                               {'n_neighbors': 200, 'n_components': 3, 'min_dist': 0.0}]
-            for best_parameter in best_parameters:
-                reduced_vectors = umap.UMAP(
-                    n_neighbors=best_parameter['n_neighbors'],
-                    min_dist=best_parameter['min_dist'],
-                    n_components=best_parameter['n_components'],
-                    random_state=42,
-                    metric='cosine').fit_transform(self.doc_vectors)
-                # Cluster reduced vectors
-                cluster_labels = hdbscan.HDBSCAN().fit_predict(reduced_vectors).tolist()
-                BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels, reduced_vectors,
-                                                                     'neighbour_{n}_n_component_{c}'.format(
-                                                                         n=best_parameter['n_neighbors'],
-                                                                         c=best_parameter['n_components']))
+            BERTModelDocClusterUtility.visualise_cluster_results(baseline_labels, standard_vectors, 'No_UMAP')
 
             if is_experiment:
                 min_dist = 0.0
                 # Experiment UMAP clustering with 'n_component' parameters
-                for n_neighbors in [200, 150, 100, 50]:
+                for n_neighbors in [200, 150, 100, 50, 25]:
                     for n_components in [768, 600, 500, 400, 300, 200, 100, 50, 30, 15, 10, 5, 4, 3, 2]:
                         parameter = {'n_components': n_components, 'n_neighbors': n_neighbors, 'min_dist': min_dist}
                         result = {'n_neighbors': str(parameter['n_neighbors']),
@@ -176,6 +161,7 @@ class BERTModelDocCluster:
                                   'adjusted_rand_score': 'Error', 'adjusted_mutual_info_score': 'Error',
                                   'cluster_results': 'Error'}
                         try:
+
                             reduced_vectors = umap.UMAP(
                                 n_neighbors=parameter['n_neighbors'],
                                 min_dist=parameter['min_dist'],
@@ -185,6 +171,8 @@ class BERTModelDocCluster:
                             # Cluster reduced vectors
                             cluster_labels = hdbscan.HDBSCAN().fit_predict(reduced_vectors).tolist()
                             cluster_results, outliers = collect_cluster_results(cluster_labels)
+                            if n_components == 500:     # Use the highest vector dimensions as baseline
+                                baseline_labels = cluster_labels
                             # Sort cluster result
                             result['outliers'] = outliers['count']
                             result['total_clusters'] = len(cluster_results)
@@ -192,13 +180,18 @@ class BERTModelDocCluster:
                             result['adjusted_rand_score'] = adjusted_rand_score(baseline_labels, cluster_labels)
                             result['adjusted_mutual_info_score'] = adjusted_mutual_info_score(baseline_labels,
                                                                                               cluster_labels)
+                            if is_output:
+                                # Output cluster results to png files
+                                BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels, standard_vectors,
+                                                                                     'neighbour_{n}_n_component_{c}'.format(
+                                                                                             n=parameter['n_neighbors'],
+                                                                                             c=parameter['n_components']))
                         except Exception as err:
                             print("Error occurred! {err}".format(err=err))
                         print(result)
                         results.append(result)
                 df = pd.DataFrame(results, columns=['n_neighbors', 'n_components', 'total_clusters', 'outliers',
-                                                    'cluster_results', 'adjusted_rand_score',
-                                                    'adjusted_mutual_info_score'])
+                                                    'cluster_results', 'adjusted_mutual_info_score'])
                 # Output cluster results to CSV
                 path = os.path.join('output', 'cluster', 'experiments', 'umap',
                                     'UMAP_HDBSCAN_cluster_doc_vector_results.csv')

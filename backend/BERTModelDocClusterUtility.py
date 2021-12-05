@@ -107,25 +107,21 @@ class BERTModelDocClusterUtility:
     def visualise_cluster_results(cluster_labels, vectors, title):
         try:
             max_cluster_no = max(cluster_labels)
-            # Load clustering results
-            # _path = os.path.join('output', 'cluster', 'experiments', 'HDBSCAN_cluster_num_' + str(c_no) + '.csv')
-            # cluster_result_df = pd.read_csv(_path)
             df = pd.DataFrame()
             df['cluster'] = cluster_labels
             df['x'] = list(map(lambda x: round(x, 2), vectors[:, 0]))
             df['y'] = list(map(lambda x: round(x, 2), vectors[:, 1]))
             # Visualise HDBSCAN clustering results using dot chart
             colors = sns.color_palette('tab10', n_colors=max_cluster_no+1).as_hex()
-            # Plot clustered dots
-            # marker_colors = list(map(lambda c: c + 1, clusters['cluster'].tolist()))
+            # Plot clustered dots and outliers
             fig = go.Figure()
-            for cluster_no in range(-1, max_cluster_no + 1):
+            for cluster_no in range(0, max_cluster_no + 1):
                 dots = df.loc[df['cluster'] == cluster_no, :]
                 if len(dots) > 0:
-                    marker_color = colors[cluster_no] if cluster_no != -1 else 'gray'
-                    marker_symbol = 'circle' if cluster_no != -1 else 'x'
-                    marker_size = 10 if cluster_no != -1 else 1
-                    name = 'Cluster {no}'.format(no=cluster_no) if cluster_no != -1 else 'outliers'
+                    marker_color = colors[cluster_no]
+                    marker_symbol = 'circle'
+                    marker_size = 5
+                    name = 'Cluster {no}'.format(no=cluster_no)
                     fig.add_trace(go.Scatter(
                         name=name,
                         mode='markers',
