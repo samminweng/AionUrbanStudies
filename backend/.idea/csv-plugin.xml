@@ -24,6 +24,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/UrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/umap/UMAP_HDBSCAN_cluster_results.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/key_phrases/UrbanStudyCorpus_HDBSCAN_Cluster_topic_key_phrases.csv">
           <value>
             <Attribute>

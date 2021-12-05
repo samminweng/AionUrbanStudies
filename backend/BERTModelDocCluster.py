@@ -11,6 +11,9 @@ import umap  # (UMAP) is a dimension reduction technique https://umap-learn.read
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from pathlib import Path
+
+from sklearn.metrics import adjusted_rand_score, adjusted_mutual_info_score
+
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 import pickle
 import seaborn as sns  # statistical graph library
@@ -53,7 +56,7 @@ class BERTModelDocCluster:
         path = os.path.join(self.output_path, self.args.model_name + '_embeddings.pkl')
         with open(path, "rb") as fIn:
             stored_data = pickle.load(fIn)
-            document_embeddings = stored_data['embeddings']
+            self.doc_vectors = stored_data['embeddings']
         # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
         self.clusterable_embedding = umap.UMAP(
             n_neighbors=100,
@@ -61,7 +64,7 @@ class BERTModelDocCluster:
             n_components=2,
             random_state=42,
             metric='cosine'
-        ).fit_transform(document_embeddings)
+        ).fit_transform(self.doc_vectors)
         # Load the Scopus downloaded file as input file
         path = os.path.join('data', self.args.case_name + '.json')
         text_df = pd.read_json(path)
@@ -117,7 +120,93 @@ class BERTModelDocCluster:
             pickle.dump({'documents': documents, 'embeddings': sentences_embeddings}, fOut,
                         protocol=pickle.HIGHEST_PROTOCOL)
 
-    # Get the sentence embedding and cluster doc by hdbscan (https://hdbscan.readthedocs.io/en/latest/index.html)
+    # Experiment UMAP dimension reduction and evaluate reduced vectors with clustering evaluation metrics
+    def evaluate_UMAP_cluster_quality(self, is_experiment=True):
+        def collect_cluster_results(_cluster_labels):
+            _cluster_results = []
+            for _cluster_no in range(-1, max(_cluster_labels) + 1):
+                _count = len(list(filter(lambda label: label == _cluster_no, _cluster_labels)))
+                _cluster_results.append({'cluster_no': _cluster_no, 'count': _count})
+            _outliers = next(c for c in _cluster_results if c['cluster_no'] == -1)
+            # Sort cluster results by count
+            _cluster_results = sorted(_cluster_results, key=lambda c: c['cluster_no'], reverse=True)
+            return _cluster_results, _outliers
+
+        try:
+            # Store experiment results
+            results = list()
+            # Cluster doc vectors without using UMAP dimension reduction
+            baseline_labels = hdbscan.HDBSCAN().fit_predict(self.doc_vectors).tolist()
+            baseline_results, baseline_outliers = collect_cluster_results(baseline_labels)
+            results.append({'n_neighbors': 'None', 'n_components': 'None', 'min_dist': 'None',
+                            'outliers': baseline_outliers['count'], 'total_clusters': len(baseline_results),
+                            'adjusted_rand_score': adjusted_rand_score(baseline_labels, baseline_labels),
+                            'adjusted_mutual_info_score': adjusted_mutual_info_score(baseline_labels, baseline_labels),
+                            'cluster_results': baseline_results
+                            })
+            BERTModelDocClusterUtility.visualise_cluster_results(baseline_labels, self.doc_vectors, 'No_UMAP')
+
+            best_parameters = [{'n_neighbors': 200, 'n_components': 50, 'min_dist': 0.0},
+                               {'n_neighbors': 200, 'n_components': 5, 'min_dist': 0.0},
+                               {'n_neighbors': 200, 'n_components': 3, 'min_dist': 0.0}]
+            for best_parameter in best_parameters:
+                reduced_vectors = umap.UMAP(
+                    n_neighbors=best_parameter['n_neighbors'],
+                    min_dist=best_parameter['min_dist'],
+                    n_components=best_parameter['n_components'],
+                    random_state=42,
+                    metric='cosine').fit_transform(self.doc_vectors)
+                # Cluster reduced vectors
+                cluster_labels = hdbscan.HDBSCAN().fit_predict(reduced_vectors).tolist()
+                BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels, reduced_vectors,
+                                                                     'neighbour_{n}_n_component_{c}'.format(
+                                                                         n=best_parameter['n_neighbors'],
+                                                                         c=best_parameter['n_components']))
+
+            if is_experiment:
+                min_dist = 0.0
+                # Experiment UMAP clustering with 'n_component' parameters
+                for n_neighbors in [200, 150, 100, 50]:
+                    for n_components in [768, 600, 500, 400, 300, 200, 100, 50, 30, 15, 10, 5, 4, 3, 2]:
+                        parameter = {'n_components': n_components, 'n_neighbors': n_neighbors, 'min_dist': min_dist}
+                        result = {'n_neighbors': str(parameter['n_neighbors']),
+                                  'n_components': str(parameter['n_components']),
+                                  'min_dist': str(parameter['min_dist']), 'outliers': 'Error',
+                                  'total_clusters': 'Error',
+                                  'adjusted_rand_score': 'Error', 'adjusted_mutual_info_score': 'Error',
+                                  'cluster_results': 'Error'}
+                        try:
+                            reduced_vectors = umap.UMAP(
+                                n_neighbors=parameter['n_neighbors'],
+                                min_dist=parameter['min_dist'],
+                                n_components=parameter['n_components'],
+                                random_state=42,
+                                metric='cosine').fit_transform(self.doc_vectors)
+                            # Cluster reduced vectors
+                            cluster_labels = hdbscan.HDBSCAN().fit_predict(reduced_vectors).tolist()
+                            cluster_results, outliers = collect_cluster_results(cluster_labels)
+                            # Sort cluster result
+                            result['outliers'] = outliers['count']
+                            result['total_clusters'] = len(cluster_results)
+                            result['cluster_results'] = cluster_results
+                            result['adjusted_rand_score'] = adjusted_rand_score(baseline_labels, cluster_labels)
+                            result['adjusted_mutual_info_score'] = adjusted_mutual_info_score(baseline_labels,
+                                                                                              cluster_labels)
+                        except Exception as err:
+                            print("Error occurred! {err}".format(err=err))
+                        print(result)
+                        results.append(result)
+                df = pd.DataFrame(results, columns=['n_neighbors', 'n_components', 'total_clusters', 'outliers',
+                                                    'cluster_results', 'adjusted_rand_score',
+                                                    'adjusted_mutual_info_score'])
+                # Output cluster results to CSV
+                path = os.path.join('output', 'cluster', 'experiments', 'umap',
+                                    'UMAP_HDBSCAN_cluster_doc_vector_results.csv')
+                df.to_csv(path, encoding='utf-8', index=False)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # Get the sentence embedding and cluster doc by HDBSCAN (https://hdbscan.readthedocs.io/en/latest/index.html)
     def cluster_doc_by_hdbscan(self, is_graph=False, min_cluster_size=10, min_samples=1,
                                cluster_selection_epsilon=0.2,
                                cluster_selection_method='eom'):
@@ -143,8 +232,8 @@ class BERTModelDocCluster:
                           }
             print(parameters)
             # Save HDBSCAN cluster to 'temp' folder
-            _path = os.path.join(self.output_path, 'temp', 'HDBSCAN_cluster_num_' + str(cluster_number) + '.csv')
-            self.cluster_df.to_csv(_path, encoding='utf-8', index=False)
+            path = os.path.join(self.output_path, 'temp', 'HDBSCAN_cluster_num_' + str(cluster_number) + '.csv')
+            self.cluster_df.to_csv(path, encoding='utf-8', index=False)
             if is_graph:
                 # Output condense tree
                 condense_tree = clusters.condensed_tree_
@@ -193,7 +282,6 @@ class BERTModelDocCluster:
 
     # Derive the topic words from each cluster of documents
     def derive_topics_from_cluster_docs_by_TF_IDF(self):
-        # cluster_approaches = ['HDBSCAN_Cluster', 'KMeans_Cluster']
         cluster_approaches = ['HDBSCAN_Cluster']
         try:
             # Get the duplicate articles.
@@ -300,11 +388,10 @@ class BERTModelDocCluster:
 if __name__ == '__main__':
     mdc = BERTModelDocCluster()
     # mdc.get_sentence_embedding()
+    mdc.evaluate_UMAP_cluster_quality()
     # mdc.cluster_doc_by_hdbscan(is_graph=False)
     # mdc.cluster_doc_by_KMeans()
     # BERTModelDocClusterUtility.visualise_cluster_results_by_methods()
     # BERTModelDocClusterUtility.visualise_cluster_results_by_cluster_number(9)
     # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
-    mdc.combine_topics_from_clusters()
-
-
+    # mdc.combine_topics_from_clusters()

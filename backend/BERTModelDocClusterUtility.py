@@ -5,6 +5,7 @@ import logging
 import nltk
 import numpy as np
 from matplotlib import pyplot as plt
+from matplotlib.colors import rgb2hex
 from nltk import BigramCollocationFinder
 from nltk.util import ngrams
 from nltk.tokenize import sent_tokenize
@@ -12,7 +13,9 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import getpass
 import pandas as pd
-import plotly.express as px
+import plotly.graph_objects as go
+import plotly.io as pio
+import seaborn as sns
 
 # Set logging level
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -76,7 +79,6 @@ class BERTModelDocClusterUtility:
 
     @staticmethod
     def visualise_cluster_results_by_methods():
-        plt.style.use('bmh')  # Use black white background
         _path = os.path.join(BERTModelDocClusterUtility.output_path,
                              BERTModelDocClusterUtility.case_name + '_clusters.json')
         cluster_result_df = pd.read_json(_path)
@@ -102,30 +104,45 @@ class BERTModelDocClusterUtility:
 
     # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
-    def visualise_cluster_results_by_cluster_number(c_no):
+    def visualise_cluster_results(cluster_labels, vectors, title):
         try:
+            max_cluster_no = max(cluster_labels)
             # Load clustering results
-            _path = os.path.join('output', 'cluster', 'experiments', 'HDBSCAN_cluster_num_' + str(c_no) + '.csv')
-            cluster_result_df = pd.read_csv(_path)
+            # _path = os.path.join('output', 'cluster', 'experiments', 'HDBSCAN_cluster_num_' + str(c_no) + '.csv')
+            # cluster_result_df = pd.read_csv(_path)
+            df = pd.DataFrame()
+            df['cluster'] = cluster_labels
+            df['x'] = list(map(lambda x: round(x, 2), vectors[:, 0]))
+            df['y'] = list(map(lambda x: round(x, 2), vectors[:, 1]))
             # Visualise HDBSCAN clustering results using dot chart
-            cluster_df = cluster_result_df.loc[cluster_result_df['HDBSCAN_Cluster'] != -1, :]
-            cluster_list = cluster_df.to_dict("records")
-            # Sort the
-            cluster_list = sorted(cluster_list, key=lambda c: c['HDBSCAN_Cluster'])
-            df = pd.DataFrame(cluster_list, columns=['x', 'y', 'HDBSCAN_Cluster'])
-            df["HDBSCAN_Cluster"] = df["HDBSCAN_Cluster"].astype(str)  # Convert the cluster as a string
-            fig = px.scatter(df, y="y", x="x", color="HDBSCAN_Cluster", symbol="HDBSCAN_Cluster",
-                             width=600, height=800)
-            fig.update_traces(mode='markers', marker=dict(line_width=1, symbol='circle', size=5))
-            fig.update_layout(title="Cluster " + str(c_no),
-                              legend=dict(
-                                  yanchor="top",
-                                  y=0.99,
-                                  x=-0.3),
-                              margin=dict(l=20, r=20, t=30, b=20),
-                              paper_bgcolor="LightSteelBlue",
-                              )
-            fig.show()
+            colors = sns.color_palette('tab10', n_colors=max_cluster_no+1).as_hex()
+            # Plot clustered dots
+            # marker_colors = list(map(lambda c: c + 1, clusters['cluster'].tolist()))
+            fig = go.Figure()
+            for cluster_no in range(-1, max_cluster_no + 1):
+                dots = df.loc[df['cluster'] == cluster_no, :]
+                if len(dots) > 0:
+                    marker_color = colors[cluster_no] if cluster_no != -1 else 'gray'
+                    marker_symbol = 'circle' if cluster_no != -1 else 'x'
+                    marker_size = 10 if cluster_no != -1 else 1
+                    name = 'Cluster {no}'.format(no=cluster_no) if cluster_no != -1 else 'outliers'
+                    fig.add_trace(go.Scatter(
+                        name=name,
+                        mode='markers',
+                        x=dots['x'].tolist(),
+                        y=dots['y'].tolist(),
+                        marker=dict(line_width=1, symbol=marker_symbol,
+                                    size=marker_size, color=marker_color)
+                    ))
+            # Figure layout
+            fig.update_layout(title=title,
+                              width=600, height=800,
+                              legend=dict(orientation="h"),
+                              # margin=dict(l=20, r=20, t=30, b=20),
+                              paper_bgcolor="LightSteelBlue")
+
+            file_path = os.path.join('output', 'cluster', 'experiments', 'umap', 'images', title + ".png")
+            pio.write_image(fig, file_path, format='png')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
