@@ -41,13 +41,10 @@ function DocList(cluster_docs, cluster_topics, selected_topics, corpus_key_phras
     }
 
 
-
     function _createUI() {
         $('#doc_list').empty();
-
-
         // A list of cluster documents
-        const doc_table = $('<table class="table table-striped table-sm">' +
+        const doc_table = $('<table class="table table-borderless">' +
             '<tbody></tbody></table>');
         const pagination = createPagination(doc_table);
         // Add the table to display the list of documents.
