@@ -57,6 +57,12 @@ class BERTModelDocCluster:
         with open(path, "rb") as fIn:
             stored_data = pickle.load(fIn)
             self.doc_vectors = stored_data['embeddings']
+
+        # Load the Scopus downloaded file as input file
+        path = os.path.join('data', self.args.case_name + '.json')
+        self.text_df = pd.read_json(path)
+        # Concatenate 'Title' and 'Abstract' into 'Text
+        self.text_df['Text'] = self.text_df['Title'] + ". " + self.text_df['Abstract']
         # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
         self.clusterable_embedding = umap.UMAP(
             n_neighbors=100,
@@ -65,16 +71,11 @@ class BERTModelDocCluster:
             random_state=42,
             metric='cosine'
         ).fit_transform(self.doc_vectors)
-        # Load the Scopus downloaded file as input file
-        path = os.path.join('data', self.args.case_name + '.json')
-        text_df = pd.read_json(path)
-        # Concatenate 'Title' and 'Abstract' into 'Text
-        text_df['Title'] = text_df['Title'] + ". "
-        text_df['Text'] = text_df['Title'] + text_df['Abstract']
+        #
         # Store the clustering results
         self.cluster_df = pd.DataFrame(columns=['DocId', 'Text', 'x', 'y'])
-        self.cluster_df['DocId'] = text_df['DocId']
-        self.cluster_df['Text'] = text_df['Text']
+        self.cluster_df['DocId'] = self.text_df['DocId']
+        self.cluster_df['Text'] = self.text_df['Text']
         self.cluster_df['x'] = list(map(lambda x: round(x, 2), self.clusterable_embedding[:, 0]))
         self.cluster_df['y'] = list(map(lambda x: round(x, 2), self.clusterable_embedding[:, 1]))
 
@@ -121,81 +122,115 @@ class BERTModelDocCluster:
                         protocol=pickle.HIGHEST_PROTOCOL)
 
     # Experiment UMAP dimension reduction and evaluate reduced vectors with clustering evaluation metrics
-    def evaluate_UMAP_cluster_quality(self, is_experiment=True, is_output=True):
-        def collect_cluster_results(_cluster_labels):
-            _cluster_results = []
-            for _cluster_no in range(-1, max(_cluster_labels) + 1):
-                _count = len(list(filter(lambda label: label == _cluster_no, _cluster_labels)))
-                _cluster_results.append({'cluster_no': _cluster_no, 'count': _count})
-            _outliers = next(c for c in _cluster_results if c['cluster_no'] == -1)
-            # Sort cluster results by count
-            _cluster_results = sorted(_cluster_results, key=lambda c: c['cluster_no'], reverse=True)
-            return _cluster_results, _outliers
+    def evaluate_UMAP_cluster_quality(self, is_output=True):
+        # Collect clustering results and find outliers and the cluster of minimal size
+        def collect_cluster_results(_df):
+            try:
+                _cluster_docs = _df.to_dict("records")
+                _min_count = 1000
+                _min_cluster = []
+                _total_clusters = _df['cluster'].max() + 1
+                _cluster_results = []
+                # Add cluster results
+                for _cluster_no in range(-1, _total_clusters):
+                    _docs = list(filter(lambda doc: doc['cluster'] == _cluster_no, _cluster_docs))
+                    _cluster_results.append({'cluster_no': _cluster_no, 'count': len(_docs)})
+                    if _cluster_no != -1 and _total_clusters == 2 and len(_docs) <= _min_count:
+                        _min_count = len(_docs)
+                        _min_cluster = list(map(lambda c: c['DocId'], _docs))
+                # Get outliers
+                _outliers = next(c for c in _cluster_results if c['cluster_no'] == -1)
+                # Sort cluster results by count
+                _cluster_results = sorted(_cluster_results, key=lambda c: c['cluster_no'], reverse=True)
+                return _cluster_results, _outliers, _min_cluster
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+
+        # Get the doc id common to all min_clusters
+        def write_min_cluster_doc_ids(_min_cluster_list, text_df):
+            _path = os.path.join('output', 'cluster', 'experiments', 'umap', 'UMAP_HDBSCAN_min_cluster_list.csv')
+            _df = pd.DataFrame(_min_cluster_list, columns=['n_neighbors', 'n_components', 'count', 'min_cluster'])
+            _df.to_csv(_path, encoding='utf-8', index=False)
+            doc_ids = set()
+            for _min_cluster in _min_cluster_list:
+                if len(doc_ids) == 0:
+                    doc_ids = set(_min_cluster['min_cluster'])
+                else:  # Use intersection to find all the common doc ids
+                    doc_ids = doc_ids.intersection(_min_cluster['min_cluster'])
+            doc_ids = sorted(list(doc_ids))
+            # Select docs from text_df
+            selected_docs = text_df[text_df['DocId'].isin(doc_ids)]
+            selected_docs = selected_docs[['DocId', 'Title', 'Abstract']]
+            # Output to a path
+            _path = os.path.join('output', 'cluster', 'experiments', 'umap', 'UMAP_HDBSCAN_min_cluster.csv')
+            selected_docs.to_csv(_path, encoding='utf-8', index=False)
+            print('Output min cluster to ' + _path)
 
         try:
+            df = pd.DataFrame()
+            df['DocId'] = list(range(1, len(self.doc_vectors) + 1))
+            df['DocVector'] = self.doc_vectors.tolist()
             # Store experiment results
             results = list()
             # Reduce the doc vectors with standard UMAP dimension reduction
-            standard_vectors = umap.UMAP(random_state=42).fit_transform(self.doc_vectors)
-            # Cluster doc vectors without using UMAP dimension reduction
-            baseline_labels = hdbscan.HDBSCAN().fit_predict(self.doc_vectors).tolist()
-            baseline_results, baseline_outliers = collect_cluster_results(baseline_labels)
-            results.append({'n_neighbors': 'None', 'n_components': 'None', 'min_dist': 'None',
-                            'outliers': baseline_outliers['count'], 'total_clusters': len(baseline_results),
-                            'adjusted_rand_score': adjusted_rand_score(baseline_labels, baseline_labels),
-                            'adjusted_mutual_info_score': adjusted_mutual_info_score(baseline_labels, baseline_labels),
-                            'cluster_results': baseline_results
-                            })
-            BERTModelDocClusterUtility.visualise_cluster_results(baseline_labels, standard_vectors, 'No_UMAP')
+            standard_vectors = umap.UMAP(random_state=42).fit_transform(df['DocVector'].tolist())
 
-            if is_experiment:
-                min_dist = 0.0
-                # Experiment UMAP clustering with 'n_component' parameters
-                for n_neighbors in [200, 150, 100, 50, 25]:
-                    for n_components in [768, 600, 500, 400, 300, 200, 100, 50, 30, 15, 10, 5, 4, 3, 2]:
-                        parameter = {'n_components': n_components, 'n_neighbors': n_neighbors, 'min_dist': min_dist}
-                        result = {'n_neighbors': str(parameter['n_neighbors']),
-                                  'n_components': str(parameter['n_components']),
-                                  'min_dist': str(parameter['min_dist']), 'outliers': 'Error',
-                                  'total_clusters': 'Error',
-                                  'adjusted_rand_score': 'Error', 'adjusted_mutual_info_score': 'Error',
-                                  'cluster_results': 'Error'}
-                        try:
+            # Experiment UMAP
+            min_dist = 0.0
+            # Experiment UMAP clustering with 'n_component' parameters
+            for n_neighbors in [200]:
+                min_cluster_list = list()
+                baseline_labels = list()
+                for n_components in [500, 400, 300, 200, 100, 50, 30, 15, 10, 5, 4, 3, 2]:
+                    parameter = {'n_components': n_components, 'n_neighbors': n_neighbors, 'min_dist': min_dist}
+                    result = {'n_neighbors': str(parameter['n_neighbors']),
+                              'n_components': str(parameter['n_components']),
+                              'min_dist': str(parameter['min_dist']), 'outliers': 'Error',
+                              'total_clusters': 'Error',
+                              'cluster_results': 'Error', 'adjusted_rand_score': 'Error',
+                              'adjusted_mutual_info_score': 'Error'}
+                    try:
+                        reduced_vectors = umap.UMAP(
+                            n_neighbors=parameter['n_neighbors'],
+                            min_dist=parameter['min_dist'],
+                            n_components=parameter['n_components'],
+                            random_state=42,
+                            metric='cosine').fit_transform(df['DocVector'].tolist())
+                        # Cluster reduced vectors
+                        cluster_labels = hdbscan.HDBSCAN().fit_predict(reduced_vectors).tolist()
+                        df['cluster'] = cluster_labels
+                        cluster_results, outliers, min_cluster = collect_cluster_results(df)
+                        if len(baseline_labels) == 0:
+                            baseline_labels = cluster_labels
 
-                            reduced_vectors = umap.UMAP(
-                                n_neighbors=parameter['n_neighbors'],
-                                min_dist=parameter['min_dist'],
-                                n_components=parameter['n_components'],
-                                random_state=42,
-                                metric='cosine').fit_transform(self.doc_vectors)
-                            # Cluster reduced vectors
-                            cluster_labels = hdbscan.HDBSCAN().fit_predict(reduced_vectors).tolist()
-                            cluster_results, outliers = collect_cluster_results(cluster_labels)
-                            if n_components == 500:     # Use the highest vector dimensions as baseline
-                                baseline_labels = cluster_labels
-                            # Sort cluster result
-                            result['outliers'] = outliers['count']
-                            result['total_clusters'] = len(cluster_results)
-                            result['cluster_results'] = cluster_results
-                            result['adjusted_rand_score'] = adjusted_rand_score(baseline_labels, cluster_labels)
-                            result['adjusted_mutual_info_score'] = adjusted_mutual_info_score(baseline_labels,
-                                                                                              cluster_labels)
-                            if is_output:
-                                # Output cluster results to png files
-                                BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels, standard_vectors,
-                                                                                     'neighbour_{n}_n_component_{c}'.format(
-                                                                                             n=parameter['n_neighbors'],
-                                                                                             c=parameter['n_components']))
-                        except Exception as err:
-                            print("Error occurred! {err}".format(err=err))
-                        print(result)
-                        results.append(result)
-                df = pd.DataFrame(results, columns=['n_neighbors', 'n_components', 'total_clusters', 'outliers',
-                                                    'cluster_results', 'adjusted_mutual_info_score'])
-                # Output cluster results to CSV
-                path = os.path.join('output', 'cluster', 'experiments', 'umap',
-                                    'UMAP_HDBSCAN_cluster_doc_vector_results.csv')
-                df.to_csv(path, encoding='utf-8', index=False)
+                        if len(min_cluster) > 0:
+                            min_cluster_list.append({'min_cluster': min_cluster, 'count': len(min_cluster),
+                                                     'n_neighbors': parameter['n_neighbors'],
+                                                     'n_components': parameter['n_components']})
+                        # Sort cluster result
+                        result['outliers'] = outliers['count']
+                        result['total_clusters'] = len(cluster_results)
+                        result['cluster_results'] = cluster_results
+                        result['adjusted_mutual_info_score'] = adjusted_mutual_info_score(baseline_labels,
+                                                                                          cluster_labels)
+
+                        if is_output:
+                            # Output cluster results to png files
+                            BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels, standard_vectors,
+                                                                                 'neighbour_{n}_n_component_{c}'.format(
+                                                                                     n=parameter['n_neighbors'],
+                                                                                     c=parameter['n_components']))
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+                    print(result)
+                    results.append(result)
+                write_min_cluster_doc_ids(min_cluster_list, self.text_df)
+            result_df = pd.DataFrame(results, columns=['n_neighbors', 'n_components', 'total_clusters', 'outliers',
+                                                       'cluster_results', 'adjusted_mutual_info_score'])
+            # Output cluster results to CSV
+            path = os.path.join('output', 'cluster', 'experiments', 'umap',
+                                'UMAP_HDBSCAN_cluster_doc_vector_results.csv')
+            result_df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

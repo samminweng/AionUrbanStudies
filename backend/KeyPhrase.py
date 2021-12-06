@@ -74,11 +74,11 @@ class ClusterSimilarity:
         def _write_key_phrases_by_cluster(_key_phrase_list):
             try:
                 df = pd.DataFrame(_key_phrase_list, columns=['DocId'])
-                df['No'] = range(1, len(df)+1)
+                df['No'] = range(1, len(df) + 1)
                 # Map the list of key phrases (dict) to a list of strings
                 # Map the nested dict to a list of key phrases (string only)
                 df['key-phrases'] = list(map(lambda k: [kp['key-phrase'] for kp in k['key-phrases']], _key_phrase_list))
-                df = df[['No', 'DocId', 'key-phrases']]     # Re-order the columns
+                df = df[['No', 'DocId', 'key-phrases']]  # Re-order the columns
                 folder = os.path.join('output', 'key_phrases', 'cluster')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
@@ -96,7 +96,7 @@ class ClusterSimilarity:
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, self.corpus_docs))
                 results = list()
-                all_key_phrases = list()    # Store all the key phrases
+                all_key_phrases = list()  # Store all the key phrases
                 for doc in cluster_docs:
                     try:
                         doc_id = doc['DocId']
@@ -123,18 +123,19 @@ class ClusterSimilarity:
                         # Combine all the n-gram key phrases in a doc
                         # Get top 5 key phrase unique to all key phrase list
                         top_doc_key_phrases = _get_unique_doc_key_phrases(
-                                            KeyPhraseUtility.collect_top_key_phrases(model, doc_text, candidates, top_k=30),
-                                            all_key_phrases, _top_k=5)
+                            KeyPhraseUtility.collect_top_key_phrases(model, doc_text, candidates, top_k=30),
+                            all_key_phrases, _top_k=5)
                         # Write top five key phrases to 'doc_key_phrases'
                         result['key-phrases'] = top_doc_key_phrases
-                        all_key_phrases = all_key_phrases + top_doc_key_phrases      # Concatenate all key phrases of a doc
+                        all_key_phrases = all_key_phrases + top_doc_key_phrases  # Concatenate all key phrases of a doc
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 # Write key phrases to csv file
                 _write_key_phrases_by_cluster(results)
                 # Cluster all key phrases by using HDBSCAN
-                KeyPhraseUtility.cluster_key_phrases_by_HDBSCAN(all_key_phrases, cluster_no, model, is_experimented=True)
+                KeyPhraseUtility.cluster_key_phrases_by_HDBSCAN(all_key_phrases, cluster_no, model,
+                                                                is_experimented=True)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -142,11 +143,11 @@ class ClusterSimilarity:
     def combine_key_phrases(self):
         # List top 10 key phrase of each group
         def summary_group_key_phrases(_group_key_phrases):
-            _group_key_phrases = sorted(_group_key_phrases, key= lambda _g: _g['group'], reverse=True)
+            _group_key_phrases = sorted(_group_key_phrases, key=lambda _g: _g['group'], reverse=True)
             summary = list()
             for _no, _group in enumerate(_group_key_phrases):
                 top_key_phrases = _group['key-phrase'].split(", ")[:10]
-                g_summary = "({no})\t{s}".format(no=_no+1, s=", ".join(top_key_phrases))
+                g_summary = "({no})\t{s}".format(no=_no + 1, s=", ".join(top_key_phrases))
                 summary.append(g_summary)
             return "\n".join(summary)
 
@@ -180,17 +181,34 @@ class ClusterSimilarity:
             # Combine all best grouped key phrases of each cluster
             for cluster_no in list(range(-1, 10)):
                 try:
-                    path = os.path.join(in_folder, 'top_key_phrases_cluster_#{c}_best_grouping.json'.format(c=cluster_no))
+                    path = os.path.join(in_folder,
+                                        'top_key_phrases_cluster_#{c}_best_grouping.json'.format(c=cluster_no))
                     df = pd.read_json(path, orient='records')
                     grouped_key_phrases = df.to_dict("records")
                     cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
+                    cluster_doc_ids = cluster['DocIds']
+                    cluster_docs = list(filter(lambda k: k['DocId'] in cluster_doc_ids, key_phrases))
+                    # Add doc ids for each grouped key phrase
+                    for group in grouped_key_phrases:
+                        group_doc_ids = set()
+                        g_key_phrase_list = group['key-phrase'].lower().split(", ")
+                        for c_doc in cluster_docs:
+                            # Find if any doc key phrase appear in group
+                            for _doc_key_phrase in c_doc['key-phrases']:
+                                found = next((k for k in g_key_phrase_list if k == _doc_key_phrase.lower()), None)
+                                if found:
+                                    group_doc_ids.add(c_doc['DocId'])
+                                    break
+                        group_doc_ids = sorted(list(group_doc_ids))
+                        group['doc_ids'] = group_doc_ids
                     cluster['Grouped_Key_Phrases'] = grouped_key_phrases
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
             # Output to csv and json file
             cluster_df = pd.DataFrame(clusters, columns=['Cluster', 'NumDocs', 'DocIds',
                                                          'TF-IDF-Topics', 'Grouped_Key_Phrases'])
-            path = os.path.join(out_folder, self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases.csv')
+            path = os.path.join(out_folder,
+                                self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             path = os.path.join(out_folder,
                                 self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases.json')
@@ -200,9 +218,11 @@ class ClusterSimilarity:
             clusters = cluster_df.to_dict("records")
             summary_df = cluster_df
             total = summary_df['NumDocs'].sum()
-            summary_df['percent'] = list(map(lambda c: c['NumDocs']/total, clusters))
-            summary_df['topics'] = list(map(lambda c: ", ".join(list(map(lambda t: t['topic'], c['TF-IDF-Topics'][:10]))), clusters))
-            summary_df['key-phrases'] = list(map(lambda c: summary_group_key_phrases(c['Grouped_Key_Phrases']), clusters))
+            summary_df['percent'] = list(map(lambda c: c['NumDocs'] / total, clusters))
+            summary_df['topics'] = list(
+                map(lambda c: ", ".join(list(map(lambda t: t['topic'], c['TF-IDF-Topics'][:10]))), clusters))
+            summary_df['key-phrases'] = list(
+                map(lambda c: summary_group_key_phrases(c['Grouped_Key_Phrases']), clusters))
             path = os.path.join(out_folder,
                                 self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases_summary.csv')
             summary_df = summary_df.drop(columns=['TF-IDF-Topics', 'DocIds', 'Grouped_Key_Phrases'])
@@ -210,7 +230,6 @@ class ClusterSimilarity:
             print('Output summary of topics and key phrases per cluster to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-
 
     # Find top 30 similar papers for each article in a cluster
     def find_top_similar_paper_in_corpus(self, top_k=30):
@@ -235,7 +254,3 @@ if __name__ == '__main__':
     # tw.find_top_similar_paper_in_corpus()
     # tw.extract_key_phrases_by_clusters()
     tw.combine_key_phrases()
-
-
-
-
