@@ -10,7 +10,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         // Create a div to display a list of topic (a link)
         $('#cluster_topics').empty();
         // const topic_text = cluster_topics.slice(0, 10).map(topic => topic['topic']).join("; ");
-        const accordion_div = $('<div></div>');
+        const accordion_div = $('<div class="container"></div>');
         const topic_heading = $('<h3><span class="fw-bold">Top 10 topics: </span></h3>');
         const topic_p = $('<div><p></p></div>');
         // Add top 30 topics (each topic as a link)
@@ -19,25 +19,28 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
                 + selected_topic['topic'] + ' (' + selected_topic['doc_ids'].length + ')' + "</button>");
             // Click on the link to display the articles associated with topic
             link.click(function () {
-                $('#cluster_doc_heading').empty();
-                $('#cluster_doc_heading').append(cluster_link);
-                $('#cluster_doc_heading').append(
-                    $('<span> has ' + selected_topic['doc_ids'].length + ' articles about '
-                        + '<span class="search_term">' + selected_topic['topic'] + '</span></span>'));
-                // Add the reset button to display all the cluster articles
-                const reset_btn = $('<button class="mx-1">' +
-                    '<span class="ui-icon ui-icon-closethick"></span></button>');
-                reset_btn.button();
-                reset_btn.click(function (event) {
-                    // // Get the documents about the topic
-                    const cluster_doc_list = new ClusterDocList(cluster, cluster_docs, corpus_key_phrases);
-                });
-                // Update the heading
-                $('#cluster_doc_heading').append(reset_btn);
+                // $('#cluster_doc_heading').empty();
+                // $('#cluster_doc_heading').append(cluster_link);
+                // $('#cluster_doc_heading').append(
+                //     $('<span> has ' + selected_topic['doc_ids'].length + ' articles about '
+                //         + '<span class="search_term">' + selected_topic['topic'] + '</span></span>'));
+                // // Add the reset button to display all the cluster articles
+                // const reset_btn = $('<button class="mx-1">' +
+                //     '<span class="ui-icon ui-icon-closethick"></span></button>');
+                // reset_btn.button();
+                // reset_btn.click(function (event) {
+                //     // // Get the documents about the topic
+                //     const cluster_doc_list = new ClusterDocList(cluster, cluster_docs, corpus_key_phrases);
+                // });
+                // // Update the heading
+                // $('#cluster_doc_heading').append(reset_btn);
                 // Get a list of docs in relation to the selected topic
                 const topic_docs = cluster_docs.filter(d => selected_topic['doc_ids'].includes(d['DocId']));
                 // Create a list of articles associated with topic
-                const doc_list = new DocList(topic_docs, cluster_topics, selected_topic, corpus_key_phrases);
+                const doc_list = new DocList(topic_docs, selected_topic, corpus_key_phrases, null);
+                document.getElementById('doc_list').scrollIntoView({behavior: "smooth",
+                    block: "nearest", inline: "nearest"});
+
             });
             topic_p.append(link);
         }
@@ -55,7 +58,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         });
         $('#cluster_topics').append(accordion_div);
         // Add the key phrases grouped by similarity
-        const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases);
+        const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases);
     }
 
     function _createUI() {
@@ -68,7 +71,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         create_cluster_topic_key_phrases();
 
         // Create doc list
-        const doc_list = new DocList(cluster_docs, cluster_topics, null, corpus_key_phrases);
+        const doc_list = new DocList(cluster_docs, null, corpus_key_phrases, null);
     }
 
     _createUI();

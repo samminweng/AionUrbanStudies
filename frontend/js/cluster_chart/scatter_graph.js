@@ -66,12 +66,12 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         const option = {
             autosize: false,
             width: width,
-            height: height-20,
+            height: height,
             // Set the graph margin
             margin: {
-                l: 40,
-                r: 10,
-                b: 20,
+                l: 30,
+                r: 0,
+                b: 10,
                 t: 10,
                 pad: 3
             },

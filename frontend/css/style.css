@@ -9,7 +9,7 @@
 }
 
 /* Highlight searched terms*/
-.search_term {
+.search_terms {
     background: transparent;
     font-weight: bold;
     color: green;

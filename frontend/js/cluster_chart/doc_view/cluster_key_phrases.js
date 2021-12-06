@@ -1,8 +1,8 @@
 // Create a div to display the grouped key phrases
-function ClusterKeyPhrase(cluster_key_phrases){
-    let container = $('<div></div>');
+function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases){
+    let container = $('<div class="container"></div>');
     function _createUI(){
-
+        // Heading
         const heading = $('<h5><span class="fw-bold">Key Phrases: </span></h5>');
         const p = $('<p></p>');
         const list = $('<ol class="list-group list-group-flush list-group-numbered"></ol>');
@@ -51,11 +51,24 @@ function ClusterKeyPhrase(cluster_key_phrases){
             less_btn.hide();
             item_div.find('.key_phrases').append(more_btn);
             item_div.find('.key_phrases').append(less_btn);
+
+            // Get the doc ids that contain this grouped key phrases
+            const doc_ids = group['doc_ids'];
+            const group_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
+            console.log(group_docs);
+            const percent = Math.round(100 * (group['count']/total));
             // Add the div to display total number of key phrases
-            const count_div = $('<span class="badge bg-primary rounded-pill">' +
-                Math.round(100 * (group['count']/total)) + '%</span>');
+            const count_btn = $('<button class="badge bg-primary rounded-pill">' + percent + '%</button>');
+            count_btn.button();
+            // Define count btn to display the doc_ids
+            count_btn.click(function(event){
+                // Create a doc list
+                const doc_list = new DocList(group_docs, null, corpus_key_phrases, key_phrases);
+                document.getElementById('doc_list').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+            });
+
             item.append(item_div);
-            item.append(count_div);
+            item.append(count_btn);
             list.append(item);
         }
 
