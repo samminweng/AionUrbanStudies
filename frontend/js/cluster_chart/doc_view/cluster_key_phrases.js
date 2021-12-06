@@ -7,7 +7,7 @@ function ClusterKeyPhrase(cluster_key_phrases){
         const p = $('<p></p>');
         const list = $('<ol class="list-group list-group-flush list-group-numbered"></ol>');
         // Re-order the groups of key phrases
-        const grouped_key_phrases = cluster_key_phrases.sort((a, b) => b['group'] - a['group']);
+        const grouped_key_phrases = cluster_key_phrases.sort((a, b) => b['count'] - a['count']);
         const total = grouped_key_phrases.reduce((pre, cur) => pre + cur['count'], 0);
         for(const group of grouped_key_phrases){
             const key_phrases = group['key-phrase'].split(", ");
