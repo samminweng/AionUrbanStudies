@@ -31,6 +31,34 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_10.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_5.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_500.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/cluster/experiments/umap/UMAP_HDBSCAN_cluster_results.csv">
           <value>
             <Attribute>

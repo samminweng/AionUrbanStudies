@@ -5,7 +5,6 @@ import logging
 import nltk
 import numpy as np
 from matplotlib import pyplot as plt
-from matplotlib.colors import rgb2hex
 from nltk import BigramCollocationFinder
 from nltk.util import ngrams
 from nltk.tokenize import sent_tokenize
@@ -16,6 +15,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
 import seaborn as sns
+from sklearn.metrics import silhouette_score
 
 # Set logging level
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -104,15 +104,18 @@ class BERTModelDocClusterUtility:
 
     # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
-    def visualise_cluster_results(cluster_labels, vectors, title):
+    def visualise_cluster_results(cluster_labels, vectors, parameter, is_output=False):
+        if not is_output:
+            return
         try:
+
             max_cluster_no = max(cluster_labels)
             df = pd.DataFrame()
             df['cluster'] = cluster_labels
             df['x'] = list(map(lambda x: round(x, 2), vectors[:, 0]))
             df['y'] = list(map(lambda x: round(x, 2), vectors[:, 1]))
             # Visualise HDBSCAN clustering results using dot chart
-            colors = sns.color_palette('tab10', n_colors=max_cluster_no+1).as_hex()
+            colors = sns.color_palette('tab10', n_colors=max_cluster_no + 1).as_hex()
             # Plot clustered dots and outliers
             fig = go.Figure()
             for cluster_no in range(0, max_cluster_no + 1):
@@ -120,7 +123,7 @@ class BERTModelDocClusterUtility:
                 if len(dots) > 0:
                     marker_color = colors[cluster_no]
                     marker_symbol = 'circle'
-                    marker_size = 5
+                    marker_size = 10
                     name = 'Cluster {no}'.format(no=cluster_no)
                     fig.add_trace(go.Scatter(
                         name=name,
@@ -130,17 +133,53 @@ class BERTModelDocClusterUtility:
                         marker=dict(line_width=1, symbol=marker_symbol,
                                     size=marker_size, color=marker_color)
                     ))
+            # Add outliers
+            outliers = df.loc[df['cluster'] == -1, :]
+            if len(outliers) > 0:
+                fig.add_trace(go.Scatter(
+                    name='Outlier',
+                    mode='markers',
+                    x=outliers['x'].tolist(),
+                    y=outliers['y'].tolist(),
+                    marker=dict(line_width=1, symbol='x',
+                                size=5, color='gray', opacity=0.3)
+                ))
+
+            title = ' min_samples = ' + str(parameter['min_samples']) + \
+                    'min_cluster_size = ' + str(parameter['min_cluster_size']) + \
+                    ' epsilon = ' + str(parameter['epsilon'])
             # Figure layout
             fig.update_layout(title=title,
                               width=600, height=800,
                               legend=dict(orientation="h"),
-                              # margin=dict(l=20, r=20, t=30, b=20),
+                              margin=dict(l=20, r=20, t=30, b=20),
                               paper_bgcolor="LightSteelBlue")
-
-            file_path = os.path.join('output', 'cluster', 'experiments', 'umap', 'images', title + ".png")
+            file_name = 'min_samples_' + str(parameter['min_samples']) + \
+                        '_min_cluster_size_' + str(parameter['min_cluster_size']) + \
+                        '_epsilon_' + str(parameter['epsilon'])
+            file_path = os.path.join('output', 'cluster', 'experiments', 'hdbscan', 'images', file_name + ".png")
             pio.write_image(fig, file_path, format='png')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+    # Calculate Silhouette score
+    # Ref: https://towardsdatascience.com/silhouette-coefficient-validating-clustering-techniques-e976bb81d10c
+    # Ref: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html
+    @staticmethod
+    def compute_Silhouette_score(df):
+        # score = 1 indicates good clusters that each cluster distinguishes from other clusters
+        # score = 0 no difference between clusters
+        # score = -1 clusters are wrong
+        try:
+            # Get all the cluster dots
+            cluster_df = df[df['clusters'] != -1]
+            cluster_labels = cluster_df['clusters'].tolist()
+            vectors = cluster_df['vectors'].tolist()
+            avg_score = silhouette_score(vectors, cluster_labels, metric='cosine')
+            return avg_score
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+            return "None"
 
     # Use collection 'PMI' 'Chi-test' or 'likelihood' to obtain the topics from the texts
     @staticmethod
