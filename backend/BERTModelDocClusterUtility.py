@@ -104,9 +104,7 @@ class BERTModelDocClusterUtility:
 
     # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
-    def visualise_cluster_results(cluster_labels, vectors, parameter, is_graph=False):
-        if not is_graph:
-            return
+    def visualise_cluster_results(cluster_labels, vectors, parameter):
         try:
             max_cluster_no = max(cluster_labels)
             df = pd.DataFrame()
@@ -160,6 +158,7 @@ class BERTModelDocClusterUtility:
                         '_epsilon_' + str(parameter['epsilon'])
             file_path = os.path.join('output', 'cluster', 'experiments', 'hdbscan', 'images', file_name + ".png")
             pio.write_image(fig, file_path, format='png')
+            print("Output the cluster results to " + file_path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

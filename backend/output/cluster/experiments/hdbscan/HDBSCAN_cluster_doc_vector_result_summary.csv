@@ -1,11 +1,11 @@
 dimension,min_samples,min_cluster_size,epsilon,Silhouette_score,total_clusters,outliers,cluster_results
-768,13,6,0,0.2039999687,3,518,
-500,15,15,0,0.4898484448,5,190,
-300,15,15,0,0.5103941764000001,5,182,
-200,15,15,0,0.48150541750000003,5,173,
-100,15,15,0,0.5133615309,5,186,
-50,15,15,0,0.4901422325,5,215,
-30,15,15,0,0.5225435865,5,217,
-15,15,15,0,0.5293840041,5,184,
-10,15,15,0,0.4891184616,5,154,
-5,15,15,0,0.5797437453000001,5,168,
+768,,8,0.0,0.2062855918,3,520,"[{'cluster_no': 1, 'count': 8}, {'cluster_no': 0, 'count': 60}, {'cluster_no': -1, 'count': 520}]"
+500,,8,0.0,0.7509495465,12,345,"[{'cluster_no': 4, 'count': 8}, {'cluster_no': 0, 'count': 11}, {'cluster_no': 9, 'count': 14}, {'cluster_no': 3, 'count': 15}, {'cluster_no': 10, 'count': 15}, {'cluster_no': 5, 'count': 16}, {'cluster_no': 6, 'count': 17}, {'cluster_no': 8, 'count': 29}, {'cluster_no': 2, 'count': 35}, {'cluster_no': 1, 'count': 39}, {'cluster_no': 7, 'count': 44}, {'cluster_no': -1, 'count': 345}]"
+300,9.0,13,0.0,0.7009173144,7,277,"[{'cluster_no': 3, 'count': 18}, {'cluster_no': 1, 'count': 40}, {'cluster_no': 4, 'count': 50}, {'cluster_no': 0, 'count': 51}, {'cluster_no': 5, 'count': 62}, {'cluster_no': 2, 'count': 90}, {'cluster_no': -1, 'count': 277}]"
+200,10.0,8,0.0,0.7784230799,9,324,"[{'cluster_no': 2, 'count': 12}, {'cluster_no': 6, 'count': 16}, {'cluster_no': 7, 'count': 22}, {'cluster_no': 4, 'count': 27}, {'cluster_no': 1, 'count': 35}, {'cluster_no': 0, 'count': 45}, {'cluster_no': 3, 'count': 49}, {'cluster_no': 5, 'count': 58}, {'cluster_no': -1, 'count': 324}]"
+100,7.0,5,0.0,0.7623304208,13,307,"[{'cluster_no': 4, 'count': 5}, {'cluster_no': 10, 'count': 7}, {'cluster_no': 9, 'count': 11}, {'cluster_no': 2, 'count': 12}, {'cluster_no': 7, 'count': 15}, {'cluster_no': 3, 'count': 18}, {'cluster_no': 11, 'count': 19}, {'cluster_no': 8, 'count': 20}, {'cluster_no': 6, 'count': 30}, {'cluster_no': 1, 'count': 44}, {'cluster_no': 5, 'count': 49}, {'cluster_no': 0, 'count': 51}, {'cluster_no': -1, 'count': 307}]"
+50,6.0,12,0.0,0.7859679648,10,316,"[{'cluster_no': 8, 'count': 16}, {'cluster_no': 2, 'count': 17}, {'cluster_no': 3, 'count': 20}, {'cluster_no': 5, 'count': 20}, {'cluster_no': 4, 'count': 31}, {'cluster_no': 1, 'count': 34}, {'cluster_no': 7, 'count': 34}, {'cluster_no': 0, 'count': 48}, {'cluster_no': 6, 'count': 52}, {'cluster_no': -1, 'count': 316}]"
+30,,12,0.0,0.7831242007,8,323,"[{'cluster_no': 2, 'count': 12}, {'cluster_no': 6, 'count': 33}, {'cluster_no': 1, 'count': 34}, {'cluster_no': 0, 'count': 41}, {'cluster_no': 4, 'count': 46}, {'cluster_no': 3, 'count': 49}, {'cluster_no': 5, 'count': 50}, {'cluster_no': -1, 'count': 323}]"
+15,11.0,8,0.0,0.7497949753,8,296,"[{'cluster_no': 2, 'count': 14}, {'cluster_no': 4, 'count': 31}, {'cluster_no': 0, 'count': 41}, {'cluster_no': 1, 'count': 43}, {'cluster_no': 3, 'count': 51}, {'cluster_no': 5, 'count': 51}, {'cluster_no': 6, 'count': 61}, {'cluster_no': -1, 'count': 296}]"
+10,4.0,12,0.0,0.7265454013,11,296,"[{'cluster_no': 7, 'count': 15}, {'cluster_no': 9, 'count': 18}, {'cluster_no': 2, 'count': 19}, {'cluster_no': 6, 'count': 20}, {'cluster_no': 3, 'count': 25}, {'cluster_no': 8, 'count': 27}, {'cluster_no': 5, 'count': 30}, {'cluster_no': 1, 'count': 42}, {'cluster_no': 0, 'count': 48}, {'cluster_no': 4, 'count': 48}, {'cluster_no': -1, 'count': 296}]"
+5,,10,0.0,0.7292205242,7,211,"[{'cluster_no': 3, 'count': 21}, {'cluster_no': 5, 'count': 35}, {'cluster_no': 1, 'count': 37}, {'cluster_no': 0, 'count': 45}, {'cluster_no': 4, 'count': 54}, {'cluster_no': 2, 'count': 185}, {'cluster_no': -1, 'count': 211}]"

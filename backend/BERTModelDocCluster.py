@@ -124,7 +124,7 @@ class BERTModelDocCluster:
                         protocol=pickle.HIGHEST_PROTOCOL)
 
     # Experiment  dimension reduction and evaluate reduced vectors with clustering evaluation metrics
-    def evaluate_HDBSCAN_cluster_quality(self, is_output=False):
+    def evaluate_HDBSCAN_cluster_quality(self):
         # Collect clustering results and find outliers and the cluster of minimal size
         def collect_cluster_results(_df):
             try:
@@ -158,13 +158,8 @@ class BERTModelDocCluster:
             # Remove all the outliers
             df = df[~df['DocId'].isin(outlier_doc_ids)]
             n_neighbour = 150
-            # Reduce the doc vectors to 2 dimension using UMAP dimension reduction for visualisation
-            standard_vectors = umap.UMAP(n_neighbors=n_neighbour,
-                                         n_components=2,
-                                         random_state=42,
-                                         metric='cosine').fit_transform(df['DocVectors'].tolist())
             # Experiment HDBSCAN clustering with different dimensions of vectors
-            is_graph = False
+            is_graph = True
             for dimension in [None, 500, 300, 200, 100, 50, 30, 15, 10, 5]:
                 # Apply UMAP to reduce the dimensions of document vectors
                 if dimension:
@@ -214,12 +209,6 @@ class BERTModelDocCluster:
                                 result['total_clusters'] = len(cluster_results)
                                 result['cluster_results'] = cluster_results
                                 result['Silhouette_score'] = score
-                                # Output cluster results to png files
-                                BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels,
-                                                                                     standard_vectors,
-                                                                                     parameter,
-                                                                                     is_graph=is_graph
-                                                                                     )
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
                             print(result)
@@ -239,34 +228,83 @@ class BERTModelDocCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-            # Get the doc id common to all min_clusters
-
-    def write_summary(self):
-        best_results = list()
-        folder = os.path.join('output', 'cluster', 'experiments', 'hdbscan')
-        for dimension in [768, 500, 300, 200, 100, 50, 30, 15, 10, 5]:
-            path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_results_' + str(dimension) + '.json')
-            df = pd.read_json(path)
-            results = df.to_dict("records")
-            best_result = {'dimension': dimension, 'score': 0}
-            for result in results:
-                score = result['Silhouette_score']
-                # Check if the score is better than 'best' parameter
-                if score != 'None' and float(score) > best_result['score']:
-                    best_result['Silhouette_score'] = float(score)
-                    best_result['min_samples'] = result['min_samples']
-                    best_result['min_cluster_size'] = result['min_cluster_size']
-                    best_result['epsilon'] = result['epsilon']
-                    best_result['total_clusters'] = result['total_clusters']
-                    best_result['outliers'] = result['outliers']
-            best_results.append(best_result)
-        # Output the best clustering results
-        best_result_df = pd.DataFrame(best_results,
-                                      columns=['dimension', 'min_samples', 'min_cluster_size', 'epsilon',
-                                               'Silhouette_score', 'total_clusters', 'outliers',
-                                               'cluster_results'])
-        path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.csv')
-        best_result_df.to_csv(path, encoding='utf-8', index=False)
+    def output_HDBSCAN_cluster_quality_summary(self):
+        try:
+            best_results = list()
+            folder = os.path.join('output', 'cluster', 'experiments', 'hdbscan')
+            for dimension in [768, 500, 300, 200, 100, 50, 30, 15, 10, 5]:
+                path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_results_' + str(dimension) + '.json')
+                df = pd.read_json(path)
+                results = df.to_dict("records")
+                best_result = {'dimension': dimension, 'Silhouette_score': 0}
+                for result in results:
+                    score = result['Silhouette_score']
+                    # Check if the score is better than 'best' parameter
+                    if score != 'None' and float(score) > best_result['Silhouette_score']:
+                        best_result['Silhouette_score'] = float(score)
+                        best_result['min_samples'] = None if result['min_samples'] == 'None' else int(result['min_samples'])
+                        best_result['min_cluster_size'] = int(result['min_cluster_size'])
+                        best_result['epsilon'] = float(result['epsilon'])
+                        best_result['total_clusters'] = result['total_clusters']
+                        best_result['outliers'] = result['outliers']
+                        best_result['cluster_results'] = result['cluster_results']
+                best_results.append(best_result)
+            # Output the best clustering results
+            best_result_df = pd.DataFrame(best_results,
+                                          columns=['dimension', 'min_samples', 'min_cluster_size', 'epsilon',
+                                                   'Silhouette_score', 'total_clusters', 'outliers',
+                                                   'cluster_results'])
+            path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.csv')
+            best_result_df.to_csv(path, encoding='utf-8', index=False)
+            # Load all document vectors without outliers
+            df = pd.DataFrame()
+            df['DocId'] = list(range(1, len(self.doc_vectors) + 1))
+            df['DocVectors'] = self.doc_vectors.tolist()
+            # Load outlier list
+            folder = os.path.join('output', 'cluster', 'experiments', 'hdbscan')
+            outliers_df = pd.read_csv(os.path.join(folder, 'HDBSCAN_outlier_#0.csv'))
+            outlier_doc_ids = outliers_df['DocId'].tolist()
+            # Remove all the outliers
+            df = df[~df['DocId'].isin(outlier_doc_ids)]
+            n_neighbour = 150
+            # Reduce the doc vectors to 2 dimension using UMAP dimension reduction for visualisation
+            standard_vectors = umap.UMAP(n_neighbors=n_neighbour,
+                                         n_components=2,
+                                         random_state=42,
+                                         metric='cosine').fit_transform(df['DocVectors'].tolist())
+            for best_result in best_results:
+                dimension = best_result['dimension']
+                min_cluster_size = best_result['min_cluster_size']
+                min_samples = best_result['min_samples']
+                epsilon = best_result['epsilon']
+                parameter = {'dimension': dimension, 'min_cluster_size': min_cluster_size, 'min_samples': min_samples,
+                             'epsilon': epsilon}
+                # Apply UMAP to reduce the dimensions of document vectors
+                if dimension < 768:
+                    # Run HDBSCAN on reduced dimensional vectors
+                    vectors = umap.UMAP(
+                        n_neighbors=n_neighbour,
+                        min_dist=0.0,
+                        n_components=dimension,
+                        random_state=42,
+                        metric="cosine").fit_transform(df['DocVectors'].tolist())
+                else:
+                    # Run HDBSCAN on raw vectors
+                    vectors = np.vstack(df['DocVectors'])  # Convert to 2D numpy array
+                # Compute the cosine distance/similarity for each doc vectors
+                distances = pairwise_distances(vectors, metric='cosine')
+                # Cluster reduced vectors
+                cluster_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
+                                                 min_samples=min_samples,
+                                                 cluster_selection_epsilon=epsilon,
+                                                 metric='precomputed').fit_predict(
+                    distances.astype('float64')).tolist()
+                # Output cluster results to png files
+                BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels,
+                                                                     standard_vectors,
+                                                                     parameter)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     # Get the sentence embedding and cluster doc by HDBSCAN (https://hdbscan.readthedocs.io/en/latest/index.html)
     def cluster_doc_by_hdbscan(self, is_graph=False, min_cluster_size=10, min_samples=1,
@@ -451,7 +489,7 @@ if __name__ == '__main__':
     mdc = BERTModelDocCluster()
     # mdc.get_sentence_embedding()
     # mdc.evaluate_HDBSCAN_cluster_quality()
-    mdc.write_summary()
+    mdc.output_HDBSCAN_cluster_quality_summary()
     # mdc.cluster_doc_by_hdbscan(is_graph=False)
     # mdc.cluster_doc_by_KMeans()
     # BERTModelDocClusterUtility.visualise_cluster_results_by_methods()
