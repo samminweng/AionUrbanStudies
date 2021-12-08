@@ -104,11 +104,10 @@ class BERTModelDocClusterUtility:
 
     # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
-    def visualise_cluster_results(cluster_labels, vectors, parameter, is_output=False):
-        if not is_output:
+    def visualise_cluster_results(cluster_labels, vectors, parameter, is_graph=False):
+        if not is_graph:
             return
         try:
-
             max_cluster_no = max(cluster_labels)
             df = pd.DataFrame()
             df['cluster'] = cluster_labels
@@ -116,6 +115,7 @@ class BERTModelDocClusterUtility:
             df['y'] = list(map(lambda x: round(x, 2), vectors[:, 1]))
             # Visualise HDBSCAN clustering results using dot chart
             colors = sns.color_palette('tab10', n_colors=max_cluster_no + 1).as_hex()
+            marker_size = 8
             # Plot clustered dots and outliers
             fig = go.Figure()
             for cluster_no in range(0, max_cluster_no + 1):
@@ -123,7 +123,6 @@ class BERTModelDocClusterUtility:
                 if len(dots) > 0:
                     marker_color = colors[cluster_no]
                     marker_symbol = 'circle'
-                    marker_size = 10
                     name = 'Cluster {no}'.format(no=cluster_no)
                     fig.add_trace(go.Scatter(
                         name=name,
@@ -142,11 +141,12 @@ class BERTModelDocClusterUtility:
                     x=outliers['x'].tolist(),
                     y=outliers['y'].tolist(),
                     marker=dict(line_width=1, symbol='x',
-                                size=5, color='gray', opacity=0.3)
+                                size=2, color='gray', opacity=0.3)
                 ))
 
-            title = ' min_samples = ' + str(parameter['min_samples']) + \
-                    'min_cluster_size = ' + str(parameter['min_cluster_size']) + \
+            title = 'dimension = ' + str(parameter['dimension']) + \
+                    ' min_samples = ' + str(parameter['min_samples']) + \
+                    ' min_cluster_size = ' + str(parameter['min_cluster_size']) + \
                     ' epsilon = ' + str(parameter['epsilon'])
             # Figure layout
             fig.update_layout(title=title,
@@ -154,7 +154,8 @@ class BERTModelDocClusterUtility:
                               legend=dict(orientation="h"),
                               margin=dict(l=20, r=20, t=30, b=20),
                               paper_bgcolor="LightSteelBlue")
-            file_name = 'min_samples_' + str(parameter['min_samples']) + \
+            file_name = 'dimension_' + str(parameter['dimension']) + \
+                        '_min_samples_' + str(parameter['min_samples']) + \
                         '_min_cluster_size_' + str(parameter['min_cluster_size']) + \
                         '_epsilon_' + str(parameter['epsilon'])
             file_path = os.path.join('output', 'cluster', 'experiments', 'hdbscan', 'images', file_name + ".png")

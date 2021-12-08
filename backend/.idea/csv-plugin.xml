@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results.csv">
           <value>
             <Attribute>
@@ -45,6 +52,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_15.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_5.csv">
           <value>
             <Attribute>
@@ -53,6 +74,20 @@
           </value>
         </entry>
         <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_500.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_768.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_summary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
