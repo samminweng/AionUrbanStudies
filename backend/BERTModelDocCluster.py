@@ -53,7 +53,7 @@ class BERTModelDocCluster:
             # 768 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
             model_name='all-mpnet-base-v2',
             device='cpu',
-            n_neighbour=150,
+            n_neighbours=150,
             min_dist=0
         )
         # # Create the folder path for output clustering files (csv and json)
@@ -349,18 +349,16 @@ class BERTModelDocCluster:
             print("Error occurred! {err}".format(err=err))
 
     # Cluster document vectors of best parameters by HDBSCAN (https://hdbscan.readthedocs.io/en/latest/index.html)
-    def cluster_doc_by_hdbscan(self, is_graph=False, min_cluster_size=10, min_samples=1,
-                               cluster_selection_epsilon=0.2,
-                               cluster_selection_method='eom'):
+    def cluster_doc_vector_by_hdbscan_with_best_parameter(self):
         try:
-            # Load
-            path = os.path.join(os.path.join('output', 'cluster', 'experiments', 'hdbscan'),
+            # Load best clustering results at each dimension
+            path = os.path.join('output', 'cluster', 'experiments',
                                 'HDBSCAN_cluster_doc_vector_result_summary.csv')
             clustering_results = pd.read_csv(path, encoding='utf-8', index_col=False).to_dict("records")
             best_result = sorted(clustering_results, key=lambda r: r['Silhouette_score'], reverse=True)[0]
             # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
             standard_vectors = umap.UMAP(
-                n_neighbors=self.args.n_neighbors,
+                n_neighbors=self.args.n_neighbours,
                 min_dist=self.args.min_dist,
                 n_components=2,
                 random_state=42,
@@ -370,63 +368,88 @@ class BERTModelDocCluster:
             path = os.path.join('data', self.args.case_name + '.json')
             text_df = pd.read_json(path)
             # Store the clustering results
-            self.cluster_df = pd.DataFrame(columns=['DocId', 'Text', 'x', 'y'])
-            self.cluster_df['DocId'] = text_df['DocId']
-            self.cluster_df['Title'] = text_df['Title']
-            self.cluster_df['Abstract'] = text_df['Abstract']
+            cluster_df = pd.DataFrame(columns=['DocId', 'Text', 'x', 'y'])
+            cluster_df['DocId'] = text_df['DocId']
+            cluster_df['Title'] = text_df['Title']
+            cluster_df['Abstract'] = text_df['Abstract']
             # Concatenate 'Title' and 'Abstract' into 'Text
-            self.cluster_df['Text'] = text_df['Title'] + ". " + text_df['Abstract']
-            self.cluster_df['x'] = list(map(lambda x: round(x, 2), self.standard_vectors[:, 0]))
-            self.cluster_df['y'] = list(map(lambda x: round(x, 2), self.standard_vectors[:, 1]))
-            self.cluster_df['DocVector'] = self.doc_vectors.tolist()
+            cluster_df['Text'] = text_df['Title'] + ". " + text_df['Abstract']
+            cluster_df['x'] = list(map(lambda x: round(x, 2), standard_vectors[:, 0]))
+            cluster_df['y'] = list(map(lambda x: round(x, 2), standard_vectors[:, 1]))
+            cluster_df['DocVectors'] = self.doc_vectors.tolist()
             # Filter out outliers
             outlier_doc_ids = BERTModelDocClusterUtility.get_outlier_doc_ids()
-            self.cluster_df = self.cluster_df[~self.cluster_df['DocId'].isin(outlier_doc_ids)]
-            print(self.cluster_df)
-
+            cluster_df = cluster_df[~cluster_df['DocId'].isin(outlier_doc_ids)]
+            # print(cluster_df)
+            dimension = int(best_result['dimension'])
+            min_cluster_size = int(best_result['min_cluster_size'])
+            min_samples = int(best_result['min_samples'])
+            epsilon = float(best_result['epsilon'])
+            # Reduce the doc vectors to specific dimension
+            reduced_vectors = umap.UMAP(
+                n_neighbors=150,
+                min_dist=0.0,
+                n_components=dimension,
+                random_state=42,
+                metric="cosine").fit_transform(cluster_df['DocVectors'].tolist())
+            # Compute the cosine distance/similarity for each doc vectors
+            distances = pairwise_distances(reduced_vectors, metric='cosine')
             # Cluster the documents with minimal cluster size using HDBSCAN
             # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
             clusters = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
                                        min_samples=min_samples,
-                                       cluster_selection_epsilon=cluster_selection_epsilon,
-                                       metric='euclidean',
-                                       cluster_selection_method=cluster_selection_method
-                                       ).fit(self.clusterable_embedding)
+                                       cluster_selection_epsilon=epsilon,
+                                       metric='precomputed'
+                                       ).fit(distances.astype('float64'))
             # Update the cluster to 'cluster_df'
-            self.cluster_df['HDBSCAN_Cluster'] = clusters.labels_
-            cluster_number = max(self.cluster_df['HDBSCAN_Cluster'])
-            outliers = self.cluster_df.loc[self.cluster_df['HDBSCAN_Cluster'] == -1, :]
-            parameters = {"min_cluster_size": min_cluster_size,
-                          "min_samples": min_samples,
-                          "cluster_selection_method": cluster_selection_method,
-                          "cluster_selection_epsilon": cluster_selection_epsilon,
-                          "cluster_num": cluster_number,
-                          "outliers": len(outliers)
-                          }
-            print(parameters)
-            # Save HDBSCAN cluster to 'temp' folder
-            path = os.path.join(self.output_path, 'temp', 'HDBSCAN_cluster_num_' + str(cluster_number) + '.csv')
-            self.cluster_df.to_csv(path, encoding='utf-8', index=False)
-            if is_graph:
-                # Output condense tree
-                condense_tree = clusters.condensed_tree_
-                # Save condense tree to csv
-                tree_df = condense_tree.to_pandas()
-                path = os.path.join(self.output_path, 'temp', self.args.case_name + '_clusters_tree.csv')
-                tree_df.to_csv(path, encoding='utf-8')
-                # Plot condense tree graph
-                condense_tree.plot(select_clusters=True,
-                                   selection_palette=sns.color_palette('deep', 40),
-                                   label_clusters=True,
-                                   max_rectangles_per_icicle=150)
-                image_path = os.path.join('images', 'HDBSCAN' +
-                                          '_min_cluster_size_' + str(min_cluster_size) +
-                                          '_cluster_num_' + str(cluster_number) +
-                                          '_outlier_' + str(len(outliers)) +
-                                          '.png')
-                plt.savefig(image_path)
-                print("Output HDBSCAN clustering image to " + image_path)
-            return parameters
+            cluster_labels = clusters.labels_.tolist()
+            cluster_df['HDBSCAN_Cluster'] = clusters.labels_.tolist()
+            cluster_df['Reduced_Vectors'] = reduced_vectors.tolist()
+            cluster_results = reduce(lambda pre, cur: BERTModelDocClusterUtility.collect_cluster_results(pre, cur),
+                                     cluster_labels, list())
+            # Get the outliers
+            outlier_df = cluster_df[cluster_df['HDBSCAN_Cluster'] == -1]
+            cluster_labels_no_outliers = cluster_df[cluster_df['HDBSCAN_Cluster'] != -1]['HDBSCAN_Cluster'].tolist()
+            reduced_vectors_no_outliers = np.vstack(
+                cluster_df[cluster_df['HDBSCAN_Cluster'] != -1]['Reduced_Vectors'].tolist())
+            score = BERTModelDocClusterUtility.compute_Silhouette_score(cluster_labels_no_outliers,
+                                                                        reduced_vectors_no_outliers)
+
+            result = {"min_cluster_size": min_cluster_size,
+                      "min_samples": min_samples,
+                      "epsilon": epsilon,
+                      "score": score,
+                      "total_cluster": len(cluster_results),
+                      "outliers": len(outlier_df),
+                      "cluster_results": cluster_results
+                      }
+            # print(result)
+            # Re-index and re-order the columns of cluster data frame
+            cluster_df = cluster_df.reindex(columns=['HDBSCAN_Cluster', 'DocId', 'x', 'y'])
+            folder = os.path.join('output', 'cluster')
+            # Output the result to csv and json file
+            path = os.path.join(folder, self.args.case_name + '_clusters.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            # Output to a json file
+            path = os.path.join(folder, self.args.case_name + '_clusters.json')
+            cluster_df.to_json(path, orient='records')
+            # Output HDBSCAN clustering information (condense tree)
+            folder = os.path.join('output', 'cluster', 'hdbscan_clustering')
+            # Output condense tree of the cluster results
+            condense_tree = clusters.condensed_tree_
+            # Save condense tree to csv
+            tree_df = condense_tree.to_pandas()
+            path = os.path.join(folder, self.args.case_name + '_clusters_tree.csv')
+            tree_df.to_csv(path, encoding='utf-8')
+            # Plot condense tree graph
+            condense_tree.plot(select_clusters=True,
+                               selection_palette=sns.color_palette('deep', 40),
+                               label_clusters=True,
+                               max_rectangles_per_icicle=150)
+            image_path = os.path.join(folder, 'HDBSCAN_clustering_condense_tree.png')
+            plt.savefig(image_path)
+            print("Output HDBSCAN clustering image to " + image_path)
+            return result
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -538,10 +561,10 @@ class BERTModelDocCluster:
 if __name__ == '__main__':
     mdc = BERTModelDocCluster()
     # mdc.get_sentence_embedding()
-    mdc.evaluate_HDBSCAN_cluster_quality()
-    mdc.output_HDBSCAN_cluster_quality_summary()
+    # mdc.evaluate_HDBSCAN_cluster_quality()
+    # mdc.output_HDBSCAN_cluster_quality_summary()
     # mdc.re_clustering_best_hdbscan_results()
-    # mdc.cluster_doc_by_hdbscan(is_graph=False)
+    mdc.cluster_doc_vector_by_hdbscan_with_best_parameter()
     # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
     # mdc.combine_topics_from_clusters()
 
@@ -554,15 +577,7 @@ if __name__ == '__main__':
     #         # for num_cluster in range(1, 150):
     #         clusters = KMeans(n_clusters=num_cluster, random_state=42).fit(self.clusterable_embedding)
     #         self.cluster_df['KMeans_Cluster'] = clusters.labels_
-    #         # Re-index and re-order the columns of cluster data frame
-    #         re_order_cluster_df = self.cluster_df.reindex(
-    #             columns=['KMeans_Cluster', 'HDBSCAN_Cluster', 'DocId', 'x', 'y'])
-    #         # # Write the result to csv and json file
-    #         path = os.path.join(self.output_path, self.args.case_name + '_clusters.csv')
-    #         re_order_cluster_df.to_csv(path, encoding='utf-8', index=False)
-    #         # # # Write to a json file
-    #         path = os.path.join(self.output_path, self.args.case_name + '_clusters.json')
-    #         re_order_cluster_df.to_json(path, orient='records')
+
     #         print('Output cluster results and 2D data points to ' + path)
     #         # sum_of_squared_distances.append({'cluster': num_cluster, 'sse': clusters.inertia_})
     #     except Exception as err:

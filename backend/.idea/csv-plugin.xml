@@ -157,6 +157,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/hdbscan_clustering/HDBSCAN_cluster_result.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/hdbscan_clustering/UrbanStudyCorpus_HDBSCAN_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/hdbscan_clustering/UrbanStudyCorpus_clusters_tree.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/key_phrases/UrbanStudyCorpus_HDBSCAN_Cluster_topic_key_phrases.csv">
           <value>
             <Attribute>
