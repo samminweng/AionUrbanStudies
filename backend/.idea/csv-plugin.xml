@@ -87,6 +87,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_300.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_5.csv">
           <value>
             <Attribute>
@@ -109,6 +116,13 @@
           </value>
         </entry>
         <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/recluster/HDBSCAN_re_cluster_doc_vector_results_80.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -104,7 +104,7 @@ class BERTModelDocClusterUtility:
 
     # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
-    def visualise_cluster_results(cluster_labels, vectors, parameter):
+    def visualise_cluster_results(cluster_labels, vectors, parameter, folder):
         try:
             max_cluster_no = max(cluster_labels)
             df = pd.DataFrame()
@@ -142,21 +142,16 @@ class BERTModelDocClusterUtility:
                                 size=2, color='gray', opacity=0.3)
                 ))
 
-            title = 'dimension = ' + str(parameter['dimension']) + \
-                    ' min_samples = ' + str(parameter['min_samples']) + \
-                    ' min_cluster_size = ' + str(parameter['min_cluster_size']) + \
-                    ' epsilon = ' + str(parameter['epsilon'])
+            title = 'dimension = ' + str(parameter['dimension'])
             # Figure layout
             fig.update_layout(title=title,
                               width=600, height=800,
-                              legend=dict(orientation="h"),
-                              margin=dict(l=20, r=20, t=30, b=20),
-                              paper_bgcolor="LightSteelBlue")
-            file_name = 'dimension_' + str(parameter['dimension']) + \
-                        '_min_samples_' + str(parameter['min_samples']) + \
-                        '_min_cluster_size_' + str(parameter['min_cluster_size']) + \
-                        '_epsilon_' + str(parameter['epsilon'])
-            file_path = os.path.join('output', 'cluster', 'experiments', 'hdbscan', 'images', file_name + ".png")
+                              legend=dict(orientation="v"),
+                              margin=dict(l=20, r=20, t=30, b=40))
+            file_name = 'dimension_' + str(parameter['dimension'])
+            # Add iteration if needed
+            file_name = file_name + ('_iteration_' + str(parameter['iteration']) if 'iteration' in parameter else '')
+            file_path = os.path.join(folder, file_name + ".png")
             pio.write_image(fig, file_path, format='png')
             print("Output the cluster results to " + file_path)
         except Exception as err:
@@ -166,82 +161,36 @@ class BERTModelDocClusterUtility:
     # Ref: https://towardsdatascience.com/silhouette-coefficient-validating-clustering-techniques-e976bb81d10c
     # Ref: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html
     @staticmethod
-    def compute_Silhouette_score(df):
+    def compute_Silhouette_score(cluster_labels, cluster_vectors):
         # score = 1 indicates good clusters that each cluster distinguishes from other clusters
         # score = 0 no difference between clusters
         # score = -1 clusters are wrong
         try:
             # Get all the cluster dots
-            cluster_df = df[df['clusters'] != -1]
-            cluster_labels = cluster_df['clusters'].tolist()
-            vectors = cluster_df['vectors'].tolist()
-            avg_score = silhouette_score(vectors, cluster_labels, metric='cosine')
+            avg_score = silhouette_score(cluster_vectors, cluster_labels, metric='cosine')
             return avg_score
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-            return "None"
+            return None
 
-    # Use collection 'PMI' 'Chi-test' or 'likelihood' to obtain the topics from the texts
+    # Collect clustering results and find outliers and the cluster of minimal size
     @staticmethod
-    def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):
+    def collect_cluster_results(results, cur):
         try:
-            # Load function words
-            _df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
-            function_words = _df['Function Word'].tolist()
-            # Collect a list of clustered document where each document is a list of tokens
-            cluster_docs = []
-            # Select the documents from doc_ids
-            for doc_id, doc_text in zip(doc_ids, doc_texts):
-                tokens = word_tokenize(doc_text)
-                cluster_docs.append({"doc_id": doc_id, "tokens": tokens})
+            found = next((r for r in results if r['cluster_no'] == cur), None)
+            if not found:
+                found = {'cluster_no': cur, 'count': 1}
+                results.append(found)
+            else:
+                found['count'] += 1
+            # Sort the results
+            results = sorted(results, key=lambda c: (c['count'], c['cluster_no']))
+            return results
+        except Exception as _err:
+            print("Error occurred! {err}".format(err=_err))
 
-            # Create NLTK bigram object
-            bigram_measures = nltk.collocations.BigramAssocMeasures()
-            # Map the cluster documents to a list of document where each doc is represented with a list of tokens
-            documents = list(map(lambda doc: doc['tokens'], cluster_docs))
-            # Score and rank the collocations
-            finder = BigramCollocationFinder.from_documents(documents)
-            # finder.apply_freq_filter(4)
-            # # # Filter out bi_grams containing stopwords or function words
-            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in function_words or
-                                                     w2.lower() in function_words)
-            finder.apply_ngram_filter(lambda w1, w2: w1.lower() in BERTModelDocClusterUtility.stop_words or
-                                                     w2.lower() in BERTModelDocClusterUtility.stop_words)
-            # Find a list of bi_grams by likelihood collocations
-            if associate_measure == 'pmi':
-                scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
-            elif associate_measure == 'chi':
-                scored_bi_grams = finder.score_ngrams(bigram_measures.chi_sq)
-            else:  # likelihood
-                scored_bi_grams = finder.score_ngrams(bigram_measures.likelihood_ratio)
 
-            # Sort bi_grams by scores from high to low
-            sorted_bi_grams = sorted(scored_bi_grams, key=lambda bi_gram: bi_gram[1], reverse=True)
-            # Convert bi_gram object to a list of
-            bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
-                                                      'score': bi_gram[1]}, sorted_bi_grams))
-            # Collect the doc ids that each collocation appears
-            topic_words = []
-            for bi_gram in bi_grams_list:
-                collocation = bi_gram['collocation']
-                score = bi_gram['score']
-                topic_doc_ids = []
-                for doc in cluster_docs:
-                    doc_id = doc['doc_id']
-                    doc_tokens = doc['tokens']
-                    doc_bi_grams = list(ngrams(doc_tokens, 2))
-                    doc_bi_grams = list(map(lambda b: b[0] + " " + b[1], doc_bi_grams))
-                    # Check if topic word in bi_grams
-                    if collocation in doc_bi_grams:
-                        topic_doc_ids.append(doc_id)
-                topic_words.append({'topic_words': collocation, 'score': score, 'doc_ids': topic_doc_ids})
-            # limit the top 20 topic words
-            topic_words = topic_words
-            # Sort the topic_words by the number of docs
-            topic_words = sorted(topic_words, key=lambda topic_word: len(topic_word), reverse=True)
-            return topic_words
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
+
 
     # Process and clean the text by converting plural nouns to singular nouns
     # Avoid license sentences
@@ -631,3 +580,66 @@ class BERTModelDocClusterUtility:
             return list(map(lambda doc: doc['DocId'], outliers))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+
+# # Use collection 'PMI' 'Chi-test' or 'likelihood' to obtain the topics from the texts
+    # @staticmethod
+    # def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):
+    #     try:
+    #         # Load function words
+    #         _df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
+    #         function_words = _df['Function Word'].tolist()
+    #         # Collect a list of clustered document where each document is a list of tokens
+    #         cluster_docs = []
+    #         # Select the documents from doc_ids
+    #         for doc_id, doc_text in zip(doc_ids, doc_texts):
+    #             tokens = word_tokenize(doc_text)
+    #             cluster_docs.append({"doc_id": doc_id, "tokens": tokens})
+    #
+    #         # Create NLTK bigram object
+    #         bigram_measures = nltk.collocations.BigramAssocMeasures()
+    #         # Map the cluster documents to a list of document where each doc is represented with a list of tokens
+    #         documents = list(map(lambda doc: doc['tokens'], cluster_docs))
+    #         # Score and rank the collocations
+    #         finder = BigramCollocationFinder.from_documents(documents)
+    #         # finder.apply_freq_filter(4)
+    #         # # # Filter out bi_grams containing stopwords or function words
+    #         finder.apply_ngram_filter(lambda w1, w2: w1.lower() in function_words or
+    #                                                  w2.lower() in function_words)
+    #         finder.apply_ngram_filter(lambda w1, w2: w1.lower() in BERTModelDocClusterUtility.stop_words or
+    #                                                  w2.lower() in BERTModelDocClusterUtility.stop_words)
+    #         # Find a list of bi_grams by likelihood collocations
+    #         if associate_measure == 'pmi':
+    #             scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
+    #         elif associate_measure == 'chi':
+    #             scored_bi_grams = finder.score_ngrams(bigram_measures.chi_sq)
+    #         else:  # likelihood
+    #             scored_bi_grams = finder.score_ngrams(bigram_measures.likelihood_ratio)
+    #
+    #         # Sort bi_grams by scores from high to low
+    #         sorted_bi_grams = sorted(scored_bi_grams, key=lambda bi_gram: bi_gram[1], reverse=True)
+    #         # Convert bi_gram object to a list of
+    #         bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
+    #                                                   'score': bi_gram[1]}, sorted_bi_grams))
+    #         # Collect the doc ids that each collocation appears
+    #         topic_words = []
+    #         for bi_gram in bi_grams_list:
+    #             collocation = bi_gram['collocation']
+    #             score = bi_gram['score']
+    #             topic_doc_ids = []
+    #             for doc in cluster_docs:
+    #                 doc_id = doc['doc_id']
+    #                 doc_tokens = doc['tokens']
+    #                 doc_bi_grams = list(ngrams(doc_tokens, 2))
+    #                 doc_bi_grams = list(map(lambda b: b[0] + " " + b[1], doc_bi_grams))
+    #                 # Check if topic word in bi_grams
+    #                 if collocation in doc_bi_grams:
+    #                     topic_doc_ids.append(doc_id)
+    #             topic_words.append({'topic_words': collocation, 'score': score, 'doc_ids': topic_doc_ids})
+    #         # limit the top 20 topic words
+    #         topic_words = topic_words
+    #         # Sort the topic_words by the number of docs
+    #         topic_words = sorted(topic_words, key=lambda topic_word: len(topic_word), reverse=True)
+    #         return topic_words
+    #     except Exception as err:
+    #         print("Error occurred! {err}".format(err=err))
