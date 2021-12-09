@@ -53,7 +53,7 @@ class BERTModelDocCluster:
             # 768 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
             model_name='all-mpnet-base-v2',
             device='cpu',
-            n_neighbours=150,
+            n_neighbors=150,
             min_dist=0
         )
         # # Create the folder path for output clustering files (csv and json)
@@ -63,9 +63,25 @@ class BERTModelDocCluster:
         with open(path, "rb") as fIn:
             stored_data = pickle.load(fIn)
             self.doc_vectors = stored_data['embeddings']
+        # Load the Scopus downloaded file as input file
+        path = os.path.join('data', self.args.case_name + '.json')
+        text_df = pd.read_json(path)
+        # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
+        standard_vectors = umap.UMAP(
+            n_neighbors=self.args.n_neighbors,
+            min_dist=self.args.min_dist,
+            n_components=2,
+            random_state=42,
+            metric='cosine'
+        ).fit_transform(self.doc_vectors)
         # # # Load all document vectors without outliers
         self.df = pd.DataFrame()
-        self.df['DocId'] = list(range(1, len(self.doc_vectors) + 1))
+        self.df['DocId'] = text_df['DocId']
+        self.df['Title'] = text_df['Title']
+        self.df['Abstract'] = text_df['Abstract']
+        self.df['Text'] = text_df['Title'] + ". " + text_df['Abstract']
+        self.df['x'] = list(map(lambda x: round(x, 2), standard_vectors[:, 0]))
+        self.df['y'] = list(map(lambda x: round(x, 2), standard_vectors[:, 1]))
         self.df['DocVectors'] = self.doc_vectors.tolist()
         # Load outlier list that are not relevant or are duplicated
         outliers_df = pd.read_csv(os.path.join('data', 'UrbanStudyCorpus_outliers.csv'))
@@ -120,7 +136,6 @@ class BERTModelDocCluster:
     # Experiment UMAP + HDBSCAN clustering and evaluate the clustering results with 'Silhouette score'
     def evaluate_HDBSCAN_cluster_quality(self):
         try:
-            n_neighbour = 150
             # Experiment HDBSCAN clustering with different dimensions of vectors
             for dimension in [None, 500, 450, 400, 350, 300, 250, 200, 150, 100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10,
                               5]:
@@ -128,8 +143,8 @@ class BERTModelDocCluster:
                 if dimension:
                     # Run HDBSCAN on reduced dimensional vectors
                     vectors = umap.UMAP(
-                        n_neighbors=n_neighbour,
-                        min_dist=0.0,
+                        n_neighbors=self.args.n_neighbors,
+                        min_dist=self.args.min_dist,
                         n_components=dimension,
                         random_state=42,
                         metric="cosine").fit_transform(self.df['DocVectors'].tolist())
@@ -237,16 +252,10 @@ class BERTModelDocCluster:
             d_result_df.to_csv(path, encoding='utf-8', index=False)
             # Get the highest score of d_results
             # # Load all document vectors without outliers
-            df = pd.DataFrame()
-            df['DocId'] = list(range(1, len(self.doc_vectors) + 1))
-            df['DocVectors'] = self.doc_vectors.tolist()
-            # Load outlier list
-            outliers_df = pd.read_csv(os.path.join('data', 'UrbanStudyCorpus_outliers.csv'))
-            outlier_doc_ids = outliers_df['DocId'].tolist()
-            # Remove all the outliers
-            df = df[~df['DocId'].isin(outlier_doc_ids)]
-            # # Reduce the doc vectors to 2 dimension using UMAP dimension reduction for visualisation
-            standard_vectors = umap.UMAP(n_neighbors=self.args.n_neighbour,
+            df = self.df.copy(deep=True)
+            # # # Reduce the doc vectors to 2 dimension using UMAP dimension reduction for visualisation
+            standard_vectors = umap.UMAP(n_neighbors=self.args.n_neighbors,
+                                         min_dist=self.args.min_dist,
                                          n_components=2,
                                          random_state=42,
                                          metric='cosine').fit_transform(df['DocVectors'].tolist())
@@ -256,8 +265,8 @@ class BERTModelDocCluster:
                 if dimension < 768:
                     # Run HDBSCAN on reduced dimensional vectors
                     vectors = umap.UMAP(
-                        n_neighbors=self.args.n_neighbour,
-                        min_dist=0.0,
+                        n_neighbors=self.args.n_neighbors,
+                        min_dist=self.args.min_dist,
                         n_components=dimension,
                         random_state=42,
                         metric="cosine").fit_transform(df['DocVectors'].tolist())
@@ -297,8 +306,8 @@ class BERTModelDocCluster:
                 # # Get the highest score of d_results
                 # Reduced document vectors
                 vectors = umap.UMAP(
-                    n_neighbors=150,
-                    min_dist=0.0,
+                    n_neighbors=self.args.n_neighbors,
+                    min_dist=self.args.min_dist,
                     n_components=dimension,
                     random_state=42,
                     metric="cosine").fit_transform(cluster_df['DocVectors'].tolist())
@@ -326,7 +335,8 @@ class BERTModelDocCluster:
                           'total_clusters': len(cluster_results), 'outliers': len(outlier_df),
                           'cluster_results': cluster_results}
                 # # Reduce the doc vectors to 2 dimension using UMAP dimension reduction for visualisation
-                standard_vectors = umap.UMAP(n_neighbors=self.args.n_neighbour,
+                standard_vectors = umap.UMAP(n_neighbors=self.args.n_neighbors,
+                                             min_dist=self.args.min_dist,
                                              n_components=2,
                                              random_state=42,
                                              metric='cosine').fit_transform(cluster_df['reduced_vectors'].tolist())
@@ -356,31 +366,9 @@ class BERTModelDocCluster:
                                 'HDBSCAN_cluster_doc_vector_result_summary.csv')
             clustering_results = pd.read_csv(path, encoding='utf-8', index_col=False).to_dict("records")
             best_result = sorted(clustering_results, key=lambda r: r['Silhouette_score'], reverse=True)[0]
-            # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
-            standard_vectors = umap.UMAP(
-                n_neighbors=self.args.n_neighbours,
-                min_dist=self.args.min_dist,
-                n_components=2,
-                random_state=42,
-                metric='cosine'
-            ).fit_transform(self.doc_vectors)
-            # Load the Scopus downloaded file as input file
-            path = os.path.join('data', self.args.case_name + '.json')
-            text_df = pd.read_json(path)
+
             # Store the clustering results
-            cluster_df = pd.DataFrame(columns=['DocId', 'Text', 'x', 'y'])
-            cluster_df['DocId'] = text_df['DocId']
-            cluster_df['Title'] = text_df['Title']
-            cluster_df['Abstract'] = text_df['Abstract']
-            # Concatenate 'Title' and 'Abstract' into 'Text
-            cluster_df['Text'] = text_df['Title'] + ". " + text_df['Abstract']
-            cluster_df['x'] = list(map(lambda x: round(x, 2), standard_vectors[:, 0]))
-            cluster_df['y'] = list(map(lambda x: round(x, 2), standard_vectors[:, 1]))
-            cluster_df['DocVectors'] = self.doc_vectors.tolist()
-            # Filter out outliers
-            outlier_doc_ids = BERTModelDocClusterUtility.get_outlier_doc_ids()
-            cluster_df = cluster_df[~cluster_df['DocId'].isin(outlier_doc_ids)]
-            # print(cluster_df)
+            cluster_df = self.df.copy(deep=True)
             dimension = int(best_result['dimension'])
             min_cluster_size = int(best_result['min_cluster_size'])
             min_samples = int(best_result['min_samples'])
