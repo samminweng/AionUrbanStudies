@@ -592,20 +592,42 @@ class BERTModelDocClusterUtility:
             print("Error occurred! {err}".format(err=err))
 
     @staticmethod
-    def scan_duplicate_articles():
+    def get_outlier_doc_ids(is_load=True):
+        if is_load:
+            path = os.path.join('data', 'UrbanStudyCorpus_outliers.csv')
+            outlier_df = pd.read_csv(path)
+            outliers = outlier_df.to_dict("records")
+            # Return a list of doc ids
+            return list(map(lambda doc: doc['DocId'], outliers))
+
         try:
+            # Read HDBSCAN outlier
+            outlier_df = pd.read_csv(os.path.join('output', 'cluster', 'experiments', 'hdbscan', 'HDBSCAN_outlier.csv'))
+            outliers = outlier_df.to_dict("records")
+            # Scan duplicate doc in the corpus
             corpus_df = pd.read_csv(os.path.join('data', 'UrbanStudyCorpus.csv'))
             corpus = corpus_df.to_dict("records")
-            duplicate_doc_ids = set()
-            for article in corpus:
-                doc_id = article['DocId']
-                title = article['Title']
-                # Find if other article has the same title and author names
-                same_articles = list(filter(lambda a: a['Title'].lower().strip() == title.lower().strip() and
-                                                      a['DocId'] > doc_id, corpus))
-                if len(same_articles):
-                    for sa in same_articles:
-                        duplicate_doc_ids.add(sa['DocId'])
-            return list(duplicate_doc_ids)
+            # Check if a doc has the same title in the
+            for doc in corpus:
+                doc_id = doc['DocId']
+                title = doc['Title']
+                # Find if other article has the same title
+                duplicates_docs = list(filter(lambda a: a['Title'].lower().strip() == title.lower().strip() and
+                                                        a['DocId'] > doc_id, corpus))
+                for duplicate_doc in duplicates_docs:
+                    # Check if the common doc exits in outliers
+                    found_doc = next((outlier_doc for outlier_doc in outliers
+                                      if outlier_doc['DocId'] == duplicate_doc['DocId']), None)
+                    if not found_doc:      # If not, add the duplicate doc to outlier docs
+                        outliers.append({'DocId': duplicate_doc['DocId'], 'Title': duplicate_doc['Title'],
+                                         'Abstract': duplicate_doc['Abstract']})
+            # print(outliers)
+            outliers = sorted(outliers, key=lambda outlier: outlier['DocId'])
+            # Save to outlier csv to 'data'
+            path = os.path.join('data', 'UrbanStudyCorpus_outliers.csv')
+            outlier_df = pd.DataFrame(outliers, columns=['DocId', 'Title', 'Abstract'])
+            outlier_df.to_csv(path, encoding='utf-8', index=False)
+            # Return a list of doc ids
+            return list(map(lambda doc: doc['DocId'], outliers))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
