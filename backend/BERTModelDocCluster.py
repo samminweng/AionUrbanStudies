@@ -232,6 +232,7 @@ class BERTModelDocCluster:
                                        columns=['dimension', 'min_samples', 'min_cluster_size', 'epsilon',
                                                 'Silhouette_score', 'total_clusters', 'outliers',
                                                 'cluster_results'])
+            folder = os.path.join('output', 'cluster', 'experiments')
             path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.csv')
             d_result_df.to_csv(path, encoding='utf-8', index=False)
             # Get the highest score of d_results
@@ -281,7 +282,7 @@ class BERTModelDocCluster:
     # Re-cluster the best clustering results by removing outliers and see if the cluster results converge
     def re_clustering_best_hdbscan_results(self):
         try:
-            path = os.path.join(os.path.join('output', 'cluster', 'experiments', 'hdbscan'),
+            path = os.path.join(os.path.join('output', 'cluster', 'experiments'),
                                 'HDBSCAN_cluster_doc_vector_result_summary.csv')
             clustering_results = pd.read_csv(path, encoding='utf-8', index_col=False).to_dict("records")
             best_result = sorted(clustering_results, key=lambda r: r['Silhouette_score'], reverse=True)[0]
@@ -352,6 +353,11 @@ class BERTModelDocCluster:
                                cluster_selection_epsilon=0.2,
                                cluster_selection_method='eom'):
         try:
+            # Load
+            path = os.path.join(os.path.join('output', 'cluster', 'experiments', 'hdbscan'),
+                                'HDBSCAN_cluster_doc_vector_result_summary.csv')
+            clustering_results = pd.read_csv(path, encoding='utf-8', index_col=False).to_dict("records")
+            best_result = sorted(clustering_results, key=lambda r: r['Silhouette_score'], reverse=True)[0]
             # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
             standard_vectors = umap.UMAP(
                 n_neighbors=self.args.n_neighbors,
@@ -532,9 +538,9 @@ class BERTModelDocCluster:
 if __name__ == '__main__':
     mdc = BERTModelDocCluster()
     # mdc.get_sentence_embedding()
-    # mdc.evaluate_HDBSCAN_cluster_quality()
-    # mdc.output_HDBSCAN_cluster_quality_summary()
-    mdc.re_clustering_best_hdbscan_results()
+    mdc.evaluate_HDBSCAN_cluster_quality()
+    mdc.output_HDBSCAN_cluster_quality_summary()
+    # mdc.re_clustering_best_hdbscan_results()
     # mdc.cluster_doc_by_hdbscan(is_graph=False)
     # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
     # mdc.combine_topics_from_clusters()

@@ -38,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/cluster/experiments/HDBSCAN_experiment.csv">
           <value>
             <Attribute>
