@@ -423,7 +423,7 @@ class BERTModelDocClusterUtility:
         approach = "TF-IDF"
         try:
             folder = os.path.join('output', 'cluster', 'topics')
-            path = os.path.join(folder, 'UrbanStudyCorpus_' + cluster + '_' + approach + '_topic_words_details.json')
+            path = os.path.join(folder, 'UrbanStudyCorpus_' + cluster + '_' + approach + '_topic_words_n_grams.json')
             cluster_df = pd.read_json(path)
             clusters = cluster_df.to_dict("records")
             cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
