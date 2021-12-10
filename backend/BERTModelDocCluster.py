@@ -88,6 +88,11 @@ class BERTModelDocCluster:
         outlier_doc_ids = outliers_df['DocId'].tolist()
         # Remove all the outliers
         self.df = self.df[~self.df['DocId'].isin(outlier_doc_ids)]
+        # Save df to csv and json
+        path = os.path.join('data', self.args.case_name + '_cleaned.csv')
+        self.df.to_csv(path, encoding='utf-8', index=False)
+        path = os.path.join('data', self.args.case_name + '_cleaned.json')
+        self.df.to_json(path, orient='records')
 
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
@@ -443,73 +448,56 @@ class BERTModelDocCluster:
 
     # Derive the topic words from each cluster of documents
     def derive_topics_from_cluster_docs_by_TF_IDF(self):
-        cluster_approaches = ['HDBSCAN_Cluster']
+        approach = 'HDBSCAN_Cluster'
         try:
-            # Get the duplicate articles.
-            # Note the original Scopus file contain duplicated articles (titles are the same)
-            duplicate_doc_ids = BERTModelDocClusterUtility.scan_duplicate_articles()
-            print("Duplicated articles in " + self.args.case_name + ":")
-            print(*duplicate_doc_ids, sep=", ")
-            # Load the document cluster
-            doc_clusters_df = pd.read_json(
-                os.path.join(self.output_path, self.args.case_name + '_clusters.json'))
+            folder = os.path.join('output', 'cluster')
+            # Load the documents clustered by
+            doc_clusters_df = pd.read_json(os.path.join(folder, self.args.case_name + '_clusters.json'))
             # Update text column
-            doc_clusters_df['Text'] = self.cluster_df['Text']
-            # Drop the documents that are not in the list of duplicated articles
-            doc_clusters_df = doc_clusters_df[~doc_clusters_df['DocId'].isin(duplicate_doc_ids)]
-            # Cluster the documents by
-            for approach in cluster_approaches:
-                # Group the documents and doc_id by clusters
-                docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
-                    .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
-                # Get top 100 topics (1, 2, 3 grams) for each cluster
-                n_gram_topic_list = BERTModelDocClusterUtility.get_n_gram_topics(approach, docs_per_cluster)
-                # print(topic_words_df)
-                results = []
-                for i, cluster in docs_per_cluster.iterrows():
-                    try:
-                        cluster_no = cluster[approach]
-                        doc_ids = cluster['DocId']
-                        doc_texts = cluster['Text']
-                        result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
-                        n_gram_topics = []
-                        # Collect the topics of 1 gram, 2 gram and 3 gram
-                        for n_gram_num in [1, 2, 3]:
-                            n_gram_topic = next(n_gram_topic for n_gram_topic in n_gram_topic_list
-                                                if n_gram_topic['n_gram'] == n_gram_num)
-                            # Collect top 300 topics of a cluster
-                            cluster_topics = n_gram_topic['topics'][str(cluster_no)][:300]
-                            # Create a mapping between the topic and its associated articles (doc)
-                            doc_per_topic = BERTModelDocClusterUtility.group_docs_by_topics(n_gram_num,
-                                                                                            doc_ids, doc_texts,
-                                                                                            cluster_topics)
-                            n_gram_type = 'Topic-' + str(n_gram_num) + '-gram'
-                            result[n_gram_type] = doc_per_topic
-                            n_gram_topics += doc_per_topic
-                        if cluster_no == 2:  # Debugging only
-                            print("Cluster 2")
-                        result['Topic-N-gram'] = BERTModelDocClusterUtility.merge_n_gram_topic(n_gram_topics)
-                        results.append(result)
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
-                # Write the result to csv and json file
-                cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
-                                                            'Topic-1-gram',
-                                                            'Topic-2-gram',
-                                                            'Topic-3-gram',
-                                                            'Topic-N-gram'])
-                _path = os.path.join(self.output_path, 'topics',
-                                     self.args.case_name + '_' + approach + '_TF-IDF_topic_words.csv')
-                cluster_df.to_csv(_path, encoding='utf-8', index=False)
-                # # # Write to a json file
-                _path = os.path.join(self.output_path, 'topics',
-                                     self.args.case_name + '_' + approach + '_TF-IDF_topic_words.json')
-                cluster_df.to_json(_path, orient='records')
-                print('Output topics per cluster to ' + _path)
-            # # Output top 50 topics by 1, 2 and 3-grams
-            BERTModelDocClusterUtility.flatten_tf_idf_topics(5)  # topics in Cluster 5 about 'temperature' 'urban heat'
-            BERTModelDocClusterUtility.flatten_tf_idf_topics(7)  # topics in Cluster 7 about 'Iot' 'traffic'
-            BERTModelDocClusterUtility.flatten_tf_idf_topics(9)  # topics in Cluster 9 about 'human mobility'
+            doc_clusters_df['Text'] = self.df['Text'].tolist()
+            # Group the documents and doc_id by clusters
+            docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
+                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+            # Get top 100 topics (1, 2, 3 grams) for each cluster
+            n_gram_topic_list = BERTModelDocClusterUtility.get_n_gram_topics(approach, docs_per_cluster)
+            results = []
+            for i, cluster in docs_per_cluster.iterrows():
+                try:
+                    cluster_no = cluster[approach]
+                    doc_ids = cluster['DocId']
+                    doc_texts = cluster['Text']
+                    result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
+                    n_gram_topics = []
+                    # Collect the topics of 1 gram, 2 gram and 3 gram
+                    for n_gram_num in [1, 2, 3]:
+                        n_gram_topic = next(n_gram_topic for n_gram_topic in n_gram_topic_list
+                                            if n_gram_topic['n_gram'] == n_gram_num)
+                        # Collect top 300 topics of a cluster
+                        cluster_topics = n_gram_topic['topics'][str(cluster_no)][:300]
+                        # Create a mapping between the topic and its associated articles (doc)
+                        doc_per_topic = BERTModelDocClusterUtility.group_docs_by_topics(n_gram_num,
+                                                                                        doc_ids, doc_texts,
+                                                                                        cluster_topics)
+                        n_gram_type = 'Topic-' + str(n_gram_num) + '-gram'
+                        result[n_gram_type] = doc_per_topic
+                        n_gram_topics += doc_per_topic
+                    if cluster_no == 2:  # Debugging only
+                        print("Cluster 2")
+                    result['Topic-N-gram'] = BERTModelDocClusterUtility.merge_n_gram_topic(n_gram_topics)
+                    results.append(result)
+                except Exception as err:
+                    print("Error occurred! {err}".format(err=err))
+            # Write the result to csv and json file
+            cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
+                                                        'Topic-1-gram', 'Topic-2-gram', 'Topic-3-gram', 'Topic-N-gram'])
+            folder = os.path.join('output', 'cluster', 'topics')
+            path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_details.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            # # # Write to a json file
+            path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_details.json')
+            cluster_df.to_json(path, orient='records')
+            print('Output topics per cluster to ' + path)
+
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -552,9 +540,13 @@ if __name__ == '__main__':
     # mdc.evaluate_HDBSCAN_cluster_quality()
     # mdc.output_HDBSCAN_cluster_quality_summary()
     # mdc.re_clustering_best_hdbscan_results()
-    mdc.cluster_doc_vector_by_hdbscan_with_best_parameter()
+    # mdc.cluster_doc_vector_by_hdbscan_with_best_parameter()
     # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
-    # mdc.combine_topics_from_clusters()
+    # Output top 50 topics by 1, 2 and 3-grams at specific cluster
+    # BERTModelDocClusterUtility.flatten_tf_idf_topics(1)
+    # BERTModelDocClusterUtility.flatten_tf_idf_topics(2)
+    # BERTModelDocClusterUtility.flatten_tf_idf_topics(3)
+    mdc.combine_topics_from_clusters()
 
     # # Cluster document embedding by KMeans clustering
     # def cluster_doc_by_KMeans(self, num_cluster=9):

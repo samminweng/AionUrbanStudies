@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+LUCC,0.0180077764,20,1,1,CA model,0.0115657202,12,3,1,complexity science research,0.013985906900000001,7,1,1,LUCC,0.0180077764,20,1,1
+CA,0.0144062211,24,7,2,land growth,0.0086742902,9,2,1,urban land growth,0.009989933500000001,5,1,1,CA,0.0144062211,24,7,2
+analog,0.009904277000000001,11,1,1,LUCC analog,0.0086742902,9,1,1,LUCC analog model,0.009989933500000001,5,1,1,complexity science research,0.013985906900000001,7,1,1
+automata,0.0078033698,13,8,2,cellular automata,0.0077104801,12,7,2,urban land use,0.0084816783,9,5,3,CA model,0.0115657202,12,3,1
+cellular,0.006795114400000001,16,9,3,complexity science,0.0077104801,8,1,1,residential land growth,0.0079919468,4,1,1,urban land growth,0.009989933500000001,5,1,1
+simulating,0.006002592100000001,10,7,2,urbanization process,0.0072737457000000005,16,3,3,LUCC analog research,0.0079919468,4,1,1,LUCC analog model,0.009989933500000001,5,1,1
+Markov,0.0054023329,9,4,2,intelligent computation,0.0067466701,7,1,1,land use change,0.0075392696000000006,8,4,3,analog,0.009904277000000001,11,1,1
+LUC,0.0045019441,5,2,1,urban land,0.006104130100000001,19,7,4,land use policy,0.0066599557,5,2,2,land growth,0.0086742902,9,2,1
+RBFN,0.0045019441,5,1,1,urban growth,0.0059099184,13,6,3,simulating urban expansion,0.0059939601,3,2,1,LUCC analog,0.0086742902,9,1,1
+expansion,0.0038666796000000002,19,7,5,transition rule,0.0057828601,6,4,1,multiple land use,0.0059939601,3,2,1,urban land use,0.0084816783,9,5,3
+growth,0.0038615163000000003,31,9,6,analog model,0.0057828601,6,1,1,spatiotemporal neighborhood feature,0.0059939601,3,1,1,residential land growth,0.0079919468,4,1,1
+simulate,0.0029728625,7,6,3,LUCC research,0.0057828601,6,1,1,BP artificial neural,0.0059939601,3,1,1,LUCC analog research,0.0079919468,4,1,1
+computation,0.0029728625,7,1,3,neighborhood effect,0.0048190501000000005,5,4,1,artificial immune system,0.0039959734,2,1,1,automata,0.0078033698,13,8,2
+immune,0.0027011665000000002,3,1,1,analog research,0.0048190501000000005,5,1,1,Land Transformation Model,0.0039959734,2,1,1,cellular automata,0.0077104801,12,7,2
+Automata,0.0027011665000000002,3,3,1,science research,0.0044977801,7,1,2,land change science,0.0039959734,2,1,1,complexity science,0.0077104801,8,1,1
+Zhanggong,0.0027011665000000002,3,1,1,simulating urban,0.0038552401000000003,6,5,2,highest simulation accuracy,0.0039959734,2,2,1,land use change,0.0075392696000000006,8,4,3
+BP,0.0027011665000000002,3,1,1,growth simulation,0.0038552401000000003,4,2,1,basis function network,0.0039959734,2,1,1,urbanization process,0.0072737457000000005,16,3,3
+simulation,0.0026158659,21,9,6,use change,0.0036368728,8,4,3,modeling urban change,0.0039959734,2,1,1,cellular,0.006795114400000001,16,9,3
+farmland,0.0025481679,6,2,3,land change,0.0032127001000000002,5,3,2,land use transition,0.0039959734,2,1,1,intelligent computation,0.0067466701,7,1,1
+driving,0.002238604,11,6,5,urban change,0.0032127001000000002,5,1,2,use change simulation,0.0039959734,2,2,1,land use policy,0.0066599557,5,2,2
+cell,0.0021234732,5,3,3,immune system,0.0028914301,3,1,1,land growth simulation,0.0039959734,2,1,1,urban land,0.006104130100000001,19,7,4
+District,0.0021234732,5,2,3,simulate urban,0.0028914301,3,3,1,four traditional model,0.0039959734,2,1,1,simulating,0.006002592100000001,10,7,2
+Shenzhen,0.0021234732,5,2,3,multiple land,0.0028914301,3,2,1,regional population forecast,0.0039959734,2,1,1,simulating urban expansion,0.0059939601,3,2,1
+Chain,0.0018007776000000001,3,2,2,Zhanggong District,0.0028914301,3,1,1,urban growth simulation,0.0039959734,2,1,1,multiple land use,0.0059939601,3,2,1
+SOM,0.0018007776000000001,3,1,2,model integrating,0.0028914301,3,2,1,growth simulation model,0.0039959734,2,1,1,spatiotemporal neighborhood feature,0.0059939601,3,1,1
+establishment,0.0018007776000000001,3,2,2,spatiotemporal neighborhood,0.0028914301,3,1,1,urban growth model,0.0039959734,2,2,1,BP artificial neural,0.0059939601,3,1,1
+Wuhan,0.0018007776000000001,3,1,2,national policy,0.0028914301,3,1,1,urban inefficient industrial,0.0039959734,2,1,1,urban growth,0.0059099184,13,6,3
+LTM,0.0018007776000000001,2,1,1,regional population,0.0028914301,3,1,1,inefficient industrial land,0.0039959734,2,1,1,transition rule,0.0057828601,6,4,1
+automaton,0.0018007776000000001,2,2,1,population forecast,0.0028914301,3,1,1,industrial land recognition,0.0039959734,2,1,1,analog model,0.0057828601,6,1,1
+UMCNN,0.0018007776000000001,2,1,1,spatiotemporal uncertainty,0.0028914301,3,1,1,land recognition system,0.0039959734,2,1,1,LUCC research,0.0057828601,6,1,1
+USI,0.0018007776000000001,2,1,1,LUCC model,0.0028914301,3,1,1,recognition system based,0.0039959734,2,1,1,Markov,0.0054023329,9,4,2
+subclass,0.0018007776000000001,2,1,1,space system,0.0028914301,3,1,1,augmented learning model,0.0039959734,2,1,1,neighborhood effect,0.0048190501000000005,5,4,1
+aligned,0.0018007776000000001,2,2,1,BP artificial,0.0028914301,3,1,1,global change study,0.0039959734,2,1,1,analog research,0.0048190501000000005,5,1,1
+VCA,0.0018007776000000001,2,1,1,urban expansion,0.0028319741,13,5,5,science research method,0.0039959734,2,1,1,LUC,0.0045019441,5,2,1
+Cellular,0.0018007776000000001,2,1,1,residential land,0.0027276546,6,2,3,LUCC research model,0.0039959734,2,1,1,RBFN,0.0045019441,5,1,1
+Irbid,0.0018007776000000001,2,1,1,simulation accuracy,0.00257016,4,3,2,urban space system,0.0039959734,2,1,1,artificial immune system,0.0039959734,2,1,1
+Jordan,0.0018007776000000001,2,1,1,driving force,0.00257016,4,2,2,traditional Markov model,0.0039959734,2,1,1,Land Transformation Model,0.0039959734,2,1,1
+combinatory,0.0018007776000000001,2,1,1,Markov model,0.00257016,4,1,2,forward improvement method,0.0039959734,2,1,1,land change science,0.0039959734,2,1,1
+quantity,0.0016987786000000002,4,4,3,use policy,0.0022730455,5,2,3,urbanization process based,0.0039959734,2,1,1,highest simulation accuracy,0.0039959734,2,2,1
+partitioning,0.0016987786000000002,4,1,3,cover change,0.0022730455,5,1,3,artificial neural network,0.0036127431000000003,8,6,5,basis function network,0.0039959734,2,1,1
+force,0.0016987786000000002,4,2,3,artificial neural,0.0019605975,9,6,5,Pearl River Delta,0.0026639823,2,2,2,modeling urban change,0.0039959734,2,1,1
+urbanization,0.0016767363,29,8,7,integrating artificial,0.0019276200000000001,2,2,1,simulating urban growth,0.0026639823,2,2,2,land use transition,0.0039959734,2,1,1
+science,0.0016193455,13,2,6,artificial immune,0.0019276200000000001,2,1,1,cellular automata model,0.0026639823,2,2,2,use change simulation,0.0039959734,2,2,1
+transition,0.0014947805,12,7,6,external intervention,0.0019276200000000001,2,1,1,land use data,0.0026639823,2,2,2,land growth simulation,0.0039959734,2,1,1
+neighborhood,0.0014947805,12,4,6,Land Transformation,0.0019276200000000001,2,1,1,artificial fish swarm,0.0026639823,2,1,2,four traditional model,0.0039959734,2,1,1
+predicting,0.0014245662,7,6,5,Transformation Model,0.0019276200000000001,2,1,1,fish swarm algorithm,0.0026639823,2,1,2,regional population forecast,0.0039959734,2,1,1
+plan,0.0014245662,7,4,5,conventional CA,0.0019276200000000001,2,1,1,integrating artificial immune,0.0019979867,1,1,1,urban growth simulation,0.0039959734,2,1,1
+ANN,0.0013702155,11,5,6,ANN model,0.0019276200000000001,2,1,1,urban CA model,0.0019979867,1,1,1,growth simulation model,0.0039959734,2,1,1
+Land,0.0012740839,3,2,3,ML concept,0.0019276200000000001,2,1,1,CA model rely,0.0019979867,1,1,1,urban growth model,0.0039959734,2,2,1
+LR,0.0012740839,3,3,3,cellular automaton,0.0019276200000000001,2,2,1,deriving transition rule,0.0019979867,1,1,1,urban inefficient industrial,0.0039959734,2,1,1

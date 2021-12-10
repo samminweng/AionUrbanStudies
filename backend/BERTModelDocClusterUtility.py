@@ -189,9 +189,6 @@ class BERTModelDocClusterUtility:
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 
-
-
-
     # Process and clean the text by converting plural nouns to singular nouns
     # Avoid license sentences
     @staticmethod
@@ -233,32 +230,36 @@ class BERTModelDocClusterUtility:
     # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
     def get_n_gram_topics(approach, docs_per_cluster, is_load=False):
+        # A folder that stores all the topic results
+        folder = os.path.join('output', 'cluster', 'topics', 'temp')
         if is_load:
-            n_gram_topics_df = pd.read_json(os.path.join('output', 'cluster',
-                                                         'temp',
+            n_gram_topics_df = pd.read_json(os.path.join(folder,
                                                          'UrbanStudyCorpus_' + approach + '_n_topics.json'))
             return n_gram_topics_df.to_dict("records")
 
         # Convert the texts of all clusters into a list of document (a list of sentences) for deriving n-grams
         def _collect_cluster_docs(_docs_per_cluster):
             # Get the clustered texts
-            clusters = _docs_per_cluster[approach]
-            doc_texts_per_cluster = docs_per_cluster['Text']
+            clusters = _docs_per_cluster[approach].tolist()
+            doc_texts_per_cluster = docs_per_cluster['Text'].tolist()
             _docs = []
-            for i, doc_texts in doc_texts_per_cluster.items():
-                doc_id = clusters[i]  # doc id is cluster id
-                doc = []
+            for cluster_no, doc_texts in zip(clusters, doc_texts_per_cluster):
+                doc_list = []
                 for doc_text in doc_texts:
-                    text = BERTModelDocClusterUtility.preprocess_text(doc_text.strip())
-                    sentences = sent_tokenize(text)
-                    doc.extend(sentences)
-                _docs.append({'cluster': doc_id, 'doc': doc})  # doc: a list of sentences
+                    try:
+                        if isinstance(doc_text, str):
+                            text = BERTModelDocClusterUtility.preprocess_text(doc_text.strip())
+                            sentences = sent_tokenize(text)
+                            doc_list.extend(sentences)
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+                _docs.append({'cluster': cluster_no, 'doc': doc_list})  # doc: a list of sentences
             # Convert the frequency matrix to data frame
             df = pd.DataFrame(_docs, columns=['cluster', 'doc'])
             # Write to temp output for validation
-            df.to_csv(os.path.join('output', 'cluster', 'temp', approach, 'Step_1_UrbanStudyCorpus_cluster_doc.csv'),
+            df.to_csv(os.path.join(folder, 'Step_1_UrbanStudyCorpus_cluster_doc.csv'),
                       encoding='utf-8', index=False)
-            df.to_json(os.path.join('output', 'cluster', 'temp', approach, 'Step_1_UrbanStudyCorpus_cluster_doc.json'),
+            df.to_json(os.path.join(folder, 'Step_1_UrbanStudyCorpus_cluster_doc.json'),
                        orient='records')
             return _docs
 
@@ -284,7 +285,7 @@ class BERTModelDocClusterUtility:
             # Vectorized the clustered doc text and Keep the Word case unchanged
             frequency_matrix = []
             for doc in docs:
-                doc_id = doc['cluster']  # doc id is the cluster no
+                cluster_no = doc['cluster']  # doc id is the cluster no
                 doc_texts = doc['doc']
                 freq_table = {}
                 for sent in doc_texts:
@@ -295,18 +296,15 @@ class BERTModelDocClusterUtility:
                             freq_table[ngram] += 1
                         else:
                             freq_table[ngram] = 1
-                frequency_matrix.append({'cluster': doc_id, 'freq_table': freq_table})
+                frequency_matrix.append({'cluster': cluster_no, 'freq_table': freq_table})
             # Convert the frequency matrix to data frame
             df = pd.DataFrame(frequency_matrix, columns=['cluster', 'freq_table'])
             # Write to temp output for validation
-            df.to_csv(os.path.join('output', 'cluster', 'temp', approach,
-                                   'Step_2_UrbanStudyCorpus_frequency_matrix.csv'),
-                      encoding='utf-8', index=False)
-            df.to_json(os.path.join('output', 'cluster', 'temp', approach,
-                                    'Step_2_UrbanStudyCorpus_frequency_matrix.json'),
-                       orient='records')
-            print('Output topics per cluster to ' + os.path.join('output', 'cluster', 'temp',
-                                                                 'Step2_UrbanStudyCorpus_frequency_matrix.json'))
+            path = os.path.join(folder, 'Step_2_UrbanStudyCorpus_frequency_matrix.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'Step_2_UrbanStudyCorpus_frequency_matrix.json')
+            df.to_json(path, orient='records')
+            print('Output topics per cluster to ' + path)
             return frequency_matrix
 
         # Compute TF score
@@ -339,10 +337,10 @@ class BERTModelDocClusterUtility:
                 # Convert the doc per word table (a dictionary) to data frame
                 df = pd.DataFrame(list(word_doc_table.items()))
                 # Write to temp output for validation
-                df.to_csv(os.path.join('output', 'cluster', 'temp', approach,
+                df.to_csv(os.path.join(folder,
                                        'Step_3_UrbanStudyCorpus_word_doc_table.csv'),
                           encoding='utf-8', index=False)
-                df.to_json(os.path.join('output', 'cluster', 'temp', approach,
+                df.to_json(os.path.join(folder,
                                         'Step_3_UrbanStudyCorpus_word_doc_table.json'),
                            orient='records')
             return word_doc_table
@@ -412,47 +410,47 @@ class BERTModelDocClusterUtility:
                 print("Error occurred! {err}".format(err=err))
 
         topic_words_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
-        # Write the results to
-        topic_words_df.to_csv(
-            os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.csv'),
-            encoding='utf-8', index=False)
+        # Write the topics results to csv
+        topic_words_df.to_csv(path_or_buf=os.path.join(folder, 'UrbanStudyCorpus_' + approach + '_n_topics.csv'), encoding='utf-8', index=False)
         # # # Write to a json file
-        topic_words_df.to_json(
-            os.path.join('output', 'cluster', 'temp', 'UrbanStudyCorpus_' + approach + '_n_topics.json'),
-            orient='records')
+        topic_words_df.to_json(os.path.join(folder, 'UrbanStudyCorpus_' + approach + '_n_topics.json'), orient='records')
         return topics_list  # Return a list of dicts
 
     # Output the cluster topics extracted by TF-IDF as a csv file
     @staticmethod
-    def flatten_tf_idf_topics(cluster_no, _cluster="HDBSCAN_Cluster", _key_extract="TF-IDF"):
+    def flatten_tf_idf_topics(cluster_no):
+        cluster = "HDBSCAN_Cluster"
+        approach = "TF-IDF"
         try:
-            _path = os.path.join('output', 'cluster', 'topics', 'UrbanStudyCorpus_' + _cluster + '_' +
-                                 _key_extract + '_topic_words.json')
-            cluster_df = pd.read_json(_path)
+            folder = os.path.join('output', 'cluster', 'topics')
+            path = os.path.join(folder, 'UrbanStudyCorpus_' + cluster + '_' + approach + '_topic_words_details.json')
+            cluster_df = pd.read_json(path)
             clusters = cluster_df.to_dict("records")
             cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
-            records = []
+            results = []
             for i in range(50):
-                record = {'1-gram': "", '1-gram-score': 0, '1-gram-freq': 0, '1-gram-docs': 0, '1-gram-clusters': 0,
+                result = {'1-gram': "", '1-gram-score': 0, '1-gram-freq': 0, '1-gram-docs': 0, '1-gram-clusters': 0,
                           '2-gram': "", '2-gram-score': 0, '2-gram-freq': 0, '2-gram-docs': 0, '2-gram-clusters': 0,
                           '3-gram': "", '3-gram-score': 0, '3-gram-freq': 0, '3-gram-docs': 0, '3-gram-clusters': 0,
                           'N-gram': "", 'N-gram-score': 0, 'N-gram-freq': 0, 'N-gram-docs': 0, 'N-gram-clusters': 0,
                           }
                 for n_gram_num in ['1-gram', '2-gram', '3-gram', 'N-gram']:
-                    if i < len(cluster['Topic-' + n_gram_num]):
-                        n_gram = cluster['Topic-' + n_gram_num][i]
-                        record[n_gram_num] = n_gram['topic']
-                        record[n_gram_num + '-score'] = n_gram['score']
-                        record[n_gram_num + '-freq'] = n_gram['freq']
-                        record[n_gram_num + '-docs'] = len(n_gram['doc_ids'])
-                        record[n_gram_num + '-clusters'] = len(n_gram['cluster_ids'])
-                records.append(record)
-            n_gram_df = pd.DataFrame(records)
-            _path = os.path.join('output', 'cluster', 'topics', _key_extract,
-                                 'UrbanStudyCorpus_' + _cluster + '_' + _key_extract + '_' + str(
-                                     cluster_no) + '_topics.csv')
-            n_gram_df.to_csv(_path, encoding='utf-8', index=False)
-            print('Output topics per cluster to ' + _path)
+                    try:
+                        if i < len(cluster['Topic-' + n_gram_num]):
+                            n_gram = cluster['Topic-' + n_gram_num][i]
+                            result[n_gram_num] = n_gram['topic']
+                            result[n_gram_num + '-score'] = n_gram['score']
+                            result[n_gram_num + '-freq'] = n_gram['freq']
+                            result[n_gram_num + '-docs'] = len(n_gram['doc_ids'])
+                            result[n_gram_num + '-clusters'] = len(n_gram['cluster_ids'])
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+                results.append(result)
+            n_gram_df = pd.DataFrame(results)
+            folder = os.path.join('output', 'cluster', 'topics')
+            path = os.path.join(folder, 'UrbanStudyCorpus_' + approach + '_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
+            n_gram_df.to_csv(path, encoding='utf-8', index=False)
+            print('Output topics per cluster to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -476,29 +474,35 @@ class BERTModelDocClusterUtility:
             docs_per_topic = []
             # Go through each article and find if each topic appear in the article
             for doc_id, doc_text in zip(doc_ids, doc_texts):
-                # Convert the preprocessed text to n_grams
-                tokenizes = word_tokenize(BERTModelDocClusterUtility.preprocess_text(doc_text))
-                # Obtain the n-grams from the text
-                n_grams = list(ngrams(tokenizes, n_gram_num))
-                n_grams = list(map(lambda n_gram: " ".join(n_gram), n_grams))
-                # For each topic, find out the document ids that contain the topic
-                for item in topics_per_cluster:
-                    topic = item['topic']
-                    score = item['score']
-                    freq = item['freq']  # Total number of frequencies in this cluster
-                    cluster_ids = item['cluster_ids']  # A list of cluster that topic appears
-                    # The topic appears in the article
-                    if topic in n_grams:
-                        # Check if docs_per_topic contains the doc id
-                        doc_topic = next((d for d in docs_per_topic if d['topic'] == topic), None)
-                        # Include the doc ids of the topics mentioned in the articles
-                        if doc_topic:
-                            doc_topic['doc_ids'].append(doc_id)
-                        else:
-                            docs_per_topic.append({'topic': topic, 'score': score, 'freq': freq,
-                                                   'cluster_ids': cluster_ids,
-                                                   'plural': get_plural_topic_form(topic),
-                                                   'doc_ids': [doc_id]})
+                try:
+                    # Convert the preprocessed text to n_grams
+                    tokenizes = word_tokenize(BERTModelDocClusterUtility.preprocess_text(doc_text))
+                    # Obtain the n-grams from the text
+                    n_grams = list(ngrams(tokenizes, n_gram_num))
+                    n_grams = list(map(lambda n_gram: " ".join(n_gram), n_grams))
+                    # For each topic, find out the document ids that contain the topic
+                    for item in topics_per_cluster:
+                        try:
+                            topic = item['topic']
+                            score = item['score']
+                            freq = item['freq']  # Total number of frequencies in this cluster
+                            cluster_ids = item['cluster_ids']  # A list of cluster that topic appears
+                            # The topic appears in the article
+                            if topic in n_grams:
+                                # Check if docs_per_topic contains the doc id
+                                doc_topic = next((d for d in docs_per_topic if d['topic'] == topic), None)
+                                # Include the doc ids of the topics mentioned in the articles
+                                if doc_topic:
+                                    doc_topic['doc_ids'].append(doc_id)
+                                else:
+                                    docs_per_topic.append({'topic': topic, 'score': score, 'freq': freq,
+                                                           'cluster_ids': cluster_ids,
+                                                           'plural': get_plural_topic_form(topic),
+                                                           'doc_ids': [doc_id]})
+                        except Exception as err:
+                            print("Error occurred! {err}".format(err=err))
+                except Exception as err:
+                    print("Error occurred! {err}".format(err=err))
             # Sort topics by score
             sorted_docs_per_topics = sorted(docs_per_topic, key=lambda t: t['score'], reverse=True)
             return sorted_docs_per_topics
@@ -567,7 +571,7 @@ class BERTModelDocClusterUtility:
                     # Check if the common doc exits in outliers
                     found_doc = next((outlier_doc for outlier_doc in outliers
                                       if outlier_doc['DocId'] == duplicate_doc['DocId']), None)
-                    if not found_doc:      # If not, add the duplicate doc to outlier docs
+                    if not found_doc:  # If not, add the duplicate doc to outlier docs
                         outliers.append({'DocId': duplicate_doc['DocId'], 'Title': duplicate_doc['Title'],
                                          'Abstract': duplicate_doc['Abstract']})
             # print(outliers)
@@ -582,64 +586,67 @@ class BERTModelDocClusterUtility:
             print("Error occurred! {err}".format(err=err))
 
 
+
+
+
 # # Use collection 'PMI' 'Chi-test' or 'likelihood' to obtain the topics from the texts
-    # @staticmethod
-    # def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):
-    #     try:
-    #         # Load function words
-    #         _df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
-    #         function_words = _df['Function Word'].tolist()
-    #         # Collect a list of clustered document where each document is a list of tokens
-    #         cluster_docs = []
-    #         # Select the documents from doc_ids
-    #         for doc_id, doc_text in zip(doc_ids, doc_texts):
-    #             tokens = word_tokenize(doc_text)
-    #             cluster_docs.append({"doc_id": doc_id, "tokens": tokens})
-    #
-    #         # Create NLTK bigram object
-    #         bigram_measures = nltk.collocations.BigramAssocMeasures()
-    #         # Map the cluster documents to a list of document where each doc is represented with a list of tokens
-    #         documents = list(map(lambda doc: doc['tokens'], cluster_docs))
-    #         # Score and rank the collocations
-    #         finder = BigramCollocationFinder.from_documents(documents)
-    #         # finder.apply_freq_filter(4)
-    #         # # # Filter out bi_grams containing stopwords or function words
-    #         finder.apply_ngram_filter(lambda w1, w2: w1.lower() in function_words or
-    #                                                  w2.lower() in function_words)
-    #         finder.apply_ngram_filter(lambda w1, w2: w1.lower() in BERTModelDocClusterUtility.stop_words or
-    #                                                  w2.lower() in BERTModelDocClusterUtility.stop_words)
-    #         # Find a list of bi_grams by likelihood collocations
-    #         if associate_measure == 'pmi':
-    #             scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
-    #         elif associate_measure == 'chi':
-    #             scored_bi_grams = finder.score_ngrams(bigram_measures.chi_sq)
-    #         else:  # likelihood
-    #             scored_bi_grams = finder.score_ngrams(bigram_measures.likelihood_ratio)
-    #
-    #         # Sort bi_grams by scores from high to low
-    #         sorted_bi_grams = sorted(scored_bi_grams, key=lambda bi_gram: bi_gram[1], reverse=True)
-    #         # Convert bi_gram object to a list of
-    #         bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
-    #                                                   'score': bi_gram[1]}, sorted_bi_grams))
-    #         # Collect the doc ids that each collocation appears
-    #         topic_words = []
-    #         for bi_gram in bi_grams_list:
-    #             collocation = bi_gram['collocation']
-    #             score = bi_gram['score']
-    #             topic_doc_ids = []
-    #             for doc in cluster_docs:
-    #                 doc_id = doc['doc_id']
-    #                 doc_tokens = doc['tokens']
-    #                 doc_bi_grams = list(ngrams(doc_tokens, 2))
-    #                 doc_bi_grams = list(map(lambda b: b[0] + " " + b[1], doc_bi_grams))
-    #                 # Check if topic word in bi_grams
-    #                 if collocation in doc_bi_grams:
-    #                     topic_doc_ids.append(doc_id)
-    #             topic_words.append({'topic_words': collocation, 'score': score, 'doc_ids': topic_doc_ids})
-    #         # limit the top 20 topic words
-    #         topic_words = topic_words
-    #         # Sort the topic_words by the number of docs
-    #         topic_words = sorted(topic_words, key=lambda topic_word: len(topic_word), reverse=True)
-    #         return topic_words
-    #     except Exception as err:
-    #         print("Error occurred! {err}".format(err=err))
+# @staticmethod
+# def derive_topic_words_using_collocations(associate_measure, doc_ids, doc_texts):
+#     try:
+#         # Load function words
+#         _df = pd.read_csv(os.path.join('data', 'Function_Words.csv'))
+#         function_words = _df['Function Word'].tolist()
+#         # Collect a list of clustered document where each document is a list of tokens
+#         cluster_docs = []
+#         # Select the documents from doc_ids
+#         for doc_id, doc_text in zip(doc_ids, doc_texts):
+#             tokens = word_tokenize(doc_text)
+#             cluster_docs.append({"doc_id": doc_id, "tokens": tokens})
+#
+#         # Create NLTK bigram object
+#         bigram_measures = nltk.collocations.BigramAssocMeasures()
+#         # Map the cluster documents to a list of document where each doc is represented with a list of tokens
+#         documents = list(map(lambda doc: doc['tokens'], cluster_docs))
+#         # Score and rank the collocations
+#         finder = BigramCollocationFinder.from_documents(documents)
+#         # finder.apply_freq_filter(4)
+#         # # # Filter out bi_grams containing stopwords or function words
+#         finder.apply_ngram_filter(lambda w1, w2: w1.lower() in function_words or
+#                                                  w2.lower() in function_words)
+#         finder.apply_ngram_filter(lambda w1, w2: w1.lower() in BERTModelDocClusterUtility.stop_words or
+#                                                  w2.lower() in BERTModelDocClusterUtility.stop_words)
+#         # Find a list of bi_grams by likelihood collocations
+#         if associate_measure == 'pmi':
+#             scored_bi_grams = finder.score_ngrams(bigram_measures.pmi)
+#         elif associate_measure == 'chi':
+#             scored_bi_grams = finder.score_ngrams(bigram_measures.chi_sq)
+#         else:  # likelihood
+#             scored_bi_grams = finder.score_ngrams(bigram_measures.likelihood_ratio)
+#
+#         # Sort bi_grams by scores from high to low
+#         sorted_bi_grams = sorted(scored_bi_grams, key=lambda bi_gram: bi_gram[1], reverse=True)
+#         # Convert bi_gram object to a list of
+#         bi_grams_list = list(map(lambda bi_gram: {'collocation': bi_gram[0][0] + " " + bi_gram[0][1],
+#                                                   'score': bi_gram[1]}, sorted_bi_grams))
+#         # Collect the doc ids that each collocation appears
+#         topic_words = []
+#         for bi_gram in bi_grams_list:
+#             collocation = bi_gram['collocation']
+#             score = bi_gram['score']
+#             topic_doc_ids = []
+#             for doc in cluster_docs:
+#                 doc_id = doc['doc_id']
+#                 doc_tokens = doc['tokens']
+#                 doc_bi_grams = list(ngrams(doc_tokens, 2))
+#                 doc_bi_grams = list(map(lambda b: b[0] + " " + b[1], doc_bi_grams))
+#                 # Check if topic word in bi_grams
+#                 if collocation in doc_bi_grams:
+#                     topic_doc_ids.append(doc_id)
+#             topic_words.append({'topic_words': collocation, 'score': score, 'doc_ids': topic_doc_ids})
+#         # limit the top 20 topic words
+#         topic_words = topic_words
+#         # Sort the topic_words by the number of docs
+#         topic_words = sorted(topic_words, key=lambda topic_word: len(topic_word), reverse=True)
+#         return topic_words
+#     except Exception as err:
+#         print("Error occurred! {err}".format(err=err))

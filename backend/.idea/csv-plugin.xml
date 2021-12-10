@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/data/UrbanStudyCorpus_cleaned.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/UrbanStudyCorpus_outliers.csv">
           <value>
             <Attribute>
@@ -172,6 +179,34 @@
           </value>
         </entry>
         <entry key="/output/cluster/hdbscan_clustering/UrbanStudyCorpus_clusters_tree.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/topics/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/topics/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words_details.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/topics/UrbanStudyCorpus_TF-IDF_cluster_#1_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/topics/temp/UrbanStudyCorpus_HDBSCAN_Cluster_n_topics.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

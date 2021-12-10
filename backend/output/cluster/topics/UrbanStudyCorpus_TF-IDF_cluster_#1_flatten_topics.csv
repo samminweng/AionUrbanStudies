@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+perception,0.0094909291,73,20,5,public space,0.0048654338,20,8,3,street view imagery,0.005871846500000001,5,2,1,perception,0.0094909291,73,20,5
+soundscape,0.0057521655,15,2,2,human perception,0.0048137292,14,8,2,street view image,0.0049853298,9,5,3,street view imagery,0.005871846500000001,5,2,1
+perceptual,0.0046017324,12,7,2,visual quality,0.0041260536,8,2,1,cultural ecosystem service,0.0046974772,4,1,1,soundscape,0.0057521655,15,2,2
+vitality,0.0046017324,8,1,1,urban perception,0.0036102969,7,2,1,Google Street View,0.0046974772,6,4,2,street view image,0.0049853298,9,5,3
+street,0.0044564135,56,17,6,Street View,0.003438378,10,6,2,local urban perception,0.0046974772,4,1,1,public space,0.0048654338,20,8,3
+View,0.0042182547,11,6,2,street view,0.0034058037,14,7,3,architectural color icon,0.0046974772,4,1,1,human perception,0.0048137292,14,8,2
+advertising,0.0040265159,7,1,1,built environment,0.0030945402000000003,18,11,4,Street View imagery,0.0035231079,3,1,1,cultural ecosystem service,0.0046974772,4,1,1
+measuring,0.0034512993000000002,9,6,2,street quality,0.0030945402000000003,6,1,1,urban street vitality,0.0035231079,3,1,1,Google Street View,0.0046974772,6,4,2
+enclosure,0.0034512993000000002,6,2,1,safety perception,0.0030945402000000003,6,2,1,holistic visual data,0.0035231079,3,1,1,local urban perception,0.0046974772,4,1,1
+Strip,0.0034512993000000002,6,1,1,computer vision,0.0026759886,11,9,3,historical urban landscape,0.0035231079,3,1,1,architectural color icon,0.0046974772,4,1,1
+health,0.0030678216000000003,16,6,4,urban soundscape,0.0025787835,5,2,1,Las Vegas Strip,0.0035231079,3,1,1,perceptual,0.0046017324,12,7,2
+pedestrian,0.0029844943,11,4,3,health purpose,0.0025787835,5,1,1,social media photographs,0.0023487386,2,1,1,vitality,0.0046017324,8,1,1
+image,0.0027852585000000003,35,19,6,urban identity,0.0025787835,5,1,1,adversarial scoring framework,0.0023487386,2,1,1,street,0.0044564135,56,17,6
+streetscape,0.0026843439,7,3,2,architectural color,0.0025787835,5,1,1,urban perception assessment,0.0023487386,2,1,1,View,0.0042182547,11,6,2
+safety,0.0026843439,14,5,4,view imagery,0.0025787835,5,2,1,experienced urban designer,0.0023487386,2,1,1,visual quality,0.0041260536,8,2,1
+subjective,0.0024926051,13,9,4,similarity analysis,0.0025787835,5,1,1,various key element,0.0023487386,2,1,1,advertising,0.0040265159,7,1,1
+photographs,0.0024418590000000002,9,2,3,Google Street,0.0024068646,7,5,2,urban soundscape evaluation,0.0023487386,2,1,1,urban perception,0.0036102969,7,2,1
+score,0.0024418590000000002,9,5,3,street greenery,0.0024068646,7,2,2,provide useful insight,0.0023487386,2,2,1,Street View imagery,0.0035231079,3,1,1
+public,0.0023873644,30,14,6,view image,0.0021894452,9,5,3,six walking environment,0.0023487386,2,1,1,urban street vitality,0.0035231079,3,1,1
+imagery,0.0023402291,18,6,5,visual feature,0.0020630268,6,4,2,explore important feature,0.0023487386,2,1,1,holistic visual data,0.0035231079,3,1,1
+greenery,0.0023008662,12,3,4,cultural ecosystem,0.0020630268,4,1,1,subjective human perception,0.0023487386,2,2,1,historical urban landscape,0.0035231079,3,1,1
+audio,0.0023008662,6,1,2,visual enclosure,0.0020630268,4,1,1,computer vision algorithm,0.0023487386,2,2,1,Las Vegas Strip,0.0035231079,3,1,1
+interpreter,0.0023008662,4,1,1,streetscape feature,0.0020630268,4,2,1,visual image interpretation,0.0023487386,2,1,1,measuring,0.0034512993000000002,9,6,2
+icon,0.0023008662,4,1,1,evaluation model,0.0020630268,4,2,1,historical big data,0.0023487386,2,1,1,enclosure,0.0034512993000000002,6,2,1
+SVI,0.0023008662,4,2,1,street vitality,0.0020630268,4,1,1,color icon using,0.0023487386,2,1,1,Strip,0.0034512993000000002,6,1,1
+sidewalk,0.0021705413,8,2,3,color icon,0.0020630268,4,1,1,various streetscape feature,0.0023487386,2,1,1,Street View,0.003438378,10,6,2
+landscape,0.002148628,27,10,6,street space,0.0020630268,4,1,1,urban morphological feature,0.0023487386,2,1,1,street view,0.0034058037,14,7,3
+citizen,0.0021091274000000003,11,6,4,subjective measure,0.0020630268,4,2,1,morphological feature extraction,0.0023487386,2,1,1,built environment,0.0030945402000000003,18,11,4
+classification,0.0020802036000000003,16,8,5,perceptual quality,0.0020630268,4,1,1,seven residential district,0.0023487386,2,1,1,street quality,0.0030945402000000003,6,1,1
+façade,0.0019173885,5,1,2,visual data,0.001719189,5,2,2,streaming media data,0.0023487386,2,1,1,safety perception,0.0030945402000000003,6,2,1
+signal,0.0018992236,7,2,3,perceptual indicator,0.0015472701000000001,3,2,1,media data processing,0.0023487386,2,1,1,health,0.0030678216000000003,16,6,4
+color,0.0018992236,7,2,3,View imagery,0.0015472701000000001,3,1,1,accessed street greenery,0.0015658257,2,1,2,pedestrian,0.0029844943,11,4,3
+crowdsourcing,0.0018992236,7,3,3,physiological response,0.0015472701000000001,3,1,1,urban planning practice,0.0015658257,4,3,4,image,0.0027852585000000003,35,19,6
+scoring,0.0017256497000000001,3,1,1,pedestrian landscape,0.0015472701000000001,3,1,1,discrete choice model,0.0015658257,2,2,2,streetscape,0.0026843439,7,3,2
+impression,0.0017256497000000001,3,3,1,walking environment,0.0015472701000000001,3,1,1,new urban data,0.0015658257,2,1,2,safety,0.0026843439,14,5,4
+SMO,0.0017256497000000001,3,1,1,analytical model,0.0015472701000000001,3,1,1,urban design strategy,0.0015658257,2,2,2,computer vision,0.0026759886,11,9,3
+MVII,0.0017256497000000001,3,1,1,physical activity,0.0015472701000000001,3,2,1,urban design theory,0.0015658257,2,1,2,urban soundscape,0.0025787835,5,2,1
+facial,0.0017256497000000001,3,1,1,clustering approach,0.0015472701000000001,3,1,1,machine learning algorithm,0.0012997528,8,6,6,health purpose,0.0025787835,5,1,1
+Las,0.0017256497000000001,3,1,1,important feature,0.0015472701000000001,3,1,1,measuring human perception,0.0011743693,1,1,1,urban identity,0.0025787835,5,1,1
+Vegas,0.0017256497000000001,3,1,1,soundscape assessment,0.0015472701000000001,3,1,1,urban region using,0.0011743693,1,1,1,architectural color,0.0025787835,5,1,1
+Street,0.0016711551000000002,21,11,6,building façade,0.0015472701000000001,3,1,1,region using machine,0.0011743693,1,1,1,similarity analysis,0.0025787835,5,1,1
+walking,0.0016279060000000001,6,3,3,street image,0.0015472701000000001,3,2,1,limited data source,0.0011743693,1,1,1,subjective,0.0024926051,13,9,4
+identity,0.0016279060000000001,6,1,3,holistic visual,0.0015472701000000001,3,1,1,flexible spatial resolution,0.0011743693,1,1,1,photographs,0.0024418590000000002,9,2,3
+visual,0.0016252520000000002,44,15,7,facial expression,0.0015472701000000001,3,1,1,predict human perception,0.0011743693,1,1,1,score,0.0024418590000000002,9,5,3
+quality,0.0016252520000000002,44,16,7,view indice,0.0015472701000000001,3,1,1,high accuracy rate,0.0011743693,1,1,1,Google Street,0.0024068646,7,5,2
+historical,0.0015601527,12,3,5,Las Vegas,0.0015472701000000001,3,1,1,predicting six human,0.0011743693,1,1,1,street greenery,0.0024068646,7,2,2
+rating,0.0015339108000000001,4,4,2,Vegas Strip,0.0015472701000000001,3,1,1,six human perceptual,0.0011743693,1,1,1,public,0.0023873644,30,14,6
+walkability,0.0015339108000000001,4,2,2,online review,0.0015472701000000001,3,1,1,human perceptual indicator,0.0011743693,1,1,1,social media photographs,0.0023487386,2,1,1
+designer,0.0015339108000000001,8,4,4,visitor experience,0.0015472701000000001,3,1,1,new urban region,0.0011743693,1,1,1,adversarial scoring framework,0.0023487386,2,1,1
+walk,0.0015339108000000001,4,1,2,classification model,0.0013753512,4,2,2,object category segmented,0.0011743693,1,1,1,urban perception assessment,0.0023487386,2,1,1
