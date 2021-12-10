@@ -30,19 +30,18 @@ class ClusterSimilarity:
         path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_TF-IDF_topic_words.json")
         df = pd.read_json(path)
         self.clusters = df.to_dict("records")  # Convert to a list of dictionaries
-        # Load the published paper text data
-        path = os.path.join('data', self.args.case_name + '.json')
+        # Load the corpus df
+        path = os.path.join('data', self.args.case_name + '_cleaned.json')
         corpus_df = pd.read_json(path)
-        corpus_df['Text'] = corpus_df['Title'] + ". " + corpus_df['Abstract']
-        # Load HDBSCAN cluster
-        path = os.path.join('output', 'cluster', self.args.case_name + "_clusters.json")
-        hdbscan_cluster_df = pd.read_json(path)
-        # Update corpus data with hdbscan cluster results
-        corpus_df['Cluster'] = hdbscan_cluster_df['HDBSCAN_Cluster']
-        self.corpus_docs = corpus_df.to_dict("records")
-        duplicate_doc_ids = KeyPhraseUtility.scan_duplicate_articles()
-        # Remove duplicated doc
-        self.corpus_docs = list(filter(lambda d: d['DocId'] not in duplicate_doc_ids, self.corpus_docs))
+        # path = os.path.join('data', self.args.case_name + '.json')
+        # corpus_df = pd.read_json(path)
+        # corpus_df['Text'] = corpus_df['Title'] + ". " + corpus_df['Abstract']
+        # # Load HDBSCAN cluster
+        # path = os.path.join('output', 'cluster', self.args.case_name + "_clusters.json")
+        # hdbscan_cluster_df = pd.read_json(path)
+        # # Update corpus data with hdbscan cluster results
+        # corpus_df['Cluster'] = hdbscan_cluster_df['HDBSCAN_Cluster']
+
 
     # # Use the BERT model to extract long key phrases
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
@@ -251,6 +250,6 @@ class ClusterSimilarity:
 # Main entry
 if __name__ == '__main__':
     tw = ClusterSimilarity()
-    # tw.find_top_similar_paper_in_corpus()
+    tw.find_top_similar_paper_in_corpus()
     # tw.extract_key_phrases_by_clusters()
-    tw.combine_key_phrases()
+    # tw.combine_key_phrases()

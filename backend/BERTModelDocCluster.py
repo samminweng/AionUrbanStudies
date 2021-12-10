@@ -63,9 +63,6 @@ class BERTModelDocCluster:
         with open(path, "rb") as fIn:
             stored_data = pickle.load(fIn)
             self.doc_vectors = stored_data['embeddings']
-        # Load the Scopus downloaded file as input file
-        path = os.path.join('data', self.args.case_name + '.json')
-        text_df = pd.read_json(path)
         # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
         standard_vectors = umap.UMAP(
             n_neighbors=self.args.n_neighbors,
@@ -74,11 +71,11 @@ class BERTModelDocCluster:
             random_state=42,
             metric='cosine'
         ).fit_transform(self.doc_vectors)
+        # Load the Scopus downloaded file as input file
+        path = os.path.join('data', self.args.case_name + '.json')
+        text_df = pd.read_json(path)
         # # # Load all document vectors without outliers
-        self.df = pd.DataFrame()
-        self.df['DocId'] = text_df['DocId']
-        self.df['Title'] = text_df['Title']
-        self.df['Abstract'] = text_df['Abstract']
+        self.df = text_df
         self.df['Text'] = text_df['Title'] + ". " + text_df['Abstract']
         self.df['x'] = list(map(lambda x: round(x, 2), standard_vectors[:, 0]))
         self.df['y'] = list(map(lambda x: round(x, 2), standard_vectors[:, 1]))
@@ -88,11 +85,13 @@ class BERTModelDocCluster:
         outlier_doc_ids = outliers_df['DocId'].tolist()
         # Remove all the outliers
         self.df = self.df[~self.df['DocId'].isin(outlier_doc_ids)]
-        # Save df to csv and json
+        # Save df (no document vectors) to csv and json
+        df_clean = self.df.copy(deep=True)
+        df_clean.drop(['DocVectors'], inplace=True, axis=1)
         path = os.path.join('data', self.args.case_name + '_cleaned.csv')
-        self.df.to_csv(path, encoding='utf-8', index=False)
+        df_clean.to_csv(path, encoding='utf-8', index=False)
         path = os.path.join('data', self.args.case_name + '_cleaned.json')
-        self.df.to_json(path, orient='records')
+        df_clean.to_json(path, orient='records')
 
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
@@ -497,7 +496,6 @@ class BERTModelDocCluster:
             path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_n_grams.json')
             cluster_df.to_json(path, orient='records')
             print('Output topics per cluster to ' + path)
-
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
