@@ -4,6 +4,7 @@ import itertools
 import os
 import re
 import string
+from functools import reduce
 from pathlib import Path
 
 import hdbscan
@@ -276,53 +277,72 @@ class KeyPhraseUtility:
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
-    def cluster_key_phrases_by_HDBSCAN_experiment(key_phrases, cluster_no, model):
+    def cluster_key_phrases_experiment_by_HDBSCAN(key_phrases, cluster_no, model):
         try:
-            folder = os.path.join('output', 'key_phrases', 'cluster')
-            Path(folder).mkdir(parents=True, exist_ok=True)
-            # parameter = {'min_cluster_size': 10, 'min_samples': None, 'epsilon': 0.0}  # Default parameter
-            # # Get the best parameters
-            # best_parameters = {}
-            # if cluster_no in best_parameters:
-            #     parameter = best_parameters[cluster_no]  # Get the optimal parameters
-            #     # Output the grouped key phrases
-            #     group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
-            # Specify if we need to run all the experiments
             results = list()
-            for min_samples in [None] + list(range(1, 11)):
-                for min_cluster_size in [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20, 25, 30]:
-                    for epsilon in [0.0]:
-                        try:
-                            parameter = {'min_cluster_size': min_cluster_size, 'min_samples': min_samples,
-                                         'epsilon': epsilon}
-                            # Convert the key phrases to vectors
-                            key_phrase_word_only = list(map(lambda kp: kp['key-phrase'], key_phrases))
-                            key_phrase_vectors = model.encode(key_phrase_word_only)
-                            # Compute the cosine distance/similarity for each doc vectors
-                            distances = pairwise_distances(key_phrase_vectors, metric='cosine')
-                            # # Pass key phrase vector to HDBSCAN for grouping
-                            cluster_labels = hdbscan.HDBSCAN(min_cluster_size=parameter['min_cluster_size'],
-                                                             min_samples=parameter['min_samples'],
-                                                             cluster_selection_epsilon=parameter['epsilon'],
-                                                             metric='precomputed').fit_predict(
-                                distances.astype('float64')).tolist()
-                            score = BERTModelDocClusterUtility.compute_Silhouette_score(cluster_labels,
-                                                                                        key_phrase_vectors)
-                            total_groups = max(cluster_labels) + 2
-                            outliers = list(filter(lambda c: c == -1, cluster_labels))
-                            results.append({'cluster': "#" + str(cluster_no),
-                                            'min_samples': parameter['min_samples'],
-                                            'min_cluster_size': parameter['min_cluster_size'],
-                                            'epsilon': parameter['epsilon'],
-                                            'total_groups': total_groups,
-                                            'outliers': len(outliers),
-                                            'score': score})
-                        except Exception as err:
-                            print("Error occurred! {err}".format(err=err))
+            for dimension in [10, 15, 50, 100, 768]:
+                for min_samples in [None] + list(range(1, 16)):
+                    for min_cluster_size in [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+                        for epsilon in [0.0]:
+                            try:
+                                parameter = {'min_cluster_size': min_cluster_size, 'min_samples': min_samples,
+                                             'epsilon': epsilon}
+                                # Convert the key phrases to vectors
+                                key_phrase_vectors = model.encode(key_phrases)
+                                if dimension == key_phrase_vectors.shape[1]:
+                                    reduced_vectors = key_phrase_vectors
+                                else:
+                                    vector_list = key_phrase_vectors.tolist()
+                                    # Reduce the doc vectors to specific dimension
+                                    reduced_vectors = umap.UMAP(
+                                        min_dist=0.0,
+                                        n_components=dimension,
+                                        random_state=42,
+                                        metric="cosine").fit_transform(vector_list)
+                                # Get vector dimension
+                                dimension = reduced_vectors.shape[1]
+                                # Compute the cosine distance/similarity for each doc vectors
+                                distances = pairwise_distances(reduced_vectors, metric='cosine')
+                                # # Pass key phrase vector to HDBSCAN for grouping
+                                group_labels = hdbscan.HDBSCAN(min_cluster_size=parameter['min_cluster_size'],
+                                                               min_samples=parameter['min_samples'],
+                                                               cluster_selection_epsilon=parameter['epsilon'],
+                                                               metric='precomputed').fit_predict(
+                                    distances.astype('float64')).tolist()
+                                group_results = reduce(
+                                    lambda pre, cur: BERTModelDocClusterUtility.collect_cluster_results(pre, cur),
+                                    group_labels, list())
+                                outlier_number = next((g['count'] for g in group_results if g['cluster_no'] == -1), 0)
+                                if len(group_results) > 1:
+                                    df = pd.DataFrame()
+                                    df['groups'] = group_labels
+                                    df['vectors'] = reduced_vectors.tolist()
+                                    # Remove the outliers
+                                    no_outlier_df = df[df['groups'] != -1]
+                                    no_outlier_labels = no_outlier_df['groups'].tolist()
+                                    no_outlier_vectors = np.vstack(no_outlier_df['vectors'].tolist())
+                                    score = BERTModelDocClusterUtility.compute_Silhouette_score(no_outlier_labels,
+                                                                                                no_outlier_vectors)
+                                else:  # All key phrases are identified as outliers
+                                    score = 'None'
+                                # Output the result
+                                results.append({'cluster': "#" + str(cluster_no),
+                                                'dimension': dimension,
+                                                'min_samples': str(parameter['min_samples']),
+                                                'min_cluster_size': parameter['min_cluster_size'],
+                                                'epsilon': parameter['epsilon'],
+                                                'total_groups': len(group_results),
+                                                'outliers': outlier_number,
+                                                'score': score,
+                                                'group_result': group_results})
+                            except Exception as err:
+                                print("Error occurred! {err}".format(err=err))
             # output the experiment results
             df = pd.DataFrame(results)
             folder = os.path.join('output', 'key_phrases', 'experiments')
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.json')
             df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))

@@ -1,5 +1,7 @@
 import os.path
 from argparse import Namespace
+from functools import reduce
+
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 import pandas as pd
@@ -16,8 +18,8 @@ if os.name == 'nt':
 Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 
-# Convert the cluster article title into a vector and find the similar articles in other cluster
-class ClusterSimilarity:
+# Group the key phrases based on the vector similarity
+class KeyPhraseSimilarity:
     def __init__(self):
         self.args = Namespace(
             case_name='UrbanStudyCorpus',
@@ -26,10 +28,6 @@ class ClusterSimilarity:
             model_name="all-mpnet-base-v2",
             device='cuda'
         )
-        # # Load the cluster results as dataframe
-        # path = os.path.join('output', 'cluster', self.args.case_name + "_HDBSCAN_Cluster_TF-IDF_topic_words.json")
-        # df = pd.read_json(path)
-        # self.clusters = df.to_dict("records")  # Convert to a list of dictionaries
         # Load the corpus df
         path = os.path.join('data', self.args.case_name + '_cleaned.json')
         self.corpus_df = pd.read_json(path)
@@ -38,7 +36,8 @@ class ClusterSimilarity:
         cluster_df = pd.read_json(path)
         # Update corpus data with hdbscan cluster results
         self.corpus_df['Cluster'] = cluster_df['HDBSCAN_Cluster']
-        # print(self.corpus_df)
+        self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                         device=self.args.device)
 
     # # Use the BERT model to extract long key phrases
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
@@ -46,10 +45,7 @@ class ClusterSimilarity:
         try:
             corpus_docs = self.corpus_df.to_dict("records")
             total_clusters = self.corpus_df['Cluster'].max()
-            # # Encode cluster_doc and candidates as BERT embedding
-            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-                                        device=self.args.device)
-            cluster_no_list = range(-1, total_clusters+1)
+            cluster_no_list = range(-1, total_clusters + 1)
             # cluster_no_list = [2]
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
@@ -71,7 +67,7 @@ class ClusterSimilarity:
                                 n_gram_candidates = KeyPhraseUtility.generate_n_gram_candidates(sentences,
                                                                                                 n_gram_range)
                                 # find and collect top 30 key phrases similar to a paper
-                                top_n_gram_key_phrases = KeyPhraseUtility.collect_top_key_phrases(model, doc_text,
+                                top_n_gram_key_phrases = KeyPhraseUtility.collect_top_key_phrases(self.model, doc_text,
                                                                                                   n_gram_candidates,
                                                                                                   top_k=30)
                                 result[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
@@ -80,7 +76,8 @@ class ClusterSimilarity:
                                 print("Error occurred! {err}".format(err=err))
                         # Combine all the n-gram key phrases in a doc
                         # Get top 5 key phrase unique to all key phrase list
-                        doc_key_phrases = KeyPhraseUtility.collect_top_key_phrases(model, doc_text, candidates, top_k=30)
+                        doc_key_phrases = KeyPhraseUtility.collect_top_key_phrases(self.model, doc_text, candidates,
+                                                                                   top_k=30)
                         top_doc_key_phrases = KeyPhraseUtility.get_unique_doc_key_phrases(doc_key_phrases,
                                                                                           all_key_phrases)
                         # Write top five key phrases to 'doc_key_phrases'
@@ -95,11 +92,18 @@ class ClusterSimilarity:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # # Group the key phrases using HDBSCAN clustering
-    # def group_key_phrases_by_clusters(self):
-    #     # Cluster all key phrases by using HDBSCAN
-    #     KeyPhraseUtility.cluster_key_phrases_by_HDBSCAN(all_key_phrases, cluster_no, model,
-    #                                                     is_experimented=True)
+    # Group the key phrases using HDBSCAN clustering
+    def group_key_phrases_by_clusters(self):
+        # Group the key phrases in each cluster
+        cluster_no_list = [2]
+        for cluster_no in cluster_no_list:
+            folder = os.path.join('output', 'key_phrases', 'cluster')
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
+            df = pd.read_json(path)
+            all_key_phrases = reduce(lambda pre, cur: pre + cur, df['key-phrases'].tolist(), list())
+            # print(all_key_phrases)
+            # # Cluster all key phrases by using HDBSCAN
+            KeyPhraseUtility.cluster_key_phrases_experiment_by_HDBSCAN(all_key_phrases, cluster_no, self.model)
 
     # Combine all the key phrases results
     def combine_key_phrases(self):
@@ -212,7 +216,8 @@ class ClusterSimilarity:
 
 # Main entry
 if __name__ == '__main__':
-    tw = ClusterSimilarity()
-    tw.extract_key_phrases_by_clusters()
+    kp = KeyPhraseSimilarity()
+    # kp.extract_key_phrases_by_clusters()
+    kp.group_key_phrases_by_clusters()
     # tw.combine_key_phrases()
     # tw.find_top_similar_paper_in_corpus()
