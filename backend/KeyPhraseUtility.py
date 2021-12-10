@@ -279,6 +279,8 @@ class KeyPhraseUtility:
     @staticmethod
     def cluster_key_phrases_experiment_by_HDBSCAN(key_phrases, cluster_no, model):
         try:
+            # Convert the key phrases to vectors
+            key_phrase_vectors = model.encode(key_phrases)
             results = list()
             for dimension in [10, 15, 50, 100, 768]:
                 for min_samples in [None] + list(range(1, 16)):
@@ -287,8 +289,6 @@ class KeyPhraseUtility:
                             try:
                                 parameter = {'min_cluster_size': min_cluster_size, 'min_samples': min_samples,
                                              'epsilon': epsilon}
-                                # Convert the key phrases to vectors
-                                key_phrase_vectors = model.encode(key_phrases)
                                 if dimension == key_phrase_vectors.shape[1]:
                                     reduced_vectors = key_phrase_vectors
                                 else:
@@ -326,15 +326,17 @@ class KeyPhraseUtility:
                                 else:  # All key phrases are identified as outliers
                                     score = 'None'
                                 # Output the result
-                                results.append({'cluster': "#" + str(cluster_no),
-                                                'dimension': dimension,
-                                                'min_samples': str(parameter['min_samples']),
-                                                'min_cluster_size': parameter['min_cluster_size'],
-                                                'epsilon': parameter['epsilon'],
-                                                'total_groups': len(group_results),
-                                                'outliers': outlier_number,
-                                                'score': score,
-                                                'group_result': group_results})
+                                result = {'cluster': "#" + str(cluster_no),
+                                          'dimension': dimension,
+                                          'min_samples': str(parameter['min_samples']),
+                                          'min_cluster_size': parameter['min_cluster_size'],
+                                          'epsilon': parameter['epsilon'],
+                                          'total_groups': len(group_results),
+                                          'outliers': outlier_number,
+                                          'score': score,
+                                          'group_result': group_results}
+                                results.append(result)
+                                print(result)
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
             # output the experiment results

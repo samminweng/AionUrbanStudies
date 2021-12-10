@@ -95,7 +95,10 @@ class KeyPhraseSimilarity:
     # Group the key phrases using HDBSCAN clustering
     def group_key_phrases_by_clusters(self):
         # Group the key phrases in each cluster
-        cluster_no_list = [2]
+        total_clusters = self.corpus_df['Cluster'].max()
+        cluster_no_list = range(-1, total_clusters + 1)
+        #
+        # cluster_no_list = [2]
         for cluster_no in cluster_no_list:
             folder = os.path.join('output', 'key_phrases', 'cluster')
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
