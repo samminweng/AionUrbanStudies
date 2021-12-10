@@ -38,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/cluster/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/cluster/UrbanStudyCorpus_clusters.csv">
           <value>
             <Attribute>

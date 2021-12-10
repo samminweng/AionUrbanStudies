@@ -502,33 +502,33 @@ class BERTModelDocCluster:
             print("Error occurred! {err}".format(err=err))
 
     # Combine TF-IDF and BERT key phrase extraction Topics into a single file
-    def combine_topics_from_clusters(self):
+    def combine_and_summary_topics_from_clusters(self):
         cluster_approach = 'HDBSCAN_Cluster'
         try:
             folder = os.path.join('output', 'cluster', 'topics')
-            _path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_details.json')
-            tf_idf_df = pd.read_json(_path)
-            tf_ids_dict = tf_idf_df.to_dict("records")
-            results = list()
-            for topic in tf_ids_dict:
-                result = {
-                    'Cluster': topic['Cluster'],
-                    'NumDocs': topic['NumDocs'],
-                    'DocIds': topic['DocIds'],
-                    'TF-IDF-Topics': topic['Topic-N-gram']
-                }
-                results.append(result)
+            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_n_grams.json')
+            tf_idf_df = pd.read_json(path)
             # Write out to csv and json file
-            cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
-                                                        'TF-IDF-Topics'])
-            _path = os.path.join(self.output_path,
-                                 self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.csv')
-            cluster_df.to_csv(_path, encoding='utf-8', index=False)
+            cluster_df = tf_idf_df.reindex(columns=['Cluster', 'NumDocs', 'DocIds', 'Topic-N-gram'])
+            cluster_df.rename(columns={'Topic-N-gram': 'TF-IDF-Topics'}, inplace=True)
+            folder = os.path.join('output', 'cluster')
+            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            _path = os.path.join(self.output_path,
-                                 self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
-            cluster_df.to_json(_path, orient='records')
-            print('Output topics per cluster to ' + _path)
+            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
+            cluster_df.to_json(path, orient='records')
+            print('Output topics per cluster to ' + path)
+            # Output a summary of top 10 Topics of each cluster
+            clusters = cluster_df.to_dict("records")
+            summary_df = cluster_df.copy(deep=True)
+            total = summary_df['NumDocs'].sum()
+            summary_df['Percent'] = list(map(lambda c: c['NumDocs'] / total, clusters))
+            summary_df['Topics'] = list(
+                map(lambda c: ", ".join(list(map(lambda t: t['topic'], c['TF-IDF-Topics'][:10]))), clusters))
+            summary_df = summary_df.reindex(columns=['Cluster', 'NumDocs', 'Percent', 'DocIds', 'Topics'])
+            # Output the summary as csv
+            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_summary.csv')
+            summary_df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -541,12 +541,12 @@ if __name__ == '__main__':
     # mdc.output_HDBSCAN_cluster_quality_summary()
     # mdc.re_clustering_best_hdbscan_results()
     # mdc.cluster_doc_vector_by_hdbscan_with_best_parameter()
-    mdc.derive_topics_from_cluster_docs_by_TF_IDF()
-    # Output top 50 topics by 1, 2 and 3-grams at specific cluster
-    BERTModelDocClusterUtility.flatten_tf_idf_topics(1)
-    BERTModelDocClusterUtility.flatten_tf_idf_topics(2)
-    BERTModelDocClusterUtility.flatten_tf_idf_topics(3)
-    # mdc.combine_topics_from_clusters()
+    # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+    # # Output top 50 topics by 1, 2 and 3-grams at specific cluster
+    # BERTModelDocClusterUtility.flatten_tf_idf_topics(1)
+    # BERTModelDocClusterUtility.flatten_tf_idf_topics(2)
+    # BERTModelDocClusterUtility.flatten_tf_idf_topics(3)
+    mdc.combine_and_summary_topics_from_clusters()
 
     # # Cluster document embedding by KMeans clustering
     # def cluster_doc_by_KMeans(self, num_cluster=9):
