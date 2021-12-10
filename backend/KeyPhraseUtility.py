@@ -15,10 +15,13 @@ import numpy as np
 # Load function words
 from nltk.corpus import stopwords
 from sentence_transformers import util
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics import silhouette_score
+from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
 from nltk.stem import WordNetLemmatizer
 
 # Set NLTK data path
+from BERTModelDocClusterUtility import BERTModelDocClusterUtility
+
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
 if os.name == 'nt':
     nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
@@ -77,7 +80,7 @@ class KeyPhraseUtility:
             for i, (_word, _pos_tag) in enumerate(_pos_tags):
                 try:
                     # Lowercase 1st char of the firs word
-                    #if i == 0:
+                    # if i == 0:
                     #    _word = _word[0].lower() + _word[1:len(_word)]
                     # NNS indicates plural nouns and convert the plural noun to singular noun
                     if _pos_tag == 'NNS':
@@ -178,133 +181,151 @@ class KeyPhraseUtility:
             distances = cosine_similarity(doc_vector, candidate_vectors)
             # Select top key phrases based on the distance score
             top_key_phrases = list()
-            min_length = min(len(candidates), top_k)    # Get the minimal
-            # Get 2*k top distances
+            min_length = min(len(candidates), top_k)  # Get the minimal
+            # Get top 5 candidate of smallest distances or all the candidates if 4 or few
             top_distances = distances.argsort()[0][-min_length:]
             for c_index in top_distances:
                 candidate = candidates[c_index]
                 distance = distances[0][c_index]
-                vector = candidate_vectors[c_index]
+                # vector = candidate_vectors[c_index]
                 found = next((kp for kp in top_key_phrases if kp['key-phrase'].lower() == candidate.lower()), None)
                 if not found:
                     top_key_phrases.append({'key-phrase': candidate, 'score': distance})
-
             # Sort the phrases by scores
             top_key_phrases = sorted(top_key_phrases, key=lambda k: k['score'], reverse=True)
             return top_key_phrases
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Cluster key phrases
     @staticmethod
-    def cluster_key_phrases_by_HDBSCAN(key_phrases, cluster_no, model, is_experimented=False):
-        # Group key phrases with parameters
-        def group_key_phrases_by_best_parameter(_cluster_no, _parameter, _key_phrases, is_output=False):
-            # Convert the key phrases to vectors
-            key_phrase_word_only = list(map(lambda kp: kp['key-phrase'], _key_phrases))
-            key_phrase_vectors = model.encode(key_phrase_word_only)
-            # Pass key phrase vector for grouping
-            clusters = hdbscan.HDBSCAN(min_cluster_size=_parameter['min_cluster_size'],
-                                       min_samples=_parameter['min_samples'],
-                                       cluster_selection_epsilon=_parameter['epsilon'],
-                                       metric='euclidean',
-                                       cluster_selection_method='eom'
-                                       ).fit(key_phrase_vectors)
-            group_key_phrases = list()
-            for key_phrase, c_label in zip(_key_phrases, clusters.labels_):
-                key_phrase['cluster'] = "#" + str(cluster_no)
-                key_phrase['group'] = c_label
-                group_key_phrases.append(key_phrase)
-            # Sort the key phrases by group and score
-            group_key_phrases = sorted(group_key_phrases, key=lambda r: (r['group'], -r['score']))
-            # Load grouped key phrases
-            df = pd.DataFrame(group_key_phrases, columns=['group', 'score', 'key-phrase'])
-            # Reorder the groups and put outlier at last index
-            outlier_df = df[df['group'] == -1]
-            cluster_df = df[df['group'] >= 0]
-            df = pd.concat([cluster_df, outlier_df])
-            # group the key phrases and Summarize the results
-            group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrase': lambda k: list(k)})
-            _all_group_list = group_df.to_dict("records")
-            if is_output:
-                # Output the results to a csv file
-                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping_flatten.csv')
-                df.to_csv(_path, encoding='utf-8', index=False)
-                # Output the summary results to a csv file
-                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
-                group_df['count'] = group_df['key-phrase'].apply(len)
-                group_df['key-phrase'] = [', '.join(kp) for kp in group_df['key-phrase']]
-                group_df = group_df[['group', 'count', 'key-phrase']]     # Re-order the column list
-                group_df.to_csv(_path, encoding='utf-8', index=False)
-                # Output best grouped key phrases to a json file
-                _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
-                group_df.to_json(_path, orient='records')
-                
-            # Return a list of grouped key phrases (key-phrase, score)
-            return _all_group_list
+    # Write the key phrases of each cluster to a csv file
+    def output_key_phrases_by_cluster(key_phrase_list, cluster_no):
+        try:
+            df = pd.DataFrame(key_phrase_list, columns=['DocId'])
+            df['No'] = range(1, len(df) + 1)
+            # Map the list of key phrases (dict) to a list of strings
+            # Map the nested dict to a list of key phrases (string only)
+            df['key-phrases'] = list(map(lambda k: [kp['key-phrase'] for kp in k['key-phrases']], key_phrase_list))
+            df = df[['No', 'DocId', 'key-phrases']]  # Re-order the columns
+            folder = os.path.join('output', 'key_phrases', 'cluster')
+            # Path(folder).mkdir(parents=True, exist_ok=True)
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
+            df.to_json(path, orient='records')
+            print("Output the key phrases of cluster #" + str(cluster_no))
+        except Exception as _err:
+            print("Error occurred! {err}".format(err=_err))
 
+    # Get a list of unique key phrases from all papers
+    @staticmethod
+    def get_unique_doc_key_phrases(doc_key_phrases, all_key_phrases, top_k=5):
+        try:
+            if len(doc_key_phrases) < top_k:
+                return doc_key_phrases
+
+            unique_key_phrases = list()
+            for key_phrase in doc_key_phrases:
+                # find if key phrase exist in all key phrase list
+                found = next((kp for kp in all_key_phrases
+                              if kp['key-phrase'].lower() == key_phrase['key-phrase'].lower()), None)
+                if not found:
+                    unique_key_phrases.append(key_phrase)
+                else:
+                    print("Duplicated: " + found['key-phrase'])
+
+            # Get top 5 key phrase
+            unique_key_phrases = unique_key_phrases[:top_k]
+            # assert len(_unique_key_phrases) == _top_k
+            return unique_key_phrases
+        except Exception as _err:
+            print("Error occurred! {err}".format(err=_err))
+
+    # if is_output:
+    #     group_key_phrases = list()
+    #     for key_phrase, c_label in zip(_key_phrases, cluster_labels):
+    #         key_phrase['cluster'] = "#" + str(cluster_no)
+    #         key_phrase['group'] = c_label
+    #         group_key_phrases.append(key_phrase)
+    #     # Sort the key phrases by group and score
+    #     group_key_phrases = sorted(group_key_phrases, key=lambda r: (r['group'], -r['score']))
+    #     # Load grouped key phrases
+    #     df = pd.DataFrame(group_key_phrases, columns=['group', 'score', 'key-phrase'])
+    #     # Reorder the groups and put outlier at last index
+    #     outlier_df = df[df['group'] == -1]
+    #     cluster_df = df[df['group'] >= 0]
+    #     df = pd.concat([cluster_df, outlier_df])
+    #     # group the key phrases and Summarize the results
+    #     group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrase': lambda k: list(k)})
+    #     _all_group_list = group_df.to_dict("records")
+    #     # Output the results to a csv file
+    #     _path = os.path.join(folder,
+    #                          'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping_flatten.csv')
+    #     df.to_csv(_path, encoding='utf-8', index=False)
+    #     # Output the summary results to a csv file
+    #     _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
+    #     group_df['count'] = group_df['key-phrase'].apply(len)
+    #     group_df['key-phrase'] = [', '.join(kp) for kp in group_df['key-phrase']]
+    #     group_df = group_df[['group', 'count', 'key-phrase']]  # Re-order the column list
+    #     group_df.to_csv(_path, encoding='utf-8', index=False)
+    #     # Output best grouped key phrases to a json file
+    #     _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
+    #     group_df.to_json(_path, orient='records')
+    # Return a list of grouped key phrases (key-phrase, score)
+    # return _all_group_list
+
+    # Cluster key phrases (vectors) using HDBSCAN clustering
+    @staticmethod
+    def cluster_key_phrases_by_HDBSCAN_experiment(key_phrases, cluster_no, model):
         try:
             folder = os.path.join('output', 'key_phrases', 'cluster')
             Path(folder).mkdir(parents=True, exist_ok=True)
-            parameter = {'min_cluster_size': 10, 'min_samples': None, 'epsilon': 0.0}      # Default parameter
-            # Get the best parameters
-            best_parameters = {0: {'min_cluster_size': 15, 'min_samples': 2, 'epsilon': 0.0},
-                               1: {'min_cluster_size': 7, 'min_samples': 2, 'epsilon': 0.0},
-                               2: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0},
-                               3: {'min_cluster_size': 14, 'min_samples': 2, 'epsilon': 0.0},
-                               4: {'min_cluster_size': 13, 'min_samples': 2, 'epsilon': 0.0},
-                               5: {'min_cluster_size': 13, 'min_samples': 5, 'epsilon': 0.0},
-                               6: {'min_cluster_size': 8, 'min_samples': 2, 'epsilon': 0.0},
-                               7: {'min_cluster_size': 7, 'min_samples': 2, 'epsilon': 0.0},
-                               8: {'min_cluster_size': 5, 'min_samples': 2, 'epsilon': 0.0},
-                               9: {'min_cluster_size': 5, 'min_samples': 4, 'epsilon': 0.0},
-                               -1: {'min_cluster_size': 5, 'min_samples': 5, 'epsilon': 0.0}
-                               }
-            if cluster_no in best_parameters:
-                parameter = best_parameters[cluster_no]      # Get the optimal parameters
-                # Output the grouped key phrases
-                group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
+            # parameter = {'min_cluster_size': 10, 'min_samples': None, 'epsilon': 0.0}  # Default parameter
+            # # Get the best parameters
+            # best_parameters = {}
+            # if cluster_no in best_parameters:
+            #     parameter = best_parameters[cluster_no]  # Get the optimal parameters
+            #     # Output the grouped key phrases
+            #     group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases, is_output=True)
             # Specify if we need to run all the experiments
-            if not is_experimented:
-                return 
-
             results = list()
             for min_samples in [None] + list(range(1, 11)):
                 for min_cluster_size in [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20, 25, 30]:
-                    for epsilon in [0.0]: #[0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
+                    for epsilon in [0.0]:
                         try:
-                            parameter['min_cluster_size'] = min_cluster_size
-                            parameter['min_samples'] = min_samples
-                            parameter['epsilon'] = epsilon
-                            all_group_list = group_key_phrases_by_best_parameter(cluster_no, parameter, key_phrases)
-                            result = {'cluster': "#" + str(cluster_no),
-                                      'min_samples': str(parameter['min_samples']),
-                                      'min_cluster_size': parameter['min_cluster_size'],
-                                      'epsilon': parameter['epsilon'],
-                                      'total_groups': len(all_group_list)}
-                            # Check if any outliers
-                            outlier = next((group for group in all_group_list if group['group'] == -1), None)
-                            if not outlier:  # Add outlier groups
-                                result['outlier_count'] = 0
-                                result['outlier_key_phrase'] = ""
-                            else:
-                                result['outlier_count'] = len(outlier['key-phrase'])
-                                result['outlier_key_phrase'] = ", ".join(outlier['key-phrase'])
-                            # Group number starts from -1 up to the length of groups
-                            group_list = list(filter(lambda g: g['group'] != -1, all_group_list))
-                            for group in group_list:
-                                g_no = group['group']
-                                result['group_' + str(g_no) + '_count'] = len(group['key-phrase'])
-                                result['group_' + str(g_no) + '_key_phrase'] = ", ".join(group['key-phrase'])
-                            results.append(result)
+                            parameter = {'min_cluster_size': min_cluster_size, 'min_samples': min_samples,
+                                         'epsilon': epsilon}
+                            # Convert the key phrases to vectors
+                            key_phrase_word_only = list(map(lambda kp: kp['key-phrase'], key_phrases))
+                            key_phrase_vectors = model.encode(key_phrase_word_only)
+                            # Compute the cosine distance/similarity for each doc vectors
+                            distances = pairwise_distances(key_phrase_vectors, metric='cosine')
+                            # # Pass key phrase vector to HDBSCAN for grouping
+                            cluster_labels = hdbscan.HDBSCAN(min_cluster_size=parameter['min_cluster_size'],
+                                                             min_samples=parameter['min_samples'],
+                                                             cluster_selection_epsilon=parameter['epsilon'],
+                                                             metric='precomputed').fit_predict(
+                                distances.astype('float64')).tolist()
+                            score = BERTModelDocClusterUtility.compute_Silhouette_score(cluster_labels,
+                                                                                        key_phrase_vectors)
+                            total_groups = max(cluster_labels) + 2
+                            outliers = list(filter(lambda c: c == -1, cluster_labels))
+                            results.append({'cluster': "#" + str(cluster_no),
+                                            'min_samples': parameter['min_samples'],
+                                            'min_cluster_size': parameter['min_cluster_size'],
+                                            'epsilon': parameter['epsilon'],
+                                            'total_groups': total_groups,
+                                            'outliers': len(outliers),
+                                            'score': score})
                         except Exception as err:
                             print("Error occurred! {err}".format(err=err))
-            r_df = pd.DataFrame(results)
+            # output the experiment results
+            df = pd.DataFrame(results)
+            folder = os.path.join('output', 'key_phrases', 'experiments')
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
-            r_df.to_csv(path, encoding='utf-8', index=False)
+            df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-
 
     # Find the duplicate papers in the corpus
     @staticmethod
