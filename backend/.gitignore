@@ -9,3 +9,4 @@ __pycache__/
 *.npy
 # Ignore the temp vector data
 /output/similarity/temp/*.json
+/.idea/runConfigurations/KeyPhrase.xml
