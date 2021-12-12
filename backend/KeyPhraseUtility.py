@@ -242,38 +242,58 @@ class KeyPhraseUtility:
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 
-    # if is_output:
-    #     group_key_phrases = list()
-    #     for key_phrase, c_label in zip(_key_phrases, cluster_labels):
-    #         key_phrase['cluster'] = "#" + str(cluster_no)
-    #         key_phrase['group'] = c_label
-    #         group_key_phrases.append(key_phrase)
-    #     # Sort the key phrases by group and score
-    #     group_key_phrases = sorted(group_key_phrases, key=lambda r: (r['group'], -r['score']))
-    #     # Load grouped key phrases
-    #     df = pd.DataFrame(group_key_phrases, columns=['group', 'score', 'key-phrase'])
-    #     # Reorder the groups and put outlier at last index
-    #     outlier_df = df[df['group'] == -1]
-    #     cluster_df = df[df['group'] >= 0]
-    #     df = pd.concat([cluster_df, outlier_df])
-    #     # group the key phrases and Summarize the results
-    #     group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrase': lambda k: list(k)})
-    #     _all_group_list = group_df.to_dict("records")
-    #     # Output the results to a csv file
-    #     _path = os.path.join(folder,
-    #                          'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping_flatten.csv')
-    #     df.to_csv(_path, encoding='utf-8', index=False)
-    #     # Output the summary results to a csv file
-    #     _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
-    #     group_df['count'] = group_df['key-phrase'].apply(len)
-    #     group_df['key-phrase'] = [', '.join(kp) for kp in group_df['key-phrase']]
-    #     group_df = group_df[['group', 'count', 'key-phrase']]  # Re-order the column list
-    #     group_df.to_csv(_path, encoding='utf-8', index=False)
-    #     # Output best grouped key phrases to a json file
-    #     _path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
-    #     group_df.to_json(_path, orient='records')
-    # Return a list of grouped key phrases (key-phrase, score)
-    # return _all_group_list
+
+    @staticmethod
+    def group_key_phrases_with_best_result(cluster_no, parameter, model):
+        try:
+            # Load top five key phrases of every paper in a cluster
+            path = os.path.join('output', 'key_phrases', 'cluster', 'top_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
+            rows = pd.read_json(path).to_dict("records")
+            key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], rows, list())
+            # Encode key phrases into vectors
+            key_phrase_vectors = model.encode(key_phrases)
+            reduced_vectors = umap.UMAP(
+                min_dist=0.0,
+                n_components=parameter['dimension'],
+                random_state=42,
+                metric="cosine").fit_transform(key_phrase_vectors.tolist())
+            # Compute the cosine distance/similarity for each doc vectors
+            distances = pairwise_distances(reduced_vectors, metric='cosine')
+            min_samples = parameter['min_samples'] if isinstance(parameter['min_samples'], int) else None
+            # # Pass key phrase vector to HDBSCAN for grouping
+            group_labels = hdbscan.HDBSCAN(min_cluster_size=int(parameter['min_cluster_size']),
+                                           min_samples=min_samples,
+                                           cluster_selection_epsilon=float(parameter['epsilon']),
+                                           metric='precomputed').fit_predict(distances.astype('float64')).tolist()
+            # Load key phrase and group labels
+            df = pd.DataFrame()
+            df['key-phrase'] = key_phrases
+            df['group'] = group_labels
+            df['vector'] = reduced_vectors.tolist()
+            # Get the non outliers groups
+            no_outlier_df = df[df['group'] != -1].copy(deep=True)
+            no_outlier_labels = no_outlier_df['group'].tolist()
+            no_outlier_vectors = np.vstack(no_outlier_df['vector'].tolist())
+            score = BERTModelDocClusterUtility.compute_Silhouette_score(no_outlier_labels,
+                                                                        no_outlier_vectors)
+
+            # Output the summary of the grouped results
+            group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrase': lambda k: list(k)})
+            folder = os.path.join('output', 'key_phrases', 'summary')
+            # Output the results to a csv file
+            # Output the summary results to a csv file
+            group_df['cluster'] = cluster_no
+            group_df['count'] = group_df['key-phrase'].apply(len)
+            group_df = group_df[['cluster', 'group', 'count', 'key-phrase']]  # Re-order the column list
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
+            group_df.to_csv(path, encoding='utf-8', index=False)
+            # Output the summary of best grouped key phrases to a json file
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
+            group_df.to_json(path, orient='records')
+            print('Output the summary of grouped key phrase to ' + path)
+            return group_df.to_dict("records"), score
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
@@ -343,8 +363,6 @@ class KeyPhraseUtility:
             df = pd.DataFrame(results)
             folder = os.path.join('output', 'key_phrases', 'experiments')
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
-            df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.json')
             df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
