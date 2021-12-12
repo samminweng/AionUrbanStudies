@@ -245,11 +245,23 @@ class KeyPhraseUtility:
 
     @staticmethod
     def group_key_phrases_with_best_result(cluster_no, parameter, model):
+        # Collect the key phrases linked to the docs
+        def get_doc_ids_by_group_key_phrases(_doc_key_phrases, _grouped_key_phrases):
+            _doc_ids = list()
+            for doc in _doc_key_phrases:
+                # find if any doc key phrases appear in the grouped key phrases
+                for key_phrase in doc['key-phrases']:
+                    found = next((gkp for gkp in _grouped_key_phrases if gkp.lower() == key_phrase.lower()), None)
+                    if found:
+                        _doc_ids.append(doc['DocId'])
+                        break
+            return _doc_ids
+
         try:
             # Load top five key phrases of every paper in a cluster
             path = os.path.join('output', 'key_phrases', 'cluster', 'top_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
-            rows = pd.read_json(path).to_dict("records")
-            key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], rows, list())
+            doc_key_phrases = pd.read_json(path).to_dict("records")
+            key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], doc_key_phrases, list())
             # Encode key phrases into vectors
             key_phrase_vectors = model.encode(key_phrases)
             reduced_vectors = umap.UMAP(
@@ -267,7 +279,7 @@ class KeyPhraseUtility:
                                            metric='precomputed').fit_predict(distances.astype('float64')).tolist()
             # Load key phrase and group labels
             df = pd.DataFrame()
-            df['key-phrase'] = key_phrases
+            df['key-phrases'] = key_phrases
             df['group'] = group_labels
             df['vector'] = reduced_vectors.tolist()
             # Get the non outliers groups
@@ -278,13 +290,18 @@ class KeyPhraseUtility:
                                                                         no_outlier_vectors)
 
             # Output the summary of the grouped results
-            group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrase': lambda k: list(k)})
+            group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrases': lambda k: list(k)})
             folder = os.path.join('output', 'key_phrases', 'summary')
             # Output the results to a csv file
             # Output the summary results to a csv file
             group_df['cluster'] = cluster_no
-            group_df['count'] = group_df['key-phrase'].apply(len)
-            group_df = group_df[['cluster', 'group', 'count', 'key-phrase']]  # Re-order the column list
+            group_df['count'] = group_df['key-phrases'].apply(len)
+            # Collect doc ids that contained the grouped key phrases
+            group_key_phrases = group_df['key-phrases'].tolist()
+            group_doc_ids = list(map(lambda group: get_doc_ids_by_group_key_phrases(doc_key_phrases, group), group_key_phrases))
+            group_df['doc-ids'] = group_doc_ids
+            group_df['num-docs'] = group_df['doc-ids'].apply(len)
+            group_df = group_df[['cluster', 'group', 'count', 'key-phrases', 'num-docs', 'doc-ids']]  # Re-order the column list
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file

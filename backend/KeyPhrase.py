@@ -108,7 +108,7 @@ class KeyPhraseSimilarity:
             KeyPhraseUtility.cluster_key_phrases_experiment_by_HDBSCAN(all_key_phrases, cluster_no, self.model)
 
     # Combine all the key phrases results
-    def summarize_key_phrases(self):
+    def summarize_grouped_key_phrases(self):
         try:
             # Output key phrases of each paper
             folder = os.path.join('output', 'key_phrases', 'experiments')
@@ -142,6 +142,7 @@ class KeyPhraseSimilarity:
                                                      'total_groups', 'outliers', 'score', 'grouped_key_phrases'])
             path = os.path.join('output', 'key_phrases', 'summary', 'top_key_phrases_best_grouping.csv')
             df.to_csv(path, encoding='utf-8', index=False)
+
 
             # # Sort key phrases by DocId
             # sorted_key_phrases = sorted(key_phrases, key=lambda k: k['DocId'])
@@ -234,6 +235,6 @@ if __name__ == '__main__':
     kp = KeyPhraseSimilarity()
     # kp.extract_key_phrases_by_clusters()
     # kp.group_key_phrases_by_clusters()
-    kp.summarize_key_phrases()
+    kp.summarize_grouped_key_phrases()
 
     # tw.find_top_similar_paper_in_corpus()
