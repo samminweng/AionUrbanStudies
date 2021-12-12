@@ -21,11 +21,11 @@ function load_cluster_data_display_results(cluster_topic_key_phrases, corpus_dat
         $('#cluster_no').append(option);
     }
     // Set the cluster #2 as default cluster
-    const topic_list_view = new TopicListView(selected_cluster_no, cluster_topic_key_phrases, corpus_data, corpus_key_phrases);
+    const topic_list_view = new DocTopicKeyPhraseListView(selected_cluster_no, cluster_topic_key_phrases, corpus_data, corpus_key_phrases);
     // Bind the change to cluster no
     $('#cluster_no').on('change', function (event) {
-        const cluster_number = parseInt(this.value);
-        const topic_list_view = new TopicListView(cluster_number, cluster_topic_key_phrases, corpus_data, corpus_key_phrases);
+        const cluster_no = parseInt(this.value);
+        const topic_list_view = new DocTopicKeyPhraseListView(cluster_no, cluster_topic_key_phrases, corpus_data, corpus_key_phrases);
     });
 }
 
@@ -33,7 +33,7 @@ function load_cluster_data_display_results(cluster_topic_key_phrases, corpus_dat
 $(function () {
     const progress_bar = new ProgressBar();
     // Document (article abstract and title) and key terms data
-    const corpus_file_path = 'data/' + corpus + '.json';
+    const corpus_file_path = 'data/' + corpus + '_cleaned.json';
     // HDBSCAN cluster and topic words data
     const cluster_topic_key_phrases_file_path = 'data/doc_cluster/' + corpus + '_HDBSCAN_Cluster_topic_key_phrases.json';
     // Document key phrase data

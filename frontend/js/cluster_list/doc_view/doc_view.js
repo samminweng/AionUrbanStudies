@@ -1,6 +1,13 @@
 // Create a title view
-function DocView(doc, selected_topic, doc_key_phrases) {
-    const topic_words = (selected_topic === null) ? [] : [selected_topic['topic'], selected_topic['plural']];   // Highlight singular and plural topics
+function DocView(doc, selected_term, doc_key_phrases) {
+    let search_terms = [];
+    if(selected_term != null){
+        if('topic' in selected_term){
+            search_terms = [selected_term['topic'], selected_term['plural']]; // Highlight singular and plural topics
+        }
+    }
+
+
     const container = $('<div></div>');
     this.get_container = function () {
         return container;
@@ -39,13 +46,13 @@ function DocView(doc, selected_topic, doc_key_phrases) {
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));
         // Mark the collocations on title div
         title_div = mark_key_terms(title_div, doc_key_phrases, 'key_term');
-        title_div = mark_key_terms(title_div, topic_words, 'search_term');
+        title_div = mark_key_terms(title_div, search_terms, 'search_term');
         container.append(title_div);
         // Add the abstract
         let abstract_div = $('<div class="col"></div>');
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span>' + doc['Abstract'] + '</span>'));
         abstract_div = mark_key_terms(abstract_div, doc_key_phrases, 'key_term');
-        abstract_div = mark_key_terms(abstract_div, topic_words, 'search_term');
+        abstract_div = mark_key_terms(abstract_div, search_terms, 'search_term');
         container.append(abstract_div);
         // Add author keywords
         let author_keyword_div = $('<div class="col"></div>');
@@ -60,10 +67,9 @@ function DocView(doc, selected_topic, doc_key_phrases) {
         const citation_div = $('<div class="col"></div>');
         citation_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>'));
         // Add DOI link
-        const doi_link = $('<span class="p-3">' +
+        citation_div.append($('<span class="p-3"><span class="fw-bold">DOI </span>' +
             '<a target="_blank" href="https://doi.org/' + doc['DOI'] + '">' + doc['DOI'] + '</a>' +
-            '</span>');
-        citation_div.append(doi_link);
+            '</span>'));
         container.append(citation_div);
     }
 

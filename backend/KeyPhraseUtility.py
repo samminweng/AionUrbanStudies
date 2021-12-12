@@ -263,7 +263,8 @@ class KeyPhraseUtility:
             doc_key_phrases = pd.read_json(path).to_dict("records")
             key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], doc_key_phrases, list())
             # Encode key phrases into vectors
-            key_phrase_vectors = model.encode(list(map(lambda kp: kp.lower(), key_phrases)))
+            # key_phrase_vectors = model.encode(list(map(lambda kp: kp.lower(), key_phrases)))
+            key_phrase_vectors = model.encode(key_phrases)
             reduced_vectors = umap.UMAP(
                 min_dist=0.0,
                 n_components=parameter['dimension'],
@@ -317,7 +318,7 @@ class KeyPhraseUtility:
     def cluster_key_phrases_experiment_by_HDBSCAN(key_phrases, cluster_no, model):
         try:
             # Convert the key phrases to vectors
-            key_phrase_vectors = model.encode(list(map(lambda kp: kp.lower(), key_phrases)))
+            key_phrase_vectors = model.encode(key_phrases)
             results = list()
             for dimension in [10, 15, 50, 100, 768]:
                 for min_samples in [None] + list(range(1, 16)):

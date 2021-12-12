@@ -59,27 +59,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/cluster/experiments/HDBSCAN_experiment.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_result_summary.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_10.csv">
           <value>
             <Attribute>
@@ -88,13 +67,6 @@
           </value>
         </entry>
         <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_15.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_2.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -136,70 +108,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_summary.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/experiments/recluster/HDBSCAN_re_cluster_doc_vector_results_80.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/experiments/umap/UMAP_HDBSCAN_cluster_results.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/experiments/umap/UMAP_HDBSCAN_min_cluster.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/experiments/umap/UMAP_HDBSCAN_min_cluster_list.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/hdbscan_clustering/HDBSCAN_cluster_result.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/hdbscan_clustering/UrbanStudyCorpus_HDBSCAN_clusters.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/cluster/hdbscan_clustering/UrbanStudyCorpus_clusters_tree.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/topics/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/cluster/topics/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words_details.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -227,13 +136,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/key_phrases/UrbanStudyCorpus_HDBSCAN_Cluster_topic_key_phrases_summary.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/key_phrases/UrbanStudyCorpus_doc_key_phrases.csv">
           <value>
             <Attribute>
@@ -255,49 +157,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_best_grouping.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_best_grouping_flatten.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_grouping.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#0_grouping_experiments.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#1.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#1_best_grouping.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#1_grouping_experiments.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -311,20 +171,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#2_best_grouping.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#2_grouping_experiments.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#4.csv">
           <value>
             <Attribute>
@@ -332,56 +178,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#4_best_grouping.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#4_grouping.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#4_grouping_experiments.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#6_grouping_experiments.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#7_grouping_experiments.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#9.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/cluster/top_key_phrases_cluster_#9_grouping_experiments.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/key_phrases/doc_key_phrases.csv">
+        <entry key="/output/key_phrases/group_key_phrases/top_key_phrases_best_grouping.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

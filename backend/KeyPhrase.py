@@ -216,8 +216,8 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     kp = KeyPhraseSimilarity()
-    # kp.extract_key_phrases_by_clusters()
+    kp.extract_key_phrases_by_clusters()
     # kp.group_key_phrases_by_clusters_experiments()
-    kp.grouped_key_phrases_with_best_parameter()
-    kp.summarize_key_phrases_results()
+    # kp.grouped_key_phrases_with_best_parameter()
+    # kp.summarize_key_phrases_results()
     # tw.find_top_similar_paper_in_corpus()
