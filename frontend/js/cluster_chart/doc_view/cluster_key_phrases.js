@@ -7,101 +7,116 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases,
     const all_grouped_key_phrases = grouped_key_phrases.concat([outlier_key_phrases]);
     const total = all_grouped_key_phrases.reduce((pre, cur) => pre + cur['count'], 0);
 
+    // Create an list item to display a group of key phrases
+    function createGroupItem(group){
+        const group_item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>')
+        const group_no = group['group'];
+
+        // Display key phrases
+        const key_phrases = group['key-phrases'];
+        const key_phrase_div = $('<div class="ms-2 me-auto"></div>');
+        // Add sub title
+        const sub_title_div = $('<div class="fw-bold sub-title"></div>');
+        if (group_no === -1){
+            sub_title_div.text("Un-grouped Key Phrases:");
+        }
+        key_phrase_div.append(sub_title_div);
+        // Display top 10 key phrases
+        const text_span = $('<p class="key_phrase_text"></p>');
+        text_span.text(key_phrases.slice(0, 10).join(", "));
+        key_phrase_div.append(text_span);
+        group_item.append(key_phrase_div);
+        // Long list of key phrases
+        if(key_phrases.length > 10){
+            const btn_div = $('<div class="small"></div>');
+            // Create a more btn to view more topics
+            const more_btn = $('<span class="text-muted">MORE<span class="ui-icon ui-icon-plus"></span></span>');
+            // Create a few btn
+            const less_btn = $('<span class="text-muted m-3">LESS<span class="ui-icon ui-icon-minus"></span></span>');
+            more_btn.css("font-size", "0.8em");
+            less_btn.css("font-size", "0.8em");
+            // Display more key phrases
+            more_btn.click(function(event){
+                const current_key_phrases = text_span.text().split(', ');
+                // Display 20 more key phrases
+                const max_length = Math.min(key_phrases.length, current_key_phrases.length + 10)
+                const more_key_phrases = key_phrases.slice(0, max_length);
+                group_item.find('.key_phrase_text').text(more_key_phrases.join(", "));
+                if(more_key_phrases.length >= key_phrases.length){
+                    // Display 'less' btn only
+                    more_btn.hide();
+                    less_btn.show();
+                }else{
+                    more_btn.show();
+                    less_btn.show();
+                }
+            });
+            // Display top five key phrases
+            less_btn.click(function(event){
+                text_span.text(key_phrases.slice(0, 10).join(", "));
+                more_btn.show();
+                less_btn.hide();
+            });
+
+            // By default, display more btn only.
+            more_btn.show();
+            less_btn.hide();
+            btn_div.append(more_btn);
+            btn_div.append(less_btn);
+            key_phrase_div.append(btn_div);
+        }
+
+
+        // Add percent
+        const percent = Math.round(100 * (group['count']/total));
+        const doc_ids = group['DocIds'];
+        const group_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
+        const percent_btn = $('<button type="button" class="rounded btn-sm">' + percent + '%</button>');
+        // Define count btn to display the doc_ids
+        percent_btn.click(function(event){
+            // Create a doc list
+            const doc_list = new DocList(group_docs, null, corpus_key_phrases, key_phrases);
+            document.getElementById('doc_list').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        });
+        group_item.append(percent_btn);
+        return group_item;
+    }
+
+
     // Create a pagination
     // Create a pagination to show the documents
-    function createPagination(group_table) {
+    function createPagination(group_div) {
         // Create the table
         let pagination = $("<div></div>");
         // Add the table header
         const group_list = $('<ul class="list-group list-group-flush"></ul>');
-        // Display each grouped key phrases
-        for(const group of all_grouped_key_phrases){
-            const item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>')
-            const group_no = group['group'];
-            const percent = Math.round(100 * (group['count']/total));
-            const top_key_phrases = group['key-phrases'].slice(0, 10);
-            const key_phrase_div = $('<div class="ms-2 me-auto"></div>');
-            // Add sub title
-            const sub_title_div = $('<div class="fw-bold sub-title"></div>');
-            if (group_no === -1){
-                sub_title_div.text("Un-grouped Key Phrases:");
+        // // Pagination
+        pagination.pagination({
+            dataSource: function (done) {
+                let result = [];
+                for (let i = 0; i < all_grouped_key_phrases.length; i++) {
+                    result.push(all_grouped_key_phrases[i]);
+                }
+                done(result);
+            },
+            totalNumber: all_grouped_key_phrases.length,
+            pageSize: 5,
+            showNavigator: true,
+            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> groups',
+            position: 'top',
+            className: 'paginationjs-theme-blue paginationjs-small',
+            // showGoInput: true,
+            // showGoButton: true,
+            callback: function (groups, pagination) {
+                group_list.empty();
+                for (let i = 0; i < groups.length; i++) {
+                    const group = groups[i];
+                    const group_item = createGroupItem(group);
+                    group_list.append(group_item);
+                }
             }
-            key_phrase_div.append(sub_title_div);
-            // Display top 10 key phrases
-            const text_span = $('<span class="key_phrase_text"></span>');
-            text_span.text(top_key_phrases.join(", "));
-            key_phrase_div.append(text_span);
-            item.append(key_phrase_div);
-            // Add percent
-            const span = $('<span class="badge bg-primary rounded-pill"></span>')
-            span.text(" (" + percent+ '%)')
-            item.append(span);
-            group_list.append(item);
-        }
-        group_table.append(group_list);
-
-        //
-        //
-        //     const top_key_phrases = key_phrases.slice(0, 10);
-        //     const item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>');
-        //     const item_div = $('<div class="ms-2 me-auto">' +
-        //         '<div class="key_phrases">' +
-        //         '<span class="key_phrase_text">' + top_key_phrases.join(', ')  +'</span>' +
-        //         '</div></div>');
-        //     // Create a more btn to view more topics
-        //     const more_btn = $('<button type="button" class="btn btn-link">more</button>');
-        //     // Create a few btn
-        //     const less_btn = $('<button type="button" class="btn btn-link">less</button>');
-        //     more_btn.button();
-        //     less_btn.button();
-        //     // Display more key phrases
-        //     more_btn.click(function(event){
-        //         const current_key_phrases = item_div.find('.key_phrase_text').text().split(', ');
-        //         // Display 20 more key phrases
-        //         const max_length = Math.min(key_phrases.length, current_key_phrases.length + 20)
-        //         const more_key_phrases = key_phrases.slice(0, max_length);
-        //         item_div.find('.key_phrase_text').text(more_key_phrases.join(", "));
-        //         if(more_key_phrases.length >= key_phrases.length){
-        //             // Display 'less' btn only
-        //             more_btn.hide();
-        //             less_btn.show();
-        //         }else{
-        //             more_btn.show();
-        //             less_btn.show();
-        //         }
-        //     });
-        //     // Display top five key phrases
-        //     less_btn.click(function(event){
-        //         item_div.find('.key_phrase_text').text(top_key_phrases.join(", "));
-        //         more_btn.show();
-        //         less_btn.hide();
-        //     });
-        //
-        //     // By default, display more btn only.
-        //     more_btn.show();
-        //     less_btn.hide();
-        //     item_div.find('.key_phrases').append(more_btn);
-        //     item_div.find('.key_phrases').append(less_btn);
-        //
-        //     // Get the doc ids that contain this grouped key phrases
-        //     const doc_ids = group['DocIds'];
-        //     const group_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
-        //     console.log(group_docs);
-        //
-        //     // Add the div to display total number of key phrases
-        //     const count_btn = $('<button class="badge bg-primary rounded-pill">' + percent + '%</button>');
-        //     count_btn.button();
-        //     // Define count btn to display the doc_ids
-        //     count_btn.click(function(event){
-        //         // Create a doc list
-        //         const doc_list = new DocList(group_docs, null, corpus_key_phrases, key_phrases);
-        //         document.getElementById('doc_list').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-        //     });
-        //
-        //     item.append(item_div);
-        //     item.append(count_btn);
-        //     list.append(item);
-        // }
+        });
+        group_div.append(group_list);
         return pagination;
     }
 
@@ -109,13 +124,13 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases,
 
     function _createUI(){
         // Heading
-        const heading = $('<h3>Key Phrases</h3>');
+        const heading = $('<h3><span class="fw-bold">Key Phrases</span></h3>');
         const p = $('<p></p>');
         // A list of grouped key phrases
-        const group_table = $('<div></div>');
-        const pagination = createPagination(group_table);
-        p.append(group_table);
+        const group_div = $('<div></div>');
+        const pagination = createPagination(group_div);
         p.append(pagination);
+        p.append(group_div);
         accordion_div.append(heading);
         accordion_div.append(p);
     }

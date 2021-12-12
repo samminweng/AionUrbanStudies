@@ -39,7 +39,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
             // icons: null,
             collapsible: true,
             heightStyle: "fill",
-            active: 0
+            active: 1
         });
         $('#cluster_topics').append(accordion_div);
     }
