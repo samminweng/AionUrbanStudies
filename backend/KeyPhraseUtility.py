@@ -263,7 +263,7 @@ class KeyPhraseUtility:
             doc_key_phrases = pd.read_json(path).to_dict("records")
             key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], doc_key_phrases, list())
             # Encode key phrases into vectors
-            key_phrase_vectors = model.encode(key_phrases)
+            key_phrase_vectors = model.encode(list(map(lambda kp: kp.lower(), key_phrases)))
             reduced_vectors = umap.UMAP(
                 min_dist=0.0,
                 n_components=parameter['dimension'],
@@ -291,7 +291,7 @@ class KeyPhraseUtility:
 
             # Output the summary of the grouped results
             group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrases': lambda k: list(k)})
-            folder = os.path.join('output', 'key_phrases', 'summary')
+            folder = os.path.join('output', 'key_phrases', 'group_key_phrases')
             # Output the results to a csv file
             # Output the summary results to a csv file
             group_df['cluster'] = cluster_no
@@ -299,9 +299,9 @@ class KeyPhraseUtility:
             # Collect doc ids that contained the grouped key phrases
             group_key_phrases = group_df['key-phrases'].tolist()
             group_doc_ids = list(map(lambda group: get_doc_ids_by_group_key_phrases(doc_key_phrases, group), group_key_phrases))
-            group_df['doc-ids'] = group_doc_ids
-            group_df['num-docs'] = group_df['doc-ids'].apply(len)
-            group_df = group_df[['cluster', 'group', 'count', 'key-phrases', 'num-docs', 'doc-ids']]  # Re-order the column list
+            group_df['DocIds'] = group_doc_ids
+            group_df['NumDocs'] = group_df['DocIds'].apply(len)
+            group_df = group_df[['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file
@@ -317,7 +317,7 @@ class KeyPhraseUtility:
     def cluster_key_phrases_experiment_by_HDBSCAN(key_phrases, cluster_no, model):
         try:
             # Convert the key phrases to vectors
-            key_phrase_vectors = model.encode(key_phrases)
+            key_phrase_vectors = model.encode(list(map(lambda kp: kp.lower(), key_phrases)))
             results = list()
             for dimension in [10, 15, 50, 100, 768]:
                 for min_samples in [None] + list(range(1, 16)):
