@@ -8,7 +8,7 @@ $(function () {
     // Clustering chart data
     const cluster_chart_data_file_path = 'data/doc_cluster/' + corpus + '_clusters.json';
     // Document (article abstract and title)
-    const corpus_file_path = 'data/' + corpus + '.json';
+    const corpus_file_path = 'data/' + corpus + '_cleaned.json';
     // HDBSCAN cluster and topic data
     const cluster_topic_key_phrase_file_path = 'data/doc_cluster/' + corpus + '_HDBSCAN_Cluster_topic_key_phrases.json';
     // Document key phrase data

@@ -19,28 +19,12 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
                 + selected_topic['topic'] + ' (' + selected_topic['doc_ids'].length + ')' + "</button>");
             // Click on the link to display the articles associated with topic
             link.click(function () {
-                // $('#cluster_doc_heading').empty();
-                // $('#cluster_doc_heading').append(cluster_link);
-                // $('#cluster_doc_heading').append(
-                //     $('<span> has ' + selected_topic['doc_ids'].length + ' articles about '
-                //         + '<span class="search_term">' + selected_topic['topic'] + '</span></span>'));
-                // // Add the reset button to display all the cluster articles
-                // const reset_btn = $('<button class="mx-1">' +
-                //     '<span class="ui-icon ui-icon-closethick"></span></button>');
-                // reset_btn.button();
-                // reset_btn.click(function (event) {
-                //     // // Get the documents about the topic
-                //     const cluster_doc_list = new ClusterDocList(cluster, cluster_docs, corpus_key_phrases);
-                // });
-                // // Update the heading
-                // $('#cluster_doc_heading').append(reset_btn);
                 // Get a list of docs in relation to the selected topic
                 const topic_docs = cluster_docs.filter(d => selected_topic['doc_ids'].includes(d['DocId']));
                 // Create a list of articles associated with topic
                 const doc_list = new DocList(topic_docs, selected_topic, corpus_key_phrases, null);
                 document.getElementById('doc_list').scrollIntoView({behavior: "smooth",
                     block: "nearest", inline: "nearest"});
-
             });
             topic_p.append(link);
         }
@@ -48,7 +32,8 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         // Append topic heading and paragraph to accordion
         accordion_div.append(topic_heading);
         accordion_div.append(topic_p);
-
+        // Add the key phrases grouped by similarity
+        const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases, accordion_div);
         // Set accordion
         accordion_div.accordion({
             // icons: null,
@@ -57,8 +42,6 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
             active: 0
         });
         $('#cluster_topics').append(accordion_div);
-        // Add the key phrases grouped by similarity
-        const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases);
     }
 
     function _createUI() {
