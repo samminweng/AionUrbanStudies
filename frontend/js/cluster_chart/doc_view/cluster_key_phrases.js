@@ -16,9 +16,11 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases,
         const key_phrases = group['key-phrases'];
         const key_phrase_div = $('<div class="ms-2 me-auto"></div>');
         // Add sub title
-        const sub_title_div = $('<div class="fw-bold sub-title"></div>');
+        const sub_title_div = $('<div class="fw-bold text-capitalize sub-title"></div>');
         if (group_no === -1){
-            sub_title_div.text("Un-grouped Key Phrases:");
+            sub_title_div.text("miscellaneous");
+        }else{
+            sub_title_div.text(key_phrases[0]);
         }
         key_phrase_div.append(sub_title_div);
         // Display top 10 key phrases

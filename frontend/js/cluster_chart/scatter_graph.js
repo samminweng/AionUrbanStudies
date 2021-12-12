@@ -8,7 +8,7 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         return (p_value >= c_value) ? p_value : c_value;
     }, 0);
     const clusters = cluster_topic_key_phrases;
-    console.log(clusters);
+    // console.log(clusters);
     // Get the color of collocation
     const colors = function (cluster_no) {
         // Optimal color pallets for 10 colors
@@ -58,6 +58,18 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         return data;
     }
 
+    // Display top 10 topics above the chart
+    function display_top_10_topics(cluster_no){
+        $('#hover_info').empty();
+        const n = 10;
+        const topics = get_cluster_topics(cluster_no, n);      // Get top 10 cluster topics
+        const topic_text = topics.map(t => t['topic']).join(", ");
+        // Add the cluster heading
+        $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' topics</div>'));
+        $('#hover_info').append($('<div>' + topic_text + '</div>'));
+        $('#hover_info').focus();
+    }
+
 
     // Draw google chart
     function drawChart() {
@@ -91,17 +103,16 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
 
         // Get the cluster number
         Plotly.newPlot('cluster_chart', data, option);
-        let is_lock = false;
         const cluster_chart = document.getElementById('cluster_chart');
         // Add chart onclick to toggle annotation
         cluster_chart.on('plotly_click', function (data) {
             const point = data.points[0];
             // Get the doc id from text
             const cluster_no = parseInt(point.data.name.split("#")[1]);
+            // display_top_10_topics(cluster_no);
             // Create a list of cluster doc
             const cluster = clusters.find(c => c['Cluster'] === cluster_no);
             const cluster_doc_list = new ClusterDocList(cluster, corpus_data, corpus_key_phrases);
-
             // Add an annotation to the clustered dots
             const new_annotation = {
                 x: point.xaxis.d2l(point.x),
@@ -125,25 +136,17 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
             }
             Plotly.relayout('cluster_chart', 'annotations[' + newIndex + ']', new_annotation);
         });
-
-        // Add chart hover over event to display cluster infor
-        cluster_chart.on('plotly_hover', function (data) {
-            if (data.points.length > 0) {
-                $('#hover_info').empty();
-                const n = 10;
-                const cluster_no = parseInt(data.points[0].data.name.split("#")[1]);
-                const topics = get_cluster_topics(cluster_no, n);      // Get top 10 cluster topics
-                const topic_text = topics.map(t => t['topic']).join("; ");
-                // Add the cluster heading
-                $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' topics</div>'));
-                $('#hover_info').append($('<div>' + topic_text + '</div>'));
-                $('#hover_info').focus();
+        // Add chart hover event
+        cluster_chart.on('plotly_hover', function(data){
+            if(data.points.length> 0){
+                const point = data.points[0];
+                const cluster_no = parseInt(point.data.name.split("#")[1]);
+                display_top_10_topics(cluster_no);
             }
-        });
-        // // Add unhover event to clear the text
-        cluster_chart.on('plotly_unhover', function (data) {
+        }).on('plotly_unhover', function(data){
             $('#hover_info').empty();
         });
+
     }
 
 

@@ -77,14 +77,15 @@ function DocView(doc, doc_key_phrases, selected_topics, key_phrases) {
         container.find(".card-text").append(abstract_div);
 
         // Add citation
-        const citation_div = $('<div></div>');
-        citation_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>'));
+        const paper_info_div = $('<div></div>');
+        paper_info_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>'));
+        // Add Year
+        paper_info_div.append($('<span><span class="fw-bold"> Year </span>' + doc['Year']+ ' </span>'))
         // Add DOI link
-        const doi_link = $('<span class="p-3">' +
+        paper_info_div.append($('<span><span class="fw-bold"> DOI </span>' +
             '<a target="_blank" href="https://doi.org/' + doc['DOI'] + '">' + doc['DOI'] + '</a>' +
-            '</span>');
-        citation_div.append(doi_link);
-        container.find(".card-text").append(citation_div);
+            '</span>'));
+        container.find(".card-text").append(paper_info_div);
     }
 
     _createUI();

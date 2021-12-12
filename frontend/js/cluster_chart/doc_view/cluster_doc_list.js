@@ -9,13 +9,12 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
     function create_cluster_topic_key_phrases(){
         // Create a div to display a list of topic (a link)
         $('#cluster_topics').empty();
-        // const topic_text = cluster_topics.slice(0, 10).map(topic => topic['topic']).join("; ");
-        const accordion_div = $('<div class="container"></div>');
-        const topic_heading = $('<h3><span class="fw-bold">Top 10 topics: </span></h3>');
+        const topic_container = $('<div class="container"></div>')
+        const topic_heading = $('<h5><span class="fw-bold">Top 10 topics: </span></h5>');
         const topic_p = $('<div><p></p></div>');
         // Add top 30 topics (each topic as a link)
         for (const selected_topic of cluster_topics) {
-            const link = $('<button type="button" class="btn btn-link btn-sm"> '
+            const link = $('<button type="button" class="btn btn-link btn"> '
                 + selected_topic['topic'] + ' (' + selected_topic['doc_ids'].length + ')' + "</button>");
             // Click on the link to display the articles associated with topic
             link.click(function () {
@@ -30,8 +29,11 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         }
 
         // Append topic heading and paragraph to accordion
-        accordion_div.append(topic_heading);
-        accordion_div.append(topic_p);
+        topic_container.append(topic_heading);
+        topic_container.append(topic_p);
+        $('#cluster_topics').append(topic_container);
+
+        const accordion_div = $('<div class="container"></div>');
         // Add the key phrases grouped by similarity
         const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases, accordion_div);
         // Set accordion
@@ -39,7 +41,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
             // icons: null,
             collapsible: true,
             heightStyle: "fill",
-            active: 1
+            active: 0
         });
         $('#cluster_topics').append(accordion_div);
     }
