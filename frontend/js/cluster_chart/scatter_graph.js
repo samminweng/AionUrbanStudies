@@ -42,13 +42,19 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
                     data_point['y'].push(dot.y);
                     const topics = get_cluster_topics(cluster_no, 5);
                     const topic_text = topics.map(t => t['topic']).join("<br>");
-                    // Tooltip label displays top 5 topics
-                    data_point['label'].push('<b>Cluster #' + cluster_no + '</b><br>' + topic_text);
+                    if(cluster_no !== -1){
+                        // Tooltip label displays top 5 topics
+                        data_point['label'].push('<b>Cluster #' + cluster_no + '</b><br>' + topic_text);
+                    }else{
+                        // Tooltip label displays top 5 topics
+                        data_point['label'].push('<b>Outlier</b><br>' + topic_text);
+                    }
                 }
+                const trace_name = (cluster_no !== -1)? 'Cluster #' + cluster_no: "Outliers";
                 // Trace setting
                 let trace = {
                     'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
-                    'name': 'Cluster #' + cluster_no, 'mode': 'markers', 'type': 'scatter',
+                    'name': trace_name, 'mode': 'markers', 'type': 'scatter',
                     'marker': {color: colors(cluster_no)}, opacity: opacity(cluster_no),
                     'hovertemplate': '%{text}'
                 };
@@ -65,7 +71,11 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         const topics = get_cluster_topics(cluster_no, n);      // Get top 10 cluster topics
         const topic_text = topics.map(t => t['topic']).join(", ");
         // Add the cluster heading
-        $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' topics</div>'));
+        if(cluster_no !== -1){
+            $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' topics</div>'));
+        }else{
+            $('#hover_info').append($('<div class="h5">Outlier Top ' + n + ' topics</div>'));
+        }
         $('#hover_info').append($('<div>' + topic_text + '</div>'));
         $('#hover_info').focus();
     }
@@ -108,17 +118,21 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         cluster_chart.on('plotly_click', function (data) {
             const point = data.points[0];
             // Get the doc id from text
-            const cluster_no = parseInt(point.data.name.split("#")[1]);
+            let cluster_no = -1;
+            if(point.data.name.includes('#')){
+                cluster_no = parseInt(point.data.name.split("#")[1]);
+            }
             // display_top_10_topics(cluster_no);
             // Create a list of cluster doc
             const cluster = clusters.find(c => c['Cluster'] === cluster_no);
+            const cluster_text = (cluster_no !== -1) ? 'Cluster #' + cluster_no : "Outliers";
             const cluster_doc_list = new ClusterDocList(cluster, corpus_data, corpus_key_phrases);
             // Add an annotation to the clustered dots
             const new_annotation = {
                 x: point.xaxis.d2l(point.x),
                 y: point.yaxis.d2l(point.y),
                 bordercolor: point.fullData.marker.color,
-                text: '<b>Cluster #' + cluster_no + '</b>'
+                text: '<b>' + cluster_text + '</b>'
             };
 
             // Add onclick event to show/hide annotation of the cluster.
@@ -140,7 +154,10 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         cluster_chart.on('plotly_hover', function(data){
             if(data.points.length> 0){
                 const point = data.points[0];
-                const cluster_no = parseInt(point.data.name.split("#")[1]);
+                let cluster_no = -1;
+                if(point.data.name.includes('#')){
+                    cluster_no = parseInt(point.data.name.split("#")[1]);
+                }
                 display_top_10_topics(cluster_no);
             }
         }).on('plotly_unhover', function(data){

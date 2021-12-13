@@ -77,7 +77,7 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases,
         // Define count btn to display the doc_ids
         percent_btn.click(function(event){
             // Create a doc list
-            const doc_list = new DocList(group_docs, null, corpus_key_phrases, key_phrases);
+            const doc_list = new DocList(group_docs, group, corpus_key_phrases);
             document.getElementById('doc_list').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
         });
         group_item.append(percent_btn);
@@ -104,7 +104,8 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases,
             totalNumber: all_grouped_key_phrases.length,
             pageSize: 5,
             showNavigator: true,
-            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> groups',
+            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, ' +
+                '<%= totalNumber %> groups of key phrases',
             position: 'top',
             className: 'paginationjs-theme-blue paginationjs-small',
             // showGoInput: true,

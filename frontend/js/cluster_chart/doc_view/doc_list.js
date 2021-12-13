@@ -1,6 +1,14 @@
 // Display a list of research articles
-function DocList(docs, selected_topics, corpus_key_phrases, key_phrases) {
-
+function DocList(docs, selected_term, corpus_key_phrases) {
+    let header = "";
+    if(selected_term != null){
+        if('topic' in selected_term){
+            header = 'about <mark class="key_term"> ' + selected_term['topic'] + '</mark> topics';
+        }else if('group' in selected_term){
+            header = 'about <mark class="key_term"> ' + selected_term['key-phrases'].slice(0, 3).join(", ") + '</mark> and related ' +
+                    selected_term['key-phrases'].length + ' key phrases';
+        }
+    }
     // Create a pagination to show the documents
     function createPagination(docTable) {
         // Create the table
@@ -17,10 +25,9 @@ function DocList(docs, selected_topics, corpus_key_phrases, key_phrases) {
             totalNumber: docs.length,
             pageSize: 5,
             showNavigator: true,
-            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> articles',
+            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages',
+            header: '<div class="mb-3"><span class="fw-bold"><%= totalNumber %> articles </span> ' + header + '</div>',
             position: 'top',
-            // showGoInput: true,
-            // showGoButton: true,
             callback: function (docs, pagination) {
                 docTable.find('tbody').empty();
                 for (let i = 0; i < docs.length; i++) {
@@ -30,7 +37,7 @@ function DocList(docs, selected_topics, corpus_key_phrases, key_phrases) {
                     // Add the title
                     const col = $('<td class="col"></td>');
                     const doc_key_phrases = corpus_key_phrases.find(c => c['DocId'] === doc['DocId'])['key-phrases'];
-                    const doc_view = new DocView(doc, doc_key_phrases, selected_topics, key_phrases);
+                    const doc_view = new DocView(doc, doc_key_phrases, selected_term);
                     col.append(doc_view.get_container());
                     row.append(col);
                     docTable.find('tbody').append(row);

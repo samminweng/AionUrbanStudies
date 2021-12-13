@@ -4,6 +4,10 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
     const cluster_key_phrases = cluster['Grouped_Key_Phrases'];
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
     const cluster_link = $('<a target="_blank" href="cluster_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
+    if(cluster_no === -1){
+        cluster_link.text("Outliers");
+    }
+
 
     // Create a Top 10 Topic region
     function create_cluster_topic_key_phrases(){
