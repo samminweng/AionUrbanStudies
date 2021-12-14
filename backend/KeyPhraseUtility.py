@@ -244,7 +244,7 @@ class KeyPhraseUtility:
 
 
     @staticmethod
-    def group_key_phrases_with_best_result(cluster_no, parameter, model):
+    def group_key_phrases_with_best_result(cluster_no, parameter, folder):
         # Collect the key phrases linked to the docs
         def get_doc_ids_by_group_key_phrases(_doc_key_phrases, _grouped_key_phrases):
             _doc_ids = list()
@@ -262,38 +262,14 @@ class KeyPhraseUtility:
             path = os.path.join('output', 'key_phrases', 'cluster', 'top_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
             doc_key_phrases = pd.read_json(path).to_dict("records")
             key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], doc_key_phrases, list())
-            # Encode key phrases into vectors
-            # key_phrase_vectors = model.encode(list(map(lambda kp: kp.lower(), key_phrases)))
-            key_phrase_vectors = model.encode(key_phrases)
-            reduced_vectors = umap.UMAP(
-                min_dist=0.0,
-                n_components=parameter['dimension'],
-                random_state=42,
-                metric="cosine").fit_transform(key_phrase_vectors.tolist())
-            # Compute the cosine distance/similarity for each doc vectors
-            distances = pairwise_distances(reduced_vectors, metric='cosine')
-            min_samples = parameter['min_samples'] if isinstance(parameter['min_samples'], int) else None
-            # # Pass key phrase vector to HDBSCAN for grouping
-            group_labels = hdbscan.HDBSCAN(min_cluster_size=int(parameter['min_cluster_size']),
-                                           min_samples=min_samples,
-                                           cluster_selection_epsilon=float(parameter['epsilon']),
-                                           metric='precomputed').fit_predict(distances.astype('float64')).tolist()
+            # Get the grouping labels of key phrases
+            group_labels = parameter['group_labels']
             # Load key phrase and group labels
             df = pd.DataFrame()
             df['key-phrases'] = key_phrases
             df['group'] = group_labels
-            df['vector'] = reduced_vectors.tolist()
-            # Get the non outliers groups
-            no_outlier_df = df[df['group'] != -1].copy(deep=True)
-            no_outlier_labels = no_outlier_df['group'].tolist()
-            no_outlier_vectors = np.vstack(no_outlier_df['vector'].tolist())
-            score = BERTModelDocClusterUtility.compute_Silhouette_score(no_outlier_labels,
-                                                                        no_outlier_vectors)
-
-            # Output the summary of the grouped results
+            # Output the summary of the grouped key phrase results
             group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrases': lambda k: list(k)})
-            folder = os.path.join('output', 'key_phrases', 'group_key_phrases')
-            # Output the results to a csv file
             # Output the summary results to a csv file
             group_df['cluster'] = cluster_no
             group_df['count'] = group_df['key-phrases'].apply(len)
@@ -309,13 +285,28 @@ class KeyPhraseUtility:
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
             group_df.to_json(path, orient='records')
             print('Output the summary of grouped key phrase to ' + path)
-            return group_df.to_dict("records"), score
+            return group_df.to_dict("records")
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
     def cluster_key_phrases_experiment_by_HDBSCAN(key_phrases, cluster_no, model, folder):
+        def collect_group_results(_results, _group_label):
+            try:
+                _found = next((r for r in _results if r['group'] == _group_label), None)
+                if not _found:
+                    _found = {'group': _group_label, 'count': 1}
+                    _results.append(_found)
+                else:
+                    _found['count'] += 1
+                # Sort the results
+                _results = sorted(_results, key=lambda c: (c['count'], c['group']))
+                return _results
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+
+
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
@@ -347,10 +338,8 @@ class KeyPhraseUtility:
                                                                cluster_selection_epsilon=parameter['epsilon'],
                                                                metric='precomputed').fit_predict(
                                     distances.astype('float64')).tolist()
-                                group_results = reduce(
-                                    lambda pre, cur: BERTModelDocClusterUtility.collect_cluster_results(pre, cur),
-                                    group_labels, list())
-                                outlier_number = next((g['count'] for g in group_results if g['cluster_no'] == -1), 0)
+                                group_results = reduce(lambda pre, cur: collect_group_results(pre, cur), group_labels, list())
+                                outlier_number = next((g['count'] for g in group_results if g['group'] == -1), 0)
                                 if len(group_results) > 1:
                                     df = pd.DataFrame()
                                     df['groups'] = group_labels

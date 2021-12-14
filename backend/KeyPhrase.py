@@ -109,10 +109,10 @@ class KeyPhraseSimilarity:
             KeyPhraseUtility.cluster_key_phrases_experiment_by_HDBSCAN(all_key_phrases, cluster_no, self.model, folder)
 
     # Used the best experiment results to group the key phrases results
-    def grouped_key_phrases_with_best_parameter(self):
+    def grouped_key_phrases_with_best_experiment_result(self):
         try:
             # Output key phrases of each paper
-            folder = os.path.join('output', 'key_phrases', 'experiments')
+            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
             # Collect the best results in each cluster
             best_results = list()
             for cluster_no in range(-1, self.total_clusters):
@@ -126,17 +126,14 @@ class KeyPhraseSimilarity:
                     experiments = sorted(experiments, key=lambda ex: (ex['score'],
                                                                       ex['min_samples'] if isinstance(ex['min_samples'],
                                                                                                       int)
-                                                                      else None),
+                                                                      else 0),
                                          reverse=True)
                     best_result = experiments[0]
+                    folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
                     # Obtain the grouped key phrases of the cluster
-                    group_key_phrases, score = KeyPhraseUtility.group_key_phrases_with_best_result(cluster_no,
-                                                                                                   best_result,
-                                                                                                   self.model)
-                    best_result['cluster'] = cluster_no
-                    best_result['score'] = score
-                    best_result['total_groups'] = len(group_key_phrases)
-                    best_result['outliers'] = next(g['count'] for g in group_key_phrases if g['group'] == -1)
+                    group_key_phrases = KeyPhraseUtility.group_key_phrases_with_best_result(cluster_no,
+                                                                                            best_result,
+                                                                                            folder)
                     best_result['grouped_key_phrases'] = group_key_phrases
                     best_results.append(best_result)
                 except Exception as err:
@@ -146,9 +143,11 @@ class KeyPhraseSimilarity:
             df = pd.DataFrame(best_results,
                               columns=['cluster', 'dimension', 'min_samples', 'min_cluster_size', 'epsilon',
                                        'total_groups', 'outliers', 'score', 'grouped_key_phrases'])
-            path = os.path.join('output', 'key_phrases', 'group_key_phrases', 'top_key_phrases_best_grouping.csv')
+            path = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases',
+                                'top_key_phrases_best_grouping.csv')
             df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join('output', 'key_phrases', 'group_key_phrases', 'top_key_phrases_best_grouping.json')
+            path = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases',
+                                'top_key_phrases_best_grouping.json')
             df.to_json(path, orient="records")
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -219,6 +218,6 @@ if __name__ == '__main__':
     kp = KeyPhraseSimilarity()
     # kp.extract_key_phrases_by_clusters()
     kp.group_key_phrases_by_clusters_experiments()
-    # kp.grouped_key_phrases_with_best_parameter()
+    # kp.grouped_key_phrases_with_best_experiment_result()
     # kp.summarize_key_phrases_results()
 
