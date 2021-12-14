@@ -229,11 +229,11 @@ class BERTModelDocClusterUtility:
 
     # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_topics(approach, docs_per_cluster, is_load=False):
+    def get_n_gram_topics(approach, docs_per_cluster, folder, is_load=False):
         # A folder that stores all the topic results
-        folder = os.path.join('output', 'cluster', 'topics', 'temp')
+        temp_folder = os.path.join(folder, 'topics', 'temp')
         if is_load:
-            n_gram_topics_df = pd.read_json(os.path.join(folder,
+            n_gram_topics_df = pd.read_json(os.path.join(temp_folder,
                                                          'UrbanStudyCorpus_' + approach + '_n_topics.json'))
             return n_gram_topics_df.to_dict("records")
 
@@ -257,9 +257,9 @@ class BERTModelDocClusterUtility:
             # Convert the frequency matrix to data frame
             df = pd.DataFrame(_docs, columns=['cluster', 'doc'])
             # Write to temp output for validation
-            df.to_csv(os.path.join(folder, 'Step_1_UrbanStudyCorpus_cluster_doc.csv'),
+            df.to_csv(os.path.join(temp_folder, 'Step_1_UrbanStudyCorpus_cluster_doc.csv'),
                       encoding='utf-8', index=False)
-            df.to_json(os.path.join(folder, 'Step_1_UrbanStudyCorpus_cluster_doc.json'),
+            df.to_json(os.path.join(temp_folder, 'Step_1_UrbanStudyCorpus_cluster_doc.json'),
                        orient='records')
             return _docs
 
@@ -300,9 +300,9 @@ class BERTModelDocClusterUtility:
             # Convert the frequency matrix to data frame
             df = pd.DataFrame(frequency_matrix, columns=['cluster', 'freq_table'])
             # Write to temp output for validation
-            path = os.path.join(folder, 'Step_2_UrbanStudyCorpus_frequency_matrix.csv')
+            path = os.path.join(temp_folder, 'Step_2_UrbanStudyCorpus_frequency_matrix.csv')
             df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(folder, 'Step_2_UrbanStudyCorpus_frequency_matrix.json')
+            path = os.path.join(temp_folder, 'Step_2_UrbanStudyCorpus_frequency_matrix.json')
             df.to_json(path, orient='records')
             print('Output topics per cluster to ' + path)
             return frequency_matrix
@@ -337,10 +337,10 @@ class BERTModelDocClusterUtility:
                 # Convert the doc per word table (a dictionary) to data frame
                 df = pd.DataFrame(list(word_doc_table.items()))
                 # Write to temp output for validation
-                df.to_csv(os.path.join(folder,
+                df.to_csv(os.path.join(temp_folder,
                                        'Step_3_UrbanStudyCorpus_word_doc_table.csv'),
                           encoding='utf-8', index=False)
-                df.to_json(os.path.join(folder,
+                df.to_json(os.path.join(temp_folder,
                                         'Step_3_UrbanStudyCorpus_word_doc_table.json'),
                            orient='records')
             return word_doc_table
@@ -411,18 +411,18 @@ class BERTModelDocClusterUtility:
 
         topic_words_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
         # Write the topics results to csv
-        topic_words_df.to_csv(path_or_buf=os.path.join(folder, 'UrbanStudyCorpus_' + approach + '_n_topics.csv'), encoding='utf-8', index=False)
+        topic_words_df.to_csv(path_or_buf=os.path.join(temp_folder, 'UrbanStudyCorpus_' + approach + '_n_topics.csv'),
+                              encoding='utf-8', index=False)
         # # # Write to a json file
-        topic_words_df.to_json(os.path.join(folder, 'UrbanStudyCorpus_' + approach + '_n_topics.json'), orient='records')
+        topic_words_df.to_json(os.path.join(temp_folder, 'UrbanStudyCorpus_' + approach + '_n_topics.json'), orient='records')
         return topics_list  # Return a list of dicts
 
     # Output the cluster topics extracted by TF-IDF as a csv file
     @staticmethod
-    def flatten_tf_idf_topics(cluster_no):
+    def flatten_tf_idf_topics(cluster_no, folder):
         cluster = "HDBSCAN_Cluster"
         approach = "TF-IDF"
         try:
-            folder = os.path.join('output', 'cluster', 'topics')
             path = os.path.join(folder, 'UrbanStudyCorpus_' + cluster + '_' + approach + '_topic_words_n_grams.json')
             cluster_df = pd.read_json(path)
             clusters = cluster_df.to_dict("records")
@@ -447,7 +447,6 @@ class BERTModelDocClusterUtility:
                         print("Error occurred! {err}".format(err=err))
                 results.append(result)
             n_gram_df = pd.DataFrame(results)
-            folder = os.path.join('output', 'cluster', 'topics')
             path = os.path.join(folder, 'UrbanStudyCorpus_' + approach + '_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
             n_gram_df.to_csv(path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + path)
