@@ -86,22 +86,22 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         const data = convert_cluster_data_to_chart_format();
         // Define the layout
         const option = {
-            autosize: false,
+            autosize: true,
             width: width,
             height: height,
             // Set the graph margin
             margin: {
                 l: 30,
-                r: 0,
-                b: 10,
-                t: 10,
-                pad: 3
+                r: 30,
+                b: 30,
+                t: 30,
+                // pad: 1
             },
             // Plot the legend outside the
             showlegend: true,
             // // Display the legend horizontally
             legend: {
-                "orientation": "h",
+                "orientation": "v",
                 font: {
                     size: 10,
                 },

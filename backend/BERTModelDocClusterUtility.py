@@ -104,13 +104,13 @@ class BERTModelDocClusterUtility:
 
     # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
-    def visualise_cluster_results(cluster_labels, vectors, parameter, folder):
+    def visualise_cluster_results(cluster_labels, x_pos_list, y_pos_list, parameter, folder):
         try:
             max_cluster_no = max(cluster_labels)
             df = pd.DataFrame()
             df['cluster'] = cluster_labels
-            df['x'] = list(map(lambda x: round(x, 2), vectors[:, 0]))
-            df['y'] = list(map(lambda x: round(x, 2), vectors[:, 1]))
+            df['x'] = x_pos_list
+            df['y'] = y_pos_list
             # Visualise HDBSCAN clustering results using dot chart
             colors = sns.color_palette('tab10', n_colors=max_cluster_no + 1).as_hex()
             marker_size = 8

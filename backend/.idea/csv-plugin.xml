@@ -10,7 +10,28 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/data/UrbanDesignCorpus/UrbanDesignCorpus.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/UrbanStudyCorpus.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/UrbanStudyCorpus/UrbanStudyCorpus.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/UrbanStudyCorpus/UrbanStudyCorpus_outliers.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -102,6 +123,13 @@
           </value>
         </entry>
         <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_768.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/cluster/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_80.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
