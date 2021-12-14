@@ -52,6 +52,48 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/topics/UrbanStudyCorpus_TF-IDF_cluster_#1_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/topics/UrbanStudyCorpus_TF-IDF_cluster_#2_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/topics/temp/Step_1_UrbanStudyCorpus_cluster_doc.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/topics/temp/Step_2_UrbanStudyCorpus_frequency_matrix.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/topics/temp/Step_3_UrbanStudyCorpus_word_doc_table.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/topics/temp/UrbanStudyCorpus_HDBSCAN_Cluster_n_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/cluster/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
           <value>
             <Attribute>
