@@ -29,10 +29,10 @@ class KeyPhraseSimilarity:
             device='cpu'
         )
         # Load the corpus df
-        path = os.path.join('data', self.args.case_name + '_cleaned.json')
+        path = os.path.join('data', self.args.case_name, self.args.case_name + '_cleaned.json')
         self.corpus_df = pd.read_json(path)
         # # Load HDBSCAN cluster
-        path = os.path.join('output', 'cluster', self.args.case_name + "_clusters.json")
+        path = os.path.join('output', self.args.case_name, 'cluster', self.args.case_name + "_clusters.json")
         cluster_df = pd.read_json(path)
         # Update corpus data with hdbscan cluster results
         self.corpus_df['Cluster'] = cluster_df['HDBSCAN_Cluster']
@@ -88,8 +88,9 @@ class KeyPhraseSimilarity:
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
+                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'cluster')
                 # Write key phrases to csv file
-                KeyPhraseUtility.output_key_phrases_by_cluster(results, cluster_no)
+                KeyPhraseUtility.output_key_phrases_by_cluster(results, cluster_no, folder)
 
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -99,13 +100,13 @@ class KeyPhraseSimilarity:
         cluster_no_list = range(-1, self.total_clusters)
         # cluster_no_list = [2]
         for cluster_no in cluster_no_list:
-            folder = os.path.join('output', 'key_phrases', 'cluster')
+            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'cluster')
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
             df = pd.read_json(path)
             all_key_phrases = reduce(lambda pre, cur: pre + cur, df['key-phrases'].tolist(), list())
-            # print(all_key_phrases)
+            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
             # # Cluster all key phrases by using HDBSCAN
-            KeyPhraseUtility.cluster_key_phrases_experiment_by_HDBSCAN(all_key_phrases, cluster_no, self.model)
+            KeyPhraseUtility.cluster_key_phrases_experiment_by_HDBSCAN(all_key_phrases, cluster_no, self.model, folder)
 
     # Used the best experiment results to group the key phrases results
     def grouped_key_phrases_with_best_parameter(self):
@@ -217,7 +218,7 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     kp = KeyPhraseSimilarity()
     # kp.extract_key_phrases_by_clusters()
-    # kp.group_key_phrases_by_clusters_experiments()
-    kp.grouped_key_phrases_with_best_parameter()
-    kp.summarize_key_phrases_results()
+    kp.group_key_phrases_by_clusters_experiments()
+    # kp.grouped_key_phrases_with_best_parameter()
+    # kp.summarize_key_phrases_results()
 

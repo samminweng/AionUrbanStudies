@@ -200,7 +200,7 @@ class KeyPhraseUtility:
 
     @staticmethod
     # Write the key phrases of each cluster to a csv file
-    def output_key_phrases_by_cluster(key_phrase_list, cluster_no):
+    def output_key_phrases_by_cluster(key_phrase_list, cluster_no, folder):
         try:
             df = pd.DataFrame(key_phrase_list, columns=['DocId'])
             df['No'] = range(1, len(df) + 1)
@@ -208,7 +208,7 @@ class KeyPhraseUtility:
             # Map the nested dict to a list of key phrases (string only)
             df['key-phrases'] = list(map(lambda k: [kp['key-phrase'] for kp in k['key-phrases']], key_phrase_list))
             df = df[['No', 'DocId', 'key-phrases']]  # Re-order the columns
-            folder = os.path.join('output', 'key_phrases', 'cluster')
+
             # Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
             df.to_csv(path, encoding='utf-8', index=False)
@@ -315,7 +315,7 @@ class KeyPhraseUtility:
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
-    def cluster_key_phrases_experiment_by_HDBSCAN(key_phrases, cluster_no, model):
+    def cluster_key_phrases_experiment_by_HDBSCAN(key_phrases, cluster_no, model, folder):
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
@@ -372,14 +372,14 @@ class KeyPhraseUtility:
                                           'total_groups': len(group_results),
                                           'outliers': outlier_number,
                                           'score': score,
-                                          'group_result': group_results}
+                                          'group_result': group_results,
+                                          'group_labels': group_labels}
                                 results.append(result)
                                 print(result)
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
             # output the experiment results
             df = pd.DataFrame(results)
-            folder = os.path.join('output', 'key_phrases', 'experiments')
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
             df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:

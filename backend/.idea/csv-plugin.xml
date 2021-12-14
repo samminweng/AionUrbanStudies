@@ -248,6 +248,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/key_phrases/experiments/top_key_phrases_cluster_#0_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/key_phrases/group_key_phrases/top_key_phrases_best_grouping.csv">
           <value>
             <Attribute>
