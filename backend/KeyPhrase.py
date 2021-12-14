@@ -26,7 +26,7 @@ class KeyPhraseSimilarity:
             approach='HDBSCAN',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
-            device='cpu'
+            device='cuda'
         )
         # Load the corpus df
         path = os.path.join('data', self.args.case_name, self.args.case_name + '_cleaned.json')
