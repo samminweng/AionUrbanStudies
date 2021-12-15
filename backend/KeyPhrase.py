@@ -88,7 +88,7 @@ class KeyPhraseSimilarity:
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
-                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'cluster')
+                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
                 # Write key phrases to csv file
                 KeyPhraseUtility.output_key_phrases_by_cluster(results, cluster_no, folder)
 
@@ -100,39 +100,46 @@ class KeyPhraseSimilarity:
         cluster_no_list = range(-1, self.total_clusters)
         # cluster_no_list = [2]
         for cluster_no in cluster_no_list:
-            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'cluster')
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
+            key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
+            path = os.path.join(key_phrase_folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
             df = pd.read_json(path)
             all_key_phrases = reduce(lambda pre, cur: pre + cur, df['key-phrases'].tolist(), list())
-            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
+            experiment_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
             # # Cluster all key phrases by using HDBSCAN
-            KeyPhraseUtility.cluster_key_phrases_experiment_by_HDBSCAN(all_key_phrases, cluster_no, self.model, folder)
+            KeyPhraseUtility.cluster_key_phrases_experiment_by_HDBSCAN(all_key_phrases, cluster_no, self.model,
+                                                                       experiment_folder)
 
     # Used the best experiment results to group the key phrases results
     def grouped_key_phrases_with_best_experiment_result(self):
         try:
             # Output key phrases of each paper
-            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
+            folder = os.path.join('output', self.args.case_name, 'key_phrases')
             # Collect the best results in each cluster
             best_results = list()
-            for cluster_no in range(-1, self.total_clusters):
+            for cluster_no in range(2, self.total_clusters):
                 try:
-                    path = os.path.join(folder,
-                                        'top_key_phrases_cluster_#{c}_grouping_experiments.csv'.format(c=cluster_no))
-                    experiments = pd.read_csv(path).to_dict("records")
+                    path = os.path.join(folder, 'experiments',
+                                        'top_key_phrases_cluster_#{c}_grouping_experiments.json'.format(c=cluster_no))
+                    experiment_df = pd.read_json(path)
+                    experiment_df['score'] = experiment_df['score'].replace('None', None)
+                    experiment_df['min_samples'] = experiment_df['min_samples'].replace('None', 0)
+                    experiment_df = experiment_df.sort_values(['score'], ascending=False)
+                    experiments = experiment_df.to_dict("records")
                     # Filter out 'None' score
-                    experiments = list(filter(lambda e: e['score'] != 'None', experiments))
                     # sort the experiments by score and min samples
-                    experiments = sorted(experiments, key=lambda ex: (ex['score'],
-                                                                      ex['min_samples'] if isinstance(ex['min_samples'],
-                                                                                                      int)
-                                                                      else 0),
-                                         reverse=True)
+                    # experiments = sorted(experiments, key=lambda ex: (ex['score'] if isinstance(ex['score'], float) else -10,
+                    #                                                   ex['min_samples']
+                    #                                                   if isinstance(ex['min_samples'], int) else 0))
                     best_result = experiments[0]
+                    # Load top five key phrases of every paper in a cluster
+                    path = os.path.join(folder, 'doc_key_phrase',
+                                        'top_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
+                    doc_key_phrases = pd.read_json(path).to_dict("records")
                     folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
                     # Obtain the grouped key phrases of the cluster
                     group_key_phrases = KeyPhraseUtility.group_key_phrases_with_best_result(cluster_no,
                                                                                             best_result,
+                                                                                            doc_key_phrases,
                                                                                             folder)
                     best_result['grouped_key_phrases'] = group_key_phrases
                     best_results.append(best_result)

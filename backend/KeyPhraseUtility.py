@@ -244,7 +244,7 @@ class KeyPhraseUtility:
 
 
     @staticmethod
-    def group_key_phrases_with_best_result(cluster_no, parameter, folder):
+    def group_key_phrases_with_best_result(cluster_no, parameter, doc_key_phrases, folder):
         # Collect the key phrases linked to the docs
         def get_doc_ids_by_group_key_phrases(_doc_key_phrases, _grouped_key_phrases):
             _doc_ids = list()
@@ -258,9 +258,7 @@ class KeyPhraseUtility:
             return _doc_ids
 
         try:
-            # Load top five key phrases of every paper in a cluster
-            path = os.path.join('output', 'key_phrases', 'cluster', 'top_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
-            doc_key_phrases = pd.read_json(path).to_dict("records")
+            # Aggregate all the key phrases of each doc in a cluster as a single list
             key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], doc_key_phrases, list())
             # Get the grouping labels of key phrases
             group_labels = parameter['group_labels']
@@ -311,7 +309,7 @@ class KeyPhraseUtility:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
             results = list()
-            for dimension in [10, 15, 50, 100, 768]:
+            for dimension in [30, 80, 150]:      #[10, 15, 50, 80, 100, 768]:
                 for min_samples in [None] + list(range(1, 16)):
                     for min_cluster_size in [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
                         for epsilon in [0.0]:

@@ -2,22 +2,17 @@ import os
 from argparse import Namespace
 import logging
 from functools import reduce
-
 import hdbscan
 import numpy as np
 import pandas as pd
 import nltk
 # # Sentence Transformer (https://www.sbert.net/index.html)
-import sklearn
 from sentence_transformers import SentenceTransformer
 from nltk.tokenize import sent_tokenize, word_tokenize
 import umap  # (UMAP) is a dimension reduction technique https://umap-learn.readthedocs.io/en/latest/
-from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from pathlib import Path
-
-from sklearn.metrics import adjusted_rand_score, adjusted_mutual_info_score, pairwise_distances
-
+from sklearn.metrics import pairwise_distances
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 import pickle
 import seaborn as sns  # statistical graph library
@@ -66,12 +61,11 @@ class BERTModelDocCluster:
         # Reduce the dimension of doc embeddings to 2D for computing cosine similarity
         # Load the Scopus downloaded file as input file
         path = os.path.join('data', self.args.case_name, self.args.case_name + '.csv')
-        text_df = pd.read_csv(path)
+        self.df = pd.read_csv(path)
         # # # Load all document vectors without outliers
-        self.df = text_df
-        self.df['Text'] = text_df['Title'] + ". " + text_df['Abstract']
+        self.df['Text'] = self.df['Title'] + ". " + self.df['Abstract']
         self.df['DocVectors'] = self.doc_vectors.tolist()
-        # Map doc vectors to 2D dimensions
+        # Map doc vectors to 2D dimensions for visualisation
         standard_vectors = umap.UMAP(n_neighbors=self.args.n_neighbors,
                                      min_dist=self.args.min_dist,
                                      n_components=2,
@@ -79,21 +73,7 @@ class BERTModelDocCluster:
                                      metric='cosine').fit_transform(self.df['DocVectors'].tolist())
         self.df['x'] = list(map(lambda x: round(x, 2), standard_vectors[:, 0]))
         self.df['y'] = list(map(lambda y: round(y, 2), standard_vectors[:, 1]))
-        # Load outlier list that are not relevant or are duplicated
-        outlier_path = os.path.join('data', self.args.case_name, self.args.case_name + '_outliers.csv')
-        if Path(outlier_path).is_file():
-            outliers_df = pd.read_csv(outlier_path)
-            outlier_doc_ids = outliers_df['DocId'].tolist()
-            # Remove all the outliers
-            self.df = self.df[~self.df['DocId'].isin(outlier_doc_ids)]
-        # Save df (no document vectors) to csv and json
-        df_clean = self.df.copy(deep=True)
-        df_clean.drop(['DocVectors'], inplace=True, axis=1)
-        path = os.path.join('data', self.args.case_name, self.args.case_name + '_cleaned.csv')
-        df_clean.to_csv(path, encoding='utf-8', index=False)
-        path = os.path.join('data', self.args.case_name, self.args.case_name + '_cleaned.json')
-        df_clean.to_json(path, orient='records')
-        #
+        self.remove_irrelevant_docs()
 
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
@@ -139,8 +119,39 @@ class BERTModelDocCluster:
             pickle.dump({'documents': documents, 'embeddings': sentences_embeddings}, fOut,
                         protocol=pickle.HIGHEST_PROTOCOL)
 
+    # Remove un-relevant or duplicated articles from the corpus
+    def remove_irrelevant_docs(self):
+        # Load outlier list that are not relevant or are duplicated
+        irrelevant_doc_path = os.path.join('data', self.args.case_name, self.args.case_name + '_irrelevant_docs.csv')
+        if Path(irrelevant_doc_path).exists():
+            doc_df = pd.read_csv(irrelevant_doc_path)
+            doc_ids = doc_df['DocId'].tolist()
+            # Remove all the outliers
+            self.df = self.df[~self.df['DocId'].isin(doc_ids)]
+            # Save the cleaned df without document vectors into csv and json files
+            df_clean = self.df.copy(deep=True)
+            df_clean.drop(['DocVectors'], inplace=True, axis=1)
+            path = os.path.join('data', self.args.case_name, self.args.case_name + '_cleaned.csv')
+            df_clean.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join('data', self.args.case_name, self.args.case_name + '_cleaned.json')
+            df_clean.to_json(path, orient='records')
+
     # Experiment UMAP + HDBSCAN clustering and evaluate the clustering results with 'Silhouette score'
     def evaluate_HDBSCAN_cluster_quality(self):
+        # Collect clustering results and find outliers and the cluster of minimal size
+        def collect_cluster_results(_results, _cluster_label):
+            try:
+                _found = next((r for r in _results if r['cluster_no'] == _cluster_label), None)
+                if not _found:
+                    _results.append({'cluster_no': _cluster_label, 'count': 1})
+                else:
+                    _found['count'] += 1
+                # Sort the results
+                _results = sorted(_results, key=lambda c: (c['count'], c['cluster_no']))
+                return _results
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+
         try:
             # Experiment HDBSCAN clustering with different dimensions of vectors
             for dimension in [None, 500, 450, 400, 350, 300, 250, 200, 150, 100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10,
@@ -180,18 +191,17 @@ class BERTModelDocCluster:
                                 # Compute the cosine distance/similarity for each doc vectors
                                 distances = pairwise_distances(vectors, metric='cosine')
                                 # Cluster reduced vectors
-                                clusters = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
-                                                           min_samples=min_samples,
-                                                           cluster_selection_epsilon=epsilon,
-                                                           metric='precomputed').fit_predict(
+                                cluster_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
+                                                                 min_samples=min_samples,
+                                                                 cluster_selection_epsilon=epsilon,
+                                                                 metric='precomputed').fit_predict(
                                     distances.astype('float64')).tolist()
-                                df['clusters'] = clusters
+                                df['clusters'] = cluster_labels
                                 df['vectors'] = vectors.tolist()
                                 outlier_df = df[df['clusters'] == -1]
-                                cluster_results = reduce(
-                                    lambda pre, cur: BERTModelDocClusterUtility.collect_cluster_results(pre, cur),
-                                    clusters, list())
+                                cluster_results = reduce(lambda pre, cur: collect_cluster_results(pre, cur), cluster_labels, list())
                                 # Sort cluster result by count
+                                result['cluster_labels'] = cluster_labels
                                 result['outliers'] = len(outlier_df)
                                 result['total_clusters'] = len(cluster_results)
                                 result['cluster_results'] = cluster_results
@@ -213,7 +223,7 @@ class BERTModelDocCluster:
                 result_df = pd.DataFrame(results,
                                          columns=['dimension', 'min_samples', 'min_cluster_size', 'epsilon',
                                                   'total_clusters', 'outliers', 'Silhouette_score',
-                                                  'cluster_results'])
+                                                  'cluster_results', 'cluster_labels'])
                 # Output cluster results to CSV
                 path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_results_' + str(dimension) + '.csv')
                 result_df.to_csv(path, encoding='utf-8', index=False)
@@ -227,7 +237,7 @@ class BERTModelDocCluster:
         try:
             # Find the best results in each dimension
             d_results = list()
-            folder = os.path.join('output', self.args.case_name, 'cluster',  'experiments', 'hdbscan')
+            folder = os.path.join('output', self.args.case_name, 'cluster', 'experiments', 'hdbscan')
             for dimension in [768, 500, 450, 400, 350, 300, 250, 200, 150, 100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10,
                               5]:
                 path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_results_' + str(dimension) + '.json')
@@ -246,41 +256,25 @@ class BERTModelDocCluster:
                         d_result['total_clusters'] = result['total_clusters']
                         d_result['outliers'] = result['outliers']
                         d_result['cluster_results'] = result['cluster_results']
+                        d_result['cluster_labels'] = result['cluster_labels']
                 d_results.append(d_result)
-
             # Output the best clustering results
             d_result_df = pd.DataFrame(d_results,
                                        columns=['dimension', 'min_samples', 'min_cluster_size', 'epsilon',
                                                 'Silhouette_score', 'total_clusters', 'outliers',
-                                                'cluster_results'])
+                                                'cluster_results', 'cluster_labels'])
             folder = os.path.join('output', self.args.case_name, 'cluster', 'experiments')
             path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.csv')
             d_result_df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.json')
+            d_result_df.to_json(path, orient='records')
             # Get the highest score of d_results
             # # Load all document vectors without outliers
             df = self.df.copy(deep=True)
             # # # Reduce the doc vectors to 2 dimension using UMAP dimension reduction for visualisation
             for d_result in d_results:
                 # Apply UMAP to reduce the dimensions of document vectors
-                dimension = d_result['dimension']
-                if dimension < 768:
-                    # Run HDBSCAN on reduced dimensional vectors
-                    vectors = umap.UMAP(
-                        n_neighbors=self.args.n_neighbors,
-                        min_dist=self.args.min_dist,
-                        n_components=dimension,
-                        random_state=42,
-                        metric="cosine").fit_transform(df['DocVectors'].tolist())
-                else:
-                    # Run HDBSCAN on raw vectors
-                    vectors = np.vstack(df['DocVectors'])  # Convert to 2D numpy array
-                # Compute the cosine distance/similarity for each doc vectors
-                distances = pairwise_distances(vectors, metric='cosine')
-                # Cluster reduced vectors
-                cluster_labels = hdbscan.HDBSCAN(min_cluster_size=d_result['min_cluster_size'],
-                                                 min_samples=d_result['min_samples'],
-                                                 cluster_selection_epsilon=d_result['epsilon'],
-                                                 metric='precomputed').fit_predict(distances.astype('float64')).tolist()
+                cluster_labels = d_result['cluster_labels']
                 folder = os.path.join('output', self.args.case_name, 'cluster', 'experiments', 'hdbscan', 'images')
                 # Output cluster results to png files
                 BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels,
@@ -289,13 +283,181 @@ class BERTModelDocCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # # Re-cluster the best clustering results by removing outliers and see if the cluster results converge
-    # def re_clustering_best_hdbscan_results(self):
-    #     try:
-    #         path = os.path.join(os.path.join('output', 'cluster', 'experiments'),
-    #                             'HDBSCAN_cluster_doc_vector_result_summary.csv')
-    #         clustering_results = pd.read_csv(path, encoding='utf-8', index_col=False).to_dict("records")
-    #         best_result = sorted(clustering_results, key=lambda r: r['Silhouette_score'], reverse=True)[0]
+    # Cluster document vectors of best parameters by HDBSCAN (https://hdbscan.readthedocs.io/en/latest/index.html)
+    def cluster_doc_vectors_with_best_parameter_by_hdbscan(self):
+        try:
+            # Load best clustering results at each dimension
+            path = os.path.join('output', self.args.case_name, 'cluster', 'experiments',
+                                'HDBSCAN_cluster_doc_vector_result_summary.json')
+            clustering_results = pd.read_json(path).to_dict("records")
+            best_result = sorted(clustering_results, key=lambda r: r['Silhouette_score'], reverse=True)[0]
+
+            # Store the clustering results
+            cluster_df = self.df.copy(deep=True)
+            dimension = int(best_result['dimension'])
+            min_cluster_size = int(best_result['min_cluster_size'])
+            min_samples = int(best_result['min_samples'])
+            epsilon = float(best_result['epsilon'])
+            # Reduce the doc vectors to specific dimension
+            reduced_vectors = umap.UMAP(
+                n_neighbors=self.args.n_neighbors,
+                min_dist=self.args.min_dist,
+                n_components=dimension,
+                random_state=42,
+                metric="cosine").fit_transform(cluster_df['DocVectors'].tolist())
+            # Compute the cosine distance/similarity for each doc vectors
+            distances = pairwise_distances(reduced_vectors, metric='cosine')
+            # Cluster the documents with minimal cluster size using HDBSCAN
+            # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
+            clusters = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
+                                       min_samples=min_samples,
+                                       cluster_selection_epsilon=epsilon,
+                                       metric='precomputed'
+                                       ).fit(distances.astype('float64'))
+            # Update the cluster to 'cluster_df'
+            cluster_labels = clusters.labels_.tolist()
+            cluster_df['HDBSCAN_Cluster'] = cluster_labels
+            # Re-index and re-order the columns of cluster data frame
+            cluster_df = cluster_df.reindex(columns=['HDBSCAN_Cluster', 'DocId', 'x', 'y'])
+            folder = os.path.join('output', self.args.case_name, 'cluster')
+            # Output the result to csv and json file
+            path = os.path.join(folder, self.args.case_name + '_clusters.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            # Output to a json file
+            path = os.path.join(folder, self.args.case_name + '_clusters.json')
+            cluster_df.to_json(path, orient='records')
+            # Output HDBSCAN clustering information (condense tree)
+            folder = os.path.join('output', self.args.case_name, 'cluster', 'hdbscan_clustering')
+            # Output cluster results to png
+            BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels,
+                                                                 cluster_df['x'].tolist(), cluster_df['y'].tolist(),
+                                                                 best_result, folder)
+            # Output condense tree of the best cluster results
+            condense_tree = clusters.condensed_tree_
+            # Save condense tree to csv
+            tree_df = condense_tree.to_pandas()
+            path = os.path.join(folder, self.args.case_name + '_clusters_tree.csv')
+            tree_df.to_csv(path, encoding='utf-8')
+            # Plot condense tree graph
+            condense_tree.plot(select_clusters=True,
+                               selection_palette=sns.color_palette('deep', 40),
+                               label_clusters=True,
+                               max_rectangles_per_icicle=150)
+            image_path = os.path.join(folder, 'HDBSCAN_clustering_condense_tree.png')
+            plt.savefig(image_path)
+            print("Output HDBSCAN clustering image to " + image_path)
+            return best_result
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # Derive the topic words from each cluster of documents
+    def derive_topics_from_cluster_docs_by_TF_IDF(self):
+        approach = 'HDBSCAN_Cluster'
+        try:
+            folder = os.path.join('output', self.args.case_name, 'cluster')
+            # Load the documents clustered by
+            doc_clusters_df = pd.read_json(os.path.join(folder, self.args.case_name + '_clusters.json'))
+            # Update text column
+            doc_clusters_df['Text'] = self.df['Text'].tolist()
+            # Group the documents and doc_id by clusters
+            docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
+                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+            # Get top 100 topics (1, 2, 3 grams) for each cluster
+            n_gram_topic_list = BERTModelDocClusterUtility.get_n_gram_topics(approach, docs_per_cluster, folder)
+            results = []
+            for i, cluster in docs_per_cluster.iterrows():
+                try:
+                    cluster_no = cluster[approach]
+                    doc_ids = cluster['DocId']
+                    doc_texts = cluster['Text']
+                    result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
+                    n_gram_topics = []
+                    # Collect the topics of 1 gram, 2 gram and 3 gram
+                    for n_gram_num in [1, 2, 3]:
+                        n_gram_topic = next(n_gram_topic for n_gram_topic in n_gram_topic_list
+                                            if n_gram_topic['n_gram'] == n_gram_num)
+                        # Collect top 300 topics of a cluster
+                        cluster_topics = n_gram_topic['topics'][str(cluster_no)][:300]
+                        # Create a mapping between the topic and its associated articles (doc)
+                        doc_per_topic = BERTModelDocClusterUtility.group_docs_by_topics(n_gram_num,
+                                                                                        doc_ids, doc_texts,
+                                                                                        cluster_topics)
+                        n_gram_type = 'Topic-' + str(n_gram_num) + '-gram'
+                        result[n_gram_type] = doc_per_topic
+                        n_gram_topics += doc_per_topic
+                    result['Topic-N-gram'] = BERTModelDocClusterUtility.merge_n_gram_topic(n_gram_topics)
+                    results.append(result)
+                except Exception as err:
+                    print("Error occurred! {err}".format(err=err))
+            # Write the result to csv and json file
+            cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
+                                                        'Topic-1-gram', 'Topic-2-gram', 'Topic-3-gram', 'Topic-N-gram'])
+            folder = os.path.join('output', self.args.case_name, 'cluster', 'topics')
+            path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_n_grams.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            # # # Write to a json file
+            path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_n_grams.json')
+            cluster_df.to_json(path, orient='records')
+            print('Output topics per cluster to ' + path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # Combine TF-IDF and BERT key phrase extraction Topics into a single file
+    def combine_and_summary_topics_from_clusters(self):
+        cluster_approach = 'HDBSCAN_Cluster'
+        try:
+            folder = os.path.join('output', self.args.case_name, 'cluster', 'topics')
+            # Output top 50 topics by 1, 2 and 3-grams at specific cluster
+            BERTModelDocClusterUtility.flatten_tf_idf_topics(1, folder)
+            BERTModelDocClusterUtility.flatten_tf_idf_topics(2, folder)
+            BERTModelDocClusterUtility.flatten_tf_idf_topics(3, folder)
+
+            path = os.path.join(folder,
+                                self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_n_grams.json')
+            tf_idf_df = pd.read_json(path)
+            # Write out to csv and json file
+            cluster_df = tf_idf_df.reindex(columns=['Cluster', 'NumDocs', 'DocIds', 'Topic-N-gram'])
+            cluster_df.rename(columns={'Topic-N-gram': 'TF-IDF-Topics'}, inplace=True)
+            folder = os.path.join('output', self.args.case_name, 'cluster')
+            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            # # # Write to a json file
+            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
+            cluster_df.to_json(path, orient='records')
+            print('Output topics per cluster to ' + path)
+            # Output a summary of top 10 Topics of each cluster
+            clusters = cluster_df.to_dict("records")
+            summary_df = cluster_df.copy(deep=True)
+            total = summary_df['NumDocs'].sum()
+            summary_df['Percent'] = list(map(lambda c: c['NumDocs'] / total, clusters))
+            summary_df['Topics'] = list(
+                map(lambda c: ", ".join(list(map(lambda t: t['topic'], c['TF-IDF-Topics'][:10]))), clusters))
+            summary_df = summary_df.reindex(columns=['Cluster', 'NumDocs', 'Percent', 'DocIds', 'Topics'])
+            # Output the summary as csv
+            path = os.path.join(folder,
+                                self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_summary.csv')
+            summary_df.to_csv(path, encoding='utf-8', index=False)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # # Re-cluster outliers and see if any clusters can be found in the outliers
+    def re_clustering_outlier_by_hdbscan(self):
+        try:
+            folder = os.path.join('output', self.args.case_name, 'cluster', 'experiments')
+            path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.json')
+            # Get the best clustering of highest silhouette score
+            clustering_results = pd.read_json(path).to_dict("records")
+            best_result = sorted(clustering_results, key=lambda r: r['Silhouette_score'], reverse=True)[0]
+            # Get the outliers
+            cluster_df = self.df.copy(deep=True)
+
+
+
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    #
+    #
     #         dimension = int(best_result['dimension'])
     #         # # Reduce the doc vectors to 2 dimension using UMAP dimension reduction for visualisation
     #         cluster_df = self.df.copy(deep=True)
@@ -353,182 +515,6 @@ class BERTModelDocCluster:
     #         # Output cluster results to CSV
     #         path = os.path.join(folder, 'HDBSCAN_re_cluster_doc_vector_results_' + str(dimension) + '.csv')
     #         result_df.to_csv(path, encoding='utf-8', index=False)
-    #     except Exception as err:
-    #         print("Error occurred! {err}".format(err=err))
-
-    # Cluster document vectors of best parameters by HDBSCAN (https://hdbscan.readthedocs.io/en/latest/index.html)
-    def cluster_doc_vector_by_hdbscan_with_best_parameter(self):
-        try:
-            # Load best clustering results at each dimension
-            path = os.path.join('output', self.args.case_name, 'cluster', 'experiments',
-                                'HDBSCAN_cluster_doc_vector_result_summary.csv')
-            clustering_results = pd.read_csv(path, encoding='utf-8', index_col=False).to_dict("records")
-            best_result = sorted(clustering_results, key=lambda r: r['Silhouette_score'], reverse=True)[0]
-
-            # Store the clustering results
-            cluster_df = self.df.copy(deep=True)
-            dimension = int(best_result['dimension'])
-            min_cluster_size = int(best_result['min_cluster_size'])
-            min_samples = int(best_result['min_samples'])
-            epsilon = float(best_result['epsilon'])
-            # Reduce the doc vectors to specific dimension
-            reduced_vectors = umap.UMAP(
-                n_neighbors=self.args.n_neighbors,
-                min_dist=self.args.min_dist,
-                n_components=dimension,
-                random_state=42,
-                metric="cosine").fit_transform(cluster_df['DocVectors'].tolist())
-            # Compute the cosine distance/similarity for each doc vectors
-            distances = pairwise_distances(reduced_vectors, metric='cosine')
-            # Cluster the documents with minimal cluster size using HDBSCAN
-            # Ref: https://hdbscan.readthedocs.io/en/latest/index.html
-            clusters = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
-                                       min_samples=min_samples,
-                                       cluster_selection_epsilon=epsilon,
-                                       metric='precomputed'
-                                       ).fit(distances.astype('float64'))
-            # Update the cluster to 'cluster_df'
-            cluster_labels = clusters.labels_.tolist()
-
-            cluster_df['HDBSCAN_Cluster'] = clusters.labels_.tolist()
-            cluster_df['Reduced_Vectors'] = reduced_vectors.tolist()
-            cluster_results = reduce(lambda pre, cur: BERTModelDocClusterUtility.collect_cluster_results(pre, cur),
-                                     cluster_labels, list())
-            # Get the outliers
-            outlier_df = cluster_df[cluster_df['HDBSCAN_Cluster'] == -1]
-            cluster_labels_no_outliers = cluster_df[cluster_df['HDBSCAN_Cluster'] != -1]['HDBSCAN_Cluster'].tolist()
-            reduced_vectors_no_outliers = np.vstack(
-                cluster_df[cluster_df['HDBSCAN_Cluster'] != -1]['Reduced_Vectors'].tolist())
-            score = BERTModelDocClusterUtility.compute_Silhouette_score(cluster_labels_no_outliers,
-                                                                        reduced_vectors_no_outliers)
-
-            result = {"min_cluster_size": min_cluster_size,
-                      "min_samples": min_samples,
-                      "epsilon": epsilon,
-                      "score": score,
-                      "total_cluster": len(cluster_results),
-                      "outliers": len(outlier_df),
-                      "cluster_results": cluster_results
-                      }
-            # print(result)
-            # Re-index and re-order the columns of cluster data frame
-            cluster_df = cluster_df.reindex(columns=['HDBSCAN_Cluster', 'DocId', 'x', 'y'])
-            folder = os.path.join('output', self.args.case_name, 'cluster')
-            # Output the result to csv and json file
-            path = os.path.join(folder, self.args.case_name + '_clusters.csv')
-            cluster_df.to_csv(path, encoding='utf-8', index=False)
-            # Output to a json file
-            path = os.path.join(folder, self.args.case_name + '_clusters.json')
-            cluster_df.to_json(path, orient='records')
-            # Output HDBSCAN clustering information (condense tree)
-            folder = os.path.join('output', self.args.case_name, 'cluster', 'hdbscan_clustering')
-            # Output condense tree of the cluster results
-            condense_tree = clusters.condensed_tree_
-            # Save condense tree to csv
-            tree_df = condense_tree.to_pandas()
-            path = os.path.join(folder, self.args.case_name + '_clusters_tree.csv')
-            tree_df.to_csv(path, encoding='utf-8')
-            # Plot condense tree graph
-            condense_tree.plot(select_clusters=True,
-                               selection_palette=sns.color_palette('deep', 40),
-                               label_clusters=True,
-                               max_rectangles_per_icicle=150)
-            image_path = os.path.join(folder, 'HDBSCAN_clustering_condense_tree.png')
-            plt.savefig(image_path)
-            print("Output HDBSCAN clustering image to " + image_path)
-            return result
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
-    # Derive the topic words from each cluster of documents
-    def derive_topics_from_cluster_docs_by_TF_IDF(self):
-        approach = 'HDBSCAN_Cluster'
-        try:
-            folder = os.path.join('output', self.args.case_name, 'cluster')
-            # Load the documents clustered by
-            doc_clusters_df = pd.read_json(os.path.join(folder, self.args.case_name + '_clusters.json'))
-            # Update text column
-            doc_clusters_df['Text'] = self.df['Text'].tolist()
-            # Group the documents and doc_id by clusters
-            docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
-                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
-            # Get top 100 topics (1, 2, 3 grams) for each cluster
-            n_gram_topic_list = BERTModelDocClusterUtility.get_n_gram_topics(approach, docs_per_cluster, folder)
-            results = []
-            for i, cluster in docs_per_cluster.iterrows():
-                try:
-                    cluster_no = cluster[approach]
-                    doc_ids = cluster['DocId']
-                    doc_texts = cluster['Text']
-                    result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
-                    n_gram_topics = []
-                    # Collect the topics of 1 gram, 2 gram and 3 gram
-                    for n_gram_num in [1, 2, 3]:
-                        n_gram_topic = next(n_gram_topic for n_gram_topic in n_gram_topic_list
-                                            if n_gram_topic['n_gram'] == n_gram_num)
-                        # Collect top 300 topics of a cluster
-                        cluster_topics = n_gram_topic['topics'][str(cluster_no)][:300]
-                        # Create a mapping between the topic and its associated articles (doc)
-                        doc_per_topic = BERTModelDocClusterUtility.group_docs_by_topics(n_gram_num,
-                                                                                        doc_ids, doc_texts,
-                                                                                        cluster_topics)
-                        n_gram_type = 'Topic-' + str(n_gram_num) + '-gram'
-                        result[n_gram_type] = doc_per_topic
-                        n_gram_topics += doc_per_topic
-                    if cluster_no == 2:  # Debugging only
-                        print("Cluster 2")
-                    result['Topic-N-gram'] = BERTModelDocClusterUtility.merge_n_gram_topic(n_gram_topics)
-                    results.append(result)
-                except Exception as err:
-                    print("Error occurred! {err}".format(err=err))
-            # Write the result to csv and json file
-            cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
-                                                        'Topic-1-gram', 'Topic-2-gram', 'Topic-3-gram', 'Topic-N-gram'])
-            folder = os.path.join('output', self.args.case_name, 'cluster', 'topics')
-            path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_n_grams.csv')
-            cluster_df.to_csv(path, encoding='utf-8', index=False)
-            # # # Write to a json file
-            path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_n_grams.json')
-            cluster_df.to_json(path, orient='records')
-            print('Output topics per cluster to ' + path)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
-    # Combine TF-IDF and BERT key phrase extraction Topics into a single file
-    def combine_and_summary_topics_from_clusters(self):
-        cluster_approach = 'HDBSCAN_Cluster'
-        try:
-            folder = os.path.join('output', self.args.case_name, 'cluster', 'topics')
-            # Output top 50 topics by 1, 2 and 3-grams at specific cluster
-            BERTModelDocClusterUtility.flatten_tf_idf_topics(1, folder)
-            BERTModelDocClusterUtility.flatten_tf_idf_topics(2, folder)
-            BERTModelDocClusterUtility.flatten_tf_idf_topics(3, folder)
-
-            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_n_grams.json')
-            tf_idf_df = pd.read_json(path)
-            # Write out to csv and json file
-            cluster_df = tf_idf_df.reindex(columns=['Cluster', 'NumDocs', 'DocIds', 'Topic-N-gram'])
-            cluster_df.rename(columns={'Topic-N-gram': 'TF-IDF-Topics'}, inplace=True)
-            folder = os.path.join('output', self.args.case_name, 'cluster')
-            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.csv')
-            cluster_df.to_csv(path, encoding='utf-8', index=False)
-            # # # Write to a json file
-            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
-            cluster_df.to_json(path, orient='records')
-            print('Output topics per cluster to ' + path)
-            # Output a summary of top 10 Topics of each cluster
-            clusters = cluster_df.to_dict("records")
-            summary_df = cluster_df.copy(deep=True)
-            total = summary_df['NumDocs'].sum()
-            summary_df['Percent'] = list(map(lambda c: c['NumDocs'] / total, clusters))
-            summary_df['Topics'] = list(
-                map(lambda c: ", ".join(list(map(lambda t: t['topic'], c['TF-IDF-Topics'][:10]))), clusters))
-            summary_df = summary_df.reindex(columns=['Cluster', 'NumDocs', 'Percent', 'DocIds', 'Topics'])
-            # Output the summary as csv
-            path = os.path.join(folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_summary.csv')
-            summary_df.to_csv(path, encoding='utf-8', index=False)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
 
 
 # Main entry
@@ -536,10 +522,10 @@ if __name__ == '__main__':
     try:
         mdc = BERTModelDocCluster()
         # mdc.get_sentence_embedding()
-        mdc.evaluate_HDBSCAN_cluster_quality()
-        mdc.output_HDBSCAN_cluster_quality_summary()
-        mdc.cluster_doc_vector_by_hdbscan_with_best_parameter()
-        mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+        # mdc.evaluate_HDBSCAN_cluster_quality()
+        # mdc.output_HDBSCAN_cluster_quality_summary()
+        # mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
+        # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
         mdc.combine_and_summary_topics_from_clusters()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
