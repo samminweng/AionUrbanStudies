@@ -277,10 +277,10 @@ class KeyPhraseUtility:
             group_df['DocIds'] = group_doc_ids
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
             group_df = group_df[['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
+            path = os.path.join(folder, 'group_key_phrases', 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
+            path = os.path.join(folder, 'group_key_phrases', 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
             group_df.to_json(path, orient='records')
             print('Output the summary of grouped key phrase to ' + path)
             return group_df.to_dict("records")
@@ -289,7 +289,7 @@ class KeyPhraseUtility:
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
-    def cluster_key_phrases_experiment_by_HDBSCAN(key_phrases, cluster_no, model, folder):
+    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, cluster_no, model, folder):
         def collect_group_results(_results, _group_label):
             try:
                 _found = next((r for r in _results if r['group'] == _group_label), None)
@@ -304,12 +304,11 @@ class KeyPhraseUtility:
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
-
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
             results = list()
-            for dimension in [30, 80, 150]:      #[10, 15, 50, 80, 100, 768]:
+            for dimension in [10, 15, 30, 50, 80, 100, 150, 768]:
                 for min_samples in [None] + list(range(1, 16)):
                     for min_cluster_size in [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
                         for epsilon in [0.0]:
@@ -369,6 +368,8 @@ class KeyPhraseUtility:
             df = pd.DataFrame(results)
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
             df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.json')
+            df.to_json(path, orient='records')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
