@@ -74,17 +74,7 @@ class BERTModelDocCluster:
         self.df['x'] = list(map(lambda x: round(x, 2), standard_vectors[:, 0]))
         self.df['y'] = list(map(lambda y: round(y, 2), standard_vectors[:, 1]))
         self.remove_irrelevant_docs()
-        # Get the outliers identified by HDBSCAN
-        cluster_df = self.df.copy(deep=True)
-        folder = os.path.join('output', self.args.case_name, 'cluster')
-        path = os.path.join(folder, 'UrbanStudyCorpus_clusters.json')
-        # Get the best clustering of highest silhouette score
-        _df = pd.read_json(path)
-        # Assign with cluster labels
-        cluster_df['Cluster'] = _df['HDBSCAN_Cluster'].tolist()
-        # Get all the outliers
-        self.outlier_df = cluster_df[cluster_df['Cluster'] == -1]
-        print('The number of outliers {c}'.format(c=len(self.outlier_df)))
+
 
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
@@ -249,10 +239,9 @@ class BERTModelDocCluster:
         try:
             # Find the best results in each dimension
             d_results = list()
-            parent_folder = os.path.join('output', self.args.case_name, 'outlier')
+            parent_folder = os.path.join('output', self.args.case_name, 'cluster')
             folder = os.path.join(parent_folder, 'experiments', 'hdbscan')
-            # dimensions = [768, 500, 450, 400, 350, 300, 250, 200, 150, 100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10, 5]
-            dimensions = [768, 250, 200, 150, 100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10, 5]
+            dimensions = [768, 500, 450, 400, 350, 300, 250, 200, 150, 100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10, 5]
             for dimension in dimensions:
                 path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_results_' + str(dimension) + '.json')
                 df = pd.read_json(path)
@@ -284,7 +273,7 @@ class BERTModelDocCluster:
             d_result_df.to_json(path, orient='records')
             # Get the highest score of d_results
             # # Load all document vectors without outliers
-            df = self.outlier_df.copy(deep=True)
+            df = self.df.copy(deep=True)
             # # # Reduce the doc vectors to 2 dimension using UMAP dimension reduction for visualisation
             for d_result in d_results:
                 # Apply UMAP to reduce the dimensions of document vectors
@@ -300,7 +289,7 @@ class BERTModelDocCluster:
     # Cluster document vectors of best parameters by HDBSCAN (https://hdbscan.readthedocs.io/en/latest/index.html)
     def cluster_doc_vectors_with_best_parameter_by_hdbscan(self):
         try:
-            parent_folder = os.path.join('output', self.args.case_name, 'outlier')
+            parent_folder = os.path.join('output', self.args.case_name, 'cluster')
             # Load best clustering results at each dimension
             path = os.path.join(parent_folder, 'experiments',
                                 'HDBSCAN_cluster_doc_vector_result_summary.json')
@@ -309,7 +298,7 @@ class BERTModelDocCluster:
             best_result = df.head(1).to_dict(orient='records')[0]
 
             # Store the clustering results
-            cluster_df = self.outlier_df.copy(deep=True)
+            cluster_df = self.df.copy(deep=True)
             dimension = int(best_result['dimension'])
             min_cluster_size = int(best_result['min_cluster_size'])
             min_samples = int(best_result['min_samples'])
@@ -371,12 +360,12 @@ class BERTModelDocCluster:
     def derive_topics_from_cluster_docs_by_TF_IDF(self):
         approach = 'HDBSCAN_Cluster'
         try:
-            parent_folder = os.path.join('output', self.args.case_name, 'outlier')
+            parent_folder = os.path.join('output', self.args.case_name, 'cluster')
             path = os.path.join(parent_folder, self.args.case_name + '_clusters.json')
             # Load the documents clustered by
             doc_clusters_df = pd.read_json(path)
             # Update text column
-            doc_clusters_df['Text'] = self.outlier_df['Text'].tolist()
+            doc_clusters_df['Text'] = self.df['Text'].tolist()
             # Group the documents and doc_id by clusters
             docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
@@ -424,13 +413,12 @@ class BERTModelDocCluster:
     def combine_and_summary_topics_from_clusters(self):
         cluster_approach = 'HDBSCAN_Cluster'
         try:
-            parent_folder = os.path.join('output', self.args.case_name, 'outlier')
+            parent_folder = os.path.join('output', self.args.case_name, 'cluster')
             folder = os.path.join(parent_folder, 'topics')
             # # Output top 50 topics by 1, 2 and 3-grams at specific cluster
             # BERTModelDocClusterUtility.flatten_tf_idf_topics(1, folder)
             # BERTModelDocClusterUtility.flatten_tf_idf_topics(2, folder)
             # BERTModelDocClusterUtility.flatten_tf_idf_topics(3, folder)
-
             path = os.path.join(folder,
                                 self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_n_grams.json')
             tf_idf_df = pd.read_json(path)
@@ -461,9 +449,19 @@ class BERTModelDocCluster:
     # # Re-cluster outliers and see if any clusters can be found in the outliers
     def re_cluster_outliers_by_hdbscan(self):
         try:
-
+            # Get the outliers identified by HDBSCAN
+            cluster_df = self.df.copy(deep=True)
+            folder = os.path.join('output', self.args.case_name, 'cluster')
+            path = os.path.join(folder, 'UrbanStudyCorpus_clusters.json')
+            # Get the best clustering of highest silhouette score
+            _df = pd.read_json(path)
+            # Assign with cluster labels
+            cluster_df['Cluster'] = _df['HDBSCAN_Cluster'].tolist()
+            # Get all the outliers
+            outlier_df = cluster_df[cluster_df['Cluster'] == -1]
+            print('The number of outliers {c}'.format(c=len(outlier_df)))
             # print(outlier_df)
-            doc_vectors = self.outlier_df['DocVectors'].tolist()
+            doc_vectors = outlier_df['DocVectors'].tolist()
             # Reduce the doc vectors into different dimensions
             for dimension in [768, 250, 200, 150, 100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10, 5]:
                 # Apply UMAP to reduce the dimensions of document vectors
