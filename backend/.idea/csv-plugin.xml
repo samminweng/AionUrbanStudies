@@ -52,6 +52,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/cluster_outlier/HDBSCAN_cluster_doc_vector_results_250.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/cluster_outlier/HDBSCAN_cluster_doc_vector_results_768.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/cluster_outlier/experiments/HDBSCAN_cluster_doc_vector_results_100.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/UrbanStudyCorpus/cluster/experiments/hdbscan/HDBSCAN_outlier.csv">
           <value>
             <Attribute>
@@ -109,6 +130,83 @@
           </value>
         </entry>
         <entry key="/output/UrbanStudyCorpus/key_phrases/group_key_phrases/top_key_phrases_cluster_#1_best_grouping.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/UrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/experiments/HDBSCAN_cluster_doc_vector_results_10.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/experiments/HDBSCAN_cluster_doc_vector_results_15.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/experiments/HDBSCAN_cluster_doc_vector_results_5.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_20.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_30.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/hdbscan_clustering/UrbanStudyCorpus_clusters_tree.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/topics/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words_n_grams.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/outlier/topics/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words_summary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

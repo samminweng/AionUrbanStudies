@@ -2,8 +2,12 @@ import math
 import os
 import re
 import logging
+from functools import reduce
+
+import hdbscan
 import nltk
 import numpy as np
+import umap
 from matplotlib import pyplot as plt
 from nltk import BigramCollocationFinder
 from nltk.util import ngrams
@@ -15,7 +19,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
 import seaborn as sns
-from sklearn.metrics import silhouette_score
+from sklearn.metrics import silhouette_score, pairwise_distances
 
 # Set logging level
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -527,47 +531,68 @@ class BERTModelDocClusterUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Experiment HDBSCAN clustering with different kinds of parameters
     @staticmethod
-    def get_outlier_doc_ids(is_load=True):
-        if is_load:
-            path = os.path.join('data', 'UrbanStudyCorpus_outliers.csv')
-            outlier_df = pd.read_csv(path)
-            outliers = outlier_df.to_dict("records")
-            # Return a list of doc ids
-            return list(map(lambda doc: doc['DocId'], outliers))
+    def cluster_outliers_experiments_by_hdbscan(dimension, doc_vectors):
+        # Collect clustering results and find outliers and the cluster of minimal size
+        def collect_cluster_results(_results, _cluster_label):
+            try:
+                _found = next((r for r in _results if r['cluster_no'] == _cluster_label), None)
+                if not _found:
+                    _results.append({'cluster_no': _cluster_label, 'count': 1})
+                else:
+                    _found['count'] += 1
+                # Sort the results
+                _results = sorted(_results, key=lambda c: (c['count'], c['cluster_no']))
+                return _results
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
 
-        try:
-            # Read HDBSCAN outlier
-            outlier_df = pd.read_csv(os.path.join('output', 'cluster', 'experiments', 'hdbscan', 'HDBSCAN_outlier.csv'))
-            outliers = outlier_df.to_dict("records")
-            # Scan duplicate doc in the corpus
-            corpus_df = pd.read_csv(os.path.join('data', 'UrbanStudyCorpus.csv'))
-            corpus = corpus_df.to_dict("records")
-            # Check if a doc has the same title in the
-            for doc in corpus:
-                doc_id = doc['DocId']
-                title = doc['Title']
-                # Find if other article has the same title
-                duplicates_docs = list(filter(lambda a: a['Title'].lower().strip() == title.lower().strip() and
-                                                        a['DocId'] > doc_id, corpus))
-                for duplicate_doc in duplicates_docs:
-                    # Check if the common doc exits in outliers
-                    found_doc = next((outlier_doc for outlier_doc in outliers
-                                      if outlier_doc['DocId'] == duplicate_doc['DocId']), None)
-                    if not found_doc:  # If not, add the duplicate doc to outlier docs
-                        outliers.append({'DocId': duplicate_doc['DocId'], 'Title': duplicate_doc['Title'],
-                                         'Abstract': duplicate_doc['Abstract']})
-            # print(outliers)
-            outliers = sorted(outliers, key=lambda outlier: outlier['DocId'])
-            # Save to outlier csv to 'data'
-            path = os.path.join('data', 'UrbanStudyCorpus_outliers.csv')
-            outlier_df = pd.DataFrame(outliers, columns=['DocId', 'Title', 'Abstract'])
-            outlier_df.to_csv(path, encoding='utf-8', index=False)
-            # Return a list of doc ids
-            return list(map(lambda doc: doc['DocId'], outliers))
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
+        # Store all experiment results
+        results = list()
+        # Cluster the doc vectors with different parameters
+        for min_samples in [None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+            for min_cluster_size in range(5, 16):
+                for epsilon in [0.0]:
+                    result = {'dimension': dimension,
+                              'min_cluster_size': min_cluster_size,
+                              'min_samples': str(min_samples),
+                              'epsilon': epsilon,
+                              'outliers': 'None',
+                              'total_clusters': 'None',
+                              'cluster_results': 'None',
+                              'Silhouette_score': 'None',
+                              'cluster_labels': 'None'}
+                    try:
+                        # Compute the cosine distance/similarity for each doc vectors
+                        distances = pairwise_distances(doc_vectors, metric='cosine')
+                        # Apply UMAP to reduce vectors
+                        cluster_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
+                                                         min_samples=min_samples,
+                                                         cluster_selection_epsilon=epsilon,
+                                                         metric='precomputed').fit_predict(
+                            distances.astype('float64')).tolist()
+                        df = pd.DataFrame()
+                        df['cluster_labels'] = cluster_labels
+                        df['doc_vectors'] = doc_vectors.tolist()
+                        # Include the cluster labels
+                        result['cluster_labels'] = cluster_labels
+                        # Collect all the cluster labels as a single list
+                        cluster_results = reduce(lambda pre, cur: collect_cluster_results(pre, cur), cluster_labels,
+                                                 list())
+                        result['cluster_results'] = cluster_results
+                        # Compute silhouette score
+                        outlier_df = df[df['cluster_labels'] == -1]
+                        no_outlier_df = df[df['cluster_labels'] != -1]
+                        result['outliers'] = len(outlier_df)
+                        result['total_clusters'] = len(cluster_results)
+                        if len(no_outlier_df) > 0:
+                            score = BERTModelDocClusterUtility.compute_Silhouette_score(no_outlier_df['cluster_labels'].tolist(),
+                                                                                        np.vstack(no_outlier_df['doc_vectors'].tolist()))
+                            result['Silhouette_score'] = score
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+                    print(result)
+                    results.append(result)
 
-
-
-
+        return results
