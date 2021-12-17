@@ -7,9 +7,8 @@ from functools import reduce
 import hdbscan
 import nltk
 import numpy as np
-import umap
 from matplotlib import pyplot as plt
-from nltk import BigramCollocationFinder
+from nltk import WordNetLemmatizer
 from nltk.util import ngrams
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
@@ -29,7 +28,9 @@ if os.name == 'nt':
     nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
 # Download all the necessary NLTK data
 nltk.download('punkt', download_dir=nltk_path)
+nltk.download('wordnet', download_dir=nltk_path)
 nltk.download('stopwords', download_dir=nltk_path)
+nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
 # Append NTLK data path
 nltk.data.path.append(nltk_path)
 
@@ -39,20 +40,6 @@ class BERTModelDocClusterUtility:
     case_name = 'UrbanStudyCorpus'
     # Static variable
     stop_words = list(stopwords.words('english'))
-    # Output path
-    output_path = os.path.join('output', 'cluster')
-    # Load the lemma.n file to store the mapping of singular to plural nouns
-    lemma_nouns = {}
-    path = os.path.join('data', 'lemma.n')
-    f = open(path, 'r')
-    lines = f.readlines()
-    for line in lines:
-        words = line.rstrip().split("->")  # Remove trailing new line char and split by '->'
-        plural_word = words[1]
-        if '.,' in plural_word:  # Handle multiple plural forms and get the last one as default plural form
-            plural_word = plural_word.split('.,')[-1]
-        singular_word = words[0]
-        lemma_nouns[plural_word] = singular_word
 
     # # Use 'elbow method' to vary cluster number for selecting an optimal K value
     # # The elbow point of the curve is the optimal K value
@@ -181,7 +168,29 @@ class BERTModelDocClusterUtility:
     # Avoid license sentences
     @staticmethod
     def preprocess_text(text):
+        # Change plural nouns to singular nouns using lemmatizer
+        def convert_singular_words(_words, _lemmatiser):
+            # Tag the words with part-of-speech tags
+            _pos_tags = nltk.pos_tag(_words)
+            # Convert plural word to singular
+            _singular_words = []
+            for i, (_word, _pos_tag) in enumerate(_pos_tags):
+                try:
+                    # NNS indicates plural nouns and convert the plural noun to singular noun
+                    if _pos_tag == 'NNS':
+                        _singular_word = _lemmatiser.lemmatize(_word.lower())
+                        if _word[0].isupper():  # Restore the uppercase
+                            _singular_word = _singular_word.capitalize()  # Upper case the first character
+                        _singular_words.append(_singular_word)
+                    else:
+                        _singular_words.append(_word)
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
+            # Return all lemmatized words
+            return _singular_words
+
         try:
+            lemmatizer = WordNetLemmatizer()
             # Split the text into sentence
             sentences = sent_tokenize(text)
             clean_sentences = []
@@ -192,21 +201,8 @@ class BERTModelDocClusterUtility:
                         and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
                     words = word_tokenize(sentence)
                     if len(words) > 0:
-                        words[0] = words[0].lower()  # Make the 1st word of a sentence lowercase
-                        # Tag the words with part-of-speech tags
-                        pos_tags = nltk.pos_tag(words)
                         # Convert plural word to singular
-                        singular_words = []
-                        for pos_tag in pos_tags:
-                            word = pos_tag[0]
-                            # NNS indicates plural nouns
-                            if pos_tag[1] == 'NNS':
-                                singular_word = word.rstrip('s')
-                                if word in BERTModelDocClusterUtility.lemma_nouns:
-                                    singular_word = BERTModelDocClusterUtility.lemma_nouns[word]
-                                singular_words.append(singular_word)
-                            else:
-                                singular_words.append(word)
+                        singular_words = convert_singular_words(words, lemmatizer)
                         # Merge all the words to a sentence
                         clean_sentences.append(" ".join(singular_words))
             # Merge all the sentences to a text

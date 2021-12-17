@@ -16,7 +16,6 @@ import numpy as np
 # Load function words
 from nltk.corpus import stopwords
 from sentence_transformers import util
-from sklearn.metrics import silhouette_score
 from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
 from nltk.stem import WordNetLemmatizer
 

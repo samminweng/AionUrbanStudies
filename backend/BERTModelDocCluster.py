@@ -75,7 +75,6 @@ class BERTModelDocCluster:
         self.df['y'] = list(map(lambda y: round(y, 2), standard_vectors[:, 1]))
         self.remove_irrelevant_docs()
 
-
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
     def get_sentence_embedding(self):
@@ -428,7 +427,8 @@ class BERTModelDocCluster:
             path = os.path.join(parent_folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            path = os.path.join(parent_folder, self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
+            path = os.path.join(parent_folder,
+                                self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words.json')
             cluster_df.to_json(path, orient='records')
             print('Output topics per cluster to ' + path)
             # Output a summary of top 10 Topics of each cluster
