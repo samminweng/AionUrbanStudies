@@ -150,6 +150,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanStudyCorpus/key_phrases/group_key_phrases/top_key_phrases_cluster_#4_best_grouping.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/UrbanStudyCorpus/outlier/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
           <value>
             <Attribute>

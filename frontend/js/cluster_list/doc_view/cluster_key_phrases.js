@@ -1,12 +1,13 @@
 // Create a div to display the grouped key phrases
 function ClusterKeyPhrase(cluster, cluster_docs, corpus_key_phrases, accordion_div){
     const cluster_key_phrases = cluster['Grouped_Key_Phrases'];
+    cluster_key_phrases.sort((a, b) => b['count'] - a['count']);
     // Re-order the groups of key phrases
-    const outlier_key_phrases = cluster_key_phrases.find(c => c['group'] === -1);
-    const grouped_key_phrases = cluster_key_phrases.filter(c => c['group'] !== -1);
-    grouped_key_phrases.sort((a, b) => b['count'] - a['count']);
-    const all_grouped_key_phrases = grouped_key_phrases.concat([outlier_key_phrases]);
-    const total = all_grouped_key_phrases.reduce((pre, cur) => pre + cur['count'], 0);
+    // const outlier_key_phrases = cluster_key_phrases.find(c => c['group'] === -1);
+    // const grouped_key_phrases = cluster_key_phrases.filter(c => c['group'] !== -1);
+    // grouped_key_phrases.sort((a, b) => b['count'] - a['count']);
+    // const all_grouped_key_phrases = grouped_key_phrases.concat([outlier_key_phrases]);
+    const total = cluster_key_phrases.reduce((pre, cur) => pre + cur['count'], 0);
 
     // Create an list item to display a group of key phrases
     function createGroupItem(group){
@@ -97,12 +98,12 @@ function ClusterKeyPhrase(cluster, cluster_docs, corpus_key_phrases, accordion_d
         pagination.pagination({
             dataSource: function (done) {
                 let result = [];
-                for (let i = 0; i < all_grouped_key_phrases.length; i++) {
-                    result.push(all_grouped_key_phrases[i]);
+                for (let i = 0; i < cluster_key_phrases.length; i++) {
+                    result.push(cluster_key_phrases[i]);
                 }
                 done(result);
             },
-            totalNumber: all_grouped_key_phrases.length,
+            totalNumber: cluster_key_phrases.length,
             pageSize: 5,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, <%= totalNumber %> groups',
