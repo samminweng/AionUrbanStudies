@@ -241,7 +241,6 @@ class KeyPhraseUtility:
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 
-
     @staticmethod
     def group_key_phrases_with_best_result(cluster_no, parameter, doc_key_phrases, folder):
         # Collect the key phrases linked to the docs
@@ -272,14 +271,18 @@ class KeyPhraseUtility:
             group_df['count'] = group_df['key-phrases'].apply(len)
             # Collect doc ids that contained the grouped key phrases
             group_key_phrases = group_df['key-phrases'].tolist()
-            group_doc_ids = list(map(lambda group: get_doc_ids_by_group_key_phrases(doc_key_phrases, group), group_key_phrases))
+            group_doc_ids = list(
+                map(lambda group: get_doc_ids_by_group_key_phrases(doc_key_phrases, group), group_key_phrases))
             group_df['DocIds'] = group_doc_ids
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
-            group_df = group_df[['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
-            path = os.path.join(folder, 'group_key_phrases', 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
+            group_df = group_df[
+                ['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
+            path = os.path.join(folder, 'group_key_phrases',
+                                'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file
-            path = os.path.join(folder, 'group_key_phrases', 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
+            path = os.path.join(folder, 'group_key_phrases',
+                                'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
             group_df.to_json(path, orient='records')
             print('Output the summary of grouped key phrase to ' + path)
             return group_df.to_dict("records")
@@ -334,7 +337,8 @@ class KeyPhraseUtility:
                                                                cluster_selection_epsilon=parameter['epsilon'],
                                                                metric='precomputed').fit_predict(
                                     distances.astype('float64')).tolist()
-                                group_results = reduce(lambda pre, cur: collect_group_results(pre, cur), group_labels, list())
+                                group_results = reduce(lambda pre, cur: collect_group_results(pre, cur), group_labels,
+                                                       list())
                                 outlier_number = next((g['count'] for g in group_results if g['group'] == -1), 0)
                                 if len(group_results) > 1:
                                     df = pd.DataFrame()
@@ -372,25 +376,7 @@ class KeyPhraseUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Find the duplicate papers in the corpus
-    @staticmethod
-    def scan_duplicate_articles():
-        try:
-            corpus_df = pd.read_csv(os.path.join('data', 'UrbanStudyCorpus.csv'))
-            corpus = corpus_df.to_dict("records")
-            duplicate_doc_ids = set()
-            for article in corpus:
-                doc_id = article['DocId']
-                title = article['Title']
-                # Find if other article has the same title and author names
-                same_articles = list(filter(lambda a: a['Title'].lower().strip() == title.lower().strip() and
-                                                      a['DocId'] > doc_id, corpus))
-                if len(same_articles):
-                    for sa in same_articles:
-                        duplicate_doc_ids.add(sa['DocId'])
-            return list(duplicate_doc_ids)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
+
 
     # # Get the title vectors of all articles in a cluster
     @staticmethod

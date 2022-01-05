@@ -398,7 +398,8 @@ class BERTModelDocClusterUtility:
         topic_words_df.to_csv(path_or_buf=os.path.join(temp_folder, 'UrbanStudyCorpus_' + approach + '_n_topics.csv'),
                               encoding='utf-8', index=False)
         # # # Write to a json file
-        topic_words_df.to_json(os.path.join(temp_folder, 'UrbanStudyCorpus_' + approach + '_n_topics.json'), orient='records')
+        topic_words_df.to_json(os.path.join(temp_folder, 'UrbanStudyCorpus_' + approach + '_n_topics.json'),
+                               orient='records')
         return topics_list  # Return a list of dicts
 
     # Output the cluster topics extracted by TF-IDF as a csv file
@@ -431,7 +432,8 @@ class BERTModelDocClusterUtility:
                         print("Error occurred! {err}".format(err=err))
                 results.append(result)
             n_gram_df = pd.DataFrame(results)
-            path = os.path.join(folder, 'UrbanStudyCorpus_' + approach + '_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
+            path = os.path.join(folder,
+                                'UrbanStudyCorpus_' + approach + '_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
             n_gram_df.to_csv(path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + path)
         except Exception as err:
@@ -583,8 +585,9 @@ class BERTModelDocClusterUtility:
                         result['outliers'] = len(outlier_df)
                         result['total_clusters'] = len(cluster_results)
                         if len(no_outlier_df) > 0:
-                            score = BERTModelDocClusterUtility.compute_Silhouette_score(no_outlier_df['cluster_labels'].tolist(),
-                                                                                        np.vstack(no_outlier_df['doc_vectors'].tolist()))
+                            score = BERTModelDocClusterUtility.compute_Silhouette_score(
+                                no_outlier_df['cluster_labels'].tolist(),
+                                np.vstack(no_outlier_df['doc_vectors'].tolist()))
                             result['Silhouette_score'] = score
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
@@ -592,3 +595,54 @@ class BERTModelDocClusterUtility:
                     results.append(result)
 
         return results
+
+    # Find the duplicate papers in the corpus
+    @staticmethod
+    def clean_corpus(case_name):
+        # Convert the raw source files downloaded from Scopus
+        def _convert_corpus():
+            folder = os.path.join('data', case_name)
+            corpus_df = pd.read_csv(os.path.join(folder, case_name + '_raw.csv'))
+            corpus_df['DocId'] = list(range(1, len(corpus_df)+1))
+            # Select columns
+            corpus_df = corpus_df[['DocId', 'Cited by', 'Title', 'Author Keywords', 'Abstract', 'Year',
+                                   'Source title', 'Authors', 'DOI', 'Document Type']]
+            # # Output as csv file
+            corpus_df.to_csv(os.path.join(folder, case_name + '.csv'),
+                             encoding='utf-8', index=False)
+
+        try:
+            folder = os.path.join('data', case_name)
+            corpus_df = pd.read_csv(os.path.join(folder, case_name + '.csv'))
+            corpus = corpus_df.to_dict("records")
+            irrelevant_doc_ids = set()
+            # Check if the paper has other identical paper in the corpus
+            for article in corpus:
+                doc_id = article['DocId']
+                title = article['Title']
+                # Find if other article has the same title and author names
+                identical_articles = list(
+                    filter(lambda _article: _article['Title'].lower().strip() == title.lower().strip() and
+                                            _article['DocId'] > doc_id, corpus))
+                # add the article docs
+                for sa in identical_articles:
+                    irrelevant_doc_ids.add(sa['DocId'])
+            # Get the all ir-relevant docs
+            ir_df = corpus_df[corpus_df['DocId'].isin(irrelevant_doc_ids)]
+            ir_df = ir_df[['DocId', 'Title', 'Abstract']]
+
+            # Output as csv file
+            ir_df.to_csv(os.path.join(folder, case_name + '_irrelevant_docs.csv'),
+                         encoding='utf-8', index=False)
+
+            # Get all  outliers
+            df = corpus_df[~corpus_df['DocId'].isin(irrelevant_doc_ids)]
+            # Save the cleaned df without document vectors into csv and json files
+            df_clean = df.copy(deep=True)
+            # df_clean.drop(['DocVectors'], inplace=True, axis=1)
+            path = os.path.join('data', case_name, case_name + '_cleaned.csv')
+            df_clean.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join('data', case_name, case_name + '_cleaned.json')
+            df_clean.to_json(path, orient='records')
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
