@@ -335,16 +335,17 @@ class BERTModelDocCluster:
             parent_folder = os.path.join('output', self.args.case_name, 'cluster')
             path = os.path.join(parent_folder, self.args.case_name + '_clusters.json')
             # Load the documents clustered by
-            doc_clusters_df = pd.read_json(path)
+            clustered_doc_df = pd.read_json(path)
             # Update text column
-            doc_clusters_df['Text'] = self.df['Text'].tolist()
+            clustered_doc_df['Text'] = clustered_doc_df['Title'] + ". " + clustered_doc_df['Abstract']
             # Group the documents and doc_id by clusters
-            docs_per_cluster = doc_clusters_df.groupby([approach], as_index=False) \
+            docs_per_cluster_df = clustered_doc_df.groupby([approach], as_index=False) \
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
             # Get top 100 topics (1, 2, 3 grams) for each cluster
-            n_gram_topic_list = BERTModelDocClusterUtility.get_n_gram_topics(approach, docs_per_cluster, parent_folder)
+            n_gram_topic_list = BERTModelDocClusterUtility.get_n_gram_topics(approach,
+                                                                             docs_per_cluster_df, parent_folder)
             results = []
-            for i, cluster in docs_per_cluster.iterrows():
+            for i, cluster in docs_per_cluster_df.iterrows():
                 try:
                     cluster_no = cluster[approach]
                     doc_ids = cluster['DocId']
@@ -366,16 +367,16 @@ class BERTModelDocCluster:
                         n_gram_topics += doc_per_topic
                     result['Topic-N-gram'] = BERTModelDocClusterUtility.merge_n_gram_topic(n_gram_topics)
                     results.append(result)
-                except Exception as err:
-                    print("Error occurred! {err}".format(err=err))
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
             # Write the result to csv and json file
             cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
                                                         'Topic-1-gram', 'Topic-2-gram', 'Topic-3-gram', 'Topic-N-gram'])
             folder = os.path.join(parent_folder, 'topics')
-            path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_n_grams.csv')
+            path = os.path.join(folder, 'TF-IDF_topic_words_n_grams.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            path = os.path.join(folder, self.args.case_name + '_' + approach + '_TF-IDF_topic_words_n_grams.json')
+            path = os.path.join(folder, 'TF-IDF_topic_words_n_grams.json')
             cluster_df.to_json(path, orient='records')
             print('Output topics per cluster to ' + path)
         except Exception as err:
@@ -388,9 +389,9 @@ class BERTModelDocCluster:
             parent_folder = os.path.join('output', self.args.case_name, 'cluster')
             folder = os.path.join(parent_folder, 'topics')
             # # Output top 50 topics by 1, 2 and 3-grams at specific cluster
-            # BERTModelDocClusterUtility.flatten_tf_idf_topics(1, folder)
-            # BERTModelDocClusterUtility.flatten_tf_idf_topics(2, folder)
-            # BERTModelDocClusterUtility.flatten_tf_idf_topics(3, folder)
+            BERTModelDocClusterUtility.flatten_tf_idf_topics(0, folder)
+            BERTModelDocClusterUtility.flatten_tf_idf_topics(1, folder)
+            BERTModelDocClusterUtility.flatten_tf_idf_topics(6, folder)
             path = os.path.join(folder,
                                 self.args.case_name + '_' + cluster_approach + '_TF-IDF_topic_words_n_grams.json')
             tf_idf_df = pd.read_json(path)
@@ -475,8 +476,8 @@ if __name__ == '__main__':
         # mdc.get_sentence_embedding()
         # mdc.evaluate_HDBSCAN_cluster_quality()
         # mdc.summarize_HDBSCAN_cluster_experiment_results()
-        mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
-        # # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+        # mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
+        mdc.derive_topics_from_cluster_docs_by_TF_IDF()
         # mdc.combine_and_summary_topics_from_clusters()
         # # mdc.re_cluster_outliers_by_hdbscan()
     except Exception as err:

@@ -2,13 +2,15 @@ import math
 import os
 import re
 import logging
+import string
 from functools import reduce
 
 import hdbscan
+import inflect
 import nltk
 import numpy as np
 from matplotlib import pyplot as plt
-from nltk import WordNetLemmatizer
+from nltk import WordNetLemmatizer, pos_tag
 from nltk.util import ngrams
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
@@ -213,19 +215,15 @@ class BERTModelDocClusterUtility:
 
     # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_topics(approach, docs_per_cluster, folder, is_load=False):
+    def get_n_gram_topics(approach, docs_per_cluster_df, folder):
         # A folder that stores all the topic results
         temp_folder = os.path.join(folder, 'topics', 'temp')
-        if is_load:
-            n_gram_topics_df = pd.read_json(os.path.join(temp_folder,
-                                                         'UrbanStudyCorpus_' + approach + '_n_topics.json'))
-            return n_gram_topics_df.to_dict("records")
 
-        # Convert the texts of all clusters into a list of document (a list of sentences) for deriving n-grams
-        def _collect_cluster_docs(_docs_per_cluster):
+        # Convert the texts of all clusters into a list of document (a list of sentences) to derive n-gram candidates
+        def _collect_cluster_docs(_docs_per_cluster_df):
             # Get the clustered texts
-            clusters = _docs_per_cluster[approach].tolist()
-            doc_texts_per_cluster = docs_per_cluster['Text'].tolist()
+            clusters = _docs_per_cluster_df[approach].tolist()
+            doc_texts_per_cluster = _docs_per_cluster_df['Text'].tolist()
             _docs = []
             for cluster_no, doc_texts in zip(clusters, doc_texts_per_cluster):
                 doc_list = []
@@ -235,60 +233,93 @@ class BERTModelDocClusterUtility:
                             text = BERTModelDocClusterUtility.preprocess_text(doc_text.strip())
                             sentences = sent_tokenize(text)
                             doc_list.extend(sentences)
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
                 _docs.append({'cluster': cluster_no, 'doc': doc_list})  # doc: a list of sentences
             # Convert the frequency matrix to data frame
             df = pd.DataFrame(_docs, columns=['cluster', 'doc'])
+            path = os.path.join(temp_folder, 'Step_1_cluster_doc.csv')
             # Write to temp output for validation
-            df.to_csv(os.path.join(temp_folder, 'Step_1_UrbanStudyCorpus_cluster_doc.csv'),
-                      encoding='utf-8', index=False)
-            df.to_json(os.path.join(temp_folder, 'Step_1_UrbanStudyCorpus_cluster_doc.json'),
-                       orient='records')
+            df.to_csv(path, encoding='utf-8', index=False)
             return _docs
 
         # Create frequency matrix to track the frequencies of a n-gram in
-        def _create_frequency_matrix(_docs, _num):
-            # Generate n-gram of a text and avoid stop
-            def _generate_ngrams(_words, _num):
-                _n_grams = list(ngrams(_words, _num))
-                # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
-                r_list = []
-                for _n_gram in _n_grams:
-                    is_qualified = True
-                    for word in _n_gram:
-                        # Each word in 'n-gram' must not be stop words and must be a alphabet or number
-                        if word.lower() in BERTModelDocClusterUtility.stop_words or \
-                                re.search('\d|[^\w]', word.lower()):
-                            is_qualified = False
-                            break
-                    if is_qualified:
-                        r_list.append(" ".join(_n_gram))  # Convert n_gram (a list of words) to a string
-                return r_list
+        def _create_frequency_matrix(_docs, _n_gram_range):
+            lemmatizer = WordNetLemmatizer()
+
+            # Generate n-gram candidates from a text (a list of sentences)
+            def _generate_n_gram_candidates(_sentences, _n_gram_range):
+                # Check if n_gram candidate does not have stop words, punctuation or non-words
+                def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
+                    try:
+                        # qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
+                        # # # Check if there is any noun
+                        # nouns = list(filter(lambda _n: _n[1].startswith('NN'), _n_gram))
+                        # if len(nouns) == 0:
+                        #     return False
+                        # # Check the last word is a nn or nns
+                        # if _n_gram[-1][1] not in ['NN', 'NNS']:
+                        #     return False
+                        # Check if all words are not stop word or punctuation or non-words
+                        for _i, _n in enumerate(_n_gram):
+                            _word = _n[0]
+                            _pos_tag = _n[1]
+                            if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
+                                    _word.lower() in BERTModelDocClusterUtility.stop_words: #or _pos_tag not in qualified_tags:
+                                return False
+                        # n-gram is qualified
+                        return True
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+
+                # Convert n_gram tuples (pos tag and words) to a list of singular words
+                def _convert_n_gram_to_words(_n_gram):
+                    _lemma_words = list()
+                    for _gram in _n_gram:
+                        _word = _gram[0]
+                        _pos_tag = _gram[1]
+                        if _pos_tag == 'NNS':
+                            _lemma_words.append(lemmatizer.lemmatize(_word))
+                        else:
+                            _lemma_words.append(_word)
+                    return " ".join(_lemma_words)
+
+                _candidates = list()
+                # Extract n_gram from each sentence
+                for i, _sentence in enumerate(_sentences):
+                    try:
+                        _words = word_tokenize(_sentence)
+                        _pos_tags = pos_tag(_words)
+                        # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
+                        _n_grams = list(ngrams(_pos_tags, _n_gram_range))
+                        # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
+                        for _n_gram in _n_grams:
+                            if _is_qualified(_n_gram):
+                                _n_gram_words = _convert_n_gram_to_words(_n_gram)
+                                _candidates.append(_n_gram_words)  # Convert n_gram (a list of words) to a string
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                return _candidates
 
             # Vectorized the clustered doc text and Keep the Word case unchanged
             frequency_matrix = []
             for doc in docs:
                 cluster_no = doc['cluster']  # doc id is the cluster no
-                doc_texts = doc['doc']
+                sentences = doc['doc']
                 freq_table = {}
-                for sent in doc_texts:
-                    words = word_tokenize(sent)
-                    n_grams = _generate_ngrams(words, _num)
-                    for ngram in n_grams:
-                        if ngram in freq_table:
-                            freq_table[ngram] += 1
-                        else:
-                            freq_table[ngram] = 1
+                n_grams = _generate_n_gram_candidates(sentences, _n_gram_range)
+                for n_gram in n_grams:
+                    n_gram_text = n_gram.lower()
+                    if n_gram_text in freq_table:
+                        freq_table[n_gram_text] += 1
+                    else:
+                        freq_table[n_gram_text] = 1
                 frequency_matrix.append({'cluster': cluster_no, 'freq_table': freq_table})
             # Convert the frequency matrix to data frame
             df = pd.DataFrame(frequency_matrix, columns=['cluster', 'freq_table'])
             # Write to temp output for validation
-            path = os.path.join(temp_folder, 'Step_2_UrbanStudyCorpus_frequency_matrix.csv')
+            path = os.path.join(temp_folder, 'Step_2_frequency_matrix.csv')
             df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(temp_folder, 'Step_2_UrbanStudyCorpus_frequency_matrix.json')
-            df.to_json(path, orient='records')
-            print('Output topics per cluster to ' + path)
             return frequency_matrix
 
         # Compute TF score
@@ -322,10 +353,10 @@ class BERTModelDocClusterUtility:
                 df = pd.DataFrame(list(word_doc_table.items()))
                 # Write to temp output for validation
                 df.to_csv(os.path.join(temp_folder,
-                                       'Step_3_UrbanStudyCorpus_word_doc_table.csv'),
+                                       'Step_3_word_doc_table.csv'),
                           encoding='utf-8', index=False)
                 df.to_json(os.path.join(temp_folder,
-                                        'Step_3_UrbanStudyCorpus_word_doc_table.json'),
+                                        'Step_3_word_doc_table.json'),
                            orient='records')
             return word_doc_table
 
@@ -369,12 +400,12 @@ class BERTModelDocClusterUtility:
             return _tf_idf_matrix
 
         # Step 1. Convert each cluster of documents (one or more articles) into a single document
-        docs = _collect_cluster_docs(docs_per_cluster)
+        docs = _collect_cluster_docs(docs_per_cluster_df)
         topics_list = []
-        for n_gram_num in [1, 2, 3]:
+        for n_gram_range in [1, 2, 3]:
             try:
                 # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
-                freq_matrix = _create_frequency_matrix(docs, n_gram_num)
+                freq_matrix = _create_frequency_matrix(docs, n_gram_range)
                 # 3. Compute Term Frequency (TF) and generate a matrix
                 # Term frequency (TF) is the frequency of a word in a document divided by total number of words in the document.
                 tf_matrix = _compute_tf_matrix(freq_matrix)
@@ -384,10 +415,9 @@ class BERTModelDocClusterUtility:
                 idf_matrix = _compute_idf_matrix(freq_matrix, docs_per_word)
                 # Compute tf-idf matrix
                 tf_idf_matrix = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, docs_per_word)
-                # print(tf_idf_matrix)
                 # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
                 topics_list.append({
-                    'n_gram': n_gram_num,
+                    'n_gram': n_gram_range,
                     'topics': tf_idf_matrix
                 })
             except Exception as err:
@@ -395,11 +425,8 @@ class BERTModelDocClusterUtility:
 
         topic_words_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
         # Write the topics results to csv
-        topic_words_df.to_csv(path_or_buf=os.path.join(temp_folder, 'UrbanStudyCorpus_' + approach + '_n_topics.csv'),
+        topic_words_df.to_csv(os.path.join(temp_folder, approach + '_n_topics.csv'),
                               encoding='utf-8', index=False)
-        # # # Write to a json file
-        topic_words_df.to_json(os.path.join(temp_folder, 'UrbanStudyCorpus_' + approach + '_n_topics.json'),
-                               orient='records')
         return topics_list  # Return a list of dicts
 
     # Output the cluster topics extracted by TF-IDF as a csv file
@@ -408,7 +435,7 @@ class BERTModelDocClusterUtility:
         cluster = "HDBSCAN_Cluster"
         approach = "TF-IDF"
         try:
-            path = os.path.join(folder, 'UrbanStudyCorpus_' + cluster + '_' + approach + '_topic_words_n_grams.json')
+            path = os.path.join(folder, cluster + '_' + approach + '_topic_words_n_grams.json')
             cluster_df = pd.read_json(path)
             clusters = cluster_df.to_dict("records")
             cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
@@ -433,7 +460,7 @@ class BERTModelDocClusterUtility:
                 results.append(result)
             n_gram_df = pd.DataFrame(results)
             path = os.path.join(folder,
-                                'UrbanStudyCorpus_' + approach + '_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
+                                approach + '_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
             n_gram_df.to_csv(path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + path)
         except Exception as err:
@@ -442,16 +469,15 @@ class BERTModelDocClusterUtility:
     # Group the doc (articles) by individual topic
     @staticmethod
     def group_docs_by_topics(n_gram_num, doc_ids, doc_texts, topics_per_cluster):
+        p = inflect.engine()
+
         # Convert the singular topic into the topic in plural form
         def get_plural_topic_form(_topic):
             # Get plural nouns of topic
             words = _topic.split(" ")
             last_word = words[-1]
-            plural_word = last_word + "s"
-            for plural, singular in BERTModelDocClusterUtility.lemma_nouns.items():
-                if singular == last_word:
-                    plural_word = plural
-                    break
+            # Get plural word
+            plural_word = p.plural(last_word)
             plural_topic = words[:-1] + [plural_word]
             return " ".join(plural_topic)
 
@@ -603,7 +629,7 @@ class BERTModelDocClusterUtility:
         def _convert_corpus():
             folder = os.path.join('data', case_name)
             corpus_df = pd.read_csv(os.path.join(folder, case_name + '_raw.csv'))
-            corpus_df['DocId'] = list(range(1, len(corpus_df)+1))
+            corpus_df['DocId'] = list(range(1, len(corpus_df) + 1))
             # Select columns
             corpus_df = corpus_df[['DocId', 'Cited by', 'Title', 'Author Keywords', 'Abstract', 'Year',
                                    'Source title', 'Authors', 'DOI', 'Document Type']]

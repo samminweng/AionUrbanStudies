@@ -376,8 +376,6 @@ class KeyPhraseUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-
-
     # # Get the title vectors of all articles in a cluster
     @staticmethod
     def find_top_n_similar_papers(cluster_no, corpus_docs, clusters, model, top_k=30):

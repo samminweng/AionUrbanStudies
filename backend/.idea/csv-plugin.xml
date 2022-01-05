@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/UrbanDesignCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/UrbanDesignCorpus/cluster/UrbanDesignCorpus_clusters.csv">
           <value>
             <Attribute>
@@ -60,6 +67,48 @@
           </value>
         </entry>
         <entry key="/output/UrbanDesignCorpus/cluster/hdbscan_clustering/UrbanDesignCorpus_clusters_tree.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/TF-IDF_topic_words_n_grams.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/UrbanDesignCorpus_HDBSCAN_Cluster_TF-IDF_topic_words_n_grams.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/UrbanDesignCorpus_HDBSCAN_Cluster_TF-IDF_topic_words_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/temp/HDBSCAN_Cluster_n_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/temp/Step_2_frequency_matrix.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/temp/Step_3_UrbanStudyCorpus_word_doc_table.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
