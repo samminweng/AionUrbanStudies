@@ -207,7 +207,7 @@ class BERTModelDocCluster:
             print("Error occurred! {err}".format(err=err))
 
     # Output the summary of HDBSCAN clustering results and plots the clustering dot chart
-    def summarize_HDBSCAN_cluster_results(self):
+    def summarize_HDBSCAN_cluster_experiment_results(self):
         try:
             # Find the best results in each dimension
             d_results = list()
@@ -258,7 +258,7 @@ class BERTModelDocCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Cluster document vectors of best parameters by HDBSCAN (https://hdbscan.readthedocs.io/en/latest/index.html)
+    # Cluster document vectors with HDBSCAN using best parameters obtained from experiment results
     def cluster_doc_vectors_with_best_parameter_by_hdbscan(self):
         try:
             parent_folder = os.path.join('output', self.args.case_name, 'cluster')
@@ -270,7 +270,7 @@ class BERTModelDocCluster:
             best_result = df.head(1).to_dict(orient='records')[0]
 
             # Store the clustering results
-            cluster_df = self.df.copy(deep=True)
+            cluster_df = self.text_df.copy(deep=True)
             dimension = int(best_result['dimension'])
             min_cluster_size = int(best_result['min_cluster_size'])
             min_samples = int(best_result['min_samples'])
@@ -295,9 +295,9 @@ class BERTModelDocCluster:
             cluster_labels = clusters.labels_.tolist()
             cluster_df['HDBSCAN_Cluster'] = cluster_labels
             # Re-index and re-order the columns of cluster data frame
-            cluster_df = cluster_df.reindex(columns=['HDBSCAN_Cluster', 'DocId', 'x', 'y'])
-            # folder = os.path.join('output', self.args.case_name, 'cluster')
-
+            cluster_df = cluster_df.reindex(columns=['HDBSCAN_Cluster', 'DocId',
+                                                     'Cited by', 'Year', 'Document Type', 'Title', 'Abstract',
+                                                     'Author Keywords',	'Authors', 'DOI', 'x', 'y'])
             # Output the result to csv and json file
             path = os.path.join(parent_folder, self.args.case_name + '_clusters.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
@@ -474,8 +474,8 @@ if __name__ == '__main__':
         mdc = BERTModelDocCluster()
         # mdc.get_sentence_embedding()
         # mdc.evaluate_HDBSCAN_cluster_quality()
-        mdc.summarize_HDBSCAN_cluster_results()
-        # # mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
+        # mdc.summarize_HDBSCAN_cluster_experiment_results()
+        mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
         # # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
         # mdc.combine_and_summary_topics_from_clusters()
         # # mdc.re_cluster_outliers_by_hdbscan()

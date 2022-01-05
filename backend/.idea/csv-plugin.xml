@@ -45,7 +45,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/UrbanDesignCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/UrbanDesignCorpus/cluster/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/hdbscan_clustering/UrbanDesignCorpus_clusters_tree.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
