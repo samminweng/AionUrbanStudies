@@ -343,7 +343,7 @@ class BERTModelDocCluster:
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
             # Get top 100 topics (1, 2, 3 grams) for each cluster
             n_gram_topic_list = BERTModelDocClusterUtility.get_n_gram_topics(approach, docs_per_cluster_df,
-                                                                             parent_folder, is_load=True)
+                                                                             parent_folder, is_load=False)
             results = []
             for i, cluster in docs_per_cluster_df.iterrows():
                 try:
@@ -467,7 +467,7 @@ if __name__ == '__main__':
         # mdc.evaluate_HDBSCAN_cluster_quality()
         # mdc.summarize_HDBSCAN_cluster_experiment_results()
         # mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
-        # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+        mdc.derive_topics_from_cluster_docs_by_TF_IDF()
         mdc.combine_and_summary_topics_from_clusters()
         # # mdc.re_cluster_outliers_by_hdbscan()
     except Exception as err:

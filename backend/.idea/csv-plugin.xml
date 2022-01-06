@@ -73,6 +73,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/TF-IDF_cluster_topic_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/UrbanDesignCorpus/cluster/topics/TF-IDF_topic_words_n_grams.csv">
           <value>
             <Attribute>
@@ -88,6 +95,62 @@
           </value>
         </entry>
         <entry key="/output/UrbanDesignCorpus/cluster/topics/UrbanDesignCorpus_HDBSCAN_Cluster_TF-IDF_topic_words_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_#-1_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_#0_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_#1_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_#2_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_#3_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_#4_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_#5_flatten_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_#6_flatten_topics.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

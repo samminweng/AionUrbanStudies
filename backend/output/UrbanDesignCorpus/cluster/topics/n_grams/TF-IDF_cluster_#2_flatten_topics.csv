@@ -22,9 +22,9 @@ grid,0.0038968284000000003,4,1,2,safety disparity,0.0023517968,2,1,1,marking for
 safety,0.0036389923000000003,18,6,6,safety outcome,0.0023517968,2,1,1,use eye contact,0.0033697388,1,1,1,mindset,0.0048248886000000005,7,1,3
 corridor,0.003446349,5,2,3,sharing scheme,0.0023517968,2,1,1,attractive urban environment,0.0033697388,1,1,1,sustainable transportation,0.0047035937000000005,4,2,1
 distance,0.0029226213,6,3,4,bikeshare implementation,0.0023517968,2,1,1,standard traffic infrastructure,0.0033697388,1,1,1,walking mindset,0.0047035937000000005,4,1,1
-stop,0.0029226213,2,3,1,diffusion process,0.0023517968,2,1,1,urban road environment,0.0033697388,1,1,1,central place,0.0047035937000000005,4,1,1
-edition,0.0029226213,3,1,2,promote walking,0.0023517968,2,2,1,author drew attention,0.0033697388,1,1,1,urban sprawl,0.0047035937000000005,4,1,1
-coordination,0.0029226213,3,1,2,traffic simulation,0.0023517968,2,1,1,growing visual disparity,0.0033697388,1,1,1,walking,0.0046240773,14,5,5
+stop,0.0029226213,2,2,1,diffusion process,0.0023517968,2,1,1,urban road environment,0.0033697388,1,1,1,central place,0.0047035937000000005,4,1,1
+edition,0.0029226213,3,1,2,traffic simulation,0.0023517968,2,1,1,author drew attention,0.0033697388,1,1,1,urban sprawl,0.0047035937000000005,4,1,1
+coordination,0.0029226213,3,1,2,promote walking,0.0023517968,2,1,1,growing visual disparity,0.0033697388,1,1,1,walking,0.0046240773,14,5,5
 trip,0.0029226213,3,1,2,movement infrastructure,0.0023517968,2,1,1,new design approach,0.0033697388,1,1,1,subsidy,0.004383932,3,2,1
 supplier,0.0029226213,2,1,1,mobility environment,0.0023517968,2,1,1,urban traffic blight,0.0033697388,1,1,1,bike,0.004383932,3,2,1
 infrastructure,0.0028303274000000002,14,9,6,mobile community,0.0023517968,2,1,1,diminishing fuel resource,0.0033697388,1,1,1,subsystem,0.004383932,3,1,1
@@ -36,7 +36,7 @@ norm,0.0020678094,3,1,3,rail system,0.0023517968,2,1,1,examining existing litera
 urbanity,0.0020678094,3,1,3,system integration,0.0023517968,2,1,1,key factor influence,0.0033697388,1,1,1,road user,0.0035276953,3,2,1
 avenue,0.0020678094,3,1,3,traffic restraint,0.0023517968,2,1,1,using general measure,0.0033697388,1,1,1,neighborhood type,0.0035276953,3,1,1
 learning,0.0019817474,6,1,5,public transit,0.0023517968,2,1,1,daily physical activity,0.0033697388,1,1,1,corridor,0.003446349,5,2,3
-appropriate,0.0019484142000000002,2,5,2,compact development,0.0023517968,2,1,1,used stated preference,0.0033697388,1,1,1,prevalent transport problem,0.0033697388,1,1,1
+appropriate,0.0019484142000000002,2,2,2,compact development,0.0023517968,2,1,1,used stated preference,0.0033697388,1,1,1,prevalent transport problem,0.0033697388,1,1,1
 ecosystem,0.0019484142000000002,4,2,4,land speculation,0.0023517968,2,1,1,stated preference design,0.0033697388,1,1,1,well informal factor,0.0033697388,1,1,1
 fantasy,0.0019484142000000002,2,1,2,social norm,0.0016639404,3,1,3,mass transport system,0.0033697388,1,1,1,different analytical level,0.0033697388,1,1,1
 congestion,0.0019484142000000002,2,2,2,business model,0.0015678646,2,1,2,responsive transport service,0.0033697388,1,1,1,factor included legislation,0.0033697388,1,1,1
