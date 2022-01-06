@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+settlement,0.0075146989,17,8,4,mental perception,0.0098399635,9,1,1,vernacular courtyard house,0.0109687043,3,1,1,vernacular courtyard house,0.0109687043,3,1,1
+house,0.0068805522,11,6,3,residential standard,0.0087466343,8,1,1,local urban space,0.0073124695,2,1,1,mental perception,0.0098399635,9,1,1
+sündürme,0.0066306166,5,1,1,collective memory,0.0067041084,13,1,3,urban street façades,0.0073124695,2,1,1,residential standard,0.0087466343,8,1,1
+heritage,0.0056949775,19,8,5,city identity,0.0056727071,11,1,3,creating collective memory,0.0073124695,2,1,1,settlement,0.0075146989,17,8,4
+signage,0.0053044933,6,1,2,rule system,0.0054666464000000005,5,1,1,landscape analysis method,0.0073124695,2,1,1,local urban space,0.0073124695,2,1,1
+hybridization,0.0053044933,6,1,2,hybridization process,0.0054666464000000005,5,1,1,current building practice,0.0073124695,2,1,1,urban street façades,0.0073124695,2,1,1
+modifier,0.0053044933,4,1,1,landscape analysis,0.0043733171,4,1,1,foreign vernacular example,0.0073124695,2,1,1,creating collective memory,0.0073124695,2,1,1
+tradition,0.0047957705,16,7,5,original settlement,0.0043733171,4,1,1,urban housing complies,0.0036562348000000002,1,1,1,landscape analysis method,0.0073124695,2,1,1
+architecture,0.0045865909000000005,25,12,6,wayfinding system,0.0036444309,5,1,2,characteristic among people,0.0036562348000000002,1,1,1,current building practice,0.0073124695,2,1,1
+style,0.0044204111,10,5,4,architectural style,0.0036444309,5,1,2,multiple regression analysis,0.0036562348000000002,1,1,1,foreign vernacular example,0.0073124695,2,1,1
+façades,0.0044204111,5,2,2,traditional market,0.0036099045000000003,7,1,3,regression analysis reveal,0.0036562348000000002,1,1,1,house,0.0068805522,11,6,3
+citadel,0.00397837,3,1,1,local value,0.0032799878,3,2,1,income per month,0.0036562348000000002,1,1,1,collective memory,0.0067041084,13,1,3
+uniformity,0.00397837,3,2,1,transitional space,0.0032799878,3,1,1,municipal administration culture,0.0036562348000000002,1,1,1,sündürme,0.0066306166,5,1,1
+regionalism,0.00397837,3,2,1,vernacular city,0.0032799878,3,1,1,improved urban planning,0.0036562348000000002,1,1,1,heritage,0.0056949775,19,8,5
+identity,0.0037469099,44,11,7,vernacular courtyard,0.0032799878,3,1,1,urban planning practice,0.0036562348000000002,1,1,1,city identity,0.0056727071,11,1,3
+compliance,0.0035363289,4,1,2,knowledge system,0.0032799878,3,2,1,current residential standard,0.0036562348000000002,1,1,1,rule system,0.0054666464000000005,5,1,1
+marketplace,0.0035363289,4,1,2,natural context,0.0032799878,3,2,1,comprehensive legal framework,0.0036562348000000002,1,1,1,hybridization process,0.0054666464000000005,5,1,1
+symbol,0.0032970922000000002,11,3,5,vernacular example,0.0032799878,3,1,1,linking residential standard,0.0036562348000000002,1,1,1,signage,0.0053044933,6,1,2
+morphology,0.0031275237,5,3,3,cultural heritage,0.0030942039,6,3,3,urban design approach,0.0036562348000000002,1,1,1,hybridization,0.0053044933,6,1,2
+block,0.0031275237,5,1,3,historical block,0.0029155448000000002,4,1,2,changing planning practice,0.0036562348000000002,1,1,1,modifier,0.0053044933,4,1,1
+landscape,0.0030656536,36,4,7,construction process,0.0021866586,2,2,1,developing information system,0.0036562348000000002,1,1,1,tradition,0.0047957705,16,7,5
+standard,0.0029973566000000003,10,1,5,housing pattern,0.0021866586,3,1,2,produce effective monitoring,0.0036562348000000002,1,1,1,architecture,0.0045865909000000005,25,12,6
+memory,0.0029804965,35,3,7,popular architecture,0.0021866586,2,1,1,effective monitoring system,0.0036562348000000002,1,1,1,style,0.0044204111,10,5,4
+attachment,0.0026522467000000003,6,2,4,historic monument,0.0021866586,2,2,1,staff including planner,0.0036562348000000002,1,1,1,façades,0.0044204111,5,2,2
+architect,0.0026522467000000003,6,3,4,architectural heritage,0.0021866586,3,3,2,revitalizing traditional town,0.0036562348000000002,1,1,1,landscape analysis,0.0043733171,4,1,1
+conservation,0.0026522467000000003,6,2,4,urban structure,0.0021866586,3,3,2,control societal activity,0.0036562348000000002,1,1,1,original settlement,0.0043733171,4,1,1
+courtyard,0.0026522467000000003,3,1,2,extreme climate,0.0021866586,2,2,1,governing rule system,0.0036562348000000002,1,1,1,citadel,0.00397837,3,1,1
+mind,0.0026522467000000003,6,2,4,local population,0.0021866586,3,1,2,traditional rule system,0.0036562348000000002,1,1,1,uniformity,0.00397837,3,2,1
+mentality,0.0026522467000000003,3,1,2,domestic architecture,0.0021866586,2,1,1,incorporating modern technology,0.0036562348000000002,1,1,1,regionalism,0.00397837,3,2,1
+imageability,0.0026522467000000003,2,2,1,residential architecture,0.0021866586,2,1,1,sustainable housing pattern,0.0036562348000000002,1,1,1,identity,0.0037469099,44,11,7
+assess,0.0026522467000000003,2,2,1,courtyard house,0.0021866586,3,1,2,developed urban environment,0.0036562348000000002,1,1,1,urban housing complies,0.0036562348000000002,1,1,1
+star,0.0026522467000000003,2,1,1,spatial connectivity,0.0021866586,2,2,1,shows extensive neglect,0.0036562348000000002,1,1,1,characteristic among people,0.0036562348000000002,1,1,1
+setup,0.0026522467000000003,2,1,1,sustainable solution,0.0021866586,2,1,1,promoting environmental quality,0.0036562348000000002,1,1,1,multiple regression analysis,0.0036562348000000002,1,1,1
+watercourse,0.0026522467000000003,2,1,1,environmental aspect,0.0021866586,3,2,2,mass production system,0.0036562348000000002,1,1,1,regression analysis reveal,0.0036562348000000002,1,1,1
+disconnection,0.0026522467000000003,2,2,1,old center,0.0021866586,2,1,1,missing vital aspect,0.0036562348000000002,1,1,1,income per month,0.0036562348000000002,1,1,1
+regard,0.0025020190000000003,4,2,3,built morphology,0.0021866586,2,1,1,architectural development practice,0.0036562348000000002,1,1,1,municipal administration culture,0.0036562348000000002,1,1,1
+preservation,0.0025020190000000003,4,4,3,street façades,0.0021866586,2,1,1,skill meeting people,0.0036562348000000002,1,1,1,improved urban planning,0.0036562348000000002,1,1,1
+religion,0.0025020190000000003,4,2,3,two marketplace,0.0021866586,2,1,1,traditional housing pattern,0.0036562348000000002,1,1,1,urban planning practice,0.0036562348000000002,1,1,1
+formation,0.0023978853,8,3,5,architectural identity,0.0021866586,2,1,1,newly developed housing,0.0036562348000000002,1,1,1,current residential standard,0.0036562348000000002,1,1,1
+image,0.0020181,11,4,6,star architect,0.0021866586,2,1,1,developed housing pattern,0.0036562348000000002,1,1,1,comprehensive legal framework,0.0036562348000000002,1,1,1
+form,0.001958612,23,9,7,design vocabulary,0.0021866586,2,1,1,whose main aim,0.0036562348000000002,1,1,1,linking residential standard,0.0036562348000000002,1,1,1
+manifestation,0.0018765142,3,3,3,traditional city,0.0021866586,3,1,2,traditional urban settlement,0.0036562348000000002,1,1,1,urban design approach,0.0036562348000000002,1,1,1
+map,0.0018765142,3,2,3,architectural conservation,0.0021866586,2,1,1,important design criterion,0.0036562348000000002,1,1,1,changing planning practice,0.0036562348000000002,1,1,1
+rule,0.0017984139,6,1,5,building culture,0.0021866586,2,1,1,commonly named sündürme,0.0036562348000000002,1,1,1,developing information system,0.0036562348000000002,1,1,1
+climate,0.0017984139,6,5,5,take shape,0.0021866586,2,1,1,forthcoming transition device,0.0036562348000000002,1,1,1,produce effective monitoring,0.0036562348000000002,1,1,1
+material,0.0017984139,6,4,5,landscape quality,0.0021866586,2,1,1,socially satisfying environment,0.0036562348000000002,1,1,1,effective monitoring system,0.0036562348000000002,1,1,1
+whole,0.0017681644000000002,4,5,4,certain component,0.0021866586,2,1,1,new housing development,0.0036562348000000002,1,1,1,staff including planner,0.0036562348000000002,1,1,1
+past,0.0017681644000000002,4,4,4,past memory,0.0021866586,2,1,1,formal analysis result,0.0036562348000000002,1,1,1,revitalizing traditional town,0.0036562348000000002,1,1,1
+legibility,0.0017681644000000002,2,1,2,plane tree,0.0021866586,2,1,1,living environment towards,0.0036562348000000002,1,1,1,control societal activity,0.0036562348000000002,1,1,1
+lie,0.0017681644000000002,2,2,2,critical regionalism,0.0021866586,2,1,1,better living condition,0.0036562348000000002,1,1,1,governing rule system,0.0036562348000000002,1,1,1

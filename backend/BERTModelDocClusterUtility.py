@@ -213,11 +213,68 @@ class BERTModelDocClusterUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Generate n-gram candidates from a text (a list of sentences)
+    @staticmethod
+    def generate_n_gram_candidates(sentences, n_gram_range):
+        # Check if n_gram candidate does not have stop words, punctuation or non-words
+        def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
+            try:
+                # qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
+                # # # Check if there is any noun
+                nouns = list(filter(lambda _n: _n[1].startswith('NN'), _n_gram))
+                if len(nouns) == 0:
+                    return False
+                # # Check the last word is a nn or nns
+                if _n_gram[-1][1] not in ['NN', 'NNS']:
+                    return False
+                # Check if all words are not stop word or punctuation or non-words
+                for _i, _n in enumerate(_n_gram):
+                    _word = _n[0]
+                    _pos_tag = _n[1]
+                    if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
+                            _word.lower() in BERTModelDocClusterUtility.stop_words:  # or _pos_tag not in qualified_tags:
+                        return False
+                # n-gram is qualified
+                return True
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+
+        # Convert n_gram tuples (pos tag and words) to a list of singular words
+        def _convert_n_gram_to_words(_n_gram):
+            _lemma_words = list()
+            for _gram in _n_gram:
+                _word = _gram[0]
+                _pos_tag = _gram[1]
+                _lemma_words.append(_word)
+            return " ".join(_lemma_words)
+
+        candidates = list()
+        # Extract n_gram from each sentence
+        for i, sentence in enumerate(sentences):
+            try:
+                words = word_tokenize(sentence)
+                pos_tags = pos_tag(words)
+                # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
+                _n_grams = list(ngrams(pos_tags, n_gram_range))
+                # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
+                for _n_gram in _n_grams:
+                    if _is_qualified(_n_gram):
+                        n_gram_words = _convert_n_gram_to_words(_n_gram)
+                        candidates.append(n_gram_words)  # Convert n_gram (a list of words) to a string
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+        return candidates
+
     # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_topics(approach, docs_per_cluster_df, folder):
+    def get_n_gram_topics(approach, docs_per_cluster_df, folder, is_load=False):
         # A folder that stores all the topic results
         temp_folder = os.path.join(folder, 'topics', 'temp')
+        if is_load:
+            path = os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_topics.json')
+            topic_df = pd.read_json(path)
+            topic_list = topic_df.to_dict("records")
+            return topic_list
 
         # Convert the texts of all clusters into a list of document (a list of sentences) to derive n-gram candidates
         def _collect_cluster_docs(_docs_per_cluster_df):
@@ -245,69 +302,13 @@ class BERTModelDocClusterUtility:
 
         # Create frequency matrix to track the frequencies of a n-gram in
         def _create_frequency_matrix(_docs, _n_gram_range):
-            lemmatizer = WordNetLemmatizer()
-
-            # Generate n-gram candidates from a text (a list of sentences)
-            def _generate_n_gram_candidates(_sentences, _n_gram_range):
-                # Check if n_gram candidate does not have stop words, punctuation or non-words
-                def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
-                    try:
-                        # qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
-                        # # # Check if there is any noun
-                        # nouns = list(filter(lambda _n: _n[1].startswith('NN'), _n_gram))
-                        # if len(nouns) == 0:
-                        #     return False
-                        # # Check the last word is a nn or nns
-                        # if _n_gram[-1][1] not in ['NN', 'NNS']:
-                        #     return False
-                        # Check if all words are not stop word or punctuation or non-words
-                        for _i, _n in enumerate(_n_gram):
-                            _word = _n[0]
-                            _pos_tag = _n[1]
-                            if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                                    _word.lower() in BERTModelDocClusterUtility.stop_words: #or _pos_tag not in qualified_tags:
-                                return False
-                        # n-gram is qualified
-                        return True
-                    except Exception as _err:
-                        print("Error occurred! {err}".format(err=_err))
-
-                # Convert n_gram tuples (pos tag and words) to a list of singular words
-                def _convert_n_gram_to_words(_n_gram):
-                    _lemma_words = list()
-                    for _gram in _n_gram:
-                        _word = _gram[0]
-                        _pos_tag = _gram[1]
-                        if _pos_tag == 'NNS':
-                            _lemma_words.append(lemmatizer.lemmatize(_word))
-                        else:
-                            _lemma_words.append(_word)
-                    return " ".join(_lemma_words)
-
-                _candidates = list()
-                # Extract n_gram from each sentence
-                for i, _sentence in enumerate(_sentences):
-                    try:
-                        _words = word_tokenize(_sentence)
-                        _pos_tags = pos_tag(_words)
-                        # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
-                        _n_grams = list(ngrams(_pos_tags, _n_gram_range))
-                        # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
-                        for _n_gram in _n_grams:
-                            if _is_qualified(_n_gram):
-                                _n_gram_words = _convert_n_gram_to_words(_n_gram)
-                                _candidates.append(_n_gram_words)  # Convert n_gram (a list of words) to a string
-                    except Exception as _err:
-                        print("Error occurred! {err}".format(err=_err))
-                return _candidates
-
             # Vectorized the clustered doc text and Keep the Word case unchanged
             frequency_matrix = []
             for doc in docs:
                 cluster_no = doc['cluster']  # doc id is the cluster no
                 sentences = doc['doc']
                 freq_table = {}
-                n_grams = _generate_n_gram_candidates(sentences, _n_gram_range)
+                n_grams = BERTModelDocClusterUtility.generate_n_gram_candidates(sentences, _n_gram_range)
                 for n_gram in n_grams:
                     n_gram_text = n_gram.lower()
                     if n_gram_text in freq_table:
@@ -423,19 +424,16 @@ class BERTModelDocClusterUtility:
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
 
-        topic_words_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
+        topic_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
         # Write the topics results to csv
-        topic_words_df.to_csv(os.path.join(temp_folder, approach + '_n_topics.csv'),
-                              encoding='utf-8', index=False)
+        topic_df.to_json(os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_topics.json'), orient='records')
         return topics_list  # Return a list of dicts
 
     # Output the cluster topics extracted by TF-IDF as a csv file
     @staticmethod
     def flatten_tf_idf_topics(cluster_no, folder):
-        cluster = "HDBSCAN_Cluster"
-        approach = "TF-IDF"
         try:
-            path = os.path.join(folder, cluster + '_' + approach + '_topic_words_n_grams.json')
+            path = os.path.join(folder, 'TF-IDF_cluster_topic_n_grams.json')
             cluster_df = pd.read_json(path)
             clusters = cluster_df.to_dict("records")
             cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
@@ -459,8 +457,7 @@ class BERTModelDocClusterUtility:
                         print("Error occurred! {err}".format(err=err))
                 results.append(result)
             n_gram_df = pd.DataFrame(results)
-            path = os.path.join(folder,
-                                approach + '_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
+            path = os.path.join(folder, 'TF-IDF_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
             n_gram_df.to_csv(path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + path)
         except Exception as err:
@@ -468,7 +465,7 @@ class BERTModelDocClusterUtility:
 
     # Group the doc (articles) by individual topic
     @staticmethod
-    def group_docs_by_topics(n_gram_num, doc_ids, doc_texts, topics_per_cluster):
+    def group_docs_by_topics(n_gram_range, doc_ids, doc_texts, topics_per_cluster):
         p = inflect.engine()
 
         # Convert the singular topic into the topic in plural form
@@ -487,10 +484,9 @@ class BERTModelDocClusterUtility:
             for doc_id, doc_text in zip(doc_ids, doc_texts):
                 try:
                     # Convert the preprocessed text to n_grams
-                    tokenizes = word_tokenize(BERTModelDocClusterUtility.preprocess_text(doc_text))
+                    sentences = sent_tokenize(BERTModelDocClusterUtility.preprocess_text(doc_text))
                     # Obtain the n-grams from the text
-                    n_grams = list(ngrams(tokenizes, n_gram_num))
-                    n_grams = list(map(lambda n_gram: " ".join(n_gram), n_grams))
+                    n_grams = BERTModelDocClusterUtility.generate_n_gram_candidates(sentences, n_gram_range)
                     # For each topic, find out the document ids that contain the topic
                     for item in topics_per_cluster:
                         try:
@@ -627,15 +623,15 @@ class BERTModelDocClusterUtility:
     def clean_corpus(case_name):
         # Convert the raw source files downloaded from Scopus
         def _convert_corpus():
-            folder = os.path.join('data', case_name)
-            corpus_df = pd.read_csv(os.path.join(folder, case_name + '_raw.csv'))
-            corpus_df['DocId'] = list(range(1, len(corpus_df) + 1))
+            _folder = os.path.join('data', case_name)
+            _corpus_df = pd.read_csv(os.path.join(_folder, case_name + '_raw.csv'))
+            _corpus_df['DocId'] = list(range(1, len(_corpus_df) + 1))
             # Select columns
-            corpus_df = corpus_df[['DocId', 'Cited by', 'Title', 'Author Keywords', 'Abstract', 'Year',
-                                   'Source title', 'Authors', 'DOI', 'Document Type']]
+            _corpus_df = _corpus_df[['DocId', 'Cited by', 'Title', 'Author Keywords', 'Abstract', 'Year',
+                                     'Source title', 'Authors', 'DOI', 'Document Type']]
             # # Output as csv file
-            corpus_df.to_csv(os.path.join(folder, case_name + '.csv'),
-                             encoding='utf-8', index=False)
+            _corpus_df.to_csv(os.path.join(folder, case_name + '.csv'),
+                              encoding='utf-8', index=False)
 
         try:
             folder = os.path.join('data', case_name)
@@ -656,11 +652,9 @@ class BERTModelDocClusterUtility:
             # Get the all ir-relevant docs
             ir_df = corpus_df[corpus_df['DocId'].isin(irrelevant_doc_ids)]
             ir_df = ir_df[['DocId', 'Title', 'Abstract']]
-
             # Output as csv file
             ir_df.to_csv(os.path.join(folder, case_name + '_irrelevant_docs.csv'),
                          encoding='utf-8', index=False)
-
             # Get all  outliers
             df = corpus_df[~corpus_df['DocId'].isin(irrelevant_doc_ids)]
             # Save the cleaned df without document vectors into csv and json files

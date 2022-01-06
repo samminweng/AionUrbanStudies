@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+transport,0.0137853959,20,5,3,modality environment,0.010583085800000001,9,1,1,private motorised transport,0.0067394775,2,1,1,transport,0.0137853959,20,5,3
+transportation,0.0102291746,21,9,4,active mobility,0.0070553905000000005,6,2,1,road safety disparity,0.0067394775,2,1,1,modality environment,0.010583085800000001,9,1,1
+sprawl,0.0102291746,7,1,1,active transport,0.0058794921000000005,5,2,1,bike sharing scheme,0.0067394775,2,1,1,transportation,0.0102291746,21,9,4
+traffic,0.007793656800000001,16,6,4,road safety,0.0058794921000000005,5,1,1,sustainable active mobility,0.0067394775,2,1,1,sprawl,0.0102291746,7,1,1
+transit,0.0075819677,11,6,3,sustainable transportation,0.0047035937000000005,4,2,1,curbing urban sprawl,0.0067394775,2,1,1,traffic,0.007793656800000001,16,6,4
+automobile,0.006819449700000001,7,5,2,walking mindset,0.0047035937000000005,4,1,1,prevalent transport problem,0.0033697388,1,1,1,transit,0.0075819677,11,6,3
+road,0.0062755334,19,5,5,central place,0.0047035937000000005,4,1,1,well informal factor,0.0033697388,1,1,1,active mobility,0.0070553905000000005,6,2,1
+mobility,0.005862821000000001,29,8,6,urban sprawl,0.0047035937000000005,4,1,1,different analytical level,0.0033697388,1,1,1,automobile,0.006819449700000001,7,5,2
+rail,0.0058452426,6,1,2,road user,0.0035276953,3,2,1,factor included legislation,0.0033697388,1,1,1,private motorised transport,0.0067394775,2,1,1
+car,0.0048710355,10,6,4,neighborhood type,0.0035276953,3,1,1,legislation concerning transport,0.0033697388,1,1,1,road safety disparity,0.0067394775,2,1,1
+cycling,0.0048710355,5,3,2,public transport,0.0023517968,3,2,2,appropriate business model,0.0033697388,1,1,1,bike sharing scheme,0.0067394775,2,1,1
+mindset,0.0048248886000000005,7,1,3,sustainable mobility,0.0023517968,3,2,2,provide several implication,0.0033697388,1,1,1,sustainable active mobility,0.0067394775,2,1,1
+walking,0.0046240773,14,5,5,growing trend,0.0023517968,3,1,2,private sector actor,0.0033697388,1,1,1,curbing urban sprawl,0.0067394775,2,1,1
+subsidy,0.004383932,3,2,1,transport need,0.0023517968,2,2,1,adjusting relevant regulation,0.0033697388,1,1,1,road,0.0062755334,19,5,5
+bike,0.004383932,3,2,1,transport service,0.0023517968,2,2,1,creating conducive condition,0.0033697388,1,1,1,active transport,0.0058794921000000005,5,2,1
+subsystem,0.004383932,3,1,1,modern automobile,0.0023517968,2,1,1,planning urban design,0.0033697388,1,1,1,road safety,0.0058794921000000005,5,1,1
+diffusion,0.0041356188,6,1,3,motorised transport,0.0023517968,2,1,1,private transport service,0.0033697388,1,1,1,mobility,0.005862821000000001,29,8,6
+simulation,0.0041356188,6,2,3,walking distance,0.0023517968,2,1,1,privately owned car,0.0033697388,1,1,1,rail,0.0058452426,6,1,2
+bicycle,0.0038968284000000003,4,2,2,second edition,0.0023517968,2,1,1,road marking force,0.0033697388,1,1,1,car,0.0048710355,10,6,4
+grid,0.0038968284000000003,4,1,2,safety disparity,0.0023517968,2,1,1,marking force motorist,0.0033697388,1,1,1,cycling,0.0048710355,5,3,2
+safety,0.0036389923000000003,18,6,6,safety outcome,0.0023517968,2,1,1,use eye contact,0.0033697388,1,1,1,mindset,0.0048248886000000005,7,1,3
+corridor,0.003446349,5,2,3,sharing scheme,0.0023517968,2,1,1,attractive urban environment,0.0033697388,1,1,1,sustainable transportation,0.0047035937000000005,4,2,1
+distance,0.0029226213,6,3,4,bikeshare implementation,0.0023517968,2,1,1,standard traffic infrastructure,0.0033697388,1,1,1,walking mindset,0.0047035937000000005,4,1,1
+stop,0.0029226213,2,3,1,diffusion process,0.0023517968,2,1,1,urban road environment,0.0033697388,1,1,1,central place,0.0047035937000000005,4,1,1
+edition,0.0029226213,3,1,2,promote walking,0.0023517968,2,2,1,author drew attention,0.0033697388,1,1,1,urban sprawl,0.0047035937000000005,4,1,1
+coordination,0.0029226213,3,1,2,traffic simulation,0.0023517968,2,1,1,growing visual disparity,0.0033697388,1,1,1,walking,0.0046240773,14,5,5
+trip,0.0029226213,3,1,2,movement infrastructure,0.0023517968,2,1,1,new design approach,0.0033697388,1,1,1,subsidy,0.004383932,3,2,1
+supplier,0.0029226213,2,1,1,mobility environment,0.0023517968,2,1,1,urban traffic blight,0.0033697388,1,1,1,bike,0.004383932,3,2,1
+infrastructure,0.0028303274000000002,14,9,6,mobile community,0.0023517968,2,1,1,diminishing fuel resource,0.0033697388,1,1,1,subsystem,0.004383932,3,1,1
+measure,0.0024355178,5,4,4,mobility corridor,0.0023517968,2,1,1,environmentally appropriate role,0.0033697388,1,1,1,diffusion,0.0041356188,6,1,3
+modality,0.0024355178,5,1,4,road infrastructure,0.0023517968,2,1,1,access public transport,0.0033697388,1,1,1,simulation,0.0041356188,6,2,3
+highway,0.0020678094,3,2,3,mobility problem,0.0023517968,2,1,1,deliver significant health,0.0033697388,1,1,1,bicycle,0.0038968284000000003,4,2,2
+disparity,0.0020678094,3,2,3,rail corridor,0.0023517968,2,1,1,significant health benefit,0.0033697388,1,1,1,grid,0.0038968284000000003,4,1,2
+norm,0.0020678094,3,1,3,rail system,0.0023517968,2,1,1,examining existing literature,0.0033697388,1,1,1,safety,0.0036389923000000003,18,6,6
+urbanity,0.0020678094,3,1,3,system integration,0.0023517968,2,1,1,key factor influence,0.0033697388,1,1,1,road user,0.0035276953,3,2,1
+avenue,0.0020678094,3,1,3,traffic restraint,0.0023517968,2,1,1,using general measure,0.0033697388,1,1,1,neighborhood type,0.0035276953,3,1,1
+learning,0.0019817474,6,1,5,public transit,0.0023517968,2,1,1,daily physical activity,0.0033697388,1,1,1,corridor,0.003446349,5,2,3
+appropriate,0.0019484142000000002,2,5,2,compact development,0.0023517968,2,1,1,used stated preference,0.0033697388,1,1,1,prevalent transport problem,0.0033697388,1,1,1
+ecosystem,0.0019484142000000002,4,2,4,land speculation,0.0023517968,2,1,1,stated preference design,0.0033697388,1,1,1,well informal factor,0.0033697388,1,1,1
+fantasy,0.0019484142000000002,2,1,2,social norm,0.0016639404,3,1,3,mass transport system,0.0033697388,1,1,1,different analytical level,0.0033697388,1,1,1
+congestion,0.0019484142000000002,2,2,2,business model,0.0015678646,2,1,2,responsive transport service,0.0033697388,1,1,1,factor included legislation,0.0033697388,1,1,1
+fuel,0.0019484142000000002,2,2,2,urban traffic,0.0015678646,2,2,2,method used allow,0.0033697388,1,1,1,legislation concerning transport,0.0033697388,1,1,1
+schedule,0.0019484142000000002,2,2,2,car culture,0.0015678646,2,2,2,different geographical area,0.0033697388,1,1,1,appropriate business model,0.0033697388,1,1,1
+travel,0.0019484142000000002,4,4,4,sensitivity analysis,0.0015678646,2,2,2,new planning paradigm,0.0033697388,1,1,1,provide several implication,0.0033697388,1,1,1
+walkability,0.0019484142000000002,2,1,2,safety concern,0.0015678646,2,1,2,second edition build,0.0033697388,1,1,1,private sector actor,0.0033697388,1,1,1
+air,0.0019484142000000002,2,2,2,transportation system,0.0015678646,2,2,2,acclaimed first edition,0.0033697388,1,1,1,adjusting relevant regulation,0.0033697388,1,1,1
+station,0.0019484142000000002,4,3,4,interpretive model,0.0015678646,2,1,2,intercity public transportation,0.0033697388,1,1,1,creating conducive condition,0.0033697388,1,1,1
+cue,0.0019484142000000002,2,1,2,health effect,0.0015678646,2,1,2,many valuable addition,0.0033697388,1,1,1,planning urban design,0.0033697388,1,1,1
+interface,0.0019484142000000002,4,2,4,enabling factor,0.0011758984,1,1,1,case study show,0.0033697388,1,1,1,private transport service,0.0033697388,1,1,1
+commuter,0.0019484142000000002,2,2,2,prevalent transport,0.0011758984,1,1,1,show global exemplar,0.0033697388,1,1,1,privately owned car,0.0033697388,1,1,1

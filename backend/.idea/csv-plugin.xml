@@ -94,6 +94,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/topics/n_grams/TF-IDF_cluster_topic_n_grams.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/UrbanDesignCorpus/cluster/topics/temp/HDBSCAN_Cluster_n_topics.csv">
           <value>
             <Attribute>

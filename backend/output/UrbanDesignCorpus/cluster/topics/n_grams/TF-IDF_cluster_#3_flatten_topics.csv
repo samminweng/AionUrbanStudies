@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+gambling,0.012389954100000001,9,1,1,learning community,0.0065918977,6,1,1,sustainable food culture,0.0115780768,4,2,1,gambling,0.012389954100000001,9,1,1
+game,0.0087188566,19,7,4,social medium,0.0058594646,8,3,2,participatory mixed reality,0.0086835576,3,1,1,sustainable food culture,0.0115780768,4,2,1
+bang,0.0082599694,6,1,1,technology design,0.0054932481000000005,5,3,1,beyond binary choice,0.0057890384,2,1,1,game,0.0087188566,19,7,4
+library,0.0064934258,10,3,3,simulated gambling,0.0054932481000000005,5,1,1,understanding user motivation,0.0057890384,2,1,1,participatory mixed reality,0.0086835576,3,1,1
+phone,0.0058440832,9,3,3,mobile phone,0.0046638912,9,3,3,social public place,0.0057890384,2,1,1,bang,0.0082599694,6,1,1
+creativity,0.0051947406,8,3,3,sustainable food,0.0043945985,4,2,1,using social medium,0.0057890384,2,1,1,learning community,0.0065918977,6,1,1
+learning,0.0049785362000000005,16,5,5,food culture,0.0043945985,4,2,1,urban farming community,0.0057890384,2,1,1,library,0.0064934258,10,3,3
+home,0.0045888719,10,5,4,connected learning,0.0043945985,4,1,1,monetary form gambling,0.0057890384,2,1,1,social medium,0.0058594646,8,3,2
+defamiliarization,0.0041299847,3,1,1,small program,0.0043945985,4,1,1,mixed reality space,0.0057890384,2,1,1,beyond binary choice,0.0057890384,2,1,1
+entanglement,0.0041299847,3,1,1,social pattern,0.0043945985,4,1,1,topic discussed include,0.0038593589,2,2,2,understanding user motivation,0.0057890384,2,1,1
+cyber,0.0041299847,3,1,1,augmented reality,0.0036621654000000003,5,1,2,western domestic technology,0.0028945192,1,1,1,social public place,0.0057890384,2,1,1
+challenge,0.0037339021000000003,12,7,5,smart city,0.0032959489000000002,9,3,4,domestic technology design,0.0028945192,1,1,1,using social medium,0.0057890384,2,1,1
+internet,0.0036710975,8,2,4,domestic technology,0.0032959489000000002,3,1,1,create shopping list,0.0028945192,1,1,1,urban farming community,0.0057890384,2,1,1
+technology,0.0031824849,36,18,7,social creativity,0.0032959489000000002,3,1,1,scrutinize new technology,0.0028945192,1,1,1,monetary form gambling,0.0057890384,2,1,1
+artifact,0.0027533231000000003,3,3,2,design framework,0.0032959489000000002,3,2,1,extended social unit,0.0028945192,1,1,1,mixed reality space,0.0057890384,2,1,1
+informatics,0.0027533231000000003,2,2,1,digital era,0.0032959489000000002,3,1,1,unaided individual mind,0.0028945192,1,1,1,technology design,0.0054932481000000005,5,3,1
+smartphones,0.0027533231000000003,2,1,1,mixed reality,0.0032959489000000002,3,1,1,embody collective knowledge,0.0028945192,1,1,1,simulated gambling,0.0054932481000000005,5,1,1
+networking,0.0027533231000000003,2,2,1,mobile internet,0.0032959489000000002,3,1,1,proper collaboration model,0.0028945192,1,1,1,creativity,0.0051947406,8,3,3
+hacking,0.0027533231000000003,2,1,1,social learning,0.0029297323,4,1,2,supporting distributed cognition,0.0028945192,1,1,1,learning,0.0049785362000000005,16,5,5
+teleworkers,0.0027533231000000003,2,1,1,young people,0.0025635158,7,3,4,evolutionary process model,0.0028945192,1,1,1,mobile phone,0.0046638912,9,3,3
+ubicomp,0.0027533231000000003,2,1,1,binary choice,0.0021972992000000003,2,1,1,support spontaneous design,0.0028945192,1,1,1,home,0.0045888719,10,5,4
+ergonomics,0.0027533231000000003,3,1,2,interactive art,0.0021972992000000003,2,2,1,spontaneous design activity,0.0028945192,1,1,1,connected learning,0.0043945985,4,1,1
+resilience,0.0027533231000000003,3,1,2,coworking space,0.0021972992000000003,2,1,1,new design competence,0.0028945192,1,1,1,small program,0.0043945985,4,1,1
+player,0.0027533231000000003,3,2,2,user motivation,0.0021972992000000003,2,1,1,individual creative action,0.0028945192,1,1,1,social pattern,0.0043945985,4,1,1
+applet,0.0027533231000000003,2,1,1,library space,0.0021972992000000003,2,1,1,personally meaningful activity,0.0028945192,1,1,1,defamiliarization,0.0041299847,3,1,1
+gameplay,0.0027533231000000003,2,1,1,interactive medium,0.0021972992000000003,2,2,1,paper offers example,0.0028945192,1,1,1,entanglement,0.0041299847,3,1,1
+stranger,0.0027533231000000003,3,1,2,public display,0.0021972992000000003,2,2,1,including urban planning,0.0028945192,1,1,1,cyber,0.0041299847,3,1,1
+penetration,0.0027533231000000003,2,1,1,different activity,0.0021972992000000003,2,2,1,inform design strategy,0.0028945192,1,1,1,topic discussed include,0.0038593589,2,2,2
+cafes,0.0027533231000000003,2,1,1,participatory culture,0.0021972992000000003,2,2,1,smart space technology,0.0028945192,1,1,1,challenge,0.0037339021000000003,12,7,5
+restaurant,0.0025973703,4,2,3,private space,0.0021972992000000003,3,2,2,informal social learning,0.0028945192,1,1,1,internet,0.0036710975,8,2,4
+platform,0.0025973703,4,4,3,public library,0.0021972992000000003,2,1,1,analyses gathered data,0.0028945192,1,1,1,augmented reality,0.0036621654000000003,5,1,2
+food,0.0024892681000000002,8,3,5,providing space,0.0021972992000000003,2,1,1,around digital culture,0.0028945192,1,1,1,smart city,0.0032959489000000002,9,3,4
+medium,0.0024759201,13,9,6,game environment,0.0021972992000000003,2,1,1,present five persona,0.0028945192,1,1,1,domestic technology,0.0032959489000000002,3,1,1
+collaboration,0.0022944359,5,3,4,computer science,0.0021972992000000003,2,2,1,main usage pattern,0.0028945192,1,1,1,social creativity,0.0032959489000000002,3,1,1
+interface,0.0022944359,5,5,4,minor urbanism,0.0021972992000000003,2,1,1,make new connection,0.0028945192,1,1,1,design framework,0.0032959489000000002,3,2,1
+art,0.0021781096,7,6,5,cultural research,0.0021972992000000003,2,1,1,four hybrid design,0.0028945192,1,1,1,digital era,0.0032959489000000002,3,1,1
+child,0.0021781096,7,1,5,mobile technology,0.0021972992000000003,2,2,1,hybrid design dimension,0.0028945192,1,1,1,mobile internet,0.0032959489000000002,3,1,1
+engagement,0.0020950093,11,8,6,sociotechnical system,0.0021972992000000003,2,1,1,shared learning encounter,0.0028945192,1,1,1,technology,0.0031824849,36,18,7
+labor,0.0019480277,3,2,3,social butterfly,0.0021972992000000003,2,1,1,offer actionable knowledge,0.0028945192,1,1,1,social learning,0.0029297323,4,1,2
+practitioner,0.0019480277,3,3,3,new generation,0.0021972992000000003,3,1,2,study combined field,0.0028945192,1,1,1,western domestic technology,0.0028945192,1,1,1
+algorithm,0.0019480277,3,2,3,farming community,0.0021972992000000003,2,1,1,combined field observation,0.0028945192,1,1,1,domestic technology design,0.0028945192,1,1,1
+proceeding,0.0019480277,3,3,3,potential interrelationship,0.0021972992000000003,2,1,1,specific cultural trait,0.0028945192,1,1,1,create shopping list,0.0028945192,1,1,1
+contain,0.0019480277,3,3,3,monetary form,0.0021972992000000003,2,1,1,thus determining people,0.0028945192,1,1,1,scrutinize new technology,0.0028945192,1,1,1
+intelligence,0.0018355488,2,2,2,form gambling,0.0021972992000000003,2,1,1,facilitate technology diffusion,0.0028945192,1,1,1,extended social unit,0.0028945192,1,1,1
+usage,0.0018355488,4,3,4,design goal,0.0021972992000000003,2,2,1,acceptance informing design,0.0028945192,1,1,1,unaided individual mind,0.0028945192,1,1,1
+metaphor,0.0018355488,2,2,2,reality game,0.0021972992000000003,2,1,1,informing design localisation,0.0028945192,1,1,1,embody collective knowledge,0.0028945192,1,1,1
+popularity,0.0018355488,2,1,2,augmented space,0.0021972992000000003,2,1,1,current food practice,0.0028945192,1,1,1,proper collaboration model,0.0028945192,1,1,1
+workspace,0.0018355488,2,1,2,social network,0.0021972992000000003,6,3,4,world raises concern,0.0028945192,1,1,1,supporting distributed cognition,0.0028945192,1,1,1
+incubator,0.0018355488,2,1,2,reality space,0.0021972992000000003,2,1,1,natural food source,0.0028945192,1,1,1,evolutionary process model,0.0028945192,1,1,1
+actor,0.0018355488,4,2,4,online forum,0.0021972992000000003,2,1,1,urban population growth,0.0028945192,1,1,1,support spontaneous design,0.0028945192,1,1,1
