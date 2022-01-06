@@ -396,6 +396,12 @@ class BERTModelDocCluster:
             # Write out to csv and json file
             cluster_df = tf_idf_df.reindex(columns=['Cluster', 'NumDocs', 'DocIds', 'Topic-N-gram'])
             cluster_df.rename(columns={'Topic-N-gram': 'TF-IDF-Topics'}, inplace=True)
+            # Output cluster df to csv or json file
+            folder = os.path.join('output', self.args.case_name, 'cluster')
+            path = os.path.join(folder, self.args.case_name + '_TF-IDF_cluster_topics.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, self.args.case_name + '_TF-IDF_cluster_topics.json')
+            cluster_df.to_json(path, orient='records')
             # Output a summary of top 10 Topics of each cluster
             clusters = cluster_df.to_dict("records")
             summary_df = cluster_df.copy(deep=True)

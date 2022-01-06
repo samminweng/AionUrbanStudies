@@ -52,6 +52,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanDesignCorpus/cluster/UrbanDesignCorpus_TF-IDF_cluster_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/UrbanDesignCorpus/cluster/UrbanDesignCorpus_clusters.csv">
           <value>
             <Attribute>
@@ -179,6 +186,13 @@
           </value>
         </entry>
         <entry key="/output/UrbanDesignCorpus/cluster/topics/temp/Step_3_UrbanStudyCorpus_word_doc_table.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanStudyCorpus/cluster/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
