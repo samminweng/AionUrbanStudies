@@ -192,6 +192,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/UrbanDesignCorpus/key_phrases/doc_key_phrase/top_key_phrases_cluster_#0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/UrbanDesignCorpus/key_phrases/doc_key_phrase/top_key_phrases_cluster_#2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/UrbanStudyCorpus/cluster/UrbanStudyCorpus_HDBSCAN_Cluster_TF-IDF_topic_words.csv">
           <value>
             <Attribute>

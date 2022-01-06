@@ -169,7 +169,7 @@ class KeyPhraseUtility:
     # Find top K key phrase similar to the paper
     # Ref: https://www.sbert.net/examples/applications/semantic-search/README.html
     @staticmethod
-    def collect_top_key_phrases(model, doc_text, candidates, top_k=5):
+    def get_top_similar_key_phrases(model, doc_text, candidates, top_k=5):
         try:
             if len(candidates) == 0:
                 return []
