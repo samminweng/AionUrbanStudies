@@ -316,7 +316,7 @@ class BERTModelDocCluster:
             condense_tree = clusters.condensed_tree_
             # Save condense tree to csv
             tree_df = condense_tree.to_pandas()
-            path = os.path.join(folder, self.args.case_name + '_clusters_tree.csv')
+            path = os.path.join(folder, 'HDBSCAN_cluster_tree.csv')
             tree_df.to_csv(path, encoding='utf-8')
             # Plot condense tree graph
             condense_tree.plot(select_clusters=True,
@@ -473,10 +473,10 @@ if __name__ == '__main__':
     try:
         mdc = BERTModelDocCluster()
         # mdc.get_sentence_vectors()
-        mdc.evaluate_HDBSCAN_cluster_quality()
-        mdc.summarize_HDBSCAN_cluster_experiment_results()
+        # mdc.evaluate_HDBSCAN_cluster_quality()
+        # mdc.summarize_HDBSCAN_cluster_experiment_results()
         # mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
-        # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+        mdc.derive_topics_from_cluster_docs_by_TF_IDF()
         # mdc.combine_and_summary_topics_from_clusters()
         # # mdc.re_cluster_outliers_by_hdbscan()
     except Exception as err:
