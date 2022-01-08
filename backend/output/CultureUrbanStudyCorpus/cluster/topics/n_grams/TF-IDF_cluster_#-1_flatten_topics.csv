@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+festival,0.0014070848000000001,49,7,1,pleasure garden,0.0015795446,27,1,1,sustainable urban development,0.0013951953,7,5,1,pleasure garden,0.0015795446,27,1,1
+sound,0.0012635047,44,19,1,green roofs,0.0010530297,18,1,1,urban neighborhood design,0.0011958817,6,1,1,festival,0.0014070848000000001,49,7,1
+tourism,0.0009572005,100,29,4,cultural heritage,0.0009106023,33,18,3,neighborhood design concept,0.0011958817,6,1,1,sustainable urban development,0.0013951953,7,5,1
+trail,0.0008806245,46,3,2,cultural landscape,0.0009106023,33,11,3,wastewater treatment plant,0.0011958817,6,1,1,sound,0.0012635047,44,19,1
+soundscape,0.0008614805,45,13,2,wastewater treatment,0.0008775248,15,2,1,public open space,0.0010630059,8,1,2,urban neighborhood design,0.0011958817,6,1,1
+tourist,0.0008533190000000001,63,20,3,social capital,0.0008190231,14,3,1,cultural political economy,0.0009965681,5,1,1,neighborhood design concept,0.0011958817,6,1,1
+pedagogy,0.0007753324,27,8,1,residential building,0.0007605215000000001,13,5,1,urban open space,0.0009965681,5,2,1,wastewater treatment plant,0.0011958817,6,1,1
+art,0.0007009749,108,40,5,neighborhood design,0.0007605215000000001,13,2,1,critical medium literacy,0.0007972545,4,1,1,public open space,0.0010630059,8,1,2
+music,0.0006772373,50,13,3,indigenous people,0.0007020198000000001,18,10,2,applying participatory method,0.0007972545,4,1,1,green roofs,0.0010530297,18,1,1
+consumer,0.0006501478000000001,48,14,3,knowledge economy,0.0007020198000000001,18,1,2,critical spatial practice,0.0007972545,4,1,1,cultural political economy,0.0009965681,5,1,1
+roofs,0.0006317524,22,2,1,normalized weight,0.0007020198000000001,12,1,1,urban public space,0.0006643787,5,3,2,urban open space,0.0009965681,5,2,1
+heritage,0.0006101077,94,42,5,social sustainability,0.0006435182,11,4,1,urban green space,0.0006643787,5,1,2,tourism,0.0009572005,100,29,4
+pleasure,0.0005934643,31,6,2,nineteenth century,0.0006435182,11,6,1,ethnic minority group,0.0005979408,3,1,1,cultural heritage,0.0009106023,33,18,3
+park,0.0005776552,89,22,5,commercial complex,0.0006435182,11,3,1,likeable executional technique,0.0005979408,3,1,1,cultural landscape,0.0009106023,33,11,3
+settlement,0.0005551763,58,28,4,small business,0.0006435182,11,1,1,rural folk house,0.0005979408,3,1,1,trail,0.0008806245,46,3,2
+home,0.0005456043,57,24,4,human geography,0.0006435182,11,1,1,urban public school,0.0005979408,3,3,1,wastewater treatment,0.0008775248,15,2,1
+summer,0.0005456043,19,9,1,built environment,0.0006346932,48,24,5,late nineteenth century,0.0005979408,3,1,1,soundscape,0.0008614805,45,13,2
+pavilion,0.0005456043,19,1,1,open space,0.0006240176,32,8,4,sustainable relief housing,0.0005979408,3,1,1,tourist,0.0008533190000000001,63,20,3
+event,0.0005322216,82,32,5,modern city,0.0006240176,16,12,2,public housing resident,0.0005979408,3,2,1,social capital,0.0008190231,14,3,1
+visitor,0.0005264603000000001,55,19,4,acoustic environment,0.0005850165,10,4,1,socially constructed space,0.0005979408,3,2,1,critical medium literacy,0.0007972545,4,1,1
+wine,0.0005168883000000001,27,2,2,school desegregation,0.0005850165,10,1,1,changing public life,0.0005979408,3,1,1,applying participatory method,0.0007972545,4,1,1
+wastewater,0.0005168883000000001,18,4,1,public facility,0.0005850165,10,2,1,new urban design,0.0005979408,3,3,1,critical spatial practice,0.0007972545,4,1,1
+architecture,0.0005005654,126,53,6,crisis management,0.0005850165,10,1,1,perceived environmental factor,0.0005979408,3,1,1,pedagogy,0.0007753324,27,8,1
+folk,0.00048817230000000004,17,7,1,public life,0.0005265149,9,4,1,park time distance,0.0005979408,3,1,1,residential building,0.0007605215000000001,13,5,1
+classroom,0.0004594563,16,7,1,human settlement,0.0005265149,9,7,1,theoretical urban neighborhood,0.0005979408,3,1,1,neighborhood design,0.0007605215000000001,13,2,1
+roof,0.0004594563,16,3,1,treatment plant,0.0005265149,9,1,1,neighborhood urban design,0.0005979408,3,1,1,indigenous people,0.0007020198000000001,18,10,2
+pyramid,0.0004594563,16,4,1,digital technology,0.0005265149,9,7,1,building technology system,0.0005979408,3,1,1,knowledge economy,0.0007020198000000001,18,1,2
+material,0.00043486400000000003,67,38,5,first priority,0.0005265149,9,2,1,computer aided design,0.0005979408,3,1,1,normalized weight,0.0007020198000000001,12,1,1
+sea,0.0004307402,15,9,1,spatial planning,0.0004690982,17,6,3,literacy rate area,0.0005979408,3,1,1,art,0.0007009749,108,40,5
+museum,0.0004211682,44,13,4,inclusive design,0.0004680132,8,6,1,digital reading practice,0.0005979408,3,1,1,music,0.0006772373,50,13,3
+climate,0.00040890200000000005,63,24,5,language ideology,0.0004680132,8,1,1,youth art organization,0.0005979408,3,1,1,urban public space,0.0006643787,5,3,2
+water,0.00040890200000000005,63,25,5,social history,0.0004680132,8,3,1,branch office building,0.0005979408,3,1,1,urban green space,0.0006643787,5,1,2
+house,0.0004063424,30,19,3,universal design,0.0004680132,8,4,1,general environmental protection,0.0005979408,3,1,1,consumer,0.0006501478000000001,48,14,3
+resilience,0.0004020242,21,6,2,cultural identity,0.0004415042,16,9,3,local pleasure garden,0.0005979408,3,1,1,social sustainability,0.0006435182,11,4,1
+exposition,0.0004020242,14,2,1,took place,0.0004290121,11,10,2,soundscapes across country,0.0003986272,2,2,1,nineteenth century,0.0006435182,11,6,1
+waste,0.0003927976,29,10,3,young people,0.0004290121,22,13,4,different thermal index,0.0003986272,2,1,1,commercial complex,0.0006435182,11,3,1
+garden,0.0003894305,60,8,5,developing country,0.0004290121,11,6,2,flood risk management,0.0003986272,2,1,1,small business,0.0006435182,11,1,1
+soundscapes,0.0003733082,13,7,1,new town,0.0004290121,11,4,2,risk management policy,0.0003986272,2,1,1,human geography,0.0006435182,11,1,1
+entrepreneurship,0.0003733082,13,3,1,urban development,0.0004231288,32,22,5,public health opportunity,0.0003986272,2,1,1,built environment,0.0006346932,48,24,5
+governance,0.0003637362,19,10,2,policy maker,0.0004139101,15,11,3,hot arid climate,0.0003986272,2,1,1,roofs,0.0006317524,22,2,1
+building,0.0003522039,191,64,7,public policy,0.0004139101,15,7,3,research took place,0.0003986272,2,2,1,open space,0.0006240176,32,8,4
+corruption,0.0003445922,12,1,1,urban park,0.0004139101,15,4,3,culturally relevant pedagogy,0.0003986272,2,1,1,modern city,0.0006240176,16,12,2
+educator,0.0003445922,12,6,1,outdoor environment,0.00040951160000000003,7,3,1,effective executional technique,0.0003986272,2,1,1,heritage,0.0006101077,94,42,5
+speech,0.0003445922,12,4,1,social inclusion,0.00040951160000000003,7,6,1,urban young adult,0.0003986272,2,1,1,ethnic minority group,0.0005979408,3,1,1
+film,0.0003445922,12,6,1,archaeological site,0.00040951160000000003,7,3,1,environmentally conscious consumer,0.0003986272,2,1,1,likeable executional technique,0.0005979408,3,1,1
+bathroom,0.0003445922,12,1,1,environmental design,0.00040951160000000003,7,5,1,two new neutralisation,0.0003986272,2,1,1,rural folk house,0.0005979408,3,1,1
+treatment,0.0003386187,25,4,3,new approach,0.00040951160000000003,7,5,1,new neutralisation technique,0.0003986272,2,1,1,urban public school,0.0005979408,3,3,1
+consumption,0.00033750640000000003,52,27,5,archaized block,0.00040951160000000003,7,1,1,social status transition,0.0003986272,2,1,1,late nineteenth century,0.0005979408,3,1,1
+landscape,0.0003374519,183,51,7,food desert,0.00040951160000000003,7,1,1,qualitative data collection,0.0003986272,2,1,1,sustainable relief housing,0.0005979408,3,1,1
+energy,0.0003350202,35,24,4,mountainous climate,0.00040951160000000003,7,2,1,indoor operative temperature,0.0003986272,2,1,1,public housing resident,0.0005979408,3,2,1

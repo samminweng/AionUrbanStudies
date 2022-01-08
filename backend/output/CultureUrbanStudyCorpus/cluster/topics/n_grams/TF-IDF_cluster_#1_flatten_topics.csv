@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+nationalism,0.0026802108,19,1,2,creative industry,0.0033414026,11,3,2,transnational capitalist class,0.0035139688,2,1,1,transnational capitalist class,0.0035139688,2,1,1
+creativity,0.0022955203,23,10,3,cultural industry,0.0032237795,15,1,3,imperilled industrial city,0.0035139688,2,1,1,imperilled industrial city,0.0035139688,2,1,1
+regeneration,0.0018962994,19,9,3,shopping mall,0.0027338748,9,1,2,political economy approach,0.0035139688,2,1,1,political economy approach,0.0035139688,2,1,1
+governance,0.0018338285,13,3,2,creative city,0.0027338748,6,3,1,bid team member,0.0035139688,2,1,1,bid team member,0.0035139688,2,1,1
+mall,0.0016927647,12,2,2,urban regeneration,0.002430111,8,5,2,urban regeneration process,0.0035139688,2,2,1,urban regeneration process,0.0035139688,2,2,1
+fraction,0.0014811691,7,1,1,place identity,0.002278229,5,3,1,cultural tourism development,0.0035139688,2,1,1,cultural tourism development,0.0035139688,2,1,1
+consumer,0.0012974680000000002,13,7,3,theme park,0.0019342677000000002,9,1,3,final two article,0.0035139688,2,1,1,final two article,0.0035139688,2,1,1
+shopping,0.0010978576,11,1,3,entrepreneurial learning,0.0018225832,4,1,1,natural capital indicator,0.0035139688,2,1,1,natural capital indicator,0.0035139688,2,1,1
+ride,0.001057978,5,2,1,urban indicator,0.0018225832,4,1,1,smart creative city,0.0035139688,2,1,1,smart creative city,0.0035139688,2,1,1
+temptation,0.001057978,5,1,1,natural capital,0.0018225832,4,1,1,speculative design fiction,0.0035139688,2,1,1,speculative design fiction,0.0035139688,2,1,1
+bidding,0.001057978,5,1,1,cultural planning,0.0018225832,4,1,1,urban good life,0.0035139688,2,1,1,urban good life,0.0035139688,2,1,1
+industry,0.0009660212,33,5,6,political economy,0.0018225832,6,2,2,creating great place,0.0035139688,2,1,1,creating great place,0.0035139688,2,1,1
+art,0.0009086878,19,10,5,creative economy,0.0018225832,6,2,2,case study approach,0.0023426459000000003,2,2,2,creative industry,0.0033414026,11,3,2
+indicator,0.0009086878,19,2,5,creative class,0.0018225832,6,3,2,major transnational corporation,0.0017569844,1,1,1,cultural industry,0.0032237795,15,1,3
+park,0.0008608622000000001,18,1,5,vernacular creativity,0.0013669374,3,1,1,major global consumer,0.0017569844,1,1,1,shopping mall,0.0027338748,9,1,2
+alienation,0.0008463824,4,2,1,urban revitalisation,0.0013669374,3,1,1,global consumer good,0.0017569844,1,1,1,creative city,0.0027338748,6,3,1
+capital,0.0008130365,17,5,5,urban overload,0.0013669374,3,1,1,aspiring global city,0.0017569844,1,1,1,nationalism,0.0026802108,19,1,2
+economy,0.0007611076,26,8,6,flume ride,0.0013669374,3,1,1,deliberately iconic architecture,0.0017569844,1,1,1,urban regeneration,0.002430111,8,5,2
+architecture,0.0007318342000000001,25,10,6,great place,0.0013669374,3,1,1,central urban manifestation,0.0017569844,1,1,1,case study approach,0.0023426459000000003,2,2,2
+class,0.0007173851,15,7,5,urban renewal,0.0012895118,6,5,3,many different dimension,0.0017569844,1,1,1,creativity,0.0022955203,23,10,3
+renewal,0.0007053186,10,7,4,contemporary city,0.0012150555,4,2,2,energetic civil society,0.0017569844,1,1,1,place identity,0.002278229,5,3,1
+legitimacy,0.0007053186,5,3,2,quality product,0.0012150555,4,1,2,civil society governance,0.0017569844,1,1,1,theme park,0.0019342677000000002,9,1,3
+amusement,0.0007053186,5,1,2,amusement park,0.0012150555,4,1,2,society governance activity,0.0017569844,1,1,1,regeneration,0.0018962994,19,9,3
+commodity,0.0007053186,5,4,2,civic culture,0.0012150555,4,1,2,social democratic practice,0.0017569844,1,1,1,governance,0.0018338285,13,3,2
+cosmopolitanism,0.0007053186,5,1,2,urban space,0.0010716239,17,7,6,daily life concern,0.0017569844,1,1,1,entrepreneurial learning,0.0018225832,4,1,1
+map,0.0006986366,7,2,3,transnational capitalist,0.0009112916,2,1,1,progressive governance culture,0.0017569844,1,1,1,urban indicator,0.0018225832,4,1,1
+nation,0.0006347868,9,2,4,capitalist class,0.0009112916,2,1,1,resist regressive trajectory,0.0017569844,1,1,1,natural capital,0.0018225832,4,1,1
+urbanism,0.0006347868,9,5,4,iconic architecture,0.0009112916,2,1,1,creative waterfront renewal,0.0017569844,1,1,1,cultural planning,0.0018225832,4,1,1
+capitalist,0.0006347868,3,2,1,urban intervention,0.0009112916,2,2,1,competitiveness among city,0.0017569844,1,1,1,political economy,0.0018225832,6,2,2
+stance,0.0006347868,3,3,1,policy process,0.0009112916,2,2,1,particular local characteristic,0.0017569844,1,1,1,creative economy,0.0018225832,6,2,2
+subdivision,0.0006347868,3,2,1,first section,0.0009112916,2,2,1,become creative cluster,0.0017569844,1,1,1,creative class,0.0018225832,6,3,2
+amenity,0.0006347868,3,2,1,business service,0.0009112916,2,2,1,emblematic case study,0.0017569844,1,1,1,major transnational corporation,0.0017569844,1,1,1
+overload,0.0006347868,3,1,1,professional designer,0.0009112916,2,1,1,underlying recent debate,0.0017569844,1,1,1,major global consumer,0.0017569844,1,1,1
+flume,0.0006347868,3,1,1,degrowth discourse,0.0009112916,2,1,1,enforce social assumption,0.0017569844,1,1,1,global consumer good,0.0017569844,1,1,1
+transformation,0.0006217338,13,10,5,national unit,0.0009112916,2,1,1,concern architectural theory,0.0017569844,1,1,1,aspiring global city,0.0017569844,1,1,1
+consumption,0.0006217338,13,6,5,political scientist,0.0009112916,2,2,1,criticizes two kind,0.0017569844,1,1,1,deliberately iconic architecture,0.0017569844,1,1,1
+manifestation,0.0005988314,6,2,3,lighting manifestation,0.0009112916,2,1,1,genuinely urban environment,0.0017569844,1,1,1,central urban manifestation,0.0017569844,1,1,1
+democracy,0.0005988314,6,4,3,high culture,0.0009112916,2,2,1,recognizably different class,0.0017569844,1,1,1,many different dimension,0.0017569844,1,1,1
+state,0.0005739081000000001,12,7,5,economy approach,0.0009112916,2,1,1,young car enthusiast,0.0017569844,1,1,1,energetic civil society,0.0017569844,1,1,1
+firm,0.0005642549,4,2,2,cultural turn,0.0009112916,2,2,1,demonise young driver,0.0017569844,1,1,1,civil society governance,0.0017569844,1,1,1
+wider,0.0005642549,4,4,2,overall creativity,0.0009112916,2,2,1,unheralded urban space,0.0017569844,1,1,1,society governance activity,0.0017569844,1,1,1
+tourism,0.0005642549,8,2,4,value chain,0.0009112916,2,1,1,designer possess skill,0.0017569844,1,1,1,social democratic practice,0.0017569844,1,1,1
+ambition,0.0005642549,4,4,2,industry strategy,0.0009112916,2,1,1,among affluent household,0.0017569844,1,1,1,daily life concern,0.0017569844,1,1,1
+scheme,0.0005642549,8,1,4,bid team,0.0009112916,2,1,1,reflecting distinctive geography,0.0017569844,1,1,1,progressive governance culture,0.0017569844,1,1,1
+practice,0.0005299170000000001,39,20,7,spatial appropriation,0.0009112916,2,1,1,key business service,0.0017569844,1,1,1,resist regressive trajectory,0.0017569844,1,1,1
+competition,0.0004990262,5,2,3,water park,0.0009112916,2,1,1,believe good design,0.0017569844,1,1,1,creative waterfront renewal,0.0017569844,1,1,1
+refugee,0.0004990262,5,1,3,folklore museum,0.0009112916,2,1,1,make positive contribution,0.0017569844,1,1,1,competitiveness among city,0.0017569844,1,1,1
+kind,0.0004976473,17,4,6,grand theory,0.0009112916,2,2,1,shaping urban environment,0.0017569844,1,1,1,particular local characteristic,0.0017569844,1,1,1
+initiative,0.00043043110000000003,9,5,5,strategic plan,0.0009112916,2,2,1,linkage among designer,0.0017569844,1,1,1,become creative cluster,0.0017569844,1,1,1
+corporation,0.0004231912,3,2,2,global effect,0.0009112916,2,1,1,distinctive social science,0.0017569844,1,1,1,emblematic case study,0.0017569844,1,1,1

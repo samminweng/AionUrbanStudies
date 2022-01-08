@@ -327,77 +327,71 @@ class BERTModelDocClusterUtility:
         def _compute_tf_matrix(_freq_matrix):
             _tf_matrix = {}
             # Compute tf score for each cluster (doc) in the corpus
-            for row in freq_matrix:
-                doc_id = row['cluster']  # Doc id is the cluster no
-                freq_table = row['freq_table']  # Store the frequencies of each word in the doc
+            for _row in _freq_matrix:
+                _cluster_no = _row['cluster']  # Doc id is the cluster no
+                _freq_table = _row['freq_table']  # Store the frequencies of each word in the doc
                 _tf_table = {}  # TF score of each word (1,2,3-grams) in the doc
-                _total_words_in_doc = len(freq_table)  # Adjusted for total number of words in doc
-                for word, freq in freq_table.items():
+                _total_topics_in_doc = reduce(lambda total, f: total + f, _freq_table.values(), 0)  # Adjusted for total number of words in doc
+                for _topic, _freq in _freq_table.items():
                     # frequency of a word in doc / total number of words in doc
-                    _tf_table[word] = freq / _total_words_in_doc
-                _tf_matrix[doc_id] = _tf_table
+                    _tf_table[_topic] = _freq / _total_topics_in_doc
+                _tf_matrix[_cluster_no] = _tf_table
             return _tf_matrix
 
-        # Collect the table to store the mapping between word to a list of documents (clusters)
-        def _create_docs_per_word(_freq_matrix):
-            word_doc_table = {}  # Store the mapping between a word and its doc ids
-            for row in _freq_matrix:
-                doc_id = row['cluster']  # Doc id is the cluster no
-                freq_table = row['freq_table']  # Store the frequencies of each word in the doc
-                for word, count in freq_table.items():
-                    if word in word_doc_table:  # Add the table if the word appears in the doc
-                        word_doc_table[word].append(doc_id)
+        # Collect the table to store the mapping between word to a list of clusters
+        def _create_occs_per_topic(_freq_matrix):
+            _occ_table = {}  # Store the mapping between a word and its doc ids
+            for _row in _freq_matrix:
+                _cluster_no = _row['cluster']  # Doc id is the cluster no
+                _freq_table = _row['freq_table']  # Store the frequencies of each word in the doc
+                for _topic, _count in _freq_table.items():
+                    if _topic in _occ_table:  # Add the table if the word appears in the doc
+                        _occ_table[_topic].add(_cluster_no)
                     else:
-                        word_doc_table[word] = [doc_id]
-
-                # Convert the doc per word table (a dictionary) to data frame
-                df = pd.DataFrame(list(word_doc_table.items()))
-                # Write to temp output for validation
-                df.to_csv(os.path.join(temp_folder,
-                                       'Step_3_word_doc_table.csv'),
-                          encoding='utf-8', index=False)
-                df.to_json(os.path.join(temp_folder,
-                                        'Step_3_word_doc_table.json'),
-                           orient='records')
-            return word_doc_table
+                        _occ_table[_topic] = {_cluster_no}
+            # Convert the doc per word table (a dictionary) to data frame
+            _df = pd.DataFrame(list(_occ_table.items()))
+            # Write to temp output for validation
+            _path = os.path.join(temp_folder, 'Step_3_occs_per_topic.csv')
+            _df.to_csv(_path, encoding='utf-8', index=False)
+            return _occ_table
 
         # Compute IDF scores
-        def _compute_idf_matrix(_freq_matrix, _doc_per_words):
-            _total_dos = len(_freq_matrix)  # Total number of clusters in the corpus
+        def _compute_idf_matrix(_freq_matrix, _occ_per_topic):
+            _total_cluster = len(_freq_matrix)  # Total number of clusters in the corpus
             _idf_matrix = {}  # Store idf scores for each doc
-            for row in _freq_matrix:
-                doc_id = row['cluster']  # Doc id is the cluster no
-                freq_table = row['freq_table']  # Store the frequencies of each word in the doc
-                idf_table = {}
-                for word in freq_table.keys():
-                    counts = len(_doc_per_words[word])  # Number of documents (clusters) the word appears
-                    idf_table[word] = math.log10(_total_dos / float(counts))
-                _idf_matrix[doc_id] = idf_table  # Idf table stores each word's idf scores
+            for _row in _freq_matrix:
+                _cluster_no = _row['cluster']  # Doc id is the cluster no
+                _freq_table = _row['freq_table']  # Store the frequencies of each word in the doc
+                _idf_table = {}
+                for _topic in _freq_table.keys():
+                    _counts = len(_occ_per_topic[_topic])  # Number of clusters the word appears
+                    _idf_table[_topic] = math.log10(_total_cluster / float(_counts))
+                _idf_matrix[_cluster_no] = _idf_table  # Idf table stores each word's idf scores
             return _idf_matrix
 
         # Compute tf-idf score matrix
-        def _compute_tf_idf_matrix(_tf_matrix, _idf_matrix, _freq_matrix, _docs_per_word):
+        def _compute_tf_idf_matrix(_tf_matrix, _idf_matrix, _freq_matrix, _occ_per_topic):
             _tf_idf_matrix = {}
             # Compute tf-idf score for each cluster
-            for doc_id, tf_table in _tf_matrix.items():
+            for _cluster_no, _tf_table in _tf_matrix.items():
                 # Compute tf-idf score of each word in the cluster
-                idf_table = _idf_matrix[doc_id]  # idf table stores idf scores of the doc (doc_id)
+                _idf_table = _idf_matrix[_cluster_no]  # idf table stores idf scores of the doc (doc_id)
                 # Get freq table of the cluster
-                freq_table = next(f for f in _freq_matrix if f['cluster'] == doc_id)['freq_table']
-                tf_idf_list = []
-                for word, tf_score in tf_table.items():  # key is word, value is tf score
+                _freq_table = next(f for f in _freq_matrix if f['cluster'] == _cluster_no)['freq_table']
+                _tf_idf_list = []
+                for _topic, _tf_score in _tf_table.items():  # key is word, value is tf score
                     try:
-                        idf_score = idf_table[word]  # Get idf score of the word
-                        freq = freq_table[word]  # Get the frequencies of the word in cluster doc_id
-                        cluster_ids = _docs_per_word[word]  # Get the clusters that the word appears
-                        tf_idf_list.append({'topic': word, 'score': float(tf_score * idf_score), 'freq': freq,
-                                            'cluster_ids': cluster_ids})
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
-                # Sort the tf_idf_list
-                sorted_tf_idf_list = sorted(tf_idf_list, key=lambda t: t['score'], reverse=True)
-                # Store tf-idf scores of the document
-                _tf_idf_matrix[str(doc_id)] = sorted_tf_idf_list
+                        _idf_score = _idf_table[_topic]  # Get idf score of the word
+                        _freq = _freq_table[_topic]  # Get the frequencies of the word in cluster doc_id
+                        _cluster_ids = sorted(list(_occ_per_topic[_topic]))  # Get the clusters that the word appears
+                        _score = float(_tf_score * _idf_score)
+                        _tf_idf_list.append({'topic': _topic, 'score': _score, 'freq': _freq,
+                                             'cluster_ids': _cluster_ids})
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                # Sort tf_idf_list by tf-idf score
+                _tf_idf_matrix[str(_cluster_no)] = sorted(_tf_idf_list, key=lambda t: t['score'], reverse=True)
             return _tf_idf_matrix
 
         # Step 1. Convert each cluster of documents (one or more articles) into a single document
@@ -411,11 +405,11 @@ class BERTModelDocClusterUtility:
                 # Term frequency (TF) is the frequency of a word in a document divided by total number of words in the document.
                 tf_matrix = _compute_tf_matrix(freq_matrix)
                 # 4. Create the table to map the word to a list of documents
-                docs_per_word = _create_docs_per_word(freq_matrix)
+                occ_per_topic = _create_occs_per_topic(freq_matrix)
                 # 5. Compute IDF (how common or rare a word is) and output the results as a matrix
-                idf_matrix = _compute_idf_matrix(freq_matrix, docs_per_word)
+                idf_matrix = _compute_idf_matrix(freq_matrix, occ_per_topic)
                 # Compute tf-idf matrix
-                tf_idf_matrix = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, docs_per_word)
+                tf_idf_matrix = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, occ_per_topic)
                 # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
                 topics_list.append({
                     'n_gram': n_gram_range,
@@ -624,16 +618,17 @@ class BERTModelDocClusterUtility:
         # Convert the raw source files downloaded from Scopus
         def _convert_corpus():
             _folder = os.path.join('data', case_name)
-            _corpus_df = pd.read_csv(os.path.join(_folder, case_name + '_raw.csv'))
+            _corpus_df = pd.read_csv(os.path.join(_folder, case_name + '_scopus.csv'))
             _corpus_df['DocId'] = list(range(1, len(_corpus_df) + 1))
             # Select columns
             _corpus_df = _corpus_df[['DocId', 'Cited by', 'Title', 'Author Keywords', 'Abstract', 'Year',
                                      'Source title', 'Authors', 'DOI', 'Document Type']]
             # # Output as csv file
-            _corpus_df.to_csv(os.path.join(folder, case_name + '.csv'),
+            _corpus_df.to_csv(os.path.join(_folder, case_name + '.csv'),
                               encoding='utf-8', index=False)
 
         try:
+            _convert_corpus()
             folder = os.path.join('data', case_name)
             corpus_df = pd.read_csv(os.path.join(folder, case_name + '.csv'))
             corpus = corpus_df.to_dict("records")
