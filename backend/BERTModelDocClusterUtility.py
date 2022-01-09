@@ -4,6 +4,7 @@ import re
 import logging
 import string
 from functools import reduce
+from pathlib import Path
 
 import hdbscan
 import inflect
@@ -271,6 +272,7 @@ class BERTModelDocClusterUtility:
     def get_n_gram_topics(approach, docs_per_cluster_df, folder, is_load=False):
         # A folder that stores all the topic results
         temp_folder = os.path.join(folder, 'topics', 'temp')
+        Path(temp_folder).mkdir(parents=True, exist_ok=True)
         if is_load:
             path = os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_topics.json')
             topic_df = pd.read_json(path)

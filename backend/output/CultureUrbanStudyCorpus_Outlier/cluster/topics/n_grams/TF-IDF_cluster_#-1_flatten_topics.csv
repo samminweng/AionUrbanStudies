@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+development,0.0020017175000000003,234,109,2,green space,0.0012904211,27,8,1,urban green space,0.0014807211,9,5,1,development,0.0020017175000000003,234,109,2
+interaction,0.0017383577,75,42,1,open space,0.0011470410000000001,24,8,1,public open space,0.001151672,7,3,1,interaction,0.0017383577,75,42,1
+sustainability,0.0012284395,53,27,1,social interaction,0.0010514542000000001,22,14,1,urban neighborhood design,0.0009871474,6,1,1,urban green space,0.0014807211,9,5,1
+community,0.0012147175,142,80,2,urban space,0.0009172338,52,26,2,neighborhood design concept,0.0009871474,6,1,1,green space,0.0012904211,27,8,1
+risk,0.0009734803000000001,42,14,1,indigenous people,0.0009080741000000001,19,10,1,perceived sensory dimension,0.0008226229,5,2,1,sustainability,0.0012284395,53,27,1
+type,0.0009503022,41,21,1,different culture,0.0008124874,17,13,1,cultural ecosystem service,0.0008226229,5,2,1,community,0.0012147175,142,80,2
+water,0.0009271241,40,12,1,smart city,0.0008124874,17,5,1,natural property right,0.0008226229,5,1,1,public open space,0.001151672,7,3,1
+housing,0.0008807679000000001,38,23,1,young people,0.000764694,16,7,1,property right value,0.0008226229,5,1,1,open space,0.0011470410000000001,24,8,1
+ecotourism,0.0008807679000000001,38,2,1,public art,0.0006213139000000001,13,4,1,open public space,0.0006580983000000001,4,3,1,social interaction,0.0010514542000000001,22,14,1
+literature,0.0008344117,36,23,1,social capital,0.0006213139000000001,13,2,1,road traffic noise,0.0006580983000000001,4,1,1,urban neighborhood design,0.0009871474,6,1,1
+behavior,0.0007880555,34,14,1,urban ecotourism,0.0006213139000000001,13,1,1,urban regime theory,0.0006580983000000001,4,1,1,neighborhood design concept,0.0009871474,6,1,1
+pattern,0.0007880555,34,20,1,social life,0.0005735205000000001,12,8,1,rural aesthetic space,0.0006580983000000001,4,1,1,risk,0.0009734803000000001,42,14,1
+festival,0.0007416993000000001,32,3,1,small business,0.0005735205000000001,12,2,1,urban planning model,0.0006580983000000001,4,1,1,type,0.0009503022,41,21,1
+time,0.0007271196,85,54,2,neighborhood design,0.0005735205000000001,12,1,1,ethnic minority group,0.0004935737,3,1,1,water,0.0009271241,40,12,1
+student,0.0006953431,30,13,1,urban development,0.0005291734,30,23,2,sustainable food culture,0.0004935737,3,1,1,urban space,0.0009172338,52,26,2
+park,0.0006953431,30,16,1,typhoid fever,0.0005257271000000001,11,1,1,relationship among people,0.0004935737,3,2,1,indigenous people,0.0009080741000000001,19,10,1
+factor,0.0006929022,81,41,2,urban governance,0.0005257271000000001,11,8,1,eight sensory dimension,0.0004935737,3,1,1,housing,0.0008807679000000001,38,23,1
+value,0.0006501305,76,48,2,human geography,0.0005257271000000001,11,1,1,sustainable urban development,0.0004935737,3,1,1,ecotourism,0.0008807679000000001,38,2,1
+child,0.0006489869,28,10,1,city identity,0.0005257271000000001,11,1,1,changing public life,0.0004935737,3,1,1,literature,0.0008344117,36,23,1
+house,0.0006258088,27,16,1,indigenous knowledge,0.0005257271000000001,11,2,1,theoretical urban neighborhood,0.0004935737,3,1,1,perceived sensory dimension,0.0008226229,5,2,1
+road,0.0006258088,27,14,1,economic development,0.0004779337,10,7,1,neighborhood urban design,0.0004935737,3,1,1,cultural ecosystem service,0.0008226229,5,2,1
+energy,0.0006026307000000001,26,18,1,new town,0.0004779337,10,3,1,urban forest manager,0.0004935737,3,1,1,natural property right,0.0008226229,5,1,1
+change,0.0005988044,70,50,2,urban environment,0.00047625600000000004,27,22,2,human sensory assessment,0.0004935737,3,1,1,property right value,0.0008226229,5,1,1
+article,0.0005902500000000001,69,40,2,urban area,0.0004409778,25,22,2,medium size city,0.0004935737,3,1,1,different culture,0.0008124874,17,13,1
+use,0.0005816957,68,46,2,cultural value,0.0004301404,9,6,1,site interpretation centre,0.0004935737,3,1,1,smart city,0.0008124874,17,5,1
+behaviour,0.0005794526,25,18,1,vernacular architecture,0.0004301404,9,4,1,people reporting stress,0.0003290491,2,1,1,behavior,0.0007880555,34,14,1
+traffic,0.0005794526,25,11,1,urban transformation,0.0004301404,9,4,1,reporting stress prefer,0.0003290491,2,1,1,pattern,0.0007880555,34,20,1
+need,0.0005645870000000001,66,48,2,modality environment,0.0004301404,9,1,1,outdoor urban environment,0.0003290491,2,2,1,young people,0.000764694,16,7,1
+relation,0.0005562745,24,21,1,sensory dimension,0.000382347,8,2,1,typhoid fever case,0.0003290491,2,1,1,festival,0.0007416993000000001,32,3,1
+property,0.0005562745,24,6,1,climate change,0.000382347,8,8,1,transnational capitalist class,0.0003290491,2,1,1,time,0.0007271196,85,54,2
+level,0.0005560326,65,42,2,social cohesion,0.000382347,8,7,1,beyond binary choice,0.0003290491,2,1,1,student,0.0006953431,30,13,1
+world,0.0005474783,64,45,2,middle class,0.000382347,8,1,1,public green space,0.0003290491,2,1,1,park,0.0006953431,30,16,1
+identity,0.0005389239,63,24,2,road traffic,0.000382347,8,2,1,social impact assessment,0.0003290491,2,1,1,factor,0.0006929022,81,41,2
+strategy,0.0005303696,62,36,2,residential standard,0.000382347,8,1,1,different thermal index,0.0003290491,2,1,1,open public space,0.0006580983000000001,4,3,1
+region,0.0005218152,61,22,2,daily life,0.000382347,8,6,1,rapidly urbanizing city,0.0003290491,2,2,1,road traffic noise,0.0006580983000000001,4,1,1
+nature,0.0005132609000000001,60,39,2,design strategy,0.000382347,8,6,1,urban sustainability transition,0.0003290491,2,1,1,urban regime theory,0.0006580983000000001,4,1,1
+finding,0.0005099183,22,17,1,public life,0.000382347,8,3,1,hot arid climate,0.0003290491,2,1,1,rural aesthetic space,0.0006580983000000001,4,1,1
+support,0.0005099183,22,20,1,design concept,0.000382347,8,3,1,inclusive municipal governance,0.0003290491,2,1,1,urban planning model,0.0006580983000000001,4,1,1
+concern,0.0005099183,22,21,1,city center,0.000382347,8,4,1,participatory urban planning,0.0003290491,2,2,1,value,0.0006501305,76,48,2
+tourism,0.0005047065,59,17,2,aesthetic space,0.000382347,8,1,1,early modern era,0.0003290491,2,2,1,child,0.0006489869,28,10,1
+management,0.0004961522,58,38,2,residential building,0.000382347,8,3,1,urban growth boundary,0.0003290491,2,1,1,house,0.0006258088,27,16,1
+knowledge,0.0004961522,58,27,2,tourism development,0.000382347,8,3,1,urban park user,0.0003290491,2,1,1,road,0.0006258088,27,14,1
+result,0.0004875979,57,47,2,experimental study,0.000382347,8,1,1,sustainability requires people,0.0003290491,2,1,1,public art,0.0006213139000000001,13,4,1
+construction,0.0004875979,57,27,2,city planning,0.0003351431,19,12,2,using social medium,0.0003290491,2,1,1,social capital,0.0006213139000000001,13,2,1
+work,0.0004875979,57,38,2,natural environment,0.0003345536,7,7,1,land use planning,0.0003290491,2,2,1,urban ecotourism,0.0006213139000000001,13,1,1
+control,0.0004867402,21,17,1,developing country,0.0003345536,7,4,1,old masonry wall,0.0003290491,2,1,1,energy,0.0006026307000000001,26,18,1
+comfort,0.0004867402,21,9,1,acoustic environment,0.0003345536,7,2,1,yanama budyari gumada,0.0003290491,2,1,1,change,0.0005988044,70,50,2
+access,0.0004867402,21,19,1,cultural diversity,0.0003345536,7,4,1,natural resource management,0.0003290491,2,1,1,article,0.0005902500000000001,69,40,2
+mobility,0.0004790435,56,16,2,landscape planning,0.0003345536,7,4,1,last two decade,0.0003290491,2,2,1,use,0.0005816957,68,46,2
+year,0.0004704892,55,30,2,property right,0.0003345536,7,1,1,control commercial signage,0.0003290491,2,1,1,behaviour,0.0005794526,25,18,1

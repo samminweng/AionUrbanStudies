@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+bathroom,0.0131922928,12,1,1,small bathroom,0.011524668,5,1,1,creating great place,0.0187106374,2,1,1,creating great place,0.0187106374,2,1,1
+competition,0.0016229609,4,1,2,design profession,0.0046098672,2,1,1,among affluent household,0.0093553187,1,1,1,bathroom,0.0131922928,12,1,1
+designer,0.0012172207,3,3,2,interior design,0.0046098672,2,2,1,reflecting distinctive geography,0.0093553187,1,1,1,small bathroom,0.011524668,5,1,1
+fashion,0.0012172207,3,1,2,product design,0.0046098672,2,2,1,key business service,0.0093553187,1,1,1,among affluent household,0.0093553187,1,1,1
+room,0.0012172207,3,2,2,novel form,0.0046098672,2,1,1,believe good design,0.0093553187,1,1,1,reflecting distinctive geography,0.0093553187,1,1,1
+vision,0.0012172207,3,2,2,urban environment,0.0034027296,4,2,2,make positive contribution,0.0093553187,1,1,1,key business service,0.0093553187,1,1,1
+manufacturing,0.0010993577,1,1,1,great place,0.0025520472,3,1,2,shaping urban environment,0.0093553187,1,1,1,believe good design,0.0093553187,1,1,1
+spending,0.0010993577,1,1,1,universal design,0.0025520472,3,1,2,linkage among designer,0.0093553187,1,1,1,make positive contribution,0.0093553187,1,1,1
+appraisal,0.0010993577,1,1,1,manufacturing era,0.0023049336,1,1,1,distinctive social science,0.0093553187,1,1,1,shaping urban environment,0.0093553187,1,1,1
+producer,0.0010993577,1,1,1,consumer society,0.0023049336,1,1,1,social science perspective,0.0093553187,1,1,1,linkage among designer,0.0093553187,1,1,1
+distributor,0.0010993577,1,1,1,affluent household,0.0023049336,1,1,1,different urban imaginary,0.0093553187,1,1,1,distinctive social science,0.0093553187,1,1,1
+publishing,0.0010993577,1,1,1,distinctive geography,0.0023049336,1,1,1,urban interior design,0.0093553187,1,1,1,social science perspective,0.0093553187,1,1,1
+couture,0.0010993577,1,1,1,global system,0.0023049336,1,1,1,room without roof,0.0093553187,1,1,1,different urban imaginary,0.0093553187,1,1,1
+emptiness,0.0010993577,1,1,1,key business,0.0023049336,1,1,1,designer savvy society,0.0093553187,1,1,1,urban interior design,0.0093553187,1,1,1
+potentiality,0.0010993577,1,1,1,business service,0.0023049336,1,1,1,urban design relies,0.0093553187,1,1,1,room without roof,0.0093553187,1,1,1
+manipulation,0.0010993577,1,1,1,good design,0.0023049336,1,1,1,relies upon promotion,0.0093553187,1,1,1,designer savvy society,0.0093553187,1,1,1
+notice,0.0010993577,1,1,1,positive contribution,0.0023049336,1,1,1,gain public interest,0.0093553187,1,1,1,urban design relies,0.0093553187,1,1,1
+absence,0.0010993577,1,1,1,intellectual root,0.0023049336,1,1,1,formal public meeting,0.0093553187,1,1,1,relies upon promotion,0.0093553187,1,1,1
+roadmap,0.0010993577,1,1,1,critical appraisal,0.0023049336,1,1,1,four pleasure model,0.0093553187,1,1,1,gain public interest,0.0093553187,1,1,1
+affordance,0.0010993577,1,1,1,complex linkage,0.0023049336,1,1,1,cultural reference point,0.0093553187,1,1,1,formal public meeting,0.0093553187,1,1,1
+loci,0.0010993577,1,1,1,among designer,0.0023049336,1,1,1,engender positive relationship,0.0093553187,1,1,1,four pleasure model,0.0093553187,1,1,1
+salutogenic,0.0010993577,1,1,1,graphic design,0.0023049336,1,1,1,designing urban environment,0.0093553187,1,1,1,cultural reference point,0.0093553187,1,1,1
+inspire,0.0010993577,1,1,1,haute couture,0.0023049336,1,1,1,powerful starting point,0.0093553187,1,1,1,engender positive relationship,0.0093553187,1,1,1
+demonstrate,0.0010993577,1,1,1,science perspective,0.0023049336,1,1,1,illustrated case study,0.0093553187,1,1,1,designing urban environment,0.0093553187,1,1,1
+groundwork,0.0010993577,1,1,1,presenting city,0.0023049336,1,1,1,first section outline,0.0093553187,1,1,1,powerful starting point,0.0093553187,1,1,1
+hygiene,0.0010993577,1,1,1,design service,0.0023049336,1,1,1,six critical theory,0.0093553187,1,1,1,illustrated case study,0.0093553187,1,1,1
+toilet,0.0010993577,1,1,1,small area,0.0023049336,1,1,1,contemporary urban design,0.0093553187,1,1,1,first section outline,0.0093553187,1,1,1
+wellness,0.0010993577,1,1,1,many space,0.0023049336,1,1,1,create great place,0.0093553187,1,1,1,six critical theory,0.0093553187,1,1,1
+bathtubs,0.0010993577,1,1,1,triggering process,0.0023049336,1,1,1,design urban environment,0.0093553187,1,1,1,contemporary urban design,0.0093553187,1,1,1
+principal,0.0010993577,1,1,1,new potentiality,0.0023049336,1,1,1,positively transform people,0.0093553187,1,1,1,create great place,0.0093553187,1,1,1
+plumbing,0.0010993577,1,1,1,urban imaginary,0.0023049336,1,1,1,planning initiative demonstrate,0.0093553187,1,1,1,design urban environment,0.0093553187,1,1,1
+collaborative,0.0010993577,1,1,1,large courtyard,0.0023049336,1,1,1,uses transportable model,0.0093553187,1,1,1,positively transform people,0.0093553187,1,1,1
+anthropologist,0.0010993577,1,1,1,without roof,0.0023049336,1,1,1,publicly accessible location,0.0093553187,1,1,1,planning initiative demonstrate,0.0093553187,1,1,1
+consumer,0.0008114805,2,2,2,living outdoors,0.0023049336,1,1,1,encourages curious participant,0.0093553187,1,1,1,uses transportable model,0.0093553187,1,1,1
+profession,0.0008114805,2,1,2,accommodate people,0.0023049336,1,1,1,help provide policy,0.0093553187,1,1,1,publicly accessible location,0.0093553187,1,1,1
+furniture,0.0008114805,2,2,2,savvy society,0.0023049336,1,1,1,provide policy maker,0.0093553187,1,1,1,encourages curious participant,0.0093553187,1,1,1
+imaginary,0.0008114805,2,2,2,idea competition,0.0023049336,1,1,1,home culture research,0.0093553187,1,1,1,help provide policy,0.0093553187,1,1,1
+reference,0.0008114805,2,1,2,willing participation,0.0023049336,1,1,1,studied bathroom transformation,0.0093553187,1,1,1,provide policy maker,0.0093553187,1,1,1
+theory,0.0008114805,2,1,2,gained importance,0.0023049336,1,1,1,leads many people,0.0093553187,1,1,1,home culture research,0.0093553187,1,1,1
+section,0.0008114805,2,1,2,global flow,0.0023049336,1,1,1,little bathroom space,0.0093553187,1,1,1,studied bathroom transformation,0.0093553187,1,1,1
+mobility,0.0008114805,2,1,2,space speak,0.0023049336,1,1,1,universal design principal,0.0093553187,1,1,1,leads many people,0.0093553187,1,1,1
+series,0.0008114805,2,2,2,inclusive process,0.0023049336,1,1,1,design small bathroom,0.0093553187,1,1,1,little bathroom space,0.0093553187,1,1,1
+apartment,0.0008114805,2,1,2,better way,0.0023049336,1,1,1,cross disciplinary field,0.0093553187,1,1,1,universal design principal,0.0093553187,1,1,1
+emotion,0.0008114805,2,1,2,engaging people,0.0023049336,1,1,1,imagine novel form,0.0093553187,1,1,1,design small bathroom,0.0093553187,1,1,1
+household,0.0004057402,1,1,2,language barrier,0.0023049336,1,1,1,people use city,0.0093553187,1,1,1,cross disciplinary field,0.0093553187,1,1,1
+ities,0.0004057402,1,1,2,spatial manipulation,0.0023049336,1,1,1,use city space,0.0093553187,1,1,1,imagine novel form,0.0093553187,1,1,1
+root,0.0004057402,1,1,2,empirical account,0.0023049336,1,1,1,producing new opportunity,0.0093553187,1,1,1,people use city,0.0093553187,1,1,1
+imprint,0.0004057402,1,1,2,spatial consciousness,0.0023049336,1,1,1,international design competition,0.0034527698000000003,1,1,2,use city space,0.0093553187,1,1,1
+effectiveness,0.0004057402,1,1,2,competition method,0.0023049336,1,1,1,urban planning process,0.0034527698000000003,1,1,2,producing new opportunity,0.0093553187,1,1,1
+linkage,0.0004057402,1,1,2,design relies,0.0023049336,1,1,1,,0.0,0,0,0,design profession,0.0046098672,2,1,1
