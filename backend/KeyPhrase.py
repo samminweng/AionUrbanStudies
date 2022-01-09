@@ -97,7 +97,7 @@ class KeyPhraseSimilarity:
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def group_key_phrases_by_clusters_experiments(self):
-        cluster_no_list = range(-1, self.total_clusters)
+        cluster_no_list = range(0, self.total_clusters)
         # cluster_no_list = [6]
         for cluster_no in cluster_no_list:
             key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')

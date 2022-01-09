@@ -310,7 +310,7 @@ class KeyPhraseUtility:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
             results = list()
-            dimension = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5]
+            dimension = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 9, 8, 7, 6, 5]
             for dimension in dimension:
                 for min_samples in [None] + list(range(1, 21)):
                     for min_cluster_size in list(range(5, 21)):
