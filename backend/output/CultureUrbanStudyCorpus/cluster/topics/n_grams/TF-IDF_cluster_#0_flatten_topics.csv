@@ -1,51 +1,51 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-patient,0.0064136975,62,15,1,health care,0.0051936164,39,10,2,lay health worker,0.0081999696,15,1,1,lay health worker,0.0081999696,15,1,1
-tuberculosis,0.0035171890000000004,34,6,1,health worker,0.004594353000000001,23,3,1,prescription drug misuse,0.0043733171,8,1,1,patient,0.0064136975,62,15,1
-vaccine,0.0033102955,32,4,1,blood pressure,0.0043945985,22,2,1,health care provider,0.0038266525,7,2,1,health care,0.0051936164,39,10,2
-drug,0.0031034020000000003,30,11,1,palliative care,0.0041948440000000005,21,4,1,first time homelessness,0.0032799878,6,1,1,health worker,0.004594353000000001,23,3,1
-woman,0.0029276202,60,19,3,older people,0.0034861409000000003,37,2,3,intimate partner violence,0.0027333232000000002,5,1,1,blood pressure,0.0043945985,22,2,1
-care,0.0029226802,125,27,5,lay health,0.0031960716,16,1,1,herbal medicine consumption,0.0027333232000000002,5,1,1,prescription drug misuse,0.0043733171,8,1,1
-disease,0.0025516861,37,17,2,indigenous people,0.0029297323,22,2,2,community health worker,0.0027333232000000002,5,1,1,palliative care,0.0041948440000000005,21,4,1
-physician,0.0023792749,23,4,1,risk factor,0.0027965627,14,6,1,male animal handler,0.0027333232000000002,5,1,1,health care provider,0.0038266525,7,2,1
-blood,0.0019310057,28,5,2,pulmonary tuberculosis,0.0027965627,14,2,1,palliative care need,0.0021866586,4,2,1,tuberculosis,0.0035171890000000004,34,6,1
-cancer,0.0018620412000000001,27,3,2,outcome measure,0.0025968082,13,7,1,health care professional,0.0021866586,4,2,1,older people,0.0034861409000000003,37,2,3
-prevalence,0.0018541594000000001,38,12,3,care provider,0.0023970537,12,3,1,sexual health survey,0.0021866586,4,1,1,vaccine,0.0033102955,32,4,1
-homelessness,0.0017565721000000001,36,1,3,feeding tube,0.0021972992000000003,11,1,1,care home staff,0.0021866586,4,1,1,first time homelessness,0.0032799878,6,1,1
-hospital,0.0016101911,33,13,3,herbal medicine,0.0019975448000000002,10,2,1,injecting drug use,0.0021866586,4,2,1,lay health,0.0031960716,16,1,1
-treatment,0.0016101911,33,13,3,study design,0.0017977903000000002,9,6,1,sustainable rural physician,0.0021866586,4,1,1,drug,0.0031034020000000003,30,11,1
-diagnosis,0.0015861833,23,9,2,young people,0.0017977903000000002,27,8,4,traditional culinary preparation,0.0021866586,4,1,1,indigenous people,0.0029297323,22,2,2
-provider,0.0015172188000000001,22,8,2,sexual health,0.0015980358,8,2,1,skilled health care,0.0021866586,4,1,1,woman,0.0029276202,60,19,3
-medicine,0.0015172188000000001,22,5,2,prescription drug,0.0015980358,8,1,1,health care worker,0.0021866586,4,1,1,care,0.0029226802,125,27,5
-transmission,0.0014482543,21,6,2,drug misuse,0.0015980358,8,1,1,chewing betel nut,0.0021866586,4,1,1,risk factor,0.0027965627,14,6,1
-disorder,0.0013792898,20,5,2,vaccine acceptance,0.0015980358,8,2,1,health service provider,0.0016399939,3,1,1,pulmonary tuberculosis,0.0027965627,14,2,1
-condom,0.0013448075000000001,13,3,1,systematic review,0.0015980358,12,1,2,palliative care provider,0.0016399939,3,1,1,intimate partner violence,0.0027333232000000002,5,1,1
-caregiver,0.0013448075000000001,13,4,1,cardiovascular disease,0.0015980358,8,2,1,confirmed pulmonary tuberculosis,0.0016399939,3,1,1,herbal medicine consumption,0.0027333232000000002,5,1,1
-family,0.0013103253,38,18,4,health service,0.0014648662,11,8,2,disclose intimate partner,0.0016399939,3,1,1,community health worker,0.0027333232000000002,5,1,1
-misuse,0.0012413608,12,3,1,et al,0.0014133004,15,3,3,home staff understand,0.0016399939,3,1,1,male animal handler,0.0027333232000000002,5,1,1
-superstition,0.0012413608,12,1,1,cultural safety,0.0013982813,7,2,1,among young adult,0.0016399939,3,1,1,outcome measure,0.0025968082,13,7,1
-rate,0.0012068786,35,15,4,care home,0.0013982813,7,1,1,across youth culture,0.0016399939,3,1,1,disease,0.0025516861,37,17,2
-worker,0.0011723963000000001,34,7,4,drug use,0.0013982813,7,2,1,metropolitan cancer service,0.0016399939,3,1,1,care provider,0.0023970537,12,3,1
-incidence,0.0011723963000000001,17,6,2,homeless people,0.0013982813,7,3,1,identify rural woman,0.0016399939,3,1,1,physician,0.0023792749,23,4,1
-disclosure,0.0011723963000000001,17,3,2,cultural humility,0.0013982813,7,1,1,vulnerable older people,0.0016399939,3,1,1,feeding tube,0.0021972992000000003,11,1,1
-health,0.0011492104,173,36,7,betel nut,0.0013982813,7,1,1,people experiencing homelessness,0.0016399939,3,1,1,palliative care need,0.0021866586,4,2,1
-illness,0.0011379141,11,5,1,family planning,0.0013982813,7,1,1,critical housing incident,0.0016399939,3,1,1,health care professional,0.0021866586,4,2,1
-hypertension,0.0011379141,11,3,1,focus group,0.0013316965,10,8,2,open access article,0.0016399939,3,2,1,sexual health survey,0.0021866586,4,1,1
-lay,0.0011379141,11,1,1,social support,0.0013316965,10,2,2,rural physician workforce,0.0016399939,3,1,1,care home staff,0.0021866586,4,1,1
-violence,0.0011034318,16,4,2,rural area,0.0011985269,18,14,4,blood pressure screening,0.0016399939,3,1,1,injecting drug use,0.0021866586,4,2,1
-men,0.0010344673,15,4,2,indigenous population,0.0011985269,9,1,2,toward salivary ph,0.0016399939,3,1,1,sustainable rural physician,0.0021866586,4,1,1
-melioidosis,0.0010344673,10,1,1,health status,0.0011985269,6,3,1,successful work culture,0.0016399939,3,1,1,traditional culinary preparation,0.0021866586,4,1,1
-discrimination,0.0010344673,10,4,1,partner violence,0.0011985269,6,1,1,health care equity,0.0010933293,2,1,1,skilled health care,0.0021866586,4,1,1
-belief,0.0009999851000000001,29,12,4,activity data,0.0011985269,6,1,1,percutaneous endoscopic gastrostomy,0.0010933293,2,1,1,health care worker,0.0021866586,4,1,1
-harm,0.0009310206000000001,9,2,1,epistemic thinking,0.0011985269,6,1,1,self care disability,0.0010933293,2,1,1,chewing betel nut,0.0021866586,4,1,1
-bacteria,0.0009310206000000001,9,3,1,general practice,0.0011985269,6,1,1,palliative care context,0.0010933293,2,1,1,herbal medicine,0.0019975448000000002,10,2,1
-prescription,0.0009310206000000001,9,4,1,metropolitan cancer,0.0011985269,6,1,1,palliative care service,0.0010933293,2,1,1,blood,0.0019310057,28,5,2
-vaccination,0.0009310206000000001,9,2,1,professional identity,0.0011985269,6,2,1,large urban center,0.0010933293,2,2,1,cancer,0.0018620412000000001,27,3,2
-donor,0.0009310206000000001,9,2,1,time homelessness,0.0011985269,6,1,1,thematic qualitative analysis,0.0010933293,2,1,1,prevalence,0.0018541594000000001,38,12,3
-staff,0.0009270797000000001,19,5,3,homelessness prevention,0.0011985269,6,1,1,different cultural setting,0.0010933293,2,1,1,study design,0.0017977903000000002,9,6,1
-determinant,0.0009270797000000001,19,7,3,behavioral determinant,0.0011985269,6,1,1,relevant sexual health,0.0010933293,2,1,1,young people,0.0017977903000000002,27,8,4
-infection,0.0008965384,13,9,2,rural physician,0.0011985269,6,1,1,common mental disorder,0.0010933293,2,1,1,homelessness,0.0017565721000000001,36,1,3
-partner,0.0008965384,13,7,2,general physician,0.0011985269,6,1,1,enhancing physical activity,0.0010933293,2,1,1,health service provider,0.0016399939,3,1,1
-service,0.0008729969,61,27,6,community health,0.0011985269,6,2,1,open ended question,0.0010933293,2,1,1,palliative care provider,0.0016399939,3,1,1
-risk,0.0008417319000000001,36,20,5,dietary diversity,0.0011985269,6,1,1,statistically significant association,0.0010933293,2,2,1,confirmed pulmonary tuberculosis,0.0016399939,3,1,1
-prevention,0.0008294924000000001,17,6,3,animal handler,0.0011985269,6,1,1,among young people,0.0010933293,3,2,2,disclose intimate partner,0.0016399939,3,1,1
-tube,0.0008275739,12,1,2,remote community,0.0009987724000000001,5,2,1,indie rock scene,0.0010933293,2,1,1,home staff understand,0.0016399939,3,1,1
+downtown,0.0012755508000000001,23,3,2,urban study,0.0021708894,18,16,2,urban economic development,0.0019235143,2,1,1,urban study,0.0021708894,18,16,2
+politics,0.0011091746,20,11,2,creative city,0.0021708894,9,5,1,case study city,0.0019235143,2,2,1,creative city,0.0021708894,9,5,1
+hop,0.0011091746,10,1,1,hip hop,0.0021708894,9,1,1,new creative cluster,0.0019235143,2,1,1,hip hop,0.0021708894,9,1,1
+nationalism,0.0010537159,19,1,2,urban tourism,0.0019296795,8,2,1,multilocal creative knowledge,0.0019235143,2,1,1,urban tourism,0.0019296795,8,2,1
+creativity,0.0008873397,16,9,2,cultural participation,0.0019296795,8,2,1,creative knowledge worker,0.0019235143,2,1,1,cultural participation,0.0019296795,8,2,1
+hip,0.0008873397,8,1,1,labour market,0.0016884695000000001,7,2,1,creative knowledge work,0.0019235143,2,1,1,urban economic development,0.0019235143,2,1,1
+artist,0.0007764222,14,10,2,cultural production,0.0014472596,6,3,1,included participant observation,0.0019235143,2,2,1,case study city,0.0019235143,2,2,1
+regeneration,0.0007135411000000001,31,12,3,cultural planning,0.0014472596,6,3,1,focus group discussion,0.0019235143,2,2,1,new creative cluster,0.0019235143,2,1,1
+labour,0.0006655048,6,3,1,cultural producer,0.0012060497,5,1,1,urban regeneration process,0.0019235143,2,2,1,multilocal creative knowledge,0.0019235143,2,1,1
+discourse,0.0006655048,12,8,2,cultural regeneration,0.0012060497,5,2,1,smart creative city,0.0019235143,2,1,1,creative knowledge worker,0.0019235143,2,1,1
+subway,0.0006655048,6,1,1,cultural sector,0.0012060497,5,3,1,massive financial investment,0.0009617572,1,1,1,included participant observation,0.0019235143,2,2,1
+range,0.000610046,11,10,2,creative cluster,0.0012060497,5,2,1,flagship regeneration project,0.0009617572,1,1,1,focus group discussion,0.0019235143,2,2,1
+book,0.0005754363,25,15,3,place identity,0.0012060497,5,3,1,iconic cultural project,0.0009617572,1,1,1,urban regeneration process,0.0019235143,2,2,1
+opening,0.0005545873,5,3,1,place branding,0.0012060497,5,2,1,whilst balancing achievement,0.0009617572,1,1,1,smart creative city,0.0019235143,2,1,1
+cluster,0.0005545873,10,5,2,young people,0.0012060497,10,5,2,last two decade,0.0009617572,2,2,2,labour market,0.0016884695000000001,7,2,1
+branding,0.0005545873,10,4,2,creative people,0.0009648397,4,4,1,drawn meaningful insight,0.0009617572,1,1,1,cultural production,0.0014472596,6,3,1
+dance,0.0005545873,10,4,2,creative knowledge,0.0009648397,4,1,1,suggests possible avenue,0.0009617572,1,1,1,cultural planning,0.0014472596,6,3,1
+youth,0.0005545873,10,5,2,global downtown,0.0009648397,4,2,1,cultural economic development,0.0009617572,1,1,1,downtown,0.0012755508000000001,23,3,2
+barrio,0.0005545873,5,2,1,square dance,0.0009648397,4,1,1,way cultural producer,0.0009617572,1,1,1,cultural producer,0.0012060497,5,1,1
+scavenger,0.0005545873,5,1,1,quality product,0.0009648397,4,1,1,producer obtain job,0.0009617572,1,1,1,cultural regeneration,0.0012060497,5,2,1
+body,0.0004991286,9,3,2,bodily practice,0.0009648397,4,1,1,key social mechanism,0.0009617572,1,1,1,cultural sector,0.0012060497,5,3,1
+migration,0.00044366990000000003,8,6,2,creative activity,0.0009648397,4,2,1,social mechanism structure,0.0009617572,1,1,1,creative cluster,0.0012060497,5,2,1
+competition,0.00044366990000000003,8,5,2,creative placemaking,0.0009648397,4,1,1,clustered production system,0.0009617572,1,1,1,place identity,0.0012060497,5,3,1
+play,0.00044366990000000003,8,8,2,cultural economy,0.0007236298,3,2,1,art social milieu,0.0009617572,1,1,1,place branding,0.0012060497,5,2,1
+implication,0.00044366990000000003,8,5,2,alternative culture,0.0007236298,3,1,1,establish new career,0.0009617572,1,1,1,young people,0.0012060497,10,5,2
+actor,0.00044366990000000003,8,5,2,city government,0.0007236298,3,3,1,active cultural milieu,0.0009617572,1,1,1,politics,0.0011091746,20,11,2
+mobility,0.00044366990000000003,8,5,2,cultural policy,0.0007236298,6,5,2,economic development asset,0.0009617572,1,1,1,hop,0.0011091746,10,1,1
+enclave,0.00044366990000000003,4,2,1,urban governance,0.0007236298,6,5,2,examines recent response,0.0009617572,1,1,1,nationalism,0.0010537159,19,1,2
+movement,0.0004143142,18,12,3,new form,0.0007236298,6,6,2,recent development appear,0.0009617572,1,1,1,creative people,0.0009648397,4,4,1
+meaning,0.00039129670000000004,17,11,3,urban music,0.0007236298,3,1,1,closer examination reveals,0.0009617572,1,1,1,creative knowledge,0.0009648397,4,1,1
+product,0.00039129670000000004,17,9,3,mass medium,0.0007236298,3,2,1,inspiring marginal community,0.0009617572,1,1,1,global downtown,0.0009648397,4,2,1
+market,0.00039129670000000004,17,10,3,urban modernity,0.0007236298,3,1,1,three city government,0.0009617572,1,1,1,square dance,0.0009648397,4,1,1
+milieu,0.0003882111,7,6,2,ethnic quarter,0.0007236298,3,1,1,simultaneously bringing redevelopment,0.0009617572,1,1,1,quality product,0.0009648397,4,1,1
+word,0.0003882111,7,5,2,economic development,0.0007007782000000001,14,6,3,consider current research,0.0009617572,1,1,1,bodily practice,0.0009648397,4,1,1
+festival,0.0003882111,7,4,2,public space,0.0005506114,11,6,3,environmental improvement scheme,0.0009617572,1,1,1,creative activity,0.0009648397,4,2,1
+music,0.00034526180000000003,15,6,3,urban regeneration,0.0005005558,10,6,3,public art help,0.0009617572,1,1,1,creative placemaking,0.0009648397,4,1,1
+whilst,0.0003327524,3,3,1,inner working,0.0004824199,2,2,1,specific cultural quarter,0.0009617572,1,1,1,massive financial investment,0.0009617572,1,1,1
+compassion,0.0003327524,3,2,1,obtain job,0.0004824199,2,1,1,city centre area,0.0009617572,1,1,1,flagship regeneration project,0.0009617572,1,1,1
+placemaking,0.0003327524,6,2,2,cultural milieu,0.0004824199,2,2,1,urban design technique,0.0009617572,1,1,1,iconic cultural project,0.0009617572,1,1,1
+border,0.0003327524,6,3,2,revanchist sanitisation,0.0004824199,2,1,1,wider cultural regeneration,0.0009617572,1,1,1,whilst balancing achievement,0.0009617572,1,1,1
+conflict,0.0003327524,6,5,2,street drinking,0.0004824199,2,1,1,diverse urban environment,0.0009617572,1,1,1,last two decade,0.0009617572,2,2,2
+activism,0.0003327524,3,3,1,rough sleeping,0.0004824199,2,1,1,decaying urban landscape,0.0009617572,1,1,1,drawn meaningful insight,0.0009617572,1,1,1
+rise,0.0003327524,6,5,2,inner city,0.0004824199,4,3,2,renewed cultural ambiance,0.0009617572,1,1,1,suggests possible avenue,0.0009617572,1,1,1
+fall,0.0003327524,3,3,1,using culture,0.0004824199,2,2,1,major cultural event,0.0009617572,1,1,1,cultural economic development,0.0009617572,1,1,1
+suburbia,0.0003327524,3,1,1,culture hub,0.0004824199,2,1,1,foreign domestic worker,0.0009617572,1,1,1,way cultural producer,0.0009617572,1,1,1
+texts,0.0003327524,3,3,1,global city,0.0004824199,4,3,2,deserted office district,0.0009617572,1,1,1,producer obtain job,0.0009617572,1,1,1
+gayborhoods,0.0003327524,3,1,1,one hand,0.0004824199,4,4,2,different ethnic community,0.0009617572,1,1,1,key social mechanism,0.0009617572,1,1,1
+significance,0.0003327524,6,4,2,using art,0.0004824199,2,1,1,integration within society,0.0009617572,1,1,1,social mechanism structure,0.0009617572,1,1,1
+lifeworlds,0.0003327524,3,1,1,branding campaign,0.0004824199,2,1,1,public sector play,0.0009617572,1,1,1,clustered production system,0.0009617572,1,1,1
+ethnography,0.0003327524,6,4,2,cultural element,0.0004824199,2,1,1,particular government action,0.0009617572,1,1,1,art social milieu,0.0009617572,1,1,1

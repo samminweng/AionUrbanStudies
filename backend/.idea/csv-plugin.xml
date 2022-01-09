@@ -52,6 +52,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/topics/n_grams/TF-IDF_cluster_topic_n_grams.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/key_phrases/doc_key_phrase/top_key_phrases_cluster_#0.csv">
           <value>
             <Attribute>

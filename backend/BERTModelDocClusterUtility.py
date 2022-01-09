@@ -135,7 +135,8 @@ class BERTModelDocClusterUtility:
                                 size=2, color='gray', opacity=0.3)
                 ))
 
-            title = 'dimension = ' + str(parameter['dimension'])
+            title = 'dimension = ' + str(parameter['dimension']) + ' min samples = ' + str(parameter['min_samples']) + \
+                    ' min cluster size =' + str(parameter['min_cluster_size'])
             # Figure layout
             fig.update_layout(title=title,
                               width=600, height=800,
@@ -146,7 +147,7 @@ class BERTModelDocClusterUtility:
             file_name = file_name + ('_iteration_' + str(parameter['iteration']) if 'iteration' in parameter else '')
             file_path = os.path.join(folder, file_name + ".png")
             pio.write_image(fig, file_path, format='png')
-            print("Output the cluster results to " + file_path)
+            print("Output the images of clustered results to " + file_path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -565,8 +566,8 @@ class BERTModelDocClusterUtility:
         # Store all experiment results
         results = list()
         # Cluster the doc vectors with different parameters
-        for min_samples in [None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
-            for min_cluster_size in range(5, 16):
+        for min_samples in [None] + list(range(1, 21)):
+            for min_cluster_size in range(5, 21):
                 for epsilon in [0.0]:
                     result = {'dimension': dimension,
                               'min_cluster_size': min_cluster_size,
@@ -588,7 +589,7 @@ class BERTModelDocClusterUtility:
                             distances.astype('float64')).tolist()
                         df = pd.DataFrame()
                         df['cluster_labels'] = cluster_labels
-                        df['doc_vectors'] = doc_vectors.tolist()
+                        df['doc_vectors'] = distances.tolist()
                         # Include the cluster labels
                         result['cluster_labels'] = cluster_labels
                         # Collect all the cluster labels as a single list
