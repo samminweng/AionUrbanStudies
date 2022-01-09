@@ -22,7 +22,7 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 class KeyPhraseSimilarity:
     def __init__(self):
         self.args = Namespace(
-            case_name='UrbanDesignCorpus',
+            case_name='CultureUrbanStudyCorpus',
             approach='HDBSCAN',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
@@ -88,6 +88,7 @@ class KeyPhraseSimilarity:
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
+                Path(folder).mkdir(parents=True, exist_ok=True)
                 # Write key phrases to csv file
                 KeyPhraseUtility.output_key_phrases_by_cluster(results, cluster_no, folder)
 
@@ -104,6 +105,7 @@ class KeyPhraseSimilarity:
             df = pd.read_json(path)
             all_key_phrases = reduce(lambda pre, cur: pre + cur, df['key-phrases'].tolist(), list())
             experiment_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
+            Path(experiment_folder).mkdir(parents=True, exist_ok=True)
             # # Cluster all key phrases by using HDBSCAN
             KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(all_key_phrases, cluster_no, self.model,
                                                                      experiment_folder)
