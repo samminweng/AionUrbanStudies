@@ -10,3 +10,6 @@ __pycache__/
 # Ignore the temp vector data
 /output/similarity/temp/*.json
 /.idea/runConfigurations/KeyPhrase.xml
+experiments/hdbscan/
+experiments/hdbscan/images/
+
