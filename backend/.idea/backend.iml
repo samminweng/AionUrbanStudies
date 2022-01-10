@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_0/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_1/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_1/experiments/hdbscan/images" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_2/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_3/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_4/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_5/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_6/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_7/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_8/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_9/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_10/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_11/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_12/experiments/hdbscan" />
+    </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (tf_gpu)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
