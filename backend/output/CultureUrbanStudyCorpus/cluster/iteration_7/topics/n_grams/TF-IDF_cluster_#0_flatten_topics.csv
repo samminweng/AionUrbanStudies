@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+globalization,0.0075533708000000005,6,2,1,structural beauty,0.0105441161,4,1,1,historical city center,0.0221916863,2,1,1,historical city center,0.0221916863,2,1,1
+competition,0.0050355805,4,1,1,design profession,0.0052720581,2,1,1,underlying recent debate,0.0110958431,1,1,1,underlying recent debate,0.0110958431,1,1,1
+beauty,0.0046462074,10,1,2,visual approach,0.0052720581,2,1,1,enforce social assumption,0.0110958431,1,1,1,enforce social assumption,0.0110958431,1,1,1
+space,0.0041815866,9,5,2,global interconnectivity,0.0052720581,2,1,1,concern architectural theory,0.0110958431,1,1,1,concern architectural theory,0.0110958431,1,1,1
+architecture,0.0032523452000000003,7,3,2,living structure,0.0052720581,2,1,1,criticizes two kind,0.0110958431,1,1,1,criticizes two kind,0.0110958431,1,1,1
+image,0.0027877244000000002,6,2,2,historical city,0.0052720581,2,1,1,genuinely urban environment,0.0110958431,1,1,1,genuinely urban environment,0.0110958431,1,1,1
+interconnectivity,0.0025177903,2,1,1,tourist destination,0.0052720581,2,1,1,recognizably different class,0.0110958431,1,1,1,recognizably different class,0.0110958431,1,1,1
+substructure,0.0025177903,2,1,1,urban environment,0.0029186397,3,2,2,among affluent household,0.0110958431,1,1,1,among affluent household,0.0110958431,1,1,1
+article,0.0013938622000000001,3,2,2,contemporary city,0.0029186397,3,1,2,reflecting distinctive geography,0.0110958431,1,1,1,reflecting distinctive geography,0.0110958431,1,1,1
+importance,0.0013938622000000001,3,2,2,late modernism,0.0026360290000000002,1,1,1,key business service,0.0110958431,1,1,1,key business service,0.0110958431,1,1,1
+fashion,0.0013938622000000001,3,1,2,recent debate,0.0026360290000000002,1,1,1,believe good design,0.0110958431,1,1,1,believe good design,0.0110958431,1,1,1
+destination,0.0013938622000000001,3,1,2,architectural practice,0.0026360290000000002,1,1,1,make positive contribution,0.0110958431,1,1,1,make positive contribution,0.0110958431,1,1,1
+modernism,0.0012588951000000001,1,1,1,social assumption,0.0026360290000000002,1,1,1,shaping urban environment,0.0110958431,1,1,1,shaping urban environment,0.0110958431,1,1,1
+identifies,0.0012588951000000001,1,1,1,second concern,0.0026360290000000002,1,1,1,linkage among designer,0.0110958431,1,1,1,linkage among designer,0.0110958431,1,1,1
+localism,0.0012588951000000001,1,1,1,architectural theory,0.0026360290000000002,1,1,1,distinctive social science,0.0110958431,1,1,1,distinctive social science,0.0110958431,1,1,1
+containment,0.0012588951000000001,1,1,1,article identifies,0.0026360290000000002,1,1,1,social science perspective,0.0110958431,1,1,1,social science perspective,0.0110958431,1,1,1
+relativism,0.0012588951000000001,1,1,1,two kind,0.0026360290000000002,1,1,1,designer savvy society,0.0110958431,1,1,1,designer savvy society,0.0110958431,1,1,1
+race,0.0012588951000000001,1,1,1,old way,0.0026360290000000002,1,1,1,international design competition,0.0110958431,1,1,1,international design competition,0.0110958431,1,1,1
+strange,0.0012588951000000001,1,1,1,limited consequence,0.0026360290000000002,1,1,1,urban design relies,0.0110958431,1,1,1,urban design relies,0.0110958431,1,1,1
+aware,0.0012588951000000001,1,1,1,local term,0.0026360290000000002,1,1,1,relies upon promotion,0.0110958431,1,1,1,relies upon promotion,0.0110958431,1,1,1
+product,0.0012588951000000001,1,1,1,different class,0.0026360290000000002,1,1,1,gain public interest,0.0110958431,1,1,1,gain public interest,0.0110958431,1,1,1
+manufacturing,0.0012588951000000001,1,1,1,ethnic origin,0.0026360290000000002,1,1,1,formal public meeting,0.0110958431,1,1,1,formal public meeting,0.0110958431,1,1,1
+spending,0.0012588951000000001,1,1,1,becoming aware,0.0026360290000000002,1,1,1,researching global interconnectivity,0.0110958431,1,1,1,researching global interconnectivity,0.0110958431,1,1,1
+ities,0.0012588951000000001,1,1,1,manufacturing era,0.0026360290000000002,1,1,1,quantitatively supported discourse,0.0110958431,1,1,1,quantitatively supported discourse,0.0110958431,1,1,1
+appraisal,0.0012588951000000001,1,1,1,consumer society,0.0026360290000000002,1,1,1,empirically observable aspect,0.0110958431,1,1,1,empirically observable aspect,0.0110958431,1,1,1
+imprint,0.0012588951000000001,1,1,1,affluent household,0.0026360290000000002,1,1,1,using visual mean,0.0110958431,1,1,1,using visual mean,0.0110958431,1,1,1
+linkage,0.0012588951000000001,1,1,1,every scale,0.0026360290000000002,1,1,1,even different people,0.0110958431,1,1,1,even different people,0.0110958431,1,1,1
+producer,0.0012588951000000001,1,1,1,distinctive geography,0.0026360290000000002,1,1,1,structural beauty arises,0.0110958431,1,1,1,structural beauty arises,0.0110958431,1,1,1
+distributor,0.0012588951000000001,1,1,1,global system,0.0026360290000000002,1,1,1,automatically derived substructure,0.0110958431,1,1,1,automatically derived substructure,0.0110958431,1,1,1
+publishing,0.0012588951000000001,1,1,1,key business,0.0026360290000000002,1,1,1,discovered among others,0.0110958431,1,1,1,discovered among others,0.0110958431,1,1,1
+furniture,0.0012588951000000001,1,1,1,business service,0.0026360290000000002,1,1,1,senior museum administrator,0.0110958431,1,1,1,senior museum administrator,0.0110958431,1,1,1
+couture,0.0012588951000000001,1,1,1,good design,0.0026360290000000002,1,1,1,developing design strategy,0.0110958431,1,1,1,developing design strategy,0.0110958431,1,1,1
+speak,0.0012588951000000001,1,1,1,positive contribution,0.0026360290000000002,1,1,1,two case study,0.0110958431,1,1,1,two case study,0.0110958431,1,1,1
+manipulation,0.0012588951000000001,1,1,1,intellectual root,0.0026360290000000002,1,1,1,proposed urban design,0.0110958431,1,1,1,proposed urban design,0.0110958431,1,1,1
+relies,0.0012588951000000001,1,1,1,critical appraisal,0.0026360290000000002,1,1,1,urban design project,0.0110958431,1,1,1,urban design project,0.0110958431,1,1,1
+imaginary,0.0012588951000000001,1,1,1,material culture,0.0026360290000000002,1,1,1,five different city,0.0110958431,1,1,1,five different city,0.0110958431,1,1,1
+notice,0.0012588951000000001,1,1,1,complex linkage,0.0026360290000000002,1,1,1,perceive edible flower,0.0110958431,1,1,1,perceive edible flower,0.0110958431,1,1,1
+mechanic,0.0012588951000000001,1,1,1,among designer,0.0026360290000000002,1,1,1,possible health risk,0.0110958431,1,1,1,possible health risk,0.0110958431,1,1,1
+everyday,0.0012588951000000001,1,1,1,graphic design,0.0026360290000000002,1,1,1,change governance strategy,0.0110958431,1,1,1,change governance strategy,0.0110958431,1,1,1
+artifact,0.0012588951000000001,1,1,1,interior design,0.0026360290000000002,1,1,1,urban public space,0.0040951456,1,1,2,structural beauty,0.0105441161,4,1,1
+eye,0.0012588951000000001,1,1,1,haute couture,0.0026360290000000002,1,1,1,,0.0,0,0,0,globalization,0.0075533708000000005,6,2,1
+beholder,0.0012588951000000001,1,1,1,science perspective,0.0026360290000000002,1,1,1,,0.0,0,0,0,design profession,0.0052720581,2,1,1
+varies,0.0012588951000000001,1,1,1,presenting city,0.0026360290000000002,1,1,1,,0.0,0,0,0,visual approach,0.0052720581,2,1,1
+subjectivity,0.0012588951000000001,1,1,1,design service,0.0026360290000000002,1,1,1,,0.0,0,0,0,global interconnectivity,0.0052720581,2,1,1
+objectivity,0.0012588951000000001,1,1,1,designed space,0.0026360290000000002,1,1,1,,0.0,0,0,0,living structure,0.0052720581,2,1,1
+coherence,0.0012588951000000001,1,1,1,savvy society,0.0026360290000000002,1,1,1,,0.0,0,0,0,tourist destination,0.0052720581,2,1,1
+subsymmetries,0.0012588951000000001,1,1,1,idea competition,0.0026360290000000002,1,1,1,,0.0,0,0,0,competition,0.0050355805,4,1,1
+arises,0.0012588951000000001,1,1,1,willing participation,0.0026360290000000002,1,1,1,,0.0,0,0,0,beauty,0.0046462074,10,1,2
+wholeness,0.0012588951000000001,1,1,1,gained importance,0.0026360290000000002,1,1,1,,0.0,0,0,0,space,0.0041815866,9,5,2
+pair,0.0012588951000000001,1,1,1,global flow,0.0026360290000000002,1,1,1,,0.0,0,0,0,urban public space,0.0040951456,1,1,2

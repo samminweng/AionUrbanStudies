@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+class,0.01044029,10,2,1,middle class,0.0179200471,8,1,1,urban regime theory,0.033482193300000004,4,1,1,urban regime theory,0.033482193300000004,4,1,1
+regime,0.006264174,6,1,1,regime theory,0.0134400353,6,1,1,urban growth boundary,0.0167410967,2,1,1,middle class,0.0179200471,8,1,1
+city,0.0061651207,16,4,2,urban regime,0.0089600236,4,1,1,examines recent response,0.0083705483,1,1,1,urban growth boundary,0.0167410967,2,1,1
+region,0.0041761160000000005,4,1,1,urban growth,0.006720017700000001,3,2,1,recent development appear,0.0083705483,1,1,1,regime theory,0.0134400353,6,1,1
+street,0.003132087,3,1,1,urban governance,0.006720017700000001,3,1,1,closer examination reveals,0.0083705483,1,1,1,class,0.01044029,10,2,1
+history,0.003132087,3,2,1,revanchist sanitisation,0.0044800118,2,1,1,best managed city,0.0083705483,1,1,1,examines recent response,0.0083705483,1,1,1
+growth,0.003132087,3,2,1,street drinking,0.0044800118,2,1,1,pursue outdoor recreation,0.0083705483,1,1,1,recent development appear,0.0083705483,1,1,1
+norm,0.003132087,3,2,1,rough sleeping,0.0044800118,2,1,1,cooperative urban planning,0.0083705483,1,1,1,closer examination reveals,0.0083705483,1,1,1
+behaviour,0.003132087,3,2,1,public space,0.0044800118,2,1,1,provincial western city,0.0083705483,1,1,1,best managed city,0.0083705483,1,1,1
+interest,0.003132087,3,3,1,brain culture,0.0044800118,2,1,1,toward public good,0.0083705483,1,1,1,pursue outdoor recreation,0.0083705483,1,1,1
+regulation,0.003132087,3,1,1,growth boundary,0.0044800118,2,1,1,whether typical pressure,0.0083705483,1,1,1,cooperative urban planning,0.0083705483,1,1,1
+icon,0.003132087,3,1,1,planning regulation,0.0044800118,2,1,1,understood without reference,0.0083705483,1,1,1,provincial western city,0.0083705483,1,1,1
+artist,0.003132087,3,1,1,cultural icon,0.0044800118,2,1,1,broader regional setting,0.0083705483,1,1,1,toward public good,0.0083705483,1,1,1
+conversation,0.003132087,3,1,1,geographical scale,0.0044800118,2,1,1,distinctive civic culture,0.0083705483,1,1,1,whether typical pressure,0.0083705483,1,1,1
+governance,0.003132087,3,1,1,environmental history,0.0044800118,2,1,1,supports urban progress,0.0083705483,1,1,1,understood without reference,0.0083705483,1,1,1
+scale,0.003132087,3,1,1,urban study,0.0024801586000000003,3,2,2,expansive green space,0.0083705483,1,1,1,broader regional setting,0.0083705483,1,1,1
+action,0.003132087,3,1,1,coercive care,0.0022400059,1,1,1,strong civic participation,0.0083705483,1,1,1,distinctive civic culture,0.0083705483,1,1,1
+theory,0.0030825603,8,2,2,combat begging,0.0022400059,1,1,1,whose unique initiative,0.0083705483,1,1,1,supports urban progress,0.0083705483,1,1,1
+policy,0.0026972403,7,2,2,recent response,0.0022400059,1,1,1,rapidly advancing knowledge,0.0083705483,1,1,1,expansive green space,0.0083705483,1,1,1
+politics,0.0023119203,6,2,2,street culture,0.0022400059,1,1,1,contemporary public policy,0.0083705483,1,1,1,strong civic participation,0.0083705483,1,1,1
+sanitisation,0.0020880580000000003,2,1,1,increasing pressure,0.0022400059,1,1,1,behaviour change policy,0.0083705483,1,1,1,whose unique initiative,0.0083705483,1,1,1
+care,0.0020880580000000003,2,1,1,prevent people,0.0022400059,1,1,1,geographically informed set,0.0083705483,1,1,1,rapidly advancing knowledge,0.0083705483,1,1,1
+enforcement,0.0020880580000000003,2,1,1,enforcement agent,0.0022400059,1,1,1,move towards neoliberalism,0.0083705483,1,1,1,contemporary public policy,0.0083705483,1,1,1
+drinking,0.0020880580000000003,2,1,1,support provider,0.0022400059,1,1,1,fastest growing economy,0.0083705483,1,1,1,behaviour change policy,0.0083705483,1,1,1
+sleeping,0.0020880580000000003,2,1,1,recent development,0.0022400059,1,1,1,new social group,0.0083705483,1,1,1,geographically informed set,0.0083705483,1,1,1
+pressure,0.0020880580000000003,2,2,1,development appear,0.0022400059,1,1,1,three major question,0.0083705483,1,1,1,move towards neoliberalism,0.0083705483,1,1,1
+situation,0.0020880580000000003,2,1,1,first glance,0.0022400059,1,1,1,middle class norm,0.0083705483,1,1,1,fastest growing economy,0.0083705483,1,1,1
+business,0.0020880580000000003,2,2,1,closer examination,0.0022400059,1,1,1,norm take place,0.0083705483,1,1,1,new social group,0.0083705483,1,1,1
+art,0.0020880580000000003,2,2,1,examination reveals,0.0022400059,1,1,1,middle class generate,0.0083705483,1,1,1,three major question,0.0083705483,1,1,1
+ecology,0.0020880580000000003,2,2,1,revanchist reading,0.0022400059,1,1,1,middle class subject,0.0083705483,1,1,1,middle class norm,0.0083705483,1,1,1
+neighborhood,0.0020880580000000003,2,1,1,livable region,0.0022400059,1,1,1,middle class society,0.0083705483,1,1,1,norm take place,0.0083705483,1,1,1
+character,0.0020880580000000003,2,1,1,managed city,0.0022400059,1,1,1,inspired vivid description,0.0083705483,1,1,1,middle class generate,0.0083705483,1,1,1
+setting,0.0020880580000000003,2,1,1,top spot,0.0022400059,1,1,1,read complex meaning,0.0083705483,1,1,1,middle class subject,0.0083705483,1,1,1
+economy,0.0020880580000000003,2,2,1,great place,0.0022400059,1,1,1,simple legal function,0.0083705483,1,1,1,middle class society,0.0083705483,1,1,1
+vision,0.0020880580000000003,2,2,1,outdoor recreation,0.0022400059,1,1,1,increasingly complex way,0.0083705483,1,1,1,inspired vivid description,0.0083705483,1,1,1
+balance,0.0020880580000000003,2,2,1,western city,0.0022400059,1,1,1,examines metaphorical description,0.0083705483,1,1,1,read complex meaning,0.0083705483,1,1,1
+change,0.0020880580000000003,2,2,1,thriving downtown,0.0022400059,1,1,1,many planning project,0.0083705483,1,1,1,simple legal function,0.0083705483,1,1,1
+result,0.0020880580000000003,2,2,1,strong neighborhood,0.0022400059,1,1,1,last two decade,0.0083705483,1,1,1,increasingly complex way,0.0083705483,1,1,1
+neuroscience,0.0020880580000000003,2,1,1,pioneering effort,0.0022400059,1,1,1,account geographical scale,0.0083705483,1,1,1,examines metaphorical description,0.0083705483,1,1,1
+impact,0.0020880580000000003,2,2,1,local management,0.0022400059,1,1,1,wider economic process,0.0083705483,1,1,1,many planning project,0.0083705483,1,1,1
+brain,0.0020880580000000003,2,1,1,steady procession,0.0022400059,1,1,1,regime theory literature,0.0083705483,1,1,1,last two decade,0.0083705483,1,1,1
+risk,0.0020880580000000003,2,1,1,civic leader,0.0022400059,1,1,1,either nicely conjoin,0.0083705483,1,1,1,account geographical scale,0.0083705483,1,1,1
+world,0.0020880580000000003,2,2,1,values dialogue,0.0022400059,1,1,1,gives us access,0.0083705483,1,1,1,wider economic process,0.0083705483,1,1,1
+transformation,0.0020880580000000003,2,2,1,treats politics,0.0022400059,1,1,1,occupy urban space,0.0083705483,1,1,1,regime theory literature,0.0083705483,1,1,1
+body,0.0020880580000000003,2,2,1,civic duty,0.0022400059,1,1,1,urban environmental history,0.0083705483,1,1,1,either nicely conjoin,0.0083705483,1,1,1
+thought,0.0020880580000000003,2,2,1,public good,0.0022400059,1,1,1,,0.0,0,0,0,gives us access,0.0083705483,1,1,1
+debate,0.0020880580000000003,2,2,1,press clipping,0.0022400059,1,1,1,,0.0,0,0,0,occupy urban space,0.0083705483,1,1,1
+boundary,0.0020880580000000003,2,1,1,livable city,0.0022400059,1,1,1,,0.0,0,0,0,urban environmental history,0.0083705483,1,1,1
+description,0.0020880580000000003,2,1,1,typical pressure,0.0022400059,1,1,1,,0.0,0,0,0,urban growth,0.006720017700000001,3,2,1
+supporter,0.0020880580000000003,2,1,1,national norm,0.0022400059,1,1,1,,0.0,0,0,0,urban governance,0.006720017700000001,3,1,1

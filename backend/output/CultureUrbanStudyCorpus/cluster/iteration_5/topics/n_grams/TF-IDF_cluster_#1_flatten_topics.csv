@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+property,0.0032237923,8,1,1,cultural value,0.0028232027,4,1,1,cultural ecosystem service,0.0035873779,2,1,1,cultural ecosystem service,0.0035873779,2,1,1
+waterfront,0.0023796116,16,3,2,floating village,0.0028232027,4,1,1,sustainable floating community,0.0035873779,2,1,1,sustainable floating community,0.0035873779,2,1,1
+redevelopment,0.0020148702000000003,5,2,1,plastic waste,0.0028232027,4,1,1,waste activated carbon,0.0035873779,2,1,1,waste activated carbon,0.0035873779,2,1,1
+removal,0.0020148702000000003,5,1,1,floating community,0.002117402,3,1,1,acid dye wastewater,0.0035873779,2,1,1,acid dye wastewater,0.0035873779,2,1,1
+waste,0.0019334344,13,2,2,cultural ecosystem,0.0014116013,2,1,1,dye wastewater treatment,0.0035873779,2,1,1,dye wastewater treatment,0.0035873779,2,1,1
+mangrove,0.0016118961,4,1,1,ecosystem service,0.0014116013,2,1,1,contemporary cultural ecosystem,0.0017936889,1,1,1,property,0.0032237923,8,1,1
+catalyst,0.0016118961,4,1,1,global urbanism,0.0014116013,2,2,1,ecosystem service value,0.0017936889,1,1,1,cultural value,0.0028232027,4,1,1
+rubber,0.0016118961,4,1,1,pier waterfront,0.0014116013,2,1,1,rapidly urbanizing city,0.0017936889,1,1,1,floating village,0.0028232027,4,1,1
+powder,0.0016118961,4,1,1,tourist attraction,0.0014116013,2,1,1,urbanizing city state,0.0017936889,1,1,1,plastic waste,0.0028232027,4,1,1
+silk,0.0016118961,4,1,1,proposed concept,0.0014116013,2,1,1,undergone rapid urbanization,0.0017936889,1,1,1,waterfront,0.0023796116,16,3,2
+characterization,0.0016118961,4,1,1,methanol dehydration,0.0014116013,2,1,1,natural habitat extent,0.0017936889,1,1,1,floating community,0.002117402,3,1,1
+circuit,0.0012089221000000001,3,2,1,natural rubber,0.0014116013,2,1,1,coastal mangrove forest,0.0017936889,1,1,1,redevelopment,0.0020148702000000003,5,2,1
+ecotourism,0.0012089221000000001,3,1,1,fuel cell,0.0014116013,2,1,1,case study habitat,0.0017936889,1,1,1,removal,0.0020148702000000003,5,1,1
+wastewater,0.0012089221000000001,3,1,1,optical property,0.0014116013,2,1,1,changing cultural value,0.0017936889,1,1,1,waste,0.0019334344,13,2,2
+acid,0.0012089221000000001,3,1,1,silk sericin,0.0014116013,2,1,1,including qualitative archival,0.0017936889,1,1,1,contemporary cultural ecosystem,0.0017936889,1,1,1
+membrane,0.0012089221000000001,3,1,1,bamboo waste,0.0014116013,2,1,1,qualitative archival analysis,0.0017936889,1,1,1,ecosystem service value,0.0017936889,1,1,1
+beam,0.0012089221000000001,3,1,1,activated carbon,0.0014116013,2,1,1,uploaded social medium,0.0017936889,1,1,1,rapidly urbanizing city,0.0017936889,1,1,1
+fuel,0.0012089221000000001,3,1,1,acid dye,0.0014116013,2,1,1,social medium photographs,0.0017936889,1,1,1,urbanizing city state,0.0017936889,1,1,1
+cell,0.0012089221000000001,3,1,1,dye wastewater,0.0014116013,2,1,1,publically accessible mangrove,0.0017936889,1,1,1,undergone rapid urbanization,0.0017936889,1,1,1
+surface,0.0012089221000000001,3,1,1,wastewater treatment,0.0014116013,2,1,1,important cultural role,0.0017936889,1,1,1,natural habitat extent,0.0017936889,1,1,1
+dye,0.0012089221000000001,3,1,1,long beach,0.0014116013,2,1,1,heavily urbanized environment,0.0017936889,1,1,1,coastal mangrove forest,0.0017936889,1,1,1
+speed,0.0012089221000000001,3,1,1,local resident,0.0010419601,4,3,2,given new life,0.0017936889,1,1,1,case study habitat,0.0017936889,1,1,1
+evacuation,0.0012089221000000001,3,1,1,cultural heritage,0.0007814701000000001,3,3,2,analyses three form,0.0017936889,1,1,1,changing cultural value,0.0017936889,1,1,1
+converter,0.0012089221000000001,3,1,1,local people,0.0007814701000000001,3,2,2,include reclaiming functionality,0.0017936889,1,1,1,including qualitative archival,0.0017936889,1,1,1
+aborigine,0.0012089221000000001,3,1,1,cultural identity,0.0007814701000000001,3,2,2,commemorate local culture,0.0017936889,1,1,1,qualitative archival analysis,0.0017936889,1,1,1
+water,0.0010410801,7,3,2,urban culture,0.0007814701000000001,3,2,2,many city aspire,0.0017936889,1,1,1,uploaded social medium,0.0017936889,1,1,1
+landscape,0.0008923544000000001,6,2,2,indigenous people,0.0007814701000000001,3,2,2,create urban landscape,0.0017936889,1,1,1,social medium photographs,0.0017936889,1,1,1
+habitat,0.0008059481,2,1,1,service value,0.0007058007,1,1,1,urban planner hope,0.0017936889,1,1,1,publically accessible mangrove,0.0017936889,1,1,1
+photographs,0.0008059481,2,1,1,urbanizing city,0.0007058007,1,1,1,dominant global influence,0.0017936889,1,1,1,important cultural role,0.0017936889,1,1,1
+reclamation,0.0008059481,2,1,1,city state,0.0007058007,1,1,1,emerging local process,0.0017936889,1,1,1,heavily urbanized environment,0.0017936889,1,1,1
+coast,0.0008059481,2,2,1,location transition,0.0007058007,1,1,1,observation provide evidence,0.0017936889,1,1,1,given new life,0.0017936889,1,1,1
+bay,0.0008059481,2,1,1,rapid urbanization,0.0007058007,1,1,1,urban regeneration project,0.0017936889,1,1,1,analyses three form,0.0017936889,1,1,1
+degradation,0.0008059481,2,2,1,concomitant decline,0.0007058007,1,1,1,traditional architectural element,0.0017936889,1,1,1,include reclaiming functionality,0.0017936889,1,1,1
+dehydration,0.0008059481,2,1,1,natural habitat,0.0007058007,1,1,1,role local government,0.0017936889,1,1,1,commemorate local culture,0.0017936889,1,1,1
+rice,0.0008059481,2,1,1,habitat extent,0.0007058007,1,1,1,market oriented economy,0.0017936889,1,1,1,many city aspire,0.0017936889,1,1,1
+methanol,0.0008059481,2,1,1,coastal mangrove,0.0007058007,1,1,1,historical urban environment,0.0017936889,1,1,1,create urban landscape,0.0017936889,1,1,1
+pyrolysis,0.0008059481,2,1,1,mangrove forest,0.0007058007,1,1,1,must make place,0.0017936889,1,1,1,urban planner hope,0.0017936889,1,1,1
+resin,0.0008059481,2,1,1,study habitat,0.0007058007,1,1,1,certain traditional form,0.0017936889,1,1,1,dominant global influence,0.0017936889,1,1,1
+film,0.0008059481,2,1,1,novel array,0.0007058007,1,1,1,real cultural identity,0.0017936889,1,1,1,emerging local process,0.0017936889,1,1,1
+adsorption,0.0008059481,2,1,1,qualitative archival,0.0007058007,1,1,1,largely unstudied beneath,0.0017936889,1,1,1,observation provide evidence,0.0017936889,1,1,1
+sericin,0.0008059481,2,1,1,archival analysis,0.0007058007,1,1,1,ideologically based neglect,0.0017936889,1,1,1,urban regeneration project,0.0017936889,1,1,1
+filter,0.0008059481,2,1,1,oral history,0.0007058007,1,1,1,includes urban population,0.0017936889,1,1,1,traditional architectural element,0.0017936889,1,1,1
+alloy,0.0008059481,2,1,1,current source,0.0007058007,1,1,1,left little interest,0.0017936889,1,1,1,role local government,0.0017936889,1,1,1
+strain,0.0008059481,2,1,1,medium photographs,0.0007058007,1,1,1,generated considerable change,0.0017936889,1,1,1,market oriented economy,0.0017936889,1,1,1
+copper,0.0008059481,2,1,1,accessible mangrove,0.0007058007,1,1,1,reconsider established research,0.0017936889,1,1,1,historical urban environment,0.0017936889,1,1,1
+heat,0.0008059481,2,1,1,intrapersonal value,0.0007058007,1,1,1,established research preference,0.0017936889,1,1,1,must make place,0.0017936889,1,1,1
+mortar,0.0008059481,2,1,1,interpersonal value,0.0007058007,1,1,1,concern urban historian,0.0017936889,1,1,1,certain traditional form,0.0017936889,1,1,1
+concrete,0.0008059481,2,1,1,different mangrove,0.0007058007,1,1,1,receiving serious attention,0.0017936889,1,1,1,real cultural identity,0.0017936889,1,1,1
+sand,0.0008059481,2,1,1,public accessibility,0.0007058007,1,1,1,pier waterfront redevelopment,0.0017936889,1,1,1,largely unstudied beneath,0.0017936889,1,1,1
+estimation,0.0008059481,2,1,1,evolving degree,0.0007058007,1,1,1,east coast waterfront,0.0017936889,1,1,1,ideologically based neglect,0.0017936889,1,1,1

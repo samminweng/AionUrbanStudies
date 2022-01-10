@@ -1,0 +1,9 @@
+dimension,min_samples,min_cluster_size,epsilon,Silhouette_score,total_clusters,outliers,cluster_results,cluster_labels
+768,,,,0.0,,,,
+15,1.0,5.0,1.0,0.6318177023,3.0,2.0,"[{'cluster_no': -1, 'count': 2}, {'cluster_no': 0, 'count': 5}, {'cluster_no': 1, 'count': 10}]","[0, 1, 1, 1, -1, 1, 0, -1, 1, 1, 1, 1, 1, 0, 1, 0, 0]"
+10,1.0,5.0,1.0,0.27192352000000003,3.0,2.0,"[{'cluster_no': -1, 'count': 2}, {'cluster_no': 0, 'count': 10}, {'cluster_no': 1, 'count': 5}]","[0, 0, 1, 0, -1, 1, 0, -1, 0, 1, 1, 0, 1, 0, 0, 0, 0]"
+9,4.0,5.0,1.0,0.6526198432,3.0,7.0,"[{'cluster_no': -1, 'count': 7}, {'cluster_no': 0, 'count': 5}, {'cluster_no': 1, 'count': 5}]","[0, -1, 1, 0, 0, 1, -1, -1, -1, 1, 1, 1, -1, -1, 0, -1, 0]"
+8,1.0,5.0,1.0,0.34625954130000003,3.0,7.0,"[{'cluster_no': -1, 'count': 7}, {'cluster_no': 0, 'count': 5}, {'cluster_no': 1, 'count': 5}]","[-1, 1, 1, 0, -1, 0, -1, -1, 1, 0, 1, 1, 0, -1, 0, -1, -1]"
+7,,,,0.0,,,,
+6,2.0,6.0,1.0,0.5854595269,3.0,5.0,"[{'cluster_no': -1, 'count': 5}, {'cluster_no': 0, 'count': 6}, {'cluster_no': 1, 'count': 6}]","[-1, 0, 1, 1, 0, 1, 0, 0, 0, 1, -1, 1, 1, -1, -1, 0, -1]"
+5,1.0,6.0,1.0,0.7212226171,3.0,4.0,"[{'cluster_no': -1, 'count': 4}, {'cluster_no': 0, 'count': 6}, {'cluster_no': 1, 'count': 7}]","[0, 1, -1, -1, 0, 1, 0, 1, 1, 1, -1, 1, 1, 0, -1, 0, 0]"

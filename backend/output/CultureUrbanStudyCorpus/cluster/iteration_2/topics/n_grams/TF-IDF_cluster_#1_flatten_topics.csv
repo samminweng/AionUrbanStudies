@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+design,0.0054254059,81,20,2,public space,0.0031775866000000002,24,9,2,public open space,0.0035664052,8,1,2,design,0.0054254059,81,20,2
+bathroom,0.0021778072,12,1,1,experimental study,0.0028699023000000002,8,1,1,control commercial signage,0.0024158038,2,1,1,public open space,0.0035664052,8,1,2
+environment,0.0017414883000000001,26,15,2,mountainous climate,0.0021524267,6,1,1,main design strategy,0.0024158038,2,1,1,public space,0.0031775866000000002,24,9,2
+climate,0.0017414883000000001,26,1,2,urban design,0.0019859916,15,9,2,urban land use,0.0024158038,2,1,1,experimental study,0.0028699023000000002,8,1,1
+quality,0.0015405473,23,14,2,open space,0.0018535922000000001,14,2,2,old city center,0.0024158038,2,1,1,control commercial signage,0.0024158038,2,1,1
+signage,0.0012703875,7,1,1,social health,0.0017936889,5,1,1,designed space relies,0.0024158038,2,2,1,main design strategy,0.0024158038,2,1,1
+process,0.0011386654,17,11,2,humid climate,0.0017936889,5,1,1,designer personal perception,0.0024158038,2,2,1,urban land use,0.0024158038,2,1,1
+use,0.0011386654,17,8,2,small bathroom,0.0017936889,5,1,1,creating great place,0.0024158038,2,1,1,old city center,0.0024158038,2,1,1
+shop,0.0010889036,6,2,1,public apartment,0.0014349511,4,1,1,contemporary public space,0.0024158038,2,1,1,designed space relies,0.0024158038,2,2,1
+behavior,0.0010716851,16,4,2,commercial signage,0.0014349511,4,1,1,day care unit,0.0024158038,2,1,1,designer personal perception,0.0024158038,2,2,1
+system,0.0010047048,15,5,2,design criterion,0.0014349511,4,1,1,evaluation index system,0.0024158038,2,1,1,creating great place,0.0024158038,2,1,1
+art,0.0009377245000000001,14,5,2,climatic comfort,0.0014349511,4,1,1,rural residential building,0.0024158038,2,1,1,contemporary public space,0.0024158038,2,1,1
+user,0.0008707441,13,8,2,architectural space,0.0014349511,4,2,1,sustainable urban area,0.0012079019,1,1,1,day care unit,0.0024158038,2,1,1
+material,0.0008037638,12,4,2,cold region,0.0014349511,4,1,1,create sustainable settlement,0.0012079019,1,1,1,evaluation index system,0.0024158038,2,1,1
+property,0.0008037638,12,2,2,street furniture,0.0010762134,3,1,1,many design policy,0.0012079019,1,1,1,rural residential building,0.0024158038,2,1,1
+effect,0.0008037638,12,3,2,aesthetic image,0.0010762134,3,1,1,inclusive urban design,0.0012079019,1,1,1,bathroom,0.0021778072,12,1,1
+concrete,0.0008037638,12,1,2,behavioral pattern,0.0010762134,3,2,1,urban design consideration,0.0012079019,1,1,1,mountainous climate,0.0021524267,6,1,1
+society,0.0007367835,11,6,2,local observation,0.0010762134,3,1,1,thus large sector,0.0012079019,1,1,1,urban design,0.0019859916,15,9,2
+project,0.0007367835,11,7,2,city scale,0.0010762134,3,1,1,increased car control,0.0012079019,1,1,1,open space,0.0018535922000000001,14,2,2
+technology,0.0007367835,11,5,2,site scale,0.0010762134,3,1,1,without commensurate transport,0.0012079019,1,1,1,social health,0.0017936889,5,1,1
+scale,0.0007367835,11,3,2,natural ventilation,0.0010762134,3,1,1,commensurate transport policy,0.0012079019,1,1,1,humid climate,0.0017936889,5,1,1
+pattern,0.0007367835,11,4,2,universal design,0.0010762134,3,1,1,transport policy alternative,0.0012079019,1,1,1,small bathroom,0.0017936889,5,1,1
+daylight,0.0007259357000000001,4,1,1,experimental research,0.0010762134,3,1,1,safe pedestrian routeways,0.0012079019,1,1,1,environment,0.0017414883000000001,26,15,2
+china,0.0007259357000000001,4,1,1,mechanical property,0.0010762134,3,1,1,inclusive design principle,0.0012079019,1,1,1,climate,0.0017414883000000001,26,1,2
+time,0.0006698032,10,7,2,city space,0.0010762134,3,2,1,also gave rise,0.0012079019,1,1,1,quality,0.0015405473,23,14,2
+region,0.0006698032,10,2,2,poetic dwelling,0.0010762134,3,1,1,becoming undesirable facility,0.0012079019,1,1,1,public apartment,0.0014349511,4,1,1
+health,0.0006028229,9,3,2,city centre,0.0007943967000000001,6,3,2,weakened social health,0.0012079019,1,1,1,commercial signage,0.0014349511,4,1,1
+solution,0.0006028229,9,6,2,case study,0.0007943967000000001,6,5,2,study examined way,0.0012079019,1,1,1,design criterion,0.0014349511,4,1,1
+land,0.0006028229,9,3,2,building plan,0.0007174756000000001,2,1,1,improved building plan,0.0012079019,1,1,1,climatic comfort,0.0014349511,4,1,1
+information,0.0006028229,9,7,2,innovative approach,0.0007174756000000001,2,2,1,mostly favorable view,0.0012079019,1,1,1,architectural space,0.0014349511,4,2,1
+pedestrianization,0.0005444518,3,1,1,visual pollution,0.0007174756000000001,2,1,1,building spare space,0.0012079019,1,1,1,cold region,0.0014349511,4,1,1
+plaza,0.0005444518,3,2,1,environmental quality,0.0007174756000000001,2,2,1,showed vital idea,0.0012079019,1,1,1,signage,0.0012703875,7,1,1
+blindness,0.0005444518,3,1,1,commercial sign,0.0007174756000000001,2,1,1,promoting social health,0.0012079019,1,1,1,sustainable urban area,0.0012079019,1,1,1
+library,0.0005444518,3,1,1,urban contexts,0.0007174756000000001,2,2,1,allow social mixture,0.0012079019,1,1,1,create sustainable settlement,0.0012079019,1,1,1
+ventilation,0.0005444518,3,1,1,urban furniture,0.0007174756000000001,2,1,1,different feasible manner,0.0012079019,1,1,1,many design policy,0.0012079019,1,1,1
+corrosion,0.0005444518,3,1,1,public area,0.0007174756000000001,2,2,1,public space face,0.0012079019,1,1,1,inclusive urban design,0.0012079019,1,1,1
+slag,0.0005444518,3,1,1,paper deal,0.0007174756000000001,2,2,1,different urban contexts,0.0012079019,1,1,1,urban design consideration,0.0012079019,1,1,1
+street,0.0005358426,8,6,2,main design,0.0007174756000000001,2,1,1,different commenrcial signage,0.0012079019,1,1,1,thus large sector,0.0012079019,1,1,1
+evaluation,0.0005358426,8,2,2,glass facade,0.0007174756000000001,2,1,1,commenrcial signage approach,0.0012079019,1,1,1,increased car control,0.0012079019,1,1,1
+case,0.0005358426,8,8,2,architectural concept,0.0007174756000000001,2,2,1,different historic city,0.0012079019,1,1,1,without commensurate transport,0.0012079019,1,1,1
+sustainability,0.0004688622,7,3,2,old city,0.0007174756000000001,2,1,1,contrasting empirical study,0.0012079019,1,1,1,commensurate transport policy,0.0012079019,1,1,1
+centre,0.0004688622,7,4,2,product design,0.0007174756000000001,2,2,1,historic city centre,0.0012079019,1,1,1,transport policy alternative,0.0012079019,1,1,1
+principle,0.0004688622,7,5,2,reference point,0.0007174756000000001,2,1,1,book examines question,0.0012079019,1,1,1,safe pedestrian routeways,0.0012079019,1,1,1
+apartment,0.0004688622,7,2,2,digital information,0.0007174756000000001,2,2,1,commercial signage control,0.0012079019,1,1,1,inclusive design principle,0.0012079019,1,1,1
+perception,0.0004688622,7,4,2,unifying aspect,0.0007174756000000001,2,1,1,signage control management,0.0012079019,1,1,1,also gave rise,0.0012079019,1,1,1
+book,0.0004688622,7,4,2,city instrument,0.0007174756000000001,2,1,1,environment behaviour approach,0.0012079019,1,1,1,becoming undesirable facility,0.0012079019,1,1,1
+furniture,0.0004688622,7,3,2,urban pattern,0.0007174756000000001,2,2,1,fact visual preference,0.0012079019,1,1,1,weakened social health,0.0012079019,1,1,1
+road,0.0004688622,7,5,2,artistic aspect,0.0007174756000000001,2,2,1,recommend general guideline,0.0012079019,1,1,1,study examined way,0.0012079019,1,1,1
+place,0.0004688622,7,4,2,space relies,0.0007174756000000001,2,2,1,recommend design principle,0.0012079019,1,1,1,improved building plan,0.0012079019,1,1,1
+strategy,0.0004688622,7,2,2,personal perception,0.0007174756000000001,2,2,1,create commercial streetscapes,0.0012079019,1,1,1,mostly favorable view,0.0012079019,1,1,1

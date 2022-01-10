@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+event,0.0050601296,31,2,1,typhoid fever,0.0037757797,11,1,1,urban regime theory,0.0046098672,4,1,1,event,0.0050601296,31,2,1
+knowledge,0.0044072097,27,5,1,indigenous knowledge,0.0034325270000000003,10,1,1,ethnic minority group,0.0034574004,3,1,1,urban regime theory,0.0046098672,4,1,1
+year,0.0042439797,26,6,1,middle class,0.0027460216,8,1,1,typhoid fever case,0.0023049336,2,1,1,knowledge,0.0044072097,27,5,1
+festival,0.0042439797,26,1,1,residential standard,0.0027460216,8,1,1,public green space,0.0023049336,2,1,1,year,0.0042439797,26,6,1
+mobility,0.0037542897000000003,23,5,1,new town,0.0024027689,7,1,1,urban growth boundary,0.0023049336,2,1,1,festival,0.0042439797,26,1,1
+book,0.0035910597,22,7,1,smart city,0.0024027689,7,2,1,using social medium,0.0023049336,2,1,1,typhoid fever,0.0037757797,11,1,1
+group,0.0031013698,19,9,1,regime theory,0.0020595162,6,1,1,satisfy project requirement,0.0023049336,2,1,1,mobility,0.0037542897000000003,23,5,1
+fever,0.0021219898,13,1,1,city planning,0.0017162635000000002,5,3,1,decision support system,0.0023049336,2,1,1,book,0.0035910597,22,7,1
+youth,0.0019587599,12,3,1,tourism study,0.0017162635000000002,5,1,1,smart city application,0.0023049336,2,1,1,ethnic minority group,0.0034574004,3,1,1
+theory,0.0019587599,12,6,1,special event,0.0017162635000000002,5,1,1,sustainable urban environment,0.0023049336,2,1,1,indigenous knowledge,0.0034325270000000003,10,1,1
+age,0.0017955299,11,3,1,third place,0.0017162635000000002,5,1,1,tsunami hazard zone,0.0023049336,2,1,1,group,0.0031013698,19,9,1
+class,0.0017955299,11,3,1,urban area,0.0013730108,4,3,1,detect febrile case,0.0011524668,1,1,1,middle class,0.0027460216,8,1,1
+standard,0.0016322999000000001,10,1,1,green space,0.0013730108,4,2,1,fever among preschooler,0.0011524668,1,1,1,residential standard,0.0027460216,8,1,1
+decision,0.0016322999000000001,10,6,1,event activity,0.0013730108,4,1,1,urban study area,0.0011524668,1,1,1,new town,0.0024027689,7,1,1
+coordination,0.0016322999000000001,10,2,1,urban governance,0.0013730108,4,2,1,foreign resident youth,0.0011524668,1,1,1,smart city,0.0024027689,7,2,1
+growth,0.0014690699,9,4,1,urban regime,0.0013730108,4,1,1,investigated leisure activity,0.0011524668,1,1,1,typhoid fever case,0.0023049336,2,1,1
+student,0.0014690699,9,4,1,young people,0.0011401592,9,4,2,facilitate social interaction,0.0011524668,1,1,1,public green space,0.0023049336,2,1,1
+project,0.0014690699,9,5,1,optimum age,0.0010297581,3,1,1,immigrant young people,0.0011524668,1,1,1,urban growth boundary,0.0023049336,2,1,1
+mechanism,0.0014690699,9,5,1,developing country,0.0010297581,3,1,1,urban green space,0.0011524668,1,1,1,using social medium,0.0023049336,2,1,1
+implementation,0.0014690699,9,3,1,social inclusion,0.0010297581,3,2,1,friend across culture,0.0011524668,1,1,1,satisfy project requirement,0.0023049336,2,1,1
+location,0.0013058399000000001,8,5,1,ethnic minority,0.0010297581,3,1,1,examines recent response,0.0011524668,1,1,1,decision support system,0.0023049336,2,1,1
+measure,0.0013058399000000001,8,3,1,minority group,0.0010297581,3,1,1,recent development appear,0.0011524668,1,1,1,smart city application,0.0023049336,2,1,1
+governance,0.0013058399000000001,8,4,1,physical environment,0.0010297581,3,2,1,closer examination reveals,0.0011524668,1,1,1,sustainable urban environment,0.0023049336,2,1,1
+reconstruction,0.0013058399000000001,8,1,1,urban growth,0.0010297581,3,2,1,many different dimension,0.0011524668,1,1,1,tsunami hazard zone,0.0023049336,2,1,1
+incidence,0.0011426099,7,1,1,urban space,0.0010297581,3,3,1,public open scape,0.0011524668,1,1,1,fever,0.0021219898,13,1,1
+immigrant,0.0011426099,7,2,1,social medium,0.0010297581,3,1,1,different ethnic minority,0.0011524668,1,1,1,regime theory,0.0020595162,6,1,1
+range,0.0011426099,7,5,1,local culture,0.0010297581,3,3,1,towards inclusive design,0.0011524668,1,1,1,youth,0.0019587599,12,3,1
+context,0.0011426099,7,6,1,event management,0.0010297581,3,1,1,explores young people,0.0011524668,1,1,1,theory,0.0019587599,12,6,1
+participation,0.0011426099,7,5,1,research interest,0.0010297581,3,1,1,poorer urban area,0.0011524668,1,1,1,age,0.0017955299,11,3,1
+norm,0.0011426099,7,4,1,location choice,0.0010297581,3,1,1,urban young people,0.0011524668,1,1,1,class,0.0017955299,11,3,1
+economy,0.0011426099,7,4,1,new immigrant,0.0010297581,3,1,1,three urban study,0.0011524668,1,1,1,city planning,0.0017162635000000002,5,3,1
+model,0.0011426099,7,4,1,urban life,0.0010297581,3,2,1,urban study site,0.0011524668,1,1,1,tourism study,0.0017162635000000002,5,1,1
+disaster,0.0011426099,7,2,1,city organisation,0.0010297581,3,1,1,links young people,0.0011524668,1,1,1,special event,0.0017162635000000002,5,1,1
+crisis,0.0011426099,7,4,1,social norm,0.0010297581,3,1,1,emerging collective experiment,0.0011524668,1,1,1,third place,0.0017162635000000002,5,1,1
+population,0.0011426099,7,5,1,disaster prevention,0.0010297581,3,1,1,best managed city,0.0011524668,1,1,1,standard,0.0016322999000000001,10,1,1
+regime,0.0011426099,7,2,1,public space,0.0008867905,7,4,2,pursue outdoor recreation,0.0011524668,1,1,1,decision,0.0016322999000000001,10,6,1
+government,0.00108438,18,7,2,urban environment,0.0007601062,6,2,2,cooperative urban planning,0.0011524668,1,1,1,coordination,0.0016322999000000001,10,2,1
+choice,0.0009793799,6,2,1,need vaccination,0.0006865054,2,1,1,provincial western city,0.0011524668,1,1,1,growth,0.0014690699,9,4,1
+typhoid,0.0009793799,6,1,1,active surveillance,0.0006865054,2,1,1,toward public good,0.0011524668,1,1,1,student,0.0014690699,9,4,1
+response,0.0009793799,6,5,1,febrile patient,0.0006865054,2,1,1,whether typical pressure,0.0011524668,1,1,1,project,0.0014690699,9,5,1
+mode,0.0009793799,6,3,1,fever case,0.0006865054,2,1,1,understood without reference,0.0011524668,1,1,1,mechanism,0.0014690699,9,5,1
+movement,0.0009793799,6,5,1,older people,0.0006865054,2,1,1,broader regional setting,0.0011524668,1,1,1,implementation,0.0014690699,9,3,1
+effect,0.0009793799,6,5,1,hospital admission,0.0006865054,2,1,1,distinctive civic culture,0.0011524668,1,1,1,urban area,0.0013730108,4,3,1
+education,0.0009793799,6,4,1,making friend,0.0006865054,2,1,1,supports urban progress,0.0011524668,1,1,1,green space,0.0013730108,4,2,1
+set,0.0009793799,6,5,1,urban forest,0.0006865054,2,1,1,expansive green space,0.0011524668,1,1,1,event activity,0.0013730108,4,1,1
+barrier,0.0009793799,6,1,1,revanchist sanitisation,0.0006865054,2,1,1,strong civic participation,0.0011524668,1,1,1,urban governance,0.0013730108,4,2,1
+policy,0.0009638933000000001,16,7,2,street drinking,0.0006865054,2,1,1,whose unique initiative,0.0011524668,1,1,1,location,0.0013058399000000001,8,5,1
+tourism,0.0009638933000000001,16,1,2,rough sleeping,0.0006865054,2,1,1,record breaking magnitude,0.0011524668,1,1,1,measure,0.0013058399000000001,8,3,1
+system,0.00090365,15,8,2,community organization,0.0006865054,2,2,1,disaster first hand,0.0011524668,1,1,1,governance,0.0013058399000000001,8,4,1
+child,0.0008434066,14,5,2,brain culture,0.0006865054,2,1,1,intergenerational urban space,0.0011524668,1,1,1,reconstruction,0.0013058399000000001,8,1,1

@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+soundscape,0.0271727348,17,4,1,acoustic environment,0.0224150925,7,2,1,road traffic noise,0.0471230869,4,1,1,road traffic noise,0.0471230869,4,1,1
+sound,0.0142240581,13,5,2,road traffic,0.0131519298,6,1,2,hot arid climate,0.0235615434,2,1,1,soundscape,0.0271727348,17,4,1
+noise,0.0120357415,11,2,2,community response,0.0128086243,4,1,1,soundscape evaluation method,0.0235615434,2,1,1,hot arid climate,0.0235615434,2,1,1
+hearing,0.0079919808,5,1,1,traffic noise,0.0128086243,4,1,1,inclusive design research,0.0235615434,2,1,1,soundscape evaluation method,0.0235615434,2,1,1
+traffic,0.0065649499,6,1,2,sound source,0.0128086243,4,1,1,noise control policy,0.0117807717,1,1,1,inclusive design research,0.0235615434,2,1,1
+le,0.006393584700000001,4,1,1,detached house,0.009606468200000001,3,1,1,new multidisciplinary approach,0.0117807717,1,1,1,acoustic environment,0.0224150925,7,2,1
+comfort,0.0054707916,5,2,2,soundscape evaluation,0.009606468200000001,3,1,1,soundscapes across country,0.0117807717,1,1,1,sound,0.0142240581,13,5,2
+questionnaire,0.0054707916,5,3,2,profi le,0.009606468200000001,3,1,1,considers environmental sound,0.0117807717,1,1,1,road traffic,0.0131519298,6,1,2
+disturbance,0.0047951885,3,1,1,city noise,0.009606468200000001,3,1,1,emerging soundscape science,0.0117807717,1,1,1,community response,0.0128086243,4,1,1
+website,0.0047951885,3,1,1,built environment,0.0068529532,8,2,5,significant research activity,0.0117807717,1,1,1,sound source,0.0128086243,4,1,1
+reproduction,0.0043766333,4,1,2,thermal comfort,0.0065759649,3,2,2,last question aim,0.0117807717,1,1,1,noise,0.0120357415,11,2,2
+method,0.0038483292000000002,9,3,5,outdoor place,0.0065759649,3,1,2,outdoor urban space,0.0117807717,1,1,1,noise control policy,0.0117807717,1,1,1
+road,0.0035395228,6,1,4,ten question,0.0064043121,2,1,1,social background matter,0.0117807717,1,1,1,new multidisciplinary approach,0.0117807717,1,1,1
+soundscapes,0.0031967923,2,1,1,soundscape research,0.0064043121,2,1,1,space within city,0.0117807717,1,1,1,soundscapes across country,0.0117807717,1,1,1
+apartment,0.0031967923,2,1,1,arid climate,0.0064043121,2,1,1,increase economic activity,0.0117807717,1,1,1,considers environmental sound,0.0117807717,1,1,1
+headphone,0.0031967923,2,1,1,open space,0.0064043121,2,2,1,open public space,0.0117807717,1,1,1,emerging soundscape science,0.0117807717,1,1,1
+internet,0.0031967923,2,1,1,outdoor space,0.0064043121,2,1,1,two different part,0.0117807717,1,1,1,significant research activity,0.0117807717,1,1,1
+profi,0.0031967923,2,1,1,noise measurement,0.0064043121,2,1,1,similar climatic context,0.0117807717,1,1,1,last question aim,0.0117807717,1,1,1
+soundmarks,0.0031967923,2,1,1,systematic difference,0.0064043121,2,1,1,include structured interview,0.0117807717,1,1,1,outdoor urban space,0.0117807717,1,1,1
+diversity,0.0029496023,5,4,4,activity disturbance,0.0064043121,2,1,1,subjective thermal evaluation,0.0117807717,1,1,1,social background matter,0.0117807717,1,1,1
+survey,0.0029496023,5,3,4,public place,0.0064043121,2,1,1,noise measurement method,0.0117807717,1,1,1,space within city,0.0117807717,1,1,1
+difference,0.0029496023,5,1,4,urban soundscape,0.0064043121,2,1,1,question concerned annoyance,0.0117807717,1,1,1,increase economic activity,0.0117807717,1,1,1
+space,0.0025595018,14,4,7,evaluation method,0.0064043121,2,1,1,activity disturbance indoors,0.0117807717,1,1,1,open public space,0.0117807717,1,1,1
+measurement,0.0023975942,3,2,3,laboratory experiment,0.0064043121,2,1,1,social interaction happen,0.0117807717,1,1,1,two different part,0.0117807717,1,1,1
+behaviour,0.0023975942,3,1,3,soundscape analysis,0.0064043121,2,1,1,considered important part,0.0117807717,1,1,1,similar climatic context,0.0117807717,1,1,1
+experiment,0.0023596819,4,1,4,reproduction system,0.0064043121,2,1,1,life within city,0.0117807717,1,1,1,include structured interview,0.0117807717,1,1,1
+variety,0.0021883166000000003,2,2,2,equitable design,0.0064043121,2,1,1,contrarily increase isolation,0.0117807717,1,1,1,subjective thermal evaluation,0.0117807717,1,1,1
+respondent,0.0021883166000000003,2,2,2,human hearing,0.0064043121,2,1,1,created new challenge,0.0117807717,1,1,1,noise measurement method,0.0117807717,1,1,1
+al,0.0021883166000000003,2,1,2,design research,0.0064043121,2,1,1,urban outdoor place,0.0117807717,1,1,1,question concerned annoyance,0.0117807717,1,1,1
+paradigm,0.0021883166000000003,2,1,2,within city,0.004383976600000001,2,2,2,public outdoor place,0.0117807717,1,1,1,activity disturbance indoors,0.0117807717,1,1,1
+question,0.0021379607,5,2,5,et al,0.004383976600000001,2,1,2,successful open space,0.0117807717,1,1,1,social interaction happen,0.0117807717,1,1,1
+system,0.0020110371000000003,11,1,7,different method,0.004383976600000001,2,1,2,outdoor public place,0.0117807717,1,1,1,considered important part,0.0117807717,1,1,1
+environment,0.0019707002,23,6,8,inclusive design,0.004383976600000001,2,1,2,urban acoustic environment,0.0117807717,1,1,1,life within city,0.0117807717,1,1,1
+science,0.0017697614,3,1,4,historic district,0.004383976600000001,2,1,2,affects many aspect,0.0117807717,1,1,1,contrarily increase isolation,0.0117807717,1,1,1
+aim,0.0017697614,3,3,4,urban space,0.0035454616,3,2,4,without uncomfortable sound,0.0117807717,1,1,1,created new challenge,0.0117807717,1,1,1
+agenda,0.0017697614,3,2,4,noise control,0.0032021561000000003,1,1,1,uncomfortable sound source,0.0117807717,1,1,1,urban outdoor place,0.0117807717,1,1,1
+data,0.0017697614,6,1,6,control policy,0.0032021561000000003,1,1,1,positive perceptual outcome,0.0117807717,1,1,1,public outdoor place,0.0117807717,1,1,1
+house,0.0017103685,4,1,5,multidisciplinary approach,0.0032021561000000003,1,1,1,using several soundscape,0.0117807717,1,1,1,successful open space,0.0117807717,1,1,1
+source,0.0017103685,4,1,5,physical measurement,0.0032021561000000003,1,1,1,several soundscape evaluation,0.0117807717,1,1,1,outdoor public place,0.0117807717,1,1,1
+consideration,0.0017103685,4,2,5,across country,0.0032021561000000003,1,1,1,developed using headphone,0.0117807717,1,1,1,urban acoustic environment,0.0117807717,1,1,1
+outdoors,0.0015983962,1,1,1,environmental sound,0.0032021561000000003,1,1,1,design online questionnaire,0.0117807717,1,1,1,affects many aspect,0.0117807717,1,1,1
+wider,0.0015983962,2,2,3,paper range,0.0032021561000000003,1,1,1,virtual reality system,0.0117807717,1,1,1,without uncomfortable sound,0.0117807717,1,1,1
+relating,0.0015983962,1,1,1,basic definition,0.0032021561000000003,1,1,1,suitable recording system,0.0117807717,1,1,1,uncomfortable sound source,0.0117807717,1,1,1
+annoyance,0.0015983962,1,1,1,emerging soundscape,0.0032021561000000003,1,1,1,acoustic environment reproduction,0.0117807717,1,1,1,positive perceptual outcome,0.0117807717,1,1,1
+indoors,0.0015983962,1,1,1,soundscape science,0.0032021561000000003,1,1,1,urban soundscape evaluation,0.0117807717,1,1,1,using several soundscape,0.0117807717,1,1,1
+resting,0.0015983962,1,1,1,applied topic,0.0032021561000000003,1,1,1,socially equitable design,0.0117807717,1,1,1,several soundscape evaluation,0.0117807717,1,1,1
+balcony,0.0015983962,1,1,1,use soundscape,0.0032021561000000003,1,1,1,received litt le,0.0117807717,1,1,1,developed using headphone,0.0117807717,1,1,1
+vibration,0.0015983962,1,1,1,significant research,0.0032021561000000003,1,1,1,le att ention,0.0117807717,1,1,1,design online questionnaire,0.0117807717,1,1,1
+exhaust,0.0015983962,1,1,1,research activity,0.0032021561000000003,1,1,1,otologically normal hearing,0.0117807717,1,1,1,virtual reality system,0.0117807717,1,1,1
+plurality,0.0015983962,1,1,1,underpinning science,0.0032021561000000003,1,1,1,within inclusive design,0.0117807717,1,1,1,suitable recording system,0.0117807717,1,1,1

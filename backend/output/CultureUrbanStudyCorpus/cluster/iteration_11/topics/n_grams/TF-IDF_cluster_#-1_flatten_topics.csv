@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+fever,0.0057537814000000005,13,1,1,typhoid fever,0.0105600278,11,1,1,urban regime theory,0.0143495114,4,1,1,urban regime theory,0.0143495114,4,1,1
+landscape,0.0044259857,10,6,1,indigenous knowledge,0.0096000252,10,1,1,ethnic minority group,0.010762133600000001,3,1,1,ethnic minority group,0.010762133600000001,3,1,1
+age,0.0039833871,9,1,1,middle class,0.0076800202,8,1,1,typhoid fever case,0.0071747557,2,1,1,typhoid fever,0.0105600278,11,1,1
+measure,0.0035407885,8,3,1,regime theory,0.0057600151,6,1,1,urban growth boundary,0.0071747557,2,1,1,indigenous knowledge,0.0096000252,10,1,1
+reconstruction,0.0035407885,8,1,1,urban regime,0.0038400101,4,1,1,sustainable urban environment,0.0071747557,2,1,1,middle class,0.0076800202,8,1,1
+knowledge,0.0031036493,19,3,2,optimum age,0.0028800076,3,1,1,tsunami hazard zone,0.0071747557,2,1,1,typhoid fever case,0.0071747557,2,1,1
+incidence,0.0030981900000000002,7,1,1,developing country,0.0028800076,3,1,1,detect febrile case,0.0035873779,1,1,1,urban growth boundary,0.0071747557,2,1,1
+disaster,0.0030981900000000002,7,2,1,ethnic minority,0.0028800076,3,1,1,fever among preschooler,0.0035873779,1,1,1,sustainable urban environment,0.0071747557,2,1,1
+choice,0.0026555914000000003,6,2,1,minority group,0.0028800076,3,1,1,urban study area,0.0035873779,1,1,1,tsunami hazard zone,0.0071747557,2,1,1
+typhoid,0.0026555914000000003,6,1,1,everyday life,0.0028800076,3,3,1,examines recent response,0.0035873779,1,1,1,regime theory,0.0057600151,6,1,1
+education,0.0026555914000000003,6,4,1,urban growth,0.0028800076,3,2,1,recent development appear,0.0035873779,1,1,1,fever,0.0057537814000000005,13,1,1
+immigrant,0.0026555914000000003,6,1,1,location choice,0.0028800076,3,1,1,closer examination reveals,0.0035873779,1,1,1,landscape,0.0044259857,10,6,1
+method,0.0022129928000000003,5,3,1,new immigrant,0.0028800076,3,1,1,many different dimension,0.0035873779,1,1,1,age,0.0039833871,9,1,1
+tsunami,0.0022129928000000003,5,2,1,urban governance,0.0028800076,3,1,1,public open scape,0.0035873779,1,1,1,detect febrile case,0.0035873779,1,1,1
+student,0.0022129928000000003,5,3,1,local government,0.0028800076,3,2,1,different ethnic minority,0.0035873779,1,1,1,fever among preschooler,0.0035873779,1,1,1
+area,0.0021235495,13,6,2,disaster prevention,0.0028800076,3,1,1,towards inclusive design,0.0035873779,1,1,1,urban study area,0.0035873779,1,1,1
+government,0.0019601995,12,3,2,need vaccination,0.001920005,2,1,1,emerging collective experiment,0.0035873779,1,1,1,examines recent response,0.0035873779,1,1,1
+range,0.0017703943,4,3,1,active surveillance,0.001920005,2,1,1,best managed city,0.0035873779,1,1,1,recent development appear,0.0035873779,1,1,1
+modernity,0.0017703943,4,2,1,febrile patient,0.001920005,2,1,1,pursue outdoor recreation,0.0035873779,1,1,1,closer examination reveals,0.0035873779,1,1,1
+region,0.0017703943,4,1,1,fever case,0.001920005,2,1,1,cooperative urban planning,0.0035873779,1,1,1,many different dimension,0.0035873779,1,1,1
+revitalization,0.0017703943,4,3,1,older people,0.001920005,2,1,1,provincial western city,0.0035873779,1,1,1,public open scape,0.0035873779,1,1,1
+recovery,0.0017703943,4,2,1,hospital admission,0.001920005,2,1,1,toward public good,0.0035873779,1,1,1,different ethnic minority,0.0035873779,1,1,1
+capacity,0.0017703943,4,2,1,revanchist sanitisation,0.001920005,2,1,1,whether typical pressure,0.0035873779,1,1,1,towards inclusive design,0.0035873779,1,1,1
+zone,0.0017703943,4,1,1,street drinking,0.001920005,2,1,1,understood without reference,0.0035873779,1,1,1,emerging collective experiment,0.0035873779,1,1,1
+class,0.0016334996,10,2,2,rough sleeping,0.001920005,2,1,1,broader regional setting,0.0035873779,1,1,1,best managed city,0.0035873779,1,1,1
+policy,0.0016334996,10,4,2,brain culture,0.001920005,2,1,1,distinctive civic culture,0.0035873779,1,1,1,pursue outdoor recreation,0.0035873779,1,1,1
+vaccine,0.0013277957000000001,3,1,1,growth boundary,0.001920005,2,1,1,supports urban progress,0.0035873779,1,1,1,cooperative urban planning,0.0035873779,1,1,1
+morbidity,0.0013277957000000001,3,1,1,planning regulation,0.001920005,2,1,1,expansive green space,0.0035873779,1,1,1,provincial western city,0.0035873779,1,1,1
+admission,0.0013277957000000001,3,2,1,cultural icon,0.001920005,2,1,1,strong civic participation,0.0035873779,1,1,1,toward public good,0.0035873779,1,1,1
+street,0.0013277957000000001,3,1,1,ethnic group,0.001920005,2,1,1,whose unique initiative,0.0035873779,1,1,1,whether typical pressure,0.0035873779,1,1,1
+suburb,0.0013277957000000001,3,1,1,geographical scale,0.001920005,2,1,1,record breaking magnitude,0.0035873779,1,1,1,understood without reference,0.0035873779,1,1,1
+minority,0.0013277957000000001,3,1,1,environmental history,0.001920005,2,1,1,disaster first hand,0.0035873779,1,1,1,broader regional setting,0.0035873779,1,1,1
+towards,0.0013277957000000001,3,3,1,aboriginal education,0.001920005,2,1,1,rapidly advancing knowledge,0.0035873779,1,1,1,distinctive civic culture,0.0035873779,1,1,1
+experiment,0.0013277957000000001,3,2,1,indigenous people,0.001920005,2,2,1,contemporary public policy,0.0035873779,1,1,1,supports urban progress,0.0035873779,1,1,1
+citizen,0.0013277957000000001,3,3,1,landscape design,0.001920005,2,1,1,behaviour change policy,0.0035873779,1,1,1,expansive green space,0.0035873779,1,1,1
+consequence,0.0013277957000000001,3,3,1,national government,0.001920005,2,1,1,geographically informed set,0.0035873779,1,1,1,strong civic participation,0.0035873779,1,1,1
+expert,0.0013277957000000001,3,3,1,city area,0.001920005,2,1,1,move towards neoliberalism,0.0035873779,1,1,1,whose unique initiative,0.0035873779,1,1,1
+nation,0.0013277957000000001,3,3,1,reconstruction measure,0.001920005,2,1,1,fastest growing economy,0.0035873779,1,1,1,record breaking magnitude,0.0035873779,1,1,1
+earthquake,0.0013277957000000001,3,2,1,prefectural government,0.001920005,2,1,1,new social group,0.0035873779,1,1,1,disaster first hand,0.0035873779,1,1,1
+institution,0.0013277957000000001,3,3,1,hazard zone,0.001920005,2,1,1,three major question,0.0035873779,1,1,1,rapidly advancing knowledge,0.0035873779,1,1,1
+hand,0.0013277957000000001,3,2,1,formal knowledge,0.001920005,2,1,1,middle class norm,0.0035873779,1,1,1,contemporary public policy,0.0035873779,1,1,1
+behaviour,0.0013277957000000001,3,2,1,decision making,0.001920005,2,1,1,norm take place,0.0035873779,1,1,1,behaviour change policy,0.0035873779,1,1,1
+interpretation,0.0013277957000000001,3,1,1,urban environment,0.0017715418,5,1,2,middle class generate,0.0035873779,1,1,1,geographically informed set,0.0035873779,1,1,1
+regulation,0.0013277957000000001,3,1,1,urban study,0.0014172335000000001,4,3,2,middle class subject,0.0035873779,1,1,1,move towards neoliberalism,0.0035873779,1,1,1
+icon,0.0013277957000000001,3,1,1,preschool year,0.0009600025,1,1,1,middle class society,0.0035873779,1,1,1,fastest growing economy,0.0035873779,1,1,1
+artist,0.0013277957000000001,3,1,1,longitudinal study,0.0009600025,1,1,1,inspired vivid description,0.0035873779,1,1,1,new social group,0.0035873779,1,1,1
+conversation,0.0013277957000000001,3,1,1,case detection,0.0009600025,1,1,1,read complex meaning,0.0035873779,1,1,1,three major question,0.0035873779,1,1,1
+concentration,0.0013277957000000001,3,1,1,baseline census,0.0009600025,1,1,1,simple legal function,0.0035873779,1,1,1,middle class norm,0.0035873779,1,1,1
+scale,0.0013277957000000001,3,1,1,febrile case,0.0009600025,1,1,1,increasingly complex way,0.0035873779,1,1,1,norm take place,0.0035873779,1,1,1
+action,0.0013277957000000001,3,1,1,incidence rate,0.0009600025,1,1,1,examines metaphorical description,0.0035873779,1,1,1,middle class generate,0.0035873779,1,1,1

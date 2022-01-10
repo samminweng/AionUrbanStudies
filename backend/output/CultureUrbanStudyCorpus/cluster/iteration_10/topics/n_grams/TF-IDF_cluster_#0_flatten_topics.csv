@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+festival,0.0186543648,26,1,1,tourism study,0.0081143071,5,1,1,public green space,0.0112263825,2,1,1,festival,0.0186543648,26,1,1
+tourism,0.0114796091,16,1,1,special event,0.0081143071,5,1,1,using social medium,0.0112263825,2,1,1,tourism,0.0114796091,16,1,1
+event,0.0079439666,30,1,2,event activity,0.0064914456,4,1,1,foreign resident youth,0.0056131912,1,1,1,public green space,0.0112263825,2,1,1
+number,0.0028699023000000002,4,3,1,social inclusion,0.0048685842000000005,3,2,1,investigated leisure activity,0.0056131912,1,1,1,using social medium,0.0112263825,2,1,1
+popularity,0.0028699023000000002,4,2,1,social medium,0.0048685842000000005,3,1,1,facilitate social interaction,0.0056131912,1,1,1,tourism study,0.0081143071,5,1,1
+visitor,0.0028699023000000002,4,2,1,event management,0.0048685842000000005,3,1,1,immigrant young people,0.0056131912,1,1,1,special event,0.0081143071,5,1,1
+topic,0.0028699023000000002,4,1,1,research interest,0.0048685842000000005,3,1,1,urban green space,0.0056131912,1,1,1,event,0.0079439666,30,1,2
+journal,0.0028699023000000002,4,1,1,making friend,0.0032457228,2,1,1,friend across culture,0.0056131912,1,1,1,event activity,0.0064914456,4,1,1
+activity,0.0026479889000000003,10,4,2,urban forest,0.0032457228,2,1,1,intergenerational urban space,0.0056131912,1,1,1,foreign resident youth,0.0056131912,1,1,1
+inclusion,0.0021524267,3,2,1,different group,0.0032457228,2,1,1,integrate young people,0.0056131912,1,1,1,investigated leisure activity,0.0056131912,1,1,1
+restaurant,0.0021524267,3,1,1,key concept,0.0032457228,2,1,1,paper describes approach,0.0056131912,1,1,1,facilitate social interaction,0.0056131912,1,1,1
+discipline,0.0021524267,3,1,1,contemporary society,0.0032457228,2,1,1,effectively involve youth,0.0056131912,1,1,1,immigrant young people,0.0056131912,1,1,1
+enquiry,0.0021524267,3,1,1,academic study,0.0032457228,2,1,1,embed diverse youth,0.0056131912,1,1,1,urban green space,0.0056131912,1,1,1
+sociability,0.0021524267,3,1,1,social life,0.0032457228,2,1,1,diverse youth voice,0.0056131912,1,1,1,friend across culture,0.0056131912,1,1,1
+street,0.0018535922000000001,7,2,2,green space,0.0017968496,3,1,2,street view image,0.0056131912,1,1,1,intergenerational urban space,0.0056131912,1,1,1
+concept,0.0018535922000000001,7,1,2,young people,0.0017968496,3,2,2,build livable neighborhood,0.0056131912,1,1,1,integrate young people,0.0056131912,1,1,1
+book,0.0018535922000000001,7,1,2,city planning,0.0017968496,3,1,2,appropriate data source,0.0056131912,1,1,1,paper describes approach,0.0056131912,1,1,1
+knowledge,0.0018535922000000001,7,1,2,public space,0.0017968496,3,1,2,different activity pattern,0.0056131912,1,1,1,effectively involve youth,0.0056131912,1,1,1
+interest,0.0018535922000000001,7,1,2,different culture,0.0016228614,1,1,1,social medium behavior,0.0056131912,1,1,1,embed diverse youth,0.0056131912,1,1,1
+youth,0.0015887933000000001,6,2,2,distinct culture,0.0016228614,1,1,1,yet popular restaurant,0.0056131912,1,1,1,diverse youth voice,0.0056131912,1,1,1
+year,0.0015887933000000001,6,1,2,resident youth,0.0016228614,1,1,1,unpopular outdoor place,0.0056131912,1,1,1,street view image,0.0056131912,1,1,1
+forest,0.0014349511,2,1,1,educational institution,0.0016228614,1,1,1,potential recreational area,0.0056131912,1,1,1,build livable neighborhood,0.0056131912,1,1,1
+park,0.0014349511,2,2,1,empirical survey,0.0016228614,1,1,1,regarding urban design,0.0056131912,1,1,1,appropriate data source,0.0056131912,1,1,1
+leisure,0.0014349511,2,2,1,selected school,0.0016228614,1,1,1,invaluable reference source,0.0056131912,1,1,1,different activity pattern,0.0056131912,1,1,1
+contact,0.0014349511,2,2,1,metropolitan area,0.0016228614,1,1,1,series provides student,0.0056131912,1,1,1,social medium behavior,0.0056131912,1,1,1
+editor,0.0014349511,2,1,1,investigated leisure,0.0016228614,1,1,1,encourages critical evaluation,0.0056131912,1,1,1,yet popular restaurant,0.0056131912,1,1,1
+marketing,0.0014349511,2,1,1,leisure activity,0.0016228614,1,1,1,key research interest,0.0056131912,1,1,1,unpopular outdoor place,0.0056131912,1,1,1
+motivation,0.0014349511,2,1,1,social interaction,0.0016228614,1,1,1,various edited book,0.0056131912,1,1,1,potential recreational area,0.0056131912,1,1,1
+link,0.0014349511,2,1,1,outdoor location,0.0016228614,1,1,1,edited book collection,0.0056131912,1,1,1,regarding urban design,0.0056131912,1,1,1
+innovation,0.0014349511,2,1,1,school level,0.0016228614,1,1,1,teaching interest mirror,0.0056131912,1,1,1,invaluable reference source,0.0056131912,1,1,1
+taxonomy,0.0014349511,2,1,1,residential area,0.0016228614,1,1,1,postgraduate tourism management,0.0056131912,1,1,1,series provides student,0.0056131912,1,1,1
+growth,0.0013239944000000001,5,1,2,making contact,0.0016228614,1,1,1,event management programme,0.0056131912,1,1,1,encourages critical evaluation,0.0056131912,1,1,1
+sector,0.0013239944000000001,5,1,2,across culture,0.0016228614,1,1,1,programme teaching module,0.0056131912,1,1,1,key research interest,0.0056131912,1,1,1
+perspective,0.0013239944000000001,5,1,2,marginalized population,0.0016228614,1,1,1,international festival environment,0.0056131912,1,1,1,various edited book,0.0056131912,1,1,1
+child,0.0010591955000000001,4,2,2,accommodate child,0.0016228614,1,1,1,event represented nouveau,0.0056131912,1,1,1,edited book collection,0.0056131912,1,1,1
+student,0.0010591955000000001,4,1,2,welcoming space,0.0016228614,1,1,1,simply unimaginable today,0.0056131912,1,1,1,teaching interest mirror,0.0056131912,1,1,1
+volume,0.0010591955000000001,4,1,2,city agency,0.0016228614,1,1,1,one annual festival,0.0056131912,1,1,1,postgraduate tourism management,0.0056131912,1,1,1
+economy,0.0010591955000000001,4,1,2,civic area,0.0016228614,1,1,1,important communal celebration,0.0056131912,1,1,1,event management programme,0.0056131912,1,1,1
+friend,0.0007943967000000001,3,1,2,active citizenship,0.0016228614,1,1,1,festival per year,0.0056131912,1,1,1,programme teaching module,0.0056131912,1,1,1
+medium,0.0007943967000000001,3,1,2,young age,0.0016228614,1,1,1,held every year,0.0056131912,1,1,1,international festival environment,0.0056131912,1,1,1
+image,0.0007943967000000001,3,1,2,describes approach,0.0016228614,1,1,1,special event industry,0.0056131912,1,1,1,event represented nouveau,0.0056131912,1,1,1
+understanding,0.0007943967000000001,3,2,2,involve youth,0.0016228614,1,1,1,regularly occurring event,0.0056131912,1,1,1,simply unimaginable today,0.0056131912,1,1,1
+term,0.0007943967000000001,3,1,2,underrepresented population,0.0016228614,1,1,1,event management profession,0.0056131912,1,1,1,one annual festival,0.0056131912,1,1,1
+question,0.0007943967000000001,3,1,2,diverse youth,0.0016228614,1,1,1,also finds expression,0.0056131912,1,1,1,important communal celebration,0.0056131912,1,1,1
+range,0.0007943967000000001,3,2,2,youth voice,0.0016228614,1,1,1,broadly positive phenomenon,0.0056131912,1,1,1,festival per year,0.0056131912,1,1,1
+diversity,0.0007943967000000001,3,2,2,inconspicuous place,0.0016228614,1,1,1,fostering community spirit,0.0056131912,1,1,1,held every year,0.0056131912,1,1,1
+impact,0.0007943967000000001,3,1,2,street view,0.0016228614,1,1,1,shaping appropriate policy,0.0056131912,1,1,1,special event industry,0.0056131912,1,1,1
+pupil,0.0007174756000000001,1,1,1,view image,0.0016228614,1,1,1,involves reviewing literature,0.0056131912,1,1,1,regularly occurring event,0.0056131912,1,1,1
+gender,0.0007174756000000001,1,1,1,wine taste,0.0016228614,1,1,1,beyond economic impact,0.0056131912,1,1,1,event management profession,0.0056131912,1,1,1
+percentage,0.0007174756000000001,1,1,1,popular place,0.0016228614,1,1,1,developed within tourism,0.0056131912,1,1,1,also finds expression,0.0056131912,1,1,1

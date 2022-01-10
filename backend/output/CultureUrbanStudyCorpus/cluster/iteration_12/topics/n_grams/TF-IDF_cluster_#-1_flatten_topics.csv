@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+immigrant,0.017142081,6,1,1,urban environment,0.0318080836,5,1,1,ethnic minority group,0.08419786850000001,3,1,1,ethnic minority group,0.08419786850000001,3,1,1
+location,0.0142850675,5,2,1,ethnic minority,0.0190848502,3,1,1,sustainable urban environment,0.0561319123,2,1,1,sustainable urban environment,0.0561319123,2,1,1
+range,0.011428054,4,3,1,minority group,0.0190848502,3,1,1,many different dimension,0.028065956200000002,1,1,1,urban environment,0.0318080836,5,1,1
+environment,0.009489948100000001,9,2,2,location choice,0.0190848502,3,1,1,public open scape,0.028065956200000002,1,1,1,many different dimension,0.028065956200000002,1,1,1
+suburb,0.0085710405,3,1,1,new immigrant,0.0190848502,3,1,1,different ethnic minority,0.028065956200000002,1,1,1,public open scape,0.028065956200000002,1,1,1
+minority,0.0085710405,3,1,1,case study,0.0127232335,2,1,1,towards inclusive design,0.028065956200000002,1,1,1,different ethnic minority,0.028065956200000002,1,1,1
+concentration,0.0085710405,3,1,1,ethnic group,0.0127232335,2,1,1,similar ethnic background,0.028065956200000002,1,1,1,towards inclusive design,0.028065956200000002,1,1,1
+dimension,0.005714027,2,2,1,landscape design,0.0127232335,2,1,1,particular ethnic group,0.028065956200000002,1,1,1,similar ethnic background,0.028065956200000002,1,1,1
+perception,0.005714027,2,2,1,suburban definition,0.0063616167,1,1,1,local ethnic community,0.028065956200000002,1,1,1,particular ethnic group,0.028065956200000002,1,1,1
+person,0.005714027,2,1,1,topical issue,0.0063616167,1,1,1,also significant determinant,0.028065956200000002,1,1,1,local ethnic community,0.028065956200000002,1,1,1
+formation,0.005714027,2,1,1,different dimension,0.0063616167,1,1,1,organized human environment,0.028065956200000002,1,1,1,also significant determinant,0.028065956200000002,1,1,1
+man,0.005714027,2,1,1,transportation mode,0.0063616167,1,1,1,create sustainable environment,0.028065956200000002,1,1,1,organized human environment,0.028065956200000002,1,1,1
+choice,0.0031633160000000002,3,1,2,physical appearance,0.0063616167,1,1,1,,0.0,0,0,0,create sustainable environment,0.028065956200000002,1,1,1
+space,0.0031633160000000002,3,1,2,one approach,0.0063616167,1,1,1,,0.0,0,0,0,location choice,0.0190848502,3,1,1
+definition,0.0028570135,1,1,1,greater precision,0.0063616167,1,1,1,,0.0,0,0,0,new immigrant,0.0190848502,3,1,1
+structure,0.0028570135,1,1,1,suburb shape,0.0063616167,1,1,1,,0.0,0,0,0,immigrant,0.017142081,6,1,1
+transportation,0.0028570135,1,1,1,open scape,0.0063616167,1,1,1,,0.0,0,0,0,location,0.0142850675,5,2,1
+mode,0.0028570135,1,1,1,inclusive landscape,0.0063616167,1,1,1,,0.0,0,0,0,case study,0.0127232335,2,1,1
+appearance,0.0028570135,1,1,1,physical environment,0.0063616167,1,1,1,,0.0,0,0,0,ethnic group,0.0127232335,2,1,1
+confusion,0.0028570135,1,1,1,negative role,0.0063616167,1,1,1,,0.0,0,0,0,landscape design,0.0127232335,2,1,1
+precision,0.0028570135,1,1,1,symbolic dimension,0.0063616167,1,1,1,,0.0,0,0,0,range,0.011428054,4,3,1
+semantics,0.0028570135,1,1,1,wide variety,0.0063616167,1,1,1,,0.0,0,0,0,environment,0.009489948100000001,9,2,2
+shape,0.0028570135,1,1,1,discuss design,0.0063616167,1,1,1,,0.0,0,0,0,suburb,0.0085710405,3,1,1
+scape,0.0028570135,1,1,1,management practice,0.0063616167,1,1,1,,0.0,0,0,0,concentration,0.0085710405,3,1,1
+living,0.0028570135,1,1,1,cultural experience,0.0063616167,1,1,1,,0.0,0,0,0,suburban definition,0.0063616167,1,1,1
+aspect,0.0028570135,1,1,1,landscape architect,0.0063616167,1,1,1,,0.0,0,0,0,topical issue,0.0063616167,1,1,1
+variety,0.0028570135,1,1,1,different way,0.0063616167,1,1,1,,0.0,0,0,0,transportation mode,0.0063616167,1,1,1
+architect,0.0028570135,1,1,1,work towards,0.0063616167,1,1,1,,0.0,0,0,0,physical appearance,0.0063616167,1,1,1
+manager,0.0028570135,1,1,1,inclusive design,0.0063616167,1,1,1,,0.0,0,0,0,one approach,0.0063616167,1,1,1
+bound,0.0028570135,1,1,1,important role,0.0063616167,1,1,1,,0.0,0,0,0,greater precision,0.0063616167,1,1,1
+clustering,0.0028570135,1,1,1,geographic area,0.0063616167,1,1,1,,0.0,0,0,0,suburb shape,0.0063616167,1,1,1
+background,0.0028570135,1,1,1,ethnic background,0.0063616167,1,1,1,,0.0,0,0,0,inclusive landscape,0.0063616167,1,1,1
+guidance,0.0028570135,1,1,1,important source,0.0063616167,1,1,1,,0.0,0,0,0,physical environment,0.0063616167,1,1,1
+factor,0.0028570135,1,1,1,personal support,0.0063616167,1,1,1,,0.0,0,0,0,negative role,0.0063616167,1,1,1
+chance,0.0028570135,1,1,1,unobservable factor,0.0063616167,1,1,1,,0.0,0,0,0,symbolic dimension,0.0063616167,1,1,1
+size,0.0028570135,1,1,1,location decision,0.0063616167,1,1,1,,0.0,0,0,0,wide variety,0.0063616167,1,1,1
+characteristic,0.0028570135,1,1,1,particular area,0.0063616167,1,1,1,,0.0,0,0,0,discuss design,0.0063616167,1,1,1
+attraction,0.0028570135,1,1,1,significant effect,0.0063616167,1,1,1,,0.0,0,0,0,management practice,0.0063616167,1,1,1
+degree,0.0028570135,1,1,1,personal characteristic,0.0063616167,1,1,1,,0.0,0,0,0,cultural experience,0.0063616167,1,1,1
+profile,0.0028570135,1,1,1,ethnic concentration,0.0063616167,1,1,1,,0.0,0,0,0,landscape architect,0.0063616167,1,1,1
+determinant,0.0028570135,1,1,1,university degree,0.0063616167,1,1,1,,0.0,0,0,0,different way,0.0063616167,1,1,1
+relation,0.0028570135,1,1,1,ethnic community,0.0063616167,1,1,1,,0.0,0,0,0,work towards,0.0063616167,1,1,1
+existence,0.0028570135,1,1,1,language profile,0.0063616167,1,1,1,,0.0,0,0,0,important role,0.0063616167,1,1,1
+heritage,0.0028570135,1,1,1,significant determinant,0.0063616167,1,1,1,,0.0,0,0,0,geographic area,0.0063616167,1,1,1
+fit,0.0028570135,1,1,1,article deal,0.0063616167,1,1,1,,0.0,0,0,0,important source,0.0063616167,1,1,1
+behavior,0.0028570135,1,1,1,human existence,0.0063616167,1,1,1,,0.0,0,0,0,personal support,0.0063616167,1,1,1
+solution,0.0028570135,1,1,1,physical health,0.0063616167,1,1,1,,0.0,0,0,0,unobservable factor,0.0063616167,1,1,1
+technique,0.0028570135,1,1,1,departmental point,0.0063616167,1,1,1,,0.0,0,0,0,location decision,0.0063616167,1,1,1
+creative,0.0028570135,1,1,1,human environment,0.0063616167,1,1,1,,0.0,0,0,0,particular area,0.0063616167,1,1,1
+term,0.0021088774,2,1,2,emotional state,0.0063616167,1,1,1,,0.0,0,0,0,significant effect,0.0063616167,1,1,1

@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+transit,0.0029976204,12,4,1,neighborhood design,0.0058964522,12,1,1,urban neighborhood design,0.0088355788,6,1,1,urban neighborhood design,0.0088355788,6,1,1
+neighborhood,0.002212665,24,5,2,modality environment,0.0044223391,9,1,1,neighborhood design concept,0.0088355788,6,1,1,neighborhood design concept,0.0088355788,6,1,1
+walking,0.0019984136,8,3,1,urban neighborhood,0.0029482261,6,1,1,changing public life,0.0044177894,3,1,1,neighborhood design,0.0058964522,12,1,1
+mobility,0.0017516932,19,6,2,transit village,0.0024568551,5,1,1,theoretical urban neighborhood,0.0044177894,3,1,1,modality environment,0.0044223391,9,1,1
+rail,0.0017486119,7,2,1,social capital,0.0021762051,12,1,2,neighborhood urban design,0.0044177894,3,1,1,changing public life,0.0044177894,3,1,1
+mindset,0.0017486119,7,1,1,public transport,0.0019654841,4,3,1,medium size city,0.0044177894,3,1,1,theoretical urban neighborhood,0.0044177894,3,1,1
+vehicle,0.0015673044,17,3,2,sustainable transportation,0.0019654841,4,2,1,sustainable active mobility,0.0029451929,2,1,1,neighborhood urban design,0.0044177894,3,1,1
+diffusion,0.0014988102,6,1,1,active mobility,0.0019654841,4,1,1,foster social capital,0.0029451929,2,1,1,medium size city,0.0044177894,3,1,1
+strategy,0.0013829156,15,5,2,walking mindset,0.0019654841,4,1,1,sustainable social innovation,0.0029451929,2,1,1,transit,0.0029976204,12,4,1
+infrastructure,0.0012907213,14,11,2,central place,0.0019654841,4,1,1,current global situation,0.0029451929,2,1,1,sustainable active mobility,0.0029451929,2,1,1
+capital,0.0012907213,14,3,2,smart city,0.0018135042000000001,10,3,2,vehicle type choice,0.0029451929,2,1,1,foster social capital,0.0029451929,2,1,1
+realm,0.0012490085,5,3,1,business model,0.001474113,3,2,1,prevalent transport problem,0.0014725965,1,1,1,sustainable social innovation,0.0029451929,2,1,1
+corridor,0.0012490085,5,2,1,sustainable mobility,0.001474113,3,2,1,well informal factor,0.0014725965,1,1,1,current global situation,0.0029451929,2,1,1
+policy,0.0011985269,13,8,2,heterotopia concept,0.001474113,3,1,1,different analytical level,0.0014725965,1,1,1,vehicle type choice,0.0029451929,2,1,1
+transportation,0.0011063325,12,3,2,vehicle type,0.001474113,3,1,1,multiple case study,0.0014725965,1,1,1,transit village,0.0024568551,5,1,1
+transport,0.0010141381,11,4,2,vehicle use,0.001474113,3,1,1,factor included legislation,0.0014725965,1,1,1,neighborhood,0.002212665,24,5,2
+density,0.0010141381,11,3,2,medium size,0.001474113,3,1,1,legislation concerning transport,0.0014725965,1,1,1,social capital,0.0021762051,12,1,2
+implementation,0.0009219438,10,6,2,size city,0.001474113,3,1,1,appropriate business model,0.0014725965,1,1,1,walking,0.0019984136,8,3,1
+street,0.0009219438,10,5,2,public life,0.0012694529,7,2,2,provide several implication,0.0014725965,1,1,1,public transport,0.0019654841,4,3,1
+world,0.0009219438,10,6,2,design concept,0.0010881025,6,1,2,private sector actor,0.0014725965,1,1,1,sustainable transportation,0.0019654841,4,2,1
+stranger,0.0007494051,3,1,1,urban planning,0.0010881025,6,4,2,adjusting relevant regulation,0.0014725965,1,1,1,active mobility,0.0019654841,4,1,1
+heterotopia,0.0007494051,3,1,1,transport service,0.000982742,2,2,1,creating conducive condition,0.0014725965,1,1,1,walking mindset,0.0019654841,4,1,1
+avenue,0.0007494051,3,1,1,mixed use,0.000982742,2,2,1,planning urban design,0.0014725965,1,1,1,central place,0.0019654841,4,1,1
+safety,0.0007375550000000001,8,4,2,second edition,0.000982742,2,1,1,private transport service,0.0014725965,1,1,1,smart city,0.0018135042000000001,10,3,2
+purpose,0.0007375550000000001,8,5,2,diffusion process,0.000982742,2,1,1,privately owned car,0.0014725965,1,1,1,mobility,0.0017516932,19,6,2
+road,0.0006453606,7,2,2,public realm,0.000982742,2,1,1,road marking force,0.0014725965,1,1,1,rail,0.0017486119,7,2,1
+settlement,0.0006453606,7,1,2,positive interaction,0.000982742,2,1,1,marking force motorist,0.0014725965,1,1,1,mindset,0.0017486119,7,1,1
+woman,0.0006453606,7,2,2,safety concern,0.000982742,2,1,1,use eye contact,0.0014725965,1,1,1,vehicle,0.0015673044,17,3,2
+governance,0.0006453606,7,2,2,informatiologic condition,0.000982742,2,1,1,attractive urban environment,0.0014725965,1,1,1,diffusion,0.0014988102,6,1,1
+framework,0.0005531663,6,6,2,rural settlement,0.000982742,2,1,1,standard traffic infrastructure,0.0014725965,1,1,1,business model,0.001474113,3,2,1
+economy,0.0005531663,6,4,2,changing discourse,0.000982742,2,1,1,urban public transit,0.0014725965,1,1,1,sustainable mobility,0.001474113,3,2,1
+learning,0.0005531663,6,1,2,design context,0.000982742,2,1,1,public transit system,0.0014725965,1,1,1,heterotopia concept,0.001474113,3,1,1
+change,0.0005531663,6,6,2,design feature,0.000982742,2,1,1,new transit hubs,0.0014725965,1,1,1,vehicle type,0.001474113,3,1,1
+appropriate,0.0004996034,2,2,1,design principle,0.000982742,2,1,1,implement transit village,0.0014725965,1,1,1,vehicle use,0.001474113,3,1,1
+walkability,0.0004996034,2,1,1,world space,0.000982742,2,1,1,encourage transit ridership,0.0014725965,1,1,1,prevalent transport problem,0.0014725965,1,1,1
+employment,0.0004996034,2,2,1,social innovation,0.000982742,2,1,1,investing large fund,0.0014725965,1,1,1,well informal factor,0.0014725965,1,1,1
+commuter,0.0004996034,2,2,1,exploratory analysis,0.000982742,2,1,1,encourage sustainable development,0.0014725965,1,1,1,different analytical level,0.0014725965,1,1,1
+business,0.0004609719,5,4,2,global situation,0.000982742,2,1,1,supporting better transport,0.0014725965,1,1,1,multiple case study,0.0014725965,1,1,1
+village,0.0004609719,5,1,2,urban mobility,0.000982742,2,2,1,better transport integration,0.0014725965,1,1,1,factor included legislation,0.0014725965,1,1,1
+growth,0.0004609719,5,3,2,new definition,0.000982742,2,2,1,promote sustainable development,0.0014725965,1,1,1,legislation concerning transport,0.0014725965,1,1,1
+time,0.0004609719,5,5,2,type choice,0.000982742,2,1,1,sustainable development integration,0.0014725965,1,1,1,appropriate business model,0.0014725965,1,1,1
+decision,0.0004609719,5,5,2,fuel efficiency,0.000982742,2,2,1,controlling increasing traffic,0.0014725965,1,1,1,provide several implication,0.0014725965,1,1,1
+practice,0.0004609719,5,4,2,movement infrastructure,0.000982742,2,1,1,new planning paradigm,0.0014725965,1,1,1,private sector actor,0.0014725965,1,1,1
+methodology,0.0004609719,5,4,2,mobility environment,0.000982742,2,1,1,second edition build,0.0014725965,1,1,1,adjusting relevant regulation,0.0014725965,1,1,1
+center,0.0004609719,5,1,2,mobile community,0.000982742,2,1,1,acclaimed first edition,0.0014725965,1,1,1,creating conducive condition,0.0014725965,1,1,1
+household,0.0004609719,5,1,2,mobility corridor,0.000982742,2,1,1,intercity public transportation,0.0014725965,1,1,1,planning urban design,0.0014725965,1,1,1
+modality,0.0004609719,5,1,2,road infrastructure,0.000982742,2,1,1,many valuable addition,0.0014725965,1,1,1,private transport service,0.0014725965,1,1,1
+innovation,0.0003687775,4,2,2,rail corridor,0.000982742,2,1,1,heat island effect,0.0014725965,1,1,1,privately owned car,0.0014725965,1,1,1
+definition,0.0003687775,4,3,2,rail system,0.000982742,2,1,1,show global exemplar,0.0014725965,1,1,1,road marking force,0.0014725965,1,1,1
+construction,0.0003687775,4,3,2,land use,0.0007254017,4,3,2,deliberative public involvement,0.0014725965,1,1,1,marking force motorist,0.0014725965,1,1,1

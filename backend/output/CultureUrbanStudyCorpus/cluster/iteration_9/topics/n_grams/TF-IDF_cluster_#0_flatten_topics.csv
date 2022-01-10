@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+landscape,0.0066701234,15,1,2,small business,0.0253542696,11,1,1,different social milieu,0.0180045756,2,1,1,small business,0.0253542696,11,1,1
+business,0.0057807737,13,1,2,cultural development,0.0069148008,3,1,1,embodies multiple level,0.0090022878,1,1,1,different social milieu,0.0180045756,2,1,1
+demolition,0.003614555,3,1,1,lived experience,0.0046098672,2,1,1,everyday meaning implicit,0.0090022878,1,1,1,embodies multiple level,0.0090022878,1,1,1
+state,0.0035573992000000002,8,2,2,architecture revitalization,0.0046098672,2,1,1,public housing scheme,0.0090022878,1,1,1,everyday meaning implicit,0.0090022878,1,1,1
+inhabitant,0.0024097033,2,2,1,city branding,0.0046098672,2,1,1,along modernist line,0.0090022878,1,1,1,public housing scheme,0.0090022878,1,1,1
+multiplicity,0.0024097033,2,1,1,elite entrepreneur,0.0046098672,2,1,1,organised vernacular association,0.0090022878,1,1,1,along modernist line,0.0090022878,1,1,1
+branding,0.0024097033,2,1,1,cultural barbarism,0.0046098672,2,1,1,physically polluted landscape,0.0090022878,1,1,1,organised vernacular association,0.0090022878,1,1,1
+entrepreneur,0.0024097033,2,1,1,economic development,0.0046098672,2,1,1,common bond place,0.0090022878,1,1,1,physically polluted landscape,0.0090022878,1,1,1
+public,0.0024097033,2,1,1,social milieu,0.0046098672,2,1,1,various governmental body,0.0090022878,1,1,1,common bond place,0.0090022878,1,1,1
+barbarism,0.0024097033,2,1,1,spatial appropriation,0.0046098672,2,1,1,examines two case,0.0090022878,1,1,1,various governmental body,0.0090022878,1,1,1
+pride,0.0024097033,2,2,1,public space,0.0025520472,3,2,2,also considers opinion,0.0090022878,1,1,1,examines two case,0.0090022878,1,1,1
+vitality,0.0024097033,2,1,1,landscape meaning,0.0023049336,1,1,1,local general public,0.0090022878,1,1,1,also considers opinion,0.0090022878,1,1,1
+attachment,0.0024097033,2,1,1,multiple level,0.0023049336,1,1,1,among local government,0.0090022878,1,1,1,local general public,0.0090022878,1,1,1
+milieu,0.0024097033,2,1,1,ideological intent,0.0023049336,1,1,1,essential turning point,0.0090022878,1,1,1,among local government,0.0090022878,1,1,1
+appropriation,0.0024097033,2,1,1,particular way,0.0023049336,1,1,1,intimate local trauma,0.0090022878,1,1,1,essential turning point,0.0090022878,1,1,1
+sense,0.0022233745,5,2,2,everyday meaning,0.0023049336,1,1,1,every social background,0.0090022878,1,1,1,intimate local trauma,0.0090022878,1,1,1
+partnership,0.0022233745,5,1,2,meaning implicit,0.0023049336,1,1,1,voice meant nothing,0.0090022878,1,1,1,every social background,0.0090022878,1,1,1
+strategy,0.0017786996000000001,4,2,2,daily routine,0.0023049336,1,1,1,sham democracy awash,0.0090022878,1,1,1,voice meant nothing,0.0090022878,1,1,1
+government,0.0017786996000000001,4,2,2,ordinary people,0.0023049336,1,1,1,still haunt today,0.0090022878,1,1,1,sham democracy awash,0.0090022878,1,1,1
+generation,0.0017786996000000001,4,1,2,four theme,0.0023049336,1,1,1,supporting small business,0.0090022878,1,1,1,still haunt today,0.0090022878,1,1,1
+experience,0.0013340247,3,1,2,interdependent version,0.0023049336,1,1,1,supporting public life,0.0090022878,1,1,1,supporting small business,0.0090022878,1,1,1
+theme,0.0013340247,3,1,2,landscape reality,0.0023049336,1,1,1,result offour quality,0.0090022878,1,1,1,supporting public life,0.0090022878,1,1,1
+line,0.0013340247,3,3,2,social meaning,0.0023049336,1,1,1,economic development policy,0.0090022878,1,1,1,result offour quality,0.0090022878,1,1,1
+effort,0.0013340247,3,2,2,first theme,0.0023049336,1,1,1,small business influence,0.0090022878,1,1,1,economic development policy,0.0090022878,1,1,1
+form,0.0013340247,3,2,2,housing landscape,0.0023049336,1,1,1,immediate public space,0.0090022878,1,1,1,small business influence,0.0090022878,1,1,1
+attempt,0.0013340247,3,2,2,housing scheme,0.0023049336,1,1,1,business provide quality,0.0090022878,1,1,1,immediate public space,0.0090022878,1,1,1
+program,0.0013340247,3,2,2,modernist line,0.0023049336,1,1,1,become better citizen,0.0090022878,1,1,1,business provide quality,0.0090022878,1,1,1
+quality,0.0013340247,3,2,2,larger goal,0.0023049336,1,1,1,sound cultural development,0.0090022878,1,1,1,become better citizen,0.0090022878,1,1,1
+embodies,0.0012048517,1,1,1,modern living,0.0023049336,1,1,1,strengthening community relation,0.0090022878,1,1,1,sound cultural development,0.0090022878,1,1,1
+intent,0.0012048517,1,1,1,contradictory way,0.0023049336,1,1,1,area include deployment,0.0090022878,1,1,1,strengthening community relation,0.0090022878,1,1,1
+implicit,0.0012048517,1,1,1,community building,0.0023049336,1,1,1,creating tax incentive,0.0090022878,1,1,1,area include deployment,0.0090022878,1,1,1
+routine,0.0012048517,1,1,1,interpersonal tie,0.0023049336,1,1,1,corporate social responsibility,0.0090022878,1,1,1,creating tax incentive,0.0090022878,1,1,1
+version,0.0012048517,1,1,1,vernacular association,0.0023049336,1,1,1,social responsibility program,0.0090022878,1,1,1,corporate social responsibility,0.0090022878,1,1,1
+redrawing,0.0012048517,1,1,1,state strategy,0.0023049336,1,1,1,restructuring public process,0.0090022878,1,1,1,social responsibility program,0.0090022878,1,1,1
+efficiency,0.0012048517,1,1,1,community tie,0.0023049336,1,1,1,among different generation,0.0090022878,1,1,1,restructuring public process,0.0090022878,1,1,1
+rationality,0.0012048517,1,1,1,third theme,0.0023049336,1,1,1,public space focus,0.0090022878,1,1,1,among different generation,0.0090022878,1,1,1
+tandem,0.0012048517,1,1,1,large extent,0.0023049336,1,1,1,encouraging different form,0.0090022878,1,1,1,public space focus,0.0090022878,1,1,1
+strength,0.0012048517,1,1,1,polluted landscape,0.0023049336,1,1,1,new disciplinary convergence,0.0090022878,1,1,1,encouraging different form,0.0090022878,1,1,1
+imperative,0.0012048517,1,1,1,unpolluted landscape,0.0023049336,1,1,1,,0.0,0,0,0,new disciplinary convergence,0.0090022878,1,1,1
+district,0.0012048517,1,1,1,fourth imperative,0.0023049336,1,1,1,,0.0,0,0,0,cultural development,0.0069148008,3,1,1
+repository,0.0012048517,1,1,1,historic district,0.0023049336,1,1,1,,0.0,0,0,0,landscape,0.0066701234,15,1,2
+bond,0.0012048517,1,1,1,different interpretation,0.0023049336,1,1,1,,0.0,0,0,0,business,0.0057807737,13,1,2
+authenticity,0.0012048517,1,1,1,conserved landscape,0.0023049336,1,1,1,,0.0,0,0,0,lived experience,0.0046098672,2,1,1
+jurisdiction,0.0012048517,1,1,1,common bond,0.0023049336,1,1,1,,0.0,0,0,0,architecture revitalization,0.0046098672,2,1,1
+asset,0.0012048517,1,1,1,bond place,0.0023049336,1,1,1,,0.0,0,0,0,city branding,0.0046098672,2,1,1
+square,0.0012048517,1,1,1,multicoded landscape,0.0023049336,1,1,1,,0.0,0,0,0,elite entrepreneur,0.0046098672,2,1,1
+crackdown,0.0012048517,1,1,1,ideological tool,0.0023049336,1,1,1,,0.0,0,0,0,cultural barbarism,0.0046098672,2,1,1
+destruction,0.0012048517,1,1,1,manipulative end,0.0023049336,1,1,1,,0.0,0,0,0,economic development,0.0046098672,2,1,1
+landmark,0.0012048517,1,1,1,daily experience,0.0023049336,1,1,1,,0.0,0,0,0,spatial appropriation,0.0046098672,2,1,1
+turning,0.0012048517,1,1,1,cultural city,0.0023049336,1,1,1,,0.0,0,0,0,demolition,0.003614555,3,1,1

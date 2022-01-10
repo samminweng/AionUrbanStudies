@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+mobility,0.0239264346,17,3,1,young people,0.0185891398,6,2,1,explores young people,0.0113600299,1,1,1,mobility,0.0239264346,17,3,1
+youth,0.008444624000000001,6,1,1,colonial hegemony,0.0061963799,2,1,1,poorer urban area,0.0113600299,1,1,1,young people,0.0185891398,6,2,1
+immobility,0.0070371866,5,2,1,colonial discourse,0.0061963799,2,1,1,urban young people,0.0113600299,1,1,1,explores young people,0.0113600299,1,1,1
+para,0.0070371866,5,1,1,risk society,0.0061963799,2,1,1,three urban study,0.0113600299,1,1,1,poorer urban area,0.0113600299,1,1,1
+hegemony,0.0056297493,4,1,1,social networking,0.0061963799,2,1,1,urban study site,0.0113600299,1,1,1,urban young people,0.0113600299,1,1,1
+discourse,0.0056297493,4,2,1,drug use,0.0061963799,2,1,1,links young people,0.0113600299,1,1,1,three urban study,0.0113600299,1,1,1
+service,0.004222312000000001,3,2,1,colonial history,0.0061963799,2,1,1,creating colonial hegemony,0.0113600299,1,1,1,urban study site,0.0113600299,1,1,1
+ideology,0.004222312000000001,3,3,1,young life,0.0030981900000000002,1,1,1,four geographical book,0.0113600299,1,1,1,links young people,0.0113600299,1,1,1
+identity,0.004222312000000001,3,1,1,mobility constraint,0.0030981900000000002,1,1,1,seemingly omnipresent service,0.0113600299,1,1,1,creating colonial hegemony,0.0113600299,1,1,1
+drug,0.004222312000000001,3,1,1,specific context,0.0030981900000000002,1,1,1,enframing spatial discourse,0.0113600299,1,1,1,four geographical book,0.0113600299,1,1,1
+movement,0.0028148747,2,2,1,qualitative research,0.0030981900000000002,1,1,1,without physical mobility,0.0113600299,1,1,1,seemingly omnipresent service,0.0113600299,1,1,1
+empire,0.0028148747,2,1,1,child researcher,0.0030981900000000002,1,1,1,mobile risk society,0.0113600299,1,1,1,enframing spatial discourse,0.0113600299,1,1,1
+legacy,0.0028148747,2,1,1,mobility experience,0.0030981900000000002,1,1,1,forced urban life,0.0113600299,1,1,1,without physical mobility,0.0113600299,1,1,1
+virus,0.0028148747,2,1,1,comparative perspective,0.0030981900000000002,1,1,1,providing social care,0.0113600299,1,1,1,mobile risk society,0.0113600299,1,1,1
+adda,0.0028148747,2,1,1,study site,0.0030981900000000002,1,1,1,maximum physical immobility,0.0113600299,1,1,1,forced urban life,0.0113600299,1,1,1
+neighbourhood,0.0028148747,2,1,1,power relation,0.0030981900000000002,1,1,1,negative ecological side,0.0113600299,1,1,1,providing social care,0.0113600299,1,1,1
+networking,0.0028148747,2,1,1,individual location,0.0030981900000000002,1,1,1,ecological side effect,0.0113600299,1,1,1,maximum physical immobility,0.0113600299,1,1,1
+subculture,0.0028148747,2,1,1,negative image,0.0030981900000000002,1,1,1,two unique example,0.0113600299,1,1,1,negative ecological side,0.0113600299,1,1,1
+gang,0.0028148747,2,1,1,mobility play,0.0030981900000000002,1,1,1,intangible cultural resource,0.0113600299,1,1,1,ecological side effect,0.0113600299,1,1,1
+authority,0.0028148747,2,1,1,mobility performance,0.0030981900000000002,1,1,1,close spatial proximity,0.0113600299,1,1,1,two unique example,0.0113600299,1,1,1
+politics,0.002077773,4,1,2,developmental implication,0.0030981900000000002,1,1,1,similar emotional ideology,0.0113600299,1,1,1,intangible cultural resource,0.0113600299,1,1,1
+experience,0.0015583297,3,2,2,social network,0.0030981900000000002,1,1,1,discussion among people,0.0113600299,1,1,1,close spatial proximity,0.0113600299,1,1,1
+geography,0.0015583297,3,1,2,peer culture,0.0030981900000000002,1,1,1,networked social cohesion,0.0113600299,1,1,1,similar emotional ideology,0.0113600299,1,1,1
+colonial,0.0015583297,3,2,2,life trajectory,0.0030981900000000002,1,1,1,robust social networking,0.0113600299,1,1,1,discussion among people,0.0113600299,1,1,1
+risk,0.0015583297,3,1,2,mobility control,0.0030981900000000002,1,1,1,conspicuous youth subculture,0.0113600299,1,1,1,networked social cohesion,0.0113600299,1,1,1
+community,0.0015583297,3,2,2,recent research,0.0030981900000000002,1,1,1,especially methamphetamine use,0.0113600299,1,1,1,robust social networking,0.0113600299,1,1,1
+constraint,0.0014074373,1,1,1,key player,0.0030981900000000002,1,1,1,violent youth gang,0.0113600299,1,1,1,conspicuous youth subculture,0.0113600299,1,1,1
+researcher,0.0014074373,1,1,1,major force,0.0030981900000000002,1,1,1,specific youth identity,0.0113600299,1,1,1,especially methamphetamine use,0.0113600299,1,1,1
+diversity,0.0014074373,1,1,1,geographical book,0.0030981900000000002,1,1,1,dramatic social change,0.0113600299,1,1,1,violent youth gang,0.0113600299,1,1,1
+commonality,0.0014074373,1,1,1,war wound,0.0030981900000000002,1,1,1,anonymous urban environment,0.0113600299,1,1,1,specific youth identity,0.0113600299,1,1,1
+image,0.0014074373,1,1,1,moral rightness,0.0030981900000000002,1,1,1,honking horn mobility,0.0113600299,1,1,1,dramatic social change,0.0113600299,1,1,1
+friction,0.0014074373,1,1,1,imperial culture,0.0030981900000000002,1,1,1,situates colonial history,0.0113600299,1,1,1,anonymous urban environment,0.0113600299,1,1,1
+negotiation,0.0014074373,1,1,1,professional relationship,0.0030981900000000002,1,1,1,negotiated colonial politics,0.0113600299,1,1,1,honking horn mobility,0.0113600299,1,1,1
+implication,0.0014074373,1,1,1,geographical legacy,0.0030981900000000002,1,1,1,,0.0,0,0,0,situates colonial history,0.0113600299,1,1,1
+network,0.0014074373,1,1,1,recent scholarship,0.0030981900000000002,1,1,1,,0.0,0,0,0,negotiated colonial politics,0.0113600299,1,1,1
+peer,0.0014074373,1,1,1,travel writing,0.0030981900000000002,1,1,1,,0.0,0,0,0,youth,0.008444624000000001,6,1,1
+trajectory,0.0014074373,1,1,1,exploration geography,0.0030981900000000002,1,1,1,,0.0,0,0,0,immobility,0.0070371866,5,2,1
+detail,0.0014074373,1,1,1,immediate need,0.0030981900000000002,1,1,1,,0.0,0,0,0,para,0.0070371866,5,1,1
+temptation,0.0014074373,1,1,1,subject people,0.0030981900000000002,1,1,1,,0.0,0,0,0,colonial hegemony,0.0061963799,2,1,1
+conception,0.0014074373,1,1,1,spatial project,0.0030981900000000002,1,1,1,,0.0,0,0,0,colonial discourse,0.0061963799,2,1,1
+backdrop,0.0014074373,1,1,1,omnipresent service,0.0030981900000000002,1,1,1,,0.0,0,0,0,risk society,0.0061963799,2,1,1
+player,0.0014074373,1,1,1,important legacy,0.0030981900000000002,1,1,1,,0.0,0,0,0,social networking,0.0061963799,2,1,1
+force,0.0014074373,1,1,1,contextualized biography,0.0030981900000000002,1,1,1,,0.0,0,0,0,drug use,0.0061963799,2,1,1
+war,0.0014074373,1,1,1,spatial discourse,0.0030981900000000002,1,1,1,,0.0,0,0,0,colonial history,0.0061963799,2,1,1
+wound,0.0014074373,1,1,1,agency exemplifies,0.0030981900000000002,1,1,1,,0.0,0,0,0,hegemony,0.0056297493,4,1,1
+rightness,0.0014074373,1,1,1,attempted hegemony,0.0030981900000000002,1,1,1,,0.0,0,0,0,discourse,0.0056297493,4,2,1
+concern,0.0014074373,1,1,1,physical mobility,0.0030981900000000002,1,1,1,,0.0,0,0,0,service,0.004222312000000001,3,2,1
+colonialism,0.0014074373,1,1,1,mobile risk,0.0030981900000000002,1,1,1,,0.0,0,0,0,ideology,0.004222312000000001,3,3,1
+travel,0.0014074373,1,1,1,global pandemic,0.0030981900000000002,1,1,1,,0.0,0,0,0,identity,0.004222312000000001,3,1,1
+fiction,0.0014074373,1,1,1,invaded life,0.0030981900000000002,1,1,1,,0.0,0,0,0,drug,0.004222312000000001,3,1,1

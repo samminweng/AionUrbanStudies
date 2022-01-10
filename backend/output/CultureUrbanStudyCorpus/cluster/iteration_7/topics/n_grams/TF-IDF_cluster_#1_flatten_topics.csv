@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+water,0.0084734649,13,2,1,climate change,0.0111534839,9,4,1,urban forest manager,0.0122338783,3,1,1,urban forest manager,0.0122338783,3,1,1
+indicator,0.0045626349,7,1,1,greenhouse gas,0.0049571039,4,2,1,urban sustainability transition,0.0081559189,2,1,1,climate change,0.0111534839,9,4,1
+gas,0.0045626349,7,3,1,governance challenge,0.0049571039,4,1,1,greenhouse gas emission,0.0081559189,2,2,1,water,0.0084734649,13,2,1
+emission,0.0045626349,7,2,1,sustainability transition,0.0037178280000000003,3,1,1,double bottom line,0.0081559189,2,1,1,urban sustainability transition,0.0081559189,2,1,1
+ocean,0.003259025,5,1,1,population growth,0.0037178280000000003,3,2,1,significant transition towards,0.0040779594,1,1,1,greenhouse gas emission,0.0081559189,2,2,1
+change,0.0031273038,13,5,2,integrative analysis,0.0037178280000000003,3,1,1,transition towards urbanisation,0.0040779594,1,1,1,double bottom line,0.0081559189,2,1,1
+greenhouse,0.00260722,4,2,1,city system,0.0037178280000000003,3,2,1,influence social development,0.0040779594,1,1,1,greenhouse gas,0.0049571039,4,2,1
+ecosystem,0.00260722,4,2,1,bottom line,0.0037178280000000003,3,1,1,structural systemic realignments,0.0040779594,1,1,1,governance challenge,0.0049571039,4,1,1
+management,0.0024056183,10,4,2,forest manager,0.0037178280000000003,3,1,1,persistent societal challenge,0.0040779594,1,1,1,indicator,0.0045626349,7,1,1
+country,0.0024056183,10,1,2,urban sustainability,0.002478552,2,1,1,towards urban farming,0.0040779594,1,1,1,gas,0.0045626349,7,3,1
+population,0.0021650565,9,4,2,efficiency score,0.002478552,2,1,1,renewable decentralised energy,0.0040779594,1,1,1,emission,0.0045626349,7,2,1
+climate,0.0021650565,9,4,2,gas emission,0.002478552,2,2,1,decentralised energy system,0.0040779594,1,1,1,significant transition towards,0.0040779594,1,1,1
+carbon,0.0019554150000000003,3,1,1,human population,0.002478552,2,1,1,provides new insight,0.0040779594,1,1,1,transition towards urbanisation,0.0040779594,1,1,1
+oil,0.0019554150000000003,3,2,1,carbon emission,0.002478552,2,1,1,sustainability transition unfold,0.0040779594,1,1,1,influence social development,0.0040779594,1,1,1
+settlement,0.0019554150000000003,3,2,1,twentieth century,0.002478552,2,1,1,explores possible strategy,0.0040779594,1,1,1,structural systemic realignments,0.0040779594,1,1,1
+sea,0.0019554150000000003,3,1,1,human settlement,0.002478552,2,2,1,governing urban transition,0.0040779594,1,1,1,persistent societal challenge,0.0040779594,1,1,1
+extraction,0.0019554150000000003,3,1,1,rich country,0.002478552,2,1,1,across geographical contexts,0.0040779594,1,1,1,towards urban farming,0.0040779594,1,1,1
+policy,0.0019244946,8,4,2,gas extraction,0.002478552,2,1,1,regarded complex entity,0.0040779594,1,1,1,renewable decentralised energy,0.0040779594,1,1,1
+sustainability,0.0016839328,7,2,2,aquatic system,0.002478552,2,1,1,combine three methodology,0.0040779594,1,1,1,decentralised energy system,0.0040779594,1,1,1
+problem,0.0016839328,7,3,2,water management,0.002478552,2,2,1,identified six city,0.0040779594,1,1,1,provides new insight,0.0040779594,1,1,1
+growth,0.0016839328,7,3,2,urban water,0.002478552,2,1,1,meanwhile lower level,0.0040779594,1,1,1,sustainability transition unfold,0.0040779594,1,1,1
+opportunity,0.0014433710000000002,6,4,2,operational capacity,0.002478552,2,1,1,municipal solid waste,0.0040779594,1,1,1,explores possible strategy,0.0040779594,1,1,1
+government,0.0014433710000000002,6,3,2,governance issue,0.002478552,2,1,1,four broad dimension,0.0040779594,1,1,1,governing urban transition,0.0040779594,1,1,1
+target,0.00130361,2,1,1,developing country,0.0022868995,5,1,2,complex human problem,0.0040779594,1,1,1,across geographical contexts,0.0040779594,1,1,1
+poverty,0.00130361,2,2,1,local government,0.0018295196000000001,4,1,2,including climate change,0.0040779594,1,1,1,regarded complex entity,0.0040779594,1,1,1
+inspiration,0.00130361,2,1,1,land use,0.0013721397,3,3,2,global urban growth,0.0040779594,1,1,1,combine three methodology,0.0040779594,1,1,1
+megacities,0.00130361,2,1,1,significant transition,0.001239276,1,1,1,additional urban people,0.0040779594,1,1,1,identified six city,0.0040779594,1,1,1
+stakeholder,0.00130361,2,1,1,transition towards,0.001239276,1,1,1,country every week,0.0040779594,1,1,1,meanwhile lower level,0.0040779594,1,1,1
+transition,0.0012028091,5,1,2,towards urbanisation,0.001239276,1,1,1,emitting greenhouse gas,0.0040779594,1,1,1,municipal solid waste,0.0040779594,1,1,1
+energy,0.0012028091,5,3,2,economic dimension,0.001239276,1,1,1,altering planetary albedo,0.0040779594,1,1,1,four broad dimension,0.0040779594,1,1,1
+analysis,0.0012028091,5,2,2,social development,0.001239276,1,1,1,altering atmospheric component,0.0040779594,1,1,1,complex human problem,0.0040779594,1,1,1
+rate,0.0012028091,5,3,2,urban society,0.001239276,1,1,1,emission per person,0.0040779594,1,1,1,including climate change,0.0040779594,1,1,1
+use,0.0012028091,5,4,2,institutional framework,0.001239276,1,1,1,affect many aspect,0.0040779594,1,1,1,global urban growth,0.0040779594,1,1,1
+community,0.0012028091,5,4,2,systemic realignments,0.001239276,1,1,1,including human settlement,0.0040779594,1,1,1,additional urban people,0.0040779594,1,1,1
+efficiency,0.0009622473,4,2,2,structural change,0.001239276,1,1,1,affect poor people,0.0040779594,1,1,1,country every week,0.0040779594,1,1,1
+value,0.0009622473,4,2,2,urban system,0.001239276,1,1,1,quantitatively many detail,0.0040779594,1,1,1,emitting greenhouse gas,0.0040779594,1,1,1
+level,0.0009622473,4,4,2,persistent societal,0.001239276,1,1,1,affect climate change,0.0040779594,1,1,1,altering planetary albedo,0.0040779594,1,1,1
+issue,0.0009622473,4,3,2,societal challenge,0.001239276,1,1,1,universal secondary education,0.0040779594,1,1,1,altering atmospheric component,0.0040779594,1,1,1
+impact,0.0009622473,4,3,2,shift towards,0.001239276,1,1,1,maternal health service,0.0040779594,1,1,1,emission per person,0.0040779594,1,1,1
+manager,0.0009622473,4,1,2,urban farming,0.001239276,1,1,1,smarter urban design,0.0040779594,1,1,1,affect many aspect,0.0040779594,1,1,1
+innovation,0.0007216855000000001,3,3,2,decentralised energy,0.001239276,1,1,1,reducing greenhouse gas,0.0040779594,1,1,1,including human settlement,0.0040779594,1,1,1
+atmosphere,0.0007216855000000001,3,1,2,energy system,0.001239276,1,1,1,coastal city begin,0.0040779594,1,1,1,affect poor people,0.0040779594,1,1,1
+land,0.0007216855000000001,3,3,2,social economy,0.001239276,1,1,1,rising sea level,0.0040779594,1,1,1,quantitatively many detail,0.0040779594,1,1,1
+conflict,0.0007216855000000001,3,1,2,new insight,0.001239276,1,1,1,upon ocean resource,0.0040779594,1,1,1,affect climate change,0.0040779594,1,1,1
+line,0.0007216855000000001,3,1,2,transition unfold,0.001239276,1,1,1,daily urban life,0.0040779594,1,1,1,universal secondary education,0.0040779594,1,1,1
+range,0.0007216855000000001,3,1,2,possible strategy,0.001239276,1,1,1,healthy ocean environment,0.0040779594,1,1,1,maternal health service,0.0040779594,1,1,1
+expecting,0.0006518050000000001,1,1,1,urban transition,0.001239276,1,1,1,book explores issue,0.0040779594,1,1,1,smarter urban design,0.0040779594,1,1,1
+realignment,0.0006518050000000001,1,1,1,institutional transformation,0.001239276,1,1,1,community supported fishery,0.0040779594,1,1,1,reducing greenhouse gas,0.0040779594,1,1,1
+realignments,0.0006518050000000001,1,1,1,nonmetropolitan city,0.001239276,1,1,1,damage ocean life,0.0040779594,1,1,1,coastal city begin,0.0040779594,1,1,1
+societal,0.0006518050000000001,1,1,1,governance approach,0.001239276,1,1,1,helping scientist gather,0.0040779594,1,1,1,rising sea level,0.0040779594,1,1,1

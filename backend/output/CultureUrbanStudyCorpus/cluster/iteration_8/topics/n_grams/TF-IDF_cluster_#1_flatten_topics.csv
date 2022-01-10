@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+expectation,0.0079143336,7,1,1,urban transformation,0.0086749319,4,1,1,site interpretation centre,0.028065956200000002,3,1,1,site interpretation centre,0.028065956200000002,3,1,1
+centre,0.0045224763,4,1,1,site interpretation,0.0086749319,4,1,1,social impact assessment,0.0187106374,2,1,1,social impact assessment,0.0187106374,2,1,1
+comment,0.0045224763,4,1,1,educational environment,0.0065061989,3,1,1,system take place,0.0187106374,2,1,1,system take place,0.0187106374,2,1,1
+outcome,0.0033918573,3,2,1,cultural system,0.0065061989,3,1,1,inter cultural dialogue,0.0187106374,2,1,1,inter cultural dialogue,0.0187106374,2,1,1
+student,0.0033382229,8,1,2,interpretation centre,0.0065061989,3,1,1,past two decade,0.0093553187,1,1,1,past two decade,0.0093553187,1,1,1
+level,0.0029209451,7,1,2,social impact,0.004337466,2,1,1,numerous social conflict,0.0093553187,1,1,1,numerous social conflict,0.0093553187,1,1,1
+interpretation,0.0029209451,7,3,2,impact assessment,0.004337466,2,1,1,received increasing attention,0.0093553187,1,1,1,received increasing attention,0.0093553187,1,1,1
+research,0.0025036672000000003,6,3,2,cultural interaction,0.004337466,2,1,1,socialist governing ideology,0.0093553187,1,1,1,socialist governing ideology,0.0093553187,1,1,1
+prospect,0.0022612382,2,1,1,educational sphere,0.004337466,2,1,1,uses first hand,0.0093553187,1,1,1,uses first hand,0.0093553187,1,1,1
+partner,0.0022612382,2,1,1,five level,0.004337466,2,1,1,first hand information,0.0093553187,1,1,1,first hand information,0.0093553187,1,1,1
+respondent,0.0022612382,2,1,1,takes place,0.004337466,2,1,1,influenced urban planning,0.0093553187,1,1,1,influenced urban planning,0.0093553187,1,1,1
+cooperation,0.0022612382,2,1,1,cultural dialogue,0.004337466,2,1,1,locally derived influence,0.0093553187,1,1,1,locally derived influence,0.0093553187,1,1,1
+museum,0.0022612382,2,1,1,city square,0.004337466,2,1,1,radical socialist goal,0.0093553187,1,1,1,radical socialist goal,0.0093553187,1,1,1
+value,0.0020863893000000002,5,2,2,square design,0.004337466,2,1,1,spatial policy rhetoric,0.0093553187,1,1,1,spatial policy rhetoric,0.0093553187,1,1,1
+impact,0.0016691115,4,2,2,cultural context,0.004337466,2,1,1,special social group,0.0093553187,1,1,1,special social group,0.0093553187,1,1,1
+concept,0.0016691115,4,2,2,case study,0.0024012444,3,2,2,collected using questionnaire,0.0093553187,1,1,1,collected using questionnaire,0.0093553187,1,1,1
+transformation,0.0016691115,4,1,2,ethnic group,0.0024012444,3,1,2,five hundred respondent,0.0093553187,1,1,1,five hundred respondent,0.0093553187,1,1,1
+state,0.0016691115,4,1,2,land requisition,0.002168733,1,1,1,single educational environment,0.0093553187,1,1,1,single educational environment,0.0093553187,1,1,1
+university,0.0016691115,4,1,2,current prospect,0.002168733,1,1,1,another cultural system,0.0093553187,1,1,1,another cultural system,0.0093553187,1,1,1
+assessment,0.0012518336000000001,3,1,2,rural land,0.002168733,1,1,1,value takes place,0.0093553187,1,1,1,value takes place,0.0093553187,1,1,1
+space,0.0012518336000000001,3,2,2,social conflict,0.002168733,1,1,1,joint educational environment,0.0093553187,1,1,1,joint educational environment,0.0093553187,1,1,1
+requisition,0.0011306191,1,1,1,development decision,0.002168733,1,1,1,host country language,0.0093553187,1,1,1,host country language,0.0093553187,1,1,1
+obstacle,0.0011306191,1,1,1,increasing attention,0.002168733,1,1,1,seeking international recognition,0.0093553187,1,1,1,seeking international recognition,0.0093553187,1,1,1
+conversion,0.0011306191,1,1,1,possible way,0.002168733,1,1,1,nearby historical site,0.0093553187,1,1,1,nearby historical site,0.0093553187,1,1,1
+mitigation,0.0011306191,1,1,1,adverse impact,0.002168733,1,1,1,multiple interpretation strategy,0.0093553187,1,1,1,multiple interpretation strategy,0.0093553187,1,1,1
+lie,0.0011306191,1,1,1,core value,0.002168733,1,1,1,expectation within site,0.0093553187,1,1,1,expectation within site,0.0093553187,1,1,1
+duality,0.0011306191,1,1,1,poor prospect,0.002168733,1,1,1,within site interpretation,0.0093553187,1,1,1,within site interpretation,0.0093553187,1,1,1
+communist,0.0011306191,1,1,1,collaborative planning,0.002168733,1,1,1,received limited attention,0.0093553187,1,1,1,received limited attention,0.0093553187,1,1,1
+pursuit,0.0011306191,1,1,1,weak framework,0.002168733,1,1,1,specific site interpretation,0.0093553187,1,1,1,specific site interpretation,0.0093553187,1,1,1
+pertinent,0.0011306191,1,1,1,environmental legislation,0.002168733,1,1,1,spiritual experience expectation,0.0093553187,1,1,1,spiritual experience expectation,0.0093553187,1,1,1
+guide,0.0011306191,1,1,1,governing ideology,0.002168733,1,1,1,research analysed visitor,0.0093553187,1,1,1,research analysed visitor,0.0093553187,1,1,1
+mentality,0.0011306191,1,1,1,hand information,0.002168733,1,1,1,related scholarship discussion,0.0093553187,1,1,1,related scholarship discussion,0.0093553187,1,1,1
+mechanisms,0.0011306191,1,1,1,actual implementation,0.002168733,1,1,1,visit site interpretation,0.0093553187,1,1,1,visit site interpretation,0.0093553187,1,1,1
+megalopolis,0.0011306191,1,1,1,national capital,0.002168733,1,1,1,city square design,0.0093553187,1,1,1,city square design,0.0093553187,1,1,1
+questionnaire,0.0011306191,1,1,1,derived influence,0.002168733,1,1,1,public urban space,0.0093553187,1,1,1,public urban space,0.0093553187,1,1,1
+quota,0.0011306191,1,1,1,market force,0.002168733,1,1,1,essential building space,0.0093553187,1,1,1,essential building space,0.0093553187,1,1,1
+sampling,0.0011306191,1,1,1,planning idea,0.002168733,1,1,1,important heritage city,0.0093553187,1,1,1,important heritage city,0.0093553187,1,1,1
+tendency,0.0011306191,1,1,1,combined outcome,0.002168733,1,1,1,cultural context responsibility,0.0093553187,1,1,1,cultural context responsibility,0.0093553187,1,1,1
+connectivity,0.0011306191,1,1,1,revolutionary ideal,0.002168733,1,1,1,style line design,0.0093553187,1,1,1,style line design,0.0093553187,1,1,1
+translation,0.0011306191,1,1,1,economized approach,0.002168733,1,1,1,line design concept,0.0093553187,1,1,1,line design concept,0.0093553187,1,1,1
+code,0.0011306191,1,1,1,urban economy,0.002168733,1,1,1,modern artistic expression,0.0093553187,1,1,1,modern artistic expression,0.0093553187,1,1,1
+transcendence,0.0011306191,1,1,1,population management,0.002168733,1,1,1,,0.0,0,0,0,urban transformation,0.0086749319,4,1,1
+interiorization,0.0011306191,1,1,1,diverse set,0.002168733,1,1,1,,0.0,0,0,0,site interpretation,0.0086749319,4,1,1
+functioning,0.0011306191,1,1,1,communist state,0.002168733,1,1,1,,0.0,0,0,0,expectation,0.0079143336,7,1,1
+course,0.0011306191,1,1,1,urban condition,0.002168733,1,1,1,,0.0,0,0,0,educational environment,0.0065061989,3,1,1
+foreigner,0.0011306191,1,1,1,control people,0.002168733,1,1,1,,0.0,0,0,0,cultural system,0.0065061989,3,1,1
+comfort,0.0011306191,1,1,1,socialist goal,0.002168733,1,1,1,,0.0,0,0,0,centre,0.0045224763,4,1,1
+learning,0.0011306191,1,1,1,pertinent force,0.002168733,1,1,1,,0.0,0,0,0,comment,0.0045224763,4,1,1
+typology,0.0011306191,1,1,1,actual outcome,0.002168733,1,1,1,,0.0,0,0,0,cultural interaction,0.004337466,2,1,1
+stream,0.0011306191,1,1,1,spatial policy,0.002168733,1,1,1,,0.0,0,0,0,educational sphere,0.004337466,2,1,1

@@ -1,0 +1,51 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+frailty,0.0014295768,8,1,1,city identity,0.0053868529,14,2,1,healthy life expectancy,0.007340327000000001,5,1,1,healthy life expectancy,0.007340327000000001,5,1,1
+care,0.0013849874,21,1,2,traditional market,0.0030782016000000002,8,2,1,integrated community care,0.0044041962,3,1,1,city identity,0.0053868529,14,2,1
+hybridization,0.0010721826,6,1,1,life expectancy,0.0026934264,7,1,1,cubic stone street,0.0044041962,3,1,1,integrated community care,0.0044041962,3,1,1
+sündürme,0.0008934855,5,1,1,older people,0.0025561634,18,1,2,urban transformation project,0.0044041962,3,1,1,cubic stone street,0.0044041962,3,1,1
+marketplace,0.0008934855,5,2,1,architectural style,0.0023086512,6,2,1,local urban space,0.0029361308,2,1,1,urban transformation project,0.0044041962,3,1,1
+modifier,0.0007147884,4,1,1,medical care,0.0021301362,15,1,2,community care system,0.0029361308,2,1,1,traditional market,0.0030782016000000002,8,2,1
+richness,0.0007147884,4,3,1,healthy life,0.0019238760000000001,5,1,1,typological analysis method,0.0029361308,2,1,1,local urban space,0.0029361308,2,1,1
+floor,0.0007147884,4,1,1,healthy society,0.0019238760000000001,5,1,1,urban street façades,0.0029361308,2,1,1,community care system,0.0029361308,2,1,1
+continuity,0.000593566,9,4,2,cubic stone,0.0019238760000000001,5,1,1,urban design guideline,0.0029361308,2,2,1,typological analysis method,0.0029361308,2,1,1
+undernutrition,0.0005360913,3,1,1,hybridization process,0.0019238760000000001,5,1,1,many different civilization,0.0029361308,2,2,1,urban street façades,0.0029361308,2,1,1
+citadel,0.0005360913,3,1,1,urban transformation,0.0012780817,9,1,2,two governmental institution,0.0029361308,2,1,1,urban design guideline,0.0029361308,2,2,1
+emigration,0.0005360913,3,1,1,vernacular city,0.0011543256,3,1,1,high spatial resolution,0.0029361308,2,1,1,many different civilization,0.0029361308,2,2,1
+th,0.0005360913,3,1,1,transitional space,0.0011543256,3,1,1,cartographic data base,0.0029361308,2,1,1,two governmental institution,0.0029361308,2,1,1
+orient,0.0005360913,3,1,1,integrated community,0.0011543256,3,1,1,new development scheme,0.0029361308,2,1,1,high spatial resolution,0.0029361308,2,1,1
+conservation,0.0005276143,8,2,2,community care,0.0011543256,3,1,1,achieve national integration,0.0014680654,1,1,1,cartographic data base,0.0029361308,2,1,1
+architect,0.0005276143,8,5,2,care system,0.0011543256,3,1,1,ambitious infrastructural project,0.0014680654,1,1,1,new development scheme,0.0029361308,2,1,1
+stone,0.0005276143,8,2,2,medical personnel,0.0011543256,3,1,1,uniform urban plan,0.0014680654,1,1,1,life expectancy,0.0026934264,7,1,1
+climate,0.0004616625,7,4,2,stone street,0.0011543256,3,1,1,project generated webs,0.0014680654,1,1,1,older people,0.0025561634,18,1,2
+expectancy,0.0004616625,7,1,2,typological analysis,0.0011543256,3,1,1,standard recognizable material,0.0014680654,1,1,1,architectural style,0.0023086512,6,2,1
+island,0.00039571070000000004,6,3,2,historical layer,0.0011543256,3,1,1,recognizable material culture,0.0014680654,1,1,1,medical care,0.0021301362,15,1,2
+quality,0.00039571070000000004,6,5,2,traditional city,0.0011543256,3,1,1,extensive tangible scaffolding,0.0014680654,1,1,1,healthy society,0.0019238760000000001,5,1,1
+data,0.00039571070000000004,6,5,2,literary work,0.0011543256,3,2,1,introduced new type,0.0014680654,1,1,1,cubic stone,0.0019238760000000001,5,1,1
+measure,0.00039571070000000004,6,1,2,transformation project,0.0011543256,3,1,1,created new network,0.0014680654,1,1,1,hybridization process,0.0019238760000000001,5,1,1
+genealogy,0.0003573942,2,1,1,present time,0.0011543256,3,1,1,larger national geography,0.0014680654,1,1,1,achieve national integration,0.0014680654,1,1,1
+dementia,0.0003573942,2,1,1,traditional block,0.0011543256,3,1,1,low income inhabitant,0.0014680654,1,1,1,ambitious infrastructural project,0.0014680654,1,1,1
+pharmacotherapy,0.0003573942,2,1,1,imaginable community,0.0007695504000000001,2,1,1,selective conservation approach,0.0014680654,1,1,1,uniform urban plan,0.0014680654,1,1,1
+polypharmacy,0.0003573942,2,1,1,popular architecture,0.0007695504000000001,2,1,1,among responsible agency,0.0014680654,1,1,1,project generated webs,0.0014680654,1,1,1
+façades,0.0003573942,2,1,1,local identity,0.0007695504000000001,2,2,1,needs include education,0.0014680654,1,1,1,standard recognizable material,0.0014680654,1,1,1
+r,0.0003573942,2,1,1,central area,0.0007695504000000001,2,2,1,example favourable tax,0.0014680654,1,1,1,recognizable material culture,0.0014680654,1,1,1
+stair,0.0003573942,2,1,1,old center,0.0007695504000000001,2,1,1,favourable tax policy,0.0014680654,1,1,1,extensive tangible scaffolding,0.0014680654,1,1,1
+emanation,0.0003573942,2,1,1,many year,0.0007695504000000001,2,2,1,several community institution,0.0014680654,1,1,1,introduced new type,0.0014680654,1,1,1
+wa,0.0003573942,2,1,1,clinical research,0.0007695504000000001,2,1,1,developed schematic layout,0.0014680654,1,1,1,created new network,0.0014680654,1,1,1
+deprivation,0.0003573942,2,1,1,frailty prevention,0.0007695504000000001,2,1,1,urban sustainable structure,0.0014680654,1,1,1,larger national geography,0.0014680654,1,1,1
+resolution,0.0003573942,2,1,1,cobbled street,0.0007695504000000001,2,1,1,community vernacular city,0.0014680654,1,1,1,low income inhabitant,0.0014680654,1,1,1
+landuse,0.0003573942,2,1,1,historical identity,0.0007695504000000001,2,2,1,arabmuslim world foundation,0.0014680654,1,1,1,selective conservation approach,0.0014680654,1,1,1
+pioneer,0.0003573942,2,1,1,city feature,0.0007695504000000001,2,1,1,style urban planning,0.0014680654,1,1,1,among responsible agency,0.0014680654,1,1,1
+output,0.0003573942,2,1,1,historical background,0.0007695504000000001,2,2,1,express community value,0.0014680654,1,1,1,needs include education,0.0014680654,1,1,1
+questionnaire,0.0003297589,5,3,2,street façades,0.0007695504000000001,2,1,1,integrating modern technology,0.0014680654,1,1,1,example favourable tax,0.0014680654,1,1,1
+disease,0.0003297589,5,1,2,two marketplace,0.0007695504000000001,2,1,1,many traditional house,0.0014680654,1,1,1,favourable tax policy,0.0014680654,1,1,1
+guideline,0.0003297589,5,3,2,architectural identity,0.0007695504000000001,2,1,1,case study transformation,0.0014680654,1,1,1,several community institution,0.0014680654,1,1,1
+generation,0.0003297589,5,3,2,effective factor,0.0007695504000000001,2,1,1,introversion sustainable city,0.0014680654,1,1,1,developed schematic layout,0.0014680654,1,1,1
+modernization,0.0003297589,5,2,2,star architect,0.0007695504000000001,2,1,1,rather provincial city,0.0014680654,1,1,1,urban sustainable structure,0.0014680654,1,1,1
+layer,0.0003297589,5,2,2,architectural conservation,0.0007695504000000001,2,1,1,understanding traditional design,0.0014680654,1,1,1,community vernacular city,0.0014680654,1,1,1
+typology,0.0003297589,5,2,2,different source,0.0007695504000000001,2,2,1,traditional design principle,0.0014680654,1,1,1,arabmuslim world foundation,0.0014680654,1,1,1
+integration,0.0002638071,4,4,2,market modernization,0.0007695504000000001,2,1,1,sustainable vernacular city,0.0014680654,1,1,1,style urban planning,0.0014680654,1,1,1
+road,0.0002638071,4,3,2,subject building,0.0007695504000000001,2,1,1,traditional urban settlement,0.0014680654,1,1,1,express community value,0.0014680654,1,1,1
+principle,0.0002638071,4,3,2,different civilization,0.0007695504000000001,2,2,1,important design criterion,0.0014680654,1,1,1,integrating modern technology,0.0014680654,1,1,1
+lack,0.0002638071,4,3,2,house type,0.0007695504000000001,2,1,1,commonly named sündürme,0.0014680654,1,1,1,many traditional house,0.0014680654,1,1,1
+whole,0.0002638071,4,3,2,modern house,0.0007695504000000001,2,1,1,forthcoming transition device,0.0014680654,1,1,1,case study transformation,0.0014680654,1,1,1
+scope,0.0002638071,4,3,2,important value,0.0007695504000000001,2,2,1,socially satisfying environment,0.0014680654,1,1,1,introversion sustainable city,0.0014680654,1,1,1
