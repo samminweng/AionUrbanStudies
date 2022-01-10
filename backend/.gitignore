@@ -8,8 +8,5 @@ __pycache__/
 *.kv
 *.npy
 # Ignore the temp vector data
-/output/similarity/temp/*.json
 /.idea/runConfigurations/KeyPhrase.xml
-experiments/hdbscan/
-experiments/hdbscan/images/
-
+/output/CultureUrbanStudyCorpus/cluster/iteration_*/experiments/hdbscan/
