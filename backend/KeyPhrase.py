@@ -28,7 +28,7 @@ class KeyPhraseSimilarity:
             device='cpu'
         )
         # Load HDBSCAN cluster
-        path = os.path.join('output', self.args.case_name, 'cluster', self.args.case_name + "_clusters.json")
+        path = os.path.join('output', self.args.case_name, self.args.case_name + "_clusters.json")
         self.corpus_df = pd.read_json(path)
         # Update corpus data with hdbscan cluster results
         self.corpus_df.rename(columns={'HDBSCAN_Cluster': 'Cluster'}, inplace=True)
@@ -149,6 +149,7 @@ class KeyPhraseSimilarity:
                     # Replace 'None' with None value
                     experiment_df['score'] = experiment_df['score'].replace('None', None)
                     experiment_df['min_samples'] = experiment_df['min_samples'].replace('None', 0)
+                    # Sort the experiment results by score
                     experiment_df = experiment_df.sort_values(['score'], ascending=False)
                     experiments = experiment_df.to_dict("records")
                     # Get the best results
@@ -156,15 +157,15 @@ class KeyPhraseSimilarity:
                     best_result['cluster'] = cluster_no
                     # Load top five key phrases of every paper in a cluster
                     path = os.path.join(folder, 'doc_key_phrase',
-                                        'top_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
+                                        'top_doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
                     doc_key_phrases = pd.read_json(path).to_dict("records")
-                    group_key_phrase_folder = os.path.join(folder, 'group_key_phrases')
-                    Path(group_key_phrase_folder).mkdir(parents=True, exist_ok=True)
+                    cluster_group_key_phrase_folder = os.path.join(folder, 'group_key_phrases', 'cluster')
+                    Path(cluster_group_key_phrase_folder).mkdir(parents=True, exist_ok=True)
                     # Obtain the grouped key phrases of the cluster
                     group_key_phrases = KeyPhraseUtility.group_key_phrases_with_best_result(cluster_no,
                                                                                             best_result,
                                                                                             doc_key_phrases,
-                                                                                            group_key_phrase_folder)
+                                                                                            cluster_group_key_phrase_folder)
                     best_result['grouped_key_phrases'] = group_key_phrases
                     best_results.append(best_result)
                 except Exception as err:
@@ -183,33 +184,34 @@ class KeyPhraseSimilarity:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Summarize the grouped key phrases results
-    def summarize_key_phrases_results(self):
-        parent_folder = os.path.join('output', self.args.case_name)
-        # Combine all key phrases and TF-IDF topics to a json file
-        # # # Load TF-IDF topics
-        # path = os.path.join(parent_folder, 'cluster', self.args.case_name + '_' + self.args.approach +
-        #                     '_Cluster_TF-IDF_topic_words.json')
-        # cluster_df = pd.read_json(path)
-        # # Load grouped Key phrases
-        # path = os.path.join(parent_folder, 'key_phrases', 'group_key_phrases', 'top_key_phrases_best_grouping.json')
-        # df = pd.read_json(path)
-        # cluster_df['Grouped_Key_Phrases'] = df['grouped_key_phrases'].tolist()
-        # # Re-order cluster df and Output to csv and json file
-        # cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'TF-IDF-Topics', 'Grouped_Key_Phrases']]
-        # path = os.path.join(parent_folder, 'key_phrases',
-        #                     self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases.csv')
-        # cluster_df.to_csv(path, encoding='utf-8', index=False)
-        # path = os.path.join(parent_folder, 'key_phrases',
-        #                     self.args.case_name + '_' + self.args.approach + '_Cluster_topic_key_phrases.json')
-        # cluster_df.to_json(path, orient='records')
-        # print('Output key phrases per cluster to ' + path)
+    # Combine the TF-IDF topics and grouped key phrases results
+    def combine_topics_key_phrases_results(self):
+        try:
+            folder = os.path.join('output', self.args.case_name)
+            # Combine all key phrases and TF-IDF topics to a json file
+            # # Load TF-IDF topics
+            path = os.path.join(folder, 'topics', self.args.case_name + '_TF-IDF_cluster_topics.json')
+            topics_df = pd.read_json(path)
+            # Load grouped Key phrases
+            path = os.path.join(folder, 'key_phrases', 'group_key_phrases', 'top_key_phrases_best_grouping.json')
+            key_phrase_df = pd.read_json(path)
+            cluster_df = topics_df.copy(deep=True)
+            cluster_df['KeyPhrases'] = key_phrase_df['grouped_key_phrases'].tolist()
+            # Re-order cluster df and Output to csv and json file
+            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Topics', 'KeyPhrases']]
+            path = os.path.join(folder, self.args.case_name + '_cluster_topic_key_phrases.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, self.args.case_name + '_cluster_topic_key_phrases.json')
+            cluster_df.to_json(path, orient='records')
+            print('Output key phrases per cluster to ' + path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
 
 # Main entry
 if __name__ == '__main__':
     kp = KeyPhraseSimilarity()
-    kp.extract_doc_key_phrases_by_clusters()
+    # kp.extract_doc_key_phrases_by_clusters()
     # kp.group_key_phrases_by_clusters_experiments()
     # kp.grouped_key_phrases_with_best_experiment_result()
-    # kp.summarize_key_phrases_results()
+    kp.combine_topics_key_phrases_results()

@@ -275,8 +275,7 @@ class KeyPhraseUtility:
                 map(lambda group: get_doc_ids_by_group_key_phrases(doc_key_phrases, group), group_key_phrases))
             group_df['DocIds'] = group_doc_ids
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
-            group_df = group_df[
-                ['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
+            group_df = group_df[['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file

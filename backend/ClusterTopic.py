@@ -48,6 +48,7 @@ class ClusterTopic:
                                                  'Title', 'Abstract', 'Author Keywords', 'Authors', 'DOI', 'x',
                                                  'y'])
         # Output cluster results to CSV
+        folder = os.path.join('output', self.args.case_name)
         path = os.path.join(folder, self.args.case_name + '_clusters.csv')
         text_df.to_csv(path, encoding='utf-8', index=False)
         path = os.path.join(folder, self.args.case_name + '_clusters.json')
@@ -153,8 +154,8 @@ if __name__ == '__main__':
     try:
         last_iteration = 6
         ct = ClusterTopic(6)
-        # ct.collect_iterative_cluster_results()
+        ct.collect_iterative_cluster_results()
         # ct.derive_cluster_topics_by_TF_IDF()
-        ct.summarize_cluster_topics()
+        # ct.summarize_cluster_topics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
