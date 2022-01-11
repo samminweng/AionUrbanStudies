@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+indicator,0.007943073200000001,18,1,7,natural capital,0.0098166192,4,1,1,transnational capitalist class,0.0194554012,2,1,1,transnational capitalist class,0.0194554012,2,1,1
+fraction,0.0064682775,7,1,2,urban indicator,0.007615303,4,1,2,final two article,0.0194554012,2,1,1,final two article,0.0194554012,2,1,1
+colonialism,0.0038389593,5,2,3,transnational capitalist,0.0049083096,2,1,1,natural capital indicator,0.0194554012,2,1,1,natural capital indicator,0.0194554012,2,1,1
+modernism,0.0028547146,5,2,5,capitalist class,0.0049083096,2,1,1,speculative design fiction,0.0194554012,2,1,1,speculative design fiction,0.0194554012,2,1,1
+representation,0.0026476911000000002,6,3,7,iconic architecture,0.0049083096,2,1,1,urban good life,0.0194554012,2,1,1,urban good life,0.0194554012,2,1,1
+oil,0.0026277292,4,1,4,future culture,0.0049083096,2,1,1,major transnational corporation,0.0097277006,1,1,1,natural capital,0.0098166192,4,1,1
+futuristics,0.002382294,2,1,1,past rate,0.0049083096,2,1,1,major global consumer,0.0097277006,1,1,1,major transnational corporation,0.0097277006,1,1,1
+imperialism,0.002382294,2,1,1,culture change,0.0049083096,2,1,1,global consumer good,0.0097277006,1,1,1,major global consumer,0.0097277006,1,1,1
+institutionalization,0.002382294,2,2,1,republican culture,0.0049083096,2,1,1,aspiring global city,0.0097277006,1,1,1,global consumer good,0.0097277006,1,1,1
+simultaneity,0.002382294,2,1,1,integral theory,0.0049083096,2,1,1,deliberately iconic architecture,0.0097277006,1,1,1,aspiring global city,0.0097277006,1,1,1
+xi,0.002382294,2,1,1,specific field,0.0049083096,2,1,1,central urban manifestation,0.0097277006,1,1,1,deliberately iconic architecture,0.0097277006,1,1,1
+alterlivability,0.002382294,2,1,1,internal discourse,0.0049083096,2,1,1,facilitates daily life,0.0097277006,1,1,1,central urban manifestation,0.0097277006,1,1,1
+article,0.0023316338,19,6,16,synoptic view,0.0049083096,2,1,1,engages numerous agent,0.0097277006,1,1,1,facilitates daily life,0.0097277006,1,1,1
+aid,0.0023033756,3,2,3,member state,0.0049083096,2,1,1,civic authority design,0.0097277006,1,1,1,engages numerous agent,0.0097277006,1,1,1
+infrastructure,0.0022300556,11,4,13,public participatory,0.0049083096,2,1,1,designated agency maintain,0.0097277006,1,1,1,civic authority design,0.0097277006,1,1,1
+progress,0.0020666203,6,3,9,next article,0.0049083096,2,1,1,among different constituent,0.0097277006,1,1,1,designated agency maintain,0.0097277006,1,1,1
+consumer,0.0019707969000000002,3,3,4,two article,0.0049083096,2,1,1,three brief case,0.0097277006,1,1,1,among different constituent,0.0097277006,1,1,1
+politician,0.0019707969000000002,3,2,4,capital indicator,0.0049083096,2,1,1,brief case study,0.0097277006,1,1,1,three brief case,0.0097277006,1,1,1
+immigrant,0.0019707969000000002,3,1,4,speculative design,0.0049083096,2,1,1,future cultural alternative,0.0097277006,1,1,1,brief case study,0.0097277006,1,1,1
+capitalist,0.0018480793,2,1,2,design fiction,0.0049083096,2,1,1,even past rate,0.0097277006,1,1,1,future cultural alternative,0.0097277006,1,1,1

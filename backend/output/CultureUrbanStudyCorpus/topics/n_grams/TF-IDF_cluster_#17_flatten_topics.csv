@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+urbanity,0.0073852184,6,1,3,creative knowledge,0.0162717901,4,1,1,multilocal creative knowledge,0.0319624448,2,1,1,multilocal creative knowledge,0.0319624448,2,1,1
+lifeworlds,0.005728688500000001,3,1,1,mental map,0.0122038426,3,1,1,creative knowledge worker,0.0319624448,2,1,1,creative knowledge worker,0.0319624448,2,1,1
+trash,0.005728688500000001,3,1,1,knowledge worker,0.008135895,2,1,1,creative knowledge work,0.0319624448,2,1,1,modern city planning,0.0319624448,2,1,1
+pandemic,0.004923479000000001,4,1,3,knowledge work,0.008135895,2,1,1,modern city planning,0.0319624448,2,1,1,creative knowledge,0.0162717901,4,1,1
+civilisation,0.004923479000000001,4,2,3,understanding city,0.008135895,2,1,1,highly flexible labour,0.0159812224,1,1,1,highly flexible labour,0.0159812224,1,1,1
+map,0.00421259,4,1,4,organic approach,0.008135895,2,1,1,flexible labour market,0.0159812224,1,1,1,flexible labour market,0.0159812224,1,1,1
+disaster,0.00421259,4,1,4,five element,0.008135895,2,1,1,labour market segment,0.0159812224,1,1,1,labour market segment,0.0159812224,1,1,1
+lifeworld,0.0038191257000000003,2,1,1,broken form,0.008135895,2,1,1,geographically mobile workforce,0.0159812224,1,1,1,geographically mobile workforce,0.0159812224,1,1,1
+scenario,0.0036926092,3,2,3,artificial life,0.008135895,2,1,1,mobility becomes part,0.0159812224,1,1,1,mobility becomes part,0.0159812224,1,1,1
+standardization,0.0029627103,2,1,2,peripheral area,0.008135895,2,1,1,innovative methodological mix,0.0159812224,1,1,1,innovative methodological mix,0.0159812224,1,1,1
+agglomeration,0.0029627103,2,1,2,place attachment,0.0078663766,3,1,3,without great effort,0.0159812224,1,1,1,without great effort,0.0159812224,1,1,1
+creature,0.0029627103,2,1,2,social sustainability,0.0067305699,3,1,4,flexibilized labour market,0.0159812224,1,1,1,flexibilized labour market,0.0159812224,1,1,1
+composition,0.0028297277,4,1,7,labour market,0.0063114708,2,1,2,detailed qualitative perspective,0.0159812224,1,1,1,detailed qualitative perspective,0.0159812224,1,1,1
+earthquake,0.0027458862,3,1,5,first edition,0.0063114708,2,1,2,real estate development,0.0159812224,1,1,1,real estate development,0.0159812224,1,1,1
+labour,0.0024617395000000003,2,1,3,real estate,0.005244251100000001,2,2,3,clear historical parallel,0.0159812224,1,1,1,clear historical parallel,0.0159812224,1,1,1
+edition,0.0024617395000000003,2,1,3,modern city,0.0045211331000000006,3,1,7,century plague pandemic,0.0159812224,1,1,1,century plague pandemic,0.0159812224,1,1,1
+laboratory,0.0024617395000000003,2,1,3,make use,0.0044870466,2,2,4,flexible pandemic strategy,0.0159812224,1,1,1,flexible pandemic strategy,0.0159812224,1,1,1
+creativity,0.0024079862,3,1,6,play place,0.0040679475,1,1,1,attract new people,0.0159812224,1,1,1,attract new people,0.0159812224,1,1,1
+mobility,0.0021222958,3,1,7,flexible labour,0.0040679475,1,1,1,argumentavimo elementai ir,0.0159812224,1,1,1,argumentavimo elementai ir,0.0159812224,1,1,1
+attachment,0.0021222958,3,1,7,market segment,0.0040679475,1,1,1,elementai ir kūrybiškumas,0.0159812224,1,1,1,elementai ir kūrybiškumas,0.0159812224,1,1,1

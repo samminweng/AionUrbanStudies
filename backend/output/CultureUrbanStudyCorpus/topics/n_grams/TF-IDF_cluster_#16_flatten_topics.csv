@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+bicyclist,0.007974788200000001,3,1,1,digital divide,0.0104468691,2,1,1,everyday public space,0.0406794752,2,1,1,everyday public space,0.0406794752,2,1,1
+bicycling,0.007974788200000001,3,1,1,social justice,0.0104468691,2,2,1,upwardly mobile bicyclist,0.0203397376,1,1,1,upwardly mobile bicyclist,0.0203397376,1,1,1
+gayborhoods,0.007974788200000001,3,1,1,multiracial interaction,0.0104468691,2,1,1,varied cultural meaning,0.0203397376,1,1,1,varied cultural meaning,0.0203397376,1,1,1
+gentrification,0.0073303237,5,4,4,racial segregation,0.0104468691,2,2,1,gentrifying urban planning,0.0203397376,1,1,1,gentrifying urban planning,0.0203397376,1,1,1
+race,0.0063708186000000005,5,3,5,offending sight,0.0104468691,2,1,1,upholds systemic race,0.0203397376,1,1,1,upholds systemic race,0.0203397376,1,1,1
+advocacy,0.006186491200000001,3,1,2,social control,0.0104468691,2,1,1,many problematic aspect,0.0203397376,1,1,1,many problematic aspect,0.0203397376,1,1,1
+bicycle,0.006186491200000001,3,1,2,public space,0.0053465468,7,2,14,urban bicycling culture,0.0203397376,1,1,1,urban bicycling culture,0.0203397376,1,1,1
+visibility,0.006186491200000001,3,1,2,white lane,0.0052234346,1,1,1,integration within society,0.0203397376,1,1,1,integration within society,0.0203397376,1,1,1
+inequality,0.0058642589000000005,4,2,4,mobile bicyclist,0.0052234346,1,1,1,public sector play,0.0203397376,1,1,1,public sector play,0.0203397376,1,1,1
+divide,0.0053165255000000005,2,1,1,neighborhood conflict,0.0052234346,1,1,1,particular government action,0.0203397376,1,1,1,particular government action,0.0203397376,1,1,1
+incivility,0.0053165255000000005,2,1,1,racist planning,0.0052234346,1,1,1,similar effort today,0.0203397376,1,1,1,similar effort today,0.0203397376,1,1,1
+scholarship,0.0043981942,3,1,4,rolling signifier,0.0052234346,1,1,1,addressing contemporary challenge,0.0203397376,1,1,1,addressing contemporary challenge,0.0203397376,1,1,1
+racism,0.0041243275,2,2,2,meaning change,0.0052234346,1,1,1,future planning scholarship,0.0203397376,1,1,1,future planning scholarship,0.0203397376,1,1,1
+disparity,0.0041243275,2,2,2,different space,0.0052234346,1,1,1,wider urban study,0.0203397376,1,1,1,wider urban study,0.0203397376,1,1,1
+justice,0.0041243275,2,2,2,rolling signification,0.0052234346,1,1,1,urban study literature,0.0203397376,1,1,1,urban study literature,0.0203397376,1,1,1
+cosmopolitanism,0.0041243275,2,1,2,systemic race,0.0052234346,1,1,1,gay neighborhood form,0.0203397376,1,1,1,gay neighborhood form,0.0203397376,1,1,1
+sight,0.0041243275,2,1,2,class barrier,0.0052234346,1,1,1,growth machine politics,0.0203397376,1,1,1,growth machine politics,0.0203397376,1,1,1
+neighborhood,0.004068388300000001,6,3,10,burgeoning popularity,0.0052234346,1,1,1,online dating service,0.0203397376,1,1,1,online dating service,0.0203397376,1,1,1
+play,0.0039392051,4,4,7,urban bicycling,0.0052234346,1,1,1,critical race study,0.0203397376,1,1,1,critical race study,0.0203397376,1,1,1
+color,0.0038224911,3,3,5,systemic issue,0.0052234346,1,1,1,link historical legacy,0.0203397376,1,1,1,link historical legacy,0.0203397376,1,1,1

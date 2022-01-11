@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+waterfront,0.011693262500000001,16,3,3,floating village,0.0079433295,4,1,1,sustainable floating community,0.0100934036,2,1,1,waterfront,0.011693262500000001,16,3,3
+waste,0.0095007758,13,2,3,plastic waste,0.0079433295,4,1,1,waste activated carbon,0.0100934036,2,1,1,sustainable floating community,0.0100934036,2,1,1
+mangrove,0.0045352118,4,1,1,floating community,0.0059574971000000004,3,1,1,acid dye wastewater,0.0100934036,2,1,1,waste activated carbon,0.0100934036,2,1,1
+rubber,0.0045352118,4,1,1,local resident,0.0043808443,4,3,4,dye wastewater treatment,0.0100934036,2,1,1,acid dye wastewater,0.0100934036,2,1,1
+silk,0.0045352118,4,1,1,global urbanism,0.0039716647,2,2,1,cultural ecosystem service,0.007830020200000001,2,1,2,dye wastewater treatment,0.0100934036,2,1,1
+removal,0.0043977732,5,1,2,pier waterfront,0.0039716647,2,1,1,contemporary cultural ecosystem,0.0050467018,1,1,1,waste,0.0095007758,13,2,3
+catalyst,0.0035182185,4,1,2,proposed concept,0.0039716647,2,1,1,ecosystem service value,0.0050467018,1,1,1,floating village,0.0079433295,4,1,1
+powder,0.0035182185,4,1,2,methanol dehydration,0.0039716647,2,1,1,urbanizing city state,0.0050467018,1,1,1,plastic waste,0.0079433295,4,1,1
+characterization,0.0035182185,4,1,2,natural rubber,0.0039716647,2,1,1,undergone rapid urbanization,0.0050467018,1,1,1,cultural ecosystem service,0.007830020200000001,2,1,2
+acid,0.0034014088,3,1,1,fuel cell,0.0039716647,2,1,1,natural habitat extent,0.0050467018,1,1,1,floating community,0.0059574971000000004,3,1,1
+cell,0.0034014088,3,1,1,optical property,0.0039716647,2,1,1,coastal mangrove forest,0.0050467018,1,1,1,contemporary cultural ecosystem,0.0050467018,1,1,1
+dye,0.0034014088,3,1,1,silk sericin,0.0039716647,2,1,1,case study habitat,0.0050467018,1,1,1,ecosystem service value,0.0050467018,1,1,1
+speed,0.0034014088,3,1,1,bamboo waste,0.0039716647,2,1,1,changing cultural value,0.0050467018,1,1,1,urbanizing city state,0.0050467018,1,1,1
+evacuation,0.0034014088,3,1,1,activated carbon,0.0039716647,2,1,1,including qualitative archival,0.0050467018,1,1,1,undergone rapid urbanization,0.0050467018,1,1,1
+converter,0.0034014088,3,1,1,acid dye,0.0039716647,2,1,1,qualitative archival analysis,0.0050467018,1,1,1,natural habitat extent,0.0050467018,1,1,1
+aborigine,0.0034014088,3,1,1,dye wastewater,0.0039716647,2,1,1,uploaded social medium,0.0050467018,1,1,1,coastal mangrove forest,0.0050467018,1,1,1
+property,0.0029684641,8,1,8,wastewater treatment,0.0039716647,2,1,1,social medium photographs,0.0050467018,1,1,1,case study habitat,0.0050467018,1,1,1
+water,0.0029402639,7,3,7,long beach,0.0039716647,2,1,1,publically accessible mangrove,0.0050467018,1,1,1,changing cultural value,0.0050467018,1,1,1
+redevelopment,0.0027172833,5,2,5,urban history,0.0032495022,5,2,8,important cultural role,0.0050467018,1,1,1,including qualitative archival,0.0050467018,1,1,1
+ecotourism,0.0026386639,3,1,2,cultural ecosystem,0.0030810434,2,1,2,heavily urbanized environment,0.0050467018,1,1,1,qualitative archival analysis,0.0050467018,1,1,1

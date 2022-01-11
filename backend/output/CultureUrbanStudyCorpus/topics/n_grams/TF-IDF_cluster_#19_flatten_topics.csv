@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+car,0.010816267800000001,5,1,3,conflict activity,0.0218873263,3,1,1,reconfigures urban life,0.0291831018,1,1,1,reconfigures urban life,0.0291831018,1,1,1
+refugee,0.010816267800000001,5,1,3,social composition,0.0145915509,2,1,1,involving distinct way,0.0291831018,1,1,1,involving distinct way,0.0291831018,1,1,1
+urbanity,0.010816267800000001,5,1,3,twin city,0.0145915509,2,1,1,trace urban sociology,0.0291831018,1,1,1,trace urban sociology,0.0291831018,1,1,1
+automobility,0.010068170100000001,3,1,1,civil society,0.0113194857,2,1,2,makes instantaneous time,0.0291831018,1,1,1,makes instantaneous time,0.0291831018,1,1,1
+propensity,0.006712113400000001,2,1,1,social practice,0.0113194857,2,2,2,within fragmented moment,0.0291831018,1,1,1,within fragmented moment,0.0291831018,1,1,1
+twin,0.006712113400000001,2,1,1,social life,0.0081085539,3,1,7,entailed various mobility,0.0291831018,1,1,1,entailed various mobility,0.0291831018,1,1,1
+homelessness,0.0055527202,3,1,4,motor car,0.0072957754,1,1,1,modern civil society,0.0291831018,1,1,1,modern civil society,0.0291831018,1,1,1
+duration,0.0052069634,2,1,2,awesome consequence,0.0072957754,1,1,1,produce segmented response,0.0291831018,1,1,1,produce segmented response,0.0291831018,1,1,1
+conflict,0.0048522521,5,1,9,overwhelming impact,0.0072957754,1,1,1,voluntary agency resort,0.0291831018,1,1,1,voluntary agency resort,0.0291831018,1,1,1
+frequency,0.0043265071,2,1,3,distinct way,0.0072957754,1,1,1,address visible homelessness,0.0291831018,1,1,1,address visible homelessness,0.0291831018,1,1,1
+migrant,0.0043265071,2,1,3,paradoxical resistance,0.0072957754,1,1,1,revealing hidden homelessness,0.0291831018,1,1,1,revealing hidden homelessness,0.0291831018,1,1,1
+voice,0.0042320357,3,2,6,instantaneous time,0.0072957754,1,1,1,sustain inclusive practice,0.0291831018,1,1,1,sustain inclusive practice,0.0291831018,1,1,1
+prosperity,0.0042320357,3,1,6,transcending distance,0.0072957754,1,1,1,following four dimension,0.0291831018,1,1,1,following four dimension,0.0291831018,1,1,1
+mobility,0.0037299348,3,1,7,fragmented moment,0.0072957754,1,1,1,various urban resource,0.0291831018,1,1,1,various urban resource,0.0291831018,1,1,1
+emphasis,0.0037299348,3,2,7,various mobility,0.0072957754,1,1,1,extent certain area,0.0291831018,1,1,1,extent certain area,0.0291831018,1,1,1
+motor,0.0033560567000000003,1,1,1,distinct combination,0.0072957754,1,1,1,activity oriented towards,0.0291831018,1,1,1,activity oriented towards,0.0291831018,1,1,1
+coercion,0.0033560567000000003,1,1,1,complex amalgam,0.0072957754,1,1,1,oriented towards efficiency,0.0291831018,1,1,1,oriented towards efficiency,0.0291831018,1,1,1
+amalgam,0.0033560567000000003,1,1,1,interlocking machine,0.0072957754,1,1,1,rather peripheralized area,0.0291831018,1,1,1,rather peripheralized area,0.0291831018,1,1,1
+philanthrophy,0.0033560567000000003,1,1,1,reshaped citizenship,0.0072957754,1,1,1,article provides evidence,0.0291831018,1,1,1,article provides evidence,0.0291831018,1,1,1
+combine,0.0033560567000000003,1,1,1,evolved automobility,0.0072957754,1,1,1,analyze local factor,0.0291831018,1,1,1,analyze local factor,0.0291831018,1,1,1

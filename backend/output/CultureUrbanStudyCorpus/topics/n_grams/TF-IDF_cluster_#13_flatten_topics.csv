@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+studio,0.0122999136,6,1,2,social creativity,0.0170646951,3,1,1,sustainable food culture,0.0491130249,3,1,1,sustainable food culture,0.0491130249,3,1,1
+child,0.0077753937,7,1,6,sustainable food,0.0170646951,3,1,1,beyond binary choice,0.0327420166,2,1,1,beyond binary choice,0.0327420166,2,1,1
+creativity,0.006664623200000001,6,1,6,food culture,0.0170646951,3,1,1,virtual design studio,0.0327420166,2,1,1,virtual design studio,0.0327420166,2,1,1
+food,0.0058739131,6,1,7,design studio,0.0170646951,3,1,1,unaided individual mind,0.0163710083,1,1,1,social creativity,0.0170646951,3,1,1
+game,0.0058296275,4,1,4,planning process,0.0143458838,6,1,6,embody collective knowledge,0.0163710083,1,1,1,design studio,0.0170646951,3,1,1
+brief,0.0052851287,2,1,1,binary choice,0.0113764634,2,1,1,proper collaboration model,0.0163710083,1,1,1,unaided individual mind,0.0163710083,1,1,1
+blend,0.0052851287,2,2,1,interactive art,0.0113764634,2,2,1,supporting distributed cognition,0.0163710083,1,1,1,embody collective knowledge,0.0163710083,1,1,1
+librarianship,0.0052851287,2,1,1,design framework,0.0113764634,2,1,1,evolutionary process model,0.0163710083,1,1,1,proper collaboration model,0.0163710083,1,1,1
+engage,0.0052851287,2,2,1,design brief,0.0113764634,2,1,1,support spontaneous design,0.0163710083,1,1,1,supporting distributed cognition,0.0163710083,1,1,1
+computer,0.0051100478,3,3,3,virtual design,0.0113764634,2,1,1,spontaneous design activity,0.0163710083,1,1,1,evolutionary process model,0.0163710083,1,1,1
+collaboration,0.0050665565000000004,4,2,5,game environment,0.0113764634,2,1,1,new design competence,0.0163710083,1,1,1,support spontaneous design,0.0163710083,1,1,1
+engagement,0.0043241407,5,3,8,computer science,0.0113764634,2,2,1,individual creative action,0.0163710083,1,1,1,spontaneous design activity,0.0163710083,1,1,1
+technology,0.0042504746,11,6,14,technology design,0.0113764634,2,1,1,personally meaningful activity,0.0163710083,1,1,1,new design competence,0.0163710083,1,1,1
+artifact,0.0034066985000000003,2,2,3,cultural diversity,0.0109059776,4,1,5,paper offers example,0.0163710083,1,1,1,individual creative action,0.0163710083,1,1,1
+software,0.0034066985000000003,2,1,3,civic engagement,0.008825361700000001,2,1,2,including urban planning,0.0163710083,1,1,1,personally meaningful activity,0.0163710083,1,1,1
+actor,0.0033323116000000003,3,1,6,information technology,0.0073330629,2,1,3,current food practice,0.0163710083,1,1,1,paper offers example,0.0163710083,1,1,1
+student,0.0030565368,4,1,9,individual mind,0.0056882317,1,1,1,world raises concern,0.0163710083,1,1,1,including urban planning,0.0163710083,1,1,1
+experiment,0.0029369565000000003,3,2,7,creative individual,0.0056882317,1,1,1,natural food source,0.0163710083,1,1,1,current food practice,0.0163710083,1,1,1
+contributor,0.0029148137000000003,2,2,4,creativity result,0.0056882317,1,1,1,urban population growth,0.0163710083,1,1,1,world raises concern,0.0163710083,1,1,1
+privacy,0.0029148137000000003,2,1,4,human creativity,0.0056882317,1,1,1,encouraging individual user,0.0163710083,1,1,1,natural food source,0.0163710083,1,1,1

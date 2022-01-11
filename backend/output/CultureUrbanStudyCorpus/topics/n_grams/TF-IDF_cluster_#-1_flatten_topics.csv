@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+festival,0.0034934539,28,2,4,typhoid fever,0.0051166492,11,1,1,urban regime theory,0.006392489,4,1,1,urban regime theory,0.006392489,4,1,1
+fever,0.0029409327,13,1,1,small business,0.0039692722,11,1,2,ethnic minority group,0.0047943667,3,1,1,typhoid fever,0.0051166492,11,1,1
+event,0.0021927978,38,6,10,middle class,0.0037211994000000003,8,1,1,urban forest manager,0.0047943667,3,1,1,ethnic minority group,0.0047943667,3,1,1
+coordination,0.0019304549000000002,11,3,2,residential standard,0.0037211994000000003,8,1,1,human sensory assessment,0.0047943667,3,1,1,urban forest manager,0.0047943667,3,1,1
+mobility,0.0019276149000000001,23,5,7,indigenous knowledge,0.0036084293000000003,10,1,2,site interpretation centre,0.0047943667,3,1,1,human sensory assessment,0.0047943667,3,1,1
+incidence,0.0015835792,7,1,1,regime theory,0.0027908995,6,1,1,typhoid fever case,0.0031962445,2,1,1,site interpretation centre,0.0047943667,3,1,1
+gas,0.0015835792,7,3,1,smart city,0.0025259005,7,2,2,public green space,0.0031962445,2,1,1,small business,0.0039692722,11,1,2
+visitor,0.0015085682000000001,18,4,7,special event,0.0023257496,5,1,1,social impact assessment,0.0031962445,2,1,1,middle class,0.0037211994000000003,8,1,1
+child,0.0014263686000000001,15,6,6,climate change,0.0023088234,9,4,4,urban sustainability transition,0.0031962445,2,1,1,residential standard,0.0037211994000000003,8,1,1
+typhoid,0.0013573536000000001,6,1,1,young people,0.0022295658,10,5,5,greenhouse gas emission,0.0031962445,2,2,1,indigenous knowledge,0.0036084293000000003,10,1,2
+trust,0.0013573536000000001,6,2,1,new town,0.0020987907,7,1,3,urban growth boundary,0.0031962445,2,1,1,festival,0.0034934539,28,2,4
+fair,0.0013573536000000001,6,1,1,developing country,0.0020522874,8,2,4,using social medium,0.0031962445,2,1,1,typhoid fever case,0.0031962445,2,1,1
+regime,0.0013123884,9,3,3,local government,0.0020066092,9,4,5,satisfy project requirement,0.0031962445,2,1,1,public green space,0.0031962445,2,1,1
+book,0.0012421234,28,12,12,public housing,0.0018605997000000001,4,3,1,double bottom line,0.0031962445,2,1,1,social impact assessment,0.0031962445,2,1,1
+youth,0.0012361861,13,4,6,greenhouse gas,0.0018605997000000001,4,2,1,different social milieu,0.0031962445,2,1,1,urban sustainability transition,0.0031962445,2,1,1
+beauty,0.0011927839,11,2,5,event activity,0.0018605997000000001,4,1,1,decision support system,0.0031962445,2,1,1,greenhouse gas emission,0.0031962445,2,2,1
+student,0.0011774929000000001,18,6,9,urban regime,0.0018605997000000001,4,1,1,smart city application,0.0031962445,2,1,1,urban growth boundary,0.0031962445,2,1,1
+risk,0.0011733308,14,8,7,trust relationship,0.0018605997000000001,4,1,1,system take place,0.0031962445,2,1,1,using social medium,0.0031962445,2,1,1
+business,0.0011667829,23,10,11,structural beauty,0.0018605997000000001,4,1,1,inter cultural dialogue,0.0031962445,2,1,1,satisfy project requirement,0.0031962445,2,1,1
+organisation,0.0011665675,8,2,3,site interpretation,0.0018605997000000001,4,1,1,historical city center,0.0031962445,2,1,1,double bottom line,0.0031962445,2,1,1

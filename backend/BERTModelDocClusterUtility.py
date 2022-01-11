@@ -271,7 +271,7 @@ class BERTModelDocClusterUtility:
     @staticmethod
     def get_n_gram_topics(approach, docs_per_cluster_df, folder, is_load=False):
         # A folder that stores all the topic results
-        temp_folder = os.path.join(folder, 'topics', 'temp')
+        temp_folder = os.path.join(folder, 'temp')
         Path(temp_folder).mkdir(parents=True, exist_ok=True)
         if is_load:
             path = os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_topics.json')
@@ -435,7 +435,7 @@ class BERTModelDocClusterUtility:
             clusters = cluster_df.to_dict("records")
             cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
             results = []
-            for i in range(50):
+            for i in range(20):
                 result = {'1-gram': "", '1-gram-score': 0, '1-gram-freq': 0, '1-gram-docs': 0, '1-gram-clusters': 0,
                           '2-gram': "", '2-gram-score': 0, '2-gram-freq': 0, '2-gram-docs': 0, '2-gram-clusters': 0,
                           '3-gram': "", '3-gram-score': 0, '3-gram-freq': 0, '3-gram-docs': 0, '3-gram-clusters': 0,

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+frailty,0.0040222402,8,1,1,city identity,0.015156385100000001,14,2,1,healthy life expectancy,0.0206526566,5,1,1,healthy life expectancy,0.0206526566,5,1,1
+identity,0.0033818553,46,10,14,medical care,0.012597492200000001,15,1,2,integrated community care,0.012391594,3,1,1,city identity,0.015156385100000001,14,2,1
+stone,0.0031202777,8,2,2,older people,0.012560827200000001,18,1,3,cubic stone street,0.012391594,3,1,1,medical care,0.012597492200000001,15,1,2
+care,0.0030531025,21,1,9,traditional market,0.0086607915,8,2,1,urban transformation project,0.012391594,3,1,1,older people,0.012560827200000001,18,1,3
+hybridization,0.0030166802,6,1,1,life expectancy,0.0075781926,7,1,1,local urban space,0.0082610627,2,1,1,integrated community care,0.012391594,3,1,1
+expectancy,0.0027302430000000003,7,1,2,architectural style,0.0064955936,6,2,1,community care system,0.0082610627,2,1,1,cubic stone street,0.012391594,3,1,1
+sündürme,0.0025139002,5,1,1,healthy life,0.0054129947,5,1,1,typological analysis method,0.0082610627,2,1,1,urban transformation project,0.012391594,3,1,1
+marketplace,0.0025139002,5,2,1,healthy society,0.0054129947,5,1,1,urban street façades,0.0082610627,2,1,1,traditional market,0.0086607915,8,2,1
+continuity,0.0024956046,9,4,4,cubic stone,0.0054129947,5,1,1,urban design guideline,0.0082610627,2,2,1,local urban space,0.0082610627,2,1,1
+house,0.0023084675,18,6,10,hybridization process,0.0054129947,5,1,1,many different civilization,0.0082610627,2,2,1,community care system,0.0082610627,2,1,1
+modifier,0.0020111201,4,1,1,urban transformation,0.0053736002,9,1,4,two governmental institution,0.0082610627,2,1,1,typological analysis method,0.0082610627,2,1,1
+richness,0.0020111201,4,3,1,traditional house,0.0041991641000000005,5,3,2,high spatial resolution,0.0082610627,2,1,1,urban street façades,0.0082610627,2,1,1
+floor,0.0020111201,4,1,1,local community,0.0033593312,4,3,2,cartographic data base,0.0082610627,2,1,1,urban design guideline,0.0082610627,2,2,1
+style,0.0018900158000000002,13,7,9,new development,0.0033593312,4,2,2,new development scheme,0.0082610627,2,1,1,many different civilization,0.0082610627,2,2,1
+street,0.0017746614,18,7,12,satellite image,0.0033593312,4,1,2,achieve national integration,0.0041305313,1,1,1,two governmental institution,0.0082610627,2,1,1
+conservation,0.0016907009000000001,8,2,6,vernacular city,0.0032477968,3,1,1,ambitious infrastructural project,0.0041305313,1,1,1,high spatial resolution,0.0082610627,2,1,1
+age,0.0016763752,9,5,7,transitional space,0.0032477968,3,1,1,uniform urban plan,0.0041305313,1,1,1,cartographic data base,0.0082610627,2,1,1
+market,0.0016258829,19,3,13,integrated community,0.0032477968,3,1,1,project generated webs,0.0041305313,1,1,1,new development scheme,0.0082610627,2,1,1
+disease,0.0016204147000000002,5,1,3,community care,0.0032477968,3,1,1,standard recognizable material,0.0041305313,1,1,1,life expectancy,0.0075781926,7,1,1
+guideline,0.0016204147000000002,5,3,3,care system,0.0032477968,3,1,1,recognizable material culture,0.0041305313,1,1,1,architectural style,0.0064955936,6,2,1
