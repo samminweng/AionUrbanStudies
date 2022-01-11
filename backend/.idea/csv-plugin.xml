@@ -108,6 +108,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_0/CultureUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_10/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
           <value>
             <Attribute>

@@ -195,7 +195,8 @@ class BERTModelDocCluster:
                             print(result)
                             results.append(result)
                 # Output the clustering results of a dimension
-                folder = os.path.join('output', self.args.case_name, 'cluster', self.args.iteration, 'experiments', 'hdbscan')
+                folder = os.path.join('output', self.args.case_name, 'cluster', self.args.iteration, 'experiments',
+                                      'hdbscan')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Output the detailed clustering results
                 result_df = pd.DataFrame(results,
@@ -227,7 +228,8 @@ class BERTModelDocCluster:
                     # Check if the score is better than 'best' parameter
                     if score != 'None' and float(score) >= d_result['Silhouette_score']:
                         d_result['Silhouette_score'] = float(score)
-                        d_result['min_samples'] = None if result['min_samples'] == 'None' else int(result['min_samples'])
+                        d_result['min_samples'] = None if result['min_samples'] == 'None' else int(
+                            result['min_samples'])
                         d_result['min_cluster_size'] = int(result['min_cluster_size'])
                         d_result['epsilon'] = float(result['epsilon'])
                         d_result['total_clusters'] = result['total_clusters']
