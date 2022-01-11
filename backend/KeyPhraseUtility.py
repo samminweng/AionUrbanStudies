@@ -209,9 +209,9 @@ class KeyPhraseUtility:
             df = df[['No', 'DocId', 'key-phrases']]  # Re-order the columns
 
             # Path(folder).mkdir(parents=True, exist_ok=True)
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.csv')
+            path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.csv')
             df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
+            path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
             df.to_json(path, orient='records')
             print("Output the key phrases of cluster #" + str(cluster_no))
         except Exception as _err:
@@ -277,12 +277,10 @@ class KeyPhraseUtility:
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
             group_df = group_df[
                 ['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
-            path = os.path.join(folder, 'group_key_phrases',
-                                'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file
-            path = os.path.join(folder, 'group_key_phrases',
-                                'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
+            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
             group_df.to_json(path, orient='records')
             print('Output the summary of grouped key phrase to ' + path)
             return group_df.to_dict("records")
@@ -309,42 +307,38 @@ class KeyPhraseUtility:
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
+            vector_list = key_phrase_vectors.tolist()
             results = list()
-            dimension = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 9, 8, 7, 6, 5]
-            for dimension in dimension:
+            dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5]
+            # Filter out dimensions > the length of key phrases
+            dimensions = list(filter(lambda d: d < len(key_phrases)-5, dimensions))
+            for dimension in dimensions:
+                # Reduce the doc vectors to specific dimension
+                reduced_vectors = umap.UMAP(
+                    n_neighbors=15,
+                    min_dist=0.0,
+                    n_components=dimension,
+                    random_state=42,
+                    metric="cosine").fit_transform(vector_list)
+                # Get vector dimension
+                # Compute the cosine distance/similarity for each doc vectors
+                distances = pairwise_distances(reduced_vectors, metric='cosine')
                 for min_samples in [None] + list(range(1, 21)):
                     for min_cluster_size in list(range(5, 21)):
                         for epsilon in [0.0]:
                             try:
-                                parameter = {'min_cluster_size': min_cluster_size, 'min_samples': min_samples,
-                                             'epsilon': epsilon}
-                                if dimension == key_phrase_vectors.shape[1]:
-                                    reduced_vectors = key_phrase_vectors
-                                else:
-                                    vector_list = key_phrase_vectors.tolist()
-                                    # Reduce the doc vectors to specific dimension
-                                    reduced_vectors = umap.UMAP(
-                                        min_dist=0.0,
-                                        n_components=dimension,
-                                        random_state=42,
-                                        metric="cosine").fit_transform(vector_list)
-                                # Get vector dimension
-                                dimension = reduced_vectors.shape[1]
-                                # Compute the cosine distance/similarity for each doc vectors
-                                distances = pairwise_distances(reduced_vectors, metric='cosine')
-                                # # Pass key phrase vector to HDBSCAN for grouping
-                                group_labels = hdbscan.HDBSCAN(min_cluster_size=parameter['min_cluster_size'],
-                                                               min_samples=parameter['min_samples'],
-                                                               cluster_selection_epsilon=parameter['epsilon'],
-                                                               metric='precomputed').fit_predict(
-                                    distances.astype('float64')).tolist()
-                                group_results = reduce(lambda pre, cur: collect_group_results(pre, cur), group_labels,
-                                                       list())
+                                # Group key phrase vectors using HDBSCAN clustering
+                                group_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
+                                                               min_samples=min_samples,
+                                                               cluster_selection_epsilon=epsilon,
+                                                               metric='precomputed').fit_predict(distances.astype('float64')).tolist()
+                                group_results = reduce(lambda pre, cur: collect_group_results(pre, cur),
+                                                       group_labels, list())
                                 outlier_number = next((g['count'] for g in group_results if g['group'] == -1), 0)
                                 if len(group_results) > 1:
                                     df = pd.DataFrame()
                                     df['groups'] = group_labels
-                                    df['vectors'] = reduced_vectors.tolist()
+                                    df['vectors'] = distances.tolist()
                                     # Remove the outliers
                                     no_outlier_df = df[df['groups'] != -1]
                                     no_outlier_labels = no_outlier_df['groups'].tolist()
@@ -356,18 +350,19 @@ class KeyPhraseUtility:
                                 # Output the result
                                 result = {'cluster': "#" + str(cluster_no),
                                           'dimension': dimension,
-                                          'min_samples': str(parameter['min_samples']),
-                                          'min_cluster_size': parameter['min_cluster_size'],
-                                          'epsilon': parameter['epsilon'],
+                                          'min_samples': str(min_samples),
+                                          'min_cluster_size': min_cluster_size,
+                                          'epsilon': epsilon,
                                           'total_groups': len(group_results),
                                           'outliers': outlier_number,
                                           'score': score,
                                           'group_result': group_results,
                                           'group_labels': group_labels}
                                 results.append(result)
-                                print(result)
+                                # print(result)
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
+                print("=== Complete grouping the key phrases of cluster {no} with dimension {d} ===".format(no=cluster_no, d=dimension))
             # output the experiment results
             df = pd.DataFrame(results)
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')

@@ -52,7 +52,8 @@ class BERTModelDocCluster:
             device='cpu',
             n_neighbors=15,
             min_dist=0.0,
-            dimensions=[768, 15, 10, 9, 8, 7, 6, 5]
+            dimensions=[768, 500, 450, 400, 350, 300, 250, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50,
+                        45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5]
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
         path = os.path.join('data', self.args.case_name, self.args.iteration, self.args.case_name + '_cleaned.csv')
@@ -76,6 +77,8 @@ class BERTModelDocCluster:
         self.text_df['y'] = list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
         # Print out the reduced vector
         print(self.text_df)
+        # Filter out dimensions > the length of text df
+        self.args.dimensions = list(filter(lambda d: d < len(self.text_df) and d != 768, self.args.dimensions))
 
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)

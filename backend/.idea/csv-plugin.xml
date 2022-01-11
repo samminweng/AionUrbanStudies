@@ -73,6 +73,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIUrbanStudyCorpus/cluster/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/cluster/CultureUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
           <value>
             <Attribute>
@@ -109,6 +116,13 @@
           </value>
         </entry>
         <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_0/CultureUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_0/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -416,6 +430,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/CultureUrbanStudyCorpus_doc_key_phrases.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/key_phrases/doc_key_phrase/top_key_phrases_cluster_#-1.csv">
           <value>
             <Attribute>
@@ -431,6 +452,34 @@
           </value>
         </entry>
         <entry key="/output/CultureUrbanStudyCorpus/key_phrases/doc_key_phrase/top_key_phrases_cluster_#2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/experiments/top_key_phrases_cluster_#0_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/experiments/top_key_phrases_cluster_#1_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/group_key_phrases/top_key_phrases_best_grouping.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/group_key_phrases/top_key_phrases_cluster_#0_best_grouping.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
