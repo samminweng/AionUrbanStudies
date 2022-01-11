@@ -23,10 +23,9 @@ class KeyPhraseSimilarity:
     def __init__(self):
         self.args = Namespace(
             case_name='CultureUrbanStudyCorpus',
-            approach='HDBSCAN',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
-            device='cuda'
+            device='cpu'
         )
         # Load HDBSCAN cluster
         path = os.path.join('output', self.args.case_name, 'cluster', self.args.case_name + "_clusters.json")
@@ -97,8 +96,8 @@ class KeyPhraseSimilarity:
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def group_key_phrases_by_clusters_experiments(self):
-        cluster_no_list = range(0, self.total_clusters)
-        # cluster_no_list = [6]
+        # cluster_no_list = range(0, self.total_clusters)
+        cluster_no_list = [0]
         for cluster_no in cluster_no_list:
             key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
             path = os.path.join(key_phrase_folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
@@ -205,7 +204,7 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     kp = KeyPhraseSimilarity()
-    # kp.extract_key_phrases_by_clusters()
-    kp.group_key_phrases_by_clusters_experiments()
+    kp.extract_key_phrases_by_clusters()
+    # kp.group_key_phrases_by_clusters_experiments()
     # kp.grouped_key_phrases_with_best_experiment_result()
     # kp.summarize_key_phrases_results()
