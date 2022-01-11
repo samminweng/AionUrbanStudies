@@ -1,5 +1,5 @@
 'use strict';
-const corpus = 'UrbanStudyCorpus';
+const corpus = 'CultureUrbanStudyCorpus';
 const cluster_approach = "HDBSCAN";
 
 // Document ready event

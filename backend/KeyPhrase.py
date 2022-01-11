@@ -92,29 +92,6 @@ class KeyPhraseSimilarity:
                 KeyPhraseUtility.output_key_phrases_by_cluster(results, cluster_no, folder)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-        # Combine all the doc key phrases into a single file 'doc_key_phrases'
-        try:
-            key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases')
-            # Combine the key phrases of all papers to a single file
-            doc_key_phrases = list()
-            for cluster_no in range(-1, self.total_clusters):
-                # Get key phrases of a cluster
-                path = os.path.join(key_phrase_folder, 'doc_key_phrase',
-                                    'top_doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
-                docs = pd.read_json(path).to_dict("records")
-                for doc in docs:
-                    doc_key_phrases.append({'DocId': doc['DocId'], 'key-phrases': doc['key-phrases']})
-            # Sort key phrases by DocId
-            sorted_key_phrases = sorted(doc_key_phrases, key=lambda k: k['DocId'])
-            # # Aggregated all the key phrases of each individual article
-            df = pd.DataFrame(sorted_key_phrases, columns=['DocId', 'key-phrases'])
-            path = os.path.join(key_phrase_folder, self.args.case_name + '_doc_key_phrases.csv')
-            df.to_csv(path, index=False, encoding='utf-8')
-            path = os.path.join(key_phrase_folder, self.args.case_name + '_doc_key_phrases.json')
-            df.to_json(path, orient='records')
-            print('Output key phrases per doc to ' + path)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def group_key_phrases_by_clusters_experiments(self):
@@ -207,6 +184,37 @@ class KeyPhraseSimilarity:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Combine clusters and doc key phrases
+    def combine_cluster_doc_key_phrases(self):
+        # Combine all the doc key phrases into a single file 'doc_key_phrases'
+        try:
+            key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases')
+            # Combine the key phrases of all papers to a single file
+            doc_key_phrases = list()
+            for cluster_no in range(-1, self.total_clusters):
+                # Get key phrases of a cluster
+                path = os.path.join(key_phrase_folder, 'doc_key_phrase',
+                                    'top_doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
+                docs = pd.read_json(path).to_dict("records")
+                for doc in docs:
+                    doc_key_phrases.append({'DocId': doc['DocId'], 'key-phrases': doc['key-phrases']})
+            # Sort key phrases by DocId
+            sorted_key_phrases = sorted(doc_key_phrases, key=lambda k: k['DocId'])
+            # # Aggregated all the key phrases of each individual article
+            df = pd.DataFrame(sorted_key_phrases)
+            # Combine cluster and doc key phrases
+            self.corpus_df['KeyPhrases'] = df['key-phrases'].tolist()
+            # Drop column
+            self.corpus_df = self.corpus_df.drop('Text', axis=1)
+            folder = os.path.join('output', self.args.case_name)
+            path = os.path.join(folder, self.args.case_name + '_clusters.csv')
+            self.corpus_df.to_csv(path, index=False, encoding='utf-8')
+            path = os.path.join(folder, self.args.case_name + '_clusters.json')
+            self.corpus_df.to_json(path, orient='records')
+            print('Output key phrases per doc to ' + path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
 
 # Main entry
 if __name__ == '__main__':
@@ -214,4 +222,5 @@ if __name__ == '__main__':
     # kp.extract_doc_key_phrases_by_clusters()
     # kp.group_key_phrases_by_clusters_experiments()
     # kp.grouped_key_phrases_with_best_experiment_result()
-    kp.combine_topics_key_phrases_results()
+    # kp.combine_topics_key_phrases_results()
+    kp.combine_cluster_doc_key_phrases()
