@@ -1,51 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-event,0.0037591971,38,6,1,typhoid fever,0.0022622128000000003,11,1,1,urban regime theory,0.0028065956,4,1,1,event,0.0037591971,38,6,1
-knowledge,0.0030667134,31,7,1,small business,0.0022622128000000003,11,1,1,ethnic minority group,0.0021049467,3,1,1,knowledge,0.0030667134,31,7,1
-festival,0.0027699347,28,2,1,young people,0.0020565571,10,5,1,human sensory assessment,0.0021049467,3,1,1,urban regime theory,0.0028065956,4,1,1
-landscape,0.0024731560000000002,25,7,1,indigenous knowledge,0.0020565571,10,1,1,site interpretation centre,0.0021049467,3,1,1,festival,0.0027699347,28,2,1
-mobility,0.0022753035,23,5,1,urban planning,0.0017457323000000002,23,15,2,typhoid fever case,0.0014032978,2,1,1,landscape,0.0024731560000000002,25,7,1
-interaction,0.0021763773000000003,22,9,1,middle class,0.0016452457,8,1,1,public green space,0.0014032978,2,1,1,mobility,0.0022753035,23,5,1
-time,0.0021763773000000003,22,12,1,residential standard,0.0016452457,8,1,1,social impact assessment,0.0014032978,2,1,1,typhoid fever,0.0022622128000000003,11,1,1
-place,0.001898558,52,21,2,new town,0.00143959,7,1,1,urban growth boundary,0.0014032978,2,1,1,small business,0.0022622128000000003,11,1,1
-visitor,0.0017806723000000002,18,4,1,smart city,0.00143959,7,2,1,using social medium,0.0014032978,2,1,1,interaction,0.0021763773000000003,22,9,1
-history,0.0015828198000000001,16,11,1,social interaction,0.0012339343,6,4,1,last two decade,0.0014032978,2,2,1,time,0.0021763773000000003,22,12,1
-politics,0.0015828198000000001,16,8,1,regime theory,0.0012339343,6,1,1,relationship among people,0.0014032978,2,1,1,ethnic minority group,0.0021049467,3,1,1
-work,0.0015828198000000001,16,10,1,tourism study,0.0010282786,5,1,1,satisfy project requirement,0.0014032978,2,1,1,human sensory assessment,0.0021049467,3,1,1
-child,0.0014838936,15,6,1,special event,0.0010282786,5,1,1,different social milieu,0.0014032978,2,1,1,site interpretation centre,0.0021049467,3,1,1
-housing,0.0014838936,15,9,1,ethnic group,0.0010282786,5,2,1,decision support system,0.0014032978,2,1,1,young people,0.0020565571,10,5,1
-fever,0.0012860411,13,1,1,urban governance,0.0010282786,5,3,1,smart city application,0.0014032978,2,1,1,indigenous knowledge,0.0020565571,10,1,1
-youth,0.0012860411,13,4,1,third place,0.0010282786,5,1,1,system take place,0.0014032978,2,1,1,place,0.001898558,52,21,2
-literature,0.0012860411,13,5,1,green space,0.0008226229,4,2,1,inter cultural dialogue,0.0014032978,2,1,1,visitor,0.0017806723000000002,18,4,1
-community,0.0012778756000000001,35,18,2,different culture,0.0008226229,4,3,1,sustainable urban environment,0.0014032978,2,1,1,urban planning,0.0017457323000000002,23,15,2
-space,0.0012413649,34,20,2,important role,0.0008226229,4,4,1,tsunami hazard zone,0.0014032978,2,1,1,middle class,0.0016452457,8,1,1
-interpretation,0.0011871149,12,6,1,public participation,0.0008226229,4,2,1,detect febrile case,0.0007016489,1,1,1,residential standard,0.0016452457,8,1,1
-neighborhood,0.0011871149,12,7,1,two decade,0.0008226229,4,4,1,fever among preschooler,0.0007016489,1,1,1,history,0.0015828198000000001,16,11,1
-town,0.0011871149,12,4,1,public housing,0.0008226229,4,3,1,urban study area,0.0007016489,1,1,1,politics,0.0015828198000000001,16,8,1
-year,0.0011683434,32,8,2,event activity,0.0008226229,4,1,1,foreign resident youth,0.0007016489,1,1,1,work,0.0015828198000000001,16,10,1
-area,0.0010953220000000001,30,17,2,among people,0.0008226229,4,3,1,investigated leisure activity,0.0007016489,1,1,1,child,0.0014838936,15,6,1
-street,0.0010881886000000001,11,4,1,urban regime,0.0008226229,4,1,1,facilitate social interaction,0.0007016489,1,1,1,housing,0.0014838936,15,9,1
-site,0.0010881886000000001,11,5,1,trust relationship,0.0008226229,4,1,1,immigrant young people,0.0007016489,1,1,1,new town,0.00143959,7,1,1
-decade,0.0009892624,10,8,1,spatial planning,0.0008226229,4,3,1,urban green space,0.0007016489,1,1,1,smart city,0.00143959,7,2,1
-meaning,0.0009892624,10,5,1,urban transformation,0.0008226229,4,1,1,friend across culture,0.0007016489,1,1,1,typhoid fever case,0.0014032978,2,1,1
-order,0.0009892624,10,9,1,site interpretation,0.0008226229,4,1,1,past two decade,0.0007016489,1,1,1,public green space,0.0014032978,2,1,1
-field,0.0009892624,10,6,1,public space,0.000759014,10,6,2,numerous social conflict,0.0007016489,1,1,1,social impact assessment,0.0014032978,2,1,1
-point,0.0009892624,10,8,1,optimum age,0.0006169671,3,1,1,received increasing attention,0.0007016489,1,1,1,urban growth boundary,0.0014032978,2,1,1
-standard,0.0009892624,10,1,1,social inclusion,0.0006169671,3,2,1,socialist governing ideology,0.0007016489,1,1,1,using social medium,0.0014032978,2,1,1
-condition,0.0009892624,10,6,1,participatory planning,0.0006169671,3,3,1,examines recent response,0.0007016489,1,1,1,last two decade,0.0014032978,2,2,1
-government,0.0009127683,25,11,2,ethnic minority,0.0006169671,3,1,1,recent development appear,0.0007016489,1,1,1,relationship among people,0.0014032978,2,1,1
-group,0.0009127683,25,12,2,minority group,0.0006169671,3,1,1,closer examination reveals,0.0007016489,1,1,1,satisfy project requirement,0.0014032978,2,1,1
-sense,0.0008903362,9,6,1,physical environment,0.0006169671,3,2,1,many different dimension,0.0007016489,1,1,1,different social milieu,0.0014032978,2,1,1
-home,0.0008903362,9,6,1,urban renewal,0.0006169671,3,3,1,public open scape,0.0007016489,1,1,1,decision support system,0.0014032978,2,1,1
-mechanism,0.0008903362,9,5,1,take place,0.0006169671,3,2,1,different ethnic minority,0.0007016489,1,1,1,smart city application,0.0014032978,2,1,1
-regime,0.0008903362,9,3,1,social medium,0.0006169671,3,1,1,towards inclusive design,0.0007016489,1,1,1,system take place,0.0014032978,2,1,1
-business,0.0008032361000000001,22,9,2,local culture,0.0006169671,3,3,1,embodies multiple level,0.0007016489,1,1,1,inter cultural dialogue,0.0014032978,2,1,1
-policy,0.0008032361000000001,22,11,2,event management,0.0006169671,3,1,1,everyday meaning implicit,0.0007016489,1,1,1,sustainable urban environment,0.0014032978,2,1,1
-control,0.0007914099000000001,8,5,1,research interest,0.0006169671,3,1,1,public housing scheme,0.0007016489,1,1,1,tsunami hazard zone,0.0014032978,2,1,1
-partnership,0.0007914099000000001,8,4,1,economic development,0.0006169671,3,2,1,along modernist line,0.0007016489,1,1,1,fever,0.0012860411,13,1,1
-set,0.0007914099000000001,8,7,1,location choice,0.0006169671,3,1,1,organised vernacular association,0.0007016489,1,1,1,youth,0.0012860411,13,4,1
-measure,0.0007914099000000001,8,3,1,new immigrant,0.0006169671,3,1,1,physically polluted landscape,0.0007016489,1,1,1,literature,0.0012860411,13,5,1
-program,0.0007914099000000001,8,5,1,urban culture,0.0006169671,3,3,1,common bond place,0.0007016489,1,1,1,community,0.0012778756000000001,35,18,2
-sociology,0.0007914099000000001,8,4,1,young adult,0.0006169671,3,1,1,explores young people,0.0007016489,1,1,1,space,0.0012413649,34,20,2
-organisation,0.0007914099000000001,8,2,1,city organisation,0.0006169671,3,1,1,poorer urban area,0.0007016489,1,1,1,social interaction,0.0012339343,6,4,1
-reconstruction,0.0007914099000000001,8,1,1,social norm,0.0006169671,3,1,1,urban young people,0.0007016489,1,1,1,regime theory,0.0012339343,6,1,1
-activity,0.0007667254,21,12,2,cultural development,0.0006169671,3,1,1,three urban study,0.0007016489,1,1,1,interpretation,0.0011871149,12,6,1
+question,0.0027181038,8,5,1,built environment,0.00299698,9,3,2,road traffic noise,0.0086316845,4,1,1,road traffic noise,0.0086316845,4,1,1
+reconstruction,0.0027181038,8,1,1,community response,0.0026639823,4,1,1,public green space,0.0043158422,2,1,1,public green space,0.0043158422,2,1,1
+construction,0.0025482223000000003,15,5,2,traffic noise,0.0026639823,4,1,1,satisfy project requirement,0.0043158422,2,1,1,satisfy project requirement,0.0043158422,2,1,1
+immigrant,0.0023783408,7,2,1,green space,0.0019979867,3,1,1,double bottom line,0.0043158422,2,1,1,double bottom line,0.0043158422,2,1,1
+disaster,0.0023783408,7,2,1,road traffic,0.0019979867,6,1,2,draws architectural comparison,0.0043158422,2,1,1,draws architectural comparison,0.0043158422,2,1,1
+idea,0.0023783408,7,3,1,detached house,0.0019979867,3,1,1,inclusive design research,0.0043158422,2,1,1,inclusive design research,0.0043158422,2,1,1
+bridge,0.0023783408,7,2,1,location choice,0.0019979867,3,1,1,tsunami hazard zone,0.0043158422,2,1,1,tsunami hazard zone,0.0043158422,2,1,1
+water,0.0022084593,13,2,2,new immigrant,0.0019979867,3,1,1,noise control policy,0.0021579211,1,1,1,built environment,0.00299698,9,3,2
+calendar,0.0020385778,6,2,1,ethnic group,0.0019979867,3,2,1,new multidisciplinary approach,0.0021579211,1,1,1,question,0.0027181038,8,5,1
+barrier,0.0020385778,6,1,1,construction project,0.0019979867,3,2,1,soundscapes across country,0.0021579211,1,1,1,reconstruction,0.0027181038,8,1,1
+fair,0.0020385778,6,1,1,bottom line,0.0019979867,3,1,1,considers environmental sound,0.0021579211,1,1,1,community response,0.0026639823,4,1,1
+noise,0.0018686964000000001,11,2,2,profi le,0.0019979867,3,1,1,emerging soundscape science,0.0021579211,1,1,1,construction,0.0025482223000000003,15,5,2
+sound,0.0016988149,5,3,1,city noise,0.0019979867,3,1,1,significant research activity,0.0021579211,1,1,1,immigrant,0.0023783408,7,2,1
+tsunami,0.0016988149,5,2,1,disaster prevention,0.0019979867,3,1,1,last question aim,0.0021579211,1,1,1,disaster,0.0023783408,7,2,1
+ocean,0.0016988149,5,1,1,ten question,0.0013319911,2,1,1,foreign resident youth,0.0021579211,1,1,1,idea,0.0023783408,7,3,1
+astronomy,0.0016988149,5,1,1,soundscape research,0.0013319911,2,1,1,investigated leisure activity,0.0021579211,1,1,1,bridge,0.0023783408,7,2,1
+hearing,0.0016988149,5,1,1,making friend,0.0013319911,2,1,1,facilitate social interaction,0.0021579211,1,1,1,water,0.0022084593,13,2,2
+government,0.0015289334,9,3,2,urban forest,0.0013319911,2,1,1,immigrant young people,0.0021579211,1,1,1,noise control policy,0.0021579211,1,1,1
+science,0.0013590519,4,2,1,social inclusion,0.0013319911,2,1,1,urban green space,0.0021579211,1,1,1,new multidisciplinary approach,0.0021579211,1,1,1
+soundscape,0.0013590519,4,2,1,residential area,0.0013319911,2,2,1,friend across culture,0.0021579211,1,1,1,soundscapes across country,0.0021579211,1,1,1

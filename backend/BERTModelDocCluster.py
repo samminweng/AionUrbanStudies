@@ -78,7 +78,7 @@ class BERTModelDocCluster:
         # Print out the reduced vector
         print(self.text_df)
         # Filter out dimensions > the length of text df
-        self.args.dimensions = list(filter(lambda d: d < len(self.text_df) and d != 768, self.args.dimensions))
+        self.args.dimensions = list(filter(lambda d: d < len(self.text_df) - 5 and d != 768, self.args.dimensions))
 
     # Get the sentence embedding from the transformer model
     # Sentence transformer is based on transformer model (BERTto compute the vectors for sentences or paragraph (a number of sentences)
@@ -195,8 +195,10 @@ class BERTModelDocCluster:
                                         cluster_vectors)
                             except Exception as _err:
                                 print("Error occurred! {err}".format(err=_err))
-                            print(result)
+                            # print(result)
                             results.append(result)
+
+                print("Complete clustering the vectors at dimension = {d}".format(d=dimension))
                 # Output the clustering results of a dimension
                 folder = os.path.join('output', self.args.case_name, 'cluster', self.args.iteration, 'experiments',
                                       'hdbscan')
@@ -458,13 +460,13 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        iter = 6
-        mdc = BERTModelDocCluster(iter)
-        mdc.run_HDBSCAN_cluster_experiments()
-        mdc.summarize_HDBSCAN_cluster_experiment_results()
-        mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
-        mdc.derive_topics_from_cluster_docs_by_TF_IDF()
-        mdc.combine_and_summary_topics_from_clusters()
-        mdc.re_cluster_outliers_by_hdbscan()
+        for iter in list(range(6, 8)):
+            mdc = BERTModelDocCluster(iter)
+            mdc.run_HDBSCAN_cluster_experiments()
+            mdc.summarize_HDBSCAN_cluster_experiment_results()
+            mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
+            mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+            mdc.combine_and_summary_topics_from_clusters()
+            mdc.re_cluster_outliers_by_hdbscan()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

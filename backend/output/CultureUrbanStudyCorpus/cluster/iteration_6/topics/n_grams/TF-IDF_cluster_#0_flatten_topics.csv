@@ -1,51 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-car,0.0059640157,5,1,1,conflict activity,0.0077791509,3,1,1,reconfigures urban life,0.0103722012,1,1,1,reconfigures urban life,0.0103722012,1,1,1
-urbanity,0.0059640157,5,1,1,civil society,0.0051861006,2,1,1,involving distinct way,0.0103722012,1,1,1,involving distinct way,0.0103722012,1,1,1
-automobility,0.0035784094,3,1,1,social practice,0.0051861006,2,2,1,trace urban sociology,0.0103722012,1,1,1,trace urban sociology,0.0103722012,1,1,1
-homelessness,0.0035784094,3,1,1,social composition,0.0051861006,2,1,1,makes instantaneous time,0.0103722012,1,1,1,makes instantaneous time,0.0103722012,1,1,1
-space,0.003081597,7,5,2,twin city,0.0051861006,2,1,1,within fragmented moment,0.0103722012,1,1,1,within fragmented moment,0.0103722012,1,1,1
-article,0.003081597,7,3,2,social life,0.0028710531,3,1,2,entailed various mobility,0.0103722012,1,1,1,entailed various mobility,0.0103722012,1,1,1
-homeless,0.0023856063000000003,2,1,1,public space,0.0028710531,3,3,2,modern civil society,0.0103722012,1,1,1,modern civil society,0.0103722012,1,1,1
-frequency,0.0023856063000000003,2,1,1,motor car,0.0025930503,1,1,1,produce segmented response,0.0103722012,1,1,1,produce segmented response,0.0103722012,1,1,1
-composition,0.0023856063000000003,2,1,1,awesome consequence,0.0025930503,1,1,1,voluntary agency resort,0.0103722012,1,1,1,voluntary agency resort,0.0103722012,1,1,1
-propensity,0.0023856063000000003,2,1,1,overwhelming impact,0.0025930503,1,1,1,address visible homelessness,0.0103722012,1,1,1,address visible homelessness,0.0103722012,1,1,1
-twin,0.0023856063000000003,2,1,1,distinct way,0.0025930503,1,1,1,revealing hidden homelessness,0.0103722012,1,1,1,revealing hidden homelessness,0.0103722012,1,1,1
-migrant,0.0023856063000000003,2,1,1,paradoxical resistance,0.0025930503,1,1,1,sustain inclusive practice,0.0103722012,1,1,1,sustain inclusive practice,0.0103722012,1,1,1
-conflict,0.0022011407,5,1,2,instantaneous time,0.0025930503,1,1,1,following four dimension,0.0103722012,1,1,1,following four dimension,0.0103722012,1,1,1
-refugee,0.0022011407,5,1,2,extensive space,0.0025930503,1,1,1,various urban resource,0.0103722012,1,1,1,various urban resource,0.0103722012,1,1,1
-society,0.0017609126,4,2,2,transcending distance,0.0025930503,1,1,1,extent certain area,0.0103722012,1,1,1,extent certain area,0.0103722012,1,1,1
-activity,0.0017609126,4,2,2,fragmented moment,0.0025930503,1,1,1,activity oriented towards,0.0103722012,1,1,1,activity oriented towards,0.0103722012,1,1,1
-integration,0.0017609126,4,2,2,various mobility,0.0025930503,1,1,1,oriented towards efficiency,0.0103722012,1,1,1,oriented towards efficiency,0.0103722012,1,1,1
-mobility,0.0013206844,3,1,2,distinct combination,0.0025930503,1,1,1,rather peripheralized area,0.0103722012,1,1,1,rather peripheralized area,0.0103722012,1,1,1
-voice,0.0013206844,3,2,2,complex amalgam,0.0025930503,1,1,1,article provides evidence,0.0103722012,1,1,1,article provides evidence,0.0103722012,1,1,1
-emphasis,0.0013206844,3,2,2,interlocking machine,0.0025930503,1,1,1,analyze local factor,0.0103722012,1,1,1,analyze local factor,0.0103722012,1,1,1
-part,0.0013206844,3,2,2,reshaped citizenship,0.0025930503,1,1,1,set many parameter,0.0103722012,1,1,1,set many parameter,0.0103722012,1,1,1
-policy,0.0013206844,3,1,2,evolved automobility,0.0025930503,1,1,1,selected case study,0.0103722012,1,1,1,selected case study,0.0103722012,1,1,1
-today,0.0013206844,3,1,2,institutional contexts,0.0025930503,1,1,1,case study city,0.0103722012,1,1,1,case study city,0.0103722012,1,1,1
-prosperity,0.0013206844,3,1,2,welfare agency,0.0025930503,1,1,1,pattern language formation,0.0103722012,1,1,1,pattern language formation,0.0103722012,1,1,1
-motor,0.0011928031000000001,1,1,1,power combine,0.0025930503,1,1,1,host community respond,0.0103722012,1,1,1,host community respond,0.0103722012,1,1,1
-automobile,0.0011928031000000001,1,1,1,segmented response,0.0025930503,1,1,1,rather country people,0.0103722012,1,1,1,rather country people,0.0103722012,1,1,1
-dweller,0.0011928031000000001,1,1,1,central state,0.0025930503,1,1,1,paradigm shift towards,0.0103722012,1,1,1,paradigm shift towards,0.0103722012,1,1,1
-dwelling,0.0011928031000000001,1,1,1,local state,0.0025930503,1,1,1,shift towards urbanity,0.0103722012,1,1,1,shift towards urbanity,0.0103722012,1,1,1
-moment,0.0011928031000000001,1,1,1,voluntary agency,0.0025930503,1,1,1,past four decade,0.0103722012,1,1,1,past four decade,0.0103722012,1,1,1
-flexibility,0.0011928031000000001,1,1,1,agency resort,0.0025930503,1,1,1,time various challenge,0.0103722012,1,1,1,time various challenge,0.0103722012,1,1,1
-coercion,0.0011928031000000001,1,1,1,different understanding,0.0025930503,1,1,1,limit cultural prosperity,0.0103722012,1,1,1,limit cultural prosperity,0.0103722012,1,1,1
-amalgam,0.0011928031000000001,1,1,1,acknowledge responsibility,0.0025930503,1,1,1,currently face number,0.0103722012,1,1,1,currently face number,0.0103722012,1,1,1
-mobilization,0.0011928031000000001,1,1,1,homeless people,0.0025930503,1,1,1,designed without user,0.0103722012,1,1,1,designed without user,0.0103722012,1,1,1
-tomorrow,0.0011928031000000001,1,1,1,shape action,0.0025930503,1,1,1,finally creative industry,0.0103722012,1,1,1,finally creative industry,0.0103722012,1,1,1
-philanthrophy,0.0011928031000000001,1,1,1,local setting,0.0025930503,1,1,1,holistic planning strategy,0.0103722012,1,1,1,holistic planning strategy,0.0103722012,1,1,1
-combine,0.0011928031000000001,1,1,1,rhetoric address,0.0025930503,1,1,1,robust natural environment,0.0103722012,1,1,1,robust natural environment,0.0103722012,1,1,1
-church,0.0011928031000000001,1,1,1,visible homelessness,0.0025930503,1,1,1,reliable creative prosperity,0.0103722012,1,1,1,reliable creative prosperity,0.0103722012,1,1,1
-resort,0.0011928031000000001,1,1,1,conceals exclusion,0.0025930503,1,1,1,develop feedback mechanism,0.0103722012,1,1,1,develop feedback mechanism,0.0103722012,1,1,1
-pity,0.0011928031000000001,1,1,1,voice aim,0.0025930503,1,1,1,urban planning policy,0.0038280708,1,1,2,conflict activity,0.0077791509,3,1,1
-address,0.0011928031000000001,1,1,1,hidden homelessness,0.0025930503,1,1,1,,0.0,0,0,0,car,0.0059640157,5,1,1
-conceals,0.0011928031000000001,1,1,1,inclusive practice,0.0025930503,1,1,1,,0.0,0,0,0,urbanity,0.0059640157,5,1,1
-testimony,0.0011928031000000001,1,1,1,community work,0.0025930503,1,1,1,,0.0,0,0,0,civil society,0.0051861006,2,1,1
-milieux,0.0011928031000000001,1,1,1,secure access,0.0025930503,1,1,1,,0.0,0,0,0,social practice,0.0051861006,2,2,1
-non,0.0011928031000000001,1,1,1,good quality,0.0025930503,1,1,1,,0.0,0,0,0,social composition,0.0051861006,2,1,1
-outskirt,0.0011928031000000001,1,1,1,spatial distribution,0.0025930503,1,1,1,,0.0,0,0,0,twin city,0.0051861006,2,1,1
-dominant,0.0011928031000000001,1,1,1,urban conflict,0.0025930503,1,1,1,,0.0,0,0,0,urban planning policy,0.0038280708,1,1,2
-pathway,0.0011928031000000001,1,1,1,spatial dynamic,0.0025930503,1,1,1,,0.0,0,0,0,automobility,0.0035784094,3,1,1
-symbolisms,0.0011928031000000001,1,1,1,four dimension,0.0025930503,1,1,1,,0.0,0,0,0,homelessness,0.0035784094,3,1,1
-stance,0.0011928031000000001,1,1,1,urban resource,0.0025930503,1,1,1,,0.0,0,0,0,space,0.003081597,7,5,2
-declaration,0.0011928031000000001,1,1,1,statistical analysis,0.0025930503,1,1,1,,0.0,0,0,0,article,0.003081597,7,3,2
+transition,0.0055222367000000005,5,1,1,sustainability transition,0.006333468,3,1,1,urban sustainability transition,0.0127232335,2,1,1,urban sustainability transition,0.0127232335,2,1,1
+map,0.0044177894,4,1,1,greenhouse gas,0.006333468,3,1,1,modern city planning,0.0127232335,2,1,1,modern city planning,0.0127232335,2,1,1
+creativity,0.0033133420000000004,3,1,1,mental map,0.006333468,3,1,1,significant transition towards,0.0063616167,1,1,1,significant transition towards,0.0063616167,1,1,1
+population,0.0028533306,7,2,2,climate change,0.0046749892,6,1,2,transition towards urbanisation,0.0063616167,1,1,1,transition towards urbanisation,0.0063616167,1,1,1
+climate,0.0024457119,6,1,2,urban sustainability,0.004222312000000001,2,1,1,influence social development,0.0063616167,1,1,1,influence social development,0.0063616167,1,1,1
+environment,0.0024457119,6,4,2,human population,0.004222312000000001,2,1,1,structural systemic realignments,0.0063616167,1,1,1,structural systemic realignments,0.0063616167,1,1,1
+growth,0.0024457119,6,2,2,carbon emission,0.004222312000000001,2,1,1,persistent societal challenge,0.0063616167,1,1,1,persistent societal challenge,0.0063616167,1,1,1
+emission,0.0024457119,6,1,2,twentieth century,0.004222312000000001,2,1,1,towards urban farming,0.0063616167,1,1,1,towards urban farming,0.0063616167,1,1,1
+urbanisation,0.0022088947,2,1,1,rich country,0.004222312000000001,2,1,1,renewable decentralised energy,0.0063616167,1,1,1,renewable decentralised energy,0.0063616167,1,1,1
+increase,0.0022088947,2,1,1,future culture,0.004222312000000001,2,1,1,decentralised energy system,0.0063616167,1,1,1,decentralised energy system,0.0063616167,1,1,1
+futuristics,0.0022088947,2,1,1,past rate,0.004222312000000001,2,1,1,provides new insight,0.0063616167,1,1,1,provides new insight,0.0063616167,1,1,1
+edition,0.0022088947,2,1,1,culture change,0.004222312000000001,2,1,1,sustainability transition unfold,0.0063616167,1,1,1,sustainability transition unfold,0.0063616167,1,1,1
+soundmarks,0.0022088947,2,1,1,first edition,0.004222312000000001,2,1,1,explores possible strategy,0.0063616167,1,1,1,explores possible strategy,0.0063616167,1,1,1
+system,0.0016304746,4,2,2,understanding city,0.004222312000000001,2,1,1,governing urban transition,0.0063616167,1,1,1,governing urban transition,0.0063616167,1,1,1
+challenge,0.0016304746,4,3,2,organic approach,0.004222312000000001,2,1,1,across geographical contexts,0.0063616167,1,1,1,across geographical contexts,0.0063616167,1,1,1
+gas,0.0016304746,4,1,2,five element,0.004222312000000001,2,1,1,four broad dimension,0.0063616167,1,1,1,four broad dimension,0.0063616167,1,1,1
+rate,0.0016304746,4,2,2,historic district,0.004222312000000001,2,1,1,complex human problem,0.0063616167,1,1,1,complex human problem,0.0063616167,1,1,1
+element,0.0016304746,4,2,2,developing country,0.0038958243,5,1,2,including climate change,0.0063616167,1,1,1,including climate change,0.0063616167,1,1,1
+district,0.0016304746,4,2,2,modern city,0.0031166595,4,1,2,global urban growth,0.0063616167,1,1,1,global urban growth,0.0063616167,1,1,1
+sound,0.0016304746,4,1,2,city planning,0.0031166595,4,2,2,additional urban people,0.0063616167,1,1,1,additional urban people,0.0063616167,1,1,1

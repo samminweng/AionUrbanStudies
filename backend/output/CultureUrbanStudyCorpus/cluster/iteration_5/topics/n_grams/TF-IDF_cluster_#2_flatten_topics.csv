@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+slum,0.010001160200000001,8,2,1,young people,0.0058040502,5,1,3,sustainable urban development,0.0241456583,3,1,1,sustainable urban development,0.0241456583,3,1,1
+informality,0.0087510152,7,1,1,autonomous adaptation,0.0053318488,2,1,1,inclusive municipal governance,0.0160971055,2,1,1,inclusive municipal governance,0.0160971055,2,1,1
+adaptation,0.0072435095,9,1,2,reduce risk,0.0053318488,2,1,1,indigenous urban form,0.0160971055,2,1,1,indigenous urban form,0.0160971055,2,1,1
+payment,0.005000580100000001,4,1,1,municipal governance,0.0053318488,2,1,1,global environmental change,0.0080485528,1,1,1,slum,0.010001160200000001,8,2,1
+mobility,0.004314284900000001,12,2,4,colonial hegemony,0.0053318488,2,1,1,urban design challenge,0.0080485528,1,1,1,informality,0.0087510152,7,1,1
+colonial,0.0040241719,5,4,2,colonial discourse,0.0053318488,2,1,1,poor urban settlement,0.0080485528,1,1,1,global environmental change,0.0080485528,1,1,1
+illegitimate,0.0037504351000000003,3,2,1,planning principle,0.0053318488,2,1,1,autonomous adaptation strategy,0.0080485528,1,1,1,urban design challenge,0.0080485528,1,1,1
+elasticity,0.0037504351000000003,3,1,1,critical analysis,0.0053318488,2,2,1,argue urban slum,0.0080485528,1,1,1,poor urban settlement,0.0080485528,1,1,1
+hegemony,0.0032193375000000002,4,1,2,specific field,0.0053318488,2,1,1,identifying local adaptation,0.0080485528,1,1,1,autonomous adaptation strategy,0.0080485528,1,1,1
+governance,0.0028761899000000002,8,3,4,internal discourse,0.0053318488,2,1,1,densely populated suburb,0.0080485528,1,1,1,argue urban slum,0.0080485528,1,1,1
+attitude,0.0027217218,5,2,3,colonial history,0.0053318488,2,1,1,rapid environmental change,0.0080485528,1,1,1,identifying local adaptation,0.0080485528,1,1,1
+tenure,0.0025002901,2,2,1,urban form,0.0046432402,4,1,3,expected coping strategy,0.0080485528,1,1,1,densely populated suburb,0.0080485528,1,1,1
+empire,0.0025002901,2,1,1,environmental change,0.0034326060000000004,2,1,2,despite uncertain tenure,0.0080485528,1,1,1,rapid environmental change,0.0080485528,1,1,1
+colonialism,0.0025002901,2,2,1,urban planning,0.0027454519,13,5,6,critical public service,0.0080485528,1,1,1,expected coping strategy,0.0080485528,1,1,1
+hence,0.0025002901,2,1,1,growing culture,0.0026659244,1,1,1,action toward adaptation,0.0080485528,1,1,1,despite uncertain tenure,0.0080485528,1,1,1
+service,0.0021616573,10,5,5,dominant planning,0.0026659244,1,1,1,toward adaptation pathway,0.0080485528,1,1,1,critical public service,0.0080485528,1,1,1
+authority,0.0021571424,6,2,4,design challenge,0.0026659244,1,1,1,prevails among government,0.0080485528,1,1,1,action toward adaptation,0.0080485528,1,1,1
+water,0.0017976187,5,2,4,urban settlement,0.0026659244,1,1,1,among government official,0.0080485528,1,1,1,toward adaptation pathway,0.0080485528,1,1,1
+article,0.0017976187,5,4,4,city margin,0.0026659244,1,1,1,reduce risk exist,0.0080485528,1,1,1,prevails among government,0.0080485528,1,1,1
+history,0.0017293259,8,2,5,adaptation strategy,0.0026659244,1,1,1,explores young people,0.0080485528,1,1,1,among government official,0.0080485528,1,1,1

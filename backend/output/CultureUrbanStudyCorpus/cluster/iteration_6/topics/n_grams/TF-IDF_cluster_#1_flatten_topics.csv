@@ -1,51 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-summer,0.0044674275,5,2,1,urban livability,0.0081143071,5,1,1,different thermal index,0.0097371685,2,1,1,different thermal index,0.0097371685,2,1,1
-winter,0.0044674275,5,2,1,residential building,0.0064914456,4,2,1,historic urban landscape,0.0097371685,2,1,1,historic urban landscape,0.0097371685,2,1,1
-building,0.0036273480000000003,11,3,2,electrical capacity,0.0064914456,4,1,1,calculated electrical capacity,0.0097371685,2,1,1,calculated electrical capacity,0.0097371685,2,1,1
-limit,0.003573942,4,1,1,thermal comfort,0.0048685842000000005,3,1,1,urban livability measure,0.0097371685,2,1,1,urban livability measure,0.0097371685,2,1,1
-indicator,0.0032975891,10,3,2,upper limit,0.0048685842000000005,3,1,1,main urban design,0.0097371685,2,1,1,main urban design,0.0097371685,2,1,1
-index,0.0026804565,3,1,1,thermal index,0.0032457228,2,1,1,outdoor urban environment,0.0048685842000000005,1,1,1,urban livability,0.0081143071,5,1,1
-temperature,0.0026804565,3,1,1,unsustainability indicator,0.0032457228,2,1,1,hot dry city,0.0048685842000000005,1,1,1,residential building,0.0064914456,4,2,1
-reduction,0.0026804565,3,2,1,green building,0.0032457228,2,1,1,different thermal environment,0.0048685842000000005,1,1,1,electrical capacity,0.0064914456,4,1,1
-dorm,0.0026804565,3,1,1,urban landscape,0.0032457228,2,1,1,thermal comfort range,0.0048685842000000005,1,1,1,thermal comfort,0.0048685842000000005,3,1,1
-comfort,0.0023083124,7,2,2,grid company,0.0032457228,2,1,1,comprehensive micrometeorological measurement,0.0048685842000000005,1,1,1,upper limit,0.0048685842000000005,3,1,1
-sustainability,0.0023083124,7,2,2,placemaking principle,0.0032457228,2,1,1,different outdoor environment,0.0048685842000000005,1,1,1,outdoor urban environment,0.0048685842000000005,1,1,1
-design,0.0023083124,7,2,2,livability measure,0.0032457228,2,1,1,outdoor environment vary,0.0048685842000000005,1,1,1,hot dry city,0.0048685842000000005,1,1,1
-livability,0.0019785535000000003,6,1,2,urban sustainability,0.0023957994000000002,4,1,2,physiologically equivalent temperature,0.0048685842000000005,1,1,1,different thermal environment,0.0048685842000000005,1,1,1
-guideline,0.001786971,2,1,1,urban design,0.0023957994000000002,4,1,2,standard effective temperature,0.0048685842000000005,1,1,1,thermal comfort range,0.0048685842000000005,1,1,1
-unsustainability,0.001786971,2,1,1,dry city,0.0016228614,1,1,1,lower comfort limit,0.0048685842000000005,1,1,1,comprehensive micrometeorological measurement,0.0048685842000000005,1,1,1
-rating,0.001786971,2,1,1,urban microclimate,0.0016228614,1,1,1,thermal sensation vote,0.0048685842000000005,1,1,1,different outdoor environment,0.0048685842000000005,1,1,1
-dataset,0.001786971,2,1,1,absolute neccessity,0.0016228614,1,1,1,determine various aspect,0.0048685842000000005,1,1,1,outdoor environment vary,0.0048685842000000005,1,1,1
-fuzzy,0.001786971,2,1,1,every type,0.0016228614,1,1,1,urban sustainability indicator,0.0048685842000000005,1,1,1,physiologically equivalent temperature,0.0048685842000000005,1,1,1
-construction,0.0016487946,5,2,2,develop guideline,0.0016228614,1,1,1,two different period,0.0048685842000000005,1,1,1,standard effective temperature,0.0048685842000000005,1,1,1
-energy,0.0016487946,5,3,2,thermal environment,0.0016228614,1,1,1,green urban economics,0.0048685842000000005,1,1,1,lower comfort limit,0.0048685842000000005,1,1,1
-system,0.0013190356,4,3,2,second aim,0.0016228614,1,1,1,improve urban sustainability,0.0048685842000000005,1,1,1,thermal sensation vote,0.0048685842000000005,1,1,1
-measure,0.0013190356,4,1,2,comfort range,0.0016228614,1,1,1,urban planning system,0.0048685842000000005,1,1,1,determine various aspect,0.0048685842000000005,1,1,1
-questionnaire,0.0009892767000000001,3,3,2,micrometeorological measurement,0.0016228614,1,1,1,green building regulation,0.0048685842000000005,1,1,1,urban sustainability indicator,0.0048685842000000005,1,1,1
-change,0.0009892767000000001,3,2,2,thermal condition,0.0016228614,1,1,1,urban development strategy,0.0048685842000000005,1,1,1,two different period,0.0048685842000000005,1,1,1
-service,0.0009892767000000001,3,2,2,environment vary,0.0016228614,1,1,1,develops strategic development,0.0048685842000000005,1,1,1,green urban economics,0.0048685842000000005,1,1,1
-consideration,0.0009892767000000001,3,2,2,deep canyon,0.0016228614,1,1,1,new sustainable way,0.0048685842000000005,1,1,1,improve urban sustainability,0.0048685842000000005,1,1,1
-principle,0.0009892767000000001,3,2,2,solar access,0.0016228614,1,1,1,four equal pillar,0.0048685842000000005,1,1,1,urban planning system,0.0048685842000000005,1,1,1
-assessment,0.0009892767000000001,3,2,2,neutral temperature,0.0016228614,1,1,1,green building incorporates,0.0048685842000000005,1,1,1,green building regulation,0.0048685842000000005,1,1,1
-attribute,0.0009892767000000001,3,1,2,equivalent temperature,0.0016228614,1,1,1,incorporates environmental consideration,0.0048685842000000005,1,1,1,urban development strategy,0.0048685842000000005,1,1,1
-survey,0.0009892767000000001,3,2,2,outdoor standard,0.0016228614,1,1,1,pearl rating system,0.0048685842000000005,1,1,1,develops strategic development,0.0048685842000000005,1,1,1
-sense,0.0009892767000000001,3,2,2,effective temperature,0.0016228614,1,1,1,green building system,0.0048685842000000005,1,1,1,new sustainable way,0.0048685842000000005,1,1,1
-consumption,0.0009892767000000001,3,1,2,lower comfort,0.0016228614,1,1,1,research field focus,0.0048685842000000005,1,1,1,four equal pillar,0.0048685842000000005,1,1,1
-difference,0.0009892767000000001,3,1,2,comfort limit,0.0016228614,1,1,1,efficient residential building,0.0048685842000000005,1,1,1,green building incorporates,0.0048685842000000005,1,1,1
-company,0.0009892767000000001,3,1,2,better correlation,0.0016228614,1,1,1,residential building design,0.0048685842000000005,1,1,1,incorporates environmental consideration,0.0048685842000000005,1,1,1
-value,0.0009892767000000001,3,1,2,thermal sensation,0.0016228614,1,1,1,smart urban development,0.0048685842000000005,1,1,1,pearl rating system,0.0048685842000000005,1,1,1
-microclimate,0.0008934855,1,1,1,sensation vote,0.0016228614,1,1,1,thriving residential culture,0.0048685842000000005,1,1,1,green building system,0.0048685842000000005,1,1,1
-neccessity,0.0008934855,1,1,1,physical adaptation,0.0016228614,1,1,1,conduct household survey,0.0048685842000000005,1,1,1,research field focus,0.0048685842000000005,1,1,1
-measurement,0.0008934855,1,1,1,urban unsustainability,0.0016228614,1,1,1,fuzzy linguistic variable,0.0048685842000000005,1,1,1,efficient residential building,0.0048685842000000005,1,1,1
-vary,0.0008934855,1,1,1,caused change,0.0016228614,1,1,1,triangular fuzzy number,0.0048685842000000005,1,1,1,residential building design,0.0048685842000000005,1,1,1
-canyon,0.0008934855,1,1,1,human habitation,0.0016228614,1,1,1,weighted averaging operator,0.0048685842000000005,1,1,1,smart urban development,0.0048685842000000005,1,1,1
-shade,0.0008934855,1,1,1,economic change,0.0016228614,1,1,1,fuzzy coded dataset,0.0048685842000000005,1,1,1,thriving residential culture,0.0048685842000000005,1,1,1
-acceptability,0.0008934855,1,1,1,different aspect,0.0016228614,1,1,1,aggregated fuzzy score,0.0048685842000000005,1,1,1,conduct household survey,0.0048685842000000005,1,1,1
-sensation,0.0008934855,1,1,1,various aspect,0.0016228614,1,1,1,overall better performance,0.0048685842000000005,1,1,1,fuzzy linguistic variable,0.0048685842000000005,1,1,1
-clothing,0.0008934855,1,1,1,provide strategy,0.0016228614,1,1,1,allied behavioral study,0.0048685842000000005,1,1,1,triangular fuzzy number,0.0048685842000000005,1,1,1
-urbanization,0.0008934855,1,1,1,achieve sustainability,0.0016228614,1,1,1,ordinal scale datasets,0.0048685842000000005,1,1,1,weighted averaging operator,0.0048685842000000005,1,1,1
-habitation,0.0008934855,1,1,1,sustainability indicator,0.0016228614,1,1,1,electric grid company,0.0048685842000000005,1,1,1,fuzzy coded dataset,0.0048685842000000005,1,1,1
-stagnation,0.0008934855,1,1,1,environmental aspect,0.0016228614,1,1,1,urban planning standard,0.0048685842000000005,1,1,1,aggregated fuzzy score,0.0048685842000000005,1,1,1
-achievement,0.0008934855,1,1,1,different period,0.0016228614,1,1,1,leading construction company,0.0048685842000000005,1,1,1,overall better performance,0.0048685842000000005,1,1,1
-estidama,0.0008934855,1,1,1,urban economics,0.0016228614,1,1,1,decrease utility service,0.0048685842000000005,1,1,1,allied behavioral study,0.0048685842000000005,1,1,1
-cancel,0.0008934855,1,1,1,nongovernmental organization,0.0016228614,1,1,1,power grid company,0.0048685842000000005,1,1,1,ordinal scale datasets,0.0048685842000000005,1,1,1
+bathroom,0.0093248454,12,1,1,third place,0.0077960989,5,1,1,relationship among people,0.0110958431,2,1,1,relationship among people,0.0110958431,2,1,1
+refugee,0.0046624227,6,2,1,small bathroom,0.0077960989,5,1,1,multilocal creative knowledge,0.0110958431,2,1,1,multilocal creative knowledge,0.0110958431,2,1,1
+woman,0.0046624227,6,1,1,trust relationship,0.0062368791,4,1,1,creative knowledge worker,0.0110958431,2,1,1,creative knowledge worker,0.0110958431,2,1,1
+privacy,0.0038853522,5,1,1,creative knowledge,0.0062368791,4,1,1,creative knowledge work,0.0110958431,2,1,1,bathroom,0.0093248454,12,1,1
+knowledge,0.0031082818,4,1,1,place attachment,0.0046776594,3,1,1,substantial trust relationship,0.0055479216,1,1,1,third place,0.0077960989,5,1,1
+immobility,0.0031082818,4,1,1,universal design,0.0046776594,3,1,1,suggests five category,0.0055479216,1,1,1,small bathroom,0.0077960989,5,1,1
+lifeworlds,0.0023312113000000002,3,1,1,public space,0.0040282314,7,3,2,shared basic beliefs,0.0055479216,1,1,1,trust relationship,0.0062368791,4,1,1
+worker,0.0023312113000000002,3,2,1,internal risk,0.0031184396,2,1,1,difficult housing condition,0.0055479216,1,1,1,creative knowledge,0.0062368791,4,1,1
+practice,0.0022943487,8,4,2,basic beliefs,0.0031184396,2,1,1,lasting internal risk,0.0055479216,1,1,1,substantial trust relationship,0.0055479216,1,1,1
+home,0.0022943487,8,5,2,shared perception,0.0031184396,2,1,1,found livable community,0.0055479216,1,1,1,suggests five category,0.0055479216,1,1,1
+mobility,0.0022943487,8,2,2,knowledge worker,0.0031184396,2,1,1,strong trust relationship,0.0055479216,1,1,1,shared basic beliefs,0.0055479216,1,1,1
+risk,0.0020075551,7,2,2,knowledge work,0.0031184396,2,1,1,strong shared perception,0.0055479216,1,1,1,difficult housing condition,0.0055479216,1,1,1
+resident,0.0017207615,6,2,2,labour market,0.0031184396,2,1,1,shared perception towards,0.0055479216,1,1,1,lasting internal risk,0.0055479216,1,1,1
+housing,0.0017207615,6,5,2,risk society,0.0031184396,2,1,1,towards external risk,0.0055479216,1,1,1,found livable community,0.0055479216,1,1,1
+part,0.0017207615,6,4,2,many people,0.0031184396,2,2,1,homogeneous urban community,0.0055479216,1,1,1,strong trust relationship,0.0055479216,1,1,1
+beliefs,0.0015541409,2,1,1,community planning,0.0015592198,1,1,1,frequently heterogeneous community,0.0055479216,1,1,1,strong shared perception,0.0055479216,1,1,1
+psychology,0.0015541409,2,1,1,substantial trust,0.0015592198,1,1,1,support trust relationship,0.0055479216,1,1,1,shared perception towards,0.0055479216,1,1,1
+labour,0.0015541409,2,1,1,five category,0.0015592198,1,1,1,relationship among resident,0.0055479216,1,1,1,towards external risk,0.0055479216,1,1,1
+lifeworld,0.0015541409,2,1,1,community interest,0.0015592198,1,1,1,generating considerable insight,0.0055479216,1,1,1,homogeneous urban community,0.0055479216,1,1,1
+belonging,0.0015541409,2,2,1,five community,0.0015592198,1,1,1,gives special emphasis,0.0055479216,1,1,1,frequently heterogeneous community,0.0055479216,1,1,1

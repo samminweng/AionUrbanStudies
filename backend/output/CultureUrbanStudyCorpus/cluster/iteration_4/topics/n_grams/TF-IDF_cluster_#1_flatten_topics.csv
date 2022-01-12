@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-redevelopment,0.0049596804,5,2,1,architecture revitalization,0.0043772592,2,1,1,given new life,0.0074550196,1,1,1,given new life,0.0074550196,1,1,1
-waterfront,0.0047592232,13,2,2,city branding,0.0043772592,2,1,1,analyses three form,0.0074550196,1,1,1,analyses three form,0.0074550196,1,1,1
-reclamation,0.0019838722,2,1,1,elite entrepreneur,0.0043772592,2,1,1,include reclaiming functionality,0.0074550196,1,1,1,include reclaiming functionality,0.0074550196,1,1,1
-branding,0.0019838722,2,1,1,high density,0.0043772592,2,1,1,commemorate local culture,0.0074550196,1,1,1,commemorate local culture,0.0074550196,1,1,1
-entrepreneur,0.0019838722,2,1,1,pier waterfront,0.0043772592,2,1,1,various governmental body,0.0074550196,1,1,1,various governmental body,0.0074550196,1,1,1
-geographic,0.0019838722,2,1,1,local people,0.0032310323,4,3,2,examines two case,0.0074550196,1,1,1,examines two case,0.0074550196,1,1,1
-symbolism,0.0019838722,2,1,1,local government,0.0024232742,3,2,2,also considers opinion,0.0074550196,1,1,1,also considers opinion,0.0074550196,1,1,1
-raft,0.0019838722,2,1,1,vernacular architecture,0.0024232742,3,1,2,local general public,0.0074550196,1,1,1,local general public,0.0074550196,1,1,1
-partnership,0.0018304705,5,1,2,constant redevelopment,0.0021886296,1,1,1,among local government,0.0074550196,1,1,1,among local government,0.0074550196,1,1,1
-literature,0.0010982823,3,3,2,ageing neighbourhood,0.0021886296,1,1,1,urban regeneration project,0.0074550196,1,1,1,urban regeneration project,0.0074550196,1,1,1
-symbol,0.0010982823,3,2,2,prevalent theme,0.0021886296,1,1,1,traditional architectural element,0.0074550196,1,1,1,traditional architectural element,0.0074550196,1,1,1
-demand,0.0010982823,3,2,2,new user,0.0021886296,1,1,1,role local government,0.0074550196,1,1,1,role local government,0.0074550196,1,1,1
-geography,0.0010982823,3,1,2,three form,0.0021886296,1,1,1,market oriented economy,0.0074550196,1,1,1,market oriented economy,0.0074550196,1,1,1
-influence,0.0010982823,3,1,2,urban reclamation,0.0021886296,1,1,1,historical urban environment,0.0074550196,1,1,1,historical urban environment,0.0074550196,1,1,1
-reincarnation,0.0009919361,1,1,1,reclaiming functionality,0.0021886296,1,1,1,must make place,0.0074550196,1,1,1,must make place,0.0074550196,1,1,1
-prelude,0.0009919361,1,1,1,new land,0.0021886296,1,1,1,certain traditional form,0.0074550196,1,1,1,certain traditional form,0.0074550196,1,1,1
-worldliness,0.0009919361,1,1,1,reclaiming access,0.0021886296,1,1,1,real cultural identity,0.0074550196,1,1,1,real cultural identity,0.0074550196,1,1,1
-excess,0.0009919361,1,1,1,government planner,0.0021886296,1,1,1,fluctuating economic activity,0.0074550196,1,1,1,fluctuating economic activity,0.0074550196,1,1,1
-parochialism,0.0009919361,1,1,1,private enterprise,0.0021886296,1,1,1,three dimensional transport,0.0074550196,1,1,1,three dimensional transport,0.0074550196,1,1,1
-globalisation,0.0009919361,1,1,1,visitor respond,0.0021886296,1,1,1,compact city work,0.0074550196,1,1,1,compact city work,0.0074550196,1,1,1
+studio,0.0027368332,6,1,1,structural beauty,0.0038555253,4,1,1,site interpretation centre,0.010843664900000001,3,1,1,site interpretation centre,0.010843664900000001,3,1,1
+form,0.0016834728000000001,10,5,2,site interpretation,0.0038555253,4,1,1,transnational capitalist class,0.0072291099,2,1,1,transnational capitalist class,0.0072291099,2,1,1
+beauty,0.0016834728000000001,10,1,2,design studio,0.002891644,3,1,1,virtual design studio,0.0072291099,2,1,1,virtual design studio,0.0072291099,2,1,1
+image,0.0013467783,8,4,2,interpretation centre,0.002891644,3,1,1,historical city center,0.0072291099,2,1,1,historical city center,0.0072291099,2,1,1
+expectation,0.0013467783,8,2,2,poetic dwelling,0.002891644,3,1,1,major transnational corporation,0.003614555,1,1,1,structural beauty,0.0038555253,4,1,1
+fraction,0.001178431,7,1,2,transnational capitalist,0.0019277626000000002,2,1,1,major global consumer,0.003614555,1,1,1,site interpretation,0.0038555253,4,1,1
+art,0.0010100837,6,5,2,capitalist class,0.0019277626000000002,2,1,1,global consumer good,0.003614555,1,1,1,major transnational corporation,0.003614555,1,1,1
+chapter,0.0010100837,6,1,2,iconic architecture,0.0019277626000000002,2,1,1,aspiring global city,0.003614555,1,1,1,major global consumer,0.003614555,1,1,1
+capitalist,0.0009122777,2,1,1,design profession,0.0019277626000000002,2,1,1,deliberately iconic architecture,0.003614555,1,1,1,global consumer good,0.003614555,1,1,1
+corporation,0.0009122777,2,1,1,urban infrastructure,0.0019277626000000002,2,1,1,central urban manifestation,0.003614555,1,1,1,aspiring global city,0.003614555,1,1,1
+imperialism,0.0009122777,2,1,1,nineteenth century,0.0019277626000000002,2,2,1,underlying recent debate,0.003614555,1,1,1,deliberately iconic architecture,0.003614555,1,1,1
+brief,0.0009122777,2,1,1,design brief,0.0019277626000000002,2,1,1,enforce social assumption,0.003614555,1,1,1,central urban manifestation,0.003614555,1,1,1
+appropriation,0.0009122777,2,1,1,virtual design,0.0019277626000000002,2,1,1,concern architectural theory,0.003614555,1,1,1,underlying recent debate,0.003614555,1,1,1
+substructure,0.0009122777,2,1,1,spatial appropriation,0.0019277626000000002,2,1,1,criticizes two kind,0.003614555,1,1,1,enforce social assumption,0.003614555,1,1,1
+calligraphy,0.0009122777,2,1,1,living structure,0.0019277626000000002,2,1,1,genuinely urban environment,0.003614555,1,1,1,concern architectural theory,0.003614555,1,1,1
+article,0.0008417364000000001,5,3,2,historical city,0.0019277626000000002,2,1,1,recognizably different class,0.003614555,1,1,1,criticizes two kind,0.003614555,1,1,1
+student,0.0008417364000000001,5,2,2,tourist destination,0.0019277626000000002,2,1,1,among affluent household,0.003614555,1,1,1,genuinely urban environment,0.003614555,1,1,1
+modernism,0.0008417364000000001,5,2,2,urban transformation,0.0019277626000000002,2,1,1,reflecting distinctive geography,0.003614555,1,1,1,recognizably different class,0.003614555,1,1,1
+representation,0.0008417364000000001,5,3,2,contemporary city,0.0010672198,3,1,2,key business service,0.003614555,1,1,1,among affluent household,0.003614555,1,1,1
+tourist,0.0008417364000000001,5,3,2,design strategy,0.0010672198,3,2,2,believe good design,0.003614555,1,1,1,reflecting distinctive geography,0.003614555,1,1,1

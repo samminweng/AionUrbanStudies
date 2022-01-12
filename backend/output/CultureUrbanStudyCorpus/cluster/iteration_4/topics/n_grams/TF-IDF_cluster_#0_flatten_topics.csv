@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-urbanity,0.0037866766000000003,11,2,1,urban sprawl,0.0045296322000000005,6,1,1,modern city planning,0.0060779778,2,1,1,modern city planning,0.0060779778,2,1,1
-sprawl,0.00206546,6,1,1,structural beauty,0.0030197548,4,1,1,historical city center,0.0060779778,2,1,1,historical city center,0.0060779778,2,1,1
-civilisation,0.0017212166,5,3,1,mental map,0.0022648161000000003,3,1,1,speculative design fiction,0.0060779778,2,1,1,speculative design fiction,0.0060779778,2,1,1
-nomad,0.0017212166,5,1,1,citizenship education,0.0022648161000000003,3,1,1,urban good life,0.0060779778,2,1,1,urban good life,0.0060779778,2,1,1
-planning,0.0016516496,13,7,2,risk society,0.0015098774,2,1,1,main urban design,0.0060779778,2,1,1,main urban design,0.0060779778,2,1,1
-beauty,0.0012704997,10,1,2,social category,0.0015098774,2,1,1,sustainable urban environment,0.0060779778,2,1,1,sustainable urban environment,0.0060779778,2,1,1
-society,0.0011434497,9,7,2,urban dweller,0.0015098774,2,2,1,particularly difficult challenge,0.0030389889,1,1,1,urban sprawl,0.0045296322000000005,6,1,1
-article,0.0011434497,9,6,2,first edition,0.0015098774,2,1,1,difficult challenge nowadays,0.0030389889,1,1,1,urbanity,0.0037866766000000003,11,2,1
-dorm,0.00103273,3,1,1,understanding city,0.0015098774,2,1,1,relatively small number,0.0030389889,1,1,1,particularly difficult challenge,0.0030389889,1,1,1
-problem,0.0010163998000000001,8,6,2,organic approach,0.0015098774,2,1,1,four main field,0.0030389889,1,1,1,difficult challenge nowadays,0.0030389889,1,1,1
-century,0.0008893498000000001,7,5,2,five element,0.0015098774,2,1,1,prompts several reflection,0.0030389889,1,1,1,relatively small number,0.0030389889,1,1,1
-method,0.0008893498000000001,7,4,2,environmental history,0.0015098774,2,1,1,without physical mobility,0.0030389889,1,1,1,four main field,0.0030389889,1,1,1
-level,0.0008893498000000001,7,5,2,living structure,0.0015098774,2,1,1,mobile risk society,0.0030389889,1,1,1,prompts several reflection,0.0030389889,1,1,1
-citizenship,0.0008893498000000001,7,1,2,broken form,0.0015098774,2,1,1,forced urban life,0.0030389889,1,1,1,without physical mobility,0.0030389889,1,1,1
-view,0.0007622998,6,5,2,human existence,0.0015098774,2,2,1,providing social care,0.0030389889,1,1,1,mobile risk society,0.0030389889,1,1,1
-future,0.0007622998,6,5,2,artificial life,0.0015098774,2,1,1,maximum physical immobility,0.0030389889,1,1,1,forced urban life,0.0030389889,1,1,1
-structure,0.0007622998,6,4,2,historical city,0.0015098774,2,1,1,negative ecological side,0.0030389889,1,1,1,providing social care,0.0030389889,1,1,1
-chapter,0.0007622998,6,1,2,tourist destination,0.0015098774,2,1,1,ecological side effect,0.0030389889,1,1,1,maximum physical immobility,0.0030389889,1,1,1
-virus,0.0006884867,2,1,1,design methodology,0.0015098774,2,2,1,men called rabiz,0.0030389889,1,1,1,negative ecological side,0.0030389889,1,1,1
-countryside,0.0006884867,2,2,1,speculative design,0.0015098774,2,1,1,new urban design,0.0030389889,1,1,1,ecological side effect,0.0030389889,1,1,1
+indicator,0.0025268701,16,3,2,smart city,0.0036478415,11,3,2,medium size city,0.0098714742,3,1,1,medium size city,0.0098714742,3,1,1
+sustainability,0.0023689407,15,5,2,electrical capacity,0.0035941337,4,1,1,remote sensing data,0.0098714742,3,1,1,remote sensing data,0.0098714742,3,1,1
+index,0.0015792938000000001,10,2,2,sensing data,0.0035941337,4,1,1,different thermal index,0.0065809828,2,1,1,different thermal index,0.0065809828,2,1,1
+data,0.0015792938000000001,10,3,2,upper limit,0.0026956003,3,1,1,sustainable social innovation,0.0065809828,2,1,1,sustainable social innovation,0.0065809828,2,1,1
+settlement,0.0014213644,9,3,2,electricity consumption,0.0026956003,3,2,1,current global situation,0.0065809828,2,1,1,current global situation,0.0065809828,2,1,1
+pillar,0.0012837343,3,3,1,social norm,0.0026956003,3,1,1,calculated electrical capacity,0.0065809828,2,1,1,calculated electrical capacity,0.0065809828,2,1,1
+electricity,0.0012837343,3,2,1,medium size,0.0026956003,3,1,1,comprehensive evaluation model,0.0065809828,2,1,1,comprehensive evaluation model,0.0065809828,2,1,1
+citizenship,0.0012837343,3,1,1,size city,0.0026956003,3,1,1,outdoor urban environment,0.0032904914,1,1,1,smart city,0.0036478415,11,3,2
+order,0.001263435,8,7,2,livable city,0.0023213537,7,1,2,hot dry city,0.0032904914,1,1,1,electrical capacity,0.0035941337,4,1,1
+evaluation,0.001263435,8,2,2,thermal index,0.0017970669,2,1,1,different thermal environment,0.0032904914,1,1,1,sensing data,0.0035941337,4,1,1
+value,0.0009475763,6,3,2,social progress,0.0017970669,2,2,1,thermal comfort range,0.0032904914,1,1,1,outdoor urban environment,0.0032904914,1,1,1
+aspect,0.0009475763,6,4,2,efficiency score,0.0017970669,2,1,1,comprehensive micrometeorological measurement,0.0032904914,1,1,1,hot dry city,0.0032904914,1,1,1
+quality,0.0009475763,6,5,2,unsustainability indicator,0.0017970669,2,1,1,different outdoor environment,0.0032904914,1,1,1,different thermal environment,0.0032904914,1,1,1
+account,0.0009475763,6,4,2,informatiologic condition,0.0017970669,2,1,1,outdoor environment vary,0.0032904914,1,1,1,thermal comfort range,0.0032904914,1,1,1
+guideline,0.0008558229,2,1,1,rural settlement,0.0017970669,2,1,1,physiologically equivalent temperature,0.0032904914,1,1,1,comprehensive micrometeorological measurement,0.0032904914,1,1,1
+unsustainability,0.0008558229,2,1,1,traffic simulation,0.0017970669,2,1,1,standard effective temperature,0.0032904914,1,1,1,different outdoor environment,0.0032904914,1,1,1
+rating,0.0008558229,2,1,1,social innovation,0.0017970669,2,1,1,lower comfort limit,0.0032904914,1,1,1,outdoor environment vary,0.0032904914,1,1,1
+sensing,0.0008558229,2,1,1,exploratory analysis,0.0017970669,2,1,1,thermal sensation vote,0.0032904914,1,1,1,physiologically equivalent temperature,0.0032904914,1,1,1
+summer,0.0007896469000000001,5,2,2,global situation,0.0017970669,2,1,1,regarded complex entity,0.0032904914,1,1,1,standard effective temperature,0.0032904914,1,1,1
+winter,0.0007896469000000001,5,2,2,grid company,0.0017970669,2,1,1,combine three methodology,0.0032904914,1,1,1,lower comfort limit,0.0032904914,1,1,1

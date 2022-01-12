@@ -1,51 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-government,0.0024925445,31,14,1,typhoid fever,0.0018185495,11,1,1,urban regime theory,0.002272006,4,1,1,government,0.0024925445,31,14,1
-knowledge,0.0024925445,31,7,1,small business,0.0018185495,11,1,1,ethnic minority group,0.0017040045,3,1,1,knowledge,0.0024925445,31,7,1
-book,0.0022513305,28,12,1,young people,0.0016532268,10,5,1,urban forest manager,0.0017040045,3,1,1,urban regime theory,0.002272006,4,1,1
-festival,0.0022513305,28,2,1,indigenous knowledge,0.0016532268,10,1,1,human sensory assessment,0.0017040045,3,1,1,book,0.0022513305,28,12,1
-role,0.0021709258,27,20,1,local government,0.0014879041,9,4,1,site interpretation centre,0.0017040045,3,1,1,festival,0.0022513305,28,2,1
-management,0.0020905212,26,14,1,climate change,0.0014879041,9,4,1,typhoid fever case,0.001136003,2,1,1,role,0.0021709258,27,20,1
-design,0.001869523,63,27,2,developing country,0.0013225814000000001,8,2,1,public green space,0.001136003,2,1,1,management,0.0020905212,26,14,1
-business,0.0018493072,23,10,1,city planning,0.0013225814000000001,8,5,1,social impact assessment,0.001136003,2,1,1,design,0.001869523,63,27,2
-tourism,0.0016080932,20,4,1,middle class,0.0013225814000000001,8,1,1,urban sustainability transition,0.001136003,2,1,1,business,0.0018493072,23,10,1
-population,0.0015276885,19,12,1,residential standard,0.0013225814000000001,8,1,1,urban planning process,0.001136003,2,2,1,typhoid fever,0.0018185495,11,1,1
-visitor,0.0014472839,18,4,1,everyday life,0.0011572588,7,7,1,greenhouse gas emission,0.001136003,2,2,1,small business,0.0018185495,11,1,1
-history,0.0012864746000000001,16,11,1,new town,0.0011572588,7,1,1,urban growth boundary,0.001136003,2,1,1,ethnic minority group,0.0017040045,3,1,1
-space,0.0012760236,43,25,2,smart city,0.0011572588,7,2,1,using social medium,0.001136003,2,1,1,urban forest manager,0.0017040045,3,1,1
-child,0.0012060699,15,6,1,urban design,0.0010372666,17,16,2,last two decade,0.001136003,2,2,1,human sensory assessment,0.0017040045,3,1,1
-theory,0.0012060699,15,9,1,social interaction,0.0009919361,6,4,1,urban public space,0.001136003,2,2,1,site interpretation centre,0.0017040045,3,1,1
-model,0.0012060699,15,9,1,regime theory,0.0009919361,6,1,1,relationship among people,0.001136003,2,1,1,young people,0.0016532268,10,5,1
-event,0.0011276488,38,6,2,land use,0.0008266134,5,5,1,satisfy project requirement,0.001136003,2,1,1,indigenous knowledge,0.0016532268,10,1,1
-need,0.0011256652,14,10,1,planning process,0.0008266134,5,3,1,double bottom line,0.001136003,2,1,1,tourism,0.0016080932,20,4,1
-risk,0.0011256652,14,8,1,tourism study,0.0008266134,5,1,1,different social milieu,0.001136003,2,1,1,population,0.0015276885,19,12,1
-fever,0.0010452606,13,1,1,special event,0.0008266134,5,1,1,decision support system,0.001136003,2,1,1,local government,0.0014879041,9,4,1
-youth,0.0010452606,13,4,1,ethnic group,0.0008266134,5,2,1,smart city application,0.001136003,2,1,1,climate change,0.0014879041,9,4,1
-example,0.0010452606,13,12,1,third place,0.0008266134,5,1,1,system take place,0.001136003,2,1,1,visitor,0.0014472839,18,4,1
-idea,0.0010452606,13,8,1,public space,0.0007321882,12,8,2,inter cultural dialogue,0.001136003,2,1,1,developing country,0.0013225814000000001,8,2,1
-literature,0.0010452606,13,5,1,green space,0.0006612907000000001,4,2,1,historical city center,0.001136003,2,1,1,city planning,0.0013225814000000001,8,5,1
-water,0.0010452606,13,2,1,different culture,0.0006612907000000001,4,3,1,sustainable urban environment,0.001136003,2,1,1,middle class,0.0013225814000000001,8,1,1
-age,0.0009648559,12,4,1,important role,0.0006612907000000001,4,4,1,tsunami hazard zone,0.001136003,2,1,1,residential standard,0.0013225814000000001,8,1,1
-implementation,0.0009648559,12,6,1,public participation,0.0006612907000000001,4,2,1,detect febrile case,0.0005680015,1,1,1,history,0.0012864746000000001,16,11,1
-relation,0.0009648559,12,9,1,two decade,0.0006612907000000001,4,4,1,fever among preschooler,0.0005680015,1,1,1,space,0.0012760236,43,25,2
-class,0.0009648559,12,4,1,public housing,0.0006612907000000001,4,3,1,urban study area,0.0005680015,1,1,1,child,0.0012060699,15,6,1
-question,0.0009648559,12,8,1,greenhouse gas,0.0006612907000000001,4,2,1,foreign resident youth,0.0005680015,1,1,1,theory,0.0012060699,15,9,1
-town,0.0009648559,12,4,1,complex relationship,0.0006612907000000001,4,3,1,investigated leisure activity,0.0005680015,1,1,1,model,0.0012060699,15,9,1
-system,0.0008902490000000001,30,16,2,event activity,0.0006612907000000001,4,1,1,facilitate social interaction,0.0005680015,1,1,1,everyday life,0.0011572588,7,7,1
-policy,0.0008902490000000001,30,15,2,among people,0.0006612907000000001,4,3,1,immigrant young people,0.0005680015,1,1,1,new town,0.0011572588,7,1,1
-land,0.0008844513000000001,11,10,1,contemporary city,0.0006612907000000001,4,2,1,urban green space,0.0005680015,1,1,1,smart city,0.0011572588,7,2,1
-coordination,0.0008844513000000001,11,3,1,urban regime,0.0006612907000000001,4,1,1,friend across culture,0.0005680015,1,1,1,typhoid fever case,0.001136003,2,1,1
-beauty,0.0008844513000000001,11,2,1,design strategy,0.0006612907000000001,4,3,1,past two decade,0.0005680015,1,1,1,public green space,0.001136003,2,1,1
-meaning,0.0008040466,10,5,1,trust relationship,0.0006612907000000001,4,1,1,numerous social conflict,0.0005680015,1,1,1,social impact assessment,0.001136003,2,1,1
-image,0.0008040466,10,4,1,modern city,0.0006612907000000001,4,3,1,received increasing attention,0.0005680015,1,1,1,urban sustainability transition,0.001136003,2,1,1
-chapter,0.0008040466,10,4,1,spatial planning,0.0006612907000000001,4,3,1,socialist governing ideology,0.0005680015,1,1,1,urban planning process,0.001136003,2,2,1
-discussion,0.0008040466,10,7,1,governance challenge,0.0006612907000000001,4,1,1,examines recent response,0.0005680015,1,1,1,greenhouse gas emission,0.001136003,2,2,1
-architecture,0.0007715492,26,12,2,structural beauty,0.0006612907000000001,4,1,1,recent development appear,0.0005680015,1,1,1,urban growth boundary,0.001136003,2,1,1
-landscape,0.0007418742000000001,25,7,2,site interpretation,0.0006612907000000001,4,1,1,closer examination reveals,0.0005680015,1,1,1,using social medium,0.001136003,2,1,1
-effect,0.0007236419,9,8,1,urban environment,0.0006101568,10,5,2,many different dimension,0.0005680015,1,1,1,last two decade,0.001136003,2,2,1
-component,0.0007236419,9,6,1,optimum age,0.0004959680000000001,3,1,1,public open scape,0.0005680015,1,1,1,urban public space,0.001136003,2,2,1
-regime,0.0007236419,9,3,1,urban forest,0.0004959680000000001,3,2,1,different ethnic minority,0.0005680015,1,1,1,relationship among people,0.001136003,2,1,1
-challenge,0.0007121992,24,15,2,participatory planning,0.0004959680000000001,3,3,1,towards inclusive design,0.0005680015,1,1,1,satisfy project requirement,0.001136003,2,1,1
-society,0.0007121992,24,18,2,ethnic minority,0.0004959680000000001,3,1,1,significant transition towards,0.0005680015,1,1,1,double bottom line,0.001136003,2,1,1
-mobility,0.0006825243,23,5,2,minority group,0.0004959680000000001,3,1,1,transition towards urbanisation,0.0005680015,1,1,1,different social milieu,0.001136003,2,1,1
-activity,0.0006528493,22,13,2,physical environment,0.0004959680000000001,3,2,1,influence social development,0.0005680015,1,1,1,decision support system,0.001136003,2,1,1
-interaction,0.0006528493,22,9,2,sustainability transition,0.0004959680000000001,3,1,1,structural systemic realignments,0.0005680015,1,1,1,smart city application,0.001136003,2,1,1
+landscape,0.0033616415,29,6,1,typhoid fever,0.0024559353,11,1,1,road traffic noise,0.0028065956,4,1,1,landscape,0.0033616415,29,6,1
+water,0.0027820481,24,5,1,urban blight,0.0020094016000000003,9,1,1,urban regime theory,0.0028065956,4,1,1,road traffic noise,0.0028065956,4,1,1
+management,0.0020865361,18,12,1,urban space,0.0017861348,8,6,1,ethnic minority group,0.0021049467,3,1,1,urban regime theory,0.0028065956,4,1,1
+quality,0.0019706174,17,8,1,urban environment,0.0017861348,8,5,1,residential environmental quality,0.0021049467,3,1,1,water,0.0027820481,24,5,1
+group,0.0016228614,14,8,1,residential standard,0.0017861348,8,1,1,typhoid fever case,0.0014032978,2,1,1,typhoid fever,0.0024559353,11,1,1
+waste,0.0016228614,14,2,1,urban governance,0.0017861348,8,6,1,public green space,0.0014032978,2,1,1,ethnic minority group,0.0021049467,3,1,1
+fever,0.0015069427,13,1,1,road traffic,0.0015628679,7,2,1,hot arid climate,0.0014032978,2,1,1,residential environmental quality,0.0021049467,3,1,1
+environment,0.0014973747000000001,35,17,2,regime theory,0.0013396011,6,1,1,last two decade,0.0014032978,2,2,1,management,0.0020865361,18,12,1
+area,0.0014545925,34,15,2,smart city,0.0013396011,6,2,1,satisfy project requirement,0.0014032978,2,1,1,urban blight,0.0020094016000000003,9,1,1
+park,0.0013910241,12,2,1,residential environment,0.0013396011,6,1,1,fuzzy cognitive mapping,0.0014032978,2,1,1,quality,0.0019706174,17,8,1
+noise,0.0013910241,12,3,1,environmental quality,0.0013396011,6,2,1,urban decision maker,0.0014032978,2,2,1,urban space,0.0017861348,8,6,1
+standard,0.0013910241,12,3,1,landscape type,0.0011163342000000001,5,1,1,double bottom line,0.0014032978,2,1,1,urban environment,0.0017861348,8,5,1
+implementation,0.0013910241,12,5,1,urban development,0.0011163342000000001,5,5,1,draws architectural comparison,0.0014032978,2,1,1,residential standard,0.0017861348,8,1,1
+government,0.0012751054,11,4,1,urban area,0.0008930674,4,3,1,smart city application,0.0014032978,2,1,1,urban governance,0.0017861348,8,6,1
+building,0.0012751054,11,8,1,community response,0.0008930674,4,1,1,inclusive design research,0.0014032978,2,1,1,group,0.0016228614,14,8,1
+vision,0.0011591867,10,3,1,traffic noise,0.0008930674,4,1,1,historic urban landscape,0.0014032978,2,1,1,waste,0.0016228614,14,2,1
+road,0.0011591867,10,3,1,urban regime,0.0008930674,4,1,1,tsunami hazard zone,0.0014032978,2,1,1,road traffic,0.0015628679,7,2,1
+property,0.0011591867,10,2,1,water management,0.0008930674,4,3,1,waste activated carbon,0.0014032978,2,1,1,fever,0.0015069427,13,1,1
+system,0.0011123355,26,13,2,sustainable development,0.0008930674,4,2,1,acid dye wastewater,0.0014032978,2,1,1,environment,0.0014973747000000001,35,17,2
+survey,0.001043268,9,7,1,national park,0.0008930674,4,1,1,dye wastewater treatment,0.0014032978,2,1,1,area,0.0014545925,34,15,2

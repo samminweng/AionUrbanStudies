@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-landscape,0.0019707445,49,18,1,urban planning,0.0048054206000000006,59,44,1,natural property right,0.0013694640000000001,5,1,1,urban planning,0.0048054206000000006,59,44,1
-building,0.0018903059,47,24,1,public space,0.0019547474,24,15,1,property right value,0.0013694640000000001,5,1,1,landscape,0.0019707445,49,18,1
-event,0.0017294288000000001,43,8,1,urban space,0.0013846127000000001,17,10,1,road traffic noise,0.0010955712000000001,4,1,1,public space,0.0019547474,24,15,1
-interaction,0.0015283324,38,22,1,indigenous people,0.0013846127000000001,17,8,1,urban regime theory,0.0010955712000000001,4,1,1,building,0.0018903059,47,24,1
-construction,0.0015283324,38,17,1,urban environment,0.0013031649,16,12,1,ethnic minority group,0.0008216784,3,1,1,event,0.0017294288000000001,43,8,1
-community,0.0015140612,102,48,2,young people,0.0010588215,13,7,1,sustainable food culture,0.0008216784,3,1,1,interaction,0.0015283324,38,22,1
-space,0.00146953,99,44,2,typhoid fever,0.0008959259,11,1,1,sustainable urban development,0.0008216784,3,1,1,construction,0.0015283324,38,17,1
-indicator,0.0014478939,36,6,1,planning process,0.0008959259,11,4,1,human sensory assessment,0.0008216784,3,1,1,community,0.0015140612,102,48,2
-project,0.0014478939,36,21,1,urban governance,0.0008959259,11,8,1,site interpretation centre,0.0008216784,3,1,1,space,0.00146953,99,44,2
-model,0.0013674553,34,22,1,small business,0.0008959259,11,1,1,typhoid fever case,0.0005477856000000001,2,1,1,indicator,0.0014478939,36,6,1
-environment,0.0013359364,90,47,2,indigenous knowledge,0.0008959259,11,2,1,transnational capitalist class,0.0005477856000000001,2,1,1,project,0.0014478939,36,21,1
-festival,0.0012870168,32,3,1,urban design,0.0008416789,28,22,2,beyond binary choice,0.0005477856000000001,2,1,1,urban space,0.0013846127000000001,17,10,1
-growth,0.0012467975,31,22,1,developing country,0.0007330303000000001,9,3,1,public green space,0.0005477856000000001,2,1,1,indigenous people,0.0013846127000000001,17,8,1
-area,0.0011429678,77,42,2,city planning,0.0007330303000000001,9,6,1,social impact assessment,0.0005477856000000001,2,1,1,natural property right,0.0013694640000000001,5,1,1
-condition,0.0010054819,25,17,1,middle class,0.0006515825,8,1,1,different thermal index,0.0005477856000000001,2,1,1,property right value,0.0013694640000000001,5,1,1
-heritage,0.0010054819,25,14,1,residential standard,0.0006515825,8,1,1,cultural ecosystem service,0.0005477856000000001,2,1,1,model,0.0013674553,34,22,1
-business,0.0010054819,25,12,1,acoustic environment,0.0005701347,7,2,1,hot arid climate,0.0005477856000000001,2,1,1,environment,0.0013359364,90,47,2
-influence,0.0009652626,24,15,1,different culture,0.0005701347,7,6,1,urban planning process,0.0005477856000000001,2,2,1,urban environment,0.0013031649,16,12,1
-idea,0.0009652626,24,16,1,social interaction,0.0005701347,7,5,1,municipal solid waste,0.0005477856000000001,2,2,1,festival,0.0012870168,32,3,1
-vision,0.0009250433000000001,23,9,1,road traffic,0.0005701347,7,2,1,greenhouse gas emission,0.0005477856000000001,2,2,1,growth,0.0012467975,31,22,1
+crisis,0.0024557285,15,6,1,typhoid fever,0.0034829818000000003,11,1,1,road traffic noise,0.004019491300000001,4,1,1,road traffic noise,0.004019491300000001,4,1,1
+fever,0.0021282980000000003,13,1,1,urban blight,0.0028497124,9,1,1,urban regime theory,0.004019491300000001,4,1,1,urban regime theory,0.004019491300000001,4,1,1
+age,0.0019645828,12,4,1,residential standard,0.0025330777,8,1,1,ethnic minority group,0.0030146185,3,1,1,typhoid fever,0.0034829818000000003,11,1,1
+noise,0.0019645828,12,3,1,spatial planning,0.0025330777,8,3,1,residential environmental quality,0.0030146185,3,1,1,ethnic minority group,0.0030146185,3,1,1
+bathroom,0.0019645828,12,1,1,road traffic,0.0022164430000000002,7,2,1,typhoid fever case,0.0020097456,2,1,1,residential environmental quality,0.0030146185,3,1,1
+society,0.0014969997,21,18,3,regime theory,0.0018998083000000001,6,1,1,public green space,0.0020097456,2,1,1,urban blight,0.0028497124,9,1,1
+regime,0.0014734371,9,3,1,smart city,0.0018998083000000001,6,2,1,urban sustainability transition,0.0020097456,2,1,1,residential standard,0.0025330777,8,1,1
+blight,0.0014734371,9,1,1,residential environment,0.0018998083000000001,6,1,1,hot arid climate,0.0020097456,2,1,1,spatial planning,0.0025330777,8,3,1
+organisation,0.0014734371,9,3,1,environmental quality,0.0018998083000000001,6,2,1,last two decade,0.0020097456,2,2,1,crisis,0.0024557285,15,6,1
+standard,0.0012647843,12,3,2,developing country,0.0018346244000000001,9,3,2,relationship among people,0.0020097456,2,1,1,road traffic,0.0022164430000000002,7,2,1
+implementation,0.0012647843,12,5,2,public space,0.0017923185000000002,13,7,3,satisfy project requirement,0.0020097456,2,1,1,fever,0.0021282980000000003,13,1,1
+incidence,0.0011460066,7,1,1,landscape type,0.0015831735,5,1,1,multilocal creative knowledge,0.0020097456,2,1,1,typhoid fever case,0.0020097456,2,1,1
+year,0.0011299716,24,6,4,third place,0.0015831735,5,1,1,creative knowledge worker,0.0020097456,2,1,1,public green space,0.0020097456,2,1,1
+water,0.0011299716,24,5,4,small bathroom,0.0015831735,5,1,1,creative knowledge work,0.0020097456,2,1,1,urban sustainability transition,0.0020097456,2,1,1
+nature,0.0010828894,23,10,4,community response,0.0012665388,4,1,1,fuzzy cognitive mapping,0.0020097456,2,1,1,hot arid climate,0.0020097456,2,1,1
+child,0.0010539869000000001,10,3,2,traffic noise,0.0012665388,4,1,1,urban decision maker,0.0020097456,2,2,1,last two decade,0.0020097456,2,2,1
+conflict,0.0010539869000000001,10,4,2,urban regime,0.0012665388,4,1,1,double bottom line,0.0020097456,2,1,1,relationship among people,0.0020097456,2,1,1
+waste,0.0009979998000000001,14,2,3,water management,0.0012665388,4,3,1,draws architectural comparison,0.0020097456,2,1,1,satisfy project requirement,0.0020097456,2,1,1
+typhoid,0.0009822914,6,1,1,trust relationship,0.0012665388,4,1,1,smart city application,0.0020097456,2,1,1,multilocal creative knowledge,0.0020097456,2,1,1
+gas,0.0009822914,6,2,1,creative knowledge,0.0012665388,4,1,1,modern city planning,0.0020097456,2,1,1,creative knowledge worker,0.0020097456,2,1,1

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+regeneration,0.0055269446,20,7,2,creative city,0.0072378551,7,4,1,urban economic development,0.009382147700000001,2,1,1,urban economic development,0.009382147700000001,2,1,1
+branding,0.0043685625,9,3,1,cultural participation,0.0062038758000000005,6,1,1,new creative cluster,0.009382147700000001,2,1,1,new creative cluster,0.009382147700000001,2,1,1
+art,0.0032976324,49,12,4,economic development,0.005250858000000001,16,7,3,urban regeneration process,0.009382147700000001,2,2,1,urban regeneration process,0.009382147700000001,2,2,1
+innovation,0.0022107778,8,5,2,cultural producer,0.0051698965,5,1,1,smart creative city,0.009382147700000001,2,1,1,smart creative city,0.009382147700000001,2,1,1
+cluster,0.0022107778,8,4,2,cultural production,0.0051698965,5,2,1,drawn meaningful insight,0.0046910739,1,1,1,creative city,0.0072378551,7,4,1
+creativity,0.0018487396,12,6,3,cultural sector,0.0051698965,5,3,1,suggests possible avenue,0.0046910739,1,1,1,cultural participation,0.0062038758000000005,6,1,1
+sector,0.0015406163,10,6,3,creative cluster,0.0051698965,5,2,1,cultural economic development,0.0046910739,1,1,1,regeneration,0.0055269446,20,7,2
+spillover,0.0014561875,3,1,1,place branding,0.0051698965,5,2,1,way cultural producer,0.0046910739,1,1,1,economic development,0.005250858000000001,16,7,3
+agglomeration,0.0014561875,3,1,1,cultural planning,0.0051698965,5,2,1,producer obtain job,0.0046910739,1,1,1,cultural producer,0.0051698965,5,1,1
+externality,0.0014561875,3,1,1,urban regeneration,0.0047093492,8,5,2,key social mechanism,0.0046910739,1,1,1,cultural production,0.0051698965,5,2,1
+producer,0.0013817361,5,1,2,creative people,0.0041359172,4,4,1,social mechanism structure,0.0046910739,1,1,1,cultural sector,0.0051698965,5,3,1
+production,0.0012324931000000001,8,3,3,cultural regeneration,0.0041359172,4,1,1,clustered production system,0.0046910739,1,1,1,creative cluster,0.0051698965,5,2,1
+topic,0.0011053889,4,3,2,place identity,0.0041359172,4,2,1,art social milieu,0.0046910739,1,1,1,place branding,0.0051698965,5,2,1
+transition,0.0011053889,4,2,2,quality product,0.0041359172,4,1,1,establish new career,0.0046910739,1,1,1,cultural planning,0.0051698965,5,2,1
+hub,0.0011053889,4,1,2,creative activity,0.0041359172,4,2,1,active cultural milieu,0.0046910739,1,1,1,urban regeneration,0.0047093492,8,5,2
+investment,0.0011053889,4,3,2,creative placemaking,0.0041359172,4,1,1,economic development asset,0.0046910739,1,1,1,drawn meaningful insight,0.0046910739,1,1,1
+industry,0.0010784314,7,6,3,knowledge spillover,0.0031019379000000002,3,1,1,simultaneously bringing redevelopment,0.0046910739,1,1,1,suggests possible avenue,0.0046910739,1,1,1
+economy,0.0010767779,16,7,4,cultural economy,0.0020679586,2,1,1,consider current research,0.0046910739,1,1,1,cultural economic development,0.0046910739,1,1,1
+enhancement,0.0009707917000000001,2,2,1,obtain job,0.0020679586,2,1,1,environmental improvement scheme,0.0046910739,1,1,1,way cultural producer,0.0046910739,1,1,1
+troupe,0.0009707917000000001,2,1,1,using culture,0.0020679586,2,2,1,public art help,0.0046910739,1,1,1,producer obtain job,0.0046910739,1,1,1

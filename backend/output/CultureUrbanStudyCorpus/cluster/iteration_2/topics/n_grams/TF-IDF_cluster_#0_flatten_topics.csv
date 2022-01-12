@@ -1,51 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-elasticity,0.0039982228,3,1,1,urban survey,0.0091754087,3,1,1,urban planning model,0.046548415100000004,4,1,1,urban planning model,0.046548415100000004,4,1,1
-informality,0.0034431252,7,1,2,western model,0.0061169392,2,1,1,present general outlook,0.0116371038,1,1,1,present general outlook,0.0116371038,1,1,1
-hence,0.0026654819000000002,2,1,1,dystopian city,0.0061169392,2,1,1,among urban planner,0.0116371038,1,1,1,among urban planner,0.0116371038,1,1,1
-conglomeration,0.0026654819000000002,2,1,1,urban conglomeration,0.0061169392,2,1,1,good urban governance,0.0116371038,1,1,1,good urban governance,0.0116371038,1,1,1
-liberalisation,0.0026654819000000002,2,1,1,economic liberalisation,0.0061169392,2,1,1,fast wrenching control,0.0116371038,1,1,1,fast wrenching control,0.0116371038,1,1,1
-governance,0.0019675001,4,2,2,planning model,0.0045151605000000004,4,1,2,facing several challenge,0.0116371038,1,1,1,facing several challenge,0.0116371038,1,1,1
-urbanisation,0.0014756251,3,3,2,general outlook,0.0030584696,1,1,1,deep seated problem,0.0116371038,1,1,1,deep seated problem,0.0116371038,1,1,1
-treats,0.0013327409,1,1,1,colonial city,0.0030584696,1,1,1,poor management approach,0.0116371038,1,1,1,poor management approach,0.0116371038,1,1,1
-constellation,0.0013327409,1,1,1,ingrained myth,0.0030584696,1,1,1,investor whose creed,0.0116371038,1,1,1,investor whose creed,0.0116371038,1,1,1
-bickering,0.0013327409,1,1,1,view treats,0.0030584696,1,1,1,study big city,0.0116371038,1,1,1,study big city,0.0116371038,1,1,1
-imposition,0.0013327409,1,1,1,strategic force,0.0030584696,1,1,1,conceiving urban space,0.0116371038,1,1,1,conceiving urban space,0.0116371038,1,1,1
-wrenching,0.0013327409,1,1,1,urban reform,0.0030584696,1,1,1,create urban study,0.0116371038,1,1,1,create urban study,0.0116371038,1,1,1
-deep,0.0013327409,1,1,1,smart transformation,0.0030584696,1,1,1,emerging urban space,0.0116371038,1,1,1,emerging urban space,0.0116371038,1,1,1
-vortex,0.0013327409,1,1,1,close look,0.0030584696,1,1,1,represented critical aspect,0.0116371038,1,1,1,represented critical aspect,0.0116371038,1,1,1
-maelstrom,0.0013327409,1,1,1,much bickering,0.0030584696,1,1,1,advancing urban planning,0.0116371038,1,1,1,advancing urban planning,0.0116371038,1,1,1
-worthiness,0.0013327409,1,1,1,intergovernmental imposition,0.0030584696,1,1,1,effective urban management,0.0116371038,1,1,1,effective urban management,0.0116371038,1,1,1
-investor,0.0013327409,1,1,1,policy hence,0.0030584696,1,1,1,mixed method research,0.0116371038,1,1,1,mixed method research,0.0116371038,1,1,1
-creed,0.0013327409,1,1,1,exemplifies policy,0.0030584696,1,1,1,method research approach,0.0116371038,1,1,1,method research approach,0.0116371038,1,1,1
-descendant,0.0013327409,1,1,1,fast wrenching,0.0030584696,1,1,1,five identified value,0.0116371038,1,1,1,five identified value,0.0116371038,1,1,1
-integrating,0.0013327409,1,1,1,wrenching control,0.0030584696,1,1,1,significant positive influence,0.0116371038,1,1,1,significant positive influence,0.0116371038,1,1,1
-ethos,0.0013327409,1,1,1,city hence,0.0030584696,1,1,1,comprehensive comparative study,0.0116371038,1,1,1,comprehensive comparative study,0.0116371038,1,1,1
-dearth,0.0013327409,1,1,1,several challenge,0.0030584696,1,1,1,plan voisin concept,0.0116371038,1,1,1,plan voisin concept,0.0116371038,1,1,1
-indicate,0.0013327409,1,1,1,adopted culture,0.0030584696,1,1,1,western urban model,0.0116371038,1,1,1,western urban model,0.0116371038,1,1,1
-slums,0.0013327409,1,1,1,seated problem,0.0030584696,1,1,1,urban geographer opine,0.0116371038,1,1,1,urban geographer opine,0.0116371038,1,1,1
-extinction,0.0013327409,1,1,1,poor management,0.0030584696,1,1,1,similar urban conglomeration,0.0116371038,1,1,1,similar urban conglomeration,0.0116371038,1,1,1
-colonization,0.0013327409,1,1,1,management approach,0.0030584696,1,1,1,afer economic liberalisation,0.0116371038,1,1,1,afer economic liberalisation,0.0116371038,1,1,1
-comparative,0.0013327409,1,1,1,skewed towards,0.0030584696,1,1,1,modern global power,0.0116371038,1,1,1,modern global power,0.0116371038,1,1,1
-geographer,0.0013327409,1,1,1,political dynamic,0.0030584696,1,1,1,elicited multiple interpretation,0.0116371038,1,1,1,elicited multiple interpretation,0.0116371038,1,1,1
-opine,0.0013327409,1,1,1,whose creed,0.0030584696,1,1,1,propel economic growth,0.0116371038,1,1,1,propel economic growth,0.0116371038,1,1,1
-movie,0.0013327409,1,1,1,basic method,0.0030584696,1,1,1,urban development policy,0.0116371038,1,1,1,urban development policy,0.0116371038,1,1,1
-sum,0.0013327409,1,1,1,social awareness,0.0030584696,1,1,1,remain exclusionary space,0.0116371038,1,1,1,remain exclusionary space,0.0116371038,1,1,1
-wake,0.0013327409,1,1,1,economical interest,0.0030584696,1,1,1,stated public commitment,0.0116371038,1,1,1,stated public commitment,0.0116371038,1,1,1
-quintessence,0.0013327409,1,1,1,psychological research,0.0030584696,1,1,1,rapidly urbanizing city,0.0042949088,1,1,2,urban survey,0.0091754087,3,1,1
-rising,0.0013327409,1,1,1,urban phenomenon,0.0030584696,1,1,1,,0.0,0,0,0,western model,0.0061169392,2,1,1
-pot,0.0013327409,1,1,1,bilateral relationship,0.0030584696,1,1,1,,0.0,0,0,0,dystopian city,0.0061169392,2,1,1
-upsurge,0.0013327409,1,1,1,conducting survey,0.0030584696,1,1,1,,0.0,0,0,0,urban conglomeration,0.0061169392,2,1,1
-contestation,0.0009837501,2,2,2,international theory,0.0030584696,1,1,1,,0.0,0,0,0,economic liberalisation,0.0061169392,2,1,1
-relevance,0.0009837501,2,2,2,critical aspect,0.0030584696,1,1,1,,0.0,0,0,0,rapidly urbanizing city,0.0042949088,1,1,2
-essay,0.0009837501,2,1,2,encouraged people,0.0030584696,1,1,1,,0.0,0,0,0,elasticity,0.0039982228,3,1,1
-discourse,0.0009837501,2,1,2,modernist architect,0.0030584696,1,1,1,,0.0,0,0,0,informality,0.0034431252,7,1,2
-outlook,0.000491875,1,1,2,counter part,0.0030584696,1,1,1,,0.0,0,0,0,colonial city,0.0030584696,1,1,1
-myth,0.000491875,1,1,2,primal objective,0.0030584696,1,1,1,,0.0,0,0,0,ingrained myth,0.0030584696,1,1,1
-wealth,0.000491875,1,1,2,later generation,0.0030584696,1,1,1,,0.0,0,0,0,view treats,0.0030584696,1,1,1
-trajectory,0.000491875,1,1,2,social ethos,0.0030584696,1,1,1,,0.0,0,0,0,strategic force,0.0030584696,1,1,1
-reform,0.000491875,1,1,2,dialectical progress,0.0030584696,1,1,1,,0.0,0,0,0,urban reform,0.0030584696,1,1,1
-look,0.000491875,1,1,2,bilateral approach,0.0030584696,1,1,1,,0.0,0,0,0,smart transformation,0.0030584696,1,1,1
-government,0.000491875,1,1,2,alternative aspect,0.0030584696,1,1,1,,0.0,0,0,0,close look,0.0030584696,1,1,1
-affair,0.000491875,1,1,2,urban management,0.0030584696,1,1,1,,0.0,0,0,0,much bickering,0.0030584696,1,1,1
-colonial,0.000491875,1,1,2,mixed method,0.0030584696,1,1,1,,0.0,0,0,0,intergovernmental imposition,0.0030584696,1,1,1
-towards,0.000491875,1,1,2,method research,0.0030584696,1,1,1,,0.0,0,0,0,policy hence,0.0030584696,1,1,1
+risk,0.0063231993,15,2,2,indigenous knowledge,0.0166061988,11,2,1,yanama budyari gumada,0.010355111200000001,2,1,1,indigenous knowledge,0.0166061988,11,2,1
+death,0.004442606,6,1,1,indigenous people,0.012032743200000001,14,6,2,natural resource management,0.010355111200000001,2,1,1,indigenous people,0.012032743200000001,14,6,2
+biodiversity,0.002221303,3,1,1,good death,0.0090579266,6,1,1,constitutes effective landscape,0.0051775556000000006,1,1,1,yanama budyari gumada,0.010355111200000001,2,1,1
+wildfire,0.002221303,3,1,1,wildfire risk,0.0060386177,4,1,1,effective landscape planning,0.0051775556000000006,1,1,1,natural resource management,0.010355111200000001,2,1,1
+aborigine,0.002221303,3,1,1,environmental hazard,0.0045289633,3,2,1,emerging governance challenge,0.0051775556000000006,1,1,1,good death,0.0090579266,6,1,1
+conservation,0.0016861865,4,2,2,cultural literacy,0.0045289633,3,1,1,simultaneously mitigate wildfire,0.0051775556000000006,1,1,1,risk,0.0063231993,15,2,2
+hazard,0.0016861865,4,2,2,vegetation management,0.0030193089,2,1,1,mitigate wildfire risk,0.0051775556000000006,1,1,1,wildfire risk,0.0060386177,4,1,1
+housing,0.0016861865,4,2,2,budyari gumada,0.0030193089,2,1,1,support improved conservation,0.0051775556000000006,1,1,1,constitutes effective landscape,0.0051775556000000006,1,1,1
+family,0.0016861865,4,2,2,urban centre,0.0030193089,2,2,1,improved conservation practice,0.0051775556000000006,1,1,1,effective landscape planning,0.0051775556000000006,1,1,1
+upland,0.0014808687,2,1,1,directed towards,0.0030193089,2,1,1,vital historical component,0.0051775556000000006,1,1,1,emerging governance challenge,0.0051775556000000006,1,1,1
+gumada,0.0014808687,2,1,1,rural study,0.0030193089,2,1,1,early modern era,0.0051775556000000006,1,1,1,simultaneously mitigate wildfire,0.0051775556000000006,1,1,1
+reconciliation,0.0014808687,2,2,1,rural people,0.0030193089,2,1,1,manage wildfire risk,0.0051775556000000006,1,1,1,mitigate wildfire risk,0.0051775556000000006,1,1,1
+tribe,0.0014808687,2,2,1,affordable housing,0.0030193089,2,1,1,new state policy,0.0051775556000000006,1,1,1,support improved conservation,0.0051775556000000006,1,1,1
+bali,0.0014808687,2,1,1,risk perception,0.0030193089,2,1,1,providing greater allowance,0.0051775556000000006,1,1,1,improved conservation practice,0.0051775556000000006,1,1,1
+agriculture,0.0014808687,2,1,1,aboriginal education,0.0030193089,2,1,1,constrain urban growth,0.0051775556000000006,1,1,1,vital historical component,0.0051775556000000006,1,1,1
+vegetation,0.0012646399,3,1,2,associative relationship,0.0030193089,2,1,1,key environmental management,0.0051775556000000006,1,1,1,early modern era,0.0051775556000000006,1,1,1
+homelessness,0.0012646399,3,1,2,intercultural lens,0.0030193089,2,1,1,environmental management stakeholder,0.0051775556000000006,1,1,1,manage wildfire risk,0.0051775556000000006,1,1,1
+literacy,0.0012646399,3,1,2,formal knowledge,0.0030193089,2,1,1,within reflexive system,0.0051775556000000006,1,1,1,new state policy,0.0051775556000000006,1,1,1
+challenge,0.0011750463,5,3,3,aboriginal culture,0.0030193089,2,1,1,facilitate vegetation management,0.0051775556000000006,1,1,1,providing greater allowance,0.0051775556000000006,1,1,1
+home,0.0011750463,5,3,3,urban renewal,0.002578445,3,1,2,frame natural resource,0.0051775556000000006,1,1,1,constrain urban growth,0.0051775556000000006,1,1,1

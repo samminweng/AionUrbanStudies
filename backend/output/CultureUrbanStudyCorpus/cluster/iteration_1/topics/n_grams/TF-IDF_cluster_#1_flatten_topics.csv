@@ -1,51 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-art,0.0042513876,49,12,3,creative city,0.006234349,7,4,1,urban economic development,0.008081342200000001,2,1,1,urban economic development,0.008081342200000001,2,1,1
-product,0.0029266805000000003,14,6,2,cultural participation,0.0053437277,6,1,1,new creative cluster,0.008081342200000001,2,1,1,new creative cluster,0.008081342200000001,2,1,1
-creativity,0.0025085833,12,6,2,cultural producer,0.0044531064,5,1,1,urban regeneration process,0.008081342200000001,2,2,1,urban regeneration process,0.008081342200000001,2,2,1
-sector,0.0020904861,10,6,2,cultural production,0.0044531064,5,2,1,smart creative city,0.008081342200000001,2,1,1,smart creative city,0.008081342200000001,2,1,1
-branding,0.0018814375,9,3,2,cultural sector,0.0044531064,5,3,1,drawn meaningful insight,0.0040406711000000005,1,1,1,creative city,0.006234349,7,4,1
-regeneration,0.0017352602,20,7,3,creative cluster,0.0044531064,5,2,1,suggests possible avenue,0.0040406711000000005,1,1,1,cultural participation,0.0053437277,6,1,1
-innovation,0.0016723889,8,5,2,place branding,0.0044531064,5,2,1,cultural economic development,0.0040406711000000005,1,1,1,cultural producer,0.0044531064,5,1,1
-cluster,0.0016723889,8,4,2,cultural planning,0.0044531064,5,2,1,way cultural producer,0.0040406711000000005,1,1,1,cultural production,0.0044531064,5,2,1
-participation,0.0014633403000000001,7,2,2,creative people,0.0035624852000000003,4,4,1,producer obtain job,0.0040406711000000005,1,1,1,cultural sector,0.0044531064,5,3,1
-spillover,0.0012542916,3,1,1,cultural regeneration,0.0035624852000000003,4,1,1,key social mechanism,0.0040406711000000005,1,1,1,creative cluster,0.0044531064,5,2,1
-implication,0.0012542916,6,3,2,place identity,0.0035624852000000003,4,2,1,social mechanism structure,0.0040406711000000005,1,1,1,place branding,0.0044531064,5,2,1
-externality,0.0012542916,3,1,1,quality product,0.0035624852000000003,4,1,1,clustered production system,0.0040406711000000005,1,1,1,cultural planning,0.0044531064,5,2,1
-mechanism,0.0010452430000000002,5,2,2,creative activity,0.0035624852000000003,4,2,1,art social milieu,0.0040406711000000005,1,1,1,art,0.0042513876,49,12,3
-producer,0.0010452430000000002,5,1,2,creative placemaking,0.0035624852000000003,4,1,1,establish new career,0.0040406711000000005,1,1,1,drawn meaningful insight,0.0040406711000000005,1,1,1
-range,0.0010452430000000002,5,4,2,economic development,0.0029571299,16,7,3,active cultural milieu,0.0040406711000000005,1,1,1,suggests possible avenue,0.0040406711000000005,1,1,1
-enhancement,0.0008361944,2,2,1,knowledge spillover,0.0026718639,3,1,1,economic development asset,0.0040406711000000005,1,1,1,cultural economic development,0.0040406711000000005,1,1,1
-renewal,0.0008361944,4,2,2,cultural economy,0.0017812426000000001,2,1,1,simultaneously bringing redevelopment,0.0040406711000000005,1,1,1,way cultural producer,0.0040406711000000005,1,1,1
-artist,0.0008361944,4,1,2,obtain job,0.0017812426000000001,2,1,1,consider current research,0.0040406711000000005,1,1,1,producer obtain job,0.0040406711000000005,1,1,1
-troupe,0.0008361944,2,1,1,using culture,0.0017812426000000001,2,2,1,environmental improvement scheme,0.0040406711000000005,1,1,1,key social mechanism,0.0040406711000000005,1,1,1
-outlet,0.0008361944,2,1,1,culture hub,0.0017812426000000001,2,1,1,public art help,0.0040406711000000005,1,1,1,social mechanism structure,0.0040406711000000005,1,1,1
-notion,0.0008361944,4,2,2,inner city,0.0017812426000000001,2,2,1,specific cultural quarter,0.0040406711000000005,1,1,1,clustered production system,0.0040406711000000005,1,1,1
-placemaking,0.0008361944,4,1,2,using art,0.0017812426000000001,2,1,1,city centre area,0.0040406711000000005,1,1,1,art social milieu,0.0040406711000000005,1,1,1
-identity,0.0007808671,9,6,3,branding campaign,0.0017812426000000001,2,1,1,urban design technique,0.0040406711000000005,1,1,1,establish new career,0.0040406711000000005,1,1,1
-production,0.0006941041,8,3,3,cultural element,0.0017812426000000001,2,1,1,wider cultural regeneration,0.0040406711000000005,1,1,1,active cultural milieu,0.0040406711000000005,1,1,1
-interaction,0.0006271458,3,3,2,cultural factor,0.0017812426000000001,2,2,1,research reviews literature,0.0040406711000000005,1,1,1,economic development asset,0.0040406711000000005,1,1,1
-milieu,0.0006271458,3,2,2,driving force,0.0017812426000000001,2,1,1,regional economic development,0.0040406711000000005,1,1,1,simultaneously bringing redevelopment,0.0040406711000000005,1,1,1
-brand,0.0006271458,3,3,2,community life,0.0017812426000000001,2,1,1,transmitting knowledge spillover,0.0040406711000000005,1,1,1,consider current research,0.0040406711000000005,1,1,1
-shift,0.0006271458,3,3,2,art administrator,0.0017812426000000001,2,1,1,regional entrepreneurial ecosystem,0.0040406711000000005,1,1,1,environmental improvement scheme,0.0040406711000000005,1,1,1
-chance,0.0006271458,3,3,2,tradable product,0.0017812426000000001,2,1,1,notably including knowledge,0.0040406711000000005,1,1,1,public art help,0.0040406711000000005,1,1,1
-intervention,0.0006271458,3,2,2,urban design,0.0016633855,9,4,3,including knowledge base,0.0040406711000000005,1,1,1,specific cultural quarter,0.0040406711000000005,1,1,1
-theater,0.0006271458,3,1,2,urban regeneration,0.0014785649,8,5,3,creative waterfront renewal,0.0040406711000000005,1,1,1,city centre area,0.0040406711000000005,1,1,1
-administrator,0.0006271458,3,1,2,industrial recruitment,0.0008906213000000001,1,1,1,competitiveness among city,0.0040406711000000005,1,1,1,urban design technique,0.0040406711000000005,1,1,1
-agglomeration,0.0006271458,3,1,2,human capital,0.0008906213000000001,2,2,2,particular local characteristic,0.0040406711000000005,1,1,1,wider cultural regeneration,0.0040406711000000005,1,1,1
-vision,0.0006271458,3,3,2,including art,0.0008906213000000001,1,1,1,become creative cluster,0.0040406711000000005,1,1,1,research reviews literature,0.0040406711000000005,1,1,1
-knowledge,0.0005205781,6,3,3,talented people,0.0008906213000000001,1,1,1,local development strategy,0.0040406711000000005,1,1,1,regional economic development,0.0040406711000000005,1,1,1
-service,0.0004338151,5,4,3,cultural amenity,0.0008906213000000001,1,1,1,emblematic case study,0.0040406711000000005,1,1,1,transmitting knowledge spillover,0.0040406711000000005,1,1,1
-expression,0.0004338151,5,4,3,examined art,0.0008906213000000001,1,1,1,dynamic creative hub,0.0040406711000000005,1,1,1,regional entrepreneurial ecosystem,0.0040406711000000005,1,1,1
-literature,0.0004338151,5,3,3,production system,0.0008906213000000001,2,1,2,many characteristic typical,0.0040406711000000005,1,1,1,notably including knowledge,0.0040406711000000005,1,1,1
-idea,0.0004338151,5,5,3,meaningful insight,0.0008906213000000001,1,1,1,cultural industry metropolis,0.0040406711000000005,1,1,1,including knowledge base,0.0040406711000000005,1,1,1
-benefit,0.0004338151,5,2,3,possible avenue,0.0008906213000000001,1,1,1,city using culture,0.0040406711000000005,1,1,1,creative waterfront renewal,0.0040406711000000005,1,1,1
-organization,0.0004338151,5,2,3,gain value,0.0008906213000000001,1,1,1,makes one conclude,0.0040406711000000005,1,1,1,competitiveness among city,0.0040406711000000005,1,1,1
-recruitment,0.0004180972,1,1,1,cultural gatekeeper,0.0008906213000000001,1,1,1,possible key feature,0.0040406711000000005,1,1,1,particular local characteristic,0.0040406711000000005,1,1,1
-inner,0.0004180972,1,1,1,group frequent,0.0008906213000000001,1,1,1,distinguish whether culture,0.0040406711000000005,1,1,1,become creative cluster,0.0040406711000000005,1,1,1
-gain,0.0004180972,1,1,1,mechanism structure,0.0008906213000000001,1,1,1,place branding strategy,0.0040406711000000005,1,1,1,local development strategy,0.0040406711000000005,1,1,1
-interview,0.0004180972,2,2,2,clustered production,0.0008906213000000001,1,1,1,place branding campaign,0.0040406711000000005,1,1,1,emblematic case study,0.0040406711000000005,1,1,1
-manager,0.0004180972,2,2,2,unique kind,0.0008906213000000001,1,1,1,authentic cultural element,0.0040406711000000005,1,1,1,dynamic creative hub,0.0040406711000000005,1,1,1
-entertainment,0.0004180972,2,2,2,gallery opening,0.0008906213000000001,1,1,1,leisure consumption industry,0.0040406711000000005,1,1,1,many characteristic typical,0.0040406711000000005,1,1,1
-frequent,0.0004180972,1,1,1,economic sector,0.0008906213000000001,1,1,1,already deployed practice,0.0040406711000000005,1,1,1,cultural industry metropolis,0.0040406711000000005,1,1,1
-nightlife,0.0004180972,1,1,1,generate value,0.0008906213000000001,1,1,1,converged objective link,0.0040406711000000005,1,1,1,city using culture,0.0040406711000000005,1,1,1
-opening,0.0004180972,1,1,1,local art,0.0008906213000000001,1,1,1,link cultural manager,0.0040406711000000005,1,1,1,makes one conclude,0.0040406711000000005,1,1,1
+sprawl,0.0011785622,6,1,1,small town,0.0047616892000000004,10,2,1,branch office building,0.0068160179000000005,3,1,1,branch office building,0.0068160179000000005,3,1,1
+civilisation,0.0009821351000000001,5,3,1,urban sprawl,0.0028570135,6,1,1,system take place,0.0045440119000000005,2,1,1,small town,0.0047616892000000004,10,2,1
+bank,0.0009821351000000001,5,1,1,branch office,0.0019046757,4,1,1,inter cultural dialogue,0.0045440119000000005,2,1,1,system take place,0.0045440119000000005,2,1,1
+nomad,0.0009821351000000001,5,1,1,educational environment,0.0014285068,3,1,1,relevant regional culture,0.0045440119000000005,2,1,1,inter cultural dialogue,0.0045440119000000005,2,1,1
+century,0.0007974491,11,9,2,culture study,0.0014285068,3,1,1,regional culture study,0.0045440119000000005,2,1,1,relevant regional culture,0.0045440119000000005,2,1,1
+music,0.0007974491,11,2,2,wooden church,0.0014285068,3,1,1,large part today,0.002272006,1,1,1,regional culture study,0.0045440119000000005,2,1,1
+church,0.0007974491,11,1,2,built environment,0.0010544387,6,2,2,many subject area,0.002272006,1,1,1,urban sprawl,0.0028570135,6,1,1
+nobility,0.0007857081,4,2,1,particular attention,0.0009523378,2,2,1,tolerated local religion,0.002272006,1,1,1,large part today,0.002272006,1,1,1
+monasticism,0.0007857081,4,1,1,geopolitical situation,0.0009523378,2,2,1,gives detailed attention,0.002272006,1,1,1,many subject area,0.002272006,1,1,1
+inhabitant,0.0006524583000000001,9,7,2,multicultural city,0.0009523378,2,2,1,pays particular attention,0.002272006,1,1,1,tolerated local religion,0.002272006,1,1,1
+democracy,0.0005892811,3,2,1,cultural barbarism,0.0009523378,2,1,1,primarily agrarian economy,0.002272006,1,1,1,gives detailed attention,0.002272006,1,1,1
+dualism,0.0005892811,3,2,1,twin city,0.0009523378,2,1,1,spoken various language,0.002272006,1,1,1,pays particular attention,0.002272006,1,1,1
+trace,0.0005892811,3,2,1,social protection,0.0009523378,2,1,1,professed different religion,0.002272006,1,1,1,primarily agrarian economy,0.002272006,1,1,1
+empire,0.0005799630000000001,8,1,2,social category,0.0009523378,2,1,1,particularly diverse city,0.002272006,1,1,1,spoken various language,0.002272006,1,1,1
+education,0.0005799630000000001,8,5,2,urban dweller,0.0009523378,2,2,1,one national narrative,0.002272006,1,1,1,professed different religion,0.002272006,1,1,1
+model,0.0005799630000000001,8,5,2,traditional function,0.0009523378,2,1,1,several national group,0.002272006,1,1,1,particularly diverse city,0.002272006,1,1,1
+religion,0.0005074676,7,5,2,cultural interaction,0.0009523378,2,1,1,single urban space,0.002272006,1,1,1,one national narrative,0.002272006,1,1,1
+memory,0.0005074676,7,5,2,educational sphere,0.0009523378,2,1,1,essential turning point,0.002272006,1,1,1,several national group,0.002272006,1,1,1
+period,0.0005074676,7,4,2,five level,0.0009523378,2,1,1,intimate local trauma,0.002272006,1,1,1,single urban space,0.002272006,1,1,1
+art,0.0005074676,7,5,2,takes place,0.0009523378,2,1,1,every social background,0.002272006,1,1,1,essential turning point,0.002272006,1,1,1
