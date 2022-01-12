@@ -49,7 +49,7 @@ function DocList(docs, selected_term) {
 
     function _createUI() {
         $('#doc_list').empty();
-        const container = $('<div class="container"></div>');
+        const container = $('<div></div>');
         // A list of cluster documents
         const doc_table = $('<table class="table table-borderless">' +
             '<tbody></tbody></table>');

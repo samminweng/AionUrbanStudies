@@ -95,12 +95,12 @@ class KeyPhraseSimilarity:
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def group_key_phrases_by_clusters_experiments(self):
-        # cluster_no_list = range(-1, self.total_clusters)
-        cluster_no_list = [18]
+        cluster_no_list = list(range(-1, self.total_clusters))
+        # cluster_no_list = [2]
         for cluster_no in cluster_no_list:
             try:
                 key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
-                path = os.path.join(key_phrase_folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '.json')
+                path = os.path.join(key_phrase_folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
                 df = pd.read_json(path)
                 all_key_phrases = reduce(lambda pre, cur: pre + cur, df['key-phrases'].tolist(), list())
                 experiment_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
@@ -116,7 +116,7 @@ class KeyPhraseSimilarity:
         try:
             # Collect the best results in each cluster
             best_results = list()
-            for cluster_no in range(-1, self.total_clusters):
+            for cluster_no in list(range(-1, self.total_clusters)):
                 try:
                     # Output key phrases of each paper
                     folder = os.path.join('output', self.args.case_name, 'key_phrases')
@@ -124,7 +124,6 @@ class KeyPhraseSimilarity:
                                         'top_key_phrases_cluster_#{c}_grouping_experiments.json'.format(c=cluster_no))
                     experiment_df = pd.read_json(path)
                     # Replace 'None' with None value
-                    experiment_df['score'] = experiment_df['score'].replace('None', None)
                     experiment_df['min_samples'] = experiment_df['min_samples'].replace('None', 0)
                     # Sort the experiment results by score
                     experiment_df = experiment_df.sort_values(['score'], ascending=False)

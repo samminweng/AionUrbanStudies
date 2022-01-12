@@ -1,5 +1,5 @@
 // Create a div to display the grouped key phrases
-function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases, accordion_div){
+function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div){
     // Re-order the groups of key phrases
     cluster_key_phrases.sort((a, b) => b['count'] - a['count']);
     const total = cluster_key_phrases.reduce((pre, cur) => pre + cur['count'], 0);
@@ -64,7 +64,7 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases,
         // Define count btn to display the doc_ids
         percent_btn.click(function(event){
             // Create a doc list
-            const doc_list = new DocList(group_docs, group, corpus_key_phrases);
+            const doc_list = new DocList(group_docs, group);
             document.getElementById('doc_list').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
         });
         group_item.append(percent_btn);

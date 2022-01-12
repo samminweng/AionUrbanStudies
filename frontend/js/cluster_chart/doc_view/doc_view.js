@@ -11,8 +11,11 @@ function DocView(doc, selected_term) {
         }
     }
     // console.log(key_phrases);
-    const container = $('<div class="card text-dark bg-light"><div class="card-body">' +
-        '<p class="card-text"></p></div></div>');
+    const container = $('<div class="card text-dark bg-light">' +
+        '<div class="card-body">' +
+        '<p class="card-text">' +
+        '</p>' +
+        '</div></div>');
     this.get_container = function () {
         return container;
     }
@@ -41,7 +44,9 @@ function DocView(doc, selected_term) {
 
     function _createUI() {
         // Add Key Phrase
-        let key_phrase_div = $('<div><span class="fw-bold">Key Phrases: </span>' + doc_key_phrases.join(", ") + '</div>');
+        const key_phrase_div = $('<div class="container border-info">' +
+            '<p class="lead">' + doc_key_phrases.join(", ") + '</p>' +
+            '</div>');
         container.find(".card-text").append(key_phrase_div);
         // Add the title
         let title_div = $('<div></div>');

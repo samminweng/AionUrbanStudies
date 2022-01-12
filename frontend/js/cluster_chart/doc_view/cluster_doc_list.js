@@ -13,9 +13,8 @@ function ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases) {
     function create_cluster_topic_key_phrases(){
         // Create a div to display a list of topic (a link)
         $('#cluster_topics').empty();
-        const topic_container = $('<div class="container"></div>')
-        const topic_heading = $('<h5><span class="fw-bold">Top 10 topics: </span></h5>');
-        const topic_p = $('<div><p></p></div>');
+        const topic_container = $('<div><h5><span class="fw-bold">Top 10 topics: </span></h5></div>');
+        const topic_p = $('<p></p>');
         // Add top 30 topics (each topic as a link)
         for (const selected_topic of cluster_topics) {
             const link = $('<button type="button" class="btn btn-link btn"> '
@@ -33,13 +32,12 @@ function ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases) {
         }
 
         // Append topic heading and paragraph to accordion
-        topic_container.append(topic_heading);
         topic_container.append(topic_p);
         $('#cluster_topics').append(topic_container);
 
-        const accordion_div = $('<div class="container"></div>');
+        const accordion_div = $('<div></div>');
         // // Add the key phrases grouped by similarity
-        // const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases, accordion_div);
+        const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div);
         // // Set accordion
         accordion_div.accordion({
             // icons: null,

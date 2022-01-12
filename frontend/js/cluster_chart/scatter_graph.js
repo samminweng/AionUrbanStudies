@@ -175,9 +175,6 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
         $('#cluster_chart').empty();
         $('#cluster_chart').css('width', width).css('height', height);
         drawChart();
-        const cluster_doc_list = new ClusterDocList(1, corpus_data, cluster_topic_key_phrases);
-
-
     }
 
     _createUI();
