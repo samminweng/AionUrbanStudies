@@ -460,8 +460,8 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        for iter in list(range(7, 9)):
-            mdc = BERTModelDocCluster(iter)
+        for i in list(range(1, 9)):
+            mdc = BERTModelDocCluster(i)
             mdc.run_HDBSCAN_cluster_experiments()
             mdc.summarize_HDBSCAN_cluster_experiment_results()
             mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()

@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-totora,0.008919752000000001,6,1,1,national park,0.0132584956,4,1,1,contemporary construction field,0.025569955800000002,2,1,1,contemporary construction field,0.025569955800000002,2,1,1
-specie,0.0076660148,8,1,3,construction field,0.0099438717,3,1,1,outstanding universal value,0.025569955800000002,2,1,1,outstanding universal value,0.025569955800000002,2,1,1
-astronomy,0.007433126700000001,5,1,1,recent study,0.0099438717,3,1,1,tour de force,0.012784977900000001,1,1,1,national park,0.0132584956,4,1,1
-calendar,0.0069195527000000005,6,2,2,spatial planning,0.0091402801,5,1,4,critical role astronomy,0.012784977900000001,1,1,1,tour de force,0.012784977900000001,1,1,1
-favelas,0.0059465014,4,1,1,ancient people,0.0066292478,2,2,1,people merged idea,0.012784977900000001,1,1,1,critical role astronomy,0.012784977900000001,1,1,1
-bridge,0.0057392457,7,2,4,urban afforestation,0.0066292478,2,1,1,understanding ancient culture,0.012784977900000001,1,1,1,people merged idea,0.012784977900000001,1,1,1
-afforestation,0.004459876000000001,3,1,1,native specie,0.0066292478,2,1,1,architectural alignment study,0.012784977900000001,1,1,1,understanding ancient culture,0.012784977900000001,1,1,1
-exit,0.004459876000000001,3,1,1,exotic specie,0.0066292478,2,1,1,explore new dimension,0.012784977900000001,1,1,1,architectural alignment study,0.012784977900000001,1,1,1
-naturbanity,0.004459876000000001,3,1,1,building industry,0.0066292478,2,1,1,inhabit urban area,0.012784977900000001,1,1,1,explore new dimension,0.012784977900000001,1,1,1
-crisis,0.0042754331,6,1,5,contemporary construction,0.0066292478,2,1,1,significant environmental change,0.012784977900000001,1,1,1,inhabit urban area,0.012784977900000001,1,1,1
-favela,0.0034597764,3,1,2,intangible heritage,0.0066292478,2,2,1,economically poor people,0.012784977900000001,1,1,1,significant environmental change,0.012784977900000001,1,1,1
-volume,0.0033044827000000003,6,2,7,sustainable tourism,0.0066292478,2,2,1,replace community demand,0.012784977900000001,1,1,1,economically poor people,0.012784977900000001,1,1,1
-park,0.0032067063000000002,11,1,12,suspension bridge,0.0066292478,2,1,1,serve multiple function,0.012784977900000001,1,1,1,replace community demand,0.012784977900000001,1,1,1
-handicraft,0.0029732507,2,1,1,classic period,0.0066292478,2,1,1,many urban bridge,0.012784977900000001,1,1,1,serve multiple function,0.012784977900000001,1,1,1
-bulrush,0.0029732507,2,1,1,vernacular architecture,0.0054841681,3,1,4,discusses several example,0.012784977900000001,1,1,1,many urban bridge,0.012784977900000001,1,1,1
-ecodevelopment,0.0029732507,2,1,1,construction sector,0.005142679900000001,2,1,2,following available research,0.012784977900000001,1,1,1,discusses several example,0.012784977900000001,1,1,1
-geographic,0.0029732507,2,1,1,universal value,0.005142679900000001,2,1,2,available research method,0.012784977900000001,1,1,1,following available research,0.012784977900000001,1,1,1
-symbolism,0.0029732507,2,1,1,river basin,0.005142679900000001,2,1,2,spectacular new implementation,0.012784977900000001,1,1,1,available research method,0.012784977900000001,1,1,1
-court,0.0029732507,2,1,1,took place,0.0042730935,2,1,3,wood construction field,0.012784977900000001,1,1,1,spectacular new implementation,0.012784977900000001,1,1,1
-iv,0.0029732507,2,2,1,main objective,0.0036561120000000004,2,2,4,tall building structure,0.012784977900000001,1,1,1,wood construction field,0.012784977900000001,1,1,1
+slum,0.0167452467,8,2,1,urban form,0.0090347425,4,1,5,sustainable urban development,0.0404278099,3,1,1,sustainable urban development,0.0404278099,3,1,1
+informality,0.009711486200000001,7,1,3,young people,0.0089885695,5,1,7,inclusive municipal governance,0.0269518733,2,1,1,inclusive municipal governance,0.0269518733,2,1,1
+payment,0.008372623400000001,4,1,1,autonomous adaptation,0.0089272766,2,1,1,indigenous urban form,0.0269518733,2,1,1,indigenous urban form,0.0269518733,2,1,1
+mobility,0.008178653900000001,12,2,9,reduce risk,0.0089272766,2,1,1,global environmental change,0.0134759366,1,1,1,slum,0.0167452467,8,2,1
+colonial,0.0069367758,5,4,3,municipal governance,0.0089272766,2,1,1,urban design challenge,0.0134759366,1,1,1,global environmental change,0.0134759366,1,1,1
+adaptation,0.0068150152,9,1,8,colonial hegemony,0.0089272766,2,1,1,poor urban settlement,0.0134759366,1,1,1,urban design challenge,0.0134759366,1,1,1
+illegitimate,0.0062794675,3,2,1,colonial discourse,0.0089272766,2,1,1,autonomous adaptation strategy,0.0134759366,1,1,1,poor urban settlement,0.0134759366,1,1,1
+elasticity,0.0062794675,3,1,1,specific field,0.0089272766,2,1,1,argue urban slum,0.0134759366,1,1,1,autonomous adaptation strategy,0.0134759366,1,1,1
+hegemony,0.0055494207,4,1,3,internal discourse,0.0089272766,2,1,1,identifying local adaptation,0.0134759366,1,1,1,argue urban slum,0.0134759366,1,1,1
+hence,0.0041863117000000005,2,1,1,colonial history,0.0089272766,2,1,1,densely populated suburb,0.0134759366,1,1,1,identifying local adaptation,0.0134759366,1,1,1
+water,0.0037861195000000003,5,2,8,environmental change,0.007028033800000001,2,1,2,rapid environmental change,0.0134759366,1,1,1,densely populated suburb,0.0134759366,1,1,1
+attitude,0.0034077725,5,2,9,planning principle,0.007028033800000001,2,1,2,expected coping strategy,0.0134759366,1,1,1,rapid environmental change,0.0134759366,1,1,1
+authority,0.0033158047,6,2,11,critical analysis,0.007028033800000001,2,2,2,despite uncertain tenure,0.0134759366,1,1,1,expected coping strategy,0.0134759366,1,1,1
+contestation,0.0032956904,2,2,2,growing culture,0.0044636383,1,1,1,critical public service,0.0134759366,1,1,1,despite uncertain tenure,0.0134759366,1,1,1
+governance,0.0028270070000000003,8,3,15,dominant planning,0.0044636383,1,1,1,action toward adaptation,0.0134759366,1,1,1,critical public service,0.0134759366,1,1,1
+tenure,0.0027747103,2,2,3,design challenge,0.0044636383,1,1,1,toward adaptation pathway,0.0134759366,1,1,1,action toward adaptation,0.0134759366,1,1,1
+fear,0.0027747103,2,1,3,city margin,0.0044636383,1,1,1,prevails among government,0.0134759366,1,1,1,toward adaptation pathway,0.0134759366,1,1,1
+colonialism,0.0027747103,2,2,3,adaptation strategy,0.0044636383,1,1,1,among government official,0.0134759366,1,1,1,prevails among government,0.0134759366,1,1,1
+discourse,0.0027631706,5,2,11,compounding stressor,0.0044636383,1,1,1,reduce risk exist,0.0134759366,1,1,1,among government official,0.0134759366,1,1,1
+service,0.0027296513,10,5,17,remains lack,0.0044636383,1,1,1,explores young people,0.0134759366,1,1,1,reduce risk exist,0.0134759366,1,1,1

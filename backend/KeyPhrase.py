@@ -218,8 +218,8 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     kp = KeyPhraseSimilarity()
-    # kp.extract_doc_key_phrases_by_clusters()
-    # kp.group_key_phrases_by_clusters_experiments()
-    # kp.grouped_key_phrases_with_best_experiment_result()
-    # kp.combine_topics_key_phrases_results()
+    kp.extract_doc_key_phrases_by_clusters()
+    kp.group_key_phrases_by_clusters_experiments()
+    kp.grouped_key_phrases_with_best_experiment_result()
+    kp.combine_topics_key_phrases_results()
     kp.combine_cluster_doc_key_phrases()

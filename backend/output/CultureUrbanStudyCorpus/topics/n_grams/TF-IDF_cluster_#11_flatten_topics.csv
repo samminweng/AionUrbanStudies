@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-sprawl,0.010696595100000001,6,1,1,urban sprawl,0.0258988299,6,1,1,vernacular architectural heritage,0.0455058536,2,1,1,vernacular architectural heritage,0.0455058536,2,1,1
-nomad,0.0089138292,5,1,1,citizenship education,0.0100455886,3,1,2,new town building,0.0227529268,1,1,1,urban sprawl,0.0258988299,6,1,1
-rehabilitation,0.0055319665,4,1,2,vernacular heritage,0.008632943300000001,2,1,1,town building movement,0.0227529268,1,1,1,new town building,0.0227529268,1,1,1
-personality,0.0053482975,3,2,1,old core,0.008632943300000001,2,2,1,local regional influence,0.0227529268,1,1,1,town building movement,0.0227529268,1,1,1
-citizenship,0.0046232038000000005,7,1,7,social category,0.008632943300000001,2,1,1,newly achieved nationhood,0.0227529268,1,1,1,local regional influence,0.0227529268,1,1,1
-flood,0.0045965547,4,1,3,urban dweller,0.008632943300000001,2,2,1,local political leader,0.0227529268,1,1,1,newly achieved nationhood,0.0227529268,1,1,1
-festival,0.0039328695,4,1,4,built morphology,0.008632943300000001,2,1,1,surrounding vernacular heritage,0.0227529268,1,1,1,local political leader,0.0227529268,1,1,1
-legibility,0.0035655317,2,1,1,ancient festival,0.008632943300000001,2,1,1,examining rehabilitation settlement,0.0227529268,1,1,1,surrounding vernacular heritage,0.0227529268,1,1,1
-ger,0.0035655317,2,1,1,illegal behavior,0.008632943300000001,2,1,1,primary field observation,0.0227529268,1,1,1,examining rehabilitation settlement,0.0227529268,1,1,1
-fabric,0.0034180753,4,2,5,citizen orientation,0.008632943300000001,2,1,1,incorporating contemporary planning,0.0227529268,1,1,1,primary field observation,0.0227529268,1,1,1
-identity,0.0033888850000000003,13,4,14,life style,0.0066970591000000005,2,2,2,contemporary planning ideology,0.0227529268,1,1,1,incorporating contemporary planning,0.0227529268,1,1,1
-settlement,0.0031981938,8,4,11,spatial identity,0.0066970591000000005,2,1,2,men called rabiz,0.0227529268,1,1,1,contemporary planning ideology,0.0227529268,1,1,1
-departure,0.0027659832,2,2,2,national identity,0.0066970591000000005,2,1,2,design spatial theory,0.0227529268,1,1,1,men called rabiz,0.0227529268,1,1,1
-matrix,0.0027659832,2,1,2,new town,0.0055646394,2,1,3,key trading centre,0.0227529268,1,1,1,design spatial theory,0.0227529268,1,1,1
-spectacle,0.0027659832,2,1,2,architectural heritage,0.0055646394,2,1,3,follow many influence,0.0227529268,1,1,1,key trading centre,0.0227529268,1,1,1
-bid,0.0027659832,2,1,2,cultural practice,0.0055646394,2,2,3,also brings optimism,0.0227529268,1,1,1,follow many influence,0.0227529268,1,1,1
-peculiarity,0.0027659832,2,1,2,human settlement,0.0047611749,2,2,4,offering new insight,0.0227529268,1,1,1,also brings optimism,0.0227529268,1,1,1
-urbanism,0.0026418308000000002,4,2,7,town building,0.0043164716,1,1,1,sensitive responsive proposal,0.0227529268,1,1,1,offering new insight,0.0227529268,1,1,1
-periphery,0.0025635565,3,3,5,building movement,0.0043164716,1,1,1,one single city,0.0227529268,1,1,1,sensitive responsive proposal,0.0227529268,1,1,1
-neighbourhood,0.0023337726000000002,4,2,8,regional influence,0.0043164716,1,1,1,sized urban area,0.0227529268,1,1,1,one single city,0.0227529268,1,1,1
+fraction,0.0074546878,7,1,2,structural beauty,0.0114341281,4,1,1,site interpretation centre,0.0321584852,3,1,1,site interpretation centre,0.0321584852,3,1,1
+beauty,0.0068451562,10,1,5,site interpretation,0.0114341281,4,1,1,transnational capitalist class,0.0214389901,2,1,1,transnational capitalist class,0.0214389901,2,1,1
+studio,0.0063897324000000005,6,1,2,design studio,0.008575596000000001,3,1,1,virtual design studio,0.0214389901,2,1,1,virtual design studio,0.0214389901,2,1,1
+expectation,0.0062173106,8,2,4,interpretation centre,0.008575596000000001,3,1,1,historical city center,0.0214389901,2,1,1,historical city center,0.0214389901,2,1,1
+colonialism,0.0035864325000000002,4,1,3,poetic dwelling,0.008575596000000001,3,1,1,major transnational corporation,0.0107194951,1,1,1,structural beauty,0.0114341281,4,1,1
+comment,0.0035864325000000002,4,1,3,transnational capitalist,0.005717064,2,1,1,major global consumer,0.0107194951,1,1,1,site interpretation,0.0114341281,4,1,1
+visitor,0.0035312745,11,1,12,capitalist class,0.005717064,2,1,1,global consumer good,0.0107194951,1,1,1,major transnational corporation,0.0107194951,1,1,1
+modernism,0.0034225781,5,2,5,iconic architecture,0.005717064,2,1,1,aspiring global city,0.0107194951,1,1,1,major global consumer,0.0107194951,1,1,1
+architecture,0.0029952717,23,8,19,design profession,0.005717064,2,1,1,deliberately iconic architecture,0.0107194951,1,1,1,global consumer good,0.0107194951,1,1,1
+oil,0.0027380625,4,1,5,design brief,0.005717064,2,1,1,central urban manifestation,0.0107194951,1,1,1,aspiring global city,0.0107194951,1,1,1
+imperialism,0.002705494,2,1,1,virtual design,0.005717064,2,1,1,underlying recent debate,0.0107194951,1,1,1,deliberately iconic architecture,0.0107194951,1,1,1
+brief,0.002705494,2,1,1,spatial appropriation,0.005717064,2,1,1,enforce social assumption,0.0107194951,1,1,1,central urban manifestation,0.0107194951,1,1,1
+appropriation,0.002705494,2,1,1,living structure,0.005717064,2,1,1,concern architectural theory,0.0107194951,1,1,1,underlying recent debate,0.0107194951,1,1,1
+substructure,0.002705494,2,1,1,historical city,0.005717064,2,1,1,criticizes two kind,0.0107194951,1,1,1,enforce social assumption,0.0107194951,1,1,1
+calligraphy,0.002705494,2,1,1,industrial design,0.0045007812,2,2,2,genuinely urban environment,0.0107194951,1,1,1,concern architectural theory,0.0107194951,1,1,1
+tourist,0.0024468612,5,3,8,urban infrastructure,0.0045007812,2,1,2,recognizably different class,0.0107194951,1,1,1,criticizes two kind,0.0107194951,1,1,1
+site,0.0022173872,11,3,16,nineteenth century,0.0045007812,2,2,2,among affluent household,0.0107194951,1,1,1,genuinely urban environment,0.0107194951,1,1,1
+debate,0.0021792555,4,3,7,tourist destination,0.0045007812,2,1,2,reflecting distinctive geography,0.0107194951,1,1,1,recognizably different class,0.0107194951,1,1,1
+capitalist,0.0021299108,2,1,2,contemporary city,0.0038595279,3,1,6,key business service,0.0107194951,1,1,1,among affluent household,0.0107194951,1,1,1
+corporation,0.0021299108,2,1,2,design strategy,0.0038595279,3,2,6,believe good design,0.0107194951,1,1,1,reflecting distinctive geography,0.0107194951,1,1,1

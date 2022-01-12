@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-art,0.0116518829,49,12,10,economic development,0.0117709974,16,7,7,urban economic development,0.0180190964,2,1,1,urban economic development,0.0180190964,2,1,1
-regeneration,0.006101843,20,7,8,creative city,0.0107836521,7,4,2,new creative cluster,0.0180190964,2,1,1,new creative cluster,0.0180190964,2,1,1
-branding,0.005408133900000001,9,3,3,cultural producer,0.0099291618,5,1,1,urban regeneration process,0.0180190964,2,2,1,urban regeneration process,0.0180190964,2,2,1
-product,0.0048351007,14,6,7,cultural sector,0.0099291618,5,3,1,smart creative city,0.0180190964,2,1,1,smart creative city,0.0180190964,2,1,1
-cluster,0.0048072301000000005,8,4,3,creative cluster,0.0099291618,5,2,1,drawn meaningful insight,0.0090095482,1,1,1,economic development,0.0117709974,16,7,7
-creativity,0.0047022619,12,6,6,place branding,0.0099291618,5,2,1,suggests possible avenue,0.0090095482,1,1,1,art,0.0116518829,49,12,10
-producer,0.0036159468,5,1,2,cultural planning,0.0099291618,5,2,1,cultural economic development,0.0090095482,1,1,1,creative city,0.0107836521,7,4,2
-spillover,0.0027967139,3,1,1,cultural participation,0.009243130300000001,6,1,2,way cultural producer,0.0090095482,1,1,1,cultural producer,0.0099291618,5,1,1
-externality,0.0027967139,3,1,1,creative people,0.0079433295,4,4,1,producer obtain job,0.0090095482,1,1,1,cultural sector,0.0099291618,5,3,1
-amenity,0.0024036151,4,3,3,quality product,0.0079433295,4,1,1,key social mechanism,0.0090095482,1,1,1,creative cluster,0.0099291618,5,2,1
-sector,0.0023779353,10,6,10,creative activity,0.0079433295,4,2,1,social mechanism structure,0.0090095482,1,1,1,place branding,0.0099291618,5,2,1
-agglomeration,0.0021695681000000002,3,1,2,creative placemaking,0.0079433295,4,1,1,clustered production system,0.0090095482,1,1,1,cultural planning,0.0099291618,5,2,1
-innovation,0.0021565565,8,5,9,cultural production,0.0077026086,5,2,2,art social milieu,0.0090095482,1,1,1,cultural participation,0.009243130300000001,6,1,2
-hub,0.002056563,4,1,4,urban regeneration,0.0066777684,8,5,6,establish new career,0.0090095482,1,1,1,drawn meaningful insight,0.0090095482,1,1,1
-artist,0.002056563,4,1,4,cultural regeneration,0.0061620869000000005,4,1,2,active cultural milieu,0.0090095482,1,1,1,suggests possible avenue,0.0090095482,1,1,1
-troupe,0.0018644759,2,1,1,place identity,0.0061620869000000005,4,2,2,economic development asset,0.0090095482,1,1,1,cultural economic development,0.0090095482,1,1,1
-outlet,0.0018644759,2,1,1,knowledge spillover,0.0059574971000000004,3,1,1,simultaneously bringing redevelopment,0.0090095482,1,1,1,way cultural producer,0.0090095482,1,1,1
-career,0.0018027113000000001,3,1,3,obtain job,0.0039716647,2,1,1,consider current research,0.0090095482,1,1,1,producer obtain job,0.0090095482,1,1,1
-brand,0.0018027113000000001,3,3,3,using culture,0.0039716647,2,2,1,environmental improvement scheme,0.0090095482,1,1,1,key social mechanism,0.0090095482,1,1,1
-theater,0.0018027113000000001,3,1,3,culture hub,0.0039716647,2,1,1,public art help,0.0090095482,1,1,1,social mechanism structure,0.0090095482,1,1,1
+church,0.0042471688,11,1,3,small town,0.0141214905,10,2,1,branch office building,0.020213905,3,1,1,branch office building,0.020213905,3,1,1
+sprawl,0.0034951997000000003,6,1,1,urban sprawl,0.0084728943,6,1,1,system take place,0.0134759366,2,1,1,small town,0.0141214905,10,2,1
+bank,0.0029126664,5,1,1,branch office,0.005648596200000001,4,1,1,inter cultural dialogue,0.0134759366,2,1,1,system take place,0.0134759366,2,1,1
+nomad,0.0029126664,5,1,1,labour market,0.0055585996,5,1,2,relevant regional culture,0.0134759366,2,1,1,inter cultural dialogue,0.0134759366,2,1,1
+empire,0.0026773598,8,1,4,educational environment,0.0042364471,3,1,1,regional culture study,0.0134759366,2,1,1,relevant regional culture,0.0134759366,2,1,1
+music,0.0025807445,11,2,7,wooden church,0.0042364471,3,1,1,large part today,0.0067379683,1,1,1,regional culture study,0.0134759366,2,1,1
+building,0.0023549844,31,10,17,national culture,0.0033351597,3,3,2,many subject area,0.0067379683,1,1,1,urban sprawl,0.0084728943,6,1,1
+nobility,0.0023301331,4,2,1,cultural system,0.0033351597,3,1,2,tolerated local religion,0.0067379683,1,1,1,large part today,0.0067379683,1,1,1
+monasticism,0.0023301331,4,1,1,culture study,0.0033351597,3,1,2,gives detailed attention,0.0067379683,1,1,1,many subject area,0.0067379683,1,1,1
+urbanity,0.0023166375,6,1,3,citizenship education,0.0033351597,3,1,2,pays particular attention,0.0067379683,1,1,1,tolerated local religion,0.0067379683,1,1,1
+civilisation,0.0022930081,5,3,2,particular attention,0.0028242981000000003,2,2,1,primarily agrarian economy,0.0067379683,1,1,1,gives detailed attention,0.0067379683,1,1,1
+identity,0.0022619547000000003,23,12,15,geopolitical situation,0.0028242981000000003,2,2,1,spoken various language,0.0067379683,1,1,1,pays particular attention,0.0067379683,1,1,1
+earthquake,0.0020080198,6,2,4,multicultural city,0.0028242981000000003,2,2,1,professed different religion,0.0067379683,1,1,1,primarily agrarian economy,0.0067379683,1,1,1
+sphere,0.0019305313,5,4,3,cultural barbarism,0.0028242981000000003,2,1,1,particularly diverse city,0.0067379683,1,1,1,spoken various language,0.0067379683,1,1,1
+disaster,0.0019305313,5,2,3,twin city,0.0028242981000000003,2,1,1,one national narrative,0.0067379683,1,1,1,professed different religion,0.0067379683,1,1,1
+town,0.0018685713,19,3,15,social protection,0.0028242981000000003,2,1,1,several national group,0.0067379683,1,1,1,particularly diverse city,0.0067379683,1,1,1
+religion,0.0018352222000000001,7,5,6,social category,0.0028242981000000003,2,1,1,single urban space,0.0067379683,1,1,1,one national narrative,0.0067379683,1,1,1
+memory,0.0018352222000000001,7,5,6,urban dweller,0.0028242981000000003,2,2,1,essential turning point,0.0067379683,1,1,1,several national group,0.0067379683,1,1,1
+citizenship,0.0018352222000000001,7,1,6,traditional function,0.0028242981000000003,2,1,1,intimate local trauma,0.0067379683,1,1,1,single urban space,0.0067379683,1,1,1
+branch,0.0018344065,4,1,2,cultural interaction,0.0028242981000000003,2,1,1,every social background,0.0067379683,1,1,1,essential turning point,0.0067379683,1,1,1

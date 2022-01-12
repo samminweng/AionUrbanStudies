@@ -61,7 +61,7 @@ class ClusterTopic:
         try:
             topic_folder = os.path.join('output', self.args.case_name, 'topics')
             Path(topic_folder).mkdir(parents=True, exist_ok=True)
-            path = os.path.join('output', self.args.case_name, 'cluster', self.args.case_name + '_clusters.json')
+            path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters.json')
             # Load the documents clustered by
             clustered_doc_df = pd.read_json(path)
             # Update text column
@@ -152,10 +152,10 @@ class ClusterTopic:
 # Main entry
 if __name__ == '__main__':
     try:
-        last_iteration = 6
-        ct = ClusterTopic(6)
+        last_iteration = 8
+        ct = ClusterTopic(8)
         ct.collect_iterative_cluster_results()
-        # ct.derive_cluster_topics_by_TF_IDF()
-        # ct.summarize_cluster_topics()
+        ct.derive_cluster_topics_by_TF_IDF()
+        ct.summarize_cluster_topics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

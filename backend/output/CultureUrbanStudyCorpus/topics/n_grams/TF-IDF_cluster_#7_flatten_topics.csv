@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-transit,0.0084340692,12,4,1,neighborhood design,0.0165901876,12,1,1,urban neighborhood design,0.0248596793,6,1,1,urban neighborhood design,0.0248596793,6,1,1
-vehicle,0.0077016357,17,3,3,social capital,0.012869940500000001,12,1,2,neighborhood design concept,0.0248596793,6,1,1,neighborhood design concept,0.0248596793,6,1,1
-walking,0.0056227128000000005,8,3,1,modality environment,0.0124426407,9,1,1,changing public life,0.012429839600000001,3,1,1,neighborhood design,0.0165901876,12,1,1
-mobility,0.0049472085,19,6,7,smart city,0.0107249504,10,3,2,theoretical urban neighborhood,0.012429839600000001,3,1,1,social capital,0.012869940500000001,12,1,2
-rail,0.0049198737,7,2,1,public life,0.0075074653,7,2,2,neighborhood urban design,0.012429839600000001,3,1,1,modality environment,0.0124426407,9,1,1
-neighborhood,0.0043026934,24,5,10,transit village,0.0069125782,5,1,1,medium size city,0.012429839600000001,3,1,1,changing public life,0.012429839600000001,3,1,1
-diffusion,0.0042170346,6,1,1,public transport,0.0055300625,4,3,1,sustainable active mobility,0.008286559800000001,2,1,1,theoretical urban neighborhood,0.012429839600000001,3,1,1
-transport,0.0037057484,11,4,5,sustainable transportation,0.0055300625,4,2,1,foster social capital,0.008286559800000001,2,1,1,neighborhood urban design,0.012429839600000001,3,1,1
-density,0.0032497308,11,3,6,active mobility,0.0055300625,4,1,1,sustainable social innovation,0.008286559800000001,2,1,1,medium size city,0.012429839600000001,3,1,1
-mindset,0.0031712618,7,1,3,walking mindset,0.0055300625,4,1,1,current global situation,0.008286559800000001,2,1,1,smart city,0.0107249504,10,3,2
-transportation,0.0031245527000000003,12,3,7,urban neighborhood,0.005346867700000001,6,1,3,vehicle type choice,0.008286559800000001,2,1,1,transit,0.0084340692,12,4,1
-corridor,0.0027261589,5,2,2,central place,0.0042899802,4,1,2,prevalent transport problem,0.0041432799000000005,1,1,1,sustainable active mobility,0.008286559800000001,2,1,1
-woman,0.0023582035000000003,7,2,5,sustainable mobility,0.0041475469,3,2,1,well informal factor,0.0041432799000000005,1,1,1,foster social capital,0.008286559800000001,2,1,1
-implementation,0.0023001712000000002,10,6,8,heterotopia concept,0.0041475469,3,1,1,different analytical level,0.0041432799000000005,1,1,1,sustainable social innovation,0.008286559800000001,2,1,1
-heterotopia,0.0021085173,3,1,1,vehicle type,0.0041475469,3,1,1,multiple case study,0.0041432799000000005,1,1,1,current global situation,0.008286559800000001,2,1,1
-privacy,0.0019381222,5,1,4,vehicle use,0.0041475469,3,1,1,factor included legislation,0.0041432799000000005,1,1,1,vehicle type choice,0.008286559800000001,2,1,1
-household,0.0019381222,5,1,4,medium size,0.0041475469,3,1,1,legislation concerning transport,0.0041432799000000005,1,1,1,vehicle,0.0077016357,17,3,3
-modality,0.0019381222,5,1,4,size city,0.0041475469,3,1,1,appropriate business model,0.0041432799000000005,1,1,1,public life,0.0075074653,7,2,2
-safety,0.0018401369000000001,8,4,8,design concept,0.0039760207,6,1,5,provide several implication,0.0041432799000000005,1,1,1,transit village,0.0069125782,5,1,1
-implication,0.0018291212,9,5,9,business model,0.0032174851,3,2,2,private sector actor,0.0041432799000000005,1,1,1,walking,0.0056227128000000005,8,3,1
+art,0.0102433818,49,12,13,economic development,0.0150727124,16,7,6,urban economic development,0.018992930800000002,2,1,1,urban economic development,0.018992930800000002,2,1,1
+regeneration,0.006399039400000001,20,7,9,creative city,0.011534916400000001,7,4,2,new creative cluster,0.018992930800000002,2,1,1,new creative cluster,0.018992930800000002,2,1,1
+branding,0.0058615756,9,3,3,cultural producer,0.0104657792,5,1,1,urban regeneration process,0.018992930800000002,2,2,1,urban regeneration process,0.018992930800000002,2,2,1
+creativity,0.0053068508,12,6,6,cultural sector,0.0104657792,5,3,1,smart creative city,0.018992930800000002,2,1,1,smart creative city,0.018992930800000002,2,1,1
+cluster,0.0052102894,8,4,3,creative cluster,0.0104657792,5,2,1,drawn meaningful insight,0.009496465400000001,1,1,1,economic development,0.0150727124,16,7,6
+product,0.0044793276,14,6,9,place branding,0.0104657792,5,2,1,suggests possible avenue,0.009496465400000001,1,1,1,creative city,0.011534916400000001,7,4,2
+producer,0.0038678589,5,1,2,cultural planning,0.0104657792,5,2,1,cultural economic development,0.009496465400000001,1,1,1,cultural producer,0.0104657792,5,1,1
+spillover,0.0029478611,3,1,1,cultural participation,0.0098870712,6,1,2,way cultural producer,0.009496465400000001,1,1,1,cultural sector,0.0104657792,5,3,1
+externality,0.0029478611,3,1,1,creative people,0.008372623400000001,4,4,1,producer obtain job,0.009496465400000001,1,1,1,creative cluster,0.0104657792,5,2,1
+sector,0.0023318896,10,6,12,quality product,0.008372623400000001,4,1,1,key social mechanism,0.009496465400000001,1,1,1,place branding,0.0104657792,5,2,1
+agglomeration,0.0023207153,3,1,2,creative activity,0.008372623400000001,4,2,1,social mechanism structure,0.009496465400000001,1,1,1,cultural planning,0.0104657792,5,2,1
+amenity,0.0022580927,4,3,4,creative placemaking,0.008372623400000001,4,1,1,clustered production system,0.009496465400000001,1,1,1,art,0.0102433818,49,12,13
+hub,0.0022580927,4,1,4,cultural production,0.008239226,5,2,2,art social milieu,0.009496465400000001,1,1,1,cultural participation,0.0098870712,6,1,2
+economy,0.0020502714,16,7,17,urban regeneration,0.0075363562,8,5,6,establish new career,0.009496465400000001,1,1,1,drawn meaningful insight,0.009496465400000001,1,1,1
+artist,0.0019888982,4,1,5,cultural regeneration,0.0065913808,4,1,2,active cultural milieu,0.009496465400000001,1,1,1,suggests possible avenue,0.009496465400000001,1,1,1
+placemaking,0.0019888982,4,1,5,place identity,0.0065913808,4,2,2,economic development asset,0.009496465400000001,1,1,1,cultural economic development,0.009496465400000001,1,1,1
+troupe,0.0019652408,2,1,1,knowledge spillover,0.0062794675,3,1,1,simultaneously bringing redevelopment,0.009496465400000001,1,1,1,way cultural producer,0.009496465400000001,1,1,1
+outlet,0.0019652408,2,1,1,obtain job,0.0041863117000000005,2,1,1,consider current research,0.009496465400000001,1,1,1,producer obtain job,0.009496465400000001,1,1,1
+theater,0.0019538585,3,1,3,using culture,0.0041863117000000005,2,2,1,environmental improvement scheme,0.009496465400000001,1,1,1,key social mechanism,0.009496465400000001,1,1,1
+production,0.0018655117,8,3,12,culture hub,0.0041863117000000005,2,1,1,public art help,0.009496465400000001,1,1,1,social mechanism structure,0.009496465400000001,1,1,1

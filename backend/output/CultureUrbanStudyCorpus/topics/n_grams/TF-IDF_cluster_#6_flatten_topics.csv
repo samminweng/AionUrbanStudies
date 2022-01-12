@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-bathroom,0.0061274523,12,1,1,experimental study,0.008074722900000001,8,1,1,public open space,0.0210914974,8,1,2,public open space,0.0210914974,8,1,2
-signage,0.0035743472,7,1,1,open space,0.0067731861,14,2,5,control commercial signage,0.0067970769,2,1,1,experimental study,0.008074722900000001,8,1,1
-concrete,0.0033793656000000003,12,1,4,mountainous climate,0.0060560422,6,1,1,main design strategy,0.0067970769,2,1,1,control commercial signage,0.0067970769,2,1,1
-behavior,0.0030267,16,4,7,social health,0.0050467018,5,1,1,urban land use,0.0067970769,2,1,1,main design strategy,0.0067970769,2,1,1
-space,0.0029061581000000003,120,22,19,humid climate,0.0050467018,5,1,1,designed space relies,0.0067970769,2,2,1,urban land use,0.0067970769,2,1,1
-climate,0.0026033767,26,1,12,small bathroom,0.0050467018,5,1,1,designer personal perception,0.0067970769,2,2,1,designed space relies,0.0067970769,2,2,1
-shop,0.0023767045,6,2,2,public apartment,0.0040373614,4,1,1,creating great place,0.0067970769,2,1,1,designer personal perception,0.0067970769,2,2,1
-apartment,0.0023039597,7,2,3,commercial signage,0.0040373614,4,1,1,contemporary public space,0.0067970769,2,1,1,creating great place,0.0067970769,2,1,1
-furniture,0.0023039597,7,3,3,climatic comfort,0.0040373614,4,1,1,day care unit,0.0067970769,2,1,1,contemporary public space,0.0067970769,2,1,1
-daylight,0.0020424841000000003,4,1,1,architectural space,0.0040373614,4,2,1,evaluation index system,0.0067970769,2,1,1,day care unit,0.0067970769,2,1,1
-property,0.0020053223,12,2,8,cold region,0.0040373614,4,1,1,rural residential building,0.0067970769,2,1,1,evaluation index system,0.0067970769,2,1,1
-art,0.0018234757,14,5,10,residential building,0.0039150101000000005,5,1,2,old city center,0.004381273000000001,2,1,3,rural residential building,0.0067970769,2,1,1
-strength,0.0017132631,7,1,5,public space,0.003542159,24,9,14,urban public space,0.0037486718,2,2,4,open space,0.0067731861,14,2,5
-criterion,0.0016896828000000001,6,2,4,digital technology,0.0031320081,4,2,2,sustainable urban area,0.0033985384,1,1,1,bathroom,0.0061274523,12,1,1
-room,0.0016456855,5,4,3,designed space,0.0031320081,4,3,2,create sustainable settlement,0.0033985384,1,1,1,mountainous climate,0.0060560422,6,1,1
-disability,0.0016456855,5,1,3,design criterion,0.0031320081,4,1,2,many design policy,0.0033985384,1,1,1,social health,0.0050467018,5,1,1
-season,0.0016456855,5,1,3,street furniture,0.0030280211,3,1,1,inclusive urban design,0.0033985384,1,1,1,humid climate,0.0050467018,5,1,1
-wind,0.0016456855,5,1,3,local observation,0.0030280211,3,1,1,urban design consideration,0.0033985384,1,1,1,small bathroom,0.0050467018,5,1,1
-plant,0.0016456855,5,2,3,city scale,0.0030280211,3,1,1,thus large sector,0.0033985384,1,1,1,old city center,0.004381273000000001,2,1,3
-glass,0.0015844697,4,1,2,site scale,0.0030280211,3,1,1,increased car control,0.0033985384,1,1,1,public apartment,0.0040373614,4,1,1
+neighborhood,0.0047601123,27,7,11,neighborhood design,0.0159284054,12,1,1,urban neighborhood design,0.024118863900000002,6,1,1,urban neighborhood design,0.024118863900000002,6,1,1
+livability,0.0039833265,9,3,3,social capital,0.012539699999999999,12,1,2,neighborhood design concept,0.024118863900000002,6,1,1,neighborhood design concept,0.024118863900000002,6,1,1
+child,0.0036235254,15,4,8,modality environment,0.011946304100000001,9,1,1,sustainable food culture,0.0120594319,3,1,1,neighborhood design,0.0159284054,12,1,1
+car,0.0031541577,6,2,2,planning process,0.0087317481,13,6,5,changing public life,0.0120594319,3,1,1,social capital,0.012539699999999999,12,1,2
+density,0.0024156836000000003,10,2,8,urban neighborhood,0.0073148250000000005,7,2,2,theoretical urban neighborhood,0.0120594319,3,1,1,sustainable food culture,0.0120594319,3,1,1
+walking,0.0021027718,4,2,2,urban livability,0.0066368356,5,1,1,neighborhood urban design,0.0120594319,3,1,1,changing public life,0.0120594319,3,1,1
+automobility,0.0020032657,3,1,1,public life,0.00626985,6,1,2,beyond binary choice,0.0080396213,2,1,1,theoretical urban neighborhood,0.0120594319,3,1,1
+heterotopia,0.0020032657,3,1,1,design concept,0.0045754973,6,1,4,using social medium,0.0080396213,2,1,1,neighborhood urban design,0.0120594319,3,1,1
+mobility,0.0019568559000000003,9,4,9,young people,0.0042767378,8,3,7,foster social capital,0.0080396213,2,1,1,modality environment,0.011946304100000001,9,1,1
+modality,0.0019181533,5,1,4,central place,0.004179899999999999,4,1,2,decision support system,0.0080396213,2,1,1,planning process,0.0087317481,13,6,5
+creativity,0.0018031772,6,1,6,social creativity,0.0039821014,3,1,1,urban livability measure,0.0080396213,2,1,1,beyond binary choice,0.0080396213,2,1,1
+realm,0.0016894841,5,3,5,sustainable food,0.0039821014,3,1,1,speculative design fiction,0.0080396213,2,1,1,using social medium,0.0080396213,2,1,1
+street,0.0016493577,13,6,14,food culture,0.0039821014,3,1,1,urban good life,0.0080396213,2,1,1,foster social capital,0.0080396213,2,1,1
+affordances,0.0015770788,3,3,2,heterotopia concept,0.0039821014,3,1,1,creating great place,0.0080396213,2,1,1,decision support system,0.0080396213,2,1,1
+stranger,0.0015770788,3,1,2,public art,0.0038129144000000003,5,1,4,urban public space,0.0069282388,3,3,4,urban livability measure,0.0080396213,2,1,1
+game,0.0015345226,4,1,4,public space,0.0035854723000000002,16,10,15,urban planning process,0.0046188259,2,2,4,speculative design fiction,0.0080396213,2,1,1
+grid,0.0015345226,4,1,4,social life,0.0035843645,6,3,6,reconfigures urban life,0.0040198106,1,1,1,urban good life,0.0080396213,2,1,1
+competition,0.0013515872,4,1,5,great place,0.003134925,3,1,2,involving distinct way,0.0040198106,1,1,1,creating great place,0.0080396213,2,1,1
+librarianship,0.0013355105,2,1,1,urban designer,0.0026866917,4,3,5,trace urban sociology,0.0040198106,1,1,1,urban neighborhood,0.0073148250000000005,7,2,2
+engage,0.0013355105,2,2,1,cultural diversity,0.0026866917,4,1,5,makes instantaneous time,0.0040198106,1,1,1,urban public space,0.0069282388,3,3,4

@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-blight,0.0107203231,9,1,1,residential environment,0.022043065400000002,10,2,1,urban space axis,0.042843277000000006,6,1,1,urban space axis,0.042843277000000006,6,1,1
-index,0.006910126700000001,9,3,3,urban blight,0.019838758800000002,9,1,1,nationality characteristic dwelling,0.0357027309,5,1,1,nationality characteristic dwelling,0.0357027309,5,1,1
-axis,0.0064682775,7,1,2,space axis,0.0132258392,6,1,1,residential environmental quality,0.0214216385,3,1,1,residential environment,0.022043065400000002,10,2,1
-scenery,0.0059557351,5,1,1,environmental quality,0.011970030900000001,7,3,2,urban environmental management,0.0214216385,3,1,1,residential environmental quality,0.0214216385,3,1,1
-pollution,0.0039966005,7,3,5,rural design,0.011021532700000001,5,1,1,remote sensing data,0.0214216385,3,1,1,urban environmental management,0.0214216385,3,1,1
-protection,0.0037395031,14,3,11,characteristic dwelling,0.011021532700000001,5,1,1,natural scenery city,0.0214216385,3,1,1,remote sensing data,0.0214216385,3,1,1
-traffic,0.0035084244,9,3,8,key indicator,0.0088172261,4,1,1,fuzzy cognitive mapping,0.014281092300000001,2,1,1,natural scenery city,0.0214216385,3,1,1
-resilience,0.0034256576,6,1,5,sensing data,0.0088172261,4,1,1,green ecological planning,0.014281092300000001,2,1,1,urban blight,0.019838758800000002,9,1,1
-dwelling,0.0032846614,5,1,4,natural scenery,0.0088172261,4,1,1,public space environment,0.014281092300000001,2,1,1,fuzzy cognitive mapping,0.014281092300000001,2,1,1
-convenience,0.0027721189,3,2,2,scenery city,0.0088172261,4,1,1,less developing area,0.014281092300000001,2,1,1,green ecological planning,0.014281092300000001,2,1,1
-nationality,0.0027721189,3,1,2,livable city,0.008509916000000001,7,1,4,traditional culture protection,0.014281092300000001,2,1,1,public space environment,0.014281092300000001,2,1,1
-greenway,0.002382294,2,1,1,urban traffic,0.0068400176000000005,4,1,2,characteristic dwelling protection,0.014281092300000001,2,1,1,less developing area,0.014281092300000001,2,1,1
-dynasty,0.002382294,2,1,1,new city,0.0066129196,3,3,1,comprehensive evaluation model,0.014281092300000001,2,1,1,traditional culture protection,0.014281092300000001,2,1,1
-carrier,0.002382294,2,2,1,ecological environment,0.0066129196,3,3,1,urban public space,0.0118142982,3,1,4,characteristic dwelling protection,0.014281092300000001,2,1,1
-southwest,0.002382294,2,1,1,environmental load,0.0066129196,3,1,1,new urban planning,0.011078645600000001,2,1,2,comprehensive evaluation model,0.014281092300000001,2,1,1
-sensing,0.002382294,2,1,1,minority nationality,0.0066129196,3,1,1,urban design theory,0.0071405462,1,1,1,environmental quality,0.011970030900000001,7,3,2
-evaluation,0.0022300556,11,4,13,healthy city,0.0056834248000000006,4,1,3,intensively utilize land,0.0071405462,1,1,1,urban public space,0.0118142982,3,1,4
-indicator,0.0022064092,5,1,7,spatial configuration,0.0051300132,3,2,2,utilize land resource,0.0071405462,1,1,1,new urban planning,0.011078645600000001,2,1,2
-risk,0.0022064092,5,1,7,environmental management,0.0051300132,3,1,2,integrated railway transport,0.0071405462,1,1,1,rural design,0.011021532700000001,5,1,1
-improvement,0.0020666203,6,4,9,rural area,0.0048997502000000005,6,3,7,railway transport hub,0.0071405462,1,1,1,key indicator,0.0088172261,4,1,1
+axis,0.0056463457,7,1,2,middle class,0.0151334048,8,1,1,urban space axis,0.0372361407,6,1,1,urban space axis,0.0372361407,6,1,1
+scenery,0.0051230027000000004,5,1,1,space axis,0.0113500536,6,1,1,public open space,0.032907091,8,1,3,public open space,0.032907091,8,1,3
+protection,0.0042068261,14,3,10,rural design,0.009458378,5,1,1,nationality characteristic dwelling,0.0310301173,5,1,1,nationality characteristic dwelling,0.0310301173,5,1,1
+traffic,0.0033359524000000002,9,3,8,characteristic dwelling,0.009458378,5,1,1,urban environmental management,0.018618070400000002,3,1,1,urban environmental management,0.018618070400000002,3,1,1
+resilience,0.0031108038,6,1,5,key indicator,0.0075667024,4,1,1,natural scenery city,0.018618070400000002,3,1,1,natural scenery city,0.018618070400000002,3,1,1
+class,0.0030025905,9,1,9,city square,0.0075667024,4,2,1,social impact assessment,0.012412046900000001,2,1,1,middle class,0.0151334048,8,1,1
+dwelling,0.0025923365,5,1,5,natural scenery,0.0075667024,4,1,1,green ecological planning,0.012412046900000001,2,1,1,social impact assessment,0.012412046900000001,2,1,1
+square,0.0025923365,5,2,5,scenery city,0.0075667024,4,1,1,public space environment,0.012412046900000001,2,1,1,green ecological planning,0.012412046900000001,2,1,1
+nationality,0.0024198625000000002,3,1,2,open space,0.0068109315,8,1,6,less developing area,0.012412046900000001,2,1,1,public space environment,0.012412046900000001,2,1,1
+partnership,0.0023056557,5,1,6,urban history,0.0059595651000000005,7,4,6,traditional culture protection,0.012412046900000001,2,1,1,less developing area,0.012412046900000001,2,1,1
+risk,0.0021034131,7,2,10,square design,0.0059569163,4,2,2,characteristic dwelling protection,0.012412046900000001,2,1,1,traditional culture protection,0.012412046900000001,2,1,1
+functionality,0.0020738692,4,1,5,urban traffic,0.0059569163,4,1,2,public urban space,0.012412046900000001,2,2,1,characteristic dwelling protection,0.012412046900000001,2,1,1
+indicator,0.0020632705,5,1,7,minority nationality,0.0056750268,3,1,1,essential building space,0.012412046900000001,2,2,1,public urban space,0.012412046900000001,2,2,1
+geographic,0.0020492011,2,1,1,rural area,0.0051081986,6,3,6,modern artistic expression,0.012412046900000001,2,2,1,essential building space,0.012412046900000001,2,2,1
+symbolism,0.0020492011,2,1,1,cultural context,0.0050152518,4,2,3,urban public space,0.0106962284,3,1,4,modern artistic expression,0.012412046900000001,2,2,1
+greenway,0.0020492011,2,1,1,environmental management,0.0044676872,3,1,2,new urban planning,0.0097714329,2,1,2,urban public space,0.0106962284,3,1,4
+dynasty,0.0020492011,2,1,1,urban transformation,0.0043471302,4,1,4,past two decade,0.0062060235,1,1,1,new urban planning,0.0097714329,2,1,2
+carrier,0.0020492011,2,2,1,local resident,0.0038288949,4,3,5,numerous social conflict,0.0062060235,1,1,1,rural design,0.009458378,5,1,1
+southwest,0.0020492011,2,1,1,cultural identity,0.0038288949,4,3,5,received increasing attention,0.0062060235,1,1,1,key indicator,0.0075667024,4,1,1
+history,0.0016189803,14,7,18,traditional culture,0.0038288949,4,1,5,socialist governing ideology,0.0062060235,1,1,1,city square,0.0075667024,4,2,1

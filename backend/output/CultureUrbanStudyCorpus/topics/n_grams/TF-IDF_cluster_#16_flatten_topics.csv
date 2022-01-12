@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-bicyclist,0.007974788200000001,3,1,1,digital divide,0.0104468691,2,1,1,everyday public space,0.0406794752,2,1,1,everyday public space,0.0406794752,2,1,1
-bicycling,0.007974788200000001,3,1,1,social justice,0.0104468691,2,2,1,upwardly mobile bicyclist,0.0203397376,1,1,1,upwardly mobile bicyclist,0.0203397376,1,1,1
-gayborhoods,0.007974788200000001,3,1,1,multiracial interaction,0.0104468691,2,1,1,varied cultural meaning,0.0203397376,1,1,1,varied cultural meaning,0.0203397376,1,1,1
-gentrification,0.0073303237,5,4,4,racial segregation,0.0104468691,2,2,1,gentrifying urban planning,0.0203397376,1,1,1,gentrifying urban planning,0.0203397376,1,1,1
-race,0.0063708186000000005,5,3,5,offending sight,0.0104468691,2,1,1,upholds systemic race,0.0203397376,1,1,1,upholds systemic race,0.0203397376,1,1,1
-advocacy,0.006186491200000001,3,1,2,social control,0.0104468691,2,1,1,many problematic aspect,0.0203397376,1,1,1,many problematic aspect,0.0203397376,1,1,1
-bicycle,0.006186491200000001,3,1,2,public space,0.0053465468,7,2,14,urban bicycling culture,0.0203397376,1,1,1,urban bicycling culture,0.0203397376,1,1,1
-visibility,0.006186491200000001,3,1,2,white lane,0.0052234346,1,1,1,integration within society,0.0203397376,1,1,1,integration within society,0.0203397376,1,1,1
-inequality,0.0058642589000000005,4,2,4,mobile bicyclist,0.0052234346,1,1,1,public sector play,0.0203397376,1,1,1,public sector play,0.0203397376,1,1,1
-divide,0.0053165255000000005,2,1,1,neighborhood conflict,0.0052234346,1,1,1,particular government action,0.0203397376,1,1,1,particular government action,0.0203397376,1,1,1
-incivility,0.0053165255000000005,2,1,1,racist planning,0.0052234346,1,1,1,similar effort today,0.0203397376,1,1,1,similar effort today,0.0203397376,1,1,1
-scholarship,0.0043981942,3,1,4,rolling signifier,0.0052234346,1,1,1,addressing contemporary challenge,0.0203397376,1,1,1,addressing contemporary challenge,0.0203397376,1,1,1
-racism,0.0041243275,2,2,2,meaning change,0.0052234346,1,1,1,future planning scholarship,0.0203397376,1,1,1,future planning scholarship,0.0203397376,1,1,1
-disparity,0.0041243275,2,2,2,different space,0.0052234346,1,1,1,wider urban study,0.0203397376,1,1,1,wider urban study,0.0203397376,1,1,1
-justice,0.0041243275,2,2,2,rolling signification,0.0052234346,1,1,1,urban study literature,0.0203397376,1,1,1,urban study literature,0.0203397376,1,1,1
-cosmopolitanism,0.0041243275,2,1,2,systemic race,0.0052234346,1,1,1,gay neighborhood form,0.0203397376,1,1,1,gay neighborhood form,0.0203397376,1,1,1
-sight,0.0041243275,2,1,2,class barrier,0.0052234346,1,1,1,growth machine politics,0.0203397376,1,1,1,growth machine politics,0.0203397376,1,1,1
-neighborhood,0.004068388300000001,6,3,10,burgeoning popularity,0.0052234346,1,1,1,online dating service,0.0203397376,1,1,1,online dating service,0.0203397376,1,1,1
-play,0.0039392051,4,4,7,urban bicycling,0.0052234346,1,1,1,critical race study,0.0203397376,1,1,1,critical race study,0.0203397376,1,1,1
-color,0.0038224911,3,3,5,systemic issue,0.0052234346,1,1,1,link historical legacy,0.0203397376,1,1,1,link historical legacy,0.0203397376,1,1,1
+soundscape,0.009508177900000001,11,1,3,experimental study,0.0187103914,8,1,1,human sensory assessment,0.0192950911,3,1,1,human sensory assessment,0.0192950911,3,1,1
+concrete,0.008990746800000001,12,1,4,acoustic environment,0.011047372100000001,6,1,2,soundscape evaluation method,0.0128633941,2,1,1,experimental study,0.0187103914,8,1,1
+property,0.0051896009,11,1,8,sound source,0.0093551957,4,1,1,day care unit,0.0128633941,2,1,1,soundscape evaluation method,0.0128633941,2,1,1
+strength,0.0041085297,7,1,6,cold region,0.0093551957,4,1,1,evaluation index system,0.0128633941,2,1,1,day care unit,0.0128633941,2,1,1
+china,0.0041067036,4,1,2,residential building,0.0092061434,5,1,2,rural residential building,0.0128633941,2,1,1,evaluation index system,0.0128633941,2,1,1
+website,0.0039123687,3,1,1,soundscape evaluation,0.0070163968000000005,3,1,1,rapidly advancing knowledge,0.006431697,1,1,1,rural residential building,0.0128633941,2,1,1
+dorm,0.0039123687,3,1,1,sensory assessment,0.0070163968000000005,3,1,1,contemporary public policy,0.006431697,1,1,1,acoustic environment,0.011047372100000001,6,1,2
+corrosion,0.0039123687,3,1,1,experimental research,0.0070163968000000005,3,1,1,behaviour change policy,0.006431697,1,1,1,soundscape,0.009508177900000001,11,1,3
+slag,0.0039123687,3,1,1,mechanical property,0.0070163968000000005,3,1,1,geographically informed set,0.006431697,1,1,1,sound source,0.0093551957,4,1,1
+reproduction,0.0034575192,4,1,3,architectural space,0.005523686000000001,3,1,2,refocused many research,0.006431697,1,1,1,cold region,0.0093551957,4,1,1
+water,0.0033024733000000003,7,1,8,brain culture,0.0046775978,2,1,1,many research effort,0.006431697,1,1,1,residential building,0.0092061434,5,1,2
+building,0.0032313033,19,4,17,urban furniture,0.0046775978,2,1,1,effort within computer,0.006431697,1,1,1,concrete,0.008990746800000001,12,1,4
+experiment,0.0031513842,6,3,7,urban soundscape,0.0046775978,2,1,1,within computer science,0.006431697,1,1,1,soundscape evaluation,0.0070163968000000005,3,1,1
+evaluation,0.0030948581000000003,10,2,12,evaluation method,0.0046775978,2,1,1,new extended discourse,0.006431697,1,1,1,experimental research,0.0070163968000000005,3,1,1
+internet,0.0030800277,3,2,2,laboratory experiment,0.0046775978,2,1,1,different application domain,0.006431697,1,1,1,mechanical property,0.0070163968000000005,3,1,1
+steel,0.0029969156,4,1,4,soundscape analysis,0.0046775978,2,1,1,complex urban planning,0.006431697,1,1,1,rapidly advancing knowledge,0.006431697,1,1,1
+sound,0.002934664,5,2,6,reproduction system,0.0046775978,2,1,1,urban planning problem,0.006431697,1,1,1,contemporary public policy,0.006431697,1,1,1
+application,0.0026772474,7,3,10,artificial life,0.0046775978,2,1,1,support energy sustainability,0.006431697,1,1,1,behaviour change policy,0.006431697,1,1,1
+unit,0.0026396437,4,3,5,day care,0.0046775978,2,1,1,meaningful activ ities,0.006431697,1,1,1,geographically informed set,0.006431697,1,1,1
+plant,0.0026396437,4,1,5,care unit,0.0046775978,2,1,1,urban smart furniture,0.006431697,1,1,1,refocused many research,0.006431697,1,1,1

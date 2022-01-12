@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-indicator,0.0093131955,10,3,7,urban livability,0.0228303177,5,1,1,different thermal index,0.0273963812,2,1,1,different thermal index,0.0273963812,2,1,1
-summer,0.0081020733,5,2,3,electrical capacity,0.0182642542,4,1,1,historic urban landscape,0.0273963812,2,1,1,historic urban landscape,0.0273963812,2,1,1
-dorm,0.0075417005,3,1,1,residential building,0.014168608000000001,4,2,2,calculated electrical capacity,0.0273963812,2,1,1,calculated electrical capacity,0.0273963812,2,1,1
-comfort,0.0073968165,7,2,6,upper limit,0.0136981906,3,1,1,urban livability measure,0.0273963812,2,1,1,urban livability measure,0.0273963812,2,1,1
-livability,0.0072298054,6,1,5,thermal comfort,0.010626456000000001,3,1,2,main urban design,0.0273963812,2,1,1,main urban design,0.0273963812,2,1,1
-winter,0.0069322349000000005,5,2,4,urban sustainability,0.0100729618,4,1,4,strategic development plan,0.0212529119,2,2,2,urban livability,0.0228303177,5,1,1
-host,0.0060248378,5,1,5,thermal index,0.0091321271,2,1,1,hot dry city,0.0136981906,1,1,1,strategic development plan,0.0212529119,2,2,2
-unsustainability,0.0050278003,2,1,1,unsustainability indicator,0.0091321271,2,1,1,different thermal environment,0.0136981906,1,1,1,electrical capacity,0.0182642542,4,1,1
-rating,0.0050278003,2,1,1,grid company,0.0091321271,2,1,1,thermal comfort range,0.0136981906,1,1,1,residential building,0.014168608000000001,4,2,2
-dataset,0.0050278003,2,1,1,placemaking principle,0.0091321271,2,1,1,comprehensive micrometeorological measurement,0.0136981906,1,1,1,upper limit,0.0136981906,3,1,1
-fuzzy,0.0050278003,2,1,1,livability measure,0.0091321271,2,1,1,different outdoor environment,0.0136981906,1,1,1,hot dry city,0.0136981906,1,1,1
-index,0.004861244000000001,3,1,3,strategic development,0.0070843040000000005,2,2,2,outdoor environment vary,0.0136981906,1,1,1,different thermal environment,0.0136981906,1,1,1
-temperature,0.004861244000000001,3,1,3,development plan,0.0070843040000000005,2,2,2,physiologically equivalent temperature,0.0136981906,1,1,1,thermal comfort range,0.0136981906,1,1,1
-limit,0.0042267523,4,1,6,green building,0.0070843040000000005,2,1,2,standard effective temperature,0.0136981906,1,1,1,comprehensive micrometeorological measurement,0.0136981906,1,1,1
-reduction,0.004159341,3,2,4,electricity consumption,0.0070843040000000005,2,1,2,lower comfort limit,0.0136981906,1,1,1,different outdoor environment,0.0136981906,1,1,1
-electricity,0.0039003471000000002,2,1,2,host city,0.0070843040000000005,2,1,2,thermal sensation vote,0.0136981906,1,1,1,outdoor environment vary,0.0136981906,1,1,1
-company,0.0036149027,3,1,5,dry city,0.0045660635,1,1,1,determine various aspect,0.0136981906,1,1,1,physiologically equivalent temperature,0.0136981906,1,1,1
-guideline,0.0032408293000000003,2,1,3,urban microclimate,0.0045660635,1,1,1,urban sustainability indicator,0.0136981906,1,1,1,standard effective temperature,0.0136981906,1,1,1
-attribute,0.0031700642000000003,3,1,6,absolute neccessity,0.0045660635,1,1,1,two different period,0.0136981906,1,1,1,lower comfort limit,0.0136981906,1,1,1
-energy,0.0028186329,5,3,11,every type,0.0045660635,1,1,1,green urban economics,0.0136981906,1,1,1,thermal sensation vote,0.0136981906,1,1,1
+coordination,0.009844971400000001,7,1,4,regime theory,0.0304295344,6,1,1,urban regime theory,0.08447602080000001,4,1,1,urban regime theory,0.08447602080000001,4,1,1
+organisation,0.009844971400000001,7,1,4,urban regime,0.0202863562,4,1,1,last two decade,0.027995584900000002,2,2,3,regime theory,0.0304295344,6,1,1
+drinking,0.0097922031,4,2,1,young adult,0.0152147672,3,1,1,examines recent response,0.021119005200000002,1,1,1,last two decade,0.027995584900000002,2,2,3
+homelessness,0.008112907400000001,5,2,3,conflict activity,0.0152147672,3,1,1,recent development appear,0.021119005200000002,1,1,1,examines recent response,0.021119005200000002,1,1,1
+pub,0.007708950500000001,4,1,2,city organisation,0.0152147672,3,1,1,closer examination reveals,0.021119005200000002,1,1,1,recent development appear,0.021119005200000002,1,1,1
+regime,0.0074325607,6,1,5,urban governance,0.012255383,6,4,7,account geographical scale,0.021119005200000002,1,1,1,closer examination reveals,0.021119005200000002,1,1,1
+sanitisation,0.0073441523,3,2,1,revanchist sanitisation,0.0101431781,2,1,1,wider economic process,0.021119005200000002,1,1,1,account geographical scale,0.021119005200000002,1,1,1
+gayborhoods,0.0073441523,3,1,1,street drinking,0.0101431781,2,1,1,regime theory literature,0.021119005200000002,1,1,1,wider economic process,0.021119005200000002,1,1,1
+visibility,0.0057817129,3,1,2,rough sleeping,0.0101431781,2,1,1,either nicely conjoin,0.021119005200000002,1,1,1,regime theory literature,0.021119005200000002,1,1,1
+sleeping,0.0048961016,2,1,1,geographical scale,0.0101431781,2,1,1,produce segmented response,0.021119005200000002,1,1,1,either nicely conjoin,0.021119005200000002,1,1,1
+oversight,0.0048961016,2,1,1,social composition,0.0101431781,2,1,1,voluntary agency resort,0.021119005200000002,1,1,1,produce segmented response,0.021119005200000002,1,1,1
+propensity,0.0048961016,2,1,1,digital divide,0.0101431781,2,1,1,address visible homelessness,0.021119005200000002,1,1,1,voluntary agency resort,0.021119005200000002,1,1,1
+divide,0.0048961016,2,1,1,hybrid coordination,0.0101431781,2,1,1,revealing hidden homelessness,0.021119005200000002,1,1,1,address visible homelessness,0.021119005200000002,1,1,1
+shadow,0.0048961016,2,1,1,governance mode,0.0101431781,2,1,1,sustain inclusive practice,0.021119005200000002,1,1,1,revealing hidden homelessness,0.021119005200000002,1,1,1
+incivility,0.0048961016,2,1,1,cultural mechanism,0.0101431781,2,1,1,gay neighborhood form,0.021119005200000002,1,1,1,sustain inclusive practice,0.021119005200000002,1,1,1
+adult,0.0044070733,4,2,6,structural mechanism,0.0101431781,2,1,1,growth machine politics,0.021119005200000002,1,1,1,gay neighborhood form,0.021119005200000002,1,1,1
+homeless,0.0042192735000000006,3,2,4,public organisation,0.0101431781,2,1,1,online dating service,0.021119005200000002,1,1,1,growth machine politics,0.021119005200000002,1,1,1
+duration,0.0038544753,2,1,2,offending sight,0.0101431781,2,1,1,youth drinking culture,0.021119005200000002,1,1,1,online dating service,0.021119005200000002,1,1,1
+sight,0.0038544753,2,1,2,social control,0.0101431781,2,1,1,discusses young adult,0.021119005200000002,1,1,1,youth drinking culture,0.021119005200000002,1,1,1
+governance,0.0037196173000000003,9,5,15,planning system,0.0058273359,2,1,4,responsible social interaction,0.021119005200000002,1,1,1,discusses young adult,0.021119005200000002,1,1,1

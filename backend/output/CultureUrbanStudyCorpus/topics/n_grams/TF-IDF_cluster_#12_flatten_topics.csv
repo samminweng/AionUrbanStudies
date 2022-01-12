@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-slum,0.0184525454,8,2,1,autonomous adaptation,0.008979415900000001,2,1,1,sustainable urban development,0.0383549337,3,1,1,sustainable urban development,0.0383549337,3,1,1
-water,0.0093996066,11,3,7,reduce risk,0.008979415900000001,2,1,1,inclusive municipal governance,0.025569955800000002,2,1,1,inclusive municipal governance,0.025569955800000002,2,1,1
-payment,0.0092262727,4,1,1,municipal governance,0.008979415900000001,2,1,1,indigenous urban form,0.025569955800000002,2,1,1,indigenous urban form,0.025569955800000002,2,1,1
-adaptation,0.0085450969,10,2,7,architectural comparison,0.008979415900000001,2,1,1,draws architectural comparison,0.025569955800000002,2,1,1,draws architectural comparison,0.025569955800000002,2,1,1
-illegitimate,0.0069197045,3,2,1,housing quality,0.008979415900000001,2,1,1,global environmental change,0.012784977900000001,1,1,1,slum,0.0184525454,8,2,1
-hinterland,0.0069197045,3,1,1,urban form,0.0086080626,4,1,5,urban design challenge,0.012784977900000001,1,1,1,global environmental change,0.012784977900000001,1,1,1
-originality,0.003578669,2,1,2,environmental change,0.0069658374,2,1,2,poor urban settlement,0.012784977900000001,1,1,1,urban design challenge,0.012784977900000001,1,1,1
-housing,0.0033727602000000003,10,4,14,planning principle,0.0069658374,2,1,2,autonomous adaptation strategy,0.012784977900000001,1,1,1,poor urban settlement,0.012784977900000001,1,1,1
-attitude,0.0033348812,5,2,9,ethnic origin,0.0069658374,2,1,2,argue urban slum,0.012784977900000001,1,1,1,autonomous adaptation strategy,0.012784977900000001,1,1,1
-fabric,0.0033167664,3,1,5,water management,0.0069658374,2,1,2,identifying local adaptation,0.012784977900000001,1,1,1,argue urban slum,0.012784977900000001,1,1,1
-settlement,0.0031034020000000003,6,2,11,housing development,0.005787969400000001,2,2,3,densely populated suburb,0.012784977900000001,1,1,1,identifying local adaptation,0.012784977900000001,1,1,1
-tenure,0.0029735444,2,2,3,urban fabric,0.0049522588000000005,2,1,4,rapid environmental change,0.012784977900000001,1,1,1,densely populated suburb,0.012784977900000001,1,1,1
-fear,0.0029735444,2,1,3,growing culture,0.004489708,1,1,1,expected coping strategy,0.012784977900000001,1,1,1,rapid environmental change,0.012784977900000001,1,1,1
-text,0.0029735444,2,1,3,dominant planning,0.004489708,1,1,1,despite uncertain tenure,0.012784977900000001,1,1,1,expected coping strategy,0.012784977900000001,1,1,1
-coast,0.0029735444,2,1,3,design challenge,0.004489708,1,1,1,critical public service,0.012784977900000001,1,1,1,despite uncertain tenure,0.012784977900000001,1,1,1
-service,0.0027480332,7,3,13,city margin,0.004489708,1,1,1,action toward adaptation,0.012784977900000001,1,1,1,critical public service,0.012784977900000001,1,1,1
-risk,0.0025635291,3,1,7,adaptation strategy,0.004489708,1,1,1,toward adaptation pathway,0.012784977900000001,1,1,1,action toward adaptation,0.012784977900000001,1,1,1
-governance,0.002355457,6,2,13,compounding stressor,0.004489708,1,1,1,prevails among government,0.012784977900000001,1,1,1,toward adaptation pathway,0.012784977900000001,1,1,1
-stressor,0.0023065682000000002,1,1,1,remains lack,0.004489708,1,1,1,among government official,0.012784977900000001,1,1,1,prevails among government,0.012784977900000001,1,1,1
-makeshift,0.0023065682000000002,1,1,1,urban slum,0.004489708,1,1,1,reduce risk exist,0.012784977900000001,1,1,1,among government official,0.012784977900000001,1,1,1
+transit,0.0227609654,12,4,1,transit village,0.0176871668,5,1,1,sustainable active mobility,0.0200705439,2,1,1,transit,0.0227609654,12,4,1
+vehicle,0.017435139000000002,16,2,4,public transport,0.014149733500000001,4,3,1,vehicle type choice,0.0200705439,2,1,1,sustainable active mobility,0.0200705439,2,1,1
+rail,0.0132772298,7,2,1,sustainable transportation,0.014149733500000001,4,2,1,prevalent transport problem,0.010035272000000001,1,1,1,vehicle type choice,0.0200705439,2,1,1
+diffusion,0.0113804827,6,1,1,active mobility,0.014149733500000001,4,1,1,well informal factor,0.010035272000000001,1,1,1,transit village,0.0176871668,5,1,1
+mindset,0.0088002207,7,1,3,walking mindset,0.014149733500000001,4,1,1,different analytical level,0.010035272000000001,1,1,1,vehicle,0.017435139000000002,16,2,4
+mobility,0.0086464232,14,3,9,sustainable mobility,0.010612300100000001,3,2,1,multiple case study,0.010035272000000001,1,1,1,public transport,0.014149733500000001,4,3,1
+corridor,0.0074661083000000005,5,2,2,vehicle type,0.010612300100000001,3,1,1,factor included legislation,0.010035272000000001,1,1,1,sustainable transportation,0.014149733500000001,4,2,1
+transport,0.0068617073,10,3,8,vehicle use,0.010612300100000001,3,1,1,legislation concerning transport,0.010035272000000001,1,1,1,active mobility,0.014149733500000001,4,1,1
+transportation,0.0061760166000000005,10,2,9,transport service,0.007074866700000001,2,2,1,appropriate business model,0.010035272000000001,1,1,1,walking mindset,0.014149733500000001,4,1,1
+walking,0.0059728866,4,1,2,second edition,0.007074866700000001,2,1,1,provide several implication,0.010035272000000001,1,1,1,rail,0.0132772298,7,2,1
+implementation,0.0049408133,8,4,9,diffusion process,0.007074866700000001,2,1,1,private sector actor,0.010035272000000001,1,1,1,diffusion,0.0113804827,6,1,1
+learning,0.0045834475,6,1,7,type choice,0.007074866700000001,2,1,1,adjusting relevant regulation,0.010035272000000001,1,1,1,sustainable mobility,0.010612300100000001,3,2,1
+car,0.004479665,3,3,2,fuel efficiency,0.007074866700000001,2,2,1,creating conducive condition,0.010035272000000001,1,1,1,vehicle type,0.010612300100000001,3,1,1
+household,0.0042682446,5,1,6,mobility corridor,0.007074866700000001,2,1,1,planning urban design,0.010035272000000001,1,1,1,vehicle use,0.010612300100000001,3,1,1
+road,0.0038938518,7,2,10,road infrastructure,0.007074866700000001,2,1,1,private transport service,0.010035272000000001,1,1,1,prevalent transport problem,0.010035272000000001,1,1,1
+commuter,0.0037934942,2,2,1,rail corridor,0.007074866700000001,2,1,1,privately owned car,0.010035272000000001,1,1,1,well informal factor,0.010035272000000001,1,1,1
+edition,0.0037715232000000002,3,1,3,rail system,0.007074866700000001,2,1,1,road marking force,0.010035272000000001,1,1,1,different analytical level,0.010035272000000001,1,1,1
+scenario,0.0037715232000000002,3,2,3,qualitative approach,0.0055697168,2,2,2,marking force motorist,0.010035272000000001,1,1,1,multiple case study,0.010035272000000001,1,1,1
+avenue,0.0037715232000000002,3,1,3,data collection,0.0046892605,2,2,3,use eye contact,0.010035272000000001,1,1,1,factor included legislation,0.010035272000000001,1,1,1
+traffic,0.0034308536,5,2,8,business model,0.0046892605,2,1,3,attractive urban environment,0.010035272000000001,1,1,1,legislation concerning transport,0.010035272000000001,1,1,1

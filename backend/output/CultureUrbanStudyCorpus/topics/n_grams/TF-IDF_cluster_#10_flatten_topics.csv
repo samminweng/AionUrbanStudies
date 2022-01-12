@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-risk,0.0123908744,22,3,7,property right,0.021853392500000002,7,1,1,natural property right,0.052851286600000005,5,1,1,natural property right,0.052851286600000005,5,1,1
-death,0.0091217849,6,1,1,good death,0.0187314793,6,1,1,property right value,0.052851286600000005,5,1,1,property right value,0.052851286600000005,5,1,1
-consultation,0.0058969008,5,2,2,natural property,0.015609566100000001,5,1,1,yanama budyari gumada,0.0211405147,2,1,1,property right,0.021853392500000002,7,1,1
-amplification,0.0045608925,3,2,1,right value,0.015609566100000001,5,1,1,natural resource management,0.0211405147,2,1,1,yanama budyari gumada,0.0211405147,2,1,1
-biodiversity,0.0045608925,3,1,1,wildfire risk,0.0124876528,4,1,1,surrounding industrial development,0.0105702573,1,1,1,natural resource management,0.0211405147,2,1,1
-wildfire,0.0045608925,3,1,1,landscape planning,0.0121092173,5,2,2,inform local resident,0.0105702573,1,1,1,good death,0.0187314793,6,1,1
-property,0.0039803642,8,1,8,indigenous people,0.0118103323,9,2,6,relationship among culture,0.0105702573,1,1,1,wildfire risk,0.0124876528,4,1,1
-hazard,0.0039198253,4,2,3,environmental hazard,0.0093657396,3,2,1,socially constructed risk,0.0105702573,1,1,1,risk,0.0123908744,22,3,7
-literacy,0.0035381405,3,1,2,cultural literacy,0.0093657396,3,1,1,conflicting cultural worldviews,0.0105702573,1,1,1,landscape planning,0.0121092173,5,2,2
-worldviews,0.003040595,2,2,1,indigenous culture,0.0072655304,3,2,2,contentious environmental debate,0.0105702573,1,1,1,indigenous people,0.0118103323,9,2,6
-upland,0.003040595,2,1,1,social amplification,0.0062438264,2,1,1,constitutes effective landscape,0.0105702573,1,1,1,surrounding industrial development,0.0105702573,1,1,1
-intermountain,0.003040595,2,1,1,risk communication,0.0062438264,2,1,1,effective landscape planning,0.0105702573,1,1,1,inform local resident,0.0105702573,1,1,1
-gumada,0.003040595,2,1,1,vegetation management,0.0062438264,2,1,1,emerging governance challenge,0.0105702573,1,1,1,relationship among culture,0.0105702573,1,1,1
-reconciliation,0.003040595,2,2,1,land owner,0.0062438264,2,2,1,simultaneously mitigate wildfire,0.0105702573,1,1,1,socially constructed risk,0.0105702573,1,1,1
-bali,0.003040595,2,1,1,intermountain west,0.0062438264,2,1,1,mitigate wildfire risk,0.0105702573,1,1,1,conflicting cultural worldviews,0.0105702573,1,1,1
-right,0.0029812167000000003,10,2,12,budyari gumada,0.0062438264,2,1,1,support improved conservation,0.0105702573,1,1,1,contentious environmental debate,0.0105702573,1,1,1
-vegetation,0.0029398689000000003,3,1,3,urban centre,0.0062438264,2,2,1,improved conservation practice,0.0105702573,1,1,1,constitutes effective landscape,0.0105702573,1,1,1
-conservation,0.002556156,4,2,6,directed towards,0.0062438264,2,1,1,vital historical component,0.0105702573,1,1,1,effective landscape planning,0.0105702573,1,1,1
-homelessness,0.0025153885,3,1,4,rural study,0.0062438264,2,1,1,manage wildfire risk,0.0105702573,1,1,1,emerging governance challenge,0.0105702573,1,1,1
-teacher,0.0023587603,2,1,2,affordable housing,0.0062438264,2,1,1,new state policy,0.0105702573,1,1,1,simultaneously mitigate wildfire,0.0105702573,1,1,1
+indicator,0.0081775829,16,3,7,smart city,0.0230760393,11,3,2,medium size city,0.0292753106,3,1,1,medium size city,0.0292753106,3,1,1
+index,0.0072907028,10,2,4,livable city,0.0107163719,7,1,4,remote sensing data,0.0292753106,3,1,1,remote sensing data,0.0292753106,3,1,1
+pandemic,0.0049952617,5,2,2,electrical capacity,0.010658932900000001,4,1,1,different thermal index,0.0195168738,2,1,1,smart city,0.0230760393,11,3,2
+summer,0.0042056148,5,2,3,sensing data,0.010658932900000001,4,1,1,sustainable social innovation,0.0195168738,2,1,1,different thermal index,0.0195168738,2,1,1
+electricity,0.0038071032,3,2,1,residential building,0.008391287,4,2,2,current global situation,0.0195168738,2,1,1,sustainable social innovation,0.0195168738,2,1,1
+winter,0.0036453514,5,2,4,residential environment,0.008391287,4,1,2,calculated electrical capacity,0.0195168738,2,1,1,current global situation,0.0195168738,2,1,1
+pillar,0.0029971570000000003,3,3,2,upper limit,0.007994199700000001,3,1,1,comprehensive evaluation model,0.0195168738,2,1,1,calculated electrical capacity,0.0195168738,2,1,1
+simulation,0.0029162811,4,1,4,electricity consumption,0.007994199700000001,3,2,1,hot dry city,0.0097584369,1,1,1,comprehensive evaluation model,0.0195168738,2,1,1
+company,0.0025686219,4,2,5,social norm,0.007994199700000001,3,1,1,different thermal environment,0.0097584369,1,1,1,livable city,0.0107163719,7,1,4
+unsustainability,0.0025380688,2,1,1,medium size,0.007994199700000001,3,1,1,thermal comfort range,0.0097584369,1,1,1,electrical capacity,0.010658932900000001,4,1,1
+rating,0.0025380688,2,1,1,size city,0.007994199700000001,3,1,1,comprehensive micrometeorological measurement,0.0097584369,1,1,1,sensing data,0.010658932900000001,4,1,1
+sensing,0.0025380688,2,1,1,urban sustainability,0.0061236411000000004,4,1,4,different outdoor environment,0.0097584369,1,1,1,hot dry city,0.0097584369,1,1,1
+temperature,0.0025233689,3,1,3,thermal index,0.0053294665,2,1,1,outdoor environment vary,0.0097584369,1,1,1,different thermal environment,0.0097584369,1,1,1
+settlement,0.0024298385,9,3,13,social progress,0.0053294665,2,2,1,physiologically equivalent temperature,0.0097584369,1,1,1,thermal comfort range,0.0097584369,1,1,1
+evaluation,0.0024092707,8,2,12,efficiency score,0.0053294665,2,1,1,standard effective temperature,0.0097584369,1,1,1,comprehensive micrometeorological measurement,0.0097584369,1,1,1
+traffic,0.0022954411,5,3,8,unsustainability indicator,0.0053294665,2,1,1,lower comfort limit,0.0097584369,1,1,1,different outdoor environment,0.0097584369,1,1,1
+limit,0.0022845636,4,1,6,informatiologic condition,0.0053294665,2,1,1,thermal sensation vote,0.0097584369,1,1,1,outdoor environment vary,0.0097584369,1,1,1
+flow,0.0022845636,4,3,6,rural settlement,0.0053294665,2,1,1,regarded complex entity,0.0097584369,1,1,1,physiologically equivalent temperature,0.0097584369,1,1,1
+account,0.0022330404,6,4,10,traffic simulation,0.0053294665,2,1,1,combine three methodology,0.0097584369,1,1,1,standard effective temperature,0.0097584369,1,1,1
+coordination,0.0021872108,3,1,4,exploratory analysis,0.0053294665,2,1,1,identified six city,0.0097584369,1,1,1,lower comfort limit,0.0097584369,1,1,1

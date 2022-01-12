@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-festival,0.0034934539,28,2,4,typhoid fever,0.0051166492,11,1,1,urban regime theory,0.006392489,4,1,1,urban regime theory,0.006392489,4,1,1
-fever,0.0029409327,13,1,1,small business,0.0039692722,11,1,2,ethnic minority group,0.0047943667,3,1,1,typhoid fever,0.0051166492,11,1,1
-event,0.0021927978,38,6,10,middle class,0.0037211994000000003,8,1,1,urban forest manager,0.0047943667,3,1,1,ethnic minority group,0.0047943667,3,1,1
-coordination,0.0019304549000000002,11,3,2,residential standard,0.0037211994000000003,8,1,1,human sensory assessment,0.0047943667,3,1,1,urban forest manager,0.0047943667,3,1,1
-mobility,0.0019276149000000001,23,5,7,indigenous knowledge,0.0036084293000000003,10,1,2,site interpretation centre,0.0047943667,3,1,1,human sensory assessment,0.0047943667,3,1,1
-incidence,0.0015835792,7,1,1,regime theory,0.0027908995,6,1,1,typhoid fever case,0.0031962445,2,1,1,site interpretation centre,0.0047943667,3,1,1
-gas,0.0015835792,7,3,1,smart city,0.0025259005,7,2,2,public green space,0.0031962445,2,1,1,small business,0.0039692722,11,1,2
-visitor,0.0015085682000000001,18,4,7,special event,0.0023257496,5,1,1,social impact assessment,0.0031962445,2,1,1,middle class,0.0037211994000000003,8,1,1
-child,0.0014263686000000001,15,6,6,climate change,0.0023088234,9,4,4,urban sustainability transition,0.0031962445,2,1,1,residential standard,0.0037211994000000003,8,1,1
-typhoid,0.0013573536000000001,6,1,1,young people,0.0022295658,10,5,5,greenhouse gas emission,0.0031962445,2,2,1,indigenous knowledge,0.0036084293000000003,10,1,2
-trust,0.0013573536000000001,6,2,1,new town,0.0020987907,7,1,3,urban growth boundary,0.0031962445,2,1,1,festival,0.0034934539,28,2,4
-fair,0.0013573536000000001,6,1,1,developing country,0.0020522874,8,2,4,using social medium,0.0031962445,2,1,1,typhoid fever case,0.0031962445,2,1,1
-regime,0.0013123884,9,3,3,local government,0.0020066092,9,4,5,satisfy project requirement,0.0031962445,2,1,1,public green space,0.0031962445,2,1,1
-book,0.0012421234,28,12,12,public housing,0.0018605997000000001,4,3,1,double bottom line,0.0031962445,2,1,1,social impact assessment,0.0031962445,2,1,1
-youth,0.0012361861,13,4,6,greenhouse gas,0.0018605997000000001,4,2,1,different social milieu,0.0031962445,2,1,1,urban sustainability transition,0.0031962445,2,1,1
-beauty,0.0011927839,11,2,5,event activity,0.0018605997000000001,4,1,1,decision support system,0.0031962445,2,1,1,greenhouse gas emission,0.0031962445,2,2,1
-student,0.0011774929000000001,18,6,9,urban regime,0.0018605997000000001,4,1,1,smart city application,0.0031962445,2,1,1,urban growth boundary,0.0031962445,2,1,1
-risk,0.0011733308,14,8,7,trust relationship,0.0018605997000000001,4,1,1,system take place,0.0031962445,2,1,1,using social medium,0.0031962445,2,1,1
-business,0.0011667829,23,10,11,structural beauty,0.0018605997000000001,4,1,1,inter cultural dialogue,0.0031962445,2,1,1,satisfy project requirement,0.0031962445,2,1,1
-organisation,0.0011665675,8,2,3,site interpretation,0.0018605997000000001,4,1,1,historical city center,0.0031962445,2,1,1,double bottom line,0.0031962445,2,1,1
+fair,0.0090606618,6,1,1,construction project,0.007249089100000001,3,2,2,satisfy project requirement,0.0183762772,2,1,1,satisfy project requirement,0.0183762772,2,1,1
+astronomy,0.007550551500000001,5,1,1,disaster prevention,0.007249089100000001,3,1,2,tsunami hazard zone,0.0183762772,2,1,1,tsunami hazard zone,0.0183762772,2,1,1
+calendar,0.0071330417,6,2,2,satisfy project,0.0061387130000000005,2,1,1,record breaking magnitude,0.0091881386,1,1,1,record breaking magnitude,0.0091881386,1,1,1
+disaster,0.0070063657,7,2,3,project requirement,0.0061387130000000005,2,1,1,disaster first hand,0.0091881386,1,1,1,disaster first hand,0.0091881386,1,1,1
+reconstruction,0.0069405623000000005,8,1,4,barrier group,0.0061387130000000005,2,1,1,tour de force,0.0091881386,1,1,1,tour de force,0.0091881386,1,1,1
+bridge,0.006072992,7,2,4,elite network,0.0061387130000000005,2,1,1,critical role astronomy,0.0091881386,1,1,1,critical role astronomy,0.0091881386,1,1,1
+enablers,0.006040441200000001,4,1,1,national government,0.0061387130000000005,2,1,1,people merged idea,0.0091881386,1,1,1,people merged idea,0.0091881386,1,1,1
+tsunami,0.0059442015,5,2,2,reconstruction measure,0.0061387130000000005,2,1,1,understanding ancient culture,0.0091881386,1,1,1,understanding ancient culture,0.0091881386,1,1,1
+barrier,0.0045848667,6,1,5,prefectural government,0.0061387130000000005,2,1,1,architectural alignment study,0.0091881386,1,1,1,architectural alignment study,0.0091881386,1,1,1
+meter,0.0045303309,3,2,1,hazard zone,0.0061387130000000005,2,1,1,explore new dimension,0.0091881386,1,1,1,explore new dimension,0.0091881386,1,1,1
+enabler,0.0045303309,3,1,1,suspension bridge,0.0061387130000000005,2,1,1,maximize customer satisfaction,0.0091881386,1,1,1,maximize customer satisfaction,0.0091881386,1,1,1
+dozen,0.0045303309,3,2,1,classic period,0.0061387130000000005,2,1,1,affects project performance,0.0091881386,1,1,1,affects project performance,0.0091881386,1,1,1
+display,0.0045303309,3,2,1,construction industry,0.004832726000000001,2,1,2,construction industry practitioner,0.0091881386,1,1,1,construction industry practitioner,0.0091881386,1,1,1
+implementation,0.0039336678,8,2,9,host city,0.004832726000000001,2,1,2,might conduct project,0.0091881386,1,1,1,might conduct project,0.0091881386,1,1,1
+section,0.0035665209,3,3,2,political culture,0.004832726000000001,2,1,2,guide construction professional,0.0091881386,1,1,1,guide construction professional,0.0091881386,1,1,1
+engineering,0.0034702811,4,2,4,city area,0.004832726000000001,2,1,2,better satisfy project,0.0091881386,1,1,1,better satisfy project,0.0091881386,1,1,1
+recovery,0.0030565778000000003,4,2,5,cultural dimension,0.0035267391,2,1,4,seven major enabler,0.0091881386,1,1,1,seven major enabler,0.0091881386,1,1,1
+legislation,0.0030565778000000003,4,3,5,planning process,0.0031063052000000002,2,1,5,implementation whereas lack,0.0091881386,1,1,1,implementation whereas lack,0.0091881386,1,1,1
+catastrophe,0.0030202206000000003,2,1,1,nuclear crisis,0.0030693565000000003,1,1,1,top management support,0.0091881386,1,1,1,top management support,0.0091881386,1,1,1
+foot,0.0030202206000000003,2,2,1,breaking magnitude,0.0030693565000000003,1,1,1,serve multiple function,0.0091881386,1,1,1,serve multiple function,0.0091881386,1,1,1

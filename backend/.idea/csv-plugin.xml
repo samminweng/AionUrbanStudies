@@ -570,6 +570,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/topics/CultureUrbanStudyCorpus_TF-IDF_cluster_topic_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/topics/CultureUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
           <value>
             <Attribute>
