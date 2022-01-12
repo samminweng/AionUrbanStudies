@@ -1,0 +1,4 @@
+Cluster,NumDocs,Percent,DocIds,Topics
+-1,10,0.43478260869565216,"[32, 100, 105, 134, 163, 254, 258, 335, 380, 386]","project, construction, satisfy project requirement, tsunami hazard zone, implementation, vision, reconstruction, disaster, idea, bridge"
+0,7,0.30434782608695654,"[5, 47, 73, 152, 177, 209, 262]","road traffic noise, draws architectural comparison, inclusive design research, road traffic, noise, community response, noise control policy, new multidisciplinary approach, soundscapes across country, considers environmental sound"
+1,6,0.2608695652173913,"[11, 28, 72, 80, 125, 180]","water, public green space, double bottom line, health, foreign resident youth, investigated leisure activity, facilitate social interaction, immigrant young people, urban green space, friend across culture"

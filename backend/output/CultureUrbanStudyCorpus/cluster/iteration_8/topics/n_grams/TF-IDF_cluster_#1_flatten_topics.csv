@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+water,0.0169933598,13,2,1,green space,0.007340327000000001,3,1,1,public green space,0.0164524571,2,1,1,water,0.0169933598,13,2,1
+health,0.0091502706,7,4,1,bottom line,0.007340327000000001,3,1,1,double bottom line,0.0164524571,2,1,1,public green space,0.0164524571,2,1,1
+ocean,0.0065359076,5,1,1,making friend,0.0048935513,2,1,1,foreign resident youth,0.0082262285,1,1,1,double bottom line,0.0164524571,2,1,1
+friend,0.0039215446,3,1,1,urban forest,0.0048935513,2,1,1,investigated leisure activity,0.0082262285,1,1,1,health,0.0091502706,7,4,1
+youth,0.0039215446,3,1,1,social inclusion,0.0048935513,2,1,1,facilitate social interaction,0.0082262285,1,1,1,foreign resident youth,0.0082262285,1,1,1
+landscape,0.0039215446,3,2,1,climate change,0.0048935513,2,2,1,immigrant young people,0.0082262285,1,1,1,investigated leisure activity,0.0082262285,1,1,1
+sea,0.0039215446,3,1,1,gas extraction,0.0048935513,2,1,1,urban green space,0.0082262285,1,1,1,facilitate social interaction,0.0082262285,1,1,1
+extraction,0.0039215446,3,1,1,land use,0.0048935513,2,2,1,friend across culture,0.0082262285,1,1,1,immigrant young people,0.0082262285,1,1,1
+use,0.0039215446,3,2,1,aquatic system,0.0048935513,2,1,1,emerging collective experiment,0.0082262285,1,1,1,urban green space,0.0082262285,1,1,1
+ecosystem,0.0039215446,3,1,1,water management,0.0048935513,2,2,1,coastal city begin,0.0082262285,1,1,1,friend across culture,0.0082262285,1,1,1
+line,0.0039215446,3,1,1,urban water,0.0048935513,2,1,1,rising sea level,0.0082262285,1,1,1,emerging collective experiment,0.0082262285,1,1,1
+brain,0.0039215446,3,1,1,neuroscience method,0.0048935513,2,1,1,upon ocean resource,0.0082262285,1,1,1,coastal city begin,0.0082262285,1,1,1
+forest,0.002614363,2,1,1,interdisciplinary effort,0.0048935513,2,1,1,daily urban life,0.0082262285,1,1,1,rising sea level,0.0082262285,1,1,1
+inclusion,0.002614363,2,1,1,different culture,0.0024467757000000002,1,1,1,healthy ocean environment,0.0082262285,1,1,1,upon ocean resource,0.0082262285,1,1,1
+school,0.002614363,2,1,1,distinct culture,0.0024467757000000002,1,1,1,book explores issue,0.0082262285,1,1,1,daily urban life,0.0082262285,1,1,1
+gender,0.002614363,2,2,1,resident youth,0.0024467757000000002,1,1,1,community supported fishery,0.0082262285,1,1,1,healthy ocean environment,0.0082262285,1,1,1
+experiment,0.002614363,2,1,1,educational institution,0.0024467757000000002,1,1,1,damage ocean life,0.0082262285,1,1,1,book explores issue,0.0082262285,1,1,1
+article,0.002614363,2,1,1,empirical survey,0.0024467757000000002,1,1,1,helping scientist gather,0.0082262285,1,1,1,community supported fishery,0.0082262285,1,1,1
+call,0.002614363,2,2,1,selected school,0.0024467757000000002,1,1,1,scientist gather data,0.0082262285,1,1,1,damage ocean life,0.0082262285,1,1,1
+oil,0.002614363,2,1,1,metropolitan area,0.0024467757000000002,1,1,1,encouraging citizen volunteerism,0.0082262285,1,1,1,helping scientist gather,0.0082262285,1,1,1
