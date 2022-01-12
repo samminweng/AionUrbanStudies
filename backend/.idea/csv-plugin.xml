@@ -493,6 +493,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/experiments/top_key_phrases_cluster_#2_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/key_phrases/group_key_phrases/cluster/top_key_phrases_cluster_#0_best_grouping.csv">
           <value>
             <Attribute>

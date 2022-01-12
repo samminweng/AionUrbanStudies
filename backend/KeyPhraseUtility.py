@@ -345,7 +345,7 @@ class KeyPhraseUtility:
                                     score = BERTModelDocClusterUtility.compute_Silhouette_score(no_outlier_labels,
                                                                                                 no_outlier_vectors)
                                 else:  # All key phrases are identified as outliers
-                                    score = 'None'
+                                    score = -1
                                 # Output the result
                                 result = {'cluster': "#" + str(cluster_no),
                                           'dimension': dimension,
