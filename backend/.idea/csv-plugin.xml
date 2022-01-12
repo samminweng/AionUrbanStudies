@@ -143,7 +143,35 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_0/topics/TF-IDF_cluster_topic_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_0/vectors/doc_vector_results.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_1/CultureUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_1/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_1/vectors/doc_vector_results.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -96,6 +96,53 @@ class BERTModelDocClusterUtility:
         fig.savefig(_path, dpi=600)
         print("Output image to " + _path)
 
+    @staticmethod
+    def visualise_cluster_results_by_iteration(iteration, results, folder):
+        try:
+            df = pd.DataFrame(results)
+            total_clusters = df['HDBSCAN_Cluster'].max() + 1
+            # Visualise HDBSCAN clustering results using dot chart
+            colors = sns.color_palette('tab10', n_colors=total_clusters).as_hex()
+            marker_size = 8
+            # Plot clustered dots and outliers
+            fig = go.Figure()
+            for cluster_no in range(0, total_clusters):
+                dots = df.loc[df['HDBSCAN_Cluster'] == cluster_no, :]
+                if len(dots) > 0:
+                    marker_color = colors[cluster_no]
+                    marker_symbol = 'circle'
+                    name = 'Cluster {no}'.format(no=cluster_no)
+                    fig.add_trace(go.Scatter(
+                        name=name,
+                        mode='markers',
+                        x=dots['x'].tolist(),
+                        y=dots['y'].tolist(),
+                        marker=dict(line_width=1, symbol=marker_symbol,
+                                    size=marker_size, color=marker_color)
+                    ))
+            # Add outliers
+            outliers = df.loc[df['HDBSCAN_Cluster'] == -1, :]
+            if len(outliers) > 0:
+                fig.add_trace(go.Scatter(
+                    name='Outlier',
+                    mode='markers',
+                    x=outliers['x'].tolist(),
+                    y=outliers['y'].tolist(),
+                    marker=dict(line_width=1, symbol='x',
+                                size=2, color='gray', opacity=0.3)
+                ))
+
+            title = 'Iteration = ' + str(iteration)
+            # Figure layout
+            fig.update_layout(title=title,
+                              width=600, height=800,
+                              legend=dict(orientation="v"),
+                              margin=dict(l=20, r=20, t=30, b=40))
+            file_path = os.path.join(folder, 'iteration_' + str(iteration) + ".png")
+            pio.write_image(fig, file_path, format='png')
+            print("Output the images of clustered results at iteration {i} to {path}".format(i=iteration, path=file_path))
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
     # Visualise the clusters of HDBSCAN by different cluster no
     @staticmethod
     def visualise_cluster_results(cluster_labels, x_pos_list, y_pos_list, parameter, folder):
