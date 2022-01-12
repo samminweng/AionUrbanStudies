@@ -1,7 +1,7 @@
-function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
-    const cluster_no = cluster['Cluster'];
-    const cluster_topics = cluster['TF-IDF-Topics'].slice(0, 10);
-    const cluster_key_phrases = cluster['Grouped_Key_Phrases'];
+function ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases) {
+    const cluster = cluster_topic_key_phrases.find(c => c['Cluster'] === cluster_no);
+    const cluster_topics = cluster['Topics'].slice(0, 10);
+    const cluster_key_phrases = cluster['KeyPhrases'];
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
     const cluster_link = $('<a target="_blank" href="cluster_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
     if(cluster_no === -1){
@@ -25,7 +25,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
                 // Get a list of docs in relation to the selected topic
                 const topic_docs = cluster_docs.filter(d => selected_topic['doc_ids'].includes(d['DocId']));
                 // Create a list of articles associated with topic
-                const doc_list = new DocList(topic_docs, selected_topic, corpus_key_phrases, null);
+                const doc_list = new DocList(topic_docs, selected_topic, cluster_topic_key_phrases, null);
                 document.getElementById('doc_list').scrollIntoView({behavior: "smooth",
                     block: "nearest", inline: "nearest"});
             });
@@ -38,9 +38,9 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         $('#cluster_topics').append(topic_container);
 
         const accordion_div = $('<div class="container"></div>');
-        // Add the key phrases grouped by similarity
-        const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases, accordion_div);
-        // Set accordion
+        // // Add the key phrases grouped by similarity
+        // const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases, accordion_div);
+        // // Set accordion
         accordion_div.accordion({
             // icons: null,
             collapsible: true,
@@ -60,7 +60,7 @@ function ClusterDocList(cluster, corpus_data, corpus_key_phrases) {
         create_cluster_topic_key_phrases();
 
         // Create doc list
-        const doc_list = new DocList(cluster_docs, null, corpus_key_phrases, null);
+        const doc_list = new DocList(cluster_docs, null, null, null);
     }
 
     _createUI();

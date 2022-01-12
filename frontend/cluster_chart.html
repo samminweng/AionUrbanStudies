@@ -20,11 +20,10 @@
 <body>
 <div class="container">
     <div class="h4">Cluster Dot Chart</div>
-    <div>600 urban study-related research articles are grouped into 7 clusters (294 articles as outliers) using
-        BERT-based Sentence Transformer + HDBSCAN clustering + TF-IDF topic identification + BERT-based key phrase extraction.
+    <div>394 people/culture related urban study research papers are grouped into 21 clusters and 77 papers are identified as outliers
+        using BERT-based Sentence Transformer + Iterative HDBSCAN clustering + TF-IDF topic identification + BERT-based key phrase extraction.
         Our approach is similar to <a target="_blank" href="https://maartengr.github.io/BERTopic/">BERTopic approach</a>
-        (<a target="_blank" href="https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6">Link</a>)<br>
-        In this chart, each dot represents an article and its dot color reflects its cluster.
+        (<a target="_blank" href="https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6">Link</a>)
     </div>
     <div>
         <button id="opener">Open Instructions</button>
@@ -37,12 +36,12 @@
             <div class="row p-3">
                 <div class="col align-text-bottom" id="outlier-col">
                     <label for="hide_outliers">Hide Outlier</label>
-                    <input type="checkbox" name="hide_outliers" id="hide_outliers" checked>
+                    <input type="checkbox" name="hide_outliers" id="hide_outliers">
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <div id="hover_info" class="container" style="height: 100px"></div>
+                    <div id="hover_info" style="height: 150px"></div>
                     <div id="cluster_chart"></div>
                 </div>
             </div>

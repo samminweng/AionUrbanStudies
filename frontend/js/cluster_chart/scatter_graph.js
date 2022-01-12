@@ -1,45 +1,50 @@
 // Create scatter graph
-function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, corpus_data, corpus_key_phrases) {
+function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
     const width = 600;
     const height = 600;
-    const cluster_approach = 'HDBSCAN';
     // Find the maximal cluster number as total number of clusters
-    const total_clusters = cluster_chart_data.map(c => c[cluster_approach + '_Cluster']).reduce((p_value, c_value) => {
+    const total_clusters = corpus_data.map(c => c['Cluster']).reduce((p_value, c_value) => {
         return (p_value >= c_value) ? p_value : c_value;
-    }, 0);
-    const clusters = cluster_topic_key_phrases;
-    // console.log(clusters);
-    // Get the color of collocation
-    const colors = function (cluster_no) {
-        // Optimal color pallets for 10 colors
-        const color_plates = d3.schemeCategory10;
-        return (cluster_no < 0) ? "gray" : color_plates[cluster_no];
-    }
-    // Determine the opacity based on the outlier or cluster
-    const opacity = function (cluster_no) {
-        return (cluster_no < 0) ? 0.2 : 1.0;
-    }
-
+    }, 0) + 1;
+    console.log(total_clusters);
     // Get top N topics of a cluster
     function get_cluster_topics(cluster_no, n) {
         // Cluster top 5 topics
-        const topics = clusters.find(c => c['Cluster'] === cluster_no)['TF-IDF-Topics'].slice(0, n);
+        const topics = cluster_topic_key_phrases.find(c => c['Cluster'] === cluster_no)['Topics'].slice(0, n);
         return topics;
     }
 
-
     // Convert the json data to Plotly js data format
-    function convert_cluster_data_to_chart_format() {
-        let data = [];
+    function convert_cluster_data_to_data_points() {
+        // Get the categorical color for each cluster
+        const colors = function (cluster_no) {
+            // Optimal color pallets for 21 colors from http://vrl.cs.brown.edu/color
+            // citation:
+            // @article{gramazio-2017-ccd,
+            //   author={Gramazio, Connor C. and Laidlaw, David H. and Schloss, Karen B.},
+            //   journal={IEEE Transactions on Visualization and Computer Graphics},
+            //   title={Colorgorical: creating discriminable and preferable color palettes for information visualization},
+            //   year={2017}
+            // }
+            const color_plates = ["#68affc", "#266197", "#7ce5e6", "#285d28", "#1fa198", "#7feb90", "#3aa609",
+                                  "#c7dd91", "#76480d", "#b08965", "#871d32", "#ee4454", "#f8cac2", "#ed820a",
+                                  "#f3d426", "#859947", "#bde31d", "#5e4393", "#c697f4", "#6a10a6", "#fe79ec"];
+            return (cluster_no < 0) ? "gray" : color_plates[cluster_no];
+        };
+        // Determine the opacity based on the outlier or cluster
+        const opacity = function (cluster_no) {
+            return (cluster_no < 0) ? 0.2 : 1.0;
+        };
+        let data_points = [];
         const initial_cluster = (is_hide) ? 0 : -1;
         // Convert the clustered data into the format for Plotly js chart
-        for (let cluster_no = initial_cluster; cluster_no <= total_clusters; cluster_no++) {
-            const cluster_data = cluster_chart_data.filter(d => d[cluster_approach + '_Cluster'] === cluster_no);
-            if (cluster_data.length > 0) {
+        for (let cluster_no = initial_cluster; cluster_no < total_clusters; cluster_no++) {
+            const cluster = corpus_data.filter(d => d['Cluster'] === cluster_no);
+            if (cluster.length > 0) {
                 let data_point = {'x': [], 'y': [], 'label': []};
-                for (const dot of cluster_data) {
-                    data_point['x'].push(dot.x);
-                    data_point['y'].push(dot.y);
+                for (const doc of cluster) {
+                    data_point['x'].push(doc.x);
+                    data_point['y'].push(doc.y);
                     const topics = get_cluster_topics(cluster_no, 5);
                     const topic_text = topics.map(t => t['topic']).join("<br>");
                     if(cluster_no !== -1){
@@ -58,14 +63,14 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
                     'marker': {color: colors(cluster_no)}, opacity: opacity(cluster_no),
                     'hovertemplate': '%{text}'
                 };
-                data.push(trace);
+                data_points.push(trace);
             }
         }
-        return data;
+        return data_points;
     }
 
-    // Display top 10 topics above the chart
-    function display_top_10_topics(cluster_no){
+    // Display top topics above the chart
+    function display_top_topics(cluster_no){
         $('#hover_info').empty();
         const n = 10;
         const topics = get_cluster_topics(cluster_no, n);      // Get top 10 cluster topics
@@ -80,10 +85,9 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         $('#hover_info').focus();
     }
 
-
     // Draw google chart
     function drawChart() {
-        const data = convert_cluster_data_to_chart_format();
+        const data_points = convert_cluster_data_to_data_points();
         // Define the layout
         const option = {
             autosize: true,
@@ -94,12 +98,11 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
                 l: 30,
                 r: 30,
                 b: 30,
-                t: 30,
-                // pad: 1
+                t: 30
             },
             // Plot the legend outside the
             showlegend: true,
-            // // Display the legend horizontally
+            // Display the legend horizontally
             legend: {
                 "orientation": "v",
                 font: {
@@ -112,9 +115,9 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         }
 
         // Get the cluster number
-        Plotly.newPlot('cluster_chart', data, option);
+        Plotly.newPlot('cluster_chart', data_points, option);
         const cluster_chart = document.getElementById('cluster_chart');
-        // Add chart onclick to toggle annotation
+        // // Add chart onclick to toggle annotation
         cluster_chart.on('plotly_click', function (data) {
             const point = data.points[0];
             // Get the doc id from text
@@ -124,9 +127,9 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
             }
             // display_top_10_topics(cluster_no);
             // Create a list of cluster doc
-            const cluster = clusters.find(c => c['Cluster'] === cluster_no);
+            // const cluster = clusters.find(c => c['Cluster'] === cluster_no);
             const cluster_text = (cluster_no !== -1) ? 'Cluster #' + cluster_no : "Outliers";
-            const cluster_doc_list = new ClusterDocList(cluster, corpus_data, corpus_key_phrases);
+            const cluster_doc_list = new ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases);
             // Add an annotation to the clustered dots
             const new_annotation = {
                 x: point.xaxis.d2l(point.x),
@@ -158,7 +161,7 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
                 if(point.data.name.includes('#')){
                     cluster_no = parseInt(point.data.name.split("#")[1]);
                 }
-                display_top_10_topics(cluster_no);
+                display_top_topics(cluster_no);
             }
         }).on('plotly_unhover', function(data){
             $('#hover_info').empty();
@@ -172,6 +175,9 @@ function ScatterGraph(is_hide, cluster_chart_data, cluster_topic_key_phrases, co
         $('#cluster_chart').empty();
         $('#cluster_chart').css('width', width).css('height', height);
         drawChart();
+        const cluster_doc_list = new ClusterDocList(1, corpus_data, cluster_topic_key_phrases);
+
+
     }
 
     _createUI();

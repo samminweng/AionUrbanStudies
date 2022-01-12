@@ -1,5 +1,5 @@
 // Display a list of research articles
-function DocList(docs, selected_term, corpus_key_phrases) {
+function DocList(docs, selected_term) {
     let header = "";
     if(selected_term != null){
         if('topic' in selected_term){
@@ -32,12 +32,11 @@ function DocList(docs, selected_term, corpus_key_phrases) {
                 docTable.find('tbody').empty();
                 for (let i = 0; i < docs.length; i++) {
                     const doc = docs[i];
-                    // console.log(doc);
+                    console.log(doc);
                     const row = $('<tr class="d-flex"></tr>');
                     // Add the title
                     const col = $('<td class="col"></td>');
-                    const doc_key_phrases = corpus_key_phrases.find(c => c['DocId'] === doc['DocId'])['key-phrases'];
-                    const doc_view = new DocView(doc, doc_key_phrases, selected_term);
+                    const doc_view = new DocView(doc, selected_term);
                     col.append(doc_view.get_container());
                     row.append(col);
                     docTable.find('tbody').append(row);
@@ -59,8 +58,6 @@ function DocList(docs, selected_term, corpus_key_phrases) {
         container.append(pagination);
         container.append(doc_table);
         $('#doc_list').append(container);
-
-
     }
 
     _createUI();

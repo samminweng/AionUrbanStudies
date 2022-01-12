@@ -7,19 +7,9 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, corpus_key_phrases,
     // Create an list item to display a group of key phrases
     function createGroupItem(group){
         const group_item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>')
-        const group_no = group['group'];
-
         // Display key phrases
         const key_phrases = group['key-phrases'];
         const key_phrase_div = $('<div class="ms-2 me-auto"></div>');
-        // // Add sub title
-        // const sub_title_div = $('<div class="fw-bold text-capitalize sub-title"></div>');
-        // if (group_no === -1){
-        //     sub_title_div.text("miscellaneous");
-        // }else{
-        //     sub_title_div.text(key_phrases[0]);
-        // }
-        // key_phrase_div.append(sub_title_div);
         // Display top 10 key phrases
         const text_span = $('<p class="key_phrase_text"></p>');
         text_span.text(key_phrases.slice(0, 10).join(", "));
