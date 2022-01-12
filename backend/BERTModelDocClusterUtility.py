@@ -166,7 +166,7 @@ class BERTModelDocClusterUtility:
             return avg_score
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-            return None
+            return -1
 
     # Process and clean the text by converting plural nouns to singular nouns
     # Avoid license sentences

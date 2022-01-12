@@ -458,7 +458,7 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        iter = 12
+        iter = 6
         mdc = BERTModelDocCluster(iter)
         mdc.run_HDBSCAN_cluster_experiments()
         mdc.summarize_HDBSCAN_cluster_experiment_results()
