@@ -1,0 +1,4 @@
+cluster,group,count,key-phrases,NumDocs,DocIds
+22,-1,12,"['environmental aesthetic', 'landscape taste', 'scenic landscape', 'ecology', 'behavioral landscape preference', 'nature', 'landscape', 'inclusive landscape', 'inclusive design', 'urban national park', 'nature culture', 'cultural conceptualization']",5,"[9, 12, 19, 240, 279]"
+22,0,7,"['pure environmental aesthetic', 'aesthetic', 'towards inclusive design', 'cultural experience', 'thermal comfort', 'cultural process', 'environmental affordances']",4,"[9, 19, 30, 279]"
+22,1,11,"['arcadian landscape', 'landscape architect', 'outdoor urban space', 'urban environment', 'hot arid climate', 'urban space', 'natured city', 'urban conservation', 'park creation', 'urban material structure', 'urban design']",5,"[12, 19, 30, 240, 279]"

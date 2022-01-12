@@ -1,0 +1,4 @@
+cluster,group,count,key-phrases,NumDocs,DocIds
+24,-1,5,"['public green space', 'ocean health', 'ocean literacy', 'ocean activist', 'healthy ocean']",2,"[11, 72]"
+24,0,14,"['foreign resident youth', 'immigrant young people', 'social inclusion', 'multinaturalism', 'multiculturalism', 'collective experiment', 'scientific laboratory', 'modernity', 'Blue urbanism', 'fMRI', 'brain region activity', 'neuroscience', 'brain region', 'brain']",4,"[11, 28, 72, 180]"
+24,1,11,"['Zurich investigated leisure', 'water management', 'water resource management', 'unsustainable water management', 'megacities water quantity', 'megacities water', 'Australian urban water', 'urban water strategy', 'sustainable urban water', 'sustainable water', 'sustainable water management']",3,"[11, 80, 125]"

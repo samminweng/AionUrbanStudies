@@ -1,0 +1,4 @@
+cluster,group,count,key-phrases,NumDocs,DocIds
+23,-1,9,"['Nigerian urban life', 'Igbo hinterland', 'southern Nigerian town', 'Yoruba society', 'Nigerian town', 'housing quality', 'Nigerian society', 'urban design', 'lived sonic experience']",3,"[152, 177, 209]"
+23,0,13,"['Soundscape research', 'soundscapes', 'soundscape science', 'soundscape', 'environmental sound', 'road traffic noise', 'traffic noise', 'road traffic', 'noise', 'house vibration', 'human hearing', 'city noise', 'sound']",4,"[5, 47, 209, 262]"
+23,1,13,"['ethnic concentration', 'ethnic community', 'local ethnic community', 'new Canadian immigrant', 'Canadian immigrant', 'housing development', 'housing planning', 'future housing development', 'inclusive design', 'inclusive design research', 'Modern architect', 'modernity', 'architect']",4,"[73, 177, 209, 262]"
