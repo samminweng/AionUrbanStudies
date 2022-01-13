@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+para,0.0108109046,5,1,1,urban survey,0.0146057527,3,1,1,vernacular architectural heritage,0.0397601046,2,1,1,vernacular architectural heritage,0.0397601046,2,1,1
+urbanity,0.0086487237,6,1,3,social space,0.011534018,3,3,2,reconfigures urban life,0.0198800523,1,1,1,reconfigures urban life,0.0198800523,1,1,1
+car,0.0085372641,5,1,2,risk society,0.0097371685,2,1,1,involving distinct way,0.0198800523,1,1,1,involving distinct way,0.0198800523,1,1,1
+rehabilitation,0.0068298113,4,1,2,vernacular heritage,0.0097371685,2,1,1,trace urban sociology,0.0198800523,1,1,1,trace urban sociology,0.0198800523,1,1,1
+automobility,0.0064865427,3,1,1,social networking,0.0097371685,2,1,1,makes instantaneous time,0.0198800523,1,1,1,makes instantaneous time,0.0198800523,1,1,1
+malandros,0.0064865427,3,1,1,ancient festival,0.0097371685,2,1,1,within fragmented moment,0.0198800523,1,1,1,within fragmented moment,0.0198800523,1,1,1
+mobility,0.0057658158,8,2,9,dystopian city,0.0097371685,2,1,1,entailed various mobility,0.0198800523,1,1,1,entailed various mobility,0.0198800523,1,1,1
+immobility,0.0057658158,4,1,3,urban conglomeration,0.0097371685,2,1,1,modern civil society,0.0198800523,1,1,1,modern civil society,0.0198800523,1,1,1
+flood,0.0057658158,4,1,3,urban space,0.007729380300000001,10,3,16,without physical mobility,0.0198800523,1,1,1,without physical mobility,0.0198800523,1,1,1
+festival,0.0050108989000000005,4,1,4,civil society,0.0076893454,2,1,2,mobile risk society,0.0198800523,1,1,1,mobile risk society,0.0198800523,1,1,1
+virus,0.0043243618,2,1,1,social life,0.0071873983,4,1,8,forced urban life,0.0198800523,1,1,1,forced urban life,0.0198800523,1,1,1
+bandit,0.0043243618,2,1,1,architectural heritage,0.0064914456,2,1,3,providing social care,0.0198800523,1,1,1,providing social care,0.0198800523,1,1,1
+malandro,0.0043243618,2,1,1,nineteenth century,0.0064914456,2,1,3,maximum physical immobility,0.0198800523,1,1,1,maximum physical immobility,0.0198800523,1,1,1
+violence,0.0043243618,3,2,3,urban study,0.005305729,4,2,11,negative ecological side,0.0198800523,1,1,1,negative ecological side,0.0198800523,1,1,1
+adda,0.0043243618,2,1,1,popular culture,0.0049822705,2,1,5,ecological side effect,0.0198800523,1,1,1,ecological side effect,0.0198800523,1,1,1
+networking,0.0043243618,2,1,1,motor car,0.0048685842000000005,1,1,1,surrounding vernacular heritage,0.0198800523,1,1,1,surrounding vernacular heritage,0.0198800523,1,1,1
+essence,0.0034149056,2,2,2,awesome consequence,0.0048685842000000005,1,1,1,examining rehabilitation settlement,0.0198800523,1,1,1,examining rehabilitation settlement,0.0198800523,1,1,1
+barrio,0.0034149056,2,1,2,overwhelming impact,0.0048685842000000005,1,1,1,primary field observation,0.0198800523,1,1,1,primary field observation,0.0198800523,1,1,1
+injustice,0.0034149056,2,1,2,distinct way,0.0048685842000000005,1,1,1,incorporating contemporary planning,0.0198800523,1,1,1,incorporating contemporary planning,0.0198800523,1,1,1
+circumstance,0.0034149056,2,1,2,paradoxical resistance,0.0048685842000000005,1,1,1,contemporary planning ideology,0.0198800523,1,1,1,contemporary planning ideology,0.0198800523,1,1,1

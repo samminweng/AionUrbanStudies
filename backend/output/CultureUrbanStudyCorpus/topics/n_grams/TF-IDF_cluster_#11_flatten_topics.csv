@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+consultation,0.0097371685,4,1,3,indigenous people,0.0284332722,6,1,4,yanama budyari gumada,0.0636161673,2,1,1,yanama budyari gumada,0.0636161673,2,1,1
+literacy,0.0086505135,3,1,2,cultural literacy,0.0245376645,3,1,1,natural resource management,0.0636161673,2,1,1,natural resource management,0.0636161673,2,1,1
+gumada,0.0073028763,2,1,1,budyari gumada,0.016358443,2,1,1,frame natural resource,0.0318080836,1,1,1,frame natural resource,0.0318080836,1,1,1
+reconciliation,0.0073028763,2,2,1,urban centre,0.016358443,2,2,1,make explicit practice,0.0318080836,1,1,1,make explicit practice,0.0318080836,1,1,1
+bali,0.0073028763,2,1,1,directed towards,0.016358443,2,1,1,two specific activity,0.0318080836,1,1,1,two specific activity,0.0318080836,1,1,1
+homelessness,0.006346712500000001,3,1,4,affordable housing,0.016358443,2,1,1,invites new way,0.0318080836,1,1,1,invites new way,0.0318080836,1,1,1
+settler,0.005767009,2,1,2,associative relationship,0.016358443,2,1,1,unceded urban place,0.0318080836,1,1,1,unceded urban place,0.0318080836,1,1,1
+family,0.0044867275,3,1,7,intercultural lens,0.016358443,2,1,1,diverse major city,0.0318080836,1,1,1,diverse major city,0.0318080836,1,1,1
+placemaking,0.0037367029,2,1,5,resource management,0.012918100200000001,2,1,2,contemporary policy aim,0.0318080836,1,1,1,contemporary policy aim,0.0318080836,1,1,1
+heart,0.0037367029,2,1,5,natural resource,0.010905628700000001,2,1,3,northernmost capital city,0.0318080836,1,1,1,northernmost capital city,0.0318080836,1,1,1
+ontology,0.0036514382,1,1,1,urban place,0.010905628700000001,2,1,3,within condoned poverty,0.0318080836,1,1,1,within condoned poverty,0.0318080836,1,1,1
+caring,0.0036514382,1,1,1,indigenous culture,0.010905628700000001,2,1,3,legislation directed towards,0.0318080836,1,1,1,legislation directed towards,0.0318080836,1,1,1
+rejuvenation,0.0036514382,1,1,1,cultural life,0.010905628700000001,2,1,3,empirical case study,0.0318080836,1,1,1,empirical case study,0.0318080836,1,1,1
+entanglement,0.0036514382,1,1,1,urban designer,0.008370214400000001,2,1,5,provides empirical support,0.0318080836,1,1,1,provides empirical support,0.0318080836,1,1,1
+reciprocity,0.0036514382,1,1,1,reciprocal relationship,0.0081792215,1,1,1,redress historical marginalization,0.0318080836,1,1,1,redress historical marginalization,0.0318080836,1,1,1
+burn,0.0036514382,1,1,1,urbanised place,0.0081792215,1,1,1,currently limit participation,0.0318080836,1,1,1,currently limit participation,0.0318080836,1,1,1
+camp,0.0036514382,1,1,1,explicit practice,0.0081792215,1,1,1,underlying cultural assumption,0.0318080836,1,1,1,underlying cultural assumption,0.0318080836,1,1,1
+yanama,0.0036514382,1,1,1,specific activity,0.0081792215,1,1,1,public policy recommendation,0.0318080836,1,1,1,public policy recommendation,0.0318080836,1,1,1
+budyari,0.0036514382,1,1,1,cultural burn,0.0081792215,1,1,1,transformative urban design,0.0318080836,1,1,1,transformative urban design,0.0318080836,1,1,1
+walk,0.0036514382,1,1,1,sustained presence,0.0081792215,1,1,1,positive symbolic capital,0.0318080836,1,1,1,positive symbolic capital,0.0318080836,1,1,1

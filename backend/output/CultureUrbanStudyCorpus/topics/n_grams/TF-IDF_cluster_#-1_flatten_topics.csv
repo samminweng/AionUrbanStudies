@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+fever,0.0065267376000000005,13,1,1,typhoid fever,0.0118028496,11,1,1,typhoid fever case,0.007613637,2,1,1,typhoid fever,0.0118028496,11,1,1
+disaster,0.0036817494,11,3,3,smart city,0.01016792,12,3,2,social impact assessment,0.007613637,2,1,1,smart city,0.01016792,12,3,2
+incidence,0.0035143972000000003,7,1,1,indigenous knowledge,0.0084732666,10,1,2,urban growth boundary,0.007613637,2,1,1,indigenous knowledge,0.0084732666,10,1,2
+empire,0.0033470449000000003,10,2,3,good death,0.006437918000000001,6,1,1,smart city application,0.007613637,2,1,1,typhoid fever case,0.007613637,2,1,1
+typhoid,0.0030123404,6,1,1,urban sprawl,0.006437918000000001,6,1,1,system take place,0.007613637,2,1,1,social impact assessment,0.007613637,2,1,1
+mobility,0.0030123404,18,4,9,indigenous people,0.005595003,9,6,4,inter cultural dialogue,0.007613637,2,1,1,urban growth boundary,0.007613637,2,1,1
+death,0.0030123404,6,1,1,disaster prevention,0.0042919453,4,2,1,relevant regional culture,0.007613637,2,1,1,smart city application,0.007613637,2,1,1
+fair,0.0030123404,6,1,1,optimum age,0.0032189590000000004,3,1,1,regional culture study,0.007613637,2,1,1,system take place,0.007613637,2,1,1
+sprawl,0.0030123404,6,1,1,conflict activity,0.0032189590000000004,3,1,1,tsunami hazard zone,0.007613637,2,1,1,inter cultural dialogue,0.007613637,2,1,1
+water,0.0028788917,14,2,7,educational environment,0.0032189590000000004,3,1,1,detect febrile case,0.0038068185,1,1,1,relevant regional culture,0.007613637,2,1,1
+hegemony,0.0023788154,6,2,2,ethnic group,0.0031083350000000003,5,2,4,fever among preschooler,0.0038068185,1,1,1,regional culture study,0.007613637,2,1,1
+informality,0.0023429315,7,1,3,location choice,0.00254198,3,1,2,urban study area,0.0038068185,1,1,1,tsunami hazard zone,0.007613637,2,1,1
+specie,0.0023270537,8,1,4,water management,0.00254198,3,2,2,surrounding industrial development,0.0038068185,1,1,1,fever,0.0065267376000000005,13,1,1
+reconstruction,0.0023270537,8,1,4,cultural system,0.00254198,3,1,2,inform local resident,0.0038068185,1,1,1,good death,0.006437918000000001,6,1,1
+knowledge,0.0022384471,25,7,15,culture study,0.00254198,3,1,2,relationship among culture,0.0038068185,1,1,1,urban sprawl,0.006437918000000001,6,1,1
+child,0.0020563512,10,3,7,urban growth,0.002486668,4,3,4,socially constructed risk,0.0038068185,1,1,1,indigenous people,0.005595003,9,6,4
+duration,0.002008227,4,2,1,young people,0.0021973978,5,1,7,conflicting cultural worldviews,0.0038068185,1,1,1,disaster prevention,0.0042919453,4,2,1
+favelas,0.002008227,4,1,1,developing country,0.0021459727,3,1,3,contentious environmental debate,0.0038068185,1,1,1,detect febrile case,0.0038068185,1,1,1
+tsunami,0.0019823461,5,2,2,need vaccination,0.0021459727,2,1,1,past two decade,0.0038068185,1,1,1,fever among preschooler,0.0038068185,1,1,1
+recovery,0.0017452903000000001,6,4,4,active surveillance,0.0021459727,2,1,1,numerous social conflict,0.0038068185,1,1,1,urban study area,0.0038068185,1,1,1

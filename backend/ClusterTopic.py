@@ -20,26 +20,29 @@ class ClusterTopic:
     def collect_iterative_cluster_results(self):
         folder = os.path.join('output', self.args.case_name, 'cluster')
         # Load cluster results at 0 iteration as initial state
-        path = os.path.join(folder, 'iteration_0', self.args.case_name + '_clusters.json')
-        corpus_df = pd.read_json(path)
-        cur_cluster_no = corpus_df['HDBSCAN_Cluster'].max() + 1
-        results = corpus_df.to_dict("records")
+        cur_cluster_no = 0
+        results = list()
         # Go through each iteration 1 to last iteration
-        for i in list(range(1, self.args.last_iteration + 1)):
+        for i in range(0, self.args.last_iteration + 1):
             try:
                 cluster_path = os.path.join(folder, 'iteration_' + str(i), self.args.case_name + '_clusters.json')
                 df = pd.read_json(cluster_path)
                 cluster_df = df[df['HDBSCAN_Cluster'] != -1]
-                total_cluster_no = cluster_df['HDBSCAN_Cluster'].max() + 1
+                total_cluster_no = cluster_df['HDBSCAN_Cluster'].max()
+                cluster_no_list = list(range(0, total_cluster_no + 1))
                 # Added the clustered results
-                for cluster_no in range(0, total_cluster_no):
-                    cur_cluster_no = cur_cluster_no + cluster_no
+                for cluster_no in cluster_no_list:
+                    # Get the clustered docs
                     c_df = cluster_df[cluster_df['HDBSCAN_Cluster'] == cluster_no]
-                    doc_ids = c_df['DocId'].tolist()
-                    # Update the cluster no with current cluster no
-                    docs = list(filter(lambda d: d['DocId'] in doc_ids, results))
+                    docs = c_df.to_dict("records")
                     for doc in docs:
-                        doc['HDBSCAN_Cluster'] = cur_cluster_no
+                        doc['HDBSCAN_Cluster'] = cur_cluster_no + cluster_no
+                    results.extend(docs)
+                cur_cluster_no = cur_cluster_no + len(cluster_no_list)
+                # Add the outliers at lst iteration
+                if i == self.args.last_iteration:
+                    outlier_df = df[df['HDBSCAN_Cluster'] == -1]
+                    results.extend(outlier_df.to_dict("records"))
                 image_folder = os.path.join('output', self.args.case_name, 'topics', 'images')
                 Path(image_folder).mkdir(parents=True, exist_ok=True)
                 # Visualise the cluster results

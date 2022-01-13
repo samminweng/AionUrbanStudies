@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+beauty,0.0102576157,10,1,5,landscape type,0.0221573338,5,1,1,ethnic minority group,0.048796492000000004,3,1,1,ethnic minority group,0.048796492000000004,3,1,1
+preference,0.0080188446,12,4,9,structural beauty,0.017725867000000003,4,1,1,people reporting stress,0.0325309946,2,1,1,people reporting stress,0.0325309946,2,1,1
+landscape,0.0067266366000000005,54,9,22,dimension people,0.0132944003,3,1,1,reporting stress prefer,0.0325309946,2,1,1,reporting stress prefer,0.0325309946,2,1,1
+stress,0.006682370500000001,5,1,3,factor analysis,0.0132944003,3,2,1,urban park user,0.0325309946,2,1,1,urban park user,0.0325309946,2,1,1
+prefer,0.0060141335,3,1,1,landscape research,0.0132944003,3,1,1,sustainability requires people,0.0325309946,2,1,1,sustainability requires people,0.0325309946,2,1,1
+brain,0.0047493015,3,1,2,landscape concept,0.0132944003,3,1,1,urban green space,0.0282717195,3,2,4,urban green space,0.0282717195,3,2,4
+plant,0.0046459595000000005,4,1,4,ethnic minority,0.0132944003,3,1,1,perceived sensory dimension,0.0256894038,2,1,2,perceived sensory dimension,0.0256894038,2,1,2
+specie,0.0046459595000000005,4,1,4,ornamental plant,0.0132944003,3,1,1,perceive green space,0.0162654973,1,1,1,landscape type,0.0221573338,5,1,1
+wild,0.0040094223,2,1,1,cultural sustainability,0.0132944003,3,1,1,randomly selected informant,0.0162654973,1,1,1,structural beauty,0.017725867000000003,4,1,1
+greatness,0.0040094223,2,1,1,green space,0.012133978600000001,6,2,6,analyzed using factor,0.0162654973,1,1,1,perceive green space,0.0162654973,1,1,1
+respondent,0.0040094223,3,1,3,minority group,0.010498456100000001,3,1,2,using factor analysis,0.0162654973,1,1,1,randomly selected informant,0.0162654973,1,1,1
+designing,0.0040094223,3,2,3,reporting stress,0.0088629335,2,1,1,city planning perspective,0.0162654973,1,1,1,analyzed using factor,0.0162654973,1,1,1
+audience,0.0040094223,2,2,1,stress prefer,0.0088629335,2,1,1,public mental health,0.0162654973,1,1,1,using factor analysis,0.0162654973,1,1,1
+substructure,0.0040094223,2,1,1,restorative environment,0.0088629335,2,1,1,transdisciplinary system approach,0.0162654973,1,1,1,city planning perspective,0.0162654973,1,1,1
+image,0.0035009546000000003,11,3,16,mental health,0.0088629335,2,2,1,different landscape concept,0.0162654973,1,1,1,public mental health,0.0162654973,1,1,1
+emotion,0.0034844696000000002,3,2,4,transdisciplinary landscape,0.0088629335,2,1,1,concept exist side,0.0162654973,1,1,1,transdisciplinary system approach,0.0162654973,1,1,1
+discipline,0.0033411853,5,3,9,landscape taste,0.0088629335,2,1,1,new complex concept,0.0162654973,1,1,1,different landscape concept,0.0162654973,1,1,1
+dimension,0.0032060959000000003,15,3,19,landscape painting,0.0088629335,2,1,1,enable transdisciplinary landscape,0.0162654973,1,1,1,concept exist side,0.0162654973,1,1,1
+aesthetic,0.003166201,2,1,2,ecological sustainability,0.0088629335,2,1,1,transdisciplinary landscape research,0.0162654973,1,1,1,new complex concept,0.0162654973,1,1,1
+adherence,0.003166201,2,1,2,environmental aesthetic,0.0088629335,2,1,1,transdisciplinary landscape concept,0.0162654973,1,1,1,enable transdisciplinary landscape,0.0162654973,1,1,1

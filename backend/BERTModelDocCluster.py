@@ -49,7 +49,7 @@ class BERTModelDocCluster:
             # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
             # 768 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
             model_name='all-mpnet-base-v2',
-            device='cuda',
+            device='cpu',
             n_neighbors=15,
             min_dist=0.0,
             dimensions=[768, 500, 450, 400, 350, 300, 250, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50,

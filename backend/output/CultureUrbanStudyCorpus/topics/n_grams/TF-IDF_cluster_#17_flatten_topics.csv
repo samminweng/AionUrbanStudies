@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+waste,0.011015786500000001,16,3,3,residential environment,0.0191614962,10,2,1,residential environmental quality,0.0163273433,3,1,1,residential environment,0.0191614962,10,2,1
+indicator,0.0063448671,15,2,7,plastic waste,0.0076645985000000005,4,1,1,remote sensing data,0.0163273433,3,1,1,residential environmental quality,0.0163273433,3,1,1
+totora,0.0061963799,6,1,1,sensing data,0.0076645985000000005,4,1,1,municipal solid waste,0.0108848955,2,2,1,remote sensing data,0.0163273433,3,1,1
+index,0.0055078933,8,2,3,livable city,0.0068631276,7,1,5,satisfy project requirement,0.0108848955,2,1,1,waste,0.011015786500000001,16,3,3
+enablers,0.00413092,4,1,1,construction industry,0.0057484489000000005,3,2,1,contemporary construction field,0.0108848955,2,1,1,municipal solid waste,0.0108848955,2,2,1
+rubber,0.00413092,4,1,1,construction field,0.0057484489000000005,3,1,1,waste activated carbon,0.0108848955,2,1,1,satisfy project requirement,0.0108848955,2,1,1
+silk,0.00413092,4,1,1,construction sector,0.0057484489000000005,3,2,1,acid dye wastewater,0.0108848955,2,1,1,contemporary construction field,0.0108848955,2,1,1
+emission,0.0040776831,5,4,2,recent study,0.0057484489000000005,3,1,1,dye wastewater treatment,0.0108848955,2,1,1,waste activated carbon,0.0108848955,2,1,1
+removal,0.0040776831,5,1,2,environmental load,0.0057484489000000005,3,1,1,comprehensive evaluation model,0.0108848955,2,1,1,acid dye wastewater,0.0108848955,2,1,1
+property,0.0034303492,9,2,8,urban sustainability,0.0044407163000000005,4,1,4,regarded complex entity,0.0054424478,1,1,1,dye wastewater treatment,0.0108848955,2,1,1
+water,0.0033839291,8,4,7,environmental quality,0.0044407163000000005,4,1,4,combine three methodology,0.0054424478,1,1,1,comprehensive evaluation model,0.0108848955,2,1,1
+catalyst,0.0032621465000000002,4,1,2,spatial planning,0.004372239,5,1,6,identified six city,0.0054424478,1,1,1,plastic waste,0.0076645985000000005,4,1,1
+powder,0.0032621465000000002,4,1,2,efficiency score,0.0038322992,2,1,1,meanwhile lower level,0.0054424478,1,1,1,sensing data,0.0076645985000000005,4,1,1
+characterization,0.0032621465000000002,4,1,2,solid waste,0.0038322992,2,2,1,maximize customer satisfaction,0.0054424478,1,1,1,livable city,0.0068631276,7,1,5
+barrier,0.0031705358,6,1,5,satisfy project,0.0038322992,2,1,1,affects project performance,0.0054424478,1,1,1,indicator,0.0063448671,15,2,7
+implementation,0.0030981900000000002,9,3,9,project requirement,0.0038322992,2,1,1,construction industry practitioner,0.0054424478,1,1,1,totora,0.0061963799,6,1,1
+enabler,0.0030981900000000002,3,1,1,barrier group,0.0038322992,2,1,1,might conduct project,0.0054424478,1,1,1,construction industry,0.0057484489000000005,3,2,1
+exit,0.0030981900000000002,3,1,1,unsustainability indicator,0.0038322992,2,1,1,guide construction professional,0.0054424478,1,1,1,construction field,0.0057484489000000005,3,1,1
+acid,0.0030981900000000002,3,1,1,informatiologic condition,0.0038322992,2,1,1,better satisfy project,0.0054424478,1,1,1,construction sector,0.0057484489000000005,3,2,1
+cell,0.0030981900000000002,3,1,1,rural settlement,0.0038322992,2,1,1,seven major enabler,0.0054424478,1,1,1,recent study,0.0057484489000000005,3,1,1

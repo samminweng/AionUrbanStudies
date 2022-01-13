@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+frailty,0.0082085377,8,1,1,medical care,0.0239816217,15,1,2,urban space axis,0.0410917827,6,1,1,urban space axis,0.0410917827,6,1,1
+care,0.0071824705,21,1,9,older people,0.021113816,18,1,4,healthy life expectancy,0.0342431523,5,1,1,healthy life expectancy,0.0342431523,5,1,1
+expectancy,0.0056719257,7,1,2,life expectancy,0.0141719185,7,1,1,nationality characteristic dwelling,0.0342431523,5,1,1,nationality characteristic dwelling,0.0342431523,5,1,1
+axis,0.0056719257,7,1,2,space axis,0.012147358700000001,6,1,1,integrated community care,0.020545891400000002,3,1,1,medical care,0.0239816217,15,1,2
+scenery,0.0051303361000000006,5,1,1,rural design,0.0101227989,5,1,1,natural scenery city,0.020545891400000002,3,1,1,older people,0.021113816,18,1,4
+disease,0.0034202240000000004,5,1,3,healthy life,0.0101227989,5,1,1,green ecological planning,0.013697260900000001,2,1,1,integrated community care,0.020545891400000002,3,1,1
+drug,0.0034202240000000004,5,1,3,healthy society,0.0101227989,5,1,1,community care system,0.013697260900000001,2,1,1,natural scenery city,0.020545891400000002,3,1,1
+protection,0.0032819876000000003,13,3,12,characteristic dwelling,0.0101227989,5,1,1,public space environment,0.013697260900000001,2,1,1,life expectancy,0.0141719185,7,1,1
+resilience,0.0031500807000000002,6,1,5,key indicator,0.0080982391,4,1,1,less developing area,0.013697260900000001,2,1,1,green ecological planning,0.013697260900000001,2,1,1
+undernutrition,0.0030782016000000002,3,1,1,city square,0.0080982391,4,2,1,traditional culture protection,0.013697260900000001,2,1,1,community care system,0.013697260900000001,2,1,1
+inheritance,0.0030782016000000002,3,2,1,natural scenery,0.0080982391,4,1,1,characteristic dwelling protection,0.013697260900000001,2,1,1,public space environment,0.013697260900000001,2,1,1
+orient,0.0030782016000000002,3,1,1,scenery city,0.0080982391,4,1,1,public urban space,0.013697260900000001,2,2,1,less developing area,0.013697260900000001,2,1,1
+dwelling,0.0026250672,5,1,5,square design,0.0063950991,4,2,2,essential building space,0.013697260900000001,2,2,1,traditional culture protection,0.013697260900000001,2,1,1
+personnel,0.0024308253000000003,3,1,2,integrated community,0.0060736793,3,1,1,modern artistic expression,0.013697260900000001,2,2,1,characteristic dwelling protection,0.013697260900000001,2,1,1
+nationality,0.0024308253000000003,3,1,2,community care,0.0060736793,3,1,1,new urban planning,0.0108165911,2,1,2,public urban space,0.013697260900000001,2,2,1
+prevention,0.002377932,4,1,4,care system,0.0060736793,3,1,1,urban public space,0.010512829100000001,3,1,5,essential building space,0.013697260900000001,2,2,1
+demand,0.0022721453000000003,6,4,8,medical personnel,0.0060736793,3,1,1,traditional architectural element,0.0068486305,1,1,1,modern artistic expression,0.013697260900000001,2,2,1
+measure,0.0022363933000000003,8,2,11,minority nationality,0.0060736793,3,1,1,role local government,0.0068486305,1,1,1,new urban planning,0.0108165911,2,1,2
+indicator,0.0021013108,5,1,7,traditional block,0.0060736793,3,1,1,market oriented economy,0.0068486305,1,1,1,urban public space,0.010512829100000001,3,1,5
+square,0.0021013108,5,2,7,cultural context,0.0053988261,4,2,3,historical urban environment,0.0068486305,1,1,1,rural design,0.0101227989,5,1,1

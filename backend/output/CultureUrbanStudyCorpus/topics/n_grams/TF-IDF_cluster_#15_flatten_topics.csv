@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+hop,0.0124142564,10,1,1,hip hop,0.0238560627,9,1,1,everyday public space,0.0197429485,2,1,1,hip hop,0.0238560627,9,1,1
+hip,0.0099314051,8,1,1,public art,0.009214486400000001,6,1,4,intergenerational urban space,0.0098714742,1,1,1,everyday public space,0.0197429485,2,1,1
+music,0.0067983956,12,4,6,urban music,0.0079520209,3,1,1,integrate young people,0.0098714742,1,1,1,hop,0.0124142564,10,1,1
+youth,0.0056653297,10,5,6,young adult,0.0079520209,3,1,1,paper describes approach,0.0098714742,1,1,1,hip,0.0099314051,8,1,1
+art,0.0049477143,20,6,14,young people,0.0065140636,6,3,7,effectively involve youth,0.0098714742,1,1,1,intergenerational urban space,0.0098714742,1,1,1
+race,0.0039657308,7,4,6,building community,0.0053013473,2,1,1,embed diverse youth,0.0098714742,1,1,1,integrate young people,0.0098714742,1,1,1
+artist,0.0039657308,7,5,6,racial minority,0.0053013473,2,2,1,diverse youth voice,0.0098714742,1,1,1,paper describes approach,0.0098714742,1,1,1
+pub,0.0039213661,4,1,2,grime music,0.0053013473,2,1,1,upwardly mobile bicyclist,0.0098714742,1,1,1,effectively involve youth,0.0098714742,1,1,1
+bicyclist,0.0037242769,3,1,1,evidence drawn,0.0053013473,2,2,1,varied cultural meaning,0.0098714742,1,1,1,embed diverse youth,0.0098714742,1,1,1
+bicycling,0.0037242769,3,1,1,digital divide,0.0053013473,2,1,1,gentrifying urban planning,0.0098714742,1,1,1,diverse youth voice,0.0098714742,1,1,1
+racism,0.0037242769,3,3,1,social justice,0.0053013473,2,2,1,upholds systemic race,0.0098714742,1,1,1,upwardly mobile bicyclist,0.0098714742,1,1,1
+gayborhoods,0.0037242769,3,1,1,settler colonialism,0.0053013473,2,1,1,many problematic aspect,0.0098714742,1,1,1,varied cultural meaning,0.0098714742,1,1,1
+color,0.003596287,5,5,4,multiple colonialism,0.0053013473,2,1,1,urban bicycling culture,0.0098714742,1,1,1,gentrifying urban planning,0.0098714742,1,1,1
+politics,0.0033599373,11,4,12,youth work,0.0053013473,2,1,1,integration within society,0.0098714742,1,1,1,upholds systemic race,0.0098714742,1,1,1
+advocacy,0.0029410245,3,1,2,cultural exchange,0.0053013473,2,1,1,public sector play,0.0098714742,1,1,1,many problematic aspect,0.0098714742,1,1,1
+bicycle,0.0029410245,3,1,2,multiracial interaction,0.0053013473,2,1,1,particular government action,0.0098714742,1,1,1,urban bicycling culture,0.0098714742,1,1,1
+empowerment,0.0029410245,3,1,2,racial segregation,0.0053013473,2,2,1,similar effort today,0.0098714742,1,1,1,integration within society,0.0098714742,1,1,1
+settler,0.0029410245,3,2,2,ethnic diversity,0.0053013473,2,1,1,addressing contemporary challenge,0.0098714742,1,1,1,public sector play,0.0098714742,1,1,1
+activist,0.0028770296,4,3,4,neighborhood resident,0.0053013473,2,2,1,future planning scholarship,0.0098714742,1,1,1,particular government action,0.0098714742,1,1,1
+argument,0.0028770296,4,3,4,cultural activity,0.0048386112000000005,4,1,6,wider urban study,0.0098714742,1,1,1,similar effort today,0.0098714742,1,1,1

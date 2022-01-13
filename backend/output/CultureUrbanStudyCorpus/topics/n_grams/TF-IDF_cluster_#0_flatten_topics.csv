@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+nationalism,0.009349735100000001,19,1,2,creative knowledge,0.0054580124,4,1,1,case study city,0.0103722012,2,2,1,case study city,0.0103722012,2,2,1
+subway,0.0037388692,6,1,1,cultural policy,0.0043101383,4,3,2,multilocal creative knowledge,0.0103722012,2,1,1,multilocal creative knowledge,0.0103722012,2,1,1
+downtown,0.0036968928,13,1,6,alternative culture,0.0040935093,3,1,1,creative knowledge worker,0.0103722012,2,1,1,creative knowledge worker,0.0103722012,2,1,1
+cosmopolitanism,0.0029525479,6,2,2,ethnic quarter,0.0040935093,3,1,1,creative knowledge work,0.0103722012,2,1,1,nationalism,0.009349735100000001,19,1,2
+border,0.0024925795,6,3,3,urban study,0.0033457957,9,7,11,many different dimension,0.0051861006,1,1,1,creative knowledge,0.0054580124,4,1,1
+temptation,0.0024604566,5,1,2,urban tourism,0.0032326037,3,1,2,inspiring marginal community,0.0051861006,1,1,1,many different dimension,0.0051861006,1,1,1
+globalization,0.0021465195,14,5,12,melting pot,0.0032326037,3,2,2,three city government,0.0051861006,1,1,1,inspiring marginal community,0.0051861006,1,1,1
+refugee,0.0020771496,5,1,3,cultural history,0.0032326037,3,1,2,diverse urban environment,0.0051861006,1,1,1,three city government,0.0051861006,1,1,1
+urbanity,0.0020771496,5,1,3,urban spectacle,0.0032326037,3,1,2,decaying urban landscape,0.0051861006,1,1,1,diverse urban environment,0.0051861006,1,1,1
+tourism,0.0020728368,15,2,13,new form,0.0027927312,4,4,5,renewed cultural ambiance,0.0051861006,1,1,1,decaying urban landscape,0.0051861006,1,1,1
+night,0.0019683653000000002,4,3,2,inner city,0.0027290062,3,2,3,major cultural event,0.0051861006,1,1,1,renewed cultural ambiance,0.0051861006,1,1,1
+quarter,0.0019130877,6,1,5,three city,0.0027290062,3,3,3,foreign domestic worker,0.0051861006,1,1,1,major cultural event,0.0051861006,1,1,1
+semantics,0.0018694346,3,2,1,ethnic community,0.0027290062,3,2,3,deserted office district,0.0051861006,1,1,1,foreign domestic worker,0.0051861006,1,1,1
+suburbia,0.0018694346,3,1,1,study city,0.0027290062,2,2,1,different ethnic community,0.0051861006,1,1,1,deserted office district,0.0051861006,1,1,1
+texts,0.0018694346,3,3,1,knowledge worker,0.0027290062,2,1,1,metropolitan spatial apartheid,0.0051861006,1,1,1,different ethnic community,0.0051861006,1,1,1
+lifeworlds,0.0018694346,3,1,1,knowledge work,0.0027290062,2,1,1,intense emotional meaning,0.0051861006,1,1,1,metropolitan spatial apartheid,0.0051861006,1,1,1
+promise,0.0018694346,3,3,1,place attachment,0.0027290062,3,1,3,extensive interview source,0.0051861006,1,1,1,intense emotional meaning,0.0051861006,1,1,1
+hold,0.0018694346,3,1,1,healthy people,0.0027290062,2,1,1,using environmental concern,0.0051861006,1,1,1,extensive interview source,0.0051861006,1,1,1
+melting,0.0018694346,3,2,1,urban capitalism,0.0027290062,2,1,1,social medium activity,0.0051861006,1,1,1,using environmental concern,0.0051861006,1,1,1
+trash,0.0018694346,3,1,1,market city,0.0027290062,2,1,1,local cultural policy,0.0051861006,1,1,1,social medium activity,0.0051861006,1,1,1

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+blight,0.0175987348,9,1,1,urban blight,0.0311166036,9,1,1,medium size city,0.0311166036,3,1,1,urban blight,0.0311166036,9,1,1
+density,0.0064951694,9,1,8,healthy city,0.013651374,5,2,2,urban environmental management,0.0311166036,3,1,1,medium size city,0.0311166036,3,1,1
+host,0.0056646433,5,1,4,urban traffic,0.010921099200000001,4,1,2,urban sustainability transition,0.0207444024,2,1,1,urban environmental management,0.0311166036,3,1,1
+pandemic,0.0052144399,4,1,3,sustainability transition,0.0103722012,3,1,1,fuzzy cognitive mapping,0.0207444024,2,1,1,urban sustainability transition,0.0207444024,2,1,1
+dataset,0.00391083,2,1,1,medium size,0.0103722012,3,1,1,historic urban landscape,0.0207444024,2,1,1,fuzzy cognitive mapping,0.0207444024,2,1,1
+algorithm,0.00391083,2,2,1,size city,0.0103722012,3,1,1,main urban design,0.0207444024,2,1,1,historic urban landscape,0.0207444024,2,1,1
+fuzzy,0.00391083,2,1,1,social sustainability,0.0092197344,4,2,3,significant transition towards,0.0103722012,1,1,1,main urban design,0.0207444024,2,1,1
+traffic,0.0037292316,7,1,11,environmental management,0.0081908244,3,1,2,transition towards urbanisation,0.0103722012,1,1,1,healthy city,0.013651374,5,2,2
+transition,0.0036084274,5,1,8,cognitive mapping,0.0069148008,2,1,1,influence social development,0.0103722012,1,1,1,urban traffic,0.010921099200000001,4,1,2
+functionality,0.0035694673000000003,4,1,6,world space,0.0069148008,2,1,1,structural systemic realignments,0.0103722012,1,1,1,sustainability transition,0.0103722012,3,1,1
+operator,0.0030883436,2,2,2,developing country,0.0069148008,3,2,3,persistent societal challenge,0.0103722012,1,1,1,significant transition towards,0.0103722012,1,1,1
+creature,0.0030883436,2,1,2,artificial life,0.0069148008,2,1,1,towards urban farming,0.0103722012,1,1,1,transition towards urbanisation,0.0103722012,1,1,1
+attribute,0.0030016138,3,1,5,urban functionality,0.0069148008,2,1,1,renewable decentralised energy,0.0103722012,1,1,1,influence social development,0.0103722012,1,1,1
+spectrum,0.00260722,2,1,3,city district,0.0069148008,2,1,1,decentralised energy system,0.0103722012,1,1,1,structural systemic realignments,0.0103722012,1,1,1
+commerce,0.00260722,2,2,3,urban concept,0.0069148008,2,1,1,provides new insight,0.0103722012,1,1,1,persistent societal challenge,0.0103722012,1,1,1
+disease,0.00260722,2,1,3,traffic environment,0.0069148008,2,1,1,sustainability transition unfold,0.0103722012,1,1,1,towards urban farming,0.0103722012,1,1,1
+sustainability,0.0024835386,8,4,16,development pattern,0.0054605496000000005,2,1,2,explores possible strategy,0.0103722012,1,1,1,renewable decentralised energy,0.0103722012,1,1,1
+cause,0.0024027284,3,1,7,host city,0.0054605496000000005,2,1,2,governing urban transition,0.0103722012,1,1,1,decentralised energy system,0.0103722012,1,1,1
+working,0.0022658573,2,2,4,future development,0.0046098672,2,1,3,across geographical contexts,0.0103722012,1,1,1,provides new insight,0.0103722012,1,1,1
+evaluation,0.0021309895,4,3,11,spatial configuration,0.0046098672,2,1,3,real estate degradation,0.0103722012,1,1,1,sustainability transition unfold,0.0103722012,1,1,1

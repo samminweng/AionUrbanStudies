@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+festival,0.011721608100000001,28,3,4,economic development,0.0100604788,14,6,6,urban economic development,0.0137631131,2,1,1,urban economic development,0.0137631131,2,1,1
+art,0.0064793578,45,12,14,cultural producer,0.007873288,5,1,1,new creative cluster,0.0137631131,2,1,1,new creative cluster,0.0137631131,2,1,1
+branding,0.0062764621000000005,11,4,2,cultural sector,0.007873288,5,3,1,urban regeneration process,0.0137631131,2,2,1,urban regeneration process,0.0137631131,2,2,1
+regeneration,0.0055395199000000004,23,7,9,creative cluster,0.007873288,5,2,1,smart creative city,0.0137631131,2,1,1,smart creative city,0.0137631131,2,1,1
+event,0.004751529,33,3,14,special event,0.007873288,5,1,1,massive financial investment,0.006881556600000001,1,1,1,festival,0.011721608100000001,28,3,4
+tourism,0.0041660428,26,4,13,place branding,0.007873288,5,2,1,flagship regeneration project,0.006881556600000001,1,1,1,economic development,0.0100604788,14,6,6
+sector,0.0037017587,17,9,10,cultural participation,0.007460949000000001,6,1,2,iconic cultural project,0.006881556600000001,1,1,1,cultural producer,0.007873288,5,1,1
+product,0.0036127303000000003,15,7,9,creative city,0.0062986304000000005,6,3,3,whilst balancing achievement,0.006881556600000001,1,1,1,cultural sector,0.007873288,5,3,1
+creativity,0.0032553877,11,5,7,creative people,0.0062986304000000005,4,4,1,drawn meaningful insight,0.006881556600000001,1,1,1,creative cluster,0.007873288,5,2,1
+producer,0.0028529373,5,1,2,event activity,0.0062986304000000005,4,1,1,suggests possible avenue,0.006881556600000001,1,1,1,special event,0.007873288,5,1,1
+cluster,0.0025879638000000003,7,3,5,quality product,0.0062986304000000005,4,1,1,cultural economic development,0.006881556600000001,1,1,1,place branding,0.007873288,5,2,1
+brand,0.0022823499000000002,4,4,2,creative activity,0.0062986304000000005,4,2,1,way cultural producer,0.006881556600000001,1,1,1,cultural participation,0.007460949000000001,6,1,2
+enquiry,0.0021676382,3,1,1,creative placemaking,0.0062986304000000005,4,1,1,producer obtain job,0.006881556600000001,1,1,1,massive financial investment,0.006881556600000001,1,1,1
+externality,0.0021676382,3,1,1,cultural production,0.006217457500000001,5,2,2,key social mechanism,0.006881556600000001,1,1,1,flagship regeneration project,0.006881556600000001,1,1,1
+economy,0.0021298393000000002,21,8,17,tourism study,0.006217457500000001,5,1,2,social mechanism structure,0.006881556600000001,1,1,1,iconic cultural project,0.006881556600000001,1,1,1
+investment,0.0019267895,8,6,9,urban tourism,0.006217457500000001,5,1,2,clustered production system,0.006881556600000001,1,1,1,whilst balancing achievement,0.006881556600000001,1,1,1
+journal,0.0019267895,4,1,3,urban regeneration,0.005748845000000001,8,5,6,art social milieu,0.006881556600000001,1,1,1,drawn meaningful insight,0.006881556600000001,1,1,1
+marketing,0.0019267895,4,3,3,cultural regeneration,0.004973966000000001,4,1,2,establish new career,0.006881556600000001,1,1,1,suggests possible avenue,0.006881556600000001,1,1,1
+innovation,0.001771701,9,5,11,place identity,0.004973966000000001,4,2,2,active cultural milieu,0.006881556600000001,1,1,1,cultural economic development,0.006881556600000001,1,1,1
+industry,0.0017420041000000002,8,6,10,event management,0.0047239728,3,1,1,economic development asset,0.006881556600000001,1,1,1,way cultural producer,0.006881556600000001,1,1,1

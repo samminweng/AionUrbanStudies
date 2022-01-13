@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+identity,0.0034254334,52,15,17,city identity,0.0138487164,14,2,1,cubic stone street,0.0113002402,3,1,1,city identity,0.0138487164,14,2,1
+hybridization,0.0028157976000000003,6,1,1,residential standard,0.0079135523,8,1,1,urban transformation project,0.0113002402,3,1,1,cubic stone street,0.0113002402,3,1,1
+standard,0.0023558484,11,2,6,architectural style,0.0059351642,6,2,1,old city center,0.0089236876,3,2,2,urban transformation project,0.0113002402,3,1,1
+astronomy,0.0023464980000000002,5,1,1,traditional market,0.005468097000000001,7,1,2,local urban space,0.0075334935,2,1,1,old city center,0.0089236876,3,2,2
+sündürme,0.0023464980000000002,5,1,1,urban transformation,0.0051580746000000005,9,1,4,typological analysis method,0.0075334935,2,1,1,residential standard,0.0079135523,8,1,1
+house,0.0020457499000000002,16,7,11,cubic stone,0.0049459702,5,1,1,urban land use,0.0075334935,2,1,1,local urban space,0.0075334935,2,1,1
+oil,0.0019033201,7,2,4,hybridization process,0.0049459702,5,1,1,urban street façades,0.0075334935,2,1,1,typological analysis method,0.0075334935,2,1,1
+modifier,0.0018771984,4,1,1,satellite image,0.0049459702,5,2,1,outstanding universal value,0.0075334935,2,1,1,urban land use,0.0075334935,2,1,1
+trust,0.0018530062,5,1,2,trust relationship,0.0039567761,4,1,1,many different civilization,0.0075334935,2,2,1,urban street façades,0.0075334935,2,1,1
+calendar,0.0018530062,5,2,2,traditional house,0.0039057836,5,3,2,two governmental institution,0.0075334935,2,1,1,outstanding universal value,0.0075334935,2,1,1
+trace,0.0018530062,5,3,2,third place,0.0039057836,5,1,2,high spatial resolution,0.0075334935,2,1,1,many different civilization,0.0075334935,2,2,1
+conservation,0.0017299644,9,3,7,land value,0.0039057836,5,2,2,cartographic data base,0.0075334935,2,1,1,two governmental institution,0.0075334935,2,1,1
+stone,0.001564332,5,1,3,cultural landscape,0.0031246269,4,2,2,new development scheme,0.0075334935,2,1,1,high spatial resolution,0.0075334935,2,1,1
+marketplace,0.0014824049,4,1,2,old city,0.0031246269,4,3,2,relationship among people,0.0059491251,2,1,2,cartographic data base,0.0075334935,2,1,1
+period,0.0014570117,14,8,13,new development,0.0031246269,4,2,2,urban housing complies,0.0037667467000000003,1,1,1,new development scheme,0.0075334935,2,1,1
+modernization,0.0014407746000000001,6,3,5,vernacular city,0.0029675821,3,1,1,characteristic among people,0.0037667467000000003,1,1,1,relationship among people,0.0059491251,2,1,2
+typology,0.0014407746000000001,6,3,5,transitional space,0.0029675821,3,1,1,multiple regression analysis,0.0037667467000000003,1,1,1,architectural style,0.0059351642,6,2,1
+assembly,0.0014078988000000001,3,2,1,stone street,0.0029675821,3,1,1,regression analysis reveal,0.0037667467000000003,1,1,1,traditional market,0.005468097000000001,7,1,2
+citadel,0.0014078988000000001,3,1,1,typological analysis,0.0029675821,3,1,1,income per month,0.0037667467000000003,1,1,1,urban transformation,0.0051580746000000005,9,1,4
+th,0.0014078988000000001,3,1,1,historical layer,0.0029675821,3,1,1,municipal administration culture,0.0037667467000000003,1,1,1,cubic stone,0.0049459702,5,1,1
