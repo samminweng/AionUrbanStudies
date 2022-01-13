@@ -8,8 +8,7 @@ function ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases) {
         cluster_link.text("Outliers");
     }
 
-
-    // Create a Top 10 Topic region
+    // Display Top 10 Topics and grouped key phrases
     function create_cluster_topic_key_phrases(){
         // Create a div to display a list of topic (a link)
         $('#cluster_topics').empty();

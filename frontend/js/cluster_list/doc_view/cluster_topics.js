@@ -1,5 +1,5 @@
 // Create a topic list view
-function ClusterTopicListView(cluster, cluster_docs, corpus_key_phrases, accordion_div){
+function ClusterTopicListView(cluster_data, cluster_docs, accordion_div){
 
     // Populate the topic list with given length
     function populateTopicList(cluster_topics, max_length, p_div) {
@@ -14,7 +14,7 @@ function ClusterTopicListView(cluster, cluster_docs, corpus_key_phrases, accordi
                 $('#topics').val(topic['topic']);
                 // // Get the documents about the topic
                 const topic_docs = cluster_docs.filter(d => topic['doc_ids'].includes(parseInt(d['DocId'])));
-                const doc_list = new DocList(cluster, topic_docs, topic, corpus_key_phrases);
+                // const doc_list = new DocList(cluster_data, topic_docs, topic, corpus_key_phrases);
             });
             p.append(link);
         }
@@ -54,20 +54,18 @@ function ClusterTopicListView(cluster, cluster_docs, corpus_key_phrases, accordi
 
     function _createUI(){
         // Display the topics by keyword extraction
-        const extraction = 'TF-IDF';
-        const cluster_topics = cluster['TF-IDF-Topics'];
+        const cluster_topics = cluster_data['Topics'];
         accordion_div.append($('<h3><span class="fw-bold"> Top 30 Topics </span></h3>'));
         const topic_div = $('<div class="topics"></div>');
-        const sort_btn_name = 'sort-' + extraction;
         const sort_widget = $('<div>' +
             '<span>Sort by </span>' +
             '<div class="form-check form-check-inline">' +
             '   <label class="form-check-label" for="score">Score</label>' +
-            '   <input class="form-check-input" type="radio" name="' + sort_btn_name + '" value="score" checked>' +
+            '   <input class="form-check-input" type="radio" name="sort-btn" value="score" checked>' +
             '</div>' +
             '<div class="form-check form-check-inline">' +
             '   <label class="form-check-label" for="count">Count</label>' +
-            '   <input class="form-check-input" type="radio" name="' + sort_btn_name + '" value="count" >' +
+            '   <input class="form-check-input" type="radio" name="sort-btn" value="count" >' +
             '</div>' +
             '</div>');
         // Sort the topics by count (default)
@@ -78,9 +76,9 @@ function ClusterTopicListView(cluster, cluster_docs, corpus_key_phrases, accordi
         const topic_p = createTopicParagraphs(cluster_topics);
         topic_div.append(topic_p); // Show topics
         // // Add the on click event to radio button
-        sort_widget.find('input[name=' + sort_btn_name + ']').change(function () {
-            const sorted_index = sort_widget.find('input[name=' + sort_btn_name + ']:checked').val();
-            const sorted_topic = cluster[extraction + '-Topics'];
+        sort_widget.find('input[name=sort-btn]').change(function () {
+            const sorted_index = sort_widget.find('input[name=sort-btn]:checked').val();
+            const sorted_topic = cluster_data['Topics'];
             if (sorted_index === 'count') {
                 // Sort the topic by count
                 sorted_topic.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);

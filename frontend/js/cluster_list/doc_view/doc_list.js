@@ -1,7 +1,7 @@
 // Display a list of research articles
-function DocList(cluster, docs, selected_term, corpus_key_phrases) {
-    const cluster_no = cluster['Cluster'];
-    const cluster_num_docs = cluster['NumDocs'];
+function DocList(cluster_data, docs, selected_term) {
+    const cluster_no = cluster_data['Cluster'];
+    const cluster_num_docs = cluster_data['NumDocs'];
     function createListHeading(){
         $('#doc_list_heading').empty();
         const container = $('<div class="container"></div>');
@@ -52,7 +52,7 @@ function DocList(cluster, docs, selected_term, corpus_key_phrases) {
                     row.append($('<td class="col-1">' + doc['Year'] + '</td>'));
                     // Add the title
                     const col = $('<td class="col-11"></td>');
-                    const doc_key_phrases = corpus_key_phrases.find(c => c['DocId'] === doc['DocId'])['key-phrases'];
+                    const doc_key_phrases = cluster_data['KeyPhrases'];
                     const doc_view = new DocView(doc, selected_term, doc_key_phrases);
                     col.append(doc_view.get_container());
                     row.append(col);

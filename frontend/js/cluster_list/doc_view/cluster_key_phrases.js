@@ -1,12 +1,7 @@
 // Create a div to display the grouped key phrases
-function ClusterKeyPhrase(cluster, cluster_docs, corpus_key_phrases, accordion_div){
-    const cluster_key_phrases = cluster['Grouped_Key_Phrases'];
+function ClusterKeyPhrase(cluster_data, cluster_docs, accordion_div){
+    const cluster_key_phrases = cluster_data['KeyPhrases'];
     cluster_key_phrases.sort((a, b) => b['count'] - a['count']);
-    // Re-order the groups of key phrases
-    // const outlier_key_phrases = cluster_key_phrases.find(c => c['group'] === -1);
-    // const grouped_key_phrases = cluster_key_phrases.filter(c => c['group'] !== -1);
-    // grouped_key_phrases.sort((a, b) => b['count'] - a['count']);
-    // const all_grouped_key_phrases = grouped_key_phrases.concat([outlier_key_phrases]);
     const total = cluster_key_phrases.reduce((pre, cur) => pre + cur['count'], 0);
 
     // Create an list item to display a group of key phrases
@@ -17,14 +12,6 @@ function ClusterKeyPhrase(cluster, cluster_docs, corpus_key_phrases, accordion_d
         // Display key phrases
         const key_phrases = group['key-phrases'];
         const key_phrase_div = $('<div class="ms-2 me-auto"></div>');
-        // // Add sub title
-        // const sub_title_div = $('<div class="fw-bold text-capitalize sub-title"></div>');
-        // if (group_no === -1){
-        //     sub_title_div.text("miscellaneous");
-        // }else{
-        //     sub_title_div.text(key_phrases[0]);
-        // }
-        // key_phrase_div.append(sub_title_div);
         // Display top 10 key phrases
         const text_span = $('<p class="key_phrase_text"></p>');
         text_span.text(key_phrases.slice(0, 10).join(", "));
@@ -79,7 +66,7 @@ function ClusterKeyPhrase(cluster, cluster_docs, corpus_key_phrases, accordion_d
         // Define count btn to display the doc_ids
         percent_btn.click(function(event){
             // Create a doc list
-            const doc_list = new DocList(cluster, group_docs, group, corpus_key_phrases);
+            const doc_list = new DocList(cluster_data, group_docs, group, corpus_key_phrases);
             document.getElementById('doc_list_heading').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
         });
         group_item.append(percent_btn);

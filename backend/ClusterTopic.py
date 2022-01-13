@@ -39,14 +39,17 @@ class ClusterTopic:
                         doc['HDBSCAN_Cluster'] = cur_cluster_no + cluster_no
                     results.extend(docs)
                 cur_cluster_no = cur_cluster_no + len(cluster_no_list)
+                # Get outliers
+                outlier_df = df[df['HDBSCAN_Cluster'] == -1]
+                # visual_results.extend(outlier_df.to_dict("records"))
                 # Add the outliers at lst iteration
                 if i == self.args.last_iteration:
-                    outlier_df = df[df['HDBSCAN_Cluster'] == -1]
                     results.extend(outlier_df.to_dict("records"))
+                copied_results = results.copy()
                 image_folder = os.path.join('output', self.args.case_name, 'topics', 'images')
                 Path(image_folder).mkdir(parents=True, exist_ok=True)
                 # Visualise the cluster results
-                BERTModelDocClusterUtility.visualise_cluster_results_by_iteration(i, results, image_folder)
+                BERTModelDocClusterUtility.visualise_cluster_results_by_iteration(i, copied_results, image_folder)
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         # # Sort the results by DocID

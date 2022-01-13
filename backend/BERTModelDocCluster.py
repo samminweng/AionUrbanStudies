@@ -50,7 +50,7 @@ class BERTModelDocCluster:
             # 768 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
             model_name='all-mpnet-base-v2',
             device='cpu',
-            n_neighbors=15,
+            n_neighbors=150,
             min_dist=0.0,
             dimensions=[768, 500, 450, 400, 350, 300, 250, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50,
                         45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5]
@@ -463,7 +463,7 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        for i in range(0, 11):
+        for i in range(0, 5):
             mdc = BERTModelDocCluster(i)
             mdc.get_sentence_vectors(is_load=False)
             mdc.run_HDBSCAN_cluster_experiments()

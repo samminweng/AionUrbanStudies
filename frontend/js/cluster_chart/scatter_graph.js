@@ -2,6 +2,17 @@
 function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
     const width = 600;
     const height = 600;
+    // Optimal color pallets for 21 colors from http://vrl.cs.brown.edu/color
+    // citation:
+    // @article{gramazio-2017-ccd,
+    //   author={Gramazio, Connor C. and Laidlaw, David H. and Schloss, Karen B.},
+    //   journal={IEEE Transactions on Visualization and Computer Graphics},
+    //   title={Colorgorical: creating discriminable and preferable color palettes for information visualization},
+    //   year={2017}
+    // }
+    const color_plates = ["#069668", "#88e99a", "#284e37", "#54d7eb", "#4a8bae", "#30408d", "#a492e5", "#7125bd",
+                          "#e376d4", "#82185f", "#fb0998", "#f231fc", "#add51f", "#869764", "#cadba5", "#5e4028",
+                          "#fab899", "#8f0f1b", "#f24219", "#fe8f06", "#b8725a", "#fcd107", "#dd556d", "#51f310"];
     // Find the maximal cluster number as total number of clusters
     const total_clusters = corpus_data.map(c => c['Cluster']).reduce((p_value, c_value) => {
         return (p_value >= c_value) ? p_value : c_value;
@@ -18,17 +29,7 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
     function convert_cluster_data_to_data_points() {
         // Get the categorical color for each cluster
         const colors = function (cluster_no) {
-            // Optimal color pallets for 21 colors from http://vrl.cs.brown.edu/color
-            // citation:
-            // @article{gramazio-2017-ccd,
-            //   author={Gramazio, Connor C. and Laidlaw, David H. and Schloss, Karen B.},
-            //   journal={IEEE Transactions on Visualization and Computer Graphics},
-            //   title={Colorgorical: creating discriminable and preferable color palettes for information visualization},
-            //   year={2017}
-            // }
-            const color_plates = ["#68affc", "#266197", "#7ce5e6", "#285d28", "#1fa198", "#7feb90", "#3aa609",
-                                  "#c7dd91", "#76480d", "#b08965", "#871d32", "#ee4454", "#f8cac2", "#ed820a",
-                                  "#f3d426", "#859947", "#bde31d", "#5e4393", "#c697f4", "#6a10a6", "#fe79ec"];
+
             return (cluster_no < 0) ? "gray" : color_plates[cluster_no];
         };
         // Determine the opacity based on the outlier or cluster

@@ -1,5 +1,6 @@
 // Create a title view
-function DocView(doc, selected_term, doc_key_phrases) {
+function DocView(doc, selected_term) {
+    const doc_key_phrases = doc['KeyPhrases'];
     let search_terms = [];
     if(selected_term != null){
         if('topic' in selected_term){
