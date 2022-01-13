@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+indicator,0.0036344945,20,3,2,small business,0.011484319000000002,11,1,1,using social medium,0.0078216599,2,1,1,small business,0.011484319000000002,11,1,1
+livability,0.0029543112,6,1,1,urban livability,0.005220145000000001,5,1,1,sustainable social innovation,0.0078216599,2,1,1,using social medium,0.0078216599,2,1,1
+business,0.0025441462000000002,14,2,2,urban indicator,0.0041761160000000005,4,1,1,current global situation,0.0078216599,2,1,1,sustainable social innovation,0.0078216599,2,1,1
+bridge,0.002461926,5,2,1,natural capital,0.0041761160000000005,4,1,1,final two article,0.0078216599,2,1,1,current global situation,0.0078216599,2,1,1
+article,0.0019989720000000003,11,1,2,knowledge spillover,0.003132087,3,1,1,natural capital indicator,0.0078216599,2,1,1,final two article,0.0078216599,2,1,1
+entrepreneurship,0.0019695408,4,2,1,social norm,0.003132087,3,1,1,urban livability measure,0.0078216599,2,1,1,natural capital indicator,0.0078216599,2,1,1
+simulation,0.0019695408,4,1,1,economic development,0.0023119203,6,3,2,research reviews literature,0.00391083,1,1,1,urban livability measure,0.0078216599,2,1,1
+spillover,0.0014771556,3,1,1,physical environment,0.0020880580000000003,2,1,1,regional economic development,0.00391083,1,1,1,urban livability,0.005220145000000001,5,1,1
+mechanism,0.0014771556,3,2,1,development policy,0.0020880580000000003,2,2,1,transmitting knowledge spillover,0.00391083,1,1,1,urban indicator,0.0041761160000000005,4,1,1
+restaurant,0.0014771556,3,1,1,traffic simulation,0.0020880580000000003,2,1,1,regional entrepreneurial ecosystem,0.00391083,1,1,1,natural capital,0.0041761160000000005,4,1,1
+object,0.0014771556,3,1,1,community development,0.0020880580000000003,2,1,1,notably including knowledge,0.00391083,1,1,1,research reviews literature,0.00391083,1,1,1
+citizenship,0.0014771556,3,1,1,social innovation,0.0020880580000000003,2,1,1,including knowledge base,0.00391083,1,1,1,regional economic development,0.00391083,1,1,1
+definition,0.0014771556,3,2,1,exploratory analysis,0.0020880580000000003,2,1,1,street view image,0.00391083,1,1,1,transmitting knowledge spillover,0.00391083,1,1,1
+contribution,0.0014771556,3,2,1,global situation,0.0020880580000000003,2,1,1,build livable neighborhood,0.00391083,1,1,1,regional entrepreneurial ecosystem,0.00391083,1,1,1
+paper,0.0012720731000000001,7,6,2,regional planning,0.0020880580000000003,2,1,1,appropriate data source,0.00391083,1,1,1,notably including knowledge,0.00391083,1,1,1
+infrastructure,0.0010903484,6,6,2,synoptic view,0.0020880580000000003,2,1,1,different activity pattern,0.00391083,1,1,1,including knowledge base,0.00391083,1,1,1
+example,0.0010903484,6,4,2,member state,0.0020880580000000003,2,1,1,social medium behavior,0.00391083,1,1,1,street view image,0.00391083,1,1,1
+quality,0.0010903484,6,4,2,public participatory,0.0020880580000000003,2,1,1,yet popular restaurant,0.00391083,1,1,1,build livable neighborhood,0.00391083,1,1,1
+concept,0.0010903484,6,2,2,next article,0.0020880580000000003,2,1,1,unpopular outdoor place,0.00391083,1,1,1,appropriate data source,0.00391083,1,1,1
+perspective,0.0010903484,6,2,2,two article,0.0020880580000000003,2,1,1,potential recreational area,0.00391083,1,1,1,different activity pattern,0.00391083,1,1,1

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+soundscape,0.0148554237,17,4,1,acoustic environment,0.0126509424,7,2,1,road traffic noise,0.0268800707,4,1,1,road traffic noise,0.0268800707,4,1,1
+sound,0.0113600299,13,5,1,road traffic,0.010843664900000001,6,1,1,soundscape evaluation method,0.0134400353,2,1,1,soundscape,0.0148554237,17,4,1
+noise,0.009612333,11,2,1,community response,0.0072291099,4,1,1,inclusive design research,0.0134400353,2,1,1,soundscape evaluation method,0.0134400353,2,1,1
+hearing,0.0043692423,5,1,1,traffic noise,0.0072291099,4,1,1,noise control policy,0.006720017700000001,1,1,1,inclusive design research,0.0134400353,2,1,1
+system,0.0035476261,11,1,2,sound source,0.0072291099,4,1,1,new multidisciplinary approach,0.006720017700000001,1,1,1,acoustic environment,0.0126509424,7,2,1
+reproduction,0.0034953938,4,1,1,detached house,0.0054218324,3,1,1,soundscapes across country,0.006720017700000001,1,1,1,sound,0.0113600299,13,5,1
+le,0.0034953938,4,1,1,soundscape evaluation,0.0054218324,3,1,1,considers environmental sound,0.006720017700000001,1,1,1,road traffic,0.010843664900000001,6,1,1
+method,0.0029026032,9,3,2,profi le,0.0054218324,3,1,1,emerging soundscape science,0.006720017700000001,1,1,1,noise,0.009612333,11,2,1
+disturbance,0.0026215454,3,1,1,city noise,0.0054218324,3,1,1,significant research activity,0.006720017700000001,1,1,1,community response,0.0072291099,4,1,1
+website,0.0026215454,3,1,1,built environment,0.0053360988,8,2,2,last question aim,0.006720017700000001,1,1,1,sound source,0.0072291099,4,1,1
+affordances,0.0026215454,3,1,1,ten question,0.003614555,2,1,1,noise measurement method,0.006720017700000001,1,1,1,noise control policy,0.006720017700000001,1,1,1
+conceptualization,0.0026215454,3,1,1,soundscape research,0.003614555,2,1,1,question concerned annoyance,0.006720017700000001,1,1,1,new multidisciplinary approach,0.006720017700000001,1,1,1
+aspect,0.0022575802,7,2,2,noise measurement,0.003614555,2,1,1,activity disturbance indoors,0.006720017700000001,1,1,1,soundscapes across country,0.006720017700000001,1,1,1
+road,0.0019350688000000001,6,1,2,systematic difference,0.003614555,2,1,1,different urban imaginary,0.006720017700000001,1,1,1,considers environmental sound,0.006720017700000001,1,1,1
+traffic,0.0019350688000000001,6,1,2,activity disturbance,0.003614555,2,1,1,urban interior design,0.006720017700000001,1,1,1,emerging soundscape science,0.006720017700000001,1,1,1
+soundscapes,0.0017476969,2,1,1,different method,0.003614555,2,1,1,room without roof,0.006720017700000001,1,1,1,significant research activity,0.006720017700000001,1,1,1
+apartment,0.0017476969,2,1,1,urban soundscape,0.003614555,2,1,1,urban acoustic environment,0.006720017700000001,1,1,1,last question aim,0.006720017700000001,1,1,1
+expectation,0.0017476969,2,1,1,evaluation method,0.003614555,2,1,1,affects many aspect,0.006720017700000001,1,1,1,noise measurement method,0.006720017700000001,1,1,1
+headphone,0.0017476969,2,1,1,laboratory experiment,0.003614555,2,1,1,without uncomfortable sound,0.006720017700000001,1,1,1,question concerned annoyance,0.006720017700000001,1,1,1
+internet,0.0017476969,2,1,1,soundscape analysis,0.003614555,2,1,1,uncomfortable sound source,0.006720017700000001,1,1,1,activity disturbance indoors,0.006720017700000001,1,1,1

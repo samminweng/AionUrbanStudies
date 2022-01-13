@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+square,0.0040779028,11,1,2,open space,0.0092274896,12,2,2,public open space,0.030624566800000003,12,2,2,public open space,0.030624566800000003,12,2,2
+daylight,0.0040178632,4,1,1,aesthetic image,0.006250496800000001,3,1,1,eight sensory dimension,0.0207444024,3,1,1,eight sensory dimension,0.0207444024,3,1,1
+facade,0.0020089316,2,1,1,green space,0.0061516597,8,1,2,green space assessment,0.0138296016,2,1,1,green space assessment,0.0138296016,2,1,1
+greenway,0.0020089316,2,1,1,sensory dimension,0.0046137448,6,1,2,main design strategy,0.0138296016,2,1,1,main design strategy,0.0138296016,2,1,1
+perception,0.0014828738,4,2,2,space assessment,0.0041669979,2,1,1,community social interaction,0.0138296016,2,1,1,community social interaction,0.0138296016,2,1,1
+impact,0.0014828738,4,3,2,main design,0.0041669979,2,1,1,sustainable urban environment,0.0138296016,2,1,1,sustainable urban environment,0.0138296016,2,1,1
+glass,0.0014828738,4,1,2,glass facade,0.0041669979,2,1,1,perceived sensory dimension,0.007656141700000001,3,1,2,perceived sensory dimension,0.007656141700000001,3,1,2
+aspect,0.0014828738,4,2,2,unifying aspect,0.0041669979,2,1,1,urban green space,0.007656141700000001,3,1,2,urban green space,0.007656141700000001,3,1,2
+assessment,0.0011121553,3,1,2,city instrument,0.0041669979,2,1,1,green space user,0.0069148008,1,1,1,green space user,0.0069148008,1,1,1
+relation,0.0011121553,3,3,2,public square,0.0041669979,2,1,1,green space type,0.0069148008,1,1,1,green space type,0.0069148008,1,1,1
+community,0.0011121553,3,1,2,square design,0.0041669979,2,1,1,green space use,0.0069148008,1,1,1,space use variable,0.0069148008,1,1,1
+behaviour,0.0011121553,3,1,2,behaviour pattern,0.0041669979,2,1,1,space use variable,0.0069148008,1,1,1,result grant potential,0.0069148008,1,1,1
+refuge,0.0010044658,1,1,1,traditional square,0.0041669979,2,1,1,result grant potential,0.0069148008,1,1,1,affects energy consumption,0.0069148008,1,1,1
+daylighting,0.0010044658,1,1,1,landscape design,0.0041669979,2,1,1,affects energy consumption,0.0069148008,1,1,1,providing appropriate space,0.0069148008,1,1,1
+functional,0.0010044658,1,1,1,public space,0.0030758299000000003,4,1,2,providing appropriate space,0.0069148008,1,1,1,facilitating social relation,0.0069148008,1,1,1
+genesis,0.0010044658,1,1,1,social interaction,0.0030758299000000003,4,1,2,facilitating social relation,0.0069148008,1,1,1,satisfy high functional,0.0069148008,1,1,1
+classifies,0.0010044658,1,1,1,reliable tool,0.0020834989,1,1,1,satisfy high functional,0.0069148008,1,1,1,representative public area,0.0069148008,1,1,1
+highlight,0.0010044658,1,1,1,onsite questionnaire,0.0020834989,1,1,1,representative public area,0.0069148008,1,1,1,classifies different approach,0.0069148008,1,1,1
+spreading,0.0010044658,1,1,1,space user,0.0020834989,1,1,1,classifies different approach,0.0069148008,1,1,1,new glazing material,0.0069148008,1,1,1
+subordination,0.0010044658,1,1,1,space type,0.0020834989,1,1,1,new glazing material,0.0069148008,1,1,1,resulting aesthetic order,0.0069148008,1,1,1

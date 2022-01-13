@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+child,0.0039762542,7,3,2,young people,0.0124789081,9,3,2,public green space,0.0289164397,2,1,1,public green space,0.0289164397,2,1,1
+taxonomy,0.0030782016000000002,2,1,1,making friend,0.0075137205,2,1,1,foreign resident youth,0.0144582198,1,1,1,foreign resident youth,0.0144582198,1,1,1
+street,0.0028401816,5,1,2,green space,0.004159636,3,1,2,investigated leisure activity,0.0144582198,1,1,1,investigated leisure activity,0.0144582198,1,1,1
+youth,0.0022721453000000003,4,2,2,social inclusion,0.004159636,3,2,2,facilitate social interaction,0.0144582198,1,1,1,facilitate social interaction,0.0144582198,1,1,1
+school,0.0022721453000000003,4,2,2,distinct culture,0.0037568603,1,1,1,immigrant young people,0.0144582198,1,1,1,immigrant young people,0.0144582198,1,1,1
+chapter,0.0022721453000000003,4,2,2,resident youth,0.0037568603,1,1,1,friend across culture,0.0144582198,1,1,1,friend across culture,0.0144582198,1,1,1
+friend,0.001704109,3,1,2,educational institution,0.0037568603,1,1,1,newly implanted suburbanite,0.0144582198,1,1,1,newly implanted suburbanite,0.0144582198,1,1,1
+sociability,0.001704109,3,1,2,empirical survey,0.0037568603,1,1,1,reclaimed public space,0.0144582198,1,1,1,reclaimed public space,0.0144582198,1,1,1
+pupil,0.0015391008000000001,1,1,1,selected school,0.0037568603,1,1,1,neighbourhood main street,0.0144582198,1,1,1,neighbourhood main street,0.0144582198,1,1,1
+percentage,0.0015391008000000001,1,1,1,investigated leisure,0.0037568603,1,1,1,main street reveals,0.0144582198,1,1,1,main street reveals,0.0144582198,1,1,1
+prerequisite,0.0015391008000000001,1,1,1,outdoor location,0.0037568603,1,1,1,contemporary urban street,0.0144582198,1,1,1,contemporary urban street,0.0144582198,1,1,1
+conventioneer,0.0015391008000000001,1,1,1,school level,0.0037568603,1,1,1,find visible sign,0.0144582198,1,1,1,find visible sign,0.0144582198,1,1,1
+defy,0.0015391008000000001,1,1,1,making contact,0.0037568603,1,1,1,genuine social life,0.0144582198,1,1,1,genuine social life,0.0144582198,1,1,1
+spontaneity,0.0015391008000000001,1,1,1,across culture,0.0037568603,1,1,1,outdoor social activity,0.0144582198,1,1,1,outdoor social activity,0.0144582198,1,1,1
+perform,0.0015391008000000001,1,1,1,downtown worker,0.0037568603,1,1,1,supports social behaviour,0.0144582198,1,1,1,supports social behaviour,0.0144582198,1,1,1
+childhood,0.0015391008000000001,1,1,1,implanted suburbanite,0.0037568603,1,1,1,ordinary public space,0.0144582198,1,1,1,ordinary public space,0.0144582198,1,1,1
+suggest,0.0015391008000000001,1,1,1,many group,0.0037568603,1,1,1,everyday social contact,0.0144582198,1,1,1,everyday social contact,0.0144582198,1,1,1
+designation,0.0015391008000000001,1,1,1,urban neighbourhood,0.0037568603,1,1,1,cultural regeneration event,0.0144582198,1,1,1,cultural regeneration event,0.0144582198,1,1,1
+potency,0.0015391008000000001,1,1,1,street reveals,0.0037568603,1,1,1,city planning process,0.0144582198,1,1,1,city planning process,0.0144582198,1,1,1
+prevalence,0.0015391008000000001,1,1,1,urban street,0.0037568603,1,1,1,need better recognition,0.0144582198,1,1,1,need better recognition,0.0144582198,1,1,1

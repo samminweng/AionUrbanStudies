@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+knowledge,0.0032548851,29,8,1,smart city,0.0039818661,17,5,1,natural property right,0.0039959904,5,1,1,natural property right,0.0039959904,5,1,1
+risk,0.0028059354,25,5,1,typhoid fever,0.0025765016,11,1,1,property right value,0.0039959904,5,1,1,property right value,0.0039959904,5,1,1
+governance,0.0028059354,25,9,1,small business,0.0025765016,11,1,1,urban forest manager,0.0023975942,3,1,1,smart city,0.0039818661,17,5,1
+work,0.0023569857,21,12,1,indigenous knowledge,0.0023422742,10,1,1,typhoid fever case,0.0015983962,2,1,1,knowledge,0.0032548851,29,8,1
+indicator,0.0023569857,21,4,1,urban planning,0.0021611593000000003,25,14,2,social impact assessment,0.0015983962,2,1,1,risk,0.0028059354,25,5,1
+article,0.0021325109,19,7,1,indigenous people,0.0021080468,9,6,1,cultural ecosystem service,0.0015983962,2,1,1,governance,0.0028059354,25,9,1
+mobility,0.0021325109,19,5,1,sustainable development,0.0018738194,8,4,1,rapidly urbanizing city,0.0015983962,2,2,1,typhoid fever,0.0025765016,11,1,1
+fever,0.0014590864,13,1,1,urban study,0.0016395919,7,7,1,early modern era,0.0015983962,2,2,1,small business,0.0025765016,11,1,1
+education,0.0014590864,13,9,1,economic development,0.0016395919,7,4,1,urban growth boundary,0.0015983962,2,1,1,urban forest manager,0.0023975942,3,1,1
+student,0.0014590864,13,4,1,property right,0.0016395919,7,1,1,using social medium,0.0015983962,2,1,1,work,0.0023569857,21,12,1
+right,0.0014590864,13,5,1,good death,0.0014053645,6,1,1,double bottom line,0.0015983962,2,1,1,indicator,0.0023569857,21,4,1
+dimension,0.001346849,12,6,1,urban sprawl,0.0014053645,6,1,1,smart city application,0.0015983962,2,1,1,indigenous knowledge,0.0023422742,10,1,1
+measure,0.001346849,12,3,1,young people,0.0011711371,5,1,1,sustainable social innovation,0.0015983962,2,1,1,urban planning,0.0021611593000000003,25,14,2
+value,0.0013255517000000001,32,13,2,urban growth,0.0011711371,5,4,1,current global situation,0.0015983962,2,1,1,article,0.0021325109,19,7,1
+term,0.0012346116,11,9,1,landscape planning,0.0011711371,5,2,1,system take place,0.0015983962,2,1,1,mobility,0.0021325109,19,5,1
+conflict,0.0012346116,11,5,1,governance challenge,0.0011711371,5,2,1,inter cultural dialogue,0.0015983962,2,1,1,indigenous people,0.0021080468,9,6,1
+service,0.0012346116,11,6,1,natural property,0.0011711371,5,1,1,relevant regional culture,0.0015983962,2,1,1,sustainable development,0.0018738194,8,4,1
+politics,0.0012346116,11,6,1,right value,0.0011711371,5,1,1,regional culture study,0.0015983962,2,1,1,urban study,0.0016395919,7,7,1
+disaster,0.0012346116,11,3,1,new immigrant,0.0011711371,5,2,1,final two article,0.0015983962,2,1,1,economic development,0.0016395919,7,4,1
+child,0.0011223742,10,3,1,ethnic group,0.0011711371,5,2,1,natural capital indicator,0.0015983962,2,1,1,property right,0.0016395919,7,1,1

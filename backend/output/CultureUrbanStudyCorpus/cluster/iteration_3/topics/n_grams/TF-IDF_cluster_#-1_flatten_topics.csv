@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+policy,0.0018909141,65,41,1,young people,0.0014711435,25,11,1,cultural ecosystem service,0.000981731,5,2,1,policy,0.0018909141,65,41,1
+group,0.0015127313000000001,52,31,1,urban development,0.0012946063000000001,22,20,1,natural property right,0.000981731,5,1,1,group,0.0015127313000000001,52,31,1
+management,0.0014836403000000001,51,35,1,public space,0.0012596563,58,28,2,property right value,0.000981731,5,1,1,management,0.0014836403000000001,51,35,1
+research,0.0014387067000000001,134,72,2,sustainable development,0.001118069,19,12,1,road traffic noise,0.0007853848,4,1,1,young people,0.0014711435,25,11,1
+community,0.0013635504,127,72,2,smart city,0.0010003776,17,5,1,urban public space,0.0007853848,4,4,1,research,0.0014387067000000001,134,72,2
+mobility,0.0013381853,46,13,1,indigenous people,0.0008826861000000001,15,7,1,ethnic minority group,0.0005890386,3,1,1,community,0.0013635504,127,72,2
+region,0.0013381853,46,18,1,planning process,0.0008238404000000001,14,7,1,urban planning process,0.0005890386,3,3,1,mobility,0.0013381853,46,13,1
+effect,0.0013381853,46,25,1,land use,0.0007649946000000001,13,11,1,strategic development plan,0.0005890386,3,3,1,region,0.0013381853,46,18,1
+place,0.0013206039000000001,123,62,2,typhoid fever,0.0006473031,11,1,1,urban forest manager,0.0005890386,3,1,1,effect,0.0013381853,46,25,1
+knowledge,0.0012509124,43,19,1,indigenous knowledge,0.0006473031,11,2,1,human sensory assessment,0.0005890386,3,1,1,place,0.0013206039000000001,123,62,2
+street,0.0012218214,42,26,1,different culture,0.0005884574,10,8,1,residential environmental quality,0.0005890386,3,1,1,urban development,0.0012946063000000001,22,20,1
+art,0.0011927304,41,19,1,everyday life,0.0005884574,10,9,1,medium size city,0.0005890386,3,1,1,public space,0.0012596563,58,28,2
+water,0.0011054575,38,11,1,livable city,0.0005884574,10,4,1,site interpretation centre,0.0005890386,3,1,1,knowledge,0.0012509124,43,19,1
+year,0.0010763665,37,18,1,local culture,0.0005884574,10,9,1,urban environmental management,0.0005890386,3,1,1,street,0.0012218214,42,26,1
+infrastructure,0.0010763665,37,29,1,economic development,0.0005884574,10,7,1,remote sensing data,0.0005890386,3,1,1,art,0.0011927304,41,19,1
+indicator,0.0010763665,37,7,1,new town,0.0005884574,10,3,1,urban green space,0.0004347932,6,4,2,sustainable development,0.001118069,19,12,1
+vision,0.0010472755,36,17,1,residential environment,0.0005884574,10,2,1,people reporting stress,0.0003926924,2,1,1,water,0.0011054575,38,11,1
+diversity,0.0009890935,34,22,1,urban landscape,0.0005296117000000001,9,6,1,reporting stress prefer,0.0003926924,2,1,1,year,0.0010763665,37,18,1
+technology,0.0009890935,34,28,1,road traffic,0.0005296117000000001,9,3,1,outdoor urban environment,0.0003926924,2,2,1,infrastructure,0.0010763665,37,29,1
+plan,0.0009890935,34,18,1,urban blight,0.0005296117000000001,9,1,1,typhoid fever case,0.0003926924,2,1,1,indicator,0.0010763665,37,7,1

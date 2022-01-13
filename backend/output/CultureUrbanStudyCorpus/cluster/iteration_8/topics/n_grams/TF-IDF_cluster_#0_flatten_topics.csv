@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+inhabitant,0.0019675103,4,3,1,middle class,0.0080357264,8,1,1,different social milieu,0.0069652738,2,1,1,middle class,0.0080357264,8,1,1
+drug,0.0019675103,4,2,1,square dance,0.0040178632,4,1,1,embodies multiple level,0.0034826369,1,1,1,different social milieu,0.0069652738,2,1,1
+dance,0.0019675103,4,1,1,cultural development,0.0040178632,4,2,1,everyday meaning implicit,0.0034826369,1,1,1,square dance,0.0040178632,4,1,1
+prosperity,0.0019675103,4,2,1,urban transformation,0.0040178632,4,1,1,public housing scheme,0.0034826369,1,1,1,cultural development,0.0040178632,4,2,1
+class,0.0018153738000000002,10,2,2,urban history,0.0040178632,4,1,1,along modernist line,0.0034826369,1,1,1,urban transformation,0.0040178632,4,1,1
+paper,0.0016338364,9,5,2,global downtown,0.0030133974000000003,3,1,1,organised vernacular association,0.0034826369,1,1,1,urban history,0.0040178632,4,1,1
+downtown,0.0016338364,9,1,2,urban modernity,0.0030133974000000003,3,1,1,physically polluted landscape,0.0034826369,1,1,1,embodies multiple level,0.0034826369,1,1,1
+night,0.0014756327,3,1,1,new town,0.0025950291,7,1,2,common bond place,0.0034826369,1,1,1,everyday meaning implicit,0.0034826369,1,1,1
+barrio,0.0014756327,3,1,1,lived experience,0.0020089316,2,1,1,many city aspire,0.0034826369,1,1,1,public housing scheme,0.0034826369,1,1,1
+chino,0.0014756327,3,1,1,significant role,0.0020089316,2,2,1,create urban landscape,0.0034826369,1,1,1,along modernist line,0.0034826369,1,1,1
+publicness,0.0014756327,3,1,1,one hand,0.0020089316,2,2,1,urban planner hope,0.0034826369,1,1,1,organised vernacular association,0.0034826369,1,1,1
+vernacular,0.0014756327,3,1,1,barrio chino,0.0020089316,2,1,1,dominant global influence,0.0034826369,1,1,1,physically polluted landscape,0.0034826369,1,1,1
+visibility,0.0014756327,3,1,1,social structure,0.0020089316,2,2,1,emerging local process,0.0034826369,1,1,1,common bond place,0.0034826369,1,1,1
+youth,0.0012707617,7,2,2,comparative urbanism,0.0020089316,2,1,1,observation provide evidence,0.0034826369,1,1,1,many city aspire,0.0034826369,1,1,1
+housing,0.0010892243,6,2,2,social milieu,0.0020089316,2,1,1,move towards neoliberalism,0.0034826369,1,1,1,create urban landscape,0.0034826369,1,1,1
+control,0.0010892243,6,3,2,high rise,0.0020089316,2,1,1,fastest growing economy,0.0034826369,1,1,1,urban planner hope,0.0034826369,1,1,1
+multiplicity,0.0009837552,2,1,1,drug use,0.0020089316,2,1,1,new social group,0.0034826369,1,1,1,dominant global influence,0.0034826369,1,1,1
+globalism,0.0009837552,2,2,1,offending sight,0.0020089316,2,1,1,three major question,0.0034826369,1,1,1,emerging local process,0.0034826369,1,1,1
+category,0.0009837552,2,2,1,social control,0.0020089316,2,1,1,middle class norm,0.0034826369,1,1,1,observation provide evidence,0.0034826369,1,1,1
+boulevard,0.0009837552,2,2,1,urban space,0.0011121553,3,2,2,norm take place,0.0034826369,1,1,1,move towards neoliberalism,0.0034826369,1,1,1

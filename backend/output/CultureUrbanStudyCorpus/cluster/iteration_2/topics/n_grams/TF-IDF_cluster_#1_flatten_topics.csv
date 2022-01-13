@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+bathroom,0.0057936808,12,1,1,neighborhood design,0.0109134742,12,1,1,urban neighborhood design,0.0165704585,6,1,1,urban neighborhood design,0.0165704585,6,1,1
+socialization,0.0019312269000000002,4,2,1,social capital,0.0054567371,12,1,2,neighborhood design concept,0.0165704585,6,1,1,neighborhood design concept,0.0165704585,6,1,1
+neighborhood,0.0019036375,19,2,3,social health,0.0045472809,5,1,1,sustainable food culture,0.0082852292,3,1,1,neighborhood design,0.0109134742,12,1,1
+apartment,0.0016898236,7,2,2,small bathroom,0.0045472809,5,1,1,changing public life,0.0082852292,3,1,1,sustainable food culture,0.0082852292,3,1,1
+user,0.0014484202,6,5,2,urban environment,0.0036378247000000002,8,5,2,theoretical urban neighborhood,0.0082852292,3,1,1,changing public life,0.0082852292,3,1,1
+heterotopia,0.0014484202,3,1,1,public apartment,0.0036378247000000002,4,1,1,neighborhood urban design,0.0082852292,3,1,1,theoretical urban neighborhood,0.0082852292,3,1,1
+library,0.0014484202,3,1,1,electrical capacity,0.0036378247000000002,4,1,1,foster social capital,0.0055234862,2,1,1,neighborhood urban design,0.0082852292,3,1,1
+technology,0.0013024888000000001,13,6,3,urban neighborhood,0.0031830966,7,2,2,calculated electrical capacity,0.0055234862,2,1,1,bathroom,0.0057936808,12,1,1
+art,0.0013024888000000001,13,5,3,design concept,0.0031830966,7,2,2,speculative design fiction,0.0055234862,2,1,1,foster social capital,0.0055234862,2,1,1
+designer,0.0012070168,5,4,2,sustainable food,0.0027283685000000003,3,1,1,urban good life,0.0055234862,2,1,1,calculated electrical capacity,0.0055234862,2,1,1
+furniture,0.0009656135,4,2,2,food culture,0.0027283685000000003,3,1,1,creating great place,0.0055234862,2,1,1,speculative design fiction,0.0055234862,2,1,1
+alterlivability,0.0009656135,2,1,1,public life,0.0027283685000000003,6,1,2,contemporary public space,0.0055234862,2,1,1,urban good life,0.0055234862,2,1,1
+calligraphy,0.0009656135,2,1,1,heterotopia concept,0.0027283685000000003,3,1,1,current food practice,0.0027617431,1,1,1,creating great place,0.0055234862,2,1,1
+plazas,0.0009656135,2,1,1,universal design,0.0027283685000000003,3,1,1,world raises concern,0.0027617431,1,1,1,contemporary public space,0.0055234862,2,1,1
+stranger,0.0007242101,3,1,2,poetic dwelling,0.0027283685000000003,3,1,1,natural food source,0.0027617431,1,1,1,social capital,0.0054567371,12,1,2
+notion,0.0007242101,3,2,2,different culture,0.0022736405,5,3,2,urban population growth,0.0027617431,1,1,1,social health,0.0045472809,5,1,1
+room,0.0007242101,3,2,2,public space,0.0022647505,12,6,3,encouraging individual user,0.0027617431,1,1,1,small bathroom,0.0045472809,5,1,1
+dwelling,0.0007242101,3,1,2,design framework,0.0018189124000000001,2,1,1,creating sustainable food,0.0027617431,1,1,1,urban environment,0.0036378247000000002,8,5,2
+food,0.0006011487,6,1,3,building plan,0.0018189124000000001,2,1,1,present five core,0.0027617431,1,1,1,public apartment,0.0036378247000000002,4,1,1
+solution,0.0006011487,6,3,3,innovative approach,0.0018189124000000001,2,2,1,five core constituent,0.0027617431,1,1,1,electrical capacity,0.0036378247000000002,4,1,1

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+bank,0.0013585457,5,1,1,small town,0.006894815800000001,10,2,1,branch office building,0.0098714742,3,1,1,branch office building,0.0098714742,3,1,1
+music,0.0011030774,11,2,2,labour market,0.0034474079000000003,5,1,1,spoken various language,0.0032904914,1,1,1,small town,0.006894815800000001,10,2,1
+church,0.0011030774,11,1,2,branch office,0.0027579263,4,1,1,professed different religion,0.0032904914,1,1,1,labour market,0.0034474079000000003,5,1,1
+floor,0.0010868366,4,1,1,wooden church,0.0020684447000000003,3,1,1,particularly diverse city,0.0032904914,1,1,1,spoken various language,0.0032904914,1,1,1
+monasticism,0.0010868366,4,1,1,multicultural city,0.0013789632,2,2,1,one national narrative,0.0032904914,1,1,1,professed different religion,0.0032904914,1,1,1
+democracy,0.0008151274,3,2,1,cultural barbarism,0.0013789632,2,1,1,several national group,0.0032904914,1,1,1,particularly diverse city,0.0032904914,1,1,1
+dualism,0.0008151274,3,2,1,political opening,0.0013789632,2,1,1,single urban space,0.0032904914,1,1,1,one national narrative,0.0032904914,1,1,1
+emigration,0.0008151274,3,1,1,twin city,0.0013789632,2,1,1,essential turning point,0.0032904914,1,1,1,several national group,0.0032904914,1,1,1
+period,0.0008022381000000001,8,5,2,social protection,0.0013789632,2,1,1,intimate local trauma,0.0032904914,1,1,1,single urban space,0.0032904914,1,1,1
+today,0.0007019583,7,5,2,traditional function,0.0013789632,2,1,1,every social background,0.0032904914,1,1,1,essential turning point,0.0032904914,1,1,1
+citizenship,0.0007019583,7,1,2,significant element,0.0013789632,2,2,1,voice meant nothing,0.0032904914,1,1,1,intimate local trauma,0.0032904914,1,1,1
+inhabitant,0.0006016786,6,5,2,presented example,0.0013789632,2,1,1,sham democracy awash,0.0032904914,1,1,1,every social background,0.0032904914,1,1,1
+citizen,0.0006016786,6,3,2,illegal behavior,0.0013789632,2,1,1,still haunt today,0.0032904914,1,1,1,voice meant nothing,0.0032904914,1,1,1
+memory,0.0006016786,6,4,2,bank building,0.0013789632,2,1,1,particularly difficult challenge,0.0032904914,1,1,1,sham democracy awash,0.0032904914,1,1,1
+barbarism,0.0005434183,2,1,1,central bank,0.0013789632,2,1,1,difficult challenge nowadays,0.0032904914,1,1,1,still haunt today,0.0032904914,1,1,1
+tragedy,0.0005434183,2,2,1,peripheral area,0.0013789632,2,1,1,relatively small number,0.0032904914,1,1,1,particularly difficult challenge,0.0032904914,1,1,1
+improvisation,0.0005434183,2,1,1,citizen orientation,0.0013789632,2,1,1,four main field,0.0032904914,1,1,1,difficult challenge nowadays,0.0032904914,1,1,1
+twin,0.0005434183,2,1,1,national culture,0.0007634014000000001,3,3,2,prompts several reflection,0.0032904914,1,1,1,relatively small number,0.0032904914,1,1,1
+outskirt,0.0005434183,2,2,1,urban study,0.0007634014000000001,3,3,2,paper discusses improvisation,0.0032904914,1,1,1,four main field,0.0032904914,1,1,1
+multiparadigmatism,0.0005434183,2,1,1,vernacular architecture,0.0007634014000000001,3,1,2,marks urban space,0.0032904914,1,1,1,prompts several reflection,0.0032904914,1,1,1

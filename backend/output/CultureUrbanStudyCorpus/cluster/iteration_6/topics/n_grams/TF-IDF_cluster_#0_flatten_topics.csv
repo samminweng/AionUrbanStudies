@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+transit,0.0034953938,12,4,1,modality environment,0.005360913,9,1,1,control commercial signage,0.0039431509,2,1,1,modality environment,0.005360913,9,1,1
+environment,0.0027950994000000002,26,7,2,transit village,0.0029782850000000002,5,1,1,sustainable active mobility,0.0039431509,2,1,1,control commercial signage,0.0039431509,2,1,1
+walking,0.0023302625,8,3,1,public transport,0.0023826280000000003,4,3,1,vehicle type choice,0.0039431509,2,1,1,sustainable active mobility,0.0039431509,2,1,1
+rail,0.0020389797,7,2,1,sustainable transportation,0.0023826280000000003,4,2,1,prevalent transport problem,0.0019715754000000003,1,1,1,vehicle type choice,0.0039431509,2,1,1
+signage,0.0020389797,7,1,1,commercial signage,0.0023826280000000003,4,1,1,well informal factor,0.0019715754000000003,1,1,1,transit,0.0034953938,12,4,1
+mindset,0.0020389797,7,1,1,active mobility,0.0023826280000000003,4,1,1,different analytical level,0.0019715754000000003,1,1,1,transit village,0.0029782850000000002,5,1,1
+model,0.0019350688000000001,18,4,2,walking mindset,0.0023826280000000003,4,1,1,multiple case study,0.0019715754000000003,1,1,1,environment,0.0027950994000000002,26,7,2
+mobility,0.0018275650000000002,17,4,2,case study,0.0019785535000000003,9,6,2,factor included legislation,0.0019715754000000003,1,1,1,public transport,0.0023826280000000003,4,3,1
+diffusion,0.0017476969,6,1,1,sustainable mobility,0.001786971,3,2,1,legislation concerning transport,0.0019715754000000003,1,1,1,sustainable transportation,0.0023826280000000003,4,2,1
+corridor,0.0014564141,5,2,1,street furniture,0.001786971,3,1,1,appropriate business model,0.0019715754000000003,1,1,1,commercial signage,0.0023826280000000003,4,1,1
+implementation,0.0013975497000000001,13,7,2,vehicle type,0.001786971,3,1,1,provide several implication,0.0019715754000000003,1,1,1,active mobility,0.0023826280000000003,4,1,1
+transport,0.0012900459,12,5,2,vehicle use,0.001786971,3,1,1,private sector actor,0.0019715754000000003,1,1,1,walking mindset,0.0023826280000000003,4,1,1
+user,0.0012900459,12,6,2,city centre,0.0015388749,7,4,2,adjusting relevant regulation,0.0019715754000000003,1,1,1,walking,0.0023302625,8,3,1
+factor,0.001182542,11,5,2,qualitative approach,0.0011913140000000002,2,2,1,creating conducive condition,0.0019715754000000003,1,1,1,rail,0.0020389797,7,2,1
+road,0.001182542,11,4,2,data collection,0.0011913140000000002,2,2,1,planning urban design,0.0019715754000000003,1,1,1,signage,0.0020389797,7,1,1
+shop,0.0011651313000000001,4,1,1,transport service,0.0011913140000000002,2,2,1,private transport service,0.0019715754000000003,1,1,1,mindset,0.0020389797,7,1,1
+level,0.0010750382,10,7,2,second edition,0.0011913140000000002,2,1,1,privately owned car,0.0019715754000000003,1,1,1,case study,0.0019785535000000003,9,6,2
+centre,0.0010750382,10,6,2,higher density,0.0011913140000000002,2,2,1,road marking force,0.0019715754000000003,1,1,1,prevalent transport problem,0.0019715754000000003,1,1,1
+recommendation,0.0008738485,3,3,1,design principle,0.0011913140000000002,2,2,1,marking force motorist,0.0019715754000000003,1,1,1,well informal factor,0.0019715754000000003,1,1,1
+furniture,0.0008738485,3,1,1,visual pollution,0.0011913140000000002,2,1,1,use eye contact,0.0019715754000000003,1,1,1,different analytical level,0.0019715754000000003,1,1,1

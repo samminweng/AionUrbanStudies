@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+child,0.0010353568000000001,30,11,1,open space,0.0020276088,29,8,1,public open space,0.0035071456,15,4,1,public open space,0.0035071456,15,4,1
+traffic,0.0010008449,29,11,1,green space,0.0018178562000000001,26,7,1,urban green space,0.0021042873,9,5,1,urban green space,0.0021042873,9,5,1
+movement,0.0008973092000000001,26,19,1,young people,0.0017479387000000001,25,11,1,perceived sensory dimension,0.0011690485,5,2,1,open space,0.0020276088,29,8,1
+landscape,0.0008379382,117,33,3,urban space,0.0013983509000000001,40,21,2,cultural ecosystem service,0.0011690485,5,2,1,green space,0.0018178562000000001,26,7,1
+climate,0.0007592617,44,16,2,smart city,0.0011885983,17,5,1,natural property right,0.0011690485,5,1,1,young people,0.0017479387000000001,25,11,1
+performance,0.0007592617,22,13,1,urban environment,0.0010487632,30,20,2,property right value,0.0011690485,5,1,1,urban space,0.0013983509000000001,40,21,2
+data,0.0007247498000000001,42,22,2,indigenous people,0.0010487632,15,7,1,road traffic noise,0.0009352388000000001,4,1,1,smart city,0.0011885983,17,5,1
+street,0.0007247498000000001,42,26,2,public space,0.0008995705,62,29,3,urban public space,0.0009352388000000001,4,4,1,perceived sensory dimension,0.0011690485,5,2,1
+comfort,0.0006902379,20,8,1,small business,0.0008390106,12,2,1,ethnic minority group,0.0007014291,3,1,1,cultural ecosystem service,0.0011690485,5,2,1
+transportation,0.0006902379,20,8,1,typhoid fever,0.0007690930000000001,11,1,1,open public space,0.0007014291,3,2,1,natural property right,0.0011690485,5,1,1
+vehicle,0.0006902379,20,5,1,indigenous knowledge,0.0007690930000000001,11,2,1,eight sensory dimension,0.0007014291,3,1,1,property right value,0.0011690485,5,1,1
+assessment,0.000655726,19,10,1,everyday life,0.0006991755000000001,10,9,1,strategic development plan,0.0007014291,3,3,1,urban environment,0.0010487632,30,20,2
+safety,0.000655726,19,13,1,new town,0.0006991755000000001,10,3,1,urban forest manager,0.0007014291,3,1,1,indigenous people,0.0010487632,15,7,1
+water,0.000655726,38,11,2,modern city,0.0006991755000000001,10,6,1,human sensory assessment,0.0007014291,3,1,1,child,0.0010353568000000001,30,11,1
+indicator,0.00063847,37,7,2,residential environment,0.0006991755000000001,10,2,1,residential environmental quality,0.0007014291,3,1,1,traffic,0.0010008449,29,11,1
+waste,0.0006212141000000001,18,5,1,sustainable development,0.0006642167,19,12,2,medium size city,0.0007014291,3,1,1,road traffic noise,0.0009352388000000001,4,1,1
+soundscape,0.0005867022,17,4,1,road traffic,0.0006292579,9,3,1,site interpretation centre,0.0007014291,3,1,1,urban public space,0.0009352388000000001,4,4,1
+property,0.0005867022,34,8,2,environmental quality,0.0006292579,9,5,1,urban environmental management,0.0007014291,3,1,1,public space,0.0008995705,62,29,3
+downtown,0.0005521903,16,6,1,urban blight,0.0006292579,9,1,1,remote sensing data,0.0007014291,3,1,1,movement,0.0008973092000000001,26,19,1
+user,0.0005349344000000001,31,20,2,hip hop,0.0006292579,9,1,1,people reporting stress,0.00046761940000000004,2,1,1,small business,0.0008390106,12,2,1

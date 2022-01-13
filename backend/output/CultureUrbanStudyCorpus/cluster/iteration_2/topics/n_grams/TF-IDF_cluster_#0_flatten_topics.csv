@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+slum,0.004003724,8,2,1,regime theory,0.006206804000000001,6,1,1,urban regime theory,0.0131597812,4,1,1,urban regime theory,0.0131597812,4,1,1
+adaptation,0.0025023275,10,2,2,urban governance,0.0041378694,8,5,2,urban planning model,0.0131597812,4,1,1,urban planning model,0.0131597812,4,1,1
+settlement,0.0025023275,10,5,2,urban regime,0.0041378694,4,1,1,sustainable urban development,0.0098698359,3,1,1,sustainable urban development,0.0098698359,3,1,1
+nomad,0.0025023275,5,1,1,climate change,0.0036206357000000003,7,2,2,inclusive municipal governance,0.0065798906,2,1,1,inclusive municipal governance,0.0065798906,2,1,1
+organisation,0.002001862,8,2,2,developing country,0.0031034020000000003,6,2,2,indigenous urban form,0.0065798906,2,1,1,indigenous urban form,0.0065798906,2,1,1
+payment,0.002001862,4,1,1,integrative analysis,0.0031034020000000003,3,1,1,draws architectural comparison,0.0065798906,2,1,1,draws architectural comparison,0.0065798906,2,1,1
+governance,0.0018694075,18,7,3,city organisation,0.0031034020000000003,3,1,1,global environmental change,0.0032899453,1,1,1,regime theory,0.006206804000000001,6,1,1
+climate,0.0017516292,7,2,2,autonomous adaptation,0.0020689347,2,1,1,urban design challenge,0.0032899453,1,1,1,urban governance,0.0041378694,8,5,2
+coordination,0.0017516292,7,1,2,reduce risk,0.0020689347,2,1,1,poor urban settlement,0.0032899453,1,1,1,slum,0.004003724,8,2,1
+illegitimate,0.0015013965,3,2,1,municipal governance,0.0020689347,2,1,1,autonomous adaptation strategy,0.0032899453,1,1,1,climate change,0.0036206357000000003,7,2,2
+emission,0.0015013965,6,1,2,human population,0.0020689347,2,1,1,argue urban slum,0.0032899453,1,1,1,global environmental change,0.0032899453,1,1,1
+regime,0.0015013965,6,1,2,carbon emission,0.0020689347,2,1,1,identifying local adaptation,0.0032899453,1,1,1,urban design challenge,0.0032899453,1,1,1
+hinterland,0.0015013965,3,1,1,rich country,0.0020689347,2,1,1,densely populated suburb,0.0032899453,1,1,1,poor urban settlement,0.0032899453,1,1,1
+elasticity,0.0015013965,3,1,1,geographical scale,0.0020689347,2,1,1,rapid environmental change,0.0032899453,1,1,1,autonomous adaptation strategy,0.0032899453,1,1,1
+water,0.0012511637,5,2,2,republican culture,0.0020689347,2,1,1,expected coping strategy,0.0032899453,1,1,1,argue urban slum,0.0032899453,1,1,1
+government,0.0012462717,12,9,3,planning principle,0.0020689347,2,1,1,despite uncertain tenure,0.0032899453,1,1,1,identifying local adaptation,0.0032899453,1,1,1
+country,0.0012462717,12,3,3,architectural comparison,0.0020689347,2,1,1,critical public service,0.0032899453,1,1,1,densely populated suburb,0.0032899453,1,1,1
+housing,0.0010385597000000001,10,4,3,hybrid coordination,0.0020689347,2,1,1,action toward adaptation,0.0032899453,1,1,1,rapid environmental change,0.0032899453,1,1,1
+gas,0.001000931,4,1,2,governance mode,0.0020689347,2,1,1,toward adaptation pathway,0.0032899453,1,1,1,expected coping strategy,0.0032899453,1,1,1
+oversight,0.001000931,2,1,1,cultural mechanism,0.0020689347,2,1,1,prevails among government,0.0032899453,1,1,1,despite uncertain tenure,0.0032899453,1,1,1

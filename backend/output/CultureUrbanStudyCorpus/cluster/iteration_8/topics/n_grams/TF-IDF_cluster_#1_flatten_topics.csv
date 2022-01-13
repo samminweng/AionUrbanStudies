@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+modernism,0.0024936651,3,2,1,cultural planning,0.0068160179000000005,4,1,1,new town building,0.0082262285,1,1,1,new town building,0.0082262285,1,1,1
+design,0.0018406752,6,4,2,integral theory,0.003408009,2,1,1,town building movement,0.0082262285,1,1,1,town building movement,0.0082262285,1,1,1
+complex,0.0016624434000000001,2,1,1,built morphology,0.003408009,2,1,1,local regional influence,0.0082262285,1,1,1,local regional influence,0.0082262285,1,1,1
+requirement,0.0016624434000000001,2,2,1,spatial identity,0.003408009,2,1,1,newly achieved nationhood,0.0082262285,1,1,1,newly achieved nationhood,0.0082262285,1,1,1
+reception,0.0016624434000000001,2,1,1,broken form,0.003408009,2,1,1,local political leader,0.0082262285,1,1,1,local political leader,0.0082262285,1,1,1
+morphology,0.0016624434000000001,2,1,1,suspension bridge,0.003408009,2,1,1,facilitates daily life,0.0082262285,1,1,1,facilitates daily life,0.0082262285,1,1,1
+matrix,0.0016624434000000001,2,1,1,classic period,0.003408009,2,1,1,engages numerous agent,0.0082262285,1,1,1,engages numerous agent,0.0082262285,1,1,1
+fabric,0.0016624434000000001,2,1,1,urban design,0.0025155894,4,3,2,civic authority design,0.0082262285,1,1,1,civic authority design,0.0082262285,1,1,1
+legibility,0.0016624434000000001,2,1,1,town building,0.0017040045,1,1,1,designated agency maintain,0.0082262285,1,1,1,designated agency maintain,0.0082262285,1,1,1
+past,0.0016624434000000001,2,1,1,building movement,0.0017040045,1,1,1,among different constituent,0.0082262285,1,1,1,among different constituent,0.0082262285,1,1,1
+civilisation,0.0016624434000000001,2,1,1,regional influence,0.0017040045,1,1,1,three brief case,0.0082262285,1,1,1,three brief case,0.0082262285,1,1,1
+agglomeration,0.0016624434000000001,2,1,1,new capital,0.0017040045,1,1,1,brief case study,0.0082262285,1,1,1,brief case study,0.0082262285,1,1,1
+engineer,0.0016624434000000001,2,1,1,several people,0.0017040045,1,1,1,fascist popular culture,0.0082262285,1,1,1,fascist popular culture,0.0082262285,1,1,1
+suspension,0.0016624434000000001,2,1,1,achieved nationhood,0.0017040045,1,1,1,urban planning canon,0.0082262285,1,1,1,urban planning canon,0.0082262285,1,1,1
+calendar,0.0016624434000000001,2,1,1,political leader,0.0017040045,1,1,1,human culture evolves,0.0082262285,1,1,1,human culture evolves,0.0082262285,1,1,1
+composition,0.001533896,5,2,2,wanted architect,0.0017040045,1,1,1,integrative holistic thinker,0.0082262285,1,1,1,integrative holistic thinker,0.0082262285,1,1,1
+need,0.0012271168,4,4,2,built form,0.0017040045,1,1,1,people whose worldview,0.0082262285,1,1,1,people whose worldview,0.0082262285,1,1,1
+theory,0.0012271168,4,3,2,professional ideology,0.0017040045,1,1,1,closing discussion addresses,0.0082262285,1,1,1,closing discussion addresses,0.0082262285,1,1,1
+element,0.0012271168,4,2,2,early decision,0.0017040045,1,1,1,significant environmental challenge,0.0082262285,1,1,1,significant environmental challenge,0.0082262285,1,1,1
+whole,0.0012271168,4,2,2,less attention,0.0017040045,1,1,1,design spatial theory,0.0082262285,1,1,1,design spatial theory,0.0082262285,1,1,1

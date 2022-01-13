@@ -102,7 +102,7 @@ class BERTModelDocClusterUtility:
             df = pd.DataFrame(results)
             total_clusters = df['HDBSCAN_Cluster'].max() + 1
             # Visualise HDBSCAN clustering results using dot chart
-            colors = sns.color_palette('tab10', n_colors=total_clusters).as_hex()
+            colors = sns.color_palette('tab20', n_colors=total_clusters).as_hex()
             marker_size = 8
             # Plot clustered dots and outliers
             fig = go.Figure()

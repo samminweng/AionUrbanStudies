@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+climate,0.0068209214,30,4,2,experimental study,0.006404893500000001,8,1,1,different thermal index,0.0046491119,2,1,1,climate,0.0068209214,30,4,2
+comfort,0.0040925528000000004,18,6,2,open space,0.0060045877,15,4,2,hot arid climate,0.0046491119,2,1,1,experimental study,0.006404893500000001,8,1,1
+winter,0.0031830966,7,3,1,urban space,0.005203976,13,2,2,day care unit,0.0046491119,2,1,1,open space,0.0060045877,15,4,2
+property,0.0029557326,13,2,2,thermal comfort,0.0048036701,6,3,1,evaluation index system,0.0046491119,2,1,1,urban space,0.005203976,13,2,2
+summer,0.0027283685000000003,6,3,1,mountainous climate,0.0048036701,6,1,1,rural residential building,0.0046491119,2,1,1,thermal comfort,0.0048036701,6,3,1
+concrete,0.0027283685000000003,12,1,2,humid climate,0.0040030585,5,1,1,hot dry city,0.002324556,1,1,1,mountainous climate,0.0048036701,6,1,1
+quality,0.0025010045,11,4,2,design criterion,0.0032024468,4,1,1,different thermal environment,0.002324556,1,1,1,different thermal index,0.0046491119,2,1,1
+shade,0.0022736405,5,2,1,climatic comfort,0.0032024468,4,1,1,thermal comfort range,0.002324556,1,1,1,hot arid climate,0.0046491119,2,1,1
+utilisation,0.0022736405,5,1,1,cold region,0.0032024468,4,1,1,comprehensive micrometeorological measurement,0.002324556,1,1,1,day care unit,0.0046491119,2,1,1
+region,0.0022736405,10,2,2,upper limit,0.0024018351,3,1,1,different outdoor environment,0.002324556,1,1,1,evaluation index system,0.0046491119,2,1,1
+building,0.0018872921,20,3,3,building complex,0.0024018351,3,2,1,outdoor environment vary,0.002324556,1,1,1,rural residential building,0.0046491119,2,1,1
+evaluation,0.0018189124000000001,8,2,2,design guideline,0.0024018351,3,2,1,physiologically equivalent temperature,0.002324556,1,1,1,comfort,0.0040925528000000004,18,6,2
+wind,0.0018189124000000001,8,2,2,wind flow,0.0024018351,3,1,1,standard effective temperature,0.002324556,1,1,1,humid climate,0.0040030585,5,1,1
+scale,0.0018189124000000001,8,2,2,local observation,0.0024018351,3,1,1,lower comfort limit,0.002324556,1,1,1,design criterion,0.0032024468,4,1,1
+china,0.0018189124000000001,4,1,1,city scale,0.0024018351,3,1,1,thermal sensation vote,0.002324556,1,1,1,climatic comfort,0.0032024468,4,1,1
+material,0.0015915483,7,1,2,site scale,0.0024018351,3,1,1,outdoor urban space,0.002324556,1,1,1,cold region,0.0032024468,4,1,1
+water,0.0015915483,7,1,2,natural ventilation,0.0024018351,3,1,1,social background matter,0.002324556,1,1,1,winter,0.0031830966,7,3,1
+strength,0.0015915483,7,1,2,architectural space,0.0024018351,3,1,1,space within city,0.002324556,1,1,1,property,0.0029557326,13,2,2
+index,0.0013641843,6,2,2,experimental research,0.0024018351,3,1,1,increase economic activity,0.002324556,1,1,1,summer,0.0027283685000000003,6,3,1
+microclimate,0.0013641843,3,3,1,mechanical property,0.0024018351,3,1,1,open public space,0.002324556,1,1,1,concrete,0.0027283685000000003,12,1,2

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+redevelopment,0.0059764667,6,3,1,floating village,0.0077580692,4,1,1,sustainable floating community,0.0138296016,2,1,1,sustainable floating community,0.0138296016,2,1,1
+ocean,0.0049803889,5,1,1,vernacular architecture,0.0058185519,3,1,1,given new life,0.0069148008,1,1,1,floating village,0.0077580692,4,1,1
+waterfront,0.0047790947,13,2,2,floating community,0.0058185519,3,1,1,analyses three form,0.0069148008,1,1,1,given new life,0.0069148008,1,1,1
+sea,0.0039843111,4,2,1,new life,0.0038790346,2,2,1,include reclaiming functionality,0.0069148008,1,1,1,analyses three form,0.0069148008,1,1,1
+market,0.003308604,9,1,2,gas extraction,0.0038790346,2,1,1,commemorate local culture,0.0069148008,1,1,1,include reclaiming functionality,0.0069148008,1,1,1
+extraction,0.0029882333,3,1,1,pier waterfront,0.0038790346,2,1,1,coastal city begin,0.0069148008,1,1,1,commemorate local culture,0.0069148008,1,1,1
+fishing,0.0029882333,3,3,1,master plan,0.0038790346,2,1,1,rising sea level,0.0069148008,1,1,1,coastal city begin,0.0069148008,1,1,1
+basin,0.0029882333,3,2,1,river basin,0.0038790346,2,1,1,upon ocean resource,0.0069148008,1,1,1,rising sea level,0.0069148008,1,1,1
+ecotourism,0.0029882333,3,1,1,tourist attraction,0.0038790346,2,1,1,daily urban life,0.0069148008,1,1,1,upon ocean resource,0.0069148008,1,1,1
+modernization,0.0029882333,3,1,1,living space,0.0038790346,2,1,1,healthy ocean environment,0.0069148008,1,1,1,daily urban life,0.0069148008,1,1,1
+village,0.0022057360000000002,6,2,2,proposed concept,0.0038790346,2,1,1,book explores issue,0.0069148008,1,1,1,healthy ocean environment,0.0069148008,1,1,1
+reclamation,0.0019921556,2,1,1,market modernization,0.0038790346,2,1,1,community supported fishery,0.0069148008,1,1,1,book explores issue,0.0069148008,1,1,1
+oil,0.0019921556,2,1,1,long beach,0.0038790346,2,1,1,damage ocean life,0.0069148008,1,1,1,community supported fishery,0.0069148008,1,1,1
+gas,0.0019921556,2,1,1,world city,0.0019395173,1,1,1,helping scientist gather,0.0069148008,1,1,1,damage ocean life,0.0069148008,1,1,1
+inspiration,0.0019921556,2,1,1,constant redevelopment,0.0019395173,1,1,1,scientist gather data,0.0069148008,1,1,1,helping scientist gather,0.0069148008,1,1,1
+coast,0.0019921556,2,2,1,ageing neighbourhood,0.0019395173,1,1,1,encouraging citizen volunteerism,0.0069148008,1,1,1,scientist gather data,0.0069148008,1,1,1
+raft,0.0019921556,2,1,1,prevalent theme,0.0019395173,1,1,1,protect marine health,0.0069148008,1,1,1,encouraging citizen volunteerism,0.0069148008,1,1,1
+bay,0.0019921556,2,1,1,new user,0.0019395173,1,1,1,integrate ocean health,0.0069148008,1,1,1,protect marine health,0.0069148008,1,1,1
+resource,0.0018381134,5,3,2,three form,0.0019395173,1,1,1,pier waterfront redevelopment,0.0069148008,1,1,1,integrate ocean health,0.0069148008,1,1,1
+beach,0.0014704907,4,2,2,urban reclamation,0.0019395173,1,1,1,east coast waterfront,0.0069148008,1,1,1,pier waterfront redevelopment,0.0069148008,1,1,1

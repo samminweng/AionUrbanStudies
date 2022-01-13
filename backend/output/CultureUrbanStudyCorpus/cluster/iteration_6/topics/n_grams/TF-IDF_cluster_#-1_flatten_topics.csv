@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+indicator,0.0016444581000000002,36,6,1,smart city,0.0015929029,17,5,1,natural property right,0.0015840679,5,1,1,indicator,0.0016444581000000002,36,6,1
+environment,0.0015678781,93,41,2,typhoid fever,0.0010307018,11,1,1,property right value,0.0015840679,5,1,1,smart city,0.0015929029,17,5,1
+landscape,0.0015004425,89,20,2,planning process,0.0010307018,11,4,1,road traffic noise,0.0012672543,4,1,1,natural property right,0.0015840679,5,1,1
+risk,0.0014617406,32,9,1,small business,0.0010307018,11,1,1,urban green space,0.0009504407,3,2,1,property right value,0.0015840679,5,1,1
+water,0.0014160612,31,10,1,economic development,0.0009370017,10,7,1,ethnic minority group,0.0009504407,3,1,1,environment,0.0015678781,93,41,2
+nature,0.0013703818,30,18,1,residential environment,0.0009370017,10,2,1,urban forest manager,0.0009504407,3,1,1,landscape,0.0015004425,89,20,2
+material,0.0010049466,22,10,1,indigenous knowledge,0.0009370017,10,1,1,human sensory assessment,0.0009504407,3,1,1,risk,0.0014617406,32,9,1
+property,0.0008222291,18,4,1,livable city,0.0008433015,9,3,1,residential environmental quality,0.0009504407,3,1,1,water,0.0014160612,31,10,1
+soundscape,0.0007765497,17,4,1,new town,0.0008433015,9,2,1,remote sensing data,0.0009504407,3,1,1,nature,0.0013703818,30,18,1
+waterfront,0.0007765497,17,4,1,indigenous people,0.0008433015,9,6,1,perceived sensory dimension,0.0006336272000000001,2,1,1,road traffic noise,0.0012672543,4,1,1
+waste,0.0007765497,17,4,1,green space,0.0007496013,8,4,1,people reporting stress,0.0006336272000000001,2,1,1,typhoid fever,0.0010307018,11,1,1
+element,0.0007308703,16,13,1,middle class,0.0007496013,8,1,1,reporting stress prefer,0.0006336272000000001,2,1,1,planning process,0.0010307018,11,4,1
+measure,0.0007308703,16,7,1,case study,0.0006916389,20,16,2,typhoid fever case,0.0006336272000000001,2,1,1,small business,0.0010307018,11,1,1
+science,0.0006851909,15,10,1,acoustic environment,0.0006559012,7,2,1,beyond binary choice,0.0006336272000000001,2,1,1,material,0.0010049466,22,10,1
+generation,0.0006851909,15,10,1,property right,0.0006559012,7,1,1,social impact assessment,0.0006336272000000001,2,1,1,urban green space,0.0009504407,3,2,1
+application,0.0006851909,15,9,1,spatial planning,0.0006559012,7,3,1,cultural ecosystem service,0.0006336272000000001,2,1,1,ethnic minority group,0.0009504407,3,1,1
+management,0.0006574973,39,27,2,local government,0.0006559012,7,3,1,rapidly urbanizing city,0.0006336272000000001,2,2,1,urban forest manager,0.0009504407,3,1,1
+sound,0.0006395115,14,6,1,urban growth,0.000562201,6,5,1,urban planning process,0.0006336272000000001,2,2,1,human sensory assessment,0.0009504407,3,1,1
+industry,0.0006395115,14,10,1,cultural diversity,0.000562201,6,3,1,municipal solid waste,0.0006336272000000001,2,2,1,residential environmental quality,0.0009504407,3,1,1
+model,0.0006069206,36,20,2,good death,0.000562201,6,1,1,early modern era,0.0006336272000000001,2,2,1,remote sensing data,0.0009504407,3,1,1

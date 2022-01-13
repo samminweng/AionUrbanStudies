@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+urbanity,0.0063350756,6,1,1,urban space,0.013535374400000001,10,3,2,vernacular architectural heritage,0.0194158335,2,1,1,vernacular architectural heritage,0.0194158335,2,1,1
+car,0.0052792296,5,1,1,social life,0.009509796000000001,4,1,1,reconfigures urban life,0.009707916700000001,1,1,1,urban space,0.013535374400000001,10,3,2
+para,0.0052792296,5,1,1,urban survey,0.007132347000000001,3,1,1,involving distinct way,0.009707916700000001,1,1,1,reconfigures urban life,0.009707916700000001,1,1,1
+mobility,0.0048089427,8,2,2,social space,0.007132347000000001,3,3,1,trace urban sociology,0.009707916700000001,1,1,1,involving distinct way,0.009707916700000001,1,1,1
+space,0.0042453027,29,8,4,urban study,0.0054141498,4,2,2,makes instantaneous time,0.009707916700000001,1,1,1,trace urban sociology,0.009707916700000001,1,1,1
+rehabilitation,0.0042233837000000005,4,1,1,civil society,0.0047548980000000005,2,1,1,within fragmented moment,0.009707916700000001,1,1,1,makes instantaneous time,0.009707916700000001,1,1,1
+festival,0.0042233837000000005,4,1,1,risk society,0.0047548980000000005,2,1,1,entailed various mobility,0.009707916700000001,1,1,1,within fragmented moment,0.009707916700000001,1,1,1
+automobility,0.0031675378,3,1,1,vernacular heritage,0.0047548980000000005,2,1,1,modern civil society,0.009707916700000001,1,1,1,entailed various mobility,0.009707916700000001,1,1,1
+malandros,0.0031675378,3,1,1,nineteenth century,0.0047548980000000005,2,1,1,without physical mobility,0.009707916700000001,1,1,1,modern civil society,0.009707916700000001,1,1,1
+immobility,0.0024044714,4,1,2,social networking,0.0047548980000000005,2,1,1,mobile risk society,0.009707916700000001,1,1,1,without physical mobility,0.009707916700000001,1,1,1
+flood,0.0024044714,4,1,2,ancient festival,0.0047548980000000005,2,1,1,forced urban life,0.009707916700000001,1,1,1,mobile risk society,0.009707916700000001,1,1,1
+virus,0.0021116919,2,1,1,dystopian city,0.0047548980000000005,2,1,1,providing social care,0.009707916700000001,1,1,1,forced urban life,0.009707916700000001,1,1,1
+essence,0.0021116919,2,2,1,urban conglomeration,0.0047548980000000005,2,1,1,maximum physical immobility,0.009707916700000001,1,1,1,providing social care,0.009707916700000001,1,1,1
+disruption,0.0021116919,2,1,1,public space,0.0027070749,2,2,2,negative ecological side,0.009707916700000001,1,1,1,maximum physical immobility,0.009707916700000001,1,1,1
+bandit,0.0021116919,2,1,1,architectural heritage,0.0027070749,2,1,2,ecological side effect,0.009707916700000001,1,1,1,negative ecological side,0.009707916700000001,1,1,1
+malandro,0.0021116919,2,1,1,popular culture,0.0027070749,2,1,2,surrounding vernacular heritage,0.009707916700000001,1,1,1,ecological side effect,0.009707916700000001,1,1,1
+injustice,0.0021116919,2,1,1,motor car,0.0023774490000000002,1,1,1,examining rehabilitation settlement,0.009707916700000001,1,1,1,surrounding vernacular heritage,0.009707916700000001,1,1,1
+circumstance,0.0021116919,2,1,1,awesome consequence,0.0023774490000000002,1,1,1,primary field observation,0.009707916700000001,1,1,1,examining rehabilitation settlement,0.009707916700000001,1,1,1
+adda,0.0021116919,2,1,1,overwhelming impact,0.0023774490000000002,1,1,1,incorporating contemporary planning,0.009707916700000001,1,1,1,primary field observation,0.009707916700000001,1,1,1
+networking,0.0021116919,2,1,1,distinct way,0.0023774490000000002,1,1,1,contemporary planning ideology,0.009707916700000001,1,1,1,incorporating contemporary planning,0.009707916700000001,1,1,1

@@ -86,11 +86,11 @@ class BERTModelDocCluster:
             # Load doc vectors
             path = os.path.join('output', self.args.case_name, 'cluster', 'iteration_0', 'vectors', 'doc_vector_results.json')
             df = pd.read_json(path)
-            df = df[df['DocID'].isin(doc_ids)]
+            df = df[df['DocId'].isin(doc_ids)]
             # Add 'DocVectors' 'x' and 'y'
             self.text_df['DocVectors'] = df['DocVectors'].tolist()
-            self.text_df['x'] = df['x'].tolist()
-            self.text_df['y'] = df['y'].tolist()
+            self.text_df['x'] = df['x'].apply(lambda x: round(x, 2)).tolist()
+            self.text_df['y'] = df['y'].apply(lambda y: round(y, 2)).tolist()
         else:
             # Collect all the texts
             texts = list()
@@ -463,9 +463,9 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        for i in list(range(1, 2)):
+        for i in range(10, 11):
             mdc = BERTModelDocCluster(i)
-            mdc.get_sentence_vectors()
+            mdc.get_sentence_vectors(is_load=False)
             mdc.run_HDBSCAN_cluster_experiments()
             mdc.summarize_HDBSCAN_cluster_experiment_results()
             mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
