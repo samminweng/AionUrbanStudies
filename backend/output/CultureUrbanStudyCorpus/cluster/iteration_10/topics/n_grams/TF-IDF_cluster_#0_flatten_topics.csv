@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-property,0.008856079000000001,8,1,1,property right,0.0135766211,7,1,1,natural property right,0.0240970331,5,1,1,natural property right,0.0240970331,5,1,1
-mangrove,0.0044280395000000005,4,1,1,landscape planning,0.0096975865,5,2,1,property right value,0.0240970331,5,1,1,property right value,0.0240970331,5,1,1
-biodiversity,0.0033210296000000003,3,1,1,governance challenge,0.0096975865,5,2,1,urban forest manager,0.0144582198,3,1,1,urban forest manager,0.0144582198,3,1,1
-vegetation,0.0033210296000000003,3,1,1,natural property,0.0096975865,5,1,1,cultural ecosystem service,0.0096388132,2,1,1,property right,0.0135766211,7,1,1
-wildfire,0.0033210296000000003,3,1,1,right value,0.0096975865,5,1,1,double bottom line,0.0096388132,2,1,1,landscape planning,0.0096975865,5,2,1
-conservation,0.0033210296000000003,3,1,1,cultural value,0.0077580692,4,1,1,contemporary cultural ecosystem,0.0048194066,1,1,1,governance challenge,0.0096975865,5,2,1
-landscape,0.0028599508000000003,7,2,2,wildfire risk,0.0077580692,4,1,1,ecosystem service value,0.0048194066,1,1,1,cultural ecosystem service,0.0096388132,2,1,1
-water,0.0024513864,6,2,2,environmental hazard,0.0058185519,3,2,1,urbanizing city state,0.0048194066,1,1,1,double bottom line,0.0096388132,2,1,1
-habitat,0.0022140197,2,1,1,bottom line,0.0058185519,3,1,1,undergone rapid urbanization,0.0048194066,1,1,1,property,0.008856079000000001,8,1,1
-photographs,0.0022140197,2,1,1,forest manager,0.0058185519,3,1,1,natural habitat extent,0.0048194066,1,1,1,cultural value,0.0077580692,4,1,1
-upland,0.0022140197,2,1,1,cultural ecosystem,0.0038790346,2,1,1,coastal mangrove forest,0.0048194066,1,1,1,wildfire risk,0.0077580692,4,1,1
-intermountain,0.0022140197,2,1,1,ecosystem service,0.0038790346,2,1,1,case study habitat,0.0048194066,1,1,1,environmental hazard,0.0058185519,3,2,1
-west,0.0022140197,2,1,1,vegetation management,0.0038790346,2,1,1,changing cultural value,0.0048194066,1,1,1,bottom line,0.0058185519,3,1,1
-regression,0.0022140197,2,1,1,risk management,0.0038790346,2,2,1,including qualitative archival,0.0048194066,1,1,1,contemporary cultural ecosystem,0.0048194066,1,1,1
-variable,0.0022140197,2,1,1,land owner,0.0038790346,2,2,1,qualitative archival analysis,0.0048194066,1,1,1,ecosystem service value,0.0048194066,1,1,1
-customer,0.0022140197,2,1,1,intermountain west,0.0038790346,2,1,1,uploaded social medium,0.0048194066,1,1,1,urbanizing city state,0.0048194066,1,1,1
-position,0.0022140197,2,1,1,urban water,0.0038790346,2,1,1,social medium photographs,0.0048194066,1,1,1,undergone rapid urbanization,0.0048194066,1,1,1
-statement,0.0022140197,2,1,1,operational capacity,0.0038790346,2,1,1,publically accessible mangrove,0.0048194066,1,1,1,natural habitat extent,0.0048194066,1,1,1
-capacity,0.002042822,5,4,2,governance issue,0.0038790346,2,1,1,important cultural role,0.0048194066,1,1,1,coastal mangrove forest,0.0048194066,1,1,1
-manager,0.002042822,5,2,2,risk perception,0.0038790346,2,1,1,heavily urbanized environment,0.0048194066,1,1,1,case study habitat,0.0048194066,1,1,1
+urbanity,0.0067965991,5,1,1,ethnic minority,0.0091169667,3,1,1,ethnic minority group,0.036701635,3,1,1,ethnic minority group,0.036701635,3,1,1
+competition,0.0054372793,4,1,1,minority group,0.0091169667,3,1,1,public open scape,0.0122338783,1,1,1,public open scape,0.0122338783,1,1,1
+consumer,0.0040779594,3,3,1,contemporary city,0.0091169667,3,1,1,different ethnic minority,0.0122338783,1,1,1,different ethnic minority,0.0122338783,1,1,1
+fashion,0.0040779594,3,1,1,design profession,0.0060779778,2,1,1,towards inclusive design,0.0122338783,1,1,1,towards inclusive design,0.0122338783,1,1,1
+architecture,0.003010107,6,2,2,city planning,0.0056080019,5,2,2,emerging collective experiment,0.0122338783,1,1,1,emerging collective experiment,0.0122338783,1,1,1
+landscape,0.0025084225,5,2,2,urban environment,0.0033648011,3,2,2,intergenerational urban space,0.0122338783,1,1,1,intergenerational urban space,0.0122338783,1,1,1
+minority,0.0015050535,3,1,2,open scape,0.0030389889,1,1,1,integrate young people,0.0122338783,1,1,1,integrate young people,0.0122338783,1,1,1
+method,0.0015050535,3,3,2,inclusive landscape,0.0030389889,1,1,1,paper describes approach,0.0122338783,1,1,1,paper describes approach,0.0122338783,1,1,1
+youth,0.0015050535,3,1,2,negative role,0.0030389889,1,1,1,effectively involve youth,0.0122338783,1,1,1,effectively involve youth,0.0122338783,1,1,1
+idea,0.0015050535,3,2,2,symbolic dimension,0.0030389889,1,1,1,embed diverse youth,0.0122338783,1,1,1,embed diverse youth,0.0122338783,1,1,1
+importance,0.0015050535,3,2,2,wide variety,0.0030389889,1,1,1,diverse youth voice,0.0122338783,1,1,1,diverse youth voice,0.0122338783,1,1,1
+scape,0.0013593198,1,1,1,discuss design,0.0030389889,1,1,1,underlying recent debate,0.0122338783,1,1,1,underlying recent debate,0.0122338783,1,1,1
+architect,0.0013593198,1,1,1,management practice,0.0030389889,1,1,1,enforce social assumption,0.0122338783,1,1,1,enforce social assumption,0.0122338783,1,1,1
+multiculturalism,0.0013593198,1,1,1,cultural experience,0.0030389889,1,1,1,concern architectural theory,0.0122338783,1,1,1,concern architectural theory,0.0122338783,1,1,1
+multinaturalism,0.0013593198,1,1,1,landscape architect,0.0030389889,1,1,1,criticizes two kind,0.0122338783,1,1,1,criticizes two kind,0.0122338783,1,1,1
+laboratory,0.0013593198,1,1,1,different way,0.0030389889,1,1,1,genuinely urban environment,0.0122338783,1,1,1,genuinely urban environment,0.0122338783,1,1,1
+outside,0.0013593198,1,1,1,work towards,0.0030389889,1,1,1,recognizably different class,0.0122338783,1,1,1,recognizably different class,0.0122338783,1,1,1
+passion,0.0013593198,1,1,1,inclusive design,0.0030389889,1,1,1,among affluent household,0.0122338783,1,1,1,among affluent household,0.0122338783,1,1,1
+food,0.0013593198,1,1,1,traditional distinction,0.0030389889,1,1,1,reflecting distinctive geography,0.0122338783,1,1,1,reflecting distinctive geography,0.0122338783,1,1,1
+militant,0.0013593198,1,1,1,scientific laboratory,0.0030389889,1,1,1,key business service,0.0122338783,1,1,1,key business service,0.0122338783,1,1,1

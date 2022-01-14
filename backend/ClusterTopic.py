@@ -1,13 +1,13 @@
 import os
 from argparse import Namespace
+from functools import reduce
 from pathlib import Path
 
 import pandas as pd
 
-# Extract Cluster Topic using TF-IDF
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
-
+# Obtain the cluster results of the best results and extract cluster topics using TF-IDF
 class ClusterTopic:
     def __init__(self, _last_iteration):
         self.args = Namespace(
@@ -15,6 +15,42 @@ class ClusterTopic:
             approach='TF-IDF',
             last_iteration=_last_iteration
         )
+
+    def collect_iterative_cluster_topic_results(self):
+        cluster_folder = os.path.join('output', self.args.case_name, 'cluster')
+        results = list()
+        # Go through each iteration 1 to last iteration
+        for i in range(0, self.args.last_iteration + 1):
+            try:
+                dimension = 0
+                # Get the best dimension
+                folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'hdbscan_clustering')
+                for file in os.listdir(folder):
+                    file_name = file.lower()
+                    if file_name.endswith(".png") and file_name.startswith("dimension"):
+                        dimension = int(file_name.split("_")[1].split(".png")[0])
+                # Get the best score
+                folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'experiments')
+                path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.json')
+                experiment_results = pd.read_json(path).to_dict("records")
+                best_result = next(r for r in experiment_results if r['dimension'] == dimension)
+                score = best_result['Silhouette_score']
+                # Get summary of cluster topics
+                folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'topics')
+                path = os.path.join(folder, 'TF-IDF_cluster_topic_summary.json')
+                df = pd.read_json(path)
+                cluster_topics = df.to_dict("records")
+                total_papers = reduce(lambda ct1, total: ct1['NumDocs'] + total, cluster_topics, 0)
+                for ct in cluster_topics:
+                    results.append({
+                        "iteration": i, "total_papers": total_papers, "dimension": dimension, "score": score,
+                        "cluster": ct['Cluster'], "NumDocs": ct['NumDocs'], "Percent": ct['Percent'],
+                        "DocIds": ct['DocIds'], "Topics": ct['Topics']
+                    })
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+        print(results)
+
 
     # Collect all the iterative cluster results and combine into a single cluster results
     def collect_iterative_cluster_results(self):
@@ -164,8 +200,9 @@ if __name__ == '__main__':
     try:
         last_iteration = 10
         ct = ClusterTopic(last_iteration)
-        ct.collect_iterative_cluster_results()
-        ct.derive_cluster_topics_by_TF_IDF()
-        ct.summarize_cluster_topics()
+        ct.collect_iterative_cluster_topic_results()
+        # ct.collect_iterative_cluster_results()
+        # ct.derive_cluster_topics_by_TF_IDF()
+        # ct.summarize_cluster_topics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

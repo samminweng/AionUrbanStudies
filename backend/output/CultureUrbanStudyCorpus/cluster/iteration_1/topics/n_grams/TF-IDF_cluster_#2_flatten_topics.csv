@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+bank,0.0022005117000000003,5,1,1,small town,0.011046972300000001,10,2,1,branch office building,0.0148047539,3,1,1,branch office building,0.0148047539,3,1,1
+empire,0.0017604093,8,1,2,branch office,0.0044187889,4,1,1,relevant regional culture,0.0098698359,2,1,1,small town,0.011046972300000001,10,2,1
+nobility,0.0017604093,4,2,1,culture study,0.0033140917,3,1,1,regional culture study,0.0098698359,2,1,1,relevant regional culture,0.0098698359,2,1,1
+monasticism,0.0017604093,4,1,1,wooden church,0.0033140917,3,1,1,large part today,0.004934918,1,1,1,regional culture study,0.0098698359,2,1,1
+identity,0.0017352602,19,9,3,labour market,0.0027617431,5,1,2,many subject area,0.004934918,1,1,1,large part today,0.004934918,1,1,1
+religion,0.0015403582,7,5,2,multicultural city,0.0022093945,2,2,1,tolerated local religion,0.004934918,1,1,1,many subject area,0.004934918,1,1,1
+period,0.0015403582,7,4,2,social protection,0.0022093945,2,1,1,gives detailed attention,0.004934918,1,1,1,tolerated local religion,0.004934918,1,1,1
+language,0.0013203070000000002,6,5,2,traditional function,0.0022093945,2,1,1,pays particular attention,0.004934918,1,1,1,gives detailed attention,0.004934918,1,1,1
+dualism,0.0013203070000000002,3,2,1,ethnic identity,0.0022093945,2,1,1,primarily agrarian economy,0.004934918,1,1,1,pays particular attention,0.004934918,1,1,1
+trace,0.0013203070000000002,3,2,1,significant element,0.0022093945,2,2,1,spoken various language,0.004934918,1,1,1,primarily agrarian economy,0.004934918,1,1,1
+majority,0.0011002558000000001,5,4,2,presented example,0.0022093945,2,1,1,professed different religion,0.004934918,1,1,1,spoken various language,0.004934918,1,1,1
+memory,0.0011002558000000001,5,3,2,revitalization programme,0.0022093945,2,1,1,particularly diverse city,0.004934918,1,1,1,professed different religion,0.004934918,1,1,1
+bridge,0.0011002558000000001,5,2,2,bank building,0.0022093945,2,1,1,one national narrative,0.004934918,1,1,1,particularly diverse city,0.004934918,1,1,1
+war,0.0011002558000000001,5,4,2,central bank,0.0022093945,2,1,1,several national group,0.004934918,1,1,1,one national narrative,0.004934918,1,1,1
+theatre,0.0011002558000000001,5,2,2,national culture,0.0016570458,3,3,2,single urban space,0.004934918,1,1,1,several national group,0.004934918,1,1,1
+music,0.0010046243,11,2,3,office building,0.0016570458,3,1,2,several social scientist,0.004934918,1,1,1,single urban space,0.004934918,1,1,1
+church,0.0010046243,11,1,3,historical experience,0.0011046972,1,1,1,recent austerity measure,0.004934918,1,1,1,several social scientist,0.004934918,1,1,1
+form,0.0009132949,10,5,3,part today,0.0011046972,1,1,1,two specific domain,0.004934918,1,1,1,recent austerity measure,0.004934918,1,1,1
+end,0.0008802047,4,4,2,subject area,0.0011046972,1,1,1,generating new form,0.004934918,1,1,1,two specific domain,0.004934918,1,1,1
+multiparadigmatism,0.0008802047,2,1,1,criminal law,0.0011046972,1,1,1,precarious working condition,0.004934918,1,1,1,generating new form,0.004934918,1,1,1

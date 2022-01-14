@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-square,0.0040779028,11,1,2,open space,0.0092274896,12,2,2,public open space,0.030624566800000003,12,2,2,public open space,0.030624566800000003,12,2,2
-daylight,0.0040178632,4,1,1,aesthetic image,0.006250496800000001,3,1,1,eight sensory dimension,0.0207444024,3,1,1,eight sensory dimension,0.0207444024,3,1,1
-facade,0.0020089316,2,1,1,green space,0.0061516597,8,1,2,green space assessment,0.0138296016,2,1,1,green space assessment,0.0138296016,2,1,1
-greenway,0.0020089316,2,1,1,sensory dimension,0.0046137448,6,1,2,main design strategy,0.0138296016,2,1,1,main design strategy,0.0138296016,2,1,1
-perception,0.0014828738,4,2,2,space assessment,0.0041669979,2,1,1,community social interaction,0.0138296016,2,1,1,community social interaction,0.0138296016,2,1,1
-impact,0.0014828738,4,3,2,main design,0.0041669979,2,1,1,sustainable urban environment,0.0138296016,2,1,1,sustainable urban environment,0.0138296016,2,1,1
-glass,0.0014828738,4,1,2,glass facade,0.0041669979,2,1,1,perceived sensory dimension,0.007656141700000001,3,1,2,perceived sensory dimension,0.007656141700000001,3,1,2
-aspect,0.0014828738,4,2,2,unifying aspect,0.0041669979,2,1,1,urban green space,0.007656141700000001,3,1,2,urban green space,0.007656141700000001,3,1,2
-assessment,0.0011121553,3,1,2,city instrument,0.0041669979,2,1,1,green space user,0.0069148008,1,1,1,green space user,0.0069148008,1,1,1
-relation,0.0011121553,3,3,2,public square,0.0041669979,2,1,1,green space type,0.0069148008,1,1,1,green space type,0.0069148008,1,1,1
-community,0.0011121553,3,1,2,square design,0.0041669979,2,1,1,green space use,0.0069148008,1,1,1,space use variable,0.0069148008,1,1,1
-behaviour,0.0011121553,3,1,2,behaviour pattern,0.0041669979,2,1,1,space use variable,0.0069148008,1,1,1,result grant potential,0.0069148008,1,1,1
-refuge,0.0010044658,1,1,1,traditional square,0.0041669979,2,1,1,result grant potential,0.0069148008,1,1,1,affects energy consumption,0.0069148008,1,1,1
-daylighting,0.0010044658,1,1,1,landscape design,0.0041669979,2,1,1,affects energy consumption,0.0069148008,1,1,1,providing appropriate space,0.0069148008,1,1,1
-functional,0.0010044658,1,1,1,public space,0.0030758299000000003,4,1,2,providing appropriate space,0.0069148008,1,1,1,facilitating social relation,0.0069148008,1,1,1
-genesis,0.0010044658,1,1,1,social interaction,0.0030758299000000003,4,1,2,facilitating social relation,0.0069148008,1,1,1,satisfy high functional,0.0069148008,1,1,1
-classifies,0.0010044658,1,1,1,reliable tool,0.0020834989,1,1,1,satisfy high functional,0.0069148008,1,1,1,representative public area,0.0069148008,1,1,1
-highlight,0.0010044658,1,1,1,onsite questionnaire,0.0020834989,1,1,1,representative public area,0.0069148008,1,1,1,classifies different approach,0.0069148008,1,1,1
-spreading,0.0010044658,1,1,1,space user,0.0020834989,1,1,1,classifies different approach,0.0069148008,1,1,1,new glazing material,0.0069148008,1,1,1
-subordination,0.0010044658,1,1,1,space type,0.0020834989,1,1,1,new glazing material,0.0069148008,1,1,1,resulting aesthetic order,0.0069148008,1,1,1
+transit,0.0029976204,12,4,1,neighborhood design,0.0058964522,12,1,1,urban neighborhood design,0.0088355788,6,1,1,urban neighborhood design,0.0088355788,6,1,1
+neighborhood,0.002212665,24,5,2,modality environment,0.0044223391,9,1,1,neighborhood design concept,0.0088355788,6,1,1,neighborhood design concept,0.0088355788,6,1,1
+walking,0.0019984136,8,3,1,urban neighborhood,0.0029482261,6,1,1,changing public life,0.0044177894,3,1,1,neighborhood design,0.0058964522,12,1,1
+mobility,0.0017516932,19,6,2,transit village,0.0024568551,5,1,1,theoretical urban neighborhood,0.0044177894,3,1,1,modality environment,0.0044223391,9,1,1
+rail,0.0017486119,7,2,1,social capital,0.0021762051,12,1,2,neighborhood urban design,0.0044177894,3,1,1,changing public life,0.0044177894,3,1,1
+mindset,0.0017486119,7,1,1,public transport,0.0019654841,4,3,1,medium size city,0.0044177894,3,1,1,theoretical urban neighborhood,0.0044177894,3,1,1
+vehicle,0.0015673044,17,3,2,sustainable transportation,0.0019654841,4,2,1,sustainable active mobility,0.0029451929,2,1,1,neighborhood urban design,0.0044177894,3,1,1
+diffusion,0.0014988102,6,1,1,active mobility,0.0019654841,4,1,1,foster social capital,0.0029451929,2,1,1,medium size city,0.0044177894,3,1,1
+strategy,0.0013829156,15,5,2,walking mindset,0.0019654841,4,1,1,sustainable social innovation,0.0029451929,2,1,1,transit,0.0029976204,12,4,1
+infrastructure,0.0012907213,14,11,2,central place,0.0019654841,4,1,1,current global situation,0.0029451929,2,1,1,sustainable active mobility,0.0029451929,2,1,1
+capital,0.0012907213,14,3,2,smart city,0.0018135042000000001,10,3,2,vehicle type choice,0.0029451929,2,1,1,foster social capital,0.0029451929,2,1,1
+realm,0.0012490085,5,3,1,business model,0.001474113,3,2,1,prevalent transport problem,0.0014725965,1,1,1,sustainable social innovation,0.0029451929,2,1,1
+corridor,0.0012490085,5,2,1,sustainable mobility,0.001474113,3,2,1,well informal factor,0.0014725965,1,1,1,current global situation,0.0029451929,2,1,1
+policy,0.0011985269,13,8,2,heterotopia concept,0.001474113,3,1,1,different analytical level,0.0014725965,1,1,1,vehicle type choice,0.0029451929,2,1,1
+transportation,0.0011063325,12,3,2,vehicle type,0.001474113,3,1,1,multiple case study,0.0014725965,1,1,1,transit village,0.0024568551,5,1,1
+transport,0.0010141381,11,4,2,vehicle use,0.001474113,3,1,1,factor included legislation,0.0014725965,1,1,1,neighborhood,0.002212665,24,5,2
+density,0.0010141381,11,3,2,medium size,0.001474113,3,1,1,legislation concerning transport,0.0014725965,1,1,1,social capital,0.0021762051,12,1,2
+implementation,0.0009219438,10,6,2,size city,0.001474113,3,1,1,appropriate business model,0.0014725965,1,1,1,walking,0.0019984136,8,3,1
+street,0.0009219438,10,5,2,public life,0.0012694529,7,2,2,provide several implication,0.0014725965,1,1,1,public transport,0.0019654841,4,3,1
+world,0.0009219438,10,6,2,design concept,0.0010881025,6,1,2,private sector actor,0.0014725965,1,1,1,sustainable transportation,0.0019654841,4,2,1

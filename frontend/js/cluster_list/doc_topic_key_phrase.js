@@ -7,7 +7,6 @@ function DocTopicKeyPhraseListView(cluster_no, cluster_topic_key_phrases, corpus
     const cluster_doc_ids = cluster_data['DocIds'];
     const cluster_docs = corpus_data.filter(d => cluster_doc_ids.includes(parseInt(d['DocId'])));
 
-
     function _createUI() {
         $('#topics').empty();   // Clean the topics
         // Initialise the auto-complete topic with all topics

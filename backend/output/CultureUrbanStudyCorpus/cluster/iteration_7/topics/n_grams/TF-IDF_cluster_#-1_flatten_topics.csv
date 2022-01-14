@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-history,0.0030746481,30,15,1,smart city,0.0035985736,17,5,1,natural property right,0.0037498391,5,1,1,natural property right,0.0037498391,5,1,1
-governance,0.0026646950000000003,26,10,1,built environment,0.0027518504000000003,13,7,1,property right value,0.0037498391,5,1,1,property right value,0.0037498391,5,1,1
-soundscape,0.0017423006,17,4,1,typhoid fever,0.0023284888,11,1,1,road traffic noise,0.0029998713,4,1,1,smart city,0.0035985736,17,5,1
-waterfront,0.0017423006,17,4,1,small business,0.0023284888,11,1,1,urban forest manager,0.0022499034000000003,3,1,1,history,0.0030746481,30,15,1
-right,0.0016398123000000001,16,7,1,indigenous knowledge,0.002116808,10,1,1,typhoid fever case,0.0014999356,2,1,1,road traffic noise,0.0029998713,4,1,1
-year,0.0016337713000000001,28,10,2,urban planning,0.0019483991,29,18,3,social impact assessment,0.0014999356,2,1,1,built environment,0.0027518504000000003,13,7,1
-challenge,0.0016337713000000001,28,18,2,new town,0.0019051272,9,2,1,cultural ecosystem service,0.0014999356,2,1,1,governance,0.0026646950000000003,26,10,1
-book,0.0015373241,15,10,1,indigenous people,0.0019051272,9,6,1,rapidly urbanizing city,0.0014999356,2,2,1,typhoid fever,0.0023284888,11,1,1
-state,0.0015170733,26,14,2,middle class,0.0016934464,8,1,1,early modern era,0.0014999356,2,2,1,small business,0.0023284888,11,1,1
-town,0.0014587244000000001,25,10,2,acoustic environment,0.0014817656000000001,7,2,1,urban growth boundary,0.0014999356,2,1,1,urban forest manager,0.0022499034000000003,3,1,1
-water,0.0013420264,23,6,2,property right,0.0014817656000000001,7,1,1,using social medium,0.0014999356,2,1,1,indigenous knowledge,0.002116808,10,1,1
-fever,0.0013323475,13,1,1,local government,0.0014817656000000001,7,3,1,double bottom line,0.0014999356,2,1,1,urban planning,0.0019483991,29,18,3
-difference,0.0013323475,13,7,1,public space,0.0013256633,11,7,2,different social milieu,0.0014999356,2,1,1,new town,0.0019051272,9,2,1
-street,0.0013323475,13,10,1,urban design,0.0012765373,19,13,3,smart city application,0.0014999356,2,1,1,indigenous people,0.0019051272,9,6,1
-indicator,0.0012253285,21,4,2,local culture,0.0012700848,6,6,1,sustainable social innovation,0.0014999356,2,1,1,soundscape,0.0017423006,17,4,1
-situation,0.001127371,11,7,1,modern city,0.0012700848,6,4,1,current global situation,0.0014999356,2,1,1,waterfront,0.0017423006,17,4,1
-downtown,0.001127371,11,3,1,good death,0.0012700848,6,1,1,soundscape evaluation method,0.0014999356,2,1,1,middle class,0.0016934464,8,1,1
-empire,0.001127371,11,3,1,urban sprawl,0.0012700848,6,1,1,inclusive design research,0.0014999356,2,1,1,right,0.0016398123000000001,16,7,1
-mobility,0.0011086305,19,5,2,urban study,0.0010846336,9,9,2,system take place,0.0014999356,2,1,1,year,0.0016337713000000001,28,10,2
-economy,0.0011086305,19,12,2,urban development,0.0010846336,9,8,2,inter cultural dialogue,0.0014999356,2,1,1,challenge,0.0016337713000000001,28,18,2
+event,0.0028570135,33,3,1,typhoid fever,0.0019849977,11,1,1,urban regime theory,0.0024436428,4,1,1,event,0.0028570135,33,3,1
+year,0.002597285,30,8,1,climate change,0.001624089,9,4,1,ethnic minority group,0.0018327321000000001,3,1,1,year,0.002597285,30,8,1
+festival,0.0024241327,28,2,1,urban study,0.0014436347,8,6,1,urban forest manager,0.0018327321000000001,3,1,1,urban regime theory,0.0024436428,4,1,1
+mobility,0.0020778280000000003,24,6,1,developing country,0.0014436347,8,2,1,human sensory assessment,0.0018327321000000001,3,1,1,festival,0.0024241327,28,2,1
+government,0.0018180995,21,12,1,residential standard,0.0014436347,8,1,1,site interpretation centre,0.0018327321000000001,3,1,1,mobility,0.0020778280000000003,24,6,1
+experience,0.0018180995,21,12,1,local government,0.0012631803000000001,7,3,1,typhoid fever case,0.0012218214,2,1,1,typhoid fever,0.0019849977,11,1,1
+book,0.0018180995,21,11,1,new town,0.0012631803000000001,7,1,1,public green space,0.0012218214,2,1,1,ethnic minority group,0.0018327321000000001,3,1,1
+impact,0.0017315233,20,14,1,urban sustainability,0.001082726,6,2,1,social impact assessment,0.0012218214,2,1,1,urban forest manager,0.0018327321000000001,3,1,1
+vision,0.0017315233,20,9,1,regime theory,0.001082726,6,1,1,cultural ecosystem service,0.0012218214,2,1,1,human sensory assessment,0.0018327321000000001,3,1,1
+growth,0.0017315233,20,11,1,urban design,0.0009324045,14,13,2,urban sustainability transition,0.0012218214,2,1,1,site interpretation centre,0.0018327321000000001,3,1,1
+construction,0.0016449472,19,7,1,social science,0.0009022717000000001,5,4,1,urban planning process,0.0012218214,2,2,1,government,0.0018180995,21,12,1
+tourism,0.0016449472,19,3,1,social life,0.0009022717000000001,5,2,1,greenhouse gas emission,0.0012218214,2,2,1,experience,0.0018180995,21,12,1
+design,0.0015976344,50,22,2,urban life,0.0009022717000000001,5,4,1,urban growth boundary,0.0012218214,2,1,1,book,0.0018180995,21,11,1
+issue,0.001558371,18,13,1,urban growth,0.0009022717000000001,5,4,1,using social medium,0.0012218214,2,1,1,impact,0.0017315233,20,14,1
+visitor,0.001558371,18,6,1,planning process,0.0009022717000000001,5,3,1,last two decade,0.0012218214,2,2,1,vision,0.0017315233,20,9,1
+plan,0.0014717948,17,9,1,local people,0.0009022717000000001,5,4,1,relationship among people,0.0012218214,2,1,1,growth,0.0017315233,20,11,1
+waterfront,0.0014717948,17,4,1,tourism study,0.0009022717000000001,5,1,1,satisfy project requirement,0.0012218214,2,1,1,construction,0.0016449472,19,7,1
+housing,0.0013852187000000001,16,11,1,special event,0.0009022717000000001,5,1,1,multilocal creative knowledge,0.0012218214,2,1,1,tourism,0.0016449472,19,3,1
+knowledge,0.0013852187000000001,16,5,1,third place,0.0009022717000000001,5,1,1,creative knowledge worker,0.0012218214,2,1,1,climate change,0.001624089,9,4,1
+child,0.0012986425,15,6,1,green space,0.0007218173,4,2,1,creative knowledge work,0.0012218214,2,1,1,design,0.0015976344,50,22,2

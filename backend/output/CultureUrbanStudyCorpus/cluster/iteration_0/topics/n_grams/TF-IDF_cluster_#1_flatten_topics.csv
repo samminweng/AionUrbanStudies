@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-hybridization,0.0009385992,6,1,1,city identity,0.0046162388,14,2,1,cubic stone street,0.0037667467000000003,3,1,1,city identity,0.0046162388,14,2,1
-astronomy,0.000782166,5,1,1,residential standard,0.0026378508,8,1,1,urban transformation project,0.0037667467000000003,3,1,1,cubic stone street,0.0037667467000000003,3,1,1
-sündürme,0.000782166,5,1,1,architectural style,0.0019783881000000002,6,2,1,local urban space,0.0025111645,2,1,1,urban transformation project,0.0037667467000000003,3,1,1
-pattern,0.0006928181,12,9,2,cubic stone,0.0016486567,5,1,1,typological analysis method,0.0025111645,2,1,1,residential standard,0.0026378508,8,1,1
-standard,0.0006350832,11,2,2,hybridization process,0.0016486567,5,1,1,urban land use,0.0025111645,2,1,1,local urban space,0.0025111645,2,1,1
-modifier,0.0006257328,4,1,1,satellite image,0.0016486567,5,2,1,urban street façades,0.0025111645,2,1,1,typological analysis method,0.0025111645,2,1,1
-architect,0.0005773484,10,5,2,trust relationship,0.0013189254,4,1,1,outstanding universal value,0.0025111645,2,1,1,urban land use,0.0025111645,2,1,1
-conservation,0.0005196136,9,3,2,urban transformation,0.0010952463000000001,9,1,2,many different civilization,0.0025111645,2,2,1,urban street façades,0.0025111645,2,1,1
-living,0.0005196136,9,6,2,vernacular city,0.000989194,3,1,1,two governmental institution,0.0025111645,2,1,1,outstanding universal value,0.0025111645,2,1,1
-assembly,0.0004692996,3,2,1,transitional space,0.000989194,3,1,1,high spatial resolution,0.0025111645,2,1,1,many different civilization,0.0025111645,2,2,1
-citadel,0.0004692996,3,1,1,stone street,0.000989194,3,1,1,cartographic data base,0.0025111645,2,1,1,two governmental institution,0.0025111645,2,1,1
-th,0.0004692996,3,1,1,typological analysis,0.000989194,3,1,1,new development scheme,0.0025111645,2,1,1,high spatial resolution,0.0025111645,2,1,1
-perception,0.0004041439,7,3,2,historical layer,0.000989194,3,1,1,old city center,0.0013901942,3,2,2,cartographic data base,0.0025111645,2,1,1
-oil,0.0004041439,7,2,2,traditional city,0.000989194,3,1,1,urban housing complies,0.0012555822,1,1,1,new development scheme,0.0025111645,2,1,1
-designer,0.000346409,6,3,2,literary work,0.000989194,3,2,1,characteristic among people,0.0012555822,1,1,1,architectural style,0.0019783881000000002,6,2,1
-modernization,0.000346409,6,3,2,transformation project,0.000989194,3,1,1,multiple regression analysis,0.0012555822,1,1,1,cubic stone,0.0016486567,5,1,1
-principle,0.000346409,6,5,2,present time,0.000989194,3,1,1,regression analysis reveal,0.0012555822,1,1,1,hybridization process,0.0016486567,5,1,1
-island,0.000346409,6,3,2,traditional market,0.0008518582,7,1,2,income per month,0.0012555822,1,1,1,satellite image,0.0016486567,5,2,1
-characteristic,0.000346409,6,6,2,good level,0.0006594627,2,2,1,municipal administration culture,0.0012555822,1,1,1,old city center,0.0013901942,3,2,2
-occupation,0.0003128664,2,2,1,construction process,0.0006594627,2,2,1,improved urban planning,0.0012555822,1,1,1,trust relationship,0.0013189254,4,1,1
+frailty,0.0014295768,8,1,1,city identity,0.0053868529,14,2,1,healthy life expectancy,0.007340327000000001,5,1,1,healthy life expectancy,0.007340327000000001,5,1,1
+care,0.0013849874,21,1,2,traditional market,0.0030782016000000002,8,2,1,integrated community care,0.0044041962,3,1,1,city identity,0.0053868529,14,2,1
+hybridization,0.0010721826,6,1,1,life expectancy,0.0026934264,7,1,1,cubic stone street,0.0044041962,3,1,1,integrated community care,0.0044041962,3,1,1
+sündürme,0.0008934855,5,1,1,older people,0.0025561634,18,1,2,urban transformation project,0.0044041962,3,1,1,cubic stone street,0.0044041962,3,1,1
+marketplace,0.0008934855,5,2,1,architectural style,0.0023086512,6,2,1,local urban space,0.0029361308,2,1,1,urban transformation project,0.0044041962,3,1,1
+modifier,0.0007147884,4,1,1,medical care,0.0021301362,15,1,2,community care system,0.0029361308,2,1,1,traditional market,0.0030782016000000002,8,2,1
+richness,0.0007147884,4,3,1,healthy life,0.0019238760000000001,5,1,1,typological analysis method,0.0029361308,2,1,1,local urban space,0.0029361308,2,1,1
+floor,0.0007147884,4,1,1,healthy society,0.0019238760000000001,5,1,1,urban street façades,0.0029361308,2,1,1,community care system,0.0029361308,2,1,1
+continuity,0.000593566,9,4,2,cubic stone,0.0019238760000000001,5,1,1,urban design guideline,0.0029361308,2,2,1,typological analysis method,0.0029361308,2,1,1
+undernutrition,0.0005360913,3,1,1,hybridization process,0.0019238760000000001,5,1,1,many different civilization,0.0029361308,2,2,1,urban street façades,0.0029361308,2,1,1
+citadel,0.0005360913,3,1,1,urban transformation,0.0012780817,9,1,2,two governmental institution,0.0029361308,2,1,1,urban design guideline,0.0029361308,2,2,1
+emigration,0.0005360913,3,1,1,vernacular city,0.0011543256,3,1,1,high spatial resolution,0.0029361308,2,1,1,many different civilization,0.0029361308,2,2,1
+th,0.0005360913,3,1,1,transitional space,0.0011543256,3,1,1,cartographic data base,0.0029361308,2,1,1,two governmental institution,0.0029361308,2,1,1
+orient,0.0005360913,3,1,1,integrated community,0.0011543256,3,1,1,new development scheme,0.0029361308,2,1,1,high spatial resolution,0.0029361308,2,1,1
+conservation,0.0005276143,8,2,2,community care,0.0011543256,3,1,1,achieve national integration,0.0014680654,1,1,1,cartographic data base,0.0029361308,2,1,1
+architect,0.0005276143,8,5,2,care system,0.0011543256,3,1,1,ambitious infrastructural project,0.0014680654,1,1,1,new development scheme,0.0029361308,2,1,1
+stone,0.0005276143,8,2,2,medical personnel,0.0011543256,3,1,1,uniform urban plan,0.0014680654,1,1,1,life expectancy,0.0026934264,7,1,1
+climate,0.0004616625,7,4,2,stone street,0.0011543256,3,1,1,project generated webs,0.0014680654,1,1,1,older people,0.0025561634,18,1,2
+expectancy,0.0004616625,7,1,2,typological analysis,0.0011543256,3,1,1,standard recognizable material,0.0014680654,1,1,1,architectural style,0.0023086512,6,2,1
+island,0.00039571070000000004,6,3,2,historical layer,0.0011543256,3,1,1,recognizable material culture,0.0014680654,1,1,1,medical care,0.0021301362,15,1,2

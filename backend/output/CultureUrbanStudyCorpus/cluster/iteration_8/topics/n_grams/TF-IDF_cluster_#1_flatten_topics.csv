@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-modernism,0.0024936651,3,2,1,cultural planning,0.0068160179000000005,4,1,1,new town building,0.0082262285,1,1,1,new town building,0.0082262285,1,1,1
-design,0.0018406752,6,4,2,integral theory,0.003408009,2,1,1,town building movement,0.0082262285,1,1,1,town building movement,0.0082262285,1,1,1
-complex,0.0016624434000000001,2,1,1,built morphology,0.003408009,2,1,1,local regional influence,0.0082262285,1,1,1,local regional influence,0.0082262285,1,1,1
-requirement,0.0016624434000000001,2,2,1,spatial identity,0.003408009,2,1,1,newly achieved nationhood,0.0082262285,1,1,1,newly achieved nationhood,0.0082262285,1,1,1
-reception,0.0016624434000000001,2,1,1,broken form,0.003408009,2,1,1,local political leader,0.0082262285,1,1,1,local political leader,0.0082262285,1,1,1
-morphology,0.0016624434000000001,2,1,1,suspension bridge,0.003408009,2,1,1,facilitates daily life,0.0082262285,1,1,1,facilitates daily life,0.0082262285,1,1,1
-matrix,0.0016624434000000001,2,1,1,classic period,0.003408009,2,1,1,engages numerous agent,0.0082262285,1,1,1,engages numerous agent,0.0082262285,1,1,1
-fabric,0.0016624434000000001,2,1,1,urban design,0.0025155894,4,3,2,civic authority design,0.0082262285,1,1,1,civic authority design,0.0082262285,1,1,1
-legibility,0.0016624434000000001,2,1,1,town building,0.0017040045,1,1,1,designated agency maintain,0.0082262285,1,1,1,designated agency maintain,0.0082262285,1,1,1
-past,0.0016624434000000001,2,1,1,building movement,0.0017040045,1,1,1,among different constituent,0.0082262285,1,1,1,among different constituent,0.0082262285,1,1,1
-civilisation,0.0016624434000000001,2,1,1,regional influence,0.0017040045,1,1,1,three brief case,0.0082262285,1,1,1,three brief case,0.0082262285,1,1,1
-agglomeration,0.0016624434000000001,2,1,1,new capital,0.0017040045,1,1,1,brief case study,0.0082262285,1,1,1,brief case study,0.0082262285,1,1,1
-engineer,0.0016624434000000001,2,1,1,several people,0.0017040045,1,1,1,fascist popular culture,0.0082262285,1,1,1,fascist popular culture,0.0082262285,1,1,1
-suspension,0.0016624434000000001,2,1,1,achieved nationhood,0.0017040045,1,1,1,urban planning canon,0.0082262285,1,1,1,urban planning canon,0.0082262285,1,1,1
-calendar,0.0016624434000000001,2,1,1,political leader,0.0017040045,1,1,1,human culture evolves,0.0082262285,1,1,1,human culture evolves,0.0082262285,1,1,1
-composition,0.001533896,5,2,2,wanted architect,0.0017040045,1,1,1,integrative holistic thinker,0.0082262285,1,1,1,integrative holistic thinker,0.0082262285,1,1,1
-need,0.0012271168,4,4,2,built form,0.0017040045,1,1,1,people whose worldview,0.0082262285,1,1,1,people whose worldview,0.0082262285,1,1,1
-theory,0.0012271168,4,3,2,professional ideology,0.0017040045,1,1,1,closing discussion addresses,0.0082262285,1,1,1,closing discussion addresses,0.0082262285,1,1,1
-element,0.0012271168,4,2,2,early decision,0.0017040045,1,1,1,significant environmental challenge,0.0082262285,1,1,1,significant environmental challenge,0.0082262285,1,1,1
-whole,0.0012271168,4,2,2,less attention,0.0017040045,1,1,1,design spatial theory,0.0082262285,1,1,1,design spatial theory,0.0082262285,1,1,1
+carbon,0.0026704548,3,1,1,urban sustainability,0.0101876424,6,2,1,urban forest manager,0.0166437647,3,1,1,urban forest manager,0.0166437647,3,1,1
+indicator,0.0026282277,8,1,2,governance challenge,0.0067917616000000005,4,1,1,urban sustainability transition,0.0110958431,2,1,1,urban sustainability transition,0.0110958431,2,1,1
+sustainability,0.0022996993,7,2,2,electrical capacity,0.0067917616000000005,4,1,1,calculated electrical capacity,0.0110958431,2,1,1,calculated electrical capacity,0.0110958431,2,1,1
+population,0.0022996993,7,2,2,sustainability transition,0.0050938212,3,1,1,significant transition towards,0.0055479216,1,1,1,urban sustainability,0.0101876424,6,2,1
+climate,0.0022996993,7,2,2,integrative analysis,0.0050938212,3,1,1,transition towards urbanisation,0.0055479216,1,1,1,governance challenge,0.0067917616000000005,4,1,1
+problem,0.0019711708000000002,6,2,2,city system,0.0050938212,3,2,1,influence social development,0.0055479216,1,1,1,electrical capacity,0.0067917616000000005,4,1,1
+emission,0.0019711708000000002,6,1,2,forest manager,0.0050938212,3,1,1,structural systemic realignments,0.0055479216,1,1,1,significant transition towards,0.0055479216,1,1,1
+capacity,0.0019711708000000002,6,2,2,climate change,0.004386615,7,2,2,persistent societal challenge,0.0055479216,1,1,1,transition towards urbanisation,0.0055479216,1,1,1
+unsustainability,0.0017803032,2,1,1,social development,0.0033958808000000003,2,2,1,towards urban farming,0.0055479216,1,1,1,influence social development,0.0055479216,1,1,1
+stakeholder,0.0017803032,2,1,1,human population,0.0033958808000000003,2,1,1,renewable decentralised energy,0.0055479216,1,1,1,structural systemic realignments,0.0055479216,1,1,1
+reduction,0.0017803032,2,1,1,carbon emission,0.0033958808000000003,2,1,1,decentralised energy system,0.0055479216,1,1,1,persistent societal challenge,0.0055479216,1,1,1
+transition,0.0016426423,5,1,2,twentieth century,0.0033958808000000003,2,1,1,provides new insight,0.0055479216,1,1,1,towards urban farming,0.0055479216,1,1,1
+aspect,0.0016426423,5,3,2,poor people,0.0033958808000000003,2,2,1,sustainability transition unfold,0.0055479216,1,1,1,renewable decentralised energy,0.0055479216,1,1,1
+world,0.0013141139,4,3,2,health service,0.0033958808000000003,2,2,1,explores possible strategy,0.0055479216,1,1,1,decentralised energy system,0.0055479216,1,1,1
+gas,0.0013141139,4,1,2,rich country,0.0033958808000000003,2,1,1,governing urban transition,0.0055479216,1,1,1,provides new insight,0.0055479216,1,1,1
+service,0.0013141139,4,3,2,unsustainability indicator,0.0033958808000000003,2,1,1,across geographical contexts,0.0055479216,1,1,1,sustainability transition unfold,0.0055479216,1,1,1
+manager,0.0013141139,4,1,2,operational capacity,0.0033958808000000003,2,1,1,four broad dimension,0.0055479216,1,1,1,explores possible strategy,0.0055479216,1,1,1
+dimension,0.0009855854000000001,3,2,2,governance issue,0.0033958808000000003,2,1,1,complex human problem,0.0055479216,1,1,1,governing urban transition,0.0055479216,1,1,1
+technology,0.0009855854000000001,3,2,2,grid company,0.0033958808000000003,2,1,1,including climate change,0.0055479216,1,1,1,across geographical contexts,0.0055479216,1,1,1
+economy,0.0009855854000000001,3,3,2,developing country,0.0031332964,5,1,2,global urban growth,0.0055479216,1,1,1,four broad dimension,0.0055479216,1,1,1

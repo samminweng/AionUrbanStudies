@@ -10,7 +10,7 @@
 
 /* Highlight searched terms*/
 .search_terms {
-    background: transparent;
+    /*background: transparent;*/
     font-weight: bold;
     color: green;
     padding: 0;

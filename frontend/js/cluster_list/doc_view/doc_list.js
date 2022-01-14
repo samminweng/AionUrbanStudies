@@ -8,12 +8,14 @@ function DocList(cluster_data, docs, selected_term) {
         let heading_text = 'Cluster #' + cluster_no;
         if (selected_term !== null) {
             if ('topic' in selected_term){
-                heading_text += ' has ' + docs.length + " out of " + cluster_num_docs + " articles " +
+                heading_text += ' has ' + docs.length + " papers" +
                     " about <span class='search_terms'> " + selected_term['topic'] + "</span>";
             }else if('group' in selected_term){
-                console.log(selected_term);
-                heading_text += ' has ' + selected_term['DocIds'].length + " out of " + cluster_num_docs + " articles " +
-                    " about <span class='search_terms'> " + selected_term['key-phrases'][0] + "</span>";
+                // console.log(selected_term);
+                const top_key_phrases = selected_term['key-phrases'].slice(0, 3);
+                heading_text += ' has ' + selected_term['DocIds'].length + " papers " +
+                    " about <span class='search_terms'> " + top_key_phrases.join(', ') +
+                    " and other " + selected_term['key-phrases'].length + " key phrases</span>";
             }
         } else {
             heading_text += ' has ' + docs.length + ' articles ';

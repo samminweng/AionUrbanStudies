@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-frailty,0.0027361792,8,1,1,life expectancy,0.0047239728,7,1,1,urban space axis,0.013697260900000001,6,1,1,urban space axis,0.013697260900000001,6,1,1
-expectancy,0.0023941568,7,1,1,older people,0.0044832287,18,1,2,healthy life expectancy,0.011414384100000001,5,1,1,healthy life expectancy,0.011414384100000001,5,1,1
-axis,0.0023941568,7,1,1,space axis,0.0040491196000000005,6,1,1,nationality characteristic dwelling,0.011414384100000001,5,1,1,nationality characteristic dwelling,0.011414384100000001,5,1,1
-scenery,0.0017101120000000002,5,1,1,medical care,0.0037360239,15,1,2,integrated community care,0.0068486305,3,1,1,integrated community care,0.0068486305,3,1,1
-undernutrition,0.0010260672,3,1,1,rural design,0.0033742663,5,1,1,natural scenery city,0.0068486305,3,1,1,natural scenery city,0.0068486305,3,1,1
-inheritance,0.0010260672,3,2,1,healthy life,0.0033742663,5,1,1,new urban planning,0.0045657536,2,1,1,life expectancy,0.0047239728,7,1,1
-orient,0.0010260672,3,1,1,healthy society,0.0033742663,5,1,1,green ecological planning,0.0045657536,2,1,1,new urban planning,0.0045657536,2,1,1
-addition,0.0008836121,7,2,2,characteristic dwelling,0.0033742663,5,1,1,community care system,0.0045657536,2,1,1,green ecological planning,0.0045657536,2,1,1
-demand,0.0007573818000000001,6,4,2,key indicator,0.0026994130000000003,4,1,1,public space environment,0.0045657536,2,1,1,community care system,0.0045657536,2,1,1
-resilience,0.0007573818000000001,6,1,2,city square,0.0026994130000000003,4,2,1,less developing area,0.0045657536,2,1,1,public space environment,0.0045657536,2,1,1
-geographic,0.0006840448,2,1,1,natural scenery,0.0026994130000000003,4,1,1,traditional culture protection,0.0045657536,2,1,1,less developing area,0.0045657536,2,1,1
-symbolism,0.0006840448,2,1,1,scenery city,0.0026994130000000003,4,1,1,characteristic dwelling protection,0.0045657536,2,1,1,traditional culture protection,0.0045657536,2,1,1
-dementia,0.0006840448,2,1,1,integrated community,0.0020245598000000003,3,1,1,public urban space,0.0045657536,2,2,1,characteristic dwelling protection,0.0045657536,2,1,1
-pharmacotherapy,0.0006840448,2,1,1,community care,0.0020245598000000003,3,1,1,essential building space,0.0045657536,2,2,1,public urban space,0.0045657536,2,2,1
-polypharmacy,0.0006840448,2,1,1,care system,0.0020245598000000003,3,1,1,modern artistic expression,0.0045657536,2,2,1,essential building space,0.0045657536,2,2,1
-dynasty,0.0006840448,2,1,1,medical personnel,0.0020245598000000003,3,1,1,urban public space,0.0025276257,3,1,2,modern artistic expression,0.0045657536,2,2,1
-carrier,0.0006840448,2,2,1,minority nationality,0.0020245598000000003,3,1,1,traditional architectural element,0.0022828768,1,1,1,older people,0.0044832287,18,1,2
-southwest,0.0006840448,2,1,1,traditional block,0.0020245598000000003,3,1,1,role local government,0.0022828768,1,1,1,medical care,0.0037360239,15,1,2
-indicator,0.0006311515,5,1,2,urban architecture,0.0013497065,2,1,1,market oriented economy,0.0022828768,1,1,1,rural design,0.0033742663,5,1,1
-risk,0.0006311515,5,1,2,new type,0.0013497065,2,2,1,historical urban environment,0.0022828768,1,1,1,healthy society,0.0033742663,5,1,1
+art,0.0042513876,49,12,3,creative city,0.006234349,7,4,1,urban economic development,0.008081342200000001,2,1,1,urban economic development,0.008081342200000001,2,1,1
+product,0.0029266805000000003,14,6,2,cultural participation,0.0053437277,6,1,1,new creative cluster,0.008081342200000001,2,1,1,new creative cluster,0.008081342200000001,2,1,1
+creativity,0.0025085833,12,6,2,cultural producer,0.0044531064,5,1,1,urban regeneration process,0.008081342200000001,2,2,1,urban regeneration process,0.008081342200000001,2,2,1
+sector,0.0020904861,10,6,2,cultural production,0.0044531064,5,2,1,smart creative city,0.008081342200000001,2,1,1,smart creative city,0.008081342200000001,2,1,1
+branding,0.0018814375,9,3,2,cultural sector,0.0044531064,5,3,1,drawn meaningful insight,0.0040406711000000005,1,1,1,creative city,0.006234349,7,4,1
+regeneration,0.0017352602,20,7,3,creative cluster,0.0044531064,5,2,1,suggests possible avenue,0.0040406711000000005,1,1,1,cultural participation,0.0053437277,6,1,1
+innovation,0.0016723889,8,5,2,place branding,0.0044531064,5,2,1,cultural economic development,0.0040406711000000005,1,1,1,cultural producer,0.0044531064,5,1,1
+cluster,0.0016723889,8,4,2,cultural planning,0.0044531064,5,2,1,way cultural producer,0.0040406711000000005,1,1,1,cultural production,0.0044531064,5,2,1
+participation,0.0014633403000000001,7,2,2,creative people,0.0035624852000000003,4,4,1,producer obtain job,0.0040406711000000005,1,1,1,cultural sector,0.0044531064,5,3,1
+spillover,0.0012542916,3,1,1,cultural regeneration,0.0035624852000000003,4,1,1,key social mechanism,0.0040406711000000005,1,1,1,creative cluster,0.0044531064,5,2,1
+implication,0.0012542916,6,3,2,place identity,0.0035624852000000003,4,2,1,social mechanism structure,0.0040406711000000005,1,1,1,place branding,0.0044531064,5,2,1
+externality,0.0012542916,3,1,1,quality product,0.0035624852000000003,4,1,1,clustered production system,0.0040406711000000005,1,1,1,cultural planning,0.0044531064,5,2,1
+mechanism,0.0010452430000000002,5,2,2,creative activity,0.0035624852000000003,4,2,1,art social milieu,0.0040406711000000005,1,1,1,art,0.0042513876,49,12,3
+producer,0.0010452430000000002,5,1,2,creative placemaking,0.0035624852000000003,4,1,1,establish new career,0.0040406711000000005,1,1,1,drawn meaningful insight,0.0040406711000000005,1,1,1
+range,0.0010452430000000002,5,4,2,economic development,0.0029571299,16,7,3,active cultural milieu,0.0040406711000000005,1,1,1,suggests possible avenue,0.0040406711000000005,1,1,1
+enhancement,0.0008361944,2,2,1,knowledge spillover,0.0026718639,3,1,1,economic development asset,0.0040406711000000005,1,1,1,cultural economic development,0.0040406711000000005,1,1,1
+renewal,0.0008361944,4,2,2,cultural economy,0.0017812426000000001,2,1,1,simultaneously bringing redevelopment,0.0040406711000000005,1,1,1,way cultural producer,0.0040406711000000005,1,1,1
+artist,0.0008361944,4,1,2,obtain job,0.0017812426000000001,2,1,1,consider current research,0.0040406711000000005,1,1,1,producer obtain job,0.0040406711000000005,1,1,1
+troupe,0.0008361944,2,1,1,using culture,0.0017812426000000001,2,2,1,environmental improvement scheme,0.0040406711000000005,1,1,1,key social mechanism,0.0040406711000000005,1,1,1
+outlet,0.0008361944,2,1,1,culture hub,0.0017812426000000001,2,1,1,public art help,0.0040406711000000005,1,1,1,social mechanism structure,0.0040406711000000005,1,1,1

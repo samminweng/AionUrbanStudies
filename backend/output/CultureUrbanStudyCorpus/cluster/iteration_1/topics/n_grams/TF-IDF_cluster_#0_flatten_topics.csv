@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-bank,0.0013585457,5,1,1,small town,0.006894815800000001,10,2,1,branch office building,0.0098714742,3,1,1,branch office building,0.0098714742,3,1,1
-music,0.0011030774,11,2,2,labour market,0.0034474079000000003,5,1,1,spoken various language,0.0032904914,1,1,1,small town,0.006894815800000001,10,2,1
-church,0.0011030774,11,1,2,branch office,0.0027579263,4,1,1,professed different religion,0.0032904914,1,1,1,labour market,0.0034474079000000003,5,1,1
-floor,0.0010868366,4,1,1,wooden church,0.0020684447000000003,3,1,1,particularly diverse city,0.0032904914,1,1,1,spoken various language,0.0032904914,1,1,1
-monasticism,0.0010868366,4,1,1,multicultural city,0.0013789632,2,2,1,one national narrative,0.0032904914,1,1,1,professed different religion,0.0032904914,1,1,1
-democracy,0.0008151274,3,2,1,cultural barbarism,0.0013789632,2,1,1,several national group,0.0032904914,1,1,1,particularly diverse city,0.0032904914,1,1,1
-dualism,0.0008151274,3,2,1,political opening,0.0013789632,2,1,1,single urban space,0.0032904914,1,1,1,one national narrative,0.0032904914,1,1,1
-emigration,0.0008151274,3,1,1,twin city,0.0013789632,2,1,1,essential turning point,0.0032904914,1,1,1,several national group,0.0032904914,1,1,1
-period,0.0008022381000000001,8,5,2,social protection,0.0013789632,2,1,1,intimate local trauma,0.0032904914,1,1,1,single urban space,0.0032904914,1,1,1
-today,0.0007019583,7,5,2,traditional function,0.0013789632,2,1,1,every social background,0.0032904914,1,1,1,essential turning point,0.0032904914,1,1,1
-citizenship,0.0007019583,7,1,2,significant element,0.0013789632,2,2,1,voice meant nothing,0.0032904914,1,1,1,intimate local trauma,0.0032904914,1,1,1
-inhabitant,0.0006016786,6,5,2,presented example,0.0013789632,2,1,1,sham democracy awash,0.0032904914,1,1,1,every social background,0.0032904914,1,1,1
-citizen,0.0006016786,6,3,2,illegal behavior,0.0013789632,2,1,1,still haunt today,0.0032904914,1,1,1,voice meant nothing,0.0032904914,1,1,1
-memory,0.0006016786,6,4,2,bank building,0.0013789632,2,1,1,particularly difficult challenge,0.0032904914,1,1,1,sham democracy awash,0.0032904914,1,1,1
-barbarism,0.0005434183,2,1,1,central bank,0.0013789632,2,1,1,difficult challenge nowadays,0.0032904914,1,1,1,still haunt today,0.0032904914,1,1,1
-tragedy,0.0005434183,2,2,1,peripheral area,0.0013789632,2,1,1,relatively small number,0.0032904914,1,1,1,particularly difficult challenge,0.0032904914,1,1,1
-improvisation,0.0005434183,2,1,1,citizen orientation,0.0013789632,2,1,1,four main field,0.0032904914,1,1,1,difficult challenge nowadays,0.0032904914,1,1,1
-twin,0.0005434183,2,1,1,national culture,0.0007634014000000001,3,3,2,prompts several reflection,0.0032904914,1,1,1,relatively small number,0.0032904914,1,1,1
-outskirt,0.0005434183,2,2,1,urban study,0.0007634014000000001,3,3,2,paper discusses improvisation,0.0032904914,1,1,1,four main field,0.0032904914,1,1,1
-multiparadigmatism,0.0005434183,2,1,1,vernacular architecture,0.0007634014000000001,3,1,2,marks urban space,0.0032904914,1,1,1,prompts several reflection,0.0032904914,1,1,1
+blight,0.004807932500000001,9,1,1,residential environment,0.0098860426,10,2,1,urban space axis,0.019214680600000002,6,1,1,urban space axis,0.019214680600000002,6,1,1
+evaluation,0.002938181,11,4,2,urban blight,0.008897438300000001,9,1,1,nationality characteristic dwelling,0.0160122338,5,1,1,nationality characteristic dwelling,0.0160122338,5,1,1
+scenery,0.0026710736,5,1,1,space axis,0.0059316255,6,1,1,residential environmental quality,0.009607340300000001,3,1,1,residential environment,0.0098860426,10,2,1
+traffic,0.0024039662,9,3,2,rural design,0.0049430213,5,1,1,urban environmental management,0.009607340300000001,3,1,1,residential environmental quality,0.009607340300000001,3,1,1
+index,0.0024039662,9,3,2,characteristic dwelling,0.0049430213,5,1,1,remote sensing data,0.009607340300000001,3,1,1,urban environmental management,0.009607340300000001,3,1,1
+pollution,0.0018697515,7,3,2,key indicator,0.003954417,4,1,1,natural scenery city,0.009607340300000001,3,1,1,remote sensing data,0.009607340300000001,3,1,1
+axis,0.0018697515,7,1,2,sensing data,0.003954417,4,1,1,fuzzy cognitive mapping,0.006404893500000001,2,1,1,natural scenery city,0.009607340300000001,3,1,1
+resilience,0.0016026442000000001,6,1,2,natural scenery,0.003954417,4,1,1,new urban planning,0.006404893500000001,2,1,1,urban blight,0.008897438300000001,9,1,1
+convenience,0.0016026442000000001,3,2,1,scenery city,0.003954417,4,1,1,green ecological planning,0.006404893500000001,2,1,1,fuzzy cognitive mapping,0.006404893500000001,2,1,1
+protection,0.001552034,14,3,3,environmental quality,0.0034601149,7,3,2,public space environment,0.006404893500000001,2,1,1,new urban planning,0.006404893500000001,2,1,1
+indicator,0.0013355368,5,1,2,livable city,0.0034601149,7,1,2,less developing area,0.006404893500000001,2,1,1,green ecological planning,0.006404893500000001,2,1,1
+risk,0.0013355368,5,1,2,new city,0.0029658128000000002,3,3,1,traditional culture protection,0.006404893500000001,2,1,1,public space environment,0.006404893500000001,2,1,1
+health,0.0013355368,5,3,2,ecological environment,0.0029658128000000002,3,3,1,characteristic dwelling protection,0.006404893500000001,2,1,1,less developing area,0.006404893500000001,2,1,1
+data,0.0011085957,10,3,3,environmental load,0.0029658128000000002,3,1,1,comprehensive evaluation model,0.006404893500000001,2,1,1,traditional culture protection,0.006404893500000001,2,1,1
+urbanization,0.0010684294,4,3,2,spatial configuration,0.0029658128000000002,3,2,1,urban public space,0.0048036701,3,1,2,characteristic dwelling protection,0.006404893500000001,2,1,1
+greenway,0.0010684294,2,1,1,minority nationality,0.0029658128000000002,3,1,1,urban design theory,0.0032024468,1,1,1,comprehensive evaluation model,0.006404893500000001,2,1,1
+dynasty,0.0010684294,2,1,1,facilitate people,0.0019772085,2,1,1,intensively utilize land,0.0032024468,1,1,1,rural design,0.0049430213,5,1,1
+inheritance,0.0010684294,2,1,1,risk event,0.0019772085,2,1,1,utilize land resource,0.0032024468,1,1,1,urban public space,0.0048036701,3,1,2
+carrier,0.0010684294,2,2,1,cognitive mapping,0.0019772085,2,1,1,integrated railway transport,0.0032024468,1,1,1,key indicator,0.003954417,4,1,1
+southwest,0.0010684294,2,1,1,many problem,0.0019772085,2,2,1,railway transport hub,0.0032024468,1,1,1,sensing data,0.003954417,4,1,1

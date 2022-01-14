@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-year,0.0040164539,24,6,1,typhoid fever,0.0039342832,11,1,1,typhoid fever case,0.0025378790000000003,2,1,1,year,0.0040164539,24,6,1
-fever,0.0021755792,13,1,1,indigenous knowledge,0.0035766211,10,1,1,social impact assessment,0.0025378790000000003,2,1,1,typhoid fever,0.0039342832,11,1,1
-student,0.0021755792,13,4,1,indigenous people,0.0032189590000000004,9,6,1,urban growth boundary,0.0025378790000000003,2,1,1,indigenous knowledge,0.0035766211,10,1,1
-politics,0.0018408747,11,6,1,urban planning,0.0027720513000000003,21,11,2,smart city application,0.0025378790000000003,2,1,1,indigenous people,0.0032189590000000004,9,6,1
-disaster,0.0018408747,11,3,1,good death,0.0021459727,6,1,1,system take place,0.0025378790000000003,2,1,1,urban planning,0.0027720513000000003,21,11,2
-child,0.0016735225000000002,10,3,1,urban sprawl,0.0021459727,6,1,1,inter cultural dialogue,0.0025378790000000003,2,1,1,typhoid fever case,0.0025378790000000003,2,1,1
-empire,0.0016735225000000002,10,2,1,young people,0.0017883105000000002,5,1,1,relevant regional culture,0.0025378790000000003,2,1,1,social impact assessment,0.0025378790000000003,2,1,1
-knowledge,0.0015441184,25,7,2,ethnic group,0.0017883105000000002,5,2,1,regional culture study,0.0025378790000000003,2,1,1,urban growth boundary,0.0025378790000000003,2,1,1
-age,0.0015061702,9,1,1,smart city,0.0015840293000000001,12,3,2,tsunami hazard zone,0.0025378790000000003,2,1,1,smart city application,0.0025378790000000003,2,1,1
-book,0.0015061702,9,6,1,urban space,0.0014306484,4,4,1,detect febrile case,0.0012689395000000001,1,1,1,system take place,0.0025378790000000003,2,1,1
-language,0.0015061702,9,6,1,disaster prevention,0.0014306484,4,2,1,fever among preschooler,0.0012689395000000001,1,1,1,inter cultural dialogue,0.0025378790000000003,2,1,1
-nation,0.001338818,8,7,1,optimum age,0.0010729863,3,1,1,urban study area,0.0012689395000000001,1,1,1,relevant regional culture,0.0025378790000000003,2,1,1
-specie,0.001338818,8,1,1,developing country,0.0010729863,3,1,1,surrounding industrial development,0.0012689395000000001,1,1,1,regional culture study,0.0025378790000000003,2,1,1
-reconstruction,0.001338818,8,1,1,rural area,0.0010729863,3,3,1,inform local resident,0.0012689395000000001,1,1,1,tsunami hazard zone,0.0025378790000000003,2,1,1
-incidence,0.0011714657,7,1,1,location choice,0.0010729863,3,1,1,relationship among culture,0.0012689395000000001,1,1,1,fever,0.0021755792,13,1,1
-resource,0.0011714657,7,7,1,conflict activity,0.0010729863,3,1,1,socially constructed risk,0.0012689395000000001,1,1,1,student,0.0021755792,13,4,1
-informality,0.0011714657,7,1,1,local people,0.0010729863,3,3,1,conflicting cultural worldviews,0.0012689395000000001,1,1,1,good death,0.0021459727,6,1,1
-mobility,0.0011117652,18,4,2,educational environment,0.0010729863,3,1,1,contentious environmental debate,0.0012689395000000001,1,1,1,urban sprawl,0.0021459727,6,1,1
-choice,0.0010041135,6,2,1,cultural system,0.0010729863,3,1,1,past two decade,0.0012689395000000001,1,1,1,politics,0.0018408747,11,6,1
-typhoid,0.0010041135,6,1,1,culture study,0.0010729863,3,1,1,numerous social conflict,0.0012689395000000001,1,1,1,disaster,0.0018408747,11,3,1
+event,0.0062882538,32,2,1,typhoid fever,0.0046693361,11,1,1,urban regime theory,0.0062165636,4,1,1,event,0.0062882538,32,2,1
+festival,0.005502222,28,2,1,urban study,0.0029713957,7,5,1,typhoid fever case,0.0031082818,2,1,1,urban regime theory,0.0062165636,4,1,1
+tourism,0.0035371427000000003,18,2,1,new town,0.0029713957,7,1,1,public green space,0.0031082818,2,1,1,festival,0.005502222,28,2,1
+fever,0.0025546031,13,1,1,regime theory,0.0025469106,6,1,1,social impact assessment,0.0031082818,2,1,1,typhoid fever,0.0046693361,11,1,1
+literature,0.0023580952000000002,12,4,1,social life,0.0021224255,5,2,1,using social medium,0.0031082818,2,1,1,tourism,0.0035371427000000003,18,2,1
+street,0.0021615872,11,4,1,tourism study,0.0021224255,5,1,1,last two decade,0.0031082818,2,2,1,typhoid fever case,0.0031082818,2,1,1
+coordination,0.0019650793,10,2,1,special event,0.0021224255,5,1,1,satisfy project requirement,0.0031082818,2,1,1,public green space,0.0031082818,2,1,1
+beauty,0.0019650793,10,1,1,urban area,0.0016979404000000001,4,3,1,double bottom line,0.0031082818,2,1,1,social impact assessment,0.0031082818,2,1,1
+knowledge,0.0017685714000000002,9,3,1,green space,0.0016979404000000001,4,2,1,reconfigures urban life,0.0015541409,1,1,1,using social medium,0.0031082818,2,1,1
+year,0.0017406055,24,5,2,event activity,0.0016979404000000001,4,1,1,involving distinct way,0.0015541409,1,1,1,last two decade,0.0031082818,2,2,1
+state,0.0015720634,8,7,1,urban governance,0.0016979404000000001,4,2,1,trace urban sociology,0.0015541409,1,1,1,satisfy project requirement,0.0031082818,2,1,1
+town,0.0015720634,8,2,1,urban regime,0.0016979404000000001,4,1,1,makes instantaneous time,0.0015541409,1,1,1,double bottom line,0.0031082818,2,1,1
+policy,0.0013779794,19,7,2,structural beauty,0.0016979404000000001,4,1,1,within fragmented moment,0.0015541409,1,1,1,urban study,0.0029713957,7,5,1
+incidence,0.0013755555,7,1,1,optimum age,0.0012734553,3,1,1,entailed various mobility,0.0015541409,1,1,1,new town,0.0029713957,7,1,1
+immigrant,0.0013755555,7,2,1,developing country,0.0012734553,3,1,1,modern civil society,0.0015541409,1,1,1,fever,0.0025546031,13,1,1
+governance,0.0013755555,7,3,1,social inclusion,0.0012734553,3,2,1,detect febrile case,0.0015541409,1,1,1,regime theory,0.0025469106,6,1,1
+organisation,0.0013755555,7,1,1,important role,0.0012734553,3,3,1,fever among preschooler,0.0015541409,1,1,1,literature,0.0023580952000000002,12,4,1
+development,0.0013054541,18,8,2,two decade,0.0012734553,3,3,1,urban study area,0.0015541409,1,1,1,street,0.0021615872,11,4,1
+choice,0.0011790476000000001,6,2,1,local government,0.0012734553,3,2,1,foreign resident youth,0.0015541409,1,1,1,social life,0.0021224255,5,2,1
+typhoid,0.0011790476000000001,6,1,1,social medium,0.0012734553,3,1,1,investigated leisure activity,0.0015541409,1,1,1,tourism study,0.0021224255,5,1,1

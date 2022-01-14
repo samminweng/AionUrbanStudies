@@ -6,9 +6,7 @@ function ClusterKeyPhrase(cluster_data, cluster_docs, accordion_div){
 
     // Create an list item to display a group of key phrases
     function createGroupItem(group){
-        const group_item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>')
-        const group_no = group['group'];
-
+        const group_item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>');
         // Display key phrases
         const key_phrases = group['key-phrases'];
         const key_phrase_div = $('<div class="ms-2 me-auto"></div>');
@@ -61,13 +59,13 @@ function ClusterKeyPhrase(cluster_data, cluster_docs, accordion_div){
         // Add percent
         const percent = Math.round(100 * (group['count']/total));
         const doc_ids = group['DocIds'];
-        const group_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
+        const grouped_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
         const percent_btn = $('<button type="button" class="rounded btn-sm">' + percent + '%</button>');
         // Define count btn to display the doc_ids
         percent_btn.click(function(event){
             // Create a doc list
-            const doc_list = new DocList(cluster_data, group_docs, group, corpus_key_phrases);
-            document.getElementById('doc_list_heading').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+            const doc_list = new DocList(cluster_data, grouped_docs, group);
+            // document.getElementById('doc_list_heading').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
         });
         group_item.append(percent_btn);
         return group_item;

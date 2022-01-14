@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-waste,0.0045938241,16,3,2,residential environment,0.0093570282,10,2,1,residential environmental quality,0.0079730419,3,1,1,residential environment,0.0093570282,10,2,1
-indicator,0.0043067101000000005,15,2,2,environmental quality,0.0037428113,4,1,1,remote sensing data,0.0079730419,3,1,1,residential environmental quality,0.0079730419,3,1,1
-index,0.0040344589,8,2,1,plastic waste,0.0037428113,4,1,1,municipal solid waste,0.0053153612,2,2,1,remote sensing data,0.0079730419,3,1,1
-construction,0.0035214087,22,5,3,sensing data,0.0037428113,4,1,1,satisfy project requirement,0.0053153612,2,1,1,municipal solid waste,0.0053153612,2,2,1
-barrier,0.0030258442000000003,6,1,1,livable city,0.0037290228,7,1,2,contemporary construction field,0.0053153612,2,1,1,satisfy project requirement,0.0053153612,2,1,1
-totora,0.0030258442000000003,6,1,1,construction industry,0.0028071085,3,2,1,waste activated carbon,0.0053153612,2,1,1,contemporary construction field,0.0053153612,2,1,1
-consumption,0.0025215368000000003,5,3,1,construction field,0.0028071085,3,1,1,acid dye wastewater,0.0053153612,2,1,1,waste activated carbon,0.0053153612,2,1,1
-emission,0.0025215368000000003,5,4,1,construction sector,0.0028071085,3,2,1,dye wastewater treatment,0.0053153612,2,1,1,acid dye wastewater,0.0053153612,2,1,1
-removal,0.0025215368000000003,5,1,1,recent study,0.0028071085,3,1,1,comprehensive evaluation model,0.0053153612,2,1,1,dye wastewater treatment,0.0053153612,2,1,1
-water,0.0022969120000000003,8,4,2,environmental load,0.0028071085,3,1,1,regarded complex entity,0.0026576806,1,1,1,comprehensive evaluation model,0.0053153612,2,1,1
-material,0.0020808324,13,3,3,spatial planning,0.0026635877,5,1,2,combine three methodology,0.0026576806,1,1,1,waste,0.0045938241,16,3,2
-enablers,0.0020172294,4,1,1,urban sustainability,0.0021308702,4,1,2,identified six city,0.0026576806,1,1,1,indicator,0.0043067101000000005,15,2,2
-satisfaction,0.0020172294,4,4,1,efficiency score,0.0018714056,2,1,1,meanwhile lower level,0.0026576806,1,1,1,index,0.0040344589,8,2,1
-load,0.0020172294,4,2,1,solid waste,0.0018714056,2,2,1,greenhouse gas emission,0.0026576806,1,1,1,environmental quality,0.0037428113,4,1,1
-rubber,0.0020172294,4,1,1,construction project,0.0018714056,2,1,1,maximize customer satisfaction,0.0026576806,1,1,1,plastic waste,0.0037428113,4,1,1
-powder,0.0020172294,4,1,1,satisfy project,0.0018714056,2,1,1,affects project performance,0.0026576806,1,1,1,sensing data,0.0037428113,4,1,1
-silk,0.0020172294,4,1,1,project requirement,0.0018714056,2,1,1,construction industry practitioner,0.0026576806,1,1,1,livable city,0.0037290228,7,1,2
-characterization,0.0020172294,4,1,1,barrier group,0.0018714056,2,1,1,might conduct project,0.0026576806,1,1,1,construction,0.0035214087,22,5,3
-performance,0.002009798,7,4,2,unsustainability indicator,0.0018714056,2,1,1,guide construction professional,0.0026576806,1,1,1,barrier,0.0030258442000000003,6,1,1
-industry,0.0017226840000000002,6,3,2,informatiologic condition,0.0018714056,2,1,1,better satisfy project,0.0026576806,1,1,1,totora,0.0030258442000000003,6,1,1
+comfort,0.0104370274,7,2,1,urban livability,0.013789631600000001,5,1,1,different thermal index,0.0170400448,2,1,1,different thermal index,0.0170400448,2,1,1
+livability,0.0089460235,6,1,1,thermal comfort,0.008273779,3,1,1,smart city application,0.0170400448,2,1,1,smart city application,0.0170400448,2,1,1
+application,0.0074550196,5,2,1,upper limit,0.008273779,3,1,1,historic urban landscape,0.0170400448,2,1,1,historic urban landscape,0.0170400448,2,1,1
+limit,0.0059640157,4,1,1,thermal index,0.005515852700000001,2,1,1,urban livability measure,0.0170400448,2,1,1,urban livability measure,0.0170400448,2,1,1
+measure,0.0059640157,4,1,1,city application,0.005515852700000001,2,1,1,outdoor urban environment,0.0085200224,1,1,1,urban livability,0.013789631600000001,5,1,1
+index,0.0044730118,3,1,1,placemaking principle,0.005515852700000001,2,1,1,hot dry city,0.0085200224,1,1,1,comfort,0.0104370274,7,2,1
+temperature,0.0044730118,3,1,1,livability measure,0.005515852700000001,2,1,1,different thermal environment,0.0085200224,1,1,1,livability,0.0089460235,6,1,1
+dorm,0.0044730118,3,1,1,smart city,0.0030536056000000002,3,1,2,thermal comfort range,0.0085200224,1,1,1,outdoor urban environment,0.0085200224,1,1,1
+guideline,0.0029820078,2,1,1,dry city,0.0027579263,1,1,1,comprehensive micrometeorological measurement,0.0085200224,1,1,1,hot dry city,0.0085200224,1,1,1
+displacement,0.0029820078,2,1,1,urban microclimate,0.0027579263,1,1,1,different outdoor environment,0.0085200224,1,1,1,different thermal environment,0.0085200224,1,1,1
+dataset,0.0029820078,2,1,1,absolute neccessity,0.0027579263,1,1,1,outdoor environment vary,0.0085200224,1,1,1,thermal comfort range,0.0085200224,1,1,1
+fuzzy,0.0029820078,2,1,1,every type,0.0027579263,1,1,1,physiologically equivalent temperature,0.0085200224,1,1,1,comprehensive micrometeorological measurement,0.0085200224,1,1,1
+community,0.0027514259,5,3,2,develop guideline,0.0027579263,1,1,1,standard effective temperature,0.0085200224,1,1,1,different outdoor environment,0.0085200224,1,1,1
+summer,0.0022011407,4,1,2,thermal environment,0.0027579263,1,1,1,lower comfort limit,0.0085200224,1,1,1,outdoor environment vary,0.0085200224,1,1,1
+winter,0.0022011407,4,1,2,second aim,0.0027579263,1,1,1,thermal sensation vote,0.0085200224,1,1,1,physiologically equivalent temperature,0.0085200224,1,1,1
+system,0.0022011407,4,2,2,comfort range,0.0027579263,1,1,1,big displacement crisis,0.0085200224,1,1,1,standard effective temperature,0.0085200224,1,1,1
+aim,0.0016508556,3,2,2,micrometeorological measurement,0.0027579263,1,1,1,changing social need,0.0085200224,1,1,1,lower comfort limit,0.0085200224,1,1,1
+questionnaire,0.0016508556,3,3,2,thermal condition,0.0027579263,1,1,1,adopting smart application,0.0085200224,1,1,1,thermal sensation vote,0.0085200224,1,1,1
+attribute,0.0016508556,3,1,2,outdoor environment,0.0027579263,1,1,1,activate new system,0.0085200224,1,1,1,big displacement crisis,0.0085200224,1,1,1
+survey,0.0016508556,3,2,2,environment vary,0.0027579263,1,1,1,become intelligent system,0.0085200224,1,1,1,changing social need,0.0085200224,1,1,1

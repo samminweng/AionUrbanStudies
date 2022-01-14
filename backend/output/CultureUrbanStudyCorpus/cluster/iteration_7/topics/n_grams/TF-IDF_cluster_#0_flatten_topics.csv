@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-landscape,0.0073293287,54,9,4,landscape type,0.0108199691,5,1,1,urban green space,0.0238285229,3,2,1,urban green space,0.0238285229,3,2,1
-preference,0.0066880674,12,4,2,structural beauty,0.0086559753,4,1,1,ethnic minority group,0.0238285229,3,1,1,ethnic minority group,0.0238285229,3,1,1
-beauty,0.0055733895,10,1,2,green space,0.0073920745,6,2,2,perceived sensory dimension,0.0158856819,2,1,1,perceived sensory dimension,0.0158856819,2,1,1
-stress,0.0048947479,5,1,1,dimension people,0.006491981500000001,3,1,1,people reporting stress,0.0158856819,2,1,1,people reporting stress,0.0158856819,2,1,1
-prefer,0.0029368488,3,1,1,factor analysis,0.006491981500000001,3,2,1,reporting stress prefer,0.0158856819,2,1,1,reporting stress prefer,0.0158856819,2,1,1
-designing,0.0029368488,3,2,1,landscape research,0.006491981500000001,3,1,1,urban park user,0.0158856819,2,1,1,urban park user,0.0158856819,2,1,1
-discipline,0.0027866947,5,3,2,landscape concept,0.006491981500000001,3,1,1,sustainability requires people,0.0158856819,2,1,1,sustainability requires people,0.0158856819,2,1,1
-perception,0.0024857003,8,4,3,ethnic minority,0.006491981500000001,3,1,1,perceive green space,0.007942841,1,1,1,landscape type,0.0108199691,5,1,1
-plant,0.0022293558,4,1,2,minority group,0.006491981500000001,3,1,1,randomly selected informant,0.007942841,1,1,1,structural beauty,0.0086559753,4,1,1
-specie,0.0022293558,4,1,2,ornamental plant,0.006491981500000001,3,1,1,analyzed using factor,0.007942841,1,1,1,perceive green space,0.007942841,1,1,1
-dimension,0.0020359246,15,3,4,cultural sustainability,0.006491981500000001,3,1,1,using factor analysis,0.007942841,1,1,1,randomly selected informant,0.007942841,1,1,1
-nature,0.0020359246,15,4,4,sensory dimension,0.0043279876,2,1,1,city planning perspective,0.007942841,1,1,1,analyzed using factor,0.007942841,1,1,1
-aesthetic,0.0019578992,2,1,1,reporting stress,0.0043279876,2,1,1,public mental health,0.007942841,1,1,1,using factor analysis,0.007942841,1,1,1
-adherence,0.0019578992,2,1,1,stress prefer,0.0043279876,2,1,1,transdisciplinary system approach,0.007942841,1,1,1,city planning perspective,0.007942841,1,1,1
-wild,0.0019578992,2,1,1,restorative environment,0.0043279876,2,1,1,different landscape concept,0.007942841,1,1,1,public mental health,0.007942841,1,1,1
-greatness,0.0019578992,2,1,1,mental health,0.0043279876,2,2,1,concept exist side,0.007942841,1,1,1,transdisciplinary system approach,0.007942841,1,1,1
-flower,0.0019578992,2,1,1,transdisciplinary landscape,0.0043279876,2,1,1,new complex concept,0.007942841,1,1,1,different landscape concept,0.007942841,1,1,1
-audience,0.0019578992,2,2,1,landscape taste,0.0043279876,2,1,1,enable transdisciplinary landscape,0.007942841,1,1,1,concept exist side,0.007942841,1,1,1
-substructure,0.0019578992,2,1,1,landscape painting,0.0043279876,2,1,1,transdisciplinary landscape research,0.007942841,1,1,1,new complex concept,0.007942841,1,1,1
-respondent,0.0016720168,3,1,2,ecological sustainability,0.0043279876,2,1,1,transdisciplinary landscape concept,0.007942841,1,1,1,enable transdisciplinary landscape,0.007942841,1,1,1
+map,0.0056631603,4,1,1,mental map,0.008041369500000001,3,1,1,modern city planning,0.0207444024,2,1,1,modern city planning,0.0207444024,2,1,1
+creativity,0.0056631603,4,2,1,visual approach,0.005360913,2,1,1,researching global interconnectivity,0.0103722012,1,1,1,researching global interconnectivity,0.0103722012,1,1,1
+design,0.0052252599,10,4,2,global interconnectivity,0.005360913,2,1,1,quantitatively supported discourse,0.0103722012,1,1,1,quantitatively supported discourse,0.0103722012,1,1,1
+trash,0.0042473702,3,1,1,first edition,0.005360913,2,1,1,empirically observable aspect,0.0103722012,1,1,1,empirically observable aspect,0.0103722012,1,1,1
+space,0.0041802079,8,4,2,understanding city,0.005360913,2,1,1,using visual mean,0.0103722012,1,1,1,using visual mean,0.0103722012,1,1,1
+interconnectivity,0.0028315801000000002,2,1,1,organic approach,0.005360913,2,1,1,argumentavimo elementai ir,0.0103722012,1,1,1,argumentavimo elementai ir,0.0103722012,1,1,1
+edition,0.0028315801000000002,2,1,1,five element,0.005360913,2,1,1,elementai ir kūrybiškumas,0.0103722012,1,1,1,elementai ir kūrybiškumas,0.0103722012,1,1,1
+appropriation,0.0028315801000000002,2,1,1,spatial appropriation,0.005360913,2,1,1,kūrybiškumas šiuolaikinio miesto,0.0103722012,1,1,1,kūrybiškumas šiuolaikinio miesto,0.0103722012,1,1,1
+globalization,0.00261263,5,1,2,peripheral area,0.005360913,2,1,1,šiuolaikinio miesto planavimo,0.0103722012,1,1,1,šiuolaikinio miesto planavimo,0.0103722012,1,1,1
+life,0.001567578,3,3,2,city square,0.005360913,2,1,1,many social problem,0.0103722012,1,1,1,many social problem,0.0103722012,1,1,1
+form,0.001567578,3,2,2,square design,0.005360913,2,1,1,recent planning method,0.0103722012,1,1,1,recent planning method,0.0103722012,1,1,1
+expression,0.001567578,3,3,2,public space,0.0029678302,3,2,2,dominant design process,0.0103722012,1,1,1,dominant design process,0.0103722012,1,1,1
+way,0.001567578,3,3,2,modern city,0.0029678302,3,1,2,mechanical urban design,0.0103722012,1,1,1,mechanical urban design,0.0103722012,1,1,1
+element,0.001567578,3,1,2,city planning,0.0029678302,3,1,2,mere passive reception,0.0103722012,1,1,1,mere passive reception,0.0103722012,1,1,1
+problem,0.001567578,3,2,2,urban everyday,0.0026804565,1,1,1,city planning theory,0.0103722012,1,1,1,city planning theory,0.0103722012,1,1,1
+history,0.001567578,3,3,2,supported discourse,0.0026804565,1,1,1,architectural based mind,0.0103722012,1,1,1,architectural based mind,0.0103722012,1,1,1
+theory,0.001567578,3,1,2,convoluted phenomenon,0.0026804565,1,1,1,based mind map,0.0103722012,1,1,1,based mind map,0.0103722012,1,1,1
+complexity,0.001567578,3,2,2,observable aspect,0.0026804565,1,1,1,mind map theory,0.0103722012,1,1,1,mind map theory,0.0103722012,1,1,1
+architecture,0.001567578,3,2,2,uncover form,0.0026804565,1,1,1,public space focus,0.0103722012,1,1,1,public space focus,0.0103722012,1,1,1
+regeneration,0.001567578,3,2,2,urban setting,0.0026804565,1,1,1,encouraging different form,0.0103722012,1,1,1,encouraging different form,0.0103722012,1,1,1

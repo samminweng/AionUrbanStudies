@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-bathroom,0.0057936808,12,1,1,neighborhood design,0.0109134742,12,1,1,urban neighborhood design,0.0165704585,6,1,1,urban neighborhood design,0.0165704585,6,1,1
-socialization,0.0019312269000000002,4,2,1,social capital,0.0054567371,12,1,2,neighborhood design concept,0.0165704585,6,1,1,neighborhood design concept,0.0165704585,6,1,1
-neighborhood,0.0019036375,19,2,3,social health,0.0045472809,5,1,1,sustainable food culture,0.0082852292,3,1,1,neighborhood design,0.0109134742,12,1,1
-apartment,0.0016898236,7,2,2,small bathroom,0.0045472809,5,1,1,changing public life,0.0082852292,3,1,1,sustainable food culture,0.0082852292,3,1,1
-user,0.0014484202,6,5,2,urban environment,0.0036378247000000002,8,5,2,theoretical urban neighborhood,0.0082852292,3,1,1,changing public life,0.0082852292,3,1,1
-heterotopia,0.0014484202,3,1,1,public apartment,0.0036378247000000002,4,1,1,neighborhood urban design,0.0082852292,3,1,1,theoretical urban neighborhood,0.0082852292,3,1,1
-library,0.0014484202,3,1,1,electrical capacity,0.0036378247000000002,4,1,1,foster social capital,0.0055234862,2,1,1,neighborhood urban design,0.0082852292,3,1,1
-technology,0.0013024888000000001,13,6,3,urban neighborhood,0.0031830966,7,2,2,calculated electrical capacity,0.0055234862,2,1,1,bathroom,0.0057936808,12,1,1
-art,0.0013024888000000001,13,5,3,design concept,0.0031830966,7,2,2,speculative design fiction,0.0055234862,2,1,1,foster social capital,0.0055234862,2,1,1
-designer,0.0012070168,5,4,2,sustainable food,0.0027283685000000003,3,1,1,urban good life,0.0055234862,2,1,1,calculated electrical capacity,0.0055234862,2,1,1
-furniture,0.0009656135,4,2,2,food culture,0.0027283685000000003,3,1,1,creating great place,0.0055234862,2,1,1,speculative design fiction,0.0055234862,2,1,1
-alterlivability,0.0009656135,2,1,1,public life,0.0027283685000000003,6,1,2,contemporary public space,0.0055234862,2,1,1,urban good life,0.0055234862,2,1,1
-calligraphy,0.0009656135,2,1,1,heterotopia concept,0.0027283685000000003,3,1,1,current food practice,0.0027617431,1,1,1,creating great place,0.0055234862,2,1,1
-plazas,0.0009656135,2,1,1,universal design,0.0027283685000000003,3,1,1,world raises concern,0.0027617431,1,1,1,contemporary public space,0.0055234862,2,1,1
-stranger,0.0007242101,3,1,2,poetic dwelling,0.0027283685000000003,3,1,1,natural food source,0.0027617431,1,1,1,social capital,0.0054567371,12,1,2
-notion,0.0007242101,3,2,2,different culture,0.0022736405,5,3,2,urban population growth,0.0027617431,1,1,1,social health,0.0045472809,5,1,1
-room,0.0007242101,3,2,2,public space,0.0022647505,12,6,3,encouraging individual user,0.0027617431,1,1,1,small bathroom,0.0045472809,5,1,1
-dwelling,0.0007242101,3,1,2,design framework,0.0018189124000000001,2,1,1,creating sustainable food,0.0027617431,1,1,1,urban environment,0.0036378247000000002,8,5,2
-food,0.0006011487,6,1,3,building plan,0.0018189124000000001,2,1,1,present five core,0.0027617431,1,1,1,public apartment,0.0036378247000000002,4,1,1
-solution,0.0006011487,6,3,3,innovative approach,0.0018189124000000001,2,2,1,five core constituent,0.0027617431,1,1,1,electrical capacity,0.0036378247000000002,4,1,1
+design,0.0054254059,81,20,2,public space,0.0031775866000000002,24,9,2,public open space,0.0035664052,8,1,2,design,0.0054254059,81,20,2
+bathroom,0.0021778072,12,1,1,experimental study,0.0028699023000000002,8,1,1,control commercial signage,0.0024158038,2,1,1,public open space,0.0035664052,8,1,2
+environment,0.0017414883000000001,26,15,2,mountainous climate,0.0021524267,6,1,1,main design strategy,0.0024158038,2,1,1,public space,0.0031775866000000002,24,9,2
+climate,0.0017414883000000001,26,1,2,urban design,0.0019859916,15,9,2,urban land use,0.0024158038,2,1,1,experimental study,0.0028699023000000002,8,1,1
+quality,0.0015405473,23,14,2,open space,0.0018535922000000001,14,2,2,old city center,0.0024158038,2,1,1,control commercial signage,0.0024158038,2,1,1
+signage,0.0012703875,7,1,1,social health,0.0017936889,5,1,1,designed space relies,0.0024158038,2,2,1,main design strategy,0.0024158038,2,1,1
+process,0.0011386654,17,11,2,humid climate,0.0017936889,5,1,1,designer personal perception,0.0024158038,2,2,1,urban land use,0.0024158038,2,1,1
+use,0.0011386654,17,8,2,small bathroom,0.0017936889,5,1,1,creating great place,0.0024158038,2,1,1,old city center,0.0024158038,2,1,1
+shop,0.0010889036,6,2,1,public apartment,0.0014349511,4,1,1,contemporary public space,0.0024158038,2,1,1,designed space relies,0.0024158038,2,2,1
+behavior,0.0010716851,16,4,2,commercial signage,0.0014349511,4,1,1,day care unit,0.0024158038,2,1,1,designer personal perception,0.0024158038,2,2,1
+system,0.0010047048,15,5,2,design criterion,0.0014349511,4,1,1,evaluation index system,0.0024158038,2,1,1,creating great place,0.0024158038,2,1,1
+art,0.0009377245000000001,14,5,2,climatic comfort,0.0014349511,4,1,1,rural residential building,0.0024158038,2,1,1,contemporary public space,0.0024158038,2,1,1
+user,0.0008707441,13,8,2,architectural space,0.0014349511,4,2,1,sustainable urban area,0.0012079019,1,1,1,day care unit,0.0024158038,2,1,1
+material,0.0008037638,12,4,2,cold region,0.0014349511,4,1,1,create sustainable settlement,0.0012079019,1,1,1,evaluation index system,0.0024158038,2,1,1
+property,0.0008037638,12,2,2,street furniture,0.0010762134,3,1,1,many design policy,0.0012079019,1,1,1,rural residential building,0.0024158038,2,1,1
+effect,0.0008037638,12,3,2,aesthetic image,0.0010762134,3,1,1,inclusive urban design,0.0012079019,1,1,1,bathroom,0.0021778072,12,1,1
+concrete,0.0008037638,12,1,2,behavioral pattern,0.0010762134,3,2,1,urban design consideration,0.0012079019,1,1,1,mountainous climate,0.0021524267,6,1,1
+society,0.0007367835,11,6,2,local observation,0.0010762134,3,1,1,thus large sector,0.0012079019,1,1,1,urban design,0.0019859916,15,9,2
+project,0.0007367835,11,7,2,city scale,0.0010762134,3,1,1,increased car control,0.0012079019,1,1,1,open space,0.0018535922000000001,14,2,2
+technology,0.0007367835,11,5,2,site scale,0.0010762134,3,1,1,without commensurate transport,0.0012079019,1,1,1,social health,0.0017936889,5,1,1

@@ -14,7 +14,7 @@ function ClusterTopicListView(cluster_data, cluster_docs, accordion_div){
                 $('#topics').val(topic['topic']);
                 // // Get the documents about the topic
                 const topic_docs = cluster_docs.filter(d => topic['doc_ids'].includes(parseInt(d['DocId'])));
-                // const doc_list = new DocList(cluster_data, topic_docs, topic, corpus_key_phrases);
+                const doc_list = new DocList(cluster_data, topic_docs, topic);
             });
             p.append(link);
         }

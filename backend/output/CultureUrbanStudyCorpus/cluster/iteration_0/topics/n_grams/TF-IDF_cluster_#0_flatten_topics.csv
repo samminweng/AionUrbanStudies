@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-nationalism,0.0014565668000000001,19,1,2,creative knowledge,0.0018193375,4,1,1,case study city,0.0034574004,2,2,1,case study city,0.0034574004,2,2,1
-subway,0.0012462897,6,1,1,alternative culture,0.0013645031,3,1,1,multilocal creative knowledge,0.0034574004,2,1,1,multilocal creative knowledge,0.0034574004,2,1,1
-downtown,0.0009965983000000001,13,1,2,ethnic quarter,0.0013645031,3,1,1,creative knowledge worker,0.0034574004,2,1,1,creative knowledge worker,0.0034574004,2,1,1
-semantics,0.0006231449,3,2,1,study city,0.0009096687,2,2,1,creative knowledge work,0.0034574004,2,1,1,creative knowledge,0.0018193375,4,1,1
-suburbia,0.0006231449,3,1,1,knowledge worker,0.0009096687,2,1,1,many different dimension,0.0017287002,1,1,1,many different dimension,0.0017287002,1,1,1
-texts,0.0006231449,3,3,1,knowledge work,0.0009096687,2,1,1,inspiring marginal community,0.0017287002,1,1,1,inspiring marginal community,0.0017287002,1,1,1
-lifeworlds,0.0006231449,3,1,1,healthy people,0.0009096687,2,1,1,three city government,0.0017287002,1,1,1,three city government,0.0017287002,1,1,1
-promise,0.0006231449,3,3,1,urban capitalism,0.0009096687,2,1,1,diverse urban environment,0.0017287002,1,1,1,diverse urban environment,0.0017287002,1,1,1
-hold,0.0006231449,3,1,1,market city,0.0009096687,2,1,1,decaying urban landscape,0.0017287002,1,1,1,decaying urban landscape,0.0017287002,1,1,1
-melting,0.0006231449,3,2,1,people city,0.0009096687,2,1,1,renewed cultural ambiance,0.0017287002,1,1,1,renewed cultural ambiance,0.0017287002,1,1,1
-trash,0.0006231449,3,1,1,city past,0.0009096687,2,1,1,major cultural event,0.0017287002,1,1,1,major cultural event,0.0017287002,1,1,1
-mobility,0.0006132913000000001,8,5,2,social experience,0.0009096687,2,2,1,foreign domestic worker,0.0017287002,1,1,1,foreign domestic worker,0.0017287002,1,1,1
-chapter,0.0006132913000000001,8,4,2,visual approach,0.0009096687,2,1,1,deserted office district,0.0017287002,1,1,1,deserted office district,0.0017287002,1,1,1
-politics,0.0005366299,7,5,2,global interconnectivity,0.0009096687,2,1,1,different ethnic community,0.0017287002,1,1,1,different ethnic community,0.0017287002,1,1,1
-discourse,0.0005366299,7,5,2,national unit,0.0009096687,2,1,1,metropolitan spatial apartheid,0.0017287002,1,1,1,metropolitan spatial apartheid,0.0017287002,1,1,1
-migration,0.0004599685,6,4,2,ethnic tourism,0.0009096687,2,1,1,intense emotional meaning,0.0017287002,1,1,1,intense emotional meaning,0.0017287002,1,1,1
-dynamic,0.0004599685,6,3,2,high rate,0.0009096687,2,1,1,extensive interview source,0.0017287002,1,1,1,extensive interview source,0.0017287002,1,1,1
-poverty,0.0004599685,6,2,2,international relation,0.0009096687,2,2,1,using environmental concern,0.0017287002,1,1,1,using environmental concern,0.0017287002,1,1,1
-cosmopolitanism,0.0004599685,6,2,2,underground movement,0.0009096687,2,1,1,social medium activity,0.0017287002,1,1,1,social medium activity,0.0017287002,1,1,1
-clash,0.0004154299,2,2,1,city subway,0.0009096687,2,1,1,local cultural policy,0.0017287002,1,1,1,local cultural policy,0.0017287002,1,1,1
+hop,0.0014698745,10,1,1,hip hop,0.0029251303000000003,9,1,1,massive financial investment,0.0012296940000000001,1,1,1,hip hop,0.0029251303000000003,9,1,1
+downtown,0.0012477200000000001,23,3,2,urban tourism,0.0026001158,8,2,1,flagship regeneration project,0.0012296940000000001,1,1,1,urban tourism,0.0026001158,8,2,1
+hip,0.0011758996,8,1,1,urban study,0.0015593913000000001,13,11,2,iconic cultural project,0.0012296940000000001,1,1,1,urban study,0.0015593913000000001,13,11,2
+nationalism,0.0010307252,19,1,2,global downtown,0.0013000579,4,2,1,whilst balancing achievement,0.0012296940000000001,1,1,1,hop,0.0014698745,10,1,1
+night,0.0010289121000000001,7,4,1,square dance,0.0013000579,4,1,1,inspiring marginal community,0.0012296940000000001,1,1,1,global downtown,0.0013000579,4,2,1
+politics,0.0009222278,17,8,2,young people,0.0010795786,9,4,2,three city government,0.0012296940000000001,1,1,1,square dance,0.0013000579,4,1,1
+subway,0.0008819247,6,1,1,alternative culture,0.0009750434,3,1,1,diverse urban environment,0.0012296940000000001,1,1,1,downtown,0.0012477200000000001,23,3,2
+barrio,0.0007349372,5,2,1,city government,0.0009750434,3,3,1,decaying urban landscape,0.0012296940000000001,1,1,1,massive financial investment,0.0012296940000000001,1,1,1
+artist,0.0006509843000000001,12,10,2,urban music,0.0009750434,3,1,1,renewed cultural ambiance,0.0012296940000000001,1,1,1,flagship regeneration project,0.0012296940000000001,1,1,1
+regeneration,0.0004882382,9,4,2,mass medium,0.0009750434,3,2,1,major cultural event,0.0012296940000000001,1,1,1,iconic cultural project,0.0012296940000000001,1,1,1
+scholar,0.0004882382,9,7,2,urban modernity,0.0009750434,3,1,1,foreign domestic worker,0.0012296940000000001,1,1,1,whilst balancing achievement,0.0012296940000000001,1,1,1
+precinct,0.00044096230000000003,3,3,1,ethnic quarter,0.0009750434,3,1,1,deserted office district,0.0012296940000000001,1,1,1,inspiring marginal community,0.0012296940000000001,1,1,1
+activism,0.00044096230000000003,3,3,1,public art,0.0007197190000000001,6,1,2,different ethnic community,0.0012296940000000001,1,1,1,three city government,0.0012296940000000001,1,1,1
+suburbia,0.00044096230000000003,3,1,1,everyday space,0.000650029,2,2,1,tackled local concern,0.0012296940000000001,1,1,1,diverse urban environment,0.0012296940000000001,1,1,1
+texts,0.00044096230000000003,3,3,1,cultural form,0.000650029,2,2,1,created new route,0.0012296940000000001,1,1,1,decaying urban landscape,0.0012296940000000001,1,1,1
+port,0.00044096230000000003,3,2,1,cultural capital,0.000650029,2,2,1,first large wave,0.0012296940000000001,1,1,1,renewed cultural ambiance,0.0012296940000000001,1,1,1
+chino,0.00044096230000000003,3,1,1,local official,0.000650029,2,1,1,share common goal,0.0012296940000000001,1,1,1,major cultural event,0.0012296940000000001,1,1,1
+publicness,0.00044096230000000003,3,1,1,healthy people,0.000650029,2,1,1,organize around issue,0.0012296940000000001,1,1,1,foreign domestic worker,0.0012296940000000001,1,1,1
+hold,0.00044096230000000003,3,1,1,grime music,0.000650029,2,1,1,regulated global city,0.0012296940000000001,1,1,1,deserted office district,0.0012296940000000001,1,1,1
+malandros,0.00044096230000000003,3,1,1,barrio chino,0.000650029,2,1,1,foster social sustainability,0.0012296940000000001,1,1,1,different ethnic community,0.0012296940000000001,1,1,1
