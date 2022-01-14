@@ -1,5 +1,4 @@
 cluster,group,count,key-phrases,NumDocs,DocIds
-21,-1,15,"['Western urban design', 'urban design', 'town building movement', 'new town building', 'Urban infrastructure', 'fascist popular culture', 'political history', 'Italian fascist', 'urban planning', 'urbanization', 'built morphology', 'design spatial theory', 'spatial theory', 'century suspension bridge', 'suspension bridge']",6,"[77, 89, 150, 182, 229, 386]"
-21,0,7,"['implement infrastructure', 'architecture', 'infrastructure', 'repair infrastructure', 'civil engineering history', 'civil engineer construct', 'meter bridge']",2,"[89, 386]"
-21,1,8,"['Town planning', 'urban planning canon', 'holistic thinker', 'integrative holistic thinker', 'urban design practice', 'Cultural planning', 'planning culture', 'town planner']",4,"[77, 182, 229, 339]"
-21,2,10,"['empire', 'contemporary cinema', 'Indian city', 'urbanised space', 'urbanised environment', 'Adaptable city', 'urban public space', 'contemporary city', 'city culture', 'creative city']",4,"[150, 229, 237, 339]"
+21,-1,16,"['globalization', 'urban setting', 'Visual approach', 'urban design', 'spatial appropriation', 'Public design', 'interior architecture', 'urban regeneration', 'capitalist development', 'architecture', 'architectural project', 'regeneration project', 'city square design', 'square design', 'style line design', 'line design concept']",6,"[156, 206, 217, 245, 325, 369]"
+21,0,7,"['cultural expression', 'urban public space', 'urban creativity', 'public art', 'trash appear', 'urban periphery', 'city square']",5,"[156, 217, 245, 325, 369]"
+21,1,7,"['city planning theory', 'understanding city', 'city planning', 'modern city planning', 'urban planning', 'urban strategy', 'planning implementation']",3,"[206, 245, 325]"
