@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-bathroom,0.0137741501,12,1,1,neighborhood design,0.025946171,12,1,1,urban neighborhood design,0.039395333000000005,6,1,1,urban neighborhood design,0.039395333000000005,6,1,1
-neighborhood,0.0053660528,19,2,12,social capital,0.0204894339,12,1,2,neighborhood design concept,0.039395333000000005,6,1,1,neighborhood design concept,0.039395333000000005,6,1,1
-apartment,0.0053566139,7,2,3,urban neighborhood,0.0119521698,7,2,2,sustainable food culture,0.019697666500000002,3,1,1,neighborhood design,0.025946171,12,1,1
-socialization,0.0036257699000000003,4,2,2,social health,0.0108109046,5,1,1,changing public life,0.019697666500000002,3,1,1,social capital,0.0204894339,12,1,2
-heterotopia,0.0034435375,3,1,1,small bathroom,0.0108109046,5,1,1,theoretical urban neighborhood,0.019697666500000002,3,1,1,sustainable food culture,0.019697666500000002,3,1,1
-library,0.0034435375,3,1,1,design concept,0.0100901776,7,2,3,neighborhood urban design,0.019697666500000002,3,1,1,changing public life,0.019697666500000002,3,1,1
-art,0.0029735882,13,5,14,public apartment,0.0086487237,4,1,1,foster social capital,0.0131317777,2,1,1,theoretical urban neighborhood,0.019697666500000002,3,1,1
-stranger,0.0027193274000000003,3,1,2,public life,0.0086487237,6,1,3,calculated electrical capacity,0.0131317777,2,1,1,neighborhood urban design,0.019697666500000002,3,1,1
-capital,0.002661221,13,2,15,electrical capacity,0.0086487237,4,1,1,speculative design fiction,0.0131317777,2,1,1,bathroom,0.0137741501,12,1,1
-furniture,0.0026601564,4,2,4,public art,0.0075163484,6,2,4,urban good life,0.0131317777,2,1,1,foster social capital,0.0131317777,2,1,1
-design,0.0026253099,64,14,24,sustainable food,0.0064865427,3,1,1,creating great place,0.0131317777,2,1,1,calculated electrical capacity,0.0131317777,2,1,1
-food,0.0022956917,6,1,9,food culture,0.0064865427,3,1,1,contemporary public space,0.0131317777,2,1,1,speculative design fiction,0.0131317777,2,1,1
-alterlivability,0.0022956917,2,1,1,heterotopia concept,0.0064865427,3,1,1,current food practice,0.0065658888,1,1,1,urban good life,0.0131317777,2,1,1
-calligraphy,0.0022956917,2,1,1,universal design,0.0064865427,3,1,1,world raises concern,0.0065658888,1,1,1,creating great place,0.0131317777,2,1,1
-plazas,0.0022956917,2,1,1,poetic dwelling,0.0064865427,3,1,1,natural food source,0.0065658888,1,1,1,contemporary public space,0.0131317777,2,1,1
-technology,0.0020945413,13,6,17,great place,0.0051223585,3,1,2,urban population growth,0.0065658888,1,1,1,urban neighborhood,0.0119521698,7,2,2
-room,0.0019951173,3,2,4,design framework,0.0043243618,2,1,1,encouraging individual user,0.0065658888,1,1,1,social health,0.0108109046,5,1,1
-designer,0.0019130764,5,4,9,building plan,0.0043243618,2,1,1,creating sustainable food,0.0065658888,1,1,1,small bathroom,0.0108109046,5,1,1
-realm,0.0018805637,4,3,7,innovative approach,0.0043243618,2,2,1,present five core,0.0065658888,1,1,1,design concept,0.0100901776,7,2,3
-imaginary,0.0018128850000000002,2,2,2,public realm,0.0043243618,2,1,1,five core constituent,0.0065658888,1,1,1,public apartment,0.0086487237,4,1,1
+informality,0.019553072600000002,7,1,3,urban survey,0.028406178,3,1,1,urban planning model,0.1441093907,4,1,1,urban planning model,0.1441093907,4,1,1
+elasticity,0.0123781111,3,1,1,planning model,0.025641025600000002,4,1,3,present general outlook,0.036027347700000004,1,1,1,present general outlook,0.036027347700000004,1,1,1
+hence,0.008252074,2,1,1,western model,0.018937452,2,1,1,among urban planner,0.036027347700000004,1,1,1,among urban planner,0.036027347700000004,1,1,1
+liberalisation,0.008252074,2,1,1,dystopian city,0.018937452,2,1,1,good urban governance,0.036027347700000004,1,1,1,good urban governance,0.036027347700000004,1,1,1
+urbanisation,0.0073329156,3,3,4,urban conglomeration,0.018937452,2,1,1,fast wrenching control,0.036027347700000004,1,1,1,fast wrenching control,0.036027347700000004,1,1,1
+contestation,0.0065703422,2,2,2,economic liberalisation,0.018937452,2,1,1,facing several challenge,0.036027347700000004,1,1,1,facing several challenge,0.036027347700000004,1,1,1
+conglomeration,0.0065703422,2,1,2,nineteenth century,0.0150780931,2,1,2,deep seated problem,0.036027347700000004,1,1,1,deep seated problem,0.036027347700000004,1,1,1
+survey,0.0058860614,7,2,15,rapid urbanisation,0.0150780931,2,2,2,poor management approach,0.036027347700000004,1,1,1,poor management approach,0.036027347700000004,1,1,1
+essay,0.0043472137,2,1,5,popular culture,0.0112187341,2,1,4,investor whose creed,0.036027347700000004,1,1,1,investor whose creed,0.036027347700000004,1,1,1
+treats,0.004126037,1,1,1,development policy,0.0112187341,2,1,4,study big city,0.036027347700000004,1,1,1,study big city,0.036027347700000004,1,1,1
+constellation,0.004126037,1,1,1,general outlook,0.009468726,1,1,1,conceiving urban space,0.036027347700000004,1,1,1,conceiving urban space,0.036027347700000004,1,1,1
+bickering,0.004126037,1,1,1,colonial city,0.009468726,1,1,1,create urban study,0.036027347700000004,1,1,1,create urban study,0.036027347700000004,1,1,1
+imposition,0.004126037,1,1,1,ingrained myth,0.009468726,1,1,1,emerging urban space,0.036027347700000004,1,1,1,emerging urban space,0.036027347700000004,1,1,1
+wrenching,0.004126037,1,1,1,view treats,0.009468726,1,1,1,represented critical aspect,0.036027347700000004,1,1,1,represented critical aspect,0.036027347700000004,1,1,1
+deep,0.004126037,1,1,1,strategic force,0.009468726,1,1,1,advancing urban planning,0.036027347700000004,1,1,1,advancing urban planning,0.036027347700000004,1,1,1
+vortex,0.004126037,1,1,1,urban reform,0.009468726,1,1,1,effective urban management,0.036027347700000004,1,1,1,effective urban management,0.036027347700000004,1,1,1
+maelstrom,0.004126037,1,1,1,smart transformation,0.009468726,1,1,1,mixed method research,0.036027347700000004,1,1,1,mixed method research,0.036027347700000004,1,1,1
+worthiness,0.004126037,1,1,1,close look,0.009468726,1,1,1,method research approach,0.036027347700000004,1,1,1,method research approach,0.036027347700000004,1,1,1
+creed,0.004126037,1,1,1,much bickering,0.009468726,1,1,1,five identified value,0.036027347700000004,1,1,1,five identified value,0.036027347700000004,1,1,1
+descendant,0.004126037,1,1,1,intergovernmental imposition,0.009468726,1,1,1,significant positive influence,0.036027347700000004,1,1,1,significant positive influence,0.036027347700000004,1,1,1

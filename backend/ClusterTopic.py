@@ -7,6 +7,7 @@ import pandas as pd
 
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
+
 # Obtain the cluster results of the best results and extract cluster topics using TF-IDF
 class ClusterTopic:
     def __init__(self, _last_iteration):
@@ -37,19 +38,26 @@ class ClusterTopic:
                 score = best_result['Silhouette_score']
                 # Get summary of cluster topics
                 folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'topics')
-                path = os.path.join(folder, 'TF-IDF_cluster_topic_summary.csv')
-                df = pd.read_csv(path)
-                cluster_topics = df.to_dict("records")
-                total_papers = reduce(lambda ct1, total: ct1['NumDocs'] + total, cluster_topics, 0)
+                path = os.path.join(folder, 'TF-IDF_cluster_topic_summary.json')
+                cluster_topics = pd.read_json(path).to_dict("records")
+                total_papers = reduce(lambda total, ct: ct['NumDocs'] + total, cluster_topics, 0)
                 for ct in cluster_topics:
                     results.append({
                         "iteration": i, "total_papers": total_papers, "dimension": dimension, "score": score,
-                        "cluster": ct['Cluster'], "NumDocs": ct['NumDocs'], "Percent": ct['Percent'],
+                        "Cluster": ct['Cluster'], "NumDocs": ct['NumDocs'], "Percent": ct['Percent'],
                         "DocIds": ct['DocIds'], "Topics": ct['Topics']
                     })
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
-        print(results)
+        # Load the results as data frame
+        df = pd.DataFrame(results)
+        # Output cluster results to CSV
+        folder = os.path.join('output', self.args.case_name, 'cluster')
+        path = os.path.join(folder, self.args.case_name + '_iterative_cluster_topic_summary.csv')
+        df.to_csv(path, encoding='utf-8', index=False)
+        path = os.path.join(folder, self.args.case_name + '_iterative_cluster_topic_summary.json')
+        df.to_json(path, orient='records')
+        print(df)
 
 
     # Collect all the iterative cluster results and combine into a single cluster results
@@ -201,8 +209,8 @@ if __name__ == '__main__':
         last_iteration = 10
         ct = ClusterTopic(last_iteration)
         ct.collect_iterative_cluster_topic_results()
-        # ct.collect_iterative_cluster_results()
-        # ct.derive_cluster_topics_by_TF_IDF()
-        # ct.summarize_cluster_topics()
+        ct.collect_iterative_cluster_results()
+        ct.derive_cluster_topics_by_TF_IDF()
+        ct.summarize_cluster_topics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

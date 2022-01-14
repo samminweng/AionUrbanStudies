@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-soundscape,0.044566271000000005,17,4,1,acoustic environment,0.0379528271,7,2,1,road traffic noise,0.0806402121,4,1,1,road traffic noise,0.0806402121,4,1,1
-noise,0.022772292000000003,11,2,2,community response,0.021687329800000002,4,1,1,soundscape evaluation method,0.040320106,2,1,1,soundscape,0.044566271000000005,17,4,1
-sound,0.0174379467,13,5,5,road traffic,0.021687329800000002,6,1,3,inclusive design research,0.040320106,2,1,1,soundscape evaluation method,0.040320106,2,1,1
-hearing,0.0131077268,5,1,1,traffic noise,0.021687329800000002,4,1,1,noise control policy,0.020160053,1,1,1,inclusive design research,0.040320106,2,1,1
-le,0.0104861814,4,1,1,sound source,0.021687329800000002,4,1,1,new multidisciplinary approach,0.020160053,1,1,1,acoustic environment,0.0379528271,7,2,1
-reproduction,0.008280833500000001,4,1,2,detached house,0.0162654973,3,1,1,soundscapes across country,0.020160053,1,1,1,noise,0.022772292000000003,11,2,2
-disturbance,0.0078646361,3,1,1,soundscape evaluation,0.0162654973,3,1,1,considers environmental sound,0.020160053,1,1,1,community response,0.021687329800000002,4,1,1
-website,0.0078646361,3,1,1,profi le,0.0162654973,3,1,1,emerging soundscape science,0.020160053,1,1,1,road traffic,0.021687329800000002,6,1,3
-conceptualization,0.0062106251000000005,3,1,2,city noise,0.0162654973,3,1,1,significant research activity,0.020160053,1,1,1,sound source,0.021687329800000002,4,1,1
-soundscapes,0.0052430907,2,1,1,ten question,0.010843664900000001,2,1,1,last question aim,0.020160053,1,1,1,noise control policy,0.020160053,1,1,1
-headphone,0.0052430907,2,1,1,soundscape research,0.010843664900000001,2,1,1,noise measurement method,0.020160053,1,1,1,new multidisciplinary approach,0.020160053,1,1,1
-acknowledgement,0.0052430907,2,2,1,noise measurement,0.010843664900000001,2,1,1,question concerned annoyance,0.020160053,1,1,1,soundscapes across country,0.020160053,1,1,1
-profi,0.0052430907,2,1,1,systematic difference,0.010843664900000001,2,1,1,activity disturbance indoors,0.020160053,1,1,1,considers environmental sound,0.020160053,1,1,1
-timescales,0.0052430907,2,1,1,activity disturbance,0.010843664900000001,2,1,1,different urban imaginary,0.020160053,1,1,1,emerging soundscape science,0.020160053,1,1,1
-soundmarks,0.0052430907,2,1,1,urban soundscape,0.010843664900000001,2,1,1,urban interior design,0.020160053,1,1,1,significant research activity,0.020160053,1,1,1
-affordances,0.0045566141,3,1,4,evaluation method,0.010843664900000001,2,1,1,room without roof,0.020160053,1,1,1,last question aim,0.020160053,1,1,1
-road,0.0042853965,6,1,11,laboratory experiment,0.010843664900000001,2,1,1,urban acoustic environment,0.020160053,1,1,1,noise measurement method,0.020160053,1,1,1
-traffic,0.0042853965,6,1,11,soundscape analysis,0.010843664900000001,2,1,1,affects many aspect,0.020160053,1,1,1,question concerned annoyance,0.020160053,1,1,1
-experiment,0.0038701376000000003,4,1,8,reproduction system,0.010843664900000001,2,1,1,without uncomfortable sound,0.020160053,1,1,1,activity disturbance indoors,0.020160053,1,1,1
-measurement,0.0035890797,3,2,6,equitable design,0.010843664900000001,2,1,1,uncomfortable sound source,0.020160053,1,1,1,different urban imaginary,0.020160053,1,1,1
+para,0.0133555267,5,1,1,creative knowledge,0.021026637100000002,4,1,1,human sensory assessment,0.0492373752,3,1,1,human sensory assessment,0.0492373752,3,1,1
+expectation,0.0098500158,7,1,5,site interpretation,0.021026637100000002,4,1,1,site interpretation centre,0.0492373752,3,1,1,site interpretation centre,0.0492373752,3,1,1
+visitor,0.009490657900000001,11,1,10,third place,0.020926890700000002,5,1,2,multilocal creative knowledge,0.0328249168,2,1,1,multilocal creative knowledge,0.0328249168,2,1,1
+lifeworlds,0.008013316000000001,3,1,1,sensory assessment,0.0157699778,3,1,1,creative knowledge worker,0.0328249168,2,1,1,creative knowledge worker,0.0328249168,2,1,1
+comment,0.007233273100000001,4,1,3,interpretation centre,0.0157699778,3,1,1,creative knowledge work,0.0328249168,2,1,1,creative knowledge,0.021026637100000002,4,1,1
+lifeworld,0.0053422107,2,1,1,place attachment,0.0106761566,3,1,3,embodies multiple level,0.0164124584,1,1,1,site interpretation,0.021026637100000002,4,1,1
+adda,0.0053422107,2,1,1,knowledge worker,0.0105133185,2,1,1,everyday meaning implicit,0.0164124584,1,1,1,third place,0.020926890700000002,5,1,2
+networking,0.0053422107,2,1,1,knowledge work,0.0105133185,2,1,1,public housing scheme,0.0164124584,1,1,1,embodies multiple level,0.0164124584,1,1,1
+spatialization,0.0053422107,2,1,1,different country,0.0105133185,2,2,1,along modernist line,0.0164124584,1,1,1,everyday meaning implicit,0.0164124584,1,1,1
+landscape,0.0047764356,15,1,20,social networking,0.0105133185,2,1,1,organised vernacular association,0.0164124584,1,1,1,public housing scheme,0.0164124584,1,1,1
+multiplicity,0.0042534946,2,1,2,aboriginal education,0.0105133185,2,1,1,physically polluted landscape,0.0164124584,1,1,1,along modernist line,0.0164124584,1,1,1
+standardization,0.0042534946,2,1,2,labour market,0.0083707563,2,1,2,common bond place,0.0164124584,1,1,1,organised vernacular association,0.0164124584,1,1,1
+reaction,0.0042534946,2,1,2,lived experience,0.007117437700000001,2,1,3,highly flexible labour,0.0164124584,1,1,1,physically polluted landscape,0.0164124584,1,1,1
+spatiality,0.0042534946,2,1,2,complex relationship,0.006228194,2,1,4,flexible labour market,0.0164124584,1,1,1,common bond place,0.0164124584,1,1,1
+worker,0.0042214354,3,2,5,spatial planning,0.0055384431,2,1,5,labour market segment,0.0164124584,1,1,1,highly flexible labour,0.0164124584,1,1,1
+feeling,0.0042214354,3,3,5,landscape meaning,0.0052566593,1,1,1,geographically mobile workforce,0.0164124584,1,1,1,flexible labour market,0.0164124584,1,1,1
+meaning,0.0039404474,6,2,13,ideological intent,0.0052566593,1,1,1,mobility becomes part,0.0164124584,1,1,1,labour market segment,0.0164124584,1,1,1
+interpretation,0.0039404474,6,2,13,everyday meaning,0.0052566593,1,1,1,innovative methodological mix,0.0164124584,1,1,1,geographically mobile workforce,0.0164124584,1,1,1
+labour,0.0036166365,2,1,3,meaning implicit,0.0052566593,1,1,1,without great effort,0.0164124584,1,1,1,mobility becomes part,0.0164124584,1,1,1
+processing,0.0036166365,2,1,3,daily routine,0.0052566593,1,1,1,flexibilized labour market,0.0164124584,1,1,1,innovative methodological mix,0.0164124584,1,1,1

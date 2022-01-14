@@ -467,12 +467,12 @@ if __name__ == '__main__':
     try:
         for i in range(0, 11):
             mdc = BERTModelDocCluster(i)
-            # mdc.get_sentence_vectors(is_load=False)
-            # mdc.run_HDBSCAN_cluster_experiments()
-            # mdc.summarize_HDBSCAN_cluster_experiment_results()
-            # mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
-            # mdc.derive_topics_from_cluster_docs_by_TF_IDF()
+            mdc.get_sentence_vectors(is_load=False)
+            mdc.run_HDBSCAN_cluster_experiments()
+            mdc.summarize_HDBSCAN_cluster_experiment_results()
+            mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
+            mdc.derive_topics_from_cluster_docs_by_TF_IDF()
             mdc.combine_and_summary_topics_from_clusters()
-            # mdc.re_cluster_outliers_by_hdbscan()
+            mdc.re_cluster_outliers_by_hdbscan()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

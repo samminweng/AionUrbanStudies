@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-waterfront,0.0225072005,13,2,4,floating village,0.0232742075,4,1,1,sustainable floating community,0.0414888048,2,1,1,sustainable floating community,0.0414888048,2,1,1
-ocean,0.0117988911,5,1,2,floating community,0.0174556557,3,1,1,given new life,0.0207444024,1,1,1,floating village,0.0232742075,4,1,1
-redevelopment,0.0103879387,6,3,4,gas extraction,0.0116371038,2,1,1,analyses three form,0.0207444024,1,1,1,waterfront,0.0225072005,13,2,4
-fishing,0.008964699999999999,3,3,1,pier waterfront,0.0116371038,2,1,1,include reclaiming functionality,0.0207444024,1,1,1,given new life,0.0207444024,1,1,1
-beach,0.0079686222,4,2,3,proposed concept,0.0116371038,2,1,1,commemorate local culture,0.0207444024,1,1,1,analyses three form,0.0207444024,1,1,1
-basin,0.0070793347,3,2,2,market modernization,0.0116371038,2,1,1,coastal city begin,0.0207444024,1,1,1,include reclaiming functionality,0.0207444024,1,1,1
-ecotourism,0.0070793347,3,1,2,long beach,0.0116371038,2,1,1,rising sea level,0.0207444024,1,1,1,commemorate local culture,0.0207444024,1,1,1
-sea,0.0069252925,4,2,4,vernacular architecture,0.0101134606,3,1,4,upon ocean resource,0.0207444024,1,1,1,coastal city begin,0.0207444024,1,1,1
-reclamation,0.0059764667,2,1,1,new life,0.0091897054,2,2,2,daily urban life,0.0207444024,1,1,1,rising sea level,0.0207444024,1,1,1
-raft,0.0059764667,2,1,1,master plan,0.0091897054,2,1,2,healthy ocean environment,0.0207444024,1,1,1,upon ocean resource,0.0207444024,1,1,1
-bay,0.0059764667,2,1,1,river basin,0.0091897054,2,1,2,book explores issue,0.0207444024,1,1,1,daily urban life,0.0207444024,1,1,1
-village,0.0059764667,6,2,9,tourist attraction,0.0091897054,2,1,2,community supported fishery,0.0207444024,1,1,1,healthy ocean environment,0.0207444024,1,1,1
-market,0.0053593352,9,1,14,living space,0.0077580692,2,1,3,damage ocean life,0.0207444024,1,1,1,book explores issue,0.0207444024,1,1,1
-extraction,0.0051939693,3,1,4,constant redevelopment,0.0058185519,1,1,1,helping scientist gather,0.0207444024,1,1,1,community supported fishery,0.0207444024,1,1,1
-fishery,0.0047195564,2,2,2,ageing neighbourhood,0.0058185519,1,1,1,scientist gather data,0.0207444024,1,1,1,damage ocean life,0.0207444024,1,1,1
-modernization,0.0045870173,3,1,5,prevalent theme,0.0058185519,1,1,1,encouraging citizen volunteerism,0.0207444024,1,1,1,helping scientist gather,0.0207444024,1,1,1
-gas,0.0039843111,2,1,3,new user,0.0058185519,1,1,1,protect marine health,0.0207444024,1,1,1,scientist gather data,0.0207444024,1,1,1
-coast,0.0039843111,2,2,3,three form,0.0058185519,1,1,1,integrate ocean health,0.0207444024,1,1,1,encouraging citizen volunteerism,0.0207444024,1,1,1
-water,0.0036718104000000003,3,2,7,urban reclamation,0.0058185519,1,1,1,pier waterfront redevelopment,0.0207444024,1,1,1,protect marine health,0.0207444024,1,1,1
-oil,0.0034626462000000003,2,1,4,reclaiming functionality,0.0058185519,1,1,1,east coast waterfront,0.0207444024,1,1,1,integrate ocean health,0.0207444024,1,1,1
+comfort,0.015289968800000001,7,2,6,urban livability,0.042691365700000004,5,1,1,different thermal index,0.0527543305,2,1,1,different thermal index,0.0527543305,2,1,1
+livability,0.014590335900000001,6,1,5,upper limit,0.025614819400000002,3,1,1,smart city application,0.0527543305,2,1,1,smart city application,0.0527543305,2,1,1
+dorm,0.0138480118,3,1,1,thermal comfort,0.0203946461,3,1,2,historic urban landscape,0.0527543305,2,1,1,historic urban landscape,0.0527543305,2,1,1
+summer,0.010938265800000001,4,1,4,thermal index,0.017076546300000002,2,1,1,urban livability measure,0.0527543305,2,1,1,urban livability measure,0.0527543305,2,1,1
+winter,0.0097268906,4,1,5,city application,0.017076546300000002,2,1,1,hot dry city,0.0263771653,1,1,1,urban livability,0.042691365700000004,5,1,1
+index,0.009375,3,1,3,placemaking principle,0.017076546300000002,2,1,1,different thermal environment,0.0263771653,1,1,1,hot dry city,0.0263771653,1,1,1
+temperature,0.009375,3,1,3,livability measure,0.017076546300000002,2,1,1,thermal comfort range,0.0263771653,1,1,1,different thermal environment,0.0263771653,1,1,1
+dataset,0.0092320078,2,1,1,smart city,0.0151744728,3,1,4,comprehensive micrometeorological measurement,0.0263771653,1,1,1,thermal comfort range,0.0263771653,1,1,1
+fuzzy,0.0092320078,2,1,1,dry city,0.0085382731,1,1,1,different outdoor environment,0.0263771653,1,1,1,comprehensive micrometeorological measurement,0.0263771653,1,1,1
+limit,0.0087371251,4,1,6,urban microclimate,0.0085382731,1,1,1,outdoor environment vary,0.0263771653,1,1,1,different outdoor environment,0.0263771653,1,1,1
+application,0.0068082589,5,2,11,absolute neccessity,0.0085382731,1,1,1,physiologically equivalent temperature,0.0263771653,1,1,1,outdoor environment vary,0.0263771653,1,1,1
+attribute,0.0065528438,3,1,6,every type,0.0085382731,1,1,1,standard effective temperature,0.0263771653,1,1,1,physiologically equivalent temperature,0.0263771653,1,1,1
+guideline,0.00625,2,1,3,develop guideline,0.0085382731,1,1,1,lower comfort limit,0.0263771653,1,1,1,standard effective temperature,0.0263771653,1,1,1
+measure,0.0054466071000000005,4,1,11,second aim,0.0085382731,1,1,1,thermal sensation vote,0.0263771653,1,1,1,lower comfort limit,0.0263771653,1,1,1
+questionnaire,0.0049019882,3,3,9,comfort range,0.0085382731,1,1,1,big displacement crisis,0.0263771653,1,1,1,thermal sensation vote,0.0263771653,1,1,1
+displacement,0.0048634453,2,1,5,micrometeorological measurement,0.0085382731,1,1,1,changing social need,0.0263771653,1,1,1,big displacement crisis,0.0263771653,1,1,1
+neccessity,0.0046160039,1,1,1,thermal condition,0.0085382731,1,1,1,adopting smart application,0.0263771653,1,1,1,changing social need,0.0263771653,1,1,1
+vary,0.0046160039,1,1,1,environment vary,0.0085382731,1,1,1,activate new system,0.0263771653,1,1,1,adopting smart application,0.0263771653,1,1,1
+clothing,0.0046160039,1,1,1,deep canyon,0.0085382731,1,1,1,become intelligent system,0.0263771653,1,1,1,activate new system,0.0263771653,1,1,1
+leap,0.0046160039,1,1,1,solar access,0.0085382731,1,1,1,intelligent system analyze,0.0263771653,1,1,1,become intelligent system,0.0263771653,1,1,1

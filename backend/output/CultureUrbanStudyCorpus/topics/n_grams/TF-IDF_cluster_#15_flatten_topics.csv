@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-hop,0.0124142564,10,1,1,hip hop,0.0238560627,9,1,1,everyday public space,0.0197429485,2,1,1,hip hop,0.0238560627,9,1,1
-hip,0.0099314051,8,1,1,public art,0.009214486400000001,6,1,4,intergenerational urban space,0.0098714742,1,1,1,everyday public space,0.0197429485,2,1,1
-music,0.0067983956,12,4,6,urban music,0.0079520209,3,1,1,integrate young people,0.0098714742,1,1,1,hop,0.0124142564,10,1,1
-youth,0.0056653297,10,5,6,young adult,0.0079520209,3,1,1,paper describes approach,0.0098714742,1,1,1,hip,0.0099314051,8,1,1
-art,0.0049477143,20,6,14,young people,0.0065140636,6,3,7,effectively involve youth,0.0098714742,1,1,1,intergenerational urban space,0.0098714742,1,1,1
-race,0.0039657308,7,4,6,building community,0.0053013473,2,1,1,embed diverse youth,0.0098714742,1,1,1,integrate young people,0.0098714742,1,1,1
-artist,0.0039657308,7,5,6,racial minority,0.0053013473,2,2,1,diverse youth voice,0.0098714742,1,1,1,paper describes approach,0.0098714742,1,1,1
-pub,0.0039213661,4,1,2,grime music,0.0053013473,2,1,1,upwardly mobile bicyclist,0.0098714742,1,1,1,effectively involve youth,0.0098714742,1,1,1
-bicyclist,0.0037242769,3,1,1,evidence drawn,0.0053013473,2,2,1,varied cultural meaning,0.0098714742,1,1,1,embed diverse youth,0.0098714742,1,1,1
-bicycling,0.0037242769,3,1,1,digital divide,0.0053013473,2,1,1,gentrifying urban planning,0.0098714742,1,1,1,diverse youth voice,0.0098714742,1,1,1
-racism,0.0037242769,3,3,1,social justice,0.0053013473,2,2,1,upholds systemic race,0.0098714742,1,1,1,upwardly mobile bicyclist,0.0098714742,1,1,1
-gayborhoods,0.0037242769,3,1,1,settler colonialism,0.0053013473,2,1,1,many problematic aspect,0.0098714742,1,1,1,varied cultural meaning,0.0098714742,1,1,1
-color,0.003596287,5,5,4,multiple colonialism,0.0053013473,2,1,1,urban bicycling culture,0.0098714742,1,1,1,gentrifying urban planning,0.0098714742,1,1,1
-politics,0.0033599373,11,4,12,youth work,0.0053013473,2,1,1,integration within society,0.0098714742,1,1,1,upholds systemic race,0.0098714742,1,1,1
-advocacy,0.0029410245,3,1,2,cultural exchange,0.0053013473,2,1,1,public sector play,0.0098714742,1,1,1,many problematic aspect,0.0098714742,1,1,1
-bicycle,0.0029410245,3,1,2,multiracial interaction,0.0053013473,2,1,1,particular government action,0.0098714742,1,1,1,urban bicycling culture,0.0098714742,1,1,1
-empowerment,0.0029410245,3,1,2,racial segregation,0.0053013473,2,2,1,similar effort today,0.0098714742,1,1,1,integration within society,0.0098714742,1,1,1
-settler,0.0029410245,3,2,2,ethnic diversity,0.0053013473,2,1,1,addressing contemporary challenge,0.0098714742,1,1,1,public sector play,0.0098714742,1,1,1
-activist,0.0028770296,4,3,4,neighborhood resident,0.0053013473,2,2,1,future planning scholarship,0.0098714742,1,1,1,particular government action,0.0098714742,1,1,1
-argument,0.0028770296,4,3,4,cultural activity,0.0048386112000000005,4,1,6,wider urban study,0.0098714742,1,1,1,similar effort today,0.0098714742,1,1,1
+indicator,0.0091682013,18,1,8,natural capital,0.010801618,4,1,1,transnational capitalist class,0.0214075544,2,1,1,transnational capitalist class,0.0214075544,2,1,1
+fraction,0.007304914700000001,7,1,2,urban indicator,0.0086003017,4,1,2,final two article,0.0214075544,2,1,1,final two article,0.0214075544,2,1,1
+colonialism,0.0044365572,5,2,3,twentieth century,0.0054844607,3,2,3,natural capital indicator,0.0214075544,2,1,1,natural capital indicator,0.0214075544,2,1,1
+modernism,0.0034523126,5,2,5,transnational capitalist,0.005400809,2,1,1,speculative design fiction,0.0214075544,2,1,1,speculative design fiction,0.0214075544,2,1,1
+article,0.002968708,19,6,20,capitalist class,0.005400809,2,1,1,urban good life,0.0214075544,2,1,1,urban good life,0.0214075544,2,1,1
+region,0.0029527340000000003,15,2,18,iconic architecture,0.005400809,2,1,1,major transnational corporation,0.0107037772,1,1,1,natural capital,0.010801618,4,1,1
+representation,0.0027837378,6,3,9,future culture,0.005400809,2,1,1,major global consumer,0.0107037772,1,1,1,major transnational corporation,0.0107037772,1,1,1
+oil,0.00276185,4,1,5,past rate,0.005400809,2,1,1,global consumer good,0.0107037772,1,1,1,major global consumer,0.0107037772,1,1,1
+aid,0.0026619343,3,2,3,culture change,0.005400809,2,1,1,aspiring global city,0.0107037772,1,1,1,global consumer good,0.0107037772,1,1,1
+futuristics,0.0026213332,2,1,1,republican culture,0.005400809,2,1,1,deliberately iconic architecture,0.0107037772,1,1,1,aspiring global city,0.0107037772,1,1,1
+imperialism,0.0026213332,2,1,1,integral theory,0.005400809,2,1,1,central urban manifestation,0.0107037772,1,1,1,deliberately iconic architecture,0.0107037772,1,1,1
+institutionalization,0.0026213332,2,2,1,specific field,0.005400809,2,1,1,facilitates daily life,0.0107037772,1,1,1,central urban manifestation,0.0107037772,1,1,1
+simultaneity,0.0026213332,2,1,1,internal discourse,0.005400809,2,1,1,engages numerous agent,0.0107037772,1,1,1,facilitates daily life,0.0107037772,1,1,1
+xi,0.0026213332,2,1,1,synoptic view,0.005400809,2,1,1,civic authority design,0.0107037772,1,1,1,engages numerous agent,0.0107037772,1,1,1
+alterlivability,0.0026213332,2,1,1,member state,0.005400809,2,1,1,designated agency maintain,0.0107037772,1,1,1,civic authority design,0.0107037772,1,1,1
+progress,0.0025401309,6,3,10,public participatory,0.005400809,2,1,1,among different constituent,0.0107037772,1,1,1,designated agency maintain,0.0107037772,1,1,1
+infrastructure,0.0024076270000000003,11,4,17,next article,0.005400809,2,1,1,three brief case,0.0107037772,1,1,1,among different constituent,0.0107037772,1,1,1
+consumer,0.0023293556,3,3,4,two article,0.005400809,2,1,1,brief case study,0.0107037772,1,1,1,three brief case,0.0107037772,1,1,1
+immigrant,0.0023293556,3,1,4,capital indicator,0.005400809,2,1,1,future cultural alternative,0.0107037772,1,1,1,brief case study,0.0107037772,1,1,1
+capitalist,0.0020871185,2,1,2,speculative design,0.005400809,2,1,1,even past rate,0.0107037772,1,1,1,future cultural alternative,0.0107037772,1,1,1

@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-transit,0.0104861814,12,4,1,modality environment,0.0160827389,9,1,1,control commercial signage,0.0118294526,2,1,1,modality environment,0.0160827389,9,1,1
-vehicle,0.0071540294,16,2,5,transit village,0.008934855,5,1,1,sustainable active mobility,0.0118294526,2,1,1,control commercial signage,0.0118294526,2,1,1
-walking,0.0069907876,8,3,1,public transport,0.007147884,4,3,1,vehicle type choice,0.0118294526,2,1,1,sustainable active mobility,0.0118294526,2,1,1
-rail,0.0061169392,7,2,1,sustainable transportation,0.007147884,4,2,1,prevalent transport problem,0.0059147263,1,1,1,vehicle type choice,0.0118294526,2,1,1
-signage,0.0061169392,7,1,1,commercial signage,0.007147884,4,1,1,well informal factor,0.0059147263,1,1,1,transit,0.0104861814,12,4,1
-transport,0.005365522,12,5,5,active mobility,0.007147884,4,1,1,different analytical level,0.0059147263,1,1,1,transit village,0.008934855,5,1,1
-diffusion,0.0052430907,6,1,1,walking mindset,0.007147884,4,1,1,multiple case study,0.0059147263,1,1,1,vehicle,0.0071540294,16,2,5
-mobility,0.0049518079,17,4,9,city centre,0.0064004448,7,4,5,factor included legislation,0.0059147263,1,1,1,public transport,0.007147884,4,3,1
-mindset,0.0040779594,7,1,3,central place,0.0056446131,4,1,2,legislation concerning transport,0.0059147263,1,1,1,sustainable transportation,0.007147884,4,2,1
-woman,0.0040503237000000004,8,3,4,sustainable mobility,0.005360913,3,2,1,appropriate business model,0.0059147263,1,1,1,commercial signage,0.007147884,4,1,1
-safety,0.0039878664,10,5,6,street furniture,0.005360913,3,1,1,provide several implication,0.0059147263,1,1,1,active mobility,0.007147884,4,1,1
-transportation,0.0038701376000000003,12,3,8,vehicle type,0.005360913,3,1,1,private sector actor,0.0059147263,1,1,1,walking mindset,0.007147884,4,1,1
-implementation,0.0037866766000000003,13,7,9,vehicle use,0.005360913,3,1,1,adjusting relevant regulation,0.0059147263,1,1,1,walking,0.0069907876,8,3,1
-corridor,0.0034503473,5,2,2,public space,0.004836464,22,8,18,creating conducive condition,0.0059147263,1,1,1,city centre,0.0064004448,7,4,5
-modality,0.0029128282,5,1,3,transport service,0.003573942,2,2,1,planning urban design,0.0059147263,1,1,1,rail,0.0061169392,7,2,1
-disability,0.0029128282,5,1,3,second edition,0.003573942,2,1,1,private transport service,0.0059147263,1,1,1,signage,0.0061169392,7,1,1
-car,0.0027602778,4,4,2,higher density,0.003573942,2,2,1,privately owned car,0.0059147263,1,1,1,prevalent transport problem,0.0059147263,1,1,1
-blindness,0.0026215454,3,1,1,visual pollution,0.003573942,2,1,1,road marking force,0.0059147263,1,1,1,well informal factor,0.0059147263,1,1,1
-road,0.0026188534,11,4,11,commercial sign,0.003573942,2,1,1,marking force motorist,0.0059147263,1,1,1,different analytical level,0.0059147263,1,1,1
-privacy,0.0025314523,5,1,4,diffusion process,0.003573942,2,1,1,use eye contact,0.0059147263,1,1,1,multiple case study,0.0059147263,1,1,1
+totora,0.0098147592,6,1,1,national park,0.0145888519,4,1,1,contemporary construction field,0.0281356429,2,1,1,contemporary construction field,0.0281356429,2,1,1
+specie,0.0088593577,8,1,3,construction field,0.0109416389,3,1,1,outstanding universal value,0.0281356429,2,1,1,outstanding universal value,0.0281356429,2,1,1
+astronomy,0.008178966000000001,5,1,1,recent study,0.0109416389,3,1,1,tour de force,0.014067821500000001,1,1,1,national park,0.0145888519,4,1,1
+calendar,0.0078145599,6,2,2,spatial planning,0.0096068056,5,1,5,critical role astronomy,0.014067821500000001,1,1,1,tour de force,0.014067821500000001,1,1,1
+bridge,0.0067834206,7,2,4,ancient people,0.0072944259,2,2,1,people merged idea,0.014067821500000001,1,1,1,critical role astronomy,0.014067821500000001,1,1,1
+favelas,0.0065431728,4,1,1,urban afforestation,0.0072944259,2,1,1,understanding ancient culture,0.014067821500000001,1,1,1,people merged idea,0.014067821500000001,1,1,1
+afforestation,0.0049073796,3,1,1,native specie,0.0072944259,2,1,1,architectural alignment study,0.014067821500000001,1,1,1,understanding ancient culture,0.014067821500000001,1,1,1
+exit,0.0049073796,3,1,1,exotic specie,0.0072944259,2,1,1,explore new dimension,0.014067821500000001,1,1,1,architectural alignment study,0.014067821500000001,1,1,1
+naturbanity,0.0049073796,3,1,1,building industry,0.0072944259,2,1,1,inhabit urban area,0.014067821500000001,1,1,1,explore new dimension,0.014067821500000001,1,1,1
+park,0.004424094,11,1,13,contemporary construction,0.0072944259,2,1,1,significant environmental change,0.014067821500000001,1,1,1,inhabit urban area,0.014067821500000001,1,1,1
+crisis,0.0041994898,6,1,7,intangible heritage,0.0072944259,2,2,1,economically poor people,0.014067821500000001,1,1,1,significant environmental change,0.014067821500000001,1,1,1
+favela,0.0039072799,3,1,2,sustainable tourism,0.0072944259,2,2,1,replace community demand,0.014067821500000001,1,1,1,economically poor people,0.014067821500000001,1,1,1
+volume,0.0034742774,6,2,9,suspension bridge,0.0072944259,2,1,1,serve multiple function,0.014067821500000001,1,1,1,replace community demand,0.014067821500000001,1,1,1
+engineering,0.0034469601000000002,4,2,5,classic period,0.0072944259,2,1,1,many urban bridge,0.014067821500000001,1,1,1,serve multiple function,0.014067821500000001,1,1,1
+architecture,0.0034308607000000002,23,6,22,vernacular architecture,0.0064819353,3,1,4,discusses several example,0.014067821500000001,1,1,1,many urban bridge,0.014067821500000001,1,1,1
+material,0.0033336655,10,1,15,construction sector,0.0058078581,2,1,2,following available research,0.014067821500000001,1,1,1,discusses several example,0.014067821500000001,1,1,1
+plant,0.0033222591,3,2,3,universal value,0.0058078581,2,1,2,available research method,0.014067821500000001,1,1,1,following available research,0.014067821500000001,1,1,1
+handicraft,0.0032715864,2,1,1,river basin,0.0058078581,2,1,2,spectacular new implementation,0.014067821500000001,1,1,1,available research method,0.014067821500000001,1,1,1
+bulrush,0.0032715864,2,1,1,took place,0.0049382716,2,1,3,wood construction field,0.014067821500000001,1,1,1,spectacular new implementation,0.014067821500000001,1,1,1
+ecodevelopment,0.0032715864,2,1,1,main objective,0.0043212902,2,2,4,tall building structure,0.014067821500000001,1,1,1,wood construction field,0.014067821500000001,1,1,1

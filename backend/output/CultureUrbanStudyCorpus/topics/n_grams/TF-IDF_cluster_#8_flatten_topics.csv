@@ -1,21 +1,21 @@
 1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
-fraction,0.0139056878,7,1,2,mental map,0.015671866,3,1,1,transnational capitalist class,0.0376674675,2,1,1,transnational capitalist class,0.0376674675,2,1,1
-map,0.005829903500000001,4,1,4,transnational capitalist,0.0104479107,2,1,1,modern city planning,0.0376674675,2,1,1,modern city planning,0.0376674675,2,1,1
-expedition,0.0050311556,2,1,1,capitalist class,0.0104479107,2,1,1,historical city center,0.0376674675,2,1,1,historical city center,0.0376674675,2,1,1
-capitalist,0.0039730537000000005,2,1,2,iconic architecture,0.0104479107,2,1,1,major transnational corporation,0.0188337337,1,1,1,major transnational corporation,0.0188337337,1,1,1
-consumer,0.0038614785,3,3,5,design profession,0.0104479107,2,1,1,major global consumer,0.0188337337,1,1,1,major global consumer,0.0188337337,1,1,1
-fashion,0.0038614785,3,1,5,understanding city,0.0104479107,2,1,1,global consumer good,0.0188337337,1,1,1,global consumer good,0.0188337337,1,1,1
-tourist,0.0037905427000000003,5,3,10,organic approach,0.0104479107,2,1,1,aspiring global city,0.0188337337,1,1,1,aspiring global city,0.0188337337,1,1,1
-chapter,0.0037136997000000002,6,1,12,five element,0.0104479107,2,1,1,deliberately iconic architecture,0.0188337337,1,1,1,deliberately iconic architecture,0.0188337337,1,1,1
-architecture,0.0036445429,19,4,21,historical city,0.0104479107,2,1,1,central urban manifestation,0.0188337337,1,1,1,central urban manifestation,0.0188337337,1,1,1
-class,0.0033541037,4,3,9,first edition,0.0082506114,2,1,2,underlying recent debate,0.0188337337,1,1,1,underlying recent debate,0.0188337337,1,1,1
-marketing,0.0033541037,2,1,3,tourist destination,0.0082506114,2,1,2,enforce social assumption,0.0188337337,1,1,1,enforce social assumption,0.0188337337,1,1,1
-corporation,0.0033541037,2,1,3,took place,0.0069652738,2,1,3,concern architectural theory,0.0188337337,1,1,1,concern architectural theory,0.0188337337,1,1,1
-firm,0.0033541037,2,1,3,contemporary city,0.0064189678000000005,3,1,7,criticizes two kind,0.0188337337,1,1,1,criticizes two kind,0.0188337337,1,1,1
-bureaucrat,0.0033541037,2,1,3,urban transformation,0.0060533122,2,1,4,genuinely urban environment,0.0188337337,1,1,1,genuinely urban environment,0.0188337337,1,1,1
-edition,0.0033541037,2,1,3,modern city,0.0052239553,3,1,9,recognizably different class,0.0188337337,1,1,1,recognizably different class,0.0188337337,1,1,1
-creativity,0.0030910319,3,1,7,globalizing city,0.0052239553,1,1,1,among affluent household,0.0188337337,1,1,1,among affluent household,0.0188337337,1,1,1
-destination,0.0030910319,3,1,7,around architecture,0.0052239553,1,1,1,reflecting distinctive geography,0.0188337337,1,1,1,reflecting distinctive geography,0.0188337337,1,1,1
-festival,0.0029149517,2,1,4,iconic building,0.0052239553,1,1,1,key business service,0.0188337337,1,1,1,key business service,0.0188337337,1,1,1
-beginning,0.0025743190000000003,2,1,5,four fraction,0.0052239553,1,1,1,believe good design,0.0188337337,1,1,1,believe good design,0.0188337337,1,1,1
-affiliate,0.0025155778,1,1,1,transnational corporation,0.0052239553,1,1,1,make positive contribution,0.0188337337,1,1,1,make positive contribution,0.0188337337,1,1,1
+landscape,0.0095607298,55,9,20,green space,0.0319788185,21,4,5,urban green space,0.0570226065,8,4,2,urban green space,0.0570226065,8,4,2
+preference,0.0073666402,13,5,8,sensory dimension,0.023125186000000002,8,2,1,public open space,0.0498947807,7,3,2,public open space,0.0498947807,7,3,2
+utilisation,0.0072908255000000005,5,1,1,open space,0.0182736106,12,3,5,perceived sensory dimension,0.044761250100000004,5,2,1,perceived sensory dimension,0.044761250100000004,5,2,1
+square,0.0062333109000000005,11,1,8,landscape type,0.014453241200000001,5,1,1,eight sensory dimension,0.0268567501,3,1,1,green space,0.0319788185,21,4,5
+tree,0.0060468202000000006,7,1,4,ecosystem service,0.0092061938,4,1,2,cultural ecosystem service,0.0213834774,3,1,2,eight sensory dimension,0.0268567501,3,1,1
+dimension,0.0056594538,21,4,16,dimension people,0.0086719447,3,1,1,people reporting stress,0.0179045001,2,1,1,sensory dimension,0.023125186000000002,8,2,1
+stress,0.0049358342,5,1,3,factor analysis,0.0086719447,3,2,1,reporting stress prefer,0.0179045001,2,1,1,cultural ecosystem service,0.0213834774,3,1,2
+specie,0.0049358342,5,2,3,landscape research,0.0086719447,3,1,1,urban park user,0.0179045001,2,1,1,open space,0.0182736106,12,3,5
+prefer,0.0043744953000000005,3,1,1,landscape concept,0.0086719447,3,1,1,sustainability requires people,0.0179045001,2,1,1,people reporting stress,0.0179045001,2,1,1
+perception,0.0042476919,13,6,14,ornamental plant,0.0086719447,3,1,1,old masonry wall,0.0179045001,2,1,1,reporting stress prefer,0.0179045001,2,1,1
+plant,0.0039486673,4,1,3,cultural sustainability,0.0086719447,3,1,1,green space assessment,0.0179045001,2,1,1,urban park user,0.0179045001,2,1,1
+brain,0.0034829948,3,1,2,stonewall tree,0.0086719447,3,1,1,community social interaction,0.0179045001,2,1,1,sustainability requires people,0.0179045001,2,1,1
+type,0.0030660242,14,3,18,cultural ecosystem,0.0069046454,3,1,2,open public space,0.0121212121,2,1,3,old masonry wall,0.0179045001,2,1,1
+emotion,0.0029615005,3,2,3,cultural service,0.0069046454,3,1,2,perceive green space,0.00895225,1,1,1,green space assessment,0.0179045001,2,1,1
+respondent,0.0029615005,3,1,3,social interaction,0.0061394765,6,3,9,randomly selected informant,0.00895225,1,1,1,community social interaction,0.0179045001,2,1,1
+designing,0.0029615005,3,2,3,reporting stress,0.005781296500000001,2,1,1,analyzed using factor,0.00895225,1,1,1,landscape type,0.014453241200000001,5,1,1
+masonry,0.0029615005,3,1,3,stress prefer,0.005781296500000001,2,1,1,using factor analysis,0.00895225,1,1,1,open public space,0.0121212121,2,1,3
+wild,0.0029163302,2,1,1,restorative environment,0.005781296500000001,2,1,1,city planning perspective,0.00895225,1,1,1,landscape,0.0095607298,55,9,20
+greatness,0.0029163302,2,1,1,mental health,0.005781296500000001,2,2,1,public mental health,0.00895225,1,1,1,ecosystem service,0.0092061938,4,1,2
+audience,0.0029163302,2,2,1,community identity,0.005781296500000001,2,1,1,provide valuable insight,0.00895225,1,1,1,perceive green space,0.00895225,1,1,1
