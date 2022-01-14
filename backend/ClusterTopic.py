@@ -37,8 +37,8 @@ class ClusterTopic:
                 score = best_result['Silhouette_score']
                 # Get summary of cluster topics
                 folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'topics')
-                path = os.path.join(folder, 'TF-IDF_cluster_topic_summary.json')
-                df = pd.read_json(path)
+                path = os.path.join(folder, 'TF-IDF_cluster_topic_summary.csv')
+                df = pd.read_csv(path)
                 cluster_topics = df.to_dict("records")
                 total_papers = reduce(lambda ct1, total: ct1['NumDocs'] + total, cluster_topics, 0)
                 for ct in cluster_topics:
