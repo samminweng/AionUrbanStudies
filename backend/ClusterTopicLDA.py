@@ -24,9 +24,10 @@ class ClusterTopicLDA:
             case_name='CultureUrbanStudyCorpus',
             approach='LDA',
             last_iteration=_last_iteration,
-            NUM_TOPICS=10,
+            NUM_TOPICS=5,
             passes=100,
             iterations=400,
+            chunksize=10,
             eval_every=None  # Don't evaluate model perplexity, takes too much time.
         )
 
@@ -34,7 +35,6 @@ class ClusterTopicLDA:
     def derive_cluster_topics_by_LDA(self):
         # approach = 'HDBSCAN_Cluster'
         try:
-
             path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters.json')
             # Load the documents clustered by
             df = pd.read_json(path)
@@ -60,57 +60,60 @@ class ClusterTopicLDA:
             docs_per_cluster_df = df.groupby(['Cluster'], as_index=False) \
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Ngrams': lambda n_grams: list(n_grams)})
             total = len(df)
-            results = list()
-            for i, cluster in docs_per_cluster_df.iterrows():
-                try:
-                    cluster_no = cluster['Cluster']
-                    n_grams = cluster['Ngrams']
-                    # Create a dictionary
-                    dictionary = corpora.Dictionary(n_grams)
-                    corpus = [dictionary.doc2bow(n_gram) for n_gram in n_grams]
-                    # Build the LDA model
-                    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=self.args.NUM_TOPICS,
-                                                               id2word=dictionary, passes=self.args.passes,
-                                                               iterations=self.args.iterations,
-                                                               eval_every=self.args.eval_every)
-                    top_topics = ldamodel.top_topics(corpus, topn=10)
-                    avg_topic_coherence = sum([t[1] for t in top_topics]) / self.args.NUM_TOPICS
-                    print('Average topic coherence: %.4f.' % avg_topic_coherence)
-                    lda_topics = list()
-                    for topic in top_topics:
-                        topic_words = list(map(lambda t: t[1], topic[0]))
-                        lda_topics.append({
-                            'topic': topic_words,
-                            'score': topic[1]   # Topic Coherence score
+            for num_topics in [5, 8, 10]:
+                results = list()
+                for i, cluster in docs_per_cluster_df.iterrows():
+                    try:
+                        cluster_no = cluster['Cluster']
+                        n_grams = cluster['Ngrams']
+                        # Create a dictionary
+                        dictionary = corpora.Dictionary(n_grams)
+                        corpus = [dictionary.doc2bow(n_gram) for n_gram in n_grams]
+                        # Build the LDA model
+                        ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics,
+                                                                   id2word=dictionary, passes=self.args.passes,
+                                                                   iterations=self.args.iterations,
+                                                                   eval_every=self.args.eval_every,
+                                                                   chunksize=self.args.chunksize)
+                        top_topics = ldamodel.top_topics(corpus, topn=10)
+                        avg_topic_coherence = sum([t[1] for t in top_topics]) / self.args.NUM_TOPICS
+                        print('Average topic coherence: %.4f.' % avg_topic_coherence)
+                        lda_topics = list()
+                        for topic in top_topics:
+                            topic_words = list(map(lambda t: t[1], topic[0]))
+                            lda_topics.append({
+                                'topic': topic_words,
+                                'score': topic[1]   # Topic Coherence score
+                            })
+                        num_docs = len(cluster['DocId'])
+                        percent = num_docs/total
+                        results.append({
+                            "Cluster": cluster_no,
+                            'DocId': cluster['DocId'],
+                            'Num Docs': len(cluster['DocId']),
+                            'Percent': round(percent, 3),
+                            "Score": avg_topic_coherence,
+                            "LDATopics": lda_topics,
                         })
-                    num_docs = len(cluster['DocId'])
-                    percent = num_docs/total
-                    results.append({
-                        "Cluster": cluster_no,
-                        'DocId': cluster['DocId'],
-                        'Num Docs': len(cluster['DocId']),
-                        'Percent': round(percent, 3),
-                        "LDATopics": lda_topics
-                    })
-                except Exception as _err:
-                    print("Error occurred! {err}".format(err=_err))
-            # Write the result to csv and json file
-            cluster_df = pd.DataFrame(results, columns=['Cluster', 'Num Docs', 'Percent', 'DocId', 'LDATopics'])
-            topic_folder = os.path.join('output', self.args.case_name, 'LDA_topics')
-            Path(topic_folder).mkdir(parents=True, exist_ok=True)
-            # # # Write to a json file
-            path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topics.json')
-            cluster_df.to_json(path, orient='records')
-            # Write to a csv file
-            path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topics.csv')
-            cluster_df.to_csv(path, encoding='utf-8', index=False)
-            # Write a summary
-            for i in range(0, 10):
-                cluster_df['LDATopics#' + str(i)] = cluster_df.apply(lambda c: c['LDATopics'][i]['topic'], axis=1)
-            cluster_df.drop('LDATopics', axis=1, inplace=True)
-            path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topic_summary.csv')
-            cluster_df.to_csv(path, encoding='utf-8', index=False)
-            print('Output topics per cluster to ' + path)
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                # Write the result to csv and json file
+                cluster_df = pd.DataFrame(results, columns=['Cluster', 'Num Docs', 'Percent', 'DocId', "Score", 'LDATopics'])
+                topic_folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'experiments')
+                Path(topic_folder).mkdir(parents=True, exist_ok=True)
+                # # # Write to a json file
+                path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topics_#' + str(num_topics) + '.json')
+                cluster_df.to_json(path, orient='records')
+                # Write to a csv file
+                path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topics#' + str(num_topics) + '.csv')
+                cluster_df.to_csv(path, encoding='utf-8', index=False)
+                # Write a summary
+                for i in range(0, self.args.NUM_TOPICS):
+                    cluster_df['LDATopics#' + str(i)] = cluster_df.apply(lambda c: c['LDATopics'][i]['topic'], axis=1)
+                cluster_df.drop('LDATopics', axis=1, inplace=True)
+                path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topic_summary#' + str(num_topics) + '.csv')
+                cluster_df.to_csv(path, encoding='utf-8', index=False)
+                print('Output topics per cluster to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
