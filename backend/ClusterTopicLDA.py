@@ -108,7 +108,7 @@ class ClusterTopicLDA:
                 path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topics#' + str(num_topics) + '.csv')
                 cluster_df.to_csv(path, encoding='utf-8', index=False)
                 # Write a summary
-                for i in range(0, self.args.NUM_TOPICS):
+                for i in range(0, num_topics):
                     cluster_df['LDATopics#' + str(i)] = cluster_df.apply(lambda c: c['LDATopics'][i]['topic'], axis=1)
                 cluster_df.drop('LDATopics', axis=1, inplace=True)
                 path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topic_summary#' + str(num_topics) + '.csv')

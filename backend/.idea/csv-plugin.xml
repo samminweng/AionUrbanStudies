@@ -115,6 +115,48 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/experiments/CultureUrbanStudyCorpus_LDA_cluster_topic_summary#10.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/experiments/CultureUrbanStudyCorpus_LDA_cluster_topic_summary#5.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/experiments/CultureUrbanStudyCorpus_LDA_cluster_topic_summary#8.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/experiments/CultureUrbanStudyCorpus_LDA_cluster_topics#10.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/experiments/CultureUrbanStudyCorpus_LDA_cluster_topics#5.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/experiments/CultureUrbanStudyCorpus_LDA_cluster_topics#8.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/cluster/CultureUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
           <value>
             <Attribute>
