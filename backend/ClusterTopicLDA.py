@@ -9,14 +9,15 @@ import gensim
 from gensim import corpora
 from gensim.models import Phrases
 from nltk import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
-
+from nltk.tokenize import word_tokenize, sent_tokenize
 import pandas as pd
-
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
 
-# Ref: https://towardsdatascience.com/topic-modelling-in-python-with-nltk-and-gensim-4ef03213cd21
+# Ref: https://radimrehurek.com/gensim/auto_examples/tutorials/run_lda.html#sphx-glr-auto-examples-tutorials-run-lda-py
+from ClusterTopicUtility import ClusterTopicUtility
+
+
 class ClusterTopicLDA:
     def __init__(self, _last_iteration):
         self.args = Namespace(
@@ -24,7 +25,9 @@ class ClusterTopicLDA:
             approach='LDA',
             last_iteration=_last_iteration,
             NUM_TOPICS=10,
-            passes=20
+            passes=100,
+            iterations=400,
+            eval_every=None  # Don't evaluate model perplexity, takes too much time.
         )
 
     # Derive the topic from each cluster of documents using
@@ -39,40 +42,38 @@ class ClusterTopicLDA:
             df['Text'] = df['Title'] + ". " + df['Abstract']
             texts = df['Text'].tolist()
             # Preprocess the texts
-            texts = list(map(lambda text: BERTModelDocClusterUtility.preprocess_text(text), texts))
-            # Remove punctuation
-            texts = list(map(lambda text: text.translate(str.maketrans('', '', string.punctuation + "’")), texts))
-            # Tokenize the text
-            texts = list(map(lambda text: word_tokenize(text), texts))
-            # Remove stop words
-            texts = list(map(lambda tokens: [token for token in tokens if token.lower() not in BERTModelDocClusterUtility.stop_words], texts))
-            # Lemmatize
-            lemmatizer = WordNetLemmatizer()
-            texts = [[lemmatizer.lemmatize(token) for token in text] for text in texts]
-            # Add bigram
-            bigram = Phrases(texts, min_count=20)
-            for idx in range(len(texts)):
-                for token in bigram[texts[idx]]:
-                    if '_' in token:
-                        # Token is a bigram, add to document.
-                        texts[idx].append(token)
-            df['Text'] = texts
+            n_grams = list()
+            for text in texts:
+                candidates = list()
+                cleaned_text = BERTModelDocClusterUtility.preprocess_text(text)
+                sentences = sent_tokenize(cleaned_text)
+                uni_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 1)
+                bi_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 2)
+                tri_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 3)
+                candidates.extend(uni_grams)
+                candidates.extend(bi_grams)
+                candidates.extend(tri_grams)
+                n_grams.append(candidates)
+
+            df['Ngrams'] = n_grams
             # Group the documents and doc_id by clusters
             docs_per_cluster_df = df.groupby(['Cluster'], as_index=False) \
-                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+                .agg({'DocId': lambda doc_id: list(doc_id), 'Ngrams': lambda n_grams: list(n_grams)})
             total = len(df)
             results = list()
             for i, cluster in docs_per_cluster_df.iterrows():
                 try:
                     cluster_no = cluster['Cluster']
-                    doc_texts = cluster['Text']
+                    n_grams = cluster['Ngrams']
                     # Create a dictionary
-                    dictionary = corpora.Dictionary(doc_texts)
-                    corpus = [dictionary.doc2bow(text) for text in doc_texts]
+                    dictionary = corpora.Dictionary(n_grams)
+                    corpus = [dictionary.doc2bow(n_gram) for n_gram in n_grams]
                     # Build the LDA model
                     ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=self.args.NUM_TOPICS,
-                                                               id2word=dictionary, passes=self.args.passes)
-                    top_topics = ldamodel.top_topics(corpus, topn=5)
+                                                               id2word=dictionary, passes=self.args.passes,
+                                                               iterations=self.args.iterations,
+                                                               eval_every=self.args.eval_every)
+                    top_topics = ldamodel.top_topics(corpus, topn=10)
                     avg_topic_coherence = sum([t[1] for t in top_topics]) / self.args.NUM_TOPICS
                     print('Average topic coherence: %.4f.' % avg_topic_coherence)
                     lda_topics = list()
@@ -83,12 +84,12 @@ class ClusterTopicLDA:
                             'score': topic[1]   # Topic Coherence score
                         })
                     num_docs = len(cluster['DocId'])
-                    percent = 100 * num_docs/total
+                    percent = num_docs/total
                     results.append({
                         "Cluster": cluster_no,
                         'DocId': cluster['DocId'],
                         'Num Docs': len(cluster['DocId']),
-                        'Percent': round(percent, 2),
+                        'Percent': round(percent, 3),
                         "LDATopics": lda_topics
                     })
                 except Exception as _err:
@@ -104,8 +105,9 @@ class ClusterTopicLDA:
             path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topics.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             # Write a summary
-            cluster_df['LDATopics'] = cluster_df.apply(lambda c:
-                                                       list(map(lambda t: "(" + ", ".join(t['topic']) + ")", c['LDATopics'])), axis=1)
+            for i in range(0, 10):
+                cluster_df['LDATopics#' + str(i)] = cluster_df.apply(lambda c: c['LDATopics'][i]['topic'], axis=1)
+            cluster_df.drop('LDATopics', axis=1, inplace=True)
             path = os.path.join(topic_folder, self.args.case_name + '_LDA_cluster_topic_summary.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + path)

@@ -1,8 +1,14 @@
 # Helper function for cluster Similarity
+import re
+import string
 from functools import reduce
+from pathlib import Path
 
 import pandas as pd
 from coverage.annotate import os
+from nltk import sent_tokenize, word_tokenize, pos_tag, ngrams
+
+from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
 
 class ClusterTopicUtility:
@@ -52,3 +58,55 @@ class ClusterTopicUtility:
         df.to_json(path, orient='records')
         print(df)
 
+    # Generate n-gram candidates from a text (a list of sentences)
+    @staticmethod
+    def generate_n_gram_candidates(sentences, n_gram_range):
+        # Check if n_gram candidate does not have stop words, punctuation or non-words
+        def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
+            try:
+                qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
+                # # # Check if there is any noun
+                nouns = list(filter(lambda _n: _n[1].startswith('NN'), _n_gram))
+                if len(nouns) == 0:
+                    return False
+                # # Check the last word is a nn or nns
+                if _n_gram[-1][1] not in ['NN', 'NNS']:
+                    return False
+                # Check if all words are not stop word or punctuation or non-words
+                for _i, _n in enumerate(_n_gram):
+                    _word = _n[0]
+                    _pos_tag = _n[1]
+                    if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
+                            _word.lower() in BERTModelDocClusterUtility.stop_words:
+                            # or _pos_tag not in qualified_tags:
+                        return False
+                # n-gram is qualified
+                return True
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+
+        # Convert n_gram tuples (pos tag and words) to a list of singular words
+        def _convert_n_gram_to_words(_n_gram):
+            _lemma_words = list()
+            for _gram in _n_gram:
+                _word = _gram[0]
+                _pos_tag = _gram[1]
+                _lemma_words.append(_word)
+            return " ".join(_lemma_words)
+
+        candidates = list()
+        # Extract n_gram from each sentence
+        for i, sentence in enumerate(sentences):
+            try:
+                words = word_tokenize(sentence)
+                pos_tags = pos_tag(words)
+                # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
+                _n_grams = list(ngrams(pos_tags, n_gram_range))
+                # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
+                for _n_gram in _n_grams:
+                    if _is_qualified(_n_gram):
+                        n_gram_words = _convert_n_gram_to_words(_n_gram)
+                        candidates.append(n_gram_words)  # Convert n_gram (a list of words) to a string
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+        return candidates
