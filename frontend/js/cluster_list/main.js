@@ -21,11 +21,11 @@ function load_cluster_data_display_results(corpus_data, cluster_topic_key_phrase
     }
     // // Set the cluster #2 as default cluster
     const topic_list_view = new DocTopicKeyPhraseListView(selected_cluster_no, cluster_topic_key_phrases, corpus_data);
-    // // Bind the change to cluster no
-    // $('#cluster_no').on('change', function (event) {
-    //     const cluster_no = parseInt(this.value);
-    //     const topic_list_view = new DocTopicKeyPhraseListView(cluster_no, cluster_topic_key_phrases, corpus_data, corpus_key_phrases);
-    // });
+    // Bind the change to cluster no
+    $('#cluster_no').on('change', function (event) {
+        const cluster_no = parseInt(this.value);
+        const topic_list_view = new DocTopicKeyPhraseListView(cluster_no, cluster_topic_key_phrases, corpus_data);
+    });
 }
 
 // Document ready event
@@ -49,6 +49,11 @@ $(function () {
         });
         // Remove the progress bar
         $('#progressbar').remove();
-
+        const total_papers = corpus_data.length;
+        const outlier_count = cluster_topic_key_phrases.find(c => c['Cluster'] === -1)['NumDocs'];
+        const outlier_percent = 100 * (outlier_count / total_papers);
+        $('#total_papers').text(total_papers);
+        $('#total_clusters').text(cluster_topic_key_phrases.length -1);
+        $('#outlier_papers').text(outlier_count + ' (' + outlier_percent.toFixed() + '%)')
     })
 });

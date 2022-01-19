@@ -59,6 +59,8 @@ function DocView(doc, selected_term) {
         const short_abstract = doc['Abstract'].substring(0, 150) + '...';
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span class="abstract">' + short_abstract + '</span>'));
         abstract_div = mark_key_terms(abstract_div, doc_key_phrases, 'key_phrase');
+
+
         // Add 'more' or 'less' button
         const more_btn = $('<button type="button" class="btn btn-link">more</button>');
         const less_btn = $('<button type="button" class="btn btn-link">less</button>');
@@ -84,6 +86,10 @@ function DocView(doc, selected_term) {
         });
         container.find(".card-text").append(abstract_div);
 
+        // Add author keywords
+        let author_keyword_div =  $('<div class="col"></div>');
+        author_keyword_div.append($('<span class="fw-bold">Author Keywords: </span><span>' + doc['Author Keywords'] + '</span>'));
+        container.find(".card-text").append(author_keyword_div);
         // Add citation
         const paper_info_div = $('<div></div>');
         paper_info_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>'));

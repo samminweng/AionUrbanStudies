@@ -1,8 +1,8 @@
 // Create scatter graph
 function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
     const width = 600;
-    const height = 600;
-    // Optimal color pallets for 21 colors from http://vrl.cs.brown.edu/color
+    const height = 700;
+    // Optimal color pallets for 30 colors from http://vrl.cs.brown.edu/color
     // citation:
     // @article{gramazio-2017-ccd,
     //   author={Gramazio, Connor C. and Laidlaw, David H. and Schloss, Karen B.},
@@ -10,9 +10,10 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
     //   title={Colorgorical: creating discriminable and preferable color palettes for information visualization},
     //   year={2017}
     // }
-    const color_plates = ["#069668", "#88e99a", "#284e37", "#54d7eb", "#4a8bae", "#30408d", "#a492e5", "#7125bd",
-                          "#e376d4", "#82185f", "#fb0998", "#f231fc", "#add51f", "#869764", "#cadba5", "#5e4028",
-                          "#fab899", "#8f0f1b", "#f24219", "#fe8f06", "#b8725a", "#fcd107", "#dd556d", "#51f310"];
+    const color_plates = ["#32964d", "#85e5dd", "#0e1e22", "#6297b3", "#18519b", "#e3a3e7", "#3c0223", "#be3acd",
+                          "#3a187b", "#dee0ff", "#8f52a5", "#76dd78", "#0b5313", "#bbcf7a", "#7c8a4f", "#a2fa12",
+                          "#744822", "#e7ad79", "#d01f18", "#e41a72", "#faf81c", "#ff8889", "#fbbd13", "#270fe2",
+                          "#315bf3"];
     // Find the maximal cluster number as total number of clusters
     const total_clusters = corpus_data.map(c => c['Cluster']).reduce((p_value, c_value) => {
         return (p_value >= c_value) ? p_value : c_value;
@@ -29,7 +30,6 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
     function convert_cluster_data_to_data_points() {
         // Get the categorical color for each cluster
         const colors = function (cluster_no) {
-
             return (cluster_no < 0) ? "gray" : color_plates[cluster_no];
         };
         // Determine the opacity based on the outlier or cluster
@@ -40,20 +40,20 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
         const initial_cluster = (is_hide) ? 0 : -1;
         // Convert the clustered data into the format for Plotly js chart
         for (let cluster_no = initial_cluster; cluster_no < total_clusters; cluster_no++) {
-            const cluster = corpus_data.filter(d => d['Cluster'] === cluster_no);
-            if (cluster.length > 0) {
+            const cluster_docs = corpus_data.filter(d => d['Cluster'] === cluster_no);
+            if (cluster_docs.length > 0) {
                 let data_point = {'x': [], 'y': [], 'label': []};
-                for (const doc of cluster) {
+                for (const doc of cluster_docs) {
                     data_point['x'].push(doc.x);
                     data_point['y'].push(doc.y);
                     const topics = get_cluster_topics(cluster_no, 5);
                     const topic_text = topics.map(t => t['topic']).join("<br>");
                     if(cluster_no !== -1){
                         // Tooltip label displays top 5 topics
-                        data_point['label'].push('<b>Cluster #' + cluster_no + '</b><br>' + topic_text);
+                        data_point['label'].push('<b>Cluster #' + cluster_no + '</b> ('+ cluster_docs.length  + ' papers)<br>' + topic_text);
                     }else{
                         // Tooltip label displays top 5 topics
-                        data_point['label'].push('<b>Outlier</b><br>' + topic_text);
+                        data_point['label'].push('<b>Outlier</b> ('+ cluster_docs.length  + ' papers)<br>' + topic_text);
                     }
                 }
                 const trace_name = (cluster_no !== -1)? 'Cluster #' + cluster_no: "Outliers";

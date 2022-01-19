@@ -9,7 +9,7 @@ from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
 
 # Obtain the cluster results of the best results and extract cluster topics using TF-IDF
-class ClusterTopic:
+class ClusterTopicTFIDF:
     def __init__(self, _last_iteration):
         self.args = Namespace(
             case_name='CultureUrbanStudyCorpus',
@@ -35,6 +35,8 @@ class ClusterTopic:
                 path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.json')
                 experiment_results = pd.read_json(path).to_dict("records")
                 best_result = next(r for r in experiment_results if r['dimension'] == dimension)
+                min_samples = best_result['min_samples']
+                min_cluster_size = best_result['min_cluster_size']
                 score = best_result['Silhouette_score']
                 # Get summary of cluster topics
                 folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'topics')
@@ -43,9 +45,10 @@ class ClusterTopic:
                 total_papers = reduce(lambda total, ct: ct['NumDocs'] + total, cluster_topics, 0)
                 for ct in cluster_topics:
                     results.append({
-                        "iteration": i, "total_papers": total_papers, "dimension": dimension, "score": score,
+                        "iteration": i, "total_papers": total_papers, "dimension": dimension,
+                        "min_samples": min_samples, "min_cluster_size": min_cluster_size, "score": score,
                         "Cluster": ct['Cluster'], "NumDocs": ct['NumDocs'], "Percent": ct['Percent'],
-                        "DocIds": ct['DocIds'], "Topics": ct['Topics']
+                        "DocIds": ct['DocIds']
                     })
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
@@ -58,7 +61,6 @@ class ClusterTopic:
         path = os.path.join(folder, self.args.case_name + '_iterative_cluster_topic_summary.json')
         df.to_json(path, orient='records')
         print(df)
-
 
     # Collect all the iterative cluster results and combine into a single cluster results
     def collect_iterative_cluster_results(self):
@@ -207,7 +209,7 @@ class ClusterTopic:
 if __name__ == '__main__':
     try:
         last_iteration = 10
-        ct = ClusterTopic(last_iteration)
+        ct = ClusterTopicTFIDF(last_iteration)
         ct.collect_iterative_cluster_topic_results()
         ct.collect_iterative_cluster_results()
         ct.derive_cluster_topics_by_TF_IDF()

@@ -101,6 +101,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/CultureUrbanStudyCorpus_LDA_cluster_topic_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/CultureUrbanStudyCorpus_LDA_cluster_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/cluster/CultureUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
           <value>
             <Attribute>
@@ -109,6 +123,13 @@
           </value>
         </entry>
         <entry key="/output/CultureUrbanStudyCorpus/cluster/CultureUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/CultureUrbanStudyCorpus_iterative_cluster_topic_summary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -368,6 +389,13 @@
           </value>
         </entry>
         <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_9/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/cluster/iteration_9/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_15.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
