@@ -1,4 +1,4 @@
-cluster,group,count,key-phrases,NumDocs,DocIds
-19,-1,12,"['American economic development', 'Community development program', 'economic development policy', 'elite network formation', 'giant Corliss engine', 'next sixty year', 'large Arab tent', 'huge metal monster', 'decision maker', 'urban culture root', 'indigenous people', 'Dutch colonist']",5,"[148, 258, 332, 372, 381]"
-19,0,7,"['result offour quality', 'numerous historic building', 'modern artistic expression', 'many cultural heritage', 'Aboriginal songwriter', 'digital archive', 'new work']",3,"[148, 372, 381]"
-19,1,6,"['immediate public space', 'urban decision maker', 'human mobility system', 'random way point', 'urban decision', 'public urban space']",3,"[148, 332, 372]"
+group,count,key-phrases,NumDocs,DocIds
+-1,14,"['American economic development', 'economic development policy', 'Community development program', 'giant Corliss engine', 'large Arab tent', 'huge metal monster', 'human mobility system', 'random way point', 'numerous historic building', 'many cultural heritage', 'indigenous people', 'digital archive', 'Dutch colonist', 'special edition']",5,"[148, 258, 332, 372, 381]"
+0,6,"['result offour quality', 'immediate public space', 'next sixty year', 'public urban space', 'modern artistic expression', 'new work']",4,"[148, 258, 372, 381]"
+1,5,"['elite network formation', 'urban decision maker', 'decision maker', 'urban decision', 'urban culture root']",3,"[258, 332, 372]"

@@ -268,7 +268,6 @@ class KeyPhraseUtility:
             # Output the summary of the grouped key phrase results
             group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrases': lambda k: list(k)})
             # Output the summary results to a csv file
-            group_df['cluster'] = cluster_no
             group_df['count'] = group_df['key-phrases'].apply(len)
             # Collect doc ids that contained the grouped key phrases
             group_key_phrases = group_df['key-phrases'].tolist()
@@ -276,8 +275,7 @@ class KeyPhraseUtility:
                 map(lambda group: get_doc_ids_by_group_key_phrases(doc_key_phrases, group), group_key_phrases))
             group_df['DocIds'] = group_doc_ids
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
-            group_df = group_df[
-                ['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
+            group_df = group_df[['group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file
@@ -290,7 +288,7 @@ class KeyPhraseUtility:
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
-    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, cluster_no, model, folder):
+    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, cluster_no, model, folder, n_neighbors=5):
         def collect_group_results(_results, _group_label):
             try:
                 _found = next((r for r in _results if r['group'] == _group_label), None)
@@ -310,13 +308,13 @@ class KeyPhraseUtility:
             key_phrase_vectors = model.encode(key_phrases)
             vector_list = key_phrase_vectors.tolist()
             results = list()
-            dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5]
+            dimensions = [100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10, 5]
             # Filter out dimensions > the length of key phrases
             dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
                 reduced_vectors = umap.UMAP(
-                    n_neighbors=15,
+                    n_neighbors=n_neighbors,
                     min_dist=0.0,
                     n_components=dimension,
                     random_state=42,
@@ -379,13 +377,13 @@ class KeyPhraseUtility:
     # # Compute the RAKE score
     # # Ref: https://github.com/zelandiya/RAKE-tutorial
     @staticmethod
-    def generate_keyword_phrase_rake_scores(phrase_list):
+    def compute_keyword_rake_scores(phrase_list):
         # Compute the score for a single word
         def _calculate_rake_word_scores(_phraseList):
             _word_frequency = {}
             _word_degree = {}
             for _phrase in _phraseList:
-                _word_list = word_tokenize(_phrase)
+                _word_list = word_tokenize(_phrase.lower())
                 _word_list_length = len(_word_list)
                 _word_list_degree = _word_list_length - 1
                 # if word_list_degree > 3: word_list_degree = 3 #exp.
@@ -411,7 +409,7 @@ class KeyPhraseUtility:
             keyword_scores_dict = {}
             for phrase in phrase_list:
                 keyword_scores_dict.setdefault(phrase, 0)
-                word_list = word_tokenize(phrase)
+                word_list = word_tokenize(phrase.lower())
                 candidate_score = 0
                 for word in word_list:
                     candidate_score += word_scores[word]

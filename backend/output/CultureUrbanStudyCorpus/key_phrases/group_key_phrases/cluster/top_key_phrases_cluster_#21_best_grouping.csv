@@ -1,4 +1,4 @@
-cluster,group,count,key-phrases,NumDocs,DocIds
-21,-1,8,"['visual practice', 'kūrybiškumas šiuolaikinio miesto', 'elementai ir kūrybiškumas', 'Public design strategy', 'public decision', 'modern artistic expression', 'Barry style line', 'style line design']",5,"[156, 206, 217, 325, 369]"
-21,0,9,"['urban public space', 'public space', 'urban everyday', 'mechanical urban design', 'public space focus', 'extensive spatial revaluation', 'real estate developer', 'public urban space', 'important heritage city']",5,"[156, 206, 217, 245, 369]"
-21,1,13,"['novel way', 'many social problem', 'šiuolaikinio miesto planavimo', 'Several contemporary study', 'new disciplinary convergence', 'encouraging different form', 'case study show', 'case study', 'study show', 'public decision making', 'decision making', 'acritical confidence', 'interdisciplinary approach']",5,"[156, 206, 217, 245, 325]"
+group,count,key-phrases,NumDocs,DocIds
+-1,10,"['many social problem', 'kūrybiškumas šiuolaikinio miesto', 'elementai ir kūrybiškumas', 'šiuolaikinio miesto planavimo', 'Several contemporary study', 'case study show', 'case study', 'study show', 'Barry style line', 'style line design']",4,"[206, 217, 245, 369]"
+0,9,"['urban public space', 'public space', 'urban everyday', 'mechanical urban design', 'public space focus', 'extensive spatial revaluation', 'real estate developer', 'public urban space', 'important heritage city']",5,"[156, 206, 217, 245, 369]"
+1,11,"['visual practice', 'novel way', 'new disciplinary convergence', 'encouraging different form', 'Public design strategy', 'public decision making', 'public decision', 'decision making', 'acritical confidence', 'interdisciplinary approach', 'modern artistic expression']",4,"[156, 217, 325, 369]"

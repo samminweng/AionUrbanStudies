@@ -1,4 +1,4 @@
-cluster,group,count,key-phrases,NumDocs,DocIds
-25,-1,6,"['important cultural role', 'contemporary cultural ecosystem', 'natural habitat extent', 'Cultural value change', 'dominant global influence', 'healthy ocean environment']",3,"[21, 44, 72]"
-25,0,9,"['undergone rapid urbanization', 'new land use', 'new land', 'new life', 'many city aspire', 'urban planner hope', 'Equal part inspiration', 'daily urban life', 'entire master plan']",5,"[21, 31, 44, 72, 216]"
-25,1,10,"['Singapore River waterfront', 'River waterfront', 'Singapore River development', 'Singapore River landscape', 'damage ocean life', 'coastal city begin', 'Swettenham pier waterfront', 'east coast waterfront', 'coast waterfront link', 'pier waterfront redevelopment']",4,"[31, 44, 72, 216]"
+group,count,key-phrases,NumDocs,DocIds
+-1,6,"['undergone rapid urbanization', 'Singapore River waterfront', 'Singapore River landscape', 'daily urban life', 'damage ocean life', 'healthy ocean environment']",4,"[21, 31, 44, 72]"
+0,10,"['important cultural role', 'contemporary cultural ecosystem', 'natural habitat extent', 'cultural ecosystem service', 'dominant global influence', 'many city aspire', 'urban planner hope', 'Singapore River development', 'Equal part inspiration', 'entire master plan']",4,"[21, 44, 72, 216]"
+1,9,"['new land use', 'River waterfront', 'new land', 'new life', 'coastal city begin', 'Swettenham pier waterfront', 'east coast waterfront', 'coast waterfront link', 'pier waterfront redevelopment']",3,"[31, 72, 216]"

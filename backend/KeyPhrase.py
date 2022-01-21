@@ -24,7 +24,8 @@ class KeyPhraseSimilarity:
             case_name='CultureUrbanStudyCorpus',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
-            device='cpu'
+            device='cpu',
+            n_neighbors=2
         )
         # Load HDBSCAN cluster
         path = os.path.join('output', self.args.case_name, self.args.case_name + "_clusters.json")
@@ -70,12 +71,11 @@ class KeyPhraseSimilarity:
                                                                                                        n_gram_candidates,
                                                                                                        top_k=30)
 
-                                phrase_list = phrase_list + list(
-                                    map(lambda t: t['key-phrase'], top_similar_key_phrases))
+                                phrase_list = phrase_list + list(map(lambda t: t['key-phrase'], top_similar_key_phrases))
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
                         # Compute the RAKE score of keywords
-                        key_phrases = KeyPhraseUtility.generate_keyword_phrase_rake_scores(phrase_list)
+                        key_phrases = KeyPhraseUtility.compute_keyword_rake_scores(phrase_list)
                         # print(phrase_scores)
                         # Obtain top five key phrases
                         result = {'Cluster': cluster_no, 'DocId': doc_id, 'key-phrases': key_phrases[:5]}
@@ -104,7 +104,7 @@ class KeyPhraseSimilarity:
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
                 # # Cluster all key phrases by using HDBSCAN
                 KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(all_key_phrases, cluster_no, self.model,
-                                                                         experiment_folder)
+                                                                         experiment_folder, self.args.n_neighbors)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
 
@@ -139,6 +139,12 @@ class KeyPhraseSimilarity:
                                                                                             best_result,
                                                                                             doc_key_phrases,
                                                                                             cluster_group_key_phrase_folder)
+                    # Sort the grouped key phrases by rake
+                    for group in group_key_phrases:
+                        phrase_list = group['key-phrases']
+                        phrase_scores = KeyPhraseUtility.compute_keyword_rake_scores(phrase_list)
+                        sorted_phrase_list = list(map(lambda p: p['key-phrase'], phrase_scores))
+                        group['key-phrases'] = sorted_phrase_list
                     best_result['grouped_key_phrases'] = group_key_phrases
                     best_results.append(best_result)
                 except Exception as err:
@@ -214,9 +220,12 @@ class KeyPhraseSimilarity:
 
 # Main entry
 if __name__ == '__main__':
-    kp = KeyPhraseSimilarity()
-    # kp.extract_doc_key_phrases_by_clusters_by_RAKE()
-    kp.group_key_phrases_by_clusters_experiments()
-    kp.grouped_key_phrases_with_best_experiment_result()
-    kp.combine_topics_key_phrases_results()
-    kp.combine_cluster_doc_key_phrases()
+    try:
+        kp = KeyPhraseSimilarity()
+        # kp.extract_doc_key_phrases_by_clusters_by_RAKE()
+        kp.group_key_phrases_by_clusters_experiments()
+        kp.grouped_key_phrases_with_best_experiment_result()
+        kp.combine_topics_key_phrases_results()
+        kp.combine_cluster_doc_key_phrases()
+    except Exception as err:
+        print("Error occurred! {err}".format(err=err))

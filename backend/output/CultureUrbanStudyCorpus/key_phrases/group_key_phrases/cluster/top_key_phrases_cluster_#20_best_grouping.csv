@@ -1,4 +1,5 @@
-cluster,group,count,key-phrases,NumDocs,DocIds
-20,-1,12,"['difficult challenge nowadays', 'several reflection', 'modular building block', 'optimal placement', 'situation show lack', 'precious traditional value', 'city center towards', 'central city area', 'tsunami hazard zone', 'center towards recovery', 'clay brick powder', 'direct contact membrane']",5,"[111, 263, 316, 335, 357]"
-20,0,7,"['prompt several reflection', 'technological change doe', 'technological change', 'proactive way', 'present situation show', 'rapid population growth', 'lead prosperous life']",4,"[111, 263, 316, 335]"
-20,1,6,"['building block', 'modular building', 'sustainable floating village', 'phosphorus removal system', 'silk fibroin microspheres', 'biological phosphorus removal']",3,"[263, 316, 357]"
+group,count,key-phrases,NumDocs,DocIds
+-1,8,"['prompt several reflection', 'several reflection', 'precious traditional value', 'lead prosperous life', 'phosphorus removal system', 'silk fibroin microspheres', 'biological phosphorus removal', 'direct contact membrane']",4,"[111, 316, 335, 357]"
+0,6,"['optimal placement', 'proactive way', 'city center towards', 'central city area', 'tsunami hazard zone', 'center towards recovery']",2,"[263, 335]"
+1,6,"['technological change doe', 'difficult challenge nowadays', 'technological change', 'situation show lack', 'present situation show', 'rapid population growth']",2,"[111, 316]"
+2,5,"['modular building block', 'building block', 'modular building', 'sustainable floating village', 'clay brick powder']",3,"[263, 316, 357]"

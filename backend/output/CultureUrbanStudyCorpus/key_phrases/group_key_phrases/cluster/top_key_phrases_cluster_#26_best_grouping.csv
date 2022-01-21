@@ -1,4 +1,4 @@
-cluster,group,count,key-phrases,NumDocs,DocIds
-26,-1,11,"['simple legal function', 'urban growth boundary', 'legal function', 'cultural actor', 'new light', 'urban planning', 'environmental history', 'Postwar federal legislation', 'massive job loss', 'Street pedestrian mall', 'main analytical point']",4,"[52, 163, 212, 254]"
-26,0,8,"['inexorable historical force', 'War II manifestation', 'certain formulation plausibility', 'continued occupational survival', 'provocative new light', 'environmental possibility', 'current trend', 'useful permanent structure']",4,"[117, 163, 212, 254]"
-26,1,6,"['urban growth', 'city various group', 'failed urban planning', 'shrewd city leader', 'urban environmental history', 'urban ecology']",4,"[52, 117, 163, 212]"
+group,count,key-phrases,NumDocs,DocIds
+-1,6,"['simple legal function', 'legal function', 'inexorable historical force', 'War II manifestation', 'certain formulation plausibility', 'main analytical point']",3,"[52, 117, 254]"
+0,8,"['urban growth boundary', 'urban growth', 'cultural actor', 'city various group', 'failed urban planning', 'shrewd city leader', 'urban planning', 'Street pedestrian mall']",4,"[52, 117, 163, 254]"
+1,11,"['continued occupational survival', 'provocative new light', 'new light', 'urban environmental history', 'environmental history', 'environmental possibility', 'current trend', 'urban ecology', 'massive job loss', 'useful permanent structure', 'reverse massive job']",4,"[117, 163, 212, 254]"
