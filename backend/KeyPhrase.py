@@ -171,13 +171,18 @@ class KeyPhraseSimilarity:
             # # Load TF-IDF topics
             path = os.path.join(folder, 'topics', self.args.case_name + '_TF-IDF_cluster_topics.json')
             topics_df = pd.read_json(path)
+
             # Load grouped Key phrases
             path = os.path.join(folder, 'key_phrases', 'group_key_phrases', 'top_key_phrases_best_grouping.json')
             key_phrase_df = pd.read_json(path)
             cluster_df = topics_df.copy(deep=True)
             cluster_df['KeyPhrases'] = key_phrase_df['grouped_key_phrases'].tolist()
+            # Load LDA Topic modeling
+            path = os.path.join(folder, 'LDA_topics', self.args.case_name + '_LDA_cluster_topics.json')
+            lda_topics_df = pd.read_json(path)
+            cluster_df['LDATopics'] = lda_topics_df['LDATopics'].tolist()
             # Re-order cluster df and Output to csv and json file
-            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Topics', 'KeyPhrases']]
+            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Topics', 'KeyPhrases', 'LDATopics']]
             path = os.path.join(folder, self.args.case_name + '_cluster_topic_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             path = os.path.join(folder, self.args.case_name + '_cluster_topic_key_phrases.json')
@@ -223,8 +228,8 @@ if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
         # kp.extract_doc_key_phrases_by_clusters_by_RAKE()
-        kp.group_key_phrases_by_clusters_experiments()
-        kp.grouped_key_phrases_with_best_experiment_result()
+        # kp.group_key_phrases_by_clusters_experiments()
+        # kp.grouped_key_phrases_with_best_experiment_result()
         kp.combine_topics_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:
