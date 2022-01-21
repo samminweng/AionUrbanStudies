@@ -1,4 +1,4 @@
 cluster,group,count,key-phrases,NumDocs,DocIds
-5,-1,11,"['urban planner', 'Japanese urban study', 'later Japanese architect', 'Urban survey', 'Japanese architect', 'urban study', 'urbanizing city', 'urban history', 'dystopian city', 'urban geographer opine', 'Indian city']",6,"[173, 185, 232, 285, 329, 348]"
-5,0,11,"['urban governance', 'good urban governance', 'urban reform', 'governance', 'urban development', 'urban planning', 'urbanisation', 'urban management', 'urban development policy', 'urban growth', 'development policy']",3,"[173, 232, 348]"
-5,1,8,"['western urban model', 'urban planning model', 'urban model', 'English garden city', 'urban space', 'urban area', 'cityscape', 'city']",3,"[285, 329, 348]"
+5,-1,14,"['fast wrenching control', 'good urban governance', 'general outlook', 'later Japanese architect', 'urban study', 'modernist architect', 'effective urban management', 'mixed method research', 'method research approach', 'mixed method', 'western urban model', 'modern global power', 'stated public commitment', 'global power']",5,"[173, 185, 232, 285, 348]"
+5,0,5,"['present general outlook', 'poor management approach', 'significant positive influence', 'comprehensive comparative study', 'public commitment']",4,"[173, 232, 285, 348]"
+5,1,11,"['Japanese urban study', 'Japanese architect', 'urban planning model', 'English garden city', 'urban model', 'similar urban conglomeration', 'Many urban geographer', 'urban geographer opine', 'urban conglomeration', 'urban geographer', 'urban development policy']",4,"[185, 285, 329, 348]"

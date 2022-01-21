@@ -1,7 +1,6 @@
 import os.path
 from argparse import Namespace
 from functools import reduce
-
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 import pandas as pd
@@ -42,14 +41,15 @@ class KeyPhraseSimilarity:
 
     # # Use the BERT model to find top 5 similar key phrases of each paper
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
-    def extract_doc_key_phrases_by_clusters(self):
+    # Use RAKE score to sort the key phrases
+    # Ref: https://medium.datadriveninvestor.com/rake-rapid-automatic-keyword-extraction-algorithm-f4ec17b2886c
+    def extract_doc_key_phrases_by_clusters_by_RAKE(self):
         try:
             corpus_docs = self.corpus_df.to_dict("records")
             cluster_no_list = range(-1, self.total_clusters)
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
-                results = list()
-                all_key_phrases = list()  # Store all the key phrases
+                results = list()  # Store all the key phrases
                 for doc in cluster_docs:
                     try:
                         doc_id = doc['DocId']
@@ -57,36 +57,33 @@ class KeyPhraseSimilarity:
                         doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
                         sentences = KeyPhraseUtility.clean_sentence(doc['Text'])
                         doc_text = " ".join(list(map(lambda s: " ".join(s), sentences)))
-                        result = {'Cluster': cluster_no, 'DocId': doc_id}
-                        # Collect all the key phrases of a doc
-                        candidates = []
+                        # Collect all the key phrases of a document
+                        phrase_list = []
                         for n_gram_range in [1, 2, 3]:
                             try:
                                 # Extract key phrase candidates using n-gram
                                 n_gram_candidates = KeyPhraseUtility.generate_n_gram_candidates(sentences,
                                                                                                 n_gram_range)
                                 # find and collect top 30 key phrases similar to a paper
-                                top_n_gram_key_phrases = KeyPhraseUtility.get_top_similar_key_phrases(self.model,
-                                                                                                      doc_text,
-                                                                                                      n_gram_candidates,
-                                                                                                      top_k=30)
-                                result[str(n_gram_range) + '-gram-key-phrases'] = top_n_gram_key_phrases
-                                candidates = candidates + list(map(lambda p: p['key-phrase'], top_n_gram_key_phrases))
+                                top_similar_key_phrases = KeyPhraseUtility.get_top_similar_key_phrases(self.model,
+                                                                                                       doc_text,
+                                                                                                       n_gram_candidates,
+                                                                                                       top_k=30)
+
+                                phrase_list = phrase_list + list(
+                                    map(lambda t: t['key-phrase'], top_similar_key_phrases))
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
-                        # Combine all the n-gram key phrases in a doc
-                        # Get top 5 key phrase unique to all key phrase list
-                        doc_key_phrases = KeyPhraseUtility.get_top_similar_key_phrases(self.model, doc_text, candidates,
-                                                                                       top_k=30)
-                        top_doc_key_phrases = KeyPhraseUtility.get_unique_doc_key_phrases(doc_key_phrases,
-                                                                                          all_key_phrases)
-                        # Write top five key phrases to 'doc_key_phrases'
-                        result['key-phrases'] = top_doc_key_phrases
-                        all_key_phrases = all_key_phrases + top_doc_key_phrases  # Concatenate all key phrases of a doc
+                        # Compute the RAKE score of keywords
+                        key_phrases = KeyPhraseUtility.generate_keyword_phrase_rake_scores(phrase_list)
+                        # print(phrase_scores)
+                        # Obtain top five key phrases
+                        result = {'Cluster': cluster_no, 'DocId': doc_id, 'key-phrases': key_phrases[:5]}
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
-                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
+                print(results)
+                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase_rake')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Write key phrases to csv file
                 KeyPhraseUtility.output_key_phrases_by_cluster(results, cluster_no, folder)
@@ -99,7 +96,7 @@ class KeyPhraseSimilarity:
         # cluster_no_list = [2]
         for cluster_no in cluster_no_list:
             try:
-                key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
+                key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase_rake')
                 path = os.path.join(key_phrase_folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
                 df = pd.read_json(path)
                 all_key_phrases = reduce(lambda pre, cur: pre + cur, df['key-phrases'].tolist(), list())
@@ -132,7 +129,7 @@ class KeyPhraseSimilarity:
                     best_result = experiments[0]
                     best_result['cluster'] = cluster_no
                     # Load top five key phrases of every paper in a cluster
-                    path = os.path.join(folder, 'doc_key_phrase',
+                    path = os.path.join(folder, 'doc_key_phrase_rake',
                                         'top_doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
                     doc_key_phrases = pd.read_json(path).to_dict("records")
                     cluster_group_key_phrase_folder = os.path.join(folder, 'group_key_phrases', 'cluster')
@@ -147,7 +144,7 @@ class KeyPhraseSimilarity:
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
             # print(best_results)
-            # Load best results of each cluster
+            # Load best results of each group
             df = pd.DataFrame(best_results,
                               columns=['cluster', 'dimension', 'min_samples', 'min_cluster_size', 'epsilon',
                                        'total_groups', 'outliers', 'score', 'grouped_key_phrases'])
@@ -192,7 +189,7 @@ class KeyPhraseSimilarity:
             doc_key_phrases = list()
             for cluster_no in range(-1, self.total_clusters):
                 # Get key phrases of a cluster
-                path = os.path.join(key_phrase_folder, 'doc_key_phrase',
+                path = os.path.join(key_phrase_folder, 'doc_key_phrase_rake',
                                     'top_doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
                 docs = pd.read_json(path).to_dict("records")
                 for doc in docs:
@@ -218,7 +215,7 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     kp = KeyPhraseSimilarity()
-    kp.extract_doc_key_phrases_by_clusters()
+    # kp.extract_doc_key_phrases_by_clusters_by_RAKE()
     kp.group_key_phrases_by_clusters_experiments()
     kp.grouped_key_phrases_with_best_experiment_result()
     kp.combine_topics_key_phrases_results()

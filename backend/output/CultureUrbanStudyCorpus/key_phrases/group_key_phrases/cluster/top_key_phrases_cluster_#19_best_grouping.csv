@@ -1,4 +1,4 @@
 cluster,group,count,key-phrases,NumDocs,DocIds
-19,-1,10,"['important cultural event', 'human mobility system', 'smart city', 'human mobility', 'mobility model', 'smart transportation', 'square design concept', 'new square design', 'city appearance', 'Aboriginal songwriter']",4,"[258, 332, 372, 381]"
-19,0,5,"['small business influence', 'Small business', 'Community development', 'business', 'entrepreneurship']",1,[148]
-19,1,10,"['first international exposition', 'international exposition', 'centennial', 'cultural event', 'city square', 'heritage city', 'aboriginal culture', 'indigenous people', 'aboriginal', 'museum']",3,"[258, 372, 381]"
+19,-1,12,"['American economic development', 'Community development program', 'economic development policy', 'elite network formation', 'giant Corliss engine', 'next sixty year', 'large Arab tent', 'huge metal monster', 'decision maker', 'urban culture root', 'indigenous people', 'Dutch colonist']",5,"[148, 258, 332, 372, 381]"
+19,0,7,"['result offour quality', 'numerous historic building', 'modern artistic expression', 'many cultural heritage', 'Aboriginal songwriter', 'digital archive', 'new work']",3,"[148, 372, 381]"
+19,1,6,"['immediate public space', 'urban decision maker', 'human mobility system', 'random way point', 'urban decision', 'public urban space']",3,"[148, 332, 372]"

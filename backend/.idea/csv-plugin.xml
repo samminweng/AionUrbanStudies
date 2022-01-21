@@ -668,6 +668,34 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/doc_key_phrase_rake/top_doc_key_phrases_cluster_#-1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/doc_key_phrase_rake/top_doc_key_phrases_cluster_#0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/doc_key_phrase_rake/top_doc_key_phrases_cluster_#1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/doc_key_phrase_rake/top_doc_key_phrases_cluster_#2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/key_phrases/experiments/top_key_phrases_cluster_#0_grouping_experiments.csv">
           <value>
             <Attribute>

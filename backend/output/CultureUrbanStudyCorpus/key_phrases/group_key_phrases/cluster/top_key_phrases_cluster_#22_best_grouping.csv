@@ -1,4 +1,4 @@
 cluster,group,count,key-phrases,NumDocs,DocIds
-22,-1,7,"['thermal comfort', 'thermal index', 'smart city application', 'smart city', 'Smart City road', 'fuzzy linguistic variable', 'Smart energy dorm']",4,"[16, 204, 227, 333]"
-22,0,12,"['thermal comfort range', 'different thermal environment', 'thermal environment', 'urban livability measure', 'Urban livability', 'livability measure', 'many urban livability', 'livability', 'Bartolomeo student dorm', 'energy dorm', 'university student residence', 'student residence']",3,"[16, 274, 333]"
-22,1,6,"['smart application', 'intelligent system', 'smart urban development', 'fuzzy logic', 'aggregated fuzzy score', 'fuzzy approach']",2,"[204, 227]"
+22,-1,10,"['different thermal environment', 'different thermal index', 'big displacement crisis', 'fuzzy linguistic variable', 'triangular fuzzy number', 'content analysis method', 'inductive content analysis', 'adequate intervention strategy', 'San Bartolomeo student', 'Bartolomeo student dorm']",5,"[16, 204, 227, 274, 333]"
+22,0,10,"['different outdoor environment', 'hot dry city', 'Smart City road', 'smart city application', 'smart urban development', 'historic urban landscape', 'many urban livability', 'urban livability measure', 'European energy politics', 'single building scale']",5,"[16, 204, 227, 274, 333]"
+22,1,5,"['comprehensive micrometeorological measurement', 'intelligent system analyze', 'intelligent system', 'aggregated fuzzy score', 'various measurable aspect']",4,"[16, 204, 227, 274]"

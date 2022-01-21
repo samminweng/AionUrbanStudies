@@ -49,12 +49,13 @@ def load_lemma_nouns():
     return _lemma_nouns
 
 
-stop_words = list(stopwords.words('english'))
 lemma_nouns = load_lemma_nouns()
 
 
 # Helper function for cluster Similarity
 class KeyPhraseUtility:
+    stop_words = list(stopwords.words('english'))
+
     # Clean licence statement texts
     @staticmethod
     def clean_sentence(text):
@@ -140,7 +141,7 @@ class KeyPhraseUtility:
                     _word = _n[0]
                     _pos_tag = _n[1]
                     if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                            _word.lower() in stop_words or _pos_tag not in qualified_tags:
+                            _word.lower() in KeyPhraseUtility.stop_words or _pos_tag not in qualified_tags:
                         return False
                 # n-gram is qualified
                 return True
@@ -275,7 +276,8 @@ class KeyPhraseUtility:
                 map(lambda group: get_doc_ids_by_group_key_phrases(doc_key_phrases, group), group_key_phrases))
             group_df['DocIds'] = group_doc_ids
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
-            group_df = group_df[['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
+            group_df = group_df[
+                ['cluster', 'group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file
@@ -310,7 +312,7 @@ class KeyPhraseUtility:
             results = list()
             dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5]
             # Filter out dimensions > the length of key phrases
-            dimensions = list(filter(lambda d: d < len(key_phrases)-5, dimensions))
+            dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
                 reduced_vectors = umap.UMAP(
@@ -330,7 +332,8 @@ class KeyPhraseUtility:
                                 group_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
                                                                min_samples=min_samples,
                                                                cluster_selection_epsilon=epsilon,
-                                                               metric='precomputed').fit_predict(distances.astype('float64')).tolist()
+                                                               metric='precomputed').fit_predict(
+                                    distances.astype('float64')).tolist()
                                 group_results = reduce(lambda pre, cur: collect_group_results(pre, cur),
                                                        group_labels, list())
                                 outlier_number = next((g['count'] for g in group_results if g['group'] == -1), 0)
@@ -361,7 +364,9 @@ class KeyPhraseUtility:
                                 # print(result)
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
-                print("=== Complete grouping the key phrases of cluster {no} with dimension {d} ===".format(no=cluster_no, d=dimension))
+                print(
+                    "=== Complete grouping the key phrases of cluster {no} with dimension {d} ===".format(no=cluster_no,
+                                                                                                          d=dimension))
             # output the experiment results
             df = pd.DataFrame(results)
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
@@ -371,210 +376,51 @@ class KeyPhraseUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # # Get the title vectors of all articles in a cluster
+    # # Compute the RAKE score
+    # # Ref: https://github.com/zelandiya/RAKE-tutorial
     @staticmethod
-    def find_top_n_similar_papers(cluster_no, corpus_docs, clusters, model, top_k=30):
-        # Clean licensee sentences from a sentence
-        def clean_sentence(text):
-            sentences = sent_tokenize(text)
-            # Preprocess the sentence
-            cleaned_sentences = list()  # Skip copy right sentence
-            for sentence in sentences:
-                if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
-                        and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
-                    try:
-                        cleaned_words = word_tokenize(sentence.lower())
-                        # Keep alphabetic characters only and remove the punctuation
-                        cleaned_sentences.append(" ".join(cleaned_words))  # merge tokenized words into sentence
-                    except Exception as _err:
-                        print("Error occurred! {err}".format(err=_err))
-            return ". ".join(cleaned_sentences)
+    def generate_keyword_phrase_rake_scores(phrase_list):
+        # Compute the score for a single word
+        def _calculate_rake_word_scores(_phraseList):
+            _word_frequency = {}
+            _word_degree = {}
+            for _phrase in _phraseList:
+                _word_list = word_tokenize(_phrase)
+                _word_list_length = len(_word_list)
+                _word_list_degree = _word_list_length - 1
+                # if word_list_degree > 3: word_list_degree = 3 #exp.
+                for _word in _word_list:
+                    _word_frequency.setdefault(_word, 0)
+                    _word_frequency[_word] += 1
+                    _word_degree.setdefault(_word, 0)
+                    _word_degree[_word] += _word_list_degree  # orig.
+            # Calculate the word degree
+            for _word in _word_frequency:
+                _word_degree[_word] = _word_degree[_word] + _word_frequency[_word]
 
-        # Get the cluster no of a doc
-        def get_cluster_no_doc(_doc_id, _clusters):
-            _cluster = next(filter(lambda c: _doc_id in c['DocIds'], _clusters), None)
-            if _cluster:
-                return _cluster['Cluster']
-            else:
-                return
+            # Calculate Word scores = deg(w)/freq(w)
+            _word_scores = {}
+            for _word in _word_frequency:
+                _word_scores.setdefault(_word, 0)
+                _word_scores[_word] = _word_degree[_word] / (_word_frequency[_word] * 1.0)  # orig.
+            return _word_scores
 
-        # Process the source titles
-        src_cluster = next(filter(lambda c: c['Cluster'] == cluster_no, clusters))
-        # Get all the docs in src cluster (such as #15)
-        src_docs = list(filter(lambda d: d['DocId'] in src_cluster['DocIds'], corpus_docs))
-        results = []
-        # Go through each doc in src cluster
-        for i, src_doc in enumerate(src_docs):
-            try:
-                src_doc_id = src_doc['DocId']
-                # Get the all the docs except for 'src' doc id
-                target_docs = list(filter(lambda d: d['DocId'] != src_doc_id, corpus_docs))
-                target_texts = list(map(lambda d: clean_sentence(d['Title'] + ". " + d['Abstract']),
-                                        target_docs))
-                # Perform semantic search (cosine similarity) to find top K (30) similar titles in corpus
-                src_vector = model.encode(clean_sentence(src_doc['Title'] + ". " + src_doc['Abstract']),
-                                          convert_to_tensor=True)
-                target_vectors = model.encode(target_texts, convert_to_tensor=True)
-                hits = util.semantic_search(src_vector, target_vectors, top_k=top_k)[0]
-                # Collect top five similar titles for 'src_title'
-                result = {"DocId": src_doc_id, "Title": src_doc['Title']}
-                similar_papers = []
-                for hit in hits:
-                    t_id = hit['corpus_id']
-                    target_doc = target_docs[t_id]
-                    score = hit['score']
-                    target_doc_id = target_doc["DocId"]
-                    similar_papers.append({
-                        'DocId': target_doc_id,
-                        'Cluster': get_cluster_no_doc(target_doc_id, clusters),
-                        'Title': target_doc['Title'],
-                        'Score': round(score, 2)
-                    })
-                result['Similar_Papers'] = similar_papers
-                results.append(result)
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-        # # Write out the similarity title information
-        df = pd.DataFrame(results)
-        # # Write to out
-        path = os.path.join('output', 'similarity', 'similar_papers',
-                            'UrbanStudyCorpus_HDBSCAN_paper_similarity_' + str(cluster_no) + '.json')
-        df.to_json(path, orient='records')
-        return results
-
-    # Write the results to a csv file
-    @staticmethod
-    def write_to_title_csv_file(cluster_no, top_k=30):
-        # # Get the most occurring clusters
-        def get_most_occurring_cluster(_similar_papers):
-            _cluster_occ = list()
-            for _similar_paper in _similar_papers:
-                _c_no = _similar_paper['Cluster']
-                _doc_id = _similar_paper['DocId']
-                _c_occ = list(filter(lambda _occ: _occ['Cluster'] == _c_no, _cluster_occ))
-                if len(_c_occ) == 0:
-                    _doc_ids = list()
-                    _doc_ids.append(_doc_id)
-                    _cluster_occ.append({'Cluster': _c_no, "DocIds": _doc_ids})
-                else:
-                    _occ = _c_occ[0]
-                    _occ['DocIds'].append(_doc_id)
-            # Sort cluster occ by the number
-            _sorted_cluster_occ = sorted(_cluster_occ, key=lambda _occ: len(_occ['DocIds']), reverse=True)
-            return _sorted_cluster_occ
-
-        # Write long version of paper similar
-        def write_paper_similarity_long_version(_sorted_results):
-            _path = os.path.join('output', 'key_phrases', 'similar_papers',
-                                 'UrbanStudyCorpus_HDBSCAN_similar_papers_' + str(cluster_no) + '_long.csv')
-            # Specify utf-8 as encoding
-            csv_file = open(_path, "w", newline='', encoding='utf-8')
-            rows = list()
-            # Header
-            rows.append(['doc_id', 'title', 'score', 'similar_cluster_no', 'similar_doc_id', 'similar_title'])
-            for _doc in _sorted_results:
-                most_similar_paper = _doc['Similar_Papers'][0]
-                rows.append([_doc['DocId'], _doc['Title'], "{:.4f}".format(most_similar_paper['Score']),
-                             most_similar_paper['Cluster'], most_similar_paper['DocId'], most_similar_paper['Title']])
-                # Display the remaining 30
-                for _i in range(1, top_k):
-                    st = _doc['Similar_Papers'][_i]
-                    rows.append(["", "", "{:.2f}".format(st['Score']), st['Cluster'], st['DocId'], st['Title']])
-            # Add blank row
-            rows.append([])
-            # Write row to csv_file
-            writer = csv.writer(csv_file)
-            for row in rows:
-                writer.writerow(row)
-            csv_file.close()
-
-        # Load
-        path = os.path.join('output', 'key_phrases', 'similar_papers',
-                            'UrbanStudyCorpus_HDBSCAN_paper_similarity_' + str(cluster_no) + '.json')
-        df = pd.read_json(path)
-        results = df.to_dict("records")
-        # Sort results by the most similar score from low to high
-        sorted_results = sorted(results, key=lambda r: r['Similar_Papers'][0]['Score'], reverse=True)
-        # Write a long version of paper similarity
-        write_paper_similarity_long_version(sorted_results)
-        top_similar_papers = []
-        # Header
-        for item in sorted_results:
-            top_st = item['Similar_Papers'][0]
-            doc_id = item['DocId']
-            title = item['Title']
-            score = "{:.2f}".format(top_st['Score'])
-            similar_doc_id = top_st['DocId']
-            similar_cluster_no = top_st['Cluster']
-            similar_title = top_st['Title']
-            # cluster_no_set.add(similar_cluster_no)
-            cluster_occ = get_most_occurring_cluster(item['Similar_Papers'])
-            is_match = bool(similar_cluster_no == cluster_occ[0]['Cluster'])
-            assert len(cluster_occ) >= 3
-            result = {
-                'doc_id': doc_id, 'title': title,
-                'score': score, 'cluster': "#" + str(similar_cluster_no),
-                'similar_doc_id': similar_doc_id,
-                'similar_title': similar_title,
-                'top1_occ_cluster': "#" + str(cluster_occ[0]['Cluster']), 'top1_count': len(cluster_occ[0]['DocIds']),
-                'top2_occ_cluster': "#" + str(cluster_occ[1]['Cluster']), 'top2_count': len(cluster_occ[1]['DocIds']),
-                'top3_occ_cluster': "#" + str(cluster_occ[2]['Cluster']), 'top3_count': len(cluster_occ[2]['DocIds']),
-                'is_match': is_match}
-            top_similar_papers.append(result)
-            # Write the summary
-        df = pd.DataFrame(top_similar_papers)
-        out_path = os.path.join('output', 'key_phrases', 'similar_papers',
-                                'UrbanStudyCorpus_HDBSCAN_similar_papers_' + str(cluster_no) + '_short.csv')
-        df.to_csv(out_path, index=False, encoding='utf-8')
-        # # Display the cluster no list
-
-    @staticmethod
-    def most_similar_candidate(cluster_no, cluster_vector, c_vectors, candidates, top_n=5):
-        keywords = []
-        for index, (candidate, c_vector) in enumerate(zip(candidates, c_vectors)):
-            score = cosine_similarity([cluster_vector], [c_vector])[0, 0]  # Get cosine similarity
-            keywords.append({'keyword': candidate, 'score': score})
-        # Sort the keywords by score
-        keywords = sorted(keywords, key=lambda k: k['score'], reverse=True)
-        top_keywords = keywords[:top_n]
-        # Write the top_keywords as a csv file
-        df = pd.DataFrame(top_keywords, columns=['score', 'keyword'])
-        path = os.path.join('output', 'key_phrases', 'keywords', 'msc_top_keywords_cluster_' + str(cluster_no) + '.csv')
-        df.to_csv(path, encoding='utf-8', index=False)
-        return top_keywords
-
-    @staticmethod
-    def maximal_marginal_relevance(cluster_vector, c_vectors, candidates,
-                                   top_n=30, diversity=0.5):
         try:
-            # Extract similarity within words, and between words and the document
-            word_doc_similarity = cosine_similarity(c_vectors, [cluster_vector])
-            word_similarity = cosine_similarity(c_vectors, c_vectors)
-
-            # Initialize candidates and already choose best keyword/key phrase
-            keywords_idx = [np.argmax(word_doc_similarity)]
-            candidates_idx = [i for i in range(len(candidates)) if i != keywords_idx[0]]
-            # Re-rank the candidate key words
-            for _ in range(top_n - 1):
-                # Extract similarities within candidates and
-                # between candidates and selected keywords/phrases
-                candidate_similarities = word_doc_similarity[candidates_idx, :]
-                target_similarities = np.max(word_similarity[candidates_idx][:, keywords_idx], axis=1)
-
-                # Calculate MMR
-                mmr = (1 - diversity) * candidate_similarities - diversity * target_similarities.reshape(-1, 1)
-                mmr_idx = candidates_idx[np.argmax(mmr)]
-
-                # Update keywords & candidates
-                keywords_idx.append(mmr_idx)
-                candidates_idx.remove(mmr_idx)
-
-            # Collect all the top keywords
-            top_keywords = list()
-            for idx in keywords_idx:
-                keyword = candidates[idx]
-                score = word_doc_similarity[idx][0]
-                top_keywords.append({'score': score, 'keyword': keyword})
-            return top_keywords
-        except Exception as _err:
-            print("Error occurred! {err}".format(err=_err))
+            # Compute the word scores
+            word_scores = _calculate_rake_word_scores(phrase_list)
+            keyword_scores_dict = {}
+            for phrase in phrase_list:
+                keyword_scores_dict.setdefault(phrase, 0)
+                word_list = word_tokenize(phrase)
+                candidate_score = 0
+                for word in word_list:
+                    candidate_score += word_scores[word]
+                keyword_scores_dict[phrase] = candidate_score
+            # Convert dict (keyword_scores_dict)
+            keyword_scores = list()
+            for keyword, score in keyword_scores_dict.items():
+                keyword_scores.append({"key-phrase": keyword, "score": score})
+            keyword_scores = sorted(keyword_scores, key=lambda ks: ks['score'], reverse=True)
+            return keyword_scores
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))

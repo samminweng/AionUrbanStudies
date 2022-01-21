@@ -1,4 +1,4 @@
 cluster,group,count,key-phrases,NumDocs,DocIds
-26,-1,9,"['urban growth boundary', 'urban growth', 'regional landscape', 'Chicago sociology', 'Chicago sociologist', 'urban environmental history', 'modern city', 'Philadelphia planning', 'Philadelphia planning process']",4,"[52, 117, 212, 254]"
-26,0,11,"['planning theory', 'urban planning policy', 'urban planning', 'urban bureaucrat', 'failed urban planning', 'green urbanism', 'urban ecology', 'urbanism', 'urban renaissance', 'American industrial metropolis', 'urban historical process']",5,"[52, 117, 163, 212, 254]"
-26,1,5,"['Artistic interpretation', 'revered monument', 'monument', 'historic building', 'arch']",2,"[52, 163]"
+26,-1,11,"['simple legal function', 'urban growth boundary', 'legal function', 'cultural actor', 'new light', 'urban planning', 'environmental history', 'Postwar federal legislation', 'massive job loss', 'Street pedestrian mall', 'main analytical point']",4,"[52, 163, 212, 254]"
+26,0,8,"['inexorable historical force', 'War II manifestation', 'certain formulation plausibility', 'continued occupational survival', 'provocative new light', 'environmental possibility', 'current trend', 'useful permanent structure']",4,"[117, 163, 212, 254]"
+26,1,6,"['urban growth', 'city various group', 'failed urban planning', 'shrewd city leader', 'urban environmental history', 'urban ecology']",4,"[52, 117, 163, 212]"
