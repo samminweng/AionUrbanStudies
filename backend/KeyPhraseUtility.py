@@ -170,7 +170,7 @@ class KeyPhraseUtility:
     # Find top K key phrase similar to the paper
     # Ref: https://www.sbert.net/examples/applications/semantic-search/README.html
     @staticmethod
-    def get_top_similar_key_phrases(model, doc_text, candidates, top_k=5):
+    def compute_key_phrases_similar_score(model, doc_text, candidates):
         try:
             if len(candidates) == 0:
                 return []
@@ -182,8 +182,8 @@ class KeyPhraseUtility:
             distances = cosine_similarity(doc_vector, candidate_vectors)
             # Select top key phrases based on the distance score
             top_key_phrases = list()
-            min_length = min(len(candidates), top_k)  # Get the minimal
-            # Get top 5 candidate of smallest distances or all the candidates if 4 or few
+            min_length = len(candidates)  # Get the minimal
+            # Get all the candidates
             top_distances = distances.argsort()[0][-min_length:]
             for c_index in top_distances:
                 candidate = candidates[c_index]
@@ -198,37 +198,19 @@ class KeyPhraseUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    @staticmethod
-    # Write the key phrases of each cluster to a csv file
-    def output_key_phrases_by_cluster(key_phrase_list, cluster_no, folder):
-        try:
-            df = pd.DataFrame(key_phrase_list, columns=['DocId'])
-            df['No'] = range(1, len(df) + 1)
-            # Map the list of key phrases (dict) to a list of strings
-            # Map the nested dict to a list of key phrases (string only)
-            df['key-phrases'] = list(map(lambda k: [kp['key-phrase'] for kp in k['key-phrases']], key_phrase_list))
-            df = df[['No', 'DocId', 'key-phrases']]  # Re-order the columns
-
-            # Path(folder).mkdir(parents=True, exist_ok=True)
-            path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.csv')
-            df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
-            df.to_json(path, orient='records')
-            print("Output the key phrases of cluster #" + str(cluster_no))
-        except Exception as _err:
-            print("Error occurred! {err}".format(err=_err))
-
     # Get a list of unique key phrases from all papers
     @staticmethod
-    def get_unique_doc_key_phrases(doc_key_phrases, all_key_phrases, top_k=5):
+    def get_top_similar_key_phrases(phrase_list, top_k=5):
         try:
-            if len(doc_key_phrases) < top_k:
-                return doc_key_phrases
+            if len(phrase_list) < top_k:
+                return phrase_list
 
+            # Sort 'phrase list'
+            sorted_phrase_list = sorted(phrase_list, key=lambda p: p['score'], reverse=True)
             unique_key_phrases = list()
-            for key_phrase in doc_key_phrases:
+            for key_phrase in sorted_phrase_list:
                 # find if key phrase exist in all key phrase list
-                found = next((kp for kp in all_key_phrases
+                found = next((kp for kp in unique_key_phrases
                               if kp['key-phrase'].lower() == key_phrase['key-phrase'].lower()), None)
                 if not found:
                     unique_key_phrases.append(key_phrase)
@@ -238,7 +220,7 @@ class KeyPhraseUtility:
             # Get top 5 key phrase
             unique_key_phrases = unique_key_phrases[:top_k]
             # assert len(_unique_key_phrases) == _top_k
-            return unique_key_phrases
+            return list(map(lambda p: p['key-phrase'], unique_key_phrases))
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 

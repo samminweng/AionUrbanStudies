@@ -1,8 +1,8 @@
-No,DocId,key-phrases
-1,19,"['public open scape', 'white British people', 'different ethnic minority', 'Ethnic minority group', 'towards inclusive design']"
-2,28,"['political outside', 'human value', 'collective experiment', 'scientific laboratory', 'urban design']"
-3,34,"['embed diverse youth', 'intergenerational urban space', 'diverse youth voice', 'diverse youth', 'urban space']"
-4,50,"['genuinely urban environment', 'concern architectural theory', 'architectural theory', 'urban environment', 'architectural practice']"
-5,67,"['distinctive social science', 'social science perspective', 'key business service', 'social science', 'key business']"
-6,147,"['urban design relies', 'formal public meeting', 'urban design consumer', 'international design competition', 'urban design']"
-7,231,"['Nordic welfare context', 'shift towards urbanity', 'paradigm shift towards', 'Nordic welfare', 'shift towards']"
+No,DocId,key-phrases,key-phrases-similarity
+1,19,"['public open scape', 'white British people', 'different ethnic minority', 'Ethnic minority group', 'towards inclusive design']","['inclusive landscape', 'inclusive design', 'towards inclusive design', 'landscape architect', 'cultural experience']"
+2,28,"['traditional distinction', 'scientific laboratory', 'political outside', 'human value', 'collective experiment']","['multinaturalism', 'multiculturalism', 'collective experiment', 'scientific laboratory', 'modernity']"
+3,34,"['embed diverse youth', 'intergenerational urban space', 'diverse youth voice', 'diverse youth', 'urban space']","['intergenerational urban space', 'embed diverse youth', 'diverse youth voice', 'diverse youth', 'urban space']"
+4,50,"['genuinely urban environment', 'concern architectural theory', 'architectural theory', 'urban environment', 'first concern']","['urban design', 'concern architectural theory', 'architectural theory', 'genuinely urban environment', 'architecture']"
+5,67,"['distinctive social science', 'social science perspective', 'key business service', 'social science', 'key business']","['urban design', 'design profession', 'contemporary city', 'interior design', 'industrial design']"
+6,147,"['formal public meeting', 'international design competition', 'urban design relies', 'urban design consumer', 'urban design']","['urban design consumer', 'urban design', 'urban design relies', 'international design', 'city planning']"
+7,231,"['Nordic welfare context', 'paradigm shift towards', 'shift towards urbanity', 'Nordic welfare', 'shift towards']","['towards urbanity', 'understand urbanity', 'urbanity', 'shift towards urbanity', 'urbanity serf']"

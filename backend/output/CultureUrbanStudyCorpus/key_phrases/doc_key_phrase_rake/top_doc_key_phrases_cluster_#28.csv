@@ -1,9 +1,9 @@
-No,DocId,key-phrases
-1,36,"['representative Spanish city', 'municipal solid waste', 'social economic indicator', 'greenhouse gas emission', 'Spanish city']"
-2,65,"['improved urban planning', 'current residential standard', 'comprehensive legal framework', 'urban planning practice', 'urban design approach']"
-3,80,"['social vulnerable people', 'unsustainable agricultural practice', 'unsustainable water management', 'integral water resource', 'megacities water quantity']"
-4,85,"['homogeneous urban community', 'towards external risk', 'substantial trust relationship', 'strong trust relationship', 'difficult housing condition']"
-5,130,"['negative ecological side', 'ecological side effect', 'maximum physical immobility', 'mobile risk society', 'Corona regime mobility']"
-6,162,"['research field focus', 'Abu Dhabi vision', 'efficient residential building', 'new sustainable way', 'Dhabi urban development']"
-7,197,"['digital field study', 'joint research program', 'first practical example', 'spatial urban unit', 'open call idea']"
-8,202,"['clear historical parallel', 'flexible pandemic strategy', 'new urban design', 'century plague pandemic', 'historical parallel']"
+No,DocId,key-phrases,key-phrases-similarity
+1,36,"['representative Spanish city', 'municipal solid waste', 'social economic indicator', 'greenhouse gas emission', 'Spanish city']","['sustainable city', 'inefficient city', 'environmental sustainability', 'sustainable performance', 'sustainability perspective']"
+2,65,"['improved urban planning', 'current residential standard', 'comprehensive legal framework', 'multiple regression analysis', 'urban planning practice']","['urban housing complies', 'residential standard', 'current residential standard', 'housing complies', 'urban housing']"
+3,80,"['social vulnerable people', 'unsustainable agricultural practice', 'unsustainable water management', 'integral water resource', 'water resource management']","['water management', 'water resource management', 'unsustainable water management', 'megacities water quantity', 'megacities water']"
+4,85,"['homogeneous urban community', 'substantial trust relationship', 'strong trust relationship', 'difficult housing condition', 'towards external risk']","['community planning', 'Gaza city', 'livable community', 'urban community', 'trust relationship']"
+5,130,"['negative ecological side', 'maximum physical immobility', 'ecological side effect', 'mobile risk society', 'Corona regime mobility']","['mobility paradigm', 'urban life', 'mobile risk society', 'risk society', 'mobility']"
+6,162,"['Abu Dhabi vision', 'Dhabi urban development', 'efficient residential building', 'Dhabi economic vision', 'green building incorporates']","['Dhabi urban development', 'green building system', 'Dhabi economic vision', 'efficient residential building', 'green building incorporates']"
+7,197,"['first practical example', 'spatial urban unit', 'present valuable insight', 'local Afghan government', 'equal public consultation']","['participatory planning', 'urban planning process', 'urban planning', 'public consultation', 'experimental participatory planning']"
+8,202,"['clear historical parallel', 'flexible pandemic strategy', 'new urban design', 'century plague pandemic', 'historical parallel']","['new urban design', 'urban design', 'pandemic strategy', 'flexible pandemic strategy', 'previous pandemic']"

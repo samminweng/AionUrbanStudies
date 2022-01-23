@@ -696,6 +696,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/doc_key_phrase_rake_backup/top_doc_key_phrases_cluster_#0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/key_phrases/experiments/top_key_phrases_cluster_#0_grouping_experiments.csv">
           <value>
             <Attribute>

@@ -1,6 +1,6 @@
-No,DocId,key-phrases
-1,148,"['result offour quality', 'immediate public space', 'American economic development', 'economic development policy', 'Community development program']"
-2,258,"['elite network formation', 'giant Corliss engine', 'next sixty year', 'large Arab tent', 'huge metal monster']"
-3,332,"['urban decision maker', 'human mobility system', 'random way point', 'decision maker', 'urban decision']"
-4,372,"['numerous historic building', 'public urban space', 'modern artistic expression', 'many cultural heritage', 'urban culture root']"
-5,381,"['indigenous people', 'digital archive', 'Dutch colonist', 'new work', 'special edition']"
+No,DocId,key-phrases,key-phrases-similarity
+1,148,"['immediate public space', 'American economic development', 'economic development policy', 'Extensive behavior mapping', 'result offour quality']","['small business influence', 'Small business', 'Community development', 'business', 'entrepreneurship']"
+2,258,"['giant Corliss engine', 'first international exposition', 'important cultural event', 'American industrial innovation', 'large Arab tent']","['first international exposition', 'international exposition', 'centennial', 'important cultural event', 'cultural event']"
+3,332,"['human mobility system', 'urban decision maker', 'random way point', 'human mobility', 'urban decision']","['human mobility system', 'smart city', 'human mobility', 'mobility model', 'smart transportation']"
+4,372,"['numerous historic building', 'public urban space', 'modern artistic expression', 'many cultural heritage', 'essential building space']","['square design concept', 'new square design', 'city appearance', 'city square', 'heritage city']"
+5,381,"['new work', 'Dutch colonist', 'complete understanding', 'indigenous people', 'special edition']","['Aboriginal songwriter', 'aboriginal culture', 'indigenous people', 'aboriginal', 'museum']"

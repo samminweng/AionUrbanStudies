@@ -1,10 +1,10 @@
-No,DocId,key-phrases
-1,45,"['Chinese state deal', 'middle class generate', 'contemporary Chinese society', 'Chinese middle class', 'middle class norm']"
-2,57,"['certain traditional form', 'historical Chinese city', 'Traditional architectural form', 'historical urban environment', 'real cultural identity']"
-3,69,"['influenced urban planning', 'first hand information', 'use first hand', 'first hand', 'urban planning']"
-4,88,"['integrated high density', 'Pacific Age power', 'fluctuating economic activity', 'Age power house', 'Kowloon Station project']"
-5,126,['abstract']
-6,169,"['corporate social responsibility', 'different social milieu', 'sound cultural development', 'social responsibility program', 'Potential discussion area']"
-7,187,"['radical socialist goal', 'spatial policy rhetoric', 'spatial policy', 'socialist goal', 'revolutionary ideal']"
-8,195,"['Chinese peasant uprising', 'concern urban historian', 'Chinese peasant', 'urban historian', 'urban setting']"
-9,248,"['time various challenge', 'robust natural environment', 'reliable creative prosperity', 'urban development state', 'holistic planning strategy']"
+No,DocId,key-phrases,key-phrases-similarity
+1,45,"['contemporary Chinese society', 'Chinese middle class', 'middle class society', 'middle class norm', 'middle class generate']","['Chinese middle class', 'contemporary Chinese society', 'Chinese society', 'Chinese politics', 'middle class society']"
+2,57,"['certain traditional form', 'historical Chinese city', 'Traditional architectural form', 'historical urban environment', 'real cultural identity']","['urban regeneration', 'historical urban environment', 'Traditional architectural form', 'urban regeneration project', 'historical Chinese city']"
+3,69,"['influenced urban planning', 'first hand information', 'use first hand', 'first hand', 'urban planning']","['urban planning', 'influenced urban planning', 'Soviet influence', 'Confucianism', 'economic development']"
+4,88,"['Pacific Age power', 'integrated high density', 'fluctuating economic activity', 'Kowloon Station project', 'former British colony']","['urban architecture', 'Chinese architecture', 'urban design', 'modern city making', 'urban development']"
+5,126,['abstract'],"[{'key-phrase': 'abstract', 'score': 0.064518064}]"
+6,169,"['corporate social responsibility', 'sound cultural development', 'different social milieu', 'social responsibility program', 'Potential discussion area']","['cultural development', 'community relation', 'sound cultural development', 'culture', 'belonging']"
+7,187,"['radical socialist goal', 'spatial policy rhetoric', 'socialist goal', 'spatial policy', 'policy rhetoric']","['urban transformation', 'urban development', 'urban economy', 'Chinese city', 'urban condition']"
+8,195,"['Chinese peasant uprising', 'concern urban historian', 'Chinese peasant', 'urban historian', 'Chinese history']","['concern urban historian', 'urban history', 'urban historian', 'Chinese history', 'Chinese peasant uprising']"
+9,248,"['robust natural environment', 'reliable creative prosperity', 'time various challenge', 'urban development state', 'holistic planning strategy']","['social inclusion', 'urban development', 'Chinese city', 'city create', 'cultural prosperity']"

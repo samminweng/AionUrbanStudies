@@ -1,9 +1,9 @@
-No,DocId,key-phrases
-1,5,"['new multidisciplinary approach', 'last question aim', 'noise control policy', 'significant research activity', 'noise control']"
-2,30,"['hot arid climate', 'similar climatic context', 'subjective thermal evaluation', 'open public space', 'outdoor urban space']"
-3,47,"['Typical residential area', 'noise measurement method', 'road traffic noise', 'activity disturbance indoors', 'measurement method']"
-4,174,"['outdoor public place', 'public outdoor place', 'successful open space', 'urban outdoor place', 'social interaction happen']"
-5,208,"['laboratory experiment doe', 'positive perceptual outcome', 'acoustic environment reproduction', 'virtual reality system', 'Urban soundscape management']"
-6,209,"['idealized otological profi', 'otological profi le', 'lived sonic experience', 'inclusive design research', 'le att ention']"
-7,262,"['Philadelphia Saving fund', 'human civilization help', 'human civilization', 'Saving fund', 'civilization help']"
-8,351,"['urban historic district', 'element historic district', 'urban cultural ecology', 'historic culture life', 'historic district characteristic']"
+No,DocId,key-phrases,key-phrases-similarity
+1,5,"['new multidisciplinary approach', 'noise control policy', 'significant research activity', 'last question aim', 'noise control']","['Soundscape research', 'soundscapes', 'soundscape science', 'soundscape', 'environmental sound']"
+2,30,"['hot arid climate', 'similar climatic context', 'subjective thermal evaluation', 'open public space', 'outdoor urban space']","['outdoor urban space', 'urban environment', 'hot arid climate', 'thermal comfort', 'urban space']"
+3,47,"['Typical residential area', 'road traffic noise', 'noise measurement method', 'activity disturbance indoors', 'residential area']","['road traffic noise', 'traffic noise', 'road traffic', 'noise', 'house vibration']"
+4,174,"['public outdoor place', 'outdoor public place', 'successful open space', 'urban outdoor place', 'social interaction happen']","['thermal comfort', 'urban outdoor place', 'Sustainable city', 'multicultural nature', 'outdoor public place']"
+5,208,"['positive perceptual outcome', 'urban soundscape evaluation', 'urban acoustic environment', 'several soundscape evaluation', 'Urban soundscape management']","['soundscape evaluation method', 'urban soundscape evaluation', 'Urban soundscape management', 'soundscape evaluation', 'several soundscape evaluation']"
+6,209,"['idealized otological profi', 'lived sonic experience', 'otological profi le', 'le att ention', 'inclusive design research']","['urban design', 'soundscape', 'inclusive design', 'human hearing', 'inclusive design research']"
+7,262,"['Philadelphia Saving fund', 'human civilization help', 'human civilization', 'Saving fund', 'civilization help']","['city noise', 'Modern architect', 'sound', 'Noise', 'modernity']"
+8,351,"['urban historic district', 'urban cultural ecology', 'element historic district', 'historic district characteristic', 'historical district soundscape']","['historical district soundscape', 'district soundscape', 'urban cultural ecology', 'soundscape', 'historic district characteristic']"

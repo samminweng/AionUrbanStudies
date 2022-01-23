@@ -1,8 +1,8 @@
-No,DocId,key-phrases
-1,25,"['critical public service', 'rapid environmental change', 'global environmental change', 'poor urban settlement', 'urban design challenge']"
-2,38,"['positive step towards', 'slum upgrading impact', 'access municipal service', 'participatory urban planning', 'gradual institutional change']"
-3,114,"['contemporary SSA urban', 'sustainable urban development', 'current urban development', 'African urban form', 'indigenous urban form']"
-4,152,"['tropical humid terrain', 'freed African slave', 'heirarchic monotheistic religion', 'indigenous development pattern', 'draw architectural comparison']"
-5,177,"['western cultural contact', 'Yoruba ethnic group', 'Yoruba ethnic origin', 'unfolding world order', 'previous resear ch']"
-6,389,"['nontraditional financing modality', 'sustainable regional level', 'regional level water', 'current global concern', 'level water management']"
-7,392,"['new democratic government', 'population towards authority', 'housing rental repayment', 'towards service provider', 'water authority persuasiveness']"
+No,DocId,key-phrases,key-phrases-similarity
+1,25,"['global environmental change', 'rapid environmental change', 'critical public service', 'poor urban settlement', 'autonomous adaptation strategy']","['slum community', 'urban slum', 'slum', 'urban settlement', 'poor urban settlement']"
+2,38,"['participatory urban planning', 'gradual institutional change', 'inclusive municipal governance', 'active City participation', 'towards inclusive governance']","['inclusive municipal governance', 'slum upgrading sustainability', 'towards inclusive governance', 'inclusive governance', 'City governance']"
+3,114,"['contemporary SSA urban', 'sustainable urban development', 'current urban development', 'African urban form', 'indigenous urban form']","['African urban form', 'indigenous urban form', 'sustainable urban development', 'sustainable urban planning', 'urban development']"
+4,152,"['modern urban housing', 'southern Nigerian town', 'acephalous societal organisation', 'Western Yoruba society', 'heirarchic monotheistic religion']","['Nigerian urban life', 'Igbo hinterland', 'southern Nigerian town', 'Yoruba society', 'Nigerian town']"
+5,177,"['Yoruba ethnic group', 'Yoruba ethnic origin', 'western cultural contact', 'particular family identifies', 'unfolding world order']","['housing development', 'housing quality', 'housing planning', 'future housing development', 'Nigerian society']"
+6,389,"['sustainable regional level', 'current global concern', 'regional level water', 'decentralized water management', 'level water management']","['water management plan', 'water management', 'Bangladesh perspective', 'water resource', 'decentralized water management']"
+7,392,"['new democratic government', 'housing rental repayment', 'population towards authority', 'towards service provider', 'water authority persuasiveness']","['water authority persuasiveness', 'water authority', 'water service', 'population towards authority', 'governance']"

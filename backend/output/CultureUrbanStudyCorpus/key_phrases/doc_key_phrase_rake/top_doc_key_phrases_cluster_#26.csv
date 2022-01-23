@@ -1,6 +1,6 @@
-No,DocId,key-phrases
-1,52,"['simple legal function', 'urban growth boundary', 'legal function', 'urban growth', 'cultural actor']"
-2,117,"['inexorable historical force', 'War II manifestation', 'certain formulation plausibility', 'continued occupational survival', 'city various group']"
-3,163,"['provocative new light', 'failed urban planning', 'shrewd city leader', 'new light', 'urban planning']"
-4,212,"['urban environmental history', 'environmental history', 'environmental possibility', 'current trend', 'urban ecology']"
-5,254,"['massive job loss', 'Street pedestrian mall', 'useful permanent structure', 'main analytical point', 'reverse massive job']"
+No,DocId,key-phrases,key-phrases-similarity
+1,52,"['simple legal function', 'urban growth boundary', 'urban growth', 'legal function', 'growth boundary']","['urban growth boundary', 'urban growth', 'regional landscape', 'planning theory', 'Artistic interpretation']"
+2,117,"['War II manifestation', 'inexorable historical force', 'viable occupational strategy', 'continued occupational survival', 'bureaucrat qua bureaucrat']","['urban planning policy', 'Chicago sociology', 'Chicago sociologist', 'urban planning', 'urban bureaucrat']"
+3,163,"['provocative new light', 'failed urban planning', 'shrewd city leader', 'new light', 'shrewd city']","['revered monument', 'failed urban planning', 'monument', 'historic building', 'urban planning']"
+4,212,"['urban environmental history', 'environmental history', 'urban space', 'environmental possibility', 'urban ecology']","['urban environmental history', 'green urbanism', 'urban ecology', 'urbanism', 'modern city']"
+5,254,"['old industrial city', 'Street pedestrian mall', 'useful permanent structure', 'main analytical point', 'American industrial metropolis']","['Philadelphia planning', 'Philadelphia planning process', 'urban renaissance', 'American industrial metropolis', 'urban historical process']"

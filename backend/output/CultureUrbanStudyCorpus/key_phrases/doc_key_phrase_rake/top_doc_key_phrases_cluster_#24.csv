@@ -1,8 +1,8 @@
-No,DocId,key-phrases
-1,23,"['explores possible strategy', 'theoretical conceptual construct', 'significant transition towards', 'sustainability transition unfold', 'structural systemic realignments']"
-2,64,"['universal secondary education', 'smarter urban design', 'maternal health service', 'global urban growth', 'additional urban people']"
-3,107,"['green urban economics', 'Rapid urban growth', 'urban planning system', 'urban sustainability indicator', 'planning system']"
-4,116,"['self interested decision', 'serious cumulative impact', 'natural flood plain', 'flood plain ecosystem', 'national development planning']"
-5,198,"['government operational capacity', 'local government policy', 'urban forest management', 'urban forest manager', 'critical governance challenge']"
-6,233,"['electric grid company', 'calculated electrical capacity', 'locked electrical capacity', 'severe acute respiratory', 'electrical energy loss']"
-7,251,"['Martin Prosperity institute', 'big city bring', 'American urban study', 'real world solution', 'benefit big city']"
+No,DocId,key-phrases,key-phrases-similarity
+1,23,"['theoretical conceptual construct', 'significant transition towards', 'structural systemic realignments', 'Urban sustainability transition', 'transition towards urbanisation']","['Urban sustainability transition', 'transition towards urbanisation', 'Urban sustainability', 'sustainability transition unfold', 'towards urbanisation']"
+2,64,"['universal secondary education', 'global urban growth', 'additional urban people', 'smarter urban design', 'complex human problem']","['affect climate change', 'affect climate', 'climate change', 'greenhouse gas emission', 'Population growth']"
+3,107,"['Rapid urban growth', 'green urban economics', 'urban sustainability indicator', 'urban planning system', 'urban growth']","['urban sustainability indicator', 'urban sustainability', 'sustainable city', 'urban unsustainability', 'sustainability indicator']"
+4,116,"['serious cumulative impact', 'natural flood plain', 'self interested decision', 'national development planning', 'flood plain ecosystem']","['city system', 'national development planning', 'development planning', 'Bangkok man', 'national development']"
+5,198,"['local government policy', 'government operational capacity', 'urban forest manager', 'urban forest management', 'critical governance challenge']","['urban forest management', 'urban forest manager', 'forest management', 'governance challenge', 'critical governance']"
+6,233,"['calculated electrical capacity', 'locked electrical capacity', 'severe acute respiratory', 'electric grid company', 'electrical energy loss']","['electricity consumption', 'electrical consumption', 'power grid', 'electric grid company', 'electrical load']"
+7,251,"['Martin Prosperity institute', 'American urban study', 'benefit big city', 'big city bring', 'real world solution']","['urban planning sector', 'urban planning', 'Modern city', 'urban study theorist', 'Future metropolis']"
