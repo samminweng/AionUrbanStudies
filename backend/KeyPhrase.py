@@ -25,7 +25,7 @@ class KeyPhraseSimilarity:
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
             device='cpu',
-            n_neighbors=2
+            n_neighbors=3
         )
         # Load HDBSCAN cluster
         path = os.path.join('output', self.args.case_name, self.args.case_name + "_clusters.json")
@@ -235,10 +235,10 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        kp.extract_doc_key_phrases_by_rake()
-        # kp.group_key_phrases_by_clusters_experiments()
-        # kp.grouped_key_phrases_with_best_experiment_result()
-        # kp.combine_topics_key_phrases_results()
-        # kp.combine_cluster_doc_key_phrases()
+        # kp.extract_doc_key_phrases_by_rake()
+        kp.group_key_phrases_by_clusters_experiments()
+        kp.grouped_key_phrases_with_best_experiment_result()
+        kp.combine_topics_key_phrases_results()
+        kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

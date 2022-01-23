@@ -74,7 +74,7 @@ class ClusterTopicLDA:
                                                                    iterations=self.args.iterations,
                                                                    eval_every=self.args.eval_every,
                                                                    chunksize=self.args.chunksize)
-                        top_topics = ldamodel.top_topics(corpus, topn=5)
+                        top_topics = ldamodel.top_topics(corpus, topn=10)
 
                         cm = CoherenceModel(model=ldamodel, corpus=corpus, dictionary=dictionary,
                                             coherence='u_mass')

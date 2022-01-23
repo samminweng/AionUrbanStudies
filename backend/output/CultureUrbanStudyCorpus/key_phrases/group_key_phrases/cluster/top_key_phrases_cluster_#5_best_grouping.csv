@@ -1,6 +1,4 @@
 group,count,key-phrases,NumDocs,DocIds
--1,8,"['present general outlook', 'general outlook', 'significant positive influence', 'mixed method research', 'method research approach', 'mixed method', 'modern global power', 'global power']",3,"[173, 232, 348]"
-0,6,"['Japanese urban study', 'urban study', 'comprehensive comparative study', 'Many urban geographer', 'urban geographer opine', 'urban geographer']",3,"[185, 285, 329]"
-1,5,"['fast wrenching control', 'western urban model', 'urban planning model', 'English garden city', 'Western model']",2,"[173, 285]"
-2,6,"['good urban governance', 'poor management approach', 'effective urban management', 'similar urban conglomeration', 'urban conglomeration', 'urban development policy']",4,"[173, 232, 329, 348]"
-3,5,"['later Japanese architect', 'Japanese architect', 'modernist architect', 'stated public commitment', 'public commitment']",2,"[185, 348]"
+0,10,"['fast wrenching control', 'later Japanese architect', 'Japanese architect', 'modernist architect', 'western urban model', 'urban planning model', 'English garden city', 'Western model', 'similar urban conglomeration', 'urban conglomeration']",4,"[173, 185, 285, 329]"
+1,14,"['present general outlook', 'good urban governance', 'poor management approach', 'good governance', 'significant positive influence', 'effective urban management', 'mixed method research', 'method research approach', 'mixed method', 'modern global power', 'stated public commitment', 'urban development policy', 'global power', 'public commitment']",3,"[173, 232, 348]"
+2,6,"['Japanese urban study', 'urban study', 'comprehensive comparative study', 'Many urban geographer', 'urban geographer opine', 'urban geographer']",3,"[185, 285, 329]"

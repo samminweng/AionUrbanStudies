@@ -1,5 +1,4 @@
 group,count,key-phrases,NumDocs,DocIds
--1,8,"['prompt several reflection', 'several reflection', 'precious traditional value', 'lead prosperous life', 'phosphorus removal system', 'silk fibroin microspheres', 'biological phosphorus removal', 'direct contact membrane']",4,"[111, 316, 335, 357]"
-0,6,"['optimal placement', 'proactive way', 'city center towards', 'central city area', 'tsunami hazard zone', 'center towards recovery']",2,"[263, 335]"
-1,6,"['technological change doe', 'difficult challenge nowadays', 'technological change', 'situation show lack', 'present situation show', 'rapid population growth']",2,"[111, 316]"
-2,5,"['modular building block', 'building block', 'modular building', 'sustainable floating village', 'clay brick powder']",3,"[263, 316, 357]"
+-1,7,"['prompt several reflection', 'difficult challenge nowadays', 'technological change doe', 'difficult challenge', 'technological change', 'present situation show', 'Nam Phong river']",3,"[111, 316, 357]"
+0,6,"['rapid population growth', 'east Japan earthquake', 'unprecedented national crisis', 'presumed tsunami hazard', 'central city area', 'affected city area']",2,"[316, 335]"
+1,12,"['modular building block', 'modular building', 'building block', 'adaptive architecture', 'sustainable architecture', 'precious traditional value', 'sustainable floating village', 'sustainable floating community', 'GPS precipitable water', 'AC DC converter', 'double dual boost', 'neuron CMOS inverter']",3,"[263, 316, 357]"

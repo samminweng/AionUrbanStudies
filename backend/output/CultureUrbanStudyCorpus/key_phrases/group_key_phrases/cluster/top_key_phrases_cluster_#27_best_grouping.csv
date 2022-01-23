@@ -1,5 +1,5 @@
 group,count,key-phrases,NumDocs,DocIds
--1,11,"['collective experiment', 'scientific laboratory', 'concern architectural theory', 'architectural theory', 'architectural practice', 'key business service', 'key business', 'Nordic welfare context', 'paradigm shift towards', 'Nordic welfare', 'shift towards']",4,"[28, 50, 67, 231]"
-0,7,"['public open scape', 'political outside', 'human value', 'distinctive social science', 'social science perspective', 'social science', 'formal public meeting']",4,"[19, 28, 67, 147]"
-1,12,"['white British people', 'different ethnic minority', 'Ethnic minority group', 'towards inclusive design', 'embed diverse youth', 'intergenerational urban space', 'diverse youth voice', 'diverse youth', 'urban space', 'genuinely urban environment', 'urban environment', 'shift towards urbanity']",4,"[19, 34, 50, 231]"
-2,5,"['urban design', 'urban design relies', 'urban design consumer', 'international design competition', 'urban design']",2,"[28, 147]"
+-1,3,"['first concern', 'key business service', 'key business']",2,"[50, 67]"
+0,19,"['public open scape', 'white British people', 'different ethnic minority', 'Ethnic minority group', 'towards inclusive design', 'traditional distinction', 'scientific laboratory', 'political outside', 'human value', 'collective experiment', 'embed diverse youth', 'diverse youth voice', 'diverse youth', 'distinctive social science', 'social science perspective', 'social science', 'formal public meeting', 'Nordic welfare context', 'Nordic welfare']",6,"[19, 28, 34, 67, 147, 231]"
+1,6,"['concern architectural theory', 'architectural theory', 'international design competition', 'urban design relies', 'urban design consumer', 'urban design']",2,"[50, 147]"
+2,7,"['intergenerational urban space', 'urban space', 'genuinely urban environment', 'urban environment', 'paradigm shift towards', 'shift towards urbanity', 'shift towards']",3,"[34, 50, 231]"

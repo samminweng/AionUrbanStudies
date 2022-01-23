@@ -1,4 +1,4 @@
 group,count,key-phrases,NumDocs,DocIds
--1,14,"['American economic development', 'economic development policy', 'Community development program', 'giant Corliss engine', 'large Arab tent', 'huge metal monster', 'human mobility system', 'random way point', 'numerous historic building', 'many cultural heritage', 'indigenous people', 'digital archive', 'Dutch colonist', 'special edition']",5,"[148, 258, 332, 372, 381]"
-0,6,"['result offour quality', 'immediate public space', 'next sixty year', 'public urban space', 'modern artistic expression', 'new work']",4,"[148, 258, 372, 381]"
-1,5,"['elite network formation', 'urban decision maker', 'decision maker', 'urban decision', 'urban culture root']",3,"[258, 332, 372]"
+-1,3,"['human mobility system', 'random way point', 'human mobility']",1,[332]
+0,7,"['immediate public space', 'large Arab tent', 'urban decision maker', 'urban decision', 'numerous historic building', 'public urban space', 'essential building space']",4,"[148, 258, 332, 372]"
+1,15,"['American economic development', 'economic development policy', 'Extensive behavior mapping', 'result offour quality', 'giant Corliss engine', 'first international exposition', 'important cultural event', 'American industrial innovation', 'modern artistic expression', 'many cultural heritage', 'new work', 'Dutch colonist', 'complete understanding', 'indigenous people', 'special edition']",4,"[148, 258, 372, 381]"

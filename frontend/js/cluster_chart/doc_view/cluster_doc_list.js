@@ -2,6 +2,7 @@ function ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases) {
     const cluster = cluster_topic_key_phrases.find(c => c['Cluster'] === cluster_no);
     const cluster_topics = cluster['Topics'].slice(0, 10);
     const cluster_key_phrases = cluster['KeyPhrases'];
+    const cluster_lda_topics = cluster['LDATopics'];
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
     const cluster_link = $('<a target="_blank" href="cluster_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
     if(cluster_no === -1){
@@ -37,6 +38,8 @@ function ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases) {
         const accordion_div = $('<div></div>');
         // // Add the key phrases grouped by similarity
         const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div);
+        // Create LDA Accordion
+        const lda_topic_div = new ClusterLDATopics(cluster_lda_topics, accordion_div);
         // // Set accordion
         accordion_div.accordion({
             // icons: null,
@@ -46,6 +49,9 @@ function ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases) {
         });
         $('#cluster_topics').append(accordion_div);
     }
+
+
+
 
     function _createUI() {
         // Create a div to display
