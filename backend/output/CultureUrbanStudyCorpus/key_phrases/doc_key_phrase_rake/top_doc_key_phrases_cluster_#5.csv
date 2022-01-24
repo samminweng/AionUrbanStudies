@@ -1,7 +1,7 @@
-No,DocId,key-phrases,key-phrases-similarity
-1,173,"['present general outlook', 'good urban governance', 'fast wrenching control', 'poor management approach', 'good governance']","['urban governance', 'good urban governance', 'urban reform', 'urban planner', 'governance']"
-2,185,"['later Japanese architect', 'Japanese urban study', 'Japanese architect', 'urban study', 'modernist architect']","['Japanese urban study', 'later Japanese architect', 'Urban survey', 'Japanese architect', 'urban study']"
-3,232,"['significant positive influence', 'effective urban management', 'mixed method research', 'method research approach', 'mixed method']","['urban development', 'urban planning', 'urbanizing city', 'urbanisation', 'urban management']"
-4,285,"['western urban model', 'urban planning model', 'comprehensive comparative study', 'English garden city', 'Western model']","['western urban model', 'urban planning', 'urban planning model', 'urban history', 'urban model']"
-5,329,"['similar urban conglomeration', 'Many urban geographer', 'urban geographer opine', 'urban geographer', 'urban conglomeration']","['dystopian city', 'urban geographer opine', 'urban space', 'urbanisation', 'urban area']"
-6,348,"['modern global power', 'stated public commitment', 'urban development policy', 'global power', 'public commitment']","['urban governance', 'Indian city', 'urban development', 'urban development policy', 'urban growth']"
+No,DocId,key-phrases,key-phrases-rake
+1,173,"['urban governance', 'good urban governance', 'urban reform', 'urban planner', 'governance']","['present general outlook', 'good urban governance', 'fast wrenching control', 'poor management approach', 'good governance']"
+2,185,"['Japanese urban study', 'later Japanese architect', 'Japanese architect', 'Urban survey', 'urban study']","['later Japanese architect', 'Japanese urban study', 'Japanese architect', 'urban study', 'modernist architect']"
+3,232,"['urban development', 'urban planning', 'urbanizing city', 'slums proliferation', 'urbanisation']","['significant positive influence', 'effective urban management', 'mixed method research', 'method research approach', 'mixed method']"
+4,285,"['western urban model', 'urban planning', 'urban planning model', 'urban history', 'urban model']","['western urban model', 'urban planning model', 'comprehensive comparative study', 'English garden city', 'Western model']"
+5,329,"['dystopian city', 'urban geographer opine', 'urban space', 'urbanisation', 'urban area']","['similar urban conglomeration', 'Many urban geographer', 'urban geographer opine', 'urban geographer', 'urban conglomeration']"
+6,348,"['urban governance', 'Indian city', 'urban development', 'urban development policy', 'urban growth']","['modern global power', 'stated public commitment', 'urban development policy', 'global power', 'public commitment']"

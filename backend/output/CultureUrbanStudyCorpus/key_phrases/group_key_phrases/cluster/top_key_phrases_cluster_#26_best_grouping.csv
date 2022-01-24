@@ -1,4 +1,4 @@
 group,count,key-phrases,NumDocs,DocIds
--1,12,"['simple legal function', 'legal function', 'War II manifestation', 'inexorable historical force', 'provocative new light', 'new light', 'environmental history', 'urban space', 'old industrial city', 'Street pedestrian mall', 'useful permanent structure', 'main analytical point']",5,"[52, 117, 163, 212, 254]"
-0,8,"['urban growth boundary', 'urban growth', 'growth boundary', 'bureaucrat qua bureaucrat', 'failed urban planning', 'shrewd city leader', 'shrewd city', 'American industrial metropolis']",4,"[52, 117, 163, 254]"
-1,5,"['viable occupational strategy', 'continued occupational survival', 'urban environmental history', 'environmental possibility', 'urban ecology']",2,"[117, 212]"
+-1,4,"['Artistic interpretation', 'revered monument', 'monument', 'historic building']",2,"[52, 163]"
+0,10,"['urban growth boundary', 'urban growth', 'planning theory', 'urban planning policy', 'urban planning', 'urban bureaucrat', 'failed urban planning', 'urban planning', 'Philadelphia planning', 'Philadelphia planning process']",4,"[52, 117, 163, 254]"
+1,11,"['regional landscape', 'Chicago sociology', 'Chicago sociologist', 'urban environmental history', 'green urbanism', 'urban ecology', 'modern city', 'Urbanism', 'urban renaissance', 'American industrial metropolis', 'urban historical process']",4,"[52, 117, 212, 254]"

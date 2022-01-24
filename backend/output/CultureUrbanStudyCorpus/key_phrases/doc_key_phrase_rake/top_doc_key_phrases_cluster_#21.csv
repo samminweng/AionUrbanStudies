@@ -1,7 +1,7 @@
-No,DocId,key-phrases,key-phrases-similarity
-1,156,"['urban public space', 'public space', 'urban everyday', 'urban setting', 'Visual approach']","['cultural expression', 'globalization', 'urban public space', 'urban setting', 'Visual approach']"
-2,206,"['mechanical urban design', 'many social problem', 'kūrybiškumas šiuolaikinio miesto', 'šiuolaikinio miesto planavimo', 'modern city planning']","['urban design', 'city planning theory', 'understanding city', 'city planning', 'modern city planning']"
-3,217,"['Several contemporary study', 'new disciplinary convergence', 'encouraging different form', 'Public design strategy', 'public space focus']","['urban creativity', 'spatial appropriation', 'Public design', 'public art', 'interior architecture']"
-4,245,"['extensive spatial revaluation', 'real estate developer', 'case study show', 'spatial revaluation', 'real estate']","['urban regeneration', 'urban planning', 'capitalist development', 'urban strategy', 'trash appear']"
-5,325,"['public decision making', 'public decision', 'decision making', 'specialized approach', 'third approach']","['urban planning', 'architecture', 'urban periphery', 'architectural project', 'regeneration project']"
-6,369,"['modern artistic expression', 'public urban space', 'Barry style line', 'style line design', 'essential building space']","['city square design', 'square design', 'style line design', 'city square', 'line design concept']"
+No,DocId,key-phrases,key-phrases-rake
+1,156,"['cultural expression', 'globalization', 'urban public space', 'urban setting', 'Visual approach']","['urban public space', 'public space', 'urban everyday', 'urban setting', 'Visual approach']"
+2,206,"['urban design', 'city planning theory', 'understanding city', 'modern city planning', 'city planning']","['mechanical urban design', 'many social problem', 'kūrybiškumas šiuolaikinio miesto', 'šiuolaikinio miesto planavimo', 'modern city planning']"
+3,217,"['urban creativity', 'spatial appropriation', 'Public design', 'public art', 'interior architecture']","['Several contemporary study', 'new disciplinary convergence', 'encouraging different form', 'Public design strategy', 'public space focus']"
+4,245,"['urban regeneration', 'urban planning', 'capitalist development', 'urban strategy', 'trash appear']","['extensive spatial revaluation', 'real estate developer', 'case study show', 'spatial revaluation', 'real estate']"
+5,325,"['urban planning', 'architecture', 'urban periphery', 'architectural project', 'regeneration project']","['public decision making', 'public decision', 'decision making', 'specialized approach', 'third approach']"
+6,369,"['city square design', 'square design', 'style line design', 'city square', 'line design concept']","['modern artistic expression', 'public urban space', 'Barry style line', 'style line design', 'essential building space']"

@@ -1,10 +1,14 @@
 import os.path
 from argparse import Namespace
 from functools import reduce
+
+from nltk import sent_tokenize, word_tokenize
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 import pandas as pd
 import logging
+
+from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 from KeyPhraseUtility import KeyPhraseUtility
 import getpass
 
@@ -56,8 +60,11 @@ class KeyPhraseSimilarity:
                         doc_id = doc['DocId']
                         # Get the first doc
                         doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
-                        sentences = KeyPhraseUtility.clean_sentence(doc['Text'])
-                        doc_text = " ".join(list(map(lambda s: " ".join(s), sentences)))
+                        doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Text'])
+                        sentences = list()
+                        for sentence in sent_tokenize(doc_text):
+                            tokens = word_tokenize(sentence)
+                            sentences.append(tokens)
                         # Collect all the key phrases of a document
                         n_gram_candidates = []
                         for n_gram_range in [1, 2, 3]:
@@ -74,10 +81,10 @@ class KeyPhraseSimilarity:
                         key_phrases_by_similarity = KeyPhraseUtility.get_top_similar_key_phrases(phrase_list_similarity)
                         # Compute the RAKE score of keywords
                         phrase_scores = KeyPhraseUtility.compute_keyword_rake_scores(n_gram_candidates)
-                        key_phrases = list(map(lambda n: n['key-phrase'], phrase_scores))
+                        key_phrase_rakes = list(map(lambda n: n['key-phrase'], phrase_scores))
                         # Obtain top five key phrases
-                        result = {'Cluster': cluster_no, 'DocId': doc_id, 'key-phrases': key_phrases[:5],
-                                  'key-phrases-similarity': key_phrases_by_similarity}
+                        result = {'Cluster': cluster_no, 'DocId': doc_id, 'key-phrases-rake': key_phrase_rakes[:5],
+                                  'key-phrases': key_phrases_by_similarity}
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
@@ -85,10 +92,10 @@ class KeyPhraseSimilarity:
                 folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase_rake')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Write key phrases to csv file
-                df = pd.DataFrame(results, columns=['DocId', 'key-phrases', 'key-phrases-similarity'])
+                df = pd.DataFrame(results, columns=['DocId', 'key-phrases', 'key-phrases-rake'])
                 df['No'] = range(1, len(df) + 1)
                 # Map the list of key phrases (dict) to a list of strings
-                df = df[['No', 'DocId', 'key-phrases', 'key-phrases-similarity']]  # Re-order the columns
+                df = df[['No', 'DocId', 'key-phrases', 'key-phrases-rake']]  # Re-order the columns
                 # Path(folder).mkdir(parents=True, exist_ok=True)
                 path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.csv')
                 df.to_csv(path, encoding='utf-8', index=False)
@@ -191,6 +198,7 @@ class KeyPhraseSimilarity:
             cluster_df['LDATopics'] = lda_topics_df['LDATopics'].tolist()
             # Re-order cluster df and Output to csv and json file
             cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Topics', 'KeyPhrases', 'LDATopics']]
+            # folder = os.path.join(folder, 'key_phrases')
             path = os.path.join(folder, self.args.case_name + '_cluster_topic_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             path = os.path.join(folder, self.args.case_name + '_cluster_topic_key_phrases.json')
@@ -235,7 +243,7 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        # kp.extract_doc_key_phrases_by_rake()
+        kp.extract_doc_key_phrases_by_rake()
         kp.group_key_phrases_by_clusters_experiments()
         kp.grouped_key_phrases_with_best_experiment_result()
         kp.combine_topics_key_phrases_results()

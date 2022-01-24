@@ -1,6 +1,6 @@
-No,DocId,key-phrases,key-phrases-similarity
-1,148,"['immediate public space', 'American economic development', 'economic development policy', 'Extensive behavior mapping', 'result offour quality']","['small business influence', 'Small business', 'Community development', 'business', 'entrepreneurship']"
-2,258,"['giant Corliss engine', 'first international exposition', 'important cultural event', 'American industrial innovation', 'large Arab tent']","['first international exposition', 'international exposition', 'centennial', 'important cultural event', 'cultural event']"
-3,332,"['human mobility system', 'urban decision maker', 'random way point', 'human mobility', 'urban decision']","['human mobility system', 'smart city', 'human mobility', 'mobility model', 'smart transportation']"
-4,372,"['numerous historic building', 'public urban space', 'modern artistic expression', 'many cultural heritage', 'essential building space']","['square design concept', 'new square design', 'city appearance', 'city square', 'heritage city']"
-5,381,"['new work', 'Dutch colonist', 'complete understanding', 'indigenous people', 'special edition']","['Aboriginal songwriter', 'aboriginal culture', 'indigenous people', 'aboriginal', 'museum']"
+No,DocId,key-phrases,key-phrases-rake
+1,148,"['small business influence', 'Small business', 'Community development', 'business', 'entrepreneurship']","['immediate public space', 'American economic development', 'economic development policy', 'Extensive behavior mapping', 'result offour quality']"
+2,258,"['first international exposition', 'international exposition', 'centennial', 'important cultural event', 'cultural event']","['giant Corliss engine', 'first international exposition', 'important cultural event', 'American industrial innovation', 'large Arab tent']"
+3,332,"['human mobility system', 'smart city', 'human mobility', 'mobility model', 'smart transportation']","['human mobility system', 'urban decision maker', 'random way point', 'human mobility', 'urban decision']"
+4,372,"['square design concept', 'new square design', 'city appearance', 'city square', 'heritage city']","['numerous historic building', 'public urban space', 'modern artistic expression', 'many cultural heritage', 'essential building space']"
+5,381,"['Aboriginal songwriter', 'aboriginal culture', 'indigenous people', 'aboriginal', 'aboriginal issue']","['new work', 'Dutch colonist', 'complete understanding', 'indigenous people', 'special edition']"

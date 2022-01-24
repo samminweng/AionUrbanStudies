@@ -1,4 +1,5 @@
 group,count,key-phrases,NumDocs,DocIds
--1,3,"['human mobility system', 'random way point', 'human mobility']",1,[332]
-0,7,"['immediate public space', 'large Arab tent', 'urban decision maker', 'urban decision', 'numerous historic building', 'public urban space', 'essential building space']",4,"[148, 258, 332, 372]"
-1,15,"['American economic development', 'economic development policy', 'Extensive behavior mapping', 'result offour quality', 'giant Corliss engine', 'first international exposition', 'important cultural event', 'American industrial innovation', 'modern artistic expression', 'many cultural heritage', 'new work', 'Dutch colonist', 'complete understanding', 'indigenous people', 'special edition']",4,"[148, 258, 372, 381]"
+0,5,"['small business influence', 'Small business', 'Community development', 'business', 'entrepreneurship']",1,[148]
+1,5,"['human mobility system', 'smart city', 'human mobility', 'mobility model', 'smart transportation']",1,[332]
+2,5,"['Aboriginal songwriter', 'aboriginal culture', 'indigenous people', 'aboriginal', 'aboriginal issue']",1,[381]
+3,10,"['first international exposition', 'international exposition', 'centennial', 'important cultural event', 'cultural event', 'square design concept', 'new square design', 'city appearance', 'city square', 'heritage city']",2,"[258, 372]"
