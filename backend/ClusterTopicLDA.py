@@ -27,8 +27,12 @@ class ClusterTopicLDA:
             chunksize=10,
             eval_every=None  # Don't evaluate model perplexity, takes too much time.
         )
-        path = os.path.join('output', self.args.case_name, 'key_phrases', self.args.case_name + '_cluster_topics_key_phrases.json')
-        self.cluster_df = pd.read_json(path)
+        # Load Key phrase
+        path = os.path.join('output', self.args.case_name, 'key_phrases',
+                            self.args.case_name + '_cluster_topics_key_phrases.json')
+        self.cluster_key_phrases_df = pd.read_json(path)
+        # Sort by Cluster
+        self.cluster_key_phrase_df = self.cluster_key_phrases_df.sort_values(by=['Cluster'], ascending=True)
 
     # Derive n_gram from each individual paper
     def derive_n_grams_group_by_clusters(self):
@@ -56,8 +60,10 @@ class ClusterTopicLDA:
             # Group the n-grams by clusters
             docs_per_cluster_df = df.groupby(['Cluster'], as_index=False) \
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Ngrams': lambda n_grams: list(n_grams)})
-            # Sort
-
+            # Sort by Cluster
+            docs_per_cluster_df = docs_per_cluster_df.sort_values(by=['Cluster'], ascending=True)
+            # Load the key phrases
+            docs_per_cluster_df['KeyPhrases'] = self.cluster_key_phrases_df['KeyPhrases'].tolist()
             # Write n_gram to csv and json file
             folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'n_grams')
             Path(folder).mkdir(parents=True, exist_ok=True)
@@ -76,16 +82,13 @@ class ClusterTopicLDA:
                                 self.args.case_name + '_doc_n_grams.json')
             # Load the documents clustered by
             df = pd.read_json(path)
-
-            clusters = self.cluster_df.to_dict("records")
             # Collect
             results = list()
             # Apply LDA Topic model on each cluster of papers
             for i, cluster in df.iterrows():
                 try:
                     cluster_no = cluster['Cluster']
-                    c = next((c for c in clusters if c['Cluster'] == cluster_no))
-                    num_topics = len(c['KeyPhrases'])       # Get the number of grouped phrases
+                    num_topics = len(cluster['KeyPhrases'])       # Get the number of grouped phrases
                     doc_n_gram_list = cluster['Ngrams']
                     # Create a dictionary
                     dictionary = corpora.Dictionary(doc_n_gram_list)
@@ -160,8 +163,6 @@ class ClusterTopicLDA:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-
-
     # Combine LDA Cluster topics with grouped key phrase results
     def combine_LDA_topics_to_file(self):
         try:
@@ -188,8 +189,8 @@ class ClusterTopicLDA:
 if __name__ == '__main__':
     try:
         ct = ClusterTopicLDA()
-        # ct.derive_n_grams_group_by_clusters()
-        ct.derive_cluster_topics_by_LDA()
+        ct.derive_n_grams_group_by_clusters()
+        # ct.derive_cluster_topics_by_LDA()
         # ct.compute_key_phrase_scores()
         # ct.combine_LDA_topics_to_file()
     except Exception as err:
