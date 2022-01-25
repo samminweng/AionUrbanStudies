@@ -1,5 +1,2 @@
 group,count,key-phrases,NumDocs,DocIds
-0,5,"['small business influence', 'Small business', 'Community development', 'business', 'entrepreneurship']",1,[148]
-1,5,"['human mobility system', 'smart city', 'human mobility', 'mobility model', 'smart transportation']",1,[332]
-2,5,"['Aboriginal songwriter', 'aboriginal culture', 'indigenous people', 'aboriginal', 'aboriginal issue']",1,[381]
-3,10,"['first international exposition', 'international exposition', 'centennial', 'important cultural event', 'cultural event', 'square design concept', 'new square design', 'city appearance', 'city square', 'heritage city']",2,"[258, 372]"
+-1,25,"['small business influence', 'Small business', 'Community development', 'business', 'entrepreneurship', 'first international exposition', 'international exposition', 'centennial', 'important cultural event', 'cultural event', 'human mobility system', 'smart city', 'human mobility', 'mobility model', 'smart transportation', 'square design concept', 'new square design', 'city appearance', 'city square', 'heritage city', 'Aboriginal songwriter', 'aboriginal culture', 'indigenous people', 'aboriginal', 'aboriginal issue']",5,"[148, 258, 332, 372, 381]"

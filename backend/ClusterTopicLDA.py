@@ -18,21 +18,20 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTopicLDA:
-    def __init__(self, _last_iteration):
+    def __init__(self):
         self.args = Namespace(
             case_name='CultureUrbanStudyCorpus',
             approach='LDA',
-            last_iteration=_last_iteration,
-            NUM_TOPICS=5,
             passes=100,
             iterations=400,
             chunksize=10,
             eval_every=None  # Don't evaluate model perplexity, takes too much time.
         )
+        path = os.path.join('output', self.args.case_name, 'key_phrases', self.args.case_name + '_cluster_topics_key_phrases.json')
+        self.cluster_df = pd.read_json(path)
 
-    # Derive the topic from each cluster of documents using LDA Topic modeling
-    def derive_cluster_topics_by_LDA(self):
-        # approach = 'HDBSCAN_Cluster'
+    # Derive n_gram from each individual paper
+    def derive_n_grams_from_papers(self):
         try:
             path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters.json')
             # Load the documents clustered by
@@ -41,7 +40,7 @@ class ClusterTopicLDA:
             df['Text'] = df['Title'] + ". " + df['Abstract']
             texts = df['Text'].tolist()
             # Preprocess the texts
-            n_grams = list()
+            n_gram_list = list()
             for text in texts:
                 candidates = list()
                 cleaned_text = BERTModelDocClusterUtility.preprocess_text(text)
@@ -52,111 +51,110 @@ class ClusterTopicLDA:
                 candidates.extend(uni_grams)
                 candidates.extend(bi_grams)
                 candidates.extend(tri_grams)
-                n_grams.append(candidates)
-
-            df['Ngrams'] = n_grams
-            # Group the documents and doc_id by clusters
-            docs_per_cluster_df = df.groupby(['Cluster'], as_index=False) \
-                .agg({'DocId': lambda doc_id: list(doc_id), 'Ngrams': lambda n_grams: list(n_grams)})
-            total = len(df)
-            for num_topics in range(3, 11):
-                results = list()
-                for i, cluster in docs_per_cluster_df.iterrows():
-                    try:
-                        cluster_no = cluster['Cluster']
-                        n_grams = cluster['Ngrams']
-                        # Create a dictionary
-                        dictionary = corpora.Dictionary(n_grams)
-                        corpus = [dictionary.doc2bow(n_gram) for n_gram in n_grams]
-                        # Build the LDA model
-                        ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics,
-                                                                   id2word=dictionary, passes=self.args.passes,
-                                                                   iterations=self.args.iterations,
-                                                                   eval_every=self.args.eval_every,
-                                                                   chunksize=self.args.chunksize)
-                        top_topics = ldamodel.top_topics(corpus, topn=10)
-
-                        cm = CoherenceModel(model=ldamodel, corpus=corpus, dictionary=dictionary,
-                                            coherence='u_mass')
-                        avg_topic_coherence = sum([t[1] for t in top_topics]) / num_topics
-                        print('Average topic coherence: %.4f.' % avg_topic_coherence)
-                        topic_score = cm.get_coherence()
-                        # Collect all the topic words
-                        lda_topics = list()
-                        for topic in top_topics:
-                            topic_words = list(map(lambda t: t[1], topic[0]))
-                            lda_topics.append({
-                                'topic': topic_words,
-                                'score': topic[1]  # Topic Coherence score
-                            })
-                        num_docs = len(cluster['DocId'])
-                        percent = num_docs / total
-                        results.append({
-                            "NumTopics": num_topics,
-                            "Cluster": cluster_no,
-                            'DocId': cluster['DocId'],
-                            'NumDocs': len(cluster['DocId']),
-                            'Percent': round(percent, 3),
-                            "Score": topic_score,
-                            "LDATopics": lda_topics,
-                        })
-                    except Exception as _err:
-                        print("Error occurred! {err}".format(err=_err))
-                # Write the result to csv and json file
-                cluster_df = pd.DataFrame(results,
-                                          columns=['NumTopics', 'Cluster', 'NumDocs', 'Percent', 'DocId', "Score",
-                                                   'LDATopics'])
-                topic_folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'experiments')
-                Path(topic_folder).mkdir(parents=True, exist_ok=True)
-                # # # Write to a json file
-                path = os.path.join(topic_folder,
-                                    self.args.case_name + '_LDA_cluster_topics_#' + str(num_topics) + '.json')
-                cluster_df.to_json(path, orient='records')
-                # Write to a csv file
-                path = os.path.join(topic_folder,
-                                    self.args.case_name + '_LDA_cluster_topics#' + str(num_topics) + '.csv')
-                cluster_df.to_csv(path, encoding='utf-8', index=False)
-                # Write a summary
-                for i in range(0, num_topics):
-                    cluster_df['LDATopics#' + str(i)] = cluster_df.apply(lambda c: c['LDATopics'][i]['topic'], axis=1)
-                cluster_df.drop('LDATopics', axis=1, inplace=True)
-                path = os.path.join(topic_folder,
-                                    self.args.case_name + '_LDA_cluster_topic_summary#' + str(num_topics) + '.csv')
-                cluster_df.to_csv(path, encoding='utf-8', index=False)
-                print('Output topics per cluster to ' + path)
+                n_gram_list.append(candidates)
+            df['Ngrams'] = n_gram_list
+            # Write n_gram to csv and json file
+            folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'n_grams')
+            Path(folder).mkdir(parents=True, exist_ok=True)
+            path = os.path.join(folder, self.args.case_name + '_doc_n_grams.csv')
+            df.to_csv(path, index=False, encoding='utf-8')
+            path = os.path.join(folder, self.args.case_name + '_doc_n_grams.json')
+            df.to_json(path, orient='records')
+            print('Output key phrases per doc to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    def get_best_cluster_topics_by_LDA(self):
+    # Derive the topic from each cluster of documents using LDA Topic modeling
+    def derive_cluster_topics_by_LDA(self):
         try:
-            folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'experiments')
+            path = os.path.join('output', self.args.case_name, 'LDA_topics', 'n_grams',
+                                self.args.case_name + '_doc_n_grams.json')
+            # Load the documents clustered by
+            df = pd.read_json(path)
+            # Group the documents and doc_id by clusters
+            docs_per_cluster_df = df.groupby(['Cluster'], as_index=False) \
+                .agg({'DocId': lambda doc_id: list(doc_id), 'Ngrams': lambda n_grams: list(n_grams)})
+
+            clusters = self.cluster_df.to_dict("records")
+            # Collect
             results = list()
-            for num_topics in range(3, 11):
-                path = os.path.join(folder, self.args.case_name + '_LDA_cluster_topics_#' + str(num_topics) + '.json')
-                # Load the documents clustered by
-                df = pd.read_json(path)
-                cluster_topics = df.to_dict("records")
-                if len(results) == 0:
-                    results = cluster_topics
-                else:
-                    for i in range(len(results)):
-                        result = results[i]
-                        cluster_no = result['Cluster']
-                        cluster_topic = next(ct for ct in cluster_topics if ct['Cluster'] == cluster_no)
-                        if cluster_topic['Score'] > result['Score']:
-                            results[i] = cluster_topic
-            topic_folder = os.path.join('output', self.args.case_name, 'LDA_topics', )
-            Path(topic_folder).mkdir(parents=True, exist_ok=True)
+            # Apply LDA Topic model on each cluster of papers
+            for i, cluster in docs_per_cluster_df.iterrows():
+                try:
+                    cluster_no = cluster['Cluster']
+                    c = next((c for c in clusters if c['Cluster'] == cluster_no))
+                    num_topics = len(c['KeyPhrases'])
+                    doc_n_gram_list = cluster['Ngrams']
+                    # Create a dictionary
+                    dictionary = corpora.Dictionary(doc_n_gram_list)
+                    corpus = [dictionary.doc2bow(n_gram) for n_gram in doc_n_gram_list]
+                    # Build the LDA model
+                    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics,
+                                                               id2word=dictionary, passes=self.args.passes,
+                                                               iterations=self.args.iterations,
+                                                               eval_every=self.args.eval_every,
+                                                               chunksize=self.args.chunksize)
+                    top_topic_list = ldamodel.top_topics(corpus, topn=10)
+                    total_score = 0
+                    # Collect all the topic words
+                    lda_topics = list()
+                    for topic in top_topic_list:
+                        topic_words = list(map(lambda t: t[1], topic[0]))
+                        topic_score = topic[1]
+                        topic_coherence_score = ClusterTopicUtility.compute_topic_coherence_score(doc_n_gram_list,
+                                                                                                  topic_words)
+                        diff = round(100 * (abs(topic_coherence_score - topic_score) / abs(topic_coherence_score)))
+                        if diff > 100:
+                            print("Diff {d}%".format(d=diff))
+                        lda_topics.append({
+                            'topic_words': topic_words,
+                            'score': round(topic_coherence_score, 3)  # Topic Coherence score
+                        })
+                        total_score += topic_coherence_score
+                    avg_score = total_score / (num_topics * 1.0)
+                    # Add one record
+                    results.append({
+                        "Cluster": cluster_no,
+                        "NumTopics": num_topics,
+                        "LDAScore": round(avg_score, 3),
+                        "LDATopics": lda_topics,
+                    })
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
+            # Write the result to csv and json file
             cluster_df = pd.DataFrame(results,
-                                      columns=['Cluster', 'NumDocs', 'Percent', 'DocId', 'NumTopics', "Score",
-                                               'LDATopics'])
+                                      columns=['Cluster', 'NumTopics', 'LDAScore', 'LDATopics'])
+            topic_folder = os.path.join('output', self.args.case_name, 'LDA_topics')
+            Path(topic_folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
             path = os.path.join(topic_folder,
-                                self.args.case_name + '_LDA_cluster_topics.json')
+                                self.args.case_name + '_LDA_topics.json')
             cluster_df.to_json(path, orient='records')
             # Write to a csv file
             path = os.path.join(topic_folder,
-                                self.args.case_name + '_LDA_cluster_topics.csv')
+                                self.args.case_name + '_LDA_topics.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            print('Output topics per cluster to ' + path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # Combine LDA Cluster topics with grouped key phrase results
+    def combine_LDA_topics_to_file(self):
+        try:
+            cluster_df = self.cluster_df.copy(deep=True)
+            # # Load LDA Topic modeling
+            folder = os.path.join('output', self.args.case_name, 'LDA_topics')
+            path = os.path.join(folder, self.args.case_name + '_LDA_topics.json')
+            lda_topics_df = pd.read_json(path)
+            # Load cluster topic, key phrases
+            cluster_df['LDATopics'] = lda_topics_df['LDATopics'].tolist()
+            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Topics', 'KeyPhrases', 'LDATopics']]
+            # # # Write to a json file
+            folder = os.path.join('output', self.args.case_name)
+            path = os.path.join(folder, self.args.case_name + '_cluster_topics_key_phrases_LDA_topics.json')
+            cluster_df.to_json(path, orient='records')
+            # Write to a csv file
+            path = os.path.join(folder, self.args.case_name + '_cluster_topics_key_phrases_LDA_topics.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -164,7 +162,10 @@ class ClusterTopicLDA:
 
 # Main entry
 if __name__ == '__main__':
-    last_iteration = 10
-    ct = ClusterTopicLDA(10)
-    ct.derive_cluster_topics_by_LDA()
-    ct.get_best_cluster_topics_by_LDA()
+    try:
+        ct = ClusterTopicLDA()
+        # ct.derive_n_grams_from_papers()
+        # ct.derive_cluster_topics_by_LDA()
+        ct.combine_LDA_topics_to_file()
+    except Exception as err:
+        print("Error occurred! {err}".format(err=err))

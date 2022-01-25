@@ -1,4 +1,3 @@
 group,count,key-phrases,NumDocs,DocIds
--1,7,"['sustainable floating village', 'sustainable floating community', 'floating village', 'tsunami disaster prevention', 'east Japan earthquake', 'Japan earthquake', 'disaster prevention']",2,"[316, 335]"
 0,13,"['urban design', 'urban planning', 'land use', 'environment', 'civilisation', 'sustainable architecture', 'architecture', 'modular building', 'urban planning', 'social sustainability', 'ecotourism development', 'tourism development', 'town reconstruction']",4,"[111, 263, 316, 335]"
-1,5,"['cement catalyst', 'recycle epoxy resin', 'mortar cement catalyst', 'polymer composite membrane', 'rhyolite mortar']",1,[357]
+1,12,"['sustainable floating village', 'sustainable floating community', 'floating village', 'tsunami disaster prevention', 'east Japan earthquake', 'Japan earthquake', 'disaster prevention', 'cement catalyst', 'recycle epoxy resin', 'mortar cement catalyst', 'polymer composite membrane', 'rhyolite mortar']",3,"[316, 335, 357]"

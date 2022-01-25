@@ -198,7 +198,7 @@ class KeyPhraseUtility:
     def get_top_similar_key_phrases(phrase_list, top_k=5):
         try:
             if len(phrase_list) < top_k:
-                return phrase_list
+                return list(map(lambda p: p['key-phrase'], phrase_list))
 
             # Sort 'phrase list'
             sorted_phrase_list = sorted(phrase_list, key=lambda p: p['score'], reverse=True)
@@ -285,7 +285,7 @@ class KeyPhraseUtility:
             key_phrase_vectors = model.encode(key_phrases)
             vector_list = key_phrase_vectors.tolist()
             results = list()
-            dimensions = [100, 90, 80, 70, 60, 50, 40, 30, 20, 15, 10, 5]
+            dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5]
             # Filter out dimensions > the length of key phrases
             dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
             for dimension in dimensions:
@@ -300,7 +300,7 @@ class KeyPhraseUtility:
                 # Compute the cosine distance/similarity for each doc vectors
                 distances = pairwise_distances(reduced_vectors, metric='cosine')
                 for min_samples in [None] + list(range(1, 21)):
-                    for min_cluster_size in list(range(5, 21)):
+                    for min_cluster_size in list(range(10, 21)):
                         for epsilon in [0.0]:
                             try:
                                 # Group key phrase vectors using HDBSCAN clustering
@@ -339,9 +339,8 @@ class KeyPhraseUtility:
                                 # print(result)
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
-                print(
-                    "=== Complete grouping the key phrases of cluster {no} with dimension {d} ===".format(no=cluster_no,
-                                                                                                          d=dimension))
+                print("=== Complete grouping the key phrases of cluster "
+                      "{no} with dimension {d} ===".format(no=cluster_no, d=dimension))
             # output the experiment results
             df = pd.DataFrame(results)
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')

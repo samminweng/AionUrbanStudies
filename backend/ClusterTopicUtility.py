@@ -1,11 +1,9 @@
-# Helper function for cluster Similarity
+# Helper function for LDA topic modeling
+import math
 import re
 import string
-from functools import reduce
-from pathlib import Path
+import sys
 
-import pandas as pd
-from coverage.annotate import os
 from nltk import sent_tokenize, word_tokenize, pos_tag, ngrams
 
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
@@ -13,50 +11,43 @@ from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
 class ClusterTopicUtility:
     @staticmethod
-    def collect_iterative_cluster_topic_results(case_name, last_iteration):
-        cluster_folder = os.path.join('output', case_name, 'cluster')
-        results = list()
-        # Go through each iteration 1 to last iteration
-        for i in range(0, last_iteration + 1):
+    def compute_topic_coherence_score(doc_n_gram_list, topic_words):
+        # Get the number of docs containing the word
+        def _count_docs_by_word(_doc_n_gram_list, _word):
+            _count = 0
+            for _doc_n_grams in _doc_n_gram_list:
+                _found = next((_n_gram for _n_gram in _doc_n_grams if _n_gram.lower() == _word.lower()), None)
+                if _found:
+                    _count += 1
+            return _count
+
+        # Get the number of docs containing both word i and word j
+        def _count_docs_by_two_words(_doc_n_gram_list, _word_i, _word_j):
+            _count = 0
+            for _doc_n_grams in _doc_n_gram_list:
+                _found_i = next((_n_gram for _n_gram in _doc_n_grams if _n_gram.lower() == _word_i.lower()), None)
+                _found_j = next((_n_gram for _n_gram in _doc_n_grams if _n_gram.lower() == _word_j.lower()), None)
+                if _found_i and _found_j:
+                    _count += 1
+            return _count
+
+        score = 0
+        for i in range(0, len(topic_words)):
             try:
-                dimension = 0
-                # Get the best dimension
-                folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'hdbscan_clustering')
-                for file in os.listdir(folder):
-                    file_name = file.lower()
-                    if file_name.endswith(".png") and file_name.startswith("dimension"):
-                        dimension = int(file_name.split("_")[1].split(".png")[0])
-                # Get the best score
-                folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'experiments')
-                path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.json')
-                experiment_results = pd.read_json(path).to_dict("records")
-                best_result = next(r for r in experiment_results if r['dimension'] == dimension)
-                min_samples = best_result['min_samples']
-                min_cluster_size = best_result['min_cluster_size']
-                score = best_result['Silhouette_score']
-                # Get summary of cluster topics
-                folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'topics')
-                path = os.path.join(folder, 'TF-IDF_cluster_topic_summary.json')
-                cluster_topics = pd.read_json(path).to_dict("records")
-                total_papers = reduce(lambda total, ct: ct['NumDocs'] + total, cluster_topics, 0)
-                for ct in cluster_topics:
-                    results.append({
-                        "iteration": i, "total_papers": total_papers, "dimension": dimension,
-                        "min_samples": min_samples, "min_cluster_size": min_cluster_size, "score": score,
-                        "Cluster": ct['Cluster'], "NumDocs": ct['NumDocs'], "Percent": ct['Percent'],
-                        "DocIds": ct['DocIds']
-                    })
+                word_i = topic_words[i]
+                doc_count_word_i = _count_docs_by_word(doc_n_gram_list, word_i)
+                assert doc_count_word_i > 0
+                for j in range(i+1, len(topic_words)):
+                    word_j = topic_words[j]
+                    doc_count_word_i_j = _count_docs_by_two_words(doc_n_gram_list, word_i, word_j)
+                    assert doc_count_word_i_j >= 0
+                    coherence_score = math.log((doc_count_word_i_j + 1)/(1.0 * doc_count_word_i))
+                    score += coherence_score
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
-        # Load the results as data frame
-        df = pd.DataFrame(results)
-        # Output cluster results to CSV
-        folder = os.path.join('output', case_name, 'cluster')
-        path = os.path.join(folder, case_name + '_iterative_cluster_topic_summary.csv')
-        df.to_csv(path, encoding='utf-8', index=False)
-        path = os.path.join(folder, case_name + '_iterative_cluster_topic_summary.json')
-        df.to_json(path, orient='records')
-        print(df)
+                sys.exit(-1)
+        avg_score = score / (1.0*len(topic_words))
+        return avg_score
 
     # Generate n-gram candidates from a text (a list of sentences)
     @staticmethod

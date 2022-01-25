@@ -1,5 +1,4 @@
 group,count,key-phrases,NumDocs,DocIds
 -1,10,"['embed diverse youth', 'diverse youth voice', 'diverse youth', 'concern architectural theory', 'architectural theory', 'architecture', 'design profession', 'interior design', 'industrial design', 'international design']",4,"[34, 50, 67, 147]"
 0,13,"['inclusive landscape', 'inclusive design', 'towards inclusive design', 'landscape architect', 'intergenerational urban space', 'urban space', 'urban design', 'genuinely urban environment', 'urban design', 'urban design', 'urban design relies', 'design consumer', 'city planning']",5,"[19, 34, 50, 67, 147]"
-1,7,"['modernity', 'contemporary city', 'towards urbanity', 'understand urbanity', 'urbanity', 'shift towards urbanity', 'urbanity serf']",3,"[28, 67, 231]"
-2,5,"['cultural experience', 'multinaturalism', 'multiculturalism', 'collective experiment', 'scientific laboratory']",2,"[19, 28]"
+1,12,"['cultural experience', 'multinaturalism', 'multiculturalism', 'collective experiment', 'modernity', 'scientific laboratory', 'contemporary city', 'towards urbanity', 'understand urbanity', 'urbanity', 'shift towards urbanity', 'urbanity serf']",4,"[19, 28, 67, 231]"

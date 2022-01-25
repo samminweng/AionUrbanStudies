@@ -1,6 +1,2 @@
 group,count,key-phrases,NumDocs,DocIds
--1,4,"['fuzzy linguistic variable', 'fuzzy logic', 'aggregated fuzzy score', 'fuzzy approach']",1,[227]
-0,5,"['urban livability measure', 'Urban livability', 'livability measure', 'many urban livability', 'livability']",1,[274]
-1,6,"['smart city application', 'smart city', 'Smart City road', 'smart application', 'intelligent system', 'smart urban development']",2,"[204, 227]"
-2,5,"['thermal comfort', 'thermal comfort range', 'different thermal environment', 'thermal environment', 'thermal index']",1,[16]
-3,5,"['Smart energy dorm', 'Bartolomeo student dorm', 'energy dorm', 'university student residence', 'student residence']",1,[333]
+-1,25,"['thermal comfort', 'thermal comfort range', 'different thermal environment', 'thermal environment', 'thermal index', 'smart city application', 'smart city', 'Smart City road', 'smart application', 'intelligent system', 'smart urban development', 'fuzzy linguistic variable', 'fuzzy logic', 'aggregated fuzzy score', 'fuzzy approach', 'urban livability measure', 'Urban livability', 'livability measure', 'many urban livability', 'livability', 'Smart energy dorm', 'Bartolomeo student dorm', 'energy dorm', 'university student residence', 'student residence']",5,"[16, 204, 227, 274, 333]"
