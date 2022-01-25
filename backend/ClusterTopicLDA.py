@@ -153,9 +153,8 @@ class ClusterTopicLDA:
             path = os.path.join('output', self.args.case_name, 'LDA_topics', 'n_grams',
                                 self.args.case_name + '_doc_n_grams.json')
             # Load the documents clustered by
-            df = pd.read_json(path)
-            # Convert to a list of dict
-            clusters = df.to_dict("records")
+            clusters = pd.read_json(path).to_dict("records")
+            # Store the phrase scores
             score_list = list()
             results = list()
             # Get the cluster
@@ -171,11 +170,23 @@ class ClusterTopicLDA:
                                                                               top_key_phrases)
                     group['score'] = score
                     total_score += score
+                # Added the grouped key phrases of a cluster
                 results.append(key_phrase_groups)
                 avg_score = total_score/num_groups
                 # store score
                 score_list.append(round(avg_score, 3))
-
+            # Write the updated grouped key phrases
+            cluster_df = self.cluster_key_phrase_df.copy(deep=True)
+            cluster_df['KeyPhrases'] = results
+            folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'key_phrase_scores')
+            Path(folder).mkdir(parents=True, exist_ok=True)
+            # # # Write to a json file
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_scores.json')
+            cluster_df.to_json(path, orient='records')
+            # Write to a csv file
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_scores.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            print('Output phrase scores to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -207,7 +218,7 @@ if __name__ == '__main__':
         ct = ClusterTopicLDA()
         # ct.derive_n_grams_group_by_clusters()
         ct.derive_cluster_topics_by_LDA()
-        # ct.compute_key_phrase_scores()
+         # ct.compute_key_phrase_scores()
          # ct.combine_LDA_topics_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
