@@ -122,6 +122,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/CultureUrbanStudyCorpus_LDA_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/experiments/CultureUrbanStudyCorpus_LDA_cluster_topic_summary#10.csv">
           <value>
             <Attribute>
@@ -186,6 +193,13 @@
           </value>
         </entry>
         <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/experiments/CultureUrbanStudyCorpus_doc_n_grams.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/LDA_topics/n_grams/CultureUrbanStudyCorpus_doc_n_grams.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -648,6 +662,13 @@
           </value>
         </entry>
         <entry key="/output/CultureUrbanStudyCorpus/iteration_4/cluster/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/CultureUrbanStudyCorpus/key_phrases/CultureUrbanStudyCorpus_cluster_topics_key_phrases.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
