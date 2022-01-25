@@ -78,11 +78,11 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
         const topic_text = topics.map(t => t['topic']).join(", ");
         // Add the cluster heading
         if(cluster_no !== -1){
-            $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' topics</div>'));
+            $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' topics by LDA Topic Modelling</div>'));
         }else{
             $('#hover_info').append($('<div class="h5">Outlier Top ' + n + ' topics</div>'));
         }
-        $('#hover_info').append($('<div>' + topic_text + '</div>'));
+        $('#hover_info').append($('<div>space, square, open space, study, context, design, interaction, public open space, public space, social interaction</div>'));
         $('#hover_info').focus();
     }
 
