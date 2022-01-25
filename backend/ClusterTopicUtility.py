@@ -77,8 +77,7 @@ class ClusterTopicUtility:
                     _word = _n[0]
                     _pos_tag = _n[1]
                     if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                            _word.lower() in BERTModelDocClusterUtility.stop_words:
-                            # or _pos_tag not in qualified_tags:
+                            _word.lower() in BERTModelDocClusterUtility.stop_words or _pos_tag not in qualified_tags:
                         return False
                 # n-gram is qualified
                 return True

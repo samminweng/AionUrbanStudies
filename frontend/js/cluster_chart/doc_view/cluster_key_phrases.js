@@ -114,7 +114,7 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div){
 
     function _createUI(){
         // Heading
-        const heading = $('<h3><span class="fw-bold">Key Phrases</span></h3>');
+        const heading = $('<h3><span class="fw-bold">Shared Phrase Grouping</span></h3>');
         const p = $('<p></p>');
         // A list of grouped key phrases
         const group_div = $('<div></div>');

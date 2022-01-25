@@ -13,7 +13,7 @@ function ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases) {
     function create_cluster_topic_key_phrases(){
         // Create a div to display a list of topic (a link)
         $('#cluster_topics').empty();
-        const topic_container = $('<div><h5><span class="fw-bold">Top 10 topics: </span></h5></div>');
+        const topic_container = $('<div><h5><span class="fw-bold">Distinct Terms by TF-IDF: </span></h5></div>');
         const topic_p = $('<p></p>');
         // Add top 30 topics (each topic as a link)
         for (const selected_topic of cluster_topics) {

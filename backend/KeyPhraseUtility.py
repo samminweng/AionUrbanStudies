@@ -170,7 +170,7 @@ class KeyPhraseUtility:
     # Find top K key phrase similar to the paper
     # Ref: https://www.sbert.net/examples/applications/semantic-search/README.html
     @staticmethod
-    def compute_key_phrases_similar_score(model, doc_text, candidates):
+    def compute_similar_score_key_phrases(model, doc_text, candidates):
         try:
             if len(candidates) == 0:
                 return []
@@ -179,22 +179,17 @@ class KeyPhraseUtility:
             candidate_vectors = model.encode(candidates, convert_to_numpy=True)
             doc_vector = model.encode([doc_text], convert_to_numpy=True)  # Convert the numpy array
             # Compute the distance of doc vector and each candidate vector
-            distances = cosine_similarity(doc_vector, candidate_vectors)
+            distances = cosine_similarity(doc_vector, candidate_vectors)[0].tolist()
             # Select top key phrases based on the distance score
-            top_key_phrases = list()
-            min_length = len(candidates)  # Get the minimal
-            # Get all the candidates
-            top_distances = distances.argsort()[0][-min_length:]
-            for c_index in top_distances:
-                candidate = candidates[c_index]
-                distance = distances[0][c_index]
-                # vector = candidate_vectors[c_index]
-                found = next((kp for kp in top_key_phrases if kp['key-phrase'].lower() == candidate.lower()), None)
+            candidate_scores = list()
+            # Get all the candidates sorted by similar score
+            for candidate, distance in zip(candidates, distances):
+                found = next((kp for kp in candidate_scores if kp['key-phrase'].lower() == candidate.lower()), None)
                 if not found:
-                    top_key_phrases.append({'key-phrase': candidate, 'score': distance})
+                    candidate_scores.append({'key-phrase': candidate, 'score': distance})
             # Sort the phrases by scores
-            top_key_phrases = sorted(top_key_phrases, key=lambda k: k['score'], reverse=True)
-            return top_key_phrases
+            candidate_scores = sorted(candidate_scores, key=lambda k: k['score'], reverse=True)
+            return candidate_scores
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

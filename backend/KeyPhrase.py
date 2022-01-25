@@ -48,10 +48,11 @@ class KeyPhraseSimilarity:
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     # Use RAKE score to sort the key phrases
     # Ref: https://medium.datadriveninvestor.com/rake-rapid-automatic-keyword-extraction-algorithm-f4ec17b2886c
-    def extract_doc_key_phrases_by_rake(self):
+    def extract_doc_key_phrases_by_similarity(self):
         try:
             corpus_docs = self.corpus_df.to_dict("records")
-            cluster_no_list = range(-1, self.total_clusters)
+            cluster_no_list = [8]
+            # cluster_no_list = range(-1, self.total_clusters)
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
                 results = list()  # Store all the key phrases
@@ -75,27 +76,23 @@ class KeyPhraseSimilarity:
                                 n_gram_candidates = n_gram_candidates + candidates
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
-                        phrase_list_similarity = KeyPhraseUtility.compute_key_phrases_similar_score(self.model,
-                                                                                                    doc_text,
-                                                                                                    n_gram_candidates)
-                        key_phrases_by_similarity = KeyPhraseUtility.get_top_similar_key_phrases(phrase_list_similarity)
-                        # Compute the RAKE score of keywords
-                        phrase_scores = KeyPhraseUtility.compute_keyword_rake_scores(n_gram_candidates)
-                        key_phrase_rakes = list(map(lambda n: n['key-phrase'], phrase_scores))
+                        candidate_scores = KeyPhraseUtility.compute_similar_score_key_phrases(self.model,
+                                                                                              doc_text,
+                                                                                              n_gram_candidates)
+                        key_phrases = KeyPhraseUtility.get_top_similar_key_phrases(candidate_scores, top_k=5)
                         # Obtain top five key phrases
-                        result = {'Cluster': cluster_no, 'DocId': doc_id, 'key-phrases-rake': key_phrase_rakes[:5],
-                                  'key-phrases': key_phrases_by_similarity}
+                        result = {'Cluster': cluster_no, 'DocId': doc_id, 'key-phrases': key_phrases}
                         results.append(result)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                 print(results)
-                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase_rake')
+                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Write key phrases to csv file
-                df = pd.DataFrame(results, columns=['DocId', 'key-phrases', 'key-phrases-rake'])
+                df = pd.DataFrame(results, columns=['DocId', 'key-phrases'])
                 df['No'] = range(1, len(df) + 1)
                 # Map the list of key phrases (dict) to a list of strings
-                df = df[['No', 'DocId', 'key-phrases', 'key-phrases-rake']]  # Re-order the columns
+                df = df[['No', 'DocId', 'key-phrases']]  # Re-order the columns
                 # Path(folder).mkdir(parents=True, exist_ok=True)
                 path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.csv')
                 df.to_csv(path, encoding='utf-8', index=False)
@@ -243,10 +240,10 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        kp.extract_doc_key_phrases_by_rake()
-        kp.group_key_phrases_by_clusters_experiments()
-        kp.grouped_key_phrases_with_best_experiment_result()
-        kp.combine_topics_key_phrases_results()
-        kp.combine_cluster_doc_key_phrases()
+        kp.extract_doc_key_phrases_by_similarity()
+        # kp.group_key_phrases_by_clusters_experiments()
+        # kp.grouped_key_phrases_with_best_experiment_result()
+        # kp.combine_topics_key_phrases_results()
+        # kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
