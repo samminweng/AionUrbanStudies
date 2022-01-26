@@ -178,6 +178,7 @@ class ClusterTopicLDA:
             # Write the updated grouped key phrases
             cluster_df = self.cluster_key_phrase_df.copy(deep=True)
             cluster_df['KeyPhrases'] = results
+            cluster_df['KeyPhraseScore'] = score_list
             folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'key_phrase_scores')
             Path(folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
@@ -191,23 +192,47 @@ class ClusterTopicLDA:
             print("Error occurred! {err}".format(err=err))
 
     # Combine LDA Cluster topics with grouped key phrase results
-    def combine_LDA_topics_to_file(self):
+    def combine_LDA_topics_key_phrase_to_file(self):
         try:
-            cluster_df = self.cluster_df.copy(deep=True)
-            # # Load LDA Topic modeling
-            folder = os.path.join('output', self.args.case_name, 'LDA_topics')
+            # Load key phrase scores
+            folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'key_phrase_scores')
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_scores.json')
+            cluster_df = pd.read_json(path)
+            # Load results of LDA Topic model
+            folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'LDA_topic_scores')
             path = os.path.join(folder, self.args.case_name + '_LDA_topics.json')
             lda_topics_df = pd.read_json(path)
-            # Load cluster topic, key phrases
+            # # Load cluster topic, key phrases
+            cluster_df['NumTopics'] = lda_topics_df['NumTopics'].tolist()
             cluster_df['LDATopics'] = lda_topics_df['LDATopics'].tolist()
-            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Topics', 'KeyPhrases', 'LDATopics']]
-            # # # Write to a json file
-            folder = os.path.join('output', self.args.case_name)
-            path = os.path.join(folder, self.args.case_name + '_cluster_topics_key_phrases_LDA_topics.json')
-            cluster_df.to_json(path, orient='records')
+            cluster_df['LDAScore'] = lda_topics_df['LDAScore'].tolist()
+            # Compute the percent
+            total = cluster_df['NumDocs'].sum()
+            cluster_df['Percent'] = cluster_df['NumDocs'].apply(lambda x: x/total)
+            # Key terms are the terms identify by TF-IDF
+            cluster_df['KeyTerms'] = cluster_df['Topics'].tolist()
+            # Output the intermediate results
+            df = cluster_df[['Cluster', 'NumDocs', 'Percent', 'DocIds',
+                             'KeyPhraseScore', 'KeyPhrases',
+                             'NumTopics', 'LDAScore', 'LDATopics']]
+            # # # # Write to a json file
+            folder = os.path.join('output', self.args.case_name, 'LDA_topics')
+            path = os.path.join(folder, self.args.case_name + '_cluster_key_phrases_LDA_topics.json')
+            df.to_json(path, orient='records')
             # Write to a csv file
-            path = os.path.join(folder, self.args.case_name + '_cluster_topics_key_phrases_LDA_topics.csv')
-            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, self.args.case_name + '_cluster_key_phrases_LDA_topics.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            # Output the overall results
+            df = cluster_df[['Cluster', 'NumDocs', 'Percent', 'DocIds', 'KeyTerms',
+                             'KeyPhraseScore', 'KeyPhrases',
+                             'LDAScore', 'LDATopics']]
+            # # # # Write to a json file
+            folder = os.path.join('output', self.args.case_name)
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+            df.to_json(path, orient='records')
+            # Write to a csv file
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -217,8 +242,8 @@ if __name__ == '__main__':
     try:
         ct = ClusterTopicLDA()
         # ct.derive_n_grams_group_by_clusters()
-        ct.derive_cluster_topics_by_LDA()
-         # ct.compute_key_phrase_scores()
-         # ct.combine_LDA_topics_to_file()
+        # ct.derive_cluster_topics_by_LDA()
+        # ct.compute_key_phrase_scores()
+        ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
