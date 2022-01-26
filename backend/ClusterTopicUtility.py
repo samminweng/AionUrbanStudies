@@ -11,43 +11,48 @@ from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
 class ClusterTopicUtility:
     @staticmethod
-    def compute_topic_coherence_score(doc_n_gram_list, topic_words):
-        # Get the number of docs containing the word
-        def _count_docs_by_word(_doc_n_gram_list, _word):
-            _count = 0
-            for _doc_n_grams in _doc_n_gram_list:
-                _found = next((_n_gram for _n_gram in _doc_n_grams if _n_gram.lower() == _word.lower()), None)
-                if _found:
-                    _count += 1
-            return _count
+    def compute_topic_coherence_score(doc_n_gram_list, doc_id_list, topic_words):
+        # Build a mapping of word and doc ids
+        def _build_word_docIds(_doc_n_gram_list, _doc_id_list, _topic_words):
+            _word_docIds = {}
+            for _word in _topic_words:
+                _word_docIds.setdefault(_word, list())
+                # Get the number of docs containing the word
+                for _index, _doc_n_grams in enumerate(_doc_n_gram_list):
+                    _doc_id = _doc_id_list[_index]
+                    _found = next((_n_gram for _n_gram in _doc_n_grams if _n_gram.lower() == _word.lower()), None)
+                    if _found:
+                        _word_docIds[_word].append(_doc_id)
+            return _word_docIds
 
-        # Get the number of docs containing both word i and word j
-        def _count_docs_by_two_words(_doc_n_gram_list, _word_i, _word_j):
-            _count = 0
-            for _doc_n_grams in _doc_n_gram_list:
-                _found_i = next((_n_gram for _n_gram in _doc_n_grams if _n_gram.lower() == _word_i.lower()), None)
-                _found_j = next((_n_gram for _n_gram in _doc_n_grams if _n_gram.lower() == _word_j.lower()), None)
-                if _found_i and _found_j:
-                    _count += 1
-            return _count
+        # # Get doc ids containing both word i and word j
+        def _get_docIds_two_words(_docId_word_i, _docIds_word_j):
+            return [_docId for _docId in _docId_word_i if _docId in _docIds_word_j]
 
-        score = 0
-        for i in range(0, len(topic_words)):
-            try:
-                word_i = topic_words[i]
-                doc_count_word_i = _count_docs_by_word(doc_n_gram_list, word_i)
-                assert doc_count_word_i > 0
-                for j in range(i+1, len(topic_words)):
-                    word_j = topic_words[j]
-                    doc_count_word_i_j = _count_docs_by_two_words(doc_n_gram_list, word_i, word_j)
-                    assert doc_count_word_i_j >= 0
-                    coherence_score = math.log((doc_count_word_i_j + 1)/(1.0 * doc_count_word_i))
-                    score += coherence_score
-            except Exception as _err:
-                print("Error occurred! {err}".format(err=_err))
-                sys.exit(-1)
-        avg_score = score / (1.0*len(topic_words))
-        return avg_score
+        try:
+            word_docs = _build_word_docIds(doc_n_gram_list, doc_id_list, topic_words)
+            score = 0
+            for i in range(0, len(topic_words)):
+                try:
+                    word_i = topic_words[i]
+                    docs_word_i = word_docs[word_i]
+                    doc_count_word_i = len(docs_word_i)
+                    assert doc_count_word_i > 0
+                    for j in range(i + 1, len(topic_words)):
+                        word_j = topic_words[j]
+                        docs_word_j = word_docs[word_j]
+                        doc_word_i_j = _get_docIds_two_words(docs_word_i, docs_word_j)
+                        doc_count_word_i_j = len(doc_word_i_j)
+                        assert doc_count_word_i_j >= 0
+                        coherence_score = math.log((doc_count_word_i_j + 1) / (1.0 * doc_count_word_i))
+                        score += coherence_score
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
+                    sys.exit(-1)
+            avg_score = score / (1.0 * len(topic_words))
+            return avg_score, word_docs
+        except Exception as _err:
+            print("Error occurred! {err}".format(err=_err))
 
     # Generate n-gram candidates from a text (a list of sentences)
     @staticmethod
@@ -100,3 +105,19 @@ class ClusterTopicUtility:
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         return candidates
+
+    @staticmethod
+    def output_key_phrase_group_LDA_topics(clusters, cluster_no_list):
+        # Load n_gram
+
+        for cluster_no in cluster_no_list:
+            cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
+
+            # result = {
+            #     'group#1': "", 'group-1-score': 0, '1-gram-freq': 0, '1-gram-docs': 0, '1-gram-clusters': 0,
+            #      '2-gram': "", '2-gram-score': 0, '2-gram-freq': 0, '2-gram-docs': 0, '2-gram-clusters': 0,
+            #      '3-gram': "", '3-gram-score': 0, '3-gram-freq': 0, '3-gram-docs': 0, '3-gram-clusters': 0,
+            #      'N-gram': "", 'N-gram-score': 0, 'N-gram-freq': 0, 'N-gram-docs': 0, 'N-gram-clusters': 0,
+            #      }
+            # }
+            # for group in cluster['KeyPhrases']:

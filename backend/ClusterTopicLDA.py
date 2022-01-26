@@ -66,7 +66,7 @@ class ClusterTopicLDA:
             # Load the key phrases
             docs_per_cluster_df['KeyPhrases'] = self.cluster_key_phrases_df['KeyPhrases'].tolist()
             # Reorder the column
-            docs_per_cluster_df = docs_per_cluster_df[['Cluster', 'KeyPhrases', 'Ngrams']]
+            docs_per_cluster_df = docs_per_cluster_df[['Cluster', 'KeyPhrases', 'DocId', 'Ngrams']]
             # Write n_gram to csv and json file
             folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'n_grams')
             Path(folder).mkdir(parents=True, exist_ok=True)
@@ -91,8 +91,9 @@ class ClusterTopicLDA:
             for i, cluster in df.iterrows():
                 try:
                     cluster_no = cluster['Cluster']
-                    num_topics = len(cluster['KeyPhrases'])       # Get the number of grouped phrases
+                    num_topics = len(cluster['KeyPhrases'])  # Get the number of grouped phrases
                     doc_n_gram_list = cluster['Ngrams']
+                    doc_id_list = cluster['DocId']
                     # Create a dictionary
                     dictionary = corpora.Dictionary(doc_n_gram_list)
                     corpus = [dictionary.doc2bow(n_gram) for n_gram in doc_n_gram_list]
@@ -109,14 +110,15 @@ class ClusterTopicLDA:
                     for topic in top_topic_list:
                         topic_words = list(map(lambda t: t[1], topic[0]))
                         topic_score = topic[1]
-                        topic_coherence_score = ClusterTopicUtility.compute_topic_coherence_score(doc_n_gram_list,
-                                                                                                  topic_words)
+                        topic_coherence_score, word_docs = ClusterTopicUtility.compute_topic_coherence_score(
+                            doc_n_gram_list, doc_id_list, topic_words)
                         diff = round(100 * (abs(topic_coherence_score - topic_score) / abs(topic_coherence_score)))
                         if diff > 100:
                             print("Diff {d}%".format(d=diff))
                         lda_topics.append({
                             'topic_words': topic_words,
-                            'score': round(topic_coherence_score, 3)  # Topic Coherence score
+                            'score': round(topic_coherence_score, 3),  # Topic Coherence score
+                            'word_docIds': word_docs
                         })
                         total_score += topic_coherence_score
                     avg_score = total_score / (num_topics * 1.0)
@@ -162,17 +164,19 @@ class ClusterTopicLDA:
                 key_phrase_groups = cluster['KeyPhrases']
                 num_groups = len(key_phrase_groups)
                 doc_n_gram_list = cluster['Ngrams']
+                doc_id_list = cluster['DocId']
                 total_score = 0
                 for group in key_phrase_groups:
                     top_key_phrases = group['key-phrases'][:10]
                     # Topic coherence score
-                    score = ClusterTopicUtility.compute_topic_coherence_score(doc_n_gram_list,
-                                                                              top_key_phrases)
+                    score, word_docs = ClusterTopicUtility.compute_topic_coherence_score(doc_n_gram_list, doc_id_list,
+                                                                                         top_key_phrases)
                     group['score'] = score
+                    group['word_docIds'] = word_docs
                     total_score += score
                 # Added the grouped key phrases of a cluster
                 results.append(key_phrase_groups)
-                avg_score = total_score/num_groups
+                avg_score = total_score / num_groups
                 # store score
                 score_list.append(round(avg_score, 3))
             # Write the updated grouped key phrases
@@ -208,7 +212,7 @@ class ClusterTopicLDA:
             cluster_df['LDAScore'] = lda_topics_df['LDAScore'].tolist()
             # Compute the percent
             total = cluster_df['NumDocs'].sum()
-            cluster_df['Percent'] = cluster_df['NumDocs'].apply(lambda x: x/total)
+            cluster_df['Percent'] = cluster_df['NumDocs'].apply(lambda x: x / total)
             # Key terms are the terms identify by TF-IDF
             cluster_df['KeyTerms'] = cluster_df['Topics'].tolist()
             # Output the intermediate results
@@ -233,6 +237,8 @@ class ClusterTopicLDA:
             # Write to a csv file
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
             df.to_csv(path, encoding='utf-8', index=False)
+            clusters = cluster_df.to_dict("records")
+            # ClusterTopicUtility.output_key_phrase_group_LDA_topics(clusters, [-1, 8, 20])
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -241,9 +247,9 @@ class ClusterTopicLDA:
 if __name__ == '__main__':
     try:
         ct = ClusterTopicLDA()
-        # ct.derive_n_grams_group_by_clusters()
-        # ct.derive_cluster_topics_by_LDA()
-        # ct.compute_key_phrase_scores()
+        ct.derive_n_grams_group_by_clusters()
+        ct.derive_cluster_topics_by_LDA()
+        ct.compute_key_phrase_scores()
         ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
