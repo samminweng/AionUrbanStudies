@@ -1,9 +1,11 @@
 # Helper function for LDA topic modeling
 import math
+import os
 import re
 import string
 import sys
 
+import pandas as pd
 from nltk import sent_tokenize, word_tokenize, pos_tag, ngrams
 
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
@@ -107,17 +109,29 @@ class ClusterTopicUtility:
         return candidates
 
     @staticmethod
-    def output_key_phrase_group_LDA_topics(clusters, cluster_no_list):
-        # Load n_gram
-
+    def output_key_phrase_group_LDA_topics(clusters, cluster_no_list, folder, case_name):
+        # Produce the output for each cluster
+        results = list()
         for cluster_no in cluster_no_list:
             cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
+            result = {'cluster': cluster_no}
+            # Added the grouped key phrase
+            for i, group in enumerate(cluster['KeyPhrases']):
+                # Convert the dictionary to a list
+                word_docIds = group['word_docIds'].items()
+                word_docIds = sorted(word_docIds, key=lambda w: w[1], reverse=True)
+                result['group_' + str(i) + '_score'] = group['score']
+                result['group_' + str(i)] = word_docIds
 
-            # result = {
-            #     'group#1': "", 'group-1-score': 0, '1-gram-freq': 0, '1-gram-docs': 0, '1-gram-clusters': 0,
-            #      '2-gram': "", '2-gram-score': 0, '2-gram-freq': 0, '2-gram-docs': 0, '2-gram-clusters': 0,
-            #      '3-gram': "", '3-gram-score': 0, '3-gram-freq': 0, '3-gram-docs': 0, '3-gram-clusters': 0,
-            #      'N-gram': "", 'N-gram-score': 0, 'N-gram-freq': 0, 'N-gram-docs': 0, 'N-gram-clusters': 0,
-            #      }
-            # }
-            # for group in cluster['KeyPhrases']:
+            # Added the LDA topics
+            for i, topic in enumerate(cluster['LDATopics']):
+                # Convert the dictionary to a list
+                word_docIds = topic['word_docIds'].items()
+                word_docIds = sorted(word_docIds, key=lambda w: w[1], reverse=True)
+                result['LDATopic_' + str(i) + '_score'] = topic['score']
+                result['LDATopic_' + str(i)] = word_docIds
+            results.append(result)
+        # Write to csv
+        df = pd.DataFrame(results)
+        path = os.path.join(folder, case_name + '_cluster_key_phrases_LDA_topics_summary.csv')
+        df.to_csv(path, encoding='utf-8', index=False)

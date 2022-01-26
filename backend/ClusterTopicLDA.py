@@ -237,8 +237,9 @@ class ClusterTopicLDA:
             # Write to a csv file
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
             df.to_csv(path, encoding='utf-8', index=False)
+            folder = os.path.join('output', self.args.case_name, 'LDA_topics')
             clusters = cluster_df.to_dict("records")
-            # ClusterTopicUtility.output_key_phrase_group_LDA_topics(clusters, [-1, 8, 20])
+            ClusterTopicUtility.output_key_phrase_group_LDA_topics(clusters, [0, 8, 20], folder, self.args.case_name)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -247,9 +248,9 @@ class ClusterTopicLDA:
 if __name__ == '__main__':
     try:
         ct = ClusterTopicLDA()
-        ct.derive_n_grams_group_by_clusters()
-        ct.derive_cluster_topics_by_LDA()
-        ct.compute_key_phrase_scores()
+        # ct.derive_n_grams_group_by_clusters()
+        # ct.derive_cluster_topics_by_LDA()
+        # ct.compute_key_phrase_scores()
         ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

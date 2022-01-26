@@ -1,14 +1,4 @@
 class TermChartUtility {
-    // Collect all the document
-    static collect_documents_by_doc_ids(collocation, doc_term_data) {
-        const doc_ids = Object.values(collocation['DocIDs']).flat();
-        // console.log(doc_ids);
-        const documents = doc_term_data.filter(doc_term => doc_ids.includes(doc_term['DocId']));
-        documents.sort((a, b) => b['Year'] - a['Year']);
-        return documents;
-
-    }
-
     // Get the maximal doc length
     static get_max_node_size(nodes) {
         let max_node_size = 0;
@@ -20,7 +10,7 @@ class TermChartUtility {
     }
 
     // Convert the collocations json to the format of D3 network graph
-    static create_node_link_data(searched_term, term_map, documents) {
+    static create_node_link_data(searched_term, term_map) {
         // Populate the nodes with collocation data
         let nodes = [];
         // Add other nodes from term map
