@@ -2,13 +2,11 @@ import os
 from argparse import Namespace
 from functools import reduce
 from pathlib import Path
-
 import pandas as pd
-
-from BERTModelDocClusterUtility import BERTModelDocClusterUtility
-
-
 # Obtain the cluster results of the best results and extract cluster topics using TF-IDF
+from ClusterTopicUtility import ClusterTopicUtility
+
+
 class ClusterTermTFIDF:
     def __init__(self, _last_iteration):
         self.args = Namespace(
@@ -96,7 +94,7 @@ class ClusterTermTFIDF:
                 image_folder = os.path.join('output', self.args.case_name, 'topics', 'images')
                 Path(image_folder).mkdir(parents=True, exist_ok=True)
                 # Visualise the cluster results
-                BERTModelDocClusterUtility.visualise_cluster_results_by_iteration(i, copied_results, image_folder)
+                ClusterTopicUtility.visualise_cluster_results_by_iteration(i, copied_results, image_folder)
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         # # Sort the results by DocID
@@ -114,7 +112,6 @@ class ClusterTermTFIDF:
 
     # Derive the distinct from each cluster of documents
     def derive_cluster_terms_by_TF_IDF(self):
-        # approach = 'HDBSCAN_Cluster'
         try:
             topic_folder = os.path.join('output', self.args.case_name, 'topics')
             Path(topic_folder).mkdir(parents=True, exist_ok=True)
@@ -127,9 +124,9 @@ class ClusterTermTFIDF:
             docs_per_cluster_df = clustered_doc_df.groupby(['HDBSCAN_Cluster'], as_index=False) \
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
             # Get top 100 topics (1, 2, 3 grams) for each cluster
-            n_gram_topic_list = BERTModelDocClusterUtility.get_n_gram_topics('HDBSCAN_Cluster',
-                                                                             docs_per_cluster_df,
-                                                                             topic_folder, is_load=False)
+            n_gram_topic_list = ClusterTopicUtility.get_n_gram_terms('HDBSCAN_Cluster',
+                                                                     docs_per_cluster_df,
+                                                                     topic_folder, is_load=False)
             results = []
             for i, cluster in docs_per_cluster_df.iterrows():
                 try:
@@ -145,13 +142,13 @@ class ClusterTermTFIDF:
                         # Collect top 300 topics of a cluster
                         cluster_topics = n_gram_topic['topics'][str(cluster_no)][:300]
                         # Create a mapping between the topic and its associated articles (doc)
-                        doc_per_topic = BERTModelDocClusterUtility.group_docs_by_topics(n_gram_range,
-                                                                                        doc_ids, doc_texts,
-                                                                                        cluster_topics)
+                        doc_per_topic = ClusterTopicUtility.group_docs_by_terms(n_gram_range,
+                                                                                doc_ids, doc_texts,
+                                                                                cluster_topics)
                         n_gram_type = 'Topic-' + str(n_gram_range) + '-gram'
                         result[n_gram_type] = doc_per_topic
                         n_gram_topics += doc_per_topic
-                    result['Topic-N-gram'] = BERTModelDocClusterUtility.merge_n_gram_topic(n_gram_topics)
+                    result['Topic-N-gram'] = ClusterTopicUtility.merge_n_gram_terms(n_gram_topics)
                     results.append(result)
                     print('Derive topics of cluster #{no}'.format(no=cluster_no))
                 except Exception as _err:
@@ -185,7 +182,7 @@ class ClusterTermTFIDF:
             # # Output top 50 topics by 1, 2 and 3-grams at specific cluster
             for cluster_no in range(-1, total_clusters):
                 folder = os.path.join(topic_folder, 'n_grams')
-                BERTModelDocClusterUtility.flatten_tf_idf_topics(cluster_no, folder)
+                ClusterTopicUtility.flatten_tf_idf_terms(cluster_no, folder)
             # # Output cluster df to csv or json file
             path = os.path.join(topic_folder, self.args.case_name + '_TF-IDF_cluster_topics.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)

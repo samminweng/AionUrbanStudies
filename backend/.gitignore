@@ -9,5 +9,5 @@ __pycache__/
 *.npy
 # Ignore the temp vector data
 /.idea/runConfigurations/KeyPhrase.xml
-/output/CultureUrbanStudyCorpus/cluster/iteration_*/experiments/hdbscan/*
-/output/CultureUrbanStudyCorpus/cluster/iteration_*/experiments/hdbscan/images/*
+# /**/cluster/iteration_*/experiments/hdbscan/*
+# /**/cluster/iteration_*/experiments/hdbscan/images/*
