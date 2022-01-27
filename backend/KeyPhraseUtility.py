@@ -33,25 +33,6 @@ nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
 nltk.data.path.append(nltk_path)
 
 
-# Load the lemma.n file to store the mapping of singular to plural nouns
-def load_lemma_nouns():
-    _lemma_nouns = {}
-    path = os.path.join('data', 'lemma.n')
-    f = open(path, 'r')
-    lines = f.readlines()
-    for line in lines:
-        words = line.rstrip().split("->")  # Remove trailing new line char and split by '->'
-        plural_word = words[1]
-        if '.,' in plural_word:  # Handle multiple plural forms and get the last one as default plural form
-            plural_word = plural_word.split('.,')[-1]
-        singular_word = words[0]
-        _lemma_nouns[plural_word] = singular_word
-    return _lemma_nouns
-
-
-lemma_nouns = load_lemma_nouns()
-
-
 # Helper function for cluster Similarity
 class KeyPhraseUtility:
     stop_words = list(stopwords.words('english'))
@@ -90,17 +71,17 @@ class KeyPhraseUtility:
                             singular_word = singular_word.capitalize()  # Upper case the first character
                         singular_words.append(singular_word)
                     else:
-                        # Check if the word in lemma list
-                        if _word.lower() in lemma_nouns:
-                            try:
-                                singular_word = lemma_nouns[_word.lower()]
-                                if _word[0].isupper():  # Restore the uppercase
-                                    singular_word = singular_word.capitalize()  # Upper case the first character
-                                singular_words.append(singular_word)
-                            except Exception as _err:
-                                print("Error occurred! {err}".format(err=_err))
-                        else:
-                            singular_words.append(_word)
+                        # # Check if the word in lemma list
+                        # if _word.lower() in lemma_nouns:
+                        #     try:
+                        #         singular_word = lemma_nouns[_word.lower()]
+                        #         if _word[0].isupper():  # Restore the uppercase
+                        #             singular_word = singular_word.capitalize()  # Upper case the first character
+                        #         singular_words.append(singular_word)
+                        #     except Exception as _err:
+                        #         print("Error occurred! {err}".format(err=_err))
+                        # else:
+                        singular_words.append(_word)
                 except Exception as _err:
                     print("Error occurred! {err}".format(err=_err))
             # Return all lemmatized words

@@ -36,10 +36,10 @@ function DocView(doc, selected_terms, occ_terms) {
 
     function _createUI() {
         // Add Key Phrase
-        const key_phrase_div = $('<div class="container border-info">' +
-            '<p class="lead">' + doc_key_phrases.join(", ") + '</p>' +
-            '</div>');
-        container.find(".card-text").append(key_phrase_div);
+        // const key_phrase_div = $('<div class="container border-info">' +
+        //     '<p class="lead">' + doc_key_phrases.join(", ") + '</p>' +
+        //     '</div>');
+        // container.find(".card-text").append(key_phrase_div);
         // Add the title
         let title_div = $('<div></div>');
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));
