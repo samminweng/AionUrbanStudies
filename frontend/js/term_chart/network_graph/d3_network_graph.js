@@ -1,15 +1,25 @@
 // Create D3 network graph using collocation and
-function D3NetworkGraph(topic_data, cluster_docs) {
+function D3NetworkGraph(word_docs, cluster_docs, is_key_phrase) {
+    $('#doc_list').empty();
+    $('#header').empty();
+    // Convert the word_docs map to nodes/links
+    const {nodes, links} = create_node_link_data(word_docs);
+    // console.log(nodes);
+    // console.log(links);
     const width = 600;
     const height = 600;
     const max_radius = 30;
-    const distance = 200;
-    // const strength = -1000;
-    const word_docs = topic_data['word_docIds'];
-    // Convert the word_docs map to nodes/links
-    const {nodes, links} = create_node_link_data(word_docs);
-    console.log(nodes);
-    console.log(links);
+    let node_radius = 2;
+    let link_width = 1;
+    let forceNode = d3.forceManyBody().strength(-2000);
+    let forceLink = d3.forceLink(links).id(d => d.id);
+    if(is_key_phrase){
+        forceNode = d3.forceManyBody();
+        forceLink = d3.forceLink(links).id(d => d.id).distance(100);
+        node_radius = 5;
+        link_width = 5;
+    }
+
     // Convert the json to the format of D3 network graph
     function create_node_link_data(word_docs) {
         // Convert the word_docs to a list
@@ -24,7 +34,7 @@ function D3NetworkGraph(topic_data, cluster_docs) {
         }
         // Sort the nodes by the doc_ids
         nodes.sort((a, b) => a['doc_ids'].length - b['doc_ids'].length);
-        console.log(nodes);
+        // console.log(nodes);
         // Populate the links with occurrences
         let links = [];
         for (let source = 0; source < nodes.length; source++) {
@@ -32,33 +42,79 @@ function D3NetworkGraph(topic_data, cluster_docs) {
                 const source_doc_ids = nodes[source]['doc_ids'];
                 const target_doc_ids = nodes[target]['doc_ids'];
                 const occ_doc_ids = source_doc_ids.filter(doc_id => target_doc_ids.includes(doc_id));
-                console.log(occ_doc_ids);
+                // console.log(occ_doc_ids);
                 if(occ_doc_ids.length > 0){
                     // Add the link
-                    links.push({source: nodes[source], target: nodes[target], value: occ_doc_ids, weight: occ_doc_ids.length});
+                    links.push({source: nodes[source], target: nodes[target], doc_ids: occ_doc_ids,
+                                weight: occ_doc_ids.length});
                 }
             }
         }
         return {nodes: nodes, links: links};
     }
 
-
-    // Get the color of collocation
-    const colors = function (d) {
-        return d3.schemeCategory10[0];
-    }
-    // Get font size
-    function get_font_size(node){
-        return "12";
-    }
-
     // Get the number of documents for a collocation node
     function get_node_size(node) {
         let num_doc = node['doc_ids'].length;
         // return Math.round(num_doc + max_radius;
-        return Math.min(num_doc * 2, max_radius);
+        return Math.min(num_doc*node_radius, max_radius);
     }
 
+    // Get the link weight
+    function get_link_width(link){
+        return link.weight * link_width;
+    }
+
+
+    // Onclick event of a node
+    function click_node(node){
+        const doc_ids = node.doc_ids;
+        const node_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
+        // console.log(node_docs);
+        const select_term = [node.name];
+        // Find the source node of d
+        const d_links = links.filter(link => link['source'].name === node.name || link['target'].name === node.name);
+        // Aggregate all the doc ids to a set to avoid duplicate doc ids
+        const occ_doc_ids = new Set();
+        const occ_terms = new Set();
+        for(const d_link of d_links){
+            for (const doc_id of d_link['doc_ids']){
+                occ_doc_ids.add(doc_id);
+            }
+            occ_terms.add(d_link['source'].name);
+            occ_terms.add(d_link['target'].name);
+        }
+        const occ_term_list = Array.from(occ_terms).filter(term => term !== node.name);
+        $("#header").empty();
+        const header_div = $("<div class='h5'></div>");
+        header_div.append($("<span class='search_terms'>" + node.name  + "</span> " + "<span> appears in " +
+                            node_docs.length + " papers</span>"));
+        if (occ_term_list.length > 0){
+            header_div.append($('<span> and occurs with </span>'));
+        }
+
+        // Populate each co-occurring term
+        const occ_div = $('<div></div>')
+        for(const occ_term of occ_term_list){
+            const link_btn = $('<button type="button" class="btn btn-link">' + occ_term+ ' </button>');
+            link_btn.button();
+            link_btn.click(function( event ) {
+                const selected_node = nodes.find(n => n.name === node.name);
+                const occ_node = nodes.find(n => n.name === occ_term);
+                const occ_doc_ids = selected_node['doc_ids'].filter(doc_id => occ_node['doc_ids'].includes(doc_id));
+                const occ_docs = cluster_docs.filter(d => occ_doc_ids.includes(d['DocId']));
+                const doc_list = new DocList(occ_docs, select_term, [occ_term]);
+                header_div.empty();
+                header_div.html("<span class='search_terms'>" + node.name  + "</span> and <mark>" + occ_term +
+                                "</mark> both appear in " + occ_docs.length + ' papers')
+            });
+
+            occ_div.append(link_btn);
+        }
+        $("#header").append(header_div);
+        $("#header").append(occ_div);
+        const doc_list = new DocList(node_docs, select_term, occ_term_list);
+    }
 
 
     // Drag event function
@@ -89,13 +145,16 @@ function D3NetworkGraph(topic_data, cluster_docs) {
 
     function _create_d3_network_graph() {
         // Add the svg node to 'term_map' div
-        let svg = d3.select('#term_chart')
-            .append("svg").attr("viewBox", [0, 0, width, height]);
+        let svg = d3.select('#term_chart').append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("viewBox", [-width / 2, -height / 2, width, height])
+            .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
     //     // Simulation
         const simulation = d3.forceSimulation(nodes)
-            // .force('link', d3.forceLink(links).id(d => d.id).distance(distance))
-            .force("charge", d3.forceManyBody().strength(-10))
-            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('link', forceLink)
+            .force("charge", forceNode)
+            .force('center', d3.forceCenter())
             .on("tick", ticked);
 
         // Initialise the links
@@ -106,10 +165,7 @@ function D3NetworkGraph(topic_data, cluster_docs) {
             .selectAll("line")
             .data(links)
             .join("line")
-            .attr("stroke-width", function(d){
-                // console.log(d);
-                return d.weight;
-            }) ;
+            .attr("stroke-width", d => get_link_width(d));
 
         // Initialise the nodes
         let node = svg.append('g')
@@ -117,20 +173,7 @@ function D3NetworkGraph(topic_data, cluster_docs) {
             .data(nodes)
             .join("g")
             .on("click", function (d, n) {// Add the onclick event
-                // // console.log(n.name);
-                // let key_term = n.name;
-                // if (key_term === searched_term) {
-                //     $('#complementary_term').text("");
-                //     let doc_list_view = new DocumentListView(searched_term, [], documents);
-                //     return;
-                // }
-                // $('#complementary_term').text(key_term);
-                // // console.log(complementary_terms);
-                // const filtered_documents = TermChartUtility.filter_documents_by_key_terms(searched_term,
-                //     [key_term], term_map, documents);
-                // console.log(filtered_documents);
-                // // Create the document list view
-                // let doc_list_view = new DocumentListView(searched_term, [key_term], filtered_documents);
+                click_node(n);
             }).call(drag(simulation));
 
         // Add the circles
@@ -155,14 +198,25 @@ function D3NetworkGraph(topic_data, cluster_docs) {
             .attr("class", "lead")
             .attr('x', "1em")
             .attr('y', "0.5em")
-            .style("font", d => get_font_size(d) + "px sans-serif")
+            .style("font", d => "14px sans-serif")
             .text(d => {
                 return d.name;
             });
         // // Tooltip
-        // node.append("title")
-        //     .text(d => "'" + d.name + "' has " + term_map.find(tm => tm[0] === d.name)[1].length + " articles");
-        // link = svg.selectAll('.link');
+        node.append("title").text(d => {
+            // Find the source node of d
+            const d_links = links.filter(link => link['source'].name === d.name || link['target'].name === d.name);
+            // Aggregate all the doc ids to a set to avoid duplicate doc ids
+            const occ_doc_ids = new Set();
+            for(const d_link of d_links){
+                for (const doc_id of d_link['doc_ids']){
+                    occ_doc_ids.add(doc_id);
+                }
+            }
+            return "'" + d.name + "' alone appears in " + d['doc_ids'].length + " papers and\n" +
+                        "co-occurs with " + d_links.length + " words in " + occ_doc_ids.size + " papers\n";
+        });
+
         // Simulate the tick event
         function ticked() {
             link

@@ -23,69 +23,58 @@
         in a cluster. The link between two terms represents the co-occurrences of these terms.
     </div>
     <div class="row m-3">
-        <div class="h5">Conditions</div>
-        <div class="col">
+        <div class="col border border-3">
             <div class="row">
                 <div class="col">
-                    <label>Cluster:</label>
-                    <select class="form-select">
-                    </select>
-                </div>
-                <div class="col">
-                    <label>Category:</label>
-                    <select class="form-select">
-                    </select>
+                    <div class="container p-3">
+                        <fieldset>
+                            <div class="container-sm mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <select name="cluster_list" id="cluster_list">
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <div id="group_list"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="container-sm mt-3">
+                                <div class="row">
+                                    <div class="col-3">Cluster: <span id="cluster_no"></span></div>
+                                    <div class="col-4">Total Papers: <span id="doc_count"></span></div>
+                                    <div class="col-5">Coherence Score: <span id="score"></span></div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                    <div id="term_info">
+                    </div>
                 </div>
             </div>
-<!--            <div class="row mt-3">-->
-<!--                <div class="col">-->
-<!--                    <div class="ui-widget">-->
-<!--                        <label for="input_term">Or Enter term:</label>-->
-<!--                        <input id="input_term" class="ui-autocomplete-input" placeholder="built environment">-->
-<!--                        <button type="button" class="ui-button">Search</button>-->
-<!--                        Try to type 'a' or 'n'-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-        </div>
-    </div>
-    <div class="row">
-        <div class="col border border-3">
-<!--            <div class="row">-->
-<!--                <div class="col controls" id="year_control">-->
-<!--                    <div class="force p-3">-->
-<!--                        <p><label>Year</label>Shift the year to view the trend</p>-->
-<!--                        <label for="year_range" class="form-label"></label>-->
-<!--&lt;!&ndash;                        <output id="year_output">2021</output>&ndash;&gt;-->
-<!--                        <div id="year_range" style="width: 300px">-->
-<!--                            <div id="custom-handle" class="ui-slider-handle"></div>-->
-<!--                        </div>-->
-<!--&lt;!&ndash;                        <input id="year_range" type="range" min="0" max="4" step="1" value="4" style="width: 300px">&ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
             <div class="row">
                 <div class="col">
                     <div id="term_chart"></div>
                 </div>
             </div>
         </div>
-        <div class="col border border-3">
+        <div class="col border border-3 p-3">
             <div class="row">
-                <div class="col" id="selected_term"></div>
+                <div class="col lead" id="header"></div>
             </div>
             <div class="row">
-                <div class="col" id="text_list_view"></div>
+                <div id="doc_list" class="col"></div>
             </div>
         </div>
     </div>
 </div>
 <!-- Our javascript -->
-<script type="text/javascript" src="js/term_chart/document_view/text_view.js"></script>
-<script type="text/javascript" src="js/term_chart/document_view/document_list_view.js"></script>
-<script type="text/javascript" src="js/term_chart/document_view/selected_term_view.js"></script>
+<script type="text/javascript" src="js/term_chart/doc_view/doc_list.js"></script>
+<script type="text/javascript" src="js/term_chart/doc_view/doc_view.js"></script>
 <script type="text/javascript" src="js/term_chart/network_graph/d3_network_graph.js"></script>
-<script type="text/javascript" src="js/term_chart/network_graph/year_control.js"></script>
 <script type="text/javascript" src="js/term_chart/term_chart_utility.js"></script>
 <script type="text/javascript" src="js/term_chart/term_chart.js"></script>
 <script type="text/javascript" src="js/term_chart/main.js"></script>
