@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+sequestration,0.0132139367,8,1,1,carbon sequestration,0.0207160427,8,1,1,carbon sequestration potential,0.0493997942,8,1,1,carbon sequestration potential,0.0493997942,8,1,1
+productivity,0.008671646,7,1,2,sequestration potential,0.0207160427,8,1,1,urban land growth,0.0308748714,5,1,1,urban land growth,0.0308748714,5,1,1
+afforestation,0.0082587104,5,1,1,food productivity,0.0181265374,7,1,1,land use change,0.018640993,5,2,3,land use change,0.018640993,5,2,3
+food,0.0079780382,8,2,3,agricultural afforestation,0.0129475267,5,1,1,simulating urban expansion,0.0185249228,3,2,1,simulating urban expansion,0.0185249228,3,2,1
+automata,0.0069807834,7,5,3,urban land,0.0119088033,13,3,6,land use policy,0.0149127944,4,1,3,food productivity,0.0181265374,7,1,1
+expansion,0.006402311700000001,13,4,7,urban expansion,0.0109927415,12,4,6,artificial immune system,0.012349948500000001,2,1,1,land use policy,0.0149127944,4,1,3
+automaton,0.006194032800000001,5,4,2,urban growth,0.0100766797,11,3,6,land change science,0.012349948500000001,2,1,1,agricultural afforestation,0.0129475267,5,1,1
+carbon,0.005543484,8,1,5,cellular automaton,0.009710645,5,4,2,highest simulation accuracy,0.012349948500000001,2,2,1,artificial immune system,0.012349948500000001,2,1,1
+cell,0.0049862739,5,3,3,transition rule,0.009710645,5,3,2,urban growth simulation,0.012349948500000001,2,1,1,land change science,0.012349948500000001,2,1,1
+immune,0.004955226300000001,3,1,1,land growth,0.009710645,5,1,2,growth simulation model,0.012349948500000001,2,1,1,highest simulation accuracy,0.012349948500000001,2,2,1
+swarm,0.004955226300000001,4,2,2,cellular automata,0.009380628700000001,6,3,3,urban growth model,0.012349948500000001,2,2,1,urban growth simulation,0.012349948500000001,2,1,1
+growth,0.0044643977,20,5,11,use change,0.007817190600000001,5,2,3,current food productivity,0.012349948500000001,2,1,1,growth simulation model,0.012349948500000001,2,1,1
+transition,0.0040902347000000006,7,5,6,immune system,0.0077685160000000005,3,1,1,artificial fish swarm,0.0092624614,2,1,2,urban growth model,0.012349948500000001,2,2,1
+farmland,0.0039890191,4,1,3,national policy,0.0077685160000000005,3,1,1,fish swarm algorithm,0.0092624614,2,1,2,current food productivity,0.012349948500000001,2,1,1
+potential,0.0033599997,12,4,10,spatiotemporal uncertainty,0.0077685160000000005,3,1,1,particle swarm optimization,0.0092624614,2,1,2,urban land,0.0119088033,13,3,6
+restriction,0.0029917643,3,2,3,neighborhood effect,0.0077685160000000005,4,3,2,urban land use,0.0087378201,4,2,6,urban expansion,0.0109927415,12,4,6
+rule,0.0029215962,5,3,6,driving factor,0.0065180642000000006,6,3,5,integrating artificial immune,0.0061749743,1,1,1,urban growth,0.0100766797,11,3,6
+urbanization,0.0028905487,7,4,8,growth model,0.005826387000000001,3,2,2,deriving transition rule,0.0061749743,1,1,1,cellular automaton,0.009710645,5,4,2
+kappa,0.0024776131,2,1,2,land use,0.0052676125,12,3,10,possible external intervention,0.0061749743,1,1,1,transition rule,0.009710645,5,3,2
+fish,0.0024776131,2,1,2,artificial immune,0.0051790107,2,1,1,particularly planning policy,0.0061749743,1,1,1,cellular automata,0.009380628700000001,6,3,3

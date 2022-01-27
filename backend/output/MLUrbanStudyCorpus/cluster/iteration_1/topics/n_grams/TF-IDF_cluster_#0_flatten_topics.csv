@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+energy,0.0034527698000000003,46,8,2,natural ventilation,0.0022828768,7,2,1,urban heat island,0.0042809868,15,6,2,urban heat island,0.0042809868,15,6,2
+temperature,0.0030774687,41,12,2,heat hazard,0.0022828768,7,2,1,land surface temperature,0.0025685921000000002,9,7,2,energy,0.0034527698000000003,46,8,2
+ventilation,0.0028472709,14,3,1,urban heat,0.0020461732,17,7,2,natural ventilation potential,0.0023198764,3,2,1,temperature,0.0030774687,41,12,2
+heat,0.0026271074,35,8,2,ventilation potential,0.0019567516000000003,6,2,1,urban agglomeration scale,0.0023198764,3,1,1,ventilation,0.0028472709,14,3,1
+air,0.0018014451,24,12,2,wind speed,0.0019567516000000003,6,5,1,surface urban heat,0.0023198764,3,2,1,heat,0.0026271074,35,8,2
+surface,0.0018014451,24,11,2,heat exposure,0.0019567516000000003,6,2,1,land cover classification,0.0023198764,3,1,1,land surface temperature,0.0025685921000000002,9,7,2
+index,0.0017263849000000002,23,9,2,urban form,0.0018054469000000001,15,4,2,urban arid environment,0.0015465843,2,1,1,natural ventilation potential,0.0023198764,3,2,1
+climate,0.0016513247,22,8,2,thermal comfort,0.0018054469000000001,15,3,2,level whose origin,0.0015465843,2,1,1,urban agglomeration scale,0.0023198764,3,1,1
+simulation,0.0015012043,20,9,2,heat island,0.0018054469000000001,15,6,2,regional dust event,0.0015465843,2,1,1,surface urban heat,0.0023198764,3,2,1
+form,0.0012760236,17,5,2,dust storm,0.0016306263000000001,5,1,1,minimum air temperature,0.0015465843,2,1,1,land cover classification,0.0023198764,3,1,1
+comfort,0.0012760236,17,4,2,exposure index,0.0016306263000000001,5,1,1,urban air temperature,0.0015465843,2,1,1,natural ventilation,0.0022828768,7,2,1
+concentration,0.0011259032,15,4,2,energy performance,0.0013239944000000001,11,4,2,urban geometric type,0.0015465843,2,1,1,heat hazard,0.0022828768,7,2,1
+island,0.0011259032,15,6,2,air temperature,0.0013239944000000001,11,5,2,urban built environment,0.0015465843,2,2,1,urban heat,0.0020461732,17,7,2
+exposure,0.0009757828000000001,13,3,2,energy modeling,0.001304501,4,2,1,natural ventilation requirement,0.0015465843,2,2,1,ventilation potential,0.0019567516000000003,6,2,1
+parameter,0.0008256623,11,7,2,design parameter,0.001304501,4,1,1,outdoor wind environment,0.0015465843,2,2,1,wind speed,0.0019567516000000003,6,5,1
+vegetation,0.0008256623,11,5,2,artificial surface,0.001304501,4,2,1,computational fluid dynamic,0.0015465843,2,2,1,heat exposure,0.0019567516000000003,6,2,1
+policymakers,0.0008135060000000001,4,4,1,complex terrain,0.001304501,4,1,1,multivariate linear regression,0.0015465843,2,2,1,urban form,0.0018054469000000001,15,4,2
+dust,0.0008135060000000001,4,1,1,land surface,0.0012036313,10,7,2,mean absolute percentage,0.0015465843,2,2,1,thermal comfort,0.0018054469000000001,15,3,2
+heating,0.0008135060000000001,4,2,1,surface temperature,0.0010832682000000001,9,7,2,absolute percentage error,0.0015465843,2,2,1,air,0.0018014451,24,12,2
+file,0.0008135060000000001,4,1,1,engineering simulation,0.0009783758000000001,3,1,1,using reinforcement learning,0.0015465843,2,1,1,surface,0.0018014451,24,11,2

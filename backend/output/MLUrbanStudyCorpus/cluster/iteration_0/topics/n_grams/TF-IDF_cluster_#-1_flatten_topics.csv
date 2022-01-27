@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+temperature,0.0023759627,85,21,1,surface temperature,0.0012465912,27,12,1,land surface temperature,0.0016720144,14,11,1,temperature,0.0023759627,85,21,1
+susceptibility,0.0010342426,37,8,1,landslide susceptibility,0.0010619111,23,6,1,stream water quality,0.0009554368,8,1,1,land surface temperature,0.0016720144,14,11,1
+landslide,0.00067086,24,6,1,air temperature,0.0007848908000000001,17,7,1,carbon sequestration potential,0.0009554368,8,1,1,surface temperature,0.0012465912,27,12,1
+soundscape,0.00044724,16,4,1,carbon emission,0.0007848908000000001,17,3,1,urban heat island,0.0008374803,19,9,2,landslide susceptibility,0.0010619111,23,6,1
+ventilation,0.00039133500000000003,14,3,1,thermal comfort,0.0007387207,16,4,1,complexity science research,0.0008360072,7,1,1,susceptibility,0.0010342426,37,8,1
+aridity,0.0003633825,13,1,1,energy use,0.0006002106,13,5,1,water resource management,0.0007165776,6,3,1,stream water quality,0.0009554368,8,1,1
+height,0.0003094931,30,8,2,building height,0.0006002106,13,3,1,building block level,0.0007165776,6,2,1,carbon sequestration potential,0.0009554368,8,1,1
+densification,0.0003074775,11,1,1,urban design,0.0005793597,34,16,2,urban functional zone,0.0007165776,6,1,1,urban heat island,0.0008374803,19,9,2
+park,0.00029917670000000003,29,7,2,energy performance,0.0005540406,12,5,1,urban modeling technique,0.0007165776,6,1,1,complexity science research,0.0008360072,7,1,1
+emission,0.00029917670000000003,29,10,2,building energy,0.0005078705000000001,11,5,1,road traffic noise,0.0007165776,6,1,1,air temperature,0.0007848908000000001,17,7,1
+deviance,0.00027952500000000003,10,1,1,cooling effect,0.0004617005,10,5,1,landslide susceptibility mapping,0.000597148,5,3,1,carbon emission,0.0007848908000000001,17,3,1
+mosquito,0.00027952500000000003,10,2,1,health hazard,0.0004617005,10,2,1,building coverage ratio,0.000597148,5,5,1,thermal comfort,0.0007387207,16,4,1
+analog,0.00027952500000000003,10,1,1,thermal landscape,0.0004617005,10,1,1,electric consumption data,0.000597148,5,1,1,water resource management,0.0007165776,6,3,1
+floor,0.0002515725,9,6,1,positive deviance,0.0004617005,10,1,1,urban greenness space,0.000597148,5,1,1,building block level,0.0007165776,6,2,1
+segregation,0.0002515725,9,2,1,conditioning factor,0.00041553040000000003,9,4,1,urban land growth,0.000597148,5,1,1,urban functional zone,0.0007165776,6,1,1
+neighbourhood,0.0002515725,9,3,1,thermal patch,0.00041553040000000003,9,1,1,urban planning reform,0.000597148,5,1,1,urban modeling technique,0.0007165776,6,1,1
+flood,0.0002475945,24,7,2,land growth,0.00041553040000000003,9,2,1,cultural ecosystem service,0.0004777184,4,1,1,road traffic noise,0.0007165776,6,1,1
+industry,0.0002269616,22,9,2,park accessibility,0.00041553040000000003,9,1,1,help urban planner,0.0004777184,4,3,1,landslide,0.00067086,24,6,1
+summer,0.00022362,8,7,1,sediment yield,0.00036936040000000003,8,1,1,local urban perception,0.0004777184,4,1,1,energy use,0.0006002106,13,5,1
+bee,0.00022362,8,1,1,urban agglomeration,0.00036936040000000003,8,3,1,urban thermal landscape,0.0004777184,4,1,1,building height,0.0006002106,13,3,1

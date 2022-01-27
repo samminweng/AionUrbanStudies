@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+emotion,0.018036034,14,2,2,urban identity,0.015089222800000001,5,1,1,urban design problem,0.020524772400000002,3,1,2,urban design problem,0.020524772400000002,3,1,2
+advertising,0.012024022700000001,7,1,1,urban emotion,0.015089222800000001,5,1,1,explore important feature,0.0182442422,2,1,1,explore important feature,0.0182442422,2,1,1
+gaze,0.0068708701,4,1,1,clustering approach,0.0090535337,3,1,1,emotional computing technics,0.0182442422,2,1,1,emotional computing technics,0.0182442422,2,1,1
+identity,0.0062225283,6,1,3,important feature,0.0090535337,3,1,1,city image dimension,0.0182442422,2,1,1,city image dimension,0.0182442422,2,1,1
+photo,0.0051854403,5,2,3,emotional computing,0.0090535337,3,1,1,interactive machine learning,0.0136831816,2,1,2,emotion,0.018036034,14,2,2
+façades,0.0051531526000000005,4,1,2,image dimension,0.0090535337,3,1,1,present day condition,0.0091221211,1,1,1,urban identity,0.015089222800000001,5,1,1
+user,0.0043236803,6,3,5,building façades,0.0090535337,3,1,1,designing urban space,0.0091221211,1,1,1,urban emotion,0.015089222800000001,5,1,1
+laboratory,0.0038648644,3,2,2,aesthetic rating,0.0090535337,3,1,1,find important feature,0.0091221211,1,1,1,interactive machine learning,0.0136831816,2,1,2
+computing,0.0038648644,3,1,2,public space,0.0072882078,4,2,3,new urban pattern,0.0091221211,1,1,1,advertising,0.012024022700000001,7,1,1
+robot,0.003435435,4,1,4,design problem,0.0067901503000000005,3,1,2,human design process,0.0091221211,1,1,1,present day condition,0.0091221211,1,1,1
+head,0.003435435,2,1,1,visual gaze,0.0060356891,2,1,1,randomized fitness measure,0.0091221211,1,1,1,designing urban space,0.0091221211,1,1,1
+technics,0.003435435,2,1,1,gaze analysis,0.0060356891,2,1,1,subjective expected utility,0.0091221211,1,1,1,find important feature,0.0091221211,1,1,1
+rating,0.0031112642,3,1,3,model street,0.0060356891,2,1,1,using clustering technique,0.0091221211,1,1,1,new urban pattern,0.0091221211,1,1,1
+feedback,0.0028824535000000003,4,3,5,emotion layer,0.0060356891,2,1,1,interactive design loop,0.0091221211,1,1,1,human design process,0.0091221211,1,1,1
+behaviour,0.0021618401,3,1,5,computing technics,0.0060356891,2,1,1,visual gaze dynamic,0.0091221211,1,1,1,randomized fitness measure,0.0091221211,1,1,1
+worldwide,0.0021618401,3,1,5,based technique,0.0060356891,2,1,1,important architectural feature,0.0091221211,1,1,1,subjective expected utility,0.0091221211,1,1,1
+citizen,0.0021387516,6,3,9,outdoor advertising,0.0060356891,2,1,1,technical challenge arises,0.0091221211,1,1,1,using clustering technique,0.0091221211,1,1,1
+proposal,0.0020741761,2,2,3,visual environment,0.0060356891,2,1,1,gaze dynamic hamper,0.0091221211,1,1,1,interactive design loop,0.0091221211,1,1,1
+video,0.0020741761,2,1,3,advertising object,0.0060356891,2,1,1,dynamic hamper precise,0.0091221211,1,1,1,visual gaze dynamic,0.0091221211,1,1,1
+sociology,0.0020741761,2,2,3,design recommendation,0.0060356891,2,1,1,hamper precise calculation,0.0091221211,1,1,1,important architectural feature,0.0091221211,1,1,1

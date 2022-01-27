@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+consumption,0.0054757972,36,7,1,social medium,0.0040900087,16,6,1,stream water quality,0.0053614467,8,1,1,consumption,0.0054757972,36,7,1
+water,0.0044065986000000005,45,10,2,electric consumption,0.0038343831000000003,15,2,1,urban functional zone,0.004021085000000001,6,1,1,stream water quality,0.0053614467,8,1,1
+emission,0.0031942151000000003,21,6,1,water quality,0.0033231320000000003,13,3,1,road traffic noise,0.004021085000000001,6,1,1,water,0.0044065986000000005,45,10,2
+noise,0.0024336877,16,4,1,urban design,0.0031268278000000003,19,7,2,artificial neural network,0.0035017616,12,7,3,social medium,0.0040900087,16,6,1
+energy,0.0024058842,55,10,4,carbon emission,0.0030675065,12,2,1,social medium data,0.0033509042,5,2,1,urban functional zone,0.004021085000000001,6,1,1
+soundscape,0.0022815822,15,3,1,urban environment,0.0026331182,16,6,2,machine learning approach,0.0033509042,5,4,1,road traffic noise,0.004021085000000001,6,1,1
+road,0.0021543371,22,8,2,health hazard,0.0025562554,10,2,1,electric consumption data,0.0033509042,5,1,1,electric consumption,0.0038343831000000003,15,2,1
+travel,0.0019773712,13,3,1,data analysis,0.0025562554,10,4,1,big data analysis,0.0033509042,5,1,1,artificial neural network,0.0035017616,12,7,3
+governance,0.0019773712,13,2,1,energy consumption,0.0025562554,10,5,1,cultural ecosystem service,0.0026807234,4,1,1,social medium data,0.0033509042,5,2,1
+landscape,0.0017059906,39,7,4,road traffic,0.0025562554,10,3,1,urban form indicator,0.0026807234,4,1,1,machine learning approach,0.0033509042,5,4,1
+mode,0.0016731603,11,4,1,landscape pattern,0.0023039784,14,3,2,urban development pattern,0.0025887457,6,1,2,electric consumption data,0.0033509042,5,1,1
+photographs,0.0016731603,11,3,1,big data,0.0023039784,14,6,2,water resource management,0.0021572880000000003,5,2,2,big data analysis,0.0033509042,5,1,1
+personality,0.0016731603,11,2,1,urban data,0.0021394085,13,5,2,machine learning method,0.0020426943,7,5,3,water quality,0.0033231320000000003,13,3,1
+traffic,0.0016647150000000002,17,6,2,soil erosion,0.0020450043,8,1,1,land cover pattern,0.0020105425,3,1,1,emission,0.0031942151000000003,21,6,1
+network,0.0016306584,62,22,5,sediment yield,0.0020450043,8,1,1,watershed soil erosion,0.0020105425,3,1,1,urban design,0.0031268278000000003,19,7,2
+player,0.0015210548,10,3,1,predictive model,0.0020450043,8,3,1,geographic information system,0.0020105425,3,3,1,carbon emission,0.0030675065,12,2,1
+load,0.0015210548,10,3,1,consumption data,0.0020450043,8,3,1,natural gas use,0.0020105425,3,1,1,cultural ecosystem service,0.0026807234,4,1,1
+mosquito,0.0015210548,10,2,1,stream water,0.0020450043,8,1,1,urban data science,0.0020105425,3,1,1,urban form indicator,0.0026807234,4,1,1
+air,0.0014688662,15,5,2,neural network,0.0018378558,25,13,4,heterogeneous urban environment,0.0020105425,3,1,1,urban environment,0.0026331182,16,6,2
+pollution,0.0013709418000000001,14,5,2,energy use,0.0018102688000000001,11,3,2,travel carbon emission,0.0020105425,3,1,1,urban development pattern,0.0025887457,6,1,2

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+flood,0.027491323800000002,20,4,4,pluvial flooding,0.0173254674,4,2,1,urban pluvial flooding,0.0308748714,3,1,1,urban pluvial flooding,0.0308748714,3,1,1
+vulnerability,0.012371095700000001,9,3,4,urban flood,0.0162426257,5,2,2,urban flood risk,0.0205832476,2,1,1,flood,0.027491323800000002,20,4,4
+risk,0.0106559024,13,3,7,flood risk,0.0162426257,5,1,2,flood risk mapping,0.0205832476,2,1,1,urban flood risk,0.0205832476,2,1,1
+emergency,0.0099588867,6,2,3,flood vulnerability,0.012994100500000001,3,2,1,flood risk map,0.0205832476,2,1,1,flood risk mapping,0.0205832476,2,1,1
+rainfall,0.0082990722,5,1,3,demand point,0.012994100500000001,3,1,1,evaluate model performance,0.0205832476,2,2,1,evaluate model performance,0.0205832476,2,2,1
+flooding,0.0082473971,4,2,2,pluvial flood,0.012994100500000001,3,2,1,emergency response centre,0.0205832476,2,1,1,emergency response centre,0.0205832476,2,1,1
+event,0.0049181088,6,3,7,emergency response,0.0104604134,4,1,3,multiple layer perceptron,0.0205832476,2,1,1,multiple layer perceptron,0.0205832476,2,1,1
+exposure,0.0048626568,5,1,6,conditioning factor,0.0097455754,3,1,2,maximum coverage location,0.0205832476,2,1,1,maximum coverage location,0.0205832476,2,1,1
+conditioning,0.0041236986000000005,2,1,2,risk mapping,0.0086627337,2,1,1,coverage location problem,0.0205832476,2,1,1,coverage location problem,0.0205832476,2,1,1
+centre,0.0041236986000000005,2,1,2,risk map,0.0086627337,2,1,1,location problem model,0.0205832476,2,1,1,location problem model,0.0205832476,2,1,1
+curve,0.0038901254,4,3,6,evaluate model,0.0086627337,2,2,1,prevent urban flood,0.0102916238,1,1,1,pluvial flooding,0.0173254674,4,2,1
+hazard,0.0038901254,4,3,6,response centre,0.0086627337,2,1,1,urban flood damage,0.0102916238,1,1,1,urban flood,0.0162426257,5,2,2
+probability,0.0034599314,3,1,5,layer perceptron,0.0086627337,2,1,1,flood conditioning factor,0.0102916238,1,1,1,flood risk,0.0162426257,5,1,2
+perceptron,0.0033196289,2,1,3,maximum coverage,0.0086627337,2,1,1,including urban density,0.0102916238,1,1,1,flood vulnerability,0.012994100500000001,3,2,1
+threshold,0.0033196289,2,1,3,coverage location,0.0086627337,2,1,1,analyze flood vulnerability,0.0102916238,1,1,1,demand point,0.012994100500000001,3,1,1
+susceptibility,0.0033196289,2,1,3,problem model,0.0086627337,2,1,1,using flood hazard,0.0102916238,1,1,1,vulnerability,0.012371095700000001,9,3,4
+allocation,0.0032787392,4,1,7,flood event,0.0086627337,2,2,1,flood vulnerability map,0.0102916238,1,1,1,risk,0.0106559024,13,3,7
+intensity,0.0029175941,3,2,6,hydraulic model,0.0086627337,2,2,1,higher performance accuracy,0.0102916238,1,1,1,emergency response,0.0104604134,4,1,3
+response,0.0028524826,5,1,9,rainfall threshold,0.0086627337,2,1,1,played major role,0.0102916238,1,1,1,prevent urban flood,0.0102916238,1,1,1
+camp,0.0027491324,1,1,1,flood susceptibility,0.0086627337,2,1,1,flood hazard determination,0.0102916238,1,1,1,urban flood damage,0.0102916238,1,1,1

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+mobility,0.0013020612,104,36,2,traffic flow,0.0012065928,21,8,1,urban human mobility,0.0014739612,10,2,1,urban human mobility,0.0014739612,10,2,1
+travel,0.0006885901,55,24,2,traffic congestion,0.0010916792,19,14,1,human mobility data,0.0013265651,9,4,1,human mobility data,0.0013265651,9,4,1
+taxi,0.0005427615000000001,16,8,1,transportation mode,0.0009193088,16,4,1,mobile phone data,0.0013265651,9,4,1,mobile phone data,0.0013265651,9,4,1
+behavior,0.0004757531,38,26,2,human mobility,0.0007846070000000001,37,11,2,planning support system,0.001179169,8,1,1,mobility,0.0013020612,104,36,2
+safety,0.0004632333,37,15,2,urban traffic,0.0007469384000000001,13,11,1,street view imagery,0.001179169,8,2,1,traffic flow,0.0012065928,21,8,1
+movement,0.00042567390000000004,34,16,2,travel behavior,0.0006894816,12,8,1,transportation mode recognition,0.0010317729000000001,7,1,1,planning support system,0.001179169,8,1,1
+routing,0.00040707110000000004,12,7,1,urban design,0.0006361678,30,22,2,traffic light control,0.0007369806,5,3,1,street view imagery,0.001179169,8,2,1
+passenger,0.00040707110000000004,12,6,1,traffic control,0.0006320248000000001,11,5,1,traffic control system,0.0007369806,5,3,1,traffic congestion,0.0010916792,19,14,1
+game,0.00035055490000000003,28,6,2,traffic light,0.0005171112000000001,9,5,1,road traffic safety,0.0007369806,5,1,1,transportation mode recognition,0.0010317729000000001,7,1,1
+innovation,0.0003392259,10,5,1,urban computing,0.0005171112000000001,9,4,1,traffic flow forecasting,0.0005895845,4,1,1,transportation mode,0.0009193088,16,4,1
+transit,0.0003380351,27,5,2,phone data,0.0005171112000000001,9,4,1,smart card data,0.0005895845,4,2,1,human mobility,0.0007846070000000001,37,11,2
+congestion,0.0003255153,26,17,2,flow prediction,0.0005171112000000001,9,4,1,intelligent transportation system,0.0005895845,4,4,1,urban traffic,0.0007469384000000001,13,11,1
+intrusion,0.00030530330000000004,9,2,1,transit mobility,0.0005171112000000001,9,2,1,traffic flow prediction,0.0005895845,4,1,1,traffic light control,0.0007369806,5,3,1
+insight,0.0002879558,23,20,2,functional region,0.0004596544,8,3,1,smart urban environment,0.0005895845,4,1,1,traffic control system,0.0007369806,5,3,1
+designer,0.0002879558,23,12,2,visual quality,0.0004596544,8,2,1,planned special event,0.0005895845,4,1,1,road traffic safety,0.0007369806,5,1,1
+bike,0.0002713807,8,2,1,travel pattern,0.0004596544,8,3,1,heterogeneous urban data,0.0005895845,4,2,1,travel behavior,0.0006894816,12,8,1
+ownership,0.0002713807,8,2,1,human behavior,0.0004596544,8,6,1,architectural color icon,0.0005895845,4,1,1,travel,0.0006885901,55,24,2
+accident,0.0002713807,8,5,1,view imagery,0.0004596544,8,2,1,transit mobility structure,0.0005895845,4,1,1,urban design,0.0006361678,30,22,2
+placement,0.0002713807,8,4,1,mobile phone,0.0004241119,20,9,2,temporally varying impact,0.0005895845,4,1,1,traffic control,0.0006320248000000001,11,5,1
+crash,0.0002713807,8,1,1,public space,0.0004029063,19,9,2,smart infrastructure system,0.0005895845,4,1,1,traffic flow forecasting,0.0005895845,4,1,1

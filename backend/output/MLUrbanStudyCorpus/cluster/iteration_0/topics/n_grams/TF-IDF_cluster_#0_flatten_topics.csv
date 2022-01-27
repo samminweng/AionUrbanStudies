@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+segmentation,0.0008631924000000001,46,20,2,land cover,0.0028901968,96,32,2,urban land cover,0.0026416424,13,5,1,land cover,0.0028901968,96,32,2
+cloud,0.00046912630000000004,25,9,2,change detection,0.0022840477000000002,28,8,1,land cover change,0.0020320326000000002,10,7,1,urban land cover,0.0026416424,13,5,1
+aperture,0.0004575971,9,8,1,point cloud,0.0017946089000000001,22,7,1,land cover map,0.0018288293,9,7,1,change detection,0.0022840477000000002,28,8,1
+settlement,0.0004128312,22,8,2,building detection,0.0013867433,17,7,1,land cover classification,0.0015749218,21,7,2,land cover change,0.0020320326000000002,10,7,1
+centerline,0.00040675300000000004,8,3,1,building extraction,0.0011420239000000001,14,7,1,synthetic aperture radar,0.0014224228,7,7,1,land cover map,0.0018288293,9,7,1
+pocket,0.00040675300000000004,8,1,1,image classification,0.0009633989000000001,32,19,2,land cover mapping,0.0014224228,7,5,1,point cloud,0.0017946089000000001,22,7,1
+completeness,0.00035590890000000003,7,6,1,classification accuracy,0.0008128678,27,15,2,overall classification accuracy,0.0014224228,7,6,1,land cover classification,0.0015749218,21,7,2
+radar,0.00035590890000000003,7,7,1,cover map,0.0007341582,9,7,1,closely packed building,0.0014224228,7,1,1,synthetic aperture radar,0.0014224228,7,7,1
+imaging,0.00035590890000000003,7,2,1,impervious surface,0.0006525851,8,4,1,land cover class,0.0014224228,7,4,1,land cover mapping,0.0014224228,7,5,1
+bare,0.0003050647,6,6,1,synthetic aperture,0.0006525851,8,7,1,data weighting method,0.0012192196,6,1,1,overall classification accuracy,0.0014224228,7,6,1
+orthophotos,0.00025422060000000003,5,2,1,cover mapping,0.0006525851,8,5,1,land use class,0.0010160163000000001,5,4,1,closely packed building,0.0014224228,7,1,1
+descriptor,0.00024394570000000002,13,5,2,road centerline,0.0006525851,8,3,1,lidar point cloud,0.0010160163000000001,5,2,1,land cover class,0.0014224228,7,4,1
+band,0.0002251806,12,7,2,cover classification,0.0006322305000000001,21,7,2,urban area extraction,0.0010160163000000001,5,3,1,building detection,0.0013867433,17,7,1
+label,0.0002064156,11,9,2,semantic segmentation,0.0006322305000000001,21,6,2,land use land,0.0010160163000000001,5,3,1,data weighting method,0.0012192196,6,1,1
+lidar,0.00020337650000000002,4,2,1,classification performance,0.0005710119,7,5,1,use land cover,0.0010160163000000001,5,3,1,building extraction,0.0011420239000000001,14,7,1
+window,0.00020337650000000002,4,4,1,supervised classification,0.0005710119,7,5,1,video semantic segmentation,0.0010160163000000001,5,1,1,land use class,0.0010160163000000001,5,4,1
+correctness,0.00020337650000000002,4,4,1,aperture radar,0.0005710119,7,7,1,land use change,0.0009749516,13,7,2,lidar point cloud,0.0010160163000000001,5,2,1
+spatialization,0.00020337650000000002,4,1,1,overall classification,0.0005710119,7,6,1,urban point cloud,0.000812813,4,2,1,urban area extraction,0.0010160163000000001,5,3,1
+roof,0.00020337650000000002,4,3,1,land resource,0.0005710119,7,5,1,point cloud data,0.000812813,4,2,1,land use land,0.0010160163000000001,5,3,1
+masonry,0.00020337650000000002,4,1,1,deprivation pocket,0.0005710119,7,1,1,green urban area,0.000812813,4,1,1,use land cover,0.0010160163000000001,5,3,1

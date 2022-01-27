@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+densification,0.0210318517,11,1,1,urban morphology,0.0174607033,5,1,1,partly complex description,0.0122477977,1,1,1,densification,0.0210318517,11,1,1
+company,0.0095599326,5,1,1,densification potential,0.0139685626,4,1,1,knowledge discovery technique,0.0122477977,1,1,1,urban morphology,0.0174607033,5,1,1
+geosilhouettes,0.0076479461000000006,4,1,1,regional science,0.010476422,3,2,1,high dimensional data,0.0122477977,1,1,1,densification potential,0.0139685626,4,1,1
+neighbourhood,0.0061546159,5,1,2,urban lab,0.010476422,3,1,1,knowledge discovery system,0.0122477977,1,1,1,partly complex description,0.0122477977,1,1,1
+fit,0.0057359595,3,1,1,sustainability transition,0.010476422,3,1,1,defines objective criterion,0.0122477977,1,1,1,knowledge discovery technique,0.0122477977,1,1,1
+lab,0.0057359595,3,1,1,new company,0.010476422,3,1,1,increasingly large number,0.0122477977,1,1,1,high dimensional data,0.0122477977,1,1,1
+cluster,0.00499516,6,2,3,knowledge discovery,0.0069842813,2,1,1,urban place detection,0.0122477977,1,1,1,knowledge discovery system,0.0122477977,1,1,1
+industry,0.004959096200000001,15,2,5,geographical measure,0.0069842813,2,1,1,longstanding regional science,0.0122477977,1,1,1,defines objective criterion,0.0122477977,1,1,1
+block,0.0049236927,4,2,2,cluster fit,0.0069842813,2,1,1,regional science perspective,0.0122477977,1,1,1,increasingly large number,0.0122477977,1,1,1
+segregation,0.0049236927,4,1,2,place detection,0.0069842813,2,1,1,explicitly geographical measure,0.0122477977,1,1,1,urban place detection,0.0122477977,1,1,1
+sustainability,0.0049236927,4,2,2,social interaction,0.0069842813,2,1,1,outlier detection problem,0.0122477977,1,1,1,longstanding regional science,0.0122477977,1,1,1
+description,0.003823973,2,2,1,industrial waterfront,0.0069842813,2,1,1,thinking behind geosilhouettes,0.0122477977,1,1,1,regional science perspective,0.0122477977,1,1,1
+immigrant,0.003823973,2,1,1,geospatial simulation,0.0069842813,2,1,1,open urban area,0.0122477977,1,1,1,explicitly geographical measure,0.0122477977,1,1,1
+proxy,0.003823973,2,2,1,neighbourhood densification,0.0069842813,2,1,1,use machine learning,0.0122477977,1,1,1,outlier detection problem,0.0122477977,1,1,1
+typology,0.003823973,2,2,1,densification strategy,0.0069842813,2,1,1,level using data,0.0122477977,1,1,1,thinking behind geosilhouettes,0.0122477977,1,1,1
+waterfront,0.003823973,2,1,1,path dependency,0.0069842813,2,1,1,reduced residential segregation,0.0122477977,1,1,1,open urban area,0.0122477977,1,1,1
+half,0.003823973,2,2,1,localization decision,0.0069842813,2,1,1,newly arrived immigrant,0.0122477977,1,1,1,use machine learning,0.0122477977,1,1,1
+entrepreneur,0.003823973,2,1,1,new entity,0.0069842813,2,1,1,offering new opportunity,0.0122477977,1,1,1,level using data,0.0122477977,1,1,1
+entity,0.003823973,2,1,1,service sector,0.0069842813,2,1,1,good urban form,0.0122477977,1,1,1,reduced residential segregation,0.0122477977,1,1,1
+sector,0.0036927695,3,1,2,built environment,0.006744645200000001,3,1,2,influence spatial behavior,0.0122477977,1,1,1,newly arrived immigrant,0.0122477977,1,1,1

@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+sidewalk,0.0080357975,6,1,1,urban environment,0.0147844577,10,4,2,urban modeling technique,0.0338039216,6,1,1,urban modeling technique,0.0338039216,6,1,1
+perception,0.007760083,9,2,2,urban perception,0.0137787724,6,1,1,local urban perception,0.0225359477,4,1,1,local urban perception,0.0225359477,4,1,1
+image,0.0050071230000000005,13,5,4,urban modeling,0.0114823103,5,1,1,proposed urban modeling,0.0169019608,3,1,1,proposed urban modeling,0.0169019608,3,1,1
+street,0.0043111572,5,3,2,urban model,0.0091858483,4,1,1,adversarial scoring framework,0.0112679739,2,1,1,urban environment,0.0147844577,10,4,2
+scoring,0.0040178988,3,1,1,modeling technique,0.0088706746,6,1,2,urban perception assessment,0.0112679739,2,1,1,urban perception,0.0137787724,6,1,1
+height,0.0038516331,10,2,4,adversarial scoring,0.0045929241,2,1,1,building usable floor,0.0112679739,2,1,1,urban modeling,0.0114823103,5,1,1
+presence,0.0034489258,4,2,2,scoring framework,0.0045929241,2,1,1,usable floor area,0.0112679739,2,1,1,adversarial scoring framework,0.0112679739,2,1,1
+scene,0.0034489258,4,2,2,perception assessment,0.0045929241,2,1,1,spatial information system,0.0112679739,2,1,1,urban perception assessment,0.0112679739,2,1,1
+classification,0.0027789801,12,3,5,seven type,0.0045929241,2,1,1,predict building height,0.0112679739,2,1,1,building usable floor,0.0112679739,2,1,1
+classifier,0.0026961432000000003,7,3,4,five classifier,0.0045929241,2,1,1,artificial urban environment,0.0112679739,2,1,1,usable floor area,0.0112679739,2,1,1
+feedback,0.0026785992,2,2,1,computer vision,0.0045929241,2,2,1,street view image,0.010881360900000001,3,1,2,spatial information system,0.0112679739,2,1,1
+score,0.0026785992,2,2,1,sidewalk segment,0.0045929241,2,1,1,urban perception datasets,0.0056339869,1,1,1,predict building height,0.0112679739,2,1,1
+vision,0.0026785992,2,2,1,urban scene,0.0045929241,2,2,1,created using machine,0.0056339869,1,1,1,artificial urban environment,0.0112679739,2,1,1
+valuation,0.0026785992,2,1,1,georeferenced image,0.0045929241,2,1,1,incorporates deep learning,0.0056339869,1,1,1,street view image,0.010881360900000001,3,1,2
+object,0.0026785992,2,1,1,high resolution,0.0045929241,2,2,1,method provides perception,0.0056339869,1,1,1,urban model,0.0091858483,4,1,1
+citizen,0.0025866943,3,2,2,urban valuation,0.0045929241,2,1,1,provides perception estimation,0.0056339869,1,1,1,sidewalk,0.0080357975,6,1,1
+building,0.0025473984,11,3,5,significant impact,0.0045929241,2,2,1,driving factor analysis,0.0056339869,1,1,1,perception,0.007760083,9,2,2
+source,0.0019258166,5,5,4,usable floor,0.0045929241,2,1,1,urban functional aspect,0.0056339869,1,1,1,urban perception datasets,0.0056339869,1,1,1
+technology,0.0019258166,5,3,4,urban region,0.0045929241,2,1,1,urban perception derivation,0.0056339869,1,1,1,created using machine,0.0056339869,1,1,1
+information,0.0019097341,18,8,6,predict building,0.0045929241,2,1,1,using multiple classifier,0.0056339869,1,1,1,incorporates deep learning,0.0056339869,1,1,1

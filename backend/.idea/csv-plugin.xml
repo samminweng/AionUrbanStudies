@@ -927,6 +927,41 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/MLUrbanStudyCorpus/MLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/MLUrbanStudyCorpus_iterative_cluster_topic_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_4/MLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster_terms/MLUrbanStudyCorpus_TF-IDF_cluster_topic_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster_terms/MLUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

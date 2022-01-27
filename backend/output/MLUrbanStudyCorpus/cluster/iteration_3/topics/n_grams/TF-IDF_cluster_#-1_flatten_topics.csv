@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+landscape,0.0038383259,62,13,1,landslide susceptibility,0.0023690983,23,6,1,artificial neural network,0.0040588314,15,10,1,artificial neural network,0.0040588314,15,10,1
+energy,0.0036526005,59,13,1,urban form,0.0021630898000000003,21,7,1,urban development pattern,0.0024352988,9,2,1,landscape,0.0038383259,62,13,1
+effect,0.0030335156000000003,49,22,1,landscape pattern,0.0018540770000000002,18,4,1,stream water quality,0.0021647101000000003,8,1,1,energy,0.0036526005,59,13,1
+temperature,0.0027239732000000003,44,9,1,surface temperature,0.0018540770000000002,18,5,1,carbon sequestration potential,0.0021647101000000003,8,1,1,effect,0.0030335156000000003,49,22,1
+consumption,0.0022287054000000002,36,7,1,urban land,0.0016480684,16,4,1,urban land use,0.0018941213,7,3,1,temperature,0.0027239732000000003,44,9,1
+use,0.0020429799,66,37,2,electric consumption,0.0015450641,15,2,1,water resource management,0.0016235326,6,3,1,urban development pattern,0.0024352988,9,2,1
+urbanization,0.0017953460000000002,29,10,1,urban expansion,0.0013390556,13,5,1,urban functional zone,0.0016235326,6,1,1,landslide susceptibility,0.0023690983,23,6,1
+index,0.0015786663000000002,51,18,2,land use,0.0013390556,26,11,2,urban modeling technique,0.0016235326,6,1,1,consumption,0.0022287054000000002,36,7,1
+region,0.0015477121,25,17,1,urban growth,0.0013390556,13,5,1,road traffic noise,0.0016235326,6,1,1,stream water quality,0.0021647101000000003,8,1,1
+water,0.0015477121,50,13,2,building height,0.0013390556,13,3,1,machine learning algorithm,0.0014882382,11,9,2,carbon sequestration potential,0.0021647101000000003,8,1,1
+landslide,0.0014858036000000002,24,6,1,water quality,0.0013390556,13,3,1,land surface temperature,0.0013529438,5,4,1,urban form,0.0021630898000000003,21,7,1
+classification,0.0014238951000000001,46,19,2,energy use,0.0012360513,12,4,1,social medium data,0.0013529438,5,2,1,use,0.0020429799,66,37,2
+decision,0.0013619866000000001,44,30,2,expert system,0.0012360513,12,5,1,using machine learning,0.0013529438,5,5,1,urban land use,0.0018941213,7,3,1
+industry,0.0013619866000000001,22,9,1,built environment,0.0012360513,12,5,1,landslide susceptibility mapping,0.0013529438,5,3,1,landscape pattern,0.0018540770000000002,18,4,1
+resource,0.0013619866000000001,22,13,1,carbon emission,0.0012360513,12,2,1,land use policy,0.0013529438,5,2,1,surface temperature,0.0018540770000000002,18,5,1
+surface,0.0013619866000000001,22,9,1,urban planner,0.001133047,11,10,1,land use change,0.0013529438,5,2,1,urbanization,0.0017953460000000002,29,10,1
+forecasting,0.0013619866000000001,22,7,1,urban design,0.0010815449000000001,21,8,2,machine learning algorithms,0.0013529438,5,5,1,urban land,0.0016480684,16,4,1
+level,0.0013310324000000001,43,29,2,urban development,0.0010300428,20,8,2,electric consumption data,0.0013529438,5,1,1,water resource management,0.0016235326,6,3,1
+carbon,0.0013000781000000001,21,4,1,health hazard,0.0010300428,10,2,1,urban land growth,0.0013529438,5,1,1,urban functional zone,0.0016235326,6,1,1
+tool,0.0012381696,40,27,2,thermal landscape,0.0010300428,10,1,1,big data analysis,0.0013529438,5,1,1,urban modeling technique,0.0016235326,6,1,1

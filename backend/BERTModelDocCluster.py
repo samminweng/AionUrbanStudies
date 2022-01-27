@@ -465,7 +465,7 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        for i in range(0, 1):
+        for i in range(0, 5):
             mdc = BERTModelDocCluster(i)
             mdc.get_sentence_vectors(is_load=False)
             mdc.run_HDBSCAN_cluster_experiments()

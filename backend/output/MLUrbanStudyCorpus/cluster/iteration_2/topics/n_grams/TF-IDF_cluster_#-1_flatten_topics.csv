@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+energy,0.0025271707000000003,59,13,1,learning technique,0.0017797719,25,22,1,machine learning technique,0.0043237939,23,20,1,machine learning technique,0.0043237939,23,20,1
+prediction,0.0023130037,54,29,1,landslide susceptibility,0.0016373902000000001,23,6,1,machine learning algorithm,0.0022558925,12,10,1,energy,0.0025271707000000003,59,13,1
+water,0.0022273369,52,15,1,landscape pattern,0.0012814358,18,4,1,machine learning method,0.0018799104,10,8,1,prediction,0.0023130037,54,29,1
+method,0.0018970241,120,69,2,surface temperature,0.0012814358,18,5,1,urban development pattern,0.0016919193000000002,9,2,1,machine learning algorithm,0.0022558925,12,10,1
+temperature,0.0018846696,44,9,1,air quality,0.0012814358,18,5,1,stream water quality,0.0015039283,8,1,1,water,0.0022273369,52,15,1
+climate,0.0016276692,38,15,1,social medium,0.0012102449,17,7,1,carbon sequestration potential,0.0015039283,8,1,1,method,0.0018970241,120,69,2
+susceptibility,0.0015848358,37,8,1,climate change,0.0012102449,17,9,1,water resource management,0.0011279462,6,3,1,temperature,0.0018846696,44,9,1
+air,0.0014563356,34,10,1,electric consumption,0.0010678631,15,2,1,urban functional zone,0.0011279462,6,1,1,machine learning method,0.0018799104,10,8,1
+potential,0.0013278354,31,16,1,learning algorithm,0.0010678631,15,13,1,urban modeling technique,0.0011279462,6,1,1,learning technique,0.0017797719,25,22,1
+environment,0.0012962998,82,43,2,smart city,0.0010678631,15,6,1,road traffic noise,0.0011279462,6,1,1,urban development pattern,0.0016919193000000002,9,2,1
+design,0.0012488742000000001,79,32,2,study area,0.0009966723,14,9,1,machine learning model,0.0010407285,15,11,2,landslide susceptibility,0.0016373902000000001,23,6,1
+height,0.0011993352,28,7,1,data analysis,0.0009966723,14,8,1,artificial neural network,0.0010407285,15,10,2,climate,0.0016276692,38,15,1
+building,0.00118564,75,22,2,urban area,0.0009458796,36,27,2,geographic information system,0.0009399552,5,5,1,susceptibility,0.0015848358,37,8,1
+scenario,0.0011565018,27,17,1,urban expansion,0.0009254814,13,5,1,land surface temperature,0.0009399552,5,4,1,stream water quality,0.0015039283,8,1,1
+use,0.0010749803,68,38,2,building height,0.0009254814,13,3,1,social medium data,0.0009399552,5,2,1,carbon sequestration potential,0.0015039283,8,1,1
+road,0.001070835,25,11,1,water quality,0.0009254814,13,3,1,landslide susceptibility mapping,0.0009399552,5,3,1,air,0.0014563356,34,10,1
+flood,0.0010280016,24,7,1,neural network,0.0008933308000000001,34,21,2,land use policy,0.0009399552,5,2,1,potential,0.0013278354,31,16,1
+landslide,0.0010280016,24,6,1,energy use,0.0008542905,12,4,1,machine learning algorithms,0.0009399552,5,5,1,environment,0.0012962998,82,43,2
+hazard,0.0009851682,23,8,1,expert system,0.0008542905,12,5,1,support vector machine,0.0009399552,5,4,1,landscape pattern,0.0012814358,18,4,1
+input,0.0009851682,23,18,1,learning method,0.0008542905,12,10,1,electric consumption data,0.0009399552,5,1,1,surface temperature,0.0012814358,18,5,1

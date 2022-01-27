@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+landslide,0.0266873065,24,6,1,landslide susceptibility,0.0410068669,23,6,1,landslide susceptibility mapping,0.0234749456,5,3,1,landslide susceptibility,0.0410068669,23,6,1
+susceptibility,0.0236240072,33,6,2,susceptibility mapping,0.0106974435,6,4,1,rockfall hazard assessment,0.018779956400000002,4,1,1,landslide,0.0266873065,24,6,1
+hazard,0.0064429111,9,3,2,conditioning factor,0.0106974435,6,3,1,landslide susceptibility assessment,0.0140849673,3,2,1,susceptibility,0.0236240072,33,6,2
+runout,0.0055598555000000004,5,1,1,shallow landslide,0.0106974435,6,1,1,landslide susceptibility model,0.0140849673,3,3,1,landslide susceptibility mapping,0.0234749456,5,3,1
+rockfall,0.0055598555000000004,5,1,1,rockfall hazard,0.0106974435,6,1,1,utility computing model,0.0140849673,3,1,1,rockfall hazard assessment,0.018779956400000002,4,1,1
+training,0.005011153,7,5,2,burnt area,0.0089145363,5,1,1,three statistical model,0.009389978200000001,2,1,1,landslide susceptibility assessment,0.0140849673,3,2,1
+wildfire,0.0044478844,4,1,1,susceptibility map,0.0089145363,5,4,1,landslide inventory map,0.009389978200000001,2,2,1,landslide susceptibility model,0.0140849673,3,3,1
+detachment,0.0044478844,4,1,1,landslide risk,0.0071316290000000004,4,4,1,landslide susceptibility evaluation,0.009389978200000001,2,2,1,utility computing model,0.0140849673,3,1,1
+mapping,0.004295274,6,4,2,hazard assessment,0.0071316290000000004,4,1,1,rockfall kinematic model,0.009389978200000001,2,1,1,susceptibility mapping,0.0106974435,6,4,1
+risk,0.0035793950000000004,5,5,2,frequency ratio,0.0053487218,3,2,1,structural health monitoring,0.009389978200000001,2,1,1,conditioning factor,0.0106974435,6,3,1
+kernel,0.0035793950000000004,5,1,2,landslide inventory,0.0053487218,3,3,1,landslide susceptibility modeling,0.009389978200000001,2,1,1,shallow landslide,0.0106974435,6,1,1
+curve,0.0033892599000000002,7,4,3,susceptibility assessment,0.0053487218,3,2,1,basis function kernel,0.009389978200000001,2,1,1,rockfall hazard,0.0106974435,6,1,1
+inventory,0.0033359133,3,3,1,predisposing factor,0.0053487218,3,2,1,support vector machine,0.0090678007,3,2,2,three statistical model,0.009389978200000001,2,1,1
+conditioning,0.0033359133,3,2,1,susceptibility model,0.0053487218,3,3,1,radial basis function,0.0060452005,2,1,2,landslide inventory map,0.009389978200000001,2,2,1
+damage,0.0033359133,3,3,1,kinematic model,0.0053487218,3,1,1,landslide risk management,0.004694989100000001,1,1,1,landslide susceptibility evaluation,0.009389978200000001,2,2,1
+utility,0.0029050799,6,1,3,computing model,0.0053487218,3,1,1,earlier geotechnical investigation,0.004694989100000001,1,1,1,rockfall kinematic model,0.009389978200000001,2,1,1
+frequency,0.002863516,4,3,2,inventory map,0.0035658145000000002,2,2,1,geotechnical investigation report,0.004694989100000001,1,1,1,structural health monitoring,0.009389978200000001,2,1,1
+slope,0.002863516,4,3,2,field survey,0.0035658145000000002,2,2,1,initial fourteen landslide,0.004694989100000001,1,1,1,landslide susceptibility modeling,0.009389978200000001,2,1,1
+map,0.0025582952,8,6,4,causal factor,0.0035658145000000002,2,1,1,fourteen landslide causal,0.004694989100000001,1,1,1,basis function kernel,0.009389978200000001,2,1,1
+mitigation,0.0024208999,5,4,3,susceptibility evaluation,0.0035658145000000002,2,2,1,landslide causal factor,0.004694989100000001,1,1,1,support vector machine,0.0090678007,3,2,2
