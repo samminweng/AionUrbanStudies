@@ -56,6 +56,7 @@ class ClusterTermTFIDF:
         df = pd.DataFrame(results)
         # Output cluster results to CSV
         folder = os.path.join('output', self.args.case_name, 'cluster_terms', 'iterative_clusters')
+        Path(folder).mkdir(parents=True, exist_ok=True)
         path = os.path.join(folder, self.args.case_name + '_iterative_cluster_summary.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         path = os.path.join(folder, self.args.case_name + '_iterative_cluster_summary.json')

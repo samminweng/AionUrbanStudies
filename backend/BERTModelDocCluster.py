@@ -1,4 +1,5 @@
 import os
+import sys
 from argparse import Namespace
 import logging
 from functools import reduce
@@ -14,7 +15,6 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from sklearn.metrics import pairwise_distances
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
-import pickle
 import seaborn as sns  # statistical graph library
 import getpass
 
@@ -53,7 +53,9 @@ class BERTModelDocCluster:
             n_neighbors=150,
             min_dist=0.0,
             dimensions=[768, 500, 450, 400, 350, 300, 250, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50,
-                        45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5]
+                        45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5],
+            min_samples=[5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+            min_cluster_size=list(range(5, 31))
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
         path = os.path.join('data', self.args.case_name, self.args.iteration, self.args.case_name + '_cleaned.csv')
@@ -156,9 +158,9 @@ class BERTModelDocCluster:
                 # Store experiment results
                 results = list()
                 # Experiment HDBSCAN clustering with different parameters
-                for min_samples in [None] + list(range(1, 31)):
-                    for min_cluster_size in range(5, 31):
-                        for epsilon in [0.0, 0.5, 1.0]:
+                for min_samples in self.args.min_samples:
+                    for min_cluster_size in self.args.min_cluster_size:
+                        for epsilon in [0.0]:
                             result = {'dimension': dimension,
                                       'min_cluster_size': min_cluster_size,
                                       'min_samples': str(min_samples),
@@ -200,6 +202,7 @@ class BERTModelDocCluster:
                                         cluster_vectors)
                             except Exception as _err:
                                 print("Error occurred! {err}".format(err=_err))
+                                sys.exit(-1)
                             # print(result)
                             results.append(result)
 

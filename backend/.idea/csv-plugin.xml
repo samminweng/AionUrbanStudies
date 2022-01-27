@@ -941,7 +941,84 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_0/MLUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_0/MLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_0/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_0/experiments/hdbscan/HDBSCAN_cluster_doc_vector_results_9.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_1/MLUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_1/MLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_2/MLUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_3/MLUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_3/MLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_4/MLUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_4/MLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/cluster_backup/iteration_0/temp/Step_1_cluster_doc.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
