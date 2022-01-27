@@ -54,7 +54,7 @@ class BERTModelDocCluster:
             min_dist=0.0,
             dimensions=[768, 500, 450, 400, 350, 300, 250, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50,
                         45, 40, 35, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5],
-            min_samples=[5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+            min_samples=list(range(1, 61)),
             min_cluster_size=list(range(5, 31))
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
