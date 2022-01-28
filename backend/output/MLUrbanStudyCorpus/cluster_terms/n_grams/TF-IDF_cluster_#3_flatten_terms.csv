@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+temperature,0.0104439349,80,19,4,surface temperature,0.0083874676,25,11,2,urban heat island,0.0143654127,17,8,2,urban heat island,0.0143654127,17,8,2
+air,0.0071802053,55,19,4,air temperature,0.0078155332,17,7,1,land surface temperature,0.010140291400000001,12,10,2,temperature,0.0104439349,80,19,4
+heat,0.0066589406000000005,41,13,3,thermal comfort,0.007355796,16,4,1,urban thermal landscape,0.0046317811,4,1,1,land surface temperature,0.010140291400000001,12,10,2
+energy,0.0064229553,75,11,6,heat island,0.0060389766,18,10,2,thermal landscape pattern,0.0046317811,4,1,1,surface temperature,0.0083874676,25,11,2
+surface,0.0040216749,38,16,5,urban heat,0.0052564762000000004,20,9,3,natural gas use,0.0034738358,3,1,1,air temperature,0.0078155332,17,7,1
+ventilation,0.0039773545,14,3,1,building energy,0.0050571097,11,5,1,urban thermal condition,0.0034738358,3,2,1,thermal comfort,0.007355796,16,4,1
+comfort,0.0037318134,18,5,2,cooling effect,0.0045973725,10,5,1,heterogeneous urban environment,0.0034738358,3,1,1,air,0.0071802053,55,19,4
+aridity,0.0036932577,13,1,1,health hazard,0.0045973725,10,2,1,urban thermal environment,0.0034738358,3,2,1,heat,0.0066589406000000005,41,13,3
+island,0.0030858505,19,11,3,thermal landscape,0.0045973725,10,1,1,natural ventilation potential,0.0034738358,3,2,1,energy,0.0064229553,75,11,6
+climate,0.0026548215,31,13,6,air quality,0.0042252031,20,6,4,outdoor thermal comfort,0.0034738358,3,2,1,heat island,0.0060389766,18,10,2
+wind,0.0020732297,10,5,2,thermal patch,0.0041376352,9,1,1,boosted regression tree,0.0033098862000000002,5,4,3,urban heat,0.0052564762000000004,20,9,3
+microclimate,0.0019886772,7,4,1,energy use,0.0040259844,12,4,2,mean absolute error,0.0025350728,3,3,2,building energy,0.0050571097,11,5,1
+cooling,0.0019886772,7,5,1,land surface,0.0040259844,12,10,2,climate change mitigation,0.0025350728,3,1,2,urban thermal landscape,0.0046317811,4,1,1
+vegetation,0.0019198339,28,9,7,natural ventilation,0.0032181607,7,2,1,stacking ensemble model,0.0025350728,3,1,2,thermal landscape pattern,0.0046317811,4,1,1
+hazard,0.0019050039,18,4,5,heat hazard,0.0032181607,7,2,1,per square foot,0.0023158905,2,1,1,cooling effect,0.0045973725,10,5,1
+building,0.0017726459,61,14,10,energy performance,0.0030194883,9,3,2,building energy consumption,0.0023158905,2,1,1,health hazard,0.0045973725,10,2,1
+emission,0.0014617187000000001,9,5,3,ventilation potential,0.0027584235,6,2,1,minimum air temperature,0.0023158905,2,1,1,thermal landscape,0.0045973725,10,1,1
+summer,0.0014512608,7,6,2,wind speed,0.0027584235,6,5,1,urban air temperature,0.0023158905,2,1,1,air quality,0.0042252031,20,6,4
+prediction,0.0014255367,35,18,9,heat exposure,0.0027584235,6,2,1,normalized difference vegetation,0.0023158905,2,2,1,thermal patch,0.0041376352,9,1,1
+grade,0.0014204837,5,1,1,cooling efficiency,0.0027584235,6,1,1,urban vegetation configuration,0.0023158905,2,1,1,energy use,0.0040259844,12,4,2

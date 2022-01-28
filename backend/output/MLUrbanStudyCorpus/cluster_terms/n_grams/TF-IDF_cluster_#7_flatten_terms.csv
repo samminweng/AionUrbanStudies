@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+emotion,0.009680249,14,2,3,urban emotion,0.0107316315,5,1,1,social medium data,0.0139960901,4,1,3,social medium data,0.0139960901,4,1,3
+gaze,0.0048379733,4,1,1,geodemographic classification,0.0078315352,5,1,2,collect vast amount,0.012241135700000001,2,2,1,collect vast amount,0.012241135700000001,2,2,1
+redevelopment,0.0048379733,4,2,1,physiological response,0.0064389789000000005,3,1,1,medium data analysis,0.012241135700000001,2,1,1,medium data analysis,0.012241135700000001,2,1,1
+permit,0.0048379733,4,1,1,emotional computing,0.0064389789000000005,3,1,1,emotional computing technics,0.012241135700000001,2,1,1,emotional computing technics,0.012241135700000001,2,1,1
+alteration,0.0035305683,4,1,2,building alteration,0.0064389789000000005,3,1,1,knowledge discovery process,0.012241135700000001,2,1,1,knowledge discovery process,0.012241135700000001,2,1,1
+behaviour,0.0027034094,6,3,5,online review,0.0064389789000000005,3,1,1,natural language processing,0.0069980450000000005,2,2,3,urban emotion,0.0107316315,5,1,1
+pilot,0.0026479262,3,2,2,visitor experience,0.0064389789000000005,3,1,1,human physiological change,0.0061205679,1,1,1,emotion,0.009680249,14,2,3
+laboratory,0.0026479262,3,2,2,public space,0.005596943,7,3,5,includes signal frequency,0.0061205679,1,1,1,geodemographic classification,0.0078315352,5,1,2
+head,0.0024189866,2,1,1,pilot study,0.0046989211000000005,3,2,2,signal frequency unification,0.0061205679,1,1,1,natural language processing,0.0069980450000000005,2,2,3
+technics,0.0024189866,2,1,1,subjective data,0.0042926526,2,1,1,varying sound level,0.0061205679,1,1,1,physiological response,0.0064389789000000005,3,1,1
+pleasantness,0.0024189866,2,1,1,visual gaze,0.0042926526,2,1,1,various demographic background,0.0061205679,1,1,1,emotional computing,0.0064389789000000005,3,1,1
+urbanists,0.0024189866,2,2,1,gaze analysis,0.0042926526,2,1,1,four machine learning,0.0061205679,1,1,1,building alteration,0.0064389789000000005,3,1,1
+participant,0.0022528412000000003,5,2,5,model street,0.0042926526,2,1,1,discover relevant pattern,0.0061205679,1,1,1,online review,0.0064389789000000005,3,1,1
+robot,0.0022231633,4,1,4,emotion layer,0.0042926526,2,1,1,increased participant arousal,0.0061205679,1,1,1,visitor experience,0.0064389789000000005,3,1,1
+visitor,0.0020743391,3,1,3,computing technics,0.0042926526,2,1,1,social science study,0.0061205679,1,1,1,human physiological change,0.0061205679,1,1,1
+perception,0.0020604563,9,4,8,crowdsourcing game,0.0042926526,2,1,1,employing machine learning,0.0061205679,1,1,1,includes signal frequency,0.0061205679,1,1,1
+experience,0.0020604563,9,5,8,thematic structure,0.0042926526,2,1,1,two different time,0.0061205679,1,1,1,signal frequency unification,0.0061205679,1,1,1
+sense,0.0018229756,5,1,6,adaptive reuse,0.0042926526,2,1,1,different time period,0.0061205679,1,1,1,varying sound level,0.0061205679,1,1,1
+facet,0.0017652842,2,1,2,discovery process,0.0042926526,2,1,1,accessible green space,0.0061205679,1,1,1,various demographic background,0.0061205679,1,1,1
+townscapes,0.0017652842,2,1,2,discriminatory power,0.0042926526,2,1,1,employing data science,0.0061205679,1,1,1,four machine learning,0.0061205679,1,1,1

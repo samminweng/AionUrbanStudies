@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+analog,0.0046030717,10,1,1,land growth,0.0066792073,9,2,1,complexity science research,0.0130394707,7,1,1,complexity science research,0.0130394707,7,1,1
+system,0.0024954536,53,18,10,expert system,0.0064989742,12,5,2,urban land growth,0.0093139076,5,1,1,urban land growth,0.0093139076,5,1,1
+automata,0.0023683466,9,7,3,complexity science,0.0059370732,8,1,1,urban planning reform,0.0093139076,5,1,1,urban planning reform,0.0093139076,5,1,1
+intelligence,0.0023524962,27,14,8,urban land,0.0053690942000000005,24,7,6,land use change,0.0085193592,8,4,3,land use change,0.0085193592,8,4,3
+tender,0.0023015359000000003,5,1,1,intelligent computation,0.005194939,7,1,1,residential land growth,0.0074511261,4,1,1,residential land growth,0.0074511261,4,1,1
+expansion,0.002081356,15,5,6,urbanization process,0.004699898,17,3,5,urban land use,0.006738303,12,5,6,urban land use,0.006738303,12,5,6
+reform,0.0020154877,6,1,2,transition rule,0.0044528049,6,4,1,simulating urban expansion,0.0055883446000000005,3,2,1,land growth,0.0066792073,9,2,1
+transition,0.0019036984,9,7,4,analog model,0.0044528049,6,1,1,spatiotemporal neighborhood feature,0.0055883446000000005,3,1,1,expert system,0.0064989742,12,5,2
+agent,0.0019036984,9,3,4,land use,0.0038302667,36,10,9,urban planning conflict,0.0055883446000000005,3,1,1,complexity science,0.0059370732,8,1,1
+collusion,0.0018412287000000001,4,1,1,science research,0.0037910683,7,1,2,artificial neural network,0.004495741,10,6,7,simulating urban expansion,0.0055883446000000005,3,2,1
+simulation,0.0017157942000000002,26,11,9,urban growth,0.0037513104,11,4,4,land use planning,0.0042799612,5,2,4,spatiotemporal neighborhood feature,0.0055883446000000005,3,1,1
+attack,0.0016795731,5,1,2,neighborhood effect,0.0037106707,5,4,1,land use policy,0.0042596796,4,1,3,urban planning conflict,0.0055883446000000005,3,1,1
+expert,0.0016650848,12,7,6,planning reform,0.0037106707,5,1,1,artificial immune system,0.0037255631000000003,2,1,1,urban land,0.0053690942000000005,24,7,6
+growth,0.00158381,24,8,9,analog research,0.0037106707,5,1,1,urban land dynamic,0.0037255631000000003,2,2,1,intelligent computation,0.005194939,7,1,1
+automaton,0.0015788978,6,4,3,mathematical programming,0.0037106707,5,1,1,land change science,0.0037255631000000003,2,1,1,urbanization process,0.004699898,17,3,5
+change,0.0014596049,31,8,10,cellular automata,0.0033941218,8,4,3,search asset allocation,0.0037255631000000003,2,1,1,analog,0.0046030717,10,1,1
+urbanization,0.0014518258,22,5,9,use change,0.0033941218,8,4,3,urban information system,0.0037255631000000003,2,1,1,artificial neural network,0.004495741,10,6,7
+immune,0.0013809215,3,1,1,growth simulation,0.0029685366,4,2,1,highest simulation accuracy,0.0037255631000000003,2,2,1,transition rule,0.0044528049,6,4,1
+establishment,0.0013436584,4,2,2,artificial intelligence,0.0028095052,20,10,8,use change simulation,0.0037255631000000003,2,2,1,analog model,0.0044528049,6,1,1
+livelihood,0.0013436584,4,1,2,land management,0.0027079059,5,2,2,land growth simulation,0.0037255631000000003,2,1,1,land use planning,0.0042799612,5,2,4

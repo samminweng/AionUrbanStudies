@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+susceptibility,0.0165514645,35,7,2,landslide susceptibility,0.023657153400000002,23,6,1,landslide susceptibility mapping,0.0130133569,5,3,1,landslide susceptibility,0.023657153400000002,23,6,1
+landslide,0.015552437700000001,24,6,1,conditioning factor,0.009257147,9,4,1,rockfall hazard assessment,0.0104106855,4,1,1,susceptibility,0.0165514645,35,7,2
+flood,0.008891059,24,7,3,susceptibility mapping,0.0072000032,7,5,1,landslide susceptibility assessment,0.0078080142,3,2,1,landslide,0.015552437700000001,24,6,1
+water,0.0035971159,23,8,7,interface network,0.0072000032,7,1,1,urban pluvial flooding,0.0078080142,3,1,1,landslide susceptibility mapping,0.0130133569,5,3,1
+conditioning,0.0032400912,5,3,1,urban flood,0.0061714313,6,3,1,landslide susceptibility model,0.0078080142,3,3,1,rockfall hazard assessment,0.0104106855,4,1,1
+runout,0.0032400912,5,1,1,flood risk,0.0061714313,6,2,1,utility computing model,0.0078080142,3,1,1,conditioning factor,0.009257147,9,4,1
+rockfall,0.0032400912,5,1,1,susceptibility map,0.0061714313,6,5,1,storm water management,0.0078080142,3,2,1,flood,0.008891059,24,7,3
+hazard,0.0028968471,12,5,5,shallow landslide,0.0061714313,6,1,1,interface network connectivity,0.0078080142,3,1,1,landslide susceptibility assessment,0.0078080142,3,2,1
+rainfall,0.0028373939,6,2,2,rockfall hazard,0.0061714313,6,1,1,urban flood risk,0.0052053428,2,1,1,urban pluvial flooding,0.0078080142,3,1,1
+drainage,0.0028373939,6,1,2,burnt area,0.0051428594,5,1,1,flood risk mapping,0.0052053428,2,1,1,landslide susceptibility model,0.0078080142,3,3,1
+curve,0.0026554432,11,7,5,landslide risk,0.0041142875,4,4,1,flood risk map,0.0052053428,2,1,1,utility computing model,0.0078080142,3,1,1
+wildfire,0.0025920730000000003,4,1,1,pluvial flooding,0.0041142875,4,2,1,evaluate model performance,0.0052053428,2,2,1,storm water management,0.0078080142,3,2,1
+detachment,0.0025920730000000003,4,1,1,water management,0.0041142875,4,3,1,three statistical model,0.0052053428,2,1,1,interface network connectivity,0.0078080142,3,1,1
+risk,0.00253944,13,8,6,storm water,0.0041142875,4,2,1,landslide inventory map,0.0052053428,2,2,1,susceptibility mapping,0.0072000032,7,5,1
+emergency,0.0022227647,6,2,3,express service,0.0041142875,4,1,1,landslide susceptibility evaluation,0.0052053428,2,2,1,interface network,0.0072000032,7,1,1
+monitoring,0.0021487569000000002,11,6,6,field survey,0.0030857157,3,3,1,emergency response centre,0.0052053428,2,1,1,urban flood,0.0061714313,6,3,1
+interface,0.0020844581,7,1,4,flood vulnerability,0.0030857157,3,2,1,multiple layer perceptron,0.0052053428,2,1,1,flood risk,0.0061714313,6,2,1
+reading,0.0019440547,3,2,1,frequency ratio,0.0030857157,3,2,1,maximum coverage location,0.0052053428,2,1,1,susceptibility map,0.0061714313,6,5,1
+sludge,0.0019440547,3,1,1,landslide inventory,0.0030857157,3,3,1,coverage location problem,0.0052053428,2,1,1,shallow landslide,0.0061714313,6,1,1
+flooding,0.0018915959000000001,4,2,2,susceptibility assessment,0.0030857157,3,2,1,location problem model,0.0052053428,2,1,1,rockfall hazard,0.0061714313,6,1,1

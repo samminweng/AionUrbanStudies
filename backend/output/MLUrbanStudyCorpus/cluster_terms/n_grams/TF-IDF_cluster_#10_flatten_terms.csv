@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+livability,0.0124867078,6,1,3,functional area,0.0183617036,3,1,1,urban functional area,0.0423016463,3,1,1,urban functional area,0.0423016463,3,1,1
+intercity,0.0083244719,4,1,3,two modality,0.012241135700000001,2,1,1,intercity corporate network,0.0282010975,2,1,1,intercity corporate network,0.0282010975,2,1,1
+modality,0.0062433539,3,1,3,corporate network,0.012241135700000001,2,1,1,help urban planner,0.0161220784,2,1,3,help urban planner,0.0161220784,2,1,3
+needs,0.0036403378000000003,1,1,1,intercity network,0.012241135700000001,2,1,1,introduced many challenge,0.014100548800000001,1,1,1,introduced many challenge,0.014100548800000001,1,1,1
+complement,0.0036403378000000003,1,1,1,automation tool,0.012241135700000001,2,1,1,unplanned urban expansion,0.014100548800000001,1,1,1,unplanned urban expansion,0.014100548800000001,1,1,1
+mainland,0.0036403378000000003,1,1,1,multiple feature,0.0089331138,2,1,2,functional area needs,0.014100548800000001,1,1,1,functional area needs,0.014100548800000001,1,1,1
+detects,0.0036403378000000003,1,1,1,ground object,0.0089331138,2,1,2,user behavior data,0.014100548800000001,1,1,1,user behavior data,0.014100548800000001,1,1,1
+interlocking,0.0036403378000000003,1,1,1,service industry,0.0089331138,2,1,2,implemented using machine,0.014100548800000001,1,1,1,implemented using machine,0.014100548800000001,1,1,1
+pseudo,0.0036403378000000003,1,1,1,big city,0.0069980450000000005,2,1,3,higher classification accuracy,0.014100548800000001,1,1,1,higher classification accuracy,0.014100548800000001,1,1,1
+geohazards,0.0036403378000000003,1,1,1,rapid rate,0.0061205679,1,1,1,two modality complement,0.014100548800000001,1,1,1,two modality complement,0.014100548800000001,1,1,1
+assess,0.0036403378000000003,1,1,1,global urbanization,0.0061205679,1,1,1,yield good result,0.014100548800000001,1,1,1,yield good result,0.014100548800000001,1,1,1
+overlap,0.0036403378000000003,1,1,1,area needs,0.0061205679,1,1,1,automatically build model,0.014100548800000001,1,1,1,automatically build model,0.014100548800000001,1,1,1
+ground,0.0027122441,2,1,5,scientific approach,0.0061205679,1,1,1,interlocking network model,0.014100548800000001,1,1,1,interlocking network model,0.014100548800000001,1,1,1
+preference,0.0027122441,2,1,5,user behavior,0.0061205679,1,1,1,different test data,0.014100548800000001,1,1,1,different test data,0.014100548800000001,1,1,1
+backdrop,0.0026565796000000003,1,1,2,behavior data,0.0061205679,1,1,1,network big data,0.014100548800000001,1,1,1,network big data,0.014100548800000001,1,1,1
+migration,0.0026565796000000003,1,1,2,set test,0.0061205679,1,1,1,many negative impact,0.014100548800000001,1,1,1,many negative impact,0.014100548800000001,1,1,1
+jam,0.0026565796000000003,1,1,2,higher classification,0.0061205679,1,1,1,fingerto urban planning,0.014100548800000001,1,1,1,fingerto urban planning,0.014100548800000001,1,1,1
+satisfaction,0.0026565796000000003,1,1,2,single modality,0.0061205679,1,1,1,numerous automation tool,0.014100548800000001,1,1,1,numerous automation tool,0.014100548800000001,1,1,1
+individual,0.0026565796000000003,1,1,2,modality complement,0.0061205679,1,1,1,urban planner assess,0.014100548800000001,1,1,1,urban planner assess,0.014100548800000001,1,1,1
+linkage,0.0026565796000000003,1,1,2,predefined model,0.0061205679,1,1,1,yet unplanned development,0.014100548800000001,1,1,1,yet unplanned development,0.014100548800000001,1,1,1

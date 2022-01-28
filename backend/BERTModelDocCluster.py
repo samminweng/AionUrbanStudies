@@ -44,6 +44,7 @@ class BERTModelDocCluster:
         self.iteration = iteration
         self.args = Namespace(
             case_name='MLUrbanStudyCorpus',
+            # case_name='CultureUrbanStudyCorpus',
             iteration='iteration_' + str(iteration),
             path='data',
             # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
@@ -52,9 +53,8 @@ class BERTModelDocCluster:
             device='cpu',
             n_neighbors=150,
             min_dist=0.0,
-            # dimensions=[768, 50, 10],
-            dimensions=[768, 500, 400, 300, 200, 100, 90, 80, 70, 60, 50, 40, 30],
-            min_samples=list(range(1, 51)),
+            dimensions=[768, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20],
+            min_samples=list(range(1, 31)),
             min_cluster_size=list(range(5, 31))
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
@@ -267,7 +267,7 @@ class BERTModelDocCluster:
             for d_result in d_results:
                 # Apply UMAP to reduce the dimensions of document vectors
                 cluster_labels = d_result['cluster_labels']
-                folder = os.path.join(parent_folder, 'experiments', 'hdbscan', 'images')
+                folder = os.path.join(parent_folder, 'experiments', 'images')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Output cluster results to png files
                 BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels,
@@ -405,7 +405,7 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        for i in range(0, 1):
+        for i in range(0, 6):
             mdc = BERTModelDocCluster(i)
             mdc.get_sentence_vectors(is_load=False)
             mdc.run_HDBSCAN_cluster_experiments()

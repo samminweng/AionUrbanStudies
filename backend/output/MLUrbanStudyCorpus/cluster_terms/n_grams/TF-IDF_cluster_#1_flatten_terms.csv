@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+cover,0.005071501,114,36,5,land cover,0.0108755197,99,31,3,land cover classification,0.01150867,24,8,1,land cover classification,0.01150867,24,8,1
+segmentation,0.0031404177,46,20,3,change detection,0.0053804405,28,8,1,urban land cover,0.0062338629000000005,13,5,1,land cover,0.0108755197,99,31,3
+extraction,0.0024838824,69,32,6,cover classification,0.0046118062000000005,24,8,1,remote sensing image,0.0059495698,27,12,4,urban land cover,0.0062338629000000005,13,5,1
+imagery,0.0024478841,68,37,6,image classification,0.0044873603,32,19,2,land cover change,0.0047952792000000004,10,7,1,remote sensing image,0.0059495698,27,12,4
+cloud,0.0021786915,25,9,2,point cloud,0.004227489,22,7,1,land cover map,0.0043157513,9,7,1,change detection,0.0053804405,28,8,1
+image,0.0019522103000000001,251,83,11,building detection,0.0032666960000000004,17,7,1,urban land use,0.0036137764,25,9,6,cover,0.005071501,114,36,5
+expansion,0.0018359131,51,17,6,satellite image,0.0030022485,34,22,4,remote sensing data,0.0035637913000000003,13,9,3,land cover change,0.0047952792000000004,10,7,1
+remote,0.0016384788000000001,24,13,3,semantic segmentation,0.0029448302,21,6,2,synthetic aperture radar,0.0033566954,7,7,1,image classification,0.0044873603,32,19,2
+detection,0.0016264558,95,31,9,urban land,0.0028962576,50,18,6,land cover mapping,0.0033566954,7,5,1,land cover map,0.0043157513,9,7,1
+change,0.0015391148000000001,126,32,10,land use,0.0027273389,99,31,9,overall classification accuracy,0.0033566954,7,6,1,point cloud,0.004227489,22,7,1
+settlement,0.0015019389,22,8,3,building extraction,0.0026902203,14,7,1,closely packed building,0.0033566954,7,1,1,urban land use,0.0036137764,25,9,6
+population,0.0014466783,64,24,8,classification accuracy,0.0023841385000000002,27,15,4,land cover class,0.0033566954,7,4,1,remote sensing data,0.0035637913000000003,13,9,3
+mapping,0.0013562609,60,30,8,sensing image,0.0023841385000000002,27,13,4,remotely sensed data,0.0028771675,6,5,1,synthetic aperture radar,0.0033566954,7,7,1
+surface,0.0013346055,30,20,5,aerial image,0.0023839101,17,7,2,data weighting method,0.0028771675,6,1,1,land cover mapping,0.0033566954,7,5,1
+building,0.001307026,107,31,10,overall accuracy,0.0022191088000000003,31,23,5,land use classification,0.0027995294,8,2,2,overall classification accuracy,0.0033566954,7,6,1
+satellite,0.0011519455,32,27,6,deep learning,0.0020869483,45,23,7,land use change,0.0024672402,9,5,3,closely packed building,0.0033566954,7,1,1
+aperture,0.0010747738,9,8,1,cover change,0.0019632201,14,10,2,convolutional neural network,0.0024573679,17,12,6,land cover class,0.0033566954,7,4,1
+dataset,0.001066389,37,22,7,satellite imagery,0.0018675135,17,14,3,land use class,0.0023976396000000002,5,4,1,building detection,0.0032666960000000004,17,7,1
+vehicle,0.0010426441,19,11,4,cover map,0.0017294273,9,7,1,lidar point cloud,0.0023976396000000002,5,2,1,segmentation,0.0031404177,46,20,3
+land,0.0010248262,275,59,12,urban expansion,0.0015639791,27,10,6,urban area extraction,0.0023976396000000002,5,3,1,satellite image,0.0030022485,34,22,4

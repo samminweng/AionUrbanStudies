@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,3-gram,3-gram-score,3-gram-freq,3-gram-docs,3-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+perception,0.006589167700000001,51,13,8,visual quality,0.0091588354,8,2,1,street view imagery,0.0246857253,8,2,1,street view imagery,0.0246857253,8,2,1
+street,0.0064599683000000005,50,13,8,view imagery,0.0091588354,8,2,1,street view image,0.0099257161,7,5,4,street view image,0.0099257161,7,5,4
+vitality,0.005460506600000001,8,1,1,human perception,0.007853921,12,6,3,urban street vitality,0.009257147,3,1,1,urban street vitality,0.009257147,3,1,1
+enclosure,0.00409538,6,2,1,street quality,0.0068691265,6,1,1,holistic visual data,0.009257147,3,1,1,holistic visual data,0.009257147,3,1,1
+imagery,0.0037035894000000003,18,6,6,safety perception,0.0068691265,6,2,1,historical urban landscape,0.009257147,3,1,1,historical urban landscape,0.009257147,3,1,1
+streetscape,0.002988652,6,3,2,street view,0.0068391405,13,7,4,experienced urban designer,0.0061714313,2,1,1,visual quality,0.0091588354,8,2,1
+safety,0.0024690596,12,4,6,public space,0.0059708395,14,6,5,various key element,0.0061714313,2,1,1,human perception,0.007853921,12,6,3
+identity,0.0023412577,6,1,3,urban identity,0.0057242721,5,1,1,explore important feature,0.0061714313,2,1,1,street quality,0.0068691265,6,1,1
+view,0.0018592623,19,9,9,visual feature,0.0050128265,6,4,2,subjective human perception,0.0061714313,2,2,1,safety perception,0.0068691265,6,2,1
+quality,0.0017782026,40,12,11,visual enclosure,0.0045794177,4,1,1,computer vision algorithm,0.0061714313,2,2,1,street view,0.0068391405,13,7,4
+rating,0.001494326,3,3,2,streetscape feature,0.0045794177,4,2,1,historical big data,0.0061714313,2,1,1,perception,0.006589167700000001,51,13,8
+vision,0.0014826028,9,7,7,evaluation model,0.0045794177,4,2,1,various streetscape feature,0.0061714313,2,1,1,street,0.0064599683000000005,50,13,8
+renewal,0.0013651267,2,2,1,street vitality,0.0045794177,4,1,1,seven residential district,0.0061714313,2,1,1,experienced urban designer,0.0061714313,2,1,1
+gender,0.0013651267,2,1,1,street space,0.0045794177,4,1,1,streaming medium data,0.0061714313,2,1,1,various key element,0.0061714313,2,1,1
+preservation,0.0013651267,2,1,1,subjective measure,0.0045794177,4,2,1,medium data processing,0.0061714313,2,1,1,explore important feature,0.0061714313,2,1,1
+measurement,0.0013178692,8,5,7,perceptual quality,0.0045794177,4,1,1,discrete choice model,0.0045036751,2,2,2,subjective human perception,0.0061714313,2,2,1
+space,0.0012447418,28,11,11,computer vision,0.0038383968000000003,9,7,5,new urban data,0.0045036751,2,1,2,computer vision algorithm,0.0061714313,2,2,1
+interest,0.0012345298,6,5,6,view image,0.0036826141000000003,7,5,4,urban design theory,0.0045036751,2,1,2,historical big data,0.0061714313,2,1,1
+score,0.0012345298,6,3,6,perceptual indicator,0.0034345633,3,2,1,region using machine,0.0030857157,1,1,1,various streetscape feature,0.0061714313,2,1,1
+segmentation,0.0011706289,3,3,3,quantitative measurement,0.0034345633,3,2,1,limited data source,0.0030857157,1,1,1,seven residential district,0.0061714313,2,1,1

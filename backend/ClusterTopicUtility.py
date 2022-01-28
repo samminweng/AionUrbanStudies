@@ -168,19 +168,19 @@ class ClusterTopicUtility:
                     # For each topic, find out the document ids that contain the topic
                     for item in topics_per_cluster:
                         try:
-                            topic = item['topic']
+                            topic = item['term']
                             score = item['score']
                             freq = item['freq']  # Total number of frequencies in this cluster
                             cluster_ids = item['cluster_ids']  # A list of cluster that topic appears
                             # The topic appears in the article
                             if topic in n_grams:
                                 # Check if docs_per_topic contains the doc id
-                                doc_topic = next((d for d in docs_per_topic if d['topic'] == topic), None)
+                                doc_topic = next((d for d in docs_per_topic if d['term'] == topic), None)
                                 # Include the doc ids of the topics mentioned in the articles
                                 if doc_topic:
                                     doc_topic['doc_ids'].append(doc_id)
                                 else:
-                                    docs_per_topic.append({'topic': topic, 'score': score, 'freq': freq,
+                                    docs_per_topic.append({'term': topic, 'score': score, 'freq': freq,
                                                            'cluster_ids': cluster_ids,
                                                            'plural': get_plural_topic_form(topic),
                                                            'doc_ids': [doc_id]})
@@ -196,15 +196,10 @@ class ClusterTopicUtility:
 
     # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_terms(approach, docs_per_cluster_df, folder, is_load=False):
+    def get_n_gram_terms(approach, docs_per_cluster_df, folder):
         # A folder that stores all the topic results
-        temp_folder = os.path.join(folder, 'temp')
+        temp_folder = os.path.join(folder, 'TF_IDF')
         Path(temp_folder).mkdir(parents=True, exist_ok=True)
-        if is_load:
-            path = os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_topics.json')
-            topic_df = pd.read_json(path)
-            topic_list = topic_df.to_dict("records")
-            return topic_list
 
         # Convert the texts of all clusters into a list of document (a list of sentences) to derive n-gram candidates
         def _collect_cluster_docs(_docs_per_cluster_df):
@@ -311,13 +306,13 @@ class ClusterTopicUtility:
                 # Get freq table of the cluster
                 _freq_table = next(f for f in _freq_matrix if f['cluster'] == _cluster_no)['freq_table']
                 _tf_idf_list = []
-                for _topic, _tf_score in _tf_table.items():  # key is word, value is tf score
+                for _term, _tf_score in _tf_table.items():  # key is word, value is tf score
                     try:
-                        _idf_score = _idf_table[_topic]  # Get idf score of the word
-                        _freq = _freq_table[_topic]  # Get the frequencies of the word in cluster doc_id
-                        _cluster_ids = sorted(list(_occ_per_topic[_topic]))  # Get the clusters that the word appears
+                        _idf_score = _idf_table[_term]  # Get idf score of the word
+                        _freq = _freq_table[_term]  # Get the frequencies of the word in cluster doc_id
+                        _cluster_ids = sorted(list(_occ_per_topic[_term]))  # Get the clusters that the word appears
                         _score = float(_tf_score * _idf_score)
-                        _tf_idf_list.append({'topic': _topic, 'score': _score, 'freq': _freq,
+                        _tf_idf_list.append({'term': _term, 'score': _score, 'freq': _freq,
                                              'cluster_ids': _cluster_ids})
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
@@ -327,7 +322,7 @@ class ClusterTopicUtility:
 
         # Step 1. Convert each cluster of documents (one or more articles) into a single document
         docs = _collect_cluster_docs(docs_per_cluster_df)
-        topics_list = []
+        terms_list = []
         for n_gram_range in [1, 2, 3]:
             try:
                 # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
@@ -342,23 +337,23 @@ class ClusterTopicUtility:
                 # Compute tf-idf matrix
                 tf_idf_matrix = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, occ_per_topic)
                 # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
-                topics_list.append({
+                terms_list.append({
                     'n_gram': n_gram_range,
-                    'topics': tf_idf_matrix
+                    'terms': tf_idf_matrix
                 })
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
 
-        topic_df = pd.DataFrame(topics_list, columns=['n_gram', 'topics'])
+        term_df = pd.DataFrame(terms_list, columns=['n_gram', 'terms'])
         # Write the topics results to csv
-        topic_df.to_json(os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_topics.json'), orient='records')
-        return topics_list  # Return a list of dicts
+        term_df.to_json(os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_terms.json'), orient='records')
+        return terms_list  # Return a list of dicts
 
     # Output the cluster topics extracted by TF-IDF as a csv file
     @staticmethod
     def flatten_tf_idf_terms(cluster_no, folder):
         try:
-            path = os.path.join(folder, 'TF-IDF_cluster_topic_n_grams.json')
+            path = os.path.join(folder, 'TF-IDF_cluster_term_n_grams.json')
             cluster_df = pd.read_json(path)
             clusters = cluster_df.to_dict("records")
             cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
@@ -371,9 +366,9 @@ class ClusterTopicUtility:
                           }
                 for n_gram_num in ['1-gram', '2-gram', '3-gram', 'N-gram']:
                     try:
-                        if i < len(cluster['Topic-' + n_gram_num]):
-                            n_gram = cluster['Topic-' + n_gram_num][i]
-                            result[n_gram_num] = n_gram['topic']
+                        if i < len(cluster['Term-' + n_gram_num]):
+                            n_gram = cluster['Term-' + n_gram_num][i]
+                            result[n_gram_num] = n_gram['term']
                             result[n_gram_num + '-score'] = n_gram['score']
                             result[n_gram_num + '-freq'] = n_gram['freq']
                             result[n_gram_num + '-docs'] = len(n_gram['doc_ids'])
@@ -382,7 +377,7 @@ class ClusterTopicUtility:
                         print("Error occurred! {err}".format(err=err))
                 results.append(result)
             n_gram_df = pd.DataFrame(results)
-            path = os.path.join(folder, 'TF-IDF_cluster_#' + str(cluster_no) + '_flatten_topics.csv')
+            path = os.path.join(folder, 'TF-IDF_cluster_#' + str(cluster_no) + '_flatten_terms.csv')
             n_gram_df.to_csv(path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + path)
         except Exception as err:
@@ -398,7 +393,7 @@ class ClusterTopicUtility:
             duplicate_topics = set()
             # Scan the mixed n_gram_topic and find duplicated topics to another topic
             for n_gram_topic in sorted_n_grams:
-                topic = n_gram_topic['topic']
+                topic = n_gram_topic['term']
                 score = n_gram_topic['score']
                 freq = n_gram_topic['freq']
                 cluster_ids = set(n_gram_topic['cluster_ids'])  # a set of cluster ids
@@ -406,7 +401,7 @@ class ClusterTopicUtility:
                 # Scan if any other sub topic have the same freq and cluster_ids and share similar topics
                 # The topic (such as 'air') is a substring of another topic ('air temperature') so 'air' is duplicated
                 relevant_topics = list(
-                    filter(lambda _n_gram: _n_gram['topic'] != topic and topic in _n_gram['topic'] and
+                    filter(lambda _n_gram: _n_gram['term'] != topic and topic in _n_gram['term'] and
                                            _n_gram['freq'] == freq and
                                            len(set(_n_gram['doc_ids']) - doc_ids) == 0 and
                                            len(set(_n_gram['cluster_ids']) - cluster_ids) == 0,
@@ -415,14 +410,13 @@ class ClusterTopicUtility:
                     duplicate_topics.add(topic)
             # Removed duplicated topics and single char (such as 'j')
             filter_topics = list(
-                filter(lambda _n_gram: len(_n_gram['topic']) > 1 and _n_gram['topic'] not in duplicate_topics,
+                filter(lambda _n_gram: len(_n_gram['term']) > 1 and _n_gram['term'] not in duplicate_topics,
                        sorted_n_grams))
             # Sort by the score and  The resulting topics are mostly 2 or 3 grams
             filter_sorted_topics = sorted(filter_topics, key=lambda _n_gram: _n_gram['score'], reverse=True)
             return filter_sorted_topics[:300]  # Get top 300 topics
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-
 
     @staticmethod
     def visualise_cluster_results_by_iteration(iteration, results, folder):
@@ -468,6 +462,7 @@ class ClusterTopicUtility:
                               margin=dict(l=20, r=20, t=30, b=40))
             file_path = os.path.join(folder, 'iteration_' + str(iteration) + ".png")
             pio.write_image(fig, file_path, format='png')
-            print("Output the images of clustered results at iteration {i} to {path}".format(i=iteration, path=file_path))
+            print(
+                "Output the images of clustered results at iteration {i} to {path}".format(i=iteration, path=file_path))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
