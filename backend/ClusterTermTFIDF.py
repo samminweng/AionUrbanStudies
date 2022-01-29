@@ -211,8 +211,8 @@ if __name__ == '__main__':
     try:
         ct = ClusterTermTFIDF()
         # ct.collect_iterative_cluster_results()
-        # ct.output_iterative_cluster_images()
+        ct.output_iterative_cluster_images()
         # ct.derive_cluster_terms_by_TF_IDF()
-        ct.summarize_cluster_terms()
+        # ct.summarize_cluster_terms()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

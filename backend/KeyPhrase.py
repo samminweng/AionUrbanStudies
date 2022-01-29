@@ -26,7 +26,8 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 class KeyPhraseSimilarity:
     def __init__(self):
         self.args = Namespace(
-            case_name='CultureUrbanStudyCorpus',
+            # case_name='CultureUrbanStudyCorpus',
+            case_name='MLUrbanStudyCorpus',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
             device='cpu',

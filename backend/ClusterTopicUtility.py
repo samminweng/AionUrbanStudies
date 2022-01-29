@@ -11,6 +11,7 @@ import seaborn as sns
 import inflect
 import pandas as pd
 from nltk import sent_tokenize, word_tokenize, pos_tag, ngrams
+from psutil._common import pio
 
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
@@ -461,7 +462,7 @@ class ClusterTopicUtility:
                               legend=dict(orientation="v"),
                               margin=dict(l=20, r=20, t=30, b=40))
             file_path = os.path.join(folder, 'iteration_' + str(iteration) + ".png")
-            pio.write_image(fig, file_path, format='png')
+            fig.write_image(file_path, format='png')
             print(
                 "Output the images of clustered results at iteration {i} to {path}".format(i=iteration, path=file_path))
         except Exception as err:
