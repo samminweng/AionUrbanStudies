@@ -176,13 +176,13 @@ class KeyPhraseUtility:
 
     # Get a list of unique key phrases from all papers
     @staticmethod
-    def get_top_similar_key_phrases(phrase_list, top_k=5):
+    def sort_key_phrases_by_score(phrase_scores, top_k=5):
         try:
-            if len(phrase_list) < top_k:
-                return list(map(lambda p: p['key-phrase'], phrase_list))
+            if len(phrase_scores) < top_k:
+                return phrase_scores
 
             # Sort 'phrase list'
-            sorted_phrase_list = sorted(phrase_list, key=lambda p: p['score'], reverse=True)
+            sorted_phrase_list = sorted(phrase_scores, key=lambda p: p['score'], reverse=True)
             unique_key_phrases = list()
             for key_phrase in sorted_phrase_list:
                 # find if key phrase exist in all key phrase list
@@ -194,9 +194,7 @@ class KeyPhraseUtility:
                     print("Duplicated: " + found['key-phrase'])
 
             # Get top 5 key phrase
-            unique_key_phrases = unique_key_phrases[:top_k]
-            # assert len(_unique_key_phrases) == _top_k
-            return list(map(lambda p: p['key-phrase'], unique_key_phrases))
+            return unique_key_phrases[:top_k]
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 
@@ -280,8 +278,8 @@ class KeyPhraseUtility:
                 # Get vector dimension
                 # Compute the cosine distance/similarity for each doc vectors
                 distances = pairwise_distances(reduced_vectors, metric='cosine')
-                for min_samples in [None] + list(range(1, 21)):
-                    for min_cluster_size in list(range(10, 21)):
+                for min_samples in list(range(1, 31)):
+                    for min_cluster_size in list(range(5, 31)):
                         for epsilon in [0.0]:
                             try:
                                 # Group key phrase vectors using HDBSCAN clustering
