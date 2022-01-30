@@ -1,7 +1,9 @@
 // Create scatter graph
-function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
+function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
     const width = 600;
     const height = 700;
+    const corpus_data = _corpus_data;
+    const cluster_data = _cluster_data;
     // Optimal color pallets for 30 colors from http://vrl.cs.brown.edu/color
     // citation:
     // @article{gramazio-2017-ccd,
@@ -19,11 +21,11 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
         return (p_value >= c_value) ? p_value : c_value;
     }, 0) + 1;
     console.log(total_clusters);
-    // Get top N topics of a cluster
-    function get_cluster_topics(cluster_no, n) {
+    // Get top N terms of a cluster by TF-IDF
+    function get_cluster_terms(cluster_no, n) {
         // Cluster top 5 topics
-        const topics = cluster_topic_key_phrases.find(c => c['Cluster'] === cluster_no)['Topics'].slice(0, n);
-        return topics;
+        const terms = cluster_data.find(c => c['Cluster'] === cluster_no)['Terms'].slice(0, n);
+        return terms;
     }
 
     // Convert the json data to Plotly js data format
@@ -40,20 +42,24 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
         const initial_cluster = (is_hide) ? 0 : -1;
         // Convert the clustered data into the format for Plotly js chart
         for (let cluster_no = initial_cluster; cluster_no < total_clusters; cluster_no++) {
+
             const cluster_docs = corpus_data.filter(d => d['Cluster'] === cluster_no);
             if (cluster_docs.length > 0) {
                 let data_point = {'x': [], 'y': [], 'label': []};
                 for (const doc of cluster_docs) {
                     data_point['x'].push(doc.x);
                     data_point['y'].push(doc.y);
-                    const topics = get_cluster_topics(cluster_no, 5);
-                    const topic_text = topics.map(t => t['topic']).join("<br>");
+                    const terms = get_cluster_terms(cluster_no, 5);
+                    const term_text = terms.map(t => t['term']).join("<br>");
+                    const percent = parseInt(100 * cluster_data.find(c => c['Cluster'] === cluster_no)['Percent']);
                     if(cluster_no !== -1){
                         // Tooltip label displays top 5 topics
-                        data_point['label'].push('<b>Cluster #' + cluster_no + '</b> ('+ cluster_docs.length  + ' papers)<br>' + topic_text);
+                        data_point['label'].push('<b>Cluster #' + cluster_no + '</b> has '+ cluster_docs.length +
+                            ' papers (' + percent+ '%)<br>' + term_text);
                     }else{
                         // Tooltip label displays top 5 topics
-                        data_point['label'].push('<b>Outlier</b> ('+ cluster_docs.length  + ' papers)<br>' + topic_text);
+                        data_point['label'].push('<b>Outlier</b> has '+ cluster_docs.length  +
+                            ' papers (' + percent+ '%)<br>' + term_text);
                     }
                 }
                 const trace_name = (cluster_no !== -1)? 'Cluster #' + cluster_no: "Outliers";
@@ -70,19 +76,19 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
         return data_points;
     }
 
-    // Display top topics above the chart
-    function display_top_topics(cluster_no){
+    // Display top terms above the chart
+    function display_top_terms(cluster_no){
         $('#hover_info').empty();
         const n = 10;
-        const topics = get_cluster_topics(cluster_no, n);      // Get top 10 cluster topics
-        const topic_text = topics.map(t => t['topic']).join(", ");
+        const terms = get_cluster_terms(cluster_no, n);      // Get top 10 cluster topics
+        const terms_text = terms.map(t => t['term']).join(", ");
         // Add the cluster heading
         if(cluster_no !== -1){
-            $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' topics by LDA Topic Modelling</div>'));
+            $('#hover_info').append($('<div class="h5">Cluster #' + cluster_no+' Top ' + n + ' Distinct Terms</div>'));
         }else{
-            $('#hover_info').append($('<div class="h5">Outlier Top ' + n + ' topics</div>'));
+            $('#hover_info').append($('<div class="h5">Outlier Top ' + n + ' Distinct terms</div>'));
         }
-        $('#hover_info').append($('<div>space, square, open space, study, context, design, interaction, public open space, public space, social interaction</div>'));
+        $('#hover_info').append($('<div>' + terms_text + '</div>'));
         $('#hover_info').focus();
     }
 
@@ -130,7 +136,7 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
             // Create a list of cluster doc
             // const cluster = clusters.find(c => c['Cluster'] === cluster_no);
             const cluster_text = (cluster_no !== -1) ? 'Cluster #' + cluster_no : "Outliers";
-            const cluster_doc_list = new ClusterDocList(cluster_no, corpus_data, cluster_topic_key_phrases);
+            const cluster_doc_list = new ClusterDocList(cluster_no, corpus_data, cluster_data);
             // Add an annotation to the clustered dots
             const new_annotation = {
                 x: point.xaxis.d2l(point.x),
@@ -162,7 +168,7 @@ function ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases) {
                 if(point.data.name.includes('#')){
                     cluster_no = parseInt(point.data.name.split("#")[1]);
                 }
-                display_top_topics(cluster_no);
+                display_top_terms(cluster_no);
             }
         }).on('plotly_unhover', function(data){
             $('#hover_info').empty();

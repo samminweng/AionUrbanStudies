@@ -25,7 +25,7 @@ function SunburstGraph(key_phrase_groups, cluster_no, cluster_docs) {
             // Added the top 10 word
             const key_phrases = group['key-phrases'];
             for(const key_phrase of key_phrases){
-                
+
             }
 
             console.log(group);

@@ -1,8 +1,10 @@
 // Create a div to display the grouped key phrases
 function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div){
+    console.log(cluster_key_phrases);
+    const total = cluster_key_phrases.reduce((pre, cur) => pre + cur['key-phrases'].length, 0);
     // Re-order the groups of key phrases
-    cluster_key_phrases.sort((a, b) => b['count'] - a['count']);
-    const total = cluster_key_phrases.reduce((pre, cur) => pre + cur['count'], 0);
+    cluster_key_phrases.sort((a, b) => b['key-phrases'].length - a['key-phrases'].length);
+
 
     // Create an list item to display a group of key phrases
     function createGroupItem(group){
@@ -57,7 +59,7 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div){
 
 
         // Add percent
-        const percent = Math.round(100 * (group['count']/total));
+        const percent = Math.round(100 * (group['key-phrases'].length/(1.0* total)));
         const doc_ids = group['DocIds'];
         const group_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
         const percent_btn = $('<button type="button" class="rounded btn-sm">' + percent + '%</button>');

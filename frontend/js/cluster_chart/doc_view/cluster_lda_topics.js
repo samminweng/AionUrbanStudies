@@ -6,25 +6,13 @@ function ClusterLDATopics(cluster_lda_topics, accordion_div){
         const index = lda_topic['index'];
         const topic_view = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>')
         // Display key phrases
-        const topic_words = lda_topic['lda-topics']['topic'];
+        const topic_words = lda_topic['lda-topics']['top_words'];
         const topic_word_div = $('<div class="ms-2 me-auto"> <div class="fw-bold">Topic #' + (index + 1) +'</div> </div>');
         // Display top 10 key phrases
         const topic_word_span = $('<p class="lda_topic_text"></p>');
         topic_word_span.text(topic_words.join(", "));
         topic_word_div.append(topic_word_span);
         topic_view.append(topic_word_div);
-        // // Add percent
-        // const percent = Math.round(100 * (group['count']/total));
-        // const doc_ids = group['DocIds'];
-        // const group_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
-        // const percent_btn = $('<button type="button" class="rounded btn-sm">' + percent + '%</button>');
-        // // Define count btn to display the doc_ids
-        // percent_btn.click(function(event){
-        //     // Create a doc list
-        //     const doc_list = new DocList(group_docs, group);
-        //     document.getElementById('doc_list').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-        // });
-        // group_item.append(percent_btn);
         return topic_view;
     }
 
