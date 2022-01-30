@@ -1,5 +1,6 @@
 'use strict';
-const corpus = 'CultureUrbanStudyCorpus';
+// const corpus = 'CultureUrbanStudyCorpus';
+const corpus = 'MLUrbanStudyCorpus';
 const cluster_path = 'data/' + corpus + '_cluster_terms_key_phrases_LDA_topics.json';
 const corpus_path = 'data/' + corpus + '_clusters.json';
 // Display the results of a cluster

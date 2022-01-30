@@ -6,8 +6,8 @@
     <!-- All the third party libraries-->
     <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="lib/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="lib/plotly-2.4.2.min.js"></script>
-    <script type="text/javascript" src="lib/pagination.min.js"></script>
+    <script type="text/javascript" src="lib/plotly-2.8.3.min.js"></script>
+    <script type="text/javascript" src="lib/pagination.min.js"></script>//
     <script type="text/javascript" src="lib/jquery.mark.min.js"></script>
     <script type="text/javascript" src="lib/jquery-ui.js"></script>
     <!-- CSS styles -->
@@ -19,54 +19,44 @@
 <body>
 <div class="container">
     <div class="h4">Term Sunburst Chart</div>
-    <div>The bubble represents a cluster, phrase groups and top 10 phrases in each group
+    <div>This sunburst chart display the hierarchical structure of key phrase groups and LDA topics
     </div>
-    <div class="row m-3">
-        <div class="col border border-3">
-            <div class="row">
-                <div class="col">
-                    <div class="container p-3">
-                        <fieldset>
-                            <div class="container-sm mt-3">
-                                <div class="row">
-                                    <div class="col">
-                                        <select name="cluster_list" id="cluster_list">
-                                        </select>
-                                    </div>
-                                    <div class="col">
-                                        <div id="group_types"></div>
-                                    </div>
-                                </div>
+    <div class="row">
+        <div class="col">
+            <div class="container p-3">
+                <fieldset>
+                    <div class="container-sm mt-3">
+                        <div class="row">
+                            <div class="col">
+                                <select name="cluster_list" id="cluster_list">
+                                </select>
                             </div>
-                        </fieldset>
-                        <fieldset>
-                            <div class="container-sm mt-3">
-                                <div class="row">
-                                    <div class="col-3">Cluster: <span id="cluster_no"></span></div>
-                                    <div class="col-4">Total Papers: <span id="doc_count"></span></div>
-                                    <div class="col-5">Coherence Score: <span id="score"></span></div>
-                                </div>
+                            <div class="col">
+                                <div id="group_types"></div>
                             </div>
-
-                        </fieldset>
+                        </div>
                     </div>
-                    <div id="term_info">
+                </fieldset>
+                <fieldset>
+                    <div class="container-sm mt-3">
+                        <div class="row">
+                            <div class="col-3">Cluster: <span id="cluster_no"></span></div>
+                            <div class="col-4">Total Papers: <span id="doc_count"></span></div>
+                            <div class="col-5">Coherence Score: <span id="score"></span></div>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div id="term_chart"></div>
-                </div>
+            <div id="term_info">
             </div>
         </div>
+    </div>
+    <div class="row m-3">
         <div class="col border border-3 p-3">
-            <div class="row">
-                <div class="col lead" id="header"></div>
-            </div>
-            <div class="row">
-                <div id="doc_list" class="col"></div>
-            </div>
+            <div id="key_phrase_chart"></div>
+        </div>
+        <div class="col border border-3 p-3">
+            <div id="lda_topic_chart"></div>
         </div>
     </div>
 </div>

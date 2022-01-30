@@ -35,7 +35,8 @@ function TermSunburst(cluster_data, cluster_docs){
         try{
             const cluster_no = cluster_data['Cluster'];
             // Display key phrase groups as default graph
-            const graph = new SunburstGraph(key_phrase_groups, cluster_no, cluster_docs);
+            const key_phrase_graph = new SunburstGraph(key_phrase_groups, cluster_no, true);
+            const lad_topic_graph = new SunburstGraph(lda_topics, cluster_no, false);
         }catch (error){
             console.error(error);
         }
