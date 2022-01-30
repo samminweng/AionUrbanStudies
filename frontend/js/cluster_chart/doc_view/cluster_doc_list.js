@@ -1,10 +1,10 @@
 function ClusterDocList(cluster_no, corpus_data, cluster_data) {
     const cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
-
     const cluster_key_phrases = cluster['KeyPhrases'];
     const cluster_lda_topics = cluster['LDATopics'];
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
-    const cluster_link = $('<a target="_blank" href="cluster_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
+    // const cluster_link = $('<a target="_blank" href="cluster_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
+    const cluster_link = $('<span>Cluster #' + cluster_no + '</span>');
     if(cluster_no === -1){
         cluster_link.text("Outliers");
     }
@@ -40,7 +40,7 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
         // // Add the key phrases grouped by similarity
         const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div);
         // Create LDA Accordion
-        // const lda_topic_div = new ClusterLDATopics(cluster_lda_topics, accordion_div);
+        const lda_topic_div = new ClusterLDATopics(cluster_lda_topics, accordion_div);
         // // Set accordion
         accordion_div.accordion({
             // icons: null,
@@ -58,7 +58,8 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
         // Create a div to display
         $('#cluster_doc_heading').empty();
         $('#cluster_doc_heading').append(cluster_link);
-        $('#cluster_doc_heading').append($('<span> has ' +cluster_docs.length+ ' articles</span>'));
+        const percent = parseInt(cluster['Percent'] * 100);
+        $('#cluster_doc_heading').append($('<span> has ' +cluster_docs.length+ ' papers (' + percent + '%)</span>'));
 
         // Create a div to display top 10 Topic of a cluster
         create_cluster_terms_key_phrase_topics();
