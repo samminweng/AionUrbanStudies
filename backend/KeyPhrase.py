@@ -212,9 +212,9 @@ class KeyPhraseSimilarity:
             # Re-order cluster df and Output to csv and json file
             cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases']]
             folder = os.path.join(folder, 'key_phrases')
-            path = os.path.join(folder, self.args.case_name + '_cluster_topics_key_phrases.csv')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(folder, self.args.case_name + '_cluster_topics_key_phrases.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.json')
             cluster_df.to_json(path, orient='records')
             print('Output key phrases per cluster to ' + path)
         except Exception as err:
@@ -256,10 +256,10 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        # kp.extract_doc_key_phrases_by_similarity()
-        # kp.group_key_phrases_by_clusters_experiments()
-        # kp.grouped_key_phrases_with_best_experiment_result()
-        # kp.combine_terms_key_phrases_results()
+        kp.extract_doc_key_phrases_by_similarity()
+        kp.group_key_phrases_by_clusters_experiments()
+        kp.grouped_key_phrases_with_best_experiment_result()
+        kp.combine_terms_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

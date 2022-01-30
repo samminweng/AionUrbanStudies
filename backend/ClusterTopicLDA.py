@@ -1,15 +1,11 @@
 import os
-import re
-import string
 from argparse import Namespace
 # Obtain the cluster results of the best results and extract cluster topics using TF-IDF
 from pathlib import Path
-
 import gensim
 from gensim import corpora
-from gensim.models import Phrases, CoherenceModel
-from nltk import WordNetLemmatizer
-from nltk.tokenize import word_tokenize, sent_tokenize
+from gensim.models import Phrases
+from nltk.tokenize import sent_tokenize
 import pandas as pd
 from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
@@ -20,7 +16,8 @@ from ClusterTopicUtility import ClusterTopicUtility
 class ClusterTopicLDA:
     def __init__(self):
         self.args = Namespace(
-            case_name='CultureUrbanStudyCorpus',
+            # case_name='CultureUrbanStudyCorpus',
+            case_name='MLUrbanStudyCorpus',
             approach='LDA',
             passes=100,
             iterations=400,
@@ -29,7 +26,7 @@ class ClusterTopicLDA:
         )
         # Load Key phrase
         path = os.path.join('output', self.args.case_name, 'key_phrases',
-                            self.args.case_name + '_cluster_topics_key_phrases.json')
+                            self.args.case_name + '_cluster_terms_key_phrases.json')
         self.cluster_key_phrases_df = pd.read_json(path)
         # Sort by Cluster
         self.cluster_key_phrase_df = self.cluster_key_phrases_df.sort_values(by=['Cluster'], ascending=True)
@@ -115,8 +112,9 @@ class ClusterTopicLDA:
                         diff = round(100 * (abs(topic_coherence_score - topic_score) / abs(topic_coherence_score)))
                         if diff > 100:
                             print("Diff {d}%".format(d=diff))
+
                         lda_topics.append({
-                            'topic_words': topic_words,
+                            'top_words': topic_words,
                             'score': round(topic_coherence_score, 3),  # Topic Coherence score
                             'word_docIds': word_docs
                         })
@@ -161,21 +159,24 @@ class ClusterTopicLDA:
             results = list()
             # Get the cluster
             for cluster in clusters:
-                key_phrase_groups = cluster['KeyPhrases']
-                num_groups = len(key_phrase_groups)
                 doc_n_gram_list = cluster['Ngrams']
                 doc_id_list = cluster['DocId']
                 total_score = 0
-                for group in key_phrase_groups:
-                    top_key_phrases = group['key-phrases'][:10]
+                num_groups = 0
+                key_phrase_group_list = list()
+                for kp_group in cluster['KeyPhrases']:
+                    top_key_phrases = kp_group['key-phrases'][:10]
                     # Topic coherence score
                     score, word_docs = ClusterTopicUtility.compute_topic_coherence_score(doc_n_gram_list, doc_id_list,
                                                                                          top_key_phrases)
-                    group['score'] = score
-                    group['word_docIds'] = word_docs
+                    group = {"top_words": top_key_phrases, 'score': score, 'word_docIds': word_docs,
+                             'key-phrases': kp_group['key-phrases'], 'NumDocs': kp_group['NumDocs'],
+                             'DocIds': kp_group['DocIds']}
                     total_score += score
+                    num_groups += 1
+                    key_phrase_group_list.append(group)
                 # Added the grouped key phrases of a cluster
-                results.append(key_phrase_groups)
+                results.append(key_phrase_group_list)
                 avg_score = total_score / num_groups
                 # store score
                 score_list.append(round(avg_score, 3))
@@ -213,8 +214,6 @@ class ClusterTopicLDA:
             # Compute the percent
             total = cluster_df['NumDocs'].sum()
             cluster_df['Percent'] = cluster_df['NumDocs'].apply(lambda x: x / total)
-            # Key terms are the terms identify by TF-IDF
-            cluster_df['KeyTerms'] = cluster_df['Topics'].tolist()
             # Output the intermediate results
             df = cluster_df[['Cluster', 'NumDocs', 'Percent', 'DocIds',
                              'KeyPhraseScore', 'KeyPhrases',
@@ -227,7 +226,7 @@ class ClusterTopicLDA:
             path = os.path.join(folder, self.args.case_name + '_cluster_key_phrases_LDA_topics.csv')
             df.to_csv(path, encoding='utf-8', index=False)
             # Output the overall results
-            df = cluster_df[['Cluster', 'NumDocs', 'Percent', 'DocIds', 'KeyTerms',
+            df = cluster_df[['Cluster', 'NumDocs', 'Percent', 'DocIds', 'Terms',
                              'KeyPhraseScore', 'KeyPhrases',
                              'LDAScore', 'LDATopics']]
             # # # # Write to a json file
@@ -237,9 +236,9 @@ class ClusterTopicLDA:
             # Write to a csv file
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
             df.to_csv(path, encoding='utf-8', index=False)
-            folder = os.path.join('output', self.args.case_name, 'LDA_topics')
-            clusters = cluster_df.to_dict("records")
-            ClusterTopicUtility.output_key_phrase_group_LDA_topics(clusters, [0, 8, 20], folder, self.args.case_name)
+            # folder = os.path.join('output', self.args.case_name, 'LDA_topics')
+            # clusters = cluster_df.to_dict("records")
+            # ClusterTopicUtility.output_key_phrase_group_LDA_topics(clusters, [0, 8, 20], folder, self.args.case_name)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -248,9 +247,9 @@ class ClusterTopicLDA:
 if __name__ == '__main__':
     try:
         ct = ClusterTopicLDA()
-        # ct.derive_n_grams_group_by_clusters()
-        # ct.derive_cluster_topics_by_LDA()
-        # ct.compute_key_phrase_scores()
+        ct.derive_n_grams_group_by_clusters()
+        ct.derive_cluster_topics_by_LDA()
+        ct.compute_key_phrase_scores()
         ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
