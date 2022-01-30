@@ -267,6 +267,12 @@ class KeyPhraseUtility:
             dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5]
             # Filter out dimensions > the length of key phrases
             dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
+            min_cluster_size_list = range(5, 20)
+            min_sample_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+            if (len(key_phrases)/5) > 30:
+                min_cluster_size_list = [20, 25, 30, 35, 40, 45, 50, 55, 60]
+                min_sample_list = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
+
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
                 reduced_vectors = umap.UMAP(
@@ -278,8 +284,8 @@ class KeyPhraseUtility:
                 # Get vector dimension
                 # Compute the cosine distance/similarity for each doc vectors
                 distances = pairwise_distances(reduced_vectors, metric='cosine')
-                for min_samples in list(range(1, 31)):
-                    for min_cluster_size in list(range(5, 31)):
+                for min_samples in min_sample_list:
+                    for min_cluster_size in min_cluster_size_list:
                         for epsilon in [0.0]:
                             try:
                                 # Group key phrase vectors using HDBSCAN clustering
@@ -311,7 +317,7 @@ class KeyPhraseUtility:
                                           'epsilon': epsilon,
                                           'total_groups': len(group_results),
                                           'outliers': outlier_number,
-                                          'score': score,
+                                          'score': round(score, 4),
                                           'group_result': group_results,
                                           'group_labels': group_labels}
                                 results.append(result)

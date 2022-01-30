@@ -1,0 +1,4 @@
+group,count,key-phrases,NumDocs,DocIds
+-1,9,"['machine learning', 'extreme learning machine', 'ground object classification', 'machine classification algorithm', 'multidimensional livability', 'livability management', 'multidimensional livability index', 'livability index', 'livability']",3,"[342, 481, 567]"
+0,10,"['urban functional area', 'urban planning', 'unplanned urban expansion', 'global urbanization', 'sustainable urban planning', 'urban development classification', 'urban planning machine', 'urban planning', 'new urban development', 'urban planning']",3,"[342, 463, 481]"
+1,6,"['intercity corporate network', 'intercity network', 'network big data', 'network model', 'corporate network', 'GIS big data']",2,"[447, 481]"

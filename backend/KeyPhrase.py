@@ -158,6 +158,8 @@ class KeyPhraseSimilarity:
                     # Get the best results
                     best_result = experiments[0]
                     best_result['cluster'] = cluster_no
+                    total_num_key_phrases = reduce(lambda pre, cur: pre + cur['count'], best_result['group_result'], 0)
+                    best_result['total_key_phrases'] = total_num_key_phrases
                     # Load top five key phrases of every paper in a cluster
                     path = os.path.join(key_phrase_folder, 'doc_key_phrase', 'top_doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
                     doc_key_phrases = pd.read_json(path).to_dict("records")
@@ -168,6 +170,8 @@ class KeyPhraseSimilarity:
                                                                                             best_result,
                                                                                             doc_key_phrases,
                                                                                             folder)
+
+
                     # Sort the grouped key phrases by rake
                     for group in group_key_phrases:
                         phrase_list = group['key-phrases']
@@ -182,7 +186,7 @@ class KeyPhraseSimilarity:
             # Load best results of each group
             df = pd.DataFrame(best_results,
                               columns=['cluster', 'dimension', 'min_samples', 'min_cluster_size', 'epsilon',
-                                       'total_groups', 'outliers', 'score', 'grouped_key_phrases'])
+                                       'total_key_phrases', 'total_groups', 'outliers', 'score', 'grouped_key_phrases'])
             folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, 'top_key_phrases_best_grouping.csv')
@@ -192,13 +196,13 @@ class KeyPhraseSimilarity:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Combine the TF-IDF topics and grouped key phrases results
-    def combine_topics_key_phrases_results(self):
+    # Combine the TF-IDF terms and grouped key phrases results
+    def combine_terms_key_phrases_results(self):
         try:
             folder = os.path.join('output', self.args.case_name)
             # Combine all key phrases and TF-IDF topics to a json file
             # # Load TF-IDF topics
-            path = os.path.join(folder, 'topics', self.args.case_name + '_TF-IDF_cluster_topics.json')
+            path = os.path.join(folder, 'cluster_terms', self.args.case_name + '_TF-IDF_cluster_terms.json')
             topics_df = pd.read_json(path)
             cluster_df = topics_df.copy(deep=True)
             # Load grouped Key phrases
@@ -206,7 +210,7 @@ class KeyPhraseSimilarity:
             key_phrase_df = pd.read_json(path)
             cluster_df['KeyPhrases'] = key_phrase_df['grouped_key_phrases'].tolist()
             # Re-order cluster df and Output to csv and json file
-            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Topics', 'KeyPhrases']]
+            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases']]
             folder = os.path.join(folder, 'key_phrases')
             path = os.path.join(folder, self.args.case_name + '_cluster_topics_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
@@ -252,10 +256,10 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        kp.extract_doc_key_phrases_by_similarity()
-        kp.group_key_phrases_by_clusters_experiments()
+        # kp.extract_doc_key_phrases_by_similarity()
+        # kp.group_key_phrases_by_clusters_experiments()
         # kp.grouped_key_phrases_with_best_experiment_result()
-        # kp.combine_topics_key_phrases_results()
-        # kp.combine_cluster_doc_key_phrases()
+        # kp.combine_terms_key_phrases_results()
+        kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

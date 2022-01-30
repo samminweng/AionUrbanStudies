@@ -1,0 +1,4 @@
+group,count,key-phrases,NumDocs,DocIds
+-1,4,"['conduct cooperative design', 'Online cooperative design', 'online design', 'cooperative design']",1,[589]
+0,19,"['urban design plan', 'urban design task', 'urban design', 'inspires urban designer', 'urban design method', 'building reconstruction', 'city modelling', 'elevation data', 'height data', 'height prediction', 'sustainable urban development', 'urban data operationalization', 'urban layout', 'urban development', 'urban data', 'urban layout', 'urban planning', 'statistical spatial test', 'urban design']",6,"[259, 412, 457, 480, 569, 589]"
+1,7,"['automatic design', 'generative architectural', 'generated design data', 'generated design', 'architectural form', 'design', 'design proposal']",3,"[259, 412, 569]"
