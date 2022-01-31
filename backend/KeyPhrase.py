@@ -128,10 +128,16 @@ class KeyPhraseSimilarity:
                 path = os.path.join(key_phrase_folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
                 df = pd.read_json(path)
                 all_key_phrases = reduce(lambda pre, cur: pre + cur, df['key-phrases'].tolist(), list())
+                # Filter duplicate key phrases
+                unique_key_phrase = list()
+                for key_phrase in all_key_phrases:
+                    found = next((k for k in unique_key_phrase if k.lower() == key_phrase.lower()), None)
+                    if not found:
+                        unique_key_phrase.append(key_phrase)
                 experiment_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
                 # # Cluster all key phrases by using HDBSCAN
-                KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(all_key_phrases, cluster_no, self.model,
+                KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(unique_key_phrase, cluster_no, self.model,
                                                                          experiment_folder, self.args.n_neighbors)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
@@ -150,8 +156,6 @@ class KeyPhraseSimilarity:
                     path = os.path.join(key_phrase_folder, 'experiments',
                                         'top_key_phrases_cluster_#{c}_grouping_experiments.json'.format(c=cluster_no))
                     experiment_df = pd.read_json(path)
-                    # Replace 'None' with None value
-                    experiment_df['min_samples'] = experiment_df['min_samples'].replace('None', 0)
                     # Sort the experiment results by score
                     experiment_df = experiment_df.sort_values(['score'], ascending=False)
                     experiments = experiment_df.to_dict("records")
@@ -256,9 +260,9 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        kp.extract_doc_key_phrases_by_similarity()
-        kp.group_key_phrases_by_clusters_experiments()
-        kp.grouped_key_phrases_with_best_experiment_result()
+        # kp.extract_doc_key_phrases_by_similarity()
+        # kp.group_key_phrases_by_clusters_experiments()
+        # kp.grouped_key_phrases_with_best_experiment_result()
         kp.combine_terms_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:

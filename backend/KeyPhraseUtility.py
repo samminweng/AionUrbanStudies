@@ -215,11 +215,17 @@ class KeyPhraseUtility:
         try:
             # Aggregate all the key phrases of each doc in a cluster as a single list
             key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], doc_key_phrases, list())
+            # Filter duplicate key phrases
+            unique_key_phrase = list()
+            for key_phrase in key_phrases:
+                found = next((k for k in unique_key_phrase if k.lower() == key_phrase.lower()), None)
+                if not found:
+                    unique_key_phrase.append(key_phrase)
             # Get the grouping labels of key phrases
             group_labels = parameter['group_labels']
             # Load key phrase and group labels
             df = pd.DataFrame()
-            df['key-phrases'] = key_phrases
+            df['key-phrases'] = unique_key_phrase
             df['group'] = group_labels
             # Output the summary of the grouped key phrase results
             group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrases': lambda k: list(k)})

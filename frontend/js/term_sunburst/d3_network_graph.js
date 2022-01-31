@@ -159,8 +159,11 @@ function D3NetworkGraph(word_docs, is_key_phrase, chart_div, color) {
                     occ_doc_ids.add(doc_id);
                 }
             }
-            return "'" + d.name + "' alone appears in " + d['doc_ids'].length + " papers and\n" +
-                        "co-occurs with " + d_links.length + " words in " + occ_doc_ids.size + " papers\n";
+            let str = "'" + d.name + "' alone appears in " + d['doc_ids'].length + " papers\n";
+            if(d_links.length > 0){
+                str += "and co-occurs with " + d_links.length + " words in " + occ_doc_ids.size + " papers\n";
+            }
+            return str;
         });
 
         // Simulate the tick event

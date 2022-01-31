@@ -5,7 +5,7 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
     const chart_div = (is_key_phrase? $('#key_phrase_chart'): $('#lda_topic_chart'));
     // Convert the word_docs map to nodes/links
     const {total, group_list} = compute_total(group_data);
-    const {labels, values, parents, ids} = create_graph_data();
+    const {labels, values, parents, ids, texts} = create_graph_data();
     console.log(ids);
     const width = 600;
     const height = 600;
@@ -34,6 +34,7 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
         const root = "Cluster#"+cluster_no;
         let ids = [root];
         let labels = [root];
+        let texts = [""];
         let values = [total];
         let parents = [""];
         for(let i=0; i < group_list.length; i++){
@@ -44,12 +45,13 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
             const group_score = group['score'].toFixed(2);
             ids.push(group_name);
             labels.push(group_name + " <br>score:" + group_score);
+            texts.push("");
             values.push(group_total);
             parents.push(root);
             const top_words = group['top_words'];
             for(const top_word of top_words){
                 const num_docs = group['word_docIds'][top_word].length;
-                const w_id =  group_name + " - " + top_word;
+                const w_id =  group_name + " # " + top_word;
                 let w_label = top_word;
                 const w_array = top_word.split(" ");
                 if(w_array.length > 2){
@@ -57,6 +59,7 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
                 }
                 ids.push(w_id);
                 labels.push(w_label);
+                texts.push(" has " + num_docs + " papers")
                 values.push(num_docs);
                 parents.push(group_name);
             }
@@ -73,6 +76,7 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
             "ids": ids,
             "labels": labels,
             "parents": parents,
+            "text": texts,
             "values": values,
             "leaf": {"opacity": 0.7},
             "marker": {"line": {"width": 2}},
@@ -82,11 +86,14 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
             'insidetextorientation': "horizontal",
             // Label text orientation
             "textposition": 'inside',
-            'hoverinfo': 'label',
+            // "hovertemplate": "<b>%{label}</b> %{text}",
+            'hoverinfo': 'label+text',
         }];
 
         const layout = {
             "margin": {"l": 10, "r": 10, "b": 10, "t": 10},
+            hovermode: 'closest',
+            config: { responsive: true }
             // "sunburstcolorway": D3Colors
         };
         const chart_id = chart_div.attr('id');
@@ -96,30 +103,38 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
         // Define the hover event
         chart_element.on('plotly_click', function(data){
             const id = data.points[0].id;
-            const name = data.points[0].label;
             if(id.startsWith('Topic')){
                 const index = parseInt(id.split("#")[1]) - 1;
-                const group = group_data[index];
-                console.log(group);
+                const group = group_list[index]['group'];
+                // console.log(group);
                 const word_docs = group['word_docIds'];
                 const chart_div = $('#lda_topic_network_graph');
                 const network_graph = new D3NetworkGraph(word_docs, false, chart_div, D3Colors[index]);
+                const score = group['score'].toFixed(2);
                 // Added header
-                $('#lda_topic_occurrence_header').text(id + " Term Occurrence Chart");
+                $('#lda_topic_occurrence_header').empty();
+                const header = $('<div>Topic #' + (index+1) + ' Term Occurrence Chart (Score = <span>' + score+ '</span>)</div>');
+                if(score < 0){
+                    header.find("span").attr('class', 'text-danger');
+                }
+                $('#lda_topic_occurrence_header').append(header);
             }else if(id.startsWith('Group')){
                 const index = parseInt(id.split("#")[1]) - 1;
-                const group = group_data[index];
-                console.log(group);
+                const group = group_list[index]['group'];
+                const score = group['score'].toFixed(2);
                 const word_docs = group['word_docIds'];
                 const chart_div = $('#phrase_network_graph');
                 const network_graph = new D3NetworkGraph(word_docs, true, chart_div, D3Colors[index]);
                 // Added header
-                $('#phrase_occurrence_header').text(id + " Term Occurrence Chart");
+                // Added header
+                $('#phrase_occurrence_header').empty();
+                const header = $('<div> Group #' + (index +1) + ' Term Occurrence Chart (Score = <span>' + score+ '</span>)</div>');
+                if(score < 0){
+                    header.find("span").attr('class', 'text-danger');
+                }
+                $('#phrase_occurrence_header').append(header);
             }
-
-        })
-
-
+        });// End of chart onclick event
     }
     // Create the header
     function create_header(){
