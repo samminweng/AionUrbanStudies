@@ -63,6 +63,7 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
         }
         return {labels: labels, values: values, parents: parents, ids:ids};
     }
+
     // Create the sunburst
     function create_sunburst_graph() {
         chart_div.empty();
@@ -95,6 +96,7 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
         // Define the hover event
         chart_element.on('plotly_click', function(data){
             const id = data.points[0].id;
+            const name = data.points[0].label;
             if(id.startsWith('Topic')){
                 const index = parseInt(id.split("#")[1]) - 1;
                 const group = group_data[index];
@@ -102,6 +104,8 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
                 const word_docs = group['word_docIds'];
                 const chart_div = $('#lda_topic_network_graph');
                 const network_graph = new D3NetworkGraph(word_docs, false, chart_div, D3Colors[index]);
+                // Added header
+                $('#lda_topic_occurrence_header').text(id + " Term Occurrence Chart");
             }else if(id.startsWith('Group')){
                 const index = parseInt(id.split("#")[1]) - 1;
                 const group = group_data[index];
@@ -109,6 +113,8 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
                 const word_docs = group['word_docIds'];
                 const chart_div = $('#phrase_network_graph');
                 const network_graph = new D3NetworkGraph(word_docs, true, chart_div, D3Colors[index]);
+                // Added header
+                $('#phrase_occurrence_header').text(id + " Term Occurrence Chart");
             }
 
         })
