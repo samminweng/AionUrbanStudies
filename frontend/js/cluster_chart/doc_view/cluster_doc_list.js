@@ -3,8 +3,8 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
     const cluster_key_phrases = cluster['KeyPhrases'];
     const cluster_lda_topics = cluster['LDATopics'];
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
-    // const cluster_link = $('<a target="_blank" href="cluster_list.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
-    const cluster_link = $('<span>Cluster #' + cluster_no + '</span>');
+    const cluster_link = $('<a target="_blank" href="term_sunburst.html?cluster='+ cluster_no + '">Cluster #' + cluster_no + '</a>');
+    // const cluster_link = $('<span>Cluster #' + cluster_no + '</span>');
     if(cluster_no === -1){
         cluster_link.text("Outliers");
     }
