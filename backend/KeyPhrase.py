@@ -56,8 +56,8 @@ class KeyPhraseSimilarity:
             folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
             Path(folder).mkdir(parents=True, exist_ok=True)
             corpus_docs = self.corpus_df.to_dict("records")
-            cluster_no_list = [0]
-            # cluster_no_list = range(-1, self.total_clusters)
+            # cluster_no_list = [1]
+            cluster_no_list = range(-1, self.total_clusters)
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))[:20]
                 results = list()  # Store all the key phrases
@@ -88,25 +88,24 @@ class KeyPhraseSimilarity:
                         phrase_similar_scores = KeyPhraseUtility.sort_phrases_by_similar_score(candidate_scores)
                         phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
                         # Rank  top 20 high scoring phrases
-                        for num in [10, 20]:
-                            for diversity in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
-                                phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(
-                                                            self.model, doc_text, phrase_candidates[:num], diversity)
-                                # key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
-                                # Obtain top five key phrases
-                                result = {'Cluster': cluster_no, 'DocId': doc_id, 'top_num': num,
-                                          'Diversity': diversity}
-                                          # 'key-phrases': key_phrases[:5],
-                                          # 'phrase-candidates': phrase_candidates}
-                                # Output the top 5 key-phrase and score
-                                for i in range(0, 20):
-                                    if i < len(phrase_scores_mmr):
-                                        result['top_'+str(i)+'_phrase'] = phrase_scores_mmr[i]['key-phrase']
-                                        result['top_'+str(i)+'_score'] = phrase_scores_mmr[i]['score']
-                                    else:
-                                        result['top_' + str(i) + '_phrase'] = 'NAN'
-                                        result['top_' + str(i) + '_score'] = 0
-                                results.append(result)
+                        num = 20
+                        diversity = 0.5
+                        phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(
+                                                    self.model, doc_text, phrase_candidates[:num], diversity)
+                        key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
+                        # Obtain top five key phrases
+                        result = {'Cluster': cluster_no, 'DocId': doc_id, 'top_num': num,
+                                  'Diversity': diversity, 'key-phrases': key_phrases[:5],
+                                  'phrase-candidates': phrase_candidates}
+                        # Output the top 5 key-phrase and score
+                        # for i in range(0, 20):
+                        #     if i < len(phrase_scores_mmr):
+                        #         result['top_'+str(i)+'_phrase'] = phrase_scores_mmr[i]['key-phrase']
+                        #         result['top_'+str(i)+'_score'] = phrase_scores_mmr[i]['score']
+                        #     else:
+                        #         result['top_' + str(i) + '_phrase'] = 'NAN'
+                        #         result['top_' + str(i) + '_score'] = 0
+                        results.append(result)
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
                         sys.exit(-1)
@@ -114,7 +113,7 @@ class KeyPhraseSimilarity:
                 # Write key phrases to csv file
                 df = pd.DataFrame(results)
                 # Map the list of key phrases (dict) to a list of strings
-                # Path(folder).mkdir(parents=True, exist_ok=True)
+                Path(folder).mkdir(parents=True, exist_ok=True)
                 path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.csv')
                 df.to_csv(path, encoding='utf-8', index=False)
                 path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
