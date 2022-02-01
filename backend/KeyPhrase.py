@@ -59,7 +59,7 @@ class KeyPhraseSimilarity:
             # cluster_no_list = [1]
             cluster_no_list = range(-1, self.total_clusters)
             for cluster_no in cluster_no_list:
-                cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))[:20]
+                cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
                 results = list()  # Store all the key phrases
                 for doc in cluster_docs:
                     try:
@@ -124,24 +124,25 @@ class KeyPhraseSimilarity:
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def group_key_phrases_by_clusters_experiments(self):
-        cluster_no_list = list(range(-1, self.total_clusters))
-        # cluster_no_list = [2]
+        # cluster_no_list = list(range(-1, self.total_clusters))
+        cluster_no_list = [0]
         for cluster_no in cluster_no_list:
             try:
                 key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
                 path = os.path.join(key_phrase_folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
                 df = pd.read_json(path)
+                # Aggregate the key phrases of each individual paper
                 all_key_phrases = reduce(lambda pre, cur: pre + cur, df['key-phrases'].tolist(), list())
                 # Filter duplicate key phrases
-                unique_key_phrase = list()
+                unique_key_phrases = list()
                 for key_phrase in all_key_phrases:
-                    found = next((k for k in unique_key_phrase if k.lower() == key_phrase.lower()), None)
+                    found = next((k for k in unique_key_phrases if k.lower() == key_phrase.lower()), None)
                     if not found:
-                        unique_key_phrase.append(key_phrase)
+                        unique_key_phrases.append(key_phrase)
                 experiment_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments')
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
                 # # Cluster all key phrases by using HDBSCAN
-                KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(unique_key_phrase, cluster_no, self.model,
+                KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(unique_key_phrases, cluster_no, self.model,
                                                                          experiment_folder, self.args.n_neighbors)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
@@ -151,8 +152,8 @@ class KeyPhraseSimilarity:
         try:
             # Collect the best results in each cluster
             best_results = list()
-            # cluster_no_list = [8]
-            cluster_no_list = list(range(-1, self.total_clusters))
+            cluster_no_list = [0]
+            # cluster_no_list = list(range(-1, self.total_clusters))
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper

@@ -199,14 +199,14 @@ class KeyPhraseUtility:
     @staticmethod
     def group_key_phrases_with_best_result(cluster_no, parameter, doc_key_phrases, folder):
         # Collect the key phrases linked to the docs
-        def get_doc_ids_by_group_key_phrases(_doc_key_phrases, _grouped_key_phrases):
+        def _collect_doc_ids(_doc_key_phrases, _grouped_key_phrases):
             _doc_ids = list()
-            for doc in _doc_key_phrases:
+            for _doc in _doc_key_phrases:
                 # find if any doc key phrases appear in the grouped key phrases
-                for key_phrase in doc['key-phrases']:
-                    found = next((gkp for gkp in _grouped_key_phrases if gkp.lower() == key_phrase.lower()), None)
-                    if found:
-                        _doc_ids.append(doc['DocId'])
+                for _candidate in _doc['phrase-candidates']:
+                    _found = next((_gkp for _gkp in _grouped_key_phrases if _gkp.lower() == _candidate.lower()), None)
+                    if _found:
+                        _doc_ids.append(_doc['DocId'])
                         break
             return _doc_ids
 
@@ -223,25 +223,27 @@ class KeyPhraseUtility:
             group_labels = parameter['group_labels']
             # Load key phrase and group labels
             df = pd.DataFrame()
-            df['key-phrases'] = unique_key_phrase
-            df['group'] = group_labels
+            df['Cluster'] = cluster_no
+            df['Key-phrases'] = unique_key_phrase
+            df['Group'] = group_labels
             # Output the summary of the grouped key phrase results
-            group_df = df.groupby(by=['group'], as_index=False).agg({'key-phrases': lambda k: list(k)})
+            group_df = df.groupby(by=['Group'], as_index=False).agg({'Key-phrases': lambda k: list(k)})
             # Output the summary results to a csv file
-            group_df['count'] = group_df['key-phrases'].apply(len)
+            group_df['NumPhrases'] = group_df['Key-phrases'].apply(len)
             # Collect doc ids that contained the grouped key phrases
-            group_key_phrases = group_df['key-phrases'].tolist()
-            group_doc_ids = list(
-                map(lambda group: get_doc_ids_by_group_key_phrases(doc_key_phrases, group), group_key_phrases))
-            group_df['DocIds'] = group_doc_ids
+            group_key_phrases = group_df['Key-phrases'].tolist()
+            group_df['DocIds'] = list(map(lambda group: _collect_doc_ids(doc_key_phrases, group), group_key_phrases))
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
-            group_df = group_df[['group', 'count', 'key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
+            group_df = group_df[['Cluster', 'Group', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
             group_df.to_json(path, orient='records')
             print('Output the summary of grouped key phrase to ' + path)
+
+
+
             return group_df.to_dict("records")
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -272,10 +274,10 @@ class KeyPhraseUtility:
             # Filter out dimensions > the length of key phrases
             dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
             min_cluster_size_list = range(5, 20)
-            min_sample_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+            min_sample_list = [5, 10, 15, 20, 25, 30]
             if (len(key_phrases)/5) > 30:
-                min_cluster_size_list = [20, 25, 30, 35, 40, 45, 50, 55, 60]
-                min_sample_list = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
+                min_cluster_size_list = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
+                # min_sample_list = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
 
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
