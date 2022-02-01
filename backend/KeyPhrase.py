@@ -94,8 +94,8 @@ class KeyPhraseSimilarity:
                                                     self.model, doc_text, phrase_candidates[:num], diversity)
                         key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
                         # Obtain top five key phrases
-                        result = {'Cluster': cluster_no, 'DocId': doc_id, 'top_num': num,
-                                  'Diversity': diversity, 'key-phrases': key_phrases[:5],
+                        result = {'Cluster': cluster_no, 'DocId': doc_id,   # 'top_num': num, 'Diversity': diversity,
+                                  'key-phrases': key_phrases[:5], 'candidate-count': len(phrase_candidates),
                                   'phrase-candidates': phrase_candidates}
                         # Output the top 5 key-phrase and score
                         # for i in range(0, 20):
