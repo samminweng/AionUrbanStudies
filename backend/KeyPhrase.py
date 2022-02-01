@@ -31,7 +31,8 @@ class KeyPhraseSimilarity:
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
             device='cpu',
-            n_neighbors=3
+            n_neighbors=3,
+            diversity=0.0
         )
         # Load HDBSCAN cluster
         path = os.path.join('output', self.args.case_name, self.args.case_name + "_clusters.json")
@@ -55,10 +56,10 @@ class KeyPhraseSimilarity:
             folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
             Path(folder).mkdir(parents=True, exist_ok=True)
             corpus_docs = self.corpus_df.to_dict("records")
-            # cluster_no_list = [8]
-            cluster_no_list = range(-1, self.total_clusters)
+            cluster_no_list = [0]
+            # cluster_no_list = range(-1, self.total_clusters)
             for cluster_no in cluster_no_list:
-                cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
+                cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))[:20]
                 results = list()  # Store all the key phrases
                 for doc in cluster_docs:
                     try:
@@ -78,37 +79,41 @@ class KeyPhraseSimilarity:
                                 candidates = KeyPhraseUtility.generate_n_gram_candidates(sentences, n_gram_range)
                                 # # find and collect top 30 key phrases similar to a paper
                                 n_gram_candidates = n_gram_candidates + candidates
-                            except Exception as err:
-                                print("Error occurred! {err}".format(err=err))
+                            except Exception as __err:
+                                print("Error occurred! {err}".format(err=__err))
                         candidate_scores = KeyPhraseUtility.compute_similar_score_key_phrases(self.model,
                                                                                               doc_text,
                                                                                               n_gram_candidates)
 
-                        key_phrase_scores = KeyPhraseUtility.sort_key_phrases_by_score(candidate_scores)
-                        top_key_phrases = list(map(lambda p: p['key-phrase'], key_phrase_scores))
-                        # Obtain top five key phrases
-                        result = {'Cluster': cluster_no, 'DocId': doc_id, 'key-phrases': top_key_phrases}
-                        # Output the top 5 key-phrase and score
-                        for i in range(0, 5):
-                            if i < len(key_phrase_scores):
-                                result['top_'+str(i)+'_phrase'] = key_phrase_scores[i]['key-phrase']
-                                result['top_'+str(i)+'_score'] = key_phrase_scores[i]['score']
-                            else:
-                                result['top_' + str(i) + '_phrase'] = 'NAN'
-                                result['top_' + str(i) + '_score'] = 0
-                        results.append(result)
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
+                        phrase_similar_scores = KeyPhraseUtility.sort_phrases_by_similar_score(candidate_scores)
+                        phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
+                        # Rank  top 20 high scoring phrases
+                        for num in [10, 20]:
+                            for diversity in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
+                                phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(
+                                                            self.model, doc_text, phrase_candidates[:num], diversity)
+                                # key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
+                                # Obtain top five key phrases
+                                result = {'Cluster': cluster_no, 'DocId': doc_id, 'top_num': num,
+                                          'Diversity': diversity}
+                                          # 'key-phrases': key_phrases[:5],
+                                          # 'phrase-candidates': phrase_candidates}
+                                # Output the top 5 key-phrase and score
+                                for i in range(0, 20):
+                                    if i < len(phrase_scores_mmr):
+                                        result['top_'+str(i)+'_phrase'] = phrase_scores_mmr[i]['key-phrase']
+                                        result['top_'+str(i)+'_score'] = phrase_scores_mmr[i]['score']
+                                    else:
+                                        result['top_' + str(i) + '_phrase'] = 'NAN'
+                                        result['top_' + str(i) + '_score'] = 0
+                                results.append(result)
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
                         sys.exit(-1)
                 print(results)
                 # Write key phrases to csv file
                 df = pd.DataFrame(results)
-                df['No'] = range(1, len(df) + 1)
                 # Map the list of key phrases (dict) to a list of strings
-                df = df[['No', 'Cluster', 'DocId', 'key-phrases',
-                         'top_0_phrase', 'top_0_score', 'top_1_phrase', 'top_1_score',
-                         'top_2_phrase', 'top_2_score', 'top_3_phrase', 'top_3_score',
-                         'top_4_phrase', 'top_4_score']]  # Re-order the columns
                 # Path(folder).mkdir(parents=True, exist_ok=True)
                 path = os.path.join(folder, 'top_doc_key_phrases_cluster_#' + str(cluster_no) + '.csv')
                 df.to_csv(path, encoding='utf-8', index=False)
@@ -260,10 +265,10 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        # kp.extract_doc_key_phrases_by_similarity()
+        kp.extract_doc_key_phrases_by_similarity()
         # kp.group_key_phrases_by_clusters_experiments()
         # kp.grouped_key_phrases_with_best_experiment_result()
-        kp.combine_terms_key_phrases_results()
-        kp.combine_cluster_doc_key_phrases()
+        # kp.combine_terms_key_phrases_results()
+        # kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

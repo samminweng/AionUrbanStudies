@@ -4,6 +4,7 @@ import itertools
 import os
 import re
 import string
+import sys
 from functools import reduce
 from pathlib import Path
 
@@ -176,11 +177,8 @@ class KeyPhraseUtility:
 
     # Get a list of unique key phrases from all papers
     @staticmethod
-    def sort_key_phrases_by_score(phrase_scores, top_k=5):
+    def sort_phrases_by_similar_score(phrase_scores):
         try:
-            if len(phrase_scores) < top_k:
-                return phrase_scores
-
             # Sort 'phrase list'
             sorted_phrase_list = sorted(phrase_scores, key=lambda p: p['score'], reverse=True)
             unique_key_phrases = list()
@@ -193,8 +191,8 @@ class KeyPhraseUtility:
                 else:
                     print("Duplicated: " + found['key-phrase'])
 
-            # Get top 5 key phrase
-            return unique_key_phrases[:top_k]
+            # Return unique key phrases
+            return unique_key_phrases
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
 
@@ -389,3 +387,44 @@ class KeyPhraseUtility:
             return keyword_scores
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+    # Maximal Marginal Relevance minimizes redundancy and maximizes the diversity of results
+    # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
+    @staticmethod
+    def re_rank_phrases_by_maximal_margin_relevance(model, doc_text, phrase_candidates, diversity=0.0, top_k=20):
+        try:
+            top_n = min(20, len(phrase_candidates))
+            doc_vector = model.encode([doc_text], convert_to_numpy=True)
+            phrase_vectors = model.encode(phrase_candidates, show_progress_bar=True, convert_to_numpy=True)
+
+            # Extract similarity within words, and between words and the document
+            phrase_doc_similarity = cosine_similarity(phrase_vectors, doc_vector)
+            phrase_similarity = cosine_similarity(phrase_vectors, phrase_vectors)
+
+            # Pick up the most similar phrase
+            most_similar_index = np.argmax(phrase_doc_similarity)
+            # Initialize candidates and already choose best keyword/key phrases
+            key_phrase_idx = [most_similar_index]
+            top_phrases = [{'key-phrase': (phrase_candidates[most_similar_index]),
+                            'score': phrase_doc_similarity[most_similar_index][0]}]
+            # Get all the remaining index
+            candidate_indexes = list(filter(lambda idx: idx != most_similar_index, range(len(phrase_candidates))))
+            # Add the other candidate phrase
+            for i in range(0, top_n-1):
+                # Get similarities between doc and candidates
+                candidate_similarities = phrase_doc_similarity[candidate_indexes, :]
+                # Get similarity between candidates and a set of extracted key phrases
+                target_similarities = phrase_similarity[candidate_indexes][:, key_phrase_idx]
+                # Calculate MMR
+                mmr_scores = (1 - diversity) * candidate_similarities - diversity * np.max(target_similarities, axis=1).reshape(-1, 1)
+                mmr_idx = candidate_indexes[np.argmax(mmr_scores)]
+
+                # Update keywords & candidates
+                top_phrases.append({'key-phrase': phrase_candidates[mmr_idx], 'score': phrase_doc_similarity[mmr_idx][0]})
+                key_phrase_idx.append(mmr_idx)
+                # Remove the phrase at mmr_idx from candidate
+                candidate_indexes = list(filter(lambda idx: idx != mmr_idx, candidate_indexes))
+            return top_phrases
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+            sys.exit(-1)
