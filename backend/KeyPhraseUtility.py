@@ -135,6 +135,11 @@ class KeyPhraseUtility:
         for i, sentence in enumerate(sentences):
             try:
                 pos_tags = pos_tag(sentence)
+                # For debugging
+                # if 'contains' in sentence and 'mobility' in sentence:
+                #     print("bug")
+                #     print(" ".join(sentence))
+                #     print(pos_tags)
                 # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
                 n_grams = list(ngrams(pos_tags, n_gram_range))
                 # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
@@ -203,7 +208,7 @@ class KeyPhraseUtility:
             _doc_ids = list()
             for _doc in _doc_key_phrases:
                 # find if any doc key phrases appear in the grouped key phrases
-                for _candidate in _doc['phrase-candidates']:
+                for _candidate in _doc['Phrase-candidates']:
                     _found = next((_gkp for _gkp in _grouped_key_phrases if _gkp.lower() == _candidate.lower()), None)
                     if _found:
                         _doc_ids.append(_doc['DocId'])
@@ -212,7 +217,7 @@ class KeyPhraseUtility:
 
         try:
             # Aggregate all the key phrases of each doc in a cluster as a single list
-            key_phrases = reduce(lambda pre, cur: pre + cur['key-phrases'], doc_key_phrases, list())
+            key_phrases = reduce(lambda pre, cur: pre + cur['Key-phrases'], doc_key_phrases, list())
             # Filter duplicate key phrases
             unique_key_phrase = list()
             for key_phrase in key_phrases:
@@ -223,7 +228,6 @@ class KeyPhraseUtility:
             group_labels = parameter['group_labels']
             # Load key phrase and group labels
             df = pd.DataFrame()
-            df['Cluster'] = cluster_no
             df['Key-phrases'] = unique_key_phrase
             df['Group'] = group_labels
             # Output the summary of the grouped key phrase results
@@ -234,23 +238,21 @@ class KeyPhraseUtility:
             group_key_phrases = group_df['Key-phrases'].tolist()
             group_df['DocIds'] = list(map(lambda group: _collect_doc_ids(doc_key_phrases, group), group_key_phrases))
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
-            group_df = group_df[['Cluster', 'Group', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds']]  # Re-order the column list
+            group_df['Cluster'] = cluster_no
+            group_df = group_df[['Cluster', 'Group', 'NumDocs', 'DocIds', 'NumPhrases', 'Key-phrases']]  # Re-order the column list
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
             # Output the summary of best grouped key phrases to a json file
             path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
             group_df.to_json(path, orient='records')
             print('Output the summary of grouped key phrase to ' + path)
-
-
-
             return group_df.to_dict("records")
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
-    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, cluster_no, model, folder, n_neighbors=5):
+    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, model, n_neighbors=3):
         def collect_group_results(_results, _group_label):
             try:
                 _found = next((r for r in _results if r['group'] == _group_label), None)
@@ -271,13 +273,13 @@ class KeyPhraseUtility:
             vector_list = key_phrase_vectors.tolist()
             results = list()
             dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5]
+            # dimensions = [100, 50]
             # Filter out dimensions > the length of key phrases
             dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
-            min_cluster_size_list = range(5, 20)
-            min_sample_list = [5, 10, 15, 20, 25, 30]
+            min_cluster_size_list = list(range(20, 4, -1))
+            min_sample_list = [50, 45, 40, 35, 30, 25, 20, 15, 10, 5]
             if (len(key_phrases)/5) > 30:
-                min_cluster_size_list = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
-                # min_sample_list = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
+                min_cluster_size_list = [60, 55, 50, 45, 40, 35, 30, 25, 20, 15]
 
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
@@ -305,46 +307,40 @@ class KeyPhraseUtility:
                                 outlier_number = next((g['count'] for g in group_results if g['group'] == -1), 0)
                                 if len(group_results) > 1:
                                     df = pd.DataFrame()
-                                    df['groups'] = group_labels
-                                    df['vectors'] = distances.tolist()
+                                    df['Group'] = group_labels
+                                    df['Vector'] = distances.tolist()
                                     # Remove the outliers
-                                    no_outlier_df = df[df['groups'] != -1]
-                                    no_outlier_labels = no_outlier_df['groups'].tolist()
-                                    no_outlier_vectors = np.vstack(no_outlier_df['vectors'].tolist())
+                                    no_outlier_df = df[df['Group'] != -1]
+                                    no_outlier_labels = no_outlier_df['Group'].tolist()
+                                    no_outlier_vectors = np.vstack(no_outlier_df['Vector'].tolist())
                                     score = BERTModelDocClusterUtility.compute_Silhouette_score(no_outlier_labels,
                                                                                                 no_outlier_vectors)
                                 else:  # All key phrases are identified as outliers
                                     score = -1
                                 # Output the result
-                                result = {'cluster': "#" + str(cluster_no),
-                                          'dimension': dimension,
+                                result = {'dimension': dimension,
                                           'min_samples': str(min_samples),
                                           'min_cluster_size': min_cluster_size,
                                           'epsilon': epsilon,
                                           'total_groups': len(group_results),
                                           'outliers': outlier_number,
                                           'score': round(score, 4),
-                                          'group_result': group_results,
+                                          'group_results': group_results,
                                           'group_labels': group_labels}
                                 results.append(result)
                                 # print(result)
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
-                print("=== Complete grouping the key phrases of cluster "
-                      "{no} with dimension {d} ===".format(no=cluster_no, d=dimension))
-            # output the experiment results
-            df = pd.DataFrame(results)
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
-            df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.json')
-            df.to_json(path, orient='records')
+                print("=== Complete to group the key phrases at dimension {d} ===".format(d=dimension))
+            # Return all experiment results
+            return results
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
     # # Compute the RAKE score
     # # Ref: https://github.com/zelandiya/RAKE-tutorial
     @staticmethod
-    def compute_keyword_rake_scores(phrase_list):
+    def rank_key_phrases_by_rake_scores(phrase_list):
         # Compute the score for a single word
         def _calculate_rake_word_scores(_phraseList):
             _word_frequency = {}
