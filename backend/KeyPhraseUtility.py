@@ -202,7 +202,7 @@ class KeyPhraseUtility:
             print("Error occurred! {err}".format(err=_err))
 
     @staticmethod
-    def group_key_phrases_with_best_result(cluster_no, parameter, doc_key_phrases, folder):
+    def group_cluster_key_phrases_with_opt_parameter(parameter, doc_key_phrases):
         # Collect the key phrases linked to the docs
         def _collect_doc_ids(_doc_key_phrases, _grouped_key_phrases):
             _doc_ids = list()
@@ -238,14 +238,39 @@ class KeyPhraseUtility:
             group_key_phrases = group_df['Key-phrases'].tolist()
             group_df['DocIds'] = list(map(lambda group: _collect_doc_ids(doc_key_phrases, group), group_key_phrases))
             group_df['NumDocs'] = group_df['DocIds'].apply(len)
-            group_df['Cluster'] = cluster_no
-            group_df = group_df[['Cluster', 'Group', 'NumDocs', 'DocIds', 'NumPhrases', 'Key-phrases']]  # Re-order the column list
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.csv')
-            group_df.to_csv(path, encoding='utf-8', index=False)
-            # Output the summary of best grouped key phrases to a json file
-            path = os.path.join(folder, 'top_key_phrases_cluster_#' + str(cluster_no) + '_best_grouping.json')
-            group_df.to_json(path, orient='records')
-            print('Output the summary of grouped key phrase to ' + path)
+            return group_df.to_dict("records")
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    @staticmethod
+    def group_key_phrases_with_opt_parameter(parameter, key_phrases, doc_key_phrases):
+        # Collect the key phrases linked to the docs
+        def _collect_doc_ids(_doc_key_phrases, _group):
+            _doc_ids = list()
+            for _doc in _doc_key_phrases:
+                # find if any doc key phrases appear in the grouped key phrases
+                for _candidate in _doc['Phrase-candidates']:
+                    _found = next((_key_phrase for _key_phrase in _group if _key_phrase.lower() == _candidate.lower()), None)
+                    if _found:
+                        _doc_ids.append(_doc['DocId'])
+                        break
+            return _doc_ids
+
+        try:
+            # Get the grouping labels of key phrases
+            group_labels = parameter['group_labels']
+            # Load key phrase and group labels
+            df = pd.DataFrame()
+            df['Key-phrases'] = key_phrases
+            df['Group'] = group_labels
+            # Output the summary of the grouped key phrase results
+            group_df = df.groupby(by=['Group'], as_index=False).agg({'Key-phrases': lambda k: list(k)})
+            # Output the summary results to a csv file
+            group_df['NumPhrases'] = group_df['Key-phrases'].apply(len)
+            # Collect doc ids that contained the grouped key phrases
+            group_key_phrases = group_df['Key-phrases'].tolist()
+            group_df['DocIds'] = list(map(lambda group: _collect_doc_ids(doc_key_phrases, group), group_key_phrases))
+            group_df['NumDocs'] = group_df['DocIds'].apply(len)
             return group_df.to_dict("records")
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -336,6 +361,7 @@ class KeyPhraseUtility:
             return results
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+            sys.exit(-1)
 
     # # Compute the RAKE score
     # # Ref: https://github.com/zelandiya/RAKE-tutorial
