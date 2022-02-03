@@ -499,6 +499,7 @@ class KeyPhraseUtility:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)
 
+    # Group the phrases based on the optimal results
     @staticmethod
     def re_group_phrases_by_opt_experiment(level, cluster_no, key_phrase_folder):
         try:
@@ -567,6 +568,30 @@ class KeyPhraseUtility:
             path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
             group_df.to_json(path, orient='records')
             print('Output the summary of grouped key phrase to ' + path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+            sys.exit(-1)
+
+    # Obtain the top 3 frequent words from a list of phrases
+    @staticmethod
+    def get_top_frequent_words(phrases):
+        try:
+            freq_word_dict = {}
+            # Count the word frequencies
+            for phrase in phrases:
+                words = phrase.lower().split(" ")
+                for word in words:
+                    freq_word_dict.setdefault(word, 0)
+                    freq_word_dict[word] += 1
+            # Convert the dict to list
+            freq_words = list()
+            for word, freq in freq_word_dict.items():
+                freq_words.append({'word': word, 'freq': freq})
+            # Sort the list
+            freq_words = sorted(freq_words, key=lambda fw: fw['freq'], reverse=True)
+            assert len(freq_words) >= 3
+            top_words = list(map(lambda fw: fw['word'], freq_words))
+            return top_words[:3]
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)
