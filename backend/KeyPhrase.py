@@ -167,6 +167,7 @@ class KeyPhraseSimilarity:
     def group_cluster_key_phrases_with_best_experiments(self):
         try:
             # Collect the best results in each cluster
+            results = list()
             cluster_no_list = [0]
             # cluster_no_list = list(range(-1, self.total_clusters))
             for cluster_no in cluster_no_list:
@@ -198,6 +199,8 @@ class KeyPhraseSimilarity:
                         group['dimension'] = optimal_parameter['dimension']
                         group['min_samples'] = optimal_parameter['min_samples']
                         group['min_cluster_size'] = optimal_parameter['min_cluster_size']
+                    # Store the grouped key phrases of a cluster
+                    results.append({'Cluster': cluster_no, 'Key-phrases': group_key_phrases})
                     # Output the grouped key phrases
                     group_df = pd.DataFrame(group_key_phrases)
                     group_df['Cluster'] = cluster_no
@@ -215,19 +218,18 @@ class KeyPhraseSimilarity:
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
                     sys.exit(-1)
-            # optimal_parameter['grouped_key_phrases'] = group_key_phrases
-            # best_results.append(optimal_parameter)
-            # # print(best_results)
-            # # Load best results of each group
-            # df = pd.DataFrame(best_results,
-            #                   columns=['Cluster', 'dimension', 'min_samples', 'min_cluster_size', 'epsilon',
-            #                            'total_key_phrases', 'total_groups', 'outliers', 'score', 'grouped_key_phrases'])
-            # folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
-            # Path(folder).mkdir(parents=True, exist_ok=True)
-            # path = os.path.join(folder, 'cluster_key_phrases_best_grouping.csv')
-            # df.to_csv(path, encoding='utf-8', index=False)
-            # path = os.path.join(folder, 'cluster_key_phrases_best_grouping.json')
-            # df.to_json(path, orient="records")
+
+                # # Load best results of each group
+                df = pd.DataFrame(results,
+                                  columns=['Cluster', 'dimension', 'min_samples', 'min_cluster_size', 'epsilon',
+                                           'total_key_phrases', 'total_groups', 'outliers', 'score',
+                                           'grouped_key_phrases'])
+                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
+                Path(folder).mkdir(parents=True, exist_ok=True)
+                path = os.path.join(folder, 'cluster_key_phrases_grouping.csv')
+                df.to_csv(path, encoding='utf-8', index=False)
+                path = os.path.join(folder, 'cluster_key_phrases_grouping.json')
+                df.to_json(path, orient="records")
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -236,81 +238,30 @@ class KeyPhraseSimilarity:
         key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases')
         # cluster_no_list = list(range(-1, self.total_clusters))
         min_cluster_size_list = list(range(30, 9, -1))
-        level = 4
         cluster_no_list = [0]
         try:
             for cluster_no in cluster_no_list:
-                KeyPhraseUtility.run_re_grouping_experiments(level, cluster_no, key_phrase_folder,
-                                                             min_cluster_size_list,
-                                                             self.model, self.args.n_neighbors)
-                # # # Re-group the key phrases within a group using the optimal parameters
-                KeyPhraseUtility.re_group_phrases_by_opt_experiment(level, cluster_no, key_phrase_folder)
+                is_stop = False
+                level = 1
+                while not is_stop:
+                    try:
+                        KeyPhraseUtility.run_re_grouping_experiments(level, cluster_no, key_phrase_folder,
+                                                                     min_cluster_size_list,
+                                                                     self.model, self.args.n_neighbors)
+                        # # # Re-group the key phrases within a group using the optimal parameters
+                        is_stop = KeyPhraseUtility.re_group_phrases_by_opt_experiment(level, cluster_no, key_phrase_folder)
+                        level += 1
+                        print("=== Complete re-grouping the key phrases at level {level} in cluster #{c_no} ===".format(level=level, c_no=cluster_no))
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                        sys.exit(-1)
+                # flat the sub-groups
+                last_level = level
+                KeyPhraseUtility.flat_key_phrase_subgroups(cluster_no, last_level, key_phrase_folder)
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
             sys.exit(-1)
 
-    # Aggregate all the sub-groups to level 1
-    def flat_re_grouped_key_phrases(self):
-        cluster_no = 0
-        last_level = 4
-        all_sub_groups = list()
-        # Collect all the groups and sub-groups
-        for level in range(2, last_level + 1):
-            # Load parent level
-            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases',
-                                  'level_' + str(level))
-            path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
-            # Get the large groups
-            all_sub_groups = all_sub_groups + pd.read_json(path).to_dict("records")
-        # Load the groups at level 1
-        folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases',
-                              'level_1')
-        path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
-        # Get the large groups
-        results = list()
-        groups = pd.read_json(path).to_dict("records")
-        for group in groups:
-            parent = group['Parent']
-            group_id = group['Group']
-            group['TitleWords'] = KeyPhraseUtility.get_top_frequent_words(group['Key-phrases'])
-            if len(group['Key-phrases']) <= 30:
-                results.append(group)
-            else:
-                # Find all the sub-groups starting with 'root_1'
-                sub_groups = list(filter(lambda g: g['Parent'].startswith(parent + '_' + str(group_id)) and
-                                                   len(g['Key-phrases']) <= 30, all_sub_groups))
-
-                # Update the parents of sub-group
-                for sub_group in sub_groups:
-                    sub_group['Parent'] = parent
-                    sub_group['TitleWords'] = KeyPhraseUtility.get_top_frequent_words(sub_group['Key-phrases'])
-                results = results + sub_groups
-        # Get all the unique parent ids
-        parent_ids = list(set(map(lambda g: g['Parent'], results)))
-        # Sort parent ids
-        parent_ids = sorted(parent_ids, key=lambda p: int(p.split("_")[1]))
-        sorted_results = list()
-        for parent_id in parent_ids:
-            sub_groups = list(filter(lambda g: g['Parent'] == parent_id, results))
-            # Sort the sub groups by num phrases
-            sub_groups = sorted(sub_groups, key=lambda g: int(g['NumPhrases']), reverse=True)
-            # Re-number the sub-group
-            g_id = 0
-            for sub_group in sub_groups:
-                sub_group['Group'] = g_id
-                g_id += 1
-            sorted_results = sorted_results + sub_groups
-        # # print(best_results)
-        # # Load best results of each group
-        df = pd.DataFrame(sorted_results, columns=['Cluster', 'Parent', 'Group', 'TitleWords', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds'])
-        df = df.rename(columns={'Parent': 'Group', 'Group': 'SubGroup'})
-        folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
-        Path(folder).mkdir(parents=True, exist_ok=True)
-        path = os.path.join(folder, 'cluster_key_phrases_sub_grouping_cluster_#' + str(cluster_no) + '.csv')
-        df.to_csv(path, encoding='utf-8', index=False)
-        path = os.path.join(folder, 'cluster_key_phrases_sub_grouping_cluster_#' + str(cluster_no) + '.json')
-        df.to_json(path, orient="records")
-        print(results)
     # Combine the TF-IDF terms and grouped key phrases results
     def combine_terms_key_phrases_results(self):
         try:
@@ -374,8 +325,7 @@ if __name__ == '__main__':
         # kp.extract_doc_key_phrases_by_similarity_diversity()
         # kp.experiment_group_cluster_key_phrases()
         # kp.group_cluster_key_phrases_with_best_experiments()
-        # kp.re_group_key_phrases_within_groups()
-        kp.flat_re_grouped_key_phrases()
+        kp.re_group_key_phrases_within_groups()
         # kp.combine_terms_key_phrases_results()
         # kp.combine_cluster_doc_key_phrases()
     except Exception as err:
