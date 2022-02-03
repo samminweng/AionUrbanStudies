@@ -250,7 +250,8 @@ class KeyPhraseUtility:
             for _doc in _doc_key_phrases:
                 # find if any doc key phrases appear in the grouped key phrases
                 for _candidate in _doc['Phrase-candidates']:
-                    _found = next((_key_phrase for _key_phrase in _group if _key_phrase.lower() == _candidate.lower()), None)
+                    _found = next((_key_phrase for _key_phrase in _group if _key_phrase.lower() == _candidate.lower()),
+                                  None)
                     if _found:
                         _doc_ids.append(_doc['DocId'])
                         break
@@ -303,8 +304,6 @@ class KeyPhraseUtility:
             dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
             min_cluster_size_list = list(range(20, 4, -1))
             min_sample_list = [50, 45, 40, 35, 30, 25, 20, 15, 10, 5]
-            if (len(key_phrases)/5) > 30:
-                min_cluster_size_list = [60, 55, 50, 45, 40, 35, 30, 25, 20, 15]
 
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
@@ -434,21 +433,61 @@ class KeyPhraseUtility:
             # Get all the remaining index
             candidate_indexes = list(filter(lambda idx: idx != most_similar_index, range(len(phrase_candidates))))
             # Add the other candidate phrase
-            for i in range(0, top_n-1):
+            for i in range(0, top_n - 1):
                 # Get similarities between doc and candidates
                 candidate_similarities = phrase_doc_similarity[candidate_indexes, :]
                 # Get similarity between candidates and a set of extracted key phrases
                 target_similarities = phrase_similarity[candidate_indexes][:, key_phrase_idx]
                 # Calculate MMR
-                mmr_scores = (1 - diversity) * candidate_similarities - diversity * np.max(target_similarities, axis=1).reshape(-1, 1)
+                mmr_scores = (1 - diversity) * candidate_similarities - diversity * np.max(target_similarities,
+                                                                                           axis=1).reshape(-1, 1)
                 mmr_idx = candidate_indexes[np.argmax(mmr_scores)]
 
                 # Update keywords & candidates
-                top_phrases.append({'key-phrase': phrase_candidates[mmr_idx], 'score': phrase_doc_similarity[mmr_idx][0]})
+                top_phrases.append(
+                    {'key-phrase': phrase_candidates[mmr_idx], 'score': phrase_doc_similarity[mmr_idx][0]})
                 key_phrase_idx.append(mmr_idx)
                 # Remove the phrase at mmr_idx from candidate
                 candidate_indexes = list(filter(lambda idx: idx != mmr_idx, candidate_indexes))
             return top_phrases
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+            sys.exit(-1)
+
+    # Run HDBSCAN to re-group the phrases
+    @staticmethod
+    def run_re_grouping_experiments(iteration, cluster_no, key_phrase_folder, model, n_neighbors):
+        try:
+            # Load the best grouping by clusters
+            _path = os.path.join(key_phrase_folder, 'group_key_phrases', 'level_' + str(iteration),
+                                 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
+            _key_phrase_groups = pd.read_json(_path).to_dict("records")
+            # Re-group the group size > 30
+            _key_phrase_groups = list(filter(lambda g: len(g['Key-phrases']) > 30, _key_phrase_groups))
+
+            _results = list()
+            # Run the grouping experiments to regroup the key phrases
+            for _group in _key_phrase_groups:
+                _parent_group = _group['Group']
+                _key_phrases = _group['Key-phrases']
+                _experiments = KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(_key_phrases, model,
+                                                                                        n_neighbors)
+                # Updated the parent group
+                for _ex in _experiments:
+                    _ex['parent_group'] = _parent_group
+                _results = _results + _experiments
+            # Output all the experiment results
+            _ex_folder = os.path.join(key_phrase_folder, 'experiments', 'level_' + str(iteration + 1))
+            Path(_ex_folder).mkdir(parents=True, exist_ok=True)
+            # output the experiment results
+            df = pd.DataFrame(_results)
+            _path = os.path.join(_ex_folder,
+                                 'key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.csv')
+            df.to_csv(_path, encoding='utf-8', index=False)
+            _path = os.path.join(_ex_folder,
+                                 'key_phrases_cluster_#' + str(cluster_no) + '_grouping_experiments.json')
+            df.to_json(_path, orient='records')
+            print("=== Complete grouping the key phrases of cluster {no} ===".format(no=cluster_no))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)
