@@ -1,4 +1,0 @@
-Cluster,Parent,Group,NumPhrases,Key-phrases,NumDocs,DocIds
-9,,0,6,"['correlation', 'environmental factor', 'Dengue disease dynamic', 'climate variable', 'mosquito development', 'rainy season']",4,"[49, 234, 345, 413]"
-9,,1,13,"['urban ecological management', 'urbanization index', 'urban landscape', 'landscape ecology', 'urban land use', 'remote sensing image', 'ecosystem service value', 'urban development pattern', 'population', 'urban greenness space', 'Road network density', 'urban planning policy', 'random forest']",5,"[10, 49, 234, 345, 413]"
-9,,2,6,"['spatial heterogeneity', 'landscape pattern change', 'landscape shape index', 'artificial light data', 'landscape metric model', 'typical landscape index']",4,"[10, 49, 234, 345]"
