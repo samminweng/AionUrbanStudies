@@ -459,7 +459,7 @@ class KeyPhraseUtility:
     def run_re_grouping_experiments(level, cluster_no, key_phrase_folder, min_cluster_size_list, model, n_neighbors):
         try:
             # Load the best grouping of previous level
-            path = os.path.join(key_phrase_folder, 'group_key_phrases', 'level_' + str(level - 1),
+            path = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups', 'level_' + str(level - 1),
                                 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
             key_phrase_groups = pd.read_json(path).to_dict("records")
             # Re-group the group size > 30 only
@@ -504,7 +504,7 @@ class KeyPhraseUtility:
     def re_group_phrases_by_opt_experiment(level, cluster_no, key_phrase_folder):
         try:
             # Load the key phrase groups at the previous iteration
-            path = os.path.join(key_phrase_folder, 'group_key_phrases', 'level_' + str(level - 1),
+            path = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups', 'level_' + str(level - 1),
                                 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
             key_phrase_groups = pd.read_json(path).to_dict("records")
             # Re-group the group size > 30 only
@@ -561,7 +561,7 @@ class KeyPhraseUtility:
             # Re-order the column list
             group_df = group_df[['Cluster', 'Parent', 'Group', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds',
                                  'score', 'dimension', 'min_samples', 'min_cluster_size']]
-            folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'level_' + str(level))
+            folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups', 'level_' + str(level))
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.csv')
             group_df.to_csv(path, encoding='utf-8', index=False)
@@ -586,10 +586,15 @@ class KeyPhraseUtility:
             freq_word_dict = {}
             # Count the word frequencies
             for phrase in phrases:
-                words = phrase.lower().split(" ")
+                words = phrase.split(" ")
                 for word in words:
-                    freq_word_dict.setdefault(word, 0)
-                    freq_word_dict[word] += 1
+                    # Check if the word contain all upper cases of char
+                    if word.isupper():
+                        freq_word_dict.setdefault(word, 0)
+                        freq_word_dict[word] += 1
+                    else:
+                        freq_word_dict.setdefault(word.lower(), 0)
+                        freq_word_dict[word.lower()] += 1
             # Convert the dict to list
             freq_words = list()
             for word, freq in freq_word_dict.items():
@@ -610,12 +615,12 @@ class KeyPhraseUtility:
         # Collect all the groups and sub-groups
         for level in range(2, last_level):
             # Load parent level
-            folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'level_' + str(level))
+            folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups', 'level_' + str(level))
             path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
             # Get the large groups
             all_sub_groups = all_sub_groups + pd.read_json(path).to_dict("records")
         # Load the groups at level 1
-        folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'level_1')
+        folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups', 'level_1')
         path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
         # Get the large groups
         results = list()

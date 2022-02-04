@@ -214,7 +214,7 @@ class KeyPhraseSimilarity:
                     group_df = group_df[['Cluster', 'Parent', 'Group', 'NumPhrases', 'Key-phrases', 'NumDocs',
                                          'DocIds', 'score', 'dimension', 'min_samples',
                                          'min_cluster_size']]  # Re-order the column list
-                    folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'level_0')
+                    folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups', 'level_0')
                     Path(folder).mkdir(parents=True, exist_ok=True)
                     path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.csv')
                     group_df.to_csv(path, encoding='utf-8', index=False)
@@ -345,9 +345,9 @@ if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
         # kp.extract_doc_key_phrases_by_similarity_diversity()
-        kp.experiment_group_cluster_key_phrases()
-        kp.group_cluster_key_phrases_with_best_experiments()
-        # kp.re_group_key_phrases_within_groups()
+        # kp.experiment_group_cluster_key_phrases()
+        # kp.group_cluster_key_phrases_with_best_experiments()
+        kp.re_group_key_phrases_within_groups()
         # kp.combine_terms_key_phrases_results()
         # kp.combine_cluster_doc_key_phrases()
     except Exception as err:
