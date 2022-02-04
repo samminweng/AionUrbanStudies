@@ -294,11 +294,15 @@ class KeyPhraseSimilarity:
             topics_df = pd.read_json(path)
             cluster_df = topics_df.copy(deep=True)
             # Load grouped Key phrases
-            path = os.path.join(folder, 'key_phrases', 'group_key_phrases', 'top_key_phrases_best_grouping.json')
+            path = os.path.join(folder, 'key_phrases', 'group_key_phrases', 'cluster_key_phrases_group.json')
             key_phrase_df = pd.read_json(path)
-            cluster_df['KeyPhrases'] = key_phrase_df['grouped_key_phrases'].tolist()
+            cluster_df['KeyPhrases'] = key_phrase_df['Key-phrases'].tolist()
+            # Load the subgroups
+            path = os.path.join(folder, 'key_phrases', 'group_key_phrases', 'cluster_key_phrases_sub_groups.json')
+            subgroups_df = pd.read_json(path)
+            cluster_df['SubGroups'] = subgroups_df['SubGroups'].tolist()
             # Re-order cluster df and Output to csv and json file
-            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases']]
+            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases', 'SubGroups']]
             folder = os.path.join(folder, 'key_phrases')
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
@@ -318,16 +322,16 @@ class KeyPhraseSimilarity:
             for cluster_no in range(-1, self.total_clusters):
                 # Get key phrases of a cluster
                 path = os.path.join(key_phrase_folder, 'doc_key_phrase',
-                                    'top_doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
+                                    'doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
                 docs = pd.read_json(path).to_dict("records")
                 for doc in docs:
-                    doc_key_phrases.append({'DocId': doc['DocId'], 'key-phrases': doc['key-phrases']})
+                    doc_key_phrases.append({'DocId': doc['DocId'], 'KeyPhrases': doc['Key-phrases']})
             # Sort key phrases by DocId
             sorted_key_phrases = sorted(doc_key_phrases, key=lambda k: k['DocId'])
             # # Aggregated all the key phrases of each individual article
             df = pd.DataFrame(sorted_key_phrases)
             # Combine cluster and doc key phrases
-            self.corpus_df['KeyPhrases'] = df['key-phrases'].tolist()
+            self.corpus_df['KeyPhrases'] = df['KeyPhrases'].tolist()
             # Drop column
             self.corpus_df = self.corpus_df.drop('Text', axis=1)
             folder = os.path.join('output', self.args.case_name)
@@ -347,8 +351,8 @@ if __name__ == '__main__':
         # kp.extract_doc_key_phrases_by_similarity_diversity()
         # kp.experiment_group_cluster_key_phrases()
         # kp.group_cluster_key_phrases_with_best_experiments()
-        kp.re_group_key_phrases_within_groups()
+        # kp.re_group_key_phrases_within_groups()
         # kp.combine_terms_key_phrases_results()
-        # kp.combine_cluster_doc_key_phrases()
+        kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
