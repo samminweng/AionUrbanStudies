@@ -619,8 +619,12 @@ class KeyPhraseUtility:
             # Load parent level
             folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups', 'level_' + str(level))
             path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
+            sub_groups = pd.read_json(path).to_dict("records")
+            # Find all the sub-groups starting with 'root_1'
+            if level < (last_level - 1):
+                sub_groups = list(filter(lambda g: len(g['Key-phrases']) <= 30, sub_groups))
             # Get the large groups
-            all_sub_groups = all_sub_groups + pd.read_json(path).to_dict("records")
+            all_sub_groups = all_sub_groups + sub_groups
         # Load the groups at level 1
         folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups', 'level_1')
         path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
@@ -635,9 +639,7 @@ class KeyPhraseUtility:
                 results.append(group)
             else:
                 # Find all the sub-groups starting with 'root_1'
-                sub_groups = list(filter(lambda g: g['Parent'].startswith(parent + '_' + str(group_id)) and
-                                                   len(g['Key-phrases']) <= 30, all_sub_groups))
-
+                sub_groups = list(filter(lambda g: g['Parent'].startswith(parent + '_' + str(group_id)), all_sub_groups))
                 # Update the parents of sub-group
                 for sub_group in sub_groups:
                     sub_group['Parent'] = parent

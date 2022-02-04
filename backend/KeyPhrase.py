@@ -242,8 +242,8 @@ class KeyPhraseSimilarity:
         key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases')
         # minimal cluster size
         min_cluster_size_list = list(range(30, 9, -1))
-        cluster_no_list = [0]
-        # cluster_no_list = list(range(-1, self.total_clusters))
+        # cluster_no_list = [1]
+        cluster_no_list = list(range(-1, self.total_clusters))
         # Maximal level 5
         max_level = 5
         try:
