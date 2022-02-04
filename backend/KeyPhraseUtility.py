@@ -588,8 +588,10 @@ class KeyPhraseUtility:
             for phrase in phrases:
                 words = phrase.split(" ")
                 for word in words:
-                    # Check if the word contain all upper cases of char
-                    if word.isupper():
+                    upper_cases = re.findall(r'[A-Z]', word)
+                    # Check if the word contain all upper cases of chars or at least two chars
+                    if word.isupper() or len(upper_cases) >= 2:
+                        # Keep the cases of the word
                         freq_word_dict.setdefault(word, 0)
                         freq_word_dict[word] += 1
                     else:
