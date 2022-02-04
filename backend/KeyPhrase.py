@@ -43,6 +43,12 @@ class KeyPhraseSimilarity:
         self.corpus_df['Text'] = self.corpus_df['Title'] + ". " + self.corpus_df['Abstract']
         # Get the total cluster
         self.total_clusters = self.corpus_df['Cluster'].max() + 1
+        # Group all docId of a cluster
+        cluster_df = self.corpus_df.groupby(['Cluster'], as_index=False).agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+        cluster_df.rename(columns={'DocId': 'DocIds'}, inplace=True)
+        cluster_df['NumDocs'] = cluster_df['DocIds'].apply(len)
+        cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds']]
+        self.clusters = cluster_df.to_dict("records")
         # Language model
         self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                          device=self.args.device)
@@ -125,8 +131,8 @@ class KeyPhraseSimilarity:
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def experiment_group_cluster_key_phrases(self):
-        # cluster_no_list = list(range(-1, self.total_clusters))
-        cluster_no_list = [0]
+        cluster_no_list = list(range(-1, self.total_clusters))
+        # cluster_no_list = [0]
         for cluster_no in cluster_no_list:
             try:
                 key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
@@ -168,8 +174,8 @@ class KeyPhraseSimilarity:
         try:
             # Collect the best results in each cluster
             results = list()
-            cluster_no_list = [0]
-            # cluster_no_list = list(range(-1, self.total_clusters))
+            # cluster_no_list = [0]
+            cluster_no_list = list(range(-1, self.total_clusters))
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper
@@ -219,45 +225,61 @@ class KeyPhraseSimilarity:
                     print("Error occurred! {err}".format(err=err))
                     sys.exit(-1)
 
-                # # Load best results of each group
-                df = pd.DataFrame(results,
-                                  columns=['Cluster', 'dimension', 'min_samples', 'min_cluster_size', 'epsilon',
-                                           'total_key_phrases', 'total_groups', 'outliers', 'score',
-                                           'grouped_key_phrases'])
-                folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
-                Path(folder).mkdir(parents=True, exist_ok=True)
-                path = os.path.join(folder, 'cluster_key_phrases_grouping.csv')
-                df.to_csv(path, encoding='utf-8', index=False)
-                path = os.path.join(folder, 'cluster_key_phrases_grouping.json')
-                df.to_json(path, orient="records")
+            # # Load best results of each group
+            df = pd.DataFrame(results,
+                              columns=['Cluster', 'Key-phrases'])
+            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
+            Path(folder).mkdir(parents=True, exist_ok=True)
+            path = os.path.join(folder, 'cluster_key_phrases_group.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'cluster_key_phrases_group.json')
+            df.to_json(path, orient="records")
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
     # Re-group the key phrases within a group
     def re_group_key_phrases_within_groups(self):
         key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases')
-        # cluster_no_list = list(range(-1, self.total_clusters))
+        # minimal cluster size
         min_cluster_size_list = list(range(30, 9, -1))
-        cluster_no_list = [0]
+        # cluster_no_list = [0]
+        cluster_no_list = list(range(-1, self.total_clusters))
+        # Maximal level 5
+        max_level = 5
         try:
+            results = list()
             for cluster_no in cluster_no_list:
-                is_stop = False
-                level = 1
-                while not is_stop:
-                    try:
-                        KeyPhraseUtility.run_re_grouping_experiments(level, cluster_no, key_phrase_folder,
-                                                                     min_cluster_size_list,
-                                                                     self.model, self.args.n_neighbors)
-                        # # # Re-group the key phrases within a group using the optimal parameters
-                        is_stop = KeyPhraseUtility.re_group_phrases_by_opt_experiment(level, cluster_no, key_phrase_folder)
-                        level += 1
-                        print("=== Complete re-grouping the key phrases at level {level} in cluster #{c_no} ===".format(level=level, c_no=cluster_no))
-                    except Exception as _err:
-                        print("Error occurred! {err}".format(err=_err))
-                        sys.exit(-1)
-                # flat the sub-groups
-                last_level = level
-                KeyPhraseUtility.flat_key_phrase_subgroups(cluster_no, last_level, key_phrase_folder)
+                cluster = next(cluster for cluster in self.clusters if cluster['Cluster'] == cluster_no)
+                if cluster['NumDocs'] > 10:
+                    is_stop = False
+                    level = 1
+                    while not is_stop and level <= max_level:
+                        try:
+                            KeyPhraseUtility.run_re_grouping_experiments(level, cluster_no, key_phrase_folder,
+                                                                         min_cluster_size_list,
+                                                                         self.model, self.args.n_neighbors)
+                            # # # Re-group the key phrases within a group using the optimal parameters
+                            is_stop = KeyPhraseUtility.re_group_phrases_by_opt_experiment(level, cluster_no, key_phrase_folder)
+                            level += 1
+                            print("=== Complete re-grouping the key phrases at level {level} in cluster #{c_no} ===".format(level=level, c_no=cluster_no))
+                        except Exception as _err:
+                            print("Error occurred! {err}".format(err=_err))
+                            sys.exit(-1)
+                    # flat the sub-groups
+                    last_level = level
+                    sub_groups = KeyPhraseUtility.flat_key_phrase_subgroups(cluster_no, last_level, key_phrase_folder)
+                    results.append({'Cluster': cluster_no, 'SubGroups': sub_groups})
+                else:
+                    results.append({'Cluster': cluster_no, 'SubGroups': []})
+                    # # Load best results of each group
+            df = pd.DataFrame(results,
+                              columns=['Cluster', 'SubGroups'])
+            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
+            Path(folder).mkdir(parents=True, exist_ok=True)
+            path = os.path.join(folder, 'cluster_key_phrases_sub_groups.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'cluster_key_phrases_sub_groups.json')
+            df.to_json(path, orient="records")
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
             sys.exit(-1)
@@ -323,9 +345,9 @@ if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
         # kp.extract_doc_key_phrases_by_similarity_diversity()
-        # kp.experiment_group_cluster_key_phrases()
-        # kp.group_cluster_key_phrases_with_best_experiments()
-        kp.re_group_key_phrases_within_groups()
+        kp.experiment_group_cluster_key_phrases()
+        kp.group_cluster_key_phrases_with_best_experiments()
+        # kp.re_group_key_phrases_within_groups()
         # kp.combine_terms_key_phrases_results()
         # kp.combine_cluster_doc_key_phrases()
     except Exception as err:

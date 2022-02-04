@@ -657,10 +657,11 @@ class KeyPhraseUtility:
                           columns=['Cluster', 'Parent', 'Group', 'TitleWords', 'NumPhrases', 'Key-phrases',
                                    'NumDocs', 'DocIds'])
         df = df.rename(columns={'Parent': 'Group', 'Group': 'SubGroup'})
-        folder = os.path.join(key_phrase_folder, 'group_key_phrases')
+        df['Group'] = df['Group'].apply(lambda g: int(g.split("_")[1]))
+        folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'sub_groups')
         Path(folder).mkdir(parents=True, exist_ok=True)
         path = os.path.join(folder, 'cluster_key_phrases_sub_grouping_cluster_#' + str(cluster_no) + '.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         path = os.path.join(folder, 'cluster_key_phrases_sub_grouping_cluster_#' + str(cluster_no) + '.json')
         df.to_json(path, orient="records")
-        # print(results)
+        return df.to_dict("records")
