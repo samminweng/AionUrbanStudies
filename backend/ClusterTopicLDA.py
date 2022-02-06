@@ -132,7 +132,7 @@ class ClusterTopicLDA:
             # Write the result to csv and json file
             cluster_df = pd.DataFrame(results,
                                       columns=['Cluster', 'NumTopics', 'LDAScore', 'LDATopics'])
-            topic_folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'LDA_topic_scores')
+            topic_folder = os.path.join('output', self.args.case_name, 'LDA_topics')
             Path(topic_folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
             path = os.path.join(topic_folder,
@@ -232,8 +232,8 @@ class ClusterTopicLDA:
 if __name__ == '__main__':
     try:
         ct = ClusterTopicLDA()
-        # ct.derive_n_grams_group_by_clusters()
-        # ct.derive_cluster_topics_by_LDA()
+        ct.derive_n_grams_group_by_clusters()
+        ct.derive_cluster_topics_by_LDA()
         ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

@@ -1,32 +1,15 @@
 // Create Plotly sunburst graph to display Grouped key phrases and LDA Topics
 // Ref: https://plotly.com/javascript/sunburst-charts/
 // Ref: https://plotly.com/javascript/reference/sunburst/
-function SunburstGraph(group_data, cluster_no, is_key_phrase) {
-    const chart_div = (is_key_phrase? $('#key_phrase_chart'): $('#lda_topic_chart'));
+function SunburstGraph(group_data, sub_group_data, cluster_no) {
+    const chart_div = $('#key_phrase_chart');
     // Convert the word_docs map to nodes/links
-    const {total, group_list} = compute_total(group_data);
+    const total = group_data.reduce((pre, cur) => pre + cur['NumPhrases'], 0);
     const {labels, values, parents, ids, texts} = create_graph_data();
     console.log(ids);
     const width = 600;
     const height = 600;
     const D3Colors = d3.schemeCategory10;
-
-    // Count the count of a groups
-    function compute_total(key_phrase_groups){
-        let total = 0;
-        let group_list = [];
-        for(const group of key_phrase_groups){
-            let group_total = 0;
-            for(const [top_word, doc_ids] of Object.entries(group['word_docIds'])){
-                group_total += doc_ids.length;
-                total += doc_ids.length;
-            }
-            group_list.push({group: group, total: group_total});
-        }
-        // Sort by the total
-        group_list.sort((a, b) => b['total'] - a['total'])
-        return {total: total, group_list: group_list};
-    }
 
     // Convert the json to the format of plotly graph
     function create_graph_data() {
@@ -34,33 +17,26 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
         const root = "Cluster#"+cluster_no;
         let ids = [root];
         let labels = [root];
-        let texts = [""];
         let values = [total];
         let parents = [""];
-        for(let i=0; i < group_list.length; i++){
-            const group = group_list[i]['group'];
-            const group_total = group_list[i]['total'];
-            const prefix = (is_key_phrase ? "Group": "Topic");
-            const group_name = prefix + " #" + (i + 1);
-            const group_score = group['score'].toFixed(2);
+        for(const group of group_data){
+            const group_total = group['NumPhrases'];
+            const group_id = group['Group'];
+            const group_name = "Group" + "#" + (group_id + 1);
+            const percent = 100 * (group_total / total);
             ids.push(group_name);
-            labels.push(group_name + " <br>score:" + group_score);
-            texts.push("");
+            labels.push(group_name + "<br>(" + percent.toFixed(0) + "%)");
             values.push(group_total);
             parents.push(root);
-            const top_words = group['top_words'];
-            for(const top_word of top_words){
-                const num_docs = group['word_docIds'][top_word].length;
-                const w_id =  group_name + " # " + top_word;
-                let w_label = top_word;
-                const w_array = top_word.split(" ");
-                if(w_array.length > 2){
-                    w_label = w_array[0] + " " + w_array[1] + "<br>" + w_array[2];
-                }
-                ids.push(w_id);
-                labels.push(w_label);
-                texts.push(" has " + num_docs + " papers")
-                values.push(num_docs);
+            // Get the sub-group
+            const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+            for(const sub_group of sub_groups){
+                const sub_group_id =  group_name + "#" + sub_group['SubGroup'];
+                const sub_group_label = sub_group['TitleWords'].join(",<br>");
+                const sub_group_total = sub_group['NumPhrases'];
+                ids.push(sub_group_id);
+                labels.push(sub_group_label);
+                values.push(sub_group_total);
                 parents.push(group_name);
             }
         }
@@ -83,7 +59,7 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
             "branchvalues": 'total',
             "outsidetextfont": {size: 24, color: "#377eb8"},
             "insidetextfont": {size: 16},
-            'insidetextorientation': "horizontal",
+            // 'insidetextorientation': "horizontal",
             // Label text orientation
             "textposition": 'inside',
             // "hovertemplate": "<b>%{label}</b> %{text}",
@@ -100,64 +76,30 @@ function SunburstGraph(group_data, cluster_no, is_key_phrase) {
         Plotly.newPlot(chart_id, data, layout, {showSendToCloud: true})
         const chart_element = document.getElementById(chart_id);
 
-        // Define the hover event
-        chart_element.on('plotly_click', function(data){
-            const id = data.points[0].id;
-            if(id.startsWith('Topic')){
-                const index = parseInt(id.split("#")[1]) - 1;
-                const group = group_list[index]['group'];
-                // console.log(group);
-                const word_docs = group['word_docIds'];
-                const chart_div = $('#lda_topic_network_graph');
-                const network_graph = new D3NetworkGraph(word_docs, false, chart_div, D3Colors[index]);
-                const score = group['score'].toFixed(2);
-                // Added header
-                $('#lda_topic_occurrence_header').empty();
-                const header = $('<div>Topic #' + (index+1) + ' Term Occurrence Chart (Score = <span>' + score+ '</span>)</div>');
-                if(score < 0){
-                    header.find("span").attr('class', 'text-danger');
-                }
-                $('#lda_topic_occurrence_header').append(header);
-            }else if(id.startsWith('Group')){
-                const index = parseInt(id.split("#")[1]) - 1;
-                const group = group_list[index]['group'];
-                const score = group['score'].toFixed(2);
-                const word_docs = group['word_docIds'];
-                const chart_div = $('#phrase_network_graph');
-                const network_graph = new D3NetworkGraph(word_docs, true, chart_div, D3Colors[index]);
-                // Added header
-                // Added header
-                $('#phrase_occurrence_header').empty();
-                const header = $('<div> Group #' + (index +1) + ' Term Occurrence Chart (Score = <span>' + score+ '</span>)</div>');
-                if(score < 0){
-                    header.find("span").attr('class', 'text-danger');
-                }
-                $('#phrase_occurrence_header').append(header);
-            }
-        });// End of chart onclick event
+        // // Define the hover event
+        // chart_element.on('plotly_click', function(data){
+        //     const id = data.points[0].id;
+        //     const index = parseInt(id.split("#")[1]) - 1;
+        //     const group = group_data[index]['group'];
+        //     const score = group['score'].toFixed(2);
+        //     const word_docs = group['word_docIds'];
+        //     const chart_div = $('#phrase_network_graph');
+        //     const network_graph = new D3NetworkGraph(word_docs, true, chart_div, D3Colors[index]);
+        //     // Added header
+        //     $('#phrase_occurrence_header').empty();
+        //     const header = $('<div> Group #' + (index +1) + ' Term Occurrence Chart (Score = <span>' + score+ '</span>)</div>');
+        //     if(score < 0){
+        //         header.find("span").attr('class', 'text-danger');
+        //     }
+        //     $('#phrase_occurrence_header').append(header);
+        //
+        // });// End of chart onclick event
     }
     // Create the header
     function create_header(){
-        const total_score = group_data.reduce((pre, cur) => cur['score'] + pre, 0);
-        const avg_score = total_score / group_data.length;
         const group_count = group_data.length;
-        if(is_key_phrase){
-            $('#phrase_count').text(group_count);
-            $('#phrase_score').text(avg_score.toFixed(2));
-            if(avg_score < 0){
-                $('#phrase_score').attr('class', 'text-danger');
-            }else{
-                $('#phrase_score').removeAttr("class");
-            }
-        }else{
-            $('#topic_count').text(group_count);
-            $('#topic_score').text(avg_score.toFixed(2));
-            if(avg_score < 0){
-                $('#topic_score').attr('class', 'text-danger');
-            }else{
-                $('#topic_score').removeAttr("class");
-            }
-        }
+        $('#phrase_count').text(group_count);
+        $('#phrase_total').text(total);
     }
 
     // Create the sunburst graph using D3 library
