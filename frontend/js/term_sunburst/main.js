@@ -10,10 +10,10 @@ function displayChartByCluster(cluster_no, clusters, corpus_data){
     console.log(cluster_data);
     const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']))
     console.log(cluster_docs);
-    $('#cluster_no').text(cluster_no);
-    $('#doc_count').text(cluster_docs.length);
     // Create a term chart
     const chart = new TermSunburst(cluster_data, cluster_docs);
+    $('#sub_group_list_view').empty();
+    $('#sub_group_header').empty();
 }
 
 // Document ready event

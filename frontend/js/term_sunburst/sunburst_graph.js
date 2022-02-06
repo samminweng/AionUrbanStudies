@@ -23,9 +23,8 @@ function SunburstGraph(group_data, sub_group_data, cluster_no) {
             const group_total = group['NumPhrases'];
             const group_id = group['Group'];
             const group_name = "Group" + "#" + (group_id + 1);
-            const percent = 100 * (group_total / total);
             ids.push(group_name);
-            labels.push(group_name + "<br>(" + percent.toFixed(0) + "%)");
+            labels.push(group_name);
             values.push(group_total);
             parents.push(root);
             // Get the sub-group
@@ -77,23 +76,24 @@ function SunburstGraph(group_data, sub_group_data, cluster_no) {
         const chart_element = document.getElementById(chart_id);
 
         // // Define the hover event
-        // chart_element.on('plotly_click', function(data){
-        //     const id = data.points[0].id;
-        //     const index = parseInt(id.split("#")[1]) - 1;
-        //     const group = group_data[index]['group'];
-        //     const score = group['score'].toFixed(2);
-        //     const word_docs = group['word_docIds'];
-        //     const chart_div = $('#phrase_network_graph');
-        //     const network_graph = new D3NetworkGraph(word_docs, true, chart_div, D3Colors[index]);
-        //     // Added header
-        //     $('#phrase_occurrence_header').empty();
-        //     const header = $('<div> Group #' + (index +1) + ' Term Occurrence Chart (Score = <span>' + score+ '</span>)</div>');
-        //     if(score < 0){
-        //         header.find("span").attr('class', 'text-danger');
-        //     }
-        //     $('#phrase_occurrence_header').append(header);
-        //
-        // });// End of chart onclick event
+        chart_element.on('plotly_click', function(data){
+            const id = data.points[0].id;
+            const group_id = parseInt(id.split("#")[1]) - 1;
+            const group = group_data.find(g => g['Group'] === group_id);
+            if(group){
+                const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+                $('#sub_group_header').empty();
+                const header = $('<div class="bg-secondary bg-opacity-10 p-3"></div>')
+                const percent = 100 * (group['NumPhrases'] / total);
+                // Create a header
+                header.append($('<div class="row">' +
+                    '<div class="col">Phrase Group #' + (group_id + 1) + ' has ' + group['NumPhrases'] +
+                    ' Phrases (' + percent.toFixed(0) + '%) </div></div>'));
+                $('#sub_group_header').append(header);
+                // Create a list view to display all the sub-groups
+                const list_view = new KeyPhraseListView(group, sub_groups, total);
+            }
+        });// End of chart onclick event
     }
     // Create the header
     function create_header(){

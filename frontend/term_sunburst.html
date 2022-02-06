@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Term Sunburst Chart</title>
+    <title>Phrase Sunburst Chart</title>
     <meta charset="utf-8">
     <!-- All the third party libraries-->
     <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
@@ -19,8 +19,8 @@
 </head>
 <body>
 <div class="container">
-    <div class="h4">Top 10 Words Chart</div>
-    <div>This sunburst chart display the hierarchical structure of LDA topics and key phrase groups and their top 10 words respectively.
+    <div class="h4">Phrase Group Chart</div>
+    <div>This sunburst chart display the hierarchical structures of key phrase groups and their sub-groups respectively.
     </div>
     <div class="row">
         <div class="col">
@@ -28,14 +28,6 @@
                 <fieldset>
                     <select name="cluster_list" id="cluster_list">
                     </select>
-                </fieldset>
-                <fieldset>
-                    <div class="container-sm mt-3">
-                        <div class="row">
-                            <div class="col-3">Cluster: <span id="cluster_no"></span></div>
-                            <div class="col-4">Total Papers: <span id="doc_count"></span></div>
-                        </div>
-                    </div>
                 </fieldset>
             </div>
         </div>
@@ -45,33 +37,25 @@
             <div id="key_phrase_header" class="bg-secondary bg-opacity-10 p-3">
                 <div class="row">
                     <div class="col">
-                        Phrase Groups: <span id="phrase_count"> </span>
+                        Total Groups: <span id="phrase_count"> </span>
                     </div>
                     <div class="col">
-                        Total Number of Phrases: <span id="phrase_total"></span>
+                        Total Phrases: <span id="phrase_total"></span>
                     </div>
                 </div>
             </div>
-            <div id="key_phrase_chart"></div>
+            <div class="p-3">
+                <div id="key_phrase_chart" ></div>
+            </div>
         </div>
         <div class="col border border-3 p-3">
-            <div id="key_phrase_list_view"></div>
-<!--            <div id="key_phrase_header" class="bg-secondary bg-opacity-10 p-3">-->
-<!--                <div class="row">-->
-<!--                    <div class="col">-->
-<!--                        Phrase Groups: <span id="phrase_count"> </span>-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        Total Papers: <span id="phrase_score"></span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div id="key_phrase_chart"></div>-->
+            <div id="sub_group_header"></div>
+            <div id="sub_group_list_view" class="p-3"></div>
         </div>
     </div>
 </div>
 <!-- Our javascript -->
-<script type="text/javascript" src="js/term_sunburst/d3_network_graph.js"></script>
+<script type="text/javascript" src="js/term_sunburst/key_phrase_list_view.js"></script>
 <script type="text/javascript" src="js/term_sunburst/sunburst_graph.js"></script>
 <script type="text/javascript" src="js/term_sunburst/term_sunburst.js"></script>
 <script type="text/javascript" src="js/term_sunburst/main.js"></script>
