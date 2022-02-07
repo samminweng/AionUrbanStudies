@@ -200,7 +200,9 @@ class KeyPhraseSimilarity:
                     # Sort the grouped key phrases by rake
                     for group in group_key_phrases:
                         phrase_scores = KeyPhraseUtility.rank_key_phrases_by_rake_scores(group['Key-phrases'])
-                        group['Key-phrases'] = list(map(lambda p: p['key-phrase'], phrase_scores))
+                        key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores))
+                        group['Key-phrases'] = key_phrases
+                        group['TitleWords'] = KeyPhraseUtility.get_top_frequent_words(key_phrases)
                         group['score'] = optimal_parameter['score']
                         group['dimension'] = optimal_parameter['dimension']
                         group['min_samples'] = optimal_parameter['min_samples']
@@ -350,9 +352,9 @@ if __name__ == '__main__':
         kp = KeyPhraseSimilarity()
         # kp.extract_doc_key_phrases_by_similarity_diversity()
         # kp.experiment_group_cluster_key_phrases()
-        # kp.group_cluster_key_phrases_with_best_experiments()
+        kp.group_cluster_key_phrases_with_best_experiments()
         # kp.re_group_key_phrases_within_groups()
-        # kp.combine_terms_key_phrases_results()
+        kp.combine_terms_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

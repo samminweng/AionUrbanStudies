@@ -204,7 +204,7 @@ class ClusterTopicLDA:
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.json')
             cluster_df = pd.read_json(path)
             # Load results of LDA Topic model
-            folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'LDA_topic_scores')
+            folder = os.path.join('output', self.args.case_name, 'LDA_topics')
             path = os.path.join(folder, self.args.case_name + '_LDA_topics.json')
             lda_topics_df = pd.read_json(path)
             # # # Load cluster topic, key phrases
@@ -232,8 +232,8 @@ class ClusterTopicLDA:
 if __name__ == '__main__':
     try:
         ct = ClusterTopicLDA()
-        ct.derive_n_grams_group_by_clusters()
-        ct.derive_cluster_topics_by_LDA()
+        # ct.derive_n_grams_group_by_clusters()
+        # ct.derive_cluster_topics_by_LDA()
         ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

@@ -29,15 +29,27 @@ function SunburstGraph(group_data, sub_group_data, cluster_no) {
             parents.push(root);
             // Get the sub-group
             const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-            for(const sub_group of sub_groups){
-                const sub_group_id =  group_name + "#" + sub_group['SubGroup'];
-                const sub_group_label = sub_group['TitleWords'].join(",<br>");
-                const sub_group_total = sub_group['NumPhrases'];
+            if(sub_groups.length > 0){
+                for(const sub_group of sub_groups){
+                    const sub_group_id =  group_name + "#" + sub_group['SubGroup'];
+                    const sub_group_label = sub_group['TitleWords'].join(",<br>");
+                    const sub_group_total = sub_group['NumPhrases'];
+                    ids.push(sub_group_id);
+                    labels.push(sub_group_label);
+                    values.push(sub_group_total);
+                    parents.push(group_name);
+                }
+            }else{
+                // Add the group
+                const sub_group_id = group_name + "#" +group_id;
+                const sub_group_label = group['TitleWords'].join(",<br>");
+                const sub_group_total = group['NumPhrases'];
                 ids.push(sub_group_id);
                 labels.push(sub_group_label);
                 values.push(sub_group_total);
                 parents.push(group_name);
             }
+
         }
         return {labels: labels, values: values, parents: parents, ids:ids};
     }
@@ -81,32 +93,32 @@ function SunburstGraph(group_data, sub_group_data, cluster_no) {
             const group_id = parseInt(id.split("#")[1]) - 1;
             const group = group_data.find(g => g['Group'] === group_id);
             if(group){
-                const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
                 $('#sub_group_header').empty();
                 const header = $('<div class="bg-secondary bg-opacity-10 p-3"></div>')
                 const percent = 100 * (group['NumPhrases'] / total);
                 // Create a header
                 header.append($('<div class="row">' +
-                    '<div class="col">Phrase Group #' + (group_id + 1) + ' has ' + group['NumPhrases'] +
+                    '<div class="col">Group #' + (group_id + 1) + ' has ' + group['NumPhrases'] +
                     ' Phrases (' + percent.toFixed(0) + '%) </div></div>'));
                 $('#sub_group_header').append(header);
-                // Create a list view to display all the sub-groups
-                const list_view = new KeyPhraseListView(group, sub_groups, total);
+                const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+                if(sub_groups.length > 0){
+                    // Create a list view to display all the sub-groups
+                    const list_view = new KeyPhraseListView(group, sub_groups, total);
+                }else{
+                    // Create a list view to display all the sub-groups
+                    const list_view = new KeyPhraseListView(group, [group], total);
+                }
+
             }
         });// End of chart onclick event
     }
-    // Create the header
-    function create_header(){
-        const group_count = group_data.length;
-        $('#phrase_count').text(group_count);
-        $('#phrase_total').text(total);
-    }
+
 
     // Create the sunburst graph using D3 library
     function createUI() {
         try {
             create_sunburst_graph();
-            create_header();
         } catch (error) {
             console.error(error);
         }

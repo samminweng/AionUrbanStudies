@@ -381,6 +381,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/MLUrbanStudyCorpus/LDA_topics/MLUrbanStudyCorpus_LDA_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/MLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/MLUrbanStudyCorpus/MLUrbanStudyCorpus_clusters.csv">
           <value>
             <Attribute>
@@ -402,14 +416,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/MLUrbanStudyCorpus/cluster_terms/MLUrbanStudyCorpus_TF-IDF_cluster_topic_summary.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/MLUrbanStudyCorpus/cluster_terms/MLUrbanStudyCorpus_TF-IDF_cluster_topics.csv">
+        <entry key="/output/MLUrbanStudyCorpus/key_phrases/MLUrbanStudyCorpus_cluster_terms_key_phrases.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
