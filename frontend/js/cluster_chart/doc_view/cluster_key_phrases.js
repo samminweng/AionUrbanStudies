@@ -1,16 +1,16 @@
 // Create a div to display the grouped key phrases
 function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div){
     console.log(cluster_key_phrases);
-    const total = cluster_key_phrases.reduce((pre, cur) => pre + cur['key-phrases'].length, 0);
+    const total = cluster_key_phrases.reduce((pre, cur) => pre + cur['Key-phrases'].length, 0);
     // Re-order the groups of key phrases
-    cluster_key_phrases.sort((a, b) => b['key-phrases'].length - a['key-phrases'].length);
+    cluster_key_phrases.sort((a, b) => b['Key-phrases'].length - a['Key-phrases'].length);
 
 
     // Create an list item to display a group of key phrases
     function createGroupItem(group){
         const group_item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>')
         // Display key phrases
-        const key_phrases = group['key-phrases'];
+        const key_phrases = group['Key-phrases'];
         const key_phrase_div = $('<div class="ms-2 me-auto"></div>');
         // Display top 10 key phrases
         const text_span = $('<p class="key_phrase_text"></p>');
@@ -59,7 +59,7 @@ function ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div){
 
 
         // Add percent
-        const percent = Math.round(100 * (group['key-phrases'].length/(1.0* total)));
+        const percent = Math.round(100 * (group['Key-phrases'].length/(1.0* total)));
         const doc_ids = group['DocIds'];
         const group_docs = cluster_docs.filter(d => doc_ids.includes(d['DocId']));
         const percent_btn = $('<button type="button" class="rounded btn-sm">' + percent + '%</button>');

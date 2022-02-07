@@ -36,12 +36,13 @@ function KeyPhraseListView(group, sub_groups, total){
         const key_phrase_div = $('<div class="ms-2 me-auto"><span class="fw-bold text-capitalize"> ' + title_terms.join(", ") + ' </span></div>');
         // Display top 10 key phrases
         const text_span = $('<p class="key_phrase_text"></p>');
-        text_span.text(key_phrases.slice(0, 10).join(", "));
+        const MAX = 10
+        text_span.text(key_phrases.slice(0, MAX).join(", "));
         key_phrase_div.append(text_span);
 
         sub_group_item.append(key_phrase_div);
         // // Long list of key phrases
-        if(key_phrases.length > 10){
+        if(key_phrases.length > MAX){
             const btn_div = $('<div class="small"></div>');
             // Create a more btn to view more topics
             const more_btn = $('<span class="text-muted">MORE<span class="ui-icon ui-icon-plus"></span></span>');
@@ -68,7 +69,7 @@ function KeyPhraseListView(group, sub_groups, total){
             });
             // Display top five key phrases
             less_btn.click(function(event){
-                text_span.text(key_phrases.slice(0, 10).join(", "));
+                text_span.text(key_phrases.slice(0, MAX).join(", "));
                 mark_key_terms(text_span, title_terms, 'key_phrase');
                 more_btn.show();
                 less_btn.hide();
@@ -110,7 +111,7 @@ function KeyPhraseListView(group, sub_groups, total){
             pageSize: 10,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, ' +
-                '<%= totalNumber %> groups of key phrases',
+                '<%= totalNumber %> sub-groups of key phrases',
             position: 'top',
             className: 'paginationjs-theme-black paginationjs-small',
             // showGoInput: true,
