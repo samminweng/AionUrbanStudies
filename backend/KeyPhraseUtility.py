@@ -207,8 +207,8 @@ class KeyPhraseUtility:
         def _collect_doc_ids(_doc_key_phrases, _grouped_key_phrases):
             _doc_ids = list()
             for _doc in _doc_key_phrases:
-                # find if any doc key phrases appear in the grouped key phrases
-                for _candidate in _doc['Phrase-candidates']:
+                # find if the doc contains any key phrases in its top 5 phrase list
+                for _candidate in _doc['Key-phrases']:
                     _found = next((_gkp for _gkp in _grouped_key_phrases if _gkp.lower() == _candidate.lower()), None)
                     if _found:
                         _doc_ids.append(_doc['DocId'])
@@ -249,7 +249,7 @@ class KeyPhraseUtility:
             _doc_ids = list()
             for _doc in _doc_key_phrases:
                 # find if any doc key phrases appear in the grouped key phrases
-                for _candidate in _doc['Phrase-candidates']:
+                for _candidate in _doc['Key-phrases']:
                     _found = next((_key_phrase for _key_phrase in _group if _key_phrase.lower() == _candidate.lower()),
                                   None)
                     if _found:

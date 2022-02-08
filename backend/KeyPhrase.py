@@ -197,10 +197,8 @@ class KeyPhraseSimilarity:
                     # Obtain the grouped key phrases of the cluster
                     group_key_phrases = KeyPhraseUtility.group_cluster_key_phrases_with_opt_parameter(optimal_parameter,
                                                                                                       doc_key_phrases)
-                    # Sort the grouped key phrases by rake
+                    # Sort the grouped key phrases by most frequent words
                     for group in group_key_phrases:
-                        # phrase_scores = KeyPhraseUtility.rank_key_phrases_by_rake_scores(group['Key-phrases'])
-                        # key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores))
                         key_phrases = group['Key-phrases']
                         freq_words = KeyPhraseUtility.get_top_frequent_words(key_phrases)
                         sorted_key_phrases = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words, key_phrases)
@@ -353,10 +351,10 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        kp.extract_doc_key_phrases_by_similarity_diversity()
-        kp.experiment_group_cluster_key_phrases()
-        kp.group_cluster_key_phrases_with_best_experiments()
-        kp.re_group_key_phrases_within_groups()
+        # kp.extract_doc_key_phrases_by_similarity_diversity()
+        # kp.experiment_group_cluster_key_phrases()
+        # kp.group_cluster_key_phrases_with_best_experiments()
+        # kp.re_group_key_phrases_within_groups()
         kp.combine_terms_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:

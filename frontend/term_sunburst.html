@@ -24,40 +24,42 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="container p-3">
-                <fieldset>
-                    <select name="cluster_list" id="cluster_list">
-                    </select>
-                </fieldset>
+            <select name="cluster_list" id="cluster_list">
+            </select>
+            <div id="cluster_header" class="p-3">
+                <div class="col">
+                    Total Papers: <span id="paper_count"> </span>
+                </div>
+                <div class="col">
+                    Total Groups: <span id="phrase_count"> </span>
+                </div>
+                <div class="col">
+                    Total Phrases: <span id="phrase_total"></span>
+                </div>
             </div>
+        </div>
+        <div class="col">
+
         </div>
     </div>
     <div class="row p-3">
         <div class="col border border-3 p-3">
             <div id="key_phrase_header" class="bg-secondary bg-opacity-10 p-3">
-                <div class="row">
-                    <div class="col">
-                        Total Papers: <span id="paper_count"> </span>
-                    </div>
-                    <div class="col">
-                        Total Groups: <span id="phrase_count"> </span>
-                    </div>
-                    <div class="col">
-                        Total Phrases: <span id="phrase_total"></span>
-                    </div>
-                </div>
             </div>
             <div class="p-3">
-                <div id="key_phrase_chart" ></div>
+                <div id="key_phrase_chart"></div>
             </div>
         </div>
         <div class="col border border-3 p-3">
             <div id="sub_group_header"></div>
             <div id="sub_group_list_view" class="p-3"></div>
+            <div id="doc_list" class="p-3"></div>
         </div>
     </div>
 </div>
 <!-- Our javascript -->
+<script type="text/javascript" src="js/term_sunburst/doc_view.js"></script>
+<script type="text/javascript" src="js/term_sunburst/doc_list.js"></script>
 <script type="text/javascript" src="js/term_sunburst/key_phrase_list_view.js"></script>
 <script type="text/javascript" src="js/term_sunburst/sunburst_graph.js"></script>
 <script type="text/javascript" src="js/term_sunburst/term_sunburst.js"></script>

@@ -232,8 +232,8 @@ class ClusterTopicLDA:
 if __name__ == '__main__':
     try:
         ct = ClusterTopicLDA()
-        # ct.derive_n_grams_group_by_clusters()
-        # ct.derive_cluster_topics_by_LDA()
+        ct.derive_n_grams_group_by_clusters()
+        ct.derive_cluster_topics_by_LDA()
         ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

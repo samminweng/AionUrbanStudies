@@ -1,15 +1,12 @@
 // Create Plotly sunburst graph to display Grouped key phrases and LDA Topics
 // Ref: https://plotly.com/javascript/sunburst-charts/
 // Ref: https://plotly.com/javascript/reference/sunburst/
-function SunburstGraph(group_data, sub_group_data, cluster_no) {
+function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
     const chart_div = $('#key_phrase_chart');
     // Convert the word_docs map to nodes/links
     const total = group_data.reduce((pre, cur) => pre + cur['NumPhrases'], 0);
     const {labels, values, parents, ids, texts} = create_graph_data();
     console.log(ids);
-    const width = 600;
-    const height = 600;
-    const D3Colors = d3.schemeCategory10;
 
     // Convert the json to the format of plotly graph
     function create_graph_data() {
@@ -54,6 +51,25 @@ function SunburstGraph(group_data, sub_group_data, cluster_no) {
         return {labels: labels, values: values, parents: parents, ids:ids};
     }
 
+    // Create the group header
+    function create_group_header(group){
+        // Added the header of key-phrase group
+        const header = $('<div class="row"> </div>');
+        const group_id = group['Group'] + 1;
+        // // Add Cluster
+        // header.append($('<div class="col"> Cluster: #' + cluster_no + ' </div>'));
+        // Add group no
+        header.append($('<div class="col"> Group: #' + group_id + ' </div>'));
+        // Add the num of phrases
+        header.append($('<div class="col"> Total Pharses: ' + group['Key-phrases'].length + ' </div>'));
+        // Add the num of papers
+        header.append($('<div class="col"> Total Papers: ' + group['DocIds'].length + ' </div>'));
+
+        // Added to UI
+        $('#key_phrase_header').empty();
+        $('#key_phrase_header').append(header);
+    }
+
     // Create the sunburst
     function create_sunburst_graph() {
         chart_div.empty();
@@ -70,7 +86,7 @@ function SunburstGraph(group_data, sub_group_data, cluster_no) {
             "branchvalues": 'total',
             "outsidetextfont": {size: 24, color: "#377eb8"},
             "insidetextfont": {size: 16},
-            // 'insidetextorientation': "horizontal",
+            'insidetextorientation': "horizontal",
             // Label text orientation
             "textposition": 'inside',
             // "hovertemplate": "<b>%{label}</b> %{text}",
@@ -93,23 +109,15 @@ function SunburstGraph(group_data, sub_group_data, cluster_no) {
             const group_id = parseInt(id.split("#")[1]) - 1;
             const group = group_data.find(g => g['Group'] === group_id);
             if(group){
-                $('#sub_group_header').empty();
-                const header = $('<div class="bg-secondary bg-opacity-10 p-3"></div>')
-                const percent = 100 * (group['NumPhrases'] / total);
-                // Create a header
-                header.append($('<div class="row">' +
-                    '<div class="col">Group #' + (group_id + 1) + ' has ' + group['NumPhrases'] +
-                    ' Phrases (' + percent.toFixed(0) + '%) </div></div>'));
-                $('#sub_group_header').append(header);
                 const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
                 if(sub_groups.length > 0){
                     // Create a list view to display all the sub-groups
-                    const list_view = new KeyPhraseListView(group, sub_groups, total);
+                    const list_view = new KeyPhraseListView(group, sub_groups, total, cluster_docs);
                 }else{
                     // Create a list view to display all the sub-groups
-                    const list_view = new KeyPhraseListView(group, [group], total);
+                    const list_view = new KeyPhraseListView(group, [group], total, cluster_docs);
                 }
-
+                create_group_header(group);
             }
         });// End of chart onclick event
     }
@@ -119,6 +127,8 @@ function SunburstGraph(group_data, sub_group_data, cluster_no) {
     function createUI() {
         try {
             create_sunburst_graph();
+
+
         } catch (error) {
             console.error(error);
         }

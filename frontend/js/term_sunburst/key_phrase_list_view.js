@@ -1,5 +1,5 @@
 // Create a div to display the grouped key phrases
-function KeyPhraseListView(group, sub_groups, total){
+function KeyPhraseListView(group, sub_groups, total, cluster_docs){
     console.log(group);
     console.log(sub_groups);
     // console.log(cluster_key_phrases);
@@ -27,13 +27,37 @@ function KeyPhraseListView(group, sub_groups, total){
         return div;
     }
 
+    // Display the relevant paper
+    function display_relevant_papers(sub_group){
+        const sub_group_doc_ids = sub_group['DocIds'];
+        const key_phrases =  sub_group['Key-phrases'];
+        // Get sub_group docs
+        const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
+        console.log(sub_group_docs);
+        const header_text = 'about ' + sub_group['TitleWords'].join(", ");
+        // Create a list view of docs
+        const doc_list = new DocList(sub_group_docs, key_phrases, header_text);
+    }
+
+
     // Create an list item to display a group of key phrases
     function createSubGroup(sub_group){
         const sub_group_item = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>')
         // Display key phrases
         const key_phrases = sub_group['Key-phrases'];
         const title_terms = sub_group['TitleWords'];
-        const key_phrase_div = $('<div class="ms-2 me-auto"><span class="fw-bold text-capitalize"> ' + title_terms.join(", ") + ' </span></div>');
+        const sub_group_docs = sub_group['DocIds'];
+        const sub_group_btn = $('<a class="ui-widget ui-corner-all fw-bold text-capitalize ms-0 mb-3">' +
+                                ' ' + title_terms.join(", ") + ' (' + key_phrases.length + ')</a>');
+        sub_group_btn.button();
+        // click event for sub_group_btn
+        sub_group_btn.click(function(event){
+            // Display all the relevant papers.
+            display_relevant_papers(sub_group);
+        });
+
+        const key_phrase_div = $('<div class="ms-2 me-auto"></div>');
+        key_phrase_div.append(sub_group_btn);
         // Display top 10 key phrases
         const text_span = $('<p class="key_phrase_text"></p>');
         const MAX = 10
@@ -83,10 +107,6 @@ function KeyPhraseListView(group, sub_groups, total){
         }
         // Highlight the title words in each individual sub-group
         mark_key_terms(text_span, title_terms, 'key_phrase');
-        // Add percent
-        const percent = Math.round(100 * (sub_group['NumPhrases']/(1.0* total)));
-        const percent_btn = $('<button type="button" class="rounded btn-sm">' + percent + '%</button>');
-        sub_group_item.append(percent_btn);
         return sub_group_item;
     }
 
@@ -128,6 +148,22 @@ function KeyPhraseListView(group, sub_groups, total){
         group_div.append(group_list);
         return pagination;
     }
+
+    // Create header
+    function createHeader(){
+        const group_id = group['Group'];
+        const group_docs = group['DocIds'];
+        const group_key_phrases = group['Key-phrases'];
+        $('#sub_group_header').empty();
+        const header = $('<div class="bg-secondary bg-opacity-10 p-3"></div>')
+        // Create a header
+        header.append($('<div class="row">' +
+                            '<div class="col">Group #' + (group_id + 1) + ' has ' + group_key_phrases.length + ' phrases</div>' +
+                        '</div>'));
+        $('#sub_group_header').append(header);
+
+    }
+
     // Create UI
     function _createUI(){
         $('#sub_group_list_view').empty();
@@ -138,6 +174,7 @@ function KeyPhraseListView(group, sub_groups, total){
         p.append(pagination);
         p.append(group_div);
         $('#sub_group_list_view').append(p);
+        createHeader();
     }
 
 
