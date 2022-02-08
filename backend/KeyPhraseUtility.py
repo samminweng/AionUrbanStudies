@@ -411,6 +411,23 @@ class KeyPhraseUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Sort the key phrases by counting the occurrences of frequent words.
+    # A phrase contains a more number of freq words and has a high rank
+    @staticmethod
+    def rank_key_phrases_by_top_word_freq(freq_words, key_phrases):
+        key_phrase_scores = list()
+        for key_phrase in key_phrases:
+            try:
+                # Check if the key phrase contains any freq_words
+                found_words = [w for w in freq_words if w.lower() in key_phrase]
+                key_phrase_scores.append({"key-phrase": key_phrase, "score": len(found_words)})
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
+                sys.exit(-1)
+        # Sort the list by score
+        sorted_key_phrases = sorted(key_phrase_scores, key=lambda ks: (ks['score'], ks['key-phrase'].lower()), reverse=True)
+        return list(map(lambda ks: ks['key-phrase'], sorted_key_phrases))
+
     # Maximal Marginal Relevance minimizes redundancy and maximizes the diversity of results
     # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     @staticmethod
@@ -539,9 +556,9 @@ class KeyPhraseUtility:
                         try:
                             # Add the current group id as the parent of sub-group
                             sub_group['Parent'] = group['Parent'] + '_' + str(group['Group'])
-                            sorted_phrase_scores = KeyPhraseUtility.rank_key_phrases_by_rake_scores(
-                                sub_group['Key-phrases'])
-                            sub_group['Key-phrases'] = list(map(lambda p: p['key-phrase'], sorted_phrase_scores))
+                            freq_words = KeyPhraseUtility.get_top_frequent_words(sub_group['Key-phrases'])
+                            sorted_key_phrases = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words, sub_group['Key-phrases'])
+                            sub_group['Key-phrases'] = sorted_key_phrases
                             sub_group['score'] = opt_parameter['score']
                             sub_group['dimension'] = opt_parameter['dimension']
                             sub_group['min_samples'] = opt_parameter['min_samples']
@@ -634,7 +651,9 @@ class KeyPhraseUtility:
         for group in groups:
             parent = group['Parent']
             group_id = group['Group']
-            group['TitleWords'] = KeyPhraseUtility.get_top_frequent_words(group['Key-phrases'])
+            freq_words = KeyPhraseUtility.get_top_frequent_words(group['Key-phrases'])
+            group['TitleWords'] = freq_words
+            group['Key-phrases'] = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words, group['Key-phrases'])
             if len(group['Key-phrases']) <= 30:
                 results.append(group)
             else:
@@ -642,8 +661,10 @@ class KeyPhraseUtility:
                 sub_groups = list(filter(lambda g: g['Parent'].startswith(parent + '_' + str(group_id)), all_sub_groups))
                 # Update the parents of sub-group
                 for sub_group in sub_groups:
+                    freq_words = KeyPhraseUtility.get_top_frequent_words(sub_group['Key-phrases'])
                     sub_group['Parent'] = parent
-                    sub_group['TitleWords'] = KeyPhraseUtility.get_top_frequent_words(sub_group['Key-phrases'])
+                    sub_group['TitleWords'] = freq_words
+                    sub_group['Key-phrases'] = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words, sub_group['Key-phrases'])
                 results = results + sub_groups
         # Get all the unique parent ids
         parent_ids = list(set(map(lambda g: g['Parent'], results)))

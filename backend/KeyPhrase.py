@@ -199,10 +199,13 @@ class KeyPhraseSimilarity:
                                                                                                       doc_key_phrases)
                     # Sort the grouped key phrases by rake
                     for group in group_key_phrases:
-                        phrase_scores = KeyPhraseUtility.rank_key_phrases_by_rake_scores(group['Key-phrases'])
-                        key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores))
-                        group['Key-phrases'] = key_phrases
-                        group['TitleWords'] = KeyPhraseUtility.get_top_frequent_words(key_phrases)
+                        # phrase_scores = KeyPhraseUtility.rank_key_phrases_by_rake_scores(group['Key-phrases'])
+                        # key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores))
+                        key_phrases = group['Key-phrases']
+                        freq_words = KeyPhraseUtility.get_top_frequent_words(key_phrases)
+                        sorted_key_phrases = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words, key_phrases)
+                        group['Key-phrases'] = sorted_key_phrases
+                        group['TitleWords'] = freq_words
                         group['score'] = optimal_parameter['score']
                         group['dimension'] = optimal_parameter['dimension']
                         group['min_samples'] = optimal_parameter['min_samples']
@@ -350,10 +353,10 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        # kp.extract_doc_key_phrases_by_similarity_diversity()
-        # kp.experiment_group_cluster_key_phrases()
+        kp.extract_doc_key_phrases_by_similarity_diversity()
+        kp.experiment_group_cluster_key_phrases()
         kp.group_cluster_key_phrases_with_best_experiments()
-        # kp.re_group_key_phrases_within_groups()
+        kp.re_group_key_phrases_within_groups()
         kp.combine_terms_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:
