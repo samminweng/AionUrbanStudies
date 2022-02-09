@@ -21,7 +21,7 @@ function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
             const group_id = group['Group'];
             // Get the sub-group
             const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-            const group_name = "Group" + "#" + (group_id + 1);
+            const group_name = "Topic" + "#" + (group_id + 1);
             let group_total = group['NumDocs'];
             if(sub_groups.length > 0){
                 group_total = sub_groups.reduce((pre, cur) => pre + cur['NumDocs'], 0);

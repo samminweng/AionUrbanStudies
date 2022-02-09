@@ -351,10 +351,10 @@ class KeyPhraseSimilarity:
 if __name__ == '__main__':
     try:
         kp = KeyPhraseSimilarity()
-        # kp.extract_doc_key_phrases_by_similarity_diversity()
-        # kp.experiment_group_cluster_key_phrases()
-        # kp.group_cluster_key_phrases_with_best_experiments()
-        # kp.re_group_key_phrases_within_groups()
+        kp.extract_doc_key_phrases_by_similarity_diversity()
+        kp.experiment_group_cluster_key_phrases()
+        kp.group_cluster_key_phrases_with_best_experiments()
+        kp.re_group_key_phrases_within_groups()
         kp.combine_terms_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:
