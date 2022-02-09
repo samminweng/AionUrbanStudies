@@ -324,7 +324,7 @@ class ClusterTopicUtility:
         # Step 1. Convert each cluster of documents (one or more articles) into a single document
         docs = _collect_cluster_docs(docs_per_cluster_df)
         terms_list = []
-        for n_gram_range in [1, 2, 3]:
+        for n_gram_range in [1, 2]:
             try:
                 # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
                 freq_matrix = _create_frequency_matrix(docs, n_gram_range)
@@ -362,10 +362,9 @@ class ClusterTopicUtility:
             for i in range(20):
                 result = {'1-gram': "", '1-gram-score': 0, '1-gram-freq': 0, '1-gram-docs': 0, '1-gram-clusters': 0,
                           '2-gram': "", '2-gram-score': 0, '2-gram-freq': 0, '2-gram-docs': 0, '2-gram-clusters': 0,
-                          '3-gram': "", '3-gram-score': 0, '3-gram-freq': 0, '3-gram-docs': 0, '3-gram-clusters': 0,
                           'N-gram': "", 'N-gram-score': 0, 'N-gram-freq': 0, 'N-gram-docs': 0, 'N-gram-clusters': 0,
                           }
-                for n_gram_num in ['1-gram', '2-gram', '3-gram', 'N-gram']:
+                for n_gram_num in ['1-gram', '2-gram', 'N-gram']:
                     try:
                         if i < len(cluster['Term-' + n_gram_num]):
                             n_gram = cluster['Term-' + n_gram_num][i]

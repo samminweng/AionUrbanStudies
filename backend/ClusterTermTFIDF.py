@@ -138,7 +138,7 @@ class ClusterTermTFIDF:
                     result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
                     n_gram_terms = []
                     # Collect the topics of 1 gram, 2 gram and 3 gram
-                    for n_gram_range in [1, 2, 3]:
+                    for n_gram_range in [1, 2]:
                         n_gram_topic = next(n_gram_topic for n_gram_topic in n_gram_term_list
                                             if n_gram_topic['n_gram'] == n_gram_range)
                         # Collect top 300 topics of a cluster
@@ -158,8 +158,7 @@ class ClusterTermTFIDF:
                     sys.exit(-1)
             # Write the result to csv and json file
             cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
-                                                        'Term-1-gram', 'Term-2-gram', 'Term-3-gram',
-                                                        'Term-N-gram'])
+                                                        'Term-1-gram', 'Term-2-gram', 'Term-N-gram'])
             folder = os.path.join(term_folder, 'n_grams')
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, 'TF-IDF_cluster_term_n_grams.csv')
@@ -210,9 +209,9 @@ class ClusterTermTFIDF:
 if __name__ == '__main__':
     try:
         ct = ClusterTermTFIDF()
-        ct.collect_iterative_cluster_results()
-        ct.output_iterative_cluster_images()
-        ct.derive_cluster_terms_by_TF_IDF()
+        # ct.collect_iterative_cluster_results()
+        # ct.output_iterative_cluster_images()
+        # ct.derive_cluster_terms_by_TF_IDF()
         ct.summarize_cluster_terms()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
