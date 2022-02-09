@@ -24,8 +24,9 @@ function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
     // Get top N terms of a cluster by TF-IDF
     function get_cluster_terms(cluster_no, n) {
         // Cluster top 5 topics
-        const terms = cluster_data.find(c => c['Cluster'] === cluster_no)['Terms'].slice(0, n);
-        return terms;
+        let cluster_terms = cluster_data.find(c => c['Cluster'] === cluster_no)['Terms'].slice(0, 10);
+        cluster_terms.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
+        return cluster_terms.slice(0, n);
     }
 
     // Convert the json data to Plotly js data format

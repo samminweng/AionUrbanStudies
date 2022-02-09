@@ -15,8 +15,10 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
         $('#cluster_terms').empty();
         const container = $('<div><h5><span class="fw-bold">Distinct Terms by TF-IDF: </span></h5></div>');
         const term_p = $('<p></p>');
-        const cluster_terms = cluster['Terms'].slice(0, 10);
-        // Add top 30 topics (each topic as a link)
+        let cluster_terms = cluster['Terms'].slice(0, 10);
+        // Sort the terms by its number of docs
+        cluster_terms.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
+        // Add top 10 cluster terms (each term is a link)
         for (const selected_term of cluster_terms) {
             const link = $('<button type="button" class="btn btn-link btn"> '
                 + selected_term['term'] + ' (' + selected_term['doc_ids'].length + ')' + "</button>");
