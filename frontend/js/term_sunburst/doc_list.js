@@ -17,7 +17,8 @@ function DocList(docs, selected_terms, head_text) {
             pageSize: 5,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages',
-            header: '<div class="mb-3"><span class="fw-bold"><%= totalNumber %> papers </span> ' + head_text + '</div>',
+            header: '<div class="mb-3"><span class="fw-bold"><%= totalNumber %> papers </span> about ' +
+                '<span class="text-capitalize">' + head_text + '</span></div>',
             position: 'top',
             callback: function (docs, pagination) {
                 docTable.find('tbody').empty();

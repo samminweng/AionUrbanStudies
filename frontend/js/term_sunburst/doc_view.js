@@ -34,7 +34,7 @@ function DocView(doc, selected_terms) {
 
     function _createUI() {
         // Add Key Phrase
-        let key_phrase_div = $('<div class="container border-info">' +
+        let key_phrase_div = $('<div class="container border-info m-auto">' +
             '<p class="lead">' + doc['KeyPhrases'].join(", ") + '</p>' +
             '</div>');
         key_phrase_div = mark_key_terms(key_phrase_div, selected_terms, 'key_phrase');
@@ -81,6 +81,11 @@ function DocView(doc, selected_terms) {
         let author_keyword_div =  $('<div class="col"></div>');
         author_keyword_div.append($('<span class="fw-bold">Author Keywords: </span><span>' + doc['Author Keywords'] + '</span>'));
         container.find(".card-text").append(author_keyword_div);
+        // Add authors
+        let author_div =  $('<div class="col"></div>');
+        author_div.append($('<span class="fw-bold">Authors: </span><span>' + doc['Authors'] + '</span>'));
+        container.find(".card-text").append(author_div);
+
         // Add citation
         const paper_info_div = $('<div></div>');
         paper_info_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>'));

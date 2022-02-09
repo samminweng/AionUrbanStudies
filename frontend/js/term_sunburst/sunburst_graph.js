@@ -4,7 +4,6 @@
 function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
     const chart_div = $('#key_phrase_chart');
     // Convert the word_docs map to nodes/links
-    const total = group_data.reduce((pre, cur) => pre + cur['NumPhrases'], 0);
     const {labels, values, parents, ids, texts} = create_graph_data();
     console.log(ids);
 
@@ -12,62 +11,58 @@ function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
     function create_graph_data() {
         // Populate the groups of key phrases
         const root = "Cluster#"+cluster_no;
-        let ids = [root];
-        let labels = [root];
-        let values = [total];
-        let parents = [""];
+        let ids = [];
+        let labels = [];
+        let values = [];
+        let parents = [];
+        let texts = [];
+        let total = 0;
         for(const group of group_data){
-            const group_total = group['NumPhrases'];
             const group_id = group['Group'];
+            // Get the sub-group
+            const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
             const group_name = "Group" + "#" + (group_id + 1);
+            let group_total = group['NumDocs'];
+            if(sub_groups.length > 0){
+                group_total = sub_groups.reduce((pre, cur) => pre + cur['NumDocs'], 0);
+            }
+            total += group_total;
             ids.push(group_name);
             labels.push(group_name);
             values.push(group_total);
+            texts.push(" (" + group['NumDocs'] + " papers)")
             parents.push(root);
-            // Get the sub-group
-            const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
             if(sub_groups.length > 0){
                 for(const sub_group of sub_groups){
-                    const sub_group_id =  group_name + "#" + sub_group['SubGroup'];
+                    const sub_group_id =  group_name + "-" + sub_group['SubGroup'];
                     const sub_group_label = sub_group['TitleWords'].join(",<br>");
-                    const sub_group_total = sub_group['NumPhrases'];
+                    const sub_group_total = sub_group['NumDocs'];
                     ids.push(sub_group_id);
                     labels.push(sub_group_label);
                     values.push(sub_group_total);
+                    texts.push(" (" + sub_group_total + " papers)");
                     parents.push(group_name);
                 }
             }else{
                 // Add the group
                 const sub_group_id = group_name + "#" +group_id;
                 const sub_group_label = group['TitleWords'].join(",<br>");
-                const sub_group_total = group['NumPhrases'];
+                const sub_group_total = group['NumDocs'];
                 ids.push(sub_group_id);
                 labels.push(sub_group_label);
                 values.push(sub_group_total);
+                texts.push(" (" + sub_group_total + " papers)");
                 parents.push(group_name);
             }
-
         }
-        return {labels: labels, values: values, parents: parents, ids:ids};
-    }
+        // Add the root
+        ids.push(root);
+        labels.push(root);
+        values.push(total);
+        parents.push("");
+        texts.push(" (" + cluster_docs.length + " papers)");
 
-    // Create the group header
-    function create_group_header(group){
-        // Added the header of key-phrase group
-        const header = $('<div class="row"> </div>');
-        const group_id = group['Group'] + 1;
-        // // Add Cluster
-        // header.append($('<div class="col"> Cluster: #' + cluster_no + ' </div>'));
-        // Add group no
-        header.append($('<div class="col"> Group: #' + group_id + ' </div>'));
-        // Add the num of phrases
-        header.append($('<div class="col"> Total Pharses: ' + group['Key-phrases'].length + ' </div>'));
-        // Add the num of papers
-        header.append($('<div class="col"> Total Papers: ' + group['DocIds'].length + ' </div>'));
-
-        // Added to UI
-        $('#key_phrase_header').empty();
-        $('#key_phrase_header').append(header);
+        return {labels: labels, values: values, parents: parents, ids:ids, texts: texts};
     }
 
     // Create the sunburst
@@ -106,29 +101,25 @@ function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
         // // Define the hover event
         chart_element.on('plotly_click', function(data){
             const id = data.points[0].id;
-            const group_id = parseInt(id.split("#")[1]) - 1;
-            const group = group_data.find(g => g['Group'] === group_id);
-            if(group){
-                const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-                if(sub_groups.length > 0){
-                    // Create a list view to display all the sub-groups
-                    const list_view = new KeyPhraseListView(group, sub_groups, total, cluster_docs);
+            if(id.includes("#")){
+                if(id.includes("-")){
+                    const group_id = parseInt(id.split("#")[1]) - 1;
+                    const subgroup_id = parseInt(id.split("-")[1])
+                    // const group = group_data.find(g => g['Group'] === group_id);
+                    const sub_group = sub_group_data.find(g => g['Group'] === group_id && g['SubGroup'] === subgroup_id);
+                    if(sub_group){
+                        const sub_group_table = new KeyPhraseTable(sub_group, cluster_docs);
+                    }
                 }else{
-                    // Create a list view to display all the sub-groups
-                    const list_view = new KeyPhraseListView(group, [group], total, cluster_docs);
+                    // const list_view = new KeyPhraseListView(group, sub_groups, cluster_docs);
                 }
-                create_group_header(group);
             }
         });// End of chart onclick event
     }
-
-
     // Create the sunburst graph using D3 library
     function createUI() {
         try {
             create_sunburst_graph();
-
-
         } catch (error) {
             console.error(error);
         }

@@ -13,8 +13,9 @@ function displayChartByCluster(cluster_no, clusters, corpus_data) {
     console.log(cluster_docs);
     // Create a term chart
     const chart = new TermSunburst(cluster_data, cluster_docs);
-    $('#sub_group_list_view').empty();
-    $('#sub_group_header').empty();
+    $('#sub_group').empty();
+    $('#doc_list').empty();
+
 }
 
 // Document ready event

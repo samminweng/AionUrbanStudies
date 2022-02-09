@@ -17,7 +17,7 @@ function TermSunburst(cluster_data, cluster_docs){
             const cluster_no = cluster_data['Cluster'];
             // Display key phrase groups as default graph
             const sunburst_graph = new SunburstGraph(groups, sub_groups, cluster_no, cluster_docs);
-            create_header();
+            // create_header();
         }catch (error){
             console.error(error);
         }

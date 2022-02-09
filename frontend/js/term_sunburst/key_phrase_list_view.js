@@ -1,9 +1,8 @@
 // Create a div to display the grouped key phrases
-function KeyPhraseListView(group, sub_groups, total, cluster_docs){
+function KeyPhraseListView(group, sub_groups, cluster_docs){
     console.log(group);
     console.log(sub_groups);
-    // console.log(cluster_key_phrases);
-    // const total = group['NumPhrases'];
+    sub_groups.sort((a, b) => b['NumDocs'] - a['NumDocs']);
 
     // Highlight key terms
     function mark_key_terms(div, terms, class_name) {
@@ -34,7 +33,7 @@ function KeyPhraseListView(group, sub_groups, total, cluster_docs){
         // Get sub_group docs
         const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
         console.log(sub_group_docs);
-        const header_text = 'about ' + sub_group['TitleWords'].join(", ");
+        const header_text = sub_group['TitleWords'].join(", ");
         // Create a list view of docs
         const doc_list = new DocList(sub_group_docs, key_phrases, header_text);
     }
@@ -48,7 +47,7 @@ function KeyPhraseListView(group, sub_groups, total, cluster_docs){
         const title_terms = sub_group['TitleWords'];
         const sub_group_docs = sub_group['DocIds'];
         const sub_group_btn = $('<a class="ui-widget ui-corner-all fw-bold text-capitalize ms-0 mb-3">' +
-                                ' ' + title_terms.join(", ") + ' (' + key_phrases.length + ')</a>');
+                                ' ' + title_terms.join(", ") + ' (' + sub_group_docs.length + ' papers)</a>');
         sub_group_btn.button();
         // click event for sub_group_btn
         sub_group_btn.click(function(event){
@@ -76,20 +75,15 @@ function KeyPhraseListView(group, sub_groups, total, cluster_docs){
             less_btn.css("font-size", "0.8em");
             // Display more key phrases
             more_btn.click(function(event){
-                const current_key_phrases = text_span.text().split(', ');
+                // const current_key_phrases = text_span.text().split(', ');
                 // Display 20 more key phrases
-                const max_length = Math.min(key_phrases.length, current_key_phrases.length + 10)
-                const more_key_phrases = key_phrases.slice(0, max_length);
-                text_span.text(more_key_phrases.join(", "));
+                // const max_length = Math.min(key_phrases.length, current_key_phrases.length + 10)
+                // const more_key_phrases = key_phrases.slice(0, max_length);
+                text_span.text(key_phrases.join(", "));
                 mark_key_terms(text_span, title_terms, 'key_phrase');
-                if(more_key_phrases.length >= key_phrases.length){
-                    // Display 'less' btn only
-                    more_btn.hide();
-                    less_btn.show();
-                }else{
-                    more_btn.show();
-                    less_btn.show();
-                }
+                // Display 'less' btn only
+                more_btn.hide();
+                less_btn.show();
             });
             // Display top five key phrases
             less_btn.click(function(event){
@@ -158,7 +152,7 @@ function KeyPhraseListView(group, sub_groups, total, cluster_docs){
         const header = $('<div class="bg-secondary bg-opacity-10 p-3"></div>')
         // Create a header
         header.append($('<div class="row">' +
-                            '<div class="col">Group #' + (group_id + 1) + ' has ' + group_key_phrases.length + ' phrases</div>' +
+                            '<div class="col">Group #' + (group_id + 1) + ' has ' + sub_groups.length + ' sub-groups</div>' +
                         '</div>'));
         $('#sub_group_header').append(header);
 
@@ -174,7 +168,8 @@ function KeyPhraseListView(group, sub_groups, total, cluster_docs){
         p.append(pagination);
         p.append(group_div);
         $('#sub_group_list_view').append(p);
-        createHeader();
+        // createHeader();
+        $('#doc_list').empty();
     }
 
 
