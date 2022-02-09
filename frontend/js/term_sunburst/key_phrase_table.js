@@ -1,19 +1,15 @@
 // Create a div table to display a sub-group of key phrases
 function KeyPhraseTable(sub_group, cluster_docs){
-    // Display the relevant paper
-    function display_relevant_papers(sub_group){
-        const sub_group_doc_ids = sub_group['DocIds'];
-        const key_phrases =  sub_group['Key-phrases'];
-        // Get sub_group docs
-        const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
-        console.log(sub_group_docs);
-        const header_text = sub_group['TitleWords'].join(", ");
-        // Create a list view of docs
-        const doc_list = new DocList(sub_group_docs, key_phrases, header_text);
-    }
+    const sub_group_doc_ids = sub_group['DocIds'];
+    const key_phrases = sub_group['Key-phrases'];
+    const title_words = sub_group['TitleWords'];
+    console.log(key_phrases);
+    // Get sub_group docs
+    const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
+    console.log(sub_group_docs);
 
     // Allocate the key phrases based on the words
-    function create_key_phrases_dict(key_phrases, title_words){
+    function create_key_phrases_dict(){
         let key_phrase_dict = {};
         // Initialise dict with an array
         for(const title_word of title_words){
@@ -48,46 +44,59 @@ function KeyPhraseTable(sub_group, cluster_docs){
     }
 
     // Create title word header
-    function create_header(sub_group){
-        const title_words = sub_group['TitleWords'];
-        const sub_group_docs = cluster_docs.filter(d => sub_group['DocIds'].includes(d['DocId']));
+    function create_header(){
         // Create a header
         const header_div = $('<div></div>');
-        const btn = $('<a class="ui-widget ui-corner-all fw-bold text-capitalize ms-0 mb-3">' +
-                    '<span>' + title_words.join(", ")+ '</span> (' + sub_group_docs.length +' papers) </a>')
-
+        const btn = $('<a class="ui-widget ui-corner-all fw-bold text-capitalize">' +
+                    '<span>' + title_words.join(", ")+ '</span> (' + sub_group_docs.length +' papers) </a>');
         btn.button();
         // click event for sub_group_btn
         btn.click(function(event){
             // Display all the relevant papers.
-            display_relevant_papers(sub_group);
+            const header_text = title_words.join(", ");
+            // Create a list view of docs
+            const doc_list = new DocList(sub_group_docs, key_phrases, header_text);
         });
         header_div.append(btn);
         return header_div;
     }
 
-
-    // Create an list item to display a group of key phrases
-    function createSubGroupTable(sub_group){
-        const title_words = sub_group['TitleWords'];
-        const key_phrases = sub_group['Key-phrases'];
-        console.log(key_phrases);
-        // Create a container
-        const container = $('<div></div>');
-        const header_div = create_header(sub_group);
-        container.append(header_div);
-        // Create a table
-        const table_div = $('<table class="table table-bordered">' +
-                            '<tbody></tbody></table>');
+    // Create table header
+    function create_table_header(){
         // Create table header with Title words
         const table_header_div = $('<thead><tr></tr></thead>');
-        for(const word of sub_group['TitleWords']){
+        for(const word of title_words){
             table_header_div.find('tr').append($('<th scope="col" class="text-capitalize">' + word + ' </th>'));
         }
         // Add misc
         table_header_div.find('tr').append($('<th scope="col" class="text-capitalize">misc</th>'));
+        return table_header_div;
+    }
+
+    // Display papers for each individual key phrase
+    function display_paper_by_key_phrase(key_phrase){
+        const docs = sub_group_docs.filter(d => {
+            const found = d['KeyPhrases'].find(kp => kp.toLowerCase() === key_phrase.toLowerCase())
+            return found;
+        });
+        console.log(docs);
+        // Create a list view of docs
+        const doc_list = new DocList(docs, [key_phrase], key_phrase);
+    }
+
+    // Create an list item to display a group of key phrases
+    function createSubGroupTable(){
+        // Create a container
+        const container = $('<div></div>');
+        const header_div = create_header();
+        container.append(header_div);
+        // Create a table
+        const table_div = $('<table class="table table-bordered table-sm">' +
+                            '<tbody></tbody></table>');
+        const table_header_div = create_table_header();
         // Append div
         table_div.append(table_header_div);
+        // Create table body
         // Get all the key-phrases
         const [key_phrase_dict, max_count] = create_key_phrases_dict(key_phrases, title_words);
         console.log(key_phrase_dict);
@@ -99,7 +108,13 @@ function KeyPhraseTable(sub_group, cluster_docs){
                 const key_phrase = key_phrase_dict[word][i];
                 const col = $('<td></td>');
                 if(key_phrase){
-                    col.text(key_phrase);
+                    const col_btn = $('<a class="ui-widget ui-corner-all">'  + key_phrase+ ' </a>');
+                    col_btn.button();
+                    col_btn.click(function(event){
+                        display_paper_by_key_phrase(key_phrase);
+                    });
+                    // col.text(key_phrase);
+                    col.append(col_btn);
                 }
                 row.append(col);
             }
@@ -107,7 +122,12 @@ function KeyPhraseTable(sub_group, cluster_docs){
             const key_phrase = key_phrase_dict['misc'][i];
             const col = $('<td></td>');
             if(key_phrase){
-                col.text(key_phrase);
+                const col_btn = $('<a class="ui-widget ui-corner-all">'  + key_phrase+ ' </a>');
+                col_btn.button();
+                col_btn.click(function(event){
+                    display_paper_by_key_phrase(key_phrase);
+                });
+                col.append(col_btn);
             }
             row.append(col);
             table_div.append(row);
@@ -118,10 +138,9 @@ function KeyPhraseTable(sub_group, cluster_docs){
 
     // Create UI
     function _createUI(){
-
         const p = $('<p></p>');
         // A list of grouped key phrases
-        const table_div = createSubGroupTable(sub_group);
+        const table_div = createSubGroupTable();
         p.append(table_div);
         $('#sub_group').empty();
         $('#sub_group').append(p);
