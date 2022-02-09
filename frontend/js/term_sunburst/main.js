@@ -10,13 +10,66 @@ function displayChartByCluster(cluster_no, clusters, corpus_data) {
     const cluster_data = clusters.find(c => c['Cluster'] === cluster_no);
     console.log(cluster_data);
     const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']))
-    console.log(cluster_docs);
+    // console.log(cluster_docs);
     // Create a term chart
     const chart = new TermSunburst(cluster_data, cluster_docs);
     $('#sub_group').empty();
     $('#doc_list').empty();
-
 }
+
+// Collect the unique top 3 terms
+function get_top_terms(cluster_terms, n) {
+    let top_terms = [];
+    for (const cluster_term of cluster_terms) {
+        const term = cluster_term['term'];
+        // Check if the term overlap with any top term
+        const overlap_top_term = top_terms.find(top_term => {
+            // Split the terms into words and check if two term has overlapping word
+            // For example, 'land use' is in the list. 'urban land' should not be included.
+            const top_term_words = top_term.split(" ");
+            const term_words = term.split(" ");
+            if(top_term_words.length === term_words.length){
+                for(const top_term_word of top_term_words){
+                    for(const term_word of term_words){
+                        const over_lapping_word = top_term_words.find(t => t.toLowerCase() === term_word.toLowerCase());
+                        if(over_lapping_word){
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        })
+        // The term does not overlap any existing top term
+        if(!overlap_top_term){
+            // Check if any term word exist in top_terms
+            const found_term = top_terms.find(top_term => {
+                // Check if term is a part of an existing top term or an existing top term is part of the term
+                // For example, 'cover' is part of 'land cover'
+                if(term.toLowerCase().includes(top_term.toLowerCase()) ||
+                    top_term.toLowerCase().includes(term.toLowerCase())){
+                    return true;
+                }
+
+                // Otherwise, return false
+                return false;
+            });
+            if(found_term){
+                const found_index = top_terms.indexOf(found_term);
+                // Replace
+                top_terms[found_index] = term;
+            }else{
+                top_terms.push(term);
+            }
+            // Check if top_terms has three terms
+            if(top_terms.length === n){
+                break;
+            }
+        }
+    }
+    return top_terms;
+}
+
 
 // Document ready event
 $(function () {
@@ -35,8 +88,12 @@ $(function () {
         displayChartByCluster(selected_cluster_no, clusters, corpus_data);   // Display the cluster #8 as default cluster
         $("#cluster_list").empty();
         // Add a list of LDA topics
-        for (let i = 0; i < clusters.length; i++) {
-            const cluster_no = clusters[i]['Cluster'];
+        for (const cluster of clusters) {
+            const cluster_no = cluster['Cluster'];
+            let cluster_terms = cluster['Terms'];
+            console.log(cluster_terms);
+            const top_terms = get_top_terms(cluster_terms, 3);
+            console.log(top_terms);
             if (cluster_no !== selected_cluster_no) {
                 $("#cluster_list").append($('<option value="' + cluster_no + '"> Cluster #' + cluster_no + ' </option>'));
             } else {

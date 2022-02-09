@@ -180,6 +180,7 @@ class ClusterTermTFIDF:
             # Write out to csv and json file
             cluster_df = cluster_df.reindex(columns=['Cluster', 'NumDocs', 'DocIds', 'Term-N-gram'])
             cluster_df.rename(columns={'Term-N-gram': 'Terms'}, inplace=True)
+            cluster_df['Terms'] = cluster_df['Terms'].apply(lambda terms: ClusterTopicUtility.get_top_cluster_terms(terms, 10))
             total_clusters = cluster_df['Cluster'].max() + 1
             # # Output top 50 topics by 1, 2 and 3-grams at specific cluster
             for cluster_no in range(-1, total_clusters):

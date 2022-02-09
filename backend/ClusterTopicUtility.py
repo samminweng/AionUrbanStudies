@@ -414,7 +414,7 @@ class ClusterTopicUtility:
                        sorted_n_grams))
             # Sort by the score and  The resulting topics are mostly 2 or 3 grams
             filter_sorted_topics = sorted(filter_topics, key=lambda _n_gram: _n_gram['score'], reverse=True)
-            return filter_sorted_topics[:300]  # Get top 300 topics
+            return filter_sorted_topics[:50]  # Get top 50 topics
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -466,3 +466,14 @@ class ClusterTopicUtility:
                 "Output the images of clustered results at iteration {i} to {path}".format(i=iteration, path=file_path))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+    # Get the top 3 terms (obtained by TF-IDF) to represent the cluster
+    @staticmethod
+    def get_top_cluster_terms(terms, top_n=10):
+        # Get top 10 terms
+        cluster_terms = terms[:top_n]
+        # Sort the cluster terms by number of docs and freq
+        cluster_terms = sorted(cluster_terms, key=lambda t: (len(t['doc_ids']), t['freq']), reverse=True)
+        # print(cluster_terms)
+        return cluster_terms
+
