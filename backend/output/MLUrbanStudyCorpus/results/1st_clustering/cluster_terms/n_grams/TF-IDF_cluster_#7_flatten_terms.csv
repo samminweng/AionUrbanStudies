@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+emotion,0.009680249,14,2,3,urban emotion,0.0107316315,5,1,1,urban emotion,0.0107316315,5,1,1
+gaze,0.0048379733,4,1,1,geodemographic classification,0.0078315352,5,1,2,emotion,0.009680249,14,2,3
+redevelopment,0.0048379733,4,2,1,physiological response,0.0064389789000000005,3,1,1,geodemographic classification,0.0078315352,5,1,2
+permit,0.0048379733,4,1,1,emotional computing,0.0064389789000000005,3,1,1,physiological response,0.0064389789000000005,3,1,1
+alteration,0.0035305683,4,1,2,building alteration,0.0064389789000000005,3,1,1,emotional computing,0.0064389789000000005,3,1,1
+behaviour,0.0027034094,6,3,5,online review,0.0064389789000000005,3,1,1,building alteration,0.0064389789000000005,3,1,1
+pilot,0.0026479262,3,2,2,visitor experience,0.0064389789000000005,3,1,1,online review,0.0064389789000000005,3,1,1
+laboratory,0.0026479262,3,2,2,public space,0.005596943,7,3,5,visitor experience,0.0064389789000000005,3,1,1
+head,0.0024189866,2,1,1,pilot study,0.0046989211000000005,3,2,2,public space,0.005596943,7,3,5
+technics,0.0024189866,2,1,1,subjective data,0.0042926526,2,1,1,gaze,0.0048379733,4,1,1
+pleasantness,0.0024189866,2,1,1,visual gaze,0.0042926526,2,1,1,redevelopment,0.0048379733,4,2,1
+urbanists,0.0024189866,2,2,1,gaze analysis,0.0042926526,2,1,1,permit,0.0048379733,4,1,1
+participant,0.0022528412000000003,5,2,5,model street,0.0042926526,2,1,1,pilot study,0.0046989211000000005,3,2,2
+robot,0.0022231633,4,1,4,emotion layer,0.0042926526,2,1,1,subjective data,0.0042926526,2,1,1
+visitor,0.0020743391,3,1,3,computing technics,0.0042926526,2,1,1,visual gaze,0.0042926526,2,1,1
+perception,0.0020604563,9,4,8,crowdsourcing game,0.0042926526,2,1,1,gaze analysis,0.0042926526,2,1,1
+experience,0.0020604563,9,5,8,thematic structure,0.0042926526,2,1,1,model street,0.0042926526,2,1,1
+sense,0.0018229756,5,1,6,adaptive reuse,0.0042926526,2,1,1,emotion layer,0.0042926526,2,1,1
+facet,0.0017652842,2,1,2,discovery process,0.0042926526,2,1,1,computing technics,0.0042926526,2,1,1
+townscapes,0.0017652842,2,1,2,discriminatory power,0.0042926526,2,1,1,crowdsourcing game,0.0042926526,2,1,1

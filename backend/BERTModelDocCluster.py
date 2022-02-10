@@ -56,7 +56,7 @@ class BERTModelDocCluster:
             min_dist=0.0,
             dimensions=[768, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20],
             min_samples=[30, 25, 20, 15, 10],
-            min_cluster_size=[15, 20, 25, 30, 35, 40, 45, 50]
+            min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
         path = os.path.join('data', self.args.case_name, self.args.in_folder, self.args.case_name + '_cleaned.csv')
@@ -406,10 +406,10 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        BERTModelDocClusterUtility.collect_cluster_as_corpus('MLUrbanStudyCorpus', 0)
-        # Re-cluster large cluster into sub-clusters
         cluster_no = 1
-        iteration = 0
+        BERTModelDocClusterUtility.collect_cluster_as_corpus('MLUrbanStudyCorpus', cluster_no)
+        # Re-cluster large cluster into sub-clusters
+        iteration = 1
         mdc = BERTModelDocCluster(cluster_no, iteration)
         mdc.get_sentence_vectors(is_load=False)
         mdc.run_HDBSCAN_cluster_experiments()

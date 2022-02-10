@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+designer,0.0066751745000000005,6,2,5,cooperative design,0.0249763083,5,1,1,cooperative design,0.0249763083,5,1,1
+al,0.0059728866,2,1,1,feature parameter,0.014985785000000001,3,1,1,feature parameter,0.014985785000000001,3,1,1
+layout,0.0054014815,6,3,6,design feature,0.0099905233,2,1,1,design feature,0.0099905233,2,1,1
+sketch,0.0029864433,1,1,1,design data,0.0099905233,2,1,1,design data,0.0099905233,2,1,1
+preview,0.0029864433,1,1,1,building reconstruction,0.0099905233,2,1,1,building reconstruction,0.0099905233,2,1,1
+inspires,0.0029864433,1,1,1,historical map,0.0099905233,2,1,1,historical map,0.0099905233,2,1,1
+architectural,0.0029864433,1,1,1,missing height,0.0099905233,2,1,1,missing height,0.0099905233,2,1,1
+voxels,0.0029864433,1,1,1,street park,0.0099905233,2,1,1,street park,0.0099905233,2,1,1
+pixelization,0.0029864433,1,1,1,design aspect,0.0099905233,2,1,1,design aspect,0.0099905233,2,1,1
+infers,0.0029864433,1,1,1,et al,0.0099905233,2,1,1,et al,0.0099905233,2,1,1
+evident,0.0029864433,1,1,1,early design,0.0072907028,2,1,2,early design,0.0072907028,2,1,2
+operationalization,0.0029864433,1,1,1,design stage,0.0072907028,2,1,2,design stage,0.0072907028,2,1,2
+allow,0.0029864433,1,1,1,design tool,0.0072907028,2,2,2,design tool,0.0072907028,2,2,2
+interpreting,0.0029864433,1,1,1,computational framework,0.0072907028,2,1,2,computational framework,0.0072907028,2,1,2
+operationalize,0.0029864433,1,1,1,urban layout,0.0072907028,2,2,2,urban layout,0.0072907028,2,2,2
+thumb,0.0029864433,1,1,1,performance data,0.0072907028,2,1,2,performance data,0.0072907028,2,1,2
+autocorrelation,0.0029864433,1,1,1,analysis tool,0.0072907028,2,1,2,analysis tool,0.0072907028,2,1,2
+townscape,0.0029864433,1,1,1,urban designer,0.0057114089,2,1,3,designer,0.0066751745000000005,6,2,5
+workspace,0.0029864433,1,1,1,visual representation,0.0057114089,2,1,3,urban designer,0.0057114089,2,1,3
+consensus,0.0029864433,1,1,1,scale plan,0.0049952617,1,1,1,visual representation,0.0057114089,2,1,3

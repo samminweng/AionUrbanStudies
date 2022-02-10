@@ -1,0 +1,21 @@
+1-gram,1-gram-score,1-gram-freq,1-gram-docs,1-gram-clusters,2-gram,2-gram-score,2-gram-freq,2-gram-docs,2-gram-clusters,N-gram,N-gram-score,N-gram-freq,N-gram-docs,N-gram-clusters
+dengue,0.012134459200000001,5,1,1,landscape pattern,0.029418584,15,2,4,landscape pattern,0.029418584,15,2,4
+suburb,0.0097075673,4,1,1,greenness space,0.021339911,5,1,1,greenness space,0.021339911,5,1,1
+incidence,0.0097075673,4,1,1,mosquito occurrence,0.021339911,5,1,1,mosquito occurrence,0.021339911,5,1,1
+mosquito,0.0088552653,5,1,2,urban greenness,0.0170719288,4,1,1,urban greenness,0.0170719288,4,1,1
+greenness,0.0070842123,4,1,2,combined influence,0.0170719288,4,1,1,combined influence,0.0170719288,4,1,1
+landscape,0.0061644358000000005,39,5,11,dengue incidence,0.0170719288,4,1,1,dengue incidence,0.0170719288,4,1,1
+precipitation,0.0055760715,5,2,4,service value,0.012803946600000001,3,1,1,service value,0.012803946600000001,3,1,1
+outer,0.0048537837,2,1,1,climate factor,0.012803946600000001,3,1,1,climate factor,0.012803946600000001,3,1,1
+recursive,0.0048537837,2,1,1,recursive partitioning,0.012803946600000001,3,1,1,recursive partitioning,0.012803946600000001,3,1,1
+climate,0.0043894392,6,1,6,ecosystem service,0.0117674336,6,2,4,dengue,0.012134459200000001,5,1,1
+index,0.0042201242000000005,17,5,10,landscape index,0.0097597256,4,2,3,ecosystem service,0.0117674336,6,2,4
+partitioning,0.0041622359,3,1,3,urbanization impact,0.0085359644,2,1,1,landscape index,0.0097597256,4,2,3
+ecosystem,0.003657866,5,2,6,social economy,0.0085359644,2,1,1,suburb,0.0097075673,4,1,1
+light,0.003657866,5,1,6,patch density,0.0085359644,2,2,1,urbanization impact,0.0085359644,2,1,1
+aggregation,0.0036163255000000003,4,3,5,outer suburb,0.0085359644,2,1,1,social economy,0.0085359644,2,1,1
+downtown,0.0035421061,2,1,2,standardized unit,0.0085359644,2,1,1,patch density,0.0085359644,2,2,1
+disease,0.0033456429,3,1,4,varied impact,0.0085359644,2,1,1,outer suburb,0.0085359644,2,1,1
+occurrence,0.0029285982,5,1,7,dengue disease,0.0085359644,2,1,1,standardized unit,0.0085359644,2,1,1
+mode,0.0029262928000000003,4,1,6,ovitrap index,0.0085359644,2,1,1,varied impact,0.0085359644,2,1,1
+urbanization,0.002783457,8,2,9,vector mosquito,0.0085359644,2,1,1,dengue disease,0.0085359644,2,1,1
