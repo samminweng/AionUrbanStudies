@@ -73,7 +73,7 @@ function get_top_terms(cluster_terms, n) {
 // Document ready event
 $(function () {
     // Select cluster number
-    let selected_cluster_no = 3;
+    let selected_cluster_no = 6;
     if (params.has('cluster')) {
         selected_cluster_no = parseInt(params.get('cluster'));
     }

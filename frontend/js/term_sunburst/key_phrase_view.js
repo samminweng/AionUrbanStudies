@@ -135,52 +135,6 @@ function KeyPhraseView(sub_group, cluster_docs){
         const header_div = create_header(key_phrase_div);
         container.append(header_div);
         container.append(key_phrase_div);
-
-        // const header_div = create_header();
-        // container.append(header_div);
-        // // Create a table
-        // const table_div = $('<table class="table table-bordered table-sm">' +
-        //                     '<tbody></tbody></table>');
-        // const table_header_div = create_table_header();
-        // // Append div
-        // table_div.append(table_header_div);
-        // // Create table body
-        // // Get all the key-phrases
-        // const [key_phrase_dict, max_count] = create_key_phrases_dict(key_phrases, title_words);
-        // console.log(key_phrase_dict);
-        // // Add the key-phrases
-        // for(let i = 0; i < max_count; i++){
-        //     // Get the
-        //     const row = $('<tr></tr>');
-        //     for(const word of title_words){
-        //         const key_phrase = key_phrase_dict[word][i];
-        //         const col = $('<td></td>');
-        //         if(key_phrase){
-        //             const col_btn = $('<a class="ui-widget ui-corner-all">'  + key_phrase+ ' </a>');
-        //             col_btn.button();
-        //             col_btn.click(function(event){
-        //                 display_paper_by_key_phrase(key_phrase);
-        //             });
-        //             // col.text(key_phrase);
-        //             col.append(col_btn);
-        //         }
-        //         row.append(col);
-        //     }
-        //     // Add misc
-        //     const key_phrase = key_phrase_dict['misc'][i];
-        //     const col = $('<td></td>');
-        //     if(key_phrase){
-        //         const col_btn = $('<a class="ui-widget ui-corner-all">'  + key_phrase+ ' </a>');
-        //         col_btn.button();
-        //         col_btn.click(function(event){
-        //             display_paper_by_key_phrase(key_phrase);
-        //         });
-        //         col.append(col_btn);
-        //     }
-        //     row.append(col);
-        //     table_div.append(row);
-        // }
-        // container.append(table_div);
         return container;
     }
 
