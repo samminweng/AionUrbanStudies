@@ -83,21 +83,30 @@ $(function () {
     $.when(
         $.getJSON(cluster_path), $.getJSON(corpus_path)
     ).done(function (result1, result2) {
-        const clusters = result1[0];
+        let clusters = result1[0];
         const corpus_data = result2[0];
+        // Populate the top terms
+        for(let cluster of clusters){
+            const cluster_terms = cluster['Terms'];
+            console.log(cluster_terms);
+            const top_terms = get_top_terms(cluster_terms, 3);
+            console.log(top_terms);
+            cluster['TopTerms'] = top_terms;
+        }
+
         displayChartByCluster(selected_cluster_no, clusters, corpus_data);   // Display the cluster #8 as default cluster
         $("#cluster_list").empty();
         // Add a list of LDA topics
         for (const cluster of clusters) {
             const cluster_no = cluster['Cluster'];
-            let cluster_terms = cluster['Terms'];
-            console.log(cluster_terms);
-            const top_terms = get_top_terms(cluster_terms, 3);
-            console.log(top_terms);
+            const top_terms = cluster['TopTerms'];
+            const cluster_doc_ids = cluster['DocIds'];
             if (cluster_no !== selected_cluster_no) {
-                $("#cluster_list").append($('<option value="' + cluster_no + '"> Cluster #' + cluster_no + ' </option>'));
+                $("#cluster_list").append($('<option value="' + cluster_no + '"> ' + top_terms.join(", ") +
+                    ' (' + cluster_doc_ids.length+ ' papers)  </option>'));
             } else {
-                $("#cluster_list").append($('<option value="' + cluster_no + '" selected> Cluster #' + cluster_no + ' </option>'));
+                $("#cluster_list").append($('<option value="' + cluster_no + '" selected> ' + top_terms.join(", ") +
+                    ' (' + cluster_doc_ids.length+ ' papers)  </option>'));
             }
         }
         $("#cluster_list").selectmenu({

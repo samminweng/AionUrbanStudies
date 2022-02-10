@@ -1,7 +1,7 @@
 // Create Plotly sunburst graph to display Grouped key phrases and LDA Topics
 // Ref: https://plotly.com/javascript/sunburst-charts/
 // Ref: https://plotly.com/javascript/reference/sunburst/
-function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
+function SunburstGraph(group_data, sub_group_data, cluster, cluster_docs) {
     const chart_div = $('#key_phrase_chart');
     // Convert the word_docs map to nodes/links
     const {labels, values, parents, ids, texts} = create_graph_data();
@@ -10,7 +10,7 @@ function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
     // Convert the json to the format of plotly graph
     function create_graph_data() {
         // Populate the groups of key phrases
-        const root = "Cluster#"+cluster_no;
+        const root = cluster['TopTerms'].join(",<br>");
         let ids = [];
         let labels = [];
         let values = [];
@@ -45,7 +45,7 @@ function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
                 }
             }else{
                 // Add the group
-                const sub_group_id = group_name + "#" +group_id;
+                const sub_group_id = group_name + "#";
                 const sub_group_label = group['TitleWords'].join(",<br>");
                 const sub_group_total = group['NumDocs'];
                 ids.push(sub_group_id);
@@ -100,18 +100,27 @@ function SunburstGraph(group_data, sub_group_data, cluster_no, cluster_docs) {
 
         // // Define the hover event
         chart_element.on('plotly_click', function(data){
+            $('#sub_group').empty();
+            $('#doc_list').empty();
             const id = data.points[0].id;
             if(id.includes("#")){
+                const group_id = parseInt(id.split("#")[1]) - 1;
+                // Get the sub-group
                 if(id.includes("-")){
-                    const group_id = parseInt(id.split("#")[1]) - 1;
-                    const subgroup_id = parseInt(id.split("-")[1])
-                    // const group = group_data.find(g => g['Group'] === group_id);
+                    const subgroup_id = parseInt(id.split("-")[1]);
                     const sub_group = sub_group_data.find(g => g['Group'] === group_id && g['SubGroup'] === subgroup_id);
                     if(sub_group){
                         const sub_group_table = new KeyPhraseTable(sub_group, cluster_docs);
                     }
                 }else{
-                    // const list_view = new KeyPhraseListView(group, sub_groups, cluster_docs);
+                    const found = id.match(/#/g);
+                    if(found && found.length === 2){
+                        // This indicates the groups has only one subgroup. so we use the group data.
+                        // Get the group
+                        const group = group_data.find(g => g['Group'] === group_id);
+                        // Display the group
+                        const sub_group_table = new KeyPhraseTable(group, cluster_docs);
+                    }
                 }
             }
         });// End of chart onclick event

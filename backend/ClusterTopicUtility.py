@@ -467,13 +467,12 @@ class ClusterTopicUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Get the top 3 terms (obtained by TF-IDF) to represent the cluster
+    # Get the top 10 terms (obtained by TF-IDF) to represent the cluster
     @staticmethod
-    def get_top_cluster_terms(terms, top_n=10):
+    def get_cluster_terms(terms, top_n=10):
         # Get top 10 terms
         cluster_terms = terms[:top_n]
         # Sort the cluster terms by number of docs and freq
         cluster_terms = sorted(cluster_terms, key=lambda t: (len(t['doc_ids']), t['freq']), reverse=True)
         # print(cluster_terms)
         return cluster_terms
-

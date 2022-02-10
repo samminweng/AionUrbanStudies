@@ -144,8 +144,10 @@ function KeyPhraseTable(sub_group, cluster_docs){
         p.append(table_div);
         $('#sub_group').empty();
         $('#sub_group').append(p);
-        // createHeader();
         $('#doc_list').empty();
+        // Create a list of docs
+        const doc_list = new DocList(sub_group_docs, key_phrases, title_words.join(", "));
+        document.getElementById('sub_group').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     }
 
 
