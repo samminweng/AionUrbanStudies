@@ -43,7 +43,7 @@ class BERTModelDocCluster:
     def __init__(self, iteration):
         self.iteration = iteration
         self.args = Namespace(
-            case_name='MLUrbanStudyCorpus',
+            case_name='AIMLUrbanStudyCorpus',
             # case_name='CultureUrbanStudyCorpus',
             iteration='iteration_' + str(iteration),
             path='data',
@@ -405,13 +405,16 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        for i in range(0, 6):
-            mdc = BERTModelDocCluster(i)
-            mdc.get_sentence_vectors(is_load=False)
-            mdc.run_HDBSCAN_cluster_experiments()
-            mdc.summarize_HDBSCAN_cluster_experiment_results()
-            mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
-            mdc.derive_cluster_docs()
-            mdc.re_cluster_outliers_by_hdbscan()
+        # BERTModelDocClusterUtility.clean_corpus('AIMLUrbanStudyCorpus')
+        # # Cluster papers iteratively
+        # for i in range(0, 1):
+        #     mdc = BERTModelDocCluster(i)
+        #     mdc.get_sentence_vectors(is_load=False)
+        #     mdc.run_HDBSCAN_cluster_experiments()
+        #     mdc.summarize_HDBSCAN_cluster_experiment_results()
+        #     mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
+        #     mdc.derive_cluster_docs()
+        #     mdc.re_cluster_outliers_by_hdbscan()
+        
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

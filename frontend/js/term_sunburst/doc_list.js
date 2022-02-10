@@ -50,7 +50,7 @@ function DocList(docs, selected_terms, head_text) {
         container.append(pagination);
         container.append(doc_table);
         $('#doc_list').append(container);
-        document.getElementById('doc_list').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        // document.getElementById('doc_list').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     }
 
     _createUI();

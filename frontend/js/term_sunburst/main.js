@@ -8,9 +8,8 @@ const params = new URLSearchParams(window.location.search);
 // Display the results of a cluster
 function displayChartByCluster(cluster_no, clusters, corpus_data) {
     const cluster_data = clusters.find(c => c['Cluster'] === cluster_no);
-    console.log(cluster_data);
-    const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']))
-    // console.log(cluster_docs);
+    // console.log(cluster_data);
+    const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']));
     // Create a term chart
     const chart = new TermSunburst(cluster_data, cluster_docs);
     $('#sub_group').empty();
@@ -88,9 +87,9 @@ $(function () {
         // Populate the top terms
         for(let cluster of clusters){
             const cluster_terms = cluster['Terms'];
-            console.log(cluster_terms);
+            // console.log(cluster_terms);
             const top_terms = get_top_terms(cluster_terms, 3);
-            console.log(top_terms);
+            // console.log(top_terms);
             cluster['TopTerms'] = top_terms;
         }
 
@@ -110,6 +109,7 @@ $(function () {
             }
         }
         $("#cluster_list").selectmenu({
+            width : 'auto',
             change: function (event, data) {
                 // console.log( data.item.value);
                 const cluster_no = parseInt(data.item.value);

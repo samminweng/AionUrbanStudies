@@ -336,7 +336,7 @@ class BERTModelDocClusterUtility:
         # Convert the raw source files downloaded from Scopus
         def _convert_corpus():
             _folder = os.path.join('data', case_name)
-            _corpus_df = pd.read_csv(os.path.join(_folder, case_name + '_scopus.csv'))
+            _corpus_df = pd.read_csv(os.path.join(_folder, case_name + '.csv'))
             _corpus_df['DocId'] = list(range(1, len(_corpus_df) + 1))
             # Select columns
             _corpus_df = _corpus_df[['DocId', 'Cited by', 'Title', 'Author Keywords', 'Abstract', 'Year',
