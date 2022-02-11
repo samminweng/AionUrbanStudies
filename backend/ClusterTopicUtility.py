@@ -199,7 +199,7 @@ class ClusterTopicUtility:
     @staticmethod
     def get_n_gram_terms(approach, docs_per_cluster_df, folder):
         # A folder that stores all the topic results
-        temp_folder = os.path.join(folder, 'TF_IDF')
+        temp_folder = os.path.join(folder, 'temp')
         Path(temp_folder).mkdir(parents=True, exist_ok=True)
 
         # Convert the texts of all clusters into a list of document (a list of sentences) to derive n-gram candidates
