@@ -24,7 +24,7 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 # Group the key phrases based on the vector similarity
 class KeyPhraseSimilarity:
-    def __init__(self):
+    def __init__(self, _cluster_no):
         self.args = Namespace(
             # case_name='CultureUrbanStudyCorpus',
             case_name='MLUrbanStudyCorpus',
@@ -32,10 +32,12 @@ class KeyPhraseSimilarity:
             model_name="all-mpnet-base-v2",
             device='cpu',
             n_neighbors=3,
-            diversity=0.0
+            diversity=0.0,
+            sub_cluster_name='sub_cluster#' + str(_cluster_no),
         )
         # Load HDBSCAN cluster
-        path = os.path.join('output', self.args.case_name, self.args.case_name + "_clusters.json")
+        path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters_' +
+                            self.args.sub_cluster_name + '.json')
         self.corpus_df = pd.read_json(path)
         # Update corpus data with hdbscan cluster results
         self.corpus_df.rename(columns={'HDBSCAN_Cluster': 'Cluster'}, inplace=True)
@@ -293,7 +295,8 @@ class KeyPhraseSimilarity:
             folder = os.path.join('output', self.args.case_name)
             # Combine all key phrases and TF-IDF topics to a json file
             # # Load TF-IDF topics
-            path = os.path.join(folder, 'cluster_terms', self.args.case_name + '_TF-IDF_cluster_terms.json')
+            path = os.path.join(folder, 'cluster_terms', self.args.case_name + '_TF-IDF_cluster_terms_' +
+                                self.args.sub_cluster_name + '.json')
             topics_df = pd.read_json(path)
             cluster_df = topics_df.copy(deep=True)
             # Load grouped Key phrases
@@ -338,9 +341,9 @@ class KeyPhraseSimilarity:
             # Drop column
             self.corpus_df = self.corpus_df.drop('Text', axis=1)
             folder = os.path.join('output', self.args.case_name)
-            path = os.path.join(folder, self.args.case_name + '_clusters.csv')
+            path = os.path.join(folder, self.args.case_name + '_clusters_' + self.args.sub_cluster_name + '.csv')
             self.corpus_df.to_csv(path, index=False, encoding='utf-8')
-            path = os.path.join(folder, self.args.case_name + '_clusters.json')
+            path = os.path.join(folder, self.args.case_name + '_clusters_' + self.args.sub_cluster_name + '.json')
             self.corpus_df.to_json(path, orient='records')
             print('Output key phrases per doc to ' + path)
         except Exception as err:
@@ -350,7 +353,8 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     try:
-        kp = KeyPhraseSimilarity()
+        _cluster_no = 1
+        kp = KeyPhraseSimilarity(_cluster_no)
         kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()
         kp.group_cluster_key_phrases_with_best_experiments()
