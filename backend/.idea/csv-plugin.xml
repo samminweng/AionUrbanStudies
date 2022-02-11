@@ -381,48 +381,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/MLUrbanStudyCorpus/LDA_topics/MLUrbanStudyCorpus_LDA_topics.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/MLUrbanStudyCorpus/MLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/MLUrbanStudyCorpus/MLUrbanStudyCorpus_clusters.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_0/MLUrbanStudyCorpus_clusters.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/MLUrbanStudyCorpus/cluster/iteration_0/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/MLUrbanStudyCorpus/key_phrases/MLUrbanStudyCorpus_cluster_terms_key_phrases.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/MLUrbanStudyCorpus/key_phrases/group_key_phrases/cluster_key_phrases_group.csv">
           <value>
             <Attribute>
@@ -438,6 +396,34 @@
           </value>
         </entry>
         <entry key="/output/MLUrbanStudyCorpus/key_phrases/group_key_phrases/sub_groups/cluster_key_phrases_sub_grouping_cluster_#3.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#0/MLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics_sub_cluster#0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#0/MLUrbanStudyCorpus_clusters_sub_cluster#0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#1/MLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics_sub_cluster#1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#1/MLUrbanStudyCorpus_clusters_sub_cluster#1.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
