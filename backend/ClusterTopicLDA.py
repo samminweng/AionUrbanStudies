@@ -27,7 +27,7 @@ class ClusterTopicLDA:
         )
         # Load Key phrase
         path = os.path.join('output', self.args.case_name, 'key_phrases',
-                            self.args.case_name + '_cluster_terms_key_phrases.json')
+                            self.args.case_name + '_cluster_terms_key_phrases_' + self.args.sub_cluster_name + '.json')
         self.cluster_key_phrases_df = pd.read_json(path)
         # Sort by Cluster
         self.cluster_key_phrase_df = self.cluster_key_phrases_df.sort_values(by=['Cluster'], ascending=True)
@@ -35,7 +35,8 @@ class ClusterTopicLDA:
     # Derive n_gram from each individual paper
     def derive_n_grams_group_by_clusters(self):
         try:
-            path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters.json')
+            path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters_' +
+                                self.args.sub_cluster_name + '.json')
             # Load the documents clustered by
             df = pd.read_json(path)
             # Update text column
@@ -137,11 +138,11 @@ class ClusterTopicLDA:
             Path(topic_folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
             path = os.path.join(topic_folder,
-                                self.args.case_name + '_LDA_topics.json')
+                                self.args.case_name + '_LDA_topics_' + self.args.sub_cluster_name + '.json')
             cluster_df.to_json(path, orient='records')
             # Write to a csv file
             path = os.path.join(topic_folder,
-                                self.args.case_name + '_LDA_topics.csv')
+                                self.args.case_name + '_LDA_topics_' + self.args.sub_cluster_name + '.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             print('Output topics per cluster to ' + path)
         except Exception as err:
@@ -202,11 +203,13 @@ class ClusterTopicLDA:
         try:
             # # Load key phrase scores
             folder = os.path.join('output', self.args.case_name, 'key_phrases',)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_' +
+                                self.args.sub_cluster_name + '.json')
             cluster_df = pd.read_json(path)
             # Load results of LDA Topic model
             folder = os.path.join('output', self.args.case_name, 'LDA_topics')
-            path = os.path.join(folder, self.args.case_name + '_LDA_topics.json')
+            path = os.path.join(folder, self.args.case_name + '_LDA_topics_' +
+                                self.args.sub_cluster_name + '.json')
             lda_topics_df = pd.read_json(path)
             # # # Load cluster topic, key phrases
             cluster_df['NumTopics'] = lda_topics_df['NumTopics'].tolist()
@@ -220,10 +223,12 @@ class ClusterTopicLDA:
                              'KeyPhrases', 'SubGroups', 'LDAScore', 'LDATopics']]
             # # # # Write to a json file
             folder = os.path.join('output', self.args.case_name)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics_' +
+                                self.args.sub_cluster_name + '.json')
             df.to_json(path, orient='records')
             # Write to a csv file
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics_' +
+                                self.args.sub_cluster_name + '.csv')
             df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -232,8 +237,8 @@ class ClusterTopicLDA:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 1
-        ct = ClusterTopicLDA()
+        _cluster_no = 0
+        ct = ClusterTopicLDA(_cluster_no)
         ct.derive_n_grams_group_by_clusters()
         ct.derive_cluster_topics_by_LDA()
         ct.combine_LDA_topics_key_phrase_to_file()
