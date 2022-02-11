@@ -14,7 +14,7 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTopicLDA:
-    def __init__(self):
+    def __init__(self, _cluster_no):
         self.args = Namespace(
             # case_name='CultureUrbanStudyCorpus',
             case_name='MLUrbanStudyCorpus',
@@ -22,7 +22,8 @@ class ClusterTopicLDA:
             passes=100,
             iterations=400,
             chunksize=10,
-            eval_every=None  # Don't evaluate model perplexity, takes too much time.
+            eval_every=None,  # Don't evaluate model perplexity, takes too much time.
+            sub_cluster_name='sub_cluster#' + str(_cluster_no),
         )
         # Load Key phrase
         path = os.path.join('output', self.args.case_name, 'key_phrases',
@@ -231,6 +232,7 @@ class ClusterTopicLDA:
 # Main entry
 if __name__ == '__main__':
     try:
+        _cluster_no = 1
         ct = ClusterTopicLDA()
         ct.derive_n_grams_group_by_clusters()
         ct.derive_cluster_topics_by_LDA()

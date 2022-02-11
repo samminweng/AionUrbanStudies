@@ -310,9 +310,11 @@ class KeyPhraseSimilarity:
             # Re-order cluster df and Output to csv and json file
             cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases', 'SubGroups']]
             folder = os.path.join(folder, 'key_phrases')
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.csv')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_' +
+                                self.args.sub_cluster_name + '.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_' +
+                                self.args.sub_cluster_name + '.json')
             cluster_df.to_json(path, orient='records')
             print('Output key phrases per cluster to ' + path)
         except Exception as err:
@@ -353,7 +355,7 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 1
+        _cluster_no = 0
         kp = KeyPhraseSimilarity(_cluster_no)
         kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()
