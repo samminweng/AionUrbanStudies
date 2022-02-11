@@ -46,7 +46,7 @@ class BERTModelDocCluster:
             # case_name='CultureUrbanStudyCorpus',
             cluster_no=cluster_no,
             iteration=iteration,
-            in_folder='re_cluster#' + str(cluster_no) + '_' + str(iteration),
+            in_folder='sub_cluster#' + str(cluster_no) + '_' + str(iteration),
             path='data',
             # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
             # 768 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
@@ -393,7 +393,7 @@ class BERTModelDocCluster:
             outlier_df = outlier_df.drop(columns=['HDBSCAN_Cluster', 'x', 'y'])
             # Re-order
             print('The number of outliers {c}'.format(c=len(outlier_df)))
-            folder = os.path.join('data', self.args.case_name, 're_cluster#' + str(self.args.cluster_no) +
+            folder = os.path.join('data', self.args.case_name, 'sub_cluster#' + str(self.args.cluster_no) +
                                   '_' + str(self.args.iteration + 1))
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, self.args.case_name + '_cleaned.csv')

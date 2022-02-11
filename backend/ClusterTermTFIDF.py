@@ -9,43 +9,47 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTermTFIDF:
-    def __init__(self):
+    def __init__(self, _cluster_no, _last_iteration=1):
         self.args = Namespace(
             case_name='MLUrbanStudyCorpus',
             # case_name='CultureUrbanStudyCorpus',
             approach='TF-IDF',
-            last_iteration=3
+            in_folder='re_cluster#' + str(_cluster_no),
+            cluster_no=_cluster_no,
+            last_iteration=_last_iteration
         )
 
+    # Collect all iterative cluster results
     def collect_iterative_cluster_results(self):
         cluster_folder = os.path.join('output', self.args.case_name, 'cluster')
         results = list()
         # Go through each iteration 1 to last iteration
         for i in range(0, self.args.last_iteration + 1):
             try:
-                dimension = 0
+                opt_dimension = 0
                 # Get the best dimension
-                folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'hdbscan_clustering')
-                for file in os.listdir(folder):
+                folder = os.path.join(cluster_folder, self.args.in_folder + '_' + str(i))
+                clustering_folder = os.path.join(folder, 'hdbscan_clustering')
+                # Get the optimal dimension
+                for file in os.listdir(clustering_folder):
                     file_name = file.lower()
                     if file_name.endswith(".png") and file_name.startswith("dimension"):
-                        dimension = int(file_name.split("_")[1].split(".png")[0])
-                # Get the best score
-                folder = os.path.join(cluster_folder, 'iteration_' + str(i), 'experiments')
-                path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_result_summary.json')
+                        opt_dimension = int(file_name.split("_")[1].split(".png")[0])
+                # Get the best score of all clustering experiments
+                ex_folder = os.path.join(folder, 'experiments')
+                path = os.path.join(ex_folder, 'HDBSCAN_cluster_doc_vector_result_summary.json')
                 experiment_results = pd.read_json(path).to_dict("records")
-                best_result = next(r for r in experiment_results if r['dimension'] == dimension)
+                best_result = next(r for r in experiment_results if r['dimension'] == opt_dimension)
                 min_samples = best_result['min_samples']
                 min_cluster_size = best_result['min_cluster_size']
                 score = best_result['Silhouette_score']
                 # Get summary of cluster topics
-                folder = os.path.join(cluster_folder, 'iteration_' + str(i))
                 path = os.path.join(folder, self.args.case_name + '_cluster_docs.json')
                 clusters = pd.read_json(path).to_dict("records")
                 total_papers = reduce(lambda total, ct: ct['NumDocs'] + total, clusters, 0)
                 for cluster in clusters:
                     results.append({
-                        "iteration": i, "total_papers": total_papers, "dimension": dimension,
+                        "iteration": i, "total_papers": total_papers, "dimension": opt_dimension,
                         "min_samples": min_samples, "min_cluster_size": min_cluster_size, "score": score,
                         "Cluster": cluster['HDBSCAN_Cluster'], "NumDocs": cluster['NumDocs'], "Percent": cluster['Percent'],
                         "DocIds": cluster['DocIds']
@@ -57,22 +61,24 @@ class ClusterTermTFIDF:
         # Output cluster results to CSV
         folder = os.path.join('output', self.args.case_name, 'cluster_terms', 'iterative_clusters')
         Path(folder).mkdir(parents=True, exist_ok=True)
-        path = os.path.join(folder, self.args.case_name + '_iterative_cluster_summary.csv')
+        path = os.path.join(folder, self.args.case_name + '_iterative_cluster#' + str(self.args.cluster_no) + '_summary.csv')
         df.to_csv(path, encoding='utf-8', index=False)
-        path = os.path.join(folder, self.args.case_name + '_iterative_cluster_summary.json')
+        path = os.path.join(folder, self.args.case_name + '_iterative_cluster#' + str(self.args.cluster_no) + '_summary.json')
         df.to_json(path, orient='records')
         print(df)
 
     # Collect all the iterative cluster results and combine into a single cluster results
-    def output_iterative_cluster_images(self):
+    def output_iterative_cluster_results(self):
         folder = os.path.join('output', self.args.case_name, 'cluster')
         # Load cluster results at 0 iteration as initial state
         cur_cluster_no = 0
         results = list()
         # Go through each iteration 1 to last iteration
-        for i in range(0, self.args.last_iteration + 1):
+        for iteration in range(0, self.args.last_iteration + 1):
             try:
-                cluster_path = os.path.join(folder, 'iteration_' + str(i), self.args.case_name + '_clusters.json')
+                # Load the clustered docs in each iteration
+                cluster_path = os.path.join(folder, self.args.in_folder + '_' + str(iteration),
+                                            self.args.case_name + '_clusters.json')
                 df = pd.read_json(cluster_path)
                 cluster_df = df[df['HDBSCAN_Cluster'] != -1]
                 total_cluster_no = cluster_df['HDBSCAN_Cluster'].max()
@@ -90,25 +96,26 @@ class ClusterTermTFIDF:
                 outlier_df = df[df['HDBSCAN_Cluster'] == -1]
                 # visual_results.extend(outlier_df.to_dict("records"))
                 # Add the outliers at lst iteration
-                if i == self.args.last_iteration:
+                if iteration == self.args.last_iteration:
                     results.extend(outlier_df.to_dict("records"))
-                copied_results = results.copy()
-                image_folder = os.path.join('output', self.args.case_name, 'cluster_terms', 'images')
-                Path(image_folder).mkdir(parents=True, exist_ok=True)
+                # copied_results = results.copy()
+                # image_folder = os.path.join('output', self.args.case_name, 'cluster_terms', 'images')
+                # Path(image_folder).mkdir(parents=True, exist_ok=True)
                 # Visualise the cluster results
-                ClusterTopicUtility.visualise_cluster_results_by_iteration(i, copied_results, image_folder)
+                # ClusterTopicUtility.visualise_cluster_results_by_iteration(i, copied_results, image_folder)
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         # # Sort the results by DocID
         results = sorted(results, key=lambda c: c['DocId'])
-        text_df = pd.DataFrame(results, columns=['HDBSCAN_Cluster', 'DocId', 'Cited by', 'Year', 'Document Type',
-                                                 'Title', 'Abstract', 'Author Keywords', 'Authors', 'DOI', 'x',
-                                                 'y'])
+        text_df = pd.DataFrame(results)
+        # Reorder the columns
+        text_df = text_df[['HDBSCAN_Cluster', 'DocId', 'Cited by', 'Year', 'Document Type',
+                            'Title', 'Abstract', 'Author Keywords', 'Authors', 'DOI', 'x', 'y']]
         # Output cluster results to CSV
         folder = os.path.join('output', self.args.case_name)
-        path = os.path.join(folder, self.args.case_name + '_clusters.csv')
+        path = os.path.join(folder, self.args.case_name + '_clusters_re_cluster#' + str(self.args.cluster_no) + '.csv')
         text_df.to_csv(path, encoding='utf-8', index=False)
-        path = os.path.join(folder, self.args.case_name + '_clusters.json')
+        path = os.path.join(folder, self.args.case_name + '_clusters_re_cluster#' + str(self.args.cluster_no) + '.json')
         text_df.to_json(path, orient='records')
         print(text_df)
 
@@ -116,8 +123,9 @@ class ClusterTermTFIDF:
     def derive_cluster_terms_by_TF_IDF(self):
         try:
             term_folder = os.path.join('output', self.args.case_name, 'cluster_terms')
-            Path(term_folder).mkdir(parents=True, exist_ok=True)
-            path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters.json')
+            # Get the cluster docs
+            path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters_re_cluster#' +
+                                str(self.args.cluster_no) + '.json')
             # Load the documents clustered by
             clustered_doc_df = pd.read_json(path)
             # Update text column
@@ -161,10 +169,10 @@ class ClusterTermTFIDF:
                                                         'Term-1-gram', 'Term-2-gram', 'Term-N-gram'])
             folder = os.path.join(term_folder, 'n_grams')
             Path(folder).mkdir(parents=True, exist_ok=True)
-            path = os.path.join(folder, 'TF-IDF_cluster_term_n_grams.csv')
+            path = os.path.join(folder, 'TF-IDF_cluster_term_n_grams_re_cluster#' + str(self.args.cluster_no) + '.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            path = os.path.join(folder, 'TF-IDF_cluster_term_n_grams.json')
+            path = os.path.join(folder, 'TF-IDF_cluster_term_n_grams_re_cluster#' + str(self.args.cluster_no) + '.json')
             cluster_df.to_json(path, orient='records')
             print('Output terms per cluster to ' + path)
         except Exception as err:
@@ -209,10 +217,12 @@ class ClusterTermTFIDF:
 # Main entry
 if __name__ == '__main__':
     try:
-        ct = ClusterTermTFIDF()
-        ct.collect_iterative_cluster_results()
-        ct.output_iterative_cluster_images()
+        cluster_no = 0
+        last_iteration = 1
+        ct = ClusterTermTFIDF(cluster_no, last_iteration)
+        # ct.collect_iterative_cluster_results()
+        # ct.output_iterative_cluster_results()
         ct.derive_cluster_terms_by_TF_IDF()
-        ct.summarize_cluster_terms()
+        # ct.summarize_cluster_terms()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
