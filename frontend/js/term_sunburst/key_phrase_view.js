@@ -2,8 +2,9 @@
 function KeyPhraseView(sub_group, cluster_docs){
     const sub_group_doc_ids = sub_group['DocIds'];
     const key_phrases = sub_group['Key-phrases'];
-    const title_words = sub_group['TitleWords'];
-    console.log(key_phrases);
+    // const title_words = sub_group['TitleWords'];
+    const title_words = collect_title_words(key_phrases);
+    console.log(title_words);
     // Get sub_group docs
     const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
     console.log(sub_group_docs);
@@ -36,6 +37,32 @@ function KeyPhraseView(sub_group, cluster_docs){
         }
         return dict;
     }
+
+    // Collect top 5 frequent from key phrases
+    function collect_title_words(key_phrases){
+        let word_freq = []
+        for(const key_phrase of key_phrases){
+            const words = key_phrase.toLowerCase().split(" ");
+            for (const word of words){
+                const found_word = word_freq.find(w => w['word'].toLowerCase() === word)
+                if(found_word){
+                    found_word['freq'] += 1;
+                }else{
+                    word_freq.push({'word': word, 'freq':1});
+                }
+            }
+        }
+        // Sort by freq
+        word_freq.sort((a, b) => {
+            // if(a['freq'] === b['freq']){
+            //     return a['word'].localeCompare(b['word']);
+            // }
+            return b['freq'] - a['freq'];
+        });
+        // Return the top 5
+        return word_freq.slice(0, 5).map(a => a['word']);
+    }
+
 
     // Display the relevant papers containing key phrases
     function display_papers_by_word(word){
