@@ -29,7 +29,11 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 textposition: 'auto',
                 hovertemplate: '%{x} papers',
                 marker: {
-                    color: d3colors[group_id + 1]
+                    color: d3colors[group_id + 1],
+                    line: {
+                        width:1,
+                        color: 'white'
+                    }
                 }
             };
             if (sub_groups.length > 0) {
@@ -72,7 +76,8 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             height: 700,
             showlegend: true,
             barmode: 'group',
-            bargap: 0.4,
+            bargap: 0.2,
+            bargroupgap: 0.1,
             margin: {"l": 10, "r": 10},
             insidetextfont: {
                 size: 16
@@ -94,6 +99,14 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             $('#sub_group').empty();
             $('#doc_list').empty();
             const id = data.points[0].y;
+            // Get the marker
+            const marker = data.points[0].data.marker;
+            const color = marker.color;
+            // console.log(trace_index);
+            // // Set the line width
+            // marker.line.width = 3;
+            // marker.line.color = 'black';
+            // Plotly.restyle(chart_element, marker, [trace_index]);
             console.log(id);
             if (id.includes("#")) {
                 const group_id = parseInt(id.split("#")[1]) - thread;
@@ -102,7 +115,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                     const subgroup_id = parseInt(id.split("|")[1]);
                     const sub_group = sub_group_data.find(g => g['Group'] === group_id && g['SubGroup'] === subgroup_id);
                     if (sub_group) {
-                        const view = new KeyPhraseView(sub_group, cluster_docs);
+                        const view = new KeyPhraseView(sub_group, cluster_docs, color);
                     }
                 } else {
                     const found = id.match(/#/g);
@@ -111,7 +124,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                         // Get the group
                         const group = group_data.find(g => g['Group'] === group_id);
                         // Display the group
-                        const view = new KeyPhraseView(group, cluster_docs);
+                        const view = new KeyPhraseView(group, cluster_docs, color);
                     }
                 }
             }

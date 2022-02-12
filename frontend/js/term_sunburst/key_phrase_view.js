@@ -1,5 +1,5 @@
 // Create a div to display a sub-group of key phrases
-function KeyPhraseView(sub_group, cluster_docs){
+function KeyPhraseView(sub_group, cluster_docs, color){
     const sub_group_doc_ids = sub_group['DocIds'];
     const key_phrases = sub_group['Key-phrases'];
     // const title_words = sub_group['TitleWords'];
@@ -42,13 +42,17 @@ function KeyPhraseView(sub_group, cluster_docs){
     function collect_title_words(key_phrases){
         let word_freq = []
         for(const key_phrase of key_phrases){
-            const words = key_phrase.toLowerCase().split(" ");
+            const words = key_phrase.split(" ");
             for (const word of words){
-                const found_word = word_freq.find(w => w['word'].toLowerCase() === word)
+                const found_word = word_freq.find(w => w['word'].toLowerCase() === word.toLowerCase())
                 if(found_word){
                     found_word['freq'] += 1;
                 }else{
-                    word_freq.push({'word': word, 'freq':1});
+                    if(word === word.toUpperCase()){
+                        word_freq.push({'word': word, 'freq':1});
+                    }else{
+                        word_freq.push({'word': word.toLowerCase(), 'freq':1});
+                    }
                 }
             }
         }
@@ -106,8 +110,8 @@ function KeyPhraseView(sub_group, cluster_docs){
         const word_list = title_words.concat(['Others']);
         for(const word of word_list){
             const relevant_key_phrases = dict[word];
-            const btn = $('<button type="button" class="btn btn-link">' +
-                '<span class="fw-bold text-capitalize">' + word + '</span> </button>');
+            const btn = $('<button type="button" class="btn btn-lg">' +
+                '<span class="fw-bold text-capitalize" style="color: ' + color+ '">' + word + '</span> </button>');
             btn.button();
             // click event for sub_group_btn
             btn.click(function(event){
@@ -116,7 +120,7 @@ function KeyPhraseView(sub_group, cluster_docs){
                 const list_group = $('<div class="mx-auto"></div>');
                 // Add each key phrase
                 for(const key_phrase of relevant_key_phrases){
-                    const kp_btn = $('<button type="button" class="btn">' +
+                    const kp_btn = $('<button type="button" class="btn btn-lg">' +
                         '<span class="badge rounded-pill bg-light text-dark">' + key_phrase+ '</span></button>');
                     // Add button
                     kp_btn.button({
@@ -141,16 +145,6 @@ function KeyPhraseView(sub_group, cluster_docs){
         return header_div;
     }
 
-    // Display papers for each individual key phrase
-    function display_paper_by_key_phrase(key_phrase){
-        const docs = sub_group_docs.filter(d => {
-            const found = d['KeyPhrases'].find(kp => kp.toLowerCase() === key_phrase.toLowerCase())
-            return found;
-        });
-        console.log(docs);
-        // Create a list view of docs
-        const doc_list = new DocList(docs, [key_phrase], key_phrase);
-    }
 
     // Create an list item to display a group of key phrases
     function createSubGroupView(){
