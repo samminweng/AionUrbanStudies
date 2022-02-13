@@ -3,24 +3,68 @@
 const corpus = 'MLUrbanStudyCorpus';
 const cluster_path = 'data/' + corpus + '_cluster_terms_key_phrases_LDA_topics.json';
 const corpus_path = 'data/' + corpus + '_clusters.json';
-const sub_cluster_path = 'data/sub_clusters/' + corpus + '_cluster_terms_key_phrases_LDA_topics_sub_cluster_';
-const sub_cluster_corpus_path = 'data/sub_clusters/' + corpus + '_clusters_sub_cluster_';
+const sub_cluster_path = 'data/sub_clusters/' + corpus + '_cluster_terms_key_phrases_LDA_topics_cluster_';
+const sub_cluster_corpus_path = 'data/sub_clusters/' + corpus + '_clusters_cluster_';
 const params = new URLSearchParams(window.location.search);
 // sub_cluster numbers
-const sub_cluster_no_list = [0, 1];
-
+const sub_cluster_list = [0, 1];
 // Select cluster number
-let selected_cluster_no = 3;
+let selected_cluster_no = 0;
+
+// Display the sub-clusters of a large cluster
+function displaySubCluster(parent_cluster_no, sub_cluster_dict){
+    const sub_cluster_data = sub_cluster_dict[parent_cluster_no];
+    const div = $("<div></div>");
+
+    // Create a select
+    const select_drop = $('<select></select>');
+    // Add the options
+    const sub_cluster_groups = sub_cluster_data['SubClusters'];
+    const corpus = sub_cluster_data['Corpus'];
+    for(const sub_cluster of sub_cluster_groups){
+        console.log(sub_cluster);
+        // Get the cluster terms
+        const cluster_terms = sub_cluster['Terms'];
+        const top_terms = get_top_terms(cluster_terms, 3);
+        const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
+        const option = $('<option>' + top_terms.join(", ") + ' ( ' + cluster_docs.length  + ' )</option>');
+        select_drop.append(option);
+        // Updated the Top Terms
+        sub_cluster['TopTerms'] = top_terms;
+
+    }
+    div.append($("<label>Select a sub-cluster: </label>"))
+    div.append(select_drop);
+    $('#sub_cluster_list').append(div);
+    // Make a dropdown menu
+    select_drop.selectmenu({
+        width: 'auto'
+    });
+    // Create a term chart
+    const sub_cluster = sub_cluster_groups[0];
+    const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
+    const chart = new TermSunburst(sub_cluster, cluster_docs);
+
+}
+
+
 
 // Display the results of a cluster
-function displayChartByCluster(cluster_no, clusters, corpus_data) {
+function displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_dict) {
+    $('#sub_group').empty();
+    $('#doc_list').empty();
+    $('#sub_cluster_list').empty();
+    $('#key_phrase_chart').empty();
     const cluster_data = clusters.find(c => c['Cluster'] === cluster_no);
     // console.log(cluster_data);
     const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']));
-    // Create a term chart
-    const chart = new TermSunburst(cluster_data, cluster_docs);
-    $('#sub_group').empty();
-    $('#doc_list').empty();
+    if(sub_cluster_list.includes(cluster_no)){
+        displaySubCluster(cluster_no, sub_cluster_dict);
+    }else{
+        // Create a term chart
+        const chart = new TermSunburst(cluster_data, cluster_docs);
+    }
+
 }
 
 // Collect the unique top 3 terms
@@ -82,7 +126,6 @@ $(function () {
     if (params.has('cluster')) {
         selected_cluster_no = parseInt(params.get('cluster'));
     }
-
     // Load collocations and tfidf key terms
     $.when(
         $.getJSON(cluster_path), $.getJSON(corpus_path),
@@ -92,9 +135,11 @@ $(function () {
         .done(function (result1, result2, result3, result4, result5, result6) {
             let clusters = result1[0];
             const corpus_data = result2[0];
-            const sub_clusters = [{'Parent': 0, 'SubClusters': result3[0], 'Corpus': result4[0]},
-                {'Parent': 1, 'SubClusters': result5[0], 'Corpus': result6[0]}];
-            console.log(sub_clusters);
+            const sub_cluster_dict = {
+                0: {'SubClusters': result3[0], 'Corpus': result4[0]},
+                1: {'SubClusters': result5[0], 'Corpus': result6[0]}
+            };
+            console.log(sub_cluster_dict);
 
             // Populate the top terms
             for (let cluster of clusters) {
@@ -105,7 +150,7 @@ $(function () {
                 cluster['TopTerms'] = top_terms;
             }
 
-            displayChartByCluster(selected_cluster_no, clusters, corpus_data);   // Display the cluster #8 as default cluster
+            displayChartByCluster(selected_cluster_no, clusters, corpus_data, sub_cluster_dict);   // Display the cluster #8 as default cluster
             $("#cluster_list").empty();
             // Add a list of LDA topics
             for (const cluster of clusters) {
@@ -125,7 +170,7 @@ $(function () {
                 change: function (event, data) {
                     // console.log( data.item.value);
                     const cluster_no = parseInt(data.item.value);
-                    displayChartByCluster(cluster_no, clusters, corpus_data);
+                    displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_dict);
                 }
             });
         });

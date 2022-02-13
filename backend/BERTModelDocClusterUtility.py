@@ -219,7 +219,7 @@ class BERTModelDocClusterUtility:
         # Check if n_gram candidate does not have stop words, punctuation or non-words
         def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
             try:
-                # qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
+                qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
                 # # # Check if there is any noun
                 nouns = list(filter(lambda _n: _n[1].startswith('NN'), _n_gram))
                 if len(nouns) == 0:
@@ -232,7 +232,7 @@ class BERTModelDocClusterUtility:
                     _word = _n[0]
                     _pos_tag = _n[1]
                     if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                            _word.lower() in BERTModelDocClusterUtility.stop_words:  # or _pos_tag not in qualified_tags:
+                            _word.lower() in BERTModelDocClusterUtility.stop_words or _pos_tag not in qualified_tags:
                         return False
                 # n-gram is qualified
                 return True

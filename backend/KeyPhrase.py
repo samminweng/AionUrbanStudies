@@ -355,7 +355,7 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 0
+        _cluster_no = 1
         kp = KeyPhraseSimilarity(_cluster_no)
         kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()

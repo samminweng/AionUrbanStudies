@@ -1,4 +1,6 @@
 function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
+    const width = 600;
+    const height = 750;
     const d3colors = d3.schemeCategory10;
     console.log(d3colors);
     const min_group_id = group_data.reduce((pre, cur) => pre['Group'] < cur['Group'] ? pre : cur)['Group'];
@@ -72,15 +74,15 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                     size: 1,
                 }
             },
-            width: 600,
-            height: 700,
+            width: width,
+            height: height,
             showlegend: true,
             barmode: 'group',
-            bargap: 0.2,
-            bargroupgap: 0.1,
+            // bargap: 0.2,
+            // bargroupgap: 0.1,
             margin: {"l": 10, "r": 10},
             insidetextfont: {
-                size: 16
+                size: 20
             },
             legend: {
                 traceorder: 'reversed',

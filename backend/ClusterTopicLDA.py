@@ -15,6 +15,7 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 class ClusterTopicLDA:
     def __init__(self, _cluster_no):
+        self.cluster_no = _cluster_no
         self.args = Namespace(
             # case_name='CultureUrbanStudyCorpus',
             case_name='MLUrbanStudyCorpus',
@@ -223,12 +224,12 @@ class ClusterTopicLDA:
                              'KeyPhrases', 'SubGroups', 'LDAScore', 'LDATopics']]
             # # # # Write to a json file
             folder = os.path.join('output', self.args.case_name)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics_' +
-                                self.args.sub_cluster_name + '.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics_cluster_' +
+                                str(self.cluster_no) + '.json')
             df.to_json(path, orient='records')
             # Write to a csv file
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics_' +
-                                self.args.sub_cluster_name + '.csv')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics_cluster_' +
+                                str(self.cluster_no) + '.csv')
             df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -237,7 +238,7 @@ class ClusterTopicLDA:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 1
+        _cluster_no = 0
         ct = ClusterTopicLDA(_cluster_no)
         ct.derive_n_grams_group_by_clusters()
         ct.derive_cluster_topics_by_LDA()
