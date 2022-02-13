@@ -2,17 +2,50 @@
 function KeyPhraseView(sub_group, cluster_docs, color){
     const sub_group_doc_ids = sub_group['DocIds'];
     const key_phrases = sub_group['Key-phrases'];
-    // const title_words = sub_group['TitleWords'];
-    const title_words = collect_title_words(key_phrases);
-    console.log(title_words);
+    const title_words = sub_group['TitleWords'];
+    // let title_words = collect_title_words(key_phrases);
     // Get sub_group docs
     const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
-    console.log(sub_group_docs);
-    const dict = create_key_phrases_dict(title_words, key_phrases);
+    // console.log(sub_group_docs);
+    const word_key_phrase_dict = create_word_key_phrases_dict(title_words, key_phrases);
+    const word_doc_dict = create_word_doc_dict(title_words, sub_group_docs);
+    console.log(title_words);
+
+    // Create a dict to store the word and doc relation
+    function create_word_doc_dict(title_words, sub_group_docs){
+        let dict = {};
+        for(const [title_word, key_phrases] of Object.entries(word_key_phrase_dict)){
+            let word_doc_ids = [];
+            // Match the key phrases with title words and assign key phrase
+            for(const key_phrase of key_phrases) {
+                // // Collect the doc containing the key phrase
+                const relevant_docs = sub_group_docs.filter(d => {
+                    const found = d['KeyPhrases'].find(kp => kp.toLowerCase() === key_phrase.toLowerCase());
+                    if(found){
+                        return true;
+                    }
+                    return false;
+                });
+                for (const doc of relevant_docs){
+                    if(!word_doc_ids.includes(doc['DocId'])){
+                        word_doc_ids.push(doc['DocId']);
+                    }
+                }
+            }
+            dict[title_word] = word_doc_ids;
+        }
+        // Sort the title words by the number of
+        title_words.sort((a, b) => {
+            return dict[b].length - dict[a].length;
+        })
+
+
+        return dict;
+    }
 
     // Create a dict of word and key phrases
     // Allocate the key phrases based on the words
-    function create_key_phrases_dict(title_words, key_phrases){
+    function create_word_key_phrases_dict(title_words, key_phrases){
         let dict = {};
         // Initialise dict with an array
         for(const title_word of title_words){
@@ -21,7 +54,6 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         // Add misc
         dict['Others'] = [];
         // Match the key phrases with title words and assign key phrase
-        let max_count = 0;
         for(const key_phrase of key_phrases) {
             let is_found = false;
             for(const title_word of title_words){
@@ -58,28 +90,17 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         }
         // Sort by freq
         word_freq.sort((a, b) => {
-            // if(a['freq'] === b['freq']){
-            //     return a['word'].localeCompare(b['word']);
-            // }
             return b['freq'] - a['freq'];
         });
-        // Return the top 5
-        return word_freq.slice(0, 5).map(a => a['word']);
+        // Return the top 3
+        return word_freq.slice(0, 3).map(a => a['word']);
     }
-
 
     // Display the relevant papers containing key phrases
     function display_papers_by_word(word){
-        const relevant_key_phrases = dict[word];
-        const relevant_docs = sub_group_docs.filter(d => {
-            for(const key_phrase of relevant_key_phrases){
-                const found = d['KeyPhrases'].find(kp => kp.toLowerCase() === key_phrase.toLowerCase());
-                if(found){
-                    return true;
-                }
-            }
-            return false;
-        })
+        const relevant_doc_ids = word_doc_dict[word];
+        const relevant_key_phrases = word_key_phrase_dict[word];
+        const relevant_docs = sub_group_docs.filter(d => relevant_doc_ids.includes(d['DocId']));
 
         // Display all the relevant papers.
         const header_text = word;
@@ -95,12 +116,38 @@ function KeyPhraseView(sub_group, cluster_docs, color){
                 return true;
             }
             return false;
-        })
+        });
 
         // Display all the relevant papers.
         const header_text = key_phrase;
         // Create a list view of docs
         const doc_list = new DocList(relevant_docs, [key_phrase], header_text);
+    }
+
+    // Display the key phrase of a word
+    function display_key_phrases_by_word(word, key_phrase_div){
+        key_phrase_div.empty();
+        const list_group = $('<div class="mx-auto"></div>');
+        const relevant_key_phrases = word_key_phrase_dict[word];
+        // Add each key phrase
+        for(const key_phrase of relevant_key_phrases){
+            const kp_btn = $('<button type="button" class="btn">' +
+                '<span class="badge rounded-pill bg-light text-dark">' + key_phrase+ '</span></button>');
+            // Add button
+            kp_btn.button({
+                classes: {
+                    "ui-button": "highlight"
+                }
+            });
+            // On click event
+            kp_btn.click(function(event){
+                display_papers_by_key_phrase(key_phrase);
+            });
+            list_group.append(kp_btn);
+        }
+        key_phrase_div.append(list_group);
+        // Display the list of papers containing the key phrases
+        display_papers_by_word(word);
     }
 
     // Create title word header
@@ -109,35 +156,12 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         const header_div = $('<div></div>');
         const word_list = title_words.concat(['Others']);
         for(const word of word_list){
-            const relevant_key_phrases = dict[word];
-            const btn = $('<button type="button" class="btn btn-lg">' +
-                '<span class="fw-bold text-capitalize" style="color: ' + color+ '">' + word + '</span> </button>');
+            const btn = $('<button type="button" class="btn btn-link">' +
+                '<span class="fw-bold text-capitalize" style="color: ' + color+ '">' + word + '</span>' + ' </button>');
             btn.button();
             // click event for sub_group_btn
             btn.click(function(event){
-                // Display a list of relevant key phrases
-                key_phrase_div.empty();
-                const list_group = $('<div class="mx-auto"></div>');
-                // Add each key phrase
-                for(const key_phrase of relevant_key_phrases){
-                    const kp_btn = $('<button type="button" class="btn btn-lg">' +
-                        '<span class="badge rounded-pill bg-light text-dark">' + key_phrase+ '</span></button>');
-                    // Add button
-                    kp_btn.button({
-                        classes: {
-                            "ui-button": "highlight"
-                        }
-                    });
-                    // On click event
-                    kp_btn.click(function(event){
-                        display_papers_by_key_phrase(key_phrase);
-                    });
-                    list_group.append(kp_btn);
-                }
-                key_phrase_div.append(list_group);
-                // Display the list of papers containing the key phrases
-                display_papers_by_word(word);
-
+                display_key_phrases_by_word(word, key_phrase_div);
             });
             header_div.append(btn);
         }
@@ -145,32 +169,22 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         return header_div;
     }
 
-
-    // Create an list item to display a group of key phrases
-    function createSubGroupView(){
-        // Create a container
-        const container = $('<div></div>');
-        const key_phrase_div = $('<div></div>');
-
-        // Add the header div to display the title words
-        const header_div = create_header(key_phrase_div);
-        container.append(header_div);
-        container.append(key_phrase_div);
-        return container;
-    }
-
     // Create UI
     function _createUI(){
-        const p = $('<p></p>');
+        // Create an list item to display a group of key phrases
+        const container = $('<div></div>');
+        // Create a container
+        const key_phrase_div = $('<div></div>');
+        const header_div = create_header(key_phrase_div);
         // A list of grouped key phrases
-        const div = createSubGroupView();
-        p.append(div);
+        container.append(header_div);
+        container.append(key_phrase_div);
         $('#sub_group').empty();
-        $('#sub_group').append(p);
+        $('#sub_group').append(container);
         $('#doc_list').empty();
-        // Create a list of docs
-        const doc_list = new DocList(sub_group_docs, key_phrases, title_words.join(", "));
-        document.getElementById('sub_group').scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        // Display the docs containing the 1st word
+        const word = title_words[0];
+        display_key_phrases_by_word(word, key_phrase_div);
     }
 
 

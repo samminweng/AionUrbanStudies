@@ -15,19 +15,21 @@ let selected_cluster_no = 0;
 function displaySubCluster(parent_cluster_no, sub_cluster_dict){
     const sub_cluster_data = sub_cluster_dict[parent_cluster_no];
     const div = $("<div></div>");
-
     // Create a select
     const select_drop = $('<select></select>');
     // Add the options
     const sub_cluster_groups = sub_cluster_data['SubClusters'];
+    sub_cluster_groups.sort((a, b) => b['DocIds'].length - a['DocIds'].length);
     const corpus = sub_cluster_data['Corpus'];
     for(const sub_cluster of sub_cluster_groups){
-        console.log(sub_cluster);
+        // console.log(sub_cluster);
+        const sub_cluster_no = sub_cluster['Cluster'];
         // Get the cluster terms
         const cluster_terms = sub_cluster['Terms'];
         const top_terms = get_top_terms(cluster_terms, 3);
         const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
-        const option = $('<option>' + top_terms.join(", ") + ' ( ' + cluster_docs.length  + ' )</option>');
+        const option = $('<option value="'+ sub_cluster_no+ '">' + top_terms.join(", ") + ' (' +
+                         cluster_docs.length  + ' papers)</option>');
         select_drop.append(option);
         // Updated the Top Terms
         sub_cluster['TopTerms'] = top_terms;
@@ -38,23 +40,24 @@ function displaySubCluster(parent_cluster_no, sub_cluster_dict){
     $('#sub_cluster_list').append(div);
     // Make a dropdown menu
     select_drop.selectmenu({
-        width: 'auto'
+        width: 'auto',
+        change: function (event, data) {
+            // console.log( data.item.value);
+            const sub_cluster_no = parseInt(data.item.value);
+            const sub_cluster = sub_cluster_groups.find(c => c['Cluster'] === sub_cluster_no);
+            const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
+            const chart = new TermSunburst(sub_cluster, cluster_docs);
+        }
     });
     // Create a term chart
     const sub_cluster = sub_cluster_groups[0];
     const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
     const chart = new TermSunburst(sub_cluster, cluster_docs);
-
 }
-
-
 
 // Display the results of a cluster
 function displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_dict) {
-    $('#sub_group').empty();
-    $('#doc_list').empty();
     $('#sub_cluster_list').empty();
-    $('#key_phrase_chart').empty();
     const cluster_data = clusters.find(c => c['Cluster'] === cluster_no);
     // console.log(cluster_data);
     const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']));
@@ -139,7 +142,7 @@ $(function () {
                 0: {'SubClusters': result3[0], 'Corpus': result4[0]},
                 1: {'SubClusters': result5[0], 'Corpus': result6[0]}
             };
-            console.log(sub_cluster_dict);
+            // console.log(sub_cluster_dict);
 
             // Populate the top terms
             for (let cluster of clusters) {

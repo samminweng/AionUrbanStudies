@@ -8,6 +8,9 @@ function TermSunburst(cluster, cluster_docs){
     // Main entry
     function createUI(){
         try{
+            $('#sub_group').empty();
+            $('#doc_list').empty();
+            $('#key_phrase_chart').empty();
             // Display key phrase groups as default graph
             // const sunburst_graph = new SunburstGraph(groups, sub_groups, cluster, cluster_docs);
             const graph = new BarChart(groups, sub_groups, cluster, cluster_docs);

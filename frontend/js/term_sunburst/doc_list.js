@@ -24,7 +24,7 @@ function DocList(docs, selected_terms, head_text) {
                 docTable.find('tbody').empty();
                 for (let i = 0; i < docs.length; i++) {
                     const doc = docs[i];
-                    console.log(doc);
+                    // console.log(doc);
                     const row = $('<tr class="d-flex"></tr>');
                     // Add the title
                     const col = $('<td class="col"></td>');

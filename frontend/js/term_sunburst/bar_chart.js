@@ -1,15 +1,16 @@
+// Plotly Bar chart
+// Ref: https://plotly.com/javascript/reference/bar/
 function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
     const width = 600;
-    const height = 750;
+    const height = 700;
     const d3colors = d3.schemeCategory10;
-    console.log(d3colors);
+    group_data.sort((a, b) => a['Group'] - b['Group']);
+    console.log(group_data);
     const min_group_id = group_data.reduce((pre, cur) => pre['Group'] < cur['Group'] ? pre : cur)['Group'];
     let thread = 2;
     if (min_group_id === 0) {
         thread = 1;
     }
-    const top_terms = cluster['TopTerms'];
-    console.log(group_data);
     const data = create_graph_data();
     console.log(data);
 
@@ -18,26 +19,37 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
     function create_graph_data() {
         let data = [];
         // Re-order the groups to match with the order of the chart.
-        group_data.sort((a, b) => a['Group'] - b['Group']);
-        for (const group of group_data) {
+
+        for (let i =0; i< group_data.length; i++) {
+            const group = group_data[i];
             const group_id = group['Group'];
             const group_name = "Topic#" + (group_id + thread);
             // Get the sub-group
             const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
             // create a trace
             let trace = {
-                x: [], y: [], text: [], orientation: 'h', type: 'bar',
+                x: [], y: [], text: [],
+                orientation: 'h', type: 'bar',
                 name: group_name,
                 textposition: 'auto',
+                insidetextanchor: "start",
+                insidetextfont: {
+                    size: 14
+                },
+                outsidetextfont:{
+                    size: 14
+                },
                 hovertemplate: '%{x} papers',
                 marker: {
-                    color: d3colors[group_id + 1],
-                    line: {
-                        width:1,
-                        color: 'white'
-                    }
+                    color: d3colors[group_id + 1]
                 }
             };
+            if(i > 0){
+                trace['xaixs'] = "x" + (i+1)
+                trace['yaxis'] = "y" + (i+1)
+            }
+
+
             if (sub_groups.length > 0) {
                 for (const sub_group of sub_groups) {
                     // console.log(sub_group);
@@ -64,33 +76,46 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
 
 
     function create_UI() {
-        const layout = {
-            title: top_terms.join(", ") + " (" + cluster_docs.length + " papers)",
+        let layout = {
             xaxis: {
                 title: 'Number of Papers',
+                domain: [0, 1.0],
             },
             yaxis: {
                 tickfont: {
                     size: 1,
-                }
+                },
+                domain: [0, 0.65]
+            },
+            yaxis2: {
+                tickfont: {
+                    size: 1,
+                },
+                domain: [0.7, 0.75]
+            },
+            yaxis3: {
+                tickfont: {
+                    size: 1,
+                },
+                domain: [0.8, 1.0]
             },
             width: width,
             height: height,
+            autosize: false,
             showlegend: true,
-            barmode: 'group',
-            // bargap: 0.2,
-            // bargroupgap: 0.1,
-            margin: {"l": 10, "r": 10},
-            insidetextfont: {
-                size: 20
-            },
+            margin: {"l": 10, "r": 10, "t": 0},
             legend: {
                 traceorder: 'reversed',
-            }
-            // hovermode: 'closest',
-            // config: { responsive: true }
+            },
+            hovermode: 'closest',
+            config: { responsive: true },
+            grid: {
+                rows: (group_data.length >=3 ? group_data.length: 3),   // Display three rows by default
+                columns: 1,
+                pattern: 'independent',
+                roworder: 'bottom to top'}
         };
-
+        console.log(data);
         // Plot bar chart
         Plotly.newPlot('key_phrase_chart', data, layout);
 

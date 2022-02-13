@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Phrase Sunburst Chart</title>
+    <title>Term Chart</title>
     <meta charset="utf-8">
     <!-- All the third party libraries-->
     <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
@@ -19,20 +19,18 @@
 </head>
 <body>
 <div class="container">
-    <div class="h4">Phrase Group Chart</div>
+    <div class="h4">Cluster, Term and Key Phrase Chart</div>
     <div>This sunburst chart display the hierarchical structures of topics and key phrases extracted from paper texts (abstract + title).
         <br>
         Each individual paper has a mixture of topics, and each topic contain a mixture of words and key phrases.
     </div>
     <div class="row">
         <div class="col">
-            <div>
+            <div class="m-auto p-2">
                 <label for="cluster_list">Select a Cluster: </label>
                 <select name="cluster_list" id="cluster_list" ></select>
             </div>
-        </div>
-        <div class="col">
-            <div id="sub_cluster_list"></div>
+            <div class='m-auto p-2' id="sub_cluster_list"></div>
         </div>
     </div>
     <div class="row p-3">
