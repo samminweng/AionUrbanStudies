@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/data/AIMLUrbanStudyCorpus/iteration_5/AIMLUrbanStudyCorpus_cleaned.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/CultureUrbanStudyCorpus/CultureUrbanStudyCorpus_cleaned.csv">
           <value>
             <Attribute>

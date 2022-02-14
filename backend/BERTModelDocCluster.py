@@ -408,13 +408,13 @@ if __name__ == '__main__':
         # cluster_no = 1
         # BERTModelDocClusterUtility.collect_cluster_as_corpus('MLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
-        iteration = 0
+        iteration = 5
         mdc = BERTModelDocCluster(iteration)
-        mdc.get_sentence_vectors(is_load=True)
-        # mdc.run_HDBSCAN_cluster_experiments()
-        # mdc.summarize_HDBSCAN_cluster_experiment_results()
-        # mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
+        mdc.get_sentence_vectors(is_load=False)
+        mdc.run_HDBSCAN_cluster_experiments()
+        mdc.summarize_HDBSCAN_cluster_experiment_results()
+        mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
         mdc.derive_cluster_docs()
-        # mdc.output_outliers_as_corpus()
+        mdc.output_outliers_as_corpus()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
