@@ -9,7 +9,7 @@ function KeyPhraseView(sub_group, cluster_docs, color){
     // console.log(sub_group_docs);
     const word_key_phrase_dict = create_word_key_phrases_dict(title_words, key_phrases);
     const word_doc_dict = create_word_doc_dict(title_words, sub_group_docs);
-    console.log(title_words);
+    // console.log(title_words);
 
     // Create a dict to store the word and doc relation
     function create_word_doc_dict(title_words, sub_group_docs){
