@@ -3,13 +3,12 @@ function KeyPhraseView(sub_group, cluster_docs, color){
     const sub_group_doc_ids = sub_group['DocIds'];
     const key_phrases = sub_group['Key-phrases'];
     const title_words = sub_group['TitleWords'];
-    // let title_words = collect_title_words(key_phrases);
     // Get sub_group docs
     const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
     // console.log(sub_group_docs);
     const word_key_phrase_dict = create_word_key_phrases_dict(title_words, key_phrases);
     const word_doc_dict = create_word_doc_dict(title_words, sub_group_docs);
-    // console.log(title_words);
+    console.log(key_phrases);
 
     // Create a dict to store the word and doc relation
     function create_word_doc_dict(title_words, sub_group_docs){
@@ -34,12 +33,6 @@ function KeyPhraseView(sub_group, cluster_docs, color){
             }
             dict[title_word] = word_doc_ids;
         }
-        // Sort the title words by the number of
-        title_words.sort((a, b) => {
-            return dict[b].length - dict[a].length;
-        })
-
-
         return dict;
     }
 
@@ -131,7 +124,7 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         const relevant_key_phrases = word_key_phrase_dict[word];
         // Add each key phrase
         for(const key_phrase of relevant_key_phrases){
-            const kp_btn = $('<button type="button" class="btn">' +
+            const kp_btn = $('<button type="button" class="btn btn-lg">' +
                 '<span class="badge rounded-pill bg-light text-dark">' + key_phrase+ '</span></button>');
             // Add button
             kp_btn.button({

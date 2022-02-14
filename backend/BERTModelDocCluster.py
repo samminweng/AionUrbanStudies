@@ -40,13 +40,13 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
 class BERTModelDocCluster:
-    def __init__(self, cluster_no, iteration):
+    def __init__(self, iteration):
         self.args = Namespace(
-            case_name='MLUrbanStudyCorpus',
+            case_name='AIMLUrbanStudyCorpus',
             # case_name='CultureUrbanStudyCorpus',
-            cluster_no=cluster_no,
+            # cluster_no=cluster_no,
             iteration=iteration,
-            in_folder='sub_cluster#' + str(cluster_no) + '_' + str(iteration),
+            in_folder='iteration_' + str(iteration),
             path='data',
             # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
             # 768 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
@@ -393,8 +393,7 @@ class BERTModelDocCluster:
             outlier_df = outlier_df.drop(columns=['HDBSCAN_Cluster', 'x', 'y'])
             # Re-order
             print('The number of outliers {c}'.format(c=len(outlier_df)))
-            folder = os.path.join('data', self.args.case_name, 'sub_cluster#' + str(self.args.cluster_no) +
-                                  '_' + str(self.args.iteration + 1))
+            folder = os.path.join('data', self.args.case_name, 'iteration_' + str(self.args.iteration + 1))
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, self.args.case_name + '_cleaned.csv')
             # Save outlier df to another corpus
@@ -406,16 +405,16 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        cluster_no = 1
-        BERTModelDocClusterUtility.collect_cluster_as_corpus('MLUrbanStudyCorpus', cluster_no)
+        # cluster_no = 1
+        # BERTModelDocClusterUtility.collect_cluster_as_corpus('MLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
-        iteration = 1
-        mdc = BERTModelDocCluster(cluster_no, iteration)
-        mdc.get_sentence_vectors(is_load=False)
-        mdc.run_HDBSCAN_cluster_experiments()
-        mdc.summarize_HDBSCAN_cluster_experiment_results()
-        mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
+        iteration = 0
+        mdc = BERTModelDocCluster(iteration)
+        mdc.get_sentence_vectors(is_load=True)
+        # mdc.run_HDBSCAN_cluster_experiments()
+        # mdc.summarize_HDBSCAN_cluster_experiment_results()
+        # mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()
         mdc.derive_cluster_docs()
-        mdc.output_outliers_as_corpus()
+        # mdc.output_outliers_as_corpus()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

@@ -3,6 +3,20 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="/data/AIMLUrbanStudyCorpus/AIMLUrbanStudyCorpus_cleaned.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/AIMLUrbanStudyCorpus/iteration_0/AIMLUrbanStudyCorpus_cleaned.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/CultureUrbanStudyCorpus/CultureUrbanStudyCorpus_cleaned.csv">
           <value>
             <Attribute>
@@ -39,6 +53,27 @@
           </value>
         </entry>
         <entry key="/data/CultureUrbanStudyCorpus/iteration_2/CultureUrbanStudyCorpus_cleaned.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/MLUrbanStudyCorpus/iteration_0/MLUrbanStudyCorpus_cleaned.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster/iteration_0/AIMLUrbanStudyCorpus_cluster_docs.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster/iteration_0/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -381,7 +416,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/MLUrbanStudyCorpus/key_phrases/MLUrbanStudyCorpus_cluster_terms_key_phrases_sub_cluster#0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/MLUrbanStudyCorpus/key_phrases/group_key_phrases/cluster_key_phrases_group.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/MLUrbanStudyCorpus/key_phrases/group_key_phrases/cluster_key_phrases_sub_groups.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -409,14 +458,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#0/MLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics_sub_cluster#0.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#0/MLUrbanStudyCorpus_clusters_sub_cluster#0.csv">
+        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#0/MLUrbanStudyCorpus_clusters_cluster_0.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -430,14 +472,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#1/MLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics_sub_cluster#1.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#1/MLUrbanStudyCorpus_clusters_sub_cluster#1.csv">
+        <entry key="/output/MLUrbanStudyCorpus/results/sub_cluster#1/MLUrbanStudyCorpus_clusters_cluster_1.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

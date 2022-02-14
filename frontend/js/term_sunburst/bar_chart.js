@@ -39,7 +39,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 outsidetextfont:{
                     size: 14
                 },
-                hovertemplate: '%{x} papers',
+                hovertemplate: '%{text}',
                 marker: {
                     color: d3colors[group_id + 1]
                 }
@@ -60,7 +60,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                     const num_docs = sub_group['NumDocs'];
                     trace['y'].push(group_name + "|" + sub_group_id);
                     trace['x'].push(num_docs);
-                    trace['text'].push(title_words.join(", "))
+                    trace['text'].push('<b>' + title_words.join(", ") + '</b>')
                 }
             } else {
                 // Add the group
@@ -68,7 +68,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 const num_docs = group['NumDocs'];
                 trace['y'].push(group_name + "#" + group_id);
                 trace['x'].push(num_docs);
-                trace['text'].push(title_words.join(", "))
+                trace['text'].push('<b>' + title_words.join(", ") + '</b>')
             }
             data.push(trace);
         }
@@ -93,7 +93,10 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         }
         // Get the portion of each sub-group
         let portion = (1.0 / total_sub_groups * 0.85);
-        let gap = (1.0 - (portion * total_sub_groups))/(group_data.length-1);    // Gap between different groups
+        let gap = 0.02;
+        if(group_data.length > 1){
+            gap = (1.0 - (portion * total_sub_groups))/(group_data.length-1);    // Gap between different groups
+        }
         let cur_domain = 0.0;
         for(let i=0; i < group_data.length; i++){
             const group = group_data[i];
@@ -133,7 +136,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             },
             width: width,
             height: height,
-            autosize: false,
+            autosize: true,
             showlegend: true,
             margin: {"l": 10, "r": 10, "t": 10},
             legend: { traceorder: 'reversed'},
