@@ -419,7 +419,7 @@ class ClusterTopicUtility:
             print("Error occurred! {err}".format(err=err))
 
     @staticmethod
-    def visualise_cluster_results_by_iteration(iteration, results, folder):
+    def visualise_cluster_results_by_iteration(title, results, file_path):
         try:
             df = pd.DataFrame(results)
             total_clusters = df['HDBSCAN_Cluster'].max() + 1
@@ -454,16 +454,16 @@ class ClusterTopicUtility:
                                 size=2, color='gray', opacity=0.3)
                 ))
 
-            title = 'Iteration = ' + str(iteration)
+            # title = 'Iteration = ' + str(iteration)
             # Figure layout
             fig.update_layout(title=title,
                               width=600, height=800,
                               legend=dict(orientation="v"),
                               margin=dict(l=20, r=20, t=30, b=40))
-            file_path = os.path.join(folder, 'iteration_' + str(iteration) + ".png")
+            # file_path = os.path.join(folder, 'iteration_' + str(iteration) + ".png")
             fig.write_image(file_path, format='png')
             print(
-                "Output the images of clustered results at iteration {i} to {path}".format(i=iteration, path=file_path))
+                "Output the images of clustered results to {path}".format(path=file_path))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 

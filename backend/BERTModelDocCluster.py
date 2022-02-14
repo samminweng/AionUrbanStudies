@@ -408,7 +408,7 @@ if __name__ == '__main__':
         # cluster_no = 1
         # BERTModelDocClusterUtility.collect_cluster_as_corpus('MLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
-        iteration = 5
+        iteration = 4
         mdc = BERTModelDocCluster(iteration)
         mdc.get_sentence_vectors(is_load=False)
         mdc.run_HDBSCAN_cluster_experiments()

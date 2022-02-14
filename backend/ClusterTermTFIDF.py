@@ -9,13 +9,14 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTermTFIDF:
-    def __init__(self, _cluster_no, _last_iteration=1):
+    def __init__(self, _last_iteration):
         self.args = Namespace(
-            case_name='MLUrbanStudyCorpus',
+            case_name='AIMLUrbanStudyCorpus',
             # case_name='CultureUrbanStudyCorpus',
             approach='TF-IDF',
-            sub_cluster_name='sub_cluster#' + str(_cluster_no),
-            cluster_no=_cluster_no,
+            # sub_cluster_name='sub_cluster#' + str(_cluster_no),
+            # cluster_no=_cluster_no,
+            folder_name='iteration',
             last_iteration=_last_iteration
         )
 
@@ -28,7 +29,7 @@ class ClusterTermTFIDF:
             try:
                 opt_dimension = 0
                 # Get the best dimension
-                folder = os.path.join(cluster_folder, self.args.sub_cluster_name + '_' + str(i))
+                folder = os.path.join(cluster_folder, self.args.folder_name + '_' + str(i))
                 clustering_folder = os.path.join(folder, 'hdbscan_clustering')
                 # Get the optimal dimension
                 for file in os.listdir(clustering_folder):
@@ -62,10 +63,10 @@ class ClusterTermTFIDF:
         folder = os.path.join('output', self.args.case_name, 'cluster_terms', 'iterative_clusters')
         Path(folder).mkdir(parents=True, exist_ok=True)
         path = os.path.join(folder, self.args.case_name + '_iterative_summary_'
-                            + str(self.args.sub_cluster_name) + '.csv')
+                            + self.args.folder_name + '.csv')
         df.to_csv(path, encoding='utf-8', index=False)
         path = os.path.join(folder, self.args.case_name + '_iterative_summary_'
-                            + str(self.args.sub_cluster_name) + '.json')
+                            + self.args.folder_name + '.json')
         df.to_json(path, orient='records')
         print(df)
 
@@ -79,7 +80,7 @@ class ClusterTermTFIDF:
         for iteration in range(0, self.args.last_iteration + 1):
             try:
                 # Load the clustered docs in each iteration
-                cluster_path = os.path.join(folder, self.args.sub_cluster_name + '_' + str(iteration),
+                cluster_path = os.path.join(folder, self.args.folder_name + '_' + str(iteration),
                                             self.args.case_name + '_clusters.json')
                 df = pd.read_json(cluster_path)
                 cluster_df = df[df['HDBSCAN_Cluster'] != -1]
@@ -100,11 +101,13 @@ class ClusterTermTFIDF:
                 # Add the outliers at lst iteration
                 if iteration == self.args.last_iteration:
                     results.extend(outlier_df.to_dict("records"))
-                # copied_results = results.copy()
-                # image_folder = os.path.join('output', self.args.case_name, 'cluster_terms', 'images')
-                # Path(image_folder).mkdir(parents=True, exist_ok=True)
+                copied_results = results.copy()
+                image_folder = os.path.join('output', self.args.case_name, 'cluster_terms', 'images')
+                Path(image_folder).mkdir(parents=True, exist_ok=True)
+                file_path = os.path.join(image_folder, 'iteration_' + str(iteration) + ".png")
+                title = 'Iteration = ' + str(iteration)
                 # Visualise the cluster results
-                # ClusterTopicUtility.visualise_cluster_results_by_iteration(i, copied_results, image_folder)
+                ClusterTopicUtility.visualise_cluster_results_by_iteration(title, copied_results, file_path)
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         # # Sort the results by DocID
@@ -115,9 +118,9 @@ class ClusterTermTFIDF:
                             'Title', 'Abstract', 'Author Keywords', 'Authors', 'DOI', 'x', 'y']]
         # Output cluster results to CSV
         folder = os.path.join('output', self.args.case_name)
-        path = os.path.join(folder, self.args.case_name + '_clusters_' + str(self.args.sub_cluster_name) + '.csv')
+        path = os.path.join(folder, self.args.case_name + '_clusters_' + self.args.folder_name + '.csv')
         text_df.to_csv(path, encoding='utf-8', index=False)
-        path = os.path.join(folder, self.args.case_name + '_clusters_' + str(self.args.sub_cluster_name) + '.json')
+        path = os.path.join(folder, self.args.case_name + '_clusters_' + self.args.folder_name + '.json')
         text_df.to_json(path, orient='records')
         print(text_df)
 
@@ -127,7 +130,7 @@ class ClusterTermTFIDF:
             term_folder = os.path.join('output', self.args.case_name, 'cluster_terms')
             # Get the cluster docs
             path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters_' +
-                                str(self.args.sub_cluster_name) + '.json')
+                                self.args.folder_name + '.json')
             # Load the documents clustered by
             clustered_doc_df = pd.read_json(path)
             # Update text column
@@ -171,10 +174,10 @@ class ClusterTermTFIDF:
                                                         'Term-1-gram', 'Term-2-gram', 'Term-N-gram'])
             folder = os.path.join(term_folder, 'TF_IDF_Terms')
             Path(folder).mkdir(parents=True, exist_ok=True)
-            path = os.path.join(folder, 'TF-IDF_cluster_term_' + str(self.args.sub_cluster_name) + '.csv')
+            path = os.path.join(folder, 'TF-IDF_cluster_term_' + self.args.folder_name + '.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            path = os.path.join(folder, 'TF-IDF_cluster_term_' + str(self.args.sub_cluster_name) + '.json')
+            path = os.path.join(folder, 'TF-IDF_cluster_term_' + self.args.folder_name + '.json')
             cluster_df.to_json(path, orient='records')
             print('Output terms per cluster to ' + path)
         except Exception as err:
@@ -186,7 +189,7 @@ class ClusterTermTFIDF:
             term_folder = os.path.join('output', self.args.case_name, 'cluster_terms')
             # Load cluster topics
             path = os.path.join(term_folder, 'TF_IDF_Terms', 'TF-IDF_cluster_term_' +
-                                self.args.sub_cluster_name + '.json')
+                                self.args.folder_name + '.json')
             cluster_df = pd.read_json(path)
             # Write out to csv and json file
             cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Term-N-gram']]
@@ -199,10 +202,10 @@ class ClusterTermTFIDF:
             #     ClusterTopicUtility.flatten_tf_idf_terms(cluster_no, folder)
             # # Output cluster df to csv or json file
             path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms_' +
-                                self.args.sub_cluster_name + '.csv')
+                                self.args.folder_name + '.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms_' +
-                                self.args.sub_cluster_name + '.json')
+                                self.args.folder_name + '.json')
             cluster_df.to_json(path, orient='records')
             # Output a summary of top 10 Topics of each cluster
             clusters = cluster_df.to_dict("records")
@@ -214,7 +217,7 @@ class ClusterTermTFIDF:
             summary_df = summary_df.reindex(columns=['Cluster', 'NumDocs', 'Percent', 'DocIds', 'Terms'])
             # Output the summary as csv
             path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms_summary_' +
-                                self.args.sub_cluster_name + '.csv')
+                                self.args.folder_name + '.csv')
             summary_df.to_csv(path, encoding='utf-8', index=False)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -223,12 +226,12 @@ class ClusterTermTFIDF:
 # Main entry
 if __name__ == '__main__':
     try:
-        cluster_no = 1
-        last_iteration = 1
-        ct = ClusterTermTFIDF(cluster_no, last_iteration)
-        ct.collect_iterative_cluster_results()
-        ct.output_iterative_cluster_results()
-        ct.derive_cluster_terms_by_TF_IDF()
+        # cluster_no = 1
+        last_iteration = 4
+        ct = ClusterTermTFIDF(last_iteration)
+        # ct.collect_iterative_cluster_results()
+        # ct.output_iterative_cluster_results()
+        # ct.derive_cluster_terms_by_TF_IDF()
         ct.summarize_cluster_terms()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
