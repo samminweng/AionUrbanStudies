@@ -1,0 +1,3140 @@
+0,1
+spatiotemporal pattern,"{0, 4, -1}"
+social sensing,{-1}
+sensing perspective,{-1}
+resident complain,{-1}
+complain event,{-1}
+street vending,{-1}
+important part,{-1}
+informal economy,{-1}
+negative externality,{-1}
+positive role,{-1}
+observation data,{-1}
+vending event,{-1}
+big data,"{0, 1, 2, 3, 4, -1}"
+urban governance,"{2, -1}"
+governance platform,{-1}
+urban problem,"{4, -1}"
+problem complaint,{-1}
+complaint hotline,{-1}
+occurrence mechanism,{-1}
+urban manager,{-1}
+urban resident,"{4, -1}"
+model show,{-1}
+former concentrate,{-1}
+urban area,"{1, 2, 3, 4, 5, -1}"
+work time,{-1}
+finding reaffirm,{-1}
+perception bias,{-1}
+sensing data,"{1, -1}"
+governance practice,{-1}
+spatial familiarity,{-1}
+urban environment,"{0, 1, 3, 5, -1}"
+eye movement,{-1}
+movement data,{-1}
+user context,{-1}
+familiarity level,{-1}
+information service,"{3, -1}"
+sketch map,{-1}
+mobile phone,"{0, 1, 3, -1}"
+phone positioning,{-1}
+social medium,"{0, 4, -1}"
+medium data,"{0, 4, -1}"
+new type,{-1}
+sensory data,{-1}
+navigation task,{-1}
+random forest,"{1, -1}"
+forest classifier,{-1}
+binary classification,{-1}
+statistical feature,{-1}
+semantic feature,{-1}
+pupil diameter,{-1}
+fixation dispersion,{-1}
+saccade duration,{-1}
+fixation count,{-1}
+important feature,{-1}
+wide availability,{-1}
+smartphone sensing,{-1}
+internet connection,{-1}
+mobile crowd,{-1}
+crowd sourcing,{-1}
+promising paradigm,{-1}
+smart city,"{0, 1, 2, 4, -1}"
+city context,{-1}
+crowd data,{-1}
+scalable monitoring,{-1}
+resource demand,{-1}
+main bottleneck,"{3, -1}"
+data validation,{-1}
+validation framework,{-1}
+utilizing machine,{-1}
+machine learning,"{0, 1, 2, 3, 4, 5, -1}"
+learning technique,"{0, 1, 3, 4, 5, -1}"
+road monitoring,{-1}
+monitoring application,{-1}
+area road,{-1}
+crucial need,{-1}
+much attention,"{1, -1}"
+commercial location,{-1}
+rapid development,"{1, 2, -1}"
+urban data,"{0, 1, 2, 3, 4, 5, -1}"
+human mobility,"{0, 1, 3, 4, 5, -1}"
+commercial district,{-1}
+district discovery,{-1}
+discovery framework,{-1}
+graph convolution,{-1}
+convolution network,{-1}
+mobility feature,{-1}
+geographic similarity,{-1}
+hierarchical clustering,{-1}
+functional region,"{4, -1}"
+human pattern,{-1}
+kernel density,{-1}
+density estimation,{-1}
+semantic label,{-1}
+multisource data,{-1}
+accurate traffic,{-1}
+citywide network,{-1}
+data mining,"{0, 1, 2, 4, -1}"
+mining application,{-1}
+congestion warning,{-1}
+transportation scheduling,{-1}
+previous work,"{0, 3, 4, -1}"
+significant effort,{-1}
+temporal dynamic,{-1}
+spatial dependency,{-1}
+key limitation,{-1}
+current model,{-1}
+existing approach,{-1}
+spatial correlation,{-1}
+predefined graph,{-1}
+graph structure,{-1}
+genuine relation,{-1}
+incomplete graph,{-1}
+graph connection,{-1}
+temporal trend,"{4, -1}"
+stacking structure,{-1}
+method suffers,{-1}
+temporal dependency,"{1, -1}"
+dependency vanquish,{-1}
+vanquish problem,{-1}
+multistep prediction,{-1}
+spatialoral dependency,{-1}
+traffic flow,"{1, 5, -1}"
+new traffic,{-1}
+traffic speed,"{1, -1}"
+speed prediction,{-1}
+prediction framework,"{3, -1}"
+multiscale graph,{-1}
+graph attention,{-1}
+attention network,{-1}
+neural architecture,{-1}
+geographical dependency,{-1}
+spatial semantics,{-1}
+global perspective,{-1}
+multiheads attention,{-1}
+attention mechanism,{-1}
+traffic data,"{1, -1}"
+data set,"{0, 1, 2, 4, 5, -1}"
+set demonstrate,{-1}
+geotagged photo,{-1}
+spatiotemporal distribution,{-1}
+tourist flow,{-1}
+urban planning,"{0, 1, 2, 3, 4, 5, -1}"
+perturbed state,{-1}
+recent year,"{0, 1, 2, 3, 5, -1}"
+social data,{-1}
+popular hotspot,{-1}
+mobility pattern,"{3, 5, -1}"
+residence information,{-1}
+previous study,"{3, -1}"
+shannon entropy,{-1}
+special ward,{-1}
+result show,"{0, 1, 2, 5, -1}"
+gradient boosting,{-1}
+boosting machine,{-1}
+linear model,{-1}
+distributed random,{-1}
+deep learning,"{1, 5, -1}"
+temporal entropy,{-1}
+frequent visit,{-1}
+temporal distribution,{-1}
+spatial distribution,"{0, -1}"
+future tourism,{-1}
+tourism research,"{0, -1}"
+different topic,"{4, -1}"
+support policymakers,{-1}
+urban setting,{-1}
+significant interest,{-1}
+vehicular traffic,"{2, -1}"
+traffic modelling,{-1}
+prolific application,{-1}
+application domain,{-1}
+sport analytics,{-1}
+defensive strategy,{-1}
+team sport,{-1}
+advanced machine,"{3, -1}"
+large datasets,{-1}
+domain expert,"{4, -1}"
+active learning,{-1}
+learning strategy,{-1}
+classification model,"{1, -1}"
+model building,{-1}
+professional basketball,{-1}
+basketball game,{-1}
+offensive strategy,{-1}
+neural network,"{1, 2, 5, -1}"
+network architecture,{-1}
+basketball play,{-1}
+usage scenario,{-1}
+urban trip,{-1}
+trip generation,{-1}
+transportation model,{-1}
+important role,"{1, -1}"
+first phase,{-1}
+global course,{-1}
+mathematical derivation,{-1}
+many predictor,{-1}
+low accuracy,{-1}
+input vector,{-1}
+decision tree,"{1, 4, -1}"
+generation prediction,{-1}
+powerful machine,{-1}
+prediction performance,"{1, -1}"
+linear regression,"{3, -1}"
+regression method,{-1}
+feature selection,{-1}
+output variable,{-1}
+experimental result,"{1, 2, 5, -1}"
+residential travel,{-1}
+travel census,{-1}
+beijing prove,{-1}
+gbdt model,{-1}
+optimal store,{-1}
+store placement,"{0, -1}"
+knowledge transfer,{-1}
+optimal location,{-1}
+chain enterprise,{-1}
+new city,{-1}
+data scarcity,{-1}
+existing model,{-1}
+model tend,{-1}
+superior performance,"{4, -1}"
+training sample,{-1}
+data distribution,{-1}
+distribution discrepancy,{-1}
+different city,"{0, 3, -1}"
+insufficient data,{-1}
+prior knowledge,{-1}
+prior initialization,{-1}
+multiple city,{-1}
+multimodal data,{-1}
+effective learning,{-1}
+training batch,{-1}
+noisy data,{-1}
+practical application,{-1}
+result demonstrate,"{1, -1}"
+various baseline,{-1}
+contextual influence,{-1}
+explanatory tool,{-1}
+travel mode,"{1, 3, -1}"
+mode likelihood,{-1}
+gps trajectory,"{0, 1, 5, -1}"
+past study,{-1}
+varying impact,{-1}
+environmental factor,{-1}
+geographic context,{-1}
+context problem,{-1}
+innovative framework,{-1}
+multiple contexts,"{0, -1}"
+likelihood map,{-1}
+individual travel,{-1}
+travel behavior,"{1, 3, 5, -1}"
+notable change,{-1}
+local level,{-1}
+spatial dimension,"{0, -1}"
+negative association,{-1}
+afternoon peak,{-1}
+meaningful interpretation,{-1}
+complex interaction,"{1, -1}"
+graph input,{-1}
+input representation,{-1}
+urban network,{-1}
+network analysis,"{5, -1}"
+network path,{-1}
+particular interest,{-1}
+successful application,{-1}
+analysis becomes,{-1}
+hidden pattern,{-1}
+predictive model,"{0, -1}"
+different input,{-1}
+different graph,{-1}
+temporal characteristic,{-1}
+taxi journey,{-1}
+journey dataset,{-1}
+road network,"{1, 3, 5, -1}"
+temporal information,{-1}
+information help,{-1}
+intelligence perception,{-1}
+perception system,{-1}
+thing application,{-1}
+urgent need,"{0, -1}"
+status quo,{-1}
+present situation,{-1}
+intelligent city,"{1, -1}"
+city construction,{-1}
+key problem,"{1, 5, -1}"
+information perception,{-1}
+early warning,{-1}
+terrorist activity,{-1}
+system collect,{-1}
+heterogeneous information,"{0, -1}"
+perception layer,{-1}
+intelligence identification,{-1}
+identification layer,{-1}
+intelligence inference,{-1}
+inference layer,{-1}
+focal area,{-1}
+suspicious information,{-1}
+semantic database,{-1}
+terrorist action,{-1}
+action signal,{-1}
+complex event,{-1}
+event processing,{-1}
+learning technology,{-1}
+mining prediction,{-1}
+mass event,{-1}
+event flow,{-1}
+historical data,"{1, 3, -1}"
+terrorist attack,{-1}
+exploratory study,{-1}
+geolocation technique,{-1}
+recent attention,{-1}
+vital statistic,{-1}
+private company,{-1}
+useful data,{-1}
+urban infrastructure,"{0, 4, -1}"
+available dataset,{-1}
+road traffic,"{1, 2, 3, 5, -1}"
+traffic crash,{-1}
+crash location,{-1}
+location data,{-1}
+young adult,{-1}
+research project,{-1}
+improved geoparsing,{-1}
+geoparsing algorithm,{-1}
+crash report,{-1}
+unique crash,{-1}
+motorcycle delivery,{-1}
+delivery service,{-1}
+geolocated dataset,{-1}
+first crash,{-1}
+crash map,{-1}
+spatial clustering,{-1}
+clustering algorithm,"{0, 3, 5, -1}"
+urban planner,"{0, 3, 4, -1}"
+useful information,"{1, -1}"
+road safety,"{5, -1}"
+safety improvement,{-1}
+twitter data,"{0, -1}"
+essential data,{-1}
+poor environment,"{0, -1}"
+open access,"{0, 1, -1}"
+access article,"{0, -1}"
+unrestricted use,"{0, -1}"
+original author,"{0, -1}"
+intelligent image,{-1}
+image labeling,{-1}
+labeling system,{-1}
+traffic violation,{-1}
+possible change,{-1}
+road infrastructure,{-1}
+learning method,"{1, 3, -1}"
+automatic marking,{-1}
+information system,"{2, -1}"
+intelligent system,{-1}
+automatic object,{-1}
+object recognition,"{2, -1}"
+system development,"{1, -1}"
+development tool,"{4, -1}"
+experimental part,{-1}
+network training,{-1}
+automatic image,{-1}
+flow prediction,"{1, -1}"
+great significance,"{1, -1}"
+urban safety,{-1}
+safety control,{-1}
+stampede prevention,{-1}
+transmission control,{-1}
+use vehicle,{-1}
+learning model,{-1}
+od flow,{-1}
+actual human,{-1}
+od transfer,{-1}
+transfer pattern,{-1}
+citywide scale,{-1}
+different datasets,{-1}
+phone signal,{-1}
+signal data,{-1}
+signal base,{-1}
+base station,"{0, 4, -1}"
+geographical space,"{4, -1}"
+phone user,"{0, -1}"
+location information,"{0, -1}"
+flow data,"{1, 5, -1}"
+natural topology,{-1}
+topology structure,{-1}
+tgcn model,{-1}
+graph fusion,{-1}
+fusion module,{-1}
+dynamic population,"{3, -1}"
+population distribution,"{2, 3, -1}"
+distribution prediction,{-1}
+prediction task,"{0, -1}"
+semantic information,{-1}
+hybrid machine,{-1}
+extensive experiment,"{1, 3, -1}"
+signal datasets,{-1}
+proceeding contain,"{0, 1, 2, -1}"
+special focus,"{0, 1, 2, -1}"
+topic include,{-1}
+visual analytics,"{2, 3, -1}"
+crime detection,{-1}
+qualitative evaluation,{-1}
+rich source,{-1}
+many downstream,{-1}
+downstream application,{-1}
+comprehensive analysis,{-1}
+geographic information,{-1}
+information retrieval,{-1}
+recommender system,"{0, -1}"
+geographic knowledge,{-1}
+knowledge graphs,"{0, -1}"
+urban space,"{0, 3, 4, -1}"
+researched aspect,{-1}
+statistical model,"{1, 2, 4, -1}"
+spatial adjacency,{-1}
+functional semantics,{-1}
+distributional heterogeneity,{-1}
+spatial context,"{4, -1}"
+itdl augmentation,{-1}
+spatial heterogeneity,"{0, -1}"
+different region,"{3, -1}"
+clustering mechanism,{-1}
+denser area,{-1}
+hierarchical dataset,{-1}
+openstreetmap dataset,{-1}
+baseline task,{-1}
+different scale,"{3, -1}"
+interesting fact,{-1}
+semantic analogy,{-1}
+social computing,{-1}
+public policy,"{1, 3, -1}"
+policy making,{-1}
+urban growth,{-1}
+covid pandemic,{-1}
+possible solution,{-1}
+exhaustive study,{-1}
+ml model,{-1}
+main objective,{-1}
+inclusive perspective,{-1}
+sustainability scope,{-1}
+data type,"{4, -1}"
+case study,"{0, 1, 2, 3, 4, 5, -1}"
+andalusian city,{-1}
+traffic modeling,{-1}
+reliable method,{-1}
+new similarity,{-1}
+similarity measure,"{0, -1}"
+learning field,{-1}
+temporal mobility,{-1}
+community detection,{-1}
+detection algorithms,{-1}
+depict traffic,{-1}
+spatial interaction,"{4, -1}"
+latter group,{-1}
+different land,{-1}
+similarity method,{-1}
+several time,{-1}
+reliable structure,{-1}
+areal unit,{-1}
+clustering process,"{4, -1}"
+homogeneous area,{-1}
+flow map,{-1}
+clustering result,{-1}
+different area,{-1}
+polycentric structure,{-1}
+urban future,{-1}
+city planning,"{1, 2, 3, 4, -1}"
+planning project,{-1}
+complex system,"{4, -1}"
+urban scientist,{-1}
+computational method,"{4, -1}"
+spatial analysis,"{2, -1}"
+vast amount,"{0, -1}"
+urban phenomenon,{-1}
+cybernetic system,{-1}
+new tool,{-1}
+urban theory,{-1}
+adaptive system,{-1}
+urban morphology,"{3, -1}"
+urban economy,{-1}
+mobility system,{-1}
+empirical research,{-1}
+functional pattern,{-1}
+imaginary vision,{-1}
+qualitative transition,{-1}
+ubiquitous use,{-1}
+coupled module,{-1}
+urban economics,{-1}
+expected result,{-1}
+decision maker,"{5, -1}"
+economic outcome,{-1}
+policy development,"{0, -1}"
+challenging task,"{0, 5, -1}"
+complex pattern,{-1}
+conventional model,{-1}
+gravity model,"{0, -1}"
+physic principle,{-1}
+predictive power,"{0, -1}"
+many factor,{-1}
+existing machine,{-1}
+nearby region,{-1}
+contextual information,"{0, -1}"
+demand characteristic,{-1}
+multitask learning,{-1}
+learning framework,"{0, -1}"
+effective representation,{-1}
+learned embeddings,{-1}
+geographic movement,{-1}
+animal migration,{-1}
+migration understanding,{-1}
+geographic coordinate,{-1}
+time stamp,{-1}
+computational technique,{-1}
+implicit movement,{-1}
+route direction,{-1}
+historical exploration,{-1}
+exploration route,{-1}
+diverse corpus,{-1}
+comparable corpora,{-1}
+iterative process,"{4, -1}"
+hand labeling,{-1}
+word embeddings,{-1}
+traditional machine,"{5, -1}"
+model ensembling,{-1}
+prediction accuracy,{-1}
+acceptable level,{-1}
+corpus training,{-1}
+training set,"{4, -1}"
+computational processing,{-1}
+spatial cognition,{-1}
+large amount,"{0, 2, 4, 5, -1}"
+potential knowledge,{-1}
+various application,{-1}
+traffic incident,"{1, -1}"
+incident analysis,{-1}
+actual insight,{-1}
+city smarter,{-1}
+computational framework,{-1}
+word embedding,{-1}
+different feature,"{0, -1}"
+feature extraction,"{1, -1}"
+representation model,{-1}
+twitter interaction,{-1}
+third step,{-1}
+feature generation,{-1}
+generation model,{-1}
+dataset eligible,{-1}
+study show,{-1}
+right feature,{-1}
+extraction strategy,{-1}
+internet meme,{-1}
+autonomous vehicle,"{2, -1}"
+automatic identification,{-1}
+social function,"{0, -1}"
+functional zoning,{-1}
+land use,"{0, 3, 5, -1}"
+use classification,"{0, -1}"
+hot topic,"{3, -1}"
+various field,{-1}
+city field,{-1}
+block level,{-1}
+spatial scale,{-1}
+scale limitation,{-1}
+high uncertainty,{-1}
+dynamic data,{-1}
+distribution waveform,{-1}
+interpretation indicator,{-1}
+spatial error,{-1}
+taxi driver,{-1}
+aoi type,{-1}
+hds method,{-1}
+matching test,{-1}
+similarity index,{-1}
+gaussian kernel,{-1}
+kernel function,{-1}
+pearson coefficient,{-1}
+aoi sample,{-1}
+residential district,{-1}
+overall accuracy,"{0, -1}"
+taxi trajectory,{-1}
+continuous update,{-1}
+supplementary method,{-1}
+use type,"{0, -1}"
+image interpretation,{-1}
+identification effect,{-1}
+railway industry,{-1}
+substantial railway,{-1}
+railway station,{-1}
+new technology,"{4, -1}"
+enable safety,{-1}
+technological technique,{-1}
+data analysis,"{0, 1, 2, 4, -1}"
+many area,{-1}
+important benefit,{-1}
+railway safety,{-1}
+new method,"{4, -1}"
+operational model,{-1}
+various difficulty,{-1}
+risk analysis,{-1}
+analytical need,{-1}
+powerful tool,{-1}
+analytical prediction,{-1}
+framework model,{-1}
+risk assessment,{-1}
+assessment process,{-1}
+real time,"{0, 1, -1}"
+human error,{-1}
+passenger data,{-1}
+business model,{-1}
+safety record,{-1}
+predict hazard,{-1}
+security efficiency,{-1}
+design pattern,{-1}
+topic modeling,"{4, -1}"
+particular functionality,{-1}
+general methodology,{-1}
+expert knowledge,"{5, -1}"
+similar region,{-1}
+methodology face,{-1}
+face limitation,{-1}
+transferability issue,{-1}
+data quality,"{2, -1}"
+novel framework,{-1}
+dirichlet allocation,"{4, -1}"
+different way,{-1}
+significant agreement,{-1}
+topic probability,{-1}
+use case,{-1}
+metropolitan area,"{3, 5, -1}"
+uncover discrepancy,{-1}
+smooth inaccuracy,{-1}
+popular topic,{-1}
+different concern,{-1}
+public sector,{-1}
+traffic management,"{1, 2, 5, -1}"
+subject area,{-1}
+topic identification,{-1}
+valid research,{-1}
+research area,"{5, -1}"
+driver car,{-1}
+system design,{-1}
+network visualization,{-1}
+association graph,{-1}
+term show,{-1}
+concept reveal,{-1}
+decision tool,{-1}
+diverse discipline,{-1}
+future study,{-1}
+mining technique,"{2, 4, -1}"
+convolutional network,{-1}
+global poverty,{-1}
+rapid expansion,{-1}
+phone network,{-1}
+graph machine,{-1}
+sudden relevance,{-1}
+recent application,{-1}
+application range,{-1}
+humanitarian response,{-1}
+poverty estimation,{-1}
+epidemic containment,{-1}
+vast majority,{-1}
+computational tool,{-1}
+social network,"{0, 2, 3, 4, -1}"
+myriad way,{-1}
+model treat,{-1}
+treat relation,{-1}
+learning algorithms,"{0, 1, 3, -1}"
+different prediction,"{1, -1}"
+phone datasets,{-1}
+poverty research,{-1}
+node labelling,{-1}
+citation network,{-1}
+mobility data,"{0, 1, 3, 4, 5, -1}"
+crime prediction,{-1}
+traditional crime,{-1}
+prediction model,"{0, 1, -1}"
+census data,"{0, -1}"
+human activity,"{0, 2, 4, -1}"
+ubiquitous computing,{-1}
+human presence,"{4, -1}"
+extensive set,{-1}
+urban study,"{2, 4, -1}"
+ensemble technique,{-1}
+different type,"{2, 5, -1}"
+census tract,{-1}
+tract level,"{0, -1}"
+foursquare venue,{-1}
+taxi ride,{-1}
+baseline model,{-1}
+poi data,"{0, 4, -1}"
+test set,{-1}
+residential population,{-1}
+ambient population,{-1}
+crime level,{-1}
+main crime,{-1}
+crime category,{-1}
+predictive gain,{-1}
+dynamic feature,{-1}
+feature varies,{-1}
+crime type,{-1}
+grand larceny,{-1}
+census feature,{-1}
+predictive feature,{-1}
+result offer,{-1}
+valuable insight,{-1}
+urban policy,{-1}
+law enforcement,{-1}
+rapid increase,{-1}
+area smart,{-1}
+assorted field,{-1}
+computer science,"{0, -1}"
+sensor network,"{2, -1}"
+umbrella term,{-1}
+smart mobility,{-1}
+smart governance,{-1}
+smart planning,{-1}
+smart environment,{-1}
+crucial aspect,{-1}
+efficient movement,{-1}
+extensive survey,{-1}
+research work,{-1}
+comparative study,{-1}
+major work,{-1}
+aforementioned field,{-1}
+data aggregation,{-1}
+data exploration,{-1}
+intuitive way,{-1}
+graphical problem,{-1}
+visual clutter,{-1}
+spatiotemporal data,"{0, 1, 2, -1}"
+preprocessing tool,{-1}
+automatic creation,{-1}
+high resolution,"{2, -1}"
+resolution grid,{-1}
+vector tile,{-1}
+massive itinerary,{-1}
+itinerary request,{-1}
+request dataset,{-1}
+france region,{-1}
+mining tourism,{-1}
+tourism pattern,{-1}
+call detail,{-1}
+travel pattern,"{3, -1}"
+transportation information,{-1}
+different country,{-1}
+different length,{-1}
+event period,{-1}
+complete information,{-1}
+tourist move,{-1}
+traditional survey,"{3, -1}"
+smarter transportation,{-1}
+transportation system,"{1, 2, 3, 5, -1}"
+urban resource,{-1}
+resource planning,"{1, -1}"
+urban travel,{-1}
+travel interpretation,{-1}
+trajectory segmentation,{-1}
+service provision,{-1}
+sensor trace,{-1}
+travel diary,{-1}
+mode detection,"{1, 5, -1}"
+current approach,"{5, -1}"
+approach segment,{-1}
+certain criterion,{-1}
+significant vagueness,{-1}
+activity transition,{-1}
+segmentation approach,{-1}
+time interpretation,{-1}
+frequent gap,{-1}
+location trace,{-1}
+atomic segment,{-1}
+homogeneous state,{-1}
+progressive iteration,{-1}
+new state,{-1}
+offline mode,{-1}
+environmental condition,{-1}
+varying quality,{-1}
+segmentation model,{-1}
+information delivery,{-1}
+delivery pertinent,{-1}
+behavior interpretation,{-1}
+opportunistic crime,{-1}
+crime security,{-1}
+security game,{-1}
+urban crime,{-1}
+optimal police,{-1}
+opportunistic criminal,{-1}
+real world,{-1}
+world data,{-1}
+patrol strategy,{-1}
+first contribution,{-1}
+game abstraction,{-1}
+abstraction framework,{-1}
+discrete target,{-1}
+similar target,{-1}
+abstract game,{-1}
+total target,{-1}
+original game,{-1}
+second contribution,{-1}
+mixed integer,{-1}
+linear program,{-1}
+neighboring target,{-1}
+large scale,{-1}
+scale problem,{-1}
+third contribution,{-1}
+planning algorithm,{-1}
+mixed strategy,{-1}
+fourth contribution,{-1}
+heuristic propagation,{-1}
+propagation model,{-1}
+limited data,{-1}
+local police,{-1}
+police department,"{2, -1}"
+university campus,{-1}
+high prediction,{-1}
+real datasets,{-1}
+significant crime,{-1}
+crime rate,{-1}
+rate reduction,{-1}
+planning strategy,{-1}
+current police,{-1}
+police strategy,{-1}
+european conference,"{2, -1}"
+visual data,{-1}
+visualization tool,{-1}
+multivariate time,{-1}
+time series,{-1}
+dynamic trafficmanagement,{-1}
+cluster analysis,{-1}
+spatial configuration,"{4, -1}"
+spatial abstraction,{-1}
+traffic analysis,"{1, -1}"
+library version,{-1}
+community structure,{-1}
+structure generator,{-1}
+social tag,{-1}
+learning language,{-1}
+language model,{-1}
+exploratory analysis,{-1}
+text collection,{-1}
+hybrid biclustering,{-1}
+satellite image,{-1}
+image time,{-1}
+medium message,{-1}
+emergency awareness,{-1}
+exploratory monitoring,{-1}
+twitter stream,{-1}
+presidential election,{-1}
+election cycle,{-1}
+stem education,{-1}
+time system,{-1}
+crowd flow,{-1}
+metropolitan subway,{-1}
+subway station,{-1}
+series data,{-1}
+ecg monitoring,{-1}
+wearable device,{-1}
+sparse model,{-1}
+data monitoring,{-1}
+automatic detection,{-1}
+significant anomaly,{-1}
+engine misfire,{-1}
+misfire detection,{-1}
+mobile audio,{-1}
+kdd process,{-1}
+discrimination discovery,{-1}
+user modeling,"{3, -1}"
+music recommender,{-1}
+steel production,{-1}
+reasoning approach,{-1}
+terroristic attack,{-1}
+last decade,"{4, -1}"
+security incident,{-1}
+numerous vulnerability,{-1}
+potential threat,{-1}
+government agency,{-1}
+early identification,{-1}
+reasoning layer,{-1}
+symbolic event,{-1}
+meaningful alert,{-1}
+information source,{-1}
+different abstraction,{-1}
+abstraction level,{-1}
+sensor information,"{0, -1}"
+police patrol,{-1}
+patrol input,{-1}
+data source,"{0, 1, 4, -1}"
+user role,{-1}
+intelligence analyst,{-1}
+analyst work,{-1}
+work flow,{-1}
+functional requirement,{-1}
+attack prediction,{-1}
+prediction system,"{1, -1}"
+threat event,{-1}
+reliable model,"{3, -1}"
+sensitive threat,{-1}
+event driven,{-1}
+driven architecture,{-1}
+processing system,{-1}
+prototype implementation,{-1}
+simulated validation,{-1}
+validation scenario,{-1}
+expert user,{-1}
+threat probability,{-1}
+physical environment,"{0, -1}"
+health outcome,{0}
+neighborhood scale,{0}
+urban health,{0}
+chronic disease,{0}
+accurate prediction,"{0, 4}"
+different machine,{0}
+social environment,{0}
+neighborhood disorder,{0}
+socioeconomic variable,{0}
+historical record,{0}
+service request,{0}
+complementary data,{0}
+city official,{0}
+evaluate future,{0}
+future scenario,{0}
+neighborhood condition,{0}
+significant discrepancy,{0}
+actual value,{0}
+policy intervention,{0}
+human behaviour,{0}
+social activity,{0}
+time understanding,{0}
+many issue,{0}
+crowd size,{0}
+criminal activity,{0}
+medium platform,"{0, 4}"
+population movement,{0}
+movement pattern,"{0, 3}"
+major city,{0}
+temporal pattern,{0}
+historical average,{0}
+anomalous activity,{0}
+natural language,"{0, 4}"
+language processing,"{0, 4}"
+analysis offer,{0}
+offer insight,{0}
+city pulse,{0}
+network message,{0}
+private service,{0}
+rapid urbanization,"{0, 4}"
+different model,{0}
+sustainable city,"{0, 2, 5}"
+network profile,{0}
+governmental entity,{0}
+cultural event,{0}
+present paper,{0}
+citizen message,{0}
+city service,{0}
+service dimension,{0}
+text datasets,{0}
+initial result,{0}
+iso category,{0}
+governmental support,{0}
+support decision,{0}
+decision system,{0}
+customer complain,{0}
+complain system,{0}
+community dashboard,{0}
+police office,{0}
+cultural producer,{0}
+environmental agency,{0}
+urban land,{0}
+use detection,{0}
+research hotspot,{0}
+numerous method,"{0, 4}"
+spatial information,"{0, 5}"
+multiple data,{0}
+information loss,{0}
+integrated framework,{0}
+phone data,"{0, 3}"
+region embeddings,{0}
+glove model,{0}
+lda model,{0}
+use topic,{0}
+topic distribution,{0}
+similarity matrix,{0}
+use result,{0}
+use algorithm,{0}
+effective information,{0}
+information support,{0}
+kadaster knowledge,{0}
+knowledge graph,{0}
+fifth star,{0}
+open data,{0}
+data silo,{0}
+administrative level,{0}
+several datasets,{0}
+proprietary incompany,{0}
+incompany data,{0}
+store data,{0}
+data lake,{0}
+integrated view,{0}
+common belief,{0}
+government information,{0}
+virtual assistant,{0}
+open government,{0}
+government knowledge,{0}
+developed demonstrator,{0}
+data browsing,{0}
+multicriteria analysis,{0}
+retail store,{0}
+placement problem,{0}
+retail success,{0}
+consumer study,{0}
+geographic feature,{0}
+timely solution,{0}
+human movement,"{0, 3}"
+movement feature,{0}
+commercial area,{0}
+area feature,{0}
+various machine,{0}
+candidate area,{0}
+real data,"{0, 5}"
+matrix tensor,{0}
+tensor factorization,{0}
+pattern mining,{0}
+inbuilt sensor,{0}
+spatiotemporal activity,{0}
+available information,{0}
+automated extraction,{0}
+city environment,{0}
+traffic control,"{0, 1, 2}"
+transportation facility,{0}
+learning process,{0}
+additional contexts,{0}
+meaningful pattern,{0}
+efficient factorization,{0}
+factorization algorithm,{0}
+variable selection,{0}
+cmtf model,{0}
+empirical analysis,{0}
+factor goodness,{0}
+digital technology,{0}
+social study,{0}
+novel way,{0}
+social science,{0}
+science study,{0}
+data science,"{0, 2, 4}"
+science technique,"{0, 2}"
+subjective data,{0}
+direct input,{0}
+pilot study,{0}
+green space,{0}
+field experiment,{0}
+different time,{0}
+time period,{0}
+smartphone app,{0}
+location tracking,{0}
+photographic information,{0}
+main feature,{0}
+top interaction,{0}
+interaction area,{0}
+certain pattern,{0}
+extracting leisure,{0}
+leisure activity,{0}
+activity potential,{0}
+web data,{0}
+prominent source,{0}
+geographic analysis,{0}
+web information,{0}
+unstructured form,{0}
+web ranking,{0}
+mobile sensor,"{0, 2}"
+sensor data,"{0, 1, 2, 5}"
+subtle quality,{0}
+particular function,{0}
+semantic topic,{0}
+topic model,"{0, 4}"
+place tag,{0}
+leisure ontology,{0}
+ontology class,{0}
+urban leisure,{0}
+related city,{0}
+city policy,{0}
+affordance estimation,{0}
+official webtexts,{0}
+semantic level,{0}
+new opportunity,"{0, 1}"
+tourism study,{0}
+mobility prediction,{0}
+local function,{0}
+public record,{0}
+sns data,{0}
+urban region,"{0, 2, 4}"
+newtonian mechanic,{0}
+resident population,{0}
+sns post,{0}
+mass value,{0}
+urban traffic,"{0, 1, 3, 5}"
+traffic gravity,{0}
+travel distance,{0}
+possible distance,{0}
+distance value,{0}
+social factor,{0}
+dimension reduction,{0}
+reduction method,{0}
+record data,{0}
+functional distance,{0}
+euclidean distance,{0}
+function vector,{0}
+significant impact,{0}
+urban placeness,{0}
+starbucks post,{0}
+vital role,{0}
+urban design,"{0, 1, 3}"
+conventional method,"{0, 1}"
+essential insight,{0}
+common factor,{0}
+instagram post,{0}
+coffee shop,{0}
+psychological construct,{0}
+ontological framework,{0}
+metropolitan city,{0}
+curated dataset,{0}
+contextual attribute,{0}
+quantitative variation,{0}
+urban location,{0}
+urban system,"{0, 2, 4}"
+political decision,{0}
+deep understanding,{0}
+local neighborhood,{0}
+neighborhood contexts,{0}
+possible way,{0}
+unique signature,{0}
+urban context,"{0, 1, 2, 3}"
+decision support,{0}
+support tool,{0}
+urban stakeholder,"{0, 2}"
+meaningful classification,{0}
+socioeconomic profile,{0}
+urban neighborhood,"{0, 4}"
+sufficient information,{0}
+socioeconomic feature,{0}
+future trend,{0}
+real estate,{0}
+estate price,{0}
+socioeconomic performance,{0}
+new knowledge,{0}
+large data,"{0, 2}"
+visualization technique,{0}
+different level,{0}
+pattern identification,{0}
+socioeconomic data,"{0, 4}"
+chicago city,{0}
+city government,{0}
+different visualization,{0}
+multivariate analysis,{0}
+different form,{0}
+specific visualization,"{0, 3}"
+effective data,{0}
+data interpretation,{0}
+planning student,{0}
+survey research,{0}
+basic variable,{0}
+detailed population,{0}
+population characteristic,{0}
+aggregated form,{0}
+geographic area,{0}
+new data,"{0, 2, 4}"
+infrastructure monitoring,{0}
+remote sensing,{0}
+cell phone,{0}
+phone tracking,{0}
+tracking record,{0}
+time data,{0}
+disaggregated level,{0}
+rich environment,{0}
+frequent time,{0}
+time increment,{0}
+simple visualization,{0}
+quantitative analysis,{0}
+multidimensional data,{0}
+data revolution,{0}
+appropriate tool,{0}
+new environment,{0}
+planning education,{0}
+rich landscape,{0}
+planning curriculum,{0}
+planning practice,{0}
+smooth representation,{0}
+kernelized random,{0}
+random walk,{0}
+joint model,{0}
+water scarcity,{0}
+scarcity evaluation,{0}
+efficient stance,{0}
+stance detection,{0}
+latent feature,{0}
+adversarial machine,{0}
+android malware,{0}
+malware evasion,{0}
+evasion attack,{0}
+word similarity,{0}
+similarity computation,{0}
+jaccard distance,{0}
+distance measure,{0}
+unsupervised activity,{0}
+activity recognition,"{0, 2}"
+smartphone accelerometer,{0}
+emotion recognition,{0}
+multiple classifier,{0}
+intelligent taxi,{0}
+artificial fish,{0}
+fish swarm,{0}
+swarm algorithm,{0}
+telecom localization,{0}
+localization error,{0}
+context knowledge,{0}
+mobility demand,{0}
+timely detection,{0}
+temporal relation,{0}
+rdf stream,{0}
+stream processing,{0}
+processing scenario,{0}
+online taxicab,{0}
+taxicab platform,{0}
+automatic text,{0}
+text generation,{0}
+text extraction,{0}
+comparative research,{0}
+social recommendation,{0}
+behavioral pattern,"{0, 3}"
+geographical area,"{0, 3}"
+enormous amount,{0}
+direct measurement,{0}
+human behavior,"{0, 4, 5}"
+early recognition,{0}
+great importance,{0}
+societal application,{0}
+transportation optimization,{0}
+social platform,{0}
+location context,{0}
+data record,{0}
+advanced approach,{0}
+temporal variation,{0}
+phone activity,{0}
+timeline type,{0}
+communication activity,{0}
+obtained category,{0}
+location area,{0}
+human communication,{0}
+official land,{0}
+business zone,{0}
+zone recommender,{0}
+planning data,{0}
+zone recommendation,{0}
+recommendation system,{0}
+physical business,{0}
+urban city,"{0, 3}"
+public business,{0}
+business data,{0}
+recommended zone,{0}
+food business,{0}
+feature group,{0}
+recommendation quality,{0}
+scientific research,{0}
+policy use,{0}
+social connectivity,{0}
+connectivity phenomena,{0}
+rich potential,{0}
+modern city,"{0, 1, 3}"
+study example,{0}
+physical aspect,{0}
+significant light,{0}
+urban function,"{0, 5}"
+predictive analytics,{0}
+proactive property,{0}
+property vacancy,{0}
+vacancy policy,{0}
+vacant property,{0}
+future vacancy,{0}
+vacancy risk,{0}
+individual property,{0}
+city activity,{0}
+high accuracy,"{0, 4}"
+reactive strategy,{0}
+holistic insight,{0}
+proactive intervention,{0}
+reverse decline,{0}
+sociotechnical system,{0}
+temporal decomposition,{0}
+semantic enrichment,{0}
+mobility flow,{0}
+past decade,{0}
+localisation technology,{0}
+analytical approach,"{0, 1}"
+new generation,{0}
+gis system,{0}
+support platform,{0}
+fleet management,{0}
+related application,{0}
+probabilistic topic,"{0, 4}"
+trip count,{0}
+semantic decomposition,{0}
+real dataset,{0}
+cellular data,{0}
+user activity,{0}
+urban center,{0}
+content delivery,{0}
+activity recommendation,{0}
+mobile web,{0}
+geographical evolution,{0}
+social life,{0}
+phone usage,{0}
+usage pattern,{0}
+longitudinal attribute,{0}
+automatic characterization,{0}
+telecommunication provider,{0}
+urban activity,{0}
+activity inference,{0}
+supervised learning,{0}
+user communication,{0}
+communication pattern,{0}
+station level,{0}
+foursquare user,{0}
+nearby venue,{0}
+learning feature,{0}
+input telecommunication,{0}
+telecommunication signal,{0}
+diverse set,{0}
+foursquare place,{0}
+place category,{0}
+application scenario,"{0, 1}"
+entertainment spot,{0}
+shopping area,{0}
+accuracy rate,{0}
+candidate set,{0}
+activity type,{0}
+random guess,{0}
+candidate class,{0}
+class increases,{0}
+location annotation,{0}
+mobile record,{0}
+mobile service,{0}
+perfect location,{0}
+location sensor,{0}
+sensor probe,{0}
+meaningful location,{0}
+location name,{0}
+digital coordinate,{0}
+valuable information,{0}
+semantic predicting,{0}
+predicting method,{0}
+meaningful base,{0}
+semantic tag,{0}
+explicit feature,{0}
+phone record,"{0, 4}"
+annotation model,{0}
+comprehensive experiment,{0}
+experiment demonstrate,{0}
+good performance,"{0, 5}"
+traditional classification,{0}
+classification method,"{0, 1}"
+semantic location,{0}
+transportation management,{0}
+use planning,{0}
+urban computing,"{0, 3}"
+networked technology,{0}
+side effect,{0}
+urban behavior,{0}
+city experience,{0}
+main concept,{0}
+ubiquitous technology,{0}
+multiple discipline,{0}
+science perspective,{0}
+data visualization,{0}
+pattern recognition,{0}
+traffic forecasting,"{0, 1, 5}"
+biological virus,{0}
+transportation design,{0}
+urban mobility,"{1, 2, 3, 5}"
+mobility scenario,{1}
+useful tool,{1}
+multiple field,{1}
+traffic simulation,"{1, 5}"
+python language,{1}
+communication channel,{1}
+communication protocol,{1}
+mobile network,{1}
+particular traffic,{1}
+light assignment,{1}
+assignment scenario,{1}
+intelligent transportation,"{1, 2, 5}"
+space characteristic,{1}
+valuable knowledge,{1}
+intelligent traffic,"{1, 5}"
+traffic scheduling,{1}
+extensive application,{1}
+urban transportation,"{1, 5}"
+transportation infrastructure,"{1, 3}"
+infrastructure data,{1}
+related concept,{1}
+passenger flow,{1}
+city transportation,{1}
+paper deeply,{1}
+hidden feature,"{1, 4}"
+traffic volume,{1}
+random section,{1}
+gcnn model,{1}
+fault tolerance,{1}
+peak traffic,{1}
+actual traffic,{1}
+predicted result,"{1, 4}"
+mechanical learning,{1}
+good implementation,{1}
+implementation prospect,{1}
+academic value,{1}
+feature optimization,{1}
+important basis,{1}
+transportation operation,{1}
+planning application,{1}
+urban road,{1}
+electronic registration,{1}
+registration identification,{1}
+travel record,{1}
+optimization method,{1}
+regression tree,{1}
+current prediction,{1}
+prediction point,{1}
+upstream correlative,{1}
+correlative point,{1}
+pearson correlation,{1}
+correlation coefficient,{1}
+linear correlation,{1}
+principal component,{1}
+component analysis,"{1, 3}"
+original training,{1}
+training data,"{1, 5}"
+optimized training,{1}
+adaptive prediction,{1}
+rush hour,{1}
+traffic condition,"{1, 5}"
+condition change,{1}
+mobility service,"{1, 3}"
+public service,"{1, 2, 4}"
+large city,{1}
+vacant vehicle,{1}
+energy consumption,{1}
+traffic efficiency,{1}
+air pollution,{1}
+pollution problem,{1}
+enough information,{1}
+passenger information,{1}
+demanded area,{1}
+iot sensor,{1}
+taxi fleet,{1}
+deep sequence,{1}
+external factor,{1}
+neighborhood location,{1}
+lstm model,{1}
+average error,{1}
+baseline method,"{1, 4}"
+taxi service,{1}
+public transportation,"{1, 3, 5}"
+transportation mode,"{1, 3}"
+big city,{1}
+city taxi,{1}
+long waiting,{1}
+waiting time,{1}
+excessive vacant,{1}
+vacant trip,{1}
+exploratory taxi,{1}
+fleet service,{1}
+service analysis,{1}
+forecast model,{1}
+spatiotemporal variation,{1}
+taxi demand,{1}
+large sample,{1}
+historic data,{1}
+direct comparison,{1}
+urban place,"{1, 3}"
+increased availability,{1}
+different method,{1}
+traffic congestion,"{1, 2, 5}"
+common need,{1}
+traffic prediction,{1}
+traffic light,"{1, 5}"
+management scheme,{1}
+forecasting effectiveness,{1}
+probe data,{1}
+multiple test,{1}
+first scenario,{1}
+second scenario,{1}
+min interval,{1}
+third scenario,{1}
+random road,{1}
+whole day,{1}
+regression model,"{1, 3}"
+model performs,{1}
+stable condition,{1}
+minor variation,{1}
+perceptron model,{1}
+model adapts,{1}
+modern architecture,{1}
+transportation data,"{1, 3}"
+data management,{1}
+data analytics,"{1, 4}"
+learning task,{1}
+massive traffic,{1}
+traffic sensor,{1}
+bus trajectory,"{1, 3}"
+trajectory data,"{1, 3, 5}"
+transportation network,{1}
+network data,"{1, 3}"
+incident data,{1}
+numerous application,"{1, 5}"
+emergency response,"{1, 3}"
+city resilience,{1}
+query processing,{1}
+next destination,{1}
+destination prediction,{1}
+eta improvement,{1}
+urban delivery,{1}
+delivery fleet,{1}
+urban logistics,{1}
+logistics system,{1}
+estimated time,{1}
+paramount importance,{1}
+efficient resource,"{1, 4}"
+satisfactory client,{1}
+client experience,{1}
+individual logistics,{1}
+logistics business,{1}
+business entity,{1}
+road system,{1}
+data collection,"{1, 3, 4, 5}"
+initiative worldwide,{1}
+destination predictor,{1}
+global positioning,"{1, 3, 5}"
+positioning system,"{1, 3, 5}"
+system trajectory,"{1, 5}"
+road incident,{1}
+incident detector,{1}
+classification algorithms,{1}
+incident detection,{1}
+practical choice,{1}
+government authority,{1}
+advanced infrastructure,{1}
+operational efficiency,{1}
+logistics industry,{1}
+trajectory clustering,{1}
+incremental machine,{1}
+hyperdimensional computing,{1}
+complex challenge,{1}
+policy promotes,{1}
+new infrastructure,{1}
+lead cause,{1}
+environmental issue,{1}
+significant volume,{1}
+traffic profiling,{1}
+unsupervised incremental,{1}
+incremental learning,{1}
+learning approach,{1}
+congestion detection,{1}
+commuter trip,{1}
+vehicular movement,{1}
+feature vector,{1}
+dataset consisting,{1}
+movement record,{1}
+bluetooth identifier,{1}
+arterial road,{1}
+urban clustering,{1}
+online machine,{1}
+different challenge,{1}
+required quality,{1}
+available clustering,{1}
+clustering protocol,{1}
+many intersection,{1}
+main advantage,{1}
+adaptation approach,{1}
+significant stability,{1}
+efficiency performance,{1}
+performance improvement,{1}
+stack resnet,{1}
+citywide traffic,{1}
+traffic accident,"{1, 5}"
+accident prediction,"{1, 5}"
+classic machine,{1}
+historical accident,{1}
+accident record,{1}
+resnet framework,{1}
+sophisticated correlation,{1}
+internet technique,{1}
+various contexts,{1}
+contexts attracts,{1}
+mode recognition,{1}
+mode information,{1}
+journey planning,{1}
+much work,{1}
+handcrafted feature,{1}
+strong representation,{1}
+representation ability,{1}
+multiple transportation,{1}
+robust feature,{1}
+feature representation,{1}
+lstm network,{1}
+dependency characteristic,{1}
+cnn output,{1}
+artificial segment,{1}
+peak feature,{1}
+raw sensor,{1}
+sensor measurement,{1}
+long period,{1}
+recognition algorithm,{1}
+htc datasets,{1}
+comparative algorithms,{1}
+shl dataset,{1}
+barometric data,{1}
+smart mobile,{1}
+urban vehicle,{1}
+deep reinforcement,{1}
+mobile crowdsensing,"{1, 4}"
+promising sensing,{1}
+sensing paradigm,{1}
+mobile node,{1}
+municipal administration,{1}
+mcs task,{1}
+recruiting strategy,{1}
+novel vehicle,{1}
+vehicle selection,{1}
+selection algorithm,{1}
+sensing range,{1}
+limited cost,{1}
+selection problem,{1}
+mcs server,{1}
+candidate vehicle,{1}
+markov decision,{1}
+decision process,{1}
+temporal coverage,{1}
+real trajectory,"{1, 3}"
+trajectory dataset,{1}
+numerical result,{1}
+optimal solution,"{1, 5}"
+highway traffic,{1}
+volume prediction,{1}
+traffic stress,{1}
+many research,{1}
+prediction methodology,{1}
+different evaluation,{1}
+single machine,{1}
+model stacking,{1}
+predictive accuracy,{1}
+multiple machine,{1}
+experiment show,{1}
+traditional one,{1}
+single model,{1}
+encouraging result,{1}
+certain condition,{1}
+significant improvement,{1}
+human travel,{1}
+gps device,{1}
+different transportation,{1}
+trajectory prediction,{1}
+traffic monitoring,{1}
+mode classification,{1}
+original trajectory,{1}
+sub trajectory,{1}
+mode label,{1}
+advanced feature,{1}
+basic feature,{1}
+distance feature,{1}
+change rate,{1}
+stop rate,{1}
+velocity change,{1}
+lightgbm classifier,{1}
+experiment data,{1}
+xgboost method,{1}
+tree method,{1}
+flow analysis,{1}
+learning car,{1}
+car detection,{1}
+cctv image,{1}
+image series,{1}
+traffic infrastructure,{1}
+automatic number,{1}
+number plate,{1}
+plate recognition,{1}
+vehicle detection,"{1, 2}"
+travel time,"{1, 3}"
+time estimation,{1}
+car plate,{1}
+limited extent,{1}
+road user,{1}
+various road,{1}
+flow pattern,"{1, 3}"
+cnn model,{1}
+low quality,{1}
+quality imagery,{1}
+various weather,{1}
+weather condition,{1}
+mobilenet model,{1}
+harmonic mean,{1}
+time traffic,{1}
+fast performance,{1}
+faster region,{1}
+region proposal,{1}
+accurate estimation,{1}
+car unit,{1}
+analysis application,{1}
+wider understanding,{1}
+social event,{1}
+extreme weather,{1}
+volume estimation,{1}
+city scale,{1}
+important problem,{1}
+many transportation,{1}
+urban application,"{1, 3}"
+hybrid framework,{1}
+flow theory,{1}
+context feature,{1}
+multiple source,"{1, 2}"
+special set,{1}
+extra information,{1}
+speed information,{1}
+travel speed,{1}
+speed estimation,{1}
+estimation model,{1}
+high level,{1}
+level feature,{1}
+graphical model,{1}
+predicted volume,{1}
+small amount,{1}
+ground truth,"{1, 5}"
+truth data,{1}
+beijing taxis,{1}
+volume ground,{1}
+video clip,{1}
+demonstrate effectiveness,{1}
+joint prediction,{1}
+parking occupancy,{1}
+representation learning,{1}
+planning service,{1}
+traffic forecast,{1}
+forecast feature,{1}
+accurate routing,{1}
+adaptive traffic,{1}
+control system,"{1, 2, 5}"
+management authority,{1}
+availability prediction,{1}
+significant part,{1}
+long distance,{1}
+next location,{1}
+considerable time,{1}
+time loss,{1}
+simultaneous prediction,{1}
+parking availability,{1}
+approach relay,{1}
+dimensional space,{1}
+dynamical information,{1}
+observed phenomenon,{1}
+high performance,{1}
+performance prediction,{1}
+art method,{1}
+intelligent driver,{1}
+driver assist,{1}
+assist system,{1}
+urban driving,{1}
+unnecessary delay,{1}
+pollution level,{1}
+smart navigation,{1}
+driver diagnostics,{1}
+line traffic,{1}
+traffic simulator,{1}
+navigation system,{1}
+limited traffic,{1}
+prediction get,{1}
+individual driver,{1}
+preferred parking,{1}
+availability information,{1}
+diagnostics part,{1}
+reaction time,{1}
+collision warning,{1}
+assist device,{1}
+audi vehicle,{1}
+square root,{1}
+root law,{1}
+urban police,{1}
+law formula,{1}
+emergency travel,{1}
+observable component,{1}
+patrol coverage,{1}
+unknown component,{1}
+effective travel,{1}
+empirical constant,{1}
+operator regression,{1}
+speed model,{1}
+exogenous factor,{1}
+call type,{1}
+incident location,{1}
+practical implication,{1}
+operational data,{1}
+police jurisdiction,{1}
+urban emergency,{1}
+emergency police,{1}
+police operation,{1}
+emergency service,{1}
+business unit,{1}
+unscheduled service,{1}
+service call,{1}
+epidemic control,{1}
+forecasting system,{1}
+various mobile,{1}
+network application,{1}
+gps data,{1}
+mobile operator,{1}
+cellular network,{1}
+network location,{1}
+data contains,{1}
+urban challenge,{1}
+recent literature,{1}
+mining view,{1}
+mobility model,{1}
+learning predictor,{1}
+predictive tool,{1}
+city challenge,{1}
+various classification,{1}
+different classification,{1}
+classification algorithm,{1}
+comprehensive comparison,{1}
+computational time,{1}
+kobe city,{1}
+transport mode,"{1, 5}"
+much quicker,{1}
+boosted decision,{1}
+high speed,{1}
+acela express,{1}
+express case,{1}
+deadweight cost,{1}
+public transit,"{1, 2, 3, 5}"
+transit subsidy,{1}
+storage time,{1}
+cross dock,{1}
+dock facility,{1}
+vehicle system,{1}
+sustainable supply,{1}
+supply chain,{1}
+chain management,{1}
+international trade,{1}
+trade center,{1}
+entrepreneurial agency,{1}
+transit accessibility,{1}
+accessibility measure,{1}
+behavioral economics,{1}
+economics concept,{1}
+car insurance,{1}
+insurance product,{1}
+freight transportation,"{1, 5}"
+traffic fatality,{1}
+fatality reduction,{1}
+action plan,{1}
+transportation plan,{1}
+pacific northwest,{1}
+comparative performance,{1}
+performance evaluation,"{1, 4}"
+comparative safety,{1}
+safety evaluation,{1}
+metropolitan transportation,{1}
+statewide commodity,{1}
+commodity flow,{1}
+flow forecast,{1}
+electric vehicle,{1}
+vehicle simulation,{1}
+maritime transport,{1}
+short sea,{1}
+sea shipping,{1}
+truck traffic,{1}
+car use,{1}
+use restriction,{1}
+restriction measure,{1}
+safety culture,{1}
+small motor,{1}
+motor carrier,{1}
+gas consumption,{1}
+consumption information,{1}
+fuel price,{1}
+price adjustment,{1}
+state department,{1}
+infrastructure development,{1}
+daily truck,{1}
+truck volume,{1}
+seaport terminal,{1}
+key issue,"{1, 5}"
+economic sustainability,{1}
+road transport,{1}
+transit spending,{1}
+personal income,{1}
+infrastructure investment,{1}
+intermodal rail,{1}
+rail movement,{1}
+state transportation,{1}
+transportation planning,"{1, 3}"
+economic impact,{1}
+heavy haul,{1}
+haul railroad,{1}
+paced inspection,{1}
+inspection system,{1}
+arrival delay,{1}
+rail competition,{1}
+competition change,{1}
+stagger act,{1}
+toll road,{1}
+intermodal marine,{1}
+marine container,{1}
+container terminal,{1}
+highway trust,{1}
+trust fund,{1}
+secure rail,{1}
+rail interchange,{1}
+interchange routing,{1}
+spatial pattern,{1}
+household demand,{1}
+rhode island,{1}
+sustainable air,{1}
+air traffic,{1}
+management system,"{1, 2, 5}"
+development methodology,{1}
+transportation efficiency,{1}
+national strategy,{1}
+aviation security,{1}
+air domain,{1}
+domain awareness,{1}
+new form,{1}
+transportation impact,{1}
+increased ethanol,{1}
+ethanol production,{1}
+kansas case,{1}
+vtcs data,{1}
+schedule adherence,{1}
+bustransit performance,{1}
+passenger usage,{1}
+portable technology,{1}
+intercity bus,{1}
+accident worldwide,{1}
+traveler information,{2}
+transit system,{2}
+system management,{2}
+integral part,"{2, 4}"
+traffic safety,{2}
+transit efficiency,{2}
+energy efficiency,{2}
+environmental pollution,{2}
+massive amount,"{2, 4}"
+significant traction,{2}
+thorough survey,{2}
+ml technology,{2}
+broad range,"{2, 3}"
+cooperative driving,{2}
+road hazard,{2}
+hazard warning,{2}
+future direction,{2}
+data dashboard,{2}
+analytics infrastructure,{2}
+data capture,{2}
+capture system,{2}
+lockdown policy,{2}
+various aspect,{2}
+physical matter,{2}
+centered towards,{2}
+social group,{2}
+physical infrastructure,{2}
+infrastructure momentum,{2}
+plan management,{2}
+urban scenario,{2}
+service infrastructure,{2}
+urban density,{2}
+balanced supply,{2}
+spatial status,{2}
+efficient delivery,{2}
+delivery system,{2}
+service guarantee,{2}
+delivery mechanism,{2}
+synchronized functioning,{2}
+occasional dynamic,{2}
+citizen support,{2}
+support system,"{2, 4}"
+bidirectional data,{2}
+new domain,{2}
+math programming,{2}
+pertinent issue,{2}
+smartphone sensor,{2}
+advanced driver,{2}
+driver assistance,{2}
+assistance system,{2}
+air quality,"{2, 3}"
+mobile measurement,{2}
+spatial data,{2}
+visual interface,{2}
+multimodal sensor,{2}
+data fusion,{2}
+bicycle counting,{2}
+starter city,{2}
+critical infrastructure,{2}
+online gis,{2}
+empirical study,{2}
+unified reference,{2}
+reference model,{2}
+privileged tool,{2}
+city governance,{2}
+local administration,{2}
+administration case,{2}
+quality monitoring,{2}
+conceptual framework,{2}
+system research,{2}
+democracy theory,{2}
+department facebook,{2}
+facebook page,{2}
+cognitive system,{2}
+literature review,"{2, 4}"
+building management,{2}
+urban air,{2}
+opportunistic mobile,{2}
+electric motor,{2}
+operating anomaly,{2}
+predictive maintenance,{2}
+monitoring system,{2}
+water quality,{2}
+quality management,{2}
+heavy industry,{2}
+industry environment,{2}
+camera image,{2}
+smarter irrigation,{2}
+irrigation system,{2}
+humanlike behaviour,{2}
+health area,{2}
+traffic load,{2}
+edge computing,{2}
+reinforcement learning,"{2, 5}"
+major problem,{2}
+traffic system,{2}
+major priority,{2}
+government infrastructure,{2}
+efficient traffic,{2}
+efficient economy,{2}
+massive change,{2}
+city infrastructure,{2}
+future traffic,{2}
+traffic clogging,{2}
+congestion anticipation,{2}
+efficient system,{2}
+computing platform,{2}
+secure transaction,{2}
+fabric blockchain,{2}
+blockchain intervenes,{2}
+security protocol,{2}
+proposed system,{2}
+native form,{2}
+scale implementation,{2}
+permanent access,{2}
+access control,{2}
+main reason,{2}
+system architecture,{2}
+significant congestion,{2}
+overall city,{2}
+city traffic,{2}
+costly investment,{2}
+new communication,{2}
+communication infrastructure,{2}
+statistical analysis,{2}
+physical object,{2}
+information network,{2}
+iot refers,{2}
+wide range,{2}
+medical professional,{2}
+patient outcome,{2}
+ip address,{2}
+busy street,{2}
+upcoming delay,{2}
+explosive growth,{2}
+exponential increase,{2}
+data consumption,{2}
+multiple modality,{2}
+intelligent processing,{2}
+iot application,{2}
+various data,{2}
+different discipline,{2}
+fresh insight,{2}
+different algorithm,{2}
+iot data,{2}
+wide scope,{2}
+different domain,"{2, 5}"
+supervised method,{2}
+analytic method,{2}
+particular area,{2}
+data model,{2}
+efficient algorithms,{2}
+data characteristic,{2}
+statistical method,"{2, 3, 5}"
+iot system,{2}
+unsupervised data,{2}
+statistical inference,{2}
+inference approach,{2}
+explanatory versus,{2}
+iot environment,{2}
+unsupervised technique,{2}
+open challenge,{2}
+future research,{2}
+research direction,"{2, 3}"
+enabling machine,{2}
+heterogeneous sensor,{2}
+graph autoencoders,{2}
+adaptive modular,{2}
+modular system,{2}
+adaptive service,{2}
+service selection,{2}
+user location,{2}
+location semantics,{2}
+mobile notification,{2}
+intrusion detection,{2}
+ambient intelligence,{2}
+language identification,{2}
+indoor air,{2}
+iot display,{2}
+artistic experience,{2}
+public space,"{2, 3}"
+power efficient,{2}
+efficient clock,{2}
+clock synchronization,{2}
+mesh network,{2}
+individual mobility,{2}
+crowd sensing,{2}
+scalable architecture,{2}
+quality data,{2}
+social robot,{2}
+augmented reality,{2}
+ambient medium,{2}
+multimedia device,{2}
+surgery skill,{2}
+kinematic sensor,{2}
+quality evaluator,{2}
+gamification platform,{2}
+vehicle sensor,{2}
+data integration,{2}
+data processing,{2}
+smart home,{2}
+environmental quality,{2}
+environmental sensor,{2}
+ambient explanation,{2}
+user requirement,{2}
+multiple evaluation,{2}
+future population,{2}
+street sign,{2}
+disaster response,{2}
+relief coordination,{2}
+coordination pipeline,{2}
+heterogeneous source,"{2, 3}"
+smart community,{2}
+urban heat,{2}
+heat monitoring,{2}
+monitoring framework,{2}
+light detection,{2}
+inertial sensor,{2}
+sensor fusion,{2}
+analytics framework,"{2, 4}"
+governance intelligence,{2}
+intelligence framework,{2}
+potential value,{2}
+conceptual study,{2}
+operational study,{2}
+specific path,{2}
+path towards,{2}
+towards implementation,{2}
+analytical algorithms,{2}
+governance issue,{2}
+panoramic data,{2}
+similarity calculation,{2}
+conflict resolution,{2}
+citizen profile,{2}
+citizen persona,{2}
+group level,{2}
+service delivery,{2}
+citizen participation,{2}
+analysis technique,"{2, 3, 4}"
+ontology model,{2}
+net technique,{2}
+blood donation,{2}
+donation governance,{2}
+mutual supplement,{2}
+supplement cross,{2}
+multiple disciplinaries,{2}
+world population,{2}
+traffic delay,{2}
+noise pollution,{2}
+psychological problem,{2}
+road serviceability,{2}
+key input,{2}
+traffic inference,{2}
+scientific community,{2}
+interactive design,{2}
+design approach,{2}
+vehicular data,{2}
+thing multiagent,{2}
+multiagent system,{2}
+learning algorithm,{2}
+subsequent inference,{2}
+vehicular type,{2}
+reduced model,{2}
+interactive approach,{2}
+product engineering,{2}
+mathematical model,{2}
+interactive traffic,{2}
+trivial case,{2}
+type vehicle,{2}
+introductory section,{2}
+urban expansion,{2}
+transport service,{2}
+respective solution,{2}
+disruptive technology,{2}
+similar research,{2}
+support vector,{2}
+vector machine,{2}
+vehicular detection,{2}
+actual acoustic,{2}
+video presence,{2}
+test vehicle,{2}
+smart technology,{2}
+new observation,{2}
+observation capability,{2}
+urban datasets,"{2, 3}"
+various sensor,{2}
+smart meter,{2}
+bluetooth record,{2}
+digital record,{2}
+main domain,{2}
+semantic framework,{2}
+sensor technology,{2}
+considerable challenge,{2}
+framework retrieves,{2}
+certain kind,{2}
+pollution detection,{2}
+pattern detection,{2}
+large number,"{2, 3}"
+traditional taxi,{3}
+systematic review,{3}
+quick overview,{3}
+unprecedented opportunity,{3}
+current research,"{3, 4}"
+research status,{3}
+ridership factor,{3}
+passenger service,{3}
+service market,{3}
+market partition,{3}
+route planning,"{3, 5}"
+transportation emission,{3}
+extensional application,{3}
+abundant study,{3}
+determinant analysis,{3}
+ridership pattern,{3}
+multiple aspect,{3}
+wide time,{3}
+time span,{3}
+behavior research,{3}
+commuting trip,{3}
+distribution pattern,{3}
+various travel,{3}
+travel index,{3}
+autopsychic cruising,{3}
+system dispatching,{3}
+distribution character,{3}
+fuel consumption,{3}
+greenhouse gas,{3}
+electric taxi,{3}
+transportation congestion,{3}
+many machine,{3}
+travel condition,{3}
+condition index,{3}
+fundamental aspect,{3}
+interesting pattern,{3}
+research interest,{3}
+useful application,{3}
+crowd behavior,{3}
+primary focus,{3}
+semantic relationship,{3}
+comparative analysis,{3}
+embedded space,{3}
+trajectory deviate,{3}
+theoretical null,{3}
+null model,{3}
+geographical proximity,{3}
+semantic proximity,{3}
+deep analysis,{3}
+experimental evaluation,{3}
+evaluation aim,{3}
+crosstown traffic,{3}
+special event,{3}
+football game,{3}
+mobility need,{3}
+urban event,{3}
+event causes,{3}
+causes issue,{3}
+service user,{3}
+building reliable,{3}
+temporal impact,{3}
+supervised machine,{3}
+event impact,{3}
+analyse effectiveness,{3}
+evaluation result,{3}
+event data,{3}
+several venue,{3}
+hannover region,{3}
+germany demonstrate,{3}
+event context,{3}
+baseline shows,{3}
+superior capacity,{3}
+unique dataset,{3}
+main predictor,{3}
+reachability feature,{3}
+travel type,{3}
+considerable influence,{3}
+mode choice,{3}
+geovisual analytics,{3}
+pattern discovery,{3}
+fundamental importance,{3}
+transit travel,{3}
+transit network,{3}
+transit passenger,{3}
+massive data,{3}
+efficient representation,{3}
+transit trip,{3}
+smart card,{3}
+card data,{3}
+comprehensive solution,{3}
+original transit,{3}
+transit corridor,{3}
+primarymobility connection,{3}
+hierarchical mobility,{3}
+mobility community,"{3, 5}"
+visualization form,{3}
+mapping prototype,{3}
+behavior pattern,{3}
+visual exploration,{3}
+transit mobility,"{3, 5}"
+big transit,"{3, 5}"
+transit data,"{3, 5}"
+analytics approach,"{3, 4}"
+effective solution,{3}
+meaningful travel,{3}
+urban performance,{3}
+temporal telecom,{3}
+telecom data,{3}
+laborious data,{3}
+novel methodology,{3}
+urban feature,{3}
+clear correlation,{3}
+cellular device,{3}
+certain roaming,{3}
+roaming distance,{3}
+meter resolution,{3}
+entertainment amenity,{3}
+natural water,{3}
+water feature,{3}
+betweenness centrality,{3}
+park amenity,{3}
+negative impact,{3}
+decision making,{3}
+human behavioral,{3}
+foundational design,{3}
+design tool,{3}
+success rate,{3}
+dynamic nature,{3}
+urban population,{3}
+key role,{3}
+emergency management,"{3, 5}"
+public travel,{3}
+travel information,{3}
+widespread use,{3}
+population study,{3}
+data sparsity,{3}
+sparsity problem,{3}
+huge handicap,{3}
+comprehensive approach,{3}
+population map,{3}
+trajectory reconstruction,{3}
+reconstruction method,{3}
+spatiotemporal granularity,{3}
+phone trajectory,{3}
+efficient automation,{3}
+automation population,{3}
+spatiotemporal resolution,{3}
+spatiotemporal characteristic,{3}
+phone dataset,{3}
+distribution estimation,{3}
+movement state,{3}
+socioeconomic status,{3}
+policy formulation,{3}
+marketing strategy,{3}
+strategy development,{3}
+human data,{3}
+category information,{3}
+city level,{3}
+location category,{3}
+socioeconomic indicator,{3}
+many aspect,{3}
+global spread,{3}
+infectious disease,{3}
+daily commute,{3}
+commute pattern,{3}
+cellular radio,{3}
+radio tower,{3}
+wifi positioning,{3}
+significant pattern,{3}
+advanced analysis,{3}
+different approach,{3}
+positioning characteristic,{3}
+modeling approach,{3}
+place modeling,{3}
+trajectory modeling,{3}
+future challenge,{3}
+mobility analysis,{3}
+new concept,"{3, 5}"
+mobile application,{3}
+flexible cycling,{3}
+bike trajectory,{3}
+bike activity,{3}
+trajectory log,{3}
+sparsity constraint,{3}
+combine time,{3}
+time information,{3}
+potential pattern,{3}
+bike flow,{3}
+historical trajectory,{3}
+poi information,{3}
+typical category,{3}
+poi recommendation,{3}
+mobike trajectory,{3}
+activity profile,{3}
+truck driver,{3}
+dynamical pattern,{3}
+freight behavior,{3}
+digital age,{3}
+heterogeneous demographic,{3}
+work profile,{3}
+pervasive data,{3}
+learning concept,{3}
+signature travel,{3}
+travel activity,"{3, 5}"
+dimensionality reduction,{3}
+driver survey,{3}
+survey data,"{3, 5}"
+longitudinal activity,{3}
+activity sequence,{3}
+activity reconstruction,{3}
+fundamental activity,{3}
+activity feature,{3}
+survey dataset,{3}
+daily activity,{3}
+faithful reconstruction,{3}
+input data,{3}
+reconstruction error,{3}
+useful extension,{3}
+single activity,{3}
+infrequent activity,{3}
+truck queuing,{3}
+original dimension,{3}
+error rate,{3}
+variational autoencoder,{3}
+driver activity,{3}
+distinctive activity,{3}
+activity pattern,{3}
+singapore truck,{3}
+pedestrian activity,{3}
+pedestrian behavior,"{3, 5}"
+public health,"{3, 4}"
+economic development,{3}
+urban landscape,{3}
+transit infrastructure,{3}
+crime risk,{3}
+pedestrian count,{3}
+count data,{3}
+extensive array,{3}
+open datasets,{3}
+pedestrian volume,{3}
+volume relate,{3}
+building density,{3}
+streetscape quality,{3}
+urban walkability,{3}
+analyze place,{3}
+situational factor,{3}
+quantification process,{3}
+individual geolocations,{3}
+contextual indicator,{3}
+feature relevant,{3}
+multivariate regression,{3}
+standard error,{3}
+contextual feature,{3}
+situational indicator,{3}
+indicator impact,{3}
+key driver,{3}
+importance accounting,{3}
+behavior modeling,{3}
+web solution,{3}
+transportation route,{3}
+big geodata,{3}
+geodata analysis,{3}
+city resident,{3}
+transportation need,{3}
+optimal route,{3}
+route network,{3}
+total cost,{3}
+transportation preference,{3}
+large set,"{3, 4}"
+geodata specific,{3}
+data gathering,{3}
+route design,{3}
+smart algorithms,{3}
+planning system,{3}
+main algorithms,{3}
+novel addition,{3}
+future work,{3}
+web service,{3}
+visual learning,{3}
+work place,{3}
+place detection,{3}
+card transaction,{3}
+transaction data,{3}
+homework dynamic,{3}
+complex travel,{3}
+decipher activity,{3}
+activity location,{3}
+public transport,{3}
+transport commuter,{3}
+planner classification,{3}
+several country,{4}
+local government,{4}
+government use,{4}
+use data,{4}
+reported issue,{4}
+citizen report,{4}
+urban issue,{4}
+broken streetlamps,{4}
+temporal feature,{4}
+feature reveal,{4}
+report category,{4}
+common pattern,{4}
+zurich area,{4}
+promising performance,{4}
+ultimate goal,{4}
+platform operation,{4}
+spatial granularity,{4}
+current information,{4}
+information technology,{4}
+unexplored dimension,{4}
+social outcome,{4}
+old question,{4}
+spatial boundary,{4}
+available smartphone,{4}
+smartphone data,{4}
+systematic framework,{4}
+locational request,{4}
+high concentration,{4}
+direct observation,{4}
+selected time,{4}
+additional transportation,{4}
+population data,{4}
+commercial establishment,{4}
+strong approximation,{4}
+derived place,{4}
+commercial patch,{4}
+spatial variety,{4}
+popular place,{4}
+different lifestyle,{4}
+income group,{4}
+fixed location,{4}
+unmovable boundary,{4}
+dynamic redefinition,{4}
+recent work,{4}
+potential contribution,{4}
+locational model,{4}
+collaborative development,{4}
+sydney example,{4}
+recent advance,{4}
+computational analysis,{4}
+artificial intelligence,"{4, 5}"
+effective digital,{4}
+digital planning,{4}
+planning tool,{4}
+related contribution,{4}
+participatory data,{4}
+planning support,{4}
+system environment,{4}
+built environment,{4}
+environment practitioner,{4}
+real planning,{4}
+planning issue,{4}
+wide array,{4}
+participatory analytics,{4}
+task load,{4}
+added value,{4}
+result highlight,{4}
+highlight recommendation,{4}
+general attitude,{4}
+attitude towards,{4}
+towards machine,{4}
+conceptual challenge,{4}
+simultaneous need,{4}
+concrete scenario,{4}
+system evaluation,{4}
+democracy enhancement,{4}
+resource allocation,{4}
+daily life,{4}
+unstructured data,{4}
+urban dynamic,"{4, 5}"
+validated result,{4}
+spatiotemporal dynamism,{4}
+community challenge,{4}
+civic voice,{4}
+civic query,{4}
+seoul citizen,{4}
+efficient solution,{4}
+city lies,{4}
+novel approach,{4}
+optimize government,{4}
+government performance,{4}
+throughput legitimacy,{4}
+informal civic,{4}
+query data,{4}
+resident want,{4}
+civic participation,{4}
+participation platform,{4}
+sustainable development,{4}
+author intend,{4}
+civic demand,{4}
+geospatial analysis,{4}
+urban livability,{4}
+intertwined component,{4}
+new sensor,{4}
+analysis method,{4}
+planning effort,{4}
+current challenge,{4}
+interdisciplinary analysis,{4}
+urban informatics,{4}
+livable city,{4}
+ultimate aim,{4}
+geospatial data,{4}
+urban analysis,{4}
+mixed method,{4}
+method approach,{4}
+urban analytics,{4}
+main discussion,{4}
+novel analysis,{4}
+livability improvement,{4}
+big picture,{4}
+flickr photos,{4}
+city worldwide,{4}
+city image,{4}
+image dimension,{4}
+traditional method,"{4, 5}"
+scalable manner,{4}
+city manager,{4}
+plan city,{4}
+city branding,{4}
+branding strategy,{4}
+city development,{4}
+development policy,{4}
+label detection,{4}
+dimension identification,{4}
+alternative way,{4}
+thematic structure,{4}
+building renovation,{4}
+adaptive reuse,{4}
+central role,{4}
+developed city,{4}
+available land,{4}
+new building,{4}
+socioeconomic dynamic,{4}
+leading indicator,{4}
+economic growth,{4}
+collective understanding,{4}
+alteration pattern,{4}
+significant barrier,{4}
+knowledge discovery,{4}
+discovery process,{4}
+building permit,{4}
+permit data,{4}
+alteration project,{4}
+construction activity,{4}
+permit description,{4}
+urban change,{4}
+process proceeds,{4}
+text mining,{4}
+popular word,{4}
+popularity change,{4}
+building information,{4}
+ancillary data,{4}
+thematic pattern,{4}
+urban redevelopment,{4}
+generalizable approach,{4}
+unstructured text,{4}
+text data,{4}
+permit record,{4}
+database structure,{4}
+permit typology,{4}
+local contexts,{4}
+alteration activity,{4}
+environmental implication,{4}
+socioeconomic attribute,{4}
+restaurant data,{4}
+population employment,{4}
+enterprise activity,{4}
+neighborhood level,{4}
+social scientist,{4}
+policy maker,{4}
+updated location,{4}
+online platform,{4}
+chinese city,{4}
+nighttime population,{4}
+population number,{4}
+consumption level,{4}
+spatial resolution,{4}
+trained model,{4}
+test dataset,{4}
+spatial location,{4}
+location demographic,{4}
+firm industry,{4}
+restaurant model,{4}
+data gap,{4}
+algorithm dividend,{4}
+traditional methodology,{4}
+urbanization issue,{4}
+complex dynamic,{4}
+historical urbanization,{4}
+mobile device,{4}
+urban decision,{4}
+accurate result,{4}
+local business,{4}
+temporal demand,{4}
+business hour,{4}
+luxembourg city,{4}
+crowdsensed datasets,{4}
+region extraction,{4}
+actual function,{4}
+computational advancement,{4}
+image recognition,{4}
+geodemographic classification,{4}
+functional zone,{4}
+full use,{4}
+neighborhood area,{4}
+first law,{4}
+neighbor approach,{4}
+training tuples,{4}
+poi tcenter,{4}
+poi tcontext,{4}
+characteristic vector,{4}
+training framework,{4}
+poi vector,{4}
+na level,{4}
+clustering model,{4}
+reciprocal rank,{4}
+rank value,{4}
+region identification,{4}
+identification accuracy,{4}
+important implication,{4}
+positive deviance,{4}
+systematic literature,{4}
+international development,{4}
+development result,{4}
+current state,{4}
+typical source,{4}
+positive deviant,{4}
+current preoccupation,{4}
+systematic basis,{4}
+development impact,{4}
+collaborative customization,{4}
+successful adoption,{4}
+system hinge,{4}
+collaborative city,{4}
+valued form,{4}
+partial knowledge,{4}
+network analytics,{4}
+distributed knowledge,{4}
+structured definition,{4}
+pluralist nature,{4}
+knowledge acquisition,{4}
+unstructured community,{4}
+community input,{4}
+community discussion,{4}
+public official,{4}
+main element,{4}
+topical aspect,{4}
+semantic depth,{4}
+specific term,{4}
+different decision,{4}
+topic hierarchy,{4}
+linguistic feature,{4}
+extracted feature,{4}
+bayes classifier,{4}
+semantic analysis,"{4, 5}"
+sentiment analysis,{4}
+topical class,{4}
+analysis result,{4}
+community opinion,{4}
+urban project,{4}
+top priority,{4}
+engineering feature,{4}
+social issue,{4}
+new possibility,{4}
+descriptive literature,{4}
+recent case,{4}
+study article,{4}
+article reveal,{4}
+local knowledge,{4}
+city structure,{4}
+smda method,{4}
+joint matrix,{4}
+matrix factorization,{4}
+various function,{4}
+hospital district,{4}
+region function,{4}
+single domain,{4}
+domain data,{4}
+mobility information,{4}
+district attribute,{4}
+human trajectory,{4}
+station information,{4}
+nonnegative matrix,{4}
+factorization model,{4}
+function distribution,{4}
+extracted distribution,{4}
+thematic analytics,{4}
+urban ground,{4}
+ground sensing,{4}
+various stakeholder,{4}
+rich information,{4}
+textual form,{4}
+learning capability,{4}
+textual feedback,{4}
+feedback data,{4}
+feedback analysis,{4}
+analysis framework,{4}
+essential method,{4}
+trend analysis,{4}
+experiment indicate,{4}
+geospatial information,{4}
+semantic theme,{4}
+detected topic,{4}
+routine work,{4}
+public safety,{5}
+travel route,{5}
+safety deployment,{5}
+short period,{5}
+hour level,{5}
+sparse traffic,{5}
+accident sample,{5}
+learning prediction,{5}
+prediction result,{5}
+memory network,{5}
+accident risk,{5}
+multiple input,{5}
+high accident,{5}
+mobility structure,{5}
+structure towards,{5}
+integrated graph,{5}
+disjoint cluster,{5}
+similar mobility,{5}
+different part,{5}
+city interact,{5}
+transportation development,{5}
+resilient society,{5}
+novel transit,{5}
+structure detection,{5}
+detection problem,{5}
+collective movement,{5}
+study region,{5}
+function information,{5}
+different source,{5}
+attributed graph,{5}
+attributed feature,{5}
+graph node,{5}
+travel dynamic,{5}
+pattern matrix,{5}
+vector representation,{5}
+unsupervised clustering,{5}
+gap statistic,{5}
+static information,{5}
+topological structure,{5}
+resident movement,{5}
+movement dynamic,{5}
+meaningful transit,{5}
+detected mobility,{5}
+holistic overview,{5}
+transit movement,{5}
+movement structure,{5}
+informed decision,{5}
+urban development,{5}
+transit management,{5}
+generic paradigm,{5}
+complex network,{5}
+traffic planning,{5}
+route recommendation,{5}
+various method,{5}
+essential idea,{5}
+potential information,{5}
+optimal logistics,{5}
+logistics transportation,{5}
+fpga processor,{5}
+development requirement,{5}
+improved utilization,{5}
+road resource,{5}
+excellent user,{5}
+user experience,{5}
+experience neotype,{5}
+precise travel,{5}
+travel need,{5}
+dynamic routing,{5}
+bus implementation,{5}
+bus data,{5}
+high volatility,{5}
+high number,{5}
+optimization goal,{5}
+bus route,{5}
+different audience,{5}
+audience source,{5}
+travel demand,{5}
+demand prediction,{5}
+dynamic route,{5}
+last mile,{5}
+prediction function,{5}
+multiple operation,{5}
+operation bus,{5}
+optimal routing,{5}
+bus destination,{5}
+operating characteristic,{5}
+dynamic programming,{5}
+programming algorithm,{5}
+several experiment,{5}
+shuttle bus,{5}
+urbanization process,{5}
+efficient transportation,{5}
+traditional clustering,{5}
+initial point,{5}
+poor robustness,{5}
+hybrid architecture,{5}
+cognitive computing,{5}
+traffic trajectory,{5}
+location bias,{5}
+final result,{5}
+qa algorithm,{5}
+suboptimal solution,{5}
+global optimum,{5}
+search feedback,{5}
+movement simulation,{5}
+simulation framework,{5}
+crowd dynamic,{5}
+demand model,{5}
+low frequency,{5}
+collection method,{5}
+tremendous amount,{5}
+traditional travel,{5}
+observed trajectory,{5}
+inverse reinforcement,{5}
+smartphone application,{5}
+daily movement,{5}
+simulation technology,{5}
+simulation result,{5}
+model performance,{5}
+reliable traffic,{5}
+flow forecasting,{5}
+robust forecasting,{5}
+forecasting model,{5}
+nonlinear characteristic,{5}
+nonlinear relationship,{5}
+forecasting effect,{5}
+particle swarm,{5}
+swarm optimization,{5}
+extreme learning,{5}
+learning machine,{5}
+ring road,{5}
+safe reinforcement,{5}
+scene decomposition,{5}
+complex task,{5}
+automated vehicle,{5}
+traffic participant,{5}
+modular decision,{5}
+navigate intersection,{5}
+rl algorithm,{5}
+safety guarantee,{5}
+decision strategy,{5}
+strategy robust,{5}
+perception error,{5}
+belief update,{5}
+update technique,{5}
+decomposition approach,{5}
+multiple traffic,{5}
+algorithm outperforms,{5}
+complex intersection,{5}
+intersection scenario,{5}
+safe trajectory,{5}
+different situation,{5}
+future movement,{5}
+absolute certainty,{5}
+motion planning,{5}
+reachability analysis,{5}
+spatial area,{5}
+physical constraint,{5}
+new approach,{5}
+environmental information,{5}
+maximum value,{5}
+reachable area,{5}
+user monitoring,{5}
+monitoring road,{5}
+traffic information,{5}
+information collection,{5}
+road surveillance,{5}
+deep mind,{5}
+mind analytics,{5}
+behavior tracking,{5}
+road congestion,{5}
+huge traffic,{5}
+big problem,{5}
+light control,{5}
+qos parameter,{5}
+security camera,{5}
+live video,{5}
+considerable gain,{5}
+routing scheme,{5}
+fuzzy controller,{5}
+good result,{5}
+traffic network,{5}
+robust prediction,{5}
+challenging problem,{5}
+autonomous driving,{5}
+pedestrian crossing,{5}
+considerable importance,{5}
+motion tracking,{5}
+prediction approach,{5}
+abrupt change,{5}
+pedestrian motion,{5}
+hierarchical structure,{5}
+straight road,{5}
+thorough analysis,{5}
+generalization performance,{5}
+fuzzy logic,{5}
+detection framework,{5}
+mobile computing,{5}
+substantial training,{5}
+reasoning procedure,{5}
+truth information,{5}
+various transport,{5}
+expert system,{5}
+fuzzy reasoning,{5}
+reasoning scheme,{5}
+fuzzy rule,{5}
+rule base,{5}
+varied certainty,{5}
+certainty factor,{5}
+different membership,{5}
+membership function,{5}
+function combination,{5}
+heuristic algorithm,{5}
+genetic algorithm,{5}
+knowledge learning,{5}
+learning system,{5}
+many benefit,{5}
+traditional company,{5}
+company method,{5}
+classical ga,{5}
+previous method,{5}
+future customer,{5}
+customer region,{5}
+unlabeled customer,{5}
+customer coordinate,{5}
+urban freight,{5}
+dynamic traffic,{5}
+traffic grid,{5}
+path planning,{5}
+planning algorithms,{5}
+static characteristic,{5}
+speed limit,{5}
+lighter traffic,{5}
+traffic path,{5}
+increased number,{5}
+huge increase,{5}
+state space,{5}
+memory environment,{5}
+routing system,{5}
+individual vehicle,{5}
+vehicle speed,{5}
+light status,{5}
+fasted path,{5}
+target point,{5}
+recent advancement,{5}
+model result,{5}
+red light,{5}
+light stop,{5}
+collective learning,{5}
+significant challenge,{5}
+important instrument,{5}
+present study,{5}
+decentralized manner,{5}
+region agent,{5}
+intersection agent,{5}
+neighboring intersection,{5}
+movement agent,{5}
+optimal action,{5}
+local control,{5}
+control policy,{5}
+intersection controller,{5}
+timing decision,{5}
+dynamic environment,{5}
+advanced phase,{5}
+phase composition,{5}
+composition process,{5}
+collective operation,{5}
+light system,{5}
+collective machine,{5}
+local signal,{5}
+signal operation,{5}
+individual intersection,{5}
+traffic performance,{5}
+regional level,{5}
+robust anomaly,{5}
+anomaly detection,{5}
+information fusion,{5}
+camera network,{5}
+abnormal behavior,{5}
+violent event,{5}
+person detection,{5}
+detection method,{5}
+person tracker,{5}
+intermediate stage,{5}
+real sensor,{5}
+several scenario,{5}
+normal situation,{5}
+person loitering,{5}
+sudden smoke,{5}
+smoke development,{5}
+static video,{5}
+video surveillance,{5}
+surveillance system,{5}
+trained machine,{5}
+world coordinate,{5}
+markov model,{5}
+accurate observation,{5}
+good condition,{5}
