@@ -73,6 +73,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/AIMLUrbanStudyCorpus_clusters_iteration.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster/iteration_0/AIMLUrbanStudyCorpus_cluster_docs.csv">
           <value>
             <Attribute>
@@ -95,6 +102,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_terms/AIMLUrbanStudyCorpus_TF-IDF_cluster_terms_summary_iteration.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/key_phrases/group_key_phrases/cluster_key_phrases_group.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
