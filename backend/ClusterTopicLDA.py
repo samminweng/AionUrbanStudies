@@ -14,8 +14,8 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTopicLDA:
-    def __init__(self):
-        # self.cluster_no = _cluster_no
+    def __init__(self, _cluster_no):
+        self.cluster_no = _cluster_no
         self.args = Namespace(
             # case_name='CultureUrbanStudyCorpus',
             case_name='AIMLUrbanStudyCorpus',
@@ -24,12 +24,11 @@ class ClusterTopicLDA:
             iterations=400,
             chunksize=10,
             eval_every=None,  # Don't evaluate model perplexity, takes too much time.
-            folder_name='iteration',
-            # sub_cluster_name='sub_cluster#' + str(_cluster_no),
+            cluster_folder='cluster_' + str(_cluster_no),
         )
         # Load Key phrase
-        path = os.path.join('output', self.args.case_name, 'key_phrases',
-                            self.args.case_name + '_cluster_terms_key_phrases_' + self.args.folder_name + '.json')
+        path = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases',
+                            self.args.case_name + '_cluster_terms_key_phrases.json')
         self.cluster_key_phrases_df = pd.read_json(path)
         # Sort by Cluster
         self.cluster_key_phrase_df = self.cluster_key_phrases_df.sort_values(by=['Cluster'], ascending=True)
@@ -37,8 +36,8 @@ class ClusterTopicLDA:
     # Derive n_gram from each individual paper
     def derive_n_grams_group_by_clusters(self):
         try:
-            path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters_' +
-                                self.args.folder_name + '.json')
+            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                self.args.case_name + '_clusters.json')
             # Load the documents clustered by
             df = pd.read_json(path)
             # Update text column
@@ -69,7 +68,8 @@ class ClusterTopicLDA:
             # Reorder the column
             docs_per_cluster_df = docs_per_cluster_df[['Cluster', 'KeyPhrases', 'DocId', 'Ngrams']]
             # Write n_gram to csv and json file
-            folder = os.path.join('output', self.args.case_name, 'LDA_topics', 'n_grams')
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                  'LDA_topics', 'n_grams')
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, self.args.case_name + '_doc_n_grams.csv')
             docs_per_cluster_df.to_csv(path, index=False, encoding='utf-8')
@@ -240,9 +240,9 @@ class ClusterTopicLDA:
 if __name__ == '__main__':
     try:
         _cluster_no = 0
-        ct = ClusterTopicLDA()
-        ct.derive_n_grams_group_by_clusters()
-        ct.derive_cluster_topics_by_LDA()
-        ct.combine_LDA_topics_key_phrase_to_file()
+        ct = ClusterTopicLDA(_cluster_no)
+        # ct.derive_n_grams_group_by_clusters()
+        # ct.derive_cluster_topics_by_LDA()
+        # ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
