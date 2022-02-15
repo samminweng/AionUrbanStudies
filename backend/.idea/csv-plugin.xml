@@ -129,6 +129,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_0/LDA_topics/AIMLUrbanStudyCorpus_LDA_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_0/cluster/iteration_0/AIMLUrbanStudyCorpus_cluster_docs.csv">
           <value>
             <Attribute>
