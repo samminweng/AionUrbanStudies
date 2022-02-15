@@ -1,0 +1,3194 @@
+0,1
+object detection,"{1, -1}"
+vital step,{-1}
+computer vision,"{1, -1}"
+vision application,{-1}
+precision agriculture,{-1}
+urban planning,"{0, 1, -1}"
+defense application,{-1}
+satellite imagery,"{0, 1, -1}"
+complicated task,{-1}
+various reason,{-1}
+pixel resolution,"{1, -1}"
+small object,"{1, -1}"
+large scale,"{1, -1}"
+single satellite,"{1, -1}"
+satellite image,"{0, 1, -1}"
+many challenge,"{1, -1}"
+class variation,{-1}
+high variance,{-1}
+object size,{-1}
+dense background,{-1}
+deep learning,"{0, 1, -1}"
+learning algorithms,"{0, 1, -1}"
+neural network,"{0, 1, -1}"
+imagery multiscale,{-1}
+rapid detection,{-1}
+windowed network,{-1}
+developed dataset,{-1}
+standard resolution,{-1}
+obvious leader,{-1}
+cloud detection,{-1}
+unsupervised classification,{-1}
+environmental protection,"{0, -1}"
+hazard analysis,{-1}
+constant challenge,{-1}
+wide range,"{0, -1}"
+cloud mask,{-1}
+mask algorithms,{-1}
+entire image,{-1}
+pixel modeling,{-1}
+training subset,{-1}
+different input,{-1}
+input feature,{-1}
+cloud validation,{-1}
+validation dataset,{-1}
+cropped scene,{-1}
+biome dataset,{-1}
+accurate model,"{0, -1}"
+sample subset,{-1}
+total training,{-1}
+training sample,{-1}
+map classification,{-1}
+classification result,"{0, -1}"
+overall accuracy,"{0, 1, -1}"
+cloud omission,{-1}
+omission error,{-1}
+cloud commission,{-1}
+commission error,{-1}
+test image,{-1}
+independent validation,"{0, -1}"
+validation image,{-1}
+model training,{-1}
+overall correctness,{-1}
+cloud classification,{-1}
+classification model,"{0, -1}"
+good performance,"{0, 1, -1}"
+small portion,{-1}
+training pixel,{-1}
+spectral characteristic,{-1}
+example pixel,{-1}
+model accuracy,{-1}
+machine learning,"{0, 1, -1}"
+learning technique,"{0, 1, -1}"
+digital surface,"{1, -1}"
+surface model,"{1, -1}"
+automatic building,"{1, -1}"
+building extraction,"{1, -1}"
+major area,{-1}
+extensive range,{-1}
+environmental risk,{-1}
+risk management,{-1}
+urban morphology,"{0, -1}"
+morphology complexity,{-1}
+different method,{-1}
+supervised machine,{-1}
+building footprint,"{1, -1}"
+footprint extraction,{-1}
+ml model,{-1}
+benchmark dataset,{-1}
+feature descriptor,{-1}
+support vector,"{0, 1, -1}"
+vector machine,"{0, 1, -1}"
+extreme learning,"{0, -1}"
+learning machine,"{0, -1}"
+third model,"{1, -1}"
+convolutional network,"{1, -1}"
+transfer learning,{-1}
+urban area,"{0, 1, -1}"
+feature extraction,"{0, 1, -1}"
+urban context,{-1}
+active remote,{-1}
+essential tool,{-1}
+geoinformation extraction,{-1}
+clouds segmentation,{-1}
+accurate classification,{-1}
+city design,{-1}
+roof superstructure,{-1}
+superstructure classification,{-1}
+lidar point,{-1}
+point cloud,"{1, -1}"
+low density,"{0, -1}"
+imbalanced class,{-1}
+nonplanar object,{-1}
+class problem,{-1}
+lidar data,"{1, -1}"
+major advantage,{-1}
+raw data,"{0, 1, -1}"
+methodological novelty,{-1}
+key element,{-1}
+connected component,{-1}
+component analysis,{-1}
+new component,{-1}
+imbalanced data,{-1}
+data problem,{-1}
+gable dormer,{-1}
+satisfying classification,{-1}
+classification performance,"{1, -1}"
+learning method,"{0, -1}"
+image analysis,"{0, -1}"
+cover classification,"{0, -1}"
+land cover,"{0, 1, -1}"
+cover map,"{0, -1}"
+valuable information,"{1, -1}"
+various application,"{1, -1}"
+territorial monitoring,{-1}
+climate change,"{0, 1, -1}"
+change prevention,{-1}
+image classification,"{0, 1, -1}"
+high revolution,{-1}
+cover mapping,"{0, 1, -1}"
+mapping task,{-1}
+learning model,"{0, 1, -1}"
+large amount,"{1, -1}"
+new approach,"{0, 1, -1}"
+coastal town,{-1}
+ténès region,{-1}
+study area,"{0, 1, -1}"
+national strategy,{-1}
+natural hazard,"{0, 1, -1}"
+cnn model,{-1}
+hidden layer,{-1}
+spectral index,"{0, -1}"
+index combination,{-1}
+accuracy assessment,"{0, -1}"
+good value,{-1}
+rf algorithm,{-1}
+final land,{-1}
+support tool,{-1}
+national decision,{-1}
+land use,"{0, 1, -1}"
+use land,"{0, -1}"
+new caledonia,{-1}
+complementary piece,{-1}
+cartographic information,{-1}
+environmental monitoring,"{0, 1, -1}"
+biodiversity hotspot,{-1}
+lulc maps,{-1}
+extreme event,{-1}
+human activity,"{0, -1}"
+satellite data,"{0, -1}"
+learning configuration,{-1}
+semantic labelling,{-1}
+labelling architecture,{-1}
+data augmentation,"{1, -1}"
+lulc mapping,{-1}
+subtropical environment,{-1}
+specific data,{-1}
+data set,"{0, 1, -1}"
+scientific community,{-1}
+lulc benchmark,{-1}
+complex environment,{-1}
+representative area,{-1}
+human operator,{-1}
+training set,{-1}
+test set,"{0, 1, -1}"
+several architecture,{-1}
+raw observation,{-1}
+learning approach,"{1, -1}"
+comparable result,{-1}
+lc detection,{-1}
+lu detection,{-1}
+detection task,{-1}
+lc classification,{-1}
+classification output,{-1}
+learning architecture,{-1}
+raw channel,{-1}
+channel input,{-1}
+lu classification,{-1}
+classification task,"{1, -1}"
+remote sensing,"{0, 1, -1}"
+sensing community,{-1}
+lulc detection,{-1}
+detection technique,"{0, -1}"
+case study,"{0, 1, -1}"
+hot topic,{-1}
+various method,{-1}
+edge detection,"{1, -1}"
+different study,{-1}
+extraction process,{-1}
+current study,"{0, -1}"
+dark roofs,{-1}
+various indicator,{-1}
+example completeness,{-1}
+preliminary finding,{-1}
+used machine,{-1}
+research result,"{1, -1}"
+generic indicator,{-1}
+planning authority,{-1}
+urban demand,{-1}
+refined method,{-1}
+change detection,"{0, 1, -1}"
+building area,"{1, -1}"
+automatic detection,"{1, -1}"
+important role,"{0, 1, -1}"
+ecological environment,{-1}
+environment monitoring,"{1, -1}"
+urban management,"{0, -1}"
+resolution remote,{-1}
+spatial resolution,"{0, 1, -1}"
+spatial detail,{-1}
+spectral heterogeneity,{-1}
+technology proceed,{-1}
+new solution,{-1}
+ncbas detection,{-1}
+detection method,"{1, -1}"
+generalized machine,{-1}
+building mask,{-1}
+semantic segmentation,"{1, -1}"
+low confidence,{-1}
+final vector,{-1}
+fringe area,{-1}
+experimental result,"{0, 1, -1}"
+result show,"{0, 1, -1}"
+high confidence,{-1}
+confidence share,{-1}
+overall effect,{-1}
+final detection,{-1}
+detection result,"{1, -1}"
+assessment method,{-1}
+area registration,{-1}
+registration efficiency,{-1}
+joint use,{-1}
+prior rule,{-1}
+svm classifier,"{0, -1}"
+probability feature,{-1}
+practical application,{-1}
+airborne lidar,{-1}
+aerial image,"{1, -1}"
+urban mapping,"{1, -1}"
+urban resident,"{0, -1}"
+total world,{-1}
+world population,{-1}
+demographic transition,{-1}
+urgent need,"{0, -1}"
+planning process,"{0, -1}"
+current plan,{-1}
+spectral signature,"{1, -1}"
+different sensor,{-1}
+multiple feature,"{0, -1}"
+feature space,{-1}
+point clouds,{-1}
+aerial photo,{-1}
+overall classification,"{0, -1}"
+classification accuracy,"{0, 1, -1}"
+geometric feature,{-1}
+classifying space,{-1}
+different class,{-1}
+independent acquisition,{-1}
+orthorectification problem,{-1}
+radiometric property,{-1}
+affordable sensor,{-1}
+unreinforced masonry,{-1}
+masonry building,{-1}
+roof diaphragms,{-1}
+roof diaphragm,{-1}
+vulnerability study,{-1}
+disaster risk,{-1}
+risk assessment,{-1}
+disaster management,"{0, 1, -1}"
+management strategy,"{0, -1}"
+great relevance,{-1}
+common building,{-1}
+building typology,{-1}
+local government,"{0, -1}"
+network architecture,"{1, -1}"
+detailed exposure,{-1}
+exposure model,{-1}
+rs image,{-1}
+recent technology,{-1}
+hidden information,{-1}
+observed earth,{-1}
+earth environment,{-1}
+sustainable development,"{0, -1}"
+agricultural decision,{-1}
+performance improvement,{-1}
+large datasets,{-1}
+dl method,{-1}
+recent research,{-1}
+research problem,{-1}
+dl approach,{-1}
+much time,{-1}
+tl modeling,{-1}
+modeling technique,{-1}
+tl model,{-1}
+bottleneck feature,{-1}
+lclu classification,{-1}
+merced dataset,{-1}
+outdate performance,{-1}
+pléiades image,{-1}
+marina area,{-1}
+new gateway,{-1}
+building data,{-1}
+automated extraction,{-1}
+efficient mapping,{-1}
+touristic development,{-1}
+maximum likelihood,"{0, -1}"
+morphological operation,{-1}
+classified imagery,{-1}
+random forest,"{0, 1, -1}"
+detected building,{-1}
+classification method,"{0, 1, -1}"
+half century,{-1}
+rational use,{-1}
+negative impact,{-1}
+human life,{-1}
+life activity,{-1}
+correct distribution,{-1}
+industrial facility,{-1}
+waste disposal,{-1}
+disposal zone,{-1}
+balanced planning,{-1}
+current state,{-1}
+integrated monitoring,{-1}
+suburban area,{-1}
+intelligent processing,{-1}
+digital map,{-1}
+tree specie,{-1}
+specie classification,{-1}
+data fusion,"{1, -1}"
+challenging task,"{1, -1}"
+spatial diversity,{-1}
+urban environment,"{0, 1, -1}"
+aerial vehicle,"{0, 1, -1}"
+tree classification,{-1}
+fusion technique,{-1}
+limited training,{-1}
+infrared imagery,{-1}
+urban study,"{1, -1}"
+individual tree,{-1}
+fusion approach,{-1}
+diverse datasets,{-1}
+multiple sensor,"{0, 1, -1}"
+spectral feature,"{0, -1}"
+sensor type,{-1}
+multispectral reflectance,{-1}
+reflectance band,{-1}
+minimum noise,{-1}
+noise fraction,{-1}
+hyperspectral reflectance,{-1}
+full dataset,{-1}
+dataset combination,{-1}
+individual sensor,{-1}
+limited sampling,{-1}
+sampling requirement,{-1}
+raster format,{-1}
+great challenge,{-1}
+nighttime light,"{0, -1}"
+related issue,{-1}
+flood loss,{-1}
+loss assessment,{-1}
+epidemiological study,{-1}
+present study,{-1}
+domestic product,{-1}
+electric consumption,{-1}
+linear regression,{-1}
+back propagation,{-1}
+rf model,{-1}
+city scale,"{0, -1}"
+distribution map,{-1}
+validation result,"{0, -1}"
+district scale,{-1}
+ntl dataset,{-1}
+administrative scale,{-1}
+specific situation,{-1}
+optimum model,{-1}
+spatial heterogeneity,"{0, -1}"
+scientific support,{-1}
+location semantics,{-1}
+street view,{-1}
+view image,{-1}
+environmental research,{-1}
+great potential,"{0, 1, -1}"
+previous study,"{0, -1}"
+contextual information,"{0, 1, -1}"
+land parcel,"{0, -1}"
+scene image,"{1, -1}"
+straightforward algorithm,{-1}
+displacement strategy,{-1}
+learning network,"{1, -1}"
+urban population,"{0, -1}"
+population distribution,"{0, -1}"
+geospatial data,"{0, 1, -1}"
+zonal strategy,{-1}
+fine resolution,{-1}
+high accuracy,"{0, -1}"
+guangzhou city,{-1}
+gridded population,"{0, -1}"
+light remote,{-1}
+interest data,{-1}
+use data,"{0, -1}"
+accuracy evaluation,"{1, -1}"
+evaluation result,{-1}
+determinant coefficient,{-1}
+root mean,"{1, -1}"
+mean square,{-1}
+square error,{-1}
+regression model,{-1}
+dense area,{-1}
+sparse area,{-1}
+population mapping,"{0, -1}"
+zonal modeling,{-1}
+modeling strategy,{-1}
+primary choice,{-1}
+regional difference,{-1}
+earth observation,"{1, -1}"
+observation image,{-1}
+industrial world,{-1}
+world benefit,{-1}
+high resolution,"{0, 1, -1}"
+resolution earth,{-1}
+recent year,"{0, 1, -1}"
+many machine,{-1}
+scene classification,"{1, -1}"
+spatial pyramid,"{1, -1}"
+sparse coding,{-1}
+classical model,{-1}
+promising classification,{-1}
+many benchmark,{-1}
+benchmark data,{-1}
+dictionary learning,{-1}
+sparse representation,{-1}
+learning stage,{-1}
+classification stage,"{0, -1}"
+good result,"{1, -1}"
+recent study,"{0, -1}"
+unlabeled data,{-1}
+multiple classification,{-1}
+image data,"{1, -1}"
+landuse data,"{0, -1}"
+changping data,{-1}
+new way,{-1}
+resource cost,{-1}
+sensing scene,{-1}
+image classifier,{-1}
+robust segmentation,{-1}
+segmentation framework,{-1}
+packed building,{-1}
+urban village,{-1}
+asian city,{-1}
+multiple machine,"{0, -1}"
+urban scene,{-1}
+presented framework,{-1}
+major segmentation,{-1}
+segmentation process,{-1}
+forest classifier,"{0, -1}"
+entire scene,{-1}
+building point,{-1}
+attribute analysis,{-1}
+analysis method,"{0, -1}"
+individual building,{-1}
+different city,{-1}
+unified structure,{-1}
+lidar datasets,{-1}
+overall segmentation,{-1}
+segmentation accuracy,{-1}
+complicated structure,{-1}
+comparative assessment,{-1}
+urban vegetation,{-1}
+green vegetation,{-1}
+spatial planning,{-1}
+urban challenge,{-1}
+synthetic aperture,"{1, -1}"
+aperture radar,{-1}
+optical satellite,"{1, -1}"
+various machine,"{1, -1}"
+vegetation mapping,{-1}
+extreme gradient,{-1}
+gradient boosting,{-1}
+mlp classifier,{-1}
+mt classification,{-1}
+classification scenario,{-1}
+speckle filtering,{-1}
+sar data,{-1}
+additional increase,{-1}
+low vegetation,{-1}
+sar imagery,{-1}
+regional mapping,{-1}
+urban land,"{0, -1}"
+use category,"{0, -1}"
+great importance,"{0, -1}"
+decision support,"{0, 1, -1}"
+resource allocation,{-1}
+first mapping,{-1}
+mapping result,{-1}
+national map,{-1}
+regional analysis,{-1}
+segmentation approach,{-1}
+basic mapping,{-1}
+mapping unit,{-1}
+urban parcel,{-1}
+social sensing,"{0, -1}"
+sensing data,"{0, -1}"
+learning algorithm,"{1, -1}"
+ii class,{-1}
+derived map,{-1}
+great significance,{-1}
+traditional remote,{-1}
+accuracy requirement,{-1}
+experimental area,{-1}
+standard test,{-1}
+test field,{-1}
+experimental data,"{0, -1}"
+original image,{-1}
+spectral curve,{-1}
+large difference,{-1}
+full use,"{1, -1}"
+spectral information,{-1}
+noise problem,{-1}
+uav image,"{1, -1}"
+certain extent,{-1}
+accuracy analysis,{-1}
+verification image,{-1}
+kappa coefficient,"{0, 1, -1}"
+gis approach,"{0, -1}"
+green area,{-1}
+area planning,{-1}
+landsat satellite,"{0, -1}"
+last decade,"{0, 1, -1}"
+populated emirate,{-1}
+urban development,"{0, 1, -1}"
+planning procedure,{-1}
+essential role,{-1}
+environmental quality,{-1}
+air quality,{-1}
+information system,"{0, 1, -1}"
+pollution percentage,{-1}
+study methodology,{-1}
+satellite medium,{-1}
+spatial signature,{-1}
+area machine,{-1}
+significant feature,{-1}
+relational index,{-1}
+area percentage,{-1}
+sentinel air,{-1}
+quality data,{-1}
+population density,"{0, -1}"
+density map,{-1}
+gis technique,"{1, -1}"
+high pollution,{-1}
+environmental standard,{-1}
+study result,{-1}
+municipality policymakers,{-1}
+healthy living,{-1}
+data application,{-1}
+massive volume,{-1}
+common software,{-1}
+software package,{-1}
+big data,"{0, 1, -1}"
+data analysis,"{0, 1, -1}"
+big geo,{-1}
+geo data,{-1}
+large area,"{1, -1}"
+long period,{-1}
+high potential,{-1}
+different application,{-1}
+rs application,{-1}
+different aspect,{-1}
+gee platform,"{0, -1}"
+journal article,{-1}
+sentinel datasets,{-1}
+gee user,{-1}
+broad range,{-1}
+use classification,"{0, -1}"
+natural disaster,"{0, 1, -1}"
+climate analysis,{-1}
+image processing,"{0, 1, -1}"
+gee publication,{-1}
+different field,{-1}
+data processing,"{0, 1, -1}"
+processing challenge,{-1}
+road extraction,{-1}
+land planning,"{0, -1}"
+vehicle navigation,"{1, -1}"
+extraction method,"{1, -1}"
+many preprocessing,{-1}
+subsequent optimization,{-1}
+optimization step,{-1}
+automatic road,{-1}
+road centerline,{-1}
+centerline extraction,{-1}
+learning framework,"{1, -1}"
+nonroad area,{-1}
+area removing,{-1}
+positive sample,{-1}
+sample selection,{-1}
+selection method,{-1}
+shape feature,{-1}
+road sample,{-1}
+classifier framework,{-1}
+unlabeled learning,{-1}
+learning classifier,{-1}
+posterior probability,{-1}
+final road,{-1}
+road network,"{1, -1}"
+tensor voting,{-1}
+voting algorithm,{-1}
+benchmark datasets,"{1, -1}"
+completeness ratio,{-1}
+correctness ratio,{-1}
+detection quality,{-1}
+quantitative accuracy,{-1}
+classification road,{-1}
+extraction algorithms,{-1}
+method comparison,{-1}
+method performs,{-1}
+large number,"{1, -1}"
+long training,{-1}
+training time,{-1}
+urban tree,{-1}
+tree offer,{-1}
+significant benefit,{-1}
+major challenge,{-1}
+urban planner,"{0, -1}"
+tree coverage,{-1}
+automatic extraction,{-1}
+artificial intelligence,"{0, -1}"
+intelligence workflow,{-1}
+thematic quality,{-1}
+cadastral parcel,{-1}
+aerial orthophoto,{-1}
+manual preparation,{-1}
+required training,{-1}
+input sample,{-1}
+cnn method,{-1}
+cnn output,{-1}
+cnn classification,{-1}
+parcel layer,{-1}
+combined method,{-1}
+parcel level,{-1}
+level statistic,{-1}
+land management,"{0, -1}"
+management practice,"{0, -1}"
+aerial point,{-1}
+recent advance,"{0, 1, -1}"
+visualization need,{-1}
+public administration,{-1}
+frequent source,{-1}
+city model,"{1, -1}"
+many application,"{1, -1}"
+development plan,"{0, -1}"
+energy evaluation,{-1}
+visibility analysis,{-1}
+gis study,{-1}
+main data,{-1}
+data source,"{0, 1, -1}"
+aerial photogrammetry,{-1}
+towards automation,{-1}
+different approach,{-1}
+semantic class,{-1}
+ground level,{-1}
+level object,{-1}
+urban expansion,"{0, -1}"
+accurate simulation,{-1}
+spatiotemporal trend,{-1}
+urban suitability,{-1}
+suitability index,{-1}
+human bias,{-1}
+nonlinear relation,{-1}
+usi map,{-1}
+expansion cell,{-1}
+validated result,{-1}
+fuzzy kappa,{-1}
+kappa simulation,"{0, -1}"
+future expansion,{-1}
+urban growth,"{0, -1}"
+growth zone,{-1}
+data mining,"{0, -1}"
+important part,"{0, -1}"
+strategic planning,{-1}
+urban settlement,{-1}
+population explosion,{-1}
+rural area,"{0, -1}"
+image need,{-1}
+new settlement,{-1}
+water body,"{0, -1}"
+observatory image,{-1}
+multiscale road,{-1}
+aerial imagery,"{1, -1}"
+accurate road,{-1}
+navigation system,{-1}
+common road,{-1}
+classification algorithm,"{0, -1}"
+extraction problem,{-1}
+time consuming,{-1}
+robust feature,{-1}
+gabor filter,{-1}
+structural feature,{-1}
+classification map,"{0, -1}"
+original imagery,{-1}
+imagery serving,{-1}
+guidance image,{-1}
+reliable road,{-1}
+quantitative result,{-1}
+visual performance,{-1}
+feature selection,"{0, -1}"
+sentinel image,"{0, -1}"
+accurate land,"{0, -1}"
+crucial data,{-1}
+natural resource,"{0, -1}"
+sensor technology,{-1}
+learning capability,{-1}
+data complementarity,{-1}
+accurate feature,{-1}
+promising advantage,{-1}
+available multisource,{-1}
+lulc map,{-1}
+classification framework,"{1, -1}"
+segmentation level,{-1}
+segmentation quality,{-1}
+quality measure,{-1}
+geometrical feature,{-1}
+optical data,{-1}
+multiple ratio,{-1}
+textural feature,"{0, -1}"
+sar image,{-1}
+rf classifier,"{0, -1}"
+lulc class,"{0, -1}"
+relevant feature,{-1}
+optical image,"{0, -1}"
+image segmentation,"{1, -1}"
+segmentation optimization,{-1}
+scale parameter,{-1}
+sp value,{-1}
+rf classification,{-1}
+scale value,{-1}
+lulc classification,{-1}
+integrated approach,"{0, -1}"
+promising method,{-1}
+lulc extraction,{-1}
+approach feature,{-1}
+remarkable potential,{-1}
+geographic information,"{0, 1, -1}"
+system layer,{-1}
+machine accuracy,{-1}
+used model,{-1}
+possible variable,{-1}
+copernicus mission,{-1}
+mission satellite,{-1}
+town environment,{-1}
+different town,{-1}
+optimal combination,{-1}
+area extraction,{-1}
+overall kappa,{-1}
+kappa index,"{0, -1}"
+high classification,"{0, -1}"
+hyperspectral image,"{1, -1}"
+network paradigm,{-1}
+decision tree,"{0, -1}"
+ensemble learning,"{0, -1}"
+promising result,"{0, 1, -1}"
+hsi analysis,{-1}
+insufficient information,{-1}
+information abstraction,{-1}
+hyperspectral pixel,{-1}
+nonlinear feature,{-1}
+hsi classification,"{1, -1}"
+hyperspectral datasets,{-1}
+net classifier,{-1}
+classifier yield,{-1}
+competitive processing,{-1}
+processing speed,{-1}
+spatial feature,"{1, -1}"
+new window,{-1}
+future research,{-1}
+deciduous tree,{-1}
+data gathering,{-1}
+processing technique,{-1}
+vegetation specie,{-1}
+specie mapping,{-1}
+scientific aspect,{-1}
+platform design,{-1}
+imaging system,{-1}
+simultaneous use,{-1}
+rikola frame,{-1}
+infrared camera,{-1}
+flight mission,{-1}
+ha area,{-1}
+spectral band,{-1}
+spectral range,{-1}
+research question,{-1}
+conventional machine,{-1}
+infrared image,{-1}
+individual crown,{-1}
+crown level,{-1}
+spectral property,{-1}
+moderate classification,{-1}
+classification ability,{-1}
+hyperspectral data,{-1}
+data cube,{-1}
+classification error,{-1}
+error matrix,{-1}
+alternative imaging,{-1}
+imaging platform,{-1}
+simulated imaging,{-1}
+imaging project,{-1}
+sound solution,{-1}
+green space,"{0, -1}"
+space inventory,{-1}
+tree mapping,{-1}
+road connectivity,{-1}
+key information,{-1}
+observational data,{-1}
+land surface,"{0, 1, -1}"
+road map,"{1, -1}"
+map irregular,{-1}
+light detection,{-1}
+net evolution,{-1}
+evolution approach,{-1}
+image object,{-1}
+classifies image,{-1}
+minimum area,{-1}
+structure feature,{-1}
+feature index,{-1}
+complete road,{-1}
+multistep approach,{-1}
+morphology thinning,{-1}
+harris corner,{-1}
+corner detection,{-1}
+square fitting,{-1}
+complex road,{-1}
+york dataset,{-1}
+object identification,{-1}
+identification dataset,{-1}
+vaihingen dataset,{-1}
+labelling benchmark,{-1}
+guangzhou dataset,{-1}
+experiment result,{-1}
+efficient solution,{-1}
+complex scene,{-1}
+frequent interval,{-1}
+valuable tool,{-1}
+uav data,{-1}
+labeled training,{-1}
+spatial datasets,{-1}
+training label,{-1}
+contextual cue,{-1}
+unreliable sample,{-1}
+uav datasets,{-1}
+mislabeled training,{-1}
+dar es,{-1}
+image segment,{-1}
+spatial data,"{0, -1}"
+viable method,{-1}
+costly step,{-1}
+urban greenery,{-1}
+greenery land,{-1}
+cover extraction,{-1}
+critical part,{-1}
+modern city,{-1}
+greenery coverage,{-1}
+coverage information,{-1}
+land resource,"{0, -1}"
+resource management,"{0, -1}"
+challenging work,{-1}
+greenery information,{-1}
+greenery extraction,{-1}
+multispectral remote,"{1, -1}"
+main step,{-1}
+small part,{-1}
+manual extraction,{-1}
+extraction result,{-1}
+verification sample,{-1}
+unlabelled data,{-1}
+favourable performance,{-1}
+square kilometer,{-1}
+kilometer area,{-1}
+ndvi method,{-1}
+accurate delineation,{-1}
+greenery region,{-1}
+computational load,{-1}
+area greenery,{-1}
+greenery auto,{-1}
+auto extraction,{-1}
+optimal integration,{-1}
+integration level,{-1}
+promising approach,{-1}
+suitable remains,{-1}
+many researcher,{-1}
+different integration,{-1}
+scientific reference,{-1}
+imp mode,{-1}
+pixel level,"{1, -1}"
+feature level,{-1}
+decision level,{-1}
+typical machine,{-1}
+extracted feature,"{1, -1}"
+significant improvement,"{1, -1}"
+different level,"{0, -1}"
+suitable method,{-1}
+data distribution,{-1}
+data resolution,{-1}
+sar feature,{-1}
+likelihood method,"{0, -1}"
+texture feature,{-1}
+single data,{-1}
+appropriate fusion,{-1}
+fusion level,{-1}
+fusion method,{-1}
+shape descriptor,{-1}
+object recognition,{-1}
+important task,{-1}
+many area,{-1}
+augmented reality,{-1}
+sensor measure,{-1}
+high amount,{-1}
+scene object,{-1}
+high collect,{-1}
+collect rate,{-1}
+robust technique,{-1}
+input data,"{1, -1}"
+common solution,{-1}
+extraction technique,"{0, -1}"
+representative scene,{-1}
+scene information,{-1}
+computational cost,"{1, -1}"
+simplified object,{-1}
+object representation,{-1}
+pattern recognition,{-1}
+recognition input,{-1}
+object shape,{-1}
+deep highway,{-1}
+highway unit,{-1}
+unit network,{-1}
+cover type,"{0, -1}"
+type classification,"{1, -1}"
+advanced earth,{-1}
+observation system,{-1}
+night imaging,{-1}
+imaging capability,{-1}
+rich information,{-1}
+resource investigation,{-1}
+massive data,"{1, -1}"
+operational operation,{-1}
+sar remote,{-1}
+large data,{-1}
+image interpretation,{-1}
+scientific application,{-1}
+intelligent method,{-1}
+vision technology,{-1}
+great success,{-1}
+vision area,{-1}
+band imaging,{-1}
+phase coherence,{-1}
+coherence processing,{-1}
+projection direction,{-1}
+data composition,{-1}
+hierarchic feature,{-1}
+feature representation,"{1, -1}"
+training data,"{1, -1}"
+resource inventory,{-1}
+planning data,{-1}
+different time,{-1}
+multi sensor,{-1}
+sensor data,{-1}
+area information,{-1}
+city planning,"{1, -1}"
+disaster prediction,{-1}
+urban structure,"{0, -1}"
+key advantage,{-1}
+imaging modality,{-1}
+ground survey,{-1}
+much research,{-1}
+resolution satellite,"{0, -1}"
+spectral resolution,{-1}
+good precision,{-1}
+moderate accuracy,{-1}
+empirical result,{-1}
+machine approach,{-1}
+resolution image,"{0, -1}"
+available data,"{0, -1}"
+available map,{-1}
+temporal resolution,"{0, -1}"
+sheer volume,{-1}
+collected image,{-1}
+road data,{-1}
+key role,"{0, -1}"
+traffic management,"{1, -1}"
+military application,{-1}
+decision making,"{0, 1, -1}"
+numerous application,"{1, -1}"
+road infrastructure,{-1}
+mobile phone,"{0, -1}"
+road detection,"{1, -1}"
+major issue,{-1}
+infrastructure extraction,{-1}
+first order,{-1}
+image transforms,{-1}
+identified dataset,{-1}
+dataset form,{-1}
+high dimension,{-1}
+dimension feature,{-1}
+superior machine,{-1}
+great result,{-1}
+dimensional datasets,{-1}
+technique towards,{-1}
+imagery feature,{-1}
+svm approach,{-1}
+primitive image,{-1}
+segmentation algorithm,{-1}
+svm procedure,{-1}
+final object,{-1}
+object classification,{-1}
+neighbor classifier,"{1, -1}"
+classifier result,{-1}
+obia domain,{-1}
+urban point,{-1}
+cloud labelling,{-1}
+promising application,{-1}
+urban city,{-1}
+city modelling,{-1}
+efficient method,{-1}
+cloud data,{-1}
+multiple class,"{1, -1}"
+urban lidar,{-1}
+vision technique,"{1, -1}"
+supervoxel approach,{-1}
+dense lidar,{-1}
+compact manner,{-1}
+computational efficiency,{-1}
+coloured point,{-1}
+cloud connectivity,{-1}
+connectivity algorithm,{-1}
+geometric space,{-1}
+local connectivity,{-1}
+realistic object,{-1}
+different machine,"{0, 1, -1}"
+labelled segment,{-1}
+segment label,{-1}
+different feature,{-1}
+feature vector,{-1}
+point density,{-1}
+accurate labelling,{-1}
+high cost,{-1}
+human annotation,{-1}
+field study,{-1}
+novel approach,"{0, 1, -1}"
+multilabel classification,{-1}
+powerful framework,{-1}
+complex relationship,{-1}
+spectral profile,{-1}
+different type,"{0, -1}"
+surface material,{-1}
+spectral unmixing,{-1}
+multispectral image,"{0, -1}"
+modis sensor,{-1}
+supervised classification,"{0, 1, -1}"
+predictive performance,{-1}
+annotated training,{-1}
+training example,{-1}
+time instance,{-1}
+hyperion sensor,{-1}
+cover estimation,"{1, -1}"
+excellent prediction,{-1}
+prediction accuracy,{-1}
+limited number,{-1}
+diverse training,{-1}
+unmixing method,{-1}
+vital component,{-1}
+human survival,{-1}
+socioeconomic development,"{1, -1}"
+water resource,{-1}
+rapid urbanization,"{0, -1}"
+precise extraction,{-1}
+automatic identification,{-1}
+paper concern,{-1}
+urban water,"{0, -1}"
+water type,{-1}
+interpretation level,{-1}
+object level,{-1}
+level employ,{-1}
+employ machine,{-1}
+mega city,{-1}
+satisfactory accuracy,{-1}
+water extraction,{-1}
+sensed imagery,{-1}
+important problem,{-1}
+hazard assessment,{-1}
+technology nowadays,{-1}
+many study,{-1}
+lidar imagery,{-1}
+multispectral imagery,{-1}
+logical group,{-1}
+standard deviation,{-1}
+positive surface,{-1}
+surface openness,{-1}
+deep belief,{-1}
+belief network,{-1}
+core application,{-1}
+hierarchical structure,"{1, -1}"
+human brain,{-1}
+good classification,{-1}
+classification approach,"{0, 1, -1}"
+dbn model,{-1}
+contextual mapping,{-1}
+mapping feature,{-1}
+polsar data,{-1}
+method outperforms,"{1, -1}"
+preserved shape,{-1}
+shape detail,{-1}
+ensemble method,"{0, -1}"
+binary classification,{-1}
+civil engineering,{-1}
+engineering application,"{1, -1}"
+flood control,{-1}
+data need,{-1}
+binary class,{-1}
+generalization performance,{-1}
+ii error,{-1}
+geographic site,{-1}
+ensemble framework,{-1}
+adaboost method,{-1}
+bagging method,{-1}
+terrain type,{-1}
+rough terrain,{-1}
+discontinuous surface,{-1}
+conditional random,{-1}
+random field,{-1}
+adaptive data,{-1}
+data reduction,{-1}
+terrestrial laser,{-1}
+laser scanner,{-1}
+urban data,"{0, 1, -1}"
+adaptive support,{-1}
+support region,{-1}
+data point,{-1}
+scale theory,{-1}
+data sample,{-1}
+relevant information,{-1}
+computed support,{-1}
+inference rate,{-1}
+comparable classification,{-1}
+future housing,{0}
+housing dispersal,{0}
+adversarial network,{0}
+growth map,{0}
+housing preference,{0}
+process approach,{0}
+city worldwide,{0}
+robust solution,{0}
+metropolitan city,{0}
+dispersal guideline,{0}
+spatial pattern,{0}
+intermediate city,{0}
+rapid dynamic,{0}
+land market,{0}
+outdated information,{0}
+urban territory,{0}
+adequate classification,{0}
+mixed method,{0}
+spatial classification,{0}
+speculative land,{0}
+land value,{0}
+urbanized land,{0}
+geospatial variable,{0}
+data collection,{0}
+collection medium,{0}
+primary road,{0}
+road system,{0}
+direct observation,{0}
+observation point,{0}
+georeferenced map,{0}
+urban limit,{0}
+official slope,{0}
+judgment method,{0}
+objective classification,{0}
+contextual feature,{0}
+urban attribute,{0}
+global population,{0}
+timely population,{0}
+population count,{0}
+previous research,{0}
+strong correlation,{0}
+statistical quantification,{0}
+edge pattern,{0}
+pixel group,{0}
+openstreetmap building,{0}
+feature capture,{0}
+location impact,{0}
+predictive power,{0}
+census unit,{0}
+finding indicate,{0}
+detection analysis,{0}
+physical land,{0}
+land type,{0}
+geographical region,{0}
+rapid change,{0}
+immediate attention,{0}
+use planning,{0}
+environmental change,"{0, 1}"
+right track,{0}
+present scenario,{0}
+classification technique,{0}
+metropolitan area,{0}
+various land,{0}
+use type,{0}
+environmental management,{0}
+disaster control,{0}
+health protection,{0}
+biodiversity conservation,{0}
+mixed land,{0}
+limited predictor,{0}
+low accuracy,{0}
+street block,{0}
+minimum classification,{0}
+classification unit,{0}
+expansive set,{0}
+explicit information,{0}
+vertical height,{0}
+social medium,{0}
+automatic ensemble,{0}
+ensemble model,{0}
+base model,{0}
+randomized tree,{0}
+program imagery,{0}
+model transferability,{0}
+different region,{0}
+feature transferability,{0}
+important implication,{0}
+forest algorithm,"{0, 1}"
+economic development,{0}
+recent decade,{0}
+land expansion,{0}
+different expansion,{0}
+expansion determinant,{0}
+residential land,{0}
+public service,{0}
+service land,{0}
+commercial land,{0}
+industrial land,{0}
+use expansion,{0}
+downtown area,{0}
+poi factor,{0}
+rf estimation,{0}
+enormous difference,{0}
+potential determinant,{0}
+development stage,{0}
+actual land,{0}
+spatiotemporal knowledge,{0}
+use dynamic,{0}
+sound planning,{0}
+planning strategy,{0}
+new light,{0}
+potential driving,{0}
+driving force,{0}
+regional population,{0}
+population forecast,{0}
+learning strategy,{0}
+regional planning,{0}
+national infrastructure,{0}
+positive population,{0}
+population growth,{0}
+planning relies,{0}
+unique advantage,{0}
+demographic rate,{0}
+primary planner,{0}
+type population,{0}
+population forecasting,{0}
+biased result,{0}
+major city,{0}
+xgboost algorithm,{0}
+feature importance,{0}
+near future,{0}
+objective reference,{0}
+land price,{0}
+price distribution,{0}
+experimental study,"{0, 1}"
+open data,{0}
+spatiotemporal distribution,{0}
+residential market,{0}
+accurate mapping,"{0, 1}"
+dynamic require,{0}
+reliable land,{0}
+price prediction,{0}
+prediction model,{0}
+several land,{0}
+geographic variable,{0}
+regression algorithm,{0}
+radial basis,{0}
+vector regression,{0}
+corresponding period,{0}
+urban subcenters,{0}
+relative importance,{0}
+educational facility,{0}
+important determinant,{0}
+rlp distribution,{0}
+natural amenity,{0}
+education facility,{0}
+commercial facility,{0}
+public transportation,{0}
+infrastructure layout,{0}
+smart city,{0}
+city growth,{0}
+stream water,{0}
+water quality,{0}
+development pattern,{0}
+pattern scenario,{0}
+interpretable machine,{0}
+pollutant generation,{0}
+growth planning,{0}
+pollutant concentration,{0}
+concentration data,{0}
+total phosphate,{0}
+escherichia coli,{0}
+planning scenario,{0}
+urban density,{0}
+additive explanation,{0}
+spatial variation,{0}
+shap result,{0}
+urbanization level,{0}
+rf prediction,{0}
+prediction result,{0}
+high density,{0}
+current sprawl,{0}
+sprawl development,{0}
+potential risk,{0}
+coli pollution,{0}
+wet season,{0}
+empirical evidence,{0}
+mechanistic explanation,{0}
+quality degradation,{0}
+urban sprawl,{0}
+powerful tool,{0}
+scenario prediction,{0}
+environmental impact,{0}
+image fusion,{0}
+use change,{0}
+ecosystem service,{0}
+economic value,{0}
+accelerated land,{0}
+current challenge,{0}
+ecological goal,{0}
+landscape planning,{0}
+conservation strategy,{0}
+landscape change,{0}
+several landscape,{0}
+spatial configuration,{0}
+rotation forest,{0}
+es value,{0}
+agriculture farmland,{0}
+unused land,{0}
+spatial distribution,{0}
+observed increase,{0}
+landscape uniformity,{0}
+landscape type,{0}
+landscape diversity,{0}
+slight improvement,{0}
+benefit transfer,{0}
+transfer approach,{0}
+sensitivity analysis,{0}
+lulc change,{0}
+landscape pattern,{0}
+esv trend,{0}
+interdisciplinary approach,{0}
+environmental practitioner,{0}
+economic benefit,{0}
+ecological gain,{0}
+different landscape,{0}
+regional scale,{0}
+growth simulation,{0}
+simulation model,{0}
+artificial fish,{0}
+fish swarm,{0}
+swarm algorithm,{0}
+cellular automata,{0}
+cellular automaton,{0}
+optimum parameter,{0}
+novel model,{0}
+growth model,{0}
+land growth,{0}
+growth type,{0}
+certain range,{0}
+central area,{0}
+genetic algorithms,{0}
+distance variable,{0}
+parameter value,{0}
+model regardless,{0}
+initial parameter,{0}
+parameter setting,{0}
+cropland protection,{0}
+ecological security,{0}
+core area,{0}
+new town,{0}
+town center,{0}
+precise simulation,{0}
+potential increase,{0}
+increase area,{0}
+raw material,{0}
+material consumption,{0}
+innovative route,{0}
+construction material,{0}
+consumption analysis,{0}
+landcover map,{0}
+artificial surface,{0}
+agricultural area,{0}
+available datasets,"{0, 1}"
+official figure,{0}
+sand consumption,{0}
+gravel consumption,{0}
+new method,{0}
+observation datasets,{0}
+sustainability expert,{0}
+informed strategy,{0}
+resource consumption,{0}
+important information,{0}
+land conservation,{0}
+ecological greenway,{0}
+urbanization process,{0}
+cover change,{0}
+area change,{0}
+resolution imagery,{0}
+temporal texture,{0}
+pseudo cross,{0}
+cross multivariate,{0}
+multivariate variogram,{0}
+pcmv texture,{0}
+multiple scale,{0}
+normalized difference,{0}
+difference vegetation,"{0, 1}"
+vegetation index,"{0, 1}"
+change mapping,{0}
+tianjin area,{0}
+feature combination,{0}
+postclassification comparison,{0}
+comparison method,{0}
+result demonstrate,"{0, 1}"
+beijing area,{0}
+reliable way,{0}
+high rate,{0}
+unexpected land,{0}
+hilla city,{0}
+babylon governorate,{0}
+spatiotemporal dynamic,{0}
+driving factor,{0}
+appropriate policy,{0}
+monitoring mechanism,{0}
+ikonos satellite,{0}
+supervised image,{0}
+statistical machine,{0}
+confusion matrix,{0}
+statistical result,{0}
+enable assessment,{0}
+class change,{0}
+cover class,{0}
+allow assessment,{0}
+spatial trend,{0}
+future class,{0}
+study show,{0}
+bare land,"{0, 1}"
+land area,{0}
+increased expansion,{0}
+southwestern part,{0}
+visual resource,{0}
+polish city,{0}
+weighted regression,{0}
+small city,{0}
+settlement system,{0}
+large city,{0}
+important function,{0}
+social science,{0}
+main goal,{0}
+poland form,{0}
+segmentation procedure,{0}
+significant association,{0}
+regional variation,{0}
+spatiotemporal uncertainty,{0}
+urbanization prediction,{0}
+computational resource,{0}
+geographical information,{0}
+growth modeling,{0}
+viable tool,{0}
+policy maker,{0}
+civil organization,{0}
+design infrastructure,{0}
+public utility,{0}
+utility network,{0}
+plan housing,{0}
+housing solution,{0}
+prediction estimate,{0}
+land prediction,{0}
+different growth,{0}
+automaton model,{0}
+human knowledge,{0}
+understandable policy,{0}
+priori knowledge,{0}
+town planning,{0}
+planning policy,{0}
+land extension,{0}
+geographical condition,{0}
+growth rate,{0}
+economic driver,{0}
+inherent doubt,{0}
+certainty area,{0}
+paper aim,{0}
+planning exercise,{0}
+recent effort,{0}
+water demand,{0}
+demand modeling,{0}
+practical information,{0}
+demand pattern,{0}
+predictive model,{0}
+spatial scale,{0}
+census tract,{0}
+fine scale,{0}
+census block,{0}
+coarse scale,{0}
+cb scale,{0}
+household characteristic,{0}
+rf technique,{0}
+iterative approach,{0}
+input variable,{0}
+minimum redundancy,{0}
+ct scale,{0}
+capita income,{0}
+education level,{0}
+economic aspect,{0}
+direct relationship,{0}
+water management,{0}
+socioeconomic inequality,{0}
+planning decision,{0}
+intensity analysis,{0}
+environmental factor,{0}
+natural habitat,{0}
+natural factor,{0}
+biochemical property,{0}
+major land,{0}
+cover category,{0}
+urban region,{0}
+environmental challenge,{0}
+unique contribution,{0}
+combine usage,{0}
+period experience,{0}
+fast change,{0}
+use transformation,{0}
+whole period,{0}
+major change,{0}
+agricultural activity,{0}
+category level,{0}
+structural transformation,{0}
+transformation measure,{0}
+use harmonization,{0}
+harmonization policy,{0}
+legal reform,{0}
+underlying driver,{0}
+conflict zone,{0}
+large part,{0}
+many city,{0}
+state show,{0}
+high growth,{0}
+taliban regime,{0}
+scale displacement,{0}
+neighboring country,{0}
+us invasion,{0}
+significant population,{0}
+maximum pressure,{0}
+capital city,{0}
+limited capacity,{0}
+local authority,{0}
+unplanned urbanization,{0}
+logistic regression,{0}
+regression modelling,{0}
+settlement pattern,{0}
+image feature,"{0, 1}"
+aerial photographs,{0}
+terrain feature,{0}
+ikonos image,{0}
+unplanned settlement,{0}
+eastern part,{0}
+military base,{0}
+important factor,"{0, 1}"
+steeper slope,{0}
+gentle slope,{0}
+institutional area,{0}
+main driver,{0}
+poor infrastructure,{0}
+change modeling,{0}
+chain model,{0}
+future city,{0}
+future land,{0}
+land change,{0}
+challenging process,{0}
+spatial modeling,{0}
+expansion pattern,{0}
+simulation capability,{0}
+environmental variable,{0}
+urban center,{0}
+potential transition,{0}
+transition map,{0}
+additional input,{0}
+actual map,{0}
+irbid city,{0}
+accurate prediction,{0}
+improved model,{0}
+model prediction,{0}
+predicted map,{0}
+agricultural region,{0}
+vital role,"{0, 1}"
+food security,{0}
+perennial drainage,{0}
+study case,"{0, 1}"
+digital elevation,"{0, 1}"
+elevation model,"{0, 1}"
+riparian vegetation,{0}
+riverine system,{0}
+soil erosion,{0}
+increased infiltration,{0}
+buffer zone,{0}
+urban space,{0}
+illegal occupation,{0}
+hydrologic risk,{0}
+permanent protection,{0}
+digital image,{0}
+processing workflow,{0}
+surface water,{0}
+ephemeral condition,{0}
+first trimester,{0}
+accurate assessment,{0}
+streamflow condition,{0}
+water runoff,{0}
+flow regime,{0}
+decision maker,{0}
+reliable information,{0}
+drainage network,{0}
+area partitioning,{0}
+spatiotemporal convolution,{0}
+dynamic land,{0}
+change simulation,{0}
+transition rule,{0}
+entire region,{0}
+neighborhood effect,{0}
+data time,{0}
+time slice,{0}
+neighborhood interaction,{0}
+spatiotemporal dependency,{0}
+spatiotemporal neighborhood,{0}
+neighborhood feature,{0}
+feature learning,"{0, 1}"
+partitioning strategy,{0}
+conversion probability,{0}
+probability map,{0}
+dynamic simulation,{0}
+simulation result,{0}
+entire study,{0}
+stochastic factor,{0}
+traditional model,{0}
+result illustrate,{0}
+composite pattern,{0}
+som partitioning,{0}
+partitioning result,{0}
+optimal time,{0}
+time step,{0}
+positive correlation,{0}
+temporal dependency,{0}
+population spatialization,{0}
+beijing city,{0}
+similar feature,{0}
+statistical method,{0}
+multisource remote,{0}
+population census,{0}
+census data,{0}
+predictive algorithm,{0}
+variable combination,{0}
+population modeling,{0}
+developed model,"{0, 1}"
+mean absolute,{0}
+absolute error,{0}
+census population,{0}
+town scale,{0}
+valuable reference,{0}
+public health,{0}
+disaster prevention,"{0, 1}"
+use plan,{0}
+deep understanding,{0}
+different domain,{0}
+key challenge,{0}
+individual make,{0}
+location decision,{0}
+human agent,{0}
+use conversion,{0}
+conversion model,{0}
+use master,{0}
+master plan,{0}
+shenzhen city,{0}
+empirical data,{0}
+simulation accuracy,{0}
+learning matter,{0}
+decision model,{0}
+detailed planning,{0}
+growth trajectory,{0}
+service facility,{0}
+facility planning,{0}
+planning effectiveness,{0}
+basic element,{0}
+combinatory trend,{0}
+complex situation,{0}
+hidden relationship,{0}
+human alone,{0}
+target plot,{0}
+specific case,{0}
+combinatory land,{0}
+use index,{0}
+biased population,{0}
+population coverage,{0}
+temporal length,{0}
+smart card,{0}
+effective analysis,{0}
+landuse pattern,{0}
+municipal water,{0}
+water consumption,{0}
+consumption data,{0}
+classification strategy,{0}
+socioeconomic type,{0}
+public facility,{0}
+various form,{0}
+consumption time,{0}
+time series,{0}
+socioeconomic function,{0}
+diversity index,{0}
+information entropy,{0}
+spatial expansion,{0}
+city center,{0}
+industrial development,{0}
+consumption pattern,{0}
+municipal service,{0}
+service data,{0}
+large population,{0}
+spatiotemporal modeling,{0}
+general framework,{0}
+important variable,{0}
+urban footprint,{0}
+framework model,{0}
+spatiotemporal regression,{0}
+regression problem,{0}
+binary classifier,{0}
+temporal correction,{0}
+previous value,{0}
+current value,{0}
+semantic inpainting,"{0, 1}"
+inpainting algorithm,{0}
+free data,{0}
+landsat archive,{0}
+layer framework,{0}
+interested user,{0}
+approximate growth,{0}
+growth prediction,{0}
+main advantage,{0}
+historical data,{0}
+new machine,{0}
+explanatory input,{0}
+american city,{0}
+geomorphological characteristic,{0}
+close agreement,{0}
+correlation coefficient,{0}
+planning cycle,{0}
+resilient city,{0}
+slum settlement,{0}
+boundary data,{0}
+slum upgrading,{0}
+vhr imagery,{0}
+initial land,{0}
+boundary layer,{0}
+homogenous neighborhood,{0}
+multiple context,{0}
+texture image,{0}
+physical characteristic,"{0, 1}"
+regression tree,"{0, 1}"
+nonslum settlement,{0}
+effective image,{0}
+reference data,{0}
+training site,{0}
+image indicator,{0}
+slum mapping,{0}
+building layout,{0}
+building density,{0}
+roof characteristic,{0}
+caribbean country,{0}
+similar situation,{0}
+data availability,{0}
+cover zone,{0}
+slum region,{0}
+economic growth,"{0, 1}"
+urban slum,{0}
+slum area,{0}
+proper observation,{0}
+possible livelihood,{0}
+livelihood condition,{0}
+future implementation,{0}
+development activity,{0}
+feature identification,{0}
+important tool,{0}
+major objective,{0}
+different land,{0}
+chingrajpara area,{0}
+landcover classification,{0}
+future planning,{0}
+spatial factor,{0}
+building height,{0}
+comparative case,{0}
+serious issue,{0}
+issue worldwide,{0}
+spatial characteristic,"{0, 1}"
+valuable implication,{0}
+previous attempt,{0}
+influence building,{0}
+different development,{0}
+detailed information,{0}
+neighbor algorithm,{0}
+administrative center,{0}
+transportation network,{0}
+new building,{0}
+use structure,{0}
+key component,{0}
+urban system,{0}
+sensed activity,{0}
+activity data,{0}
+sensed land,{0}
+cover product,{0}
+developed land,{0}
+behavioral feature,{0}
+impervious surface,"{0, 1}"
+surface cover,{0}
+change product,{0}
+model assessment,{0}
+classification workflow,{0}
+physical feature,"{0, 1}"
+identified land,{0}
+detailed land,{0}
+viable way,{0}
+traditional approach,{0}
+mapping product,{0}
+facing sustainability,{0}
+sustainability threat,{0}
+big time,{0}
+series data,{0}
+temporal dynamic,"{0, 1}"
+accuracy average,{0}
+urban extent,{0}
+political uprising,{0}
+arab spring,{0}
+cropland area,{0}
+annual urbanization,{0}
+urbanization rate,{0}
+annual rate,{0}
+f indings,{0}
+northern region,{0}
+essential factor,{0}
+surface land,{0}
+change phenomenon,{0}
+r programming,{0}
+programming language,{0}
+nn ge,{0}
+test dataset,{0}
+ge classifier,{0}
+training dataset,"{0, 1}"
+dtnb algorithms,{0}
+effective method,{0}
+oli image,{0}
+mathematical algorithms,{0}
+test datasets,"{0, 1}"
+rmse value,{0}
+adoption pattern,{0}
+low impact,{0}
+impact development,{0}
+classification tree,{0}
+storm water,{0}
+consent decree,{0}
+private landowner,{0}
+infiltration effort,{0}
+green infrastructure,"{0, 1}"
+infrastructure project,{0}
+wastewater system,{0}
+private land,{0}
+land owner,{0}
+potential opportunity,{0}
+lid project,{0}
+lid configuration,{0}
+adoption strategy,{0}
+high performance,{0}
+performance decision,{0}
+adoption category,{0}
+spatial dataset,{0}
+sufficient quality,{0}
+scientific management,{0}
+correlative study,{0}
+urban forest,{0}
+engine platform,{0}
+significant opportunity,{0}
+forest machine,{0}
+pixel scale,{0}
+sample point,{0}
+field visit,{0}
+validation sample,{0}
+forest cover,{0}
+average percentage,{0}
+western part,{0}
+use policy,{0}
+urbanizing district,{0}
+annual land,{0}
+timely assessment,{0}
+urbanizing area,{0}
+automata modelling,{0}
+future urbanization,{0}
+local policy,{0}
+direct response,{0}
+local land,{0}
+strict enforcement,{0}
+national policy,{0}
+subsequent year,{0}
+previous farmland,{0}
+management agency,{0}
+baseline scenario,{0}
+new growth,{0}
+industry zone,{0}
+overall plan,{0}
+plan scenario,{0}
+significant amount,{0}
+marginal farmland,{0}
+urban zone,{0}
+hierarchical farmland,{0}
+farmland protection,{0}
+protection policy,{0}
+local setting,{0}
+sustainable urbanization,{0}
+farmland loss,{0}
+linear waterway,{0}
+derelict site,{0}
+gi development,{0}
+dynamic urbanscapes,{0}
+fuzzy inference,{0}
+inference system,{0}
+grey transformation,{0}
+transformation likelihood,{0}
+vacant site,{0}
+waterway corridor,{0}
+social criterion,{0}
+predictive capacity,{0}
+logistic model,{0}
+site size,{0}
+air pollution,"{0, 1}"
+main influencers,{0}
+site transformation,{0}
+gi transformation,{0}
+grey development,{0}
+current trend,{0}
+planning practice,{0}
+geographic object,{0}
+hydrologic modelling,{0}
+catchment scale,"{0, 1}"
+city initiative,{0}
+widespread installation,{0}
+new stormwater,{0}
+stormwater infrastructure,{0}
+green roofs,"{0, 1}"
+permeable pavement,{0}
+model input,{0}
+various authority,{0}
+method show,{0}
+great promise,{0}
+category relevant,{0}
+specific application,{0}
+urban catchment,{0}
+catchment area,{0}
+bayesian machine,{0}
+overall land,{0}
+subsequent inclusion,{0}
+supplementary data,{0}
+parcel delineation,{0}
+additional rule,{0}
+scale hydrologic,{0}
+generated land,{0}
+cover result,{0}
+rainfall volume,{0}
+h design,{0}
+design storm,{0}
+city implementation,{0}
+multiple methodology,{0}
+urgent policy,{0}
+policy issue,{0}
+african city,{0}
+critical step,{0}
+urban policy,{0}
+household survey,{0}
+survey data,{0}
+monetary poverty,{0}
+poverty rate,{0}
+neighborhood level,{0}
+important policy,{0}
+policy implication,{0}
+economic opportunity,{0}
+spatiotemporal detection,{0}
+large basin,{0}
+awash basin,{0}
+environmental condition,{0}
+wise use,{0}
+main objective,{0}
+landsat image,{0}
+significant increment,{0}
+areal extent,{0}
+shrubland coverage,{0}
+change matrix,{0}
+conversion rate,{0}
+modeled future,{0}
+change scenario,{0}
+significant expansion,{0}
+subbasin level,{0}
+multispectral satellite,{0}
+many problem,{0}
+planning sector,{0}
+interval period,{0}
+past decade,"{0, 1}"
+processing time,{0}
+different band,"{0, 1}"
+kappa statistic,{0}
+significant change,{0}
+water infrastructure,{0}
+network method,{0}
+explorative model,{0}
+exploration time,{0}
+water system,{0}
+system adaptation,{0}
+adaptation planning,{0}
+specific network,{0}
+network structure,{0}
+training pattern,{0}
+exploration data,{0}
+spatial randomness,{0}
+safety coefficient,{0}
+observed data,{0}
+validation process,{0}
+overestimation problem,{0}
+acceptable range,{0}
+final decision,{0}
+multiple land,{0}
+use transition,{0}
+numerous machine,{0}
+change model,{0}
+use class,"{0, 1}"
+specific land,{0}
+important example,{0}
+rural protection,{0}
+urban subclass,{0}
+subclass development,{0}
+new model,{0}
+multiple transition,{0}
+ganzhou city,{0}
+satisfactory goodness,{0}
+use map,{0}
+simulated future,{0}
+future map,{0}
+main pathway,{0}
+multiple law,{0}
+policy making,"{0, 1}"
+sustainable land,{0}
+strengthened regulation,{0}
+land supply,{0}
+ecological function,{0}
+key point,{0}
+use function,{0}
+use management,{0}
+accelerated urbanization,{0}
+future pattern,{0}
+urban issue,{0}
+traditional machine,{0}
+accurate result,{0}
+ca model,{0}
+insufficient consideration,{0}
+urban transition,{0}
+rule mining,{0}
+effective deep,{0}
+united mining,{0}
+substantial potential,{0}
+neighborhood information,{0}
+receptive field,"{0, 1}"
+markov chain,{0}
+expansion process,{0}
+transformational relation,{0}
+expansion status,{0}
+landscape index,{0}
+index similarity,{0}
+expansion result,{0}
+result reveal,"{0, 1}"
+primary factor,{0}
+forests classification,{0}
+texture analysis,{0}
+great number,{0}
+planning problem,{0}
+use mapping,{0}
+analysis classification,{0}
+spatial index,{0}
+visual inspection,{0}
+texture value,{0}
+crossvalidation scheme,{0}
+ancillary data,{0}
+effective planning,{0}
+fundamental concentration,{0}
+socioeconomic improvement,{0}
+specific condition,{0}
+noteworthy issue,{0}
+metropolitan zone,{0}
+significant factor,{0}
+temporal characteristic,{0}
+lahore city,{0}
+change analysis,{0}
+different technique,{0}
+geospatial technique,{0}
+precision appraisal,{0}
+characterized map,{0}
+distinctive image,{0}
+transition probability,{0}
+probability matrix,{0}
+region change,{0}
+future year,{0}
+informational index,{0}
+primary roadway,{0}
+micro level,{0}
+ensemble classifier,{0}
+accurate information,{0}
+human interpretation,{0}
+sensor imagery,{0}
+intricate nature,{0}
+changing pattern,{0}
+time period,{0}
+ecological risk,{0}
+critical land,{0}
+environmental resource,{0}
+improved classification,{0}
+classification algorithms,{0}
+landsat imagery,"{0, 1}"
+temporal information,"{0, 1}"
+quantum increase,{0}
+producer accuracy,{0}
+kappa value,{0}
+thematic land,{0}
+map show,{0}
+study period,{0}
+net increase,{0}
+increase rate,{0}
+annual growth,{0}
+peripheral area,{0}
+annual expansion,{0}
+expansion rate,{0}
+core city,{0}
+city area,{0}
+agricultural land,{0}
+vegetation cover,{0}
+main factor,{0}
+city towards,{0}
+employment center,{0}
+thematic map,{0}
+spatial information,"{0, 1}"
+detailed understanding,{0}
+growth dynamic,{0}
+change pattern,{0}
+modeling framework,{0}
+change science,{0}
+ml concept,{0}
+new paradigm,{0}
+nonexclusive class,{0}
+considerable merit,{0}
+several application,{0}
+potential model,{0}
+ca transition,{0}
+ann model,{0}
+standard evaluation,{0}
+evaluation measure,{0}
+integrated model,{0}
+ltm model,{0}
+testing procedure,{0}
+luc model,{0}
+fit calibration,{0}
+calibration value,{0}
+modified model,{0}
+environmental issue,{0}
+heterogeneous landscape,{0}
+landsat data,{0}
+detection algorithm,{0}
+net change,{0}
+annual change,{0}
+annual decrease,{0}
+natural land,{0}
+drastic decline,{0}
+natural area,{0}
+valuable baseline,{0}
+current situation,{0}
+appropriate strategy,{0}
+land recognition,{0}
+recognition system,{0}
+salient point,{0}
+significant impact,{0}
+positive impact,{0}
+mining land,{0}
+construction land,{0}
+common sense,{0}
+actual construction,{0}
+endogenous optimization,{0}
+optimization method,"{0, 1}"
+input factor,{0}
+correlation requirement,{0}
+functional form,{0}
+planning model,{0}
+general requirement,{0}
+surface temperature,{0}
+unintended spread,{0}
+artificial component,{0}
+urban heat,"{0, 1}"
+heat island,"{0, 1}"
+negative influence,{0}
+human health,{0}
+energy demand,{0}
+water shortage,{0}
+relevant role,{0}
+ground surface,{0}
+local temperature,{0}
+certain area,{0}
+lst model,{0}
+local scale,{0}
+algorithm base,{0}
+base approach,{0}
+comprehensive data,{0}
+gis functionality,{0}
+complex map,{0}
+map production,{0}
+considerable efficiency,{0}
+expanded investigation,{0}
+environmental significance,{0}
+microclimate perception,{0}
+improved decision,{0}
+neighborhood scale,{0}
+problem identification,{0}
+support mitigation,{0}
+geospatial application,{0}
+current literature,{0}
+svm method,{0}
+attribute selection,{0}
+optimal parameter,{0}
+parameter choice,{0}
+svm technique,{0}
+svm model,{0}
+model building,{0}
+building procedure,{0}
+detailed evaluation,"{0, 1}"
+output result,{0}
+svm parameter,{0}
+geospatial datasets,{0}
+spatial attribute,{0}
+subset method,{0}
+model evaluation,{0}
+real land,{0}
+use datasets,{0}
+result indicate,{0}
+model perform,{0}
+data sampling,{0}
+informative subset,{0}
+optimal learning,{0}
+learning parameter,{0}
+automatic classification,{0}
+resolution land,{0}
+new data,"{0, 1}"
+data weighting,{0}
+weighting procedure,{0}
+central tendency,{0}
+tendency measure,{0}
+tree shade,{0}
+shade mapping,{0}
+space analysis,{0}
+urban hydrologic,{0}
+hydrologic modeling,{0}
+cover data,{0}
+high definition,{0}
+atmospheric image,{0}
+image consisting,{0}
+formal tectology,{0}
+different image,"{0, 1}"
+different area,{0}
+weighting method,{0}
+different pattern,{0}
+mean value,{0}
+harmonic value,{0}
+central value,{0}
+data weight,{0}
+weight coefficient,{0}
+calculation process,{0}
+weighting coefficient,{0}
+second stage,"{0, 1}"
+different classification,{0}
+test data,{0}
+cross validation,{0}
+svm classification,{0}
+mode measure,{0}
+obtained result,{0}
+classification success,{0}
+success rate,{0}
+performance analysis,"{0, 1}"
+basis function,{0}
+function network,{0}
+perceptron network,{0}
+urban change,"{0, 1}"
+environment protection,{0}
+protection activist,{0}
+method exists,{0}
+ml technique,{0}
+reference map,{0}
+statistical measure,{0}
+spatial distance,{0}
+distance deviation,{0}
+explanatory variable,{0}
+close match,{0}
+spatial accuracy,{0}
+systematic data,{0}
+land consumption,{0}
+systematic approach,{0}
+useful structure,{0}
+multivariate municipality,{0}
+municipality data,{0}
+consecutive step,{0}
+important result,{0}
+cluster mean,{0}
+symbolic machine,{0}
+understandable description,{0}
+classification rule,{0}
+structure type,{0}
+initial interest,{0}
+basic instrument,{0}
+lc object,{0}
+graph measure,{0}
+different parameter,"{0, 1}"
+measure importance,{0}
+independent test,{0}
+node degree,{0}
+strong impact,{0}
+coastal area,"{0, 1}"
+intensive resource,{0}
+cover information,{0}
+area development,{0}
+spatiotemporal change,{0}
+change statistic,{0}
+dense vegetation,{0}
+bare soil,{0}
+anthropogenic impact,{0}
+geoconservation activity,{0}
+force analysis,{0}
+boosted regression,{0}
+area expansion,{0}
+many research,"{0, 1}"
+core topic,{0}
+basic component,{0}
+scientific basis,{0}
+evolution process,{0}
+expansion trend,{0}
+rational control,{0}
+control policy,{0}
+shenyang city,{0}
+arcgis software,{0}
+distance factor,{0}
+economic factor,{0}
+topographic map,{0}
+statistical yearbook,{0}
+dependent variable,{0}
+learning tradition,{0}
+influencing factor,{0}
+empirical relationship,{0}
+binary dependent,{0}
+continuous variable,{0}
+main driving,{0}
+relative influence,{0}
+brt analysis,{0}
+regression analysis,{0}
+development zone,{0}
+residential area,{0}
+important driving,{0}
+total contribution,{0}
+contribution rate,{0}
+rural settlement,{0}
+much influence,{0}
+location factor,{0}
+spatial form,{0}
+zone construction,{0}
+comparative analysis,{0}
+urban web,{0}
+athens agglomeration,{0}
+continuous increase,{0}
+total coverage,{0}
+new development,{0}
+development project,{0}
+preparation period,{0}
+imagery archive,{0}
+athens area,{0}
+urban feature,"{0, 1}"
+inductive learning,{0}
+production rule,{0}
+result validation,{0}
+validation procedure,{0}
+messogia plain,{0}
+international airport,{0}
+industrial area,{0}
+overall increase,{0}
+accuracy comparison,{0}
+basic information,{0}
+advanced science,{0}
+ecological management,{0}
+important subject,{0}
+research interest,{0}
+multidimensional feature,{0}
+object feature,{0}
+linear model,{0}
+deciduous forest,{0}
+japanese cedar,{0}
+red pine,{0}
+paddy field,{0}
+textural information,{0}
+limited feature,{0}
+accurate classifier,{0}
+dense time,{0}
+time stack,{0}
+mining approach,{0}
+many part,{0}
+ecological process,{0}
+material flow,{0}
+land transformation,{0}
+early challenge,{0}
+bare ground,{0}
+spatial variability,{0}
+composite change,{0}
+central premise,{0}
+temporal trajectory,{0}
+temporal signature,{0}
+spectral region,{0}
+earth image,{0}
+data gap,{0}
+likelihood classifier,{0}
+transformed feature,{0}
+data stack,{0}
+reduced number,{0}
+urban core,{0}
+village settlement,{0}
+genetic algorithm,{0}
+data quality,{0}
+particular completeness,{0}
+essential aspect,{0}
+completeness error,{0}
+methodological framework,{0}
+approach consisting,{0}
+osm data,{0}
+squared correlation,{0}
+interregional comparison,{0}
+european region,{0}
+model performance,"{0, 1}"
+presented methodology,{0}
+informal settlement,{0}
+settlement area,{0}
+interimage system,{0}
+bird sensor,{0}
+test site,"{0, 1}"
+open source,{0}
+free access,{0}
+access system,{0}
+semantic net,{0}
+classification step,{0}
+appropriate segmentation,{0}
+segmentation parameter,{0}
+cover classes,{0}
+urban block,{0}
+analysis unit,{0}
+customized feature,{0}
+geometrical structure,{0}
+automatic mapping,{0}
+main functionality,{0}
+novel method,"{0, 1}"
+new generation,{0}
+regression domain,{0}
+svm modeling,{0}
+various factor,{0}
+unchanged data,{0}
+traditional method,"{0, 1}"
+reliable performance,{0}
+impact analysis,{0}
+mankato area,{0}
+gis modelling,{0}
+essential information,{0}
+change dynamic,{0}
+aerial photography,{0}
+quickbird imagery,{0}
+dramatic urbanization,{0}
+annual air,{0}
+pollution removal,{0}
+removal rate,{0}
+analyst classifier,{0}
+lulc data,{0}
+valuable input,{0}
+knowledge discovery,{0}
+metropolitan land,{0}
+use evolution,{0}
+evaluation procedure,{0}
+innovative tool,{0}
+huge amount,"{0, 1}"
+territorial system,{0}
+useful information,{0}
+various type,{0}
+extracted knowledge,{0}
+spatial transformation,{0}
+transformation rule,{0}
+mining tool,{0}
+classification scheme,{0}
+classification schema,{0}
+independent variable,{0}
+spatial location,{0}
+conclusion drawn,{0}
+urban pattern,{0}
+spatial analysis,{0}
+prediction error,{0}
+critical role,{1}
+geospatial database,{1}
+facility siting,{1}
+hydrological analysis,{1}
+urban design,{1}
+big gap,{1}
+dem data,{1}
+practical idea,{1}
+sr method,{1}
+bicubic interpolation,{1}
+local variation,{1}
+recent development,{1}
+great progress,{1}
+terrain character,{1}
+huge difference,{1}
+elevation field,{1}
+value field,{1}
+traditional interpolation,{1}
+interpolation method,{1}
+sr experiment,{1}
+surface parameterization,{1}
+model development,{1}
+small catchment,{1}
+infrastructure classification,{1}
+dsm information,{1}
+bayes classifier,{1}
+chessboard grid,{1}
+classification efficiency,{1}
+weather condition,{1}
+image layer,{1}
+overcast day,{1}
+winter day,{1}
+dsm layer,{1}
+urban stormwater,{1}
+stormwater management,{1}
+management model,{1}
+demographic analysis,{1}
+segmentation model,{1}
+new deep,{1}
+cascaded multiscale,{1}
+multiscale feature,{1}
+feature fusion,{1}
+classification network,{1}
+segmentation network,{1}
+nonlocal operation,{1}
+excessive noise,{1}
+computational effort,{1}
+multiscale prediction,{1}
+deep supervision,{1}
+prediction performance,{1}
+different scale,{1}
+different remote,{1}
+image datasets,{1}
+generalization ability,{1}
+novel deeply,{1}
+building change,{1}
+crucial role,{1}
+extensive attention,{1}
+method suffer,{1}
+limited accuracy,{1}
+information loss,{1}
+inadequate capability,{1}
+bcd task,{1}
+spatial attention,{1}
+raw image,{1}
+difference feature,{1}
+pyramid pooling,{1}
+detection performance,{1}
+supervision module,{1}
+middle layer,{1}
+distinctive feature,{1}
+qualitative experiment,{1}
+building datasets,{1}
+efficiency analysis,{1}
+analysis reveals,{1}
+great balance,{1}
+bcd performance,{1}
+many field,{1}
+disaster detection,{1}
+natural image,{1}
+image field,{1}
+supervised scene,{1}
+unsupervised scene,{1}
+actual need,{1}
+adversarial net,{1}
+gating unit,{1}
+discriminative network,{1}
+representation capability,{1}
+semisupervised classification,{1}
+feature map,{1}
+dependence relationship,{1}
+sag module,{1}
+module aim,{1}
+important scene,{1}
+scene region,{1}
+branch aim,{1}
+semantic representation,{1}
+input image,{1}
+discriminant ability,{1}
+new optimization,{1}
+optimization term,{1}
+generator loss,{1}
+eurosat data,{1}
+terrain analysis,{1}
+natural feature,{1}
+feature detection,{1}
+geoai research,{1}
+research method,{1}
+deep machine,{1}
+detection pipeline,{1}
+new feature,{1}
+channel expansion,{1}
+detection model,{1}
+simultaneous machine,{1}
+sensing imagery,{1}
+fusion strategy,{1}
+enriched information,{1}
+information content,{1}
+different set,{1}
+augmentation technique,{1}
+joint building,{1}
+important input,{1}
+great deal,{1}
+building map,{1}
+disaster response,{1}
+response service,{1}
+land surveying,{1}
+network detection,{1}
+detection problem,{1}
+segmentation task,{1}
+single model,{1}
+overall performance,{1}
+binary decomposition,{1}
+decomposition technique,{1}
+learning literature,{1}
+multiclass problem,{1}
+different model,{1}
+aggregation step,{1}
+final output,{1}
+output label,{1}
+segmentation problem,{1}
+road class,{1}
+challenging problem,{1}
+problem scheme,{1}
+robust experimental,{1}
+decomposition strategy,{1}
+learning scheme,{1}
+binary segmentation,{1}
+scale quantification,{1}
+statistical index,{1}
+sentinel series,{1}
+regression technique,{1}
+labeled data,{1}
+significant effort,{1}
+manual labeling,{1}
+visual interpretation,{1}
+evaluation data,{1}
+extensive experimentation,{1}
+model configuration,{1}
+statistical accuracy,{1}
+brighter prediction,{1}
+siamese network,{1}
+earth population,{1}
+efficient monitoring,{1}
+monitoring tool,{1}
+crucial point,{1}
+vertical axis,{1}
+new construction,{1}
+valuable source,{1}
+method start,{1}
+conventional image,{1}
+processing tool,{1}
+significant loss,{1}
+deep method,{1}
+siamese architecture,{1}
+kpconv network,{1}
+hyperspectral system,{1}
+lidar scanner,{1}
+city management,{1}
+road edge,{1}
+first result,{1}
+vehicle detection,{1}
+various challenge,{1}
+nowadays vehicle,{1}
+security concern,{1}
+various crime,{1}
+child kidnapping,{1}
+traffic misconduct,{1}
+sexual misconduct,{1}
+rescue vehicle,{1}
+hill area,{1}
+digital watermarking,{1}
+vehicle tracking,{1}
+toll plaza,{1}
+counting task,{1}
+complex background,{1}
+small size,{1}
+visual appearance,{1}
+appearance object,{1}
+traditional methodology,{1}
+robust algorithms,{1}
+brief description,{1}
+traditional algorithms,{1}
+learning concept,{1}
+comprehensive analysis,{1}
+corresponding challenge,{1}
+uav photogrammetry,{1}
+essential part,{1}
+photogrammetry work,{1}
+data updating,{1}
+extraction accuracy,{1}
+complex area,{1}
+various pattern,{1}
+complex structure,{1}
+unique style,{1}
+vdvi band,{1}
+dsm band,{1}
+separate building,{1}
+ground object,{1}
+small building,{1}
+tree branch,{1}
+open standard,{1}
+standard dataset,{1}
+footprint information,{1}
+key factor,{1}
+observation field,{1}
+outstanding improvement,{1}
+extraction field,{1}
+hierarchical feature,{1}
+building prediction,{1}
+different size,{1}
+depict building,{1}
+varied size,{1}
+extra lightweight,{1}
+lightweight encoder,{1}
+representative building,{1}
+building feature,{1}
+scale attention,{1}
+attention module,{1}
+final building,{1}
+large earthquake,{1}
+earthquake occurs,{1}
+damage distribution,{1}
+housing structure,{1}
+prevention measure,{1}
+public organization,{1}
+single building,{1}
+recent machine,{1}
+damage detection,{1}
+detection system,{1}
+structural attribute,{1}
+detection accuracy,{1}
+affected area,{1}
+kumamoto earthquake,{1}
+coastal development,{1}
+different issue,{1}
+extreme storm,{1}
+storm event,{1}
+risk mitigation,{1}
+overall coastal,{1}
+coastal zone,{1}
+zone management,{1}
+traditional bathymetry,{1}
+bathymetry measurement,{1}
+various complexity,{1}
+incident wave,{1}
+wave signature,{1}
+inversion model,{1}
+physical model,{1}
+real data,{1}
+ocean depth,{1}
+simulated case,{1}
+bathymetry estimation,{1}
+novel application,{1}
+aerial videos,{1}
+support system,{1}
+segmentation algorithms,{1}
+segmentation method,{1}
+additional module,{1}
+optical flow,{1}
+computational overhead,{1}
+research work,{1}
+cnn architecture,{1}
+consistent labeling,{1}
+accurate localization,{1}
+class label,{1}
+manipaluavid dataset,{1}
+pretrained model,{1}
+urban street,{1}
+street scene,{1}
+final layer,{1}
+productive activity,{1}
+dynamic monitoring,{1}
+suburban construction,{1}
+construction inspection,{1}
+high intraclass,{1}
+intraclass variance,{1}
+decoder architecture,{1}
+attention gate,{1}
+pooling module,{1}
+gated feature,{1}
+distinguish building,{1}
+complex surroundings,{1}
+aerial building,{1}
+building dataset,{1}
+rural building,{1}
+experiment show,{1}
+recent model,{1}
+practical scenario,{1}
+significant role,{1}
+civil infrastructure,{1}
+infrastructure construction,{1}
+disaster rescuing,{1}
+geographic image,{1}
+image retrieval,{1}
+geoinformatics community,{1}
+many approach,{1}
+previous method,{1}
+abundant information,{1}
+hsr remote,{1}
+mentioned challenge,{1}
+deep framework,{1}
+meaningful object,{1}
+hsr image,{1}
+deep representation,{1}
+augmented image,{1}
+image representation,{1}
+fused representation,{1}
+global latent,{1}
+latent feature,{1}
+different object,{1}
+sensing image,{1}
+image dataset,{1}
+strong baseline,{1}
+data analytics,{1}
+corresponding applicability,{1}
+height map,{1}
+valuable data,{1}
+inexpensive satellite,{1}
+basic model,{1}
+generalized framework,{1}
+decoder leverage,{1}
+secondary task,{1}
+adversarial term,{1}
+loss function,{1}
+learned uncertainty,{1}
+uncertainty estimate,{1}
+specific instance,{1}
+common data,{1}
+new dataset,{1}
+independent study,{1}
+fundamental task,{1}
+appropriate method,{1}
+many variation,{1}
+viewpoint variation,{1}
+significant accuracy,{1}
+image training,{1}
+epoch time,{1}
+local climate,{1}
+climate zone,{1}
+zone mapping,{1}
+rapid development,{1}
+forty year,{1}
+urban citizen,{1}
+urbanization lead,{1}
+economic progress,{1}
+extra heat,{1}
+new concept,{1}
+island research,{1}
+standard classification,{1}
+classification system,{1}
+minimum diameter,{1}
+valid effect,{1}
+urban climate,{1}
+wudapt method,{1}
+lcz mapping,{1}
+environmental context,{1}
+fifteen city,{1}
+economic region,{1}
+multispectral data,{1}
+residual learning,{1}
+large image,{1}
+small image,{1}
+image size,{1}
+natural class,{1}
+urban class,{1}
+large input,{1}
+input size,{1}
+environment context,{1}
+lcz model,{1}
+satisfactory result,{1}
+domain shift,{1}
+advanced domain,{1}
+domain adaptation,{1}
+adaptation method,{1}
+yolo framework,{1}
+predominant feature,{1}
+solar energy,{1}
+energy suitability,{1}
+suitability analysis,{1}
+increased availability,{1}
+related work,{1}
+layer architecture,{1}
+constrained regression,{1}
+building size,{1}
+size prediction,{1}
+invariant augmentation,{1}
+prediction phase,{1}
+solution quality,{1}
+planet database,{1}
+jaccard index,{1}
+real mask,{1}
+outlet etc,{1}
+low altitude,{1}
+recent time,{1}
+powerful sensor,{1}
+laser rangefinder,{1}
+rangefinder sensor,{1}
+stereo vision,{1}
+vision system,{1}
+vision method,{1}
+urban intelligent,{1}
+intelligent navigator,{1}
+low power,{1}
+power consumption,{1}
+different street,{1}
+street object,{1}
+bump sign,{1}
+initial learning,{1}
+learning rate,{1}
+specified location,{1}
+several challenge,{1}
+conventional sensor,{1}
+sar mapping,{1}
+mapping approach,{1}
+significant cost,{1}
+cost saving,{1}
+ground control,{1}
+control point,{1}
+cloud coverage,{1}
+independent image,{1}
+turnaround time,{1}
+population estimation,{1}
+whilst mapping,{1}
+many interest,{1}
+topographic mapping,{1}
+artificial intelligent,{1}
+intelligent problem,{1}
+geospatial infrastructure,{1}
+high demand,{1}
+current technique,{1}
+future trend,{1}
+overhead imagery,{1}
+crop yield,{1}
+yield forecasting,{1}
+large domain,{1}
+domain gap,{1}
+ground imagery,{1}
+inherent complexity,{1}
+vast amount,{1}
+imagery share,{1}
+common structure,{1}
+unsupervised feature,{1}
+architectural change,{1}
+adversarial training,{1}
+training scheme,{1}
+pretext task,{1}
+unified approach,{1}
+overhead scene,{1}
+scene parsing,{1}
+network extraction,{1}
+big remote,{1}
+airborne sensor,{1}
+huge number,{1}
+whole earth,{1}
+different side,{1}
+several domain,{1}
+hazard monitoring,{1}
+global climate,{1}
+successful technique,{1}
+vision task,{1}
+significant challenge,{1}
+available training,{1}
+target task,{1}
+recent literature,{1}
+various way,{1}
+cnns parameter,{1}
+annotated dataset,{1}
+limited availability,{1}
+hybrid classification,{1}
+rdd image,{1}
+local region,{1}
+learning paradigm,{1}
+efficient classification,{1}
+application scenario,{1}
+building detection,{1}
+learning act,{1}
+mathematical transformation,{1}
+raw input,{1}
+appropriate form,{1}
+mathematical computation,{1}
+physical property,{1}
+building structure,{1}
+physical interpretation,{1}
+network model,{1}
+input representation,{1}
+representation suitable,{1}
+complex urban,{1}
+various kind,{1}
+test project,{1}
+elevation data,{1}
+challenging topic,{1}
+consecutive stage,{1}
+candidate identification,{1}
+single vehicle,{1}
+vehicle extraction,{1}
+previous approach,{1}
+first stage,{1}
+third stage,{1}
+specific feature,{1}
+sensor input,{1}
+superior performance,{1}
+residual network,{1}
+feature engineering,{1}
+residual block,{1}
+discriminative feature,{1}
+spatial contexts,{1}
+hyperspectral imagery,{1}
+block connect,{1}
+convolutional layer,{1}
+identity mapping,{1}
+batch normalization,{1}
+learning process,{1}
+trained model,{1}
+qualitative result,{1}
+binary feature,{1}
+feature classification,{1}
+fast building,{1}
+major stage,{1}
+area detection,{1}
+building contour,{1}
+contour extraction,{1}
+superpixel segmentation,{1}
+subsampled orthophoto,{1}
+original orthophoto,{1}
+building contours,{1}
+intersection likewise,{1}
+local feature,{1}
+binary descriptor,{1}
+binary description,{1}
+texture detail,{1}
+color channel,{1}
+different roof,{1}
+roof color,{1}
+desirable result,{1}
+historical cityscape,{1}
+active research,{1}
+research field,{1}
+generalization capability,{1}
+several machine,{1}
+shadow detection,{1}
+shadow compensation,{1}
+compensation method,{1}
+special architecture,{1}
+objective evaluation,{1}
+computational complexity,{1}
+change information,{1}
+geographical location,{1}
+disaster evaluation,{1}
+deforestation monitoring,{1}
+camera sensor,{1}
+aperture artifact,{1}
+significant result,{1}
+change map,{1}
+observation application,{1}
+improved result,{1}
+semantic object,{1}
+predefined class,{1}
+energy audit,{1}
+built infrastructure,{1}
+expert understanding,{1}
+socioeconomic end,{1}
+urban neighborhood,{1}
+imagery data,{1}
+standard benchmark,{1}
+ground truth,{1}
+truth land,{1}
+atlas land,{1}
+land classification,{1}
+classification dataset,{1}
+european city,{1}
+deep architecture,{1}
+standard computer,{1}
+several city,{1}
+empirical study,{1}
+disaster relief,{1}
+large variety,{1}
+sensing literature,{1}
+object label,{1}
+extra step,{1}
+pixelwise decision,{1}
+generic framework,{1}
+region descriptor,{1}
+descriptor extraction,{1}
+accurate detection,{1}
+aerial orthophotos,{1}
+first time,{1}
+matrix covariance,{1}
+covariance descriptor,{1}
+principled evaluation,{1}
+pair segmentation,{1}
+performance evaluation,{1}
+different classifier,{1}
+different segmentation,{1}
+several advantage,{1}
+detection chain,{1}
+object category,{1}
+intelligent system,{1}
+scene perception,{1}
+city modeling,{1}
+learning feature,{1}
+monitoring engineering,{1}
+automated building,{1}
+detection framework,{1}
+developed method,{1}
+classification procedure,{1}
+large training,{1}
+mrf model,{1}
+optimal label,{1}
+scene building,{1}
+quantitative validation,{1}
+promising potential,{1}
+developed approach,{1}
+image image,{1}
+robust fashion,{1}
+discriminatory model,{1}
+visual descriptor,{1}
+specific description,{1}
+description technique,{1}
+emergent machine,{1}
+real time,{1}
+several task,{1}
+visual feature,{1}
+novel network,{1}
+descriptor evaluation,{1}
+automatic feature,{1}
+task aim,{1}
+representative information,{1}
+interesting challenge,{1}
+recognition algorithms,{1}
+huge opportunity,{1}
+forest management,{1}
+climate modelling,{1}
+first layer,{1}
+systematic evaluation,{1}
