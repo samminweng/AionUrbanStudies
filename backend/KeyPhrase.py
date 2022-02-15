@@ -24,7 +24,7 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 # Group the key phrases based on the vector similarity
 class KeyPhraseSimilarity:
-    def __init__(self):
+    def __init__(self, _cluster_no):
         self.args = Namespace(
             # case_name='CultureUrbanStudyCorpus',
             case_name='AIMLUrbanStudyCorpus',
@@ -33,12 +33,12 @@ class KeyPhraseSimilarity:
             device='cpu',
             n_neighbors=3,
             diversity=0.0,
-            folder_name='iteration',
-            # folder_name='cluster' + str(_cluster_no),
+            cluster_no=_cluster_no,
+            cluster_folder='cluster_' + str(_cluster_no),
         )
         # Load HDBSCAN cluster
-        path = os.path.join('output', self.args.case_name, self.args.case_name + '_clusters_' +
-                            self.args.folder_name + '.json')
+        path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                            self.args.case_name + '_clusters.json')
         self.corpus_df = pd.read_json(path)
         # Update corpus data with hdbscan cluster results
         self.corpus_df.rename(columns={'HDBSCAN_Cluster': 'Cluster'}, inplace=True)
@@ -62,7 +62,8 @@ class KeyPhraseSimilarity:
     # Ref: https://medium.datadriveninvestor.com/rake-rapid-automatic-keyword-extraction-algorithm-f4ec17b2886c
     def extract_doc_key_phrases_by_similarity_diversity(self):
         try:
-            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                  'key_phrases', 'doc_key_phrase')
             Path(folder).mkdir(parents=True, exist_ok=True)
             corpus_docs = self.corpus_df.to_dict("records")
             # cluster_no_list = [0]
@@ -138,7 +139,8 @@ class KeyPhraseSimilarity:
         # cluster_no_list = [0]
         for cluster_no in cluster_no_list:
             try:
-                key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'doc_key_phrase')
+                key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                                 'key_phrases', 'doc_key_phrase')
                 path = os.path.join(key_phrase_folder, 'doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
                 df = pd.read_json(path)
                 # Aggregate the key phrases of each individual paper
@@ -149,7 +151,8 @@ class KeyPhraseSimilarity:
                     found = next((k for k in unique_key_phrases if k.lower() == key_phrase.lower()), None)
                     if not found:
                         unique_key_phrases.append(key_phrase)
-                experiment_folder = os.path.join('output', self.args.case_name, 'key_phrases', 'experiments', 'level_0')
+                experiment_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                                 'key_phrases', 'experiments', 'level_0')
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
                 min_cluster_size_list = list(range(30, 14, -1))
                 # # Cluster all key phrases using HDBSCAN clustering
@@ -182,7 +185,8 @@ class KeyPhraseSimilarity:
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper
-                    key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases')
+                    key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                                     'key_phrases')
                     path = os.path.join(key_phrase_folder, 'experiments', 'level_0',
                                         'key_phrases_cluster_#{c}_grouping_experiments.json'.format(c=cluster_no))
                     experiments = pd.read_json(path).to_dict("records")
@@ -234,7 +238,8 @@ class KeyPhraseSimilarity:
             # # Load best results of each group
             df = pd.DataFrame(results,
                               columns=['Cluster', 'Key-phrases'])
-            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                  'key_phrases', 'group_key_phrases')
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, 'cluster_key_phrases_group.csv')
             df.to_csv(path, encoding='utf-8', index=False)
@@ -245,7 +250,8 @@ class KeyPhraseSimilarity:
 
     # Re-group the key phrases within a group
     def re_group_key_phrases_within_groups(self):
-        key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases')
+        key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                         'key_phrases')
         # minimal cluster size
         min_cluster_size_list = list(range(30, 9, -1))
         # cluster_no_list = [6]
@@ -281,7 +287,8 @@ class KeyPhraseSimilarity:
                     # # Load best results of each group
             df = pd.DataFrame(results,
                               columns=['Cluster', 'SubGroups'])
-            folder = os.path.join('output', self.args.case_name, 'key_phrases', 'group_key_phrases')
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                  'key_phrases', 'group_key_phrases')
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, 'cluster_key_phrases_sub_groups.csv')
             df.to_csv(path, encoding='utf-8', index=False)
@@ -294,11 +301,10 @@ class KeyPhraseSimilarity:
     # Combine the TF-IDF terms and grouped key phrases results
     def combine_terms_key_phrases_results(self):
         try:
-            folder = os.path.join('output', self.args.case_name)
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder)
             # Combine all key phrases and TF-IDF topics to a json file
             # # Load TF-IDF topics
-            path = os.path.join(folder, 'cluster_terms', self.args.case_name + '_TF-IDF_cluster_terms_' +
-                                self.args.folder_name + '.json')
+            path = os.path.join(folder, 'cluster_terms', self.args.case_name + '_TF-IDF_cluster_terms.json')
             topics_df = pd.read_json(path)
             cluster_df = topics_df.copy(deep=True)
             # Load grouped Key phrases
@@ -312,11 +318,9 @@ class KeyPhraseSimilarity:
             # Re-order cluster df and Output to csv and json file
             cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases', 'SubGroups']]
             folder = os.path.join(folder, 'key_phrases')
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_' +
-                                self.args.folder_name + '.csv')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_' +
-                                self.args.folder_name + '.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.json')
             cluster_df.to_json(path, orient='records')
             print('Output key phrases per cluster to ' + path)
         except Exception as err:
@@ -326,7 +330,7 @@ class KeyPhraseSimilarity:
     def combine_cluster_doc_key_phrases(self):
         # Combine all the doc key phrases into a single file 'doc_key_phrases'
         try:
-            key_phrase_folder = os.path.join('output', self.args.case_name, 'key_phrases')
+            key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases')
             # Combine the key phrases of all papers to a single file
             doc_key_phrases = list()
             for cluster_no in range(-1, self.total_clusters):
@@ -344,10 +348,10 @@ class KeyPhraseSimilarity:
             self.corpus_df['KeyPhrases'] = df['KeyPhrases'].tolist()
             # Drop column
             self.corpus_df = self.corpus_df.drop('Text', axis=1)
-            folder = os.path.join('output', self.args.case_name)
-            path = os.path.join(folder, self.args.case_name + '_clusters_' + self.args.folder_name + '.csv')
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder)
+            path = os.path.join(folder, self.args.case_name + '_clusters.csv')
             self.corpus_df.to_csv(path, index=False, encoding='utf-8')
-            path = os.path.join(folder, self.args.case_name + '_clusters_' + self.args.folder_name + '.json')
+            path = os.path.join(folder, self.args.case_name + '_clusters.json')
             self.corpus_df.to_json(path, orient='records')
             print('Output key phrases per doc to ' + path)
         except Exception as err:
@@ -357,8 +361,8 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     try:
-        # _cluster_no = 1
-        kp = KeyPhraseSimilarity()
+        _cluster_no = 0
+        kp = KeyPhraseSimilarity(_cluster_no)
         kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()
         kp.group_cluster_key_phrases_with_best_experiments()
