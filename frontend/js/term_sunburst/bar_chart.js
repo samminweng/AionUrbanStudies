@@ -31,7 +31,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 x: [], y: [], text: [],
                 orientation: 'h', type: 'bar',
                 name: group_name,
-                textposition: 'auto',
+                textposition: 'inside',
                 insidetextanchor: "start",
                 insidetextfont: {
                     size: 14
@@ -39,7 +39,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 outsidetextfont:{
                     size: 14
                 },
-                hovertemplate: '%{text}',
+                hovertemplate: '%{text} (%{x} papers)',
                 marker: {
                     color: d3colors[group_id + 1]
                 }
@@ -76,6 +76,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         return data;
     }
 
+    // Populate the bar height
     function populate_y_axis_domain(layout){
         let total_sub_groups = 0;
         // Go through each main group
@@ -92,7 +93,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             }
         }
         // Get the portion of each sub-group
-        let portion = (1.0 / total_sub_groups * 0.85);
+        let portion = Math.min(1.0 / total_sub_groups * 0.85, 0.2);
         let gap = 0.02;
         if(group_data.length > 1){
             gap = (1.0 - (portion * total_sub_groups))/(group_data.length-1);    // Gap between different groups

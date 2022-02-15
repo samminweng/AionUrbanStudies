@@ -1,7 +1,7 @@
 // Create scatter graph
 function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
     const width = 600;
-    const height = 700;
+    const height = 600;
     const corpus_data = _corpus_data;
     const cluster_data = _cluster_data;
     // Optimal color pallets for 30 colors from http://vrl.cs.brown.edu/color
@@ -97,16 +97,16 @@ function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
     function drawChart() {
         const data_points = convert_cluster_data_to_data_points();
         // Define the layout
-        const option = {
+        const options = {
             autosize: true,
             width: width,
             height: height,
             // Set the graph margin
             margin: {
-                l: 30,
-                r: 30,
-                b: 30,
-                t: 30
+                l: 20,
+                r: 10,
+                b: 50,
+                t: 0
             },
             // Plot the legend outside the
             showlegend: true,
@@ -114,16 +114,18 @@ function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
             legend: {
                 "orientation": "v",
                 font: {
-                    size: 10,
+                    size: 12,
                 },
             },
             annotations: [],
             hovermode: 'closest',
             config: { responsive: true }
+        };
+        const config = {
+            displayModeBar: false // Hide the floating bar
         }
-
         // Get the cluster number
-        Plotly.newPlot('cluster_chart', data_points, option);
+        Plotly.newPlot('cluster_chart', data_points, options, config);
         const cluster_chart = document.getElementById('cluster_chart');
         // // Add chart onclick to toggle annotation
         cluster_chart.on('plotly_click', function (data) {
