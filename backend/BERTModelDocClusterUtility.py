@@ -386,7 +386,7 @@ class BERTModelDocClusterUtility:
     @staticmethod
     def collect_cluster_as_corpus(case_name, cluster_no):
         # Load the cluster results
-        path = os.path.join('output', case_name, 'results', '1st_clustering', case_name + '_clusters.json')
+        path = os.path.join('output', case_name, 'iteration', case_name + '_clusters_iteration.json')
         corpus = pd.read_json(path).to_dict("records")
         # Get the papers of the cluster 
         cluster_docs = list(filter(lambda doc: doc['Cluster'] == cluster_no, corpus))
@@ -394,7 +394,7 @@ class BERTModelDocClusterUtility:
         # Re_order the columns (Cluster,DocId,Cited by,Year,Document Type,Title,Abstract,Author Keywords,Authors,DOI)
         df = df[['DocId', 'Cited by', 'Year', 'Document Type', 'Title', 'Abstract', 'Author Keywords',
                  'Authors', 'DOI']]
-        folder = os.path.join('data', case_name, 'sub_cluster#' + str(cluster_no) + "_0")
+        folder = os.path.join('data', case_name, 'cluster_' + str(cluster_no), "iteration_0")
         Path(folder).mkdir(parents=True, exist_ok=True)
         # Output the cluster data to a corpus
         path = os.path.join(folder, case_name + '_cleaned.csv')

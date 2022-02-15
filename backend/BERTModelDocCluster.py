@@ -40,13 +40,14 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
 class BERTModelDocCluster:
-    def __init__(self, iteration):
+    def __init__(self, _iteration, _cluster_no):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
             # case_name='CultureUrbanStudyCorpus',
-            # cluster_no=cluster_no,
-            iteration=iteration,
-            in_folder='iteration_' + str(iteration),
+            cluster_no=_cluster_no,
+            cluster_folder='cluster_' + str(_cluster_no),
+            iteration=_iteration,
+            in_folder='iteration_' + str(_iteration),
             path='data',
             # We switched to 'sentence-transformers/all-mpnet-base-v2' which is suitable for clustering with
             # 768 dimensional dense vectors (https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
@@ -59,7 +60,8 @@ class BERTModelDocCluster:
             min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
-        path = os.path.join('data', self.args.case_name, self.args.in_folder, self.args.case_name + '_cleaned.csv')
+        path = os.path.join('data', self.args.case_name, self.args.cluster_folder,
+                            self.args.in_folder, self.args.case_name + '_cleaned.csv')
         self.text_df = pd.read_csv(path)
         # # # # # Load all document vectors without outliers
         self.text_df['Text'] = self.text_df['Title'] + ". " + self.text_df['Abstract']
@@ -88,8 +90,8 @@ class BERTModelDocCluster:
             # Get all the doc ids of text_df
             doc_ids = self.text_df['DocId'].tolist()
             # Load doc vectors
-            path = os.path.join('output', self.args.case_name, 'cluster', self.args.in_folder, 'vectors',
-                                'doc_vector_results.json')
+            path = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster',
+                                self.args.in_folder, 'vectors', 'doc_vector_results.json')
             df = pd.read_json(path)
             df = df[df['DocId'].isin(doc_ids)]
             # Add 'DocVectors' 'x' and 'y'
@@ -122,7 +124,8 @@ class BERTModelDocCluster:
             self.text_df['y'] = list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
         # Print out the reduced vector
         print(self.text_df)
-        folder = os.path.join('output', self.args.case_name, 'cluster', self.args.in_folder, 'vectors')
+        folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster',
+                              self.args.in_folder, 'vectors')
         Path(folder).mkdir(parents=True, exist_ok=True)
         path = os.path.join(folder, 'doc_vector_results.csv')
         self.text_df.to_csv(path, encoding='utf-8', index=False)
@@ -208,11 +211,10 @@ class BERTModelDocCluster:
                                 sys.exit(-1)
                             # print(result)
                             results.append(result)
-
                 print("Complete clustering the vectors at dimension = {d}".format(d=dimension))
                 # Output the clustering results of a dimension
-                folder = os.path.join('output', self.args.case_name, 'cluster', self.args.in_folder, 'experiments',
-                                      'hdbscan')
+                folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster',
+                                      self.args.in_folder, 'experiments', 'hdbscan')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Output the detailed clustering results
                 result_df = pd.DataFrame(results,
@@ -232,7 +234,8 @@ class BERTModelDocCluster:
         try:
             # Find the best results in each dimension
             d_results = list()
-            parent_folder = os.path.join('output', self.args.case_name, 'cluster', self.args.in_folder)
+            parent_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                         'cluster', self.args.in_folder)
             folder = os.path.join(parent_folder, 'experiments', 'hdbscan')
             for dimension in self.args.dimensions:
                 path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_results_' + str(dimension) + '.json')
@@ -282,13 +285,14 @@ class BERTModelDocCluster:
     # Cluster document vectors with HDBSCAN using best parameters obtained from experiment results
     def cluster_doc_vectors_with_best_parameter_by_hdbscan(self):
         try:
-            parent_folder = os.path.join('output', self.args.case_name, 'cluster', self.args.in_folder)
+            parent_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                         'cluster', self.args.in_folder)
             # Load best clustering results at each dimension
             path = os.path.join(parent_folder, 'experiments',
                                 'HDBSCAN_cluster_doc_vector_result_summary.json')
-            df = pd.read_json(path)
-            df = df.sort_values(by=['Silhouette_score'], ascending=False)
-            best_result = df.head(1).to_dict(orient='records')[0]
+            ex_results = pd.read_json(path).to_dict("records")
+            sorted_ex_results = sorted(ex_results, key=lambda e: e['Silhouette_score'], reverse=True)
+            best_result = sorted_ex_results[0]
             # Get the parameter of the best clustering results
             cluster_df = self.text_df.copy(deep=True)
             dimension = int(best_result['dimension'])
@@ -354,7 +358,8 @@ class BERTModelDocCluster:
     def derive_cluster_docs(self):
         approach = 'HDBSCAN_Cluster'
         try:
-            parent_folder = os.path.join('output', self.args.case_name, 'cluster', self.args.in_folder)
+            parent_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                         'cluster', self.args.in_folder)
             path = os.path.join(parent_folder, self.args.case_name + '_clusters.json')
             # Load the documents clustered by
             clustered_doc_df = pd.read_json(path)
@@ -384,7 +389,8 @@ class BERTModelDocCluster:
     def output_outliers_as_corpus(self):
         try:
             # Get the outliers identified by HDBSCAN
-            folder = os.path.join('output', self.args.case_name, 'cluster', self.args.in_folder)
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                  'cluster', self.args.in_folder)
             path = os.path.join(folder, self.args.case_name + '_clusters.json')
             # Get the best clustering of highest silhouette score
             cluster_df = pd.read_json(path)
@@ -393,7 +399,8 @@ class BERTModelDocCluster:
             outlier_df = outlier_df.drop(columns=['HDBSCAN_Cluster', 'x', 'y'])
             # Re-order
             print('The number of outliers {c}'.format(c=len(outlier_df)))
-            folder = os.path.join('data', self.args.case_name, 'iteration_' + str(self.args.iteration + 1))
+            folder = os.path.join('data', self.args.case_name, self.args.cluster_folder,
+                                  'iteration_' + str(self.args.iteration + 1))
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, self.args.case_name + '_cleaned.csv')
             # Save outlier df to another corpus
@@ -405,12 +412,12 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        # cluster_no = 1
-        # BERTModelDocClusterUtility.collect_cluster_as_corpus('MLUrbanStudyCorpus', cluster_no)
+        cluster_no = 2
+        BERTModelDocClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
-        iteration = 4
-        mdc = BERTModelDocCluster(iteration)
-        mdc.get_sentence_vectors(is_load=False)
+        iteration = 0
+        mdc = BERTModelDocCluster(iteration, cluster_no)
+        mdc.get_sentence_vectors(is_load=True)
         mdc.run_HDBSCAN_cluster_experiments()
         mdc.summarize_HDBSCAN_cluster_experiment_results()
         mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()

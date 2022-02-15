@@ -1,14 +1,14 @@
 'use strict';
 // const corpus = 'CultureUrbanStudyCorpus';
-const corpus = 'MLUrbanStudyCorpus';
+const corpus = 'AIMLUrbanStudyCorpus';
 
 // Document ready event
 $(function () {
     const progress_bar = new ProgressBar();
     // Clustering docs data (document, abstract and title)
-    const cluster_data_file_path = 'data/' + corpus + '_clusters.json';
+    const cluster_data_file_path = 'data/' + corpus + '_clusters_iteration.json';
     // HDBSCAN cluster and topic data
-    const cluster_topic_key_phrase_file_path = 'data/' + corpus + '_cluster_terms_key_phrases_LDA_topics.json';
+    const cluster_topic_key_phrase_file_path = 'data/' + corpus + '_cluster_terms_key_phrases_LDA_topics_iteration.json';
     // Load data
     $.when(
         $.getJSON(cluster_data_file_path),
