@@ -115,6 +115,15 @@ function KeyPhraseView(sub_group, cluster_docs, color){
             });
             row.append($('<div class="col border-1 border-start border-dark"></div>').append(kp_btn));
         }
+
+        // Add empty cell if needed
+        let reminders = relevant_key_phrases.length%3;
+        while(reminders > 0 && reminders !== 3){
+            row.append($('<div class="col border-1 border-start border-dark"></div>'));
+            reminders = reminders + 1;
+        }
+
+
         // Display the list of papers containing the key phrases
         display_papers_by_word(word);
     }
