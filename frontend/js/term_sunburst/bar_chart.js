@@ -16,7 +16,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
     console.log(data);
 
     // Collect top 5 frequent from key phrases
-    function collect_title_words(key_phrases){
+    function collect_title_words(key_phrases, group_id){
         // Create word frequency list
         const create_word_freq_list = function(key_phrases){
             // Create bi-grams
@@ -57,6 +57,45 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
 
         const word_freq_list = create_word_freq_list(key_phrases);
 
+        // Update top word frequencies and pick up top words
+        const pick_top_words= function(top_words, candidate_words, top_n){
+            // Get all the words
+            let all_words = top_words.concat(candidate_words);
+            // Go through top_words and check if any top word has two words (such as 'twitter data'
+            // If so, reduce the frequency of its single word (freq('twitter') -1 and freq('data') -1)
+            for(const top_word of top_words){
+                if(top_word['range'] === 2){
+                    // Get the single word from a bi-gram
+                   const top_word_list = top_word['word'].split(" ");
+                   // Go through each individual word of top_word
+                   for(const individual_word of top_word_list){
+                       // Update the frequencies of the single word
+                       for(const word of all_words){
+                            if(word['word'].toLowerCase() === individual_word.toLowerCase()){
+                                // Update the freq
+                                word['freq'] = word['freq'] - top_word['freq'];
+                            }
+                       }
+                   }
+                }
+            }
+            // Remove the words of no frequencies
+            all_words = all_words.filter(w => w['freq'] > 0);
+            // Sort all the words by frequencies
+            all_words.sort((a, b) => {
+                if(b['freq'] === a['freq']){
+                    return b['range'] - a['range'];     // Prefer longer phrases
+                }
+                return b['freq'] - a['freq'];
+            });
+            // Pick up top frequent word from all_words
+            const new_top_words = all_words.slice(0, top_n);
+            const new_candidate_words = all_words.slice(top_n);
+            return [new_top_words, new_candidate_words];
+        }
+
+        // Pick up top 5 frequent words
+        const top_n = 5;
         // Sort by freq
         word_freq_list.sort((a, b) => {
             if(b['freq'] === a['freq']){
@@ -64,48 +103,26 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             }
             return b['freq'] - a['freq'];
         });
-
-        const pick_top_words= function(top_words, candidate_words, top_n){
-            const all_words = top_words.concat(candidate_words);
-            // Go through top_words and check if any top word can be
-            for(const top_word of top_words){
-                if(top_word['range'] === 2){
-                   // Update the frequencies of each uni grams
-                    for(const word of all_words){
-                        if(top_word['word'].toLowerCase().includes(word['word'].toLowerCase())){
-                            // Update the frequent of the candidates
-                            word['freq'] = word['freq'] - top_word['freq'];
-                        }
-                    }
-                }
-            }
-
-            // Pick up top two frequent word from remain_words
-            all_words.sort((a, b) => {
-                if(b['freq'] === a['freq']){
-                    return b['range'] - a['range'];     // Prefer longer phrases
-                }
-                return b['freq'] - a['freq'];
-            });
-            top_words = all_words.slice(0, top_n);
-            candidate_words = all_words.slice(top_n);
-            return [top_words, candidate_words];
-        }
-
-        // Pick up top 5 frequent words
-        const top_n = 5;
-
         // Select top 5 bi_grams as default top_words
         let top_words = word_freq_list.slice(0, 5);
         let candidate_words = word_freq_list.slice(5);
-
-        for(let iteration=0; iteration<5; iteration++){
-            console.log("=== Iteration ", iteration)
-            console.log("Before: Top words:", top_words);
-            console.log("Before: Candidate Words", candidate_words);
-            [top_words, candidate_words] = pick_top_words(top_words, candidate_words, top_n);
-            console.log("After: Top Words = ", top_words);
-            console.log("After: Candidate Words =", candidate_words);
+        let is_same = false;
+        for(let iteration=0; !is_same && iteration<5; iteration++){
+            console.log("Group id: ", group_id);
+            console.log("Iteration: ", iteration);
+            console.log("top_words:", top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
+            const [new_top_words, new_candidate_words] = pick_top_words(top_words, candidate_words, top_n);
+            console.log("new top words: ", new_top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
+            // Check if new and old top words are the same
+            is_same = true;
+            for(const new_word of new_top_words){
+                const found = top_words.find(w => w['word'] === new_word['word']);
+                if(!found){
+                    is_same = is_same && false;
+                }
+            }
+            top_words = new_top_words;
+            candidate_words = new_candidate_words;
         }
 
         // Return the top 3
@@ -154,8 +171,9 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                     // console.log(sub_group);
                     const sub_group_id = sub_group['SubGroup'];
                     // const title_words = sub_group['TitleWords'];
+                    const key_phrases = sub_group['Key-phrases'];
                     // Get the title words of a sub-group
-                    const title_words = collect_title_words(sub_group['Key-phrases']);
+                    const title_words = collect_title_words(key_phrases, sub_group_id);
                     sub_group['TitleWords'] = title_words;
                     // Update the title word of a sub-group;
                     const num_docs = sub_group['NumDocs'];
@@ -166,7 +184,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             } else {
                 // Add the group
                 // const title_words = group['TitleWords'];
-                const title_words = collect_title_words(group['Key-phrases']);
+                const title_words = collect_title_words(group['Key-phrases'], group_id);
                 group['TitleWords'] = title_words;
                 const num_docs = group['NumDocs'];
                 trace['y'].push(group_name + "#" + group_id);
