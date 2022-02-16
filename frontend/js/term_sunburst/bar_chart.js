@@ -88,6 +88,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 }
                 return b['freq'] - a['freq'];
             });
+            // console.log("All words", all_words.map(w => w['word'] + '(' + w['freq'] + ')'));
             // Pick up top frequent word from all_words
             const new_top_words = all_words.slice(0, top_n);
             const new_candidate_words = all_words.slice(top_n);
@@ -95,7 +96,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         }
 
         // Pick up top 5 frequent words
-        const top_n = 5;
+        const top_n = 6;
         // Sort by freq
         word_freq_list.sort((a, b) => {
             if(b['freq'] === a['freq']){
@@ -104,15 +105,15 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             return b['freq'] - a['freq'];
         });
         // Select top 5 bi_grams as default top_words
-        let top_words = word_freq_list.slice(0, 5);
-        let candidate_words = word_freq_list.slice(5);
+        let top_words = word_freq_list.slice(0, top_n);
+        let candidate_words = word_freq_list.slice(top_n);
         let is_same = false;
-        for(let iteration=0; !is_same && iteration<5; iteration++){
-            console.log("Group id: ", group_id);
-            console.log("Iteration: ", iteration);
-            console.log("top_words:", top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
+        for(let iteration=0; !is_same && iteration<10; iteration++){
+            // console.log("Group id: ", group_id);
+            // console.log("Iteration: ", iteration);
+            // console.log("top_words:", top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
             const [new_top_words, new_candidate_words] = pick_top_words(top_words, candidate_words, top_n);
-            console.log("new top words: ", new_top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
+            // console.log("new top words: ", new_top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
             // Check if new and old top words are the same
             is_same = true;
             for(const new_word of new_top_words){
@@ -214,22 +215,26 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             }
         }
         // Get the portion of each sub-group
-        let portion = Math.min(1.0 / total_sub_groups * 0.85, 0.2);
-        let gap = 0.02;
-        if(group_data.length > 1){
-            gap = (1.0 - (portion * total_sub_groups))/(group_data.length-1);    // Gap between different groups
-        }
-        let cur_domain = 0.0;
-        for(let i=0; i < group_data.length; i++){
+        // let portion = Math.min(1.0 / total_sub_groups * 0.85, 0.2);
+        const portion = 0.08;
+        const gap = 0.05;
+        console.log("portion", portion);
+        // let gap = 0.02;
+        // if(group_data.length > 1){
+        //     gap = (1.0 - (portion * total_sub_groups))/(group_data.length-1);    // Gap between different groups
+        // }
+        // console.log("gap", gap);
+        let cur_domain = 1.0;
+        for(let i=group_data.length-1; i >=0; i--){
             const group = group_data[i];
             const group_id = group['Group'];
             // Get the sub-group
             const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
             // Add one base portion
-            let next_domain = cur_domain + portion;
+            let next_domain = cur_domain - portion;
             if(sub_groups.length > 0){
                 // The domain Proportion to the number of sub-groups
-                next_domain = cur_domain + (sub_groups.length * portion);
+                next_domain = cur_domain - (sub_groups.length * portion);
             }
             // Get axis name
             const axis_name =  (i > 0 ? "yaxis" + (i+1) : "yaxis");
@@ -237,14 +242,11 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 tickfont: {
                     size: 1,
                 },
-                domain: [cur_domain, next_domain]
+                domain: [next_domain, cur_domain]
             }
-            if(i < group_data.length -1){
-                cur_domain = next_domain + gap;// Add the gap to separate different groups
-            }else{
-                cur_domain = next_domain;
-            }
+            cur_domain = next_domain - gap;// Add the gap to separate different groups
         }
+        console.log(layout);
         return layout;
     }
 
@@ -258,13 +260,13 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             height: height,
             autosize: true,
             showlegend: false,
-            margin: {"l": 0, "r": 0, "t": 10},
+            margin: {"l": 0, "r": 0, "t": 0},
             legend: { traceorder: 'reversed'},
             grid: {
                 rows: (group_data.length >=3 ? group_data.length: 3),   // Display three rows by default
                 columns: 1,
                 pattern: 'independent',
-                roworder: 'bottom to top'
+                roworder: 'top to bottom'
             },
 
         };
