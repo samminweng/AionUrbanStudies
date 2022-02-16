@@ -131,7 +131,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
 
 
     // Graph data for a group
-    function create_graph_data(group) {
+    function create_graph_data(group, max_size) {
         let data = [];
         // Re-order the groups to match with the order of the chart.
         // const group = group_data[i];
@@ -144,7 +144,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             x: [], y: [], text: [],
             orientation: 'h', type: 'bar',
             name: group_name,
-            textposition: 'inside',
+            textposition: 'insides',
             insidetextanchor: "start",
             insidetextfont: {
                 size: 14
@@ -154,15 +154,36 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             },
             hovertemplate: '%{x} papers',
             marker: {
-                color: d3colors[group_id + 1]
-            }
+                color: d3colors[group_id + 1],
+                line: {
+                    color: 'black',
+                    width: 1
+                }
+            },
+            opacity: 0.5,
         };
+        let comp_trace ={
+            x: [], y: [], text: [],
+            orientation: 'h', type: 'bar',
+            name: group_name,
+            marker: {
+                color: 'white',
+                line: {
+                    color: 'black',
+                    width: 1
+                }
+            },
+            opacity: 0.5,
+            hoverinfo: 'none',
+        }
+        // Ref: https://plotly.com/javascript/reference/layout/annotations/
+        // A text can
+        let annotations = [];
 
         if (sub_groups.length > 0) {
             for (const sub_group of sub_groups) {
                 // console.log(sub_group);
                 const sub_group_id = sub_group['SubGroup'];
-                // const title_words = sub_group['TitleWords'];
                 const key_phrases = sub_group['Key-phrases'];
                 // Get the title words of a sub-group
                 const title_words = collect_title_words(key_phrases, sub_group_id);
@@ -171,7 +192,25 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 const num_docs = sub_group['NumDocs'];
                 trace['y'].push(group_name + "|" + sub_group_id);
                 trace['x'].push(num_docs);
-                trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>');
+                // trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>');
+                comp_trace['y'].push(group_name + "|" + sub_group_id);
+                comp_trace['x'].push(max_size - num_docs);
+                // comp_trace['text'].push();
+                annotations.push({
+                    x: 0.0,
+                    y: group_name + "|" + sub_group_id,
+                    text: '<b>' + title_words.slice(0, 3).join(", ") + '</b>',
+                    font: {
+                        family: 'Arial',
+                        size: 14,
+                        color: 'black'
+                    },
+                    xref: 'paper',
+                    xanchor: 'left',
+                    align: 'left',
+                    showarrow: false
+                })
+
             }
         } else {
             // Add the group
@@ -181,67 +220,36 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             const num_docs = group['NumDocs'];
             trace['y'].push(group_name + "#" + group_id);
             trace['x'].push(num_docs);
-            trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>')
+            // trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>');
+            comp_trace['y'].push(group_name + "#" + group_id);
+            comp_trace['x'].push(max_size - num_docs);
+            annotations.push({
+                x: 0.0,
+                y: group_name + "#" + group_id,
+                text: '<b>' + title_words.slice(0, 3).join(", ") + '</b>',
+                font: {
+                    family: 'Arial',
+                    size: 14,
+                    color: 'black'
+                },
+                xref: 'paper',
+                xanchor: 'left',
+                align: 'left',
+                showarrow: false
+            })
         }
         data.push(trace);
-        return data;
+        data.push(comp_trace);
+
+        return [data, annotations];
     }
 
-    // // Populate the bar height
-    // function populate_y_axis_domain(layout){
-    //     let total_sub_groups = 0;
-    //     // Go through each main group
-    //     for (let i =0; i< group_data.length; i++) {
-    //         const group = group_data[i];
-    //         const group_id = group['Group'];
-    //         // Get the sub-group
-    //         const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-    //         if(sub_groups.length > 0){
-    //             total_sub_groups += sub_groups.length;
-    //         }else{
-    //             // The group does not have a sub-group
-    //             total_sub_groups += 1;
-    //         }
-    //     }
-    //     // Get the portion of each sub-group
-    //     // let portion = Math.min(1.0 / total_sub_groups * 0.85, 0.2);
-    //     const portion = 0.08;
-    //     const gap = 0.05;
-    //     console.log("portion", portion);
-    //     // let gap = 0.02;
-    //     // if(group_data.length > 1){
-    //     //     gap = (1.0 - (portion * total_sub_groups))/(group_data.length-1);    // Gap between different groups
-    //     // }
-    //     // console.log("gap", gap);
-    //     let cur_domain = 1.0;
-    //     for(let i=group_data.length-1; i >=0; i--){
-    //         const group = group_data[i];
-    //         const group_id = group['Group'];
-    //         // Get the sub-group
-    //         const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-    //         // Add one base portion
-    //         let next_domain = cur_domain - portion;
-    //         if(sub_groups.length > 0){
-    //             // The domain Proportion to the number of sub-groups
-    //             next_domain = cur_domain - (sub_groups.length * portion);
-    //         }
-    //         // Get axis name
-    //         const axis_name =  (i > 0 ? "yaxis" + (i+1) : "yaxis");
-    //         layout[axis_name] ={
-    //             tickfont: {
-    //                 size: 1,
-    //             },
-    //             domain: [next_domain, cur_domain]
-    //         }
-    //         cur_domain = next_domain - gap;// Add the gap to separate different groups
-    //     }
-    //     console.log(layout);
-    //     return layout;
-    // }
+
 
     // Create a bar chart for each group
-    function create_bar_chart(group, chart_id){
-        const graph_data = create_graph_data(group);
+    function create_bar_chart(group, chart_id, max_size){
+        const x_domain = [0, max_size];
+        const [graph_data, annotations] = create_graph_data(group, max_size);
         const group_id = group['Group'];
         const group_name = "Group#" + (group_id + thread);
         // Get the sub-group
@@ -254,12 +262,14 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         let layout = {
             width: width,
             height: graph_height,
+            xaxis: {range: x_domain},
             showlegend: false,
-            margin: {"l": 0, "r": 0, "t": 0, "b": height},
+            margin: {"l": 10, "r": 10, "t": 0, "b": height},
             legend: { traceorder: 'reversed'},
+            barmode: 'stack',
+            annotations: annotations
         };
         console.log(graph_data);
-        // layout = populate_y_axis_domain(layout);
         // console.log(layout);
         const config = {
             displayModeBar: false // Hide the floating bar
@@ -303,20 +313,33 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
 
     function create_UI() {
         $('#key_phrase_chart').empty();
+        let max_size = 0;
         for(let i =0; i < group_data.length; i++){
             const chart_id = 'chart_' + i;
             // Create a div
             const graph_div = $('<div id="' + chart_id +'" class="col"></div>')
             $('#key_phrase_chart').append($('<div class="row"></div>').append(graph_div));
+            const group = group_data[i];
+            const group_id = group['Group'];
+            const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+            if(sub_groups.length >0 ){
+                for(const sub_group of sub_groups){
+                    const num_docs = sub_group['NumDocs'];
+                    max_size = Math.max(num_docs, max_size);
+                }
+            }else{
+                max_size = Math.max(max_size, group['NumDocs']);
+            }
+        }
+        // max_size = max_size + 1;
+        console.log("max_size", max_size);
+        // Display the bar chart for each group
+        for(let i =0; i < group_data.length; i++){
+            const chart_id = 'chart_' + i;
             // Get the group
             const group = group_data[i];
-            create_bar_chart(group, chart_id);
-
+            create_bar_chart(group, chart_id, max_size);
         }
-
-
-
-
     }
 
     create_UI();
