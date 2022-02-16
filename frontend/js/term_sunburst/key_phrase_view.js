@@ -63,31 +63,6 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         return dict;
     }
 
-    // Collect top 5 frequent from key phrases
-    function collect_title_words(key_phrases){
-        let word_freq = []
-        for(const key_phrase of key_phrases){
-            const words = key_phrase.split(" ");
-            for (const word of words){
-                const found_word = word_freq.find(w => w['word'].toLowerCase() === word.toLowerCase())
-                if(found_word){
-                    found_word['freq'] += 1;
-                }else{
-                    if(word === word.toUpperCase()){
-                        word_freq.push({'word': word, 'freq':1});
-                    }else{
-                        word_freq.push({'word': word.toLowerCase(), 'freq':1});
-                    }
-                }
-            }
-        }
-        // Sort by freq
-        word_freq.sort((a, b) => {
-            return b['freq'] - a['freq'];
-        });
-        // Return the top 3
-        return word_freq.slice(0, 3).map(a => a['word']);
-    }
 
     // Display the relevant papers containing key phrases
     function display_papers_by_word(word){
@@ -151,20 +126,23 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         const word_list = title_words.concat(['others']);
         for(let i=0; i < word_list.length; i++){
             const word = word_list[i];
-            const btn = $('<a class="nav-link">' +
-                '<span class="fw-bold">' + word + '</span></a>');
-            if(i === 0){
-                btn.addClass("active");     // Set default tab
+            const relevant_key_phrases = word_key_phrase_dict[word];
+            if(relevant_key_phrases.length > 0){
+                const btn = $('<a class="nav-link">' +
+                    '<span class="fw-bold">' + word + '</span></a>');
+                if(i === 0){
+                    btn.addClass("active");     // Set default tab
+                }
+                // '<span class="fw-bold" style="color: ' + color+ '">' + word + '</span></a>');
+                // btn.button();
+                // click event for sub_group_btn
+                btn.click(function(event){
+                    header_div.find("a").removeClass("active");
+                    display_key_phrases_by_word(word, key_phrase_div);
+                    btn.addClass("active");
+                });
+                nav.append(btn);
             }
-            // '<span class="fw-bold" style="color: ' + color+ '">' + word + '</span></a>');
-            // btn.button();
-            // click event for sub_group_btn
-            btn.click(function(event){
-                header_div.find("a").removeClass("active");
-                display_key_phrases_by_word(word, key_phrase_div);
-                btn.addClass("active");
-            });
-            nav.append(btn);
         }
         // Add header div
         const header_div = $('<div class="container p-3"></div>');
@@ -188,6 +166,9 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         // Display the docs containing the 1st word
         const word = title_words[0];
         display_key_phrases_by_word(word, key_phrase_div);
+        const element = document.getElementById("sub_group");
+        element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+
     }
 
 

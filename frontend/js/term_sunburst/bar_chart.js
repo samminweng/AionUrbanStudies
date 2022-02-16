@@ -15,6 +15,103 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
     const data = create_graph_data();
     console.log(data);
 
+    // Collect top 5 frequent from key phrases
+    function collect_title_words(key_phrases){
+        // Create word frequency list
+        const create_word_freq_list = function(key_phrases){
+            // Create bi-grams
+            const create_bi_grams = function(words){
+                const bi_grams = [];
+                if(words.length === 2){
+                    bi_grams.push(words[0] + " " + words[1]);
+                }else if(words.length === 3) {
+                    bi_grams.push(words[1] + " " + words[2]);
+                }
+                return bi_grams;
+            }
+            let word_freq_list = [];
+            // Collect word frequencies from the list of key phrases.
+            for(const key_phrase of key_phrases){
+                const words = key_phrase.split(" ");
+                const bi_grams = create_bi_grams(words);
+                const n_grams = words.concat(bi_grams);
+                // collect uni_gram
+                for (const n_gram of n_grams){
+                    const range = n_gram.split(" ").length;
+                    const found_word = word_freq_list.find(w => w['word'].toLowerCase() === n_gram.toLowerCase())
+                    if(found_word){
+                        found_word['freq'] += 1;
+                    }else{
+                        if(n_gram === n_gram.toUpperCase()){
+                            word_freq_list.push({'word': n_gram, 'freq':1, 'range': range});
+                        }else{
+                            word_freq_list.push({'word': n_gram.toLowerCase(), 'freq':1, 'range': range});
+                        }
+                    }
+                }
+            }
+
+            return word_freq_list;
+            // console.log(word_freq_list);
+        }
+
+        const word_freq_list = create_word_freq_list(key_phrases);
+
+        // Sort by freq
+        word_freq_list.sort((a, b) => {
+            if(b['freq'] === a['freq']){
+                return b['range'] - a['range'];     // Prefer longer phrases
+            }
+            return b['freq'] - a['freq'];
+        });
+
+        const pick_top_words= function(top_words, candidate_words, top_n){
+            const all_words = top_words.concat(candidate_words);
+            // Go through top_words and check if any top word can be
+            for(const top_word of top_words){
+                if(top_word['range'] === 2){
+                   // Update the frequencies of each uni grams
+                    for(const word of all_words){
+                        if(top_word['word'].toLowerCase().includes(word['word'].toLowerCase())){
+                            // Update the frequent of the candidates
+                            word['freq'] = word['freq'] - top_word['freq'];
+                        }
+                    }
+                }
+            }
+
+            // Pick up top two frequent word from remain_words
+            all_words.sort((a, b) => {
+                if(b['freq'] === a['freq']){
+                    return b['range'] - a['range'];     // Prefer longer phrases
+                }
+                return b['freq'] - a['freq'];
+            });
+            top_words = all_words.slice(0, top_n);
+            candidate_words = all_words.slice(top_n);
+            return [top_words, candidate_words];
+        }
+
+        // Pick up top 5 frequent words
+        const top_n = 5;
+
+        // Select top 5 bi_grams as default top_words
+        let top_words = word_freq_list.slice(0, 5);
+        let candidate_words = word_freq_list.slice(5);
+
+        for(let iteration=0; iteration<5; iteration++){
+            console.log("=== Iteration ", iteration)
+            console.log("Before: Top words:", top_words);
+            console.log("Before: Candidate Words", candidate_words);
+            [top_words, candidate_words] = pick_top_words(top_words, candidate_words, top_n);
+            console.log("After: Top Words = ", top_words);
+            console.log("After: Candidate Words =", candidate_words);
+        }
+
+        // Return the top 3
+        return top_words.slice(0, 5).map(w => w['word']);
+    }
+
 
     // Graph data
     function create_graph_data() {
@@ -56,19 +153,25 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 for (const sub_group of sub_groups) {
                     // console.log(sub_group);
                     const sub_group_id = sub_group['SubGroup'];
-                    const title_words = sub_group['TitleWords'];
+                    // const title_words = sub_group['TitleWords'];
+                    // Get the title words of a sub-group
+                    const title_words = collect_title_words(sub_group['Key-phrases']);
+                    sub_group['TitleWords'] = title_words;
+                    // Update the title word of a sub-group;
                     const num_docs = sub_group['NumDocs'];
                     trace['y'].push(group_name + "|" + sub_group_id);
                     trace['x'].push(num_docs);
-                    trace['text'].push('<b>' + title_words.join(", ") + '</b>')
+                    trace['text'].push('<b>' + title_words.slice(0,3).join(", ") + '</b>');
                 }
             } else {
                 // Add the group
-                const title_words = group['TitleWords'];
+                // const title_words = group['TitleWords'];
+                const title_words = collect_title_words(group['Key-phrases']);
+                group['TitleWords'] = title_words;
                 const num_docs = group['NumDocs'];
                 trace['y'].push(group_name + "#" + group_id);
                 trace['x'].push(num_docs);
-                trace['text'].push('<b>' + title_words.join(", ") + '</b>')
+                trace['text'].push('<b>' + title_words.slice(0,3).join(", ") + '</b>')
             }
             data.push(trace);
         }
@@ -127,8 +230,6 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         return layout;
     }
 
-
-
     function create_UI() {
         let layout = {
             xaxis: {
@@ -138,8 +239,8 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             width: width,
             height: height,
             autosize: true,
-            showlegend: true,
-            margin: {"l": 10, "r": 10, "t": 10},
+            showlegend: false,
+            margin: {"l": 0, "r": 0, "t": 10},
             legend: { traceorder: 'reversed'},
             grid: {
                 rows: (group_data.length >=3 ? group_data.length: 3),   // Display three rows by default
@@ -166,11 +267,6 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             // Get the marker
             const marker = data.points[0].data.marker;
             const color = marker.color;
-            // console.log(trace_index);
-            // // Set the line width
-            // marker.line.width = 3;
-            // marker.line.color = 'black';
-            // Plotly.restyle(chart_element, marker, [trace_index]);
             console.log(id);
             if (id.includes("#")) {
                 const group_id = parseInt(id.split("#")[1]) - thread;
