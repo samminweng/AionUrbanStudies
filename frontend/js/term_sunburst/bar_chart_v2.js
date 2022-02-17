@@ -223,7 +223,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             annotations.push({
                 x: 0.0,
                 y: group_name + "#" + group_id,
-                text: '<b>' + title_words.slice(0, 3).join(", ") + '</b>',
+                text: '<b>' + title_words.join(", ").substring(0, 50) + '...</b>',
                 font: {
                     family: 'Arial',
                     size: 14,
@@ -298,6 +298,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                         // Get the group
                         const group = group_data.find(g => g['Group'] === group_id);
                         // Display the group
+                        const word_chart = new WordBubbleChart(group, cluster_docs, color);
                         const view = new KeyPhraseView(group, cluster_docs, color);
                     }
                 }
@@ -337,8 +338,9 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         }
         // // For development only
         // Create a term chart of sub_group
-        // const group_id = group_data[0]['Group'];
+        // const group_id = group_data[1]['Group'];
         // const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+        // const view = new KeyPhraseView(group_data[0], cluster_docs, d3colors[0]);
         // const word_chart = new WordBubbleChart(sub_groups[2], cluster_docs, d3colors[0]);
 
 

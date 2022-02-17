@@ -63,7 +63,6 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         return dict;
     }
 
-
     // Display the relevant papers containing key phrases
     function display_papers_by_word(word){
         const relevant_doc_ids = word_doc_dict[word];
@@ -96,33 +95,34 @@ function KeyPhraseView(sub_group, cluster_docs, color){
     function display_key_phrases_by_word(word, key_phrase_div){
         key_phrase_div.empty();
         const relevant_key_phrases = word_key_phrase_dict[word];
-        let row = $('<div class="row"></div>');
-        key_phrase_div.append(row);
+        // Get the number of rows by rounding upto the closest integer
+        const num_row = Math.ceil(relevant_key_phrases.length/3) + 1;
         // Add each key phrase
-        for(let i=0; i<relevant_key_phrases.length; i++){
+        for(let i=0; i<num_row; i++){
             // Create a new row
-            if(i>0 && (i%3) === 0){
-                key_phrase_div.append(row);
-                row = $('<div class="row"></div>');
+            const row = $('<div class="row"></div>');
+            key_phrase_div.append(row);
+            let j = 0;
+            for(j=i*3; j <i*3 + 3 && j < relevant_key_phrases.length; j++){
+                const key_phrase = relevant_key_phrases[j];
+                const kp_btn = $('<button type="button" class="btn">' + key_phrase+ '</button>');
+                // Add button
+                kp_btn.button();
+                // On click event
+                kp_btn.click(function(event){
+                    display_papers_by_key_phrase(key_phrase);
+                });
+                row.append($('<div class="col border-1 border-start border-dark"></div>').append(kp_btn));
             }
-            const key_phrase = relevant_key_phrases[i];
-            const kp_btn = $('<button type="button" class="btn">' + key_phrase+ '</button>');
-            // Add button
-            kp_btn.button();
-            // On click event
-            kp_btn.click(function(event){
-                display_papers_by_key_phrase(key_phrase);
-            });
-            row.append($('<div class="col border-1 border-start border-dark"></div>').append(kp_btn));
+            if(j === relevant_key_phrases.length){
+                // Add empty cell if needed
+                let reminders = relevant_key_phrases.length%3;
+                while(reminders > 0 && reminders !== 3){
+                    row.append($('<div class="col border-1 border-start border-dark"></div>'));
+                    reminders = reminders + 1;
+                }
+            }
         }
-
-        // Add empty cell if needed
-        let reminders = relevant_key_phrases.length%3;
-        while(reminders > 0 && reminders !== 3){
-            row.append($('<div class="col border-1 border-start border-dark"></div>'));
-            reminders = reminders + 1;
-        }
-
 
         // Display the list of papers containing the key phrases
         display_papers_by_word(word);
@@ -177,8 +177,6 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         display_key_phrases_by_word(word, key_phrase_div);
         const element = document.getElementById("sub_group");
         element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-
-
 
     }
 

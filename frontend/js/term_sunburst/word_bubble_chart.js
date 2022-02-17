@@ -109,7 +109,7 @@ function WordBubbleChart(group, cluster_docs, color) {
             // Removed the duplicated title words, such as 'data'
             // neighbouring_words = neighbouring_words.filter(w => ! title_words.includes(w['word']));
             // Get top 5 neighbouring words
-            dict[title_word] = neighbouring_words.slice(0, 5);
+            dict[title_word] = neighbouring_words.slice(0, 6);
         }
         return dict;
     }
@@ -151,11 +151,11 @@ function WordBubbleChart(group, cluster_docs, color) {
                             radius: n_phrases.length+ 5
                         },
                         color: 'gray',
-                        dataLabels: {
-                            style: {
-                                fontSize: '10px'
-                            }
-                        }
+                        // dataLabels: {
+                        //     style: {
+                        //         fontSize: '10px'
+                        //     }
+                        // }
                     });
                     // Add link
                     links.push({
@@ -176,11 +176,11 @@ function WordBubbleChart(group, cluster_docs, color) {
                                 radius: n_phrases.length + 5
                             },
                             color: 'gray',
-                            dataLabels: {
-                                style: {
-                                    fontSize: '9px'
-                                }
-                            }
+                            // dataLabels: {
+                            //     style: {
+                            //         fontSize: '9px'
+                            //     }
+                            // }
                         });
                     }
                     // Add link
@@ -221,6 +221,8 @@ function WordBubbleChart(group, cluster_docs, color) {
                         // linkLength: 10,
                         // friction: -0.1,
                         approximation: 'barnes-hut',
+                        integration: 'euler',
+
                     }
                 }
             },
@@ -231,16 +233,16 @@ function WordBubbleChart(group, cluster_docs, color) {
                     allowOverlap: false,
                     style: {
                         color:"black",
-                        textOutline: false
+                        textOutline: false,
+                        style: {
+                            fontSize: '9px'
+                        }
                     }
                 },
                 data: links,
                 nodes: nodes
             }]
         });
-        //
-
-
     }
 
     _createUI();
