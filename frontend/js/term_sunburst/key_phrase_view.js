@@ -178,6 +178,8 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         const element = document.getElementById("sub_group");
         element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 
+
+
     }
 
 

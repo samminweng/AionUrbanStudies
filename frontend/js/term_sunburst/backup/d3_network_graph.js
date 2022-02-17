@@ -5,7 +5,7 @@ function D3NetworkGraph(word_docs, is_key_phrase, chart_div, color) {
     const {nodes, links} = create_node_link_data(word_docs);
     // console.log(nodes);
     // console.log(links);
-    const width = 600;
+    const width = 500;
     const height = 600;
     const max_radius = 30;
     let node_radius = 2;
@@ -128,16 +128,6 @@ function D3NetworkGraph(word_docs, is_key_phrase, chart_div, color) {
             .attr("stroke-width", 1.5)
             .attr("r", d => get_node_size(d))
             .attr("fill", d => color);
-        // node.append("image")
-        //     .attr('href', d => get_image_path(d))
-        //     .attr('x', d => -1 * get_node_size(d)/2 )
-        //     .attr('y', d => -1 * get_node_size(d)/2)
-        //     .attr("stroke", "white")
-        //     .attr("stroke-width", 1.5)
-        //     .attr("width", d => get_node_size(d))
-        //     .attr("height", d => get_node_size(d))
-        //     .attr('rx', "3")
-        //     .attr("color", d => colors(d));
 
         // Add node label
         node.append("text")

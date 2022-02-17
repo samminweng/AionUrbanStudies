@@ -2,17 +2,15 @@
 // Ref: https://plotly.com/javascript/reference/bar/
 function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
     const width = 500;
-
     const d3colors = d3.schemeCategory10;
     group_data.sort((a, b) => a['Group'] - b['Group']);
-    console.log(group_data);    // Three main groups of key phrases
-    console.log(sub_group_data);    // Each main group contain a number of sub_groups
+    // console.log(group_data);    // Three main groups of key phrases
+    // console.log(sub_group_data);    // Each main group contain a number of sub_groups
     const min_group_id = group_data.reduce((pre, cur) => pre['Group'] < cur['Group'] ? pre : cur)['Group'];
     let thread = 2;
     if (min_group_id === 0) {
         thread = 1;
     }
-
 
     // Collect top 5 frequent from key phrases
     function collect_title_words(key_phrases, group_id){
@@ -129,7 +127,6 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         return top_words.slice(0, 5).map(w => w['word']);
     }
 
-
     // Graph data for a group
     function create_graph_data(group, max_size) {
         let data = [];
@@ -244,8 +241,6 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         return [data, annotations];
     }
 
-
-
     // Create a bar chart for each group
     function create_bar_chart(group, chart_id, max_size){
         const x_domain = [0, max_size];
@@ -269,7 +264,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             barmode: 'stack',
             annotations: annotations
         };
-        console.log(graph_data);
+        // console.log(graph_data);
         // console.log(layout);
         const config = {
             displayModeBar: false // Hide the floating bar
@@ -285,7 +280,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             // Get the marker
             const marker = data.points[0].data.marker;
             const color = marker.color;
-            console.log(id);
+            // console.log(id);
             if (id.includes("#")) {
                 const group_id = parseInt(id.split("#")[1]) - thread;
                 // Get the sub-group
@@ -293,6 +288,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                     const subgroup_id = parseInt(id.split("|")[1]);
                     const sub_group = sub_group_data.find(g => g['Group'] === group_id && g['SubGroup'] === subgroup_id);
                     if (sub_group) {
+                        const word_chart = new WordBubbleChart(sub_group, cluster_docs, color);
                         const view = new KeyPhraseView(sub_group, cluster_docs, color);
                     }
                 } else {
@@ -309,8 +305,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         });// End of chart onclick event
     }
 
-
-
+    // Main entry
     function create_UI() {
         $('#key_phrase_chart').empty();
         let max_size = 0;
@@ -332,7 +327,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             }
         }
         // max_size = max_size + 1;
-        console.log("max_size", max_size);
+        // console.log("max_size", max_size);
         // Display the bar chart for each group
         for(let i =0; i < group_data.length; i++){
             const chart_id = 'chart_' + i;
@@ -340,6 +335,13 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             const group = group_data[i];
             create_bar_chart(group, chart_id, max_size);
         }
+        // // For development only
+        // Create a term chart of sub_group
+        // const group_id = group_data[0]['Group'];
+        // const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+        // const word_chart = new WordBubbleChart(sub_groups[2], cluster_docs, d3colors[0]);
+
+
     }
 
     create_UI();
