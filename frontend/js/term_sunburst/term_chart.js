@@ -9,6 +9,7 @@ function TermChart(cluster, cluster_docs){
     // Main entry
     function createUI(){
         try{
+            $('#term_occ_chart').empty();
             $('#sub_group').empty();
             $('#doc_list').empty();
             $('#key_phrase_chart').empty();

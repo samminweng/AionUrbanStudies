@@ -16,21 +16,22 @@ function WordBubbleChart(group, cluster_docs, color) {
     console.log("phrase_doc_dict", phrase_doc_dict);
 
     // Collect the phrase to doc relation
-    function collect_phrase_docs(){
+    function collect_phrase_docs() {
         let dict = {};
-        for(const doc of group_docs){
+        for (const doc of group_docs) {
             const doc_id = doc['DocId'];
             const key_phrases = doc['KeyPhrases'];
-            for(const key_phrase of key_phrases){
-                if(key_phrase.toLowerCase() in dict){
+            for (const key_phrase of key_phrases) {
+                if (key_phrase.toLowerCase() in dict) {
                     dict[key_phrase.toLowerCase()].push(doc_id);
-                }else{
+                } else {
                     dict[key_phrase.toLowerCase()] = [doc_id];
                 }
             }
         }
         return dict;
     }
+
     // Collect all key phrases containing title words
     function collect_key_phrases_by_words() {
         let dict = {}; // Key: word, Value: a list of key phrases
@@ -115,11 +116,13 @@ function WordBubbleChart(group, cluster_docs, color) {
     }
 
     // Get all the nodes
-    function collect_nodes_links(){
+    function collect_nodes_links() {
         let nodes = [];
         let links = [];
-        for(let i=0; i< title_words.length; i++){
+        for (let i = 0; i < title_words.length; i++) {
             const title_word = title_words[i];
+            // Check if the word appear in word_neighbour_phrases_dict
+
             const key_phrases = word_key_phrase_dict[title_word];
             nodes.push({
                 id: title_word,
@@ -139,23 +142,18 @@ function WordBubbleChart(group, cluster_docs, color) {
             });
 
             const neighbor_words = word_neighbour_phrases_dict[title_word];
-            for(const n_word of neighbor_words){
+            for (const n_word of neighbor_words) {
                 const n_phrases = n_word['phrases'];
                 // Add an intermediate node
                 let parent = title_word;
-                if(n_phrases.length > 1){
+                if (n_phrases.length > 1) {
                     // Add the node
                     nodes.push({
                         id: n_word['word'],
                         marker: {
-                            radius: n_phrases.length+ 5
+                            radius: n_phrases.length + 5
                         },
-                        color: 'gray',
-                        // dataLabels: {
-                        //     style: {
-                        //         fontSize: '10px'
-                        //     }
-                        // }
+                        color: 'gray'
                     });
                     // Add link
                     links.push({
@@ -164,23 +162,17 @@ function WordBubbleChart(group, cluster_docs, color) {
                     parent = n_word['word'];
                 }
 
-
                 // Add phrases
-                for(const phrase of n_phrases){
+                for (const phrase of n_phrases) {
                     // found if the phrase exists
                     const found = nodes.find(n => n['id'] === phrase);
-                    if(!found){
+                    if (!found) {
                         nodes.push({
                             id: phrase,
                             marker: {
                                 radius: n_phrases.length + 5
                             },
-                            color: 'gray',
-                            // dataLabels: {
-                            //     style: {
-                            //         fontSize: '9px'
-                            //     }
-                            // }
+                            color: 'gray'
                         });
                     }
                     // Add link
@@ -189,8 +181,8 @@ function WordBubbleChart(group, cluster_docs, color) {
                     });
                 }
             }
-        }
 
+        }
         return [nodes, links];
 
     }
@@ -208,8 +200,8 @@ function WordBubbleChart(group, cluster_docs, color) {
             title: {
                 text: ''
             },
-            events:{
-                click: function(event){
+            events: {
+                click: function (event) {
                     console.log(event);
                 }
             },
@@ -232,7 +224,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                     linkFormat: '',
                     allowOverlap: false,
                     style: {
-                        color:"black",
+                        color: "black",
                         textOutline: false,
                         style: {
                             fontSize: '9px'

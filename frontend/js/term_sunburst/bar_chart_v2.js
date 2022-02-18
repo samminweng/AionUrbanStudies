@@ -274,6 +274,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         const chart_element = document.getElementById(chart_id);
         // // Define the hover event
         chart_element.on('plotly_click', function (data) {
+            $('#term_occ_chart').empty();
             $('#sub_group').empty();
             $('#doc_list').empty();
             const id = data.points[0].y;
@@ -338,10 +339,15 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         }
         // // For development only
         // Create a term chart of sub_group
-        // const group_id = group_data[1]['Group'];
-        // const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-        // const view = new KeyPhraseView(group_data[0], cluster_docs, d3colors[0]);
-        // const word_chart = new WordBubbleChart(sub_groups[2], cluster_docs, d3colors[0]);
+        const group_id = group_data[0]['Group'];
+        const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+        if(sub_groups.length > 0){
+            const view = new KeyPhraseView(sub_groups[0], cluster_docs, d3colors[0]);
+            const word_chart = new WordBubbleChart(sub_groups[0], cluster_docs, d3colors[0]);
+        }else{
+            const view = new KeyPhraseView(group_data[0], cluster_docs, d3colors[0]);
+            const word_chart = new WordBubbleChart(group_data[0], cluster_docs, d3colors[0]);
+        }
 
 
     }
