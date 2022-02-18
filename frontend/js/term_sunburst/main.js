@@ -7,7 +7,7 @@ const corpus_path = corpus + '_clusters.json';
 const params = new URLSearchParams(window.location.search);
 // Select cluster number
 let selected_cluster_no = 0;
-let selected_sub_cluster_no = 0;
+let selected_sub_cluster_no = 1;
 
 // Display the sub-clusters of a large cluster
 function displaySubCluster(parent_cluster_no, sub_cluster_dict){
