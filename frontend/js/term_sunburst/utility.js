@@ -2,7 +2,7 @@
 class Utility{
 
     // Collect top 5 frequent from key phrases
-    static collect_title_words(key_phrases){
+    static collect_title_words(key_phrases, docs){
         // Create word frequency list
         const create_word_freq_list = function(key_phrases){
             // Create bi-grams
@@ -14,7 +14,20 @@ class Utility{
                     bi_grams.push(words[1] + " " + words[2]);
                 }
                 return bi_grams;
+            };
+            // Get the docs containing the word
+            const get_word_docs = function(word){
+                let doc_ids = [];
+                for(const doc of docs){
+                    const key_phrases = doc['KeyPhrases'];
+                    const found = key_phrases.find(p => p.toLowerCase().includes(word))
+                    if(found){
+                        doc_ids.push(doc['DocId']);
+                    }
+                }
+                return doc_ids;
             }
+
             let word_freq_list = [];
             // Collect word frequencies from the list of key phrases.
             for(const key_phrase of key_phrases){
@@ -28,10 +41,11 @@ class Utility{
                     if(found_word){
                         found_word['freq'] += 1;
                     }else{
+                        const doc_ids = get_word_docs(n_gram.toLowerCase());
                         if(n_gram === n_gram.toUpperCase()){
-                            word_freq_list.push({'word': n_gram, 'freq':1, 'range': range});
+                            word_freq_list.push({'word': n_gram, 'freq':1, 'range': range, 'doc_ids':doc_ids});
                         }else{
-                            word_freq_list.push({'word': n_gram.toLowerCase(), 'freq':1, 'range': range});
+                            word_freq_list.push({'word': n_gram.toLowerCase(), 'freq':1, 'range': range, 'doc_ids': doc_ids});
                         }
                     }
                 }
@@ -43,7 +57,7 @@ class Utility{
 
         const word_freq_list = create_word_freq_list(key_phrases);
 
-        // Update top word frequencies and pick up top words
+        // Update top word frequencies and pick up top words that increase the maximal coverage
         const pick_top_words= function(top_words, candidate_words, top_n){
             // Get all the words
             let all_words = top_words.concat(candidate_words);
@@ -90,16 +104,17 @@ class Utility{
             }
             return b['freq'] - a['freq'];
         });
+        console.log("word_freq_list", word_freq_list);
         // Select top 5 bi_grams as default top_words
         let top_words = word_freq_list.slice(0, top_n);
         let candidate_words = word_freq_list.slice(top_n);
         let is_same = false;
         for(let iteration=0; !is_same && iteration<10; iteration++){
             // console.log("Group id: ", group_id);
-            // console.log("Iteration: ", iteration);
-            // console.log("top_words:", top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
+            console.log("Iteration: ", iteration);
+            console.log("top_words:", top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
             const [new_top_words, new_candidate_words] = pick_top_words(top_words, candidate_words, top_n);
-            // console.log("new top words: ", new_top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
+            console.log("new top words: ", new_top_words.map(w => w['word'] + '(' + w['freq'] + ')'));
             // Check if new and old top words are the same
             is_same = true;
             for(const new_word of new_top_words){
@@ -191,6 +206,43 @@ class Utility{
 }
 
 
+
+// const pick_top_words= function(top_words, candidate_words, top_n){
+//     // Get all the words
+//     let all_words = top_words.concat(candidate_words);
+//     // Go through top_words and check if any top word has two words (such as 'twitter data'
+//     // If so, reduce the frequency of its single word (freq('twitter') -1 and freq('data') -1)
+//     for(const top_word of top_words){
+//         if(top_word['range'] === 2){
+//             // Get the single word from a bi-gram
+//             const top_word_list = top_word['word'].split(" ");
+//             // Go through each individual word of top_word
+//             for(const individual_word of top_word_list){
+//                 // Update the frequencies of the single word
+//                 for(const word of all_words){
+//                     if(word['word'].toLowerCase() === individual_word.toLowerCase()){
+//                         // Update the freq
+//                         word['freq'] = word['freq'] - top_word['freq'];
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     // Remove the words of no frequencies
+//     all_words = all_words.filter(w => w['freq'] > 0);
+//     // Sort all the words by frequencies
+//     all_words.sort((a, b) => {
+//         if(b['freq'] === a['freq']){
+//             return b['range'] - a['range'];     // Prefer longer phrases
+//         }
+//         return b['freq'] - a['freq'];
+//     });
+//     // console.log("All words", all_words.map(w => w['word'] + '(' + w['freq'] + ')'));
+//     // Pick up top frequent word from all_words
+//     const new_top_words = all_words.slice(0, top_n);
+//     const new_candidate_words = all_words.slice(top_n);
+//     return [new_top_words, new_candidate_words];
+// }
 
 // // Collect all key phrases co-occurring with title words
 // function collect_word_neighbour_phrases() {

@@ -61,14 +61,15 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         // Ref: https://plotly.com/javascript/reference/layout/annotations/
         // A text can
         let annotations = [];
-
+        const MAXLENGTH = 50;
         if (sub_groups.length > 0) {
             for (const sub_group of sub_groups) {
-                // console.log(sub_group);
+                console.log(sub_group);
                 const sub_group_id = sub_group['SubGroup'];
                 const key_phrases = sub_group['Key-phrases'];
+                const sub_group_docs = cluster_docs.filter(d => sub_group['DocIds'].includes(d['DocId']))
                 // Get the title words of a sub-group
-                const title_words = Utility.collect_title_words(key_phrases);
+                const title_words = Utility.collect_title_words(key_phrases, sub_group_docs);
                 sub_group['TitleWords'] = title_words;
                 // Update the title word of a sub-group;
                 const num_docs = sub_group['NumDocs'];
@@ -81,7 +82,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 annotations.push({
                     x: 0.0,
                     y: group_name + "|" + sub_group_id,
-                    text: '<b>' + title_words.slice(0, 3).join(", ") + '</b>',
+                    text: '<b>' + title_words.join(", ").substring(0, MAXLENGTH) + '...</b>',
                     font: {
                         family: 'Arial',
                         size: 14,
@@ -96,8 +97,9 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             }
         } else {
             // Add the group
-            // const title_words = group['TitleWords'];
-            const title_words = Utility.collect_title_words(group['Key-phrases']);
+            console.log("group", group);
+            const group_docs = cluster_docs.filter(d => group['DocIds'].includes(d['DocId']));
+            const title_words = Utility.collect_title_words(group['Key-phrases'], group_docs);
             group['TitleWords'] = title_words;
             const num_docs = group['NumDocs'];
             trace['y'].push(group_name + "#" + group_id);
@@ -108,7 +110,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             annotations.push({
                 x: 0.0,
                 y: group_name + "#" + group_id,
-                text: '<b>' + title_words.join(", ").substring(0, 50) + '...</b>',
+                text: '<b>' + title_words.join(", ").substring(0, MAXLENGTH) + '...</b>',
                 font: {
                     family: 'Arial',
                     size: 14,
