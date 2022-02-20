@@ -2,7 +2,7 @@
 function KeyPhraseView(sub_group, cluster_docs, color){
     const sub_group_doc_ids = sub_group['DocIds'];
     const key_phrases = sub_group['Key-phrases'];
-    const title_words = sub_group['TitleWords'];
+    const title_words = sub_group['TitleWords'].concat("others");
     // Get sub_group docs
     const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
     // console.log(sub_group_docs);
@@ -79,7 +79,7 @@ function KeyPhraseView(sub_group, cluster_docs, color){
     function create_title_word_header(key_phrase_div){
         // Create a header
         const nav = $('<nav class="nav nav-pills"></nav>');
-        const word_list = title_words.concat(['others']);
+        const word_list = title_words;
         for(let i=0; i < word_list.length; i++){
             const word = word_list[i];
             const relevant_key_phrases = word_key_phrase_dict[word];

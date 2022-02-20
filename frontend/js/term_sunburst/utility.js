@@ -118,8 +118,8 @@ class Utility{
         let is_same = false;
         for(let iteration=0; !is_same && iteration<10; iteration++){
             // console.log("Group id: ", group_id);
-            console.log("Iteration: ", iteration);
-            console.log("top_words:", top_words.map(w => w['word'] + '(' + w['doc_ids'].length + ')'));
+            // console.log("Iteration: ", iteration);
+            // console.log("top_words:", top_words.map(w => w['word'] + '(' + w['doc_ids'].length + ')'));
             // Pass the copy array to the function to avoid change the values of 'top_word' 'candidate_words'
             const new_top_words = pick_top_words(Array.from(top_words), Array.from(candidate_words), top_n);
             // Check if new and old top words are the same
@@ -145,7 +145,7 @@ class Utility{
                 }
                 return true;
             });
-            console.log("new top words: ", top_words.map(w => w['word'] + '(' + w['doc_ids'].length + ')'));
+            // console.log("new top words: ", top_words.map(w => w['word'] + '(' + w['doc_ids'].length + ')'));
         }
         // Sort the top words by freq
         top_words.sort((a, b) => b['freq'] - a['freq']);
@@ -187,8 +187,6 @@ class Utility{
         for(const title_word of title_words){
             dict[title_word] = [];
         }
-        // Add misc
-        dict['others'] = [];
         // Match the key phrases with title words and assign key phrase
         for(const key_phrase of key_phrases) {
             let is_found = false;
