@@ -51,7 +51,7 @@ function displaySubCluster(parent_cluster_no, sub_cluster_dict){
         }
     });
     // Create a term chart
-    const sub_cluster = sub_cluster_groups[1];
+    const sub_cluster = sub_cluster_groups.find(c => c['Cluster'] === selected_sub_cluster_no);
     const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
     const chart = new TermChart(sub_cluster, cluster_docs);
 }
