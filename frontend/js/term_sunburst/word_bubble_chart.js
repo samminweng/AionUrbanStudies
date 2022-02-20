@@ -44,7 +44,7 @@ function WordBubbleChart(group, cluster_docs, color) {
         if(!id.includes("paper#")){
             // Highlight title word
             const title_word = id;
-            div = mark_key_terms(div, [title_word], 'search_terms');
+            div = mark_key_terms(div, [title_word], 'key_term');
         }else{
             const doc_id = parseInt(id.split("paper#")[1]);
             // Get the title words linking to this doc
@@ -54,7 +54,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                     words.push(title_word);
                 }
             }
-            div = mark_key_terms(div, words, 'search_terms');
+            div = mark_key_terms(div, words, 'key_term');
         }
         return div.html();
     }
@@ -159,7 +159,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                 dataLabels: {
                     enabled: true,
                     linkFormat: '',
-                    allowOverlap: true
+                    allowOverlap: false
                 },
                 data: links,
                 nodes: nodes
@@ -252,7 +252,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                     keys: ['from', 'to'],
                     layoutAlgorithm: {
                         enableSimulation: false,
-                        // linkLength: 10,
+                        linkLength: 25,
                         // friction: -0.1,
                         approximation: 'barnes-hut',
                         integration: 'euler',
@@ -293,8 +293,8 @@ function WordBubbleChart(group, cluster_docs, color) {
     }
 
     function _createUI() {
-        display_word_paper_chart("others");
-        // display_all_word_chart();
+        // display_word_paper_chart("others");
+        display_all_word_chart();
         // Add click event
         $('#back_btn').button();
         $('#back_btn').click(function(event){

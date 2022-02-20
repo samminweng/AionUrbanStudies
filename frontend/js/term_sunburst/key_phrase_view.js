@@ -10,6 +10,28 @@ function KeyPhraseView(sub_group, cluster_docs, color){
     const word_doc_dict = Utility.create_word_doc_dict(title_words, sub_group_docs, word_key_phrase_dict);
     // console.log(key_phrases);
 
+    // Highlight key terms
+    function mark_key_terms(div, terms, class_name) {
+        if(terms !== null){
+            // Check if the topic is not empty
+            for (const term of terms) {
+                // Mark the topic
+                const mark_options = {
+                    "separateWordSearch": false,
+                    "accuracy": {
+                        "value": "partially",
+                        "limiters": [",", ".", "'s", "/", ";", ":", '(', ')', '‘', '’', '%', 's', 'es']
+                    },
+                    "acrossElements": true,
+                    "ignorePunctuation": ":;.,-–—‒_(){}[]!'\"+=".split(""),
+                    "className": class_name
+                }
+                div.mark(term, mark_options);
+            }
+        }
+        return div;
+    }
+
     // Display the relevant papers containing key phrases
     function display_papers_by_word(word){
         const relevant_doc_ids = word_doc_dict[word];
@@ -70,6 +92,8 @@ function KeyPhraseView(sub_group, cluster_docs, color){
                 }
             }
         }
+        // Highlight the word
+        key_phrase_div = mark_key_terms(key_phrase_div, [word], 'key_term');
 
         // Display the list of papers containing the key phrases
         display_papers_by_word(word);

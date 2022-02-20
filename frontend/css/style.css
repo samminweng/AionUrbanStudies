@@ -22,6 +22,12 @@
     padding: 0;
 }
 
+.key_term {
+    background: transparent;
+    font-weight: bold;
+    color: black;
+    padding: 0;
+}
 
 /** Network style */
 .controls {

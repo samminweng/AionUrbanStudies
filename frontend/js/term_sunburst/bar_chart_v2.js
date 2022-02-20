@@ -26,15 +26,8 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             x: [], y: [], text: [],
             orientation: 'h', type: 'bar',
             name: group_name,
-            textposition: 'insides',
-            insidetextanchor: "start",
-            insidetextfont: {
-                size: 14
-            },
-            outsidetextfont: {
-                size: 14
-            },
-            hovertemplate: '%{x} papers',
+            textposition: 'none',
+            hoverinfo: "text",
             marker: {
                 color: d3colors[group_id + 1],
                 line: {
@@ -75,7 +68,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
                 const num_docs = sub_group['NumDocs'];
                 trace['y'].push(group_name + "|" + sub_group_id);
                 trace['x'].push(num_docs);
-                // trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>');
+                trace['text'].push('<b>' + key_phrases.length + ' key phrases, ' + num_docs+ ' papers</b>');
                 comp_trace['y'].push(group_name + "|" + sub_group_id);
                 comp_trace['x'].push(max_size - num_docs);
                 // comp_trace['text'].push();
@@ -100,10 +93,12 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             console.log("group", group);
             const group_docs = cluster_docs.filter(d => group['DocIds'].includes(d['DocId']));
             const title_words = Utility.collect_title_words(group['Key-phrases'], group_docs);
+            const key_phrases = group['Key-phrases'];
             group['TitleWords'] = title_words;
             const num_docs = group['NumDocs'];
             trace['y'].push(group_name + "#" + group_id);
             trace['x'].push(num_docs);
+            trace['text'].push('<b>' + key_phrases.length + ' key phrases, ' + num_docs+ ' papers</b>');
             // trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>');
             comp_trace['y'].push(group_name + "#" + group_id);
             comp_trace['x'].push(max_size - num_docs);
@@ -206,7 +201,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             const group = group_data[i];
             const group_id = group['Group'];
             const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-            if(sub_groups.length >0 ){
+            if(sub_groups.length > 0){
                 for(const sub_group of sub_groups){
                     const num_docs = sub_group['NumDocs'];
                     max_size = Math.max(num_docs, max_size);
