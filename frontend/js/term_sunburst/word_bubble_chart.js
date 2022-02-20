@@ -61,6 +61,7 @@ function WordBubbleChart(group, cluster_docs, color) {
 
     // Display a detail chart for title word
     function display_word_paper_chart(title_word){
+        console.log(title_word);
         // Get all the nodes
         const collect_nodes_links = function(word_docs) {
             let nodes = [];
@@ -90,7 +91,7 @@ function WordBubbleChart(group, cluster_docs, color) {
             for(let i=0; i< word_docs.length;i++) {
                 const doc = word_docs[i];
                 const doc_id = doc['DocId'];
-                const word_key_phrase = doc['KeyPhrases'].find(phrase => phrase.toLowerCase().includes(title_word));
+                const word_key_phrase = doc['KeyPhrases'].find(phrase => key_phrases.includes(phrase));
                 // const key_phrases = doc['KeyPhrases'].filter(phrase => phrase !== word_key_phrase);
                 const text = doc['KeyPhrases'].join(";<br>");
                 const id = "paper#" + doc_id
@@ -99,12 +100,11 @@ function WordBubbleChart(group, cluster_docs, color) {
                     name: "<span>" + word_key_phrase + "</span>",
                     text: text,
                     color: 'gray',
+                    // opacity: 0.5,
                     marker: {
                         radius: 20
                     },
                     dataLabels: {
-                        enabled: true,
-                        allowOverlap: false,
                         format: '{point.name}',
                         style: {
                             color: 'black',
@@ -113,7 +113,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                         },
                         align: 'left',
                         useHTML: true,
-                        verticalAlign: 'top',
+                        verticalAlign: 'bottom',
                     }
                 });
                 const link = {from: title_word, to: id}
@@ -122,7 +122,6 @@ function WordBubbleChart(group, cluster_docs, color) {
             return [nodes, links];
         };
 
-        console.log(title_word);
         // $('term_occ_chart').empty();
         const word_docs = group_docs.filter(d => word_doc_dict[title_word].includes(d['DocId']));
         const [nodes, links] = collect_nodes_links(word_docs);
@@ -294,8 +293,8 @@ function WordBubbleChart(group, cluster_docs, color) {
     }
 
     function _createUI() {
-        // display_word_paper_chart("traffic");
-        display_all_word_chart();
+        display_word_paper_chart("others");
+        // display_all_word_chart();
         // Add click event
         $('#back_btn').button();
         $('#back_btn').click(function(event){
