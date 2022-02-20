@@ -2,13 +2,13 @@
 // Ref: https://www.highcharts.com/docs/chart-and-series-types/network-graph
 // API: https://api.highcharts.com/highcharts/
 function WordBubbleChart(group, cluster_docs, color) {
-    const d3colors = d3.schemeCategory10;
-    const title_words = group['TitleWords'].concat(['others']);
-    const group_key_phrases = group['Key-phrases'];
-    const group_docs = cluster_docs.filter(d => group['DocIds'].includes(d['DocId']));
-    const word_key_phrase_dict = Utility.create_word_key_phrases_dict(title_words, group_key_phrases);
-    const word_doc_dict = Utility.create_word_doc_dict(title_words, group_docs, word_key_phrase_dict);
-    const phrase_doc_dict = Utility.collect_phrase_docs(group_docs);
+    let d3colors = d3.schemeCategory10;
+    let title_words = group['TitleWords'].concat(['others']);
+    let group_key_phrases = group['Key-phrases'];
+    let group_docs = cluster_docs.filter(d => group['DocIds'].includes(d['DocId']));
+    let word_key_phrase_dict = Utility.create_word_key_phrases_dict(title_words, group_key_phrases);
+    let word_doc_dict = Utility.create_word_doc_dict(title_words, group_docs, word_key_phrase_dict);
+    let phrase_doc_dict = Utility.collect_phrase_docs(group_docs);
     console.log("group", group);
     console.log("group docs", group_docs);
     console.log("word_key_phrase_dict", word_key_phrase_dict);
@@ -17,7 +17,7 @@ function WordBubbleChart(group, cluster_docs, color) {
 
     // Highlight key terms
     function mark_key_terms(div, terms, class_name) {
-        if(terms !== null){
+        if (terms !== null) {
             // Check if the topic is not empty
             for (const term of terms) {
                 // Mark the topic
@@ -38,19 +38,19 @@ function WordBubbleChart(group, cluster_docs, color) {
     }
 
     // Create a tooltip
-    function create_tooltip(id, text){
+    function create_tooltip(id, text) {
         // console.log("this.point", this.point);
         let div = $('<div>' + text + '</div>');
-        if(!id.includes("paper#")){
+        if (!id.includes("paper#")) {
             // Highlight title word
             const title_word = id;
             div = mark_key_terms(div, [title_word], 'key_term');
-        }else{
+        } else {
             const doc_id = parseInt(id.split("paper#")[1]);
             // Get the title words linking to this doc
             let words = [];
-            for(const title_word of title_words){
-                if(word_doc_dict[title_word].includes(doc_id)){
+            for (const title_word of title_words) {
+                if (word_doc_dict[title_word].includes(doc_id)) {
                     words.push(title_word);
                 }
             }
@@ -60,10 +60,11 @@ function WordBubbleChart(group, cluster_docs, color) {
     }
 
     // Display a detail chart for title word
-    function display_word_paper_chart(title_word){
+    function display_word_paper_chart(title_word) {
+        $('#term_occ_chart').empty();
         console.log(title_word);
         // Get all the nodes
-        const collect_nodes_links = function(word_docs) {
+        const collect_nodes_links = function (word_docs) {
             let nodes = [];
             let links = [];
             // Create a title word node
@@ -88,7 +89,7 @@ function WordBubbleChart(group, cluster_docs, color) {
             });
             // Add word node and link between word and paper
             // Add link
-            for(let i=0; i< word_docs.length;i++) {
+            for (let i = 0; i < word_docs.length; i++) {
                 const doc = word_docs[i];
                 const doc_id = doc['DocId'];
                 const word_key_phrase = doc['KeyPhrases'].find(phrase => key_phrases.includes(phrase));
@@ -125,7 +126,6 @@ function WordBubbleChart(group, cluster_docs, color) {
         // $('term_occ_chart').empty();
         const word_docs = group_docs.filter(d => word_doc_dict[title_word].includes(d['DocId']));
         const [nodes, links] = collect_nodes_links(word_docs);
-        $('#term_occ_chart').empty();
         Highcharts.chart('term_occ_chart', {
             chart: {
                 type: 'networkgraph',
@@ -134,12 +134,12 @@ function WordBubbleChart(group, cluster_docs, color) {
             title: {
                 text: ''
             },
-            tooltip:{
+            tooltip: {
                 backgroundColor: 'white',
                 borderColor: 'black',
                 borderRadius: 10,
                 borderWidth: 3,
-                formatter: function() {
+                formatter: function () {
                     return create_tooltip(this.point.id, this.point.text);
                 }
             },
@@ -168,14 +168,14 @@ function WordBubbleChart(group, cluster_docs, color) {
     }
 
     // Display the papers for all words
-    function display_all_word_chart(){
+    function display_all_word_chart() {
         $('#term_occ_chart').empty();
         // Get all the nodes
-        const collect_nodes_links = function() {
+        const collect_nodes_links = function () {
             let nodes = [];
             let links = [];
             // // Add the paper
-            for(let i=0; i< group_docs.length;i++){
+            for (let i = 0; i < group_docs.length; i++) {
                 const doc = group_docs[i];
                 const doc_id = doc['DocId'];
                 const text = doc['KeyPhrases'].join(";<br>");
@@ -217,8 +217,8 @@ function WordBubbleChart(group, cluster_docs, color) {
                     }
                 });
                 // Add link
-                for(const doc_id of word_docs){
-                    const link ={from: title_word, to: "paper#" + doc_id}
+                for (const doc_id of word_docs) {
+                    const link = {from: title_word, to: "paper#" + doc_id}
                     links.push(link);
                 }
 
@@ -229,7 +229,7 @@ function WordBubbleChart(group, cluster_docs, color) {
         };
         const [nodes, links] = collect_nodes_links();
         // Create highcharts
-        Highcharts.chart('term_occ_chart', {
+        let chart = Highcharts.chart('term_occ_chart', {
             chart: {
                 type: 'networkgraph',
                 height: 600,
@@ -237,13 +237,13 @@ function WordBubbleChart(group, cluster_docs, color) {
             title: {
                 text: ''
             },
-            tooltip:{
+            tooltip: {
                 backgroundColor: 'white',
                 borderColor: 'black',
                 borderRadius: 10,
                 borderWidth: 3,
                 opacity: 0,
-                formatter: function() {
+                formatter: function () {
                     return create_tooltip(this.point.id, this.point.text);
                 }
             },
@@ -276,20 +276,23 @@ function WordBubbleChart(group, cluster_docs, color) {
                     }
                 },
                 data: links,
-                nodes: nodes
+                nodes: nodes,
+                // Add the onclick event to display the chart for a single title word
+                events: {
+                    click: function (event) {
+                        console.log("event", event);
+                        const id = event.point.id;
+                        // Check if clicking on any title word
+                        const found = title_words.find(w => w === id);
+                        if (found) {
+                            console.log(word_doc_dict);
+                            display_word_paper_chart(found);
+                        }
+                    }
+                }
             }]
         });
 
-        // Add onclick event
-        document.getElementById('term_occ_chart').addEventListener('click', e => {
-            // console.log(e);
-            const id = e.point.id;
-            // Check if clicking on any title word
-            const found = title_words.find(w => w === id);
-            if(found){
-                display_word_paper_chart(found);
-            }
-        });
     }
 
     function _createUI() {
@@ -297,7 +300,7 @@ function WordBubbleChart(group, cluster_docs, color) {
         display_all_word_chart();
         // Add click event
         $('#back_btn').button();
-        $('#back_btn').click(function(event){
+        $('#back_btn').click(function (event) {
             display_all_word_chart();
         });
     }
