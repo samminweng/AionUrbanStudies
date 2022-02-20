@@ -37,9 +37,30 @@ function WordBubbleChart(group, cluster_docs, color) {
         return div;
     }
 
+    // Create a tooltip
+    function create_tooltip(id, text){
+        // console.log("this.point", this.point);
+        let div = $('<div>' + text + '</div>');
+        if(!id.includes("paper#")){
+            // Highlight title word
+            const title_word = id;
+            div = mark_key_terms(div, [title_word], 'search_terms');
+        }else{
+            const doc_id = parseInt(id.split("paper#")[1]);
+            // Get the title words linking to this doc
+            let words = [];
+            for(const title_word of title_words){
+                if(word_doc_dict[title_word].includes(doc_id)){
+                    words.push(title_word);
+                }
+            }
+            div = mark_key_terms(div, words, 'search_terms');
+        }
+        return div.html();
+    }
+
     // Display a detail chart for title word
     function display_word_paper_chart(title_word){
-
         // Get all the nodes
         const collect_nodes_links = function(word_docs) {
             let nodes = [];
@@ -64,7 +85,6 @@ function WordBubbleChart(group, cluster_docs, color) {
                     }
                 }
             });
-            let labels = [];
             // Add word node and link between word and paper
             // Add link
             for(let i=0; i< word_docs.length;i++) {
@@ -78,7 +98,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                     id: id,
                     name: "<span>" + word_key_phrase + "</span>",
                     text: text,
-                    // color: color,
+                    color: 'gray',
                     marker: {
                         radius: 20
                     },
@@ -102,7 +122,6 @@ function WordBubbleChart(group, cluster_docs, color) {
             return [nodes, links];
         };
 
-
         console.log(title_word);
         // $('term_occ_chart').empty();
         const word_docs = group_docs.filter(d => word_doc_dict[title_word].includes(d['DocId']));
@@ -122,7 +141,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                 borderRadius: 10,
                 borderWidth: 3,
                 formatter: function() {
-                    return '<div><b>' + this.point.text + '</b></div>';
+                    return create_tooltip(this.point.id, this.point.text);
                 }
             },
             plotOptions: {
@@ -151,6 +170,7 @@ function WordBubbleChart(group, cluster_docs, color) {
 
     // Display the papers for all words
     function display_all_word_chart(){
+        $('#term_occ_chart').empty();
         // Get all the nodes
         const collect_nodes_links = function() {
             let nodes = [];
@@ -208,10 +228,8 @@ function WordBubbleChart(group, cluster_docs, color) {
             return [nodes, links];
 
         };
-
-        $('#term_occ_chart').empty();
         const [nodes, links] = collect_nodes_links();
-
+        // Create highcharts
         Highcharts.chart('term_occ_chart', {
             chart: {
                 type: 'networkgraph',
@@ -227,26 +245,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                 borderWidth: 3,
                 opacity: 0,
                 formatter: function() {
-                    console.log("this.point", this.point);
-                    let div = $('<div>' + this.point.text + '</div>');
-                    if(!this.point.id.includes("paper#")){
-                        // Highlight title word
-                        const title_word = this.point.id;
-                        div = mark_key_terms(div, [title_word], 'search_terms');
-                    }else{
-                        const doc_id = parseInt(this.point.id.split("paper#")[1]);
-                        // Get the title words linking to this doc
-                        let words = [];
-                        for(const title_word of title_words){
-                            if(word_doc_dict[title_word].includes(doc_id)){
-                                words.push(title_word);
-                            }
-                        }
-                        div = mark_key_terms(div, words, 'search_terms');
-                    }
-                    return div.html();
-                    // mark_key_terms(div)
-                    // return '<div>' + this.point.text + '</div>';
+                    return create_tooltip(this.point.id, this.point.text);
                 }
             },
             plotOptions: {
@@ -297,6 +296,11 @@ function WordBubbleChart(group, cluster_docs, color) {
     function _createUI() {
         // display_word_paper_chart("traffic");
         display_all_word_chart();
+        // Add click event
+        $('#back_btn').button();
+        $('#back_btn').click(function(event){
+            display_all_word_chart();
+        });
     }
 
     _createUI();
