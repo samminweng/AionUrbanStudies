@@ -221,15 +221,15 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         }
         // // For development only
         // Create a term chart of sub_group
-        const group = group_data[1];
+        const group = group_data[0];
         const group_id = group['Group'];
         const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
         if(sub_groups.length > 0){
             const view = new KeyPhraseView(sub_groups[0], cluster_docs, d3colors[0]);
             const word_chart = new WordBubbleChart(sub_groups[0], cluster_docs, d3colors[0]);
         }else{
-            const view = new KeyPhraseView(group, cluster_docs, d3colors[1]);
-            const word_chart = new WordBubbleChart(group, cluster_docs, d3colors[1]);
+            const view = new KeyPhraseView(group, cluster_docs, d3colors[0]);
+            const word_chart = new WordBubbleChart(group, cluster_docs, d3colors[0]);
         }
 
 
