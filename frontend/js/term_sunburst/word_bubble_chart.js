@@ -24,7 +24,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                 const mark_options = {
                     "separateWordSearch": false,
                     "accuracy": {
-                        "value": "exactly",
+                        "value": "partially",
                         "limiters": [",", ".", "'s", "/", ";", ":", '(', ')', '‘', '’', '%', 's', 'es']
                     },
                     "acrossElements": true,
@@ -164,7 +164,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                     id: "paper#" + doc_id,
                     name: '',
                     text: text,
-                    // color: color,
+                    color: 'gray',
                     marker: {
                         radius: 5
                     },
@@ -228,16 +228,25 @@ function WordBubbleChart(group, cluster_docs, color) {
                 opacity: 0,
                 formatter: function() {
                     console.log("this.point", this.point);
+                    let div = $('<div>' + this.point.text + '</div>');
                     if(!this.point.id.includes("paper#")){
                         // Highlight title word
                         const title_word = this.point.id;
-                        let div = $('<div>' + this.point.text + '</div>');
                         div = mark_key_terms(div, [title_word], 'search_terms');
-                        return div.html();
+                    }else{
+                        const doc_id = parseInt(this.point.id.split("paper#")[1]);
+                        // Get the title words linking to this doc
+                        let words = [];
+                        for(const title_word of title_words){
+                            if(word_doc_dict[title_word].includes(doc_id)){
+                                words.push(title_word);
+                            }
+                        }
+                        div = mark_key_terms(div, words, 'search_terms');
                     }
-
+                    return div.html();
                     // mark_key_terms(div)
-                    return '<div>' + this.point.text + '</div>';
+                    // return '<div>' + this.point.text + '</div>';
                 }
             },
             plotOptions: {
