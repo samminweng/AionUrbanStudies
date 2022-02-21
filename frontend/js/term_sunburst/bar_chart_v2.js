@@ -231,8 +231,6 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             const view = new KeyPhraseView(group, cluster_docs, d3colors[0]);
             const word_chart = new WordBubbleChart(group, cluster_docs, d3colors[0]);
         }
-
-
     }
 
     create_UI();

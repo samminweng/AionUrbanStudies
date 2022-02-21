@@ -147,7 +147,7 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         const word = title_words[0];
         display_key_phrases_by_word(word, key_phrase_div);
         const element = document.getElementById("sub_group");
-        element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+        element.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
 
     }
 

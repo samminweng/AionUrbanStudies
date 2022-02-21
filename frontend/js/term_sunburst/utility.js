@@ -16,10 +16,11 @@ class Utility{
                 return bi_grams;
             };
             // Get the docs containing the word
-            const get_doc_ids_by_key_phrase = function(key_phrase){
+            const get_doc_ids_by_key_phrase = function(key_phrase, docs){
                 let doc_ids = [];
                 for(const doc of docs){
-                    const found = doc['KeyPhrases'].find(kp => key_phrase === kp)
+                    // phrases appear in the doc's top key phrases
+                    const found = doc['KeyPhrases'].find(kp => key_phrase.toLowerCase() === kp.toLowerCase())
                     if(found){
                         doc_ids.push(doc['DocId']);
                     }
@@ -30,15 +31,19 @@ class Utility{
             let word_freq_list = [];
             // Collect word frequencies from the list of key phrases.
             for(const key_phrase of key_phrases){
-                const key_phrase_doc_ids = get_doc_ids_by_key_phrase(key_phrase);
-                const words = key_phrase.split(" ");
-                const bi_grams = create_bi_grams(words);
-                const n_grams = words.concat(bi_grams);
+                const key_phrase_doc_ids = get_doc_ids_by_key_phrase(key_phrase, docs);
+                const uni_grams = key_phrase.split(" ");
+                const bi_grams = create_bi_grams(uni_grams);
+                const n_grams = uni_grams.concat(bi_grams);
                 // collect uni_gram
                 for (const n_gram of n_grams){
                     const range = n_gram.split(" ").length;
                     const found_word = word_freq_list.find(w => w['word'].toLowerCase() === n_gram.toLowerCase())
                     if(found_word){
+                        if(n_gram.toLowerCase() === 'data'){
+                            console.log("Found");
+                        }
+
                         // Update doc id
                         let found_doc_ids = found_word['doc_ids'];
                         for(const doc_id of key_phrase_doc_ids){
@@ -57,9 +62,7 @@ class Utility{
                     }
                 }
             }
-
             return word_freq_list;
-            // console.log(word_freq_list);
         }
 
         const word_freq_list = create_word_freq_list(key_phrases);
@@ -67,8 +70,8 @@ class Utility{
         // Update top word frequencies and pick up top words that increase the maximal coverage
         const pick_top_words= function(top_words, candidate_words, top_n){
             // console.log("top_words", top_words)
-            // Go through top_words and check if any top word has two words (such as 'twitter data'
-            // If so, reduce the frequency of its single word (freq('twitter') -1 and freq('data') -1)
+            // Go through top_words and check if other top words can be merged.
+            // For example, 'traffic prediction' can be merged to 'traffic'
             for(let i = 0; i< top_words.length; i++){
                 const top_word = top_words[i];
                 const top_word_doc_ids = top_word['doc_ids'];
@@ -78,13 +81,18 @@ class Utility{
                         let other_word = top_words[j];
                         // Update the doc_id from
                         other_word['doc_ids'] = other_word['doc_ids'].filter(id => id !== doc_id);
-                        // const found = other_word['word'].split(" ").find(w => top_word['word'].includes(w));
+                    }
+                    // // Go through each candidate words
+                    for(let k=0; k< candidate_words.length; k++){
+                        let candidate_word = candidate_words[k];
+                        // Update the doc_id from
+                        candidate_word['doc_ids'] = candidate_word['doc_ids'].filter(id => id !== doc_id);
                     }
                 }
             }
             // Remove top word that does not have any doc
-            top_words = top_words.filter(w => w['doc_ids'].length > 0 && w['freq'] > 0);
-            // Add the candidate words if top words
+            top_words = top_words.filter(w => w['doc_ids'].length > 0);
+            // Add the candidate words if any top word is removed from the list
             if(top_words.length < top_n){
                 // Sort all the words by frequencies
                 candidate_words.sort((a, b) => {
@@ -110,18 +118,19 @@ class Utility{
             }
             return b['freq'] - a['freq'];
         });
-        // console.log("word_freq_list", word_freq_list);
-        const word_freq_clone = JSON.parse(JSON.stringify(word_freq_list));
+
+        // Deep clone word_freq_list to ensure the value of word freq list does not get affected.
         // Select top 5 bi_grams as default top_words
-        let top_words = word_freq_list.slice(0, top_n);
-        let candidate_words = word_freq_list.slice(top_n);
+        const word_freq_clone = JSON.parse(JSON.stringify(word_freq_list));
+        let top_words = word_freq_clone.slice(0, top_n);
+        let candidate_words = word_freq_clone.slice(top_n);
         let is_same = false;
         for(let iteration=0; !is_same && iteration<10; iteration++){
             // console.log("Group id: ", group_id);
-            // console.log("Iteration: ", iteration);
-            // console.log("top_words:", top_words.map(w => w['word'] + '(' + w['doc_ids'].length + ')'));
+            console.log("Iteration: ", iteration);
+            console.log("top_words:", top_words.map(w => w['word'] + '(' + w['doc_ids'].length + ')'));
             // Pass the copy array to the function to avoid change the values of 'top_word' 'candidate_words'
-            const new_top_words = pick_top_words(Array.from(top_words), Array.from(candidate_words), top_n);
+            const new_top_words = pick_top_words(top_words, candidate_words, top_n);
             // Check if new and old top words are the same
             is_same = true;
             for(const new_word of new_top_words){
@@ -130,6 +139,7 @@ class Utility{
                     is_same = is_same && false;
                 }
             }
+            const word_freq_clone = JSON.parse(JSON.stringify(word_freq_list));
             // Replace the old top words with new top words
             top_words = word_freq_clone.filter(w => {
                 const found = new_top_words.find(nw => nw['word'] === w['word']);
