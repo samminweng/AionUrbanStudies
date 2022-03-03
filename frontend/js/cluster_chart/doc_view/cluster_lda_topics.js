@@ -1,6 +1,6 @@
 // Create a div to display the grouped key phrases
 function ClusterLDATopics(cluster_lda_topics, accordion_div){
-    console.log(cluster_lda_topics);
+    // console.log(cluster_lda_topics);
     // Create an list item to display a group of key phrases
     function createLDATopicView(lda_topic){
         const index = lda_topic['index'];

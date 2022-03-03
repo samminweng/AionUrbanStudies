@@ -40,15 +40,15 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
 
         const accordion_div = $('<div></div>');
         // // Add the key phrases grouped by similarity
-        const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div);
+        // const key_phrase_div = new ClusterKeyPhrase(cluster_key_phrases, cluster_docs, accordion_div);
         // Create LDA Accordion
-        const lda_topic_div = new ClusterLDATopics(cluster_lda_topics, accordion_div);
+        // const lda_topic_div = new ClusterLDATopics(cluster_lda_topics, accordion_div);
         // // Set accordion
         accordion_div.accordion({
             // icons: null,
             collapsible: true,
             heightStyle: "fill",
-            active: 0
+            active: 1
         });
         $('#cluster_terms').append(accordion_div);
     }

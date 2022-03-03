@@ -90,6 +90,11 @@ function DocView(doc, selected_term) {
         let author_keyword_div =  $('<div class="col"></div>');
         author_keyword_div.append($('<span class="fw-bold">Author Keywords: </span><span>' + doc['Author Keywords'] + '</span>'));
         container.find(".card-text").append(author_keyword_div);
+        // Add authors
+        let author_div =  $('<div class="col"></div>');
+        author_div.append($('<span class="fw-bold">Authors: </span><span>' + doc['Authors'] + '</span>'));
+        container.find(".card-text").append(author_div);
+
         // Add citation
         const paper_info_div = $('<div></div>');
         paper_info_div.append($('<span><span class="fw-bold">Cited by </span>' + doc['Cited by'] + ' articles</span>'));

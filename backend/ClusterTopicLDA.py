@@ -14,8 +14,8 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTopicLDA:
-    def __init__(self, _cluster_no):
-        self.cluster_no = _cluster_no
+    def __init__(self):
+        # self.cluster_no = _cluster_no
         self.args = Namespace(
             # case_name='CultureUrbanStudyCorpus',
             case_name='AIMLUrbanStudyCorpus',
@@ -24,7 +24,8 @@ class ClusterTopicLDA:
             iterations=400,
             chunksize=10,
             eval_every=None,  # Don't evaluate model perplexity, takes too much time.
-            cluster_folder='cluster_' + str(_cluster_no),
+            cluster_folder='iteration'
+            # cluster_folder='cluster_' + str(_cluster_no),
         )
         # Load Key phrase
         path = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases',
@@ -88,6 +89,7 @@ class ClusterTopicLDA:
             df = pd.read_json(path)
             # Collect
             results = list()
+            n_topic = 5
             # Apply LDA Topic model on each cluster of papers
             for i, cluster in df.iterrows():
                 try:
@@ -104,7 +106,7 @@ class ClusterTopicLDA:
                                                                iterations=self.args.iterations,
                                                                eval_every=self.args.eval_every,
                                                                chunksize=self.args.chunksize)
-                    top_topic_list = ldamodel.top_topics(corpus, topn=10)
+                    top_topic_list = ldamodel.top_topics(corpus, topn=n_topic)
                     total_score = 0
                     # Collect all the topic words
                     lda_topics = list()
@@ -235,8 +237,9 @@ class ClusterTopicLDA:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 2
-        ct = ClusterTopicLDA(_cluster_no)
+        # _cluster_no = 0
+        # ct = ClusterTopicLDA(_cluster_no)
+        ct = ClusterTopicLDA()
         ct.derive_n_grams_group_by_clusters()
         ct.derive_cluster_topics_by_LDA()
         ct.combine_LDA_topics_key_phrase_to_file()

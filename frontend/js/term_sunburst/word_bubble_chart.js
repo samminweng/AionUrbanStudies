@@ -3,6 +3,7 @@
 // API: https://api.highcharts.com/highcharts/
 function WordBubbleChart(group, cluster_docs, color) {
     let d3colors = d3.schemeCategory10;
+    let height = 400;
     let title_words = group['TitleWords'].concat(['others']);
     let group_key_phrases = group['Key-phrases'];
     let group_docs = cluster_docs.filter(d => group['DocIds'].includes(d['DocId']));
@@ -129,7 +130,7 @@ function WordBubbleChart(group, cluster_docs, color) {
         Highcharts.chart('term_occ_chart', {
             chart: {
                 type: 'networkgraph',
-                height: 600,
+                height: height,
             },
             title: {
                 text: ''
@@ -148,7 +149,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                     keys: ['from', 'to'],
                     layoutAlgorithm: {
                         enableSimulation: false,
-                        linkLength: 150,
+                        linkLength: 100,
                         integration: 'verlet',
                         approximation: 'barnes-hut',
                         // gravitationalConstant: 0.1
@@ -232,7 +233,7 @@ function WordBubbleChart(group, cluster_docs, color) {
         let chart = Highcharts.chart('term_occ_chart', {
             chart: {
                 type: 'networkgraph',
-                height: 600,
+                height: height,
             },
             title: {
                 text: ''
@@ -252,7 +253,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                     keys: ['from', 'to'],
                     layoutAlgorithm: {
                         enableSimulation: false,
-                        linkLength: 25,
+                        linkLength: 20,
                         // friction: -0.1,
                         approximation: 'barnes-hut',
                         integration: 'euler',

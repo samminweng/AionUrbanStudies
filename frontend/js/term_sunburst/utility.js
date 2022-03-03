@@ -10,8 +10,6 @@ class Utility{
                 const bi_grams = [];
                 if(words.length === 2){
                     bi_grams.push(words[0] + " " + words[1]);
-                }else if(words.length === 3) {
-                    bi_grams.push(words[1] + " " + words[2]);
                 }
                 return bi_grams;
             };
@@ -32,7 +30,11 @@ class Utility{
             // Collect word frequencies from the list of key phrases.
             for(const key_phrase of key_phrases){
                 const key_phrase_doc_ids = get_doc_ids_by_key_phrase(key_phrase, docs);
-                const uni_grams = key_phrase.split(" ");
+                let uni_grams = key_phrase.split(" ");
+                if(uni_grams.length === 3){
+                    uni_grams = uni_grams.slice(1, 3);
+                }
+
                 const bi_grams = create_bi_grams(uni_grams);
                 const n_grams = uni_grams.concat(bi_grams);
                 // collect uni_gram
