@@ -31,12 +31,13 @@ class Utility{
             for(const key_phrase of key_phrases){
                 const key_phrase_doc_ids = get_doc_ids_by_key_phrase(key_phrase, docs);
                 let uni_grams = key_phrase.split(" ");
+                // Skip the 1st word in three-word phrases
                 if(uni_grams.length === 3){
                     uni_grams = uni_grams.slice(1, 3);
                 }
-
                 const bi_grams = create_bi_grams(uni_grams);
                 const n_grams = uni_grams.concat(bi_grams);
+                // const n_grams = uni_grams;
                 // collect uni_gram
                 for (const n_gram of n_grams){
                     const range = n_gram.split(" ").length;
