@@ -161,7 +161,6 @@ class ClusterTopicLDA:
             # Load the documents clustered by
             clusters = pd.read_json(path).to_dict("records")
             # Store the phrase scores
-            score_list = list()
             results = list()
             # Get the cluster
             for cluster in clusters:
@@ -182,8 +181,6 @@ class ClusterTopicLDA:
                     total_score += score
                     key_phrase_group_list.append(key_phrase_group)
                 num_topics = len(cluster['KeyPhrases'])
-                # Added the grouped key phrases of a cluster
-                results.append(key_phrase_group_list)
                 avg_score = total_score / (num_topics * 1.0)
                 # Add one record
                 results.append({
@@ -192,8 +189,6 @@ class ClusterTopicLDA:
                     "KeyPhraseScore": round(avg_score, 3),
                     "KeyPhrases": key_phrase_group_list,
                 })
-                # store score
-                score_list.append(round(avg_score, 3))
             # Write the updated grouped key phrases
             cluster_df = pd.DataFrame(results,
                                       columns=['Cluster', 'NumTopics', 'KeyPhraseScore', 'KeyPhrases'])
@@ -248,7 +243,7 @@ if __name__ == '__main__':
         ct = ClusterTopicLDA(_cluster_no)
         # ct = ClusterTopicLDA()
         # ct.derive_n_grams_group_by_clusters()
-        # ct.derive_cluster_topics_by_LDA()
+        ct.derive_cluster_topics_by_LDA()
         ct.compute_key_phrase_scores()
         # ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
