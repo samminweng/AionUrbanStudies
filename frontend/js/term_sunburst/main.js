@@ -155,7 +155,7 @@ $(function () {
             // Display a cluster as default cluster
             displayChartByCluster(selected_cluster_no, clusters, corpus_data, sub_cluster_dict);
             $("#cluster_list").empty();
-            // Add a list of LDA topics
+            // Add a list of clusters/sub-clusters
             for (const cluster of clusters) {
                 const cluster_no = cluster['Cluster'];
                 const top_terms = cluster['TopTerms'];
@@ -176,6 +176,13 @@ $(function () {
                     displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_dict);
                 }
             });
+
+            // Show/hide the LDA model results
+            $('#lda_btn').button();
+            $('#lda_btn').click(function(event){
+               $('#lda_topic_view').toggle();
+            });
+
         });
 
 })

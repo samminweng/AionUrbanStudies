@@ -26,6 +26,7 @@
         (abstract + title).
         <br>
         Each individual paper has a mixture of topics, and each topic contain a mixture of words and key phrases.
+        <button id="lda_btn">Show/Hide LDA model results</button>
     </div>
     <div class="row">
         <div class="col">
@@ -38,14 +39,15 @@
     </div>
     <div class="row p-3">
         <div class="col border border-3 p-3">
-            <p>
-            <h3>Groups of Key Phrases</h3>
-            <div id="key_phrase_chart" class="container">
+            <div>
+                <h3>Groups of Key Phrases</h3>
+                <div id="key_phrase_chart" class="container">
+                </div>
             </div>
-            </p>
-            <!--            <div class="p-3">-->
-            <!--            <div id="lda_topic_view" class="container">-->
-            <!--            </div>-->
+            <div>
+                <div id="lda_topic_view" class="container">
+                </div>
+            </div>
         </div>
         <div class="col border border-3 p-3">
             <div>

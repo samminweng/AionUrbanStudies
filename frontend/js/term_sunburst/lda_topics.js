@@ -6,7 +6,7 @@ function LDATopicView(lda_topics, accordion_div){
         // const index = lda_topic['index'];
         const topic_view = $('<li class="list-group-item d-flex justify-content-between align-items-start"></li>')
         // Display key phrases
-        const topic_words = lda_topic['top_words'];
+        const topic_words = lda_topic['topic_words'];
         const topic_word_div = $('<div class="ms-2 me-auto"> <div class="fw-bold">Topic #' + (index + 1) +'</div> </div>');
         // Display top 10 key phrases
         const topic_word_span = $('<p class="lda_topic_text"></p>');
