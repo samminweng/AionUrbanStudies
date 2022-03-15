@@ -214,19 +214,25 @@ class ClusterTopicLDA:
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.json')
             cluster_df = pd.read_json(path)
             # Load results of LDA Topic model
-            folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics')
+            folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'lda_scores')
             path = os.path.join(folder, self.args.case_name + '_LDA_topics.json')
             lda_topics_df = pd.read_json(path)
             # # # Load cluster topic, key phrases
             cluster_df['NumTopics'] = lda_topics_df['NumTopics'].tolist()
             cluster_df['LDATopics'] = lda_topics_df['LDATopics'].tolist()
             cluster_df['LDAScore'] = lda_topics_df['LDAScore'].tolist()
+            # Load results of key phrase groups
+            folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'key_phrase_scores')
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_scores.json')
+            key_phrase_groups_df = pd.read_json(path)
+            cluster_df['KeyPhrases'] = key_phrase_groups_df['KeyPhrases']
+            cluster_df['KeyPhraseScore'] = key_phrase_groups_df['KeyPhraseScore']
             # Compute the percent
             total = cluster_df['NumDocs'].sum()
             cluster_df['Percent'] = cluster_df['NumDocs'].apply(lambda x: x / total)
             # Output the overall results
             df = cluster_df[['Cluster', 'NumDocs', 'Percent', 'DocIds', 'Terms',
-                             'KeyPhrases', 'SubGroups', 'LDAScore', 'LDATopics']]
+                             'KeyPhraseScore', 'KeyPhrases', 'LDAScore', 'LDATopics']]
             # # # # Write to a json file
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
@@ -246,7 +252,7 @@ if __name__ == '__main__':
         # ct = ClusterTopicLDA()
         # ct.derive_n_grams_group_by_clusters()
         # ct.derive_cluster_topics_by_LDA()
-        ct.compute_key_phrase_scores()
-        # ct.combine_LDA_topics_key_phrase_to_file()
+        # ct.compute_key_phrase_scores()
+        ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
