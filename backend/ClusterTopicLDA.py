@@ -115,7 +115,7 @@ class ClusterTopicLDA:
                         topic_coherence_score, word_docs = ClusterTopicUtility.compute_topic_coherence_score(
                             doc_n_grams, topic_words)
                         lda_topics.append({
-                            'top_words': topic_words,
+                            'topic_words': topic_words,
                             'score': round(topic_coherence_score, 3),  # Topic Coherence score
                             'word_docIds': word_docs
                         })
@@ -127,12 +127,13 @@ class ClusterTopicLDA:
                         "NumTopics": num_topics,
                         "LDAScore": round(avg_score, 3),
                         "LDATopics": lda_topics,
+                        "LDATopic_Words": list(map(lambda topic: (topic['topic_words'], topic['score']), lda_topics))
                     })
                 except Exception as _err:
                     print("Error occurred! {err}".format(err=_err))
             # Write the result to csv and json file
             cluster_df = pd.DataFrame(results,
-                                      columns=['Cluster', 'NumTopics', 'LDAScore', 'LDATopics'])
+                                      columns=['Cluster', 'NumTopics', 'LDAScore', 'LDATopics', 'LDATopic_Words'])
             topic_folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'lda_scores')
             Path(topic_folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
@@ -168,18 +169,18 @@ class ClusterTopicLDA:
                 doc_id_list = cluster['DocId']
                 doc_n_grams = tuple(zip(doc_id_list, doc_n_gram_list))
                 total_score = 0
-                key_phrase_group_list = list()
+                key_phrase_groups = list()
                 for kp_group in cluster['KeyPhrases']:
                     topic_words = ClusterTopicUtility.collect_topic_words_from_key_phrases(kp_group['Key-phrases'],
                                                                                            doc_n_grams)
                     print(topic_words)
                     # Topic coherence score
                     score, word_docs = ClusterTopicUtility.compute_topic_coherence_score(doc_n_grams, topic_words)
-                    key_phrase_group = {"topic_words": topic_words, 'score': score, 'word_docIds': word_docs,
+                    key_phrase_group = {"topic_words": topic_words, 'score': round(score, 3), 'word_docIds': word_docs,
                                         'key-phrases': kp_group['Key-phrases'], 'NumDocs': kp_group['NumDocs'],
                                         'DocIds': kp_group['DocIds']}
                     total_score += score
-                    key_phrase_group_list.append(key_phrase_group)
+                    key_phrase_groups.append(key_phrase_group)
                 num_topics = len(cluster['KeyPhrases'])
                 avg_score = total_score / (num_topics * 1.0)
                 # Add one record
@@ -187,11 +188,12 @@ class ClusterTopicLDA:
                     "Cluster": cluster['Cluster'],
                     "NumTopics": num_topics,
                     "KeyPhraseScore": round(avg_score, 3),
-                    "KeyPhrases": key_phrase_group_list,
+                    "KeyPhrases": key_phrase_groups,
+                    "KeyPhrase_Words": list(map(lambda topic: (topic['topic_words'], topic['score']), key_phrase_groups))
                 })
             # Write the updated grouped key phrases
             cluster_df = pd.DataFrame(results,
-                                      columns=['Cluster', 'NumTopics', 'KeyPhraseScore', 'KeyPhrases'])
+                                      columns=['Cluster', 'NumTopics', 'KeyPhraseScore', 'KeyPhrases', 'KeyPhrase_Words'])
             folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'key_phrase_scores')
             Path(folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
@@ -243,7 +245,7 @@ if __name__ == '__main__':
         ct = ClusterTopicLDA(_cluster_no)
         # ct = ClusterTopicLDA()
         # ct.derive_n_grams_group_by_clusters()
-        ct.derive_cluster_topics_by_LDA()
+        # ct.derive_cluster_topics_by_LDA()
         ct.compute_key_phrase_scores()
         # ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:

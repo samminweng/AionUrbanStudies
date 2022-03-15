@@ -578,23 +578,23 @@ class ClusterTopicUtility:
         word_freq_clone = copy.deepcopy(word_freq_list)
         top_words = word_freq_clone[:top_n]
         candidate_words = word_freq_clone[top_n:]
-        is_same = False
-        iteration = 0
-        while not is_same and iteration < 10:
-            # Pass the copy array to the function to avoid change the values of 'top_word' 'candidate_words'
-            new_top_words = pick_top_words(top_words, candidate_words, top_n)
-            # Check if new and old top words are the same
-            is_same = True
-            for new_word in new_top_words:
-                found = next((w for w in top_words if w['word'] == new_word['word']), None)
-                if not found:
-                    is_same = is_same & False
-            # Make a copy of wfl
-            word_freq_clone = copy.deepcopy(word_freq_list)
-            # Replace the old top words with new top words
-            top_words = list(filter(lambda word: is_found(word, new_top_words), word_freq_clone))
-            candidate_words = list(filter(lambda word: not is_found(word, new_top_words), word_freq_clone))
-            iteration += 1
+        # is_same = False
+        # iteration = 0
+        # while not is_same and iteration < 10:
+        #     # Pass the copy array to the function to avoid change the values of 'top_word' 'candidate_words'
+        #     new_top_words = pick_top_words(top_words, candidate_words, top_n)
+        #     # Check if new and old top words are the same
+        #     is_same = True
+        #     for new_word in new_top_words:
+        #         found = next((w for w in top_words if w['word'] == new_word['word']), None)
+        #         if not found:
+        #             is_same = is_same & False
+        #     # Make a copy of wfl
+        #     word_freq_clone = copy.deepcopy(word_freq_list)
+        #     # Replace the old top words with new top words
+        #     top_words = list(filter(lambda word: is_found(word, new_top_words), word_freq_clone))
+        #     candidate_words = list(filter(lambda word: not is_found(word, new_top_words), word_freq_clone))
+        #     iteration += 1
         # Sort the top words by freq
         sorted(top_words, key=lambda wf: wf['freq'], reverse=True)
         # Return the top 3
