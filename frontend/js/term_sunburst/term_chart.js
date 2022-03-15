@@ -2,7 +2,7 @@
 function TermChart(cluster, cluster_docs){
     const lda_topics = cluster['LDATopics'];
     const groups = cluster['KeyPhrases'];
-    const sub_groups = cluster['SubGroups'];
+    // const sub_groups = cluster['SubGroups'];
     // console.log("group of key phrases", groups);
 
     // Main entry
@@ -13,8 +13,8 @@ function TermChart(cluster, cluster_docs){
             $('#doc_list').empty();
             $('#key_phrase_chart').empty();
             // Display bar chart to show groups of key phrases as default graph
-            const graph = new BarChart(groups, sub_groups, cluster, cluster_docs);
-            const view = new LDATopicView(lda_topics)
+            const graph = new BarChart(groups, cluster, cluster_docs);
+            // const view = new LDATopicView(lda_topics)
 
         }catch (error){
             console.error(error);

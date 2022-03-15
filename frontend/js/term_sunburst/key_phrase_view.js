@@ -1,13 +1,14 @@
 // Create a div to display a sub-group of key phrases
-function KeyPhraseView(sub_group, cluster_docs, color){
-    const sub_group_doc_ids = sub_group['DocIds'];
-    const key_phrases = sub_group['Key-phrases'];
-    const title_words = sub_group['TitleWords'].concat("others");
-    // Get sub_group docs
-    const sub_group_docs = cluster_docs.filter(d => sub_group_doc_ids.includes(d['DocId']))
-    // console.log(sub_group_docs);
-    const word_key_phrase_dict = Utility.create_word_key_phrases_dict(title_words, key_phrases);
-    const word_doc_dict = Utility.create_word_doc_dict(title_words, sub_group_docs, word_key_phrase_dict);
+function KeyPhraseView(group, cluster_docs, color){
+    console.log(group);
+    const group_doc_ids = group['DocIds'];
+    const key_phrases = group['key-phrases'];
+    const topic_words = group['topic_words'].concat("others");
+    // Get group docs
+    const group_docs = cluster_docs.filter(d => group_doc_ids.includes(d['DocId']))
+    // console.log(group_docs);
+    const word_key_phrase_dict = Utility.create_word_key_phrases_dict(topic_words, key_phrases);
+    const word_doc_dict = Utility.create_word_doc_dict(topic_words, group_docs, word_key_phrase_dict);
     // console.log(key_phrases);
 
     // Highlight key terms
@@ -36,7 +37,7 @@ function KeyPhraseView(sub_group, cluster_docs, color){
     function display_papers_by_word(word){
         const relevant_doc_ids = word_doc_dict[word];
         const relevant_key_phrases = word_key_phrase_dict[word];
-        const relevant_docs = sub_group_docs.filter(d => relevant_doc_ids.includes(d['DocId']));
+        const relevant_docs = group_docs.filter(d => relevant_doc_ids.includes(d['DocId']));
 
         // Display all the relevant papers.
         const header_text = word;
@@ -46,7 +47,7 @@ function KeyPhraseView(sub_group, cluster_docs, color){
 
     // Display the relevant papers containing key phrases
     function display_papers_by_key_phrase(key_phrase){
-        const relevant_docs = sub_group_docs.filter(d => {
+        const relevant_docs = group_docs.filter(d => {
             const found = d['KeyPhrases'].find(kp => kp.toLowerCase() === key_phrase.toLowerCase());
             if(found){
                 return true;
@@ -103,7 +104,7 @@ function KeyPhraseView(sub_group, cluster_docs, color){
     function create_title_word_header(key_phrase_div){
         // Create a header
         const nav = $('<nav class="nav nav-pills"></nav>');
-        const word_list = title_words;
+        const word_list = topic_words;
         for(let i=0; i < word_list.length; i++){
             const word = word_list[i];
             const relevant_key_phrases = word_key_phrase_dict[word];
@@ -140,13 +141,13 @@ function KeyPhraseView(sub_group, cluster_docs, color){
         // A list of grouped key phrases
         container.append(header_div);
         container.append(key_phrase_div);
-        $('#sub_group').empty();
-        $('#sub_group').append(container);
+        $('#group').empty();
+        $('#group').append(container);
         $('#doc_list').empty();
         // Display the docs containing the 1st word
-        const word = title_words[0];
+        const word = topic_words[0];
         display_key_phrases_by_word(word, key_phrase_div);
-        const element = document.getElementById("sub_group");
+        const element = document.getElementById("group");
         element.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
 
     }

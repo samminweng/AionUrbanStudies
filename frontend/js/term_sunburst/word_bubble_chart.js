@@ -2,10 +2,9 @@
 // Ref: https://www.highcharts.com/docs/chart-and-series-types/network-graph
 // API: https://api.highcharts.com/highcharts/
 function WordBubbleChart(group, cluster_docs, color) {
-    let d3colors = d3.schemeCategory10;
     let height = 400;
-    let title_words = group['TitleWords'].concat(['others']);
-    let group_key_phrases = group['Key-phrases'];
+    let title_words = group['topic_words'].concat(['others']);
+    let group_key_phrases = group['key-phrases'];
     let group_docs = cluster_docs.filter(d => group['DocIds'].includes(d['DocId']));
     let word_key_phrase_dict = Utility.create_word_key_phrases_dict(title_words, group_key_phrases);
     let word_doc_dict = Utility.create_word_doc_dict(title_words, group_docs, word_key_phrase_dict);

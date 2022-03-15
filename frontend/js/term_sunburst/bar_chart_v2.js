@@ -1,26 +1,15 @@
 // Plotly Bar chart
 // Ref: https://plotly.com/javascript/reference/bar/
-function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
+function BarChart(group_data, cluster, cluster_docs) {
     const width = 500;
     const d3colors = d3.schemeCategory10;
     group_data.sort((a, b) => a['Group'] - b['Group']);
-    // console.log(group_data);    // Three main groups of key phrases
-    // console.log(sub_group_data);    // Each main group contain a number of sub_groups
-    const min_group_id = group_data.reduce((pre, cur) => pre['Group'] < cur['Group'] ? pre : cur)['Group'];
-    let thread = 2;
-    if (min_group_id === 0) {
-        thread = 1;
-    }
 
     // Graph data for a group
-    function create_graph_data(group, max_size) {
+    function create_graph_data(group, group_id, max_size) {
         let data = [];
         // Re-order the groups to match with the order of the chart.
-        // const group = group_data[i];
-        const group_id = group['Group'];
-        const group_name = "Group#" + (group_id + thread);
-        // Get the sub-group
-        const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+        const group_name = "Group#" + group_id;
         // create a trace
         let trace = {
             x: [], y: [], text: [],
@@ -29,7 +18,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             textposition: 'none',
             hoverinfo: "text",
             marker: {
-                color: d3colors[group_id + 1],
+                color: d3colors[group_id],
                 line: {
                     color: 'black',
                     width: 1
@@ -37,7 +26,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             },
             opacity: 0.5,
         };
-        let comp_trace ={
+        let comp_trace = {
             x: [], y: [], text: [],
             orientation: 'h', type: 'bar',
             name: group_name,
@@ -55,68 +44,34 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         // A text can
         let annotations = [];
         const MAXLENGTH = 50;
-        if (sub_groups.length > 0) {
-            for (const sub_group of sub_groups) {
-                console.log(sub_group);
-                const sub_group_id = sub_group['SubGroup'];
-                const key_phrases = sub_group['Key-phrases'];
-                const sub_group_docs = cluster_docs.filter(d => sub_group['DocIds'].includes(d['DocId']))
-                // Get the title words of a sub-group
-                const title_words = Utility.collect_title_words(key_phrases, sub_group_docs);
-                sub_group['TitleWords'] = title_words;
-                // Update the title word of a sub-group;
-                const num_docs = sub_group['NumDocs'];
-                trace['y'].push(group_name + "|" + sub_group_id);
-                trace['x'].push(num_docs);
-                trace['text'].push('<b>' + key_phrases.length + ' key phrases, ' + num_docs+ ' papers</b>');
-                comp_trace['y'].push(group_name + "|" + sub_group_id);
-                comp_trace['x'].push(max_size - num_docs);
-                // comp_trace['text'].push();
-                annotations.push({
-                    x: 0.0,
-                    y: group_name + "|" + sub_group_id,
-                    text: '<b>' + title_words.join(", ").substring(0, MAXLENGTH) + '...</b>',
-                    font: {
-                        family: 'Arial',
-                        size: 14,
-                        color: 'black'
-                    },
-                    xref: 'paper',
-                    xanchor: 'left',
-                    align: 'left',
-                    showarrow: false
-                })
 
-            }
-        } else {
-            // Add the group
-            console.log("group", group);
-            const group_docs = cluster_docs.filter(d => group['DocIds'].includes(d['DocId']));
-            const title_words = Utility.collect_title_words(group['Key-phrases'], group_docs);
-            const key_phrases = group['Key-phrases'];
-            group['TitleWords'] = title_words;
-            const num_docs = group['NumDocs'];
-            trace['y'].push(group_name + "#" + group_id);
-            trace['x'].push(num_docs);
-            trace['text'].push('<b>' + key_phrases.length + ' key phrases, ' + num_docs+ ' papers</b>');
-            // trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>');
-            comp_trace['y'].push(group_name + "#" + group_id);
-            comp_trace['x'].push(max_size - num_docs);
-            annotations.push({
-                x: 0.0,
-                y: group_name + "#" + group_id,
-                text: '<b>' + title_words.join(", ").substring(0, MAXLENGTH) + '...</b>',
-                font: {
-                    family: 'Arial',
-                    size: 14,
-                    color: 'black'
-                },
-                xref: 'paper',
-                xanchor: 'left',
-                align: 'left',
-                showarrow: false
-            })
-        }
+        // Add the group
+        console.log("group", group);
+        const topic_words = group['topic_words'];
+        const key_phrases = group['key-phrases'];
+
+        const num_docs = group['NumDocs'];
+        trace['y'].push(group_name);
+        trace['x'].push(num_docs);
+        trace['text'].push('<b>' + key_phrases.length + ' key phrases, ' + num_docs + ' papers</b>');
+        // trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>');
+        comp_trace['y'].push(group_name);
+        comp_trace['x'].push(max_size - num_docs);
+        annotations.push({
+            x: 0.0,
+            y: group_name,
+            text: '<b>' + topic_words.join(", ").substring(0, MAXLENGTH) + '...</b>',
+            font: {
+                family: 'Arial',
+                size: 14,
+                color: 'black'
+            },
+            xref: 'paper',
+            xanchor: 'left',
+            align: 'left',
+            showarrow: false
+        })
+
         data.push(trace);
         data.push(comp_trace);
 
@@ -124,17 +79,11 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
     }
 
     // Create a bar chart for each group
-    function create_bar_chart(group, chart_id, max_size){
+    function create_bar_chart(group, group_id, max_size) {
         const x_domain = [0, max_size];
-        const [graph_data, annotations] = create_graph_data(group, max_size);
-        const group_id = group['Group'];
-        const group_name = "Group#" + (group_id + thread);
-        // Get the sub-group
-        const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
+        const [graph_data, annotations] = create_graph_data(group, group_id, max_size);
         const height = 50;
-        const gap = 80;
-        let graph_height = (sub_groups.length >0 ? height * sub_groups.length + gap: height*2);
-
+        let graph_height = height * 2;
         // Graph layout
         let layout = {
             width: width,
@@ -142,7 +91,7 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             xaxis: {range: x_domain},
             showlegend: false,
             margin: {"l": 10, "r": 10, "t": 0, "b": height},
-            legend: { traceorder: 'reversed'},
+            legend: {traceorder: 'reversed'},
             barmode: 'stack',
             annotations: annotations
         };
@@ -151,13 +100,14 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
         const config = {
             displayModeBar: false // Hide the floating bar
         }
+        const chart_id = 'chart_' + group_id;
         // Plot bar chart
         Plotly.newPlot(chart_id, graph_data, layout, config);
         const chart_element = document.getElementById(chart_id);
         // // Define the hover event
         chart_element.on('plotly_click', function (data) {
             $('#term_occ_chart').empty();
-            $('#sub_group').empty();
+            $('#group').empty();
             $('#doc_list').empty();
             const id = data.points[0].y;
             // Get the marker
@@ -165,25 +115,15 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
             const color = marker.color;
             // console.log(id);
             if (id.includes("#")) {
-                const group_id = parseInt(id.split("#")[1]) - thread;
-                // Get the sub-group
-                if (id.includes("|")) {
-                    const subgroup_id = parseInt(id.split("|")[1]);
-                    const sub_group = sub_group_data.find(g => g['Group'] === group_id && g['SubGroup'] === subgroup_id);
-                    if (sub_group) {
-                        const word_chart = new WordBubbleChart(sub_group, cluster_docs, color);
-                        const view = new KeyPhraseView(sub_group, cluster_docs, color);
-                    }
-                } else {
-                    const found = id.match(/#/g);
-                    if (found && found.length === 2) {
-                        // This indicates the groups has only one subgroup. so we use the group data.
-                        // Get the group
-                        const group = group_data.find(g => g['Group'] === group_id);
-                        // Display the group
-                        const word_chart = new WordBubbleChart(group, cluster_docs, color);
-                        const view = new KeyPhraseView(group, cluster_docs, color);
-                    }
+                const group_id = parseInt(id.split("#")[1]);
+                const found = id.match(/#/g);
+                if (found) {
+                    // This indicates the groups has only one subgroup. so we use the group data.
+                    // Get the group
+                    const group = group_data[group_id];
+                    // Display the group
+                    const word_chart = new WordBubbleChart(group, cluster_docs, color);
+                    const view = new KeyPhraseView(group, cluster_docs, color);
                 }
             }
         });// End of chart onclick event
@@ -193,44 +133,30 @@ function BarChart(group_data, sub_group_data, cluster, cluster_docs) {
     function create_UI() {
         $('#key_phrase_chart').empty();
         let max_size = 0;
-        for(let i =0; i < group_data.length; i++){
-            const chart_id = 'chart_' + i;
+        for (let i = 0; i < group_data.length; i++) {
+            const group_id = i;
+            const chart_id = 'chart_' + group_id;
             // Create a div
-            const graph_div = $('<div id="' + chart_id +'" class="col"></div>')
+            const graph_div = $('<div id="' + chart_id + '" class="col"></div>')
             $('#key_phrase_chart').append($('<div class="row"></div>').append(graph_div));
             const group = group_data[i];
-            const group_id = group['Group'];
-            const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-            if(sub_groups.length > 0){
-                for(const sub_group of sub_groups){
-                    const num_docs = sub_group['NumDocs'];
-                    max_size = Math.max(num_docs, max_size);
-                }
-            }else{
-                max_size = Math.max(max_size, group['NumDocs']);
-            }
+            max_size = Math.max(max_size, group['NumDocs']);
         }
         // max_size = max_size + 1;
         // console.log("max_size", max_size);
         // Display the bar chart for each group
-        for(let i =0; i < group_data.length; i++){
-            const chart_id = 'chart_' + i;
+        for (let i = 0; i < group_data.length; i++) {
+            const group_id = i;
             // Get the group
-            const group = group_data[i];
-            create_bar_chart(group, chart_id, max_size);
+            const group = group_data[group_id];
+            create_bar_chart(group, group_id, max_size);
         }
         // // For development only
         // Create a term chart of sub_group
         const group = group_data[0];
         const group_id = group['Group'];
-        const sub_groups = sub_group_data.filter(g => g['Group'] === group_id);
-        if(sub_groups.length > 0){
-            const view = new KeyPhraseView(sub_groups[0], cluster_docs, d3colors[0]);
-            const word_chart = new WordBubbleChart(sub_groups[0], cluster_docs, d3colors[0]);
-        }else{
-            const view = new KeyPhraseView(group, cluster_docs, d3colors[0]);
-            const word_chart = new WordBubbleChart(group, cluster_docs, d3colors[0]);
-        }
+        const view = new KeyPhraseView(group, cluster_docs, d3colors[0]);
+        const word_chart = new WordBubbleChart(group, cluster_docs, d3colors[0]);
     }
 
     create_UI();
