@@ -43,7 +43,7 @@ function BarChart(group_data, cluster, cluster_docs) {
         // Ref: https://plotly.com/javascript/reference/layout/annotations/
         // A text can
         let annotations = [];
-        const MAXLENGTH = 50;
+        const MAXLENGTH = 60;
 
         // Add the group
         console.log("group", group);
