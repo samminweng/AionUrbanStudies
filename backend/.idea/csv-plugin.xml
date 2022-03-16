@@ -115,7 +115,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_0/LDA_topics/key_phrase_scores_2_words/AIMLUrbanStudyCorpus_key_phrase_scores.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_0/LDA_topics/lda_scores/AIMLUrbanStudyCorpus_LDA_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_0/LDA_topics/lda_scores_backup/AIMLUrbanStudyCorpus_LDA_topics.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

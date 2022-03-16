@@ -50,9 +50,9 @@ class ClusterTopicLDA:
                 candidates = list()
                 cleaned_text = BERTModelDocClusterUtility.preprocess_text(text)
                 sentences = sent_tokenize(cleaned_text)
-                uni_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 1)
-                bi_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 2)
-                tri_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 3)
+                uni_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 1, is_check=False)
+                bi_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 2, is_check=False)
+                tri_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 3, is_check=False)
                 candidates.extend(uni_grams)
                 candidates.extend(bi_grams)
                 candidates.extend(tri_grams)
@@ -173,7 +173,7 @@ class ClusterTopicLDA:
                 for kp_group in cluster['KeyPhrases']:
                     topic_words = ClusterTopicUtility.collect_topic_words_from_key_phrases(kp_group['Key-phrases'],
                                                                                            doc_n_grams)
-                    print(topic_words)
+                    # print(topic_words)
                     # Topic coherence score
                     score, word_docs = ClusterTopicUtility.compute_topic_coherence_score(doc_n_grams, topic_words)
                     key_phrase_group = {"topic_words": topic_words, 'score': round(score, 3), 'word_docIds': word_docs,
@@ -193,7 +193,7 @@ class ClusterTopicLDA:
                 })
             # Write the updated grouped key phrases
             cluster_df = pd.DataFrame(results,
-                                      columns=['Cluster', 'NumTopics', 'KeyPhraseScore', 'KeyPhrases', 'KeyPhrase_Words'])
+                                      columns=['Cluster', 'NumTopics', 'KeyPhraseScore', 'KeyPhrase_Words', 'KeyPhrases'])
             folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'key_phrase_scores')
             Path(folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
@@ -247,11 +247,11 @@ class ClusterTopicLDA:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 2
+        _cluster_no = 0
         ct = ClusterTopicLDA(_cluster_no)
         # ct = ClusterTopicLDA()
-        ct.derive_n_grams_group_by_clusters()
-        ct.derive_cluster_topics_by_LDA()
+        # ct.derive_n_grams_group_by_clusters()
+        # ct.derive_cluster_topics_by_LDA()
         ct.compute_key_phrase_scores()
         ct.combine_LDA_topics_key_phrase_to_file()
     except Exception as err:

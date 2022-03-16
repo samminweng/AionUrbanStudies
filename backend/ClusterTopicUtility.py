@@ -69,7 +69,7 @@ class ClusterTopicUtility:
 
     # Generate n-gram candidates from a text (a list of sentences)
     @staticmethod
-    def generate_n_gram_candidates(sentences, n_gram_range):
+    def generate_n_gram_candidates(sentences, n_gram_range, is_check=True):
         # Check if n_gram candidate does not have stop words, punctuation or non-words
         def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
             try:
@@ -112,9 +112,12 @@ class ClusterTopicUtility:
                 _n_grams = list(ngrams(pos_tags, n_gram_range))
                 # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
                 for _n_gram in _n_grams:
-                    if _is_qualified(_n_gram):
+                    if is_check and _is_qualified(_n_gram):
                         n_gram_words = _convert_n_gram_to_words(_n_gram)
                         candidates.append(n_gram_words)  # Convert n_gram (a list of words) to a string
+                    else:
+                        n_gram_words = _convert_n_gram_to_words(_n_gram)
+                        candidates.append(n_gram_words)
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         return candidates
@@ -492,6 +495,7 @@ class ClusterTopicUtility:
                 if len(_words) == 2:
                     _bi_grams.append(_words[0] + " " + _words[1])
                 elif len(_words) == 3:
+                    _bi_grams.append(_words[0] + " " + _words[1])
                     _bi_grams.append(_words[1] + " " + _words[2])
                 return _bi_grams
 
@@ -501,7 +505,7 @@ class ClusterTopicUtility:
                 for doc in _doc_n_grams:
                     doc_id = doc[0]
                     n_grams = doc[1]
-                    found = list(filter(lambda n_gram: key_phrase.lower() == n_gram.lower(), n_grams))
+                    found = list(filter(lambda n_gram: _key_phrase.lower() in n_gram.lower(), n_grams))
                     if len(found) > 0:
                         doc_ids.append(doc_id)
                 return doc_ids
@@ -524,10 +528,10 @@ class ClusterTopicUtility:
                             _word_freq_list.append(wf)
                         else:
                             # Updated doc id
-                            found['freq'] += 1
                             found['doc_ids'] = found['doc_ids'] + key_phrase_doc_ids
                             # Remove duplicates
                             found['doc_ids'] = list(dict.fromkeys(found['doc_ids']))
+                            found['freq'] = len(found['doc_ids'])
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
             return _word_freq_list
@@ -539,26 +543,22 @@ class ClusterTopicUtility:
             try:
                 for i in range(0, len(_top_words)):
                     top_word = _top_words[i]
-                    top_word_doc_ids = top_word['doc_ids']
-                    for doc_id in top_word_doc_ids:
-                        # Go through the remaining words and updates its doc_ids
-                        for j in range(i+1, len(_top_words)):
-                            other_word = _top_words[j]
-                            other_word['doc_ids'] = list(filter(lambda id: id != doc_id, other_word['doc_ids']))
-                        # Go through each candidate words
-                        for k in range(0, len(_candidate_words)):
-                            candidate_word = _candidate_words[k]
-                            # Update the doc_id from
-                            candidate_word['doc_ids'] = list(filter(lambda id: id != doc_id, candidate_word['doc_ids']))
-                # Remove top word that does not have any doc
-                _top_words = list(filter(lambda w: len(w['doc_ids']) > 0, _top_words))
+                    # Go through the remaining words and updates its doc_ids
+                    for j in range(i+1, len(_top_words)):
+                        other_word = _top_words[j]
+                        other_word['doc_ids'] = list(filter(lambda _id: _id not in top_word['doc_ids'], other_word['doc_ids']))
+                # Remove no associated doc ids
+                _top_words = list(filter(lambda w: len(w['doc_ids']) > 0, top_words))
+                for top_word in _top_words:
+                    # # # Go through each candidate words and pick up
+                    for candidate_word in _candidate_words:
+                        # Update the doc_id from
+                        candidate_word['doc_ids'] = list(filter(lambda _id: _id not in top_word['doc_ids'], candidate_word['doc_ids']))
                 # Add the candidate words if any top word is removed from the list
-                if len(_top_words) < _top_n:
-                    # Sort all the words by doc_ids and frequencies
-                    _candidate_words = sorted(_candidate_words, key=lambda wf: (len(wf['doc_ids']), wf['freq']), reverse=True)
-                    all_words = _top_words + _candidate_words
-                    return all_words[:_top_n]
-                return _top_words
+                all_words = _top_words + _candidate_words
+                # Sort all the words by doc_ids and frequencies
+                all_words = sorted(all_words, key=lambda wf: (len(wf['doc_ids']), wf['range'], wf['freq']), reverse=True)
+                return all_words[:_top_n]
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
 
@@ -573,29 +573,35 @@ class ClusterTopicUtility:
         # Pick up top 5 frequent words
         top_n = 5
         # Sort by freq and the number of docs
-        word_freq_list = sorted(word_freq_list, key=lambda wf: (wf['freq'], len(wf['doc_ids'])), reverse=True)
+        word_freq_list = sorted(word_freq_list, key=lambda wf: (wf['freq'], wf['range'], len(wf['doc_ids'])), reverse=True)
         print(word_freq_list)
         word_freq_clone = copy.deepcopy(word_freq_list)
         top_words = word_freq_clone[:top_n]
         candidate_words = word_freq_clone[top_n:]
-        # is_same = False
-        # iteration = 0
-        # while not is_same and iteration < 10:
-        #     # Pass the copy array to the function to avoid change the values of 'top_word' 'candidate_words'
-        #     new_top_words = pick_top_words(top_words, candidate_words, top_n)
-        #     # Check if new and old top words are the same
-        #     is_same = True
-        #     for new_word in new_top_words:
-        #         found = next((w for w in top_words if w['word'] == new_word['word']), None)
-        #         if not found:
-        #             is_same = is_same & False
-        #     # Make a copy of wfl
-        #     word_freq_clone = copy.deepcopy(word_freq_list)
-        #     # Replace the old top words with new top words
-        #     top_words = list(filter(lambda word: is_found(word, new_top_words), word_freq_clone))
-        #     candidate_words = list(filter(lambda word: not is_found(word, new_top_words), word_freq_clone))
-        #     iteration += 1
-        # Sort the top words by freq
-        sorted(top_words, key=lambda wf: wf['freq'], reverse=True)
+        is_pick = False
+        if is_pick:
+            new_top_words = copy.deepcopy(top_words)
+            is_same = False
+            iteration = 0
+            while True:
+                if iteration >= 10 or is_same:
+                    top_words = new_top_words
+                    break
+                # Pass the copy array to the function to avoid change the values of 'top_word' 'candidate_words'
+                new_top_words = pick_top_words(top_words, candidate_words, top_n)
+                # Check if new and old top words are the same
+                is_same = True
+                for new_word in new_top_words:
+                    found = next((w for w in top_words if w['word'] == new_word['word']), None)
+                    if not found:
+                        is_same = is_same & False
+                if not is_same:
+                    # Make a copy of wfl
+                    word_freq_clone = copy.deepcopy(word_freq_list)
+                    # Replace the old top words with new top words
+                    top_words = list(filter(lambda word: is_found(word, new_top_words), word_freq_clone))
+                    candidate_words = list(filter(lambda word: not is_found(word, new_top_words), word_freq_clone))
+                    iteration += 1
+            assert len(top_words) >= 5, "topic word less than 5"
         # Return the top 3
         return list(map(lambda w: w['word'], top_words[:5]))
