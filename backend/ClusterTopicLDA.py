@@ -246,7 +246,7 @@ class ClusterTopicLDA:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 3
+        _cluster_no = -1
         ct = ClusterTopicLDA(_cluster_no)
         # ct = ClusterTopicLDA()
         ct.derive_n_grams_group_by_clusters()

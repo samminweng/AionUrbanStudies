@@ -8,11 +8,11 @@ const params = new URLSearchParams(window.location.search);
 // Select cluster number
 let selected_cluster_no = 0;
 let selected_sub_cluster_no = 1;
-const large_clusters = [0, 2, 3];
+
 
 // Display the sub-clusters of a large cluster
-function displaySubCluster(parent_cluster_no, sub_cluster_dict){
-    const sub_cluster_data = sub_cluster_dict[parent_cluster_no];
+function displaySubCluster(sub_cluster_data){
+    // const sub_cluster_data = sub_cluster_dict[parent_cluster_no];
     const div = $("<div></div>");
     // Create a select
     const select_drop = $('<select></select>');
@@ -63,8 +63,10 @@ function displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_di
     const cluster_data = clusters.find(c => c['Cluster'] === cluster_no);
     // console.log(cluster_data);
     const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']));
-    if(large_clusters.includes(cluster_no)){
-        displaySubCluster(cluster_no, sub_cluster_dict);
+    const cluster_name = "cluster_"+cluster_no;
+    if( cluster_name in sub_cluster_dict){
+        const sub_cluster_data = sub_cluster_dict[cluster_name];
+        displaySubCluster(sub_cluster_data);
     }else{
         // Create a term chart
         const chart = new TermChart(cluster_data, cluster_docs);
@@ -133,17 +135,19 @@ $(function () {
     // Load collocations and tfidf key terms
     $.when(
         $.getJSON('data/' + cluster_path), $.getJSON( 'data/' + corpus_path),
+        $.getJSON('data/cluster_-1/' + cluster_path), $.getJSON('data/cluster_-1/' + corpus_path),
         $.getJSON('data/cluster_0/' + cluster_path), $.getJSON('data/cluster_0/' + corpus_path),
         $.getJSON('data/cluster_2/' + cluster_path), $.getJSON('data/cluster_2/' + corpus_path),
         $.getJSON('data/cluster_3/' + cluster_path), $.getJSON('data/cluster_3/' + corpus_path)
     ).then()
-        .done(function (result1, result2, result3, result4, result5, result6, result7, result8) {
+        .done(function (result1, result2, result3, result4, result5, result6, result7, result8, result9, result10) {
             let clusters = result1[0];
             const corpus_data = result2[0];
             const sub_cluster_dict = {
-                0: {'SubClusters': result3[0], 'Corpus': result4[0]},
-                2: {'SubClusters': result5[0], 'Corpus': result6[0]},
-                3: {'SubClusters': result7[0], 'Corpus': result8[0]},
+                "cluster_-1": {'SubClusters': result3[0], 'Corpus': result4[0]},
+                "cluster_0": {'SubClusters': result5[0], 'Corpus': result6[0]},
+                "cluster_2": {'SubClusters': result7[0], 'Corpus': result8[0]},
+                "cluster_3": {'SubClusters': result9[0], 'Corpus': result10[0]},
             };
             // console.log(sub_cluster_dict);
 

@@ -94,6 +94,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_-1/AIMLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_-1/cluster/iteration_0/AIMLUrbanStudyCorpus_cluster_docs.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_-1/cluster/iteration_0/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_0/AIMLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics.csv">
           <value>
             <Attribute>
