@@ -177,12 +177,6 @@ $(function () {
                 }
             });
 
-            // Show/hide the LDA model results
-            $('#lda_btn').button();
-            $('#lda_btn').click(function(event){
-               $('#lda_topic_view').toggle();
-            });
-
         });
 
 })

@@ -14,7 +14,7 @@ function TermChart(cluster, cluster_docs){
             $('#key_phrase_chart').empty();
             // Display bar chart to show groups of key phrases as default graph
             const graph = new BarChart(groups, cluster, cluster_docs);
-            const view = new LDATopicView(lda_topics)
+            // const view = new LDATopicView(lda_topics)
 
         }catch (error){
             console.error(error);
