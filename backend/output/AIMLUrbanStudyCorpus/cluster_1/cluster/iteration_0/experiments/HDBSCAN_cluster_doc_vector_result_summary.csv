@@ -1,0 +1,7 @@
+dimension,min_samples,min_cluster_size,epsilon,Silhouette_score,total_clusters,outliers,cluster_results,cluster_labels
+35,,,,0.0,,,,
+30,,,,0.0,,,,
+25,5.0,10.0,0.0,0.8054316124,3.0,23.0,"[{'cluster_no': -1, 'count': 23}, {'cluster_no': 0, 'count': 11}, {'cluster_no': 1, 'count': 10}]","[-1, 0, -1, -1, -1, -1, -1, 0, -1, 1, -1, -1, 0, 1, 1, -1, -1, 0, 0, -1, 0, -1, 0, -1, 0, 1, -1, -1, 1, -1, 1, 0, 0, -1, -1, 1, 0, 1, 1, -1, -1, 1, -1, -1]"
+20,,,,0.0,,,,
+15,,,,0.0,,,,
+10,,,,0.0,,,,

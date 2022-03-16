@@ -221,8 +221,8 @@ class ClusterTermTFIDF:
 # Main entry
 if __name__ == '__main__':
     try:
-        cluster_no = -1
-        last_iteration = 0
+        cluster_no = 2
+        last_iteration = 1
         ct = ClusterTermTFIDF(last_iteration, cluster_no)
         ct.collect_iterative_cluster_results()
         ct.output_iterative_cluster_results()

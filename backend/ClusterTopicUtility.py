@@ -495,7 +495,7 @@ class ClusterTopicUtility:
                 if len(_words) == 2:
                     _bi_grams.append(_words[0] + " " + _words[1])
                 elif len(_words) == 3:
-                    _bi_grams.append(_words[0] + " " + _words[1])
+                    # _bi_grams.append(_words[0] + " " + _words[1])
                     _bi_grams.append(_words[1] + " " + _words[2])
                 return _bi_grams
 
@@ -543,17 +543,24 @@ class ClusterTopicUtility:
             try:
                 for i in range(0, len(_top_words)):
                     top_word = _top_words[i]
-                    # Go through the remaining words and updates its doc_ids
-                    for j in range(i+1, len(_top_words)):
+                    words = top_word['word'].split(" ")
+                    for j in range(i + 1, len(_top_words)):
                         other_word = _top_words[j]
-                        other_word['doc_ids'] = list(filter(lambda _id: _id not in top_word['doc_ids'], other_word['doc_ids']))
+                        # Remove duplicated word
+                        _found = list(filter(lambda w: w in words, other_word['word'].split(" ")))
+                        if len(_found) > 0:
+                            other_word['doc_ids'] = list()
                 # Remove no associated doc ids
                 _top_words = list(filter(lambda w: len(w['doc_ids']) > 0, top_words))
                 for top_word in _top_words:
-                    # # # Go through each candidate words and pick up
-                    for candidate_word in _candidate_words:
-                        # Update the doc_id from
-                        candidate_word['doc_ids'] = list(filter(lambda _id: _id not in top_word['doc_ids'], candidate_word['doc_ids']))
+                    words = top_word['word'].split(" ")
+                    for word in words:
+                        # Remove candidate words containing words
+                        _candidate_words = list(filter(lambda cw: word not in cw['word'], _candidate_words))
+                    # # # # Go through each candidate words and pick up
+                    # for candidate_word in _candidate_words:
+                    #     # Update the doc_id from
+                    #     candidate_word['doc_ids'] = list(filter(lambda _id: _id not in top_word['doc_ids'], candidate_word['doc_ids']))
                 # Add the candidate words if any top word is removed from the list
                 all_words = _top_words + _candidate_words
                 # Sort all the words by doc_ids and frequencies
@@ -578,7 +585,7 @@ class ClusterTopicUtility:
         word_freq_clone = copy.deepcopy(word_freq_list)
         top_words = word_freq_clone[:top_n]
         candidate_words = word_freq_clone[top_n:]
-        is_pick = False
+        is_pick = True
         if is_pick:
             new_top_words = copy.deepcopy(top_words)
             is_same = False
@@ -603,5 +610,7 @@ class ClusterTopicUtility:
                     candidate_words = list(filter(lambda word: not is_found(word, new_top_words), word_freq_clone))
                     iteration += 1
             assert len(top_words) >= 5, "topic word less than 5"
+        # Sort topic words by frequencies
+        top_words = sorted(top_words, key=lambda w: w['freq'], reverse=True)
         # Return the top 3
         return list(map(lambda w: w['word'], top_words[:5]))

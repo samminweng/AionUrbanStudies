@@ -3,8 +3,6 @@
 function BarChart(group_data, cluster, cluster_docs) {
     const width = 500;
     const d3colors = d3.schemeCategory10;
-    group_data.sort((a, b) => a['Group'] - b['Group']);
-
     // Graph data for a group
     function create_graph_data(group, group_id, max_size) {
         let data = [];
@@ -45,16 +43,19 @@ function BarChart(group_data, cluster, cluster_docs) {
         let annotations = [];
         const MAXLENGTH = 60;
 
-        // Add the group
-        console.log("group", group);
-        const topic_words = group['topic_words'];
-        const key_phrases = group['key-phrases'];
+        // Add the topic words
+        let topic_words = group['topic_words'];
+        const word_key_phrase_dict = Utility.create_word_key_phrases_dict(topic_words, group['key-phrases']);
+        console.log(word_key_phrase_dict);
+        // Sort topic words by word-phrase relations
+        topic_words.sort((a, b) => {
+            return word_key_phrase_dict[b].length - word_key_phrase_dict[a].length;
+        });
 
         const num_docs = group['NumDocs'];
         trace['y'].push(group_name);
         trace['x'].push(num_docs);
-        trace['text'].push('<b>' + key_phrases.length + ' key phrases, ' + num_docs + ' papers</b>');
-        // trace['text'].push('<b>' + title_words.slice(0, 3).join(", ") + '</b>');
+        trace['text'].push('<b>' + num_docs + ' articles</b>');
         comp_trace['y'].push(group_name);
         comp_trace['x'].push(max_size - num_docs);
         annotations.push({

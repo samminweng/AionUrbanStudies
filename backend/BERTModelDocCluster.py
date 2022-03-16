@@ -55,12 +55,9 @@ class BERTModelDocCluster:
             device='cpu',
             n_neighbors=150,
             min_dist=0.0,
-            dimensions=[768, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10],
-            min_samples=[30, 25, 20, 15, 10, 5],
-            min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50],
-            # dimensions=[768, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20],
-            # min_samples=[30, 25, 20, 15, 10],
-            # min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
+            dimensions=[768, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20],
+            min_samples=[30, 25, 20, 15, 10],
+            min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
         path = os.path.join('data', self.args.case_name, self.args.cluster_folder,
@@ -415,10 +412,10 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        cluster_no = -1
+        cluster_no = 2
         BERTModelDocClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
-        iteration = 0
+        iteration = 1
         mdc = BERTModelDocCluster(iteration, cluster_no)
         mdc.get_sentence_vectors(is_load=False)
         mdc.run_HDBSCAN_cluster_experiments()

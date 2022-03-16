@@ -49,9 +49,9 @@ class ClusterTopicLDA:
                 candidates = list()
                 cleaned_text = BERTModelDocClusterUtility.preprocess_text(text)
                 sentences = sent_tokenize(cleaned_text)
-                uni_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 1, is_check=False)
-                bi_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 2, is_check=False)
-                tri_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 3, is_check=False)
+                uni_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 1, is_check=True)
+                bi_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 2, is_check=True)
+                tri_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 3, is_check=True)
                 candidates.extend(uni_grams)
                 candidates.extend(bi_grams)
                 candidates.extend(tri_grams)
@@ -150,11 +150,6 @@ class ClusterTopicLDA:
     # Compute the score
     def compute_key_phrase_scores(self):
         try:
-            # Load documents
-            path = os.path.join('output', self.args.case_name, self.args.folder,
-                                self.args.case_name + '_clusters.json')
-            docs = pd.read_json(path).to_dict("records")
-            print(docs)
             # Load n-grams
             path = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'n_grams',
                                 self.args.case_name + '_doc_n_grams.json')
@@ -239,6 +234,7 @@ class ClusterTopicLDA:
             # Write to a csv file
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
             df.to_csv(path, encoding='utf-8', index=False)
+            print("Print results to " + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -246,7 +242,7 @@ class ClusterTopicLDA:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = -1
+        _cluster_no = 0
         ct = ClusterTopicLDA(_cluster_no)
         # ct = ClusterTopicLDA()
         ct.derive_n_grams_group_by_clusters()

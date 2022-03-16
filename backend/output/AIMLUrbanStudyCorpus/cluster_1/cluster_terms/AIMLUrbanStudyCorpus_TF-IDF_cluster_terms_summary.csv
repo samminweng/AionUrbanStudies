@@ -1,0 +1,4 @@
+Cluster,NumDocs,Percent,DocIds,Terms
+-1,23,0.5227272727272727,"[2, 35, 48, 49, 51, 52, 86, 154, 157, 206, 268, 277, 287, 325, 367, 376, 411, 474, 477, 523, 529, 534, 595]","view, street view, greenery, system, street greenery, urban data, street quality, emotion, objective indicator, health purpose"
+0,11,0.25,"[31, 77, 170, 269, 271, 280, 313, 340, 429, 472, 489]","view, urban landscape, perceptual quality, visual quality, psychological perception, human health, urban region, street vitality, evaluation model, key element"
+1,10,0.22727272727272727,"[116, 177, 196, 341, 404, 416, 488, 492, 505, 533]","public space, massive data, new methodology, identity, urban identity, online review, visitor experience, important feature, design problem, heterogeneous perception"
