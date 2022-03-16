@@ -412,12 +412,12 @@ class BERTModelDocCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        cluster_no = 2
+        cluster_no = 3
         BERTModelDocClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
         iteration = 0
         mdc = BERTModelDocCluster(iteration, cluster_no)
-        mdc.get_sentence_vectors(is_load=True)
+        mdc.get_sentence_vectors(is_load=False)
         mdc.run_HDBSCAN_cluster_experiments()
         mdc.summarize_HDBSCAN_cluster_experiment_results()
         mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()

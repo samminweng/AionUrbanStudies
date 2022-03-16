@@ -386,7 +386,7 @@ class BERTModelDocClusterUtility:
     @staticmethod
     def collect_cluster_as_corpus(case_name, cluster_no):
         # Load the cluster results
-        path = os.path.join('output', case_name, 'iteration', case_name + '_clusters_iteration.json')
+        path = os.path.join('output', case_name, 'iteration', case_name + '_clusters.json')
         corpus = pd.read_json(path).to_dict("records")
         # Get the papers of the cluster 
         cluster_docs = list(filter(lambda doc: doc['Cluster'] == cluster_no, corpus))

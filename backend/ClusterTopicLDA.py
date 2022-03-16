@@ -14,8 +14,7 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTopicLDA:
-    def __init__(self):
-        # self.cluster_no = _cluster_no
+    def __init__(self, _cluster_no):
         self.args = Namespace(
             # case_name='CultureUrbanStudyCorpus',
             case_name='AIMLUrbanStudyCorpus',
@@ -24,8 +23,8 @@ class ClusterTopicLDA:
             iterations=400,
             chunksize=10,
             eval_every=None,  # Don't evaluate model perplexity, takes too much time.
-            folder='iteration',
-            # folder='cluster_' + str(_cluster_no),
+            # folder='iteration',
+            folder='cluster_' + str(_cluster_no),
         )
         # Load Key phrase
         path = os.path.join('output', self.args.case_name, self.args.folder, 'key_phrases',
@@ -247,9 +246,9 @@ class ClusterTopicLDA:
 # Main entry
 if __name__ == '__main__':
     try:
-        # _cluster_no = 2
-        # ct = ClusterTopicLDA(_cluster_no)
-        ct = ClusterTopicLDA()
+        _cluster_no = 3
+        ct = ClusterTopicLDA(_cluster_no)
+        # ct = ClusterTopicLDA()
         ct.derive_n_grams_group_by_clusters()
         ct.derive_cluster_topics_by_LDA()
         ct.compute_key_phrase_scores()
