@@ -139,19 +139,22 @@ $(function () {
     // Load collocations and tfidf key terms
     $.when(
         $.getJSON('data/' + cluster_path), $.getJSON('data/' + corpus_path),
+        $.getJSON('data/cluster_-1/' + cluster_path), $.getJSON('data/cluster_-1/' + corpus_path),
         $.getJSON('data/cluster_0/' + cluster_path), $.getJSON('data/cluster_0/' + corpus_path),
+        $.getJSON('data/cluster_1/' + cluster_path), $.getJSON('data/cluster_1/' + corpus_path),
         $.getJSON('data/cluster_2/' + cluster_path), $.getJSON('data/cluster_2/' + corpus_path),
         $.getJSON('data/cluster_3/' + cluster_path), $.getJSON('data/cluster_3/' + corpus_path)
     ).then()
-        .done(function (result1, result2, result3, result4, result5, result6, result7, result8) {
+        .done(function (result1, result2, result3, result4, result5, result6, result7, result8, result9, result10,
+                        result11, result12) {
             let clusters = result1[0];
-            // Filter out outliers
-            clusters = clusters.filter(c => c['Cluster'] !== -1);
             const corpus_data = result2[0];
             const sub_cluster_dict = {
-                "cluster_0": {'SubClusters': result3[0], 'Corpus': result4[0]},
-                "cluster_2": {'SubClusters': result5[0], 'Corpus': result6[0]},
-                "cluster_3": {'SubClusters': result7[0], 'Corpus': result8[0]},
+                "cluster_-1": {'SubClusters': result3[0], 'Corpus': result4[0]},
+                "cluster_0": {'SubClusters': result5[0], 'Corpus': result6[0]},
+                "cluster_1": {'SubClusters': result7[0], 'Corpus': result8[0]},
+                "cluster_2": {'SubClusters': result9[0], 'Corpus': result10[0]},
+                "cluster_3": {'SubClusters': result11[0], 'Corpus': result12[0]},
             };
             // Populate the top terms
             for (let cluster of clusters) {
