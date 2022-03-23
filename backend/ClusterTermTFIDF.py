@@ -9,13 +9,13 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTermTFIDF:
-    def __init__(self, _last_iteration, _cluster_no):
+    def __init__(self, _last_iteration):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
-            # case_name='CultureUrbanStudyCorpus',
             approach='TF-IDF',
-            cluster_folder='cluster_' + str(_cluster_no),
-            cluster_no=_cluster_no,
+            cluster_folder='iteration',
+            # cluster_folder='cluster_' + str(_cluster_no),
+            # cluster_no=_cluster_no,
             in_folder='iteration',
             last_iteration=_last_iteration
         )
@@ -70,21 +70,23 @@ class ClusterTermTFIDF:
 
     # Collect all the iterative cluster results and combine into a single cluster results
     def output_iterative_cluster_results(self):
-
-        score_path = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms')
-
-
+        score_path = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms',
+                                  'iterative_clusters', self.args.case_name + '_iterative_summary.json')
+        scores = pd.read_json(score_path).to_dict("records")
         # Load cluster results at 0 iteration as initial state
         cur_cluster_no = 0
         results = list()
         # Go through each iteration 1 to last iteration
         for iteration in range(0, self.args.last_iteration + 1):
             try:
+                iter_score = list(filter(lambda s: s['iteration'] == iteration, scores))
+                score = iter_score[0]['score']
                 folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster')
                 # Load the clustered docs in each iteration
                 cluster_path = os.path.join(folder, self.args.in_folder + '_' + str(iteration),
                                             self.args.case_name + '_clusters.json')
                 df = pd.read_json(cluster_path)
+                df['Score'] = score
                 cluster_df = df[df['HDBSCAN_Cluster'] != -1]
                 total_cluster_no = cluster_df['HDBSCAN_Cluster'].max()
                 cluster_no_list = list(range(0, total_cluster_no + 1))
@@ -117,7 +119,7 @@ class ClusterTermTFIDF:
         results = sorted(results, key=lambda c: c['DocId'])
         text_df = pd.DataFrame(results)
         # Reorder the columns
-        text_df = text_df[['HDBSCAN_Cluster', 'DocId', 'Cited by', 'Year', 'Document Type',
+        text_df = text_df[['HDBSCAN_Cluster', 'Score', 'DocId', 'Cited by', 'Year', 'Document Type',
                             'Title', 'Abstract', 'Author Keywords', 'Authors', 'DOI', 'x', 'y']]
         # Output cluster results to CSV
         folder = os.path.join('output', self.args.case_name, self.args.cluster_folder)
@@ -125,7 +127,7 @@ class ClusterTermTFIDF:
         text_df.to_csv(path, encoding='utf-8', index=False)
         path = os.path.join(folder, self.args.case_name + '_clusters.json')
         text_df.to_json(path, orient='records')
-        print(text_df)
+        # print(text_df)
 
     # Derive the distinct from each cluster of documents
     def derive_cluster_terms_by_TF_IDF(self):
@@ -140,7 +142,8 @@ class ClusterTermTFIDF:
             clustered_doc_df['Text'] = clustered_doc_df['Title'] + ". " + clustered_doc_df['Abstract']
             # Group the documents and doc_id by clusters
             docs_per_cluster_df = clustered_doc_df.groupby(['HDBSCAN_Cluster'], as_index=False) \
-                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text),
+                      'Score': "mean"})
             # Get top 100 topics (1, 2, 3 grams) for each cluster
             n_gram_term_list = ClusterTopicUtility.get_n_gram_terms('HDBSCAN_Cluster',
                                                                     docs_per_cluster_df,
@@ -149,9 +152,10 @@ class ClusterTermTFIDF:
             for i, cluster in docs_per_cluster_df.iterrows():
                 try:
                     cluster_no = cluster['HDBSCAN_Cluster']
+                    score = cluster['Score']
                     doc_ids = cluster['DocId']
                     doc_texts = cluster['Text']
-                    result = {"Cluster": cluster_no, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
+                    result = {"Cluster": cluster_no, "Score": score, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
                     n_gram_terms = []
                     # Collect the topics of 1 gram, 2 gram and 3 gram
                     for n_gram_range in [1, 2]:
@@ -173,7 +177,7 @@ class ClusterTermTFIDF:
                     print("Error occurred! {err}".format(err=_err))
                     sys.exit(-1)
             # Write the result to csv and json file
-            cluster_df = pd.DataFrame(results, columns=['Cluster', 'NumDocs', 'DocIds',
+            cluster_df = pd.DataFrame(results, columns=['Cluster', 'Score', 'NumDocs', 'DocIds',
                                                         'Term-1-gram', 'Term-2-gram', 'Term-N-gram'])
             folder = os.path.join(term_folder, 'TF_IDF_Terms')
             Path(folder).mkdir(parents=True, exist_ok=True)
@@ -194,7 +198,7 @@ class ClusterTermTFIDF:
             path = os.path.join(term_folder, 'TF_IDF_Terms', 'TF-IDF_cluster_term.json')
             cluster_df = pd.read_json(path)
             # Write out to csv and json file
-            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Term-N-gram']]
+            cluster_df = cluster_df[['Cluster', 'Score', 'NumDocs', 'DocIds', 'Term-N-gram']]
             cluster_df.rename(columns={'Term-N-gram': 'Terms'}, inplace=True)
             cluster_df['Terms'] = cluster_df['Terms'].apply(lambda terms: ClusterTopicUtility.get_cluster_terms(terms, 10))
             # total_clusters = cluster_df['Cluster'].max() + 1
@@ -214,7 +218,7 @@ class ClusterTermTFIDF:
             summary_df['Percent'] = list(map(lambda c: c['NumDocs'] / total, clusters))
             summary_df['Terms'] = list(
                 map(lambda c: ", ".join(list(map(lambda t: t['term'], c['Terms'][:10]))), clusters))
-            summary_df = summary_df.reindex(columns=['Cluster', 'NumDocs', 'Percent', 'DocIds', 'Terms'])
+            summary_df = summary_df.reindex(columns=['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms'])
             # Output the summary as csv
             path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms_summary.csv')
             summary_df.to_csv(path, encoding='utf-8', index=False)
@@ -225,9 +229,9 @@ class ClusterTermTFIDF:
 # Main entry
 if __name__ == '__main__':
     try:
-        cluster_no = 2
-        last_iteration = 1
-        ct = ClusterTermTFIDF(last_iteration, cluster_no)
+        # cluster_no = 2
+        last_iteration = 4
+        ct = ClusterTermTFIDF(last_iteration)
         ct.collect_iterative_cluster_results()
         ct.output_iterative_cluster_results()
         ct.derive_cluster_terms_by_TF_IDF()

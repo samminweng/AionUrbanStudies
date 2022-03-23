@@ -16,7 +16,6 @@ from ClusterTopicUtility import ClusterTopicUtility
 class ClusterTopicLDA:
     def __init__(self):
         self.args = Namespace(
-            # case_name='CultureUrbanStudyCorpus',
             case_name='AIMLUrbanStudyCorpus',
             approach='LDA',
             passes=100,
@@ -225,7 +224,7 @@ class ClusterTopicLDA:
             total = cluster_df['NumDocs'].sum()
             cluster_df['Percent'] = cluster_df['NumDocs'].apply(lambda x: x / total)
             # Output the overall results
-            df = cluster_df[['Cluster', 'NumDocs', 'Percent', 'DocIds', 'Terms',
+            df = cluster_df[['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms',
                              'KeyPhraseScore', 'KeyPhrases', 'LDAScore', 'LDATopics']]
             # # # # Write to a json file
             folder = os.path.join('output', self.args.case_name, self.args.folder)

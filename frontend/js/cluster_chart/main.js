@@ -1,7 +1,6 @@
 'use strict';
 // const corpus = 'CultureUrbanStudyCorpus';
 const corpus = 'AIMLUrbanStudyCorpus';
-
 // Document ready event
 $(function () {
     const progress_bar = new ProgressBar();
@@ -16,15 +15,13 @@ $(function () {
     ).done(function (result1, result2) {
         const corpus_data = result1[0];
         const cluster_topic_key_phrases = result2[0];
-        const is_hide = true;
         // Draw the chart and list the clusters/topic words
-        const chart = new ScatterGraph(is_hide, corpus_data, cluster_topic_key_phrases);
+        const chart = new ScatterGraph(corpus_data, cluster_topic_key_phrases);
         const dialog = new InstructionDialog(false);
         // Remove the progress bar
         $('#progressbar').remove();
         // Update basic info
         const total_papers = corpus_data.length;
-        const outlier_count = cluster_topic_key_phrases.find(c => c['Cluster'] === -1)['NumDocs'];
         $('#total_papers').text(total_papers);
     });
 

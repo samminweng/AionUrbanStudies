@@ -1,10 +1,15 @@
 // Create scatter graph
-function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
+function ScatterGraph(_corpus_data, _cluster_data) {
     const width = 600;
     const height = 600;
     const corpus_data = _corpus_data;
     const cluster_data = _cluster_data;
-    const initial_cluster = (is_hide) ? 0 : -1;
+    const initial_cluster = -1;
+    // Find the maximal cluster number as total number of clusters
+    const total_clusters = corpus_data.map(c => c['Cluster']).reduce((p_value, c_value) => {
+        return (p_value >= c_value) ? p_value : c_value;
+    }, 0) + 1;
+    const outlier_cluster = total_clusters+1;
     // Optimal color pallets for 30 colors from http://vrl.cs.brown.edu/color
     // citation:
     // @article{gramazio-2017-ccd,
@@ -15,10 +20,7 @@ function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
     // }
     const color_plates = ["#41bbc5", "#256676", "#8de990", "#1c5f1e", "#4ca346", "#bfcd8e", "#754819", "#ea8244",
         "#8c1132", "#ea7c97", "#f4327e", "#d4afb9"];
-    // Find the maximal cluster number as total number of clusters
-    const total_clusters = corpus_data.map(c => c['Cluster']).reduce((p_value, c_value) => {
-        return (p_value >= c_value) ? p_value : c_value;
-    }, 0) + 1;
+
     console.log(total_clusters);
 
     // Get top N terms of a cluster by TF-IDF
@@ -39,36 +41,50 @@ function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
         const opacity = function (cluster_no) {
             return (cluster_no < 0) ? 0.2 : 1.0;
         };
-        let data_points = [];
+        let traces = [];
 
         // Convert the clustered data into the format for Plotly js chart
         for (let cluster_no = initial_cluster; cluster_no < total_clusters; cluster_no++) {
             const cluster_docs = corpus_data.filter(d => d['Cluster'] === cluster_no);
-            const group_name = "Group #" + (cluster_no + 1);
-            if (cluster_docs.length > 0) {
-                let data_point = {'x': [], 'y': [], 'label': []};
-                for (const doc of cluster_docs) {
-                    data_point['x'].push(doc.x);
-                    data_point['y'].push(doc.y);
-                    const terms = get_cluster_terms(cluster_no, 5);
-                    const term_text = terms.map(t => t['term']).join("<br>");
-                    const percent = parseInt(100 * cluster_data.find(c => c['Cluster'] === cluster_no)['Percent']);
-                    // Tooltip label displays top 5 topics
-                    data_point['label'].push('<b>' + group_name +'</b> has ' + cluster_docs.length +
-                        ' papers (' + percent + '%)<br>' + term_text);
-                }
-                // const trace_name = 'Group #' + (cluster_no + 1);
-                // Trace setting
-                let trace = {
-                    'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
-                    'name': group_name, 'mode': 'markers', 'type': 'scatter',
-                    'marker': {color: colors(cluster_no)}, opacity: opacity(cluster_no),
-                    'hovertemplate': '%{text}'
-                };
-                data_points.push(trace);
+            const group_name = (cluster_no > -1) ? "Cluster #" + (cluster_no + 1) : "Cluster #" + outlier_cluster;
+            let data_point = {'x': [], 'y': [], 'label': []};
+            for (const doc of cluster_docs) {
+                data_point['x'].push(doc.x);
+                data_point['y'].push(doc.y);
+                const terms = get_cluster_terms(cluster_no, 5);
+                const term_text = terms.map(t => t['term']).join("<br>");
+                const percent = parseInt(100 * cluster_data.find(c => c['Cluster'] === cluster_no)['Percent']);
+                // Tooltip label displays top 5 topics
+                data_point['label'].push('<b>' + group_name + '</b> has ' + cluster_docs.length +
+                    ' papers (' + percent + '%) <br>' +
+                    'Silhouette score = <b>' + doc['Score'].toFixed(2) + '</b><br>'
+                    + term_text);
             }
+            // Trace setting
+            let trace = {
+                'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
+                'name': group_name, 'mode': 'markers', 'type': 'scatter',
+                'marker': {color: colors(cluster_no)}, opacity: opacity(cluster_no),
+                'hovertemplate': '%{text}'
+            };
+            traces.push(trace);
         }
-        return data_points;
+
+        // Sort traces by name
+        traces.sort((a, b) =>{
+            if(a['name'].localeCompare(b['name']) !== 0){
+                const a_g = parseInt(a['name'].split("#")[1]);
+                const b_g = parseInt(b['name'].split("#")[1]);
+                if(a_g > b_g){
+                    return 1;
+                }else{
+                    return -1;
+                }
+            }
+            return 0;
+        });
+        console.log(traces)
+        return traces;
     }
 
     // Display top terms above the chart
@@ -78,11 +94,8 @@ function ScatterGraph(is_hide, _corpus_data, _cluster_data) {
         const terms = get_cluster_terms(cluster_no, n);      // Get top 10 cluster topics
         const terms_text = terms.map(t => t['term']).join(", ");
         // Add the cluster heading
-        if (cluster_no !== -1) {
-            $('#hover_info').append($('<div class="h5">Group #' + cluster_no + ' Top ' + n + ' Distinct Terms</div>'));
-        } else {
-            $('#hover_info').append($('<div class="h5">Outlier Top ' + n + ' Distinct terms</div>'));
-        }
+        const cluster_name = 'Article Cluster #' + (cluster_no + 1);
+        $('#hover_info').append($('<div class="h5">' + cluster_name + ' Top ' + n + ' Distinct Terms</div>'));
         $('#hover_info').append($('<div>' + terms_text + '</div>'));
         $('#hover_info').focus();
     }

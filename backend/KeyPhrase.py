@@ -24,7 +24,7 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 # Group the key phrases based on the vector similarity
 class KeyPhraseSimilarity:
-    def __init__(self, _cluster_no):
+    def __init__(self):
         self.args = Namespace(
             # case_name='CultureUrbanStudyCorpus',
             case_name='AIMLUrbanStudyCorpus',
@@ -33,8 +33,9 @@ class KeyPhraseSimilarity:
             device='cpu',
             n_neighbors=3,
             diversity=0.0,
-            cluster_no=_cluster_no,
-            cluster_folder='cluster_' + str(_cluster_no),
+            # cluster_no=_cluster_no,
+            cluster_folder='iteration'
+            # cluster_folder='cluster_' + str(_cluster_no),
         )
         # Load HDBSCAN cluster
         path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
@@ -316,7 +317,7 @@ class KeyPhraseSimilarity:
             subgroups_df = pd.read_json(path)
             cluster_df['SubGroups'] = subgroups_df['SubGroups'].tolist()
             # Re-order cluster df and Output to csv and json file
-            cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases', 'SubGroups']]
+            cluster_df = cluster_df[['Cluster', 'Score', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases', 'SubGroups']]
             folder = os.path.join(folder, 'key_phrases')
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
@@ -361,8 +362,8 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 2
-        kp = KeyPhraseSimilarity(_cluster_no)
+        # _cluster_no = 2
+        kp = KeyPhraseSimilarity()
         kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()
         kp.group_cluster_key_phrases_with_best_experiments()

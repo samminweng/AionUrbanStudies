@@ -81,13 +81,11 @@ function DocList(docs, cluster, selected_term) {
             pageSize: 5,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages',
-            // header: '<div class="mb-3"><span class="fw-bold"><%= totalNumber %> articles </span> ' + heading + '</div>',
-            // position: 'top',
             callback: function (docs, pagination) {
                 docTable.find('tbody').empty();
                 for (let i = 0; i < docs.length; i++) {
                     const doc = docs[i];
-                    console.log(doc);
+                    // console.log(doc);
                     const row = $('<tr class="d-flex"></tr>');
                     // Add the title
                     const col = $('<td class="col"></td>');
