@@ -11,7 +11,7 @@ let selected_sub_cluster_no = 1;
 
 
 // Display the sub-clusters of a large cluster
-function displaySubCluster(sub_cluster_data){
+function displaySubCluster(sub_cluster_data) {
     // const sub_cluster_data = sub_cluster_dict[parent_cluster_no];
     const div = $("<div></div>");
     // Create a select
@@ -20,7 +20,7 @@ function displaySubCluster(sub_cluster_data){
     const sub_cluster_groups = sub_cluster_data['SubClusters'];
     sub_cluster_groups.sort((a, b) => b['DocIds'].length - a['DocIds'].length);
     const corpus = sub_cluster_data['Corpus'];
-    for(let i=0; i< sub_cluster_groups.length; i++){
+    for (let i = 0; i < sub_cluster_groups.length; i++) {
         const sub_cluster = sub_cluster_groups[i];
         // console.log(sub_cluster);
         const sub_cluster_no = sub_cluster['Cluster'];
@@ -28,8 +28,7 @@ function displaySubCluster(sub_cluster_data){
         const cluster_terms = sub_cluster['Terms'];
         const top_terms = get_top_terms(cluster_terms, 3);
         const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
-        // const option = $('<option value="'+ sub_cluster_no+ '">' +   + </option>');
-        const option = $('<option value="'+ sub_cluster_no+ '"></option>');
+        const option = $('<option value="' + sub_cluster_no + '"></option>');
         option.text(top_terms.join(", ") + ' (' + cluster_docs.length + ' papers)');
         select_drop.append(option);
         // Updated the Top Terms
@@ -37,7 +36,7 @@ function displaySubCluster(sub_cluster_data){
     }
     select_drop.val(selected_sub_cluster_no);
 
-    div.append($("<label>Select a sub-cluster: </label>"))
+    div.append($("<label>Select a sub-group: </label>"))
     div.append(select_drop);
     $('#sub_cluster_list').append(div);
     // Make a dropdown menu
@@ -63,11 +62,11 @@ function displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_di
     const cluster_data = clusters.find(c => c['Cluster'] === cluster_no);
     // console.log(cluster_data);
     const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']));
-    const cluster_name = "cluster_"+cluster_no;
-    if( cluster_name in sub_cluster_dict){
+    const cluster_name = "cluster_" + cluster_no;
+    if (cluster_name in sub_cluster_dict) {
         const sub_cluster_data = sub_cluster_dict[cluster_name];
         displaySubCluster(sub_cluster_data);
-    }else{
+    } else {
         // Create a term chart
         const chart = new TermChart(cluster_data, cluster_docs);
     }
@@ -123,6 +122,11 @@ function get_top_terms(cluster_terms, n) {
             }
         }
     }
+    const index = top_terms.findIndex(top_term => top_term === 'thing');
+    // Replace thing to IoT
+    if (index > 0) {
+        top_terms[index] = "IoT";
+    }
     return top_terms;
 }
 
@@ -134,23 +138,21 @@ $(function () {
     }
     // Load collocations and tfidf key terms
     $.when(
-        $.getJSON('data/' + cluster_path), $.getJSON( 'data/' + corpus_path),
-        $.getJSON('data/cluster_-1/' + cluster_path), $.getJSON('data/cluster_-1/' + corpus_path),
+        $.getJSON('data/' + cluster_path), $.getJSON('data/' + corpus_path),
         $.getJSON('data/cluster_0/' + cluster_path), $.getJSON('data/cluster_0/' + corpus_path),
         $.getJSON('data/cluster_2/' + cluster_path), $.getJSON('data/cluster_2/' + corpus_path),
         $.getJSON('data/cluster_3/' + cluster_path), $.getJSON('data/cluster_3/' + corpus_path)
     ).then()
-        .done(function (result1, result2, result3, result4, result5, result6, result7, result8, result9, result10) {
+        .done(function (result1, result2, result3, result4, result5, result6, result7, result8) {
             let clusters = result1[0];
+            // Filter out outliers
+            clusters = clusters.filter(c => c['Cluster'] !== -1);
             const corpus_data = result2[0];
             const sub_cluster_dict = {
-                "cluster_-1": {'SubClusters': result3[0], 'Corpus': result4[0]},
-                "cluster_0": {'SubClusters': result5[0], 'Corpus': result6[0]},
-                "cluster_2": {'SubClusters': result7[0], 'Corpus': result8[0]},
-                "cluster_3": {'SubClusters': result9[0], 'Corpus': result10[0]},
+                "cluster_0": {'SubClusters': result3[0], 'Corpus': result4[0]},
+                "cluster_2": {'SubClusters': result5[0], 'Corpus': result6[0]},
+                "cluster_3": {'SubClusters': result7[0], 'Corpus': result8[0]},
             };
-            // console.log(sub_cluster_dict);
-
             // Populate the top terms
             for (let cluster of clusters) {
                 const cluster_terms = cluster['Terms'];

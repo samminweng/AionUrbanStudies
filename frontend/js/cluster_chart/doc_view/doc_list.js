@@ -1,14 +1,69 @@
 // Display a list of research articles
-function DocList(docs, selected_term) {
-    let header = "";
-    if(selected_term != null){
-        if('topic' in selected_term){
-            header = 'about <mark class="key_term"> ' + selected_term['topic'] + '</mark> topics';
-        }else if('group' in selected_term){
-            header = 'about <mark class="key_term"> ' + selected_term['key-phrases'].slice(0, 3).join(", ") + '</mark> and related ' +
-                    selected_term['key-phrases'].length + ' key phrases';
-        }
+function DocList(docs, cluster, selected_term) {
+    // console.log(cluster);
+    sort_docs('Cited by'); // Sort citation by default
+    function sort_docs(name){
+        // Sort docs by citations
+        docs.sort((a, b) =>{
+            if(a[name] === b[name]){
+                return 0;
+            }
+            // Null values
+            if(b[name] === null){
+                return -1;
+            }
+            if(a[name] === null){
+                return 1;
+            }
+            // Non-null values
+            if(a[name] && b[name]){
+                if(b[name] > a[name]){
+                    return 1;
+                }else{
+                    return -1;
+                }
+            }
+        });
     }
+
+    // Create a heading
+    function _createHeading(){
+        let heading_text = "";
+        if(selected_term !== null){
+            heading_text = "about " + selected_term;
+        }
+        $('#doc_list_heading').empty();
+        const container = $('<div class="row"></div>')
+        // Add heading
+        container.append($('<div class="col"><span class="fw-bold"> ' + docs.length + ' papers </span>' +
+            '<span>' + heading_text + '</span></div>'));
+        // Add sort by button
+        const sort_by_div = $('<div>Sort by </div>');
+        // Sort by citation
+        sort_by_div.append($('<div class="form-check form-check-inline">' +
+            '<input class="form-check-input" type="radio" name="sort-btn" value="citation" checked>' +
+            '<label class="form-check-label"> Citation </label>' +
+            '</div>'));
+        // Sort by year
+        sort_by_div.append($('<div class="form-check form-check-inline">' +
+            '<input class="form-check-input" type="radio" name="sort-btn" value="year">' +
+            '<label class="form-check-label"> Year </label>' +
+            '</div>'));
+        container.append($('<div class="col"></div>').append(sort_by_div));
+        $('#doc_list_heading').append(container);
+
+        // Define onclick event
+        sort_by_div.find('input[name="sort-btn"]').change(function(){
+            if(this.value === "year"){
+                sort_docs("Year");
+            }else{
+                sort_docs('Cited by');
+            }
+            _createUI();
+        });
+    }
+
+
     // Create a pagination to show the documents
     function createPagination(docTable) {
         // Create the table
@@ -26,8 +81,8 @@ function DocList(docs, selected_term) {
             pageSize: 5,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages',
-            header: '<div class="mb-3"><span class="fw-bold"><%= totalNumber %> articles </span> ' + header + '</div>',
-            position: 'top',
+            // header: '<div class="mb-3"><span class="fw-bold"><%= totalNumber %> articles </span> ' + heading + '</div>',
+            // position: 'top',
             callback: function (docs, pagination) {
                 docTable.find('tbody').empty();
                 for (let i = 0; i < docs.length; i++) {
@@ -46,7 +101,6 @@ function DocList(docs, selected_term) {
         return pagination;
     }
 
-
     function _createUI() {
         $('#doc_list').empty();
         const container = $('<div></div>');
@@ -61,4 +115,5 @@ function DocList(docs, selected_term) {
     }
 
     _createUI();
+    _createHeading();
 }

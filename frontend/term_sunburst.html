@@ -21,16 +21,16 @@
 </head>
 <body>
 <div class="container">
-    <div class="h4">Cluster, Term and Key Phrase Chart</div>
-    <div>This sunburst chart display the hierarchical structures of topics and key phrases extracted from paper texts
+    <div class="h4">Topics, Key Phrase and Article Chart</div>
+    <div>Within an article group, this chart display the hierarchical structures of topics, key phrase and articles
         (abstract + title).
         <br>
-        Each individual paper has a mixture of topics, and each topic contain a mixture of words and key phrases.
+        Each topic contain a mixture of key phrases, and each key phrase group correspond to various number of articles.
     </div>
     <div class="row">
         <div class="col">
             <div class="m-auto p-2">
-                <label for="cluster_list">Select a Cluster: </label>
+                <label for="cluster_list">Select a Group: </label>
                 <select name="cluster_list" id="cluster_list"></select>
             </div>
             <div class='m-auto p-2' id="sub_cluster_list"></div>
@@ -40,14 +40,10 @@
         <div class="col border border-3 p-3">
             <div>
                 <p>
-                <h3>Groups of Key Phrases</h3>
+                <h3>Topics</h3>
                 <div id="key_phrase_chart" class="container">
                 </div>
                 </p>
-            </div>
-            <div>
-                <div id="lda_topic_view" class="container">
-                </div>
             </div>
         </div>
         <div class="col border border-3 p-3">
@@ -59,12 +55,11 @@
             </div>
         </div>
     </div>
-    <div class="row p-3">
+    <div class="row">
         <div class="col">
-            <div class="container">
-                <div id="group" class="p-3"></div>
-                <div id="doc_list" class="p-3"></div>
-            </div>
+            <div id="group"></div>
+            <div id="doc_list_heading" class="p-3"></div>
+            <div id="doc_list"></div>
         </div>
     </div>
 </div>

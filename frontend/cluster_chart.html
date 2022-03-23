@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Cluster Chart</title>
+    <title>Article Group Chart</title>
     <meta charset="utf-8">
     <!-- All the third party libraries-->
     <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
@@ -19,62 +19,43 @@
 </head>
 <body>
 <div class="container">
-    <div class="h4">Cluster Dot Chart</div>
+    <div class="h4">Overview Chart</div>
     <div>
-        <span id="total_papers"></span> (AI and ML) or ML urban study research papers are clusters into <span id="total_clusters"></span> groups
-        and <span id="outlier_papers"></span> papers are identified as outliers
-        using BERT-based Sentence Transformer + Iterative HDBSCAN clustering + TF-IDF topic identification + BERT-based key phrase extraction and grouping.
-        Our approach is an enhancement to <a target="_blank" href="https://maartengr.github.io/BERTopic/">BERTopic approach</a>
-        (<a target="_blank" href="https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6">Link</a>) and
-        comparable with LDA Topic modelling.
+        <span id="total_papers"></span>  urban study (related to AI and machine learning) research papers are
+        clusters into article groups using Iterative clustering
+        (BERT-based Sentence Transformer + HDBSCAN clustering + TF-IDF term identification)
+        and BERT-based key phrase extraction and grouping.
+        Our approach is an enhancement to
+        <a target="_blank" href="https://maartengr.github.io/BERTopic/">BERTopic</a> and
+        <a target="_blank" href="https://github.com/MaartenGr/KeyBERT">KeyBERT</a>
     </div>
     <div>
         <button id="opener">Open Instructions</button>
         <div id="instruction" title="Instructions"></div>
-        <div id="progressbar"><div class="progress-label">Loading...</div></div>
+        <div id="progressbar">
+            <div class="progress-label">Loading...</div>
+        </div>
     </div>
     <!-- Chart and doc list -->
     <div class="row mt-3">
         <div class="col border border-3">
-            <div class="row p-3">
-                <div class="col align-text-bottom" id="outlier-col">
-                    <label for="hide_outliers">Hide Outlier</label>
-                    <input type="checkbox" name="hide_outliers" id="hide_outliers">
-                </div>
-            </div>
             <div class="row">
                 <div class="col">
-                    <div class="p-3" style="height: 100px">
-                        <div id="hover_info" class="h-90 d-inline-block"></div>
+                    <div class="container p-3">
+                        <div id="cluster_chart"></div>
+                        <div style="height: 100px">
+                            <div id="hover_info" class="h-90 d-inline-block"></div>
+                        </div>
                     </div>
-                    <div id="cluster_chart"></div>
                 </div>
             </div>
         </div>
-        <div class="col border border-3 p-3">
-            <div class="row">
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <div id="cluster_doc_heading" class="h4"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div id="cluster_terms"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div id="cluster_key_phrases"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div id="doc_list"></div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col border border-3">
+            <div class="container p-3">
+                <div id="cluster_doc_heading" class="h5"></div>
+                <div id="cluster_terms"></div>
+                <div id="doc_list_heading" class="p-3"></div>
+                <div id="doc_list"></div>
             </div>
         </div>
     </div>
@@ -82,7 +63,7 @@
     <footer class="py-1 my-1">
         <div class="text-center">
         </div>
-    </footer >
+    </footer>
 </div>
 <!-- Our javascript -->
 <script type="text/javascript" src="js/cluster_chart/instruction_dialog.js"></script>

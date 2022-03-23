@@ -70,13 +70,17 @@ class ClusterTermTFIDF:
 
     # Collect all the iterative cluster results and combine into a single cluster results
     def output_iterative_cluster_results(self):
-        folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster')
+
+        score_path = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms')
+
+
         # Load cluster results at 0 iteration as initial state
         cur_cluster_no = 0
         results = list()
         # Go through each iteration 1 to last iteration
         for iteration in range(0, self.args.last_iteration + 1):
             try:
+                folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster')
                 # Load the clustered docs in each iteration
                 cluster_path = os.path.join(folder, self.args.in_folder + '_' + str(iteration),
                                             self.args.case_name + '_clusters.json')
