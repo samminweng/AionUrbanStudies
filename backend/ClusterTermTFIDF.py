@@ -9,12 +9,12 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 
 class ClusterTermTFIDF:
-    def __init__(self, _last_iteration):
+    def __init__(self, _last_iteration, _cluster_no):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
             approach='TF-IDF',
-            cluster_folder='iteration',
-            # cluster_folder='cluster_' + str(_cluster_no),
+            # cluster_folder='iteration',
+            cluster_folder='cluster_' + str(_cluster_no),
             # cluster_no=_cluster_no,
             in_folder='iteration',
             last_iteration=_last_iteration
@@ -229,9 +229,9 @@ class ClusterTermTFIDF:
 # Main entry
 if __name__ == '__main__':
     try:
-        # cluster_no = 2
-        last_iteration = 4
-        ct = ClusterTermTFIDF(last_iteration)
+        cluster_no = 3
+        last_iteration = 0
+        ct = ClusterTermTFIDF(last_iteration, cluster_no)
         ct.collect_iterative_cluster_results()
         ct.output_iterative_cluster_results()
         ct.derive_cluster_terms_by_TF_IDF()

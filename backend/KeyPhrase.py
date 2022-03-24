@@ -24,9 +24,8 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 # Group the key phrases based on the vector similarity
 class KeyPhraseSimilarity:
-    def __init__(self):
+    def __init__(self, _cluster_no):
         self.args = Namespace(
-            # case_name='CultureUrbanStudyCorpus',
             case_name='AIMLUrbanStudyCorpus',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
@@ -34,8 +33,8 @@ class KeyPhraseSimilarity:
             n_neighbors=3,
             diversity=0.0,
             # cluster_no=_cluster_no,
-            cluster_folder='iteration'
-            # cluster_folder='cluster_' + str(_cluster_no),
+            # cluster_folder='iteration'
+            cluster_folder='cluster_' + str(_cluster_no),
         )
         # Load HDBSCAN cluster
         path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
@@ -362,8 +361,8 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     try:
-        # _cluster_no = 2
-        kp = KeyPhraseSimilarity()
+        _cluster_no = 3
+        kp = KeyPhraseSimilarity(_cluster_no)
         kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()
         kp.group_cluster_key_phrases_with_best_experiments()
