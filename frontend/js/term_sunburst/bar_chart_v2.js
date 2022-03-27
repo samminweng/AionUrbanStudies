@@ -46,7 +46,7 @@ function BarChart(group_data, cluster, cluster_docs) {
         // Add the topic words
         let topic_words = group['topic_words'];
         const word_key_phrase_dict = Utility.create_word_key_phrases_dict(topic_words, group['key-phrases']);
-        console.log(word_key_phrase_dict);
+        // console.log(word_key_phrase_dict);
         // Sort topic words by word-phrase relations
         topic_words.sort((a, b) => {
             return word_key_phrase_dict[b].length - word_key_phrase_dict[a].length;

@@ -26,7 +26,7 @@ function displaySubCluster(sub_cluster_data) {
         const sub_cluster_no = sub_cluster['Cluster'];
         // Get the cluster terms
         const cluster_terms = sub_cluster['Terms'];
-        const top_terms = get_top_terms(cluster_terms, 3);
+        const top_terms = Utility.get_top_terms(cluster_terms, 3);
         const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
         const option = $('<option value="' + sub_cluster_no + '"></option>');
         option.text(top_terms.join(", ") + ' (' + cluster_docs.length + ' papers)');
@@ -59,6 +59,17 @@ function displaySubCluster(sub_cluster_data) {
 // Display the results of a cluster
 function displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_dict) {
     $('#sub_cluster_list').empty();
+    // Populate the top terms
+    for (let cluster of clusters) {
+        if(cluster['Cluster'] === selected_cluster_no){
+            console.log("Debug");
+        }
+        const cluster_terms = cluster['Terms'];
+        // console.log(cluster_terms);
+        const top_terms = Utility.get_top_terms(cluster_terms, 3);
+        // console.log(top_terms);
+        cluster['TopTerms'] = top_terms;
+    }
     const cluster_data = clusters.find(c => c['Cluster'] === cluster_no);
     // console.log(cluster_data);
     const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']));
@@ -70,64 +81,6 @@ function displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_di
         // Create a term chart
         const chart = new TermChart(cluster_data, cluster_docs);
     }
-}
-
-// Collect the unique top 3 terms
-function get_top_terms(cluster_terms, n) {
-    let top_terms = [];
-    for (const cluster_term of cluster_terms) {
-        const term = cluster_term['term'];
-        // Check if the term overlap with any top term
-        const overlap_top_term = top_terms.find(top_term => {
-            // Split the terms into words and check if two term has overlapping word
-            // For example, 'land use' is in the list. 'urban land' should not be included.
-            const top_term_words = top_term.split(" ");
-            const term_words = term.split(" ");
-            if (top_term_words.length === term_words.length) {
-                for (const top_term_word of top_term_words) {
-                    for (const term_word of term_words) {
-                        const over_lapping_word = top_term_words.find(t => t.toLowerCase() === term_word.toLowerCase());
-                        if (over_lapping_word) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        })
-        // The term does not overlap any existing top term
-        if (!overlap_top_term) {
-            // Check if any term word exist in top_terms
-            const found_term = top_terms.find(top_term => {
-                // Check if term is a part of an existing top term or an existing top term is part of the term
-                // For example, 'cover' is part of 'land cover'
-                if (term.toLowerCase().includes(top_term.toLowerCase()) ||
-                    top_term.toLowerCase().includes(term.toLowerCase())) {
-                    return true;
-                }
-
-                // Otherwise, return false
-                return false;
-            });
-            if (found_term) {
-                const found_index = top_terms.indexOf(found_term);
-                // Replace
-                top_terms[found_index] = term;
-            } else {
-                top_terms.push(term);
-            }
-            // Check if top_terms has three terms
-            if (top_terms.length === n) {
-                break;
-            }
-        }
-    }
-    const index = top_terms.findIndex(top_term => top_term === 'thing');
-    // Replace thing to IoT
-    if (index > 0) {
-        top_terms[index] = "IoT";
-    }
-    return top_terms;
 }
 
 
@@ -156,14 +109,7 @@ $(function () {
                 "cluster_2": {'SubClusters': result9[0], 'Corpus': result10[0]},
                 "cluster_3": {'SubClusters': result11[0], 'Corpus': result12[0]},
             };
-            // Populate the top terms
-            for (let cluster of clusters) {
-                const cluster_terms = cluster['Terms'];
-                // console.log(cluster_terms);
-                const top_terms = get_top_terms(cluster_terms, 3);
-                // console.log(top_terms);
-                cluster['TopTerms'] = top_terms;
-            }
+
             // Display a cluster as default cluster
             displayChartByCluster(selected_cluster_no, clusters, corpus_data, sub_cluster_dict);
             $("#cluster_list").empty();
