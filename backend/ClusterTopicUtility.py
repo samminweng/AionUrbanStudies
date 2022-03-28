@@ -609,7 +609,7 @@ class ClusterTopicUtility:
                     top_words = list(filter(lambda word: is_found(word, new_top_words), word_freq_clone))
                     candidate_words = list(filter(lambda word: not is_found(word, new_top_words), word_freq_clone))
                     iteration += 1
-            assert len(top_words) >= 5, "topic word less than 5"
+            # assert len(top_words) >= 5, "topic word less than 5"
         # Sort topic words by frequencies
         top_words = sorted(top_words, key=lambda w: w['freq'], reverse=True)
         # Return the top 3

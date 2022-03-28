@@ -74,7 +74,7 @@ class ClusterTermTFIDF:
                                   'iterative_clusters', self.args.case_name + '_iterative_summary.json')
         scores = pd.read_json(score_path).to_dict("records")
         # Load cluster results at 0 iteration as initial state
-        cur_cluster_no = 0
+        cur_cluster_no = -1
         results = list()
         # Go through each iteration 1 to last iteration
         for iteration in range(0, self.args.last_iteration + 1):
@@ -87,24 +87,25 @@ class ClusterTermTFIDF:
                                             self.args.case_name + '_clusters.json')
                 df = pd.read_json(cluster_path)
                 df['Score'] = score
-                cluster_df = df[df['HDBSCAN_Cluster'] != -1]
+                cluster_df = df
                 total_cluster_no = cluster_df['HDBSCAN_Cluster'].max()
-                cluster_no_list = list(range(0, total_cluster_no + 1))
+                cluster_no_list = list(range(-1, total_cluster_no + 1))
                 # Added the clustered results
                 for cluster_no in cluster_no_list:
                     # Get the clustered docs
                     c_df = cluster_df[cluster_df['HDBSCAN_Cluster'] == cluster_no]
                     docs = c_df.to_dict("records")
-                    for doc in docs:
-                        doc['HDBSCAN_Cluster'] = cur_cluster_no + cluster_no
-                    results.extend(docs)
-                cur_cluster_no = cur_cluster_no + len(cluster_no_list)
-                # Get outliers
-                outlier_df = df[df['HDBSCAN_Cluster'] == -1]
+                    if len(docs) < 40:
+                        for doc in docs:
+                            doc['HDBSCAN_Cluster'] = cur_cluster_no
+                        results.extend(docs)
+                        cur_cluster_no = cur_cluster_no + 1
                 # visual_results.extend(outlier_df.to_dict("records"))
                 # Add the outliers at lst iteration
-                if iteration == self.args.last_iteration:
-                    results.extend(outlier_df.to_dict("records"))
+                # if iteration == self.args.last_iteration:
+                #     # Get outliers
+                #     outlier_df = df[df['HDBSCAN_Cluster'] == -1]
+                #     results.extend(outlier_df.to_dict("records"))
                 copied_results = results.copy()
                 image_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
                                             'cluster_terms', 'images')
@@ -229,8 +230,8 @@ class ClusterTermTFIDF:
 # Main entry
 if __name__ == '__main__':
     try:
-        cluster_no = 3
-        last_iteration = 0
+        cluster_no = 2
+        last_iteration = 2
         ct = ClusterTermTFIDF(last_iteration, cluster_no)
         ct.collect_iterative_cluster_results()
         ct.output_iterative_cluster_results()

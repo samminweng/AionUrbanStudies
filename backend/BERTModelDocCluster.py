@@ -391,6 +391,8 @@ class BERTModelDocCluster:
             # Get the outliers identified by HDBSCAN
             folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
                                   'cluster', self.args.in_folder)
+            # folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            #                       'cluster', 'iteration_0')
             path = os.path.join(folder, self.args.case_name + '_clusters.json')
             # Get the best clustering of highest silhouette score
             cluster_df = pd.read_json(path)
@@ -415,7 +417,7 @@ if __name__ == '__main__':
         cluster_no = 2
         BERTModelDocClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
-        iteration = 1
+        iteration = 2
         mdc = BERTModelDocCluster(iteration, cluster_no)
         mdc.get_sentence_vectors(is_load=False)
         mdc.run_HDBSCAN_cluster_experiments()

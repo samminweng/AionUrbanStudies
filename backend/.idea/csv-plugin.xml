@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/data/AIMLUrbanStudyCorpus/cluster_2/iteration_2/AIMLUrbanStudyCorpus_cleaned.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/AIMLUrbanStudyCorpus/cluster_3/iteration_1/AIMLUrbanStudyCorpus_cleaned.csv">
           <value>
             <Attribute>
@@ -109,6 +116,20 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_-1/cluster/iteration_0/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_-1/key_phrases/AIMLUrbanStudyCorpus_cluster_terms_key_phrases.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_-1/key_phrases/group_key_phrases/cluster_key_phrases_group.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -241,7 +262,28 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_1/key_phrases/group_key_phrases/cluster_key_phrases_group.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_1/key_phrases/group_key_phrases/cluster_key_phrases_sub_groups.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/AIMLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/AIMLUrbanStudyCorpus_clusters.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -283,7 +325,63 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/cluster/iteration_1/AIMLUrbanStudyCorpus_cluster_docs.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/cluster/iteration_2/AIMLUrbanStudyCorpus_cluster_docs.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/cluster/iteration_2/AIMLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/cluster/iteration_2/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/cluster_terms/AIMLUrbanStudyCorpus_TF-IDF_cluster_terms.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/cluster_terms/AIMLUrbanStudyCorpus_TF-IDF_cluster_terms_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/cluster_terms/iterative_clusters/AIMLUrbanStudyCorpus_iterative_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/key_phrases/group_key_phrases/cluster_key_phrases_group.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_2/key_phrases/group_key_phrases/cluster_key_phrases_sub_groups.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -298,6 +396,20 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_3/cluster/iteration_0/AIMLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_3/key_phrases/group_key_phrases/cluster_key_phrases_group.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_3/key_phrases/group_key_phrases/cluster_key_phrases_sub_groups.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -368,6 +480,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/iteration/key_phrases/AIMLUrbanStudyCorpus_cluster_terms_key_phrases.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/iteration/key_phrases/group_key_phrases/cluster_key_phrases_sub_groups.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
