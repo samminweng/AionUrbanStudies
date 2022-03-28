@@ -94,7 +94,7 @@ $(function () {
                 cluster['TopTerms'] = top_terms;
             }
             // Add misc
-            const cluster_nos = [-1, 0, 1, 2, 3, 'Others'];
+            const cluster_nos = [-1, 0, 1, 2, 3, 'others'];
             const misc_clusters = clusters.filter(c => !cluster_nos.includes( c['Cluster']))
             const misc_cluster_corpus = corpus_data.filter(c => !cluster_nos.includes(c['Cluster']));
             const sub_cluster_dict = {
@@ -103,7 +103,7 @@ $(function () {
                 "cluster_1": {'SubClusters': result7[0], 'Corpus': result8[0]},
                 "cluster_2": {'SubClusters': result9[0], 'Corpus': result10[0]},
                 "cluster_3": {'SubClusters': result11[0], 'Corpus': result12[0]},
-                "cluster_Others": {'SubClusters': misc_clusters, 'Corpus': misc_cluster_corpus}
+                "cluster_others": {'SubClusters': misc_clusters, 'Corpus': misc_cluster_corpus}
             };
 
 
@@ -114,11 +114,11 @@ $(function () {
             for (const cluster_no of cluster_nos) {
                 let top_terms;
                 const cluster_doc_ids = sub_cluster_dict['cluster_'+cluster_no]['Corpus'];
-                if(cluster_no !== "Others"){
+                if(cluster_no !== "others"){
                     const cluster = clusters.find(c => c['Cluster'] === cluster_no);
                     top_terms = cluster['TopTerms'];
                 }else{
-                    top_terms = ['Others'];
+                    top_terms = ['others'];
                 }
                 if (cluster_no !== selected_cluster_no) {
                     $("#cluster_list").append($('<option value="' + cluster_no + '"> ' + top_terms.join(", ") +
