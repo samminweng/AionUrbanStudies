@@ -3,6 +3,7 @@ import sys
 from argparse import Namespace
 from functools import reduce
 
+import numpy as np
 from nltk import sent_tokenize, word_tokenize
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
@@ -32,8 +33,6 @@ class KeyPhraseSimilarity:
             device='cpu',
             n_neighbors=3,
             diversity=0.0,
-            # cluster_no=_cluster_no,
-            # cluster_folder='iteration'
             cluster_folder='cluster_' + str(_cluster_no),
         )
         # Load HDBSCAN cluster
@@ -96,25 +95,21 @@ class KeyPhraseSimilarity:
                                                                                               n_gram_candidates)
 
                         phrase_similar_scores = KeyPhraseUtility.sort_phrases_by_similar_score(candidate_scores)
+                        # compute top 25% score as the threshold
+                        score_threshold = np.percentile([sc['score'] for sc in phrase_similar_scores], 75)
+                        # print(similar_mean)
+                        # Set top 25% candidate scores as the threshold to filter the candidate words
+                        phrase_similar_scores = list(filter(lambda sc: sc['score'] >= score_threshold, phrase_similar_scores))
                         phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
-                        # Rank  top 20 high scoring phrases
-                        num = 20
+                        # Rank the high scoring phrases
                         diversity = 0.5
                         phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(
-                            self.model, doc_text, phrase_candidates[:num], diversity)
+                            self.model, doc_text, phrase_candidates, diversity)
                         key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
                         # Obtain top five key phrases
                         result = {'Cluster': cluster_no, 'DocId': doc_id,  # 'top_num': num, 'Diversity': diversity,
                                   'Key-phrases': key_phrases[:5], 'Candidate-count': len(phrase_candidates),
                                   'Phrase-candidates': phrase_candidates}
-                        # Output the top 5 key-phrase and score
-                        # for i in range(0, 20):
-                        #     if i < len(phrase_scores_mmr):
-                        #         result['top_'+str(i)+'_phrase'] = phrase_scores_mmr[i]['key-phrase']
-                        #         result['top_'+str(i)+'_score'] = phrase_scores_mmr[i]['score']
-                        #     else:
-                        #         result['top_' + str(i) + '_phrase'] = 'NAN'
-                        #         result['top_' + str(i) + '_score'] = 0
                         results.append(result)
                         print("Complete to extract the key phrases from document {d_id}".format(d_id=doc_id))
                     except Exception as _err:
@@ -154,7 +149,7 @@ class KeyPhraseSimilarity:
                 experiment_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
                                                  'key_phrases', 'experiments', 'level_0')
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
-                min_cluster_size_list = list(range(30, 14, -1))
+                min_cluster_size_list = list(range(30, 9, -1))
                 # # Cluster all key phrases using HDBSCAN clustering
                 results = KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(unique_key_phrases,
                                                                                    min_cluster_size_list,
@@ -311,12 +306,8 @@ class KeyPhraseSimilarity:
             path = os.path.join(folder, 'key_phrases', 'group_key_phrases', 'cluster_key_phrases_group.json')
             key_phrase_df = pd.read_json(path)
             cluster_df['KeyPhrases'] = key_phrase_df['Key-phrases'].tolist()
-            # Load the subgroups
-            path = os.path.join(folder, 'key_phrases', 'group_key_phrases', 'cluster_key_phrases_sub_groups.json')
-            subgroups_df = pd.read_json(path)
-            cluster_df['SubGroups'] = subgroups_df['SubGroups'].tolist()
             # Re-order cluster df and Output to csv and json file
-            cluster_df = cluster_df[['Cluster', 'Score', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases', 'SubGroups']]
+            cluster_df = cluster_df[['Cluster', 'Score', 'NumDocs', 'DocIds', 'Terms', 'KeyPhrases']]
             folder = os.path.join(folder, 'key_phrases')
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
@@ -361,13 +352,12 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 2
+        _cluster_no = 1
         kp = KeyPhraseSimilarity(_cluster_no)
-        kp.extract_doc_key_phrases_by_similarity_diversity()
-        kp.experiment_group_cluster_key_phrases()
-        kp.group_cluster_key_phrases_with_best_experiments()
-        kp.re_group_key_phrases_within_groups()
-        kp.combine_terms_key_phrases_results()
+        # kp.extract_doc_key_phrases_by_similarity_diversity()
+        # kp.experiment_group_cluster_key_phrases()
+        # kp.group_cluster_key_phrases_with_best_experiments()
+        # kp.combine_terms_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

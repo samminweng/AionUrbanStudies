@@ -298,13 +298,11 @@ class KeyPhraseUtility:
             key_phrase_vectors = model.encode(key_phrases)
             vector_list = key_phrase_vectors.tolist()
             results = list()
-            dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5]
-            # dimensions = [100, 50]
+            dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 8, 6, 5]
             # Filter out dimensions > the length of key phrases
             dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
             # min_cluster_size_list = list(range(30, 4, -1))
-            min_sample_list = [50, 45, 40, 35, 30, 25, 20, 15, 10, 5]
-
+            min_sample_list = [50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 4, 3]
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
                 reduced_vectors = umap.UMAP(
