@@ -7,12 +7,9 @@ const corpus_path = corpus + '_clusters.json';
 const params = new URLSearchParams(window.location.search);
 // Select cluster number
 let selected_cluster_no = 0;
-let selected_sub_cluster_no = 1;
-
 
 // Display the sub-clusters of a large cluster
 function displaySubCluster(sub_cluster_data) {
-    // const sub_cluster_data = sub_cluster_dict[parent_cluster_no];
     const div = $("<div></div>");
     // Create a select
     const select_drop = $('<select></select>');
@@ -34,9 +31,8 @@ function displaySubCluster(sub_cluster_data) {
         // Updated the Top Terms
         sub_cluster['TopTerms'] = top_terms;
     }
-    select_drop.val(selected_sub_cluster_no);
 
-    div.append($("<label>Select a sub-group: </label>"))
+    div.append($("<label>Select an article cluster : </label>"))
     div.append(select_drop);
     $('#sub_cluster_list').append(div);
     // Make a dropdown menu
@@ -51,7 +47,7 @@ function displaySubCluster(sub_cluster_data) {
         }
     });
     // Create a term chart
-    const sub_cluster = sub_cluster_groups.find(c => c['Cluster'] === selected_sub_cluster_no);
+    const sub_cluster = sub_cluster_groups[0];
     const cluster_docs = corpus.filter(d => sub_cluster['DocIds'].includes(d['DocId']));
     const chart = new TermChart(sub_cluster, cluster_docs);
 }
@@ -59,28 +55,12 @@ function displaySubCluster(sub_cluster_data) {
 // Display the results of a cluster
 function displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_dict) {
     $('#sub_cluster_list').empty();
-    // Populate the top terms
-    for (let cluster of clusters) {
-        if(cluster['Cluster'] === selected_cluster_no){
-            console.log("Debug");
-        }
-        const cluster_terms = cluster['Terms'];
-        // console.log(cluster_terms);
-        const top_terms = Utility.get_top_terms(cluster_terms, 3);
-        // console.log(top_terms);
-        cluster['TopTerms'] = top_terms;
-    }
-    const cluster_data = clusters.find(c => c['Cluster'] === cluster_no);
-    // console.log(cluster_data);
-    const cluster_docs = corpus_data.filter(d => cluster_data['DocIds'].includes(d['DocId']));
     const cluster_name = "cluster_" + cluster_no;
     if (cluster_name in sub_cluster_dict) {
         const sub_cluster_data = sub_cluster_dict[cluster_name];
         displaySubCluster(sub_cluster_data);
-    } else {
-        // Create a term chart
-        const chart = new TermChart(cluster_data, cluster_docs);
     }
+
 }
 
 
@@ -102,22 +82,44 @@ $(function () {
                         result11, result12) {
             let clusters = result1[0];
             const corpus_data = result2[0];
+            // Populate the top terms
+            for (let cluster of clusters) {
+                if(cluster['Cluster'] === selected_cluster_no){
+                    console.log("Debug");
+                }
+                const cluster_terms = cluster['Terms'];
+                // console.log(cluster_terms);
+                const top_terms = Utility.get_top_terms(cluster_terms, 3);
+                // console.log(top_terms);
+                cluster['TopTerms'] = top_terms;
+            }
+            // Add misc
+            const cluster_nos = [-1, 0, 1, 2, 3, 'Others'];
+            const misc_clusters = clusters.filter(c => !cluster_nos.includes( c['Cluster']))
+            const misc_cluster_corpus = corpus_data.filter(c => !cluster_nos.includes(c['Cluster']));
             const sub_cluster_dict = {
                 "cluster_-1": {'SubClusters': result3[0], 'Corpus': result4[0]},
                 "cluster_0": {'SubClusters': result5[0], 'Corpus': result6[0]},
                 "cluster_1": {'SubClusters': result7[0], 'Corpus': result8[0]},
                 "cluster_2": {'SubClusters': result9[0], 'Corpus': result10[0]},
                 "cluster_3": {'SubClusters': result11[0], 'Corpus': result12[0]},
+                "cluster_Others": {'SubClusters': misc_clusters, 'Corpus': misc_cluster_corpus}
             };
+
 
             // Display a cluster as default cluster
             displayChartByCluster(selected_cluster_no, clusters, corpus_data, sub_cluster_dict);
             $("#cluster_list").empty();
             // Add a list of clusters/sub-clusters
-            for (const cluster of clusters) {
-                const cluster_no = cluster['Cluster'];
-                const top_terms = cluster['TopTerms'];
-                const cluster_doc_ids = cluster['DocIds'];
+            for (const cluster_no of cluster_nos) {
+                let top_terms;
+                const cluster_doc_ids = sub_cluster_dict['cluster_'+cluster_no]['Corpus'];
+                if(cluster_no !== "Others"){
+                    const cluster = clusters.find(c => c['Cluster'] === cluster_no);
+                    top_terms = cluster['TopTerms'];
+                }else{
+                    top_terms = ['Others'];
+                }
                 if (cluster_no !== selected_cluster_no) {
                     $("#cluster_list").append($('<option value="' + cluster_no + '"> ' + top_terms.join(", ") +
                         ' (' + cluster_doc_ids.length + ' papers)  </option>'));
@@ -130,7 +132,7 @@ $(function () {
                 width: 'auto',
                 change: function (event, data) {
                     // console.log( data.item.value);
-                    const cluster_no = parseInt(data.item.value);
+                    const cluster_no = data.item.value;
                     displayChartByCluster(cluster_no, clusters, corpus_data, sub_cluster_dict);
                 }
             });
