@@ -278,7 +278,7 @@ class KeyPhraseUtility:
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
-    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, min_cluster_size_list, model, n_neighbors=3):
+    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, model, n_neighbors=3):
         def collect_group_results(_results, _group_label):
             try:
                 _found = next((r for r in _results if r['group'] == _group_label), None)
@@ -293,16 +293,17 @@ class KeyPhraseUtility:
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
+        dimensions = [100, 90, 80, 70, 60, 50, 40, 30, 20]
+        min_sample_list = [20, 15, 10, 5, 1]
+        # min_cluster_size_list = list(range(30, 5, -1))
+        min_cluster_size_list = list(range(30, 15, -1))
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
             vector_list = key_phrase_vectors.tolist()
             results = list()
-            dimensions = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 8, 6, 5]
             # Filter out dimensions > the length of key phrases
             dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
-            # min_cluster_size_list = list(range(30, 4, -1))
-            min_sample_list = [50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 4, 3]
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
                 reduced_vectors = umap.UMAP(

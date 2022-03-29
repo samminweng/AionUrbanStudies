@@ -528,6 +528,41 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/AIMLUrbanStudyCorpus_cluster_terms_key_phrases.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/AIMLUrbanStudyCorpus_key_phrase_groups.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/experiments/level_0/key_phrases_cluster_#1_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/experiments/level_0/key_phrases_cluster_#5_grouping_experiments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/group_key_phrases/cluster_key_phrases_group.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/iteration/AIMLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics.csv">
           <value>
             <Attribute>

@@ -23,17 +23,19 @@ if os.name == 'nt':
 Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 
-# Group the key phrases based on the vector similarity
-class KeyPhraseSimilarity:
-    def __init__(self, _cluster_no):
+# Extract key phrases and group key phrases based on the similarity
+class KeyPhraseExtraction:
+    # def __init__(self, _cluster_no):
+    def __init__(self):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
             # Model name ref: https://www.sbert.net/docs/pretrained_models.html
             model_name="all-mpnet-base-v2",
             device='cpu',
             n_neighbors=3,
-            diversity=0.0,
-            cluster_folder='cluster_' + str(_cluster_no),
+            diversity=0.5,
+            cluster_folder='cluster_merge',
+            # cluster_folder='cluster_' + str(_cluster_no),
         )
         # Load HDBSCAN cluster
         path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
@@ -44,7 +46,7 @@ class KeyPhraseSimilarity:
         # Added 'Text' column
         self.corpus_df['Text'] = self.corpus_df['Title'] + ". " + self.corpus_df['Abstract']
         # Get the total cluster
-        self.total_clusters = self.corpus_df['Cluster'].max() + 1
+        self.cluster_no_list = sorted(list(dict.fromkeys(self.corpus_df['Cluster'].tolist())))
         # Group all docId of a cluster
         cluster_df = self.corpus_df.groupby(['Cluster'], as_index=False).agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
         cluster_df.rename(columns={'DocId': 'DocIds'}, inplace=True)
@@ -66,7 +68,7 @@ class KeyPhraseSimilarity:
             Path(folder).mkdir(parents=True, exist_ok=True)
             corpus_docs = self.corpus_df.to_dict("records")
             # cluster_no_list = [0]
-            cluster_no_list = range(-1, self.total_clusters)
+            cluster_no_list = self.cluster_no_list
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
                 results = list()  # Store all the key phrases
@@ -102,9 +104,8 @@ class KeyPhraseSimilarity:
                         phrase_similar_scores = list(filter(lambda sc: sc['score'] >= score_threshold, phrase_similar_scores))
                         phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
                         # Rank the high scoring phrases
-                        diversity = 0.5
                         phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(
-                            self.model, doc_text, phrase_candidates, diversity)
+                            self.model, doc_text, phrase_candidates, self.args.diversity)
                         key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
                         # Obtain top five key phrases
                         result = {'Cluster': cluster_no, 'DocId': doc_id,  # 'top_num': num, 'Diversity': diversity,
@@ -130,8 +131,8 @@ class KeyPhraseSimilarity:
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def experiment_group_cluster_key_phrases(self):
-        cluster_no_list = list(range(-1, self.total_clusters))
-        # cluster_no_list = [0]
+        cluster_no_list = self.cluster_no_list
+        # cluster_no_list = [19]
         for cluster_no in cluster_no_list:
             try:
                 key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
@@ -149,10 +150,9 @@ class KeyPhraseSimilarity:
                 experiment_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
                                                  'key_phrases', 'experiments', 'level_0')
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
-                min_cluster_size_list = list(range(30, 9, -1))
+
                 # # Cluster all key phrases using HDBSCAN clustering
                 results = KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(unique_key_phrases,
-                                                                                   min_cluster_size_list,
                                                                                    self.model,
                                                                                    self.args.n_neighbors)
                 # Update the 'parent_group'
@@ -175,8 +175,7 @@ class KeyPhraseSimilarity:
         try:
             # Collect the best results in each cluster
             results = list()
-            # cluster_no_list = [0]
-            cluster_no_list = list(range(-1, self.total_clusters))
+            cluster_no_list = self.cluster_no_list
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper
@@ -229,7 +228,27 @@ class KeyPhraseSimilarity:
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
                     sys.exit(-1)
-
+            # Write the results to a summary
+            kp_group_summary = list()
+            for result in results:
+                kp_groups = result['Key-phrases']
+                score = kp_groups[0]['score']
+                summary = {"cluster": result['Cluster'], "count": len(kp_groups), "score": score}
+                total = 0
+                for group_no in range(1, 6):
+                    if group_no <= len(kp_groups):
+                        num_phrases = kp_groups[group_no-1]['NumPhrases']
+                        summary['kp_cluster#'+str(group_no)] = num_phrases
+                        total = total + num_phrases
+                summary['total'] = total
+                kp_group_summary.append(summary)
+            # Write keyword group results to a summary (csv)
+            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                'key_phrases', self.args.case_name + "_key_phrase_groups.csv")
+            kp_group_df = pd.DataFrame(kp_group_summary, columns=['cluster', "count", "score", "total",
+                                                                  "kp_cluster#1", "kp_cluster#2", "kp_cluster#3",
+                                                                  "kp_cluster#4", "kp_cluster#5"])
+            kp_group_df.to_csv(path, encoding='utf-8', index=False)
             # # Load best results of each group
             df = pd.DataFrame(results,
                               columns=['Cluster', 'Key-phrases'])
@@ -324,7 +343,7 @@ class KeyPhraseSimilarity:
             key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases')
             # Combine the key phrases of all papers to a single file
             doc_key_phrases = list()
-            for cluster_no in range(-1, self.total_clusters):
+            for cluster_no in self.cluster_no_list:
                 # Get key phrases of a cluster
                 path = os.path.join(key_phrase_folder, 'doc_key_phrase',
                                     'doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
@@ -352,12 +371,13 @@ class KeyPhraseSimilarity:
 # Main entry
 if __name__ == '__main__':
     try:
-        _cluster_no = 1
-        kp = KeyPhraseSimilarity(_cluster_no)
-        # kp.extract_doc_key_phrases_by_similarity_diversity()
-        # kp.experiment_group_cluster_key_phrases()
-        # kp.group_cluster_key_phrases_with_best_experiments()
-        # kp.combine_terms_key_phrases_results()
+        # _cluster_no = 1
+        # kp = KeyPhraseSimilarity(_cluster_no)
+        kp = KeyPhraseExtraction()
+        kp.extract_doc_key_phrases_by_similarity_diversity()
+        kp.experiment_group_cluster_key_phrases()
+        kp.group_cluster_key_phrases_with_best_experiments()
+        kp.combine_terms_key_phrases_results()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
