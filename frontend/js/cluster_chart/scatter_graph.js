@@ -1,27 +1,15 @@
 // Create scatter graph
 function ScatterGraph(_corpus_data, _cluster_data) {
     const width = 600;
-    const height = 600;
+    const height = 800;
     const corpus_data = _corpus_data;
     const cluster_data = _cluster_data;
-    const initial_cluster = -1;
-    // Find the maximal cluster number as total number of clusters
-    const total_clusters = corpus_data.map(c => c['Cluster']).reduce((p_value, c_value) => {
-        return (p_value >= c_value) ? p_value : c_value;
-    }, 0) + 1;
-    const outlier_cluster = total_clusters+1;
-    // Optimal color pallets for 30 colors from http://vrl.cs.brown.edu/color
-    // citation:
-    // @article{gramazio-2017-ccd,
-    //   author={Gramazio, Connor C. and Laidlaw, David H. and Schloss, Karen B.},
-    //   journal={IEEE Transactions on Visualization and Computer Graphics},
-    //   title={Colorgorical: creating discriminable and preferable color palettes for information visualization},
-    //   year={2017}
-    // }
-    const color_plates = ["#41bbc5", "#256676", "#8de990", "#1c5f1e", "#4ca346", "#bfcd8e", "#754819", "#ea8244",
-        "#8c1132", "#ea7c97", "#f4327e", "#d4afb9"];
-
-    console.log(total_clusters);
+    // Optimal color pallets for 31 colors from https://medialab.github.io/iwanthue/
+    const color_plates = ["#45bf78", "#9857ca", "#57c356", "#dc67c8", "#87bb37", "#5970d8", "#beb43a",
+        "#ad3488", "#508e2d", "#dc498a", "#68c194", "#dc385a", "#46c7ca", "#d5532c",
+        "#609ad5", "#db9435", "#665fa2", "#96892e", "#be8fd8", "#478b4e", "#985489",
+        "#a8b56d", "#a1475d", "#31947c", "#c95758", "#2a6a45", "#e387a5", "#656c29",
+        "#e59671", "#9f4f2c", "#a07138"];
 
     // Get top N terms of a cluster by TF-IDF
     function get_cluster_terms(cluster_no, n) {
@@ -44,9 +32,10 @@ function ScatterGraph(_corpus_data, _cluster_data) {
         let traces = [];
 
         // Convert the clustered data into the format for Plotly js chart
-        for (let cluster_no = initial_cluster; cluster_no < total_clusters; cluster_no++) {
+        for (const cluster of _cluster_data) {
+            const cluster_no = cluster['Cluster'];
             const cluster_docs = corpus_data.filter(d => d['Cluster'] === cluster_no);
-            const group_name = (cluster_no > -1) ? "Cluster #" + (cluster_no + 1) : "Cluster #" + outlier_cluster;
+            const cluster_name = " #" + cluster_no;
             let data_point = {'x': [], 'y': [], 'label': []};
             for (const doc of cluster_docs) {
                 data_point['x'].push(doc.x);
@@ -55,7 +44,7 @@ function ScatterGraph(_corpus_data, _cluster_data) {
                 const term_text = terms.map(t => t['term']).join("<br>");
                 const percent = parseInt(100 * cluster_data.find(c => c['Cluster'] === cluster_no)['Percent']);
                 // Tooltip label displays top 5 topics
-                data_point['label'].push('<b>' + group_name + '</b> has ' + cluster_docs.length +
+                data_point['label'].push('<b>' + cluster_name + '</b> has ' + cluster_docs.length +
                     ' papers (' + percent + '%) <br>' +
                     'Silhouette score = <b>' + doc['Score'].toFixed(2) + '</b><br>'
                     + term_text);
@@ -63,7 +52,7 @@ function ScatterGraph(_corpus_data, _cluster_data) {
             // Trace setting
             let trace = {
                 'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
-                'name': group_name, 'mode': 'markers', 'type': 'scatter',
+                'name': cluster_name, 'mode': 'markers', 'type': 'scatter',
                 'marker': {color: colors(cluster_no)}, opacity: opacity(cluster_no),
                 'hovertemplate': '%{text}'
             };
@@ -71,13 +60,13 @@ function ScatterGraph(_corpus_data, _cluster_data) {
         }
 
         // Sort traces by name
-        traces.sort((a, b) =>{
-            if(a['name'].localeCompare(b['name']) !== 0){
+        traces.sort((a, b) => {
+            if (a['name'].localeCompare(b['name']) !== 0) {
                 const a_g = parseInt(a['name'].split("#")[1]);
                 const b_g = parseInt(b['name'].split("#")[1]);
-                if(a_g > b_g){
+                if (a_g > b_g) {
                     return 1;
-                }else{
+                } else {
                     return -1;
                 }
             }
@@ -104,16 +93,28 @@ function ScatterGraph(_corpus_data, _cluster_data) {
     function drawChart() {
         const data_points = convert_cluster_data_to_data_points();
         // Define the layout
-        const options = {
+        const layout = {
             autosize: true,
             width: width,
             height: height,
+            xaxis: {
+                showgrid: false,
+                showline: false,
+                zeroline: false,
+                showticklabels: false
+            },
+            yaxis: {
+                showgrid: false,
+                showline: false,
+                zeroline: false,
+                showticklabels: false
+            },
             // Set the graph margin
             margin: {
-                l: 10,
+                l: 0,
                 r: 0,
-                b: 20,
-                t: 10
+                b: 0,
+                t: 0
             },
             // Plot the legend outside the
             showlegend: true,
@@ -121,7 +122,7 @@ function ScatterGraph(_corpus_data, _cluster_data) {
             legend: {
                 "orientation": "v",
                 font: {
-                    size: 12,
+                    size: 10,
                 },
             },
             annotations: [],
@@ -132,7 +133,7 @@ function ScatterGraph(_corpus_data, _cluster_data) {
             displayModeBar: false // Hide the floating bar
         }
         // Get the cluster number
-        Plotly.newPlot('cluster_chart', data_points, options, config);
+        Plotly.newPlot('cluster_chart', data_points, layout, config);
         const cluster_chart = document.getElementById('cluster_chart');
         // // Add chart onclick to toggle annotation
         cluster_chart.on('plotly_click', function (data) {
@@ -169,11 +170,11 @@ function ScatterGraph(_corpus_data, _cluster_data) {
         cluster_chart.on('plotly_hover', function (data) {
             if (data.points.length > 0) {
                 const point = data.points[0];
-                let cluster_no = -1;
                 if (point.data.name.includes('#')) {
-                    cluster_no = parseInt(point.data.name.split("#")[1]);
+                    const cluster_no = parseInt(point.data.name.split("#")[1]);
+                    display_top_terms(cluster_no);
                 }
-                display_top_terms(cluster_no);
+
             }
         }).on('plotly_unhover', function (data) {
             $('#hover_info').empty();
