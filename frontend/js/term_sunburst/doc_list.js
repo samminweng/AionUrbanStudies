@@ -30,8 +30,11 @@ function DocList(docs, selected_terms, head_text) {
         $('#doc_list_heading').empty();
         const container = $('<div class="row"></div>')
         // Add heading
-        container.append($('<div class="col-3"><span class="fw-bold"> ' + docs.length + ' papers </span> about ' +
-            '<span class="text-capitalize">' + head_text + '</span></div>'));
+        const heading = ($('<div class="col-3"><span class="fw-bold"> ' + docs.length + ' articles </span></div>'));
+        if(head_text !== ""){
+            heading.append($('<span> about <span class="lead">' + head_text + '</span></span>'));
+        }
+        container.append(heading);
         // Add sort by button
         const sort_by_div = $('<div>Sort by </div>');
         // Sort by citation

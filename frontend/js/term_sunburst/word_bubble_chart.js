@@ -159,6 +159,8 @@ function WordBubbleChart(group, cluster_docs, color) {
                 nodes: nodes
             }]
         });
+
+        $('#back_btn').show();
     }
 
     // Display the papers for all words
@@ -192,30 +194,31 @@ function WordBubbleChart(group, cluster_docs, color) {
                 const word_docs = word_doc_dict[title_word];
                 // Check if the word appear in word_neighbour_phrases_dict
                 const key_phrases = word_key_phrase_dict[title_word];
-                nodes.push({
-                    id: title_word,
-                    name: "<div>" + title_word + "</div>",
-                    text: "<div>" + key_phrases.join(";<br>") + '</div>',
-                    color: color,
-                    marker: {
-                        radius: Math.min(Math.sqrt(key_phrases.length) * 5 + 10, 30)
-                    },
-                    dataLabels: {
-                        backgroundColor: color,
-                        allowOverlap: false,
-                        style: {
-                            color: 'white',
-                            fontSize: '14px',
-                            textOutline: true
+                if(key_phrases.length>0){
+                    nodes.push({
+                        id: title_word,
+                        name: "<div>" + title_word + "</div>",
+                        text: "<div>" + key_phrases.join(";<br>") + '</div>',
+                        color: color,
+                        marker: {
+                            radius: Math.min(Math.sqrt(key_phrases.length) * 5 + 10, 30)
+                        },
+                        dataLabels: {
+                            backgroundColor: color,
+                            allowOverlap: false,
+                            style: {
+                                color: 'white',
+                                fontSize: '14px',
+                                textOutline: true
+                            }
                         }
+                    });
+                    // Add link
+                    for (const doc_id of word_docs) {
+                        const link = {from: title_word, to: "paper#" + doc_id}
+                        links.push(link);
                     }
-                });
-                // Add link
-                for (const doc_id of word_docs) {
-                    const link = {from: title_word, to: "paper#" + doc_id}
-                    links.push(link);
                 }
-
             }
 
             return [nodes, links];
@@ -286,7 +289,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                 }
             }]
         });
-
+        $('#back_btn').hide();
     }
 
     function _createUI() {
@@ -297,6 +300,7 @@ function WordBubbleChart(group, cluster_docs, color) {
         $('#back_btn').click(function (event) {
             display_all_word_chart();
         });
+
     }
 
     _createUI();

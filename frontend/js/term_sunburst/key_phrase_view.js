@@ -1,6 +1,6 @@
 // Create a div to display a sub-group of key phrases
 function KeyPhraseView(group, cluster_docs, color){
-    console.log(group);
+    // console.log(group);
     const group_doc_ids = group['DocIds'];
     const key_phrases = group['key-phrases'];
     const topic_words = group['topic_words'].concat("others");
@@ -147,8 +147,8 @@ function KeyPhraseView(group, cluster_docs, color){
         // Display the docs containing the 1st word
         const word = topic_words[0];
         display_key_phrases_by_word(word, key_phrase_div);
-        const element = document.getElementById("group");
-        element.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
+        // const element = document.getElementById("group");
+        // element.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
 
     }
 
