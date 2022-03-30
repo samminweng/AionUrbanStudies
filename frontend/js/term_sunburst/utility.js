@@ -56,8 +56,7 @@ class Utility {
 
 
     // Collect the unique top 3 terms
-    static get_top_terms(cluster_term_objs, n) {
-        const cluster_terms = cluster_term_objs.map(ct => ct['term']);
+    static get_top_terms(cluster_terms, n) {
         // Get top 3 term that do not overlap
         let top_terms = cluster_terms.slice(0, 1);
         let index = 1;
