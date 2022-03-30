@@ -294,9 +294,9 @@ class KeyPhraseUtility:
                 print("Error occurred! {err}".format(err=_err))
 
         dimensions = [100, 90, 80, 70, 60, 50, 40, 30, 20]
-        min_sample_list = [20, 15, 10, 5, 1]
-        # min_cluster_size_list = list(range(30, 5, -1))
-        min_cluster_size_list = list(range(30, 15, -1))
+        min_sample_list = [20, 15, 10, 5]
+        min_cluster_size_list = list(range(30, 10, -1))
+        # min_cluster_size_list = list(range(30, 15, -1))
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)

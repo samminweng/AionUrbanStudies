@@ -141,6 +141,9 @@ class ClusterTermTFIDF:
     # Collect all the article clusters < 40 articles as a single file
     def collect_article_cluster_results(self):
         folder = os.path.join('output', self.args.case_name)
+        # Load corpus
+        corpus_path = os.path.join(folder, 'iteration', self.args.case_name + '_clusters.json')
+        corpus = pd.read_json(corpus_path).to_dict("records")
         folder_names = ['cluster_0', 'cluster_1', 'cluster_2', 'cluster_3', 'iteration', 'cluster_-1']
         cluster_results = list()
         article_results = list()
@@ -150,13 +153,11 @@ class ClusterTermTFIDF:
                 cluster_path = os.path.join(folder, folder_name,
                                             self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
                 clusters = pd.read_json(cluster_path).to_dict("records")
-                # Load corpus
-                corpus_path = os.path.join(folder, folder_name, self.args.case_name + '_clusters.json')
-                corpus = pd.read_json(corpus_path).to_dict("records")
                 # filter cluster > 40 articles
                 clusters = list(filter(lambda c: len(c['DocIds']) < 40, clusters))
                 for cluster in clusters:
                     doc_ids = cluster['DocIds']
+                    score = cluster['Score']
                     # Get all the articles
                     articles = list(filter(lambda a: a['DocId'] in doc_ids, corpus))
                     assert len(articles) < 40, "Article cluster > 40"
@@ -165,6 +166,7 @@ class ClusterTermTFIDF:
                     # Update the cluster and articles
                     for article in articles:
                         article['Cluster'] = current_cluster_no
+                        article['Score'] = score
                     article_results = article_results + articles
                     cluster['Cluster'] = current_cluster_no
                     current_cluster_no = current_cluster_no + 1

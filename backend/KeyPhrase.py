@@ -131,8 +131,8 @@ class KeyPhraseExtraction:
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def experiment_group_cluster_key_phrases(self):
-        cluster_no_list = self.cluster_no_list
-        # cluster_no_list = [19]
+        # cluster_no_list = self.cluster_no_list
+        cluster_no_list = [3]
         for cluster_no in cluster_no_list:
             try:
                 key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
@@ -374,7 +374,7 @@ if __name__ == '__main__':
         # _cluster_no = 1
         # kp = KeyPhraseSimilarity(_cluster_no)
         kp = KeyPhraseExtraction()
-        kp.extract_doc_key_phrases_by_similarity_diversity()
+        # kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()
         kp.group_cluster_key_phrases_with_best_experiments()
         kp.combine_terms_key_phrases_results()
