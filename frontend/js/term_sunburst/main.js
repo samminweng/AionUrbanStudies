@@ -41,8 +41,6 @@ $(function () {
             const cluster = cluster_data.find(c => c['Cluster'] === selected_cluster_no);
             const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(d['DocId']));
             const chart = new TermChart(cluster, cluster_docs);
-            // Hide back btn
-            $('#back_btn').hide();
         });
 
 })

@@ -1,6 +1,6 @@
-// Create a word network chart using highchart library
-// Ref: https://www.highcharts.com/docs/chart-and-series-types/network-graph
-// API: https://api.highcharts.com/highcharts/
+// Create a word network chart using Open sourced Vis.js
+// Ref: https://almende.github.io/vis/index.html
+// API: https://visjs.org/
 function WordBubbleChart(group, cluster_docs, color) {
     const height = 400;
     const topic_words = group['topic_words'].concat(["others"]);
@@ -31,28 +31,6 @@ function WordBubbleChart(group, cluster_docs, color) {
         return div;
     }
 
-    // Create a tooltip
-    function create_tooltip(id, text) {
-        // console.log("this.point", this.point);
-        let div = $('<div>' + text + '</div>');
-        if (!id.includes("paper#")) {
-            // Highlight title word
-            const title_word = id;
-            div = mark_key_terms(div, [title_word], 'key_term');
-        } else {
-            const doc_id = parseInt(id.split("paper#")[1]);
-            // Get the title words linking to this doc
-            let words = [];
-            for (const title_word of topic_words) {
-                if (word_doc_dict[title_word].includes(doc_id)) {
-                    words.push(title_word);
-                }
-            }
-            div = mark_key_terms(div, words, 'key_term');
-        }
-        return div.html();
-    }
-
     // Display a detail chart for title word
     function display_word_paper_chart(topic_word) {
         $('#term_occ_chart').empty();
@@ -65,20 +43,11 @@ function WordBubbleChart(group, cluster_docs, color) {
             const key_phrases = word_key_phrase_dict[topic_word];
             nodes.push({
                 id: topic_word,
-                name: topic_word,
-                text: topic_word,
+                label: topic_word,
                 color: color,
-                marker: {
-                    radius: Math.min(Math.sqrt(key_phrases.length) * 5 + 10, 30)
-                },
-                dataLabels: {
-                    backgroundColor: color,
-                    allowOverlap: false,
-                    style: {
-                        color: 'white',
-                        fontSize: '16px',
-                        textOutline: true
-                    }
+                font:{
+                    color: 'white',
+                    size: 20
                 }
             });
             // Add word node and link between word and paper
@@ -86,30 +55,22 @@ function WordBubbleChart(group, cluster_docs, color) {
             for (let i = 0; i < word_docs.length; i++) {
                 const doc = word_docs[i];
                 const doc_id = doc['DocId'];
-                const word_key_phrase = doc['KeyPhrases'].find(phrase => key_phrases.includes(phrase));
-                // const key_phrases = doc['KeyPhrases'].filter(phrase => phrase !== word_key_phrase);
-                const text = doc['KeyPhrases'].join(";<br>");
+                const key_phrase = doc['KeyPhrases'].find(phrase => key_phrases.includes(phrase));
+                let title_div = $("<div>" + doc['KeyPhrases'].join("<br>") + "</div>");
+                // Mark topic word
+                title_div = mark_key_terms(title_div, [topic_word], 'key_term');
                 const id = "paper#" + doc_id
                 nodes.push({
                     id: id,
-                    name: "<span>" + word_key_phrase + "</span>",
-                    text: text,
+                    label: key_phrase,
+                    shape: 'box',
                     color: 'gray',
-                    // opacity: 0.5,
-                    marker: {
-                        radius: 20
+                    font:{
+                        color: 'white',
+                        size: 14,
+                        multi: true
                     },
-                    dataLabels: {
-                        format: '{point.name}',
-                        style: {
-                            color: 'black',
-                            fontSize: '12px',
-                            textOutline: true,
-                        },
-                        align: 'left',
-                        useHTML: true,
-                        verticalAlign: 'bottom',
-                    }
+                    title: title_div.html()
                 });
                 const link = {from: topic_word, to: id}
                 links.push(link);
@@ -120,187 +81,139 @@ function WordBubbleChart(group, cluster_docs, color) {
         // $('term_occ_chart').empty();
         const word_docs = group_docs.filter(d => word_doc_dict[topic_word].includes(d['DocId']));
         const [nodes, links] = collect_nodes_links(word_docs);
-        Highcharts.chart('term_occ_chart', {
-            chart: {
-                type: 'networkgraph',
-                height: height,
-            },
-            title: {
-                text: ''
-            },
-            tooltip: {
-                backgroundColor: 'white',
-                borderColor: 'black',
-                borderRadius: 10,
-                borderWidth: 3,
-                formatter: function () {
-                    return create_tooltip(this.point.id, this.point.text);
-                }
-            },
-            plotOptions: {
-                networkgraph: {
-                    keys: ['from', 'to'],
-                    layoutAlgorithm: {
-                        enableSimulation: false,
-                        linkLength: 100,
-                        integration: 'verlet',
-                        approximation: 'barnes-hut',
-                        // gravitationalConstant: 0.1
-                    }
-                }
-            },
-            series: [{
-                dataLabels: {
-                    enabled: true,
-                    linkFormat: '',
-                    allowOverlap: false
-                },
-                data: links,
-                nodes: nodes
-            }]
-        });
+        const chart_container = document.getElementById('term_occ_chart');
+        const data = {
+            nodes: nodes,
+            edges: links
+        };
+        const options = {
+            autoResize: true,
+            height: '100%',
+            width: '100%'
+        };
+        // Create the network graph
+        const network = new vis.Network(chart_container, data, options);
 
-        $('#back_btn').show();
+        // Add button
+        const btn = $('<button type="button" class="btn btn-link">Back to Previous</button>');
+        btn.button();
+        btn.on('click', function(){
+            display_all_word_bubble_chart();
+        });
+        $('#button_area').append(btn);
+        const select_index = topic_words.indexOf(topic_word);
+        // Display the key phrase view
+        const view = new KeyPhraseView(group, cluster_docs, select_index);
+
     }
 
     // Display the papers for all words
-    function display_all_word_chart() {
+    function display_all_word_bubble_chart() {
+        $('#button_area').empty();
         $('#term_occ_chart').empty();
         // Get all the nodes
-        const collect_nodes_links = function () {
+        const collect_nodes_edges = function () {
             let nodes = [];
-            let links = [];
+            let edges = [];
             // // Add the paper
             for (let i = 0; i < group_docs.length; i++) {
                 const doc = group_docs[i];
                 const doc_id = doc['DocId'];
-                const text = doc['KeyPhrases'].join(";<br>");
+                // console.log(doc['KeyPhrases']);
                 nodes.push({
-                    id: "paper#" + doc_id,
-                    name: '',
-                    text: text,
-                    color: 'gray',
-                    marker: {
-                        radius: 5
-                    },
-                    dataLabels: {
-                        enabled: false,
-                    }
+                    id: "article#" + doc_id,
+                    label: '',
+                    color: 'gray'
                 });
             }
+            // Collect the mapping between doc_id and topic word
+            let doc_word_dict = {};
             // Add word node and link between word and paper
             for (let i = 0; i < topic_words.length; i++) {
-                const title_word = topic_words[i];
-                const word_docs = word_doc_dict[title_word];
+                const topic_word = topic_words[i];
+                const word_docs = word_doc_dict[topic_word];
                 // Check if the word appear in word_neighbour_phrases_dict
-                const key_phrases = word_key_phrase_dict[title_word];
-                if(key_phrases.length>0){
+                const key_phrases = word_key_phrase_dict[topic_word];
+                if (key_phrases.length > 0) {
+                    let title_div = $("<div>" + key_phrases.join("<br>") + "</div>");
+                    // Mark topic word
+                    title_div = mark_key_terms(title_div, [topic_word], 'key_term');
+                    // Determine the font sizes based on the number of key phrases
+                    const font_size = Math.min(Math.sqrt(key_phrases.length) * 5 + 15, 30);
                     nodes.push({
-                        id: title_word,
-                        name: "<div>" + title_word + "</div>",
-                        text: "<div>" + key_phrases.join(";<br>") + '</div>',
+                        id: "word#" + topic_word,
+                        label: topic_word,
                         color: color,
-                        marker: {
-                            radius: Math.min(Math.sqrt(key_phrases.length) * 5 + 10, 30)
+                        font: {
+                            color: 'white',
+                            size: font_size
                         },
-                        dataLabels: {
-                            backgroundColor: color,
-                            allowOverlap: false,
-                            style: {
-                                color: 'white',
-                                fontSize: '14px',
-                                textOutline: true
-                            }
-                        }
+                        title: title_div.html(),
                     });
                     // Add link
                     for (const doc_id of word_docs) {
-                        const link = {from: title_word, to: "paper#" + doc_id}
-                        links.push(link);
-                    }
-                }
-            }
-
-            return [nodes, links];
-
-        };
-        const [nodes, links] = collect_nodes_links();
-        // Create highcharts
-        let chart = Highcharts.chart('term_occ_chart', {
-            chart: {
-                type: 'networkgraph',
-                height: height,
-            },
-            title: {
-                text: ''
-            },
-            tooltip: {
-                backgroundColor: 'white',
-                borderColor: 'black',
-                borderRadius: 10,
-                borderWidth: 3,
-                opacity: 0,
-                formatter: function () {
-                    return create_tooltip(this.point.id, this.point.text);
-                }
-            },
-            plotOptions: {
-                networkgraph: {
-                    keys: ['from', 'to'],
-                    layoutAlgorithm: {
-                        enableSimulation: false,
-                        linkLength: 20,
-                        // friction: -0.1,
-                        approximation: 'barnes-hut',
-                        integration: 'euler',
-                    }
-                }
-            },
-            series: [{
-                dataLabels: {
-                    enabled: true,
-                    // align: 'center',
-                    linkFormat: '',
-                    allowOverlap: false,
-                    style: {
-                        color: "black",
-                        textOutline: false,
-                        textAlign: 'center',
-                        style: {
-                            fontSize: '9px'
-                        },
-                        useHTML: true,
-                    }
-                },
-                data: links,
-                nodes: nodes,
-                // Add the onclick event to display the chart for a single title word
-                events: {
-                    click: function (event) {
-                        console.log("event", event);
-                        const id = event.point.id;
-                        // Check if clicking on any title word
-                        const found = topic_words.find(w => w === id);
-                        if (found) {
-                            console.log(word_doc_dict);
-                            display_word_paper_chart(found);
+                        const link = {from: "word#" + topic_word, to: "article#" + doc_id}
+                        edges.push(link);
+                        if (!(doc_id in doc_word_dict)) {
+                            doc_word_dict[doc_id] = [];
+                        }
+                        // Add the word to doc_id list
+                        if (!doc_word_dict[doc_id].includes(topic_word)) {
+                            doc_word_dict[doc_id].push(topic_word)
                         }
                     }
                 }
-            }]
+            }
+            // console.log(doc_word_dict);
+            // Add title to each doc node
+            for (const [doc_id, words] of Object.entries(doc_word_dict)) {
+                try {
+                    // Get the doc node
+                    let doc_node = nodes.find(n => n['id'] === 'article#' + doc_id);
+                    const doc = group_docs.find(d => d['DocId'] === parseInt(doc_id));
+                    let title_div = $("<div>" + doc['KeyPhrases'].join("<br>") + "</div>");
+                    // Mark topic word
+                    title_div = mark_key_terms(title_div, [words], 'key_term');
+                    doc_node['title'] = title_div.html();
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            // console.log(nodes);
+
+            return [nodes, edges];
+
+        };
+        const [nodes, links] = collect_nodes_edges();
+        const chart_container = document.getElementById('term_occ_chart');
+        // Set the node and edges
+        const data = {
+            nodes: nodes,
+            edges: links
+        };
+        const options = {
+            autoResize: true,
+            height: '100%',
+            width: '100%'
+        };
+        // Create the network graph
+        const network = new vis.Network(chart_container, data, options);
+        //  Onclick event
+        network.on('click', function (properties) {
+            const node = properties.nodes[0];
+            // Check if node is a topic word
+            if (node && node.startsWith('word#')) {
+                const topic_word = node.split("#")[1];
+                display_word_paper_chart(topic_word);
+                // console.log(topic_word);
+            }
         });
         $('#back_btn').hide();
     }
 
     function _createUI() {
         // display_word_paper_chart("others");
-        display_all_word_chart();
-        // Add click event
-        $('#back_btn').button();
-        $('#back_btn').click(function (event) {
-            display_all_word_chart();
-        });
-
+        display_all_word_bubble_chart();
     }
 
     _createUI();

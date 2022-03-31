@@ -1,6 +1,5 @@
 // Create a div to display a sub-group of key phrases
-function KeyPhraseView(group, cluster_docs, color){
-    // console.log(group);
+function KeyPhraseView(group, cluster_docs, select_index){
     const group_doc_ids = group['DocIds'];
     const key_phrases = group['key-phrases'];
     const topic_words = group['topic_words'].concat("others");
@@ -111,11 +110,9 @@ function KeyPhraseView(group, cluster_docs, color){
             if(relevant_key_phrases.length > 0){
                 const btn = $('<a class="nav-link">' +
                     '<span class="fw-bold">' + word + '</span></a>');
-                if(i === 0){
+                if(i === select_index){
                     btn.addClass("active");     // Set default tab
                 }
-                // '<span class="fw-bold" style="color: ' + color+ '">' + word + '</span></a>');
-                // btn.button();
                 // click event for sub_group_btn
                 btn.click(function(event){
                     header_div.find("a").removeClass("active");
@@ -145,13 +142,9 @@ function KeyPhraseView(group, cluster_docs, color){
         $('#group').append(container);
         $('#doc_list').empty();
         // Display the docs containing the 1st word
-        const word = topic_words[0];
+        const word = topic_words[select_index];
         display_key_phrases_by_word(word, key_phrase_div);
-        // const element = document.getElementById("group");
-        // element.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
-
     }
-
 
     _createUI();
 }
