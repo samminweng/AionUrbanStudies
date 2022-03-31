@@ -11,21 +11,20 @@
     <script type="text/javascript" src="lib/jquery.mark.min.js"></script>
     <script type="text/javascript" src="lib/jquery-ui.js"></script>
     <script type="text/javascript" src="lib/d3.v7.min.js"></script>
-    <script type="text/javascript" src="lib/highcharts.js"></script>
-    <script type="text/javascript" src="lib/highcharts-networkgraph.js"></script>
+    <script type="text/javascript" src="lib/vis.min.js"></script>
     <!-- CSS styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/jquery-ui.css" rel="stylesheet">
     <link href="css/pagination.css" rel="stylesheet">
+    <link href="css/vis.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
     <div class="h4">Topics, Key Phrase and Article Chart</div>
-    <div>Within an article cluster, this chart display the hierarchical structures of topics, key phrase and articles
-        (abstract + title).
-        <br>
-        Each topic contain a mixture of key phrases, and each key phrase group correspond to various number of articles.
+    <div>Within an article cluster, this chart display the hierarchical structures of topics, keywords and articles.<br>
+        <span> Each topic corresponds to a keyword cluster, and each keyword cluster contain a mixture of keywords.
+            Each keyword is associated with articles.</span>
     </div>
     <div class="row mt-3">
         <div class="col">
@@ -57,7 +56,7 @@
                 <div>
                     <button type="button" class="btn btn-link" id="back_btn">Back to Previous</button>
                 </div>
-                <div id="term_occ_chart" class="p-3"></div>
+                <div id="term_occ_chart" class="p-3" style="height:600px"></div>
             </div>
         </div>
     </div>

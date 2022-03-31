@@ -55,6 +55,33 @@ class Utility {
     }
 
 
+    // Collect top 5 words from a keyword cluster
+    static get_top_5_words_from_keyword_group(keyword_group){
+        const key_phrases = keyword_group['key-phrases'];
+        try {
+            let word_key_phrases = [];
+            for (const key_phrase of key_phrases) {
+                const words = key_phrase.toLowerCase().split(" ");
+                for (const word of words) {
+                    let word_key_phrase = word_key_phrases.find(w => w['word'] === word);
+                    if(!word_key_phrase){
+                        word_key_phrase = {
+                            'word': word, 'phrase': []
+                        };
+                        word_key_phrases.push(word_key_phrase);
+                    }
+                    word_key_phrase['phrase'].push(key_phrase);
+                }
+            }
+            // Sort words by the number of phrases
+            word_key_phrases.sort((a, b) => b['phrase'].length - a['phrase'].length);
+            // console.log(word_key_phrases);
+            return word_key_phrases.map(w => w['word']).slice(0, 5);
+        }catch (error) {
+            console.error(error);
+        }
+    }
+
     // Collect the unique top 3 terms
     static get_top_terms(cluster_terms, n) {
         // Get top 3 term that do not overlap

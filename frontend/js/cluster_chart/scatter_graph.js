@@ -26,18 +26,17 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
         for (const cluster of _cluster_data) {
             const cluster_no = cluster['Cluster'];
             const cluster_docs = corpus_data.filter(d => d['Cluster'] === cluster_no);
-            const cluster_name = " #" + cluster_no;
+            const cluster_name = "" + cluster_no;
             let data_point = {'x': [], 'y': [], 'label': []};
             for (const doc of cluster_docs) {
                 data_point['x'].push(doc.x);
                 data_point['y'].push(doc.y);
                 const terms = get_cluster_terms(cluster_no, 5);
-                const term_text = terms.map(t => '<b>' + t['term'] + '</b>').join("<br>");
+                const term_text = terms.map(t => '<i>' + t['term'] + '</i>').join("<br>");
                 const percent = parseInt(100 * cluster_data.find(c => c['Cluster'] === cluster_no)['Percent']);
                 // Tooltip label displays top 5 topics
-                data_point['label'].push('<b>Article Cluster ' + cluster_name + '</b><br>'
-                    + 'has ' + cluster_docs.length + ' papers (' + percent + '%) ' +
-                    'with a score of ' + doc['Score'].toFixed(2) + '<br>' +
+                data_point['label'].push('<b>Cluster ' + cluster_name + '</b> has ' +  cluster_docs.length +
+                    ' article (' + percent + '%) ' + ' and ' + doc['Score'].toFixed(2) + ' score<br>' +
                     term_text);
             }
             // Trace setting
@@ -64,8 +63,8 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
         // Sort traces by name
         traces.sort((a, b) => {
             if (a['name'].localeCompare(b['name']) !== 0) {
-                const a_g = parseInt(a['name'].split("#")[1]);
-                const b_g = parseInt(b['name'].split("#")[1]);
+                const a_g = parseInt(a['name']);
+                const b_g = parseInt(b['name']);
                 if (a_g > b_g) {
                     return 1;
                 } else {
@@ -85,7 +84,7 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
         const terms = get_cluster_terms(cluster_no, n);      // Get top 10 cluster topics
         const terms_text = terms.map(t => t['term']).join(", ");
         // Add the cluster heading
-        const cluster_name = 'Article Cluster #' + cluster_no;
+        const cluster_name = 'Article Cluster ' + cluster_no;
         $('#hover_info').append($('<div class="h5">' + cluster_name + '</div>'));
         $('#hover_info').append($('<div>' + terms_text + '</div>'));
         $('#hover_info').focus();

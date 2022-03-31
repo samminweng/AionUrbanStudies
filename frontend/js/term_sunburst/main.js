@@ -5,7 +5,7 @@ const cluster_path = corpus + '_cluster_terms_key_phrases_LDA_topics.json';
 const corpus_path = corpus + '_clusters.json';
 
 const params = new URLSearchParams(window.location.search);
-let selected_cluster_no = 4;
+let selected_cluster_no = 1;
 // Document ready event
 $(function () {
     // Load collocations and tfidf key terms
@@ -23,8 +23,7 @@ $(function () {
                 const terms = Utility.get_top_terms(cluster['Terms'].map(t => t['term']), 3);
                 cluster['TopTerms'] = terms;
                 // console.log(terms);
-                const option = $('<option value="' + cluster_no + '">#' + cluster_no + ': ' +
-                                 cluster['DocIds'].length + ' articles (' + terms.join(", ") + '...) </option>');
+                const option = $('<option value="' + cluster_no + '">' + cluster_no + '. ' + terms.join(", ") + '... </option>');
                 $('#cluster_list').append(option);
             }
             // Set the default cluster no
@@ -42,7 +41,8 @@ $(function () {
             const cluster = cluster_data.find(c => c['Cluster'] === selected_cluster_no);
             const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(d['DocId']));
             const chart = new TermChart(cluster, cluster_docs);
-
+            // Hide back btn
+            $('#back_btn').hide();
         });
 
 })

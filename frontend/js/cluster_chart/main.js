@@ -26,7 +26,7 @@ $(function () {
             const cluster_no = cluster['Cluster'];
             const terms = Utility.get_top_terms(cluster['Terms'].map(t => t['term']), 3);
             // console.log(terms);
-            const option = $('<option value="' + cluster_no + '"># ' + cluster_no + ' (' + terms.join(", ") + '...)</option>');
+            const option = $('<option value="' + cluster_no + '">' + cluster_no + '. ' + terms.join(", ") + '...</option>');
             $('#cluster_list').append(option);
         }
         // // Define onclick event of cluster no
