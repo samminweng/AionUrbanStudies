@@ -2,7 +2,8 @@
 // Ref: https://plotly.com/javascript/reference/bar/
 function BarChart(keyword_cluster_data, cluster, cluster_docs) {
     const width = 500;
-    const d3colors = d3.schemeCategory10;
+    const colors = ["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd",
+                    "#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"];
 
     // Create a bar chart for each group
     function create_bar_chart(group, group_id, max_size, chart_id) {
@@ -19,7 +20,7 @@ function BarChart(keyword_cluster_data, cluster, cluster_docs) {
                 textposition: 'none',
                 hoverinfo: "text",
                 marker: {
-                    color: d3colors[group_id],
+                    color: colors[group_id],
                     line: {
                         color: 'black',
                         width: 1
@@ -140,7 +141,7 @@ function BarChart(keyword_cluster_data, cluster, cluster_docs) {
         // Create a term chart of group
         const group = keyword_cluster_data[0];
         const view = new KeyPhraseView(group, cluster_docs, 0);
-        const word_chart = new WordBubbleChart(group, cluster_docs, d3colors[0]);
+        const word_chart = new WordBubbleChart(group, cluster_docs, colors[0]);
     }
 
     create_UI();

@@ -2,16 +2,22 @@
 function TermChart(cluster, cluster_docs){
     let keyword_groups = cluster['KeyPhrases'];
     let total_keywords = 0;
+    let all_keywords = [];
     // Populate the topic words of each keyword group
     for(const keyword_group of keyword_groups){
-        console.log(keyword_group);
         // const topic_words = keyword_groups['topic_words'];
         const new_topic_words = Utility.get_top_5_words_from_keyword_group(keyword_group);
         // console.log("topic_words:", topic_words);
         // console.log("new topic words:", new_topic_words);
         keyword_group['topic_words'] = new_topic_words;
         total_keywords += keyword_group['key-phrases'].length;
+        all_keywords = all_keywords.concat(keyword_group['key-phrases']);
     }
+    // console.log(all_keywords);
+    // // Add all keywords to
+    // $('#keywords').autocomplete({
+    //     source: all_keywords
+    // });
 
     // Create a cluster heading
     function createClusterHeading(){
@@ -26,11 +32,7 @@ function TermChart(cluster, cluster_docs){
         });
         heading.append(cluster_link);
         heading.append($('<span>' + total_keywords + ' keywords</span>'));
-        // Add an keyword tag to
-        const keyword_div = $('<div class="ui-widget">' +
-            '<label for="tags">Keywords: </label>' +
-            '<input></div>');
-        heading.append(keyword_div);
+
         $('#cluster_heading').empty();
         $('#cluster_heading').append(heading);
     }

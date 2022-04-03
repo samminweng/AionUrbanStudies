@@ -15,7 +15,7 @@ from ClusterTopicUtility import ClusterTopicUtility
 
 class ClusterTopicLDA:
     def __init__(self):
-    # def __init__(self, _cluster_no):
+        # def __init__(self, _cluster_no):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
             approach='LDA',
@@ -183,11 +183,13 @@ class ClusterTopicLDA:
                     "NumTopics": num_topics,
                     "KeyPhraseScore": round(avg_score, 3),
                     "KeyPhrases": key_phrase_groups,
-                    "KeyPhrase_Words": list(map(lambda topic: (topic['topic_words'], topic['score']), key_phrase_groups))
+                    "KeyPhrase_Words": list(
+                        map(lambda topic: (topic['topic_words'], topic['score']), key_phrase_groups))
                 })
             # Write the updated grouped key phrases
             cluster_df = pd.DataFrame(results,
-                                      columns=['Cluster', 'NumTopics', 'KeyPhraseScore', 'KeyPhrase_Words', 'KeyPhrases'])
+                                      columns=['Cluster', 'NumTopics', 'KeyPhraseScore', 'KeyPhrase_Words',
+                                               'KeyPhrases'])
             folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'key_phrase_scores')
             Path(folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
@@ -238,6 +240,22 @@ class ClusterTopicLDA:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Collect and generate statistics from results
+    def collect_statistics(self):
+        try:
+            folder = os.path.join('output', self.args.case_name, self.args.folder)
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+            df = pd.read_json(path)
+            total = 0
+            term_count = 0
+            for index, row in df.iterrows():
+                term_count += len(row['Terms'])
+                for term in row['Terms']:
+                    total += len(term['doc_ids'])
+            avg = total/term_count
+            print(avg)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
 # Main entry
 if __name__ == '__main__':
@@ -249,5 +267,7 @@ if __name__ == '__main__':
         ct.derive_cluster_topics_by_LDA()
         ct.compute_key_phrase_scores()
         ct.combine_LDA_topics_key_phrase_to_file()
+        # ct.collect_statistics()
+
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
