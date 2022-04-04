@@ -1,4 +1,0 @@
-group,count,key-phrases,NumDocs,DocIds
--1,4,"['Artistic interpretation', 'revered monument', 'monument', 'historic building']",2,"[52, 163]"
-0,10,"['urban growth boundary', 'urban growth', 'planning theory', 'urban planning policy', 'urban planning', 'urban bureaucrat', 'failed urban planning', 'urban planning', 'Philadelphia planning', 'Philadelphia planning process']",4,"[52, 117, 163, 254]"
-1,11,"['regional landscape', 'Chicago sociology', 'Chicago sociologist', 'urban environmental history', 'green urbanism', 'urban ecology', 'modern city', 'Urbanism', 'urban renaissance', 'American industrial metropolis', 'urban historical process']",4,"[52, 117, 212, 254]"

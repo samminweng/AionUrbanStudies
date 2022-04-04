@@ -246,16 +246,25 @@ class ClusterTopicLDA:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
             df = pd.read_json(path)
-            total = 0
-            term_count = 0
+            results = list()
             for index, row in df.iterrows():
-                term_count += len(row['Terms'])
-                for term in row['Terms']:
-                    total += len(term['doc_ids'])
-            avg = total/term_count
-            print(avg)
+                cluster_no = row['Cluster']
+                result = {'cluster': cluster_no}
+                keyword_clusters = row['KeyPhrases']
+                for group_id in range(0, 6):
+                    if group_id < len(keyword_clusters):
+                        result['keyword_cluster#' + str(group_id + 1)] = len(keyword_clusters[group_id]['DocIds'])
+                results.append(result)
+            # Write keyword group results to a summary (csv)
+            path = os.path.join('output', self.args.case_name, self.args.folder,
+                                "keyword_clusters.csv")
+            df = pd.DataFrame(results, columns=['cluster', "keyword_cluster#1", "keyword_cluster#2",
+                                                "keyword_cluster#3", "keyword_cluster#4", "keyword_cluster#5"])
+            df.to_csv(path, encoding='utf-8', index=False)
+
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
 
 # Main entry
 if __name__ == '__main__':
@@ -263,11 +272,10 @@ if __name__ == '__main__':
         # _cluster_no = 2
         # ct = ClusterTopicLDA(_cluster_no)
         ct = ClusterTopicLDA()
-        ct.derive_n_grams_group_by_clusters()
-        ct.derive_cluster_topics_by_LDA()
-        ct.compute_key_phrase_scores()
-        ct.combine_LDA_topics_key_phrase_to_file()
-        # ct.collect_statistics()
-
+        # ct.derive_n_grams_group_by_clusters()
+        # ct.derive_cluster_topics_by_LDA()
+        # ct.compute_key_phrase_scores()
+        # ct.combine_LDA_topics_key_phrase_to_file()
+        ct.collect_statistics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

@@ -2,22 +2,40 @@
 function TermChart(cluster, cluster_docs){
     let keyword_groups = cluster['KeyPhrases'];
     let total_keywords = 0;
-    let all_keywords = [];
+    let frequent_words = [];
     // Populate the topic words of each keyword group
     for(const keyword_group of keyword_groups){
-        // const topic_words = keyword_groups['topic_words'];
-        const new_topic_words = Utility.get_top_5_words_from_keyword_group(keyword_group);
-        // console.log("topic_words:", topic_words);
-        // console.log("new topic words:", new_topic_words);
-        keyword_group['topic_words'] = new_topic_words;
-        total_keywords += keyword_group['key-phrases'].length;
-        all_keywords = all_keywords.concat(keyword_group['key-phrases']);
+        try {
+            const new_topic_words = Utility.get_top_5_words_from_keyword_group(keyword_group);
+            keyword_group['topic_words'] = new_topic_words;
+            const group_doc_ids = keyword_group['DocIds'];
+            const key_phrases = keyword_group['key-phrases'];
+            total_keywords += key_phrases.length;
+            // // Get group docs
+            // const group_docs = cluster_docs.filter(d => group_doc_ids.includes(d['DocId']))
+            // const word_key_phrase_dict = Utility.create_word_key_phrases_dict(new_topic_words, key_phrases);
+            // const word_doc_dict = Utility.create_word_doc_dict(new_topic_words, group_docs, word_key_phrase_dict);
+            // for(const topic_word of new_topic_words){
+            //     const count = word_doc_dict[topic_word].length;
+            //     if(topic_word  !== "others"){
+            //         let found = frequent_words.find(w => w['word'] === topic_word);
+            //         if(found){
+            //             found['count'] = count;
+            //         }else{
+            //             frequent_words.push({'word': topic_word, "count": count})
+            //         }
+            //     }
+            // }
+        } catch (error) {
+            console.error(error);
+        }
     }
-    // console.log(all_keywords);
-    // // Add all keywords to
-    // $('#keywords').autocomplete({
-    //     source: all_keywords
+    // // Sort the frequent_words by count
+    // frequent_words.sort((a, b) =>{
+    //     return b['count'] - a['count'];
     // });
+    // console.log("article cluster", cluster['Cluster'], ": ", frequent_words.slice(0, 10).map(w => w['word']).join(", "));
+
 
     // Create a cluster heading
     function createClusterHeading(){
