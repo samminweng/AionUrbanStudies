@@ -53,45 +53,43 @@ class KeyPhraseExtraction:
         cluster_df['NumDocs'] = cluster_df['DocIds'].apply(len)
         cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds']]
         self.clusters = cluster_df.to_dict("records")
-        # Language model
-        self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-                                         device=self.args.device)
+        # # Language model
+        # self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+        #                                  device=self.args.device)
 
     # # Use the BERT model to find top 5 similar key phrases of each paper
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
-    # Use RAKE score to sort the key phrases
-    # Ref: https://medium.datadriveninvestor.com/rake-rapid-automatic-keyword-extraction-algorithm-f4ec17b2886c
     def extract_doc_key_phrases_by_similarity_diversity(self):
         try:
             folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
                                   'key_phrases', 'doc_key_phrase')
             Path(folder).mkdir(parents=True, exist_ok=True)
             corpus_docs = self.corpus_df.to_dict("records")
-            # cluster_no_list = [0]
-            cluster_no_list = self.cluster_no_list
+            cluster_no_list = [8]
+            # cluster_no_list = self.cluster_no_list
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
+                # # A folder that stores all the topic results
+                # tfidf_folder = os.path.join(folder, 'tf-idf', 'cluster_' + str(cluster_no))
+                # Path(tfidf_folder).mkdir(parents=True, exist_ok=True)
+                # # Extract single-word candidates using TF-IDF
+                # uni_gram_candidates = KeyPhraseUtility.generate_tfidf_terms(cluster_docs, tfidf_folder)
                 results = list()  # Store all the key phrases
                 for doc in cluster_docs:
+                    doc_id = doc['DocId']
+                    if doc_id != 206:
+                        continue
+                    # Get the first doc
+                    doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
+                    doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Abstract'])
+                    sentences = list()
+                    for sentence in sent_tokenize(doc_text):
+                        tokens = word_tokenize(sentence)
+                        sentences.append(tokens)
                     try:
-                        doc_id = doc['DocId']
-                        # Get the first doc
-                        doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
-                        doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Text'])
-                        sentences = list()
-                        for sentence in sent_tokenize(doc_text):
-                            tokens = word_tokenize(sentence)
-                            sentences.append(tokens)
-                        # Collect all the key phrases of a document
-                        n_gram_candidates = []
-                        for n_gram_range in [1, 2, 3]:
-                            try:
-                                # Extract key phrase candidates using n-gram
-                                candidates = KeyPhraseUtility.generate_n_gram_candidates(sentences, n_gram_range)
-                                # # find and collect top 30 key phrases similar to a paper
-                                n_gram_candidates = n_gram_candidates + candidates
-                            except Exception as __err:
-                                print("Error occurred! {err}".format(err=__err))
+                        # Collect all the candidate collocation words
+                        n_gram_candidates = KeyPhraseUtility.generate_collocation_candidates(sentences)
+                        print(", ".join(n_gram_candidates))
                         candidate_scores = KeyPhraseUtility.compute_similar_score_key_phrases(self.model,
                                                                                               doc_text,
                                                                                               n_gram_candidates)
@@ -101,7 +99,8 @@ class KeyPhraseExtraction:
                         score_threshold = np.percentile([sc['score'] for sc in phrase_similar_scores], 75)
                         # print(similar_mean)
                         # Set top 25% candidate scores as the threshold to filter the candidate words
-                        phrase_similar_scores = list(filter(lambda sc: sc['score'] >= score_threshold, phrase_similar_scores))
+                        phrase_similar_scores = list(
+                            filter(lambda sc: sc['score'] >= score_threshold, phrase_similar_scores))
                         phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
                         # Rank the high scoring phrases
                         phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(
@@ -113,8 +112,8 @@ class KeyPhraseExtraction:
                                   'Phrase-candidates': phrase_candidates}
                         results.append(result)
                         print("Complete to extract the key phrases from document {d_id}".format(d_id=doc_id))
-                    except Exception as _err:
-                        print("Error occurred! {err}".format(err=_err))
+                    except Exception as __err:
+                        print("Error occurred! {err}".format(err=__err))
                         sys.exit(-1)
                 print(results)
                 # Write key phrases to csv file
@@ -375,9 +374,9 @@ if __name__ == '__main__':
         # kp = KeyPhraseSimilarity(_cluster_no)
         kp = KeyPhraseExtraction()
         kp.extract_doc_key_phrases_by_similarity_diversity()
-        kp.experiment_group_cluster_key_phrases()
-        kp.group_cluster_key_phrases_with_best_experiments()
-        kp.combine_terms_key_phrases_results()
-        kp.combine_cluster_doc_key_phrases()
+        # kp.experiment_group_cluster_key_phrases()
+        # kp.group_cluster_key_phrases_with_best_experiments()
+        # kp.combine_terms_key_phrases_results()
+        # kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

@@ -1,6 +1,5 @@
-import csv
 import getpass
-import itertools
+import math
 import os
 import re
 import string
@@ -16,7 +15,6 @@ import pandas as pd
 import numpy as np
 # Load function words
 from nltk.corpus import stopwords
-from sentence_transformers import util
 from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
 from nltk.stem import WordNetLemmatizer
 
@@ -38,121 +36,198 @@ nltk.data.path.append(nltk_path)
 class KeyPhraseUtility:
     stop_words = list(stopwords.words('english'))
 
-    # Clean licence statement texts
     @staticmethod
-    def clean_sentence(text):
-        # Split the words 'within/near'
-        def split_words(_words):
-            _out_words = list()
-            for _word in _words:
-                if matches := re.match(r'(\w+)/(\w+)', _word):
-                    _out_words.append(matches.group(1))
-                    _out_words.append(matches.group(2))
-                elif re.match(r"('\w+)|(\w+')", _word):
-                    _out_words.append(_word.replace("'", ""))
-                else:
-                    _out_words.append(_word)
-            return _out_words
-
-        # Change plural nouns to singular nouns using lemmatizer
-        def convert_singular_words(_words, _lemmatiser):
-            # Tag the words with part-of-speech tags
-            _pos_tags = nltk.pos_tag(_words)
-            # Convert plural word to singular
-            singular_words = []
-            for i, (_word, _pos_tag) in enumerate(_pos_tags):
-                try:
-                    # Lowercase 1st char of the firs word
-                    # if i == 0:
-                    #    _word = _word[0].lower() + _word[1:len(_word)]
-                    # NNS indicates plural nouns and convert the plural noun to singular noun
-                    if _pos_tag == 'NNS':
-                        singular_word = _lemmatiser.lemmatize(_word.lower())
-                        if _word[0].isupper():  # Restore the uppercase
-                            singular_word = singular_word.capitalize()  # Upper case the first character
-                        singular_words.append(singular_word)
-                    else:
-                        # # Check if the word in lemma list
-                        # if _word.lower() in lemma_nouns:
-                        #     try:
-                        #         singular_word = lemma_nouns[_word.lower()]
-                        #         if _word[0].isupper():  # Restore the uppercase
-                        #             singular_word = singular_word.capitalize()  # Upper case the first character
-                        #         singular_words.append(singular_word)
-                        #     except Exception as _err:
-                        #         print("Error occurred! {err}".format(err=_err))
-                        # else:
-                        singular_words.append(_word)
-                except Exception as _err:
-                    print("Error occurred! {err}".format(err=_err))
-            # Return all lemmatized words
-            return singular_words
-
-        lemmatizer = WordNetLemmatizer()
-        sentences = sent_tokenize(text)
-        # Preprocess the sentence
-        cleaned_sentences = list()  # Skip copy right sentence
-        for sentence in sentences:
-            if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
-                    and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
-                try:
-                    words = split_words(word_tokenize(sentence))
-                    if len(words) > 0:
-                        # Convert the plural words into singular words
-                        cleaned_words = convert_singular_words(words, lemmatizer)
-                        cleaned_sentences.append(cleaned_words)  # merge tokenized words into sentence
-                except Exception as err:
-                    print("Error occurred! {err}".format(err=err))
-        return cleaned_sentences  # Convert a list of clean sentences to the text
-
-    @staticmethod
-    # Generate n-gram of a text and avoid stop
-    def generate_n_gram_candidates(sentences, n_gram_range):
-        def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
-            try:
-                qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
-                # # Check if there is any noun
-                nouns = list(filter(lambda _n: _n[1].startswith('NN'), _n_gram))
-                if len(nouns) == 0:
-                    return False
-                # Check the last word is a nn or nns
-                if _n_gram[-1][1] not in ['NN', 'NNS']:
-                    return False
-                # Check if all words are not stop word or punctuation or non-words
-                for _i, _n in enumerate(_n_gram):
-                    _word = _n[0]
-                    _pos_tag = _n[1]
-                    if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                            _word.lower() in KeyPhraseUtility.stop_words or _pos_tag not in qualified_tags:
-                        return False
-                # n-gram is qualified
-                return True
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-
+    # Generate Collocation using regular expression patterns
+    def generate_collocation_candidates(sentences):
         candidates = list()
         # Extract n_gram from each sentence
         for i, sentence in enumerate(sentences):
             try:
                 pos_tags = pos_tag(sentence)
-                # For debugging
-                # if 'contains' in sentence and 'mobility' in sentence:
-                #     print("bug")
-                #     print(" ".join(sentence))
-                #     print(pos_tags)
                 # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
-                n_grams = list(ngrams(pos_tags, n_gram_range))
-                # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
-                for n_gram in n_grams:
-                    if _is_qualified(n_gram):
-                        n_gram_text = " ".join(list(map(lambda n: n[0], n_gram)))
-                        # Check if candidates exist in the list
-                        found = next((c for c in candidates if c.lower() == n_gram_text.lower()), None)
-                        if not found:
-                            candidates.append(n_gram_text)  # Convert n_gram (a list of words) to a string
+                sentence_text = " ".join(list(map(lambda n: n[0] + '_' + n[1], pos_tags)))
+                print(sentence_text)
+                # Use the regular expression to obtain n_gram
+                # Patterns: (1) J + N (2) N + N (3) J + J + N + N (4) J + and + J + N + N
+                sentence_words = list()
+                pattern = r'((\s*\w+(\-\w+)*_NN[S]*[P]*\s*(\'s_POS)*\s*){2,3})' \
+                          r'|((\w+(\-\w+)*_JJ\s+){1,2}(\w+(\-\w+)*_NN[S]*[P]*\s*(\'s_POS)*\s*){1,2})' \
+                          r'|((\w+(\-\w+)*_JJ\s+)(and_CC\s+)(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[S]*[P]*\s*(\'s_POS)*\s*){1,2})'
+                matches = re.finditer(pattern, sentence_text)
+                for match_obj in matches:
+                    try:
+                        n_gram = match_obj.group(0)
+                        n_gram = n_gram.replace(" 's_POS", "'s")
+                        n_gram = n_gram.replace("_CC", "")
+                        n_gram = n_gram.replace("_JJ", "")
+                        n_gram = n_gram.replace("_NNP", "")
+                        n_gram = n_gram.replace("_NNS", "")
+                        n_gram = n_gram.replace("_NN", "")
+                        n_gram = n_gram.strip()
+                        sentence_words.append(n_gram)
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                candidates = candidates + sentence_words
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
         return candidates
+
+    # Get single_word by using standard TF-IDF for each doc in
+    @staticmethod
+    def generate_tfidf_terms(cluster_docs, folder):
+        # Generate n-gram of a text and avoid stop
+        def _generate_n_gram_candidates(_sentences, _n_gram_range):
+            def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
+                try:
+                    qualified_tags = ['NN', 'NNS', 'NNP']
+                    # Check if all words are not stop word or punctuation or non-words
+                    for _i, _n in enumerate(_n_gram):
+                        _word = _n[0]
+                        _pos_tag = _n[1]
+                        if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
+                                _word.lower() in KeyPhraseUtility.stop_words or _pos_tag not in qualified_tags:
+                            return False
+                    # n-gram is qualified
+                    return True
+                except Exception as err:
+                    print("Error occurred! {err}".format(err=err))
+
+            candidates = list()
+            # Extract n_gram from each sentence
+            for i, sentence in enumerate(_sentences):
+                try:
+                    pos_tags = pos_tag(sentence)
+                    # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
+                    n_grams = list(ngrams(pos_tags, n_gram_range))
+                    sentence_candidates = list()
+                    # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
+                    for n_gram in n_grams:
+                        if _is_qualified(n_gram):
+                            n_gram_text = " ".join(list(map(lambda n: n[0], n_gram)))
+                            sentence_candidates.append(n_gram_text)  # Convert n_gram (a list of words) to a string
+                    for candidate in sentence_candidates:
+                        # Check if candidates exist in the list
+                        found = next((c for c in candidates if c.lower() == candidate.lower()), None)
+                        if not found:
+                            candidates.append(candidate)
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
+            return candidates
+
+        # Create frequency matrix to track the frequencies of a n-gram in
+        def _create_frequency_matrix(_docs, _n_gram_range):
+            # Vectorized the clustered doc text and Keep the Word case unchanged
+            frequency_matrix = []
+            for doc in _docs:
+                doc_id = doc['DocId']  # doc id
+                doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Title'] + ". " + doc['Abstract'])
+                sentences = list()
+                for sentence in sent_tokenize(doc_text):
+                    tokens = word_tokenize(sentence)
+                    sentences.append(tokens)
+                freq_table = {}
+                candidates = _generate_n_gram_candidates(sentences, _n_gram_range)
+                for candidate in candidates:
+                    if candidate.lower() in freq_table:
+                        freq_table[candidate.lower()] += 1
+                    else:
+                        freq_table[candidate.lower()] = 1
+                frequency_matrix.append({'doc_id': doc_id, 'freq_table': freq_table})
+            return frequency_matrix
+
+        # Compute TF score
+        def _compute_tf_matrix(_freq_matrix):
+            _tf_matrix = {}
+            # Compute tf score for each cluster (doc) in the corpus
+            for _row in _freq_matrix:
+                _doc_id = _row['doc_id']  # Doc id is the cluster no
+                _freq_table = _row['freq_table']  # Store the frequencies of each word in the doc
+                _tf_table = {}  # TF score of each word (such as 1, 2, 3-gram) in the doc
+                _total_terms_in_doc = reduce(lambda total, f: total + f, _freq_table.values(), 0)
+                # Adjusted for total number of words in doc
+                for _term, _freq in _freq_table.items():
+                    # frequency of a word in doc / total number of words in doc
+                    _tf_table[_term] = _freq / _total_terms_in_doc
+                _tf_matrix[_doc_id] = _tf_table
+            return _tf_matrix
+
+        # Collect the table to store the mapping between word to a list of clusters
+        def _create_occ_per_term(_freq_matrix):
+            _occ_table = {}  # Store the mapping between a word and its doc ids
+            for _row in _freq_matrix:
+                _doc_id = _row['doc_id']  # Doc id is the cluster no
+                _freq_table = _row['freq_table']  # Store the frequencies of each word in the doc
+                for _term, _count in _freq_table.items():
+                    if _term in _occ_table:  # Add the table if the word appears in the doc
+                        _occ_table[_term].add(_doc_id)
+                    else:
+                        _occ_table[_term] = {_doc_id}
+            return _occ_table
+
+        # Compute IDF scores
+        def _compute_idf_matrix(_freq_matrix, _occ_per_term):
+            _total_cluster = len(_freq_matrix)  # Total number of clusters in the corpus
+            _idf_matrix = {}  # Store idf scores for each doc
+            for _row in _freq_matrix:
+                _doc_id = _row['doc_id']  # Doc id is the cluster no
+                _freq_table = _row['freq_table']  # Store the frequencies of each word in the doc
+                _idf_table = {}
+                for _term in _freq_table.keys():
+                    _counts = len(_occ_per_term[_term])  # Number of clusters the word appears
+                    _idf_table[_term] = math.log10(_total_cluster / float(_counts))
+                _idf_matrix[_doc_id] = _idf_table  # Idf table stores each word's idf scores
+            return _idf_matrix
+
+        # Compute tf-idf score matrix
+        def _compute_tf_idf_matrix(_tf_matrix, _idf_matrix, _freq_matrix, _occ_per_topic):
+            _tf_idf_matrix = {}
+            # Compute tf-idf score for each cluster
+            for _cluster_no, _tf_table in _tf_matrix.items():
+                # Compute tf-idf score of each word in the cluster
+                _idf_table = _idf_matrix[_cluster_no]  # idf table stores idf scores of the doc (doc_id)
+                # Get freq table of the cluster
+                _freq_table = next(f for f in _freq_matrix if f['cluster'] == _cluster_no)['freq_table']
+                _tf_idf_list = []
+                for _term, _tf_score in _tf_table.items():  # key is word, value is tf score
+                    try:
+                        _idf_score = _idf_table[_term]  # Get idf score of the word
+                        _freq = _freq_table[_term]  # Get the frequencies of the word in cluster doc_id
+                        _cluster_ids = sorted(list(_occ_per_topic[_term]))  # Get the clusters that the word appears
+                        _score = float(_tf_score * _idf_score)
+                        _tf_idf_list.append({'term': _term, 'score': _score, 'freq': _freq,
+                                             'cluster_ids': _cluster_ids})
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                # Sort tf_idf_list by tf-idf score
+                _tf_idf_matrix[str(_cluster_no)] = sorted(_tf_idf_list, key=lambda t: t['score'], reverse=True)
+            return _tf_idf_matrix
+
+        terms_list = []
+        for n_gram_range in [1]:
+            try:
+                # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
+                freq_matrix = _create_frequency_matrix(cluster_docs, n_gram_range)
+                # # 3. Compute Term Frequency (TF) and generate a matrix
+                # # Term frequency (TF) is the frequency of a word in a document divided by total number of words in the document.
+                tf_matrix = _compute_tf_matrix(freq_matrix)
+                # # 4. Create the table to map the word to a list of documents
+                occ_per_term = _create_occ_per_term(freq_matrix)
+                # # 5. Compute IDF (how common or rare a word is) and output the results as a matrix
+                idf_matrix = _compute_idf_matrix(freq_matrix, occ_per_term)
+                # # Compute tf-idf matrix
+                # tf_idf_matrix = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, occ_per_topic)
+                # # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
+                # terms_list.append({
+                #     'n_gram': n_gram_range,
+                #     'terms': tf_idf_matrix
+                # })
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
+
+        # term_df = pd.DataFrame(terms_list, columns=['n_gram', 'terms'])
+        # # Write the topics results to csv
+        # term_df.to_json(os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_terms.json'), orient='records')
+        # return terms_list  # Return a list of dicts
 
     # Find top K key phrase similar to the paper
     # Ref: https://www.sbert.net/examples/applications/semantic-search/README.html
@@ -424,7 +499,8 @@ class KeyPhraseUtility:
                 print("Error occurred! {err}".format(err=err))
                 sys.exit(-1)
         # Sort the list by score
-        sorted_key_phrases = sorted(key_phrase_scores, key=lambda ks: (ks['score'], ks['key-phrase'].lower()), reverse=True)
+        sorted_key_phrases = sorted(key_phrase_scores, key=lambda ks: (ks['score'], ks['key-phrase'].lower()),
+                                    reverse=True)
         return list(map(lambda ks: ks['key-phrase'], sorted_key_phrases))
 
     # Maximal Marginal Relevance minimizes redundancy and maximizes the diversity of results
@@ -557,7 +633,9 @@ class KeyPhraseUtility:
                                 # Add the current group id as the parent of sub-group
                                 sub_group['Parent'] = group['Parent'] + '_' + str(group['Group'])
                                 freq_words = KeyPhraseUtility.get_top_frequent_words(sub_group['Key-phrases'])
-                                sorted_key_phrases = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words, sub_group['Key-phrases'])
+                                sorted_key_phrases = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words,
+                                                                                                        sub_group[
+                                                                                                            'Key-phrases'])
                                 sub_group['Key-phrases'] = sorted_key_phrases
                                 sub_group['score'] = opt_parameter['score']
                                 sub_group['dimension'] = opt_parameter['dimension']
@@ -658,13 +736,15 @@ class KeyPhraseUtility:
                 results.append(group)
             else:
                 # Find all the sub-groups starting with 'root_1'
-                sub_groups = list(filter(lambda g: g['Parent'].startswith(parent + '_' + str(group_id)), all_sub_groups))
+                sub_groups = list(
+                    filter(lambda g: g['Parent'].startswith(parent + '_' + str(group_id)), all_sub_groups))
                 # Update the parents of sub-group
                 for sub_group in sub_groups:
                     freq_words = KeyPhraseUtility.get_top_frequent_words(sub_group['Key-phrases'])
                     sub_group['Parent'] = parent
                     sub_group['TitleWords'] = freq_words
-                    sub_group['Key-phrases'] = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words, sub_group['Key-phrases'])
+                    sub_group['Key-phrases'] = KeyPhraseUtility.rank_key_phrases_by_top_word_freq(freq_words, sub_group[
+                        'Key-phrases'])
                 results = results + sub_groups
         # Get all the unique parent ids
         parent_ids = list(set(map(lambda g: g['Parent'], results)))
@@ -695,3 +775,70 @@ class KeyPhraseUtility:
         path = os.path.join(folder, 'cluster_key_phrases_sub_grouping_cluster_#' + str(cluster_no) + '.json')
         df.to_json(path, orient="records")
         return df.to_dict("records")
+
+# # Clean licence statement texts
+# @staticmethod
+# def clean_sentence(text):
+#     # Split the words 'within/near'
+#     def split_words(_words):
+#         _out_words = list()
+#         for _word in _words:
+#             if matches := re.match(r'(\w+)/(\w+)', _word):
+#                 _out_words.append(matches.group(1))
+#                 _out_words.append(matches.group(2))
+#             elif re.match(r"('\w+)|(\w+')", _word):
+#                 _out_words.append(_word.replace("'", ""))
+#             else:
+#                 _out_words.append(_word)
+#         return _out_words
+#
+#     # Change plural nouns to singular nouns using lemmatizer
+#     def convert_singular_words(_words, _lemmatiser):
+#         # Tag the words with part-of-speech tags
+#         _pos_tags = nltk.pos_tag(_words)
+#         # Convert plural word to singular
+#         singular_words = []
+#         for i, (_word, _pos_tag) in enumerate(_pos_tags):
+#             try:
+#                 # Lowercase 1st char of the firs word
+#                 # if i == 0:
+#                 #    _word = _word[0].lower() + _word[1:len(_word)]
+#                 # NNS indicates plural nouns and convert the plural noun to singular noun
+#                 if _pos_tag == 'NNS':
+#                     singular_word = _lemmatiser.lemmatize(_word.lower())
+#                     if _word[0].isupper():  # Restore the uppercase
+#                         singular_word = singular_word.capitalize()  # Upper case the first character
+#                     singular_words.append(singular_word)
+#                 else:
+#                     # # Check if the word in lemma list
+#                     # if _word.lower() in lemma_nouns:
+#                     #     try:
+#                     #         singular_word = lemma_nouns[_word.lower()]
+#                     #         if _word[0].isupper():  # Restore the uppercase
+#                     #             singular_word = singular_word.capitalize()  # Upper case the first character
+#                     #         singular_words.append(singular_word)
+#                     #     except Exception as _err:
+#                     #         print("Error occurred! {err}".format(err=_err))
+#                     # else:
+#                     singular_words.append(_word)
+#             except Exception as _err:
+#                 print("Error occurred! {err}".format(err=_err))
+#         # Return all lemmatized words
+#         return singular_words
+#
+#     lemmatizer = WordNetLemmatizer()
+#     sentences = sent_tokenize(text)
+#     # Preprocess the sentence
+#     cleaned_sentences = list()  # Skip copy right sentence
+#     for sentence in sentences:
+#         if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
+#                 and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
+#             try:
+#                 words = split_words(word_tokenize(sentence))
+#                 if len(words) > 0:
+#                     # Convert the plural words into singular words
+#                     cleaned_words = convert_singular_words(words, lemmatizer)
+#                     cleaned_sentences.append(cleaned_words)  # merge tokenized words into sentence
+#             except Exception as err:
+#                 print("Error occurred! {err}".format(err=err))
+#     return cleaned_sentences  # Convert a list of clean sentences to the text
