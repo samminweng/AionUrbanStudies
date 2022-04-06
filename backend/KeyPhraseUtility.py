@@ -46,7 +46,7 @@ class KeyPhraseUtility:
                 pos_tags = pos_tag(sentence)
                 # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
                 sentence_text = " ".join(list(map(lambda n: n[0] + '_' + n[1], pos_tags)))
-                print(sentence_text)
+                # print(sentence_text)
                 # Use the regular expression to obtain n_gram
                 # Patterns: (1) J + N (2) N + N (3) J + J + N + N (4) J + and + J + N + N
                 sentence_words = list()
@@ -67,7 +67,10 @@ class KeyPhraseUtility:
                         sentence_words.append(n_gram)
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
-                candidates = candidates + sentence_words
+                for word in sentence_words:
+                    found = next((cw for cw in candidates if cw.lower() == word.lower()), None)
+                    if not found:
+                        candidates.append(word)
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
         return candidates
@@ -98,18 +101,14 @@ class KeyPhraseUtility:
                 try:
                     pos_tags = pos_tag(sentence)
                     # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
-                    n_grams = list(ngrams(pos_tags, n_gram_range))
+                    n_grams = list(ngrams(pos_tags, _n_gram_range))
                     sentence_candidates = list()
                     # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
                     for n_gram in n_grams:
                         if _is_qualified(n_gram):
                             n_gram_text = " ".join(list(map(lambda n: n[0], n_gram)))
                             sentence_candidates.append(n_gram_text)  # Convert n_gram (a list of words) to a string
-                    for candidate in sentence_candidates:
-                        # Check if candidates exist in the list
-                        found = next((c for c in candidates if c.lower() == candidate.lower()), None)
-                        if not found:
-                            candidates.append(candidate)
+                    candidates = candidates + sentence_candidates
                 except Exception as _err:
                     print("Error occurred! {err}".format(err=_err))
             return candidates
@@ -119,8 +118,8 @@ class KeyPhraseUtility:
             # Vectorized the clustered doc text and Keep the Word case unchanged
             frequency_matrix = []
             for doc in _docs:
-                doc_id = doc['DocId']  # doc id
-                doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Title'] + ". " + doc['Abstract'])
+                _doc_id = doc['DocId']  # doc id
+                doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Abstract'])
                 sentences = list()
                 for sentence in sent_tokenize(doc_text):
                     tokens = word_tokenize(sentence)
@@ -128,11 +127,14 @@ class KeyPhraseUtility:
                 freq_table = {}
                 candidates = _generate_n_gram_candidates(sentences, _n_gram_range)
                 for candidate in candidates:
-                    if candidate.lower() in freq_table:
-                        freq_table[candidate.lower()] += 1
+                    term = candidate.lower()
+                    if candidate.isupper():
+                        term = candidate
+                    if term in freq_table:
+                        freq_table[term] += 1
                     else:
-                        freq_table[candidate.lower()] = 1
-                frequency_matrix.append({'doc_id': doc_id, 'freq_table': freq_table})
+                        freq_table[term] = 1
+                frequency_matrix.append({'doc_id': _doc_id, 'freq_table': freq_table})
             return frequency_matrix
 
         # Compute TF score
@@ -179,55 +181,54 @@ class KeyPhraseUtility:
             return _idf_matrix
 
         # Compute tf-idf score matrix
-        def _compute_tf_idf_matrix(_tf_matrix, _idf_matrix, _freq_matrix, _occ_per_topic):
-            _tf_idf_matrix = {}
+        def _compute_tf_idf_matrix(_tf_matrix, _idf_matrix, _freq_matrix, _occ_per_term):
+            _tf_idf_matrix = list()
             # Compute tf-idf score for each cluster
-            for _cluster_no, _tf_table in _tf_matrix.items():
+            for _doc_id, _tf_table in _tf_matrix.items():
                 # Compute tf-idf score of each word in the cluster
-                _idf_table = _idf_matrix[_cluster_no]  # idf table stores idf scores of the doc (doc_id)
+                _idf_table = _idf_matrix[_doc_id]  # idf table stores idf scores of the doc (doc_id)
                 # Get freq table of the cluster
-                _freq_table = next(f for f in _freq_matrix if f['cluster'] == _cluster_no)['freq_table']
+                _freq_table = next(f for f in _freq_matrix if f['doc_id'] == _doc_id)['freq_table']
                 _tf_idf_list = []
                 for _term, _tf_score in _tf_table.items():  # key is word, value is tf score
                     try:
                         _idf_score = _idf_table[_term]  # Get idf score of the word
-                        _freq = _freq_table[_term]  # Get the frequencies of the word in cluster doc_id
-                        _cluster_ids = sorted(list(_occ_per_topic[_term]))  # Get the clusters that the word appears
+                        _freq = _freq_table[_term]  # Get the frequencies of the word in doc_id
+                        _doc_ids = sorted(list(_occ_per_term[_term]))  # Get the clusters that the word appears
                         _score = float(_tf_score * _idf_score)
-                        _tf_idf_list.append({'term': _term, 'score': _score, 'freq': _freq,
-                                             'cluster_ids': _cluster_ids})
+                        _tf_idf_list.append({'term': _term, 'score': _score, 'freq': _freq, 'doc_ids': _doc_ids})
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
+
                 # Sort tf_idf_list by tf-idf score
-                _tf_idf_matrix[str(_cluster_no)] = sorted(_tf_idf_list, key=lambda t: t['score'], reverse=True)
+                _terms_list = sorted(_tf_idf_list, key=lambda t: t['score'], reverse=True)
+                # Write to a list
+                _term_df = pd.DataFrame(_terms_list, columns=['term', 'score', 'freq', 'doc_ids'])
+                # Write the topics results to csv
+                _term_df.to_csv(os.path.join(folder, 'TF-IDF_doc_terms_' + str(_doc_id) + '.csv'), encoding='utf-8',
+                               index=False)
+                # Map the term only
+                _termsOnly = list(map(lambda t: t['term'], _terms_list))
+                _tf_idf_matrix.append({'doc_id': _doc_id,
+                                       'terms': _termsOnly})
             return _tf_idf_matrix
 
-        terms_list = []
-        for n_gram_range in [1]:
-            try:
-                # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
-                freq_matrix = _create_frequency_matrix(cluster_docs, n_gram_range)
-                # # 3. Compute Term Frequency (TF) and generate a matrix
-                # # Term frequency (TF) is the frequency of a word in a document divided by total number of words in the document.
-                tf_matrix = _compute_tf_matrix(freq_matrix)
-                # # 4. Create the table to map the word to a list of documents
-                occ_per_term = _create_occ_per_term(freq_matrix)
-                # # 5. Compute IDF (how common or rare a word is) and output the results as a matrix
-                idf_matrix = _compute_idf_matrix(freq_matrix, occ_per_term)
-                # # Compute tf-idf matrix
-                # tf_idf_matrix = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, occ_per_topic)
-                # # Top_n_word is a dictionary where key is the cluster no and the value is a list of topic words
-                # terms_list.append({
-                #     'n_gram': n_gram_range,
-                #     'terms': tf_idf_matrix
-                # })
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-
-        # term_df = pd.DataFrame(terms_list, columns=['n_gram', 'terms'])
-        # # Write the topics results to csv
-        # term_df.to_json(os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_terms.json'), orient='records')
-        # return terms_list  # Return a list of dicts
+        try:
+            # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
+            freq_matrix = _create_frequency_matrix(cluster_docs, 1)
+            # # 3. Compute Term Frequency (TF) and generate a matrix
+            # # Term frequency (TF) is the frequency of a word in a document divided by total number of words in the document.
+            tf_matrix = _compute_tf_matrix(freq_matrix)
+            # # 4. Create the table to map the word to a list of documents
+            occ_per_term = _create_occ_per_term(freq_matrix)
+            # # 5. Compute IDF (how common or rare a word is) and output the results as a matrix
+            idf_matrix = _compute_idf_matrix(freq_matrix, occ_per_term)
+            # # Compute tf-idf matrix
+            terms_list = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, occ_per_term)
+            return terms_list  # Return a list of dicts
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+            sys.exit(-1)
 
     # Find top K key phrase similar to the paper
     # Ref: https://www.sbert.net/examples/applications/semantic-search/README.html

@@ -54,8 +54,8 @@ class KeyPhraseExtraction:
         cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds']]
         self.clusters = cluster_df.to_dict("records")
         # # Language model
-        # self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-        #                                  device=self.args.device)
+        self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                         device=self.args.device)
 
     # # Use the BERT model to find top 5 similar key phrases of each paper
     # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
@@ -70,15 +70,15 @@ class KeyPhraseExtraction:
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
                 # # A folder that stores all the topic results
-                # tfidf_folder = os.path.join(folder, 'tf-idf', 'cluster_' + str(cluster_no))
-                # Path(tfidf_folder).mkdir(parents=True, exist_ok=True)
-                # # Extract single-word candidates using TF-IDF
-                # uni_gram_candidates = KeyPhraseUtility.generate_tfidf_terms(cluster_docs, tfidf_folder)
+                tfidf_folder = os.path.join(folder, 'tf-idf', 'cluster_' + str(cluster_no))
+                Path(tfidf_folder).mkdir(parents=True, exist_ok=True)
+                # Extract single-word candidates using TF-IDF
+                tfidf_candidates = KeyPhraseUtility.generate_tfidf_terms(cluster_docs, tfidf_folder)
                 results = list()  # Store all the key phrases
                 for doc in cluster_docs:
                     doc_id = doc['DocId']
-                    if doc_id != 206:
-                        continue
+                    # if doc_id != 206:
+                    #     continue
                     # Get the first doc
                     doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
                     doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Abstract'])
@@ -86,10 +86,13 @@ class KeyPhraseExtraction:
                     for sentence in sent_tokenize(doc_text):
                         tokens = word_tokenize(sentence)
                         sentences.append(tokens)
+                    # End of for loop
                     try:
+                        uni_gram_candidates = next(c for c in tfidf_candidates if c['doc_id'] == doc_id)['terms']
                         # Collect all the candidate collocation words
                         n_gram_candidates = KeyPhraseUtility.generate_collocation_candidates(sentences)
-                        print(", ".join(n_gram_candidates))
+                        n_gram_candidates = n_gram_candidates + uni_gram_candidates
+                        # print(", ".join(n_gram_candidates))
                         candidate_scores = KeyPhraseUtility.compute_similar_score_key_phrases(self.model,
                                                                                               doc_text,
                                                                                               n_gram_candidates)
@@ -105,11 +108,12 @@ class KeyPhraseExtraction:
                         # Rank the high scoring phrases
                         phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(
                             self.model, doc_text, phrase_candidates, self.args.diversity)
-                        key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
+                        mmr_key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
                         # Obtain top five key phrases
-                        result = {'Cluster': cluster_no, 'DocId': doc_id,  # 'top_num': num, 'Diversity': diversity,
-                                  'Key-phrases': key_phrases[:5], 'Candidate-count': len(phrase_candidates),
-                                  'Phrase-candidates': phrase_candidates}
+                        result = {'Cluster': cluster_no, 'DocId': doc_id,
+                                  'Key-phrases': mmr_key_phrases[:5],
+                                  'Candidate-count': len(phrase_similar_scores),
+                                  'Phrase-candidates': phrase_similar_scores}
                         results.append(result)
                         print("Complete to extract the key phrases from document {d_id}".format(d_id=doc_id))
                     except Exception as __err:
