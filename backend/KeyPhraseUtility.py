@@ -199,18 +199,16 @@ class KeyPhraseUtility:
                         _tf_idf_list.append({'term': _term, 'score': _score, 'freq': _freq, 'doc_ids': _doc_ids})
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
-
                 # Sort tf_idf_list by tf-idf score
-                _terms_list = sorted(_tf_idf_list, key=lambda t: t['score'], reverse=True)
-                # Write to a list
-                _term_df = pd.DataFrame(_terms_list, columns=['term', 'score', 'freq', 'doc_ids'])
-                # Write the topics results to csv
-                _term_df.to_csv(os.path.join(folder, 'TF-IDF_doc_terms_' + str(_doc_id) + '.csv'), encoding='utf-8',
-                               index=False)
-                # Map the term only
-                _termsOnly = list(map(lambda t: t['term'], _terms_list))
-                _tf_idf_matrix.append({'doc_id': _doc_id,
-                                       'terms': _termsOnly})
+                _term_list = sorted(_tf_idf_list, key=lambda t: t['score'], reverse=True)
+                _tf_idf_matrix.append({'doc_id': _doc_id, 'terms': _term_list})
+                # Write the selected output to csv files
+                if _doc_id in [206, 325, 523]:
+                    # Write to a list
+                    _term_df = pd.DataFrame(_term_list, columns=['term', 'score', 'freq', 'doc_ids'])
+                    # Write the topics results to csv
+                    _term_df.to_csv(os.path.join(folder, 'TF-IDF_doc_terms_' + str(_doc_id) + '.csv'), encoding='utf-8',
+                                    index=False)
             return _tf_idf_matrix
 
         try:

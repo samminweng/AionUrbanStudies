@@ -65,20 +65,22 @@ class KeyPhraseExtraction:
                                   'key_phrases', 'doc_key_phrase')
             Path(folder).mkdir(parents=True, exist_ok=True)
             corpus_docs = self.corpus_df.to_dict("records")
+            # Collect all the tfidf terms from all docs
+            # # A folder that stores all the topic results
+            tfidf_folder = os.path.join(folder, 'tf-idf')
+            Path(tfidf_folder).mkdir(parents=True, exist_ok=True)
+            # Extract single-word candidates using TF-IDF
+            tfidf_candidates = KeyPhraseUtility.generate_tfidf_terms(corpus_docs, tfidf_folder)
+            # Collect collocation from each cluster of articles
             cluster_no_list = [8]
             # cluster_no_list = self.cluster_no_list
             for cluster_no in cluster_no_list:
                 cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
-                # # A folder that stores all the topic results
-                tfidf_folder = os.path.join(folder, 'tf-idf', 'cluster_' + str(cluster_no))
-                Path(tfidf_folder).mkdir(parents=True, exist_ok=True)
-                # Extract single-word candidates using TF-IDF
-                tfidf_candidates = KeyPhraseUtility.generate_tfidf_terms(cluster_docs, tfidf_folder)
                 results = list()  # Store all the key phrases
                 for doc in cluster_docs:
                     doc_id = doc['DocId']
-                    # if doc_id != 206:
-                    #     continue
+                    if doc_id != 206:
+                        continue
                     # Get the first doc
                     doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
                     doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Abstract'])
@@ -88,7 +90,10 @@ class KeyPhraseExtraction:
                         sentences.append(tokens)
                     # End of for loop
                     try:
-                        uni_gram_candidates = next(c for c in tfidf_candidates if c['doc_id'] == doc_id)['terms']
+                        doc_tfidf_candidates = next(c for c in tfidf_candidates if c['doc_id'] == doc_id)['terms']
+                        threshold = np.percentile(list(map(lambda c: c['score'], doc_tfidf_candidates)), 90)
+                        # Get top 10% of uni_grams
+                        uni_gram_candidates = list(filter(lambda c: c['score'] >= threshold, doc_tfidf_candidates))
                         # Collect all the candidate collocation words
                         n_gram_candidates = KeyPhraseUtility.generate_collocation_candidates(sentences)
                         n_gram_candidates = n_gram_candidates + uni_gram_candidates
