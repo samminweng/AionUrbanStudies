@@ -79,8 +79,8 @@ class KeyPhraseExtraction:
                 results = list()  # Store all the key phrases
                 for doc in cluster_docs:
                     doc_id = doc['DocId']
-                    if doc_id != 206:
-                        continue
+                    # if doc_id != 523:
+                    #     continue
                     # Get the first doc
                     doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
                     doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Abstract'])
@@ -91,12 +91,14 @@ class KeyPhraseExtraction:
                     # End of for loop
                     try:
                         doc_tfidf_candidates = next(c for c in tfidf_candidates if c['doc_id'] == doc_id)['terms']
-                        threshold = np.percentile(list(map(lambda c: c['score'], doc_tfidf_candidates)), 90)
+                        # threshold = np.percentile(list(map(lambda c: c['score'], doc_tfidf_candidates)), 90)
                         # Get top 10% of uni_grams
-                        uni_gram_candidates = list(filter(lambda c: c['score'] >= threshold, doc_tfidf_candidates))
+                        # uni_gram_candidates = list(filter(lambda c: c['score'] >= threshold, doc_tfidf_candidates))
+                        # Get top 2 uni_grams from tf-idf terms
+                        uni_gram_candidates = doc_tfidf_candidates[:2]
                         # Collect all the candidate collocation words
                         n_gram_candidates = KeyPhraseUtility.generate_collocation_candidates(sentences)
-                        n_gram_candidates = n_gram_candidates + uni_gram_candidates
+                        n_gram_candidates = n_gram_candidates + list(map(lambda c: c['term'], uni_gram_candidates))
                         # print(", ".join(n_gram_candidates))
                         candidate_scores = KeyPhraseUtility.compute_similar_score_key_phrases(self.model,
                                                                                               doc_text,
@@ -104,11 +106,11 @@ class KeyPhraseExtraction:
 
                         phrase_similar_scores = KeyPhraseUtility.sort_phrases_by_similar_score(candidate_scores)
                         # compute top 25% score as the threshold
-                        score_threshold = np.percentile([sc['score'] for sc in phrase_similar_scores], 75)
+                        # score_threshold = np.percentile([sc['score'] for sc in phrase_similar_scores], 75)
                         # print(similar_mean)
                         # Set top 25% candidate scores as the threshold to filter the candidate words
-                        phrase_similar_scores = list(
-                            filter(lambda sc: sc['score'] >= score_threshold, phrase_similar_scores))
+                        # phrase_similar_scores = list(
+                        #     filter(lambda sc: sc['score'] >= score_threshold, phrase_similar_scores))
                         phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
                         # Rank the high scoring phrases
                         phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(

@@ -577,6 +577,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/tf-idf/TF-IDF_doc_terms_523.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/tf-idf/cluster_8/TF-IDF_doc_terms_2.csv">
           <value>
             <Attribute>

@@ -50,9 +50,9 @@ class KeyPhraseUtility:
                 # Use the regular expression to obtain n_gram
                 # Patterns: (1) J + N (2) N + N (3) J + J + N + N (4) J + and + J + N + N
                 sentence_words = list()
-                pattern = r'((\s*\w+(\-\w+)*_NN[S]*[P]*\s*(\'s_POS)*\s*){2,3})' \
-                          r'|((\w+(\-\w+)*_JJ\s+){1,2}(\w+(\-\w+)*_NN[S]*[P]*\s*(\'s_POS)*\s*){1,2})' \
-                          r'|((\w+(\-\w+)*_JJ\s+)(and_CC\s+)(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[S]*[P]*\s*(\'s_POS)*\s*){1,2})'
+                pattern = r'((\s*\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){2,3})' \
+                          r'|((\w+(\-\w+)*_JJ\s+){1,2}(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})' \
+                          r'|((\w+(\-\w+)*_JJ\s+)(and_CC\s+)(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})'
                 matches = re.finditer(pattern, sentence_text)
                 for match_obj in matches:
                     try:
@@ -60,6 +60,7 @@ class KeyPhraseUtility:
                         n_gram = n_gram.replace(" 's_POS", "'s")
                         n_gram = n_gram.replace("_CC", "")
                         n_gram = n_gram.replace("_JJ", "")
+                        n_gram = n_gram.replace("_NNPS", "")
                         n_gram = n_gram.replace("_NNP", "")
                         n_gram = n_gram.replace("_NNS", "")
                         n_gram = n_gram.replace("_NN", "")
@@ -82,13 +83,13 @@ class KeyPhraseUtility:
         def _generate_n_gram_candidates(_sentences, _n_gram_range):
             def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
                 try:
-                    qualified_tags = ['NN', 'NNS', 'NNP']
+                    qualified_tags = ['NN', 'NNS', 'NNP', 'NNPS']
                     # Check if all words are not stop word or punctuation or non-words
                     for _i, _n in enumerate(_n_gram):
                         _word = _n[0]
                         _pos_tag = _n[1]
                         if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                                _word.lower() in KeyPhraseUtility.stop_words or _pos_tag not in qualified_tags:
+                                _word.lower() in KeyPhraseUtility.stop_words: # or _pos_tag not in qualified_tags:
                             return False
                     # n-gram is qualified
                     return True
