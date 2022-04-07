@@ -7,12 +7,13 @@ from functools import reduce
 from pathlib import Path
 
 import inflect
-import nltk
 import pandas as pd
 import plotly.graph_objects as go
 import seaborn as sns
-from nltk import sent_tokenize, WordNetLemmatizer, word_tokenize, pos_tag, ngrams
+from nltk import sent_tokenize, word_tokenize, pos_tag, ngrams
 from nltk.corpus import stopwords
+
+from BERTArticleClusterUtility import BERTArticleClusterUtility
 
 
 class ArticleClusterTermTFIDFUtility:
@@ -65,53 +66,6 @@ class ArticleClusterTermTFIDFUtility:
             fig.write_image(file_path, format='png')
             print(
                 "Output the images of clustered results to {path}".format(path=file_path))
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
-    # Process and clean the text by converting plural nouns to singular nouns
-    # Avoid license sentences
-    @staticmethod
-    def preprocess_text(text):
-        # Change plural nouns to singular nouns using lemmatizer
-        def convert_singular_words(_words, _lemmatiser):
-            # Tag the words with part-of-speech tags
-            _pos_tags = nltk.pos_tag(_words)
-            # Convert plural word to singular
-            _singular_words = []
-            for i, (_word, _pos_tag) in enumerate(_pos_tags):
-                try:
-                    # NNS indicates plural nouns and convert the plural noun to singular noun
-                    if _pos_tag == 'NNS':
-                        _singular_word = _lemmatiser.lemmatize(_word.lower())
-                        if _word[0].isupper():  # Restore the uppercase
-                            _singular_word = _singular_word.capitalize()  # Upper case the first character
-                        _singular_words.append(_singular_word)
-                    else:
-                        _singular_words.append(_word)
-                except Exception as _err:
-                    print("Error occurred! {err}".format(err=_err))
-            # Return all lemmatized words
-            return _singular_words
-
-        try:
-            lemmatizer = WordNetLemmatizer()
-            # Split the text into sentence
-            sentences = sent_tokenize(text)
-            clean_sentences = []
-            # Tokenize the text
-            for sentence in sentences:
-                # Remove all the license relevant sentences.
-                if u"\u00A9" not in sentence.lower() and 'licensee' not in sentence.lower() \
-                        and 'copyright' not in sentence.lower() and 'rights reserved' not in sentence.lower():
-                    words = word_tokenize(sentence)
-                    if len(words) > 0:
-                        # Convert plural word to singular
-                        singular_words = convert_singular_words(words, lemmatizer)
-                        # Merge all the words to a sentence
-                        clean_sentences.append(" ".join(singular_words))
-            # Merge all the sentences to a text
-            clean_text = " ".join(clean_sentences)
-            return clean_text
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -185,7 +139,7 @@ class ArticleClusterTermTFIDFUtility:
                 for doc_text in doc_texts:
                     try:
                         if isinstance(doc_text, str):
-                            text = ArticleClusterTermTFIDFUtility.preprocess_text(doc_text.strip())
+                            text = BERTArticleClusterUtility.preprocess_text(doc_text.strip())
                             sentences = sent_tokenize(text)
                             doc_list.extend(sentences)
                     except Exception as _err:
@@ -378,7 +332,7 @@ class ArticleClusterTermTFIDFUtility:
             for doc_id, doc_text in zip(doc_ids, doc_texts):
                 try:
                     # Convert the preprocessed text to n_grams
-                    sentences = sent_tokenize(ArticleClusterTermTFIDFUtility.preprocess_text(doc_text))
+                    sentences = sent_tokenize(BERTArticleClusterUtility.preprocess_text(doc_text))
                     # Obtain the n-grams from the text
                     n_grams = ArticleClusterTermTFIDFUtility.generate_n_gram_candidates(sentences, n_gram_range)
                     # For each topic, find out the document ids that contain the topic

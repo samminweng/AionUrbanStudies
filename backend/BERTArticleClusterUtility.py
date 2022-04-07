@@ -1,16 +1,10 @@
 import os
-import re
 import logging
-import string
-from functools import reduce
 from pathlib import Path
-
-import hdbscan
 import nltk
 import numpy as np
 from matplotlib import pyplot as plt
-from nltk import WordNetLemmatizer, pos_tag
-from nltk.util import ngrams
+from nltk import WordNetLemmatizer
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -19,7 +13,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
 import seaborn as sns
-from sklearn.metrics import silhouette_score, pairwise_distances
+from sklearn.metrics import silhouette_score
 
 # Set logging level
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -212,125 +206,6 @@ class BERTArticleClusterUtility:
             return clean_text
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-
-    # Generate n-gram candidates from a text (a list of sentences)
-    @staticmethod
-    def generate_n_gram_candidates(sentences, n_gram_range):
-        # Check if n_gram candidate does not have stop words, punctuation or non-words
-        def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
-            try:
-                qualified_tags = ['NN', 'NNS', 'JJ', 'NNP']
-                # # # Check if there is any noun
-                nouns = list(filter(lambda _n: _n[1].startswith('NN'), _n_gram))
-                if len(nouns) == 0:
-                    return False
-                # # Check the last word is a nn or nns
-                if _n_gram[-1][1] not in ['NN', 'NNS']:
-                    return False
-                # Check if all words are not stop word or punctuation or non-words
-                for _i, _n in enumerate(_n_gram):
-                    _word = _n[0]
-                    _pos_tag = _n[1]
-                    if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                            _word.lower() in BERTArticleClusterUtility.stop_words or _pos_tag not in qualified_tags:
-                        return False
-                # n-gram is qualified
-                return True
-            except Exception as _err:
-                print("Error occurred! {err}".format(err=_err))
-
-        # Convert n_gram tuples (pos tag and words) to a list of singular words
-        def _convert_n_gram_to_words(_n_gram):
-            _lemma_words = list()
-            for _gram in _n_gram:
-                _word = _gram[0]
-                _pos_tag = _gram[1]
-                _lemma_words.append(_word)
-            return " ".join(_lemma_words)
-
-        candidates = list()
-        # Extract n_gram from each sentence
-        for i, sentence in enumerate(sentences):
-            try:
-                words = word_tokenize(sentence)
-                pos_tags = pos_tag(words)
-                # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
-                _n_grams = list(ngrams(pos_tags, n_gram_range))
-                # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
-                for _n_gram in _n_grams:
-                    if _is_qualified(_n_gram):
-                        n_gram_words = _convert_n_gram_to_words(_n_gram)
-                        candidates.append(n_gram_words)  # Convert n_gram (a list of words) to a string
-            except Exception as _err:
-                print("Error occurred! {err}".format(err=_err))
-        return candidates
-
-    # Experiment HDBSCAN clustering with different kinds of parameters
-    @staticmethod
-    def cluster_outliers_experiments_by_hdbscan(dimension, doc_vectors):
-        # Collect clustering results and find outliers and the cluster of minimal size
-        def collect_cluster_results(_results, _cluster_label):
-            try:
-                _found = next((r for r in _results if r['cluster_no'] == _cluster_label), None)
-                if not _found:
-                    _results.append({'cluster_no': _cluster_label, 'count': 1})
-                else:
-                    _found['count'] += 1
-                # Sort the results
-                _results = sorted(_results, key=lambda c: (c['count'], c['cluster_no']))
-                return _results
-            except Exception as _err:
-                print("Error occurred! {err}".format(err=_err))
-
-        # Store all experiment results
-        results = list()
-        # Cluster the doc vectors with different parameters
-        for min_samples in [None] + list(range(1, 21)):
-            for min_cluster_size in range(5, 21):
-                for epsilon in [0.0]:
-                    result = {'dimension': dimension,
-                              'min_cluster_size': min_cluster_size,
-                              'min_samples': str(min_samples),
-                              'epsilon': epsilon,
-                              'outliers': 'None',
-                              'total_clusters': 'None',
-                              'cluster_results': 'None',
-                              'Silhouette_score': 'None',
-                              'cluster_labels': 'None'}
-                    try:
-                        # Compute the cosine distance/similarity for each doc vectors
-                        distances = pairwise_distances(doc_vectors, metric='cosine')
-                        # Apply UMAP to reduce vectors
-                        cluster_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
-                                                         min_samples=min_samples,
-                                                         cluster_selection_epsilon=epsilon,
-                                                         metric='precomputed').fit_predict(
-                            distances.astype('float64')).tolist()
-                        df = pd.DataFrame()
-                        df['cluster_labels'] = cluster_labels
-                        df['doc_vectors'] = distances.tolist()
-                        # Include the cluster labels
-                        result['cluster_labels'] = cluster_labels
-                        # Collect all the cluster labels as a single list
-                        cluster_results = reduce(lambda pre, cur: collect_cluster_results(pre, cur), cluster_labels,
-                                                 list())
-                        result['cluster_results'] = cluster_results
-                        # Compute silhouette score
-                        outlier_df = df[df['cluster_labels'] == -1]
-                        no_outlier_df = df[df['cluster_labels'] != -1]
-                        result['outliers'] = len(outlier_df)
-                        result['total_clusters'] = len(cluster_results)
-                        if len(no_outlier_df) > 0:
-                            score = BERTArticleClusterUtility.compute_Silhouette_score(
-                                no_outlier_df['cluster_labels'].tolist(),
-                                np.vstack(no_outlier_df['doc_vectors'].tolist()))
-                            result['Silhouette_score'] = score
-                    except Exception as err:
-                        print("Error occurred! {err}".format(err=err))
-                    print(result)
-                    results.append(result)
-
-        return results
 
     # Find the duplicate papers in the corpus
     @staticmethod

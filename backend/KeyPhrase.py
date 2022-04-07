@@ -2,15 +2,11 @@ import os.path
 import sys
 from argparse import Namespace
 from functools import reduce
-
-import numpy as np
 from nltk import sent_tokenize, word_tokenize
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 import pandas as pd
 import logging
-
-from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 from KeyPhraseUtility import KeyPhraseUtility
 import getpass
 
@@ -223,7 +219,8 @@ class KeyPhraseExtraction:
                     # group_df['Cluster'] = cluster_no
                     group_df['Parent'] = 'root'
                     group_df = group_df[['Group', 'NumPhrases', 'Key-phrases', 'NumDocs',
-                                         'DocIds', 'score', 'dimension', 'min_samples', 'min_cluster_size']]  # Re-order the column list
+                                         'DocIds', 'score', 'dimension', 'min_samples',
+                                         'min_cluster_size']]  # Re-order the column list
                     folder = os.path.join(key_phrase_folder, 'group_key_phrases', 'keyword_cluster')
                     Path(folder).mkdir(parents=True, exist_ok=True)
                     path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.csv')
@@ -269,7 +266,9 @@ class KeyPhraseExtraction:
                     doc_key_phrases = pd.read_json(path).to_dict("records")
                     # print(doc_key_phrases)
                     # Re-group keyword cluster > 30
-                    new_key_phrase_groups = KeyPhraseUtility.run_re_grouping_experiments(cluster_no, self.model, key_phrase_groups, doc_key_phrases)
+                    new_key_phrase_groups = KeyPhraseUtility.run_re_grouping_experiments(cluster_no, self.model,
+                                                                                         key_phrase_groups,
+                                                                                         doc_key_phrases)
                     print("=== Complete re-grouping the key phrases in cluster #{c_no} ===".format(
                         c_no=cluster_no))
                     cluster['Key-phrases'] = new_key_phrase_groups
@@ -289,7 +288,6 @@ class KeyPhraseExtraction:
         except Exception as _err:
             print("Error occurred! {err}".format(err=_err))
             sys.exit(-1)
-
 
     # Combine the TF-IDF terms and grouped key phrases results
     def combine_terms_key_phrases_results(self):
@@ -350,8 +348,6 @@ class KeyPhraseExtraction:
 # Main entry
 if __name__ == '__main__':
     try:
-        # _cluster_no = 1
-        # kp = KeyPhraseSimilarity(_cluster_no)
         kp = KeyPhraseExtraction()
         # kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()
