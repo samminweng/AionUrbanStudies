@@ -144,8 +144,8 @@ class KeywordCluster:
 
     # Group the key phrases with different parameters using HDBSCAN clustering
     def experiment_group_cluster_key_phrases(self):
-        # cluster_no_list = self.cluster_no_list
-        cluster_no_list = [8]
+        cluster_no_list = self.cluster_no_list
+        # cluster_no_list = [8]
         for cluster_no in cluster_no_list:
             try:
                 key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
@@ -184,8 +184,8 @@ class KeywordCluster:
         try:
             # Collect the best results in each cluster
             results = list()
-            # cluster_no_list = self.cluster_no_list
-            cluster_no_list = [8]
+            cluster_no_list = self.cluster_no_list
+            # cluster_no_list = [8]
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper
@@ -232,8 +232,8 @@ class KeywordCluster:
                     path = os.path.join(folder, 'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
                     group_df.to_json(path, orient='records')
                     print('Output the summary of grouped key phrase to ' + path)
-                except Exception as err:
-                    print("Error occurred! {err}".format(err=err))
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
                     sys.exit(-1)
             # write best results of each group
             df = pd.DataFrame(results,
@@ -255,7 +255,8 @@ class KeywordCluster:
         path = os.path.join(folder, 'group_key_phrases', 'cluster_key_phrases_group.json')
         clusters = pd.read_json(path).to_dict("records")
         # minimal cluster size
-        cluster_no_list = [8]
+        # cluster_no_list = self.cluster_no_list
+        cluster_no_list = [3, 8]
         try:
             for cluster_no in cluster_no_list:
                 try:
