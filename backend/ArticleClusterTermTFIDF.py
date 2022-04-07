@@ -5,10 +5,10 @@ from functools import reduce
 from pathlib import Path
 import pandas as pd
 # Obtain the cluster results of the best results and extract cluster topics using TF-IDF
-from ClusterTopicUtility import ClusterTopicUtility
+from ArticleClusterTermTFIDFUtility import ArticleClusterTermTFIDFUtility
 
 
-class ClusterTermTFIDF:
+class ArticleClusterTermTFIDF:
     def __init__(self):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
@@ -121,7 +121,7 @@ class ClusterTermTFIDF:
                 file_path = os.path.join(image_folder, 'iteration_' + str(iteration) + ".png")
                 title = 'Iteration = ' + str(iteration)
                 # Visualise the cluster results
-                ClusterTopicUtility.visualise_cluster_results_by_iteration(title, copied_results, file_path)
+                ArticleClusterTermTFIDFUtility.visualise_cluster_results_by_iteration(title, copied_results, file_path)
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         # # Sort the results by DocID
@@ -207,9 +207,9 @@ class ClusterTermTFIDF:
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text),
                       'Score': "mean"})
             # Get top 100 topics (1, 2, 3 grams) for each cluster
-            n_gram_term_list = ClusterTopicUtility.get_n_gram_terms('HDBSCAN_Cluster',
-                                                                    docs_per_cluster_df,
-                                                                    term_folder)
+            n_gram_term_list = ArticleClusterTermTFIDFUtility.get_n_gram_terms('HDBSCAN_Cluster',
+                                                                               docs_per_cluster_df,
+                                                                               term_folder)
             results = []
             for i, cluster in docs_per_cluster_df.iterrows():
                 try:
@@ -226,13 +226,13 @@ class ClusterTermTFIDF:
                         # Collect top 300 terms
                         cluster_terms = n_gram['terms'][str(cluster_no)][:300]
                         # Create a mapping between the topic and its associated articles (doc)
-                        doc_per_term = ClusterTopicUtility.group_docs_by_terms(n_gram_range,
-                                                                               doc_ids, doc_texts,
-                                                                               cluster_terms)
+                        doc_per_term = ArticleClusterTermTFIDFUtility.group_docs_by_terms(n_gram_range,
+                                                                                          doc_ids, doc_texts,
+                                                                                          cluster_terms)
                         n_gram_type = 'Term-' + str(n_gram_range) + '-gram'
                         result[n_gram_type] = doc_per_term
                         n_gram_terms += doc_per_term
-                    result['Term-N-gram'] = ClusterTopicUtility.merge_n_gram_terms(n_gram_terms)
+                    result['Term-N-gram'] = ArticleClusterTermTFIDFUtility.merge_n_gram_terms(n_gram_terms)
                     results.append(result)
                     print('Derive term of cluster #{no}'.format(no=cluster_no))
                 except Exception as _err:
@@ -254,6 +254,13 @@ class ClusterTermTFIDF:
 
     #  Summarize cluster terms and output to a single file
     def summarize_cluster_terms(self):
+        def get_cluster_terms(terms, top_n=10):
+            # Get top 10 terms
+            cluster_terms = terms[:top_n]
+            # Sort the cluster terms by number of docs and freq
+            cluster_terms = sorted(cluster_terms, key=lambda t: (len(t['doc_ids']), t['freq']), reverse=True)
+            # print(cluster_terms)
+            return cluster_terms
         try:
             term_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms')
             # Load cluster topics
@@ -262,13 +269,7 @@ class ClusterTermTFIDF:
             # Write out to csv and json file
             cluster_df = cluster_df[['Cluster', 'Score', 'NumDocs', 'DocIds', 'Term-N-gram']]
             cluster_df.rename(columns={'Term-N-gram': 'Terms'}, inplace=True)
-            cluster_df['Terms'] = cluster_df['Terms'].apply(
-                lambda terms: ClusterTopicUtility.get_cluster_terms(terms, 10))
-            # total_clusters = cluster_df['Cluster'].max() + 1
-            # # # Output top 50 topics by 1, 2 and 3-grams at specific cluster
-            # for cluster_no in range(-1, total_clusters):
-            #     folder = os.path.join(term_folder, 'n_grams')
-            #     ClusterTopicUtility.flatten_tf_idf_terms(cluster_no, folder)
+            cluster_df['Terms'] = cluster_df['Terms'].apply(lambda terms: get_cluster_terms(terms, 10))
             # # Output cluster df to csv or json file
             path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
@@ -297,7 +298,7 @@ if __name__ == '__main__':
         # ct = ClusterTermTFIDF(last_iteration, cluster_no)
         # ct.collect_iterative_cluster_results()
         # ct.output_iterative_cluster_results()
-        ct = ClusterTermTFIDF()
+        ct = ArticleClusterTermTFIDF()
         ct.collect_article_cluster_results()
         ct.derive_cluster_terms_by_TF_IDF()
         ct.summarize_cluster_terms()

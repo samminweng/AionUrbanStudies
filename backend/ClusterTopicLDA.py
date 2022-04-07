@@ -148,7 +148,7 @@ class ClusterTopicLDA:
             print("Error occurred! {err}".format(err=err))
 
     # Compute the score
-    def compute_key_phrase_scores(self):
+    def collect_topic_word_from_keyword_group(self):
         try:
             # Load n-grams
             path = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'n_grams',
@@ -203,20 +203,20 @@ class ClusterTopicLDA:
             print("Error occurred! {err}".format(err=err))
 
     # Combine LDA Cluster topics with grouped key phrase results
-    def combine_LDA_topics_key_phrase_to_file(self):
+    def combine_topics_keyword_cluster_to_file(self):
         try:
             # # Load key phrase scores
             folder = os.path.join('output', self.args.case_name, self.args.folder, 'key_phrases')
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.json')
             cluster_df = pd.read_json(path)
-            # Load results of LDA Topic model
-            folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'lda_scores')
-            path = os.path.join(folder, self.args.case_name + '_LDA_topics.json')
-            lda_topics_df = pd.read_json(path)
+            # # Load results of LDA Topic model
+            # folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'lda_scores')
+            # path = os.path.join(folder, self.args.case_name + '_LDA_topics.json')
+            # lda_topics_df = pd.read_json(path)
             # # # Load cluster topic, key phrases
-            cluster_df['NumTopics'] = lda_topics_df['NumTopics'].tolist()
-            cluster_df['LDATopics'] = lda_topics_df['LDATopics'].tolist()
-            cluster_df['LDAScore'] = lda_topics_df['LDAScore'].tolist()
+            # cluster_df['NumTopics'] = lda_topics_df['NumTopics'].tolist()
+            # cluster_df['LDATopics'] = lda_topics_df['LDATopics'].tolist()
+            # cluster_df['LDAScore'] = lda_topics_df['LDAScore'].tolist()
             # Load results of key phrase groups
             folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'key_phrase_scores')
             path = os.path.join(folder, self.args.case_name + '_key_phrase_scores.json')

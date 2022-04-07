@@ -36,9 +36,9 @@ nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
 nltk.data.path.append(nltk_path)
 
 
-# Utility for deriving the topics from each cluster of documents.
-class BERTModelDocClusterUtility:
-    case_name = 'UrbanStudyCorpus'
+# Utility for finding article clusters
+class BERTArticleClusterUtility:
+    case_name = 'AIMLUrbanStudyCorpus'
     # Static variable
     stop_words = list(stopwords.words('english'))
 
@@ -71,8 +71,8 @@ class BERTModelDocClusterUtility:
 
     @staticmethod
     def visualise_cluster_results_by_methods():
-        _path = os.path.join(BERTModelDocClusterUtility.output_path,
-                             BERTModelDocClusterUtility.case_name + '_clusters.json')
+        _path = os.path.join(BERTArticleClusterUtility.output_path,
+                             BERTArticleClusterUtility.case_name + '_clusters.json')
         cluster_result_df = pd.read_json(_path)
         fig, (ax0, ax1, ax2) = plt.subplots(1, 3)
         # # Visualise
@@ -232,7 +232,7 @@ class BERTModelDocClusterUtility:
                     _word = _n[0]
                     _pos_tag = _n[1]
                     if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                            _word.lower() in BERTModelDocClusterUtility.stop_words or _pos_tag not in qualified_tags:
+                            _word.lower() in BERTArticleClusterUtility.stop_words or _pos_tag not in qualified_tags:
                         return False
                 # n-gram is qualified
                 return True
@@ -321,7 +321,7 @@ class BERTModelDocClusterUtility:
                         result['outliers'] = len(outlier_df)
                         result['total_clusters'] = len(cluster_results)
                         if len(no_outlier_df) > 0:
-                            score = BERTModelDocClusterUtility.compute_Silhouette_score(
+                            score = BERTArticleClusterUtility.compute_Silhouette_score(
                                 no_outlier_df['cluster_labels'].tolist(),
                                 np.vstack(no_outlier_df['doc_vectors'].tolist()))
                             result['Silhouette_score'] = score

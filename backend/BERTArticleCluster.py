@@ -14,11 +14,13 @@ import umap  # (UMAP) is a dimension reduction technique https://umap-learn.read
 import matplotlib.pyplot as plt
 from pathlib import Path
 from sklearn.metrics import pairwise_distances
-from BERTModelDocClusterUtility import BERTModelDocClusterUtility
+
 import seaborn as sns  # statistical graph library
 import getpass
 
 # Set logging level
+from BERTArticleClusterUtility import BERTArticleClusterUtility
+
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 # Set NLTK data path
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
@@ -39,11 +41,10 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
-class BERTModelDocCluster:
+class BERTArticleCluster:
     def __init__(self, _iteration, _cluster_no):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
-            # case_name='CultureUrbanStudyCorpus',
             cluster_no=_cluster_no,
             cluster_folder='cluster_' + str(_cluster_no),
             iteration=_iteration,
@@ -203,7 +204,7 @@ class BERTModelDocCluster:
                                 if len(cluster_df) > 0:
                                     cluster_labels = cluster_df['clusters'].tolist()
                                     cluster_vectors = np.vstack(cluster_df['vectors'].tolist())
-                                    result['Silhouette_score'] = BERTModelDocClusterUtility.compute_Silhouette_score(
+                                    result['Silhouette_score'] = BERTArticleClusterUtility.compute_Silhouette_score(
                                         cluster_labels,
                                         cluster_vectors)
                             except Exception as _err:
@@ -276,7 +277,7 @@ class BERTModelDocCluster:
                 folder = os.path.join(parent_folder, 'experiments', 'images')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Output cluster results to png files
-                BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels,
+                BERTArticleClusterUtility.visualise_cluster_results(cluster_labels,
                                                                      df['x'].tolist(), df['y'].tolist(),
                                                                      d_result, folder)
         except Exception as err:
@@ -333,7 +334,7 @@ class BERTModelDocCluster:
             folder = os.path.join(parent_folder, 'hdbscan_clustering')
             Path(folder).mkdir(parents=True, exist_ok=True)
             # Output cluster results to png
-            BERTModelDocClusterUtility.visualise_cluster_results(cluster_labels,
+            BERTArticleClusterUtility.visualise_cluster_results(cluster_labels,
                                                                  cluster_df['x'].tolist(), cluster_df['y'].tolist(),
                                                                  best_result, folder)
             # Output condense tree of the best cluster results
@@ -415,10 +416,10 @@ class BERTModelDocCluster:
 if __name__ == '__main__':
     try:
         cluster_no = 2
-        BERTModelDocClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
+        BERTArticleClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
         iteration = 2
-        mdc = BERTModelDocCluster(iteration, cluster_no)
+        mdc = BERTArticleCluster(iteration, cluster_no)
         mdc.get_sentence_vectors(is_load=False)
         mdc.run_HDBSCAN_cluster_experiments()
         mdc.summarize_HDBSCAN_cluster_experiment_results()

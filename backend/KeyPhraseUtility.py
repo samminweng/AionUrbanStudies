@@ -37,6 +37,29 @@ nltk.data.path.append(nltk_path)
 class KeyPhraseUtility:
     stop_words = list(stopwords.words('english'))
 
+    @staticmethod
+    def write_keyword_cluster_summary(results, folder):
+        # Write the results to a summary
+        kp_group_summary = list()
+        for result in results:
+            kp_groups = result['Key-phrases']
+            score = kp_groups[0]['score']
+            summary = {"cluster": result['Cluster'], "count": len(kp_groups), "score": score}
+            total = 0
+            for group_no in range(1, 6):
+                if group_no <= len(kp_groups):
+                    num_phrases = kp_groups[group_no - 1]['NumPhrases']
+                    summary['kp_cluster#' + str(group_no)] = num_phrases
+                    total = total + num_phrases
+            summary['total'] = total
+            kp_group_summary.append(summary)
+        # Write keyword group results to a summary (csv)
+        path = os.path.join(folder, "key_phrase_groups.csv")
+        kp_group_df = pd.DataFrame(kp_group_summary, columns=['cluster', "count", "score", "total",
+                                                              "kp_cluster#1", "kp_cluster#2", "kp_cluster#3",
+                                                              "kp_cluster#4", "kp_cluster#5"])
+        kp_group_df.to_csv(path, encoding='utf-8', index=False)
+
     # Get the topic words from each group of key phrases
     @staticmethod
     def collect_topic_words_from_key_phrases(key_phrases, doc_n_grams):
@@ -485,7 +508,7 @@ class KeyPhraseUtility:
 
     # Cluster key phrases (vectors) using HDBSCAN clustering
     @staticmethod
-    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, model, n_neighbors=100):
+    def group_key_phrase_experiments_by_HDBSCAN(key_phrases, model, is_fined_grain=False, n_neighbors=40):
         def collect_group_results(_results, _group_label):
             try:
                 _found = next((r for r in _results if r['group'] == _group_label), None)
@@ -500,10 +523,12 @@ class KeyPhraseUtility:
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
-        dimensions = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5]
-        min_sample_list = [20, 15, 10, 5, 1]
-        min_cluster_size_list = list(range(30, 10, -1))
-        # min_cluster_size_list = list(range(30, 20, -1))
+        dimensions = [100, 90, 80, 70, 60, 50, 45, 40, 35, 30]
+        min_sample_list = [20, 15, 10]
+        min_cluster_size_list = list(range(30, 9, -1))
+        if is_fined_grain:
+            dimensions = list(range(30, 3, -5))
+            min_sample_list = list(range(10, 3, -1))
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
@@ -561,6 +586,7 @@ class KeyPhraseUtility:
                                 # print(result)
                             except Exception as err:
                                 print("Error occurred! {err}".format(err=err))
+                                sys.exit(-1)
                 print("=== Complete to group the key phrases at dimension {d} ===".format(d=dimension))
             # Return all experiment results
             return results
@@ -682,49 +708,59 @@ class KeyPhraseUtility:
     @staticmethod
     def run_re_grouping_experiments(cluster_no, model, key_phrase_groups, doc_key_phrases):
         # Collect the key phrases linked to the docs
-        def _collect_doc_ids(_doc_key_phrases, _group):
+        def _collect_doc_ids(_doc_key_phrases, _key_phrases):
             _doc_ids = list()
             for _doc in _doc_key_phrases:
                 # find if any doc key phrases appear in the grouped key phrases
                 for _candidate in _doc['Key-phrases']:
-                    _found = next((_key_phrase for _key_phrase in _group if _key_phrase.lower() == _candidate.lower()),
-                                  None)
+                    _found = next((_key_phrase for _key_phrase in _key_phrases
+                                   if _key_phrase.lower() == _candidate.lower()), None)
                     if _found:
                         _doc_ids.append(_doc['DocId'])
                         break
             return _doc_ids
 
         try:
-
-            # Re-group the group size > 30 only
-            key_phrase_groups = list(filter(lambda g: len(g['Key-phrases']) > 30, key_phrase_groups))
             # Store experiment results
             results = list()
             cur_group_no = 1
             # Run the grouping experiments to regroup the key phrases
             for group in key_phrase_groups:
                 try:
-
                     key_phrases = group['Key-phrases']
-                    if len(key_phrases) < 40:
+                    if len(key_phrases) < 30:
                         group['Group'] = cur_group_no
                         results.append(group)
                         cur_group_no = cur_group_no + 1
                     else:
-                        experiments = KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(key_phrases, model)
+                        experiments = KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(key_phrases, model,
+                                                                                               is_fined_grain=True)
                         # Sort the experiments by sort
-                        experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['dimension']),
+                        experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_samples']),
                                              reverse=True)
                         # Get the best experiment
                         best_ex = experiments[0]
+                        score = best_ex['score']
+                        dimension = best_ex['dimension']
+                        min_samples = best_ex['min_samples']
+                        min_cluster_size = best_ex['min_cluster_size']
                         # Get the grouping labels of key phrases
                         group_labels = best_ex['group_labels']
                         group_list = list(set(group_labels))
                         if len(group_list) > 1:
                             grouping_results = list(zip(key_phrases, group_labels))
                             for group_no in group_list:
-                                sub_key_phrases = list(map(lambda g: g[0], list(filter(lambda g: g[1] == group_no, grouping_results))))
-                                print(sub_key_phrases)
+                                sub_key_phrases = list(
+                                    map(lambda g: g[0], list(filter(lambda g: g[1] == group_no, grouping_results))))
+                                # print(sub_key_phrases)
+                                doc_ids = _collect_doc_ids(doc_key_phrases, sub_key_phrases)
+                                new_group = {'Group': cur_group_no, 'NumPhrases': len(sub_key_phrases),
+                                             'Key-phrases': sub_key_phrases,
+                                             'DocIds': doc_ids, 'NumDocs': len(doc_ids),
+                                             'score': score, 'dimension': dimension, 'min_samples': min_samples,
+                                             'min_cluster_size': min_cluster_size}
+                                results.append(new_group)
+                                cur_group_no = cur_group_no + 1
                         else:
                             group['Group'] = cur_group_no
                             results.append(group)
@@ -769,4 +805,3 @@ class KeyPhraseUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)
-
