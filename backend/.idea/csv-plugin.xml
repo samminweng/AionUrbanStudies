@@ -66,41 +66,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/data/CultureUrbanStudyCorpus/iteration_0/CultureUrbanStudyCorpus.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/CultureUrbanStudyCorpus/iteration_0/CultureUrbanStudyCorpus_cleaned.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/CultureUrbanStudyCorpus/iteration_0/CultureUrbanStudyCorpus_irrelevant_docs.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/CultureUrbanStudyCorpus/iteration_1/CultureUrbanStudyCorpus_cleaned.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/CultureUrbanStudyCorpus/iteration_2/CultureUrbanStudyCorpus_cleaned.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_-1/AIMLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics.csv">
           <value>
             <Attribute>
@@ -500,20 +465,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/LDA_topics/lda_scores/AIMLUrbanStudyCorpus_LDA_topics.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/LDA_topics/n_grams/AIMLUrbanStudyCorpus_doc_n_grams.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/cluster_terms/AIMLUrbanStudyCorpus_TF-IDF_cluster_terms.csv">
           <value>
             <Attribute>
@@ -536,13 +487,6 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/AIMLUrbanStudyCorpus_cluster_terms_key_phrases.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/AIMLUrbanStudyCorpus_key_phrase_groups.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -578,27 +522,6 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/tf-idf/TF-IDF_doc_terms_523.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/tf-idf/cluster_8/TF-IDF_doc_terms_2.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/tf-idf/cluster_8/TF-IDF_doc_terms_206.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/tf-idf/cluster_8/TF-IDF_doc_terms_325.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

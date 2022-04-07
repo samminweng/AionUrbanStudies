@@ -6,8 +6,6 @@ import re
 import string
 import sys
 from functools import reduce
-from pathlib import Path
-
 import hdbscan
 import nltk
 import umap
@@ -17,10 +15,8 @@ import numpy as np
 # Load function words
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
-from nltk.stem import WordNetLemmatizer
 
-# Set NLTK data path
-from BERTModelDocClusterUtility import BERTModelDocClusterUtility
+from BERTArticleClusterUtility import BERTArticleClusterUtility
 
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
 if os.name == 'nt':
@@ -33,8 +29,8 @@ nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
 nltk.data.path.append(nltk_path)
 
 
-# Helper function for cluster Similarity
-class KeyPhraseUtility:
+# Helper function for keyword cluster
+class KeywordClusterUtility:
     stop_words = list(stopwords.words('english'))
 
     @staticmethod
@@ -59,137 +55,6 @@ class KeyPhraseUtility:
                                                               "kp_cluster#1", "kp_cluster#2", "kp_cluster#3",
                                                               "kp_cluster#4", "kp_cluster#5"])
         kp_group_df.to_csv(path, encoding='utf-8', index=False)
-
-    # Get the topic words from each group of key phrases
-    @staticmethod
-    def collect_topic_words_from_key_phrases(key_phrases, doc_n_grams):
-        # create a mapping between word and frequencies
-        def create_word_freq_list(_key_phrases, _doc_n_grams):
-            def _create_bi_grams(_words):
-                _bi_grams = list()
-                if len(_words) == 2:
-                    _bi_grams.append(_words[0] + " " + _words[1])
-                elif len(_words) == 3:
-                    _bi_grams.append(_words[1] + " " + _words[2])
-                return _bi_grams
-
-            # Get the docs containing the word
-            def _get_doc_ids_by_key_phrase(_key_phrase, _doc_n_grams):
-                doc_ids = list()
-                for doc in _doc_n_grams:
-                    doc_id = doc[0]
-                    n_grams = doc[1]
-                    found = list(filter(lambda n_gram: _key_phrase.lower() in n_gram.lower(), n_grams))
-                    if len(found) > 0:
-                        doc_ids.append(doc_id)
-                return doc_ids
-
-            _word_freq_list = list()
-            # Collect word frequencies from the list of key phrases.
-            for key_phrase in key_phrases:
-                try:
-                    key_phrase_doc_ids = _get_doc_ids_by_key_phrase(key_phrase, _doc_n_grams)
-                    words = key_phrase.split()
-                    n_grams = words + _create_bi_grams(words)
-                    # print(n_grams)
-                    for n_gram in n_grams:
-                        r = len(n_gram.split(" "))
-                        found = next((wf for wf in _word_freq_list if wf['word'].lower() == n_gram.lower()), None)
-                        if not found:
-                            wf = {'word': n_gram.lower(), 'freq': 1, 'range': r, 'doc_ids': key_phrase_doc_ids}
-                            if n_gram.isupper():
-                                wf['word'] = n_gram
-                            _word_freq_list.append(wf)
-                        else:
-                            # Updated doc id
-                            found['doc_ids'] = found['doc_ids'] + key_phrase_doc_ids
-                            # Remove duplicates
-                            found['doc_ids'] = list(dict.fromkeys(found['doc_ids']))
-                            found['freq'] = len(found['doc_ids'])
-                except Exception as err:
-                    print("Error occurred! {err}".format(err=err))
-            return _word_freq_list
-
-        # Update top word frequencies and pick up top words that increase the maximal coverage
-        def pick_top_words(_top_words, _candidate_words, _top_n):
-            # Go through top_words and check if other top words can be merged.
-            # For example, 'traffic prediction' can be merged to 'traffic'
-            try:
-                for i in range(0, len(_top_words)):
-                    top_word = _top_words[i]
-                    words = top_word['word'].split(" ")
-                    for j in range(i + 1, len(_top_words)):
-                        other_word = _top_words[j]
-                        # Remove duplicated word
-                        _found = list(filter(lambda w: w in words, other_word['word'].split(" ")))
-                        if len(_found) > 0:
-                            other_word['doc_ids'] = list()
-                # Remove no associated doc ids
-                _top_words = list(filter(lambda w: len(w['doc_ids']) > 0, top_words))
-                for top_word in _top_words:
-                    words = top_word['word'].split(" ")
-                    for word in words:
-                        # Remove candidate words containing words
-                        _candidate_words = list(filter(lambda cw: word not in cw['word'], _candidate_words))
-                    # # # # Go through each candidate words and pick up
-                    # for candidate_word in _candidate_words:
-                    #     # Update the doc_id from
-                    #     candidate_word['doc_ids'] = list(filter(lambda _id: _id not in top_word['doc_ids'], candidate_word['doc_ids']))
-                # Add the candidate words if any top word is removed from the list
-                all_words = _top_words + _candidate_words
-                # Sort all the words by doc_ids and frequencies
-                all_words = sorted(all_words, key=lambda wf: (len(wf['doc_ids']), wf['range'], wf['freq']),
-                                   reverse=True)
-                return all_words[:_top_n]
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-
-        # Check if
-        def is_found(_word, _new_top_words):
-            _found = next((nw for nw in _new_top_words if nw['word'] == _word['word']), None)
-            if _found:
-                return True
-            return False
-
-        word_freq_list = create_word_freq_list(key_phrases, doc_n_grams)
-        # Pick up top 5 frequent words
-        top_n = 5
-        # Sort by freq and the number of docs
-        word_freq_list = sorted(word_freq_list, key=lambda wf: (wf['freq'], wf['range'], len(wf['doc_ids'])),
-                                reverse=True)
-        print(word_freq_list)
-        word_freq_clone = copy.deepcopy(word_freq_list)
-        top_words = word_freq_clone[:top_n]
-        candidate_words = word_freq_clone[top_n:]
-        is_pick = True
-        if is_pick:
-            new_top_words = copy.deepcopy(top_words)
-            is_same = False
-            iteration = 0
-            while True:
-                if iteration >= 10 or is_same:
-                    top_words = new_top_words
-                    break
-                # Pass the copy array to the function to avoid change the values of 'top_word' 'candidate_words'
-                new_top_words = pick_top_words(top_words, candidate_words, top_n)
-                # Check if new and old top words are the same
-                is_same = True
-                for new_word in new_top_words:
-                    found = next((w for w in top_words if w['word'] == new_word['word']), None)
-                    if not found:
-                        is_same = is_same & False
-                if not is_same:
-                    # Make a copy of wfl
-                    word_freq_clone = copy.deepcopy(word_freq_list)
-                    # Replace the old top words with new top words
-                    top_words = list(filter(lambda word: is_found(word, new_top_words), word_freq_clone))
-                    candidate_words = list(filter(lambda word: not is_found(word, new_top_words), word_freq_clone))
-                    iteration += 1
-            # assert len(top_words) >= 5, "topic word less than 5"
-        # Sort topic words by frequencies
-        top_words = sorted(top_words, key=lambda w: w['freq'], reverse=True)
-        # Return the top 3
-        return list(map(lambda w: w['word'], top_words[:5]))
 
     @staticmethod
     # Generate Collocation using regular expression patterns
@@ -244,7 +109,7 @@ class KeyPhraseUtility:
                         _word = _n[0]
                         _pos_tag = _n[1]
                         if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                                _word.lower() in KeyPhraseUtility.stop_words:  # or _pos_tag not in qualified_tags:
+                                _word.lower() in KeywordClusterUtility.stop_words:  # or _pos_tag not in qualified_tags:
                             return False
                     # n-gram is qualified
                     return True
@@ -275,7 +140,7 @@ class KeyPhraseUtility:
             frequency_matrix = []
             for doc in _docs:
                 _doc_id = doc['DocId']  # doc id
-                doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Abstract'])
+                doc_text = BERTArticleClusterUtility.preprocess_text(doc['Abstract'])
                 sentences = list()
                 for sentence in sent_tokenize(doc_text):
                     tokens = word_tokenize(sentence)
@@ -568,8 +433,8 @@ class KeyPhraseUtility:
                                     no_outlier_df = df[df['Group'] != -1]
                                     no_outlier_labels = no_outlier_df['Group'].tolist()
                                     no_outlier_vectors = np.vstack(no_outlier_df['Vector'].tolist())
-                                    score = BERTModelDocClusterUtility.compute_Silhouette_score(no_outlier_labels,
-                                                                                                no_outlier_vectors)
+                                    score = BERTArticleClusterUtility.compute_Silhouette_score(no_outlier_labels,
+                                                                                               no_outlier_vectors)
                                 else:  # All key phrases are identified as outliers
                                     score = -1
                                 # Output the result
@@ -733,8 +598,8 @@ class KeyPhraseUtility:
                         results.append(group)
                         cur_group_no = cur_group_no + 1
                     else:
-                        experiments = KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(key_phrases, model,
-                                                                                               is_fined_grain=True)
+                        experiments = KeywordClusterUtility.group_key_phrase_experiments_by_HDBSCAN(key_phrases, model,
+                                                                                                    is_fined_grain=True)
                         # Sort the experiments by sort
                         experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_samples']),
                                              reverse=True)

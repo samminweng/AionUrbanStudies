@@ -7,10 +7,13 @@ from sentence_transformers import SentenceTransformer
 from pathlib import Path
 import pandas as pd
 import logging
-from KeyPhraseUtility import KeyPhraseUtility
+
+from BERTArticleClusterUtility import BERTArticleClusterUtility
 import getpass
 
 # Set logging level
+from KeywordClusterUtility import KeywordClusterUtility
+
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 # Set Sentence Transformer path
 sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
@@ -19,8 +22,8 @@ if os.name == 'nt':
 Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 
-# Extract key phrases and group key phrases based on the similarity
-class KeyPhraseExtraction:
+# Extract keyword and group keywords based on the similarity
+class KeywordCluster:
     # def __init__(self, _cluster_no):
     def __init__(self):
         self.args = Namespace(
@@ -66,7 +69,7 @@ class KeyPhraseExtraction:
             tfidf_folder = os.path.join(folder, 'tf-idf')
             Path(tfidf_folder).mkdir(parents=True, exist_ok=True)
             # Extract single-word candidates using TF-IDF
-            tfidf_candidates = KeyPhraseUtility.generate_tfidf_terms(corpus_docs, tfidf_folder)
+            tfidf_candidates = KeywordClusterUtility.generate_tfidf_terms(corpus_docs, tfidf_folder)
             # Collect collocation from each cluster of articles
             # cluster_no_list = [8]
             cluster_no_list = self.cluster_no_list
@@ -79,7 +82,7 @@ class KeyPhraseExtraction:
                     #     continue
                     # Get the first doc
                     doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
-                    doc_text = BERTModelDocClusterUtility.preprocess_text(doc['Abstract'])
+                    doc_text = BERTArticleClusterUtility.preprocess_text(doc['Abstract'])
                     sentences = list()
                     for sentence in sent_tokenize(doc_text):
                         tokens = word_tokenize(sentence)
@@ -90,17 +93,17 @@ class KeyPhraseExtraction:
                         # Get top 2 uni_grams from tf-idf terms
                         uni_gram_candidates = doc_tfidf_candidates[:2]
                         # Collect all the candidate collocation words
-                        n_gram_candidates = KeyPhraseUtility.generate_collocation_candidates(sentences)
+                        n_gram_candidates = KeywordClusterUtility.generate_collocation_candidates(sentences)
                         n_gram_candidates = n_gram_candidates + list(map(lambda c: c['term'], uni_gram_candidates))
                         # print(", ".join(n_gram_candidates))
-                        candidate_scores = KeyPhraseUtility.compute_similar_score_key_phrases(self.model,
-                                                                                              doc_text,
-                                                                                              n_gram_candidates)
+                        candidate_scores = KeywordClusterUtility.compute_similar_score_key_phrases(self.model,
+                                                                                                   doc_text,
+                                                                                                   n_gram_candidates)
 
-                        phrase_similar_scores = KeyPhraseUtility.sort_phrases_by_similar_score(candidate_scores)
+                        phrase_similar_scores = KeywordClusterUtility.sort_phrases_by_similar_score(candidate_scores)
                         phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
                         # Rank the high scoring phrases
-                        phrase_scores_mmr = KeyPhraseUtility.re_rank_phrases_by_maximal_margin_relevance(
+                        phrase_scores_mmr = KeywordClusterUtility.re_rank_phrases_by_maximal_margin_relevance(
                             self.model, doc_text, phrase_candidates, self.args.diversity)
                         mmr_key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
                         # filter out single word overlapping with any other
@@ -162,8 +165,8 @@ class KeyPhraseExtraction:
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
 
                 # # Cluster all key phrases using HDBSCAN clustering
-                results = KeyPhraseUtility.group_key_phrase_experiments_by_HDBSCAN(unique_key_phrases,
-                                                                                   self.model)
+                results = KeywordClusterUtility.group_key_phrase_experiments_by_HDBSCAN(unique_key_phrases,
+                                                                                        self.model)
                 # output the experiment results
                 df = pd.DataFrame(results)
                 path = os.path.join(experiment_folder,
@@ -203,8 +206,9 @@ class KeyPhraseExtraction:
                                         'doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
                     doc_key_phrases = pd.read_json(path).to_dict("records")
                     # Obtain the grouped key phrases of the cluster
-                    group_key_phrases = KeyPhraseUtility.group_cluster_key_phrases_with_opt_parameter(optimal_parameter,
-                                                                                                      doc_key_phrases)
+                    group_key_phrases = KeywordClusterUtility.group_cluster_key_phrases_with_opt_parameter(
+                        optimal_parameter,
+                        doc_key_phrases)
                     # Sort the grouped key phrases by most frequent words
                     for group in group_key_phrases:
                         group['Key-phrases'] = group['Key-phrases']
@@ -257,7 +261,8 @@ class KeyPhraseExtraction:
                 try:
                     cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
                     # Load the best grouping of previous level
-                    path = os.path.join(folder, 'group_key_phrases', 'keyword_cluster',
+                    keyword_cluster_folder = os.path.join(folder, 'group_key_phrases', 'keyword_cluster')
+                    path = os.path.join(keyword_cluster_folder,
                                         'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
                     key_phrase_groups = pd.read_json(path).to_dict("records")
                     # Load doc_key_phrases
@@ -266,16 +271,28 @@ class KeyPhraseExtraction:
                     doc_key_phrases = pd.read_json(path).to_dict("records")
                     # print(doc_key_phrases)
                     # Re-group keyword cluster > 30
-                    new_key_phrase_groups = KeyPhraseUtility.run_re_grouping_experiments(cluster_no, self.model,
-                                                                                         key_phrase_groups,
-                                                                                         doc_key_phrases)
+                    new_key_phrase_groups = KeywordClusterUtility.run_re_grouping_experiments(cluster_no, self.model,
+                                                                                              key_phrase_groups,
+                                                                                              doc_key_phrases)
+                    cluster['Key-phrases'] = new_key_phrase_groups
+                    # Write new key phrase groups to
+                    df = pd.DataFrame(new_key_phrase_groups)
+                    df = df[['Group', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds', 'score', 'dimension',
+                             'min_samples', 'min_cluster_size']]
+                    path = os.path.join(keyword_cluster_folder,
+                                        'group_key_phrases_cluster_#' + str(cluster_no) + '.csv')
+                    df.to_csv(path, encoding='utf-8', index=False)
+                    path = os.path.join(keyword_cluster_folder,
+                                        'group_key_phrases_cluster_#' + str(cluster_no) + '.json')
+                    df.to_json(path, orient="records")
                     print("=== Complete re-grouping the key phrases in cluster #{c_no} ===".format(
                         c_no=cluster_no))
-                    cluster['Key-phrases'] = new_key_phrase_groups
                 except Exception as _err:
                     print("Error occurred! {err}".format(err=_err))
                     sys.exit(-1)
                     # write best results of each group
+
+            # Write output to 'cluster_key_phrases_group'
             df = pd.DataFrame(clusters,
                               columns=['Cluster', 'Key-phrases'])
             folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
@@ -348,7 +365,7 @@ class KeyPhraseExtraction:
 # Main entry
 if __name__ == '__main__':
     try:
-        kp = KeyPhraseExtraction()
+        kp = KeywordCluster()
         # kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.experiment_group_cluster_key_phrases()
         kp.group_cluster_key_phrases_with_best_experiments()
