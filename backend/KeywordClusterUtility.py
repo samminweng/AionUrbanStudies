@@ -509,24 +509,6 @@ class KeywordClusterUtility:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Sort the key phrases by counting the occurrences of frequent words.
-    # A phrase contains a more number of freq words and has a high rank
-    @staticmethod
-    def rank_key_phrases_by_top_word_freq(freq_words, key_phrases):
-        key_phrase_scores = list()
-        for key_phrase in key_phrases:
-            try:
-                # Check if the key phrase contains any freq_words
-                found_words = [w for w in freq_words if w.lower() in key_phrase]
-                key_phrase_scores.append({"key-phrase": key_phrase, "score": len(found_words)})
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
-                sys.exit(-1)
-        # Sort the list by score
-        sorted_key_phrases = sorted(key_phrase_scores, key=lambda ks: (ks['score'], ks['key-phrase'].lower()),
-                                    reverse=True)
-        return list(map(lambda ks: ks['key-phrase'], sorted_key_phrases))
-
     # Maximal Marginal Relevance minimizes redundancy and maximizes the diversity of results
     # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     @staticmethod
@@ -637,37 +619,6 @@ class KeywordClusterUtility:
                     sys.exit(-1)
             print("=== Complete grouping the key phrases of cluster {no} ===".format(no=cluster_no))
             return results
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-            sys.exit(-1)
-
-    # Obtain the top 3 frequent words from a list of phrases
-    @staticmethod
-    def get_top_frequent_words(phrases):
-        try:
-            freq_word_dict = {}
-            # Count the word frequencies
-            for phrase in phrases:
-                words = phrase.split(" ")
-                for word in words:
-                    upper_cases = re.findall(r'[A-Z]', word)
-                    # Check if the word contain all upper cases of chars or at least two chars
-                    if word.isupper() or len(upper_cases) >= 2:
-                        # Keep the cases of the word
-                        freq_word_dict.setdefault(word, 0)
-                        freq_word_dict[word] += 1
-                    else:
-                        freq_word_dict.setdefault(word.lower(), 0)
-                        freq_word_dict[word.lower()] += 1
-            # Convert the dict to list
-            freq_words = list()
-            for word, freq in freq_word_dict.items():
-                freq_words.append({'word': word, 'freq': freq})
-            # Sort the list
-            freq_words = sorted(freq_words, key=lambda fw: fw['freq'], reverse=True)
-            # assert len(freq_words) >= 3
-            top_words = list(map(lambda fw: fw['word'], freq_words))
-            return top_words[:3]
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)

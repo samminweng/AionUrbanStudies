@@ -738,7 +738,28 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/AIMLUrbanStudyCorpus_key_phrase_scores.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/AIMLUrbanStudyCorpus_key_phrase_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/key_phrase_scores/AIMLUrbanStudyCorpus_key_phrase_scores.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/keyword_cluster/group_key_phrases_cluster_#8.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

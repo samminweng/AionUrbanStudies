@@ -150,55 +150,51 @@ class TopicKeywordCluster:
             print("Error occurred! {err}".format(err=err))
 
     # Compute the score
-    def collect_topic_word_from_keyword_group(self):
+    def collect_topics_from_keyword_cluster(self):
         try:
-            # Load n-grams
-            path = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'n_grams',
-                                self.args.case_name + '_doc_n_grams.json')
+            folder = os.path.join('output', self.args.case_name, self.args.folder)
             # Load the documents clustered by
-            clusters = pd.read_json(path).to_dict("records")
+            clusters = self.cluster_key_phrases_df.to_dict("records")
             # Store the phrase scores
             results = list()
             # Get the cluster
             for cluster in clusters:
-                doc_n_gram_list = cluster['Ngrams']
-                doc_id_list = cluster['DocId']
-                doc_n_grams = tuple(zip(doc_id_list, doc_n_gram_list))
-                total_score = 0
-                key_phrase_groups = list()
-                for kp_group in cluster['KeyPhrases']:
-                    topic_words = ClusterTopicUtility.collect_topic_words_from_key_phrases(kp_group['Key-phrases'],
-                                                                                           doc_n_grams)
-                    # print(topic_words)
-                    # Topic coherence score
-                    score, word_docs = ClusterTopicUtility.compute_topic_coherence_score(doc_n_grams, topic_words)
-                    key_phrase_group = {"topic_words": topic_words, 'score': round(score, 3), 'word_docIds': word_docs,
-                                        'key-phrases': kp_group['Key-phrases'], 'NumDocs': kp_group['NumDocs'],
-                                        'DocIds': kp_group['DocIds']}
-                    total_score += score
-                    key_phrase_groups.append(key_phrase_group)
-                num_topics = len(cluster['KeyPhrases'])
-                avg_score = total_score / (num_topics * 1.0)
+                cluster_no = cluster['Cluster']
+                if cluster_no != 8:
+                    continue
+                # Load doc_key_phrases for article cluster
+                key_phrase_groups = cluster['KeyPhrases']
+                for group in key_phrase_groups:
+                    topic_words = TopicKeywordClusterUtility.collect_topic_words_from_key_phrases(group['Key-phrases'])
+                    group['KeyPhrases'] = group['Key-phrases']
+                    # score, word_docs = TopicKeywordClusterUtility.compute_topic_coherence_score(doc_n_grams, topic_words)
+                    group["TopicWords"] = topic_words
+                num_topics = len(key_phrase_groups)
+                # Write output to
+                keyword_cluster_folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics',
+                                                      'keyword_cluster')
+                Path(folder).mkdir(parents=True, exist_ok=True)
+                df = pd.DataFrame(key_phrase_groups)
+                df = df[['Group', 'TopicWords', 'NumPhrases', 'KeyPhrases', 'NumDocs', 'DocIds', 'score',
+                         'dimension', 'min_samples', 'min_cluster_size']]
+                path = os.path.join(keyword_cluster_folder, 'group_key_phrases_cluster_#' + str(cluster_no) + ".csv")
+                df.to_csv(path, encoding='utf-8', index=False)
                 # Add one record
                 results.append({
                     "Cluster": cluster['Cluster'],
                     "NumTopics": num_topics,
-                    "KeyPhraseScore": round(avg_score, 3),
-                    "KeyPhrases": key_phrase_groups,
-                    "KeyPhrase_Words": list(
-                        map(lambda topic: (topic['topic_words'], topic['score']), key_phrase_groups))
+                    "KeyPhrases": key_phrase_groups
                 })
             # Write the updated grouped key phrases
             cluster_df = pd.DataFrame(results,
-                                      columns=['Cluster', 'NumTopics', 'KeyPhraseScore', 'KeyPhrase_Words',
-                                               'KeyPhrases'])
-            folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'key_phrase_scores')
-            Path(folder).mkdir(parents=True, exist_ok=True)
+                                      columns=['Cluster', 'NumTopics', 'KeyPhrases'])
+            folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics')
+
             # # # Write to a json file
-            path = os.path.join(folder, self.args.case_name + '_key_phrase_scores.json')
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_topics.json')
             cluster_df.to_json(path, orient='records')
             # Write to a csv file
-            path = os.path.join(folder, self.args.case_name + '_key_phrase_scores.csv')
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_topics.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             print('Output phrase scores to ' + path)
         except Exception as err:
@@ -275,8 +271,8 @@ if __name__ == '__main__':
         # ct = ClusterTopicLDA(_cluster_no)
         ct = TopicKeywordCluster()
         # ct.derive_n_grams_group_by_clusters()
-        ct.derive_topics_from_article_cluster_by_LDA()
-        # ct.compute_key_phrase_scores()
+        # ct.derive_topics_from_article_cluster_by_LDA()
+        ct.collect_topics_from_keyword_cluster()
         # ct.combine_LDA_topics_key_phrase_to_file()
         # ct.collect_statistics()
     except Exception as err:
