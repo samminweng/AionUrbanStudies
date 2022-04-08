@@ -369,12 +369,12 @@ if __name__ == '__main__':
     try:
         kp = KeywordCluster()
         # Extract keyword for each article
-        kp.extract_doc_key_phrases_by_similarity_diversity()
-        kp.combine_cluster_doc_key_phrases()
-        # Extract keyword clusters
-        # kp.experiment_group_cluster_key_phrases()
-        # kp.group_cluster_key_phrases_with_best_experiments()
-        # kp.re_group_key_phrases_within_keyword_cluster()
-        # kp.combine_terms_key_phrases_results()
+        # kp.extract_doc_key_phrases_by_similarity_diversity()
+        # kp.combine_cluster_doc_key_phrases()
+        # # Extract keyword clusters
+        kp.experiment_group_cluster_key_phrases()
+        kp.group_cluster_key_phrases_with_best_experiments()
+        kp.re_group_key_phrases_within_keyword_cluster()
+        kp.combine_terms_key_phrases_results()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

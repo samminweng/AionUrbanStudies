@@ -1,19 +1,19 @@
 import os
 from argparse import Namespace
-# Obtain the cluster results of the best results and extract cluster topics using TF-IDF
 from pathlib import Path
 import gensim
 from gensim import corpora
 from gensim.models import Phrases
 from nltk.tokenize import sent_tokenize
 import pandas as pd
-from BERTModelDocClusterUtility import BERTModelDocClusterUtility
 
-# Ref: https://radimrehurek.com/gensim/auto_examples/tutorials/run_lda.html#sphx-glr-auto-examples-tutorials-run-lda-py
-from ClusterTopicUtility import ClusterTopicUtility
+# Find topic words from each keyword cluster
+from BERTArticleClusterUtility import BERTArticleClusterUtility
+from TopicKeywordClusterUtility import TopicKeywordClusterUtility
 
 
-class ClusterTopicLDA:
+# Obtain the important words from each keyword cluster
+class TopicKeywordCluster:
     def __init__(self):
         # def __init__(self, _cluster_no):
         self.args = Namespace(
@@ -47,29 +47,26 @@ class ClusterTopicLDA:
             n_gram_list = list()
             for text in texts:
                 candidates = list()
-                cleaned_text = BERTModelDocClusterUtility.preprocess_text(text)
+                cleaned_text = BERTArticleClusterUtility.preprocess_text(text)
                 sentences = sent_tokenize(cleaned_text)
-                uni_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 1, is_check=True)
-                bi_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 2, is_check=True)
-                tri_grams = ClusterTopicUtility.generate_n_gram_candidates(sentences, 3, is_check=True)
-                candidates.extend(uni_grams)
-                candidates.extend(bi_grams)
-                candidates.extend(tri_grams)
+                uni_grams = TopicKeywordClusterUtility.generate_n_gram_candidates(sentences, 1)
+                bi_grams = TopicKeywordClusterUtility.generate_n_gram_candidates(sentences, 2)
+                tri_grams = TopicKeywordClusterUtility.generate_n_gram_candidates(sentences, 3)
+                candidates = candidates + uni_grams
+                candidates = candidates + bi_grams
+                candidates = candidates + tri_grams
                 n_gram_list.append(candidates)
             df['Ngrams'] = n_gram_list
             # Group the n-grams by clusters
             docs_per_cluster_df = df.groupby(['Cluster'], as_index=False) \
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Ngrams': lambda n_grams: list(n_grams)})
-
             # Sort by Cluster
             docs_per_cluster_df = docs_per_cluster_df.sort_values(by=['Cluster'], ascending=True)
-            # Load the key phrases
-            docs_per_cluster_df['KeyPhrases'] = self.cluster_key_phrases_df['KeyPhrases'].tolist()
             # Reorder the column
-            docs_per_cluster_df = docs_per_cluster_df[['Cluster', 'KeyPhrases', 'DocId', 'Ngrams']]
+            docs_per_cluster_df = docs_per_cluster_df[['Cluster', 'DocId', 'Ngrams']]
             # Write n_gram to csv and json file
             folder = os.path.join('output', self.args.case_name, self.args.folder,
-                                  'LDA_topics', 'n_grams')
+                                  'topics', 'n_grams')
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, self.args.case_name + '_doc_n_grams.csv')
             docs_per_cluster_df.to_csv(path, index=False, encoding='utf-8')
@@ -80,10 +77,11 @@ class ClusterTopicLDA:
             print("Error occurred! {err}".format(err=err))
 
     # Derive the topic from each cluster of documents using LDA Topic modeling
-    def derive_cluster_topics_by_LDA(self):
+    # Ref: https://radimrehurek.com/gensim/auto_examples/tutorials/run_lda.html#sphx-glr-auto-examples-tutorials-run-lda-py
+    def derive_topics_from_article_cluster_by_LDA(self):
         try:
             path = os.path.join('output', self.args.case_name, self.args.folder,
-                                'LDA_topics', 'n_grams', self.args.case_name + '_doc_n_grams.json')
+                                'topics', 'n_grams', self.args.case_name + '_doc_n_grams.json')
             # Load the documents clustered by
             df = pd.read_json(path)
             # Collect
@@ -92,7 +90,11 @@ class ClusterTopicLDA:
             # Apply LDA Topic model on each cluster of papers
             for i, cluster in df.iterrows():
                 try:
-                    num_topics = len(cluster['KeyPhrases'])  # Get the number of grouped phrases
+                    cluster_no = cluster['Cluster']
+                    # Get the keyword clusters for the article cluster
+                    article_cluster = self.cluster_key_phrase_df.loc[self.cluster_key_phrase_df['Cluster'] == cluster_no].iloc[0]
+                    keyword_clusters = article_cluster['KeyPhrases']
+                    num_topics = len(keyword_clusters)  # Get the number of grouped phrases
                     doc_n_gram_list = cluster['Ngrams']
                     doc_id_list = cluster['DocId']
                     doc_n_grams = tuple(zip(doc_id_list, doc_n_gram_list))
@@ -111,7 +113,7 @@ class ClusterTopicLDA:
                     lda_topics = list()
                     for topic in top_topic_list:
                         topic_words = list(map(lambda t: t[1], topic[0]))
-                        topic_coherence_score, word_docs = ClusterTopicUtility.compute_topic_coherence_score(
+                        topic_coherence_score, word_docs = TopicKeywordClusterUtility.compute_topic_coherence_score(
                             doc_n_grams, topic_words)
                         lda_topics.append({
                             'topic_words': topic_words,
@@ -133,7 +135,7 @@ class ClusterTopicLDA:
             # Write the result to csv and json file
             cluster_df = pd.DataFrame(results,
                                       columns=['Cluster', 'NumTopics', 'LDAScore', 'LDATopics', 'LDATopic_Words'])
-            topic_folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'lda_scores')
+            topic_folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics', 'lda_topics')
             Path(topic_folder).mkdir(parents=True, exist_ok=True)
             # # # Write to a json file
             path = os.path.join(topic_folder,
@@ -231,10 +233,10 @@ class ClusterTopicLDA:
                              'KeyPhraseScore', 'KeyPhrases', 'LDAScore', 'LDATopics']]
             # # # # Write to a json file
             folder = os.path.join('output', self.args.case_name, self.args.folder)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
             df.to_json(path, orient='records')
             # Write to a csv file
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.csv')
             df.to_csv(path, encoding='utf-8', index=False)
             print("Print results to " + path)
         except Exception as err:
@@ -271,11 +273,11 @@ if __name__ == '__main__':
     try:
         # _cluster_no = 2
         # ct = ClusterTopicLDA(_cluster_no)
-        ct = ClusterTopicLDA()
+        ct = TopicKeywordCluster()
         # ct.derive_n_grams_group_by_clusters()
-        # ct.derive_cluster_topics_by_LDA()
+        ct.derive_topics_from_article_cluster_by_LDA()
         # ct.compute_key_phrase_scores()
         # ct.combine_LDA_topics_key_phrase_to_file()
-        ct.collect_statistics()
+        # ct.collect_statistics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

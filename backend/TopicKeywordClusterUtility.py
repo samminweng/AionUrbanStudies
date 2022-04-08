@@ -11,7 +11,7 @@ import copy
 from nltk.corpus import stopwords
 
 
-class ClusterTopicUtility:
+class TopicKeywordClusterUtility:
     # Static variable
     stop_words = list(stopwords.words('english'))
 
@@ -83,7 +83,7 @@ class ClusterTopicUtility:
                     _word = _n[0]
                     _pos_tag = _n[1]
                     if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                            _word.lower() in ClusterTopicUtility.stop_words or _pos_tag not in qualified_tags:
+                            _word.lower() in TopicKeywordClusterUtility.stop_words or _pos_tag not in qualified_tags:
                         return False
                 # n-gram is qualified
                 return True
@@ -109,12 +109,9 @@ class ClusterTopicUtility:
                 _n_grams = list(ngrams(pos_tags, n_gram_range))
                 # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
                 for _n_gram in _n_grams:
-                    if is_check and _is_qualified(_n_gram):
+                    if _is_qualified(_n_gram):
                         n_gram_words = _convert_n_gram_to_words(_n_gram)
                         candidates.append(n_gram_words)  # Convert n_gram (a list of words) to a string
-                    else:
-                        n_gram_words = _convert_n_gram_to_words(_n_gram)
-                        candidates.append(n_gram_words)
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         return candidates
