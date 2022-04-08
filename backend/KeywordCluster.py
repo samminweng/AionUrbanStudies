@@ -45,6 +45,7 @@ class KeywordCluster:
         self.corpus_df['Text'] = self.corpus_df['Title'] + ". " + self.corpus_df['Abstract']
         # Get the total cluster
         self.cluster_no_list = sorted(list(dict.fromkeys(self.corpus_df['Cluster'].tolist())))
+        # self.cluster_no_list = [3, 8]
         # Group all docId of a cluster
         cluster_df = self.corpus_df.groupby(['Cluster'], as_index=False).agg(
             {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
@@ -142,6 +143,37 @@ class KeywordCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Combine clusters and doc key phrases
+    def combine_cluster_doc_key_phrases(self):
+        # Combine all the doc key phrases into a single file 'doc_key_phrases'
+        try:
+            key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases')
+            # Combine the key phrases of all papers to a single file
+            doc_key_phrases = list()
+            for cluster_no in self.cluster_no_list:
+                # Get key phrases of a cluster
+                path = os.path.join(key_phrase_folder, 'doc_key_phrase',
+                                    'doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
+                docs = pd.read_json(path).to_dict("records")
+                for doc in docs:
+                    doc_key_phrases.append({'DocId': doc['DocId'], 'KeyPhrases': doc['Key-phrases']})
+            # Sort key phrases by DocId
+            sorted_key_phrases = sorted(doc_key_phrases, key=lambda k: k['DocId'])
+            # # Aggregated all the key phrases of each individual article
+            df = pd.DataFrame(sorted_key_phrases)
+            # Combine cluster and doc key phrases
+            self.corpus_df['KeyPhrases'] = df['KeyPhrases'].tolist()
+            # Drop column
+            self.corpus_df = self.corpus_df.drop('Text', axis=1)
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder)
+            path = os.path.join(folder, self.args.case_name + '_clusters.csv')
+            self.corpus_df.to_csv(path, index=False, encoding='utf-8')
+            path = os.path.join(folder, self.args.case_name + '_clusters.json')
+            self.corpus_df.to_json(path, orient='records')
+            print('Output key phrases per doc to ' + path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
     # Group the key phrases with different parameters using HDBSCAN clustering
     def experiment_group_cluster_key_phrases(self):
         cluster_no_list = self.cluster_no_list
@@ -195,7 +227,8 @@ class KeywordCluster:
                                         'key_phrases_cluster_#{c}_grouping_experiments.json'.format(c=cluster_no))
                     experiments = pd.read_json(path).to_dict("records")
                     # Sort the experiment results by score
-                    experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['dimension']), reverse=True)
+                    experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_cluster_size']),
+                                         reverse=True)
                     # Get the best results
                     optimal_parameter = experiments[0]
                     optimal_parameter['Cluster'] = cluster_no
@@ -255,8 +288,7 @@ class KeywordCluster:
         path = os.path.join(folder, 'group_key_phrases', 'cluster_key_phrases_group.json')
         clusters = pd.read_json(path).to_dict("records")
         # minimal cluster size
-        # cluster_no_list = self.cluster_no_list
-        cluster_no_list = [3, 8]
+        cluster_no_list = self.cluster_no_list
         try:
             for cluster_no in cluster_no_list:
                 try:
@@ -331,47 +363,18 @@ class KeywordCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Combine clusters and doc key phrases
-    def combine_cluster_doc_key_phrases(self):
-        # Combine all the doc key phrases into a single file 'doc_key_phrases'
-        try:
-            key_phrase_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases')
-            # Combine the key phrases of all papers to a single file
-            doc_key_phrases = list()
-            for cluster_no in self.cluster_no_list:
-                # Get key phrases of a cluster
-                path = os.path.join(key_phrase_folder, 'doc_key_phrase',
-                                    'doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
-                docs = pd.read_json(path).to_dict("records")
-                for doc in docs:
-                    doc_key_phrases.append({'DocId': doc['DocId'], 'KeyPhrases': doc['Key-phrases']})
-            # Sort key phrases by DocId
-            sorted_key_phrases = sorted(doc_key_phrases, key=lambda k: k['DocId'])
-            # # Aggregated all the key phrases of each individual article
-            df = pd.DataFrame(sorted_key_phrases)
-            # Combine cluster and doc key phrases
-            self.corpus_df['KeyPhrases'] = df['KeyPhrases'].tolist()
-            # Drop column
-            self.corpus_df = self.corpus_df.drop('Text', axis=1)
-            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder)
-            path = os.path.join(folder, self.args.case_name + '_clusters.csv')
-            self.corpus_df.to_csv(path, index=False, encoding='utf-8')
-            path = os.path.join(folder, self.args.case_name + '_clusters.json')
-            self.corpus_df.to_json(path, orient='records')
-            print('Output key phrases per doc to ' + path)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
 
 # Main entry
 if __name__ == '__main__':
     try:
         kp = KeywordCluster()
-        # kp.extract_doc_key_phrases_by_similarity_diversity()
-        kp.experiment_group_cluster_key_phrases()
-        kp.group_cluster_key_phrases_with_best_experiments()
-        kp.re_group_key_phrases_within_keyword_cluster()
+        # Extract keyword for each article
+        kp.extract_doc_key_phrases_by_similarity_diversity()
+        kp.combine_cluster_doc_key_phrases()
+        # Extract keyword clusters
+        # kp.experiment_group_cluster_key_phrases()
+        # kp.group_cluster_key_phrases_with_best_experiments()
+        # kp.re_group_key_phrases_within_keyword_cluster()
         # kp.combine_terms_key_phrases_results()
-        # kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

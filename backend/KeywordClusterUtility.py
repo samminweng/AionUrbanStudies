@@ -389,11 +389,12 @@ class KeywordClusterUtility:
                 print("Error occurred! {err}".format(err=_err))
 
         dimensions = [100, 90, 80, 70, 60, 50, 45, 40, 35, 30]
-        min_sample_list = [20, 15, 10]
-        min_cluster_size_list = list(range(30, 9, -1))
+        min_sample_list = [30, 25, 20, 15, 10]
+        min_cluster_size_list = list(range(30, 14, -1))
         if is_fined_grain:
-            dimensions = list(range(30, 3, -5))
-            min_sample_list = list(range(10, 3, -1))
+            dimensions = list(range(30, 9, -5))
+            min_sample_list = list(range(10, 1, -1))
+            min_cluster_size_list = list(range(30, 9, -1))
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
@@ -601,7 +602,7 @@ class KeywordClusterUtility:
                         experiments = KeywordClusterUtility.group_key_phrase_experiments_by_HDBSCAN(key_phrases, model,
                                                                                                     is_fined_grain=True)
                         # Sort the experiments by sort
-                        experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_samples']),
+                        experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_cluster_size']),
                                              reverse=True)
                         # Get the best experiment
                         best_ex = experiments[0]
