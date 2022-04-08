@@ -1,6 +1,7 @@
 # Helper function for LDA topic modeling
 import math
 import os
+import random
 import re
 import string
 import sys
@@ -198,13 +199,28 @@ class TopicKeywordClusterUtility:
                         # Remove candidate words containing phrases
                         _candidate_word['phrases'] = list(
                             filter(lambda phrase: phrase not in cur_phrases, _candidate_word['phrases']))
-                # Add the candidate words if any top word is removed from the list
-                _all_candidate_words = _topic_words + _candidate_words
-                # Sort all the words by doc_ids and frequencies
-                _all_candidate_words = sorted(_all_candidate_words,
-                                              key=lambda wf: (len(wf['phrases']), len(wf['word'].split(" "))),
-                                              reverse=True)
-                return _all_candidate_words[:_top_n]
+                _candidate_words = sorted(_candidate_words,
+                                          key=lambda cw: (len(cw['phrases']), len(cw['word'].split(" "))),
+                                          reverse=True)
+                # Add the candidate words if any topic word is removed from the list
+                _new_topic_words = list(filter(lambda w: len(w['phrases']) > 0, _topic_words))
+                _diff = _top_n - len(_new_topic_words)
+                if _diff > 0:
+                    _candidate_words_clone = copy.deepcopy(_candidate_words)
+                    # Get the candidate words t
+                    for _new_topic in _new_topic_words:
+                        _words = _new_topic['word'].split(" ")
+                        # Filter out redundant candidates
+                        for _word in _words:
+                            _candidate_words_clone = list(filter(lambda w: _word.lower() not in w['word'].lower(),
+                                                                 _candidate_words_clone))
+                    if len(_candidate_words_clone) >= _diff:
+                        _new_topic_words = _new_topic_words + _candidate_words_clone[:_diff]
+                    else:
+                        _new_topic_words = _new_topic_words + random.sample(_candidate_words, _diff)
+                        print("Randomly select candidate words")
+                assert len(_new_topic_words) == _top_n, "Length of Topic Words != 5"
+                return _new_topic_words
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
                 sys.exit(-1)
