@@ -59,13 +59,11 @@ class KeywordExtractionUtility:
             # Extract n_gram from each sentence
             for sentence in ann.sentence:
                 pos_tags = list()
-                sentence_tokens = list()
+                # sentence_tokens = list()
                 for token in sentence.token:
                     pos_tags.append(token.originalText + "_" + token.pos)
-                    sentence_tokens.append(token.originalText)
+                    # sentence_tokens.append(token.originalText)
                 sentence_tagged_text = ' '.join(pos_tags)
-                # sentence_text = ' '.join(sentence_tokens)
-                # print(sentence_text)
                 # Use the regular expression to obtain n_gram
                 # Patterns: (1) J + N (2) N + N (3) J + J + N + N (4) J + and + J + N + N
                 sentence_words = list()
@@ -87,14 +85,16 @@ class KeywordExtractionUtility:
                         sentence_words.append(n_gram)
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
+                        sys.exit(-1)
                 for word in sentence_words:
                     found = next((cw for cw in candidates if cw.lower() == word.lower()), None)
                     if not found:
                         candidates.append(word)
-                # print('Test')
+            return candidates
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
-        return candidates
+            sys.exit(-1)
+
 
     # Get single_word by using standard TF-IDF for each doc in
     @staticmethod

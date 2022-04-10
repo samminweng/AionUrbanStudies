@@ -8,6 +8,7 @@ import pandas as pd
 from BERTArticleClusterUtility import BERTArticleClusterUtility
 from KeyWordExtractionUtility import KeywordExtractionUtility
 from stanza.server import CoreNLPClient
+
 # Set Sentence Transformer path
 sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
 if os.name == 'nt':
@@ -67,8 +68,8 @@ class KeywordExtraction:
                     annotators=['tokenize', 'ssplit', 'pos'],
                     timeout=30000,
                     memory='6G') as client:
-                cluster_no_list = [8]
-                # cluster_no_list = self.cluster_no_list
+                # cluster_no_list = [8]
+                cluster_no_list = self.cluster_no_list
                 for cluster_no in cluster_no_list:
                     cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
                     results = list()  # Store all the key phrases
@@ -85,14 +86,16 @@ class KeywordExtraction:
                             # Get top 2 uni_grams from tf-idf terms
                             uni_gram_candidates = doc_tfidf_candidates[:2]
                             # Collect all the candidate collocation words
-                            n_gram_candidates = KeywordExtractionUtility.generate_collocation_candidates(doc_text, client)
+                            n_gram_candidates = KeywordExtractionUtility.generate_collocation_candidates(doc_text,
+                                                                                                         client)
                             n_gram_candidates = n_gram_candidates + list(map(lambda c: c['term'], uni_gram_candidates))
                             # print(", ".join(n_gram_candidates))
                             candidate_scores = KeywordExtractionUtility.compute_similar_score_key_phrases(self.model,
                                                                                                           doc_text,
                                                                                                           n_gram_candidates)
 
-                            phrase_similar_scores = KeywordExtractionUtility.sort_phrases_by_similar_score(candidate_scores)
+                            phrase_similar_scores = KeywordExtractionUtility.sort_phrases_by_similar_score(
+                                candidate_scores)
                             phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
                             # Rank the high scoring phrases
                             phrase_scores_mmr = KeywordExtractionUtility.re_rank_phrases_by_maximal_margin_relevance(
@@ -104,8 +107,9 @@ class KeywordExtraction:
                                 if len(key_phrase.split(" ")) == 1:
                                     single_word = key_phrase.lower()
                                     # Check if the single word overlaps with existing words
-                                    found = next((phrase for phrase in top_key_phrases if single_word != phrase.lower() and
-                                                  single_word in phrase.lower()), None)
+                                    found = next(
+                                        (phrase for phrase in top_key_phrases if single_word != phrase.lower() and
+                                         single_word in phrase.lower()), None)
                                     if not found:
                                         top_key_phrases.append(key_phrase)
                                 else:
@@ -134,8 +138,7 @@ class KeywordExtraction:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-        # Combine clusters and doc key phrases
-
+    # Combine clusters and doc key phrases
     def combine_cluster_doc_key_phrases(self):
         # Combine all the doc key phrases into a single file 'doc_key_phrases'
         try:
@@ -173,5 +176,6 @@ if __name__ == '__main__':
         kp = KeywordExtraction()
         # Extract keyword for each article
         kp.extract_doc_key_phrases_by_similarity_diversity()
+        kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
