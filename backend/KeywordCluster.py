@@ -2,13 +2,11 @@ import os.path
 import sys
 from argparse import Namespace
 from functools import reduce
-from nltk import sent_tokenize, word_tokenize
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 import pandas as pd
 import logging
 import getpass
-
 # Set logging level
 from KeywordClusterUtility import KeywordClusterUtility
 
@@ -19,9 +17,9 @@ if os.name == 'nt':
     sentence_transformers_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "SentenceTransformer")
 Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
+
 # Extract keyword and group keywords based on the similarity
 class KeywordCluster:
-    # def __init__(self, _cluster_no):
     def __init__(self):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
@@ -29,8 +27,7 @@ class KeywordCluster:
             model_name="all-mpnet-base-v2",
             device='cpu',
             diversity=0.5,
-            cluster_folder='cluster_merge',
-            # cluster_folder='cluster_' + str(_cluster_no),
+            cluster_folder='cluster_merge'
         )
         # Load HDBSCAN cluster
         path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
