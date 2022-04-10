@@ -3,8 +3,8 @@
 // API: https://visjs.org/
 function WordBubbleChart(group, cluster_docs, color) {
     const height = 400;
-    const topic_words = group['topic_words'].concat(["others"]);
-    const group_key_phrases = group['key-phrases'];
+    const topic_words = group['TopicWords'].concat(["others"]);
+    const group_key_phrases = group['Key-phrases'];
     const group_docs = cluster_docs.filter(d => group['DocIds'].includes(d['DocId']));
     const word_key_phrase_dict = Utility.create_word_key_phrases_dict(topic_words, group_key_phrases);
     const word_doc_dict = Utility.create_word_doc_dict(topic_words, group_docs, word_key_phrase_dict);
@@ -63,6 +63,7 @@ function WordBubbleChart(group, cluster_docs, color) {
                 nodes.push({
                     id: id,
                     label: key_phrase,
+                    // shape: 'icon',
                     shape: 'box',
                     color: 'gray',
                     font:{
@@ -70,6 +71,11 @@ function WordBubbleChart(group, cluster_docs, color) {
                         size: 14,
                         multi: true
                     },
+                    // icon:{
+                    //     face: "'FontAwesome'",
+                    //     code: '\uf15c',
+                    //     color: 'gray',
+                    // },
                     title: title_div.html()
                 });
                 const link = {from: topic_word, to: id}

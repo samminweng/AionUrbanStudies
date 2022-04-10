@@ -160,34 +160,49 @@ class TopicKeywordCluster:
             # Get the cluster
             for cluster in clusters:
                 cluster_no = cluster['Cluster']
-                if cluster_no != 8:
-                    continue
+                # if cluster_no != 8:
+                #     continue
+                #
+                # path = os.path.join(folder, 'key_phrases', 'doc_key_phrase',
+                #                     'doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
+                # doc_key_phrases = pd.read_json(path).to_dict("records")
+                # doc_key_phrases = doc_key_phrase_dfs['Key-phrases']
+                # duplicates = list()
+                # key_phrase_set = set()
+                # for key_phrases in doc_key_phrases:
+                #     for key_phrase in key_phrases:
+                #         if key_phrase.lower() in key_phrase_set:
+                #             duplicates.append(key_phrase.lower())
+                #         else:
+                #             key_phrase_set.add(key_phrase.lower())
+                # print(doc_key_phrases)
                 # Load doc_key_phrases for article cluster
                 key_phrase_groups = cluster['KeyPhrases']
                 for group in key_phrase_groups:
                     topic_words = TopicKeywordClusterUtility.collect_topic_words_from_key_phrases(group['Key-phrases'])
-                    group['KeyPhrases'] = group['Key-phrases']
                     # score, word_docs = TopicKeywordClusterUtility.compute_topic_coherence_score(doc_n_grams, topic_words)
                     group["TopicWords"] = topic_words
+                #
                 num_topics = len(key_phrase_groups)
                 # Write output to
                 keyword_cluster_folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics',
                                                       'keyword_cluster')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 df = pd.DataFrame(key_phrase_groups)
-                df = df[['Group', 'TopicWords', 'NumPhrases', 'KeyPhrases', 'NumDocs', 'DocIds', 'score',
+                df = df[['Group', 'TopicWords', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds', 'score',
                          'dimension', 'min_samples', 'min_cluster_size']]
                 path = os.path.join(keyword_cluster_folder, 'group_key_phrases_cluster_#' + str(cluster_no) + ".csv")
                 df.to_csv(path, encoding='utf-8', index=False)
+                key_phrase_groups = df.to_dict("records")
                 # Add one record
                 results.append({
                     "Cluster": cluster['Cluster'],
                     "NumTopics": num_topics,
-                    "KeyPhrases": key_phrase_groups
+                    "KeywordClusters": key_phrase_groups
                 })
             # Write the updated grouped key phrases
             cluster_df = pd.DataFrame(results,
-                                      columns=['Cluster', 'NumTopics', 'KeyPhrases'])
+                                      columns=['Cluster', 'NumTopics', 'KeywordClusters'])
             folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics')
 
             # # # Write to a json file
@@ -207,26 +222,16 @@ class TopicKeywordCluster:
             folder = os.path.join('output', self.args.case_name, self.args.folder, 'key_phrases')
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases.json')
             cluster_df = pd.read_json(path)
-            # # Load results of LDA Topic model
-            # folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'lda_scores')
-            # path = os.path.join(folder, self.args.case_name + '_LDA_topics.json')
-            # lda_topics_df = pd.read_json(path)
-            # # # Load cluster topic, key phrases
-            # cluster_df['NumTopics'] = lda_topics_df['NumTopics'].tolist()
-            # cluster_df['LDATopics'] = lda_topics_df['LDATopics'].tolist()
-            # cluster_df['LDAScore'] = lda_topics_df['LDAScore'].tolist()
             # Load results of key phrase groups
-            folder = os.path.join('output', self.args.case_name, self.args.folder, 'LDA_topics', 'key_phrase_scores')
-            path = os.path.join(folder, self.args.case_name + '_key_phrase_scores.json')
+            folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics')
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_topics.json')
             key_phrase_groups_df = pd.read_json(path)
-            cluster_df['KeyPhrases'] = key_phrase_groups_df['KeyPhrases']
-            cluster_df['KeyPhraseScore'] = key_phrase_groups_df['KeyPhraseScore']
+            cluster_df['KeywordClusters'] = key_phrase_groups_df['KeywordClusters']
             # Compute the percent
             total = cluster_df['NumDocs'].sum()
             cluster_df['Percent'] = cluster_df['NumDocs'].apply(lambda x: x / total)
             # Output the overall results
-            df = cluster_df[['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms',
-                             'KeyPhraseScore', 'KeyPhrases', 'LDAScore', 'LDATopics']]
+            df = cluster_df[['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms', 'KeywordClusters']]
             # # # # Write to a json file
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
@@ -270,10 +275,8 @@ if __name__ == '__main__':
         # _cluster_no = 2
         # ct = ClusterTopicLDA(_cluster_no)
         ct = TopicKeywordCluster()
-        # ct.derive_n_grams_group_by_clusters()
-        # ct.derive_topics_from_article_cluster_by_LDA()
         ct.collect_topics_from_keyword_cluster()
-        # ct.combine_LDA_topics_key_phrase_to_file()
+        ct.combine_topics_keyword_cluster_to_file()
         # ct.collect_statistics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

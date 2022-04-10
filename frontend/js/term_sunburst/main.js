@@ -1,11 +1,11 @@
 'use strict';
 // const corpus = 'CultureUrbanStudyCorpus';
 const corpus = 'AIMLUrbanStudyCorpus';
-const cluster_path = corpus + '_cluster_terms_key_phrases_LDA_topics.json';
+const cluster_path = corpus + '_cluster_terms_key_phrases_topics.json';
 const corpus_path = corpus + '_clusters.json';
 
 const params = new URLSearchParams(window.location.search);
-let selected_cluster_no = 1;
+let selected_cluster_no = 8;
 // Document ready event
 $(function () {
     // Load collocations and tfidf key terms

@@ -451,7 +451,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/AIMLUrbanStudyCorpus_cluster_terms_key_phrases_LDA_topics.csv">
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/AIMLUrbanStudyCorpus_cluster_terms_key_phrases_topics.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -494,6 +494,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/doc_key_phrases_cluster_#1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/doc_key_phrases_cluster_#3.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -731,28 +738,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/keyword_clusters.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/AIMLUrbanStudyCorpus_key_phrase_scores.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/AIMLUrbanStudyCorpus_key_phrase_topics.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/key_phrase_scores/AIMLUrbanStudyCorpus_key_phrase_scores.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

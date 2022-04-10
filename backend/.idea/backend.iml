@@ -17,7 +17,7 @@
       <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_11/experiments/hdbscan" />
       <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_12/experiments/hdbscan" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (tf_gpu)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (tf_gpu)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

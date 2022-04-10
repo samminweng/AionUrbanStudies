@@ -1,6 +1,6 @@
 // Plotly Bar chart
 // Ref: https://plotly.com/javascript/reference/bar/
-function BarChart(keyword_cluster_data, cluster, cluster_docs) {
+function BarChart(keyword_clusters, cluster, cluster_docs) {
     const width = 500;
     const colors = ["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd",
                     "#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"];
@@ -47,8 +47,8 @@ function BarChart(keyword_cluster_data, cluster, cluster_docs) {
             let annotations = [];
             const MAXLENGTH = 60;
             // Add the topic words
-            const topic_words = group['topic_words'];
-            const key_phrases = group['key-phrases'];
+            const topic_words = group['TopicWords'];
+            const key_phrases = group['Key-phrases'];
             const num_docs = group['NumDocs'];
             trace['y'].push(group_name);
             trace['x'].push(num_docs);
@@ -115,7 +115,7 @@ function BarChart(keyword_cluster_data, cluster, cluster_docs) {
                 if (found) {
                     // This indicates the groups has only one subgroup. so we use the group data.
                     // Get the group
-                    const group = keyword_cluster_data[group_id];
+                    const group = keyword_clusters[group_id];
                     // Display the group
                     const word_chart = new WordBubbleChart(group, cluster_docs, color);
                     const view = new KeyPhraseView(group, cluster_docs, 0);
@@ -128,8 +128,8 @@ function BarChart(keyword_cluster_data, cluster, cluster_docs) {
     function create_UI() {
         $('#key_phrase_chart').empty();
         const max_size = cluster_docs.length;
-        for (let group_id=0; group_id < keyword_cluster_data.length; group_id++) {
-            const group = keyword_cluster_data[group_id];
+        for (let group_id=0; group_id < keyword_clusters.length; group_id++) {
+            const group = keyword_clusters[group_id];
             const chart_id = 'chart_' + group_id;
             // Create a div
             const graph_div = $('<div id="' + chart_id + '" class="col"></div>')
@@ -139,7 +139,7 @@ function BarChart(keyword_cluster_data, cluster, cluster_docs) {
 
         // // For development only
         // Create a term chart of group
-        const group = keyword_cluster_data[0];
+        const group = keyword_clusters[0];
         const view = new KeyPhraseView(group, cluster_docs, 0);
         const word_chart = new WordBubbleChart(group, cluster_docs, colors[0]);
     }

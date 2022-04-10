@@ -1,8 +1,8 @@
 // Create a div to display a sub-group of key phrases
 function KeyPhraseView(group, cluster_docs, select_index){
     const group_doc_ids = group['DocIds'];
-    const key_phrases = group['key-phrases'];
-    const topic_words = group['topic_words'].concat("others");
+    const key_phrases = group['Key-phrases'];
+    const topic_words = group['TopicWords'].concat("others");
     // Get group docs
     const group_docs = cluster_docs.filter(d => group_doc_ids.includes(d['DocId']))
     // console.log(group_docs);
