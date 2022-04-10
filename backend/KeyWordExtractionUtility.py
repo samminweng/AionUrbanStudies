@@ -10,16 +10,12 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
 import nltk
 import pandas as pd
-from nltk import pos_tag, ngrams, sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
-
+from stanza.server import CoreNLPClient
 from BERTArticleClusterUtility import BERTArticleClusterUtility
 
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
-nltk.download('punkt', download_dir=nltk_path)
-nltk.download('wordnet', download_dir=nltk_path)
 nltk.download('stopwords', download_dir=nltk_path)
-nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
 # Append NTLK data path
 nltk.data.path.append(nltk_path)
 
@@ -56,14 +52,19 @@ class KeywordExtractionUtility:
 
     @staticmethod
     # Generate Collocation using regular expression patterns
-    def generate_collocation_candidates(sentences):
-        candidates = list()
-        # Extract n_gram from each sentence
-        for i, sentence in enumerate(sentences):
-            try:
-                pos_tags = pos_tag(sentence)
-                # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
-                sentence_text = " ".join(list(map(lambda n: n[0] + '_' + n[1], pos_tags)))
+    def generate_collocation_candidates(doc_text, client):
+        try:
+            candidates = list()
+            ann = client.annotate(doc_text)
+            # Extract n_gram from each sentence
+            for sentence in ann.sentence:
+                pos_tags = list()
+                sentence_tokens = list()
+                for token in sentence.token:
+                    pos_tags.append(token.originalText + "_" + token.pos)
+                    sentence_tokens.append(token.originalText)
+                sentence_tagged_text = ' '.join(pos_tags)
+                # sentence_text = ' '.join(sentence_tokens)
                 # print(sentence_text)
                 # Use the regular expression to obtain n_gram
                 # Patterns: (1) J + N (2) N + N (3) J + J + N + N (4) J + and + J + N + N
@@ -71,7 +72,7 @@ class KeywordExtractionUtility:
                 pattern = r'((\s*\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){2,3})' \
                           r'|((\w+(\-\w+)*_JJ\s+){1,2}(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})' \
                           r'|((\w+(\-\w+)*_JJ\s+)(and_CC\s+)(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})'
-                matches = re.finditer(pattern, sentence_text)
+                matches = re.finditer(pattern, sentence_tagged_text)
                 for match_obj in matches:
                     try:
                         n_gram = match_obj.group(0)
@@ -90,61 +91,56 @@ class KeywordExtractionUtility:
                     found = next((cw for cw in candidates if cw.lower() == word.lower()), None)
                     if not found:
                         candidates.append(word)
-            except Exception as err:
-                print("Error occurred! {err}".format(err=err))
+                # print('Test')
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
         return candidates
 
     # Get single_word by using standard TF-IDF for each doc in
     @staticmethod
     def generate_tfidf_terms(cluster_docs, folder):
         # Generate n-gram of a text and avoid stop
-        def _generate_n_gram_candidates(_sentences, _n_gram_range):
-            def _is_qualified(_n_gram):  # _n_gram is a list of tuple (word, tuple)
+        def _generate_single_word_candidates(_doc_text, _client):
+            def _is_qualified(_word):  # _n_gram is a list of tuple (word, tuple)
                 try:
-                    qualified_tags = ['NN', 'NNS', 'NNP', 'NNPS']
                     # Check if all words are not stop word or punctuation or non-words
-                    for _i, _n in enumerate(_n_gram):
-                        _word = _n[0]
-                        _pos_tag = _n[1]
-                        if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                                _word.lower() in KeywordExtractionUtility.stop_words:  # or _pos_tag not in qualified_tags:
-                            return False
+                    if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
+                            _word.lower() in KeywordExtractionUtility.stop_words:
+                        return False
                     # n-gram is qualified
                     return True
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
 
+
+                ann = client.annotate(_doc_text)
             candidates = list()
+            ann = _client.annotate(_doc_text)
             # Extract n_gram from each sentence
-            for i, sentence in enumerate(_sentences):
+            for sentence in ann.sentence:
                 try:
-                    pos_tags = pos_tag(sentence)
-                    # Pass pos tag tuple (word, pos-tag) of each word in the sentence to produce n-grams
-                    n_grams = list(ngrams(pos_tags, _n_gram_range))
+                    sentence_tokens = list()
+                    for token in sentence.token:
+                        sentence_tokens.append(token.originalText)
                     sentence_candidates = list()
                     # Filter out not qualified n_grams that contain stopwords or the word is not alpha_numeric
-                    for n_gram in n_grams:
-                        if _is_qualified(n_gram):
-                            n_gram_text = " ".join(list(map(lambda n: n[0], n_gram)))
-                            sentence_candidates.append(n_gram_text)  # Convert n_gram (a list of words) to a string
+                    for token in sentence_tokens:
+                        if _is_qualified(token):
+                            sentence_candidates.append(token)  # Add token to a string
                     candidates = candidates + sentence_candidates
                 except Exception as _err:
                     print("Error occurred! {err}".format(err=_err))
             return candidates
 
         # Create frequency matrix to track the frequencies of a n-gram in
-        def _create_frequency_matrix(_docs, _n_gram_range):
+        def _create_frequency_matrix(_docs, _client):
             # Vectorized the clustered doc text and Keep the Word case unchanged
             frequency_matrix = []
             for doc in _docs:
                 _doc_id = doc['DocId']  # doc id
                 doc_text = BERTArticleClusterUtility.preprocess_text(doc['Abstract'])
-                sentences = list()
-                for sentence in sent_tokenize(doc_text):
-                    tokens = word_tokenize(sentence)
-                    sentences.append(tokens)
                 freq_table = {}
-                candidates = _generate_n_gram_candidates(sentences, _n_gram_range)
+                candidates = _generate_single_word_candidates(doc_text, _client)
                 for candidate in candidates:
                     term = candidate.lower()
                     if candidate.isupper():
@@ -231,18 +227,24 @@ class KeywordExtractionUtility:
             return _tf_idf_matrix
 
         try:
-            # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
-            freq_matrix = _create_frequency_matrix(cluster_docs, 1)
-            # # 3. Compute Term Frequency (TF) and generate a matrix
-            # # Term frequency (TF) is the frequency of a word in a document divided by total number of words in the document.
-            tf_matrix = _compute_tf_matrix(freq_matrix)
-            # # 4. Create the table to map the word to a list of documents
-            occ_per_term = _create_occ_per_term(freq_matrix)
-            # # 5. Compute IDF (how common or rare a word is) and output the results as a matrix
-            idf_matrix = _compute_idf_matrix(freq_matrix, occ_per_term)
-            # # Compute tf-idf matrix
-            terms_list = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, occ_per_term)
-            return terms_list  # Return a list of dicts
+            # Use Stanford CoreNLP to tokenize the text
+            with CoreNLPClient(
+                    annotators=['tokenize', 'ssplit'],
+                    timeout=30000,
+                    be_quiet=True,
+                    memory='6G') as client:
+                # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
+                freq_matrix = _create_frequency_matrix(cluster_docs, client)
+                # # 3. Compute Term Frequency (TF) and generate a matrix
+                # # Term frequency (TF) is the frequency of a word in a document divided by total number of words in the document.
+                tf_matrix = _compute_tf_matrix(freq_matrix)
+                # # 4. Create the table to map the word to a list of documents
+                occ_per_term = _create_occ_per_term(freq_matrix)
+                # # 5. Compute IDF (how common or rare a word is) and output the results as a matrix
+                idf_matrix = _compute_idf_matrix(freq_matrix, occ_per_term)
+                # # Compute tf-idf matrix
+                terms_list = _compute_tf_idf_matrix(tf_matrix, idf_matrix, freq_matrix, occ_per_term)
+                return terms_list  # Return a list of dicts
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)

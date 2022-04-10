@@ -5,11 +5,9 @@ import getpass
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
 import pandas as pd
-from nltk import sent_tokenize, word_tokenize
-
 from BERTArticleClusterUtility import BERTArticleClusterUtility
 from KeyWordExtractionUtility import KeywordExtractionUtility
-
+from stanza.server import CoreNLPClient
 # Set Sentence Transformer path
 sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
 if os.name == 'nt':
@@ -27,7 +25,6 @@ class KeywordExtraction:
             device='cpu',
             diversity=0.5,
             cluster_folder='cluster_merge',
-            # cluster_folder='cluster_' + str(_cluster_no),
         )
         # # Use the BERT model to find top 5 similar key phrases of each paper
         # # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
@@ -66,74 +63,74 @@ class KeywordExtraction:
             # Extract single-word candidates using TF-IDF
             tfidf_candidates = KeywordExtractionUtility.generate_tfidf_terms(corpus_docs, tfidf_folder)
             # Collect collocation from each cluster of articles
-            cluster_no_list = [8]
-            # cluster_no_list = self.cluster_no_list
-            for cluster_no in cluster_no_list:
-                cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
-                results = list()  # Store all the key phrases
-                for doc in cluster_docs:
-                    doc_id = doc['DocId']
-                    if doc_id != 2:
-                        continue
-                    # Get the first doc
-                    doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
-                    doc_text = BERTArticleClusterUtility.preprocess_text(doc['Abstract'])
-                    sentences = list()
-                    for sentence in sent_tokenize(doc_text):
-                        tokens = word_tokenize(sentence)
-                        sentences.append(tokens)
-                    # End of for loop
-                    try:
-                        doc_tfidf_candidates = next(c for c in tfidf_candidates if c['doc_id'] == doc_id)['terms']
-                        # Get top 2 uni_grams from tf-idf terms
-                        uni_gram_candidates = doc_tfidf_candidates[:2]
-                        # Collect all the candidate collocation words
-                        n_gram_candidates = KeywordExtractionUtility.generate_collocation_candidates(sentences)
-                        n_gram_candidates = n_gram_candidates + list(map(lambda c: c['term'], uni_gram_candidates))
-                        # print(", ".join(n_gram_candidates))
-                        candidate_scores = KeywordExtractionUtility.compute_similar_score_key_phrases(self.model,
-                                                                                                      doc_text,
-                                                                                                      n_gram_candidates)
+            with CoreNLPClient(
+                    annotators=['tokenize', 'ssplit', 'pos'],
+                    timeout=30000,
+                    memory='6G') as client:
+                cluster_no_list = [8]
+                # cluster_no_list = self.cluster_no_list
+                for cluster_no in cluster_no_list:
+                    cluster_docs = list(filter(lambda d: d['Cluster'] == cluster_no, corpus_docs))
+                    results = list()  # Store all the key phrases
+                    for doc in cluster_docs:
+                        doc_id = doc['DocId']
+                        # if doc_id != 523:
+                        #     continue
+                        # Get the first doc
+                        doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
+                        doc_text = BERTArticleClusterUtility.preprocess_text(doc['Abstract'])
+                        # End of for loop
+                        try:
+                            doc_tfidf_candidates = next(c for c in tfidf_candidates if c['doc_id'] == doc_id)['terms']
+                            # Get top 2 uni_grams from tf-idf terms
+                            uni_gram_candidates = doc_tfidf_candidates[:2]
+                            # Collect all the candidate collocation words
+                            n_gram_candidates = KeywordExtractionUtility.generate_collocation_candidates(doc_text, client)
+                            n_gram_candidates = n_gram_candidates + list(map(lambda c: c['term'], uni_gram_candidates))
+                            # print(", ".join(n_gram_candidates))
+                            candidate_scores = KeywordExtractionUtility.compute_similar_score_key_phrases(self.model,
+                                                                                                          doc_text,
+                                                                                                          n_gram_candidates)
 
-                        phrase_similar_scores = KeywordExtractionUtility.sort_phrases_by_similar_score(candidate_scores)
-                        phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
-                        # Rank the high scoring phrases
-                        phrase_scores_mmr = KeywordExtractionUtility.re_rank_phrases_by_maximal_margin_relevance(
-                            self.model, doc_text, phrase_candidates, self.args.diversity)
-                        mmr_key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
-                        # filter out single word overlapping with any other
-                        top_key_phrases = list()
-                        for key_phrase in mmr_key_phrases:
-                            if len(key_phrase.split(" ")) == 1:
-                                single_word = key_phrase.lower()
-                                # Check if the single word overlaps with existing words
-                                found = next((phrase for phrase in top_key_phrases if single_word != phrase.lower() and
-                                              single_word in phrase.lower()), None)
-                                if not found:
+                            phrase_similar_scores = KeywordExtractionUtility.sort_phrases_by_similar_score(candidate_scores)
+                            phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
+                            # Rank the high scoring phrases
+                            phrase_scores_mmr = KeywordExtractionUtility.re_rank_phrases_by_maximal_margin_relevance(
+                                self.model, doc_text, phrase_candidates, self.args.diversity)
+                            mmr_key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
+                            # filter out single word overlapping with any other
+                            top_key_phrases = list()
+                            for key_phrase in mmr_key_phrases:
+                                if len(key_phrase.split(" ")) == 1:
+                                    single_word = key_phrase.lower()
+                                    # Check if the single word overlaps with existing words
+                                    found = next((phrase for phrase in top_key_phrases if single_word != phrase.lower() and
+                                                  single_word in phrase.lower()), None)
+                                    if not found:
+                                        top_key_phrases.append(key_phrase)
+                                else:
                                     top_key_phrases.append(key_phrase)
-                            else:
-                                top_key_phrases.append(key_phrase)
 
-                        # Obtain top five key phrases
-                        result = {'Cluster': cluster_no, 'DocId': doc_id,
-                                  'Key-phrases': top_key_phrases[:5],
-                                  'Candidate-count': len(phrase_similar_scores),
-                                  'Phrase-candidates': phrase_similar_scores}
-                        results.append(result)
-                        print("Complete to extract the key phrases from document {d_id}".format(d_id=doc_id))
-                    except Exception as __err:
-                        print("Error occurred! {err}".format(err=__err))
-                        sys.exit(-1)
-                print(results)
-                # Write key phrases to csv file
-                df = pd.DataFrame(results)
-                # Map the list of key phrases (dict) to a list of strings
-                Path(folder).mkdir(parents=True, exist_ok=True)
-                path = os.path.join(folder, 'doc_key_phrases_cluster_#' + str(cluster_no) + '.csv')
-                df.to_csv(path, encoding='utf-8', index=False)
-                path = os.path.join(folder, 'doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
-                df.to_json(path, orient='records')
-                print("Output the key phrases of cluster #" + str(cluster_no))
+                            # Obtain top five key phrases
+                            result = {'Cluster': cluster_no, 'DocId': doc_id,
+                                      'Key-phrases': top_key_phrases[:5],
+                                      'Candidate-count': len(phrase_similar_scores),
+                                      'Phrase-candidates': phrase_similar_scores}
+                            results.append(result)
+                            print("Complete to extract the key phrases from document {d_id}".format(d_id=doc_id))
+                        except Exception as __err:
+                            print("Error occurred! {err}".format(err=__err))
+                            sys.exit(-1)
+                    print(results)
+                    # Write key phrases to csv file
+                    df = pd.DataFrame(results)
+                    # Map the list of key phrases (dict) to a list of strings
+                    Path(folder).mkdir(parents=True, exist_ok=True)
+                    path = os.path.join(folder, 'doc_key_phrases_cluster_#' + str(cluster_no) + '.csv')
+                    df.to_csv(path, encoding='utf-8', index=False)
+                    path = os.path.join(folder, 'doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
+                    df.to_json(path, orient='records')
+                    print("Output the key phrases of cluster #" + str(cluster_no))
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
