@@ -161,6 +161,8 @@ class TopicKeywordClusterUtility:
             for _key_phrase in _key_phrases:
                 try:
                     _candidate_words = _key_phrase.split()
+                    # Filter out stop word
+                    _candidate_words = list(filter(lambda w: w not in TopicKeywordClusterUtility.stop_words, _candidate_words))
                     _candidate_words = list(map(lambda w: w.replace("'s", ""), _candidate_words))
                     # Include bi_grams
                     _candidate_words = _candidate_words + _create_bi_grams(_candidate_words)
