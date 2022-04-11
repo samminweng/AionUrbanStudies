@@ -15,16 +15,13 @@ from TopicKeywordClusterUtility import TopicKeywordClusterUtility
 # Obtain the important words from each keyword cluster
 class TopicKeywordCluster:
     def __init__(self):
-        # def __init__(self, _cluster_no):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
-            approach='LDA',
             passes=100,
             iterations=400,
             chunksize=10,
             eval_every=None,  # Don't evaluate model perplexity, takes too much time.
-            folder='cluster_merge',
-            # folder='cluster_' + str(_cluster_no),
+            folder='cluster_merge'
         )
         # Load Key phrase
         path = os.path.join('output', self.args.case_name, self.args.folder, 'key_phrases',
@@ -160,22 +157,7 @@ class TopicKeywordCluster:
             # Get the cluster
             for cluster in clusters:
                 cluster_no = cluster['Cluster']
-                # if cluster_no != 8:
-                #     continue
-                #
-                # path = os.path.join(folder, 'key_phrases', 'doc_key_phrase',
-                #                     'doc_key_phrases_cluster_#' + str(cluster_no) + '.json')
-                # doc_key_phrases = pd.read_json(path).to_dict("records")
-                # doc_key_phrases = doc_key_phrase_dfs['Key-phrases']
-                # duplicates = list()
-                # key_phrase_set = set()
-                # for key_phrases in doc_key_phrases:
-                #     for key_phrase in key_phrases:
-                #         if key_phrase.lower() in key_phrase_set:
-                #             duplicates.append(key_phrase.lower())
-                #         else:
-                #             key_phrase_set.add(key_phrase.lower())
-                # print(doc_key_phrases)
+                
                 # Load doc_key_phrases for article cluster
                 key_phrase_groups = cluster['KeyPhrases']
                 for group in key_phrase_groups:

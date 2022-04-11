@@ -1,14 +1,10 @@
 import getpass
-import math
 import os
-import re
-import string
 import sys
 from functools import reduce
 import hdbscan
 import nltk
 import umap
-from nltk import word_tokenize, sent_tokenize, ngrams, pos_tag
 import pandas as pd
 import numpy as np
 # Load function words
@@ -16,15 +12,15 @@ from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
 from BERTArticleClusterUtility import BERTArticleClusterUtility
 
-nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
-if os.name == 'nt':
-    nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
-nltk.download('punkt', download_dir=nltk_path)
-nltk.download('wordnet', download_dir=nltk_path)
-nltk.download('stopwords', download_dir=nltk_path)
-nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
-# Append NTLK data path
-nltk.data.path.append(nltk_path)
+# nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
+# if os.name == 'nt':
+#     nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
+# # nltk.download('punkt', download_dir=nltk_path)
+# # nltk.download('wordnet', download_dir=nltk_path)
+# nltk.download('stopwords', download_dir=nltk_path)
+# # nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
+# # Append NTLK data path
+# nltk.data.path.append(nltk_path)
 
 
 # Helper function for keyword cluster
@@ -146,20 +142,20 @@ class KeywordClusterUtility:
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
-        dimensions = [100, 90, 80, 70, 60, 50, 45, 40, 35, 30]
+        dimensions = [100, 90, 80, 70, 60, 50, 45] + list(range(40, 14, -2))
         min_sample_list = [30, 25, 20, 15, 10]
         min_cluster_size_list = list(range(30, 14, -1))
         if is_fined_grain:
-            dimensions = list(range(30, 9, -5))
-            min_sample_list = list(range(10, 1, -1))
-            min_cluster_size_list = list(range(30, 9, -1))
+            dimensions = list(range(40, 2, -2))
+            min_sample_list = list(range(10, 2, -1))
+            min_cluster_size_list = list(range(30, 8, -1))
         try:
             # Convert the key phrases to vectors
             key_phrase_vectors = model.encode(key_phrases)
             vector_list = key_phrase_vectors.tolist()
             results = list()
             # Filter out dimensions > the length of key phrases
-            dimensions = list(filter(lambda d: d < len(key_phrases) - 5, dimensions))
+            dimensions = list(filter(lambda d: d < len(key_phrases) - 2, dimensions))
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
                 reduced_vectors = umap.UMAP(
@@ -218,54 +214,54 @@ class KeywordClusterUtility:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)
 
-    # # Compute the RAKE score
-    # # Ref: https://github.com/zelandiya/RAKE-tutorial
-    @staticmethod
-    def rank_key_phrases_by_rake_scores(phrase_list):
-        # Compute the score for a single word
-        def _calculate_rake_word_scores(_phraseList):
-            _word_frequency = {}
-            _word_degree = {}
-            for _phrase in _phraseList:
-                _word_list = word_tokenize(_phrase.lower())
-                _word_list_length = len(_word_list)
-                _word_list_degree = _word_list_length - 1
-                # if word_list_degree > 3: word_list_degree = 3 #exp.
-                for _word in _word_list:
-                    _word_frequency.setdefault(_word, 0)
-                    _word_frequency[_word] += 1
-                    _word_degree.setdefault(_word, 0)
-                    _word_degree[_word] += _word_list_degree  # orig.
-            # Calculate the word degree
-            for _word in _word_frequency:
-                _word_degree[_word] = _word_degree[_word] + _word_frequency[_word]
-
-            # Calculate Word scores = deg(w)/freq(w)
-            _word_scores = {}
-            for _word in _word_frequency:
-                _word_scores.setdefault(_word, 0)
-                _word_scores[_word] = _word_degree[_word] / (_word_frequency[_word] * 1.0)  # orig.
-            return _word_scores
-
-        try:
-            # Compute the word scores
-            word_scores = _calculate_rake_word_scores(phrase_list)
-            keyword_scores_dict = {}
-            for phrase in phrase_list:
-                keyword_scores_dict.setdefault(phrase, 0)
-                word_list = word_tokenize(phrase.lower())
-                candidate_score = 0
-                for word in word_list:
-                    candidate_score += word_scores[word]
-                keyword_scores_dict[phrase] = candidate_score
-            # Convert dict (keyword_scores_dict)
-            keyword_scores = list()
-            for keyword, score in keyword_scores_dict.items():
-                keyword_scores.append({"key-phrase": keyword, "score": score})
-            keyword_scores = sorted(keyword_scores, key=lambda ks: ks['score'], reverse=True)
-            return keyword_scores
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
+    # # # Compute the RAKE score
+    # # # Ref: https://github.com/zelandiya/RAKE-tutorial
+    # @staticmethod
+    # def rank_key_phrases_by_rake_scores(phrase_list):
+    #     # Compute the score for a single word
+    #     def _calculate_rake_word_scores(_phraseList):
+    #         _word_frequency = {}
+    #         _word_degree = {}
+    #         for _phrase in _phraseList:
+    #             _word_list = word_tokenize(_phrase.lower())
+    #             _word_list_length = len(_word_list)
+    #             _word_list_degree = _word_list_length - 1
+    #             # if word_list_degree > 3: word_list_degree = 3 #exp.
+    #             for _word in _word_list:
+    #                 _word_frequency.setdefault(_word, 0)
+    #                 _word_frequency[_word] += 1
+    #                 _word_degree.setdefault(_word, 0)
+    #                 _word_degree[_word] += _word_list_degree  # orig.
+    #         # Calculate the word degree
+    #         for _word in _word_frequency:
+    #             _word_degree[_word] = _word_degree[_word] + _word_frequency[_word]
+    #
+    #         # Calculate Word scores = deg(w)/freq(w)
+    #         _word_scores = {}
+    #         for _word in _word_frequency:
+    #             _word_scores.setdefault(_word, 0)
+    #             _word_scores[_word] = _word_degree[_word] / (_word_frequency[_word] * 1.0)  # orig.
+    #         return _word_scores
+    #
+    #     try:
+    #         # Compute the word scores
+    #         word_scores = _calculate_rake_word_scores(phrase_list)
+    #         keyword_scores_dict = {}
+    #         for phrase in phrase_list:
+    #             keyword_scores_dict.setdefault(phrase, 0)
+    #             word_list = word_tokenize(phrase.lower())
+    #             candidate_score = 0
+    #             for word in word_list:
+    #                 candidate_score += word_scores[word]
+    #             keyword_scores_dict[phrase] = candidate_score
+    #         # Convert dict (keyword_scores_dict)
+    #         keyword_scores = list()
+    #         for keyword, score in keyword_scores_dict.items():
+    #             keyword_scores.append({"key-phrase": keyword, "score": score})
+    #         keyword_scores = sorted(keyword_scores, key=lambda ks: ks['score'], reverse=True)
+    #         return keyword_scores
+    #     except Exception as err:
+    #         print("Error occurred! {err}".format(err=err))
 
     # Run HDBSCAN experiments to re-group the phrases at 'i' iteration
     @staticmethod
