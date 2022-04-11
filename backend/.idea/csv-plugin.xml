@@ -500,6 +500,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/doc_key_phrases_cluster_#10.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/doc_key_phrase/doc_key_phrases_cluster_#3.csv">
           <value>
             <Attribute>
@@ -746,6 +753,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/AIMLUrbanStudyCorpus_key_phrase_topics.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/topics/keyword_cluster/group_key_phrases_cluster_#1.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

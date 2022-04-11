@@ -157,8 +157,8 @@ class TopicKeywordCluster:
             # Get the cluster
             for cluster in clusters:
                 cluster_no = cluster['Cluster']
-                if cluster_no != 8:
-                    continue
+                # if cluster_no != 8:
+                #     continue
                 # Load doc_key_phrases for article cluster
                 key_phrase_groups = cluster['KeyPhrases']
                 for group in key_phrase_groups:
