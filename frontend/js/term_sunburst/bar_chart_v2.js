@@ -58,7 +58,7 @@ function BarChart(keyword_clusters, cluster, cluster_docs) {
             annotations.push({
                 x: 0.0,
                 y: group_name,
-                text: '<b>' + topic_words.join(", ").substring(0, MAXLENGTH) + '...</b>',
+                text: '' + topic_words.join(", ") + '...',
                 font: {
                     family: 'Arial',
                     size: 14,
