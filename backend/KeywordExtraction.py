@@ -151,13 +151,15 @@ class KeywordExtraction:
                                     'doc_key_phrases_cluster_#{c}.json'.format(c=cluster_no))
                 docs = pd.read_json(path).to_dict("records")
                 for doc in docs:
-                    doc_key_phrases.append({'DocId': doc['DocId'], 'KeyPhrases': doc['Key-phrases']})
+                    doc_key_phrases.append({'DocId': doc['DocId'], 'KeyPhrases': doc['Key-phrases'],
+                                           'CandidatePhrases': doc['Phrase-candidates']})
             # Sort key phrases by DocId
             sorted_key_phrases = sorted(doc_key_phrases, key=lambda k: k['DocId'])
             # # Aggregated all the key phrases of each individual article
             df = pd.DataFrame(sorted_key_phrases)
             # Combine cluster and doc key phrases
             self.corpus_df['KeyPhrases'] = df['KeyPhrases'].tolist()
+            self.corpus_df['CandidatePhrases'] = df['CandidatePhrases'].tolist()
             # Drop column
             self.corpus_df = self.corpus_df.drop('Text', axis=1)
             folder = os.path.join('output', self.args.case_name, self.args.cluster_folder)

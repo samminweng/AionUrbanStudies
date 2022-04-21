@@ -5,10 +5,11 @@ import random
 import re
 import string
 import sys
+from collections import OrderedDict
+import numpy as np
 import pandas as pd
 from nltk import word_tokenize, pos_tag, ngrams
 import copy
-
 from nltk.corpus import stopwords
 
 
@@ -162,7 +163,8 @@ class TopicKeywordClusterUtility:
                 try:
                     _candidate_words = _key_phrase.split()
                     # Filter out stop word
-                    _candidate_words = list(filter(lambda w: w not in TopicKeywordClusterUtility.stop_words, _candidate_words))
+                    _candidate_words = list(
+                        filter(lambda w: w not in TopicKeywordClusterUtility.stop_words, _candidate_words))
                     _candidate_words = list(map(lambda w: w.replace("'s", ""), _candidate_words))
                     # Include bi_grams
                     _candidate_words = _candidate_words + _create_bi_grams(_candidate_words)
@@ -265,3 +267,126 @@ class TopicKeywordClusterUtility:
             # assert len(top_words) >= 5, "topic word less than 5"
         # Return the top 3
         return list(map(lambda w: w['word'], topic_words[:5]))
+
+    @staticmethod
+    # Build a mapping of word and doc ids
+    def build_word_docIds(docs, topic_words):
+        try:
+            word_docIds = {}
+            for topic_word in topic_words:
+                word_docIds.setdefault(topic_word.lower(), set())
+                # Get the number of docs containing the word
+                for doc in docs:
+                    doc_id = doc['DocId']
+                    key_phrases = doc['KeyPhrases']
+                    _found = next(
+                        (key_phrase for key_phrase in key_phrases if topic_word.lower() in key_phrase.lower()), None)
+                    if _found:
+                        word_docIds[topic_word.lower()].add(doc_id)
+            return word_docIds
+        except Exception as _err:
+            print("Error occurred! {err}".format(err=_err))
+            sys.exit(-1)
+
+    # Use TextRank to rank key phrases
+    # Ref: https://towardsdatascience.com/textrank-for-keyword-extraction-by-python-c0bae21bcec0
+    @staticmethod
+    def collect_topic_words_from_key_phrasesV2(docs, client):
+        # def sentence_segment(doc, candidate_pos, lower):
+        #     """Store those words only in cadidate_pos"""
+        #     sentences = []
+        #     for sent in doc.sents:
+        #         selected_words = []
+        #         for token in sent:
+        #             # Store words only with cadidate POS tag
+        #             if token.pos_ in candidate_pos and token.is_stop is False:
+        #                 if lower is True:
+        #                     selected_words.append(token.text.lower())
+        #                 else:
+        #                     selected_words.append(token.text)
+        #         sentences.append(selected_words)
+        #     return sentences
+
+        def get_vocab(_docs):
+            """Get all tokens"""
+            _vocab = OrderedDict()
+            for _doc in _docs:
+                phrases = _doc['CandidatePhrases']
+                for phrase in phrases:
+                    _words = phrase['key-phrase'].lower().split(" ")
+                    _words = list(filter(lambda _word: _word not in TopicKeywordClusterUtility.stop_words, _words))
+                    for _word in _words:
+                        if _word not in _vocab:
+                            _vocab[_word] = 0
+                        _vocab[_word] += 1
+            return _vocab
+
+        def get_token_pairs(_docs, window_size=2):
+            """Build token_pairs from windows in phrases"""
+            _token_pairs = list()
+            for _doc in _docs:
+                phrases = _doc['CandidatePhrases']
+                for phrase in phrases:
+                    words = phrase['key-phrase'].lower().split(" ")
+                    # Filter out stop words
+                    words = list(filter(lambda w: w.lower() not in TopicKeywordClusterUtility.stop_words, words))
+                    for i in range(0, len(words)):
+                        for j in range(i + 1, i + window_size):
+                            if j >= len(words):
+                                break
+                            pair = (words[i], words[j])
+                            if pair not in _token_pairs:
+                                _token_pairs.append(pair)
+            return _token_pairs
+
+        def get_matrix(_vocab, _token_pairs):
+            def symmetrize(a):
+                return a + a.T - np.diag(a.diagonal())
+            """Get normalized matrix"""
+            # Build matrix
+            vocab_size = len(_vocab)
+            g = np.zeros((vocab_size, vocab_size), dtype='float')
+            for word1, word2 in _token_pairs:
+                i, j = _vocab[word1], _vocab[word2]
+                g[i][j] = 1
+
+            # Get Symmeric matrix
+            g = symmetrize(g)
+            # Normalize matrix by column
+            norm = np.sum(g, axis=0)
+            g_norm = np.divide(g, norm, where=norm != 0)  # this is ignore the 0 element in norm
+            return g_norm
+
+        # Filter sentences
+        # # Build vocabularies
+        vocab = get_vocab(docs)
+        # # Get token pairs from vocabularies
+        token_pairs = get_token_pairs(docs)
+        print(token_pairs)
+        matrix = get_matrix(vocab, token_pairs)
+        # print(matrix)
+        # # Initionlization for weight(pagerank value)
+        pr = np.array([1] * len(vocab))
+        # # Iteration
+        d = 0.85  # damping coefficient, usually is .85
+        min_diff = 1e-5  # convergence threshold
+        steps = 10  # iteration steps
+        previous_pr = 0
+        for epoch in range(steps):
+            pr = (1 - d) + d * np.dot(matrix, pr)
+            if abs(previous_pr - sum(pr)) < min_diff:
+                break
+            else:
+                previous_pr = sum(pr)
+        # Get weight for each node
+        node_weight = dict()
+        for word, index in vocab.items():
+            node_weight[word] = pr[index]
+        node_weight = OrderedDict(sorted(node_weight.items(), key=lambda t: t[1], reverse=True))
+        print(node_weight)
+        # number = 10
+        """Print top number keywords"""
+        # for i, (key, value) in enumerate(node_weight.items()):
+        #     print(key + ' - ' + str(value))
+        #     if i > number:
+        #         break

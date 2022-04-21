@@ -1,9 +1,7 @@
-import getpass
 import os
 import sys
 from functools import reduce
 import hdbscan
-import nltk
 import umap
 import pandas as pd
 import numpy as np
@@ -11,16 +9,6 @@ import numpy as np
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
 from BERTArticleClusterUtility import BERTArticleClusterUtility
-
-# nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
-# if os.name == 'nt':
-#     nltk_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "nltk_data")
-# # nltk.download('punkt', download_dir=nltk_path)
-# # nltk.download('wordnet', download_dir=nltk_path)
-# nltk.download('stopwords', download_dir=nltk_path)
-# # nltk.download('averaged_perceptron_tagger', download_dir=nltk_path)  # POS tags
-# # Append NTLK data path
-# nltk.data.path.append(nltk_path)
 
 
 # Helper function for keyword cluster
@@ -282,15 +270,12 @@ class KeywordClusterUtility:
         try:
             # Store experiment results
             results = list()
-            cur_group_no = 1
             # Run the grouping experiments to regroup the key phrases
             for group in key_phrase_groups:
                 try:
                     key_phrases = group['Key-phrases']
-                    if len(key_phrases) < 30:
-                        group['Group'] = cur_group_no
+                    if len(key_phrases) < 40:
                         results.append(group)
-                        cur_group_no = cur_group_no + 1
                     else:
                         experiments = KeywordClusterUtility.group_key_phrase_experiments_by_HDBSCAN(key_phrases, model,
                                                                                                     is_fined_grain=True)
@@ -313,22 +298,26 @@ class KeywordClusterUtility:
                                     map(lambda g: g[0], list(filter(lambda g: g[1] == group_no, grouping_results))))
                                 # print(sub_key_phrases)
                                 doc_ids = _collect_doc_ids(doc_key_phrases, sub_key_phrases)
-                                new_group = {'Group': cur_group_no, 'NumPhrases': len(sub_key_phrases),
+                                new_group = {'NumPhrases': len(sub_key_phrases),
                                              'Key-phrases': sub_key_phrases,
                                              'DocIds': doc_ids, 'NumDocs': len(doc_ids),
                                              'score': score, 'dimension': dimension, 'min_samples': min_samples,
                                              'min_cluster_size': min_cluster_size}
                                 results.append(new_group)
-                                cur_group_no = cur_group_no + 1
                         else:
-                            group['Group'] = cur_group_no
                             results.append(group)
-                            cur_group_no = cur_group_no + 1
-                        # print(grouping_results)
+                            # print(grouping_results)
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))
                     sys.exit(-1)
             print("=== Complete grouping the key phrases of cluster {no} ===".format(no=cluster_no))
+            # Sort the results by number of docs
+            results = sorted(results, key=lambda ex: (ex['NumDocs']), reverse=True)
+            # Assign group id
+            group_id = 1
+            for result in results:
+                result['Group'] = group_id
+                group_id = group_id + 1
             return results
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
