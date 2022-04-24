@@ -39,7 +39,7 @@ class KeywordCluster:
         self.corpus_df['Text'] = self.corpus_df['Title'] + ". " + self.corpus_df['Abstract']
         # Get the total cluster
         self.cluster_no_list = sorted(list(dict.fromkeys(self.corpus_df['Cluster'].tolist())))
-        # self.cluster_no_list = [8]
+        # self.cluster_no_list = [18]
         # Group all docId of a cluster
         cluster_df = self.corpus_df.groupby(['Cluster'], as_index=False).agg(
             {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
@@ -165,7 +165,7 @@ class KeywordCluster:
         clusters = pd.read_json(path).to_dict("records")
         # minimal cluster size
         cluster_no_list = self.cluster_no_list
-        # cluster_no_list = [8]
+        # cluster_no_list = [29]
         try:
             for cluster_no in cluster_no_list:
                 try:

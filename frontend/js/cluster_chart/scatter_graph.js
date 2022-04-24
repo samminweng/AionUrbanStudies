@@ -51,7 +51,7 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
                 if (cluster_no === _select_no) {
                     trace['opacity'] = 1;
                 } else {
-                    trace['opacity'] = 0.1;
+                    trace['opacity'] = 0.2;
                 }
             } else {
                 trace['opacity'] = 1;

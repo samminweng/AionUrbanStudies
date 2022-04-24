@@ -277,35 +277,39 @@ class KeywordClusterUtility:
                     if len(key_phrases) < 40:
                         results.append(group)
                     else:
-                        experiments = KeywordClusterUtility.group_key_phrase_experiments_by_HDBSCAN(key_phrases, model,
-                                                                                                    is_fined_grain=True)
-                        # Sort the experiments by sort
-                        experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_cluster_size']),
-                                             reverse=True)
-                        # Get the best experiment
-                        best_ex = experiments[0]
-                        score = best_ex['score']
-                        dimension = best_ex['dimension']
-                        min_samples = best_ex['min_samples']
-                        min_cluster_size = best_ex['min_cluster_size']
-                        # Get the grouping labels of key phrases
-                        group_labels = best_ex['group_labels']
-                        group_list = list(set(group_labels))
-                        if len(group_list) > 1:
-                            grouping_results = list(zip(key_phrases, group_labels))
-                            for group_no in group_list:
-                                sub_key_phrases = list(
-                                    map(lambda g: g[0], list(filter(lambda g: g[1] == group_no, grouping_results))))
-                                # print(sub_key_phrases)
-                                doc_ids = _collect_doc_ids(doc_key_phrases, sub_key_phrases)
-                                new_group = {'NumPhrases': len(sub_key_phrases),
-                                             'Key-phrases': sub_key_phrases,
-                                             'DocIds': doc_ids, 'NumDocs': len(doc_ids),
-                                             'score': score, 'dimension': dimension, 'min_samples': min_samples,
-                                             'min_cluster_size': min_cluster_size}
-                                results.append(new_group)
-                        else:
+                        if len(results) >= 6:
+                            # Include the group
                             results.append(group)
+                        else:
+                            experiments = KeywordClusterUtility.group_key_phrase_experiments_by_HDBSCAN(key_phrases, model,
+                                                                                                        is_fined_grain=True)
+                            # Sort the experiments by sort
+                            experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_cluster_size']),
+                                                 reverse=True)
+                            # Get the best experiment
+                            best_ex = experiments[0]
+                            score = best_ex['score']
+                            dimension = best_ex['dimension']
+                            min_samples = best_ex['min_samples']
+                            min_cluster_size = best_ex['min_cluster_size']
+                            # Get the grouping labels of key phrases
+                            group_labels = best_ex['group_labels']
+                            group_list = list(set(group_labels))
+                            if len(group_list) > 1:
+                                grouping_results = list(zip(key_phrases, group_labels))
+                                for group_no in group_list:
+                                    sub_key_phrases = list(
+                                        map(lambda g: g[0], list(filter(lambda g: g[1] == group_no, grouping_results))))
+                                    # print(sub_key_phrases)
+                                    doc_ids = _collect_doc_ids(doc_key_phrases, sub_key_phrases)
+                                    new_group = {'NumPhrases': len(sub_key_phrases),
+                                                 'Key-phrases': sub_key_phrases,
+                                                 'DocIds': doc_ids, 'NumDocs': len(doc_ids),
+                                                 'score': score, 'dimension': dimension, 'min_samples': min_samples,
+                                                 'min_cluster_size': min_cluster_size}
+                                    results.append(new_group)
+                            else:
+                                results.append(group)
                             # print(grouping_results)
                 except Exception as err:
                     print("Error occurred! {err}".format(err=err))

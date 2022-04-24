@@ -251,11 +251,17 @@ class TopicKeywordCluster:
                 cluster_no = row['Cluster']
                 keyword_clusters = row['KeywordClusters']
                 num_topics = len(keyword_clusters)
-                result = {'Cluster': cluster_no, 'NumTopics': num_topics, 'TopicWords': list()}
-                top_words = list()
+                result = {'Cluster': cluster_no, 'NumTopics': num_topics, 'Score': 0, 'TopicWords': list()}
+                top_freq_words = list()
                 for group_id in range(0, num_topics):
                     if group_id < len(keyword_clusters):
                         keyword_cluster = keyword_clusters[group_id]
+                        # Get score
+                        score = keyword_cluster['score']
+                        # Get number of key phrases
+                        num_phrases = keyword_cluster['NumPhrases']
+                        # Get number of doc
+                        num_docs = len(keyword_cluster['DocIds'])
                         # Get topic_words
                         topic_words = keyword_cluster['TopicWords']
                         # Get DocIds
@@ -263,16 +269,19 @@ class TopicKeywordCluster:
                         docs = list(filter(lambda doc: doc['DocId'] in doc_Ids, corpus_docs))
                         word_docs = TopicKeywordClusterUtility.build_word_docIds(docs, topic_words)
                         for word, docs in word_docs.items():
-                            found = next((w for w in top_words if w['word'].lower() == word.lower()), None)
+                            found = next((w for w in top_freq_words if w['word'].lower() == word.lower()), None)
                             if not found:
-                                top_words.append({'word': word.lower(), 'freq': len(docs)})
+                                top_freq_words.append({'word': word.lower(), 'freq': len(docs)})
                             else:
                                 if found['freq'] < len(docs):
                                     found['freq'] = len(docs)
-                        result['keyword_cluster#' + str(group_id + 1)] = topic_words
+                        result['keyword_cluster#' + str(group_id + 1)] = num_docs
+                        result['Score'] = result['Score'] + score
                 # Sort the topic word by freq
-                top_words = sorted(top_words, key=lambda w: w['freq'], reverse=True)
-                result['TopicWords'] = ', '.join(list(map(lambda w: w['word'], top_words[:10])))
+                top_freq_words = sorted(top_freq_words, key=lambda w: w['freq'], reverse=True)
+                result['TopicWords'] = ', '.join(list(map(lambda w: w['word'], top_freq_words[:10])))
+                # Get the average score
+                result['Score'] = result['Score']/result['NumTopics']
                 results.append(result)
             # Write keyword group results to a summary (csv)
             path = os.path.join('output', self.args.case_name, self.args.folder,
@@ -290,6 +299,6 @@ if __name__ == '__main__':
         ct = TopicKeywordCluster()
         ct.collect_topics_from_keyword_cluster()
         ct.combine_topics_keyword_cluster_to_file()
-        # ct.collect_topic_statistics()
+        ct.collect_topic_statistics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

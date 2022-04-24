@@ -6,17 +6,18 @@ function BarChart(keyword_clusters, cluster, cluster_docs) {
                     "#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"];
 
     // Create a bar chart for each group
-    function create_bar_chart(group, group_id, max_size, chart_id) {
+    function create_bar_chart(keyword_cluster, group_id, max_size, chart_id) {
         // Graph data for a group
-        const create_graph_data = function(group, group_id, max_size) {
+        const create_graph_data = function(keyword_cluster, group_id, max_size) {
             let data = [];
             // Re-order the groups to match with the order of the chart.
-            const group_name = "Group#" + group_id;
+            const group_name = "Topic " + group_id;
             // create a trace
             let trace = {
                 x: [], y: [], text: [],
                 orientation: 'h', type: 'bar',
                 name: group_name,
+                yaxis: group_name,
                 textposition: 'none',
                 hoverinfo: "text",
                 marker: {
@@ -45,11 +46,10 @@ function BarChart(keyword_clusters, cluster, cluster_docs) {
             // Ref: https://plotly.com/javascript/reference/layout/annotations/
             // A text can
             let annotations = [];
-            const MAXLENGTH = 60;
             // Add the topic words
-            const topic_words = group['TopicWords'];
-            const key_phrases = group['Key-phrases'];
-            const num_docs = group['NumDocs'];
+            const topic_words = keyword_cluster['TopicWords'];
+            const key_phrases = keyword_cluster['Key-phrases'];
+            const num_docs = keyword_cluster['NumDocs'];
             trace['y'].push(group_name);
             trace['x'].push(num_docs);
             trace['text'].push('<b>' + num_docs + ' articles</b> ('+ key_phrases.length + ' keywords)');
@@ -77,8 +77,8 @@ function BarChart(keyword_clusters, cluster, cluster_docs) {
         };
 
         const x_domain = [0, max_size];
-        const [graph_data, annotations] = create_graph_data(group, group_id, max_size);
-        const height = 50;
+        const [graph_data, annotations] = create_graph_data(keyword_cluster, group_id, max_size);
+        const height = 45;
         let graph_height = height * 2;
         // Graph layout
         let layout = {
@@ -86,7 +86,7 @@ function BarChart(keyword_clusters, cluster, cluster_docs) {
             height: graph_height,
             xaxis: {range: x_domain},
             showlegend: false,
-            margin: {"l": 10, "r": 10, "t": 0, "b": height},
+            margin: {"l": 40, "r": 10, "t": 0, "b": height},
             legend: {traceorder: 'reversed'},
             barmode: 'stack',
             annotations: annotations
@@ -105,21 +105,17 @@ function BarChart(keyword_clusters, cluster, cluster_docs) {
             $('#group').empty();
             $('#doc_list').empty();
             const id = data.points[0].y;
-            // Get the marker
-            const marker = data.points[0].data.marker;
-            const color = marker.color;
             // console.log(id);
-            if (id.includes("#")) {
-                const group_id = parseInt(id.split("#")[1]);
-                const found = id.match(/#/g);
-                if (found) {
-                    // This indicates the groups has only one subgroup. so we use the group data.
-                    // Get the group
-                    const group = keyword_clusters[group_id];
-                    // Display the group
-                    const word_chart = new WordBubbleChart(group, cluster_docs, color);
-                    const view = new KeyPhraseView(group, cluster_docs, 0);
-                }
+            if (id.includes("Topic")) {
+                const group_id = parseInt(id.split("Topic")[1]);
+                // Get the marker color
+                const color = data.points[0].data.marker.color;
+                // This indicates the groups has only one subgroup. so we use the group data.
+                // Get the group
+                const group = keyword_clusters.find(c => c['Group'] === group_id);
+                // Display the group
+                const word_chart = new WordBubbleChart(group, cluster_docs, color);
+                const view = new KeyPhraseView(group, cluster_docs, 0);
             }
         });// End of chart onclick event
     }
@@ -128,20 +124,20 @@ function BarChart(keyword_clusters, cluster, cluster_docs) {
     function create_UI() {
         $('#key_phrase_chart').empty();
         const max_size = cluster_docs.length;
-        for (let group_id=0; group_id < keyword_clusters.length; group_id++) {
-            const group = keyword_clusters[group_id];
+        for (const keyword_cluster of keyword_clusters) {
+            const group_id = keyword_cluster['Group'];
             const chart_id = 'chart_' + group_id;
             // Create a div
             const graph_div = $('<div id="' + chart_id + '" class="col"></div>')
             $('#key_phrase_chart').append($('<div class="row"></div>').append(graph_div));
-            create_bar_chart(group, group_id, max_size, chart_id);
+            create_bar_chart(keyword_cluster, group_id, max_size, chart_id);
         }
 
         // // For development only
         // Create a term chart of group
-        const group = keyword_clusters[0];
-        const view = new KeyPhraseView(group, cluster_docs, 0);
-        const word_chart = new WordBubbleChart(group, cluster_docs, colors[0]);
+        const keyword_cluster = keyword_clusters[0];
+        const view = new KeyPhraseView(keyword_cluster, cluster_docs, 0);
+        const word_chart = new WordBubbleChart(keyword_cluster, cluster_docs, colors[1]);
     }
 
     create_UI();
