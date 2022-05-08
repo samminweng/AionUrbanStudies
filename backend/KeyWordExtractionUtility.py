@@ -69,11 +69,14 @@ class KeywordExtractionUtility:
                 sentence_words = list()
                 pattern = r'((\s*\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){2,3})' \
                           r'|((\w+(\-\w+)*_JJ\s+){1,2}(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})' \
-                          r'|((\w+(\-\w+)*_JJ\s+)(and_CC\s+)(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})'
+                          r'|((\w+(\-\w+)*_JJ\s+)(and_CC\s+)(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})' \
+                          r'|((\w+(\-\w+)*_JJ\s+){1}\-_HYPH\s+(\w+)\s+(\w+(\-\w+)*_NN[P]*[S]*\s*))' \
+                          r'|(((\w+(\-\w+)*_JJ){1}\s+\-_HYPH\s+(\w+)\s+)(and_CC\s+)*(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})'
                 matches = re.finditer(pattern, sentence_tagged_text)
                 for match_obj in matches:
                     try:
                         n_gram = match_obj.group(0)
+                        n_gram = n_gram.replace(" -_HYPH ", "-")
                         n_gram = n_gram.replace(" 's_POS", "'s")
                         n_gram = n_gram.replace("_CC", "")
                         n_gram = n_gram.replace("_JJ", "")
@@ -81,11 +84,13 @@ class KeywordExtractionUtility:
                         n_gram = n_gram.replace("_NNP", "")
                         n_gram = n_gram.replace("_NNS", "")
                         n_gram = n_gram.replace("_NN", "")
+                        n_gram = n_gram.replace("_VBN", "")
                         n_gram = n_gram.strip()
                         sentence_words.append(n_gram)
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
                         sys.exit(-1)
+                # print(sentence_words)
                 for word in sentence_words:
                     found = next((cw for cw in candidates if cw.lower() == word.lower()), None)
                     if not found:

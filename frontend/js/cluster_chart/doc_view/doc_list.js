@@ -35,7 +35,7 @@ function DocList(docs, cluster, selected_term) {
         $('#doc_list_heading').empty();
         const container = $('<div class="row"></div>')
         // Add heading
-        container.append($('<div class="col"><span class="fw-bold"> ' + docs.length + ' papers </span>' +
+        container.append($('<div class="col"><span class="fw-bold"> ' + docs.length + ' articles </span>' +
             '<span>' + heading_text + '</span></div>'));
         // Add sort by button
         const sort_by_div = $('<div>Sort by </div>');

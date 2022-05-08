@@ -1,4 +1,5 @@
 import os
+import sys
 from argparse import Namespace
 from pathlib import Path
 import gensim
@@ -153,30 +154,35 @@ class TopicKeywordCluster:
     def collect_topics_from_keyword_cluster(self):
         try:
             # Collect collocation from each cluster of articles
-            with CoreNLPClient(
-                    annotators=['tokenize', 'ssplit', 'pos'],
-                    timeout=30000,
-                    memory='6G') as client:
-                folder = os.path.join('output', self.args.case_name, self.args.folder)
-                # Load the documents clustered by
-                clusters = self.cluster_key_phrases_df.to_dict("records")
-                # Store the phrase scores
-                results = list()
-                # Get the cluster
-                for cluster in clusters:
+            # with CoreNLPClient(
+            #         annotators=['tokenize', 'ssplit', 'pos'],
+            #         timeout=30000,
+            #         memory='6G') as client:
+            folder = os.path.join('output', self.args.case_name, self.args.folder)
+            # Load the documents clustered by
+            clusters = self.cluster_key_phrases_df.to_dict("records")
+            # Store the phrase scores
+            results = list()
+            # Get the cluster
+            for cluster in clusters:
+                try:
                     cluster_no = cluster['Cluster']
                     docIds = cluster['DocIds']
-                    docs = list(filter(lambda doc: doc['DocId'] in docIds, self.corpus))
-                    print(docs)
+                    # docs = list(filter(lambda doc: doc['DocId'] in docIds, self.corpus))
+                    # if cluster_no == 16:
+                    #     print("debug")
+                    # print(docs)
                     # # Load doc_key_phrases for article cluster
-                    key_phrase_groups = cluster['KeyPhrases']
-                    key_phrases = list()
+                    # Filter out tiny keyword clusters to avoid producing too many topics
+                    key_phrase_groups = list(filter(lambda g: len(g['Key-phrases']) > 5, cluster['KeyPhrases']))
                     for group in key_phrase_groups:
-                        topic_words = TopicKeywordClusterUtility.collect_topic_words_from_key_phrases(group['Key-phrases'])
-                        # score, word_docs = TopicKeywordClusterUtility.compute_topic_coherence_score(doc_n_grams, topic_words)
-                        group["TopicWords"] = topic_words
-                    # TopicKeywordClusterUtility.collect_topic_words_from_key_phrasesV2(docs, client)
-                    #
+                        try:
+                            topic_words = TopicKeywordClusterUtility.collect_topic_words_from_key_phrases(group['Key-phrases'])
+                            # score, word_docs = TopicKeywordClusterUtility.compute_topic_coherence_score(doc_n_grams, topic_words)
+                            group["TopicWords"] = topic_words
+                        except Exception as _err:
+                            print("Error occurred! {err}".format(err=_err))
+                            sys.exit(-1)
                     num_topics = len(key_phrase_groups)
                     # Write output to
                     keyword_cluster_folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics',
@@ -194,18 +200,20 @@ class TopicKeywordCluster:
                         "NumTopics": num_topics,
                         "KeywordClusters": key_phrase_groups
                     })
-                # Write the updated grouped key phrases
-                cluster_df = pd.DataFrame(results,
-                                          columns=['Cluster', 'NumTopics', 'KeywordClusters'])
-                folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics')
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
+            # Write the updated grouped key phrases
+            cluster_df = pd.DataFrame(results,
+                                      columns=['Cluster', 'NumTopics', 'KeywordClusters'])
+            folder = os.path.join('output', self.args.case_name, self.args.folder, 'topics')
 
-                # # # Write to a json file
-                path = os.path.join(folder, self.args.case_name + '_key_phrase_topics.json')
-                cluster_df.to_json(path, orient='records')
-                # Write to a csv file
-                path = os.path.join(folder, self.args.case_name + '_key_phrase_topics.csv')
-                cluster_df.to_csv(path, encoding='utf-8', index=False)
-                print('Output phrase scores to ' + path)
+            # # # Write to a json file
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_topics.json')
+            cluster_df.to_json(path, orient='records')
+            # Write to a csv file
+            path = os.path.join(folder, self.args.case_name + '_key_phrase_topics.csv')
+            cluster_df.to_csv(path, encoding='utf-8', index=False)
+            print('Output phrase scores to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
