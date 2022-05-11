@@ -55,8 +55,8 @@ class KeywordCluster:
         # # Language model
         model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                     device=self.args.device)
-        # cluster_no_list = [8]
-        cluster_no_list = self.cluster_no_list
+        cluster_no_list = [9]
+        # cluster_no_list = self.cluster_no_list
         for cluster_no in cluster_no_list:
             try:
                 folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases')
@@ -114,8 +114,8 @@ class KeywordCluster:
         try:
             # Collect the best results in each cluster
             results = list()
-            cluster_no_list = self.cluster_no_list
-            # cluster_no_list = [8]
+            # cluster_no_list = self.cluster_no_list
+            cluster_no_list = [9]
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper
@@ -191,7 +191,7 @@ class KeywordCluster:
         clusters = pd.read_json(path).to_dict("records")
         # minimal cluster size
         # cluster_no_list = self.cluster_no_list
-        cluster_no_list = [8]
+        cluster_no_list = [9]
         try:
             for cluster_no in cluster_no_list:
                 is_stop = False
@@ -286,8 +286,8 @@ if __name__ == '__main__':
     try:
         kp = KeywordCluster()
         # Extract keyword clusters
-        # kp.experiment_cluster_key_phrases()
-        # kp.cluster_key_phrases_with_best_experiments()
+        kp.experiment_cluster_key_phrases()
+        kp.cluster_key_phrases_with_best_experiments()
         kp.re_cluster_key_phrases_within_keyword_cluster()
         # kp.combine_terms_key_phrases_results()
     except Exception as err:
