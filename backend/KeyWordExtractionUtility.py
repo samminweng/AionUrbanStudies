@@ -7,7 +7,7 @@ import sys
 from functools import reduce
 
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
+from sklearn.metrics.pairwise import cosine_similarity
 import nltk
 import pandas as pd
 from nltk.corpus import stopwords
@@ -72,6 +72,7 @@ class KeywordExtractionUtility:
                           r'|((\w+(\-\w+)*_JJ\s+)(and_CC\s+)(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})' \
                           r'|((\w+(\-\w+)*_JJ\s+){1}\-_HYPH\s+(\w+)\s+(\w+(\-\w+)*_NN[P]*[S]*\s*))' \
                           r'|(((\w+(\-\w+)*_JJ){1}\s+\-_HYPH\s+(\w+)\s+)(and_CC\s+)*(\w+(\-\w+)*_JJ\s+)(\w+(\-\w+)*_NN[P]*[S]*\s*(\'s_POS)*\s*){1,2})'
+
                 matches = re.finditer(pattern, sentence_tagged_text)
                 for match_obj in matches:
                     try:
@@ -278,7 +279,7 @@ class KeywordExtractionUtility:
     # Maximal Marginal Relevance minimizes redundancy and maximizes the diversity of results
     # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     @staticmethod
-    def re_rank_phrases_by_maximal_margin_relevance(model, doc_text, phrase_candidates, diversity=0.0, top_k=20):
+    def re_rank_phrases_by_maximal_margin_relevance(model, doc_text, phrase_candidates, diversity=0.5, top_k=20):
         try:
             top_n = min(20, len(phrase_candidates))
             doc_vector = model.encode([doc_text], convert_to_numpy=True)
