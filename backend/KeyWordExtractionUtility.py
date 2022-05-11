@@ -79,7 +79,6 @@ class KeywordExtractionUtility:
                 for match_obj in matches:
                     try:
                         n_gram = match_obj.group(0)
-
                         n_gram = n_gram.replace(" 's_POS", "'s")
                         n_gram = n_gram.replace(" ,_,", "")
                         n_gram = n_gram.replace("_CC", "")
@@ -96,7 +95,7 @@ class KeywordExtractionUtility:
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
                         sys.exit(-1)
-                print(sentence_words)
+                # print(sentence_words)
                 for word in sentence_words:
                     found = next((cw for cw in candidates if cw.lower() == word.lower()), None)
                     if not found:

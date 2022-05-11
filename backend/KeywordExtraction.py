@@ -75,8 +75,8 @@ class KeywordExtraction:
                     results = list()  # Store all the key phrases
                     for doc in cluster_docs:
                         doc_id = doc['DocId']
-                        if doc_id != 367:
-                            continue
+                        # if doc_id != 367:
+                        #     continue
                         # Get the first doc
                         doc = next(doc for doc in cluster_docs if doc['DocId'] == doc_id)
                         doc_text = BERTArticleClusterUtility.preprocess_text(doc['Abstract'])
@@ -177,7 +177,7 @@ if __name__ == '__main__':
     try:
         kp = KeywordExtraction()
         # Extract keyword for each article
-        kp.extract_doc_key_phrases_by_similarity_diversity()
-        # kp.combine_cluster_doc_key_phrases()
+        # kp.extract_doc_key_phrases_by_similarity_diversity()
+        kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
