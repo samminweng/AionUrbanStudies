@@ -55,8 +55,8 @@ class KeywordCluster:
         # # Language model
         model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                     device=self.args.device)
-        cluster_no_list = [8]
-        # cluster_no_list = self.cluster_no_list
+        # cluster_no_list = [8]
+        cluster_no_list = self.cluster_no_list
         for cluster_no in cluster_no_list:
             try:
                 folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases')
@@ -114,8 +114,8 @@ class KeywordCluster:
         try:
             # Collect the best results in each cluster
             results = list()
-            # cluster_no_list = self.cluster_no_list
-            cluster_no_list = [8]
+            cluster_no_list = self.cluster_no_list
+            # cluster_no_list = [8]
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper
@@ -155,7 +155,7 @@ class KeywordCluster:
                     # Output the results to a chart
                     folder = os.path.join(key_phrase_folder, 'key_phrase_clusters', 'level_0')
                     Path(folder).mkdir(parents=True, exist_ok=True)
-                    KeywordClusterUtility.visualise_keywords_cluster_results(cluster_no, key_phrase_clusters, folder)
+                    # KeywordClusterUtility.visualise_keywords_cluster_results(cluster_no, key_phrase_clusters, folder)
                     # Output the grouped key phrases
                     group_df = pd.DataFrame(key_phrase_clusters)
                     group_df = group_df[['Group', 'score', 'NumPhrases', 'Key-phrases', 'NumDocs',
@@ -191,56 +191,57 @@ class KeywordCluster:
         clusters = pd.read_json(path).to_dict("records")
         # minimal cluster size
         # cluster_no_list = self.cluster_no_list
-        iteration = 2
-        prev_iteration = iteration - 1
         cluster_no_list = [8]
         try:
             for cluster_no in cluster_no_list:
-                try:
-                    cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
-                    # Load the best grouping of previous level
-                    path = os.path.join(folder, 'key_phrase_clusters', 'level_' + str(prev_iteration),
-                                        'key_phrases_cluster_#' + str(cluster_no) + '.json')
-                    key_phrase_clusters = pd.read_json(path).to_dict("records")
-                    # Load doc_key_phrases
-                    path = os.path.join(folder, 'doc_key_phrase',
-                                        'doc_key_phrases_cluster_#' + str(cluster_no) + ".json")
-                    doc_key_phrases = pd.read_json(path).to_dict("records")
-                    # Load key phrase vectors
-                    path = os.path.join(folder, 'key_phrase_vectors',
-                                        'key_phrase_vectors_cluster#' + str(cluster_no) + '.json')
-                    key_phrase_vectors = pd.read_json(path).to_dict("records")
-                    # # print(doc_key_phrases)
-                    # Re-cluster keyword cluster
-                    updated_key_phrase_clusters = KeywordClusterUtility.run_re_clustering_experiments(cluster_no,
-                                                                                                      key_phrase_clusters,
-                                                                                                      key_phrase_vectors,
-                                                                                                      doc_key_phrases)
+                is_stop = False
+                iteration = 1
+                while not is_stop:       # Maximum iteration: 4
+                    prev_iteration = iteration - 1
+                    try:
+                        cluster = next(cluster for cluster in clusters if cluster['Cluster'] == cluster_no)
+                        # Load the best grouping of previous level
+                        path = os.path.join(folder, 'key_phrase_clusters', 'level_' + str(prev_iteration),
+                                            'key_phrases_cluster_#' + str(cluster_no) + '.json')
+                        key_phrase_clusters = pd.read_json(path).to_dict("records")
+                        # Load doc_key_phrases
+                        path = os.path.join(folder, 'doc_key_phrase',
+                                            'doc_key_phrases_cluster_#' + str(cluster_no) + ".json")
+                        doc_key_phrases = pd.read_json(path).to_dict("records")
+                        # Load key phrase vectors
+                        path = os.path.join(folder, 'key_phrase_vectors',
+                                            'key_phrase_vectors_cluster#' + str(cluster_no) + '.json')
+                        key_phrase_vectors = pd.read_json(path).to_dict("records")
+                        # # print(doc_key_phrases)
+                        # Re-cluster keyword cluster
+                        updated_key_phrase_clusters = KeywordClusterUtility.run_re_clustering_experiments(cluster_no,
+                                                                                                          key_phrase_clusters,
+                                                                                                          key_phrase_vectors,
+                                                                                                          doc_key_phrases)
 
-                    cluster['Key-phrases'] = updated_key_phrase_clusters
-                    out_folder = os.path.join(folder, 'key_phrase_clusters', 'level_' + str(iteration))
-                    Path(out_folder).mkdir(parents=True, exist_ok=True)
-
-                    # Write new key phrase groups to
-                    df = pd.DataFrame(updated_key_phrase_clusters)
-                    df = df[['Group', 'score', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds', 'dimension',
-                             'min_samples', 'min_cluster_size', 'x', 'y']]
-                    path = os.path.join(out_folder,
-                                        'key_phrases_cluster_#' + str(cluster_no) + '.csv')
-                    df.to_csv(path, encoding='utf-8', index=False)
-                    path = os.path.join(out_folder,
-                                        'key_phrases_cluster_#' + str(cluster_no) + '.json')
-                    df.to_json(path, orient="records")
-                    KeywordClusterUtility.visualise_keywords_cluster_results(cluster_no,
-                                                                             updated_key_phrase_clusters,
-                                                                             out_folder)
-                    print("=== Complete re-clustering key phrases in cluster #{c_no} ===".format(
-                        c_no=cluster_no))
-                except Exception as _err:
-                    print("Error occurred! {err}".format(err=_err))
-                    sys.exit(-1)
-                    # write best results of each group
-
+                        cluster['Key-phrases'] = updated_key_phrase_clusters
+                        out_folder = os.path.join(folder, 'key_phrase_clusters', 'level_' + str(iteration))
+                        Path(out_folder).mkdir(parents=True, exist_ok=True)
+                        # Write new key phrase groups to
+                        df = pd.DataFrame(updated_key_phrase_clusters)
+                        df = df[['Group', 'score', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds', 'dimension',
+                                 'min_samples', 'min_cluster_size', 'x', 'y']]
+                        path = os.path.join(out_folder,
+                                            'key_phrases_cluster_#' + str(cluster_no) + '.csv')
+                        df.to_csv(path, encoding='utf-8', index=False)
+                        path = os.path.join(out_folder,
+                                            'key_phrases_cluster_#' + str(cluster_no) + '.json')
+                        df.to_json(path, orient="records")
+                        KeywordClusterUtility.visualise_keywords_cluster_results(cluster_no,
+                                                                                 updated_key_phrase_clusters,
+                                                                                 out_folder)
+                        print("=== Complete re-clustering key phrases in cluster #{c_no} at Iteration {i} ===".format(
+                            c_no=cluster_no, i=iteration))
+                        is_stop = KeywordClusterUtility.check_stop_iteration(updated_key_phrase_clusters, len(doc_key_phrases))
+                        iteration = iteration + 1
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                        sys.exit(-1)
             # # Write output to 'cluster_key_phrases_group'
             df = pd.DataFrame(clusters,
                               columns=['Cluster', 'Key-phrases'])

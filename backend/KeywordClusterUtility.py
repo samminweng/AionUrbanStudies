@@ -18,6 +18,22 @@ import seaborn as sns
 class KeywordClusterUtility:
     stop_words = list(stopwords.words('english'))
 
+    # Check if all small clusters have the coverage > 95%
+    @staticmethod
+    def check_stop_iteration(key_phrase_clusters, total_docs):
+        # Get the remaining kp_clusters
+        small_clusters = list(filter(lambda c: len(c['Key-phrases']) < 40, key_phrase_clusters))
+        doc_ids = set()
+        for r_cluster in small_clusters:
+            for doc_id in r_cluster['DocIds']:
+                doc_ids.add(doc_id)
+        # Check if the coverage of remaining clusters > 95%
+        coverage = len(doc_ids) / total_docs
+        if coverage >= 0.95:
+            return True
+
+        return False
+
     # Filter out duplicated key phrases
     @staticmethod
     def filter_unique_phrases(key_phrases):
@@ -177,7 +193,7 @@ class KeywordClusterUtility:
                         except Exception as err:
                             print("Error occurred! {err}".format(err=err))
                             sys.exit(-1)
-                print("=== Complete to group the key phrases at dimension {d} ===".format(d=dimension))
+                print("[Info] Complete clustering key phrases at dimension {d}".format(d=dimension))
             # Return all experiment results
             return results
         except Exception as err:
@@ -263,7 +279,7 @@ class KeywordClusterUtility:
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                         sys.exit(-1)
-            print("=== Complete grouping the key phrases of cluster {no} ===".format(no=cluster_no))
+            print("[Info] Complete clustering the key phrases of cluster {no}".format(no=cluster_no))
             # Sort the results by number of docs
             results = sorted(results, key=lambda ex: (ex['score']), reverse=True)
             # Assign group id
