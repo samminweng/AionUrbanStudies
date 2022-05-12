@@ -41,7 +41,7 @@ class KeywordCluster:
         self.corpus_df['Text'] = self.corpus_df['Title'] + ". " + self.corpus_df['Abstract']
         # Get the total cluster
         self.cluster_no_list = sorted(list(dict.fromkeys(self.corpus_df['Cluster'].tolist())))
-        # self.cluster_no_list = [18]
+        # self.cluster_no_list = list(range(21, 32))
         # Group all docId of a cluster
         cluster_df = self.corpus_df.groupby(['Cluster'], as_index=False).agg(
             {'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
@@ -55,8 +55,8 @@ class KeywordCluster:
         # # Language model
         model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                     device=self.args.device)
-        cluster_no_list = [8]
-        # cluster_no_list = self.cluster_no_list
+        # cluster_no_list = [8]
+        cluster_no_list = self.cluster_no_list
         for cluster_no in cluster_no_list:
             try:
                 folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'key_phrases')
@@ -73,23 +73,11 @@ class KeywordCluster:
                 df = pd.DataFrame()
                 df['Key-phrases'] = key_phrases
                 df['Vectors'] = key_phrase_vectors
-                # Reduce the dimension of doc vectors into 2D to facilitate visualisation
-                reduced_vectors = umap.UMAP(n_neighbors=150,
-                                            min_dist=0,
-                                            n_components=2,
-                                            random_state=42,
-                                            metric='cosine').fit_transform(key_phrase_vectors)
-                df['x'] = list(map(lambda x: round(x, 2), reduced_vectors[:, 0]))
-                df['y'] = list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
-
                 vector_folder = os.path.join(folder, 'key_phrase_vectors')
                 Path(vector_folder).mkdir(parents=True, exist_ok=True)
                 # Output to json or csv file
                 path = os.path.join(vector_folder, 'key_phrase_vectors_cluster#' + str(cluster_no) + '.json')
                 df.to_json(path, orient='records')
-                path = os.path.join(vector_folder, 'key_phrase_vectors_cluster#' + str(cluster_no) + '.csv')
-                df.to_csv(path, encoding='utf-8', index=False)
-
                 # # # Cluster all key phrases using HDBSCAN clustering
                 results = KeywordClusterUtility.cluster_key_phrase_experiments_by_HDBSCAN(key_phrases,
                                                                                           key_phrase_vectors,
@@ -99,9 +87,9 @@ class KeywordCluster:
                 df = pd.DataFrame(results)
                 experiment_folder = os.path.join(folder, 'key_phrase_clusters', 'level_0', 'experiments')
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
-                path = os.path.join(experiment_folder,
-                                    'experiment_key_phrases_cluster#' + str(cluster_no) + '.csv')
-                df.to_csv(path, encoding='utf-8', index=False)
+                # path = os.path.join(experiment_folder,
+                #                     'experiment_key_phrases_cluster#' + str(cluster_no) + '.csv')
+                # df.to_csv(path, encoding='utf-8', index=False)
                 path = os.path.join(experiment_folder,
                                     'experiment_key_phrases_cluster#' + str(cluster_no) + '.json')
                 df.to_json(path, orient='records')
@@ -114,8 +102,8 @@ class KeywordCluster:
         try:
             # Collect the best results in each cluster
             results = list()
-            # cluster_no_list = self.cluster_no_list
-            cluster_no_list = [8]
+            cluster_no_list = self.cluster_no_list
+            # cluster_no_list = [8]
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper
@@ -190,8 +178,8 @@ class KeywordCluster:
         path = os.path.join(folder, 'key_phrase_clusters', 'key_phrases_cluster.json')
         clusters = pd.read_json(path).to_dict("records")
         # minimal cluster size
-        # cluster_no_list = self.cluster_no_list
-        cluster_no_list = [8]
+        cluster_no_list = self.cluster_no_list
+        # cluster_no_list = [8]
         try:
             for cluster_no in cluster_no_list:
                 is_stop = False

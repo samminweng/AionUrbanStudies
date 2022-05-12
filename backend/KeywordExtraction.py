@@ -177,7 +177,7 @@ if __name__ == '__main__':
     try:
         kp = KeywordExtraction()
         # Extract keyword for each article
-        # kp.extract_doc_key_phrases_by_similarity_diversity()
+        kp.extract_doc_key_phrases_by_similarity_diversity()
         kp.combine_cluster_doc_key_phrases()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

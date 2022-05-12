@@ -17,12 +17,13 @@ import seaborn as sns
 # Helper function for keyword cluster
 class KeywordClusterUtility:
     stop_words = list(stopwords.words('english'))
+    threshold = 40
 
     # Check if all small clusters have the coverage > 95%
     @staticmethod
     def check_stop_iteration(key_phrase_clusters, total_docs):
         # Get the remaining kp_clusters
-        small_clusters = list(filter(lambda c: len(c['Key-phrases']) < 40, key_phrase_clusters))
+        small_clusters = list(filter(lambda c: len(c['Key-phrases']) < KeywordClusterUtility.threshold, key_phrase_clusters))
         doc_ids = set()
         for r_cluster in small_clusters:
             for doc_id in r_cluster['DocIds']:
@@ -126,14 +127,14 @@ class KeywordClusterUtility:
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
-        dimensions = [200, 180, 150, 120, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50]
-        min_sample_list = list(range(30, 20, -1))
-        min_cluster_size_list = list(range(30, 10, -1))
+        dimensions = [200, 180, 150, 120] + list(range(100, 15, -5))
+        min_sample_list = list(range(30, 1, -5))
+        min_cluster_size_list = list(range(30, 9, -1))
         # Different parameter values
         if is_fined_grain:
-            dimensions = list(range(80, 9, -2))
-            min_sample_list = list(range(20, 1, -2))
-            min_cluster_size_list = list(range(30, 8, -1))
+            dimensions = list(range(100, 5, -2))
+            min_sample_list = list(range(20, 1, -1))
+
         try:
             results = list()
             # Filter out dimensions > the length of key phrases
@@ -161,34 +162,22 @@ class KeywordClusterUtility:
                                 distances.astype('float64')).tolist()
                             cluster_results = reduce(lambda pre, cur: collect_group_results(pre, cur),
                                                      cluster_labels, list())
-                            clustered_keywords = list(zip(cluster_labels, distances.tolist()))
                             if len(cluster_results) > 1:
-                                if is_fined_grain:
-                                    # Compute the scores for all clustered keywords
-                                    score = BERTArticleClusterUtility.compute_Silhouette_score(cluster_labels,
-                                                                                               distances.tolist())
-                                else:
-                                    none_outliers = list(filter(lambda k: k[0] != -1, clustered_keywords))
-                                    score = BERTArticleClusterUtility.compute_Silhouette_score(
-                                        list(map(lambda n: n[0], none_outliers)),
-                                        list(map(lambda n: n[1], none_outliers))
-                                    )
-                                # print(score)
-
-                            else:  # All key phrases are identified as outliers
-                                score = -1
-                            # Output the result
-                            result = {'dimension': dimension,
-                                      'min_samples': str(min_samples),
-                                      'min_cluster_size': min_cluster_size,
-                                      'epsilon': epsilon,
-                                      'score': round(score, 4),
-                                      'group_results': cluster_results,
-                                      'group_labels': cluster_labels,
-                                      'x': list(map(lambda x: round(x, 2), reduced_vectors[:, 0])),
-                                      'y': list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
-                                      }
-                            results.append(result)
+                                # Compute the scores for all clustered keywords
+                                score = BERTArticleClusterUtility.compute_Silhouette_score(cluster_labels,
+                                                                                           distances.tolist())
+                                # Output the result
+                                result = {'dimension': dimension,
+                                          'min_samples': str(min_samples),
+                                          'min_cluster_size': min_cluster_size,
+                                          'epsilon': epsilon,
+                                          'score': round(score, 4),
+                                          'group_results': cluster_results,
+                                          'group_labels': cluster_labels,
+                                          'x': list(map(lambda x: round(x, 2), reduced_vectors[:, 0])),
+                                          'y': list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
+                                          }
+                                results.append(result)
                             # print(result)
                         except Exception as err:
                             print("Error occurred! {err}".format(err=err))
@@ -221,17 +210,17 @@ class KeywordClusterUtility:
             results = list()
             # Run the grouping experiments to regroup the key phrases
             for kp_cluster in key_phrase_clusters:
-                if len(kp_cluster['Key-phrases']) < 40:
+                key_phrases = kp_cluster['Key-phrases']
+                vectors = list()
+                for key_phrase in key_phrases:
+                    vector = next(vector['Vectors'] for vector in key_phrase_vectors
+                                  if vector['Key-phrases'].lower() == key_phrase.lower())
+                    vectors.append(vector)
+                assert len(vectors) == len(key_phrases), "Inconsistent key phrases and vectors"
+                if len(kp_cluster['Key-phrases']) < KeywordClusterUtility.threshold:
                     results.append(kp_cluster)
                 else:
                     try:
-                        key_phrases = kp_cluster['Key-phrases']
-                        vectors = list()
-                        for key_phrase in key_phrases:
-                            vector = next(vector['Vectors'] for vector in key_phrase_vectors
-                                          if vector['Key-phrases'].lower() == key_phrase.lower())
-                            vectors.append(vector)
-                        assert len(vectors) == len(key_phrases), "Inconsistent key phrases and vectors"
                         experiments = KeywordClusterUtility.cluster_key_phrase_experiments_by_HDBSCAN(key_phrases,
                                                                                                       vectors,
                                                                                                       is_fined_grain=True,
@@ -281,7 +270,7 @@ class KeywordClusterUtility:
                         sys.exit(-1)
             print("[Info] Complete clustering the key phrases of cluster {no}".format(no=cluster_no))
             # Sort the results by number of docs
-            results = sorted(results, key=lambda ex: (ex['score']), reverse=True)
+            results = sorted(results, key=lambda ex: ex['score'], reverse=True)
             # Assign group id
             group_id = 1
             for result in results:
@@ -321,13 +310,13 @@ class KeywordClusterUtility:
                                 opacity=opacity)
                 ))
 
-            title = 'Keyword Clusters'
+            title = 'Article Cluster #' + str(cluster_no)
             # Figure layout
             fig.update_layout(title=title,
                               width=600, height=800,
                               legend=dict(orientation="v"),
                               margin=dict(l=20, r=20, t=30, b=40))
-            file_name = 'dot_chart_cluster#' + str(cluster_no)
+            file_name = 'key_phrases_cluster_#' + str(cluster_no)
             file_path = os.path.join(folder, file_name + ".png")
             pio.write_image(fig, file_path, format='png')
             print("Output the images of clustered results to " + file_path)
