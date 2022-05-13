@@ -254,7 +254,7 @@ class KeywordCluster:
             topics_df = pd.read_json(path)
             cluster_df = topics_df.copy(deep=True)
             # Load grouped Key phrases
-            path = os.path.join(folder, 'key_phrases', 'group_key_phrases', 'cluster_key_phrases_group.json')
+            path = os.path.join(folder, 'key_phrases', 'key_phrase_clusters', 'key_phrases_cluster.json')
             key_phrase_df = pd.read_json(path)
             cluster_df['KeyPhrases'] = key_phrase_df['Key-phrases'].tolist()
             # Re-order cluster df and Output to csv and json file
@@ -274,9 +274,9 @@ if __name__ == '__main__':
     try:
         kp = KeywordCluster()
         # Extract keyword clusters
-        # kp.experiment_cluster_key_phrases()
-        # kp.cluster_key_phrases_with_best_experiments()
+        kp.experiment_cluster_key_phrases()
+        kp.cluster_key_phrases_with_best_experiments()
         kp.re_cluster_key_phrases_within_keyword_cluster()
-        # kp.combine_terms_key_phrases_results()
+        kp.combine_terms_key_phrases_results()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

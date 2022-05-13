@@ -7,7 +7,6 @@ from gensim import corpora
 from gensim.models import Phrases
 from nltk.tokenize import sent_tokenize
 import pandas as pd
-from stanza.server import CoreNLPClient
 # Find topic words from each keyword cluster
 from BERTArticleClusterUtility import BERTArticleClusterUtility
 from TopicKeywordClusterUtility import TopicKeywordClusterUtility
@@ -93,7 +92,8 @@ class TopicKeywordCluster:
                 try:
                     cluster_no = cluster['Cluster']
                     # Get the keyword clusters for the article cluster
-                    article_cluster = self.cluster_key_phrase_df.loc[self.cluster_key_phrase_df['Cluster'] == cluster_no].iloc[0]
+                    article_cluster = \
+                    self.cluster_key_phrase_df.loc[self.cluster_key_phrase_df['Cluster'] == cluster_no].iloc[0]
                     keyword_clusters = article_cluster['KeyPhrases']
                     num_topics = len(keyword_clusters)  # Get the number of grouped phrases
                     doc_n_gram_list = cluster['Ngrams']
@@ -177,7 +177,8 @@ class TopicKeywordCluster:
                     key_phrase_groups = list(filter(lambda g: len(g['Key-phrases']) > 5, cluster['KeyPhrases']))
                     for group in key_phrase_groups:
                         try:
-                            topic_words = TopicKeywordClusterUtility.collect_topic_words_from_key_phrases(group['Key-phrases'])
+                            topic_words = TopicKeywordClusterUtility.collect_topic_words_from_key_phrases(
+                                group['Key-phrases'])
                             # score, word_docs = TopicKeywordClusterUtility.compute_topic_coherence_score(doc_n_grams, topic_words)
                             group["TopicWords"] = topic_words
                         except Exception as _err:
@@ -191,7 +192,8 @@ class TopicKeywordCluster:
                     df = pd.DataFrame(key_phrase_groups)
                     df = df[['Group', 'TopicWords', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds', 'score',
                              'dimension', 'min_samples', 'min_cluster_size']]
-                    path = os.path.join(keyword_cluster_folder, 'group_key_phrases_cluster_#' + str(cluster_no) + ".csv")
+                    path = os.path.join(keyword_cluster_folder,
+                                        'group_key_phrases_cluster_#' + str(cluster_no) + ".csv")
                     df.to_csv(path, encoding='utf-8', index=False)
                     key_phrase_groups = df.to_dict("records")
                     # Add one record
@@ -245,61 +247,6 @@ class TopicKeywordCluster:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # Collect and generate statistics from results
-    def collect_topic_statistics(self):
-        try:
-            folder = os.path.join('output', self.args.case_name, self.args.folder)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
-            df = pd.read_json(path)
-            # Load the corpus
-            path = os.path.join(folder, self.args.case_name + '_clusters.json')
-            corpus_docs = pd.read_json(path).to_dict("records")
-            results = list()
-            for index, row in df.iterrows():
-                cluster_no = row['Cluster']
-                keyword_clusters = row['KeywordClusters']
-                num_topics = len(keyword_clusters)
-                result = {'Cluster': cluster_no, 'NumTopics': num_topics, 'Score': 0, 'TopicWords': list()}
-                top_freq_words = list()
-                for group_id in range(0, num_topics):
-                    if group_id < len(keyword_clusters):
-                        keyword_cluster = keyword_clusters[group_id]
-                        # Get score
-                        score = keyword_cluster['score']
-                        # Get number of key phrases
-                        num_phrases = keyword_cluster['NumPhrases']
-                        # Get number of doc
-                        num_docs = len(keyword_cluster['DocIds'])
-                        # Get topic_words
-                        topic_words = keyword_cluster['TopicWords']
-                        # Get DocIds
-                        doc_Ids = keyword_cluster['DocIds']
-                        docs = list(filter(lambda doc: doc['DocId'] in doc_Ids, corpus_docs))
-                        word_docs = TopicKeywordClusterUtility.build_word_docIds(docs, topic_words)
-                        for word, docs in word_docs.items():
-                            found = next((w for w in top_freq_words if w['word'].lower() == word.lower()), None)
-                            if not found:
-                                top_freq_words.append({'word': word.lower(), 'freq': len(docs)})
-                            else:
-                                if found['freq'] < len(docs):
-                                    found['freq'] = len(docs)
-                        result['keyword_cluster#' + str(group_id + 1)] = num_docs
-                        result['Score'] = result['Score'] + score
-                # Sort the topic word by freq
-                top_freq_words = sorted(top_freq_words, key=lambda w: w['freq'], reverse=True)
-                result['TopicWords'] = ', '.join(list(map(lambda w: w['word'], top_freq_words[:10])))
-                # Get the average score
-                result['Score'] = result['Score']/result['NumTopics']
-                results.append(result)
-            # Write keyword group results to a summary (csv)
-            path = os.path.join('output', self.args.case_name, self.args.folder,
-                                "keyword_clusters.csv")
-            df = pd.DataFrame(results)
-            df.to_csv(path, encoding='utf-8', index=False)
-
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
 
 # Main entry
 if __name__ == '__main__':
@@ -307,6 +254,5 @@ if __name__ == '__main__':
         ct = TopicKeywordCluster()
         ct.collect_topics_from_keyword_cluster()
         ct.combine_topics_keyword_cluster_to_file()
-        ct.collect_topic_statistics()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

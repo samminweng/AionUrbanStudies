@@ -89,7 +89,6 @@ class KeywordExtractionUtility:
                         n_gram = n_gram.replace("_NN", "")
                         n_gram = n_gram.replace("_VBN", "")
                         n_gram = n_gram.replace("_VBG", "")
-                        n_gram = n_gram.replace('-and', ' and')
                         n_gram = n_gram.strip()
                         sentence_words.append(n_gram)
                     except Exception as _err:
