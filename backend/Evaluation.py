@@ -1,7 +1,10 @@
 # Plots the chart to present our results in the papers
 import os
 from argparse import Namespace
-
+from functools import reduce
+import plotly.graph_objects as go
+from matplotlib import pyplot as plt
+import numpy as np
 import pandas as pd
 
 
@@ -12,6 +15,67 @@ class Evaluation:
             folder='cluster_merge'
         )
 
+    # Evaluate the article cluster chart
+    def evaluate_article_clusters(self):
+        folder = os.path.join('output', self.args.case_name, self.args.folder)
+        path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
+        clusters = pd.read_json(path).to_dict("records")
+        # Sort the clusters by score
+        clusters = sorted(clusters, key=lambda c: round(c['Score'], 4))
+        scores = list()
+        # Plot the line distribution
+        for cluster in clusters:
+            score = round(cluster['Score'], 2)
+            if score not in scores:
+                scores.append(score)
+        # Sort the scores
+        results = list()
+        scores = sorted(scores)
+        max_clusters = 0
+        for score in scores:
+            # Get clusters
+            score_clusters = list(filter(lambda c: round(c['Score'], 2) == score, clusters))
+            results.append({'score': score, 'clusters': score_clusters})
+            if len(score_clusters) > max_clusters:
+                max_clusters = len(score_clusters)
+        # print(results)
+        # Collect the counts
+        fig, ax = plt.subplots()
+        ax.set_xticks(np.arange(0, 1, 0.1))
+        ax.set_yticks(np.arange(0, 81, 10))
+        ax.set_ylim([0, 80])
+        width = 0.01
+        group_counts = list()
+        for ind in range(0, max_clusters):
+            counts = list()
+            for result in results:
+                r_clusters = result['clusters']
+                if ind < len(r_clusters):
+                    counts.append(r_clusters[ind]['NumDocs'])
+                else:
+                    counts.append(0)
+            group_counts.append(np.array(counts))
+        plt.bar(scores, group_counts[0], width=width)
+        plt.bar(scores, group_counts[1], width=width, bottom=group_counts[0])
+        plt.bar(scores, group_counts[2], width=width, bottom=group_counts[0]+group_counts[1])
+        plt.bar(scores, group_counts[3], width=width, bottom=group_counts[0]+group_counts[1]+group_counts[2])
+        # Add the values label
+        count_values = group_counts[0]+group_counts[1]+group_counts[2]+group_counts[3]
+        for ind, score in enumerate(scores):
+            plt.text(score, count_values[ind] + 2, s=count_values[ind], ha='center')
+        # # Add x, y axis title
+        plt.xlabel('Silhouette Score', fontsize=14)
+        plt.ylabel('Number of Articles', fontsize=14)
+
+        # Save figure to file
+        out_path = os.path.join(folder, 'evaluation', 'article_cluster.png')
+        plt.savefig(out_path)
+        plt.show()
+
+    # Evaluate the keyword cluster chart
+    def evaluate_keyword_clusters(self):
+        folder = os.path.join('output', self.args.case_name, self.args.folder)
+        path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
     # Collect and generate statistics from results
     def collect_topic_statistics(self):
         try:
@@ -59,3 +123,12 @@ class Evaluation:
 
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+
+# Main entry
+if __name__ == '__main__':
+    try:
+        eval = Evaluation()
+        eval.evaluate_article_clusters()
+    except Exception as err:
+        print("Error occurred! {err}".format(err=err))
