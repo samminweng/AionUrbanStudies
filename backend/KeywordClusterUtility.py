@@ -7,8 +7,8 @@ import pandas as pd
 import numpy as np
 # Load function words
 from nltk.corpus import stopwords
+from sklearn.metrics import silhouette_score, silhouette_samples
 from sklearn.metrics.pairwise import pairwise_distances
-from BERTArticleClusterUtility import BERTArticleClusterUtility
 import plotly.graph_objects as go
 import plotly.io as pio
 import seaborn as sns
@@ -163,17 +163,28 @@ class KeywordClusterUtility:
                             cluster_results = reduce(lambda pre, cur: collect_group_results(pre, cur),
                                                      cluster_labels, list())
                             if len(cluster_results) > 1:
+                                cluster_vectors = distances.tolist()
                                 # Compute the scores for all clustered keywords
-                                score = BERTArticleClusterUtility.compute_Silhouette_score(cluster_labels,
-                                                                                           distances.tolist())
+                                # score = BERTArticleClusterUtility.compute_Silhouette_score(cluster_labels,
+                                #                                                            cluster_vectors)
+
+                                avg_score = silhouette_score(cluster_vectors, cluster_labels, metric='cosine')
+                                silhouette_scores = silhouette_samples(cluster_vectors, cluster_labels, metric='cosine')
+                                # Get each individual cluster's score
+                                for cluster_result in cluster_results:
+                                    cluster_no = cluster_result['group']
+                                    cluster_silhouette_vals = silhouette_scores[np.array(cluster_labels) == cluster_no]
+                                    cluster_score = np.mean(cluster_silhouette_vals)
+                                    cluster_result['score'] = cluster_score
+                                # print(cluster_results)
                                 # Output the result
                                 result = {'dimension': dimension,
                                           'min_samples': str(min_samples),
                                           'min_cluster_size': min_cluster_size,
                                           'epsilon': epsilon,
-                                          'score': round(score, 4),
-                                          'group_results': cluster_results,
-                                          'group_labels': cluster_labels,
+                                          'score': round(avg_score, 4),
+                                          'cluster_results': cluster_results,
+                                          'cluster_labels': cluster_labels,
                                           'x': list(map(lambda x: round(x, 2), reduced_vectors[:, 0])),
                                           'y': list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
                                           }
@@ -224,46 +235,43 @@ class KeywordClusterUtility:
                         experiments = KeywordClusterUtility.cluster_key_phrase_experiments_by_HDBSCAN(key_phrases,
                                                                                                       vectors,
                                                                                                       is_fined_grain=True,
-                                                                                                      n_neighbors=len(
-                                                                                                          key_phrases) - 2)
-                        # print(experiments)
+                                                                                                      n_neighbors=len(key_phrases) - 2)
                         # # Sort the experiments by sort
                         experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_cluster_size']),
                                              reverse=True)
                         # Get the best experiment
                         best_ex = experiments[0]
-                        score = best_ex['score']
                         dimension = best_ex['dimension']
                         min_samples = best_ex['min_samples']
                         min_cluster_size = best_ex['min_cluster_size']
                         # Get the grouping labels of key phrases
-                        group_labels = best_ex['group_labels']
-                        # x, y posi
-                        x_pos_list = best_ex['x']
-                        y_pos_list = best_ex['y']
-                        group_list = list(set(group_labels))
+                        group_labels = np.array(best_ex['cluster_labels'])
+                        group_results = best_ex['cluster_results']
+                        # x, y pos
+                        x_pos_arr = np.array(best_ex['x'])
+                        y_pos_arr = np.array(best_ex['y'])
+                        group_list = np.unique(group_labels)
                         if len(group_list) > 1:
-                            grouping_results = list(zip(key_phrases, group_labels, x_pos_list, y_pos_list))
+                            np_key_phrases = np.array(key_phrases)
                             for group_no in group_list:
-                                sub_key_phrases = list(
-                                    map(lambda g: g[0], list(filter(lambda g: g[1] == group_no, grouping_results))))
-                                x_pos = list(
-                                    map(lambda g: g[2], list(filter(lambda g: g[1] == group_no, grouping_results))))
-                                y_pos = list(
-                                    map(lambda g: g[3], list(filter(lambda g: g[1] == group_no, grouping_results))))
-
+                                group_key_phrases = np_key_phrases[group_labels == group_no].tolist()
+                                x_pos = x_pos_arr[group_labels == group_no].tolist()
+                                y_pos = y_pos_arr[group_labels == group_no].tolist()
+                                # print(group_key_phrases)
+                                # Get Silhouette score of a group
+                                score = next(r['score'] for r in group_results if r['group'] == group_no)
                                 # print(sub_key_phrases)
-                                doc_ids = _collect_doc_ids(doc_key_phrases, sub_key_phrases)
-                                results.append({'NumPhrases': len(sub_key_phrases),
-                                                'Key-phrases': sub_key_phrases,
+                                doc_ids = _collect_doc_ids(doc_key_phrases, group_key_phrases)
+                                results.append({'NumPhrases': len(group_key_phrases),
+                                                'Key-phrases': group_key_phrases,
                                                 'DocIds': doc_ids, 'NumDocs': len(doc_ids),
                                                 'score': score, 'dimension': dimension, 'min_samples': min_samples,
                                                 'min_cluster_size': min_cluster_size,
                                                 'x': x_pos,
                                                 'y': y_pos})
                         else:
-                            kp_cluster['x'] = x_pos_list
-                            kp_cluster['y'] = y_pos_list
+                            kp_cluster['x'] = x_pos_arr.tolist()
+                            kp_cluster['y'] = y_pos_arr.tolist()
                             results.append(kp_cluster)
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))

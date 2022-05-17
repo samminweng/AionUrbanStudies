@@ -55,7 +55,7 @@ class KeywordCluster:
         # # Language model
         model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
                                     device=self.args.device)
-        # cluster_no_list = [8]
+        # cluster_no_list = [17]
         cluster_no_list = self.cluster_no_list
         for cluster_no in cluster_no_list:
             try:
@@ -87,9 +87,6 @@ class KeywordCluster:
                 df = pd.DataFrame(results)
                 experiment_folder = os.path.join(folder, 'key_phrase_clusters', 'level_0', 'experiments')
                 Path(experiment_folder).mkdir(parents=True, exist_ok=True)
-                # path = os.path.join(experiment_folder,
-                #                     'experiment_key_phrases_cluster#' + str(cluster_no) + '.csv')
-                # df.to_csv(path, encoding='utf-8', index=False)
                 path = os.path.join(experiment_folder,
                                     'experiment_key_phrases_cluster#' + str(cluster_no) + '.json')
                 df.to_json(path, orient='records')
@@ -103,7 +100,7 @@ class KeywordCluster:
             # Collect the best results in each cluster
             results = list()
             cluster_no_list = self.cluster_no_list
-            # cluster_no_list = [8]
+            # cluster_no_list = [17]
             for cluster_no in cluster_no_list:
                 try:
                     # Output key phrases of each paper
@@ -117,7 +114,8 @@ class KeywordCluster:
                                          reverse=True)
                     # Get the best results
                     best_ex = experiments[0]
-                    cluster_labels = best_ex['group_labels']
+                    cluster_results = best_ex['cluster_results']
+                    cluster_labels = best_ex['cluster_labels']
                     # x, y position
                     x_pos_list = best_ex['x']
                     y_pos_list = best_ex['y']
@@ -135,15 +133,16 @@ class KeywordCluster:
                         key_phrases, cluster_labels, doc_key_phrases, x_pos_list, y_pos_list)
                     # # Sort the grouped key phrases by most frequent words
                     for cluster in key_phrase_clusters:
+                        group_no = cluster['Group']
+                        cluster_score = next(r['score'] for r in cluster_results if r['group'] == group_no)
                         cluster['Key-phrases'] = cluster['Key-phrases']
-                        cluster['score'] = best_ex['score']
+                        cluster['score'] = cluster_score
                         cluster['dimension'] = best_ex['dimension']
                         cluster['min_samples'] = best_ex['min_samples']
                         cluster['min_cluster_size'] = best_ex['min_cluster_size']
                     # Output the results to a chart
                     folder = os.path.join(key_phrase_folder, 'key_phrase_clusters', 'level_0')
                     Path(folder).mkdir(parents=True, exist_ok=True)
-                    # KeywordClusterUtility.visualise_keywords_cluster_results(cluster_no, key_phrase_clusters, folder)
                     # Output the grouped key phrases
                     group_df = pd.DataFrame(key_phrase_clusters)
                     group_df = group_df[['Group', 'score', 'NumPhrases', 'Key-phrases', 'NumDocs',
@@ -179,7 +178,7 @@ class KeywordCluster:
         clusters = pd.read_json(path).to_dict("records")
         # minimal cluster size
         cluster_no_list = self.cluster_no_list
-        # cluster_no_list = [4]
+        # cluster_no_list = [17]
         try:
             for cluster_no in cluster_no_list:
                 is_stop = False

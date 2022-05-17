@@ -14,7 +14,7 @@ $(function () {
         const corpus_data = result1[0];
         const cluster_data = result2[0];
         // Draw the chart and list the clusters/topic words
-        // const chart = new ScatterGraph(corpus_data, cluster_data, null);
+        const chart = new ScatterGraph(corpus_data, cluster_data, 17);
         // Update basic info
         const total_papers = corpus_data.length;
         $('#total_papers').text(total_papers);
@@ -24,9 +24,8 @@ $(function () {
         // Add cluster cluster list
         for (const cluster of cluster_data) {
             const cluster_no = cluster['Cluster'];
-            const terms = Utility.get_top_terms(cluster['Terms'].map(t => t['term']), 3);
             // console.log(terms);
-            const option = $('<option value="' + cluster_no + '">' + cluster_no + '. ' + terms.join(", ") + '...</option>');
+            const option = $('<option value="' + cluster_no + '">' + cluster_no + '</option>');
             $('#cluster_list').append(option);
         }
         // // Define onclick event of cluster no

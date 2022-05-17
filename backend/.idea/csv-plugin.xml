@@ -759,6 +759,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/key_phrase_clusters/level_0/key_phrases_cluster_#17.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/key_phrase_clusters/level_0/key_phrases_cluster_#2.csv">
           <value>
             <Attribute>
@@ -1110,6 +1117,27 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/iteration/cluster/iteration_0/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/iteration/cluster/iteration_1/AIMLUrbanStudyCorpus_cluster_docs.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/iteration/cluster/iteration_1/AIMLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/iteration/cluster/iteration_1/experiments/HDBSCAN_cluster_doc_vector_result_summary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
