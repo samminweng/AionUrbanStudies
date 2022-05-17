@@ -292,8 +292,13 @@ class KeywordClusterUtility:
             colors = sns.color_palette('tab10', n_colors=len(key_phrase_clusters)).as_hex()
             # Plot clustered dots and outliers
             fig = go.Figure()
+            scores = list()
+            x_pos = list()
+            y_pos = list()
             for kp_cluster in key_phrase_clusters:
                 kp_cluster_no = kp_cluster['Group']
+                score = kp_cluster['score']
+                scores.append(score)
                 marker_color = colors[kp_cluster_no - 1]
                 marker_symbol = 'circle'
                 name = 'Keyword Cluster {no}'.format(no=kp_cluster_no)
@@ -309,13 +314,26 @@ class KeywordClusterUtility:
                                 size=marker_size, color=marker_color,
                                 opacity=opacity)
                 ))
+                x_pos = x_pos + kp_cluster['x']
+                y_pos = y_pos + kp_cluster['y']
 
-            title = 'Article Cluster #' + str(cluster_no)
-            # Figure layout
+            avg_score = np.round(np.mean(scores), decimals=3)
+            title = 'Article Cluster #' + str(cluster_no) + ' score = ' + str(avg_score)
+
+            if len(key_phrase_clusters) <= 4:
+                x_max = round(max(x_pos) + 1.5)
+                x_min = round(min(x_pos) - 1.5)
+                y_max = round(max(y_pos) + 1.5)
+                y_min = round(min(y_pos) - 1.5)
+                # Update x, y axis
+                fig.update_layout(xaxis_range=[x_min, x_max],
+                                  yaxis_range=[y_min, y_max])
+                # Figure layout
             fig.update_layout(title=title,
                               width=600, height=800,
                               legend=dict(orientation="v"),
                               margin=dict(l=20, r=20, t=30, b=40))
+
             file_name = 'key_phrases_cluster_#' + str(cluster_no)
             file_path = os.path.join(folder, file_name + ".png")
             pio.write_image(fig, file_path, format='png')

@@ -208,6 +208,9 @@ class TopicKeywordClusterUtility:
                                           reverse=True)
                 # Add the candidate words if any topic word is removed from the list
                 _new_topic_words = list(filter(lambda w: len(w['phrases']) > 0, _topic_words))
+                if len(_candidate_words) == 0:
+                    return _new_topic_words
+
                 _diff = _top_n - len(_new_topic_words)
                 if _diff > 0:
                     _candidate_words_clone = copy.deepcopy(_candidate_words)
@@ -223,7 +226,7 @@ class TopicKeywordClusterUtility:
                     else:
                         _new_topic_words = _new_topic_words + random.sample(_candidate_words, _diff)
                         print("Randomly select candidate words")
-                assert len(_new_topic_words) == _top_n, "Length of Topic Words != 5"
+                # assert len(_new_topic_words) == _top_n, "Length of Topic Words != 5"
                 return _new_topic_words
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))

@@ -153,11 +153,6 @@ class TopicKeywordCluster:
     # Compute the score
     def collect_topics_from_keyword_cluster(self):
         try:
-            # Collect collocation from each cluster of articles
-            # with CoreNLPClient(
-            #         annotators=['tokenize', 'ssplit', 'pos'],
-            #         timeout=30000,
-            #         memory='6G') as client:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             # Load the documents clustered by
             clusters = self.cluster_key_phrases_df.to_dict("records")
@@ -174,7 +169,8 @@ class TopicKeywordCluster:
                     # print(docs)
                     # # Load doc_key_phrases for article cluster
                     # Filter out tiny keyword clusters to avoid producing too many topics
-                    key_phrase_groups = list(filter(lambda g: len(g['Key-phrases']) > 5, cluster['KeyPhrases']))
+                    # key_phrase_groups = list(filter(lambda g: len(g['Key-phrases']) > 5, cluster['KeyPhrases']))
+                    key_phrase_groups = cluster['KeyPhrases']
                     for group in key_phrase_groups:
                         try:
                             topic_words = TopicKeywordClusterUtility.collect_topic_words_from_key_phrases(
@@ -190,10 +186,10 @@ class TopicKeywordCluster:
                                                           'keyword_cluster')
                     Path(folder).mkdir(parents=True, exist_ok=True)
                     df = pd.DataFrame(key_phrase_groups)
-                    df = df[['Group', 'TopicWords', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds', 'score',
-                             'dimension', 'min_samples', 'min_cluster_size']]
+                    df = df[['Group', 'score', 'TopicWords', 'NumPhrases', 'Key-phrases', 'NumDocs', 'DocIds',
+                             'dimension', 'min_samples', 'min_cluster_size', 'x', 'y']]
                     path = os.path.join(keyword_cluster_folder,
-                                        'group_key_phrases_cluster_#' + str(cluster_no) + ".csv")
+                                        'key_phrases_cluster_#' + str(cluster_no) + ".csv")
                     df.to_csv(path, encoding='utf-8', index=False)
                     key_phrase_groups = df.to_dict("records")
                     # Add one record

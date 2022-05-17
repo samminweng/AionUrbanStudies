@@ -74,10 +74,6 @@ class Evaluation:
 
     # Evaluate the keyword cluster chart
     def evaluate_keyword_clusters(self):
-        folder = os.path.join('output', self.args.case_name, self.args.folder)
-        path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
-    # Collect and generate statistics from results
-    def collect_topic_statistics(self):
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')

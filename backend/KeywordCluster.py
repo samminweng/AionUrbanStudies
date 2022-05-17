@@ -179,7 +179,7 @@ class KeywordCluster:
         clusters = pd.read_json(path).to_dict("records")
         # minimal cluster size
         cluster_no_list = self.cluster_no_list
-        # cluster_no_list = [8]
+        # cluster_no_list = [4]
         try:
             for cluster_no in cluster_no_list:
                 is_stop = False
