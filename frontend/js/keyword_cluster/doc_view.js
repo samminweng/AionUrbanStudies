@@ -1,5 +1,6 @@
 // Create a text view to display the content of the article
-function DocView(doc, keywords) {
+function DocView(doc, keywords, color_no) {
+    const class_name = 'keyword_' + color_no;
     const container = $('<div class="card text-dark bg-light">' +
         '<div class="card-body">' +
         '<p class="card-text">' +
@@ -16,6 +17,7 @@ function DocView(doc, keywords) {
             if(term !== null){
                 // Mark the topic
                 const mark_options = {
+                    "caseSensitive": false,
                     "separateWordSearch": false,
                     // "accuracy": {
                     //     "value": "exactly",
@@ -23,6 +25,7 @@ function DocView(doc, keywords) {
                     // },
                     "acrossElements": true,
                     "ignorePunctuation": ":;.,-–—‒_(){}[]!'\"+=".split(""),
+                    "element": "span",
                     "className": class_name
                 }
                 div.mark(term, mark_options);
@@ -50,7 +53,7 @@ function DocView(doc, keywords) {
         let abstract_div = $('<div class="col"></div>');
         // const short_abstract = doc['Abstract'].substring(0, 150) + '...';
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span class="abstract">' + doc['Abstract'] + '</span>'));
-        abstract_div = mark_key_terms(abstract_div, keywords, 'search_terms');
+        abstract_div = mark_key_terms(abstract_div, keywords, class_name);
         container.find(".card-text").append(abstract_div);
 
         // Add author keywords

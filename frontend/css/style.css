@@ -70,3 +70,73 @@ tfoot { display:table-footer-group }
     background: white;
 }
 
+
+.keyword_0 {
+    background: transparent;
+    font-weight: bold;
+    color: #1f77b4;
+    padding: 0;
+}
+
+.keyword_1 {
+    background: transparent;
+    font-weight: bold;
+    color: #ff7f0e;
+    padding: 0;
+}
+
+.keyword_2 {
+    background: transparent;
+    font-weight: bold;
+    color: #2ca02c;
+    padding: 0;
+}
+
+.keyword_3 {
+    background: transparent;
+    font-weight: bold;
+    color: #d62728;
+    padding: 0;
+}
+
+.keyword_4 {
+    background: transparent;
+    font-weight: bold;
+    color: #9467bd;
+    padding: 0;
+}
+
+.keyword_5 {
+    background: transparent;
+    font-weight: bold;
+    color: #8c564b;
+    padding: 0;
+}
+
+.keyword_6 {
+    background: transparent;
+    font-weight: bold;
+    color: #e377c2;
+    padding: 0;
+}
+
+.keyword_7 {
+    background: transparent;
+    font-weight: bold;
+    color: #7f7f7f;
+    padding: 0;
+}
+
+.keyword_8 {
+    background: transparent;
+    font-weight: bold;
+    color: #bcbd22;
+    padding: 0;
+}
+
+.keyword_9 {
+    background: transparent;
+    font-weight: bold;
+    color: #17becf;
+    padding: 0;
+}
