@@ -1,5 +1,6 @@
 'use strict';
 const corpus = 'AIMLUrbanStudyCorpus';
+const select_no = 17;
 // Document ready event
 $(function () {
     // Clustering docs data (document, abstract and title)
@@ -14,7 +15,7 @@ $(function () {
         const corpus_data = result1[0];
         const cluster_data = result2[0];
         // Draw the chart and list the clusters/topic words
-        const chart = new ScatterGraph(corpus_data, cluster_data, 17);
+        const chart = new ScatterGraph(corpus_data, cluster_data, select_no);
         // Update basic info
         const total_papers = corpus_data.length;
         $('#total_papers').text(total_papers);
@@ -37,6 +38,8 @@ $(function () {
                 const chart = new ScatterGraph(corpus_data, cluster_data, null);
             }
         });
+
+        $('#cluster_list').val(select_no);
     });
 
 });

@@ -20,8 +20,7 @@
 <div class="container">
     <div class="h4">Keyword Cluster Chart</div>
     <div>
-        <span id="total_papers"></span>
-        Keywords are extracted from article abstract (related to AI and machine learning on Urban Study)
+        Keywords are extracted from <span id="total_papers"></span> article abstract (related to AI and machine learning on Urban Study)
         and grouped into keyword clusters based on similarities using an iterative approach
         (Pattern Matching + BERT-based Sentence Transformer + HDBSCAN clustering + MMR ranking), which is an enhancement to
         <a target="_blank" href="https://github.com/MaartenGr/KeyBERT">KeyBERT</a>
@@ -48,9 +47,14 @@
         </div>
         <div class="col border border-3">
             <div class="container p-3">
-                <div id="keyword_view"></div>
-                <div id="doc_list"></div>
+                <div id="keyword_cluster_list"></div>
+<!--                <div id="doc_list"></div>-->
             </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <div id="keyword_cluster_view"></div>
         </div>
     </div>
     <!-- footer -->
@@ -60,12 +64,10 @@
     </footer>
 </div>
 <!-- Our javascript -->
-<!--<script type="text/javascript" src="js/article_cluster/instruction_dialog.js"></script>-->
-<!--<script type="text/javascript" src="js/article_cluster/doc_view/doc_view.js"></script>-->
-<!--<script type="text/javascript" src="js/article_cluster/doc_view/doc_list.js"></script>-->
-<script type="text/javascript" src="js/keyword_cluster/keyword_view.js"></script>
+<script type="text/javascript" src="js/keyword_cluster/doc_view.js"></script>
+<script type="text/javascript" src="js/keyword_cluster/keyword_cluster_view.js"></script>
+<script type="text/javascript" src="js/keyword_cluster/keyword_cluster_list.js"></script>
 <script type="text/javascript" src="js/keyword_cluster/scatter_graph.js"></script>
-<!--<script type="text/javascript" src="js/article_cluster/utility.js"></script>-->
 <script type="text/javascript" src="js/keyword_cluster/main.js"></script>
 </body>
 </html>
