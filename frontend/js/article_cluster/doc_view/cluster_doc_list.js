@@ -34,7 +34,10 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
     function _createUI() {
         // Create a div to display
         $('#cluster_doc_heading').empty();
-        const heading = $('<div>Article Cluster ' + cluster_no +' </div>');
+        const score = cluster['Score'];
+        const class_name = (score < 0.6 ? 'text-danger': 'text-primary');
+        const heading = $('<div>Article Cluster ' + cluster_no +' <span class="' + class_name + '">(' +
+            score.toFixed(2) + ')</span>  </div>');
         const cluster_link = $('<button type="button" class="btn btn-link" >' + cluster_docs.length + ' articles</button>');
         heading.append(cluster_link);
         $('#cluster_doc_heading').append(heading);
