@@ -158,7 +158,7 @@ class ArticleClusterTermTFIDF:
         for folder_name in folder_names:
             iterative_folder = os.path.join(folder, folder_name)
             try:
-                # ArticleClusterTermTFIDFUtility.update_clustering_scores(iterative_folder, self.model)
+                ArticleClusterTermTFIDFUtility.update_clustering_scores(iterative_folder, self.model)
                 # Load the updated iterative clustering summary
                 path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
                                     'AIMLUrbanStudyCorpus_iterative_summary.json')
@@ -345,8 +345,8 @@ if __name__ == '__main__':
         # ct.output_iterative_cluster_results()
         ct = ArticleClusterTermTFIDF()
         # ct.update_iterative_article_cluster_results()
-        # ct.collect_article_cluster_results()
-        # ct.derive_cluster_terms_by_TF_IDF()
+        ct.collect_article_cluster_results()
+        ct.derive_cluster_terms_by_TF_IDF()
         ct.summarize_cluster_terms()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
