@@ -1,6 +1,7 @@
 // Create a div to display the grouped key phrases
 function KeywordClusterView(keyword_cluster, docs) {
     const group_no = keyword_cluster['Group'];
+    const score = keyword_cluster['score'].toFixed(2);
     const keywords = keyword_cluster['Key-phrases'];
     // D3 category color pallets
     const color_plates = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2",
@@ -51,7 +52,7 @@ function KeywordClusterView(keyword_cluster, docs) {
         const container = $('<div class="m-3"></div>');
         const heading = $('<div class="mb-3">' +
                           '<span class="fw-bold" style="color:' + color + '">Keyword Cluster ' + group_no + ' </span>' +
-                          ' contains ' + keywords.length + ' keywords' + ' across ' + docs.length + ' articles</div>');
+                          ' (' + score + ') contains ' + keywords.length + ' keywords' + ' across ' + docs.length + ' articles</div>');
         // A list of grouped key phrases
         container.append(heading);
         container.append(displayKeywordList());

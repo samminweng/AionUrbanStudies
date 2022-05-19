@@ -3,15 +3,19 @@ import math
 import os
 import re
 import string
+import sys
 from functools import reduce
 from pathlib import Path
 
 import inflect
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import seaborn as sns
+import umap
 from nltk import sent_tokenize, word_tokenize, pos_tag, ngrams
 from nltk.corpus import stopwords
+from sklearn.metrics import pairwise_distances, silhouette_samples, silhouette_score
 
 from BERTArticleClusterUtility import BERTArticleClusterUtility
 
@@ -363,3 +367,66 @@ class ArticleClusterTermTFIDFUtility:
             return sorted_docs_per_topics
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
+
+    # Get the cluster parameters such as min_samples, dimension and min cluster size
+    @staticmethod
+    def update_clustering_scores(iterative_folder, model):
+        # Load Clustering parameters
+        path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
+                            'AIMLUrbanStudyCorpus_iterative_summary.json')
+        parameters = pd.read_json(path).to_dict("records")
+        # Load all docs (including clean texts)
+        path = os.path.join(iterative_folder, 'cluster', 'iteration_0', 'vectors', 'doc_vector_results.json')
+        docs = pd.read_json(path).to_dict("records")
+        iterations = np.unique(list(map(lambda p: p['iteration'], parameters)))
+        updated_parameters = list()
+        for iteration in iterations:
+            try:
+                # Find the parameters matching with doc_ids
+                matched_parameters = list(filter(lambda c: c['iteration'] == iteration, parameters))
+                assert len(matched_parameters) > 0, "Cannot find the parameters of an iteration"
+                # Collect all the doc vectors and labels of the matched
+                texts = []
+                cluster_labels = []
+                for parameter in matched_parameters:
+                    cluster_no = parameter['Cluster']
+                    for doc_id in parameter['DocIds']:
+                        doc = next(doc for doc in docs if doc['DocId'] == doc_id)
+                        assert doc is not None, "Cannot find doc"
+                        texts.append(doc['Text'])
+                        # cluster_doc_vectors.append(np_doc_vector)
+                        cluster_labels.append(cluster_no)
+                dimension = matched_parameters[0]['dimension']
+                # Get all doc vectors
+                doc_vectors = model.encode(texts, show_progress_bar=True)
+                # Reduce the dimension of doc vectors into 2D to facilitate visualisation
+                reduced_vectors = umap.UMAP(n_neighbors=150,
+                                            min_dist=0,
+                                            n_components=dimension,
+                                            random_state=42,
+                                            metric='cosine').fit_transform(doc_vectors.tolist())
+                # Compute the cosine distance/similarity for each doc vectors
+                distances = pairwise_distances(reduced_vectors, metric='cosine')
+                # avg_score = silhouette_score(distances.tolist(), cluster_labels, metric='cosine')
+                # print(avg_score)
+                # Compute Silhouette Score of each individual cluster
+                silhouette_scores = silhouette_samples(distances.tolist(), cluster_labels, metric='cosine')
+                # print(silhouette_scores)
+                # Update the score of each iterative clusters
+                for parameter in matched_parameters:
+                    cluster_no = parameter['Cluster']
+                    cluster_silhouette_vals = silhouette_scores[np.array(cluster_labels) == cluster_no]
+                    parameter['score'] = np.mean(cluster_silhouette_vals)
+                    updated_parameters.append(parameter)
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+                sys.exit(-1)
+        df = pd.DataFrame(updated_parameters)
+        # Write out to iterative summary
+        path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
+                            'AIMLUrbanStudyCorpus_iterative_summary.csv')
+        df.to_csv(path, encoding='utf-8', index=False)
+        # Write article corpus to a json file
+        path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
+                            'AIMLUrbanStudyCorpus_iterative_summary.json')
+        df.to_json(path, orient='records')

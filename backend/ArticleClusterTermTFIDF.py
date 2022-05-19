@@ -1,11 +1,22 @@
+import getpass
 import os
 import sys
 from argparse import Namespace
 from functools import reduce
 from pathlib import Path
+
+import numpy as np
 import pandas as pd
 # Obtain the cluster results of the best results and extract cluster topics using TF-IDF
+from sentence_transformers import SentenceTransformer
+
 from ArticleClusterTermTFIDFUtility import ArticleClusterTermTFIDFUtility
+
+# Set Sentence Transformer path
+sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
+if os.name == 'nt':
+    sentence_transformers_path = os.path.join("C:", os.sep, "Users", getpass.getuser(), "SentenceTransformer")
+Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 
 class ArticleClusterTermTFIDF:
@@ -14,7 +25,12 @@ class ArticleClusterTermTFIDF:
             case_name='AIMLUrbanStudyCorpus',
             approach='TF-IDF',
             cluster_folder='cluster_merge',
+            model_name='all-mpnet-base-v2',
+            device='cpu',
         )
+        # Load Sentence Transformer
+        self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                         device=self.args.device)
 
     # def __init__(self, _last_iteration, _cluster_no):
     #     self.args = Namespace(
@@ -108,12 +124,6 @@ class ArticleClusterTermTFIDF:
                             doc['HDBSCAN_Cluster'] = cur_cluster_no
                         results.extend(docs)
                         cur_cluster_no = cur_cluster_no + 1
-                # visual_results.extend(outlier_df.to_dict("records"))
-                # Add the outliers at lst iteration
-                # if iteration == self.args.last_iteration:
-                #     # Get outliers
-                #     outlier_df = df[df['HDBSCAN_Cluster'] == -1]
-                #     results.extend(outlier_df.to_dict("records"))
                 copied_results = results.copy()
                 image_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
                                             'cluster_terms', 'images')
@@ -138,6 +148,39 @@ class ArticleClusterTermTFIDF:
         text_df.to_json(path, orient='records')
         # print(text_df)
 
+    # Update iterative clustering scores with individual Silhouette scores
+    def update_iterative_article_cluster_results(self):
+        folder = os.path.join('output', self.args.case_name)
+        # Load corpus
+        # corpus_path = os.path.join(folder, 'iteration', self.args.case_name + '_clusters.json')
+        # corpus = pd.read_json(corpus_path).to_dict("records")
+        folder_names = ['cluster_0', 'cluster_1', 'cluster_2', 'cluster_3', 'iteration', 'cluster_-1']
+        for folder_name in folder_names:
+            iterative_folder = os.path.join(folder, folder_name)
+            try:
+                # ArticleClusterTermTFIDFUtility.update_clustering_scores(iterative_folder, self.model)
+                # Load the updated iterative clustering summary
+                path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
+                                    'AIMLUrbanStudyCorpus_iterative_summary.json')
+                iterative_clusters = pd.read_json(path).to_dict("records")
+                # Load the cluster results
+                path = os.path.join(iterative_folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+                cluster_results = pd.read_json(path).to_dict("records")
+                for result in cluster_results:
+                    found_cluster = next(c for c in iterative_clusters if np.array_equal(c['DocIds'], result['DocIds']))
+                    assert found_cluster is not None, "Cannot find the article cluster"
+                    result['Score'] = found_cluster['score']
+                # Write output to article clusters
+                df = pd.DataFrame(cluster_results)
+                path = os.path.join(iterative_folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
+                df.to_csv(path, encoding='utf-8', index=False)
+                # Write article corpus to a json file
+                path = os.path.join(iterative_folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+                df.to_json(path, orient='records')
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+                sys.exit(-1)
+
     # Collect all the article clusters < 40 articles as a single file
     def collect_article_cluster_results(self):
         folder = os.path.join('output', self.args.case_name)
@@ -150,7 +193,8 @@ class ArticleClusterTermTFIDF:
         current_cluster_no = 1
         for folder_name in folder_names:
             try:
-                cluster_path = os.path.join(folder, folder_name,
+                iterative_folder = os.path.join(folder, folder_name)
+                cluster_path = os.path.join(iterative_folder,
                                             self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
                 clusters = pd.read_json(cluster_path).to_dict("records")
                 # filter cluster > 40 articles
@@ -261,6 +305,7 @@ class ArticleClusterTermTFIDF:
             cluster_terms = sorted(cluster_terms, key=lambda t: (len(t['doc_ids']), t['freq']), reverse=True)
             # print(cluster_terms)
             return cluster_terms
+
         try:
             term_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms')
             # Load cluster topics
@@ -299,8 +344,9 @@ if __name__ == '__main__':
         # ct.collect_iterative_cluster_results()
         # ct.output_iterative_cluster_results()
         ct = ArticleClusterTermTFIDF()
-        ct.collect_article_cluster_results()
-        ct.derive_cluster_terms_by_TF_IDF()
+        # ct.update_iterative_article_cluster_results()
+        # ct.collect_article_cluster_results()
+        # ct.derive_cluster_terms_by_TF_IDF()
         ct.summarize_cluster_terms()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

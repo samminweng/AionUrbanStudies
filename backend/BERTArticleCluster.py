@@ -278,8 +278,8 @@ class BERTArticleCluster:
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Output cluster results to png files
                 BERTArticleClusterUtility.visualise_cluster_results(cluster_labels,
-                                                                     df['x'].tolist(), df['y'].tolist(),
-                                                                     d_result, folder)
+                                                                    df['x'].tolist(), df['y'].tolist(),
+                                                                    d_result, folder)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -335,8 +335,8 @@ class BERTArticleCluster:
             Path(folder).mkdir(parents=True, exist_ok=True)
             # Output cluster results to png
             BERTArticleClusterUtility.visualise_cluster_results(cluster_labels,
-                                                                 cluster_df['x'].tolist(), cluster_df['y'].tolist(),
-                                                                 best_result, folder)
+                                                                cluster_df['x'].tolist(), cluster_df['y'].tolist(),
+                                                                best_result, folder)
             # Output condense tree of the best cluster results
             condense_tree = clusters.condensed_tree_
             # Save condense tree to csv
