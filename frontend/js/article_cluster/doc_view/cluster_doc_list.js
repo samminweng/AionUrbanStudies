@@ -1,4 +1,4 @@
-function ClusterDocList(cluster_no, corpus_data, cluster_data) {
+function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
     const cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
     // Display Top 10 Distinct Terms and grouped key phrases
@@ -32,9 +32,10 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
         // Create a div to display
         $('#cluster_doc_heading').empty();
         const score = cluster['Score'];
-        const heading = $('<div>Article Cluster ' + cluster_no +' <span>(' + score.toFixed(2) + ')</span>  </div>');
+        const heading = $('<div><span style="color: ' +color +'">Article Cluster ' + cluster_no +'</span> ' +
+            '<span class="score">(' + score.toFixed(2) + ')</span>  </div>');
         if(score < 0.0){
-            heading.find("span").addClass('text-danger');
+            heading.find(".score").addClass('text-danger');
         }
 
 

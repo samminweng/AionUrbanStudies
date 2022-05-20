@@ -162,7 +162,7 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
         $('#cluster_chart').css('width', width).css('height', height);
         drawChart();
         if (_select_no) {
-            const cluster_doc_list = new ClusterDocList(_select_no, corpus_data, cluster_data);
+            const cluster_doc_list = new ClusterDocList(_select_no, corpus_data, cluster_data, color_plates[_select_no-1]);
         } else {
             // Clean the right panel
             $('#cluster_doc_heading').empty();

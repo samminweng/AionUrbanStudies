@@ -9,9 +9,28 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
     // D3 category color pallets
     const color_plates = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
 
+    // Get small rectangles of all dots
+    // Ref: https://www.geeksforgeeks.org/coordinates-rectangle-given-points-lie-inside/?ref=rp
+    function get_small_rectangles(x_arr, y_arr){
+        // find max and min of x position
+        const x_max = x_arr.reduce((a,b) => Math.max(a,b));
+        const x_min = x_arr.reduce((a,b) => Math.min(a,b));
+        const x_center = (x_max + x_min)/2;
+        // Update x_range
+        x_range[0] = Math.min(x_center - 2, x_min);
+        x_range[1] = Math.max(x_center + 2, x_max);
+        // find max and min of y position
+        const y_max =  y_arr.reduce((a,b) => Math.max(a,b));
+        const y_min = y_arr.reduce((a,b) => Math.min(a,b));
+        const y_center = (y_max + y_min)/2;
+        y_range[0] = Math.min(y_center - 2, y_min);
+        y_range[1] = Math.max(y_center + 2, y_max);
+    }
+
     // Convert the keyword clusters to Plotly js data format
     function convert_keyword_clusters_to_data_points() {
         let traces = [];
+        let x_arr = [], y_arr = [];
         // Convert the clustered data into the format for Plotly js chart
         for (const keyword_cluster of keyword_clusters) {
             const group_no = keyword_cluster['Group'];
@@ -50,27 +69,11 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
                 trace['opacity'] = 1;
             }
 
-
             traces.push(trace);
-
-            const x_min = Math.floor(Math.min(...x_pos));
-            // Update the range of x axis
-            if (x_min < x_range[0]) {
-                x_range[0] = x_min;
-            }
-            const x_max = Math.ceil(Math.max(...x_pos));
-            if (x_max > x_range[1]) {
-                x_range[1] = x_max;
-            }
-            const y_min = Math.floor(Math.min(...y_pos));
-            if (y_min < y_range[0]) {
-                y_range[0] = y_min;
-            }
-            const y_max = Math.ceil(Math.max(...y_pos));
-            if (y_max > y_range[1]) {
-                y_range[1] = y_max;
-            }
+            x_arr = x_arr.concat(x_pos);
+            y_arr = y_arr.concat(y_pos);
         }
+        get_small_rectangles(x_arr, y_arr);
         return traces;
     }
 
@@ -86,14 +89,14 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
                 range:x_range,
                 // showgrid: false,
                 // showline: false,
-                // zeroline: false,
+                zeroline: false,
                 // showticklabels: false
             },
             yaxis: {
                 range: y_range,
                 // showgrid: false,
                 // showline: false,
-                // zeroline: false,
+                zeroline: false,
                 // showticklabels: false
             },
             // Set the graph margin
