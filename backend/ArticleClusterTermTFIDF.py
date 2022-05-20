@@ -164,7 +164,8 @@ class ArticleClusterTermTFIDF:
                                     'AIMLUrbanStudyCorpus_iterative_summary.json')
                 iterative_clusters = pd.read_json(path).to_dict("records")
                 # Load the cluster results
-                path = os.path.join(iterative_folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+                path = os.path.join(iterative_folder,
+                                    self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
                 cluster_results = pd.read_json(path).to_dict("records")
                 for result in cluster_results:
                     found_cluster = next(c for c in iterative_clusters if np.array_equal(c['DocIds'], result['DocIds']))
@@ -175,7 +176,8 @@ class ArticleClusterTermTFIDF:
                 path = os.path.join(iterative_folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.csv')
                 df.to_csv(path, encoding='utf-8', index=False)
                 # Write article corpus to a json file
-                path = os.path.join(iterative_folder, self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+                path = os.path.join(iterative_folder,
+                                    self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
                 df.to_json(path, orient='records')
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
@@ -334,6 +336,39 @@ class ArticleClusterTermTFIDF:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Extract distinct term from each article
+    def derive_article_terms_by_TF_IDF(self):
+        try:
+            # Load the corpus
+            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                self.args.case_name + '_clusters.json')
+            docs = pd.read_json(path).to_dict("records")
+            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'article_terms')
+            Path(folder).mkdir(parents=True, exist_ok=True)
+            article_terms = ArticleClusterTermTFIDFUtility.get_TFIDF_terms_from_individual_article(docs, folder,
+                                                                                                   is_load=True)
+            # Update each doc with TFIDF terms
+            for index, doc in enumerate(docs):
+                doc_id = doc['DocId']
+                terms = article_terms[index]
+                assert terms['DocId'] == doc_id, "Cannot find TFIDF terms"
+                doc['TFIDFTerms'] = terms['N-Grams']
+            df = pd.DataFrame(docs)
+            # Update the corpus with TFIDF terms
+            df = df.reindex(columns=['Cluster', 'DocId', 'Cited by', 'KeyPhrases', 'TFIDFTerms', 'Author Keywords',
+                                     'Title', 'Abstract', 'Year', 'Document Type', 'Authors', 'DOI',
+                                     'Score', 'x', 'y', 'CandidatePhrases'])
+            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                self.args.case_name + '_clusters.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            # # # Write to a json file
+            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                self.args.case_name + '_clusters.json')
+            df.to_json(path, orient='records')
+            print('Output TFIDF terms per doc to ' + path)
+        except Exception as e:
+            print("Error occurred! {err}".format(err=e))
+
 
 # Main entry
 if __name__ == '__main__':
@@ -343,10 +378,11 @@ if __name__ == '__main__':
         # ct = ClusterTermTFIDF(last_iteration, cluster_no)
         # ct.collect_iterative_cluster_results()
         # ct.output_iterative_cluster_results()
-        ct = ArticleClusterTermTFIDF()
         # ct.update_iterative_article_cluster_results()
-        ct.collect_article_cluster_results()
-        ct.derive_cluster_terms_by_TF_IDF()
-        ct.summarize_cluster_terms()
+        ct = ArticleClusterTermTFIDF()
+        # ct.collect_article_cluster_results()
+        # ct.derive_cluster_terms_by_TF_IDF()
+        # ct.summarize_cluster_terms()
+        ct.derive_article_terms_by_TF_IDF()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

@@ -19,7 +19,7 @@ function KeywordClusterView(keyword_cluster, docs) {
             // Create a new row
             const row = $('<div class="row"></div>');
             for (let j = 0; j < 3; j++) {
-                const index = i * 3 + j;
+                const index = i + j * num_row;
                 const col = $('<div class="col-sm border-bottom text-sm-start text-truncate"></div>')
                 if (index < keywords.length) {
                     const keyword = keywords[index];

@@ -535,6 +535,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/article_terms/docs/article_term_1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/article_terms/docs/article_term_287.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/cluster_terms/AIMLUrbanStudyCorpus_TF-IDF_cluster_terms.csv">
           <value>
             <Attribute>
@@ -550,6 +564,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/cluster_terms/TF_IDF_Terms/TF-IDF_cluster_term.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/cluster_terms/temp/Step_1_cluster_doc.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
