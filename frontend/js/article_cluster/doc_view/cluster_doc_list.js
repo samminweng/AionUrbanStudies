@@ -1,7 +1,6 @@
 function ClusterDocList(cluster_no, corpus_data, cluster_data) {
     const cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
-    // const cluster_link = $('<a target="_blank" href="term_sunburst.html?cluster='+ cluster_no + '">Article Cluster #' + cluster_no + '</a>');
     // Display Top 10 Distinct Terms and grouped key phrases
     function create_cluster_terms_key_phrase_topics(){
         // Create a div to display a list of topic (a link)
@@ -21,8 +20,6 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
                 const term_docs = cluster_docs.filter(d => selected_term['doc_ids'].includes(d['DocId']));
                 // Create a list of articles associated with topic
                 const doc_list = new DocList(term_docs, cluster, selected_term['term']);
-                // document.getElementById('doc_list').scrollIntoView({behavior: "smooth",
-                //     block: "nearest", inline: "nearest"});
             });
             term_p.append(link);
         }
@@ -35,9 +32,12 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data) {
         // Create a div to display
         $('#cluster_doc_heading').empty();
         const score = cluster['Score'];
-        const class_name = (score < 0.6 ? 'text-danger': 'text-primary');
-        const heading = $('<div>Article Cluster ' + cluster_no +' <span class="' + class_name + '">(' +
-            score.toFixed(2) + ')</span>  </div>');
+        const heading = $('<div>Article Cluster ' + cluster_no +' <span>(' + score.toFixed(2) + ')</span>  </div>');
+        if(score < 0.0){
+            heading.find("span").addClass('text-danger');
+        }
+
+
         const cluster_link = $('<button type="button" class="btn btn-link" >' + cluster_docs.length + ' articles</button>');
         heading.append(cluster_link);
         $('#cluster_doc_heading').append(heading);

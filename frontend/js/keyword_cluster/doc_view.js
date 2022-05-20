@@ -36,14 +36,15 @@ function DocView(doc, keywords, color_no) {
 
     function _createUI() {
         const doc_key_phrases = doc['KeyPhrases'];
-        // Add Key Phrase
-        const key_phrase_div = $('<div class="container border-info">' +
-            '<p class="lead">' + doc_key_phrases.join(", ") + '</p>' +
-            '</div>');
-        //
-
-
+        // Add BERT-based Key Phrase
+        const key_phrase_div = $('<p class="container border-info">' +
+            '<span class="fw-bold">BERT-driven Keywords: </span>' + doc_key_phrases.join("; ") + '</p>');
         container.find(".card-text").append(key_phrase_div);
+        // Add TFIDF terms
+        const terms = doc['TFIDFTerms'].map(term => term['term']).slice(0, 5);
+        const term_div = $('<p class="container border-info">' +
+            '<span class="fw-bold">TFIDF Terms: </span>' + terms.join("; ") + '</p>')
+        container.find(".card-text").append(term_div);
         // Add the title
         let title_div = $('<div></div>');
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));

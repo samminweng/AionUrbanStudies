@@ -3,6 +3,26 @@ function DocList(docs, keywords, color_no){
 
     // Create a pagination to show the documents
     function displayDocList() {
+        // Sort docs by citations
+        docs.sort((a, b) =>{
+            if(a['Cited by'] != null && b['Cited by'] !== null){
+                if(b['Cited by'] > a['Cited by']){
+                    return 1;
+                }else{
+                    if(b['Cited by'] < a['Cited by']){
+                        return -1;
+                    }
+                    return 0;
+                }
+            }
+            if(b['Cited by'] === null){
+                return -1;
+            }
+            if(a['Cited by'] === null){
+                return 1;
+            }
+        })
+
         // Create the table
         let pagination = $("<div class='mb-3'></div>");
         // Add the table header

@@ -380,9 +380,9 @@ if __name__ == '__main__':
         # ct.output_iterative_cluster_results()
         # ct.update_iterative_article_cluster_results()
         ct = ArticleClusterTermTFIDF()
-        # ct.collect_article_cluster_results()
-        # ct.derive_cluster_terms_by_TF_IDF()
-        # ct.summarize_cluster_terms()
+        ct.collect_article_cluster_results()
+        ct.derive_cluster_terms_by_TF_IDF()
+        ct.summarize_cluster_terms()
         ct.derive_article_terms_by_TF_IDF()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

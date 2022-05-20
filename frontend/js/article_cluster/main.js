@@ -15,6 +15,7 @@ $(function () {
         const cluster_data = result2[0];
         // Draw the chart and list the clusters/topic words
         const chart = new ScatterGraph(corpus_data, cluster_data, null);
+        const view = new ArticleClusterList(corpus_data, cluster_data);
         // Update basic info
         const total_papers = corpus_data.length;
         $('#total_papers').text(total_papers);
@@ -35,6 +36,7 @@ $(function () {
             if (cluster_no) {
                 const chart = new ScatterGraph(corpus_data, cluster_data, cluster_no);
             } else {
+                // Display all article clusters
                 const chart = new ScatterGraph(corpus_data, cluster_data, null);
             }
         });
