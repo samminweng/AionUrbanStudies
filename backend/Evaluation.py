@@ -1,4 +1,5 @@
 # Plots the chart to present our results in the papers
+import copy
 import os
 import sys
 from argparse import Namespace
@@ -20,10 +21,10 @@ class Evaluation:
             folder='cluster_merge'
         )
 
-    # Re-number the article clusters
-    def re_number_article_clusters_by_scores(self):
+    # Sort the article clusters to make it consistent with clustered results
+    def sort_article_clusters_by_scores(self):
         groups = [list(range(1, 8)), list(range(8, 11)), list(range(11, 18)), list(range(18, 21)),
-                  [21, 23, 28, 29, 30, 31], [22, 27], [24, 25, 26]]
+                  list(range(21, 23)), range(23, 26), list(range(27, 32))]
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
@@ -34,7 +35,7 @@ class Evaluation:
             current_cluster_no = 1
             updated_clusters = list()
             for group_index, group in enumerate(groups):
-                grouped_clusters = list(filter(lambda c: c['Cluster'] in group, clusters))
+                grouped_clusters = copy.deepcopy(list(filter(lambda c: c['Cluster'] in group, clusters)))
                 # Sort clusters by score
                 grouped_clusters = sorted(grouped_clusters, key=lambda c: c['Score'], reverse=True)
                 # Update the cluster no
@@ -43,7 +44,7 @@ class Evaluation:
                     grouped_cluster['Cluster'] = current_cluster_no
                     current_cluster_no = current_cluster_no + 1
                     updated_clusters.append(grouped_cluster)
-                print(updated_clusters)
+            print(updated_clusters)
             updated_docs = list()
             # Update the cluster information in corpus
             for cluster in updated_clusters:
@@ -56,7 +57,7 @@ class Evaluation:
             # Write updated clusters to csv and json
             # Sorted docs by DocId
             updated_docs = sorted(updated_docs, key=lambda d: d['DocId'])
-            print(updated_docs)
+            # print(updated_docs)
             # Write clusters output
             df = pd.DataFrame(updated_clusters)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.csv')
@@ -283,9 +284,9 @@ class Evaluation:
 # Main entry
 if __name__ == '__main__':
     try:
-        eval = Evaluation()
-        # eval.re_number_article_clusters_by_scores()
-        eval.evaluate_article_clusters()
-        # eval.evaluate_keyword_clusters()
+        evl = Evaluation()
+        # evl.re_number_article_clusters_by_scores()
+        evl.evaluate_article_clusters()
+        # evl.evaluate_keyword_clusters()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
