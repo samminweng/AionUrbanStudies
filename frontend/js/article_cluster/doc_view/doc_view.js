@@ -11,21 +11,29 @@ function DocView(doc, selected_term) {
 
     // Highlight key terms
     function mark_key_terms(div, terms, class_name) {
+        // function generate_hyph(term)
+
+
         // Check if the topic is not empty
         for (const term of terms) {
             if(term !== null){
-                // Mark the topic
+                // Mark the term
                 const mark_options = {
                     "separateWordSearch": false,
                     "accuracy": {
                         "value": "exactly",
-                        "limiters": [",", ".", "'s", "/", ";", ":", '(', ')', '‘', '’', '%', 's', 'es']
+                        "limiters": [",", ".", "'s", "/", ";", ":", '(', ')', '‘', '’', '%', 's', 'es', '-']
                     },
                     "acrossElements": true,
                     "ignorePunctuation": ":;.,-–—‒_(){}[]!'\"+=".split(""),
                     "className": class_name
                 }
-                div.mark(term, mark_options);
+                // div.mark(term, mark_options);
+                // Create a regular expression to match hype
+                // console.log(term);
+                let re_str = term.split(" ").join('[\\s\\-]')
+                const reg_exp = new RegExp(re_str);
+                div.markRegExp(reg_exp, mark_options);
             }
         }
         return div;
