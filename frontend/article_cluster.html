@@ -10,6 +10,7 @@
     <script type="text/javascript" src="lib/plotly-2.12.1.min.js"></script>
     <script type="text/javascript" src="lib/pagination.min.js"></script>
     <script type="text/javascript" src="lib/jquery.mark.min.js"></script>
+    <script type="text/javascript" src="lib/d3.min.js"></script>
     <!-- CSS styles -->
     <link href="css/jquery-ui.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -31,11 +32,11 @@
             <div class="row">
                 <div class="col">
                     <div class="container p-3">
-                        <div>
-                            <label for="cluster_list">Select Article Cluster:</label>
-                            <select name="cluster_list" id="cluster_list"
-                                    style="max-height: 280px;overflow-y: auto;"></select>
-                        </div>
+<!--                        <div>-->
+<!--                            <label for="cluster_list">Select Article Cluster:</label>-->
+<!--                            <select name="cluster_list" id="cluster_list"-->
+<!--                                    style="max-height: 280px;overflow-y: auto;"></select>-->
+<!--                        </div>-->
                         <div id="cluster_chart"></div>
                         <div style="height: 100px">
                             <div id="hover_info" class="h-90 d-inline-block"></div>
@@ -45,7 +46,7 @@
             </div>
         </div>
         <div class="col border border-3">
-            <div id="article_cluster_list" class="container mt-5">
+            <div id="article_cluster_list" class="mt-3">
             </div>
         </div>
     </div>

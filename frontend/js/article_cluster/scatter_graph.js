@@ -1,14 +1,23 @@
 // Create scatter graph
 function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
     const width = 600;
-    const height = 700;
+    const height = 600;
     const corpus_data = _corpus_data;
     const cluster_data = _cluster_data;
-    // Optimal color pallets for 31 colors from https://medialab.github.io/iwanthue/
-    const color_plates = ["#ac4876", "#42c87f", "#c34da8", "#91b23e", "#5b47a7", "#7ab65b", "#492675", "#bfa43e",
-        "#687ae2", "#c9822d", "#6697e2", "#c3552d", "#36dee6", "#cf3f80", "#43c29e", "#741a4f",
-        "#62ac6a", "#ac72d4", "#4e6b1e", "#cf8fde", "#b69d56", "#4c5ea7", "#c17a49", "#8a4087",
-        "#88341c", "#df81be", "#d85750", "#e2718d", "#9d2f39", "#e2656d", "#a1314d"];
+
+
+    // Get the cluster color by group number
+    function get_color(article_cluster){
+        const cluster_no = article_cluster['Cluster'];
+        const group_no = article_cluster['Group'];
+        // Get the group colors < group_no
+        let index = 0;
+        for(let i=1; i < group_no; i++){
+            index += group_color_plates[i].length;
+        }
+        let color_index = cluster_no - index - 1;
+        return group_color_plates[group_no][color_index];
+    }
 
     // Get top N terms of a cluster by TF-IDF
     function get_cluster_terms(cluster_no, n) {
@@ -42,7 +51,7 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
             let trace = {
                 'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
                 'name': cluster_name, 'mode': 'markers', 'type': 'scatter',
-                'marker': {color: color_plates[cluster_no-1], size: 5, line: {width: 0}},
+                'marker': {color: get_color(cluster), size: 5, line: {width: 0}},
                 'hovertemplate': '%{text}'
             };
             // Update opacity based on the selection
@@ -50,7 +59,7 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
                 if (cluster_no === _select_no) {
                     trace['opacity'] = 1;
                 } else {
-                    trace['opacity'] = 0.2;
+                    trace['opacity'] = 0.05;
                 }
             } else {
                 trace['opacity'] = 1;
@@ -58,20 +67,6 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
 
             traces.push(trace);
         }
-
-        // Sort traces by name
-        traces.sort((a, b) => {
-            if (a['name'].localeCompare(b['name']) !== 0) {
-                const a_g = parseInt(a['name']);
-                const b_g = parseInt(b['name']);
-                if (a_g > b_g) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            }
-            return 0;
-        });
         // console.log(traces)
         return traces;
     }
@@ -162,7 +157,8 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
         $('#cluster_chart').css('width', width).css('height', height);
         drawChart();
         if (_select_no) {
-            const cluster_doc_list = new ClusterDocList(_select_no, corpus_data, cluster_data, color_plates[_select_no-1]);
+            const cluster = cluster_data.find(c => c['Cluster'] === _select_no);
+            const cluster_doc_list = new ClusterDocList(_select_no, corpus_data, cluster_data, get_color(cluster));
         } else {
             // Clean the right panel
             $('#cluster_doc_heading').empty();
@@ -175,34 +171,3 @@ function ScatterGraph(_corpus_data, _cluster_data, _select_no) {
     _createUI();
 }
 
-// // Add chart onclick to toggle annotation
-// cluster_chart.on('plotly_click', function (data) {
-//     const point = data.points[0];
-//     // Get the doc id from text
-//     if (!point.data.name.includes('#')) {
-//         return;
-//     }
-//     const cluster_no = parseInt(point.data.name.split("#")[1]);
-//     const cluster_doc_list = new ClusterDocList(cluster_no, corpus_data, cluster_data);
-//     // // Add an annotation to the clustered dots
-//     const new_annotation = {
-//         x: point.xaxis.d2l(point.x),
-//         y: point.yaxis.d2l(point.y),
-//         bordercolor: point.fullData.marker.color,
-//         text: '<b>Article Cluster #' + cluster_no + '</b>'
-//     };
-//     // Add onclick event to show/hide annotation of the cluster.
-//     const div = document.getElementById('cluster_chart');
-//     const newIndex = (div.layout.annotations || []).length;
-//     if (newIndex > 0) {
-//         // Find if any annotation of the cluster appears before.
-//         // If so, remove the annotation.
-//         div.layout.annotations.forEach((ann, index) => {
-//             if (ann.text === new_annotation.text) {
-//                 Plotly.relayout('cluster_chart', 'annotations[' + index + ']', 'remove');
-//                 return;
-//             }
-//         });
-//     }
-//     Plotly.relayout('cluster_chart', 'annotations[' + newIndex + ']', new_annotation);
-// });

@@ -3,6 +3,8 @@ import os
 import sys
 from argparse import Namespace
 from functools import reduce
+from pathlib import Path
+
 import plotly.graph_objects as go
 from matplotlib import pyplot as plt
 import numpy as np
@@ -18,6 +20,61 @@ class Evaluation:
             folder='cluster_merge'
         )
 
+    # Re-number the article clusters
+    def re_number_article_clusters_by_scores(self):
+        groups = [list(range(1, 8)), list(range(8, 11)), list(range(11, 18)), list(range(18, 21)),
+                  [21, 23, 28, 29, 30, 31], [22, 27], [24, 25, 26]]
+        try:
+            folder = os.path.join('output', self.args.case_name, self.args.folder)
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
+            clusters = pd.read_json(path).to_dict("records")
+            path = os.path.join(folder, self.args.case_name + '_clusters.json')
+            corpus = pd.read_json(path).to_dict("records")
+            # Sort the clusters by score within groups and update cluster numbers
+            current_cluster_no = 1
+            updated_clusters = list()
+            for group_index, group in enumerate(groups):
+                grouped_clusters = list(filter(lambda c: c['Cluster'] in group, clusters))
+                # Sort clusters by score
+                grouped_clusters = sorted(grouped_clusters, key=lambda c: c['Score'], reverse=True)
+                # Update the cluster no
+                for grouped_cluster in grouped_clusters:
+                    grouped_cluster['Group'] = group_index + 1
+                    grouped_cluster['Cluster'] = current_cluster_no
+                    current_cluster_no = current_cluster_no + 1
+                    updated_clusters.append(grouped_cluster)
+                print(updated_clusters)
+            updated_docs = list()
+            # Update the cluster information in corpus
+            for cluster in updated_clusters:
+                cluster_no = cluster['Cluster']
+                doc_ids = cluster['DocIds']
+                docs = list(filter(lambda d: d['DocId'] in doc_ids, corpus))
+                for doc in docs:
+                    doc['Cluster'] = cluster_no
+                    updated_docs.append(doc)
+            # Write updated clusters to csv and json
+            # Sorted docs by DocId
+            updated_docs = sorted(updated_docs, key=lambda d: d['DocId'])
+            print(updated_docs)
+            # Write clusters output
+            df = pd.DataFrame(updated_clusters)
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            # Write article corpus to a json file
+            path = os.path.join(folder,
+                                self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
+            df.to_json(path, orient='records')
+            # Write docs outputs
+            df = pd.DataFrame(updated_docs)
+            path = os.path.join(folder, self.args.case_name + '_clusters_updated.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            # Write article corpus to a json file
+            path = os.path.join(folder,
+                                self.args.case_name + '_clusters_updated.json')
+            df.to_json(path, orient='records')
+        except Exception as e:
+            print("Error occurred! {err}".format(err=e))
     # Evaluate the article cluster chart
     def evaluate_article_clusters(self):
         # Create a chart to display score and number of articles
@@ -87,15 +144,23 @@ class Evaluation:
 
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
             clusters = pd.read_json(path).to_dict("records")
             # Sort the clusters by score
-            clusters = sorted(clusters, key=lambda c: round(c['Score'], 4))
+            sorted_clusters = sorted(clusters, key=lambda c: round(c['Score'], 4))
             # Collect the unique scores
-            scores = np.sort(np.unique(list(map(lambda c: round(c['Score'], 4), clusters))))
-            _create_freq(clusters, scores)
-            _create_acc_freq(clusters, scores)
+            scores = np.sort(np.unique(list(map(lambda c: round(c['Score'], 4), sorted_clusters))))
+            _create_freq(sorted_clusters, scores)
+            _create_acc_freq(sorted_clusters, scores)
             # print(scores)
+            # Map the TFIDF terms
+            terms = list(map(lambda c: ', '.join(list(map(lambda t: t['term'], c['Terms']))), clusters))
+            df = pd.DataFrame(clusters)
+            df = df[['Cluster', 'Score', 'NumDocs', 'DocIds']]
+            df['Terms'] = terms
+            path = os.path.join(folder, 'evaluation', 'article_clusters.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
 
@@ -103,7 +168,7 @@ class Evaluation:
     def evaluate_keyword_clusters(self):
         # Visualise the keyword clusters
         def visualise_keywords_cluster_results(_cluster_no, _keyword_clusters,
-                                               _folder):
+                                               _folder, _weight_avg_score):
             try:
                 # filter out negative keyword clusters
                 # _keyword_clusters = list(filter(lambda c: c['score'] > 0, _keyword_clusters))
@@ -136,8 +201,7 @@ class Evaluation:
                     x_pos = x_pos + kp_cluster['x']
                     y_pos = y_pos + kp_cluster['y']
 
-                avg_score = np.round(np.mean(scores), decimals=3)
-                title = 'Article Cluster #' + str(_cluster_no) + ' score = ' + str(avg_score)
+                title = 'Article Cluster #' + str(_cluster_no) + ' score = ' + str(_weight_avg_score)
                 # Set the fixed view windows
                 x_max = max(x_pos)
                 x_min = min(x_pos)
@@ -169,89 +233,59 @@ class Evaluation:
                 print("Error occurred! {err}".format(err=err))
                 sys.exit(-1)
 
+        def get_weight_average(_keyword_clusters):
+            _total_weight = 0
+            _total_sum = 0
+            for _keyword_cluster in _keyword_clusters:
+                _weight = len(_keyword_cluster['Key-phrases'])
+                _sum = _weight * _keyword_cluster['score']
+                _total_weight += _weight
+                _total_sum += _sum
+            return round(_total_sum/_total_weight, 2)
+
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
             clusters = pd.read_json(path).to_dict("records")
-            clusters = list(filter(lambda c: c['Score'] >= 0.0, clusters))
-            all_keyword_clusters = list()
+            # Filter cluster by score
+            # clusters = list(filter(lambda c: c['Score'] >= 0.0, clusters))
             results = list()
             # Filter out cluster by 0.6 of score
             for cluster in clusters:
                 cluster_no = cluster['Cluster']
                 keyword_clusters = cluster['KeywordClusters']
                 cluster_doc_ids = cluster['DocIds']
-                img_folder = os.path.join(folder, 'evaluation', 'keyword_clusters', 'positive_score')
-                # img_folder = os.path.join(folder, 'evaluation', 'keyword_clusters', 'negative_score')
-                visualise_keywords_cluster_results(cluster_no, keyword_clusters, img_folder)
+                cluster_score = cluster['Score']
+                weight_average = get_weight_average(keyword_clusters)
+                img_folder = os.path.join(folder, 'evaluation', 'keyword_clusters')
+                Path(img_folder).mkdir(parents=True, exist_ok=True)
+                visualise_keywords_cluster_results(cluster_no, keyword_clusters, img_folder, weight_average)
                 for keyword_cluster in keyword_clusters:
                     keywords = keyword_cluster['Key-phrases']
                     doc_ids = keyword_cluster['DocIds']
                     results.append({'ArticleCluster': cluster_no, 'Article_num': len(cluster_doc_ids),
+                                    'ArticleCluster_Score': cluster_score,
                                     'KeywordCluster': keyword_cluster['Group'],
                                     'score': keyword_cluster['score'],
                                     'num_keywords': len(keywords), 'Keywords': keywords,
-                                    'NumDocs': len(doc_ids), 'DocIds': doc_ids
+                                    'NumDocs': len(doc_ids), 'DocIds': doc_ids,
+                                    'weight_average': weight_average
                                     })
             # # Write keyword group results to a summary (csv)
             path = os.path.join('output', self.args.case_name, self.args.folder, 'evaluation',
                                 "keyword_clusters.csv")
             df = pd.DataFrame(results)
             df.to_csv(path, encoding='utf-8', index=False)
-
-            # # Get total number of keyword clusters
-            # total_keyword_clusters = np.sum(list(map(lambda c: len(c['KeywordClusters']), results)))
-            # print("Total number of keyword clusters = {t}".format(t=total_keyword_clusters))
-            # # Get the average number of keyword clusters
-            # avg_num_k_clusters = np.mean(list(map(lambda c: len(c['KeywordClusters']), results)))
-            # print('Number of keyword cluster per article cluster = {c}'.format(c=avg_num_k_clusters))
-            # # Get total keywords
-            # total_keywords = np.sum(list(map(lambda c: c['TotalKeywords'], results)))
-            # print("Total keywords = {t}".format(t=total_keywords))
-
-            # # Load the corpus
-            # path = os.path.join(folder, self.args.case_name + '_clusters.json')
-            # corpus_docs = pd.read_json(path).to_dict("records")
-            # results = list()
-            # for index, row in df.iterrows():
-            #
-            #     num_topics = len(keyword_clusters)
-            #
-            #     top_freq_words = list()
-            #     for group_id in range(0, num_topics):
-            #         if group_id < len(keyword_clusters):
-            #             keyword_cluster = keyword_clusters[group_id]
-            #             # Get score
-            #             score = keyword_cluster['score']
-            #             # Get number of key phrases
-            #             num_phrases = keyword_cluster['NumPhrases']
-            #             # Get number of doc
-            #             num_docs = len(keyword_cluster['DocIds'])
-            #             # Get topic_words
-            #             topic_words = keyword_cluster['TopicWords']
-            #             # Get DocIds
-            #             doc_Ids = keyword_cluster['DocIds']
-            #             docs = list(filter(lambda doc: doc['DocId'] in doc_Ids, corpus_docs))
-            #
-            #             result['keyword_cluster#' + str(group_id + 1)] = num_docs
-            #             result['Score'] = result['Score'] + score
-            #     # Sort the topic word by freq
-            #     top_freq_words = sorted(top_freq_words, key=lambda w: w['freq'], reverse=True)
-            #     result['TopicWords'] = ', '.join(list(map(lambda w: w['word'], top_freq_words[:10])))
-            #     # Get the average score
-            #     result['Score'] = result['Score'] / result['NumTopics']
-            #     results.append(result)
-
-
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
+        except Exception as e:
+            print("Error occurred! {err}".format(err=e))
 
 
 # Main entry
 if __name__ == '__main__':
     try:
         eval = Evaluation()
-        # eval.evaluate_article_clusters()
-        eval.evaluate_keyword_clusters()
+        # eval.re_number_article_clusters_by_scores()
+        eval.evaluate_article_clusters()
+        # eval.evaluate_keyword_clusters()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

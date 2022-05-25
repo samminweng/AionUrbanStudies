@@ -8,6 +8,22 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
                           "#7f7f7f", "#bcbd22", "#17becf"];
     const avg_score = keyword_clusters.map(c => parseFloat(c['score'].toFixed(2)))
                                       .reduce((pre, cur) => pre + cur, 0.0)/keyword_clusters.length;
+    const weight_avg_score = get_weighted_average_score(keyword_clusters);
+
+    // Get weighted average score
+    function get_weighted_average_score(keyword_clusters){
+        let results = keyword_clusters.map(c => {
+            const weight = c['Key-phrases'].length;
+            const sum = weight * c['score'];
+            return [sum, weight];
+        }).reduce((pre, cur) =>{
+            return [pre[0] + cur[0], pre[1] + cur[1]];
+        }, [0, 0]);
+        const weight_sum = results[0];
+        const weight_total = results[1];
+        return weight_sum/weight_total;
+    }
+
 
     // Create a view to display a keyword cluster
     function createKeywordCluster(keyword_cluster){
@@ -78,8 +94,8 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         const container = $('<div class="container"></div>');
         // Add header
         container.append($('<div class="row mb-3">Article Cluster #' + article_cluster_no +
-            '  has ' + keyword_clusters.length + ' keyword clusters with averged score of ' +
-            avg_score.toFixed(2) +' </div>'));
+            '  has ' + keyword_clusters.length + ' keyword clusters with weighted average = ' + weight_avg_score.toFixed(2) +
+            '</div>'));
         // Add each keyword cluster
         container.append($('<div class="row">' +
             '<div class="col-sm-2 fw-bold">Keyword Cluster</div>' +
