@@ -38,8 +38,8 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
                 list_view.empty();
                 // Add each keyword cluster
                 list_view.append($('<thead><tr>' +
-                    '<th>Article Cluster</th>' +
-                    '<th>Article Number (Score)</th>' +
+                    '<th>Article Cluster (Score)</th>' +
+                    '<th>Article Number </th>' +
                     '<th>TFIDF Terms</th>' +
                     '</tr></thead>'));
                 const table_body = $('<tbody></tbody>');
@@ -66,7 +66,7 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
         const score = parseFloat(article_cluster['Score']).toFixed(2);
         // Create a button to show the article cluster
         const btn = $('<button type="button" class="btn btn-link" style="color:' + color + '">' +
-            cluster_no + '</button>');
+            cluster_no  + ' <span style="color:' + color+'">(' + score +')</span></button>');
         btn.button();
         btn.click(function (event) {
             const doc_list = new ClusterDocList(cluster_no, corpus_data, article_clusters, color);
@@ -76,14 +76,10 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
         article_cluster_view.append($('<td></td>').append(btn));
         if (score < 0.0) {
             // Add a col to display score
-            article_cluster_view.append($('<td><div class="mt-2">' + doc_ids.length +
-                '<span class="text-danger"> (' + score + ')</span></div>' +
-                '</td>'));
+            article_cluster_view.append($('<td><div class="mt-2">' + doc_ids.length + '</div></td>'));
         } else {
             // Add a col to display score
-            article_cluster_view.append($('<td><div class="mt-2">' + doc_ids.length +
-                '<span> (' + score + ')</span></div>' +
-                '</td>'));
+            article_cluster_view.append($('<td><div class="mt-2">' + doc_ids.length + '</div></td>'));
         }
 
         const term_div = $('<div></div>');

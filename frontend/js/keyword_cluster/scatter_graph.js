@@ -6,8 +6,6 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
     const keyword_clusters = article_cluster['KeywordClusters'];
     let x_range = [0, 12];
     let y_range = [0, 12];
-    // D3 category color pallets
-    const color_plates = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
 
     // Get small rectangles of all dots
     // Ref: https://www.geeksforgeeks.org/coordinates-rectangle-given-points-lie-inside/?ref=rp
@@ -138,9 +136,11 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
         $('#cluster_chart').empty();
         $('#cluster_chart').css('width', width).css('height', height);
         drawChart();
-
         // Display all keyword clusters
         const view = new KeywordClusterList(corpus_data, cluster_data, article_cluster_no);
+
+        $('#keyword_cluster_view').empty();
+        $('#doc_list_view').empty();
     }
 
     _createUI();
