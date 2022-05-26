@@ -4,7 +4,7 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
     // Display Top 10 Distinct Terms and grouped key phrases
     function create_cluster_terms_key_phrase_topics(){
         // Create a div to display a list of topic (a link)
-        $('#cluster_terms').empty();
+        const view = $('<div></div>');
         const container = $('<div class="container-sm"></div>');
         const term_p = $('<div></div>');
         let cluster_terms = cluster['Terms'].slice(0, 10);
@@ -38,11 +38,13 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
         }
         // Append topic heading and paragraph to accordion
         container.append(term_p);
-        $('#cluster_terms').append(container);
+        view.append(container);
+        return view;
     }
     function _createUI() {
+        $('#article_cluster_term_list').empty();
         // Create a div to display
-        $('#cluster_doc_heading').empty();
+        const header = $('<div class="h5"></div>');
         const score = cluster['Score'];
         const heading = $('<div>' +
             '<span style="color: ' +color +'">Article Cluster ' + cluster_no +'</span> ' +
@@ -52,16 +54,12 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
         if(score < 0.0){
             heading.find(".score").addClass('text-danger');
         }
-        $('#cluster_doc_heading').append(heading);
+        header.append(heading);
+        $('#article_cluster_term_list').append(header);
         // Create a div to display top 10 Topic of a cluster
-        create_cluster_terms_key_phrase_topics();
+        $('#article_cluster_term_list').append(create_cluster_terms_key_phrase_topics());
         // Create doc list
         const doc_list = new DocList(cluster_docs, cluster, null);
-        // Define the cluster link
-        cluster_link.click(function(){
-            // Display all the articles
-            const doc_list = new DocList(cluster_docs, cluster, null);
-        });
 
     }
     _createUI();

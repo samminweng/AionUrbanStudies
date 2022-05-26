@@ -24,7 +24,7 @@ class Evaluation:
     # Sort the article clusters to make it consistent with clustered results
     def sort_article_clusters_by_scores(self):
         groups = [list(range(1, 8)), list(range(8, 11)), list(range(11, 18)), list(range(18, 21)),
-                  list(range(21, 23)), range(23, 26), list(range(27, 32))]
+                  list(range(21, 23)), range(23, 26), list(range(26, 32))]
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
@@ -285,7 +285,7 @@ class Evaluation:
 if __name__ == '__main__':
     try:
         evl = Evaluation()
-        # evl.re_number_article_clusters_by_scores()
+        evl.sort_article_clusters_by_scores()
         evl.evaluate_article_clusters()
         # evl.evaluate_keyword_clusters()
     except Exception as err:

@@ -26,13 +26,13 @@ function DocList(docs, cluster, selected_term) {
         });
     }
 
-    // Create a heading
-    function _createHeading(){
+    // Create a heading to display the number of articles and sort function
+    function createHeading(){
         let heading_text = "";
         if(selected_term !== null){
             heading_text = "about " + selected_term;
         }
-        $('#doc_list_heading').empty();
+        const view = $('<div></div>');
         const container = $('<div class="row"></div>')
         // Add heading
         container.append($('<div class="col"><span class="fw-bold"> ' + docs.length + ' articles </span>' +
@@ -50,7 +50,7 @@ function DocList(docs, cluster, selected_term) {
             '<label class="form-check-label"> Year </label>' +
             '</div>'));
         container.append($('<div class="col"></div>').append(sort_by_div));
-        $('#doc_list_heading').append(container);
+        view.append(container);
 
         // Define onclick event
         sort_by_div.find('input[name="sort-btn"]').change(function(){
@@ -61,8 +61,8 @@ function DocList(docs, cluster, selected_term) {
             }
             _createUI();
         });
+        return view;
     }
-
 
     // Create a pagination to show the documents
     function createPagination(docTable) {
@@ -100,18 +100,19 @@ function DocList(docs, cluster, selected_term) {
     }
 
     function _createUI() {
-        $('#doc_list').empty();
+        $('#article_cluster_doc_list').empty();
         const container = $('<div></div>');
         // A list of cluster documents
         const doc_table = $('<table class="table table-borderless">' +
             '<tbody></tbody></table>');
         const pagination = createPagination(doc_table);
         // Add the table to display the list of documents.
+        container.append(createHeading());
         container.append(pagination);
         container.append(doc_table);
-        $('#doc_list').append(container);
+        $('#article_cluster_doc_list').append(container);
     }
 
     _createUI();
-    _createHeading();
+
 }

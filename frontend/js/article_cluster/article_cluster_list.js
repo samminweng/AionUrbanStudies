@@ -1,5 +1,5 @@
 // Displays a list view of all article clusters
-function ArticleClusterList(corpus_data, article_clusters) {
+function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
     // Get the cluster color by group number
     function get_color(article_cluster) {
         const cluster_no = article_cluster['Cluster'];
@@ -51,7 +51,10 @@ function ArticleClusterList(corpus_data, article_clusters) {
             }
         });
         container.append(list_view);
-        container.append(pagination);
+        if(article_clusters.length > 5){
+            container.append(pagination);
+        }
+
     }
 
     // Create a view to display a keyword cluster
@@ -66,8 +69,9 @@ function ArticleClusterList(corpus_data, article_clusters) {
             cluster_no + '</button>');
         btn.button();
         btn.click(function (event) {
+            const doc_list = new ClusterDocList(cluster_no, corpus_data, article_clusters, color);
             // Highlight the dots of a specific keyword cluster
-            const chart = new ScatterGraph(corpus_data, article_clusters, cluster_no);
+            const chart = new ScatterGraph(corpus_data, cluster_data, cluster_no);
         });
         article_cluster_view.append($('<td></td>').append(btn));
         if (score < 0.0) {
@@ -82,29 +86,16 @@ function ArticleClusterList(corpus_data, article_clusters) {
                 '</td>'));
         }
 
+        const term_div = $('<div></div>');
+        const terms = article_cluster['Terms'];
+        // Display top 10 key phrases
+        for (let i=0; i<terms.length; i++) {
+            const term = terms[i];
+            const term_view = $('<span class="btn btn-sm"> ' + term['term'] + '</span>');
+            term_div.append(term_view);
 
-        // Display TF-IDF terms
-        // const terms = article_cluster['Terms'].map(t => t['term']);
-
-        const term_div = $('<td></td>');
-        // // Display top 10 key phrases
-        // const text_span = $('<div></div>');
-        // Add top 10 cluster terms (each term is a link)
-        for (const selected_term of article_cluster['Terms']) {
-            const link = $('<button type="button" class="btn btn-link btn-sm">' + selected_term['term'] + "</button>");
-            link.button();
-            // Click on the link to display the articles associated with topic
-            link.click(function () {
-                // Get a list of docs in relation to the selected topic
-                const term_docs = corpus_data.filter(d => selected_term['doc_ids'].includes(d['DocId']));
-                // Create a list of articles associated with topic
-                const doc_list = new DocList(term_docs, article_cluster, selected_term['term']);
-            });
-            term_div.append(link);
         }
-        // text_span.text(terms.join(", "));
-        term_div.append(term_div);
-        article_cluster_view.append(term_div);
+        article_cluster_view.append($('<td></td>').append(term_div));
 
         return article_cluster_view;
     }
@@ -115,12 +106,10 @@ function ArticleClusterList(corpus_data, article_clusters) {
     function createUI() {
         $('#article_cluster_list').empty();
         const container = $('<div></div>');
-        // // Add header
-
         createPagination(container);
-
         $('#article_cluster_list').append(container);
-
+        $('#article_cluster_term_list').empty();
+        $('#article_cluster_doc_list').empty();
     }
 
     createUI();

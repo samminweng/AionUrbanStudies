@@ -90,30 +90,3 @@ function DocView(doc, selected_term) {
     _createUI();
 }
 
-
-
-// // Add 'more' or 'less' button
-// const more_btn = $('<button type="button" class="btn btn-link">more</button>');
-// const less_btn = $('<button type="button" class="btn btn-link">less</button>');
-// abstract_div.append(more_btn);
-// abstract_div.append(less_btn);
-// more_btn.show();
-// less_btn.hide();
-// // Click more btn to display full abstract
-// more_btn.on('click', function (event) {
-//     abstract_div.find('.abstract').text(doc['Abstract']);
-//     abstract_div = mark_key_terms(abstract_div, doc_key_phrases, 'key_phrase');
-//     abstract_div = mark_key_terms(abstract_div, [selected_term], 'search_terms');
-//     // Display less btn
-//     more_btn.hide();
-//     less_btn.show();
-// });
-// // Click less btn to display short abstract
-// less_btn.on('click', function (event) {
-//     abstract_div.find('.abstract').text(short_abstract);
-//     abstract_div = mark_key_terms(abstract_div, doc_key_phrases, 'key_phrase');
-//     abstract_div = mark_key_terms(abstract_div, [selected_term], 'search_terms');
-//     // Display less btn
-//     less_btn.hide();
-//     more_btn.show();
-// });
