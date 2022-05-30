@@ -141,16 +141,6 @@ function ScatterGraph(corpus_data, cluster_data, _select_no) {
         $('#cluster_chart').empty();
         $('#cluster_chart').css('width', width).css('height', height);
         drawChart();
-        // if (_select_no) {
-        //     const cluster = cluster_data.find(c => c['Cluster'] === _select_no);
-        //     const cluster_doc_list = new ClusterDocList(_select_no, corpus_data, cluster_data, get_color(cluster));
-        // } else {
-        //     // Clean the right panel
-        //     $('#cluster_doc_heading').empty();
-        //     $('#cluster_terms').empty();
-        //     $('#doc_list_heading').empty();
-        //     $('#doc_list').empty();
-        // }
     }
 
     _createUI();

@@ -76,43 +76,35 @@ class Evaluation:
             df.to_json(path, orient='records')
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
+
     # Evaluate the article cluster chart
     def evaluate_article_clusters(self):
         # Create a chart to display score and number of articles
         def _create_freq(_clusters, _scores):
             # Sort the scores
-            results = list()
-            max_clusters = 0
-            for score in _scores:
+            _scores = list()
+            _counts = list()
+            for _cluster in _clusters:
                 # Get clusters
-                score_clusters = list(filter(lambda c: round(c['Score'], 4) == score, _clusters))
-                results.append({'score': score, 'clusters': score_clusters})
-                if len(score_clusters) > max_clusters:
-                    max_clusters = len(score_clusters)
-            # print(results)
+                score = round(_cluster['Score'], 4)
+                count = _cluster['NumDocs']
+                _scores.append(score)
+                _counts.append(count)
+            results = list(zip(_scores, _counts))
+            print(results)
             # Collect the counts
             fig, ax = plt.subplots()
-            ax.set_xticks(np.arange(-1, 1.2, 0.2))
+            ax.set_xticks(np.arange(-1, 1.1, 0.2))
             # ax.set_yticks(np.arange(0, 81, 10))
             # ax.set_ylim([0, 80])
             width = 0.01
-            group_counts = list()
-            for ind in range(0, max_clusters):
-                counts = list()
-                for result in results:
-                    r_clusters = result['clusters']
-                    if ind < len(r_clusters):
-                        counts.append(r_clusters[ind]['NumDocs'])
-                    else:
-                        counts.append(0)
-                group_counts.append(np.array(counts))
-            plt.bar(scores, group_counts[0], width=width)
+            plt.bar(np.array(scores), np.array(_counts), width=width)
             plt.xlabel('Silhouette Score', fontsize=14)
             plt.ylabel('Article Number', fontsize=14)
             # Save figure to file
             out_path = os.path.join(folder, 'evaluation', 'article_cluster.png')
             plt.savefig(out_path)
-            plt.show()
+            # plt.show()
 
         # Draw the acc freq
         def _create_acc_freq(_clusters, _scores):
@@ -141,7 +133,7 @@ class Evaluation:
             plt.ylabel('Accumulated Article Numbers (%)', fontsize=14)
             out_path = os.path.join(folder, 'evaluation', 'article_cluster_acc.png')
             plt.savefig(out_path)
-            plt.show()
+            # plt.show()
 
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
@@ -248,8 +240,7 @@ class Evaluation:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
             clusters = pd.read_json(path).to_dict("records")
-            # Filter cluster by score
-            # clusters = list(filter(lambda c: c['Score'] >= 0.0, clusters))
+            summary = list()
             results = list()
             # Filter out cluster by 0.6 of score
             for cluster in clusters:
@@ -261,6 +252,9 @@ class Evaluation:
                 img_folder = os.path.join(folder, 'evaluation', 'keyword_clusters')
                 Path(img_folder).mkdir(parents=True, exist_ok=True)
                 visualise_keywords_cluster_results(cluster_no, keyword_clusters, img_folder, weight_average)
+                total_keywords = 0
+                article_numbers = list()
+                scores = list()
                 for keyword_cluster in keyword_clusters:
                     keywords = keyword_cluster['Key-phrases']
                     doc_ids = keyword_cluster['DocIds']
@@ -272,10 +266,28 @@ class Evaluation:
                                     'NumDocs': len(doc_ids), 'DocIds': doc_ids,
                                     'weight_average': weight_average
                                     })
+                    article_numbers.append(len(doc_ids))
+                    total_keywords += len(keywords)
+                    scores.append(keyword_cluster['score'])
+                avg_articles = np.mean(np.array(article_numbers))
+                avg_score = np.mean(np.array(scores))
+                coverage = avg_articles/ len(cluster_doc_ids)
+                summary.append({'ArticleCluster': cluster_no,
+                                'KeywordClusters': len(keyword_clusters),
+                                'score': avg_score,
+                                'keywords': total_keywords,
+                                'coverage': coverage,
+                                'Article_num': len(cluster_doc_ids),
+                                'ArticlePerKeywordCluster': avg_articles})
             # # Write keyword group results to a summary (csv)
             path = os.path.join('output', self.args.case_name, self.args.folder, 'evaluation',
                                 "keyword_clusters.csv")
             df = pd.DataFrame(results)
+            df.to_csv(path, encoding='utf-8', index=False)
+            # Write the summary of keyword clusters
+            path = os.path.join('output', self.args.case_name, self.args.folder, 'evaluation',
+                                "keyword_clusters_summary.csv")
+            df = pd.DataFrame(summary)
             df.to_csv(path, encoding='utf-8', index=False)
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
@@ -285,8 +297,8 @@ class Evaluation:
 if __name__ == '__main__':
     try:
         evl = Evaluation()
-        evl.sort_article_clusters_by_scores()
+        # evl.sort_article_clusters_by_scores()
         evl.evaluate_article_clusters()
-        # evl.evaluate_keyword_clusters()
+        evl.evaluate_keyword_clusters()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

@@ -57,8 +57,9 @@ function DocView(doc, keywords, color_no) {
         let abstract_div = $('<div class="col"></div>');
         // const short_abstract = doc['Abstract'].substring(0, 150) + '...';
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span class="abstract">' + doc['Abstract'] + '</span>'));
-        abstract_div = mark_key_terms(abstract_div, keywords, class_name);
         abstract_div = mark_key_terms(abstract_div, doc_key_phrases, 'key_phrase');
+        abstract_div = mark_key_terms(abstract_div, keywords, class_name);
+
         container.find(".card-text").append(abstract_div);
 
         // Add author keywords

@@ -598,6 +598,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/keyword_clusters/keyword_cluster_#1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/keyword_clusters_negative.csv">
           <value>
             <Attribute>
@@ -606,6 +613,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/keyword_clusters_positive.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/keyword_clusters_summary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

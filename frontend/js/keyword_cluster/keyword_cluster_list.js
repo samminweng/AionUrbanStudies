@@ -4,6 +4,49 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
     const keyword_clusters = article_cluster['KeywordClusters'];
     const cluster_docs = corpus_data.filter(d => article_cluster['DocIds'].includes(d['DocId']));
 
+    // Create a pagination to show the article clusters
+    function createPagination() {
+        const container = $('<div></div>');
+        // Create the pagination
+        const pagination = $('<div></div>');
+        // Create the list
+        const table = $('<table class="table table-sm"></table>');
+        // Pagination
+        pagination.pagination({
+            dataSource: function (done) {
+                let result = [];
+                for (let i = 0; i < keyword_clusters.length; i++) {
+                    result.push(keyword_clusters[i]);
+                }
+                done(result);
+            },
+            totalNumber: keyword_clusters.length,
+            pageSize: 5,
+            showNavigator: true,
+            formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, ' +
+                '<%= totalNumber %> keyword clusters',
+            callback: function (clusters, pagination) {
+                table.empty();
+                // Add each keyword cluster
+                table.append($('<thead><tr>' +
+                               '<th>Keyword Cluster</th>' +
+                               '<th>Keywords</th></tr></thead>'));
+                const table_body = $('<tbody></tbody>');
+                for (let i = 0; i < clusters.length; i++) {
+                    const cluster = clusters[i];
+                    table_body.append(createKeywordCluster(cluster))
+                }
+                table.append(table_body);
+            }
+        });
+        container.append($('<div class="table-responsive-sm"></div>').append(table));
+        if(keyword_clusters.length > 5){
+            container.append(pagination);
+        }
+        return container;
+    }
+
+
     // Create a view to display a keyword cluster
     function createKeywordCluster(keyword_cluster){
         const group_no = keyword_cluster['Group'];
@@ -29,7 +72,7 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         const keywords = keyword_cluster['Key-phrases'];
         // Display top 10 key phrases
         const keyword_div = $('<div class="container-sm small"></div>');
-        const max_size = 8;
+        const max_size = 6;
         for(const keyword of keywords.slice(0, max_size)){
             keyword_div.append($('<div class="btn btn-sm text-truncate text-start" style="width: 200px;">' + keyword + '</div>'));
         }
@@ -81,35 +124,10 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         // Add header
         container.append($('<div class="row mb-3">Article Cluster #' + article_cluster_no + '  has ' +
                                                   keyword_clusters.length + ' keyword clusters</div>'));
-        // Add each keyword cluster
-        const table = $('<table class="table table-sm">' +
-            '<thead><tr>' +
-            '<th>Keyword Cluster</th>' +
-            '<th>Keywords</th></tr></thead></table>');
-        const tbody = $('<tbody></tbody>');
-        for(const keyword_cluster of keyword_clusters){
-            tbody.append(createKeywordCluster(keyword_cluster));
-        }
-        table.append(tbody);
-        container.append(table);
+
+        container.append(createPagination());
         $('#keyword_cluster_list').append(container);
     }
 
     createUI();
 }
-// const avg_score = keyword_clusters.map(c => parseFloat(c['score'].toFixed(2)))
-//                                   .reduce((pre, cur) => pre + cur, 0.0)/keyword_clusters.length;
-// const weight_avg_score = get_weighted_average_score(keyword_clusters);
-// // Get weighted average score
-// function get_weighted_average_score(keyword_clusters){
-//     let results = keyword_clusters.map(c => {
-//         const weight = c['Key-phrases'].length;
-//         const sum = weight * c['score'];
-//         return [sum, weight];
-//     }).reduce((pre, cur) =>{
-//         return [pre[0] + cur[0], pre[1] + cur[1]];
-//     }, [0, 0]);
-//     const weight_sum = results[0];
-//     const weight_total = results[1];
-//     return weight_sum/weight_total;
-// }

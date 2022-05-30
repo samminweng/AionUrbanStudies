@@ -4,8 +4,8 @@ function KeywordClusterView(keyword_cluster, docs) {
     const score = keyword_cluster['score'].toFixed(2);
     const keywords = keyword_cluster['Key-phrases'];
     // D3 category color pallets
-    const color_plates = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2",
-        "#7f7f7f", "#bcbd22", "#17becf"];
+    // const color_plates = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2",
+    //     "#7f7f7f", "#bcbd22", "#17becf"];
     const color_no = group_no -1;
     const color = color_plates[color_no];
 

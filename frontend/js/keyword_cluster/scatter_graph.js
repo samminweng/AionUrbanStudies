@@ -1,7 +1,7 @@
 // Create scatter graph
 function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_cluster_no) {
     const width = 600;
-    const height = 700;
+    const height = 600;
     const article_cluster = cluster_data.find(c => c['Cluster'] === article_cluster_no);
     const keyword_clusters = article_cluster['KeywordClusters'];
     let x_range = [0, 12];
@@ -46,25 +46,22 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
                 // Tooltip label displays top 5 topics
                 data_point['label'].push(
                     '<b>Keyword Cluster ' + group_no + '</b> (' + keywords.length +
-                    ' keywords, ' + score.toFixed(2) + ' score)<br><extra></extra>' +
-                    '<b>Keyword:</b> <i>' + keyword + '</i>');
+                    ' keywords, ' + score.toFixed(2) + ' score)<br><extra></extra>');
             }
             // // Trace setting
             let trace = {
                 'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
                 'name': group_no, 'mode': 'markers', 'type': 'scatter',
                 'marker': {color: color_plates[group_no - 1], size: 5, line: {width: 0}},
-                'hovertemplate': '%{text}'
+                'hovertemplate': '%{text}', 'opacity': 1
             };
             // Update opacity based on the selection
             if (keyword_cluster_no) {
                 if (keyword_cluster_no === group_no) {
                     trace['opacity'] = 1;
                 } else {
-                    trace['opacity'] = 0.2;
+                    trace['opacity'] = 0.5;
                 }
-            } else {
-                trace['opacity'] = 1;
             }
 
             traces.push(trace);
@@ -102,7 +99,7 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
                 l: 20,
                 r: 20,
                 b: 20,
-                t: 40
+                t: 20
             },
             // Plot the legend outside the
             showlegend: true,
@@ -127,7 +124,26 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
         }
         // Get the cluster number
         Plotly.newPlot('cluster_chart', data_points, layout, config);
+        // Define the chart on click and hover events
+        const chart = document.getElementById('cluster_chart');
+        // Add chart click event
+        chart.on('plotly_click', function(data){
+            if (data.points.length > 0){
+                const point = data.points[0];
+                const group_no = parseInt(point.data.name);
+                if(group_no){
+                    const keyword_cluster = keyword_clusters.find(c => c['Group'] === group_no);
+                    const other_clusters = keyword_clusters.filter(c => c['Group'] !== group_no);
+                    // Update the opacity
+                    Plotly.restyle(chart, {opacity: 0.2}, other_clusters.map(c => c['Group']-1));
+                    Plotly.restyle(chart, {opacity: 1}, [group_no-1]);
+                    // Display keyword cluster view
+                    const docs = corpus_data.filter(d => keyword_cluster['DocIds'].includes(d['DocId']));
+                    const view = new KeywordClusterView(keyword_cluster, docs);
 
+                }
+            }
+        });
 
     }
 
