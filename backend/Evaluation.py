@@ -135,6 +135,29 @@ class Evaluation:
             plt.savefig(out_path)
             # plt.show()
 
+        # Get the paramters of each article clusters
+        def _get_parameters(_clusters):
+            _folder = os.path.join('output', self.args.case_name)
+            folder_names = ['cluster_0', 'cluster_1', 'cluster_2', 'cluster_3', 'iteration', 'cluster_-1']
+            results = list()
+            for folder_name in folder_names:
+                iterative_folder = os.path.join(_folder, folder_name)
+                # Load the updated iterative clustering summary
+                _path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
+                                     'AIMLUrbanStudyCorpus_iterative_summary.json')
+                iterative_clusters = pd.read_json(_path).to_dict("records")
+                results = results + iterative_clusters
+            for _cluster in _clusters:
+                doc_ids = _cluster['DocIds']
+                parameters = next((result for result in results if np.array_equal(result['DocIds'], doc_ids)), None)
+                assert parameters is not None, "Can not find the parameters of article clusters"
+                _cluster['Dimension'] = parameters['dimension']
+                _cluster['Min_Samples'] = parameters['min_samples']
+                _cluster['Min_Cluster_Size'] = parameters['min_cluster_size']
+                # Map the TFIDF terms
+                _cluster['Terms'] = ', '.join(list(map(lambda t: t['term'], _cluster['Terms'])))
+            return _clusters
+
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
@@ -145,15 +168,11 @@ class Evaluation:
             scores = np.sort(np.unique(list(map(lambda c: round(c['Score'], 4), sorted_clusters))))
             _create_freq(sorted_clusters, scores)
             _create_acc_freq(sorted_clusters, scores)
-            # print(scores)
-            # Map the TFIDF terms
-            terms = list(map(lambda c: ', '.join(list(map(lambda t: t['term'], c['Terms']))), clusters))
+            _get_parameters(clusters)
             df = pd.DataFrame(clusters)
-            df = df[['Cluster', 'Score', 'NumDocs', 'DocIds']]
-            df['Terms'] = terms
+            df = df[['Cluster', 'Score', 'NumDocs', 'DocIds', 'Terms', 'Dimension', 'Min_Samples', 'Min_Cluster_Size']]
             path = os.path.join(folder, 'evaluation', 'article_clusters.csv')
             df.to_csv(path, encoding='utf-8', index=False)
-
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
 
