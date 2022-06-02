@@ -6,3 +6,8 @@ Backend
 3. `KeywordExtraction.py`: extract keywords from article abstract
 4. `KeywordCluster.py`: cluster keywords
 5. `TopicKeywordCluster.py`: pick up topic words for a keyword cluster
+
+
+Frontend
+1. `article_cluster.html`: article cluster visualisation
+2. `keyword_cluster.html`: keyword cluster visualisation
