@@ -327,11 +327,10 @@ class Evaluation:
                     total_keywords += len(keywords)
                     scores.append(keyword_cluster['score'])
                 avg_articles = np.mean(np.array(article_numbers))
-                avg_score = np.mean(np.array(scores))
                 coverage = avg_articles/ len(cluster_doc_ids)
                 summary.append({'ArticleCluster': cluster_no,
+                                'score': cluster_score,
                                 'KeywordClusters': len(keyword_clusters),
-                                'score': avg_score,
                                 'keywords': total_keywords,
                                 'coverage': coverage,
                                 'Article_num': len(cluster_doc_ids),
