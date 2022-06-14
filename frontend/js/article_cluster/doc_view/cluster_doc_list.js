@@ -47,8 +47,8 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
         const header = $('<div class="h5"></div>');
         const score = cluster['Score'];
         const heading = $('<div>' +
-            '<span style="color: ' +color +'">Article Cluster ' + cluster_no +'</span> ' +
-            'has ' + cluster_docs.length + ' articles ' +
+            '<span style="color: ' +color +'">Abstract Cluster ' + cluster_no +'</span> ' +
+            'has ' + cluster_docs.length + ' abstracts ' +
             'and <span class="score">' + score.toFixed(2) + '</span> score</div>');
 
         if(score < 0.0){

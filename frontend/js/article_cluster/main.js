@@ -2,12 +2,10 @@
 const corpus = 'AIMLUrbanStudyCorpus';
 const group_color_plates = {
     1: Array.from(Array(7).keys()).map(i => d3.interpolateBlues(1-0.08*i)),
-    2: ['#fd8d3c', '#feb24c', '#fed976'],
-    3: Array.from(Array(7).keys()).map(i => d3.interpolateGreens(1-0.08*i)),
-    4: ['#a63603', '#d94801', '#f16913'],
-    5: ['#bf812d', '#8c510a'],
-    6: ['#4a1486', '#6a51a3', '#807dba'],
-    7: Array.from(Array(6).keys()).map(i => d3.interpolateGreys(1-0.08*i)),
+    2: Array.from(Array(7).keys()).map(i => d3.interpolateGreens(1-0.08*i)),
+    3: ['#fd8d3c', '#feb24c', '#fed976'],
+    4: Array.from(Array(15).keys()).map(i => d3.interpolateGreys(1-0.03*i)),
+
 };
 // Document ready event
 $(function () {

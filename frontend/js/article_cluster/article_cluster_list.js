@@ -38,8 +38,8 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
                 list_view.empty();
                 // Add each keyword cluster
                 list_view.append($('<thead><tr>' +
-                    '<th>Article Cluster (Score)</th>' +
-                    '<th>Article Number </th>' +
+                    '<th>Abstract Cluster (Score)</th>' +
+                    '<th>Abstract Number </th>' +
                     '<th>TFIDF Terms</th>' +
                     '</tr></thead>'));
                 const table_body = $('<tbody></tbody>');
