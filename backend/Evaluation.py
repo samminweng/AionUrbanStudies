@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import plotly.io as pio
+import plotly.figure_factory as ff
 
 
 class Evaluation:
@@ -23,11 +24,10 @@ class Evaluation:
 
     # Sort the article clusters to make it consistent with clustered results
     def sort_article_clusters_by_scores(self):
-        groups = [list(range(1, 8)), list(range(8, 11)), list(range(11, 18)), list(range(18, 21)),
-                  list(range(21, 23)), range(23, 26), list(range(26, 32))]
+        groups = [list(range(1, 8)), list(range(11, 18)), list(range(8, 11)), list(range(18, 32))]
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics.json')
             clusters = pd.read_json(path).to_dict("records")
             path = os.path.join(folder, self.args.case_name + '_clusters.json')
             corpus = pd.read_json(path).to_dict("records")
@@ -176,11 +176,52 @@ class Evaluation:
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
 
-    # Evaluate the keyword cluster chart
-    def evaluate_keyword_clusters(self):
+    # Evaluate the keyword group chart
+    def evaluate_keyword_groups(self):
+        # Load keyword experiments
+        def keyword_experiments():
+            _folder = os.path.join('output', self.args.case_name, self.args.folder, 'key_phrases',
+                                   'doc_key_phrase')
+            total_scores = list()
+            for _cluster_no in range(1, 32):
+                _path = os.path.join(_folder, 'doc_key_phrases_cluster_#' + str(_cluster_no) + '.json')
+                experiments = pd.read_json(_path).to_dict("records")
+                # print(experiments)
+                for ex in experiments:
+                    _keywords = list(filter(lambda c: c['key-phrase'] in ex['Key-phrases'], ex['Phrase-candidates']))
+                    _scores = list(map(lambda k: k['score'], _keywords))
+                    total_scores = total_scores + _scores
+            print("Average={avg} Min score={min} Max={max}".format(avg=np.mean(total_scores), min=np.min(total_scores),
+                                                                          max=np.max(total_scores)))
+
+        # Load keyword grouping experiments
+        def keyword_group_experiments():
+            _folder = os.path.join('output', self.args.case_name, self.args.folder, 'key_phrases',
+                                   'key_phrase_clusters', 'level_0', 'experiments')
+            for _cluster_no in range(1, 32):
+                _path = os.path.join(_folder, 'experiment_key_phrases_cluster#' + str(_cluster_no) + '.json' )
+                experiments = pd.read_json(_path).to_dict("records")
+                # print(experiments)
+
+        #
+        def visualise_keyword_groups_by_major_cluster(_clusters):
+            for group_no in range(1, 5):
+                _group_clusters = list(filter(lambda c: c['Group'] == group_no, _clusters))
+                # print(_group_clusters)
+                for _cluster in _group_clusters:
+                    keyword_groups = _cluster['KeywordClusters']
+                    fig = plt.figure()
+                    ax = fig.add_axes([0, 0, 1, 1])
+                    _groups = list(map(lambda g: g['Group'], keyword_groups))
+                    _scores = list(map(lambda g: g['score'], keyword_groups))
+                    ax.bar(_groups, _scores)
+                    plt.show()
+
+
+
         # Visualise the keyword clusters
         def visualise_keywords_cluster_results(_cluster_no, _keyword_clusters,
-                                               _folder, _weight_avg_score):
+                                               _folder):
             try:
                 # filter out negative keyword clusters
                 # _keyword_clusters = list(filter(lambda c: c['score'] > 0, _keyword_clusters))
@@ -213,7 +254,7 @@ class Evaluation:
                     x_pos = x_pos + kp_cluster['x']
                     y_pos = y_pos + kp_cluster['y']
 
-                title = 'Article Cluster #' + str(_cluster_no) + ' score = ' + str(_weight_avg_score)
+                title = 'Article Cluster #' + str(_cluster_no)
                 # Set the fixed view windows
                 x_max = max(x_pos)
                 x_min = min(x_pos)
@@ -245,45 +286,42 @@ class Evaluation:
                 print("Error occurred! {err}".format(err=err))
                 sys.exit(-1)
 
-        def get_weight_average(_keyword_clusters):
-            _total_weight = 0
-            _total_sum = 0
-            for _keyword_cluster in _keyword_clusters:
-                _weight = len(_keyword_cluster['Key-phrases'])
-                _sum = _weight * _keyword_cluster['score']
-                _total_weight += _weight
-                _total_sum += _sum
-            return round(_total_sum/_total_weight, 2)
-
         try:
+            keyword_experiments()
+            keyword_group_experiments()
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
             clusters = pd.read_json(path).to_dict("records")
+            # visualise_keyword_groups_by_major_cluster(clusters)
+            # Collect all keyword groups
             summary = list()
             results = list()
+            keyword_sizes = list()
+            all_keywords = list()
             # Filter out cluster by 0.6 of score
             for cluster in clusters:
                 cluster_no = cluster['Cluster']
                 keyword_clusters = cluster['KeywordClusters']
                 cluster_doc_ids = cluster['DocIds']
                 cluster_score = cluster['Score']
-                weight_average = get_weight_average(keyword_clusters)
                 img_folder = os.path.join(folder, 'evaluation', 'keyword_clusters')
                 Path(img_folder).mkdir(parents=True, exist_ok=True)
-                visualise_keywords_cluster_results(cluster_no, keyword_clusters, img_folder, weight_average)
+                visualise_keywords_cluster_results(cluster_no, keyword_clusters, img_folder)
                 total_keywords = 0
                 article_numbers = list()
                 scores = list()
                 for keyword_cluster in keyword_clusters:
                     keywords = keyword_cluster['Key-phrases']
+                    for keyword in keywords:
+                        keyword_sizes.append(len(keyword.split(" ")))
+                        all_keywords.append(keyword)
                     doc_ids = keyword_cluster['DocIds']
                     results.append({'ArticleCluster': cluster_no, 'Article_num': len(cluster_doc_ids),
                                     'ArticleCluster_Score': cluster_score,
                                     'KeywordCluster': keyword_cluster['Group'],
                                     'score': keyword_cluster['score'],
                                     'num_keywords': len(keywords), 'Keywords': keywords,
-                                    'NumDocs': len(doc_ids), 'DocIds': doc_ids,
-                                    'weight_average': weight_average
+                                    'NumDocs': len(doc_ids), 'DocIds': doc_ids
                                     })
                     article_numbers.append(len(doc_ids))
                     total_keywords += len(keywords)
@@ -308,6 +346,11 @@ class Evaluation:
                                 "keyword_clusters_summary.csv")
             df = pd.DataFrame(summary)
             df.to_csv(path, encoding='utf-8', index=False)
+            keyword_sizes = np.array(keyword_sizes)
+            all_keywords = np.array(all_keywords)
+            for s in range(6, 11):
+                matches = all_keywords[keyword_sizes == s]
+                print("The number of keyword of {s} size: {c}".format(s=s, c=matches.size))
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
 
@@ -318,6 +361,6 @@ if __name__ == '__main__':
         evl = Evaluation()
         # evl.sort_article_clusters_by_scores()
         evl.evaluate_article_clusters()
-        evl.evaluate_keyword_clusters()
+        evl.evaluate_keyword_groups()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
