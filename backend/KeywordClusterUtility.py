@@ -127,13 +127,16 @@ class KeywordClusterUtility:
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
-        dimensions = [200, 180, 150, 120] + list(range(100, 15, -5))
-        min_sample_list = list(range(30, 1, -5))
+        dimensions = [200, 180, 150, 120, 110] + list(range(100, 5, -2))
+        min_sample_list = list(range(20, 1, -1))
         min_cluster_size_list = list(range(30, 9, -1))
-        # Different parameter values
-        if is_fined_grain:
-            dimensions = list(range(100, 5, -2))
-            min_sample_list = list(range(20, 1, -1))
+        # dimensions = [200, 180, 150, 120] + list(range(100, 15, -5))
+        # min_sample_list = list(range(30, 1, -5))
+        # min_cluster_size_list = list(range(30, 9, -1))
+        # # Different parameter values
+        # if is_fined_grain:
+        #     dimensions = list(range(100, 5, -2))
+        #     min_sample_list = list(range(20, 1, -1))
 
         try:
             results = list()
@@ -227,7 +230,9 @@ class KeywordClusterUtility:
                     vector = next(vector['Vectors'] for vector in key_phrase_vectors
                                   if vector['Key-phrases'].lower() == key_phrase.lower())
                     vectors.append(vector)
-                assert len(vectors) == len(key_phrases), "Inconsistent key phrases and vectors"
+                # assert len(vectors) == len(key_phrases), "Inconsistent key phrases and vectors"
+                if len(kp_cluster['Key-phrases']) < 10:
+                    continue
                 if len(kp_cluster['Key-phrases']) < KeywordClusterUtility.threshold:
                     results.append(kp_cluster)
                 else:
@@ -276,7 +281,7 @@ class KeywordClusterUtility:
                     except Exception as err:
                         print("Error occurred! {err}".format(err=err))
                         sys.exit(-1)
-            print("[Info] Complete clustering the key phrases of cluster {no}".format(no=cluster_no))
+            print("[Info] Complete re-clustering the key phrases of cluster {no}".format(no=cluster_no))
             # Sort the results by number of docs
             results = sorted(results, key=lambda ex: ex['score'], reverse=True)
             # Assign group id

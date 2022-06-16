@@ -158,7 +158,28 @@ class Evaluation:
                 _cluster['Terms'] = ', '.join(list(map(lambda t: t['term'], _cluster['Terms'])))
             return _clusters
 
+        # Load experiment results of small min_cluster_size
+        def _get_small_cluster_size():
+            _path = os.path.join('output', self.args.case_name, self.args.folder, 'evaluation', 'experiments',
+                                 'min_cluster_size', 'HDBSCAN_cluster_doc_vector_results_200.json')
+            _results = pd.read_json(_path).to_dict("records")
+            _result = next(_result for _result in _results if _result['min_cluster_size'] == 2)
+            _clusters = list(filter(lambda _g: _g['cluster_no'] != -1, _result['cluster_results']))
+            _cluster_sizes = list(map(lambda r: r['count'], _clusters))
+            fig = plt.figure()
+            plt.hist(_cluster_sizes, bins=[0, 5, 10, 16, 20, 40])
+            plt.show()
+            _unique_cluster_sizes = np.unique(_cluster_sizes)
+            hist, bins = np.histogram(_cluster_sizes, bins=[0, 5, 10, 16, 20, 40])
+            print(hist)
+            print(bins)
+            print("Minimal cluster size: {min}, Maximal cluster size: {max}".format(min=np.min(_cluster_sizes),
+                                                                                    max=np.max(_cluster_sizes),
+                                                                                    ))
+            print("Test")
+
         try:
+            _get_small_cluster_size()
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_key_phrases_topics_updated.json')
             clusters = pd.read_json(path).to_dict("records")
@@ -360,6 +381,6 @@ if __name__ == '__main__':
         evl = Evaluation()
         # evl.sort_article_clusters_by_scores()
         evl.evaluate_article_clusters()
-        evl.evaluate_keyword_groups()
+        # evl.evaluate_keyword_groups()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

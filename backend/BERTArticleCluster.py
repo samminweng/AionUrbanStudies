@@ -42,11 +42,11 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
 class BERTArticleCluster:
-    def __init__(self, _iteration, _cluster_no):
+    def __init__(self, _iteration):  # , _cluster_no):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
-            cluster_no=_cluster_no,
-            cluster_folder='cluster_' + str(_cluster_no),
+            # cluster_no=_cluster_no,
+            # cluster_folder='cluster_' + str(_cluster_no),
             iteration=_iteration,
             in_folder='iteration_' + str(_iteration),
             path='data',
@@ -58,10 +58,12 @@ class BERTArticleCluster:
             min_dist=0.0,
             dimensions=[768, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20],
             min_samples=[30, 25, 20, 15, 10],
+            # min_samples=[None],
+            # min_cluster_size=[2, 5, 10, 15]
             min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
-        path = os.path.join('data', self.args.case_name, self.args.cluster_folder,
+        path = os.path.join('data', self.args.case_name,  # self.args.cluster_folder,
                             self.args.in_folder, self.args.case_name + '_cleaned.csv')
         self.text_df = pd.read_csv(path)
         # # # # # Load all document vectors without outliers
@@ -91,8 +93,8 @@ class BERTArticleCluster:
             # Get all the doc ids of text_df
             doc_ids = self.text_df['DocId'].tolist()
             # Load doc vectors
-            path = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster',
-                                self.args.in_folder, 'vectors', 'doc_vector_results.json')
+            path = os.path.join('output', self.args.case_name,  # self.args.cluster_folder,
+                                'cluster', self.args.in_folder, 'vectors', 'doc_vector_results.json')
             df = pd.read_json(path)
             df = df[df['DocId'].isin(doc_ids)]
             # Add 'DocVectors' 'x' and 'y'
@@ -125,8 +127,8 @@ class BERTArticleCluster:
             self.text_df['y'] = list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
         # Print out the reduced vector
         print(self.text_df)
-        folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster',
-                              self.args.in_folder, 'vectors')
+        folder = os.path.join('output', self.args.case_name,  # self.args.cluster_folder,
+                              'cluster', self.args.in_folder, 'vectors')
         Path(folder).mkdir(parents=True, exist_ok=True)
         path = os.path.join(folder, 'doc_vector_results.csv')
         self.text_df.to_csv(path, encoding='utf-8', index=False)
@@ -170,7 +172,7 @@ class BERTArticleCluster:
                         for epsilon in [0.0]:
                             result = {'dimension': dimension,
                                       'min_cluster_size': min_cluster_size,
-                                      'min_samples': str(min_samples),
+                                      'min_samples': str(min_samples) if min_samples is not None else 'None',
                                       'epsilon': epsilon,
                                       'outliers': 'None',
                                       'total_clusters': 'None',
@@ -214,8 +216,8 @@ class BERTArticleCluster:
                             results.append(result)
                 print("Complete clustering the vectors at dimension = {d}".format(d=dimension))
                 # Output the clustering results of a dimension
-                folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster',
-                                      self.args.in_folder, 'experiments', 'hdbscan')
+                folder = os.path.join('output', self.args.case_name,  # self.args.cluster_folder,
+                                      'cluster', self.args.in_folder, 'experiments', 'hdbscan')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Output the detailed clustering results
                 result_df = pd.DataFrame(results,
@@ -235,7 +237,7 @@ class BERTArticleCluster:
         try:
             # Find the best results in each dimension
             d_results = list()
-            parent_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            parent_folder = os.path.join('output', self.args.case_name,     # self.args.cluster_folder,
                                          'cluster', self.args.in_folder)
             folder = os.path.join(parent_folder, 'experiments', 'hdbscan')
             for dimension in self.args.dimensions:
@@ -286,7 +288,7 @@ class BERTArticleCluster:
     # Cluster document vectors with HDBSCAN using best parameters obtained from experiment results
     def cluster_doc_vectors_with_best_parameter_by_hdbscan(self):
         try:
-            parent_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            parent_folder = os.path.join('output', self.args.case_name,     # self.args.cluster_folder,
                                          'cluster', self.args.in_folder)
             # Load best clustering results at each dimension
             path = os.path.join(parent_folder, 'experiments',
@@ -359,7 +361,7 @@ class BERTArticleCluster:
     def derive_cluster_docs(self):
         approach = 'HDBSCAN_Cluster'
         try:
-            parent_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            parent_folder = os.path.join('output', self.args.case_name,     # self.args.cluster_folder,
                                          'cluster', self.args.in_folder)
             path = os.path.join(parent_folder, self.args.case_name + '_clusters.json')
             # Load the documents clustered by
@@ -390,10 +392,8 @@ class BERTArticleCluster:
     def output_outliers_as_corpus(self):
         try:
             # Get the outliers identified by HDBSCAN
-            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            folder = os.path.join('output', self.args.case_name,    # self.args.cluster_folder,
                                   'cluster', self.args.in_folder)
-            # folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
-            #                       'cluster', 'iteration_0')
             path = os.path.join(folder, self.args.case_name + '_clusters.json')
             # Get the best clustering of highest silhouette score
             cluster_df = pd.read_json(path)
@@ -402,7 +402,7 @@ class BERTArticleCluster:
             outlier_df = outlier_df.drop(columns=['HDBSCAN_Cluster', 'x', 'y'])
             # Re-order
             print('The number of outliers {c}'.format(c=len(outlier_df)))
-            folder = os.path.join('data', self.args.case_name, self.args.cluster_folder,
+            folder = os.path.join('data', self.args.case_name,  # self.args.cluster_folder,
                                   'iteration_' + str(self.args.iteration + 1))
             Path(folder).mkdir(parents=True, exist_ok=True)
             path = os.path.join(folder, self.args.case_name + '_cleaned.csv')
@@ -415,11 +415,11 @@ class BERTArticleCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        cluster_no = 2
-        BERTArticleClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
+        # cluster_no = 2
+        # BERTArticleClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
-        iteration = 2
-        mdc = BERTArticleCluster(iteration, cluster_no)
+        iteration = 0
+        mdc = BERTArticleCluster(iteration)
         mdc.get_sentence_vectors(is_load=False)
         mdc.run_HDBSCAN_cluster_experiments()
         mdc.summarize_HDBSCAN_cluster_experiment_results()
