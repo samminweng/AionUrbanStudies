@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Keyword Group Chart</title>
+    <meta charset="utf-8">
+    <!-- All the third party libraries-->
+    <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-ui.js"></script>
+    <script type="text/javascript" src="lib/plotly-2.12.1.min.js"></script>
+    <script type="text/javascript" src="lib/pagination.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.mark.min.js"></script>
+    <!-- CSS styles -->
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pagination.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="h4">Keyword Group Chart</div>
+    <div>
+        Keywords are extracted from <span id="total_papers"></span> article abstract (related to AI and machine learning on Urban Study)
+        and grouped into keyword groups based on similarities using a clustering approach
+        (Pattern Matching + BERT-based Sentence Transformer + HDBSCAN clustering + MMR ranking), which is an enhancement to
+        <a target="_blank" href="https://github.com/MaartenGr/KeyBERT">KeyBERT</a>
+    </div>
+    <!-- Chart and doc list -->
+    <div class="row mt-3">
+        <div class="col border border-3">
+            <div class="row">
+                <div class="col">
+                    <div class="container p-3">
+                        <div>
+                            <label for="cluster_list">Select Article Cluster:</label>
+                            <select name="cluster_list" id="cluster_list"
+                                    style="max-height: 280px;overflow-y: auto;"></select>
+                            <span id="score"></span>
+                            <div id="cluster_chart" class="align-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col border border-3">
+            <div class="container p-3">
+                <div id="keyword_cluster_list"></div>
+<!--                <div id="doc_list"></div>-->
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <div id="keyword_cluster_view"></div>
+            <div id="doc_list_view"></div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer class="py-1 my-1">
+        <div class="text-center">
+        </div>
+    </footer>
+</div>
+<!-- Our javascript -->
+<script type="text/javascript" src="js/keyword_group/doc_view.js"></script>
+<script type="text/javascript" src="js/keyword_group/doc_list.js"></script>
+<script type="text/javascript" src="js/keyword_group/keyword_group_view.js"></script>
+<script type="text/javascript" src="js/keyword_group/keyword_group_list.js"></script>
+<script type="text/javascript" src="js/keyword_group/scatter_graph.js"></script>
+<script type="text/javascript" src="js/keyword_group/main.js"></script>
+</body>
+</html>

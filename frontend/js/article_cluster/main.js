@@ -12,7 +12,7 @@ $(function () {
     // Clustering docs data (document, abstract and title)
     const cluster_data_file_path = 'data/' + corpus + '_clusters_updated.json';
     // HDBSCAN cluster and topic data
-    const cluster_topic_key_phrase_file_path = 'data/' + corpus + '_cluster_terms_key_phrases_topics_updated.json';
+    const cluster_topic_key_phrase_file_path = 'data/' + corpus + '_cluster_terms_keyword_groups_updated.json';
     // Load data
     $.when(
         $.getJSON(cluster_data_file_path),

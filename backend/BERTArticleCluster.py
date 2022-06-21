@@ -59,8 +59,8 @@ class BERTArticleCluster:
             dimensions=[768, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20],
             min_samples=[30, 25, 20, 15, 10],
             # min_samples=[None],
-            # min_cluster_size=[2, 5, 10, 15]
-            min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
+            min_cluster_size=[100, 80, 50]
+            # min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
         )
         # BERTModelDocClusterUtility.clean_corpus(self.args.case_name)
         path = os.path.join('data', self.args.case_name,  # self.args.cluster_folder,
