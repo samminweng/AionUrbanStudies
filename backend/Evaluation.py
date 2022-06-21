@@ -238,22 +238,6 @@ class Evaluation:
                 experiments = pd.read_json(_path).to_dict("records")
                 # print(experiments)
 
-        #
-        def visualise_keyword_groups_by_major_cluster(_clusters):
-            for group_no in range(1, 5):
-                _group_clusters = list(filter(lambda c: c['Group'] == group_no, _clusters))
-                # print(_group_clusters)
-                for _cluster in _group_clusters:
-                    keyword_groups = _cluster['KeywordClusters']
-                    fig = plt.figure()
-                    ax = fig.add_axes([0, 0, 1, 1])
-                    _groups = list(map(lambda g: g['Group'], keyword_groups))
-                    _scores = list(map(lambda g: g['score'], keyword_groups))
-                    ax.bar(_groups, _scores)
-                    plt.show()
-
-
-
         # Visualise the keyword clusters
         def visualise_keywords_cluster_results(_cluster_no, _keyword_clusters,
                                                _folder):
@@ -322,8 +306,8 @@ class Evaluation:
                 sys.exit(-1)
 
         try:
-            keyword_experiments()
-            keyword_group_experiments()
+            # keyword_experiments()
+            # keyword_group_experiments()
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups_updated.json')
             clusters = pd.read_json(path).to_dict("records")
