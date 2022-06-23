@@ -29,12 +29,12 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
                 table.empty();
                 // Add each keyword cluster
                 table.append($('<thead><tr>' +
-                               '<th>Keyword Cluster</th>' +
+                               '<th>Keyword Group</th>' +
                                '<th>Keywords</th></tr></thead>'));
                 const table_body = $('<tbody></tbody>');
                 for (let i = 0; i < clusters.length; i++) {
                     const cluster = clusters[i];
-                    table_body.append(createKeywordCluster(cluster))
+                    table_body.append(createKeywordGroup(cluster))
                 }
                 table.append(table_body);
             }
@@ -48,14 +48,14 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
 
 
     // Create a view to display a keyword cluster
-    function createKeywordCluster(keyword_cluster){
-        const group_no = keyword_cluster['Group'];
-        const color = color_plates[group_no-1];
+    function createKeywordGroup(keyword_group){
+        const group_no = keyword_group['Group'];
+        const color = (parseFloat(keyword_group['score']) > 0 ? color_plates[group_no-1] : 'gray');
         const keyword_cluster_view = $('<tr></tr>');
-        const score = parseFloat(keyword_cluster['score']).toFixed(2);
+        const score = parseFloat(keyword_group['score']).toFixed(2);
         // Create a button to show the keyword cluster
         const btn = $('<button type="button" class="btn btn-link" style="color:' + color+'">' +
-            keyword_cluster['Group']+ ' <span style="color:' + color+'">(' + score +')</span></button>');
+                        keyword_group['Group']+ ' <span style="color:' + color+'">(' + score +')</span></button>');
         btn.button();
         btn.click(function(event){
             // Highlight the dots of a specific keyword cluster
@@ -69,7 +69,7 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         // Add a col to display
         keyword_cluster_view.append($('<td></td>').append(btn));
         // Display key phrases
-        const keywords = keyword_cluster['Key-phrases'];
+        const keywords = keyword_group['Key-phrases'].sort((a, b) => a.localeCompare(b));
         // Display top 10 key phrases
         const keyword_div = $('<div class="container-sm small"></div>');
         const max_size = 6;
@@ -123,7 +123,7 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         const container = $('<div class="container"></div>');
         // Add header
         container.append($('<div class="row mb-3">Article Cluster #' + article_cluster_no + '  has ' +
-                                                  keyword_groups.length + ' keyword clusters</div>'));
+                                                  keyword_groups.length + ' keyword groups</div>'));
 
         container.append(createPagination());
         $('#keyword_cluster_list').append(container);

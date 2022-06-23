@@ -3,7 +3,7 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
     const width = 600;
     const height = 600;
     const article_cluster = cluster_data.find(c => c['Cluster'] === article_cluster_no);
-    const keyword_clusters = article_cluster['KeywordGroups'];
+    const keyword_groups = article_cluster['KeywordGroups'];
     let x_range = [0, 12];
     let y_range = [0, 12];
 
@@ -30,43 +30,48 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
         let traces = [];
         let x_arr = [], y_arr = [];
         // Convert the clustered data into the format for Plotly js chart
-        for (const keyword_cluster of keyword_clusters) {
-            const group_no = keyword_cluster['Group'];
-            const keywords = keyword_cluster['Key-phrases'];
-            const x_pos = keyword_cluster['x'];
-            const y_pos = keyword_cluster['y'];
-            const score = keyword_cluster['score'];
-            // Get the docs about keyword cluster
-            // Each keyword is a dot
-            let data_point = {'x': [], 'y': [], 'label': []};
-            for (let i = 0; i < keywords.length; i++) {
-                const keyword = keywords[i];
-                data_point['x'].push(x_pos[i]);
-                data_point['y'].push(y_pos[i]);
-                // Tooltip label displays top 5 topics
-                data_point['label'].push(
-                    '<b>Keyword Cluster ' + group_no + '</b> (' + keywords.length +
-                    ' keywords, ' + score.toFixed(2) + ' score)<br><extra></extra>');
-            }
-            // // Trace setting
-            let trace = {
-                'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
-                'name': group_no, 'mode': 'markers', 'type': 'scatter',
-                'marker': {color: color_plates[group_no - 1], size: 5, line: {width: 0}},
-                'hovertemplate': '%{text}', 'opacity': 1
-            };
-            // Update opacity based on the selection
-            if (keyword_cluster_no) {
-                if (keyword_cluster_no === group_no) {
-                    trace['opacity'] = 1;
-                } else {
-                    trace['opacity'] = 0.5;
+        for (const keyword_group of keyword_groups) {
+            if(keyword_group['score'] >0 ){
+                const group_no = keyword_group['Group'];
+                const keywords = keyword_group['Key-phrases'];
+                const x_pos = keyword_group['x'];
+                const y_pos = keyword_group['y'];
+                const score = keyword_group['score'];
+                // Get the docs about keyword cluster
+                // Each keyword is a dot
+                let data_point = {'x': [], 'y': [], 'label': []};
+                for (let i = 0; i < keywords.length; i++) {
+                    const keyword = keywords[i];
+                    data_point['x'].push(x_pos[i]);
+                    data_point['y'].push(y_pos[i]);
+                    // Tooltip label displays top 5 topics
+                    data_point['label'].push(
+                        '<b>Keyword Cluster ' + group_no + '</b> (' + keywords.length +
+                        ' keywords, ' + score.toFixed(2) + ' score)<br><extra></extra>');
                 }
+                // // Trace setting
+                let trace = {
+                    'x': data_point['x'], 'y': data_point['y'], 'text': data_point['label'],
+                    'name': group_no, 'mode': 'markers', 'type': 'scatter',
+                    'marker': {color: color_plates[group_no - 1], size: 5, line: {width: 0}},
+                    'hovertemplate': '%{text}', 'opacity': 1
+                };
+                // Update opacity based on the selection
+                if (keyword_cluster_no) {
+                    if (keyword_cluster_no === group_no) {
+                        trace['opacity'] = 1;
+                    } else {
+                        trace['opacity'] = 0.5;
+                    }
+                }
+
+                traces.push(trace);
+                x_arr = x_arr.concat(x_pos);
+                y_arr = y_arr.concat(y_pos);
             }
 
-            traces.push(trace);
-            x_arr = x_arr.concat(x_pos);
-            y_arr = y_arr.concat(y_pos);
+
+
         }
         get_small_rectangles(x_arr, y_arr);
         return traces;

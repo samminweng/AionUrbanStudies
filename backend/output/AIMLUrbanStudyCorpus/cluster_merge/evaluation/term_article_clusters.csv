@@ -1,0 +1,32 @@
+cluster,Term0,Freq0,Range0,Term1,Freq1,Range1,Term2,Freq2,Range2,Term3,Freq3,Range3,Term4,Freq4,Range4,Term5,Freq5,Range5,Term6,Freq6,Range6,Term7,Freq7,Range7,Term8,Freq8,Range8,Term9,Freq9,Range9
+1,traffic,69,16,traffic congestion,9,4,mode,19,9,traffic flow,14,3,transportation mode,15,2,traffic volume,9,2,intelligent transportation,7,4,citywide traffic,4,1,travel speed,4,1,mode recognition,7,1
+2,mobile phone,7,7,phone data,4,3,placeness,7,1,leisure,6,1,retail store,4,1,health outcome,4,2,leisure activity,3,1,public record,3,1,predictive analytics,3,1,mobility flow,3,1
+3,smart city,14,16,air quality,6,6,urban governance,4,5,large data,3,3,traffic control,3,3,delivery system,2,1,traffic load,2,1,traffic system,2,1,security protocol,2,1,ambient intelligence,2,1
+4,travel,19,9,human mobility,11,8,travel pattern,6,2,smart card,5,2,card data,4,1,pedestrian activity,6,2,truck driver,5,1,geographical area,5,2,special event,4,1,socioeconomic status,4,1
+5,social medium,11,9,functional region,6,2,positive deviance,10,1,support system,8,6,tweet,7,3,civic query,4,1,analysis method,4,4,medium data,4,5,image dimension,3,1,sentiment analysis,3,1
+6,traffic,46,16,traffic flow,8,3,traffic light,7,2,mobility pattern,11,4,route planning,6,3,dynamic routing,4,1,travel demand,4,1,transit mobility,8,2,mobility structure,7,1,flow forecasting,4,1
+7,flow prediction,7,2,spatial correlation,4,1,terrorist attack,4,1,spatial familiarity,6,1,trip generation,5,1,eye movement,4,1,commercial district,4,1,varying impact,4,1,railway station,4,1,opportunistic criminal,4,1
+8,deep learning,32,17,segmentation,36,11,semantic segmentation,25,3,object detection,13,5,building detection,7,1,building extraction,6,2,aerial image,11,5,building footprint,10,2,change detection,9,4,overhead imagery,6,1
+9,land,103,24,cover,65,11,land cover,60,8,image classification,18,7,cover change,10,3,urban land,17,10,change detection,10,4,cover classification,15,3,detection analysis,6,1,cover mapping,6,3
+10,land use,35,20,expansion,22,11,urban growth,11,6,urban expansion,17,8,residential land,8,3,use policy,5,2,building height,8,3,land price,5,1,urban footprint,5,1,urban change,5,3
+11,urban development,11,12,land cover,9,8,urban growth,8,6,urban land,12,10,development pattern,7,2,stream water,8,1,water quality,8,3,urban forest,5,2,land expansion,4,2,slum area,4,2
+12,land cover,11,8,urban land,21,10,cover classification,6,3,use category,6,3,contextual feature,7,2,land growth,5,2,population spatialization,4,1,deep highway,4,1,highway unit,4,1,unit network,4,1
+13,cloud,23,5,point cloud,22,3,geometric feature,5,1,lidar point,6,2,data fusion,5,3,urban point,4,1,cloud data,4,1,area extraction,3,1,packed building,7,1,water type,4,1
+14,land cover,12,8,training sample,7,3,road centerline,8,1,road extraction,5,1,green area,6,2,optical data,5,2,cloud omission,4,1,omission error,4,1,unreinforced masonry,4,1,decision level,4,1
+15,public space,20,3,perception,25,12,human perception,3,4,identity,6,2,urban identity,5,1,online review,3,1,visitor experience,3,1,important feature,3,2,design problem,3,3,heterogeneous perception,2,2
+16,perception,35,12,human perception,11,4,perceptual quality,5,1,view index,4,2,subjective measure,4,2,visual quality,7,2,psychological perception,6,1,urban perception,6,3,street vitality,3,1,evaluation model,3,1
+17,street,64,16,perception,38,12,street view,15,6,greenery,22,4,street greenery,14,1,view imagery,10,3,housing price,9,3,street quality,8,1,visual quality,8,2,objective indicator,5,1
+18,heat,24,6,temperature,23,4,heat island,12,4,urban heat,12,5,comfort,16,3,surface temperature,10,3,thermal comfort,14,2,carbon sequestration,8,1,sequestration potential,8,1,food productivity,7,1
+19,park,12,5,park accessibility,8,1,life circle,7,1,spatial justice,5,1,housing estate,5,1,economic mobility,4,1,estimation model,4,2,community life,3,1,internal structure,3,1,behavioral demand,3,1
+20,block level,9,2,building block,5,1,functional zone,6,2,geodemographic classification,5,2,ecosystem service,5,4,street context,4,1,cultural ecosystem,4,1,functional area,3,1,aesthetic rating,3,1,building type,3,1
+21,address,18,3,address record,5,1,deprivation,10,2,pocket,8,1,urban poverty,7,1,deprivation pocket,7,1,prenatal care,6,1,infill development,5,1,similarity analysis,5,1,architectural color,5,1
+22,temperature,59,4,heat,28,6,surface temperature,18,3,urban heat,14,5,heat island,13,4,air temperature,16,2,canyon geometry,5,1,urban vegetation,8,2,urban park,7,2,urban canyon,5,1
+23,air,37,13,concentration,26,9,pollutant concentration,8,3,air pollution,8,7,air quality,21,6,health hazard,10,1,concentration prediction,5,1,mode decomposition,4,1,secondary decomposition,3,1,noise pollution,5,2
+24,smart data,3,1,building height,3,3,medium user,2,1,differential equation,2,1,objective function,2,1,intervention strategy,2,1,neurological network,2,1,query engine,2,1,design recommendation,2,1,city configuration,2,1
+25,susceptibility,44,2,landslide,30,1,landslide susceptibility,26,1,susceptibility map,8,1,susceptibility mapping,8,1,flood,21,6,conditioning factor,6,1,rockfall hazard,6,1,shallow landslide,5,1,burnt area,5,1
+26,emission,14,7,carbon emission,12,2,urban climate,5,3,interface network,7,1,vehicle ownership,7,1,traffic noise,6,1,express service,4,1,form indicator,4,2,physical asset,3,1,network connectivity,3,1
+27,signal,38,8,localization,21,5,path loss,11,1,multipath,10,1,pseudorange,8,1,signal reception,4,1,multipath detection,4,1,direct signal,4,1,signal correlation,4,1,level observation,4,1
+28,energy,50,14,energy use,12,1,electric consumption,15,2,performance criterion,7,1,consumption data,7,3,multiple performance,5,1,heritage area,5,1,consumption forecasting,5,1,occupant behaviour,4,1,design parameter,4,1
+29,energy,26,14,building energy,6,2,energy demand,4,4,urban modeling,5,1,modeling technique,5,4,urban model,4,1,load prediction,4,1,feature parameter,3,1,electrical load,3,1,load forecasting,3,2
+30,crime,28,8,urban governance,5,5,urban technology,4,2,fall,6,1,tender,5,1,crime pattern,4,1,public consultation,4,1,crime distribution,3,1,concentration area,3,1,tender procedure,3,1
+31,player,10,1,crime,26,8,mosquito,10,1,densification,11,1,violent crime,10,1,property crime,10,1,total population,9,1,ethnic heterogeneity,8,1,spatial lag,8,1,residential stability,5,1

@@ -51,7 +51,7 @@ function KeywordClusterView(keyword_cluster, docs) {
         // Heading
         const container = $('<div class="m-3"></div>');
         const heading = $('<div class="mb-3">' +
-                          '<span class="fw-bold" style="color:' + color + '">Keyword Cluster ' + group_no + ' </span>' +
+                          '<span class="fw-bold" style="color:' + color + '">Keyword Group ' + group_no + ' </span>' +
                           ' (' + score + ') contains ' + keywords.length + ' keywords' + ' across ' + docs.length + ' articles</div>');
         // A list of grouped key phrases
         container.append(heading);
