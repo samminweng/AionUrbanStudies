@@ -28,10 +28,13 @@ class Evaluation:
     # Sort the article clusters to make it consistent with clustered results
     def sort_article_clusters_by_scores(self):
         # groups = [list(range(1, 8)), list(range(11, 18)), list(range(8, 11)), list(range(18, 32))]
-        groups = [[1, 3, 2, 6, 4, 5, 7],
-                  [8, 9, 10, 14, 11, 12, 13],
-                  [15, 16, 17],
-                  [21, 20, 27, 31, 22, 23, 24, 19, 25, 18, 26, 28, 29, 30]]
+        groups = [
+            {"group": 1, "map": {1:7, 2: 2, 3: 1, 4:3, 5: 4, 6: 5, 7:6}},
+            {"group": 2, "map": {11:8, 12:14, 13:12, 14:13, 15:11, 16:10, 17: 9}},
+            {"group": 3, "map": {8:17, 9: 16, 10: 15}},
+            {"group": 4, "map": {18: 21, 19: 19, 20: 20, 21:18, 22:23, 23:24, 24:22, 25:26, 26:25,
+                                 27:28, 28:27, 29:31, 30:30, 31:29}},
+             ]
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups_updated.json')
@@ -39,21 +42,15 @@ class Evaluation:
             path = os.path.join(folder, self.args.case_name + '_clusters.json')
             corpus = pd.read_json(path).to_dict("records")
             # Sort the clusters by score within groups and update cluster numbers
-            current_cluster_no = 1
             updated_clusters = list()
-            for group_index, cluster_no_list in enumerate(groups):
-                grouped_clusters = list()
-                for cluster_no in cluster_no_list:
-                    grouped_clusters.append(copy.deepcopy(next(c for c in clusters if c['Cluster'] == cluster_no)))
-                # grouped_clusters = copy.deepcopy(list(filter(lambda c: c['Cluster'] in group, clusters)))
-                # Sort clusters by score
-                # grouped_clusters = sorted(grouped_clusters, key=lambda c: c['Score'], reverse=True)
-                # Update the cluster no
-                for grouped_cluster in grouped_clusters:
-                    grouped_cluster['Group'] = group_index + 1
-                    grouped_cluster['Cluster'] = current_cluster_no
-                    current_cluster_no = current_cluster_no + 1
-                    updated_clusters.append(grouped_cluster)
+            for group in groups:
+                group_no = group['group']
+                group_map = group['map']
+                for old_cluster_no, new_cluster_no in group_map.items():
+                    update_cluster = copy.deepcopy(next(c for c in clusters if c['Cluster'] == old_cluster_no))
+                    update_cluster['Group'] = group_no
+                    update_cluster['Cluster'] = new_cluster_no
+                    updated_clusters.append(update_cluster)
             print(updated_clusters)
             updated_docs = list()
             # Update the cluster information in corpus
@@ -89,49 +86,6 @@ class Evaluation:
 
     # Evaluate the article cluster chart
     def evaluate_article_clusters(self):
-        # Get the paramters of each article clusters
-        def _get_parameters(_clusters):
-            _folder = os.path.join('output', self.args.case_name)
-            folder_names = ['cluster_0', 'cluster_1', 'cluster_2', 'cluster_3', 'iteration', 'cluster_-1']
-            results = list()
-            for folder_name in folder_names:
-                iterative_folder = os.path.join(_folder, folder_name)
-                # Load the updated iterative clustering summary
-                _path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
-                                     'AIMLUrbanStudyCorpus_iterative_summary.json')
-                iterative_clusters = pd.read_json(_path).to_dict("records")
-                results = results + iterative_clusters
-            for _cluster in _clusters:
-                doc_ids = _cluster['DocIds']
-                parameters = next((result for result in results if np.array_equal(result['DocIds'], doc_ids)), None)
-                assert parameters is not None, "Can not find the parameters of article clusters"
-                _cluster['Dimension'] = parameters['dimension']
-                _cluster['Min_Samples'] = parameters['min_samples']
-                _cluster['Min_Cluster_Size'] = parameters['min_cluster_size']
-                # Map the TFIDF terms
-                _cluster['Terms'] = ', '.join(list(map(lambda t: t['term'], _cluster['Terms'])))
-            return _clusters
-
-        # Load experiment results of small min_cluster_size
-        def _get_small_cluster_size():
-            _path = os.path.join('output', self.args.case_name, self.args.folder, 'evaluation', 'experiments',
-                                 'min_cluster_size', 'HDBSCAN_cluster_doc_vector_results_200.json')
-            _results = pd.read_json(_path).to_dict("records")
-            _result = next(_result for _result in _results if _result['min_cluster_size'] == 2)
-            _clusters = list(filter(lambda _g: _g['cluster_no'] != -1, _result['cluster_results']))
-            _cluster_sizes = list(map(lambda r: r['count'], _clusters))
-            fig = plt.figure()
-            plt.hist(_cluster_sizes, bins=[0, 5, 10, 16, 20, 40])
-            plt.show()
-            _unique_cluster_sizes = np.unique(_cluster_sizes)
-            hist, bins = np.histogram(_cluster_sizes, bins=[0, 5, 10, 16, 20, 40])
-            print(hist)
-            print(bins)
-            print("Minimal cluster size: {min}, Maximal cluster size: {max}".format(min=np.min(_cluster_sizes),
-                                                                                    max=np.max(_cluster_sizes),
-                                                                                    ))
-            print("Test")
-
         # Get term per abstract cluster
         def _get_cluster_terms(_clusters, _folder):
             _results = list()
@@ -306,8 +260,8 @@ class Evaluation:
 if __name__ == '__main__':
     try:
         evl = Evaluation()
-        # evl.sort_article_clusters_by_scores()
-        evl.evaluate_article_clusters()
+        evl.sort_article_clusters_by_scores()
+        # evl.evaluate_article_clusters()
         # evl.evaluate_keyword_groups()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

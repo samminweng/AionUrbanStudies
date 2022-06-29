@@ -202,7 +202,7 @@ class TermKeywordGroup:
             total = cluster_df['NumDocs'].sum()
             cluster_df['Percent'] = cluster_df['NumDocs'].apply(lambda x: x / total)
             # Output the overall results
-            df = cluster_df[['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms', 'KeywordGroups']]
+            df = cluster_df[['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms', 'FreqTerms', 'KeywordGroups']]
             # # # # Write to a json file
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups.json')

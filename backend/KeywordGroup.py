@@ -276,9 +276,8 @@ if __name__ == '__main__':
     try:
         kp = KeywordCluster()
         # Extract keyword clusters
-        # kp.experiment_cluster_key_phrases()
-        # kp.cluster_key_phrases_with_best_experiments()
-        # # kp.re_cluster_key_phrases_within_keyword_cluster()
+        kp.experiment_cluster_key_phrases()
+        kp.cluster_key_phrases_with_best_experiments()
         kp.combine_terms_key_phrases_results()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
