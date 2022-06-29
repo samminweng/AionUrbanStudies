@@ -37,7 +37,7 @@ class Evaluation:
              ]
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
-            path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups_updated.json')
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups.json')
             clusters = pd.read_json(path).to_dict("records")
             path = os.path.join(folder, self.args.case_name + '_clusters.json')
             corpus = pd.read_json(path).to_dict("records")
@@ -51,7 +51,9 @@ class Evaluation:
                     update_cluster['Group'] = group_no
                     update_cluster['Cluster'] = new_cluster_no
                     updated_clusters.append(update_cluster)
-            print(updated_clusters)
+            # Sort clusters by no
+            updated_clusters = sorted(updated_clusters, key=lambda c: c['Cluster'])
+            # print(updated_clusters)
             updated_docs = list()
             # Update the cluster information in corpus
             for cluster in updated_clusters:
@@ -90,16 +92,17 @@ class Evaluation:
         def _get_cluster_terms(_clusters, _folder):
             _results = list()
             for _cluster in _clusters:
-                terms = _cluster['Terms']
+                terms = _cluster['FreqTerms']
                 _cluster_no = _cluster['Cluster']
                 _result = {
                     'cluster': _cluster_no
                 }
                 for index, term in enumerate(terms):
                     _result['Term' + str(index)] = term['term']
-                    # _result['Freq' + str(index)] = term['freq']
-                    # _result['Range' + str(index)] = len(term['cluster_ids'])
-                    # _result['Score' + str(index)] = term['score']
+                    _result['Freq' + str(index)] = term['freq']
+                    _result['Range' + str(index)] = term['range']
+                    _result['DocId' + str(index)] = term['doc_ids']
+                    _result['Score' + str(index)] = term['score']
                 _results.append(_result)
             # Write output
             _df = pd.DataFrame(_results)
@@ -112,11 +115,6 @@ class Evaluation:
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups_updated.json')
             clusters = pd.read_json(path).to_dict("records")
             _get_cluster_terms(clusters, folder)
-            # _get_parameters(clusters)
-            # df = pd.DataFrame(clusters)
-            # df = df[['Cluster', 'Score', 'NumDocs', 'DocIds', 'Terms', 'Dimension', 'Min_Samples', 'Min_Cluster_Size']]
-            # path = os.path.join(folder, 'evaluation', 'article_clusters.csv')
-            # df.to_csv(path, encoding='utf-8', index=False)
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
 
@@ -260,8 +258,8 @@ class Evaluation:
 if __name__ == '__main__':
     try:
         evl = Evaluation()
-        evl.sort_article_clusters_by_scores()
-        # evl.evaluate_article_clusters()
+        # evl.sort_article_clusters_by_scores()
+        evl.evaluate_article_clusters()
         # evl.evaluate_keyword_groups()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
