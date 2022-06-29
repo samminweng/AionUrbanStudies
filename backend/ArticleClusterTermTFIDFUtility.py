@@ -194,7 +194,7 @@ class ArticleClusterTermTFIDFUtility:
 
     # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_tf_idf_terms(approach, docs_per_cluster_df, folder):
+    def get_n_gram_tf_idf_terms(docs_per_cluster_df, folder):
         # A folder that stores all the topic results
         temp_folder = os.path.join(folder, 'temp')
         Path(temp_folder).mkdir(parents=True, exist_ok=True)
@@ -202,7 +202,7 @@ class ArticleClusterTermTFIDFUtility:
         # Convert the texts of all clusters into a list of document (a list of sentences) to derive n-gram candidates
         def _collect_cluster_docs(_docs_per_cluster_df):
             # Get the clustered texts
-            clusters = _docs_per_cluster_df[approach].tolist()
+            clusters = _docs_per_cluster_df['Cluster'].tolist()
             doc_texts_per_cluster = _docs_per_cluster_df['Text'].tolist()
             _docs = []
             for cluster_no, doc_texts in zip(clusters, doc_texts_per_cluster):

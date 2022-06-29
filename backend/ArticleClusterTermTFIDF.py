@@ -224,7 +224,7 @@ class ArticleClusterTermTFIDF:
         articles_df = pd.DataFrame(article_results, columns=['Cluster', 'Score', 'DocId', 'Cited by', 'Year',
                                                              'Document Type', 'Title', 'Abstract', 'Author Keywords',
                                                              'Authors', 'DOI', 'x', 'y'])
-        articles_df = articles_df.rename(columns={"Cluster": "HDBSCAN_Cluster"})
+        # articles_df = articles_df.rename(columns={"Cluster": "HDBSCAN_Cluster"})
         out_folder = os.path.join(folder, self.args.cluster_folder)
         Path(out_folder).mkdir(parents=True, exist_ok=True)
         # Write article corpus to csv file
@@ -246,17 +246,16 @@ class ArticleClusterTermTFIDF:
             # Update text column
             clustered_doc_df['Text'] = clustered_doc_df['Title'] + ". " + clustered_doc_df['Abstract']
             # Group the documents and doc_id by clusters
-            docs_per_cluster_df = clustered_doc_df.groupby(['HDBSCAN_Cluster'], as_index=False) \
+            docs_per_cluster_df = clustered_doc_df.groupby(['Cluster'], as_index=False) \
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text),
                       'Score': "mean"})
             # Get top 100 topics (1, 2, 3 grams) for each cluster
-            n_gram_term_list = ArticleClusterTermTFIDFUtility.get_n_gram_tf_idf_terms('HDBSCAN_Cluster',
-                                                                                      docs_per_cluster_df,
+            n_gram_term_list = ArticleClusterTermTFIDFUtility.get_n_gram_tf_idf_terms(docs_per_cluster_df,
                                                                                       term_folder)
             results = []
             for i, cluster in docs_per_cluster_df.iterrows():
                 try:
-                    cluster_no = cluster['HDBSCAN_Cluster']
+                    cluster_no = cluster['Cluster']
                     score = cluster['Score']
                     doc_ids = cluster['DocId']
                     doc_texts = cluster['Text']
@@ -420,10 +419,10 @@ if __name__ == '__main__':
         # ct.output_iterative_cluster_results()
         # ct.update_iterative_article_cluster_results()
         ct = ArticleClusterTermTFIDF()
-        # ct.collect_article_cluster_results()
-        # ct.derive_cluster_terms_by_TF_IDF()
-        # ct.summarize_cluster_terms()
-        # ct.derive_article_terms_by_TF_IDF()
+        ct.collect_article_cluster_results()
+        ct.derive_cluster_terms_by_TF_IDF()
+        ct.summarize_cluster_terms()
+        ct.derive_article_terms_by_TF_IDF()
         ct.derive_freq_terms_per_cluster()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
