@@ -28,9 +28,6 @@ class ArticleClusterTermTFIDF:
             model_name='all-mpnet-base-v2',
             device='cpu',
         )
-        # Load Sentence Transformer
-        self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-                                         device=self.args.device)
 
     # def __init__(self, _last_iteration, _cluster_no):
     #     self.args = Namespace(
@@ -151,14 +148,14 @@ class ArticleClusterTermTFIDF:
     # Update iterative clustering scores with individual Silhouette scores
     def update_iterative_article_cluster_results(self):
         folder = os.path.join('output', self.args.case_name)
-        # Load corpus
-        # corpus_path = os.path.join(folder, 'iteration', self.args.case_name + '_clusters.json')
-        # corpus = pd.read_json(corpus_path).to_dict("records")
+        # Load sentence transformer
+        model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                    device=self.args.device)
         folder_names = ['cluster_0', 'cluster_1', 'cluster_2', 'cluster_3', 'iteration', 'cluster_-1']
         for folder_name in folder_names:
             iterative_folder = os.path.join(folder, folder_name)
             try:
-                ArticleClusterTermTFIDFUtility.update_clustering_scores(iterative_folder, self.model)
+                ArticleClusterTermTFIDFUtility.update_clustering_scores(iterative_folder, model)
                 # Load the updated iterative clustering summary
                 path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
                                     'AIMLUrbanStudyCorpus_iterative_summary.json')
@@ -253,9 +250,9 @@ class ArticleClusterTermTFIDF:
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text),
                       'Score': "mean"})
             # Get top 100 topics (1, 2, 3 grams) for each cluster
-            n_gram_term_list = ArticleClusterTermTFIDFUtility.get_n_gram_terms('HDBSCAN_Cluster',
-                                                                               docs_per_cluster_df,
-                                                                               term_folder)
+            n_gram_term_list = ArticleClusterTermTFIDFUtility.get_n_gram_tf_idf_terms('HDBSCAN_Cluster',
+                                                                                      docs_per_cluster_df,
+                                                                                      term_folder)
             results = []
             for i, cluster in docs_per_cluster_df.iterrows():
                 try:
@@ -369,6 +366,49 @@ class ArticleClusterTermTFIDF:
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
 
+    # Extract frequent terms per abstract cluster
+    def derive_freq_terms_per_cluster(self):
+        try:
+            term_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms')
+            # Get the cluster docs
+            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+                                self.args.case_name + '_clusters.json')
+            # Load the documents clustered by
+            clustered_doc_df = pd.read_json(path)
+            # Update text column
+            clustered_doc_df['Text'] = clustered_doc_df['Title'] + ". " + clustered_doc_df['Abstract']
+            # Group the documents and doc_id by clusters
+            docs_per_cluster_df = clustered_doc_df.groupby(['Cluster'], as_index=False) \
+                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text),
+                      'Score': "mean"})
+            docs_per_clusters = docs_per_cluster_df.to_dict("records")
+            # Load TF-IDF terms results
+            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.json')
+            cluster_terms = pd.read_json(path).to_dict("records")
+            # Get top 10 frequent terms (2 grams) within each cluster
+            for cluster_term in cluster_terms:
+                cluster_no = cluster_term['Cluster']
+                n_gram_range = 2
+                freq_terms = ArticleClusterTermTFIDFUtility.get_n_gram_freq_terms(docs_per_clusters, cluster_no, n_gram_range)
+                # Get top 10 terms
+                top_freq_terms = freq_terms[:10]
+                # Update with frequent terms
+                cluster_term['FreqTerms'] = top_freq_terms
+                # Write output to csv
+                df = pd.DataFrame(top_freq_terms)
+                folder = os.path.join(term_folder, 'freq_terms')
+                path = os.path.join(folder, 'freq_terms_cluster_' + str(cluster_no) + '.csv')
+                df.to_csv(path, encoding='utf-8', index=False)
+            # Write output to csv and json file
+            df = pd.DataFrame(cluster_terms, columns=['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms',
+                                                      'FreqTerms'])
+            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.json')
+            df.to_json(path, orient='records')
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
 
 # Main entry
 if __name__ == '__main__':
@@ -380,9 +420,10 @@ if __name__ == '__main__':
         # ct.output_iterative_cluster_results()
         # ct.update_iterative_article_cluster_results()
         ct = ArticleClusterTermTFIDF()
-        ct.collect_article_cluster_results()
-        ct.derive_cluster_terms_by_TF_IDF()
-        ct.summarize_cluster_terms()
-        ct.derive_article_terms_by_TF_IDF()
+        # ct.collect_article_cluster_results()
+        # ct.derive_cluster_terms_by_TF_IDF()
+        # ct.summarize_cluster_terms()
+        # ct.derive_article_terms_by_TF_IDF()
+        ct.derive_freq_terms_per_cluster()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

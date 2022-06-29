@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+urban planning,11,11,22,"[8, 74, 92, 113, 158, 283, 285, 312, 378, 443, 452]"
+land cover,12,5,17,"[92, 312, 452, 476, 531]"
+machine learning,8,6,14,"[113, 158, 283, 285, 452, 531]"
+satellite imagery,8,4,12,"[8, 92, 283, 531]"
+deep learning,7,5,12,"[8, 92, 113, 289, 378]"
+neural network,7,5,12,"[8, 92, 137, 378, 452]"
+training sample,7,5,12,"[74, 289, 312, 444, 452]"
+road centerline,8,3,11,"[289, 378, 443]"
+road network,7,3,10,"[289, 378, 443]"
+image classification,5,4,9,"[92, 285, 312, 437]"

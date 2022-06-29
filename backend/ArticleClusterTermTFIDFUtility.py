@@ -125,9 +125,76 @@ class ArticleClusterTermTFIDFUtility:
                 print("Error occurred! {err}".format(err=_err))
         return candidates
 
+    @staticmethod
+    def get_n_gram_freq_terms(docs_per_cluster, cluster_no, n_gram_range):
+        # Convert the texts of all clusters into a list of document (a list of sentences) to derive n-gram candidates
+        def _collect_doc_terms(_cluster_docs, _n_gram_range):
+            _doc_terms = []
+            for _doc_id, _doc_text in zip(_cluster_docs['DocId'], _cluster_docs['Text']):
+                try:
+                    _text = BERTArticleClusterUtility.preprocess_text(_doc_text.strip())
+                    _sentences = sent_tokenize(_text)
+                    _n_gram_terms = ArticleClusterTermTFIDFUtility.generate_n_gram_candidates(_sentences, _n_gram_range)
+                    _doc_terms.append({'DocId': _doc_id, 'terms': _n_gram_terms})
+                except Exception as _err:
+                    print("Error occurred! {err}".format(err=_err))
+            return _doc_terms  #
+
+        # Create frequency table to track the frequency of a term within a cluster
+        def _create_freq_table(_doc_terms, _n_gram_range):
+            # keep track of freq table
+            _freq_table = {}
+            for _doc_term in _doc_terms:
+                for _term in _doc_term['terms']:
+                    _term = _term.lower()
+                    if _term in _freq_table:
+                        _freq_table[_term] += 1
+                    else:
+                        _freq_table[_term] = 1
+            return _freq_table
+
+        # # Create range table to track the range of a term within a cluster
+        # # Range: the number of abstracts a term appears within a cluster
+        def _create_range_table(_freq_table, _doc_terms, _n_gram_range):
+            _n_gram_terms = list(_freq_table.keys())
+            _range_table = {}
+            for _doc_term in _doc_terms:
+                _doc_id = _doc_term['DocId']
+                _terms = list(map(lambda t: t.lower(), _doc_term['terms']))
+                # Check if the term appears in the abstract
+                for _n_gram_term in _n_gram_terms:
+                    if _n_gram_term in _terms:
+                        if _n_gram_term not in _range_table:
+                            _range_table[_n_gram_term] = list()
+                        _range_table[_n_gram_term].append(_doc_id)
+            return _range_table
+
+        try:
+            cluster_docs = next(docs for docs in docs_per_cluster if docs['Cluster'] == cluster_no)
+            doc_terms = _collect_doc_terms(cluster_docs, n_gram_range)
+            freq_table = _create_freq_table(doc_terms, n_gram_range)
+            range_table = _create_range_table(freq_table, doc_terms, n_gram_range)
+            # Merge freq and range dict
+            n_gram_terms = list(freq_table.keys())
+            results = list()
+            for term in n_gram_terms:
+                _freq = freq_table[term]
+                _range = range_table[term]
+                _score = _freq + len(_range)
+                # _score = 0.4* _freq + 0.6* len(_range)
+                results.append({'term': term, 'freq': _freq, 'range': len(_range), 'score': _score,
+                                'doc_ids': _range})
+            # Sort results by freq
+            results = sorted(results, key=lambda r: r['score'], reverse=True)
+            # results = sorted(results, key=lambda r: (r['range'], r['freq']), reverse=True)
+            return results
+        except Exception as _err:
+            print("Error occurred! {err}".format(err=_err))
+            sys.exit(-1)
+
     # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_terms(approach, docs_per_cluster_df, folder):
+    def get_n_gram_tf_idf_terms(approach, docs_per_cluster_df, folder):
         # A folder that stores all the topic results
         temp_folder = os.path.join(folder, 'temp')
         Path(temp_folder).mkdir(parents=True, exist_ok=True)
@@ -456,13 +523,15 @@ class ArticleClusterTermTFIDFUtility:
                     _clean_docs.append(_sentence_list)  # sentence_list: a list of sentences
                 assert len(_clean_docs) == len(_docs), "Clean docs size is not correct"
                 return _clean_docs
+
             # Tokenize the doc text
             _doc_sentences = _tokenize_docs(docs)
             # Compute the frequencies of n_grams
             _frequency_matrix = []
             for _sentences in _doc_sentences:
                 _freq_table = {}  # Key: n_gram, Value: frequencies
-                _n_gram_candidates = ArticleClusterTermTFIDFUtility.generate_n_gram_candidates(_sentences, _n_gram_range)
+                _n_gram_candidates = ArticleClusterTermTFIDFUtility.generate_n_gram_candidates(_sentences,
+                                                                                               _n_gram_range)
                 for _n_gram in _n_gram_candidates:
                     _n_gram_text = _n_gram.lower()  # Lower the word cases to unify the words
                     if _n_gram_text in _freq_table:

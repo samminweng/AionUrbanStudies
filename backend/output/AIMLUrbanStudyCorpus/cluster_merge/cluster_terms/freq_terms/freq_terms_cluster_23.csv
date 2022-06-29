@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+machine learning,8,8,16,"[85, 203, 360, 419, 440, 457, 465, 540]"
+urban planning,7,5,12,"[18, 85, 360, 457, 465]"
+big data,8,3,11,"[18, 360, 419]"
+neural network,6,3,9,"[85, 360, 465]"
+urban design,4,4,8,"[419, 440, 540, 586]"
+smart city,5,2,7,"[360, 540]"
+proceeding contain,3,3,6,"[419, 540, 586]"
+smart data,3,1,4,[18]
+control system,2,2,4,"[85, 586]"
+social medium,3,1,4,[85]

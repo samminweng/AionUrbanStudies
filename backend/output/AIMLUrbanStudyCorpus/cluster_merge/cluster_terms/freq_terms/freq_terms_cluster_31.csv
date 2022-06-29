@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+machine learning,9,6,15,"[54, 108, 132, 179, 266, 308]"
+building energy,6,3,9,"[40, 207, 308]"
+neural network,7,2,9,"[54, 108]"
+urban area,5,3,8,"[40, 108, 442]"
+smart city,6,2,8,"[70, 308]"
+urban planning,4,4,8,"[108, 266, 308, 408]"
+urban environment,6,2,8,"[275, 357]"
+energy consumption,4,3,7,"[70, 207, 308]"
+energy demand,4,2,6,"[40, 308]"
+urban study,3,3,6,"[70, 108, 132]"

@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+urban environment,23,11,34,"[111, 149, 221, 278, 279, 284, 400, 448, 471, 506, 518]"
+nlos signal,10,4,14,"[111, 278, 279, 506]"
+path loss,11,3,14,"[221, 284, 471]"
+machine learning,7,6,13,"[111, 279, 446, 448, 471, 506]"
+neural network,5,3,8,"[149, 278, 448]"
+nlos multipath,6,2,8,"[278, 506]"
+rf signature,7,1,8,[446]
+gnss positioning,4,3,7,"[278, 279, 506]"
+gnss signal,4,3,7,"[278, 279, 506]"
+signal reception,4,2,6,"[111, 400]"

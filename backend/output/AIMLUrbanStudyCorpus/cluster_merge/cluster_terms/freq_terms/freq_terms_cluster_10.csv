@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+public space,20,8,28,"[116, 196, 341, 404, 416, 488, 492, 505]"
+machine learning,10,8,18,"[116, 177, 196, 341, 404, 416, 488, 533]"
+urban design,6,4,10,"[196, 492, 505, 533]"
+urban space,5,4,9,"[116, 488, 492, 505]"
+human perception,3,3,6,"[341, 488, 492]"
+urban identity,5,1,6,[505]
+urban planning,3,2,5,"[116, 404]"
+planning process,3,2,5,"[116, 177]"
+massive data,2,2,4,"[116, 416]"
+new methodology,2,2,4,"[116, 488]"

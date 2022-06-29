@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+machine learning,11,9,20,"[77, 170, 269, 271, 313, 340, 429, 472, 489]"
+human perception,11,5,16,"[77, 170, 269, 280, 429]"
+computer vision,7,5,12,"[77, 170, 269, 280, 489]"
+deep learning,5,5,10,"[31, 269, 271, 313, 429]"
+urban design,6,4,10,"[77, 170, 269, 271]"
+urban landscape,6,3,9,"[31, 170, 280]"
+neural network,6,3,9,"[77, 280, 340]"
+visual quality,7,1,8,[340]
+street view,5,3,8,"[340, 429, 489]"
+view image,5,3,8,"[340, 429, 489]"

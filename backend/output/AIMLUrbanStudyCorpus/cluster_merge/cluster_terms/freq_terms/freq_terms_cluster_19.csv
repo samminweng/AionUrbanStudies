@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+urban planning,7,6,13,"[65, 91, 136, 140, 339, 484]"
+machine learning,6,6,12,"[65, 91, 122, 136, 323, 339]"
+park accessibility,8,1,9,[339]
+life circle,7,1,8,[136]
+spatial justice,5,1,6,[65]
+learning technique,3,3,6,"[65, 136, 323]"
+housing estate,5,1,6,[91]
+economic mobility,4,1,5,[65]
+estimation model,4,1,5,[136]
+random forest,2,2,4,"[65, 140]"

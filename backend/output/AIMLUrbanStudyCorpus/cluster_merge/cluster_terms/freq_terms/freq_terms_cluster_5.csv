@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+human mobility,11,3,14,"[326, 362, 373]"
+urban planning,6,5,11,"[249, 358, 395, 545, 546]"
+travel behavior,5,3,8,"[134, 296, 326]"
+trajectory data,5,3,8,"[249, 326, 395]"
+human movement,5,3,8,"[326, 358, 362]"
+travel pattern,6,2,8,"[326, 546]"
+machine learning,4,4,8,"[337, 373, 425, 545]"
+smart card,5,2,7,"[326, 546]"
+pedestrian activity,6,1,7,[428]
+geographical area,5,1,6,[249]

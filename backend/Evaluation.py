@@ -143,8 +143,9 @@ class Evaluation:
                 }
                 for index, term in enumerate(terms):
                     _result['Term' + str(index)] = term['term']
-                    _result['Freq' + str(index)] = term['freq']
-                    _result['Range' + str(index)] = len(term['cluster_ids'])
+                    # _result['Freq' + str(index)] = term['freq']
+                    # _result['Range' + str(index)] = len(term['cluster_ids'])
+                    # _result['Score' + str(index)] = term['score']
                 _results.append(_result)
             # Write output
             _df = pd.DataFrame(_results)

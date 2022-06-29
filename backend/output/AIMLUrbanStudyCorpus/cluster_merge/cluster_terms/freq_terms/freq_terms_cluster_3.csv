@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+machine learning,10,10,20,"[155, 240, 304, 319, 334, 346, 499, 519, 555, 587]"
+urban planning,9,9,18,"[155, 220, 319, 321, 392, 422, 423, 439, 536]"
+traffic flow,14,4,18,"[155, 220, 439, 499]"
+transportation mode,15,3,18,"[298, 392, 423]"
+traffic congestion,9,6,15,"[304, 334, 439, 519, 530, 536]"
+deep learning,7,6,13,"[155, 319, 359, 392, 439, 536]"
+traffic volume,9,3,12,"[155, 422, 499]"
+big data,8,3,11,"[155, 220, 439]"
+urban environment,7,4,11,"[334, 346, 407, 526]"
+intelligent transportation,7,3,10,"[155, 220, 319]"

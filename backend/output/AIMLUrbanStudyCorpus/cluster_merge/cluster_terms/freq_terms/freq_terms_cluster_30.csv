@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+smart city,13,5,18,"[76, 151, 152, 297, 532]"
+machine learning,9,8,17,"[47, 67, 103, 354, 377, 381, 532, 583]"
+neural network,9,5,14,"[47, 98, 377, 385, 390]"
+urban planning,7,7,14,"[75, 76, 143, 297, 354, 385, 583]"
+urban environment,7,3,10,"[67, 98, 381]"
+learning technique,5,3,8,"[381, 390, 583]"
+urban governance,5,2,7,"[151, 152]"
+urban technology,4,2,6,"[151, 152]"
+big data,4,2,6,"[152, 297]"
+deep learning,3,3,6,"[152, 297, 354]"

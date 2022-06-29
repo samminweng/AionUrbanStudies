@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+big data,14,7,21,"[125, 139, 194, 202, 353, 375, 415]"
+urban planning,9,8,17,"[125, 139, 202, 415, 438, 485, 491, 511]"
+social medium,11,5,16,"[139, 202, 415, 438, 485]"
+machine learning,8,4,12,"[125, 202, 491, 511]"
+positive deviance,10,1,11,[415]
+support system,8,1,9,[125]
+functional region,6,2,8,"[375, 491]"
+learning technique,3,2,5,"[125, 139]"
+case study,3,2,5,"[139, 485]"
+smart city,4,1,5,[194]

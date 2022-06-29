@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+electric consumption,15,2,17,"[101, 517]"
+energy use,12,4,16,"[101, 224, 441, 517]"
+machine learning,9,5,14,"[20, 192, 322, 409, 481]"
+urban design,9,2,11,"[349, 409]"
+urban area,5,4,9,"[20, 101, 192, 441]"
+energy consumption,6,3,9,"[101, 409, 441]"
+consumption data,7,2,9,"[101, 517]"
+performance criterion,7,2,9,"[349, 409]"
+urban planning,4,4,8,"[80, 192, 239, 322]"
+energy performance,5,3,8,"[349, 409, 441]"

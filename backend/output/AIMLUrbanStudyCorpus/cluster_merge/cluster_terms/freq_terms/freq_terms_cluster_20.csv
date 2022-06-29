@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+urban planning,14,11,25,"[107, 189, 267, 305, 315, 383, 449, 455, 482, 538, 567]"
+land use,10,4,14,"[267, 396, 483, 538]"
+block level,9,3,12,"[482, 483, 538]"
+machine learning,6,5,11,"[107, 189, 267, 538, 575]"
+view image,6,3,9,"[482, 538, 575]"
+case study,5,3,8,"[267, 383, 538]"
+computer vision,4,4,8,"[267, 315, 482, 575]"
+urban environment,4,3,7,"[267, 575, 579]"
+functional zone,6,1,7,[383]
+building block,5,2,7,"[482, 538]"

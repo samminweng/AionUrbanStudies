@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+landslide susceptibility,26,7,33,"[27, 81, 131, 232, 248, 329, 514]"
+urban planning,10,10,20,"[27, 81, 131, 232, 248, 253, 329, 351, 424, 514]"
+susceptibility map,8,6,14,"[27, 81, 131, 176, 248, 514]"
+susceptibility mapping,8,6,14,"[131, 159, 176, 248, 329, 514]"
+machine learning,7,6,13,"[131, 159, 217, 232, 248, 380]"
+urban area,7,5,12,"[25, 159, 176, 217, 351]"
+conditioning factor,6,4,10,"[27, 248, 253, 380]"
+study area,6,4,10,"[232, 248, 253, 351]"
+learning technique,5,4,9,"[131, 232, 248, 380]"
+climate change,4,4,8,"[25, 159, 232, 351]"

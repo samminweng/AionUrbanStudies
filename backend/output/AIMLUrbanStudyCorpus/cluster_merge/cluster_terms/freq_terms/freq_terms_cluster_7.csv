@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+urban environment,9,5,14,"[233, 356, 363, 433, 466]"
+mobility pattern,11,2,13,"[69, 127]"
+traffic flow,8,3,11,"[63, 209, 307]"
+traffic congestion,6,5,11,"[138, 209, 307, 450, 461]"
+urban area,5,5,10,"[63, 69, 138, 370, 450]"
+urban planning,5,5,10,"[127, 233, 307, 433, 461]"
+machine learning,5,5,10,"[138, 209, 370, 435, 450]"
+traffic light,7,3,10,"[370, 450, 461]"
+transit mobility,8,1,9,[69]
+route planning,6,2,8,"[63, 138]"

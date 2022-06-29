@@ -1,0 +1,11 @@
+term,freq,range,score,doc_ids
+urban planning,14,12,26,"[19, 24, 123, 181, 214, 223, 227, 255, 350, 508, 521, 596]"
+land use,18,4,22,"[24, 45, 181, 521]"
+machine learning,9,7,16,"[24, 214, 227, 255, 350, 406, 508]"
+carbon emission,12,2,14,"[214, 350]"
+urban area,8,5,13,"[195, 214, 335, 406, 508]"
+big data,7,4,11,"[45, 335, 350, 406]"
+urban land,7,1,8,[45]
+climate change,5,3,8,"[181, 223, 406]"
+neural network,5,3,8,"[214, 508, 597]"
+transportation system,5,3,8,"[227, 255, 521]"
