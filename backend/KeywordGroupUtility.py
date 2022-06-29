@@ -15,7 +15,7 @@ import seaborn as sns
 
 
 # Helper function for keyword cluster
-class KeywordClusterUtility:
+class KeywordGroupUtility:
     stop_words = list(stopwords.words('english'))
     threshold = 40
 
