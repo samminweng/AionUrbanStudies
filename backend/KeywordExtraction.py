@@ -34,7 +34,6 @@ class KeywordExtraction:
                             self.args.case_name + '_clusters.json')
         self.corpus_df = pd.read_json(path)
         # Update corpus data with hdbscan cluster results
-        self.corpus_df.rename(columns={'HDBSCAN_Cluster': 'Cluster'}, inplace=True)
         # Added 'Text' column
         self.corpus_df['Text'] = self.corpus_df['Title'] + ". " + self.corpus_df['Abstract']
         # Get the total cluster
