@@ -9,3 +9,23 @@ neural network,6,3,9,"[77, 280, 340]"
 visual quality,7,1,8,[340]
 street view,5,3,8,"[340, 429, 489]"
 view image,5,3,8,"[340, 429, 489]"
+psychological perception,6,1,7,[31]
+perceptual quality,5,2,7,"[170, 269]"
+urban environment,4,3,7,"[280, 472, 489]"
+urban perception,6,1,7,[313]
+urban scene,4,2,6,"[31, 77]"
+previous study,3,3,6,"[31, 170, 429]"
+view index,4,2,6,"[31, 77]"
+urban planning,3,3,6,"[31, 170, 280]"
+subjective measure,4,2,6,"[77, 170]"
+visual feature,4,2,6,"[280, 429]"
+urban street,5,1,6,[280]
+urban planner,3,3,6,"[313, 429, 472]"
+human health,4,1,5,[271]
+urban designer,3,2,5,"[271, 340]"
+urban region,4,1,5,[429]
+visual data,4,1,5,[472]
+perception measure,2,2,4,"[31, 170]"
+quantitative analysis,2,2,4,"[31, 170]"
+visual element,2,2,4,"[77, 429]"
+high accuracy,2,2,4,"[77, 429]"

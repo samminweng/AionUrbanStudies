@@ -9,3 +9,23 @@ urban land,7,1,8,[45]
 climate change,5,3,8,"[181, 223, 406]"
 neural network,5,3,8,"[214, 508, 597]"
 transportation system,5,3,8,"[227, 255, 521]"
+interface network,7,1,8,[227]
+vehicle ownership,7,1,8,[255]
+road traffic,7,1,8,[508]
+urban climate,5,2,7,"[223, 406]"
+traffic noise,6,1,7,[508]
+spatial distribution,4,2,6,"[19, 350]"
+linear regression,3,3,6,"[45, 195, 335]"
+decision tree,3,3,6,"[123, 508, 521]"
+spatial pattern,5,1,6,[195]
+case study,3,3,6,"[214, 223, 406]"
+new insight,3,3,6,"[214, 366, 406]"
+urban data,4,2,6,"[366, 406]"
+urban structure,4,1,5,[19]
+road network,3,2,5,"[24, 350]"
+data collection,3,2,5,"[214, 406]"
+express service,4,1,5,[335]
+service facility,3,2,5,"[335, 350]"
+data science,4,1,5,[406]
+urban form,4,1,5,[508]
+form indicator,4,1,5,[508]

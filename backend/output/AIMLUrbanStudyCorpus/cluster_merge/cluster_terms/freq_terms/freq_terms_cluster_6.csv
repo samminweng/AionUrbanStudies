@@ -9,3 +9,23 @@ functional region,6,2,8,"[375, 491]"
 learning technique,3,2,5,"[125, 139]"
 case study,3,2,5,"[139, 485]"
 smart city,4,1,5,[194]
+data analysis,3,2,5,"[194, 485]"
+civic query,4,1,5,[194]
+analysis method,4,1,5,[202]
+literature review,3,2,5,"[415, 485]"
+medium data,4,1,5,[485]
+urban planner,2,2,4,"[124, 139]"
+data analytics,2,2,4,"[125, 139]"
+urban dynamic,2,2,4,"[139, 202]"
+data mining,2,2,4,"[139, 324]"
+high accuracy,2,2,4,"[139, 355]"
+urban system,2,2,4,"[202, 438]"
+urban data,2,2,4,"[202, 324]"
+city worldwide,3,1,4,[244]
+image dimension,3,1,4,[244]
+dirichlet allocation,2,2,4,"[244, 324]"
+topic modeling,2,2,4,"[324, 511]"
+previous work,2,2,4,"[375, 491]"
+probabilistic topic,2,2,4,"[375, 511]"
+sentiment analysis,3,1,4,[438]
+analysis result,2,2,4,"[438, 485]"

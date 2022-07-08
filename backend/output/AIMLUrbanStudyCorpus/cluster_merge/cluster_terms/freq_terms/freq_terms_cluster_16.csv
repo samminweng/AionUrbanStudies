@@ -9,3 +9,23 @@ urban growth,11,5,16,"[6, 182, 256, 299, 553]"
 urban land,10,6,16,"[114, 182, 256, 348, 426, 570]"
 urban development,7,5,12,"[310, 436, 464, 570, 594]"
 residential land,8,3,11,"[114, 256, 509]"
+case study,5,5,10,"[256, 288, 310, 420, 553]"
+building height,8,1,9,[310]
+result show,4,4,8,"[114, 348, 553, 582]"
+land resource,4,3,7,"[114, 426, 570]"
+use policy,5,2,7,"[348, 426]"
+land price,5,1,6,[114]
+urban footprint,5,1,6,[299]
+land change,4,2,6,"[426, 494]"
+transition rule,4,2,6,"[436, 494]"
+urban change,5,1,6,[553]
+data mining,4,2,6,"[554, 593]"
+metropolitan city,3,2,5,"[6, 464]"
+population growth,4,1,5,[100]
+radial basis,3,2,5,"[114, 553]"
+deep learning,3,2,5,"[175, 436]"
+population density,3,2,5,"[175, 570]"
+growth model,3,2,5,"[182, 299]"
+cellular automaton,3,2,5,"[182, 436]"
+land growth,4,1,5,[256]
+cellular automata,3,2,5,"[299, 494]"

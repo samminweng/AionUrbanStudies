@@ -9,3 +9,23 @@ urban planning,3,2,5,"[116, 404]"
 planning process,3,2,5,"[116, 177]"
 massive data,2,2,4,"[116, 416]"
 new methodology,2,2,4,"[116, 488]"
+discrete choice,2,2,4,"[116, 416]"
+choice model,2,2,4,"[116, 416]"
+semantic segmentation,2,2,4,"[116, 416]"
+result show,2,2,4,"[116, 505]"
+decision making,2,2,4,"[116, 341]"
+online review,3,1,4,[196]
+visitor experience,3,1,4,[196]
+built environment,2,2,4,"[196, 416]"
+urban planner,2,2,4,"[196, 492]"
+case study,2,2,4,"[404, 505]"
+important feature,3,1,4,[505]
+design process,2,2,4,"[505, 533]"
+design problem,3,1,4,[533]
+heterogeneous perception,2,1,3,[116]
+city planning,2,1,3,[177]
+interactive machine,2,1,3,[533]
+design goal,2,1,3,[533]
+last decade,1,1,2,[116]
+large street,1,1,2,[116]
+street imagery,1,1,2,[116]

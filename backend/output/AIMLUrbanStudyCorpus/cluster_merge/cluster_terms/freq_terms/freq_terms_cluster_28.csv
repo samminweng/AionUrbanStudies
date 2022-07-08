@@ -9,3 +9,23 @@ rf signature,7,1,8,[446]
 gnss positioning,4,3,7,"[278, 279, 506]"
 gnss signal,4,3,7,"[278, 279, 506]"
 signal reception,4,2,6,"[111, 400]"
+signal strength,3,3,6,"[111, 400, 448]"
+urban area,3,3,6,"[221, 400, 446]"
+empirical model,3,3,6,"[221, 284, 471]"
+multipath detection,4,2,6,"[278, 506]"
+direct signal,4,2,6,"[278, 506]"
+signal correlation,4,2,6,"[278, 506]"
+support vector,3,3,6,"[279, 400, 506]"
+vector machine,3,3,6,"[279, 400, 506]"
+location information,3,2,5,"[111, 446]"
+real time,4,1,5,[149]
+localization problem,3,2,5,"[149, 518]"
+multipath signal,3,2,5,"[278, 506]"
+signal correlators,3,2,5,"[278, 506]"
+gnss receiver,3,2,5,"[278, 506]"
+correlation function,3,2,5,"[278, 506]"
+level observation,4,1,5,[279]
+global positioning,2,2,4,"[111, 400]"
+positioning system,2,2,4,"[111, 400]"
+decision tree,2,2,4,"[111, 279]"
+pseudorange error,3,1,4,[111]

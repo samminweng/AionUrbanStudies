@@ -9,3 +9,23 @@ urban environment,8,4,12,"[4, 117, 146, 561]"
 social medium,7,5,12,"[4, 133, 295, 311, 543]"
 urban area,5,5,10,"[3, 13, 156, 468, 537]"
 flow prediction,7,3,10,"[156, 273, 543]"
+mobile phone,5,3,8,"[4, 156, 388]"
+human mobility,5,3,8,"[22, 156, 430]"
+travel behavior,5,3,8,"[104, 311, 522]"
+special focus,4,4,8,"[184, 309, 543, 561]"
+spatial familiarity,6,1,7,[4]
+medium data,4,3,7,"[4, 133, 295]"
+mobility pattern,4,3,7,"[32, 156, 257]"
+real time,4,3,7,"[343, 522, 543]"
+big data,3,3,6,"[3, 133, 343]"
+urban problem,4,2,6,"[3, 537]"
+spatial correlation,4,2,6,"[30, 273]"
+recent year,3,3,6,"[32, 97, 211]"
+trip generation,5,1,6,[84]
+experimental result,3,3,6,"[84, 97, 273]"
+new city,5,1,6,[97]
+travel mode,4,2,6,"[104, 522]"
+terrorist attack,4,2,6,"[117, 561]"
+proceeding contain,3,3,6,"[184, 309, 543]"
+urban space,3,3,6,"[210, 211, 272]"
+traffic incident,5,1,6,[295]

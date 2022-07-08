@@ -46,12 +46,12 @@ class KeywordExtraction:
         cluster_df['NumDocs'] = cluster_df['DocIds'].apply(len)
         cluster_df = cluster_df[['Cluster', 'NumDocs', 'DocIds']]
         self.clusters = cluster_df.to_dict("records")
-        # # Language model
-        self.model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
-                                         device=self.args.device)
 
     def extract_doc_key_phrases_by_similarity_diversity(self):
         try:
+            # # Language model
+            model = SentenceTransformer(self.args.model_name, cache_folder=sentence_transformers_path,
+                                        device=self.args.device)
             folder = os.path.join('output', self.args.case_name, self.args.cluster_folder,
                                   'key_phrases', 'doc_key_phrase')
             Path(folder).mkdir(parents=True, exist_ok=True)
@@ -89,7 +89,7 @@ class KeywordExtraction:
                                                                                                          client)
                             n_gram_candidates = n_gram_candidates + list(map(lambda c: c['term'], uni_gram_candidates))
                             # print(", ".join(n_gram_candidates))
-                            candidate_scores = KeywordExtractionUtility.compute_similar_score_key_phrases(self.model,
+                            candidate_scores = KeywordExtractionUtility.compute_similar_score_key_phrases(model,
                                                                                                           doc_text,
                                                                                                           n_gram_candidates)
 
@@ -98,7 +98,7 @@ class KeywordExtraction:
                             phrase_candidates = list(map(lambda p: p['key-phrase'], phrase_similar_scores))
                             # Rank the high scoring phrases
                             phrase_scores_mmr = KeywordExtractionUtility.re_rank_phrases_by_maximal_margin_relevance(
-                                self.model, doc_text, phrase_candidates, self.args.diversity)
+                                model, doc_text, phrase_candidates, self.args.diversity)
                             mmr_key_phrases = list(map(lambda p: p['key-phrase'], phrase_scores_mmr))
                             # filter out single word overlapping with any other
                             top_key_phrases = list()
@@ -151,7 +151,7 @@ class KeywordExtraction:
                 docs = pd.read_json(path).to_dict("records")
                 for doc in docs:
                     doc_key_phrases.append({'DocId': doc['DocId'], 'KeyPhrases': doc['Key-phrases'],
-                                           'CandidatePhrases': doc['Phrase-candidates']})
+                                            'CandidatePhrases': doc['Phrase-candidates']})
             # Sort key phrases by DocId
             sorted_key_phrases = sorted(doc_key_phrases, key=lambda k: k['DocId'])
             # # Aggregated all the key phrases of each individual article

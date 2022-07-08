@@ -9,3 +9,23 @@ training sample,7,5,12,"[74, 289, 312, 444, 452]"
 road centerline,8,3,11,"[289, 378, 443]"
 road network,7,3,10,"[289, 378, 443]"
 image classification,5,4,9,"[92, 285, 312, 437]"
+satellite image,5,3,8,"[8, 158, 531]"
+remote sensing,4,4,8,"[113, 283, 285, 437]"
+experimental result,4,4,8,"[113, 378, 476, 531]"
+urban land,5,3,8,"[312, 476, 531]"
+classification accuracy,6,2,8,"[437, 444]"
+overall accuracy,4,3,7,"[74, 92, 312]"
+green area,6,1,7,[283]
+road extraction,5,2,7,"[289, 378]"
+extraction method,4,3,7,"[289, 378, 452]"
+object detection,5,1,6,[8]
+learning algorithms,3,3,6,"[8, 158, 285]"
+cover classification,4,2,6,"[92, 476]"
+study area,3,3,6,"[92, 312, 437]"
+result show,3,3,6,"[113, 378, 443]"
+centerline extraction,3,3,6,"[289, 378, 443]"
+high accuracy,3,3,6,"[289, 312, 452]"
+aerial imagery,4,2,6,"[378, 444]"
+optical data,5,1,6,[476]
+cloud omission,4,1,5,[74]
+omission error,4,1,5,[74]

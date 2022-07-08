@@ -9,3 +9,23 @@ learning technique,5,5,10,"[163, 219, 318, 365, 577]"
 urban poverty,7,1,8,[99]
 modern city,5,3,8,"[160, 163, 397]"
 urban data,5,3,8,"[160, 163, 365]"
+satellite image,5,3,8,"[204, 290, 318]"
+deprivation pocket,7,1,8,[318]
+address record,5,2,7,"[15, 263]"
+built environment,4,3,7,"[34, 95, 219]"
+prenatal care,6,1,7,[34]
+data source,5,2,7,"[43, 290]"
+case study,4,3,7,"[43, 163, 262]"
+urban morphology,4,3,7,"[95, 270, 413]"
+neural network,4,3,7,"[95, 318, 535]"
+design method,5,2,7,"[147, 276]"
+urban form,5,2,7,"[160, 219]"
+big data,4,3,7,"[160, 180, 197]"
+urban street,5,2,7,"[241, 513]"
+infill development,5,1,6,[7]
+real estate,3,3,6,"[43, 197, 286]"
+similarity analysis,5,1,6,[95]
+learning approach,3,3,6,"[95, 99, 241]"
+feature vector,4,2,6,"[95, 270]"
+decision making,3,3,6,"[95, 160, 402]"
+potential application,3,3,6,"[99, 160, 270]"

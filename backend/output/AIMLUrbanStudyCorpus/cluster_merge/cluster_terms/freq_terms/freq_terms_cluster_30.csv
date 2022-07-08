@@ -9,3 +9,23 @@ urban governance,5,2,7,"[151, 152]"
 urban technology,4,2,6,"[151, 152]"
 big data,4,2,6,"[152, 297]"
 deep learning,3,3,6,"[152, 297, 354]"
+crime pattern,4,1,5,[67]
+public consultation,4,1,5,[75]
+sensor network,3,2,5,"[76, 152]"
+governance network,3,2,5,"[151, 152]"
+sustainable city,4,1,5,[152]
+urban data,3,2,5,"[297, 487]"
+artificial intelligence,3,2,5,"[354, 487]"
+crime rate,3,1,4,[47]
+crime distribution,3,1,4,[47]
+concentration area,3,1,4,[47]
+open data,2,2,4,"[67, 174]"
+data analysis,2,2,4,"[75, 297]"
+urban area,2,2,4,"[76, 487]"
+wireless sensor,2,2,4,"[76, 541]"
+urban design,2,2,4,"[98, 532]"
+things system,3,1,4,[151]
+descriptive statistic,2,2,4,"[151, 152]"
+public safety,2,2,4,"[174, 354]"
+tender procedure,3,1,4,[377]
+road section,2,2,4,"[377, 532]"

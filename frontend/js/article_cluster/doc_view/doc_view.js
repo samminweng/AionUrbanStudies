@@ -1,6 +1,6 @@
 // Create a text view to display the content of the article
 function DocView(doc, selected_term) {
-    const container = $('<div class="card text-dark bg-light">' +
+    const container = $('<div class="card text-dark bg-light small">' +
         '<div class="card-body">' +
         '<p class="card-text">' +
         '</p>' +
@@ -11,9 +11,6 @@ function DocView(doc, selected_term) {
 
     // Highlight key terms
     function mark_key_terms(div, terms, class_name) {
-        // function generate_hyph(term)
-
-
         // Check if the topic is not empty
         for (const term of terms) {
             if(term !== null){
@@ -21,7 +18,7 @@ function DocView(doc, selected_term) {
                 const mark_options = {
                     "separateWordSearch": false,
                     "accuracy": {
-                        "value": "exactly",
+                        // "value": "exactly",
                         "limiters": [",", ".", "'s", "/", ";", ":", '(', ')', '‘', '’', '%', 's', 'es', '-']
                     },
                     "acrossElements": true,
@@ -55,7 +52,7 @@ function DocView(doc, selected_term) {
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));
         // Mark the key phrases on title div
         // title_div = mark_key_terms(title_div, doc_key_phrases, 'key_phrase');
-        // title_div = mark_key_terms(title_div, [selected_term], 'search_terms');
+        title_div = mark_key_terms(title_div, [selected_term], 'search_terms');
         container.find(".card-text").append(title_div);
         // Add the abstract
         let abstract_div = $('<div class="col"></div>');

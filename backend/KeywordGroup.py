@@ -21,7 +21,7 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 
 # Extract keyword and group keywords based on the similarity
-class KeywordCluster:
+class KeywordGroup:
     def __init__(self):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
@@ -274,7 +274,7 @@ class KeywordCluster:
 # Main entry
 if __name__ == '__main__':
     try:
-        kp = KeywordCluster()
+        kp = KeywordGroup()
         # Extract keyword clusters
         kp.experiment_cluster_key_phrases()
         kp.cluster_key_phrases_with_best_experiments()

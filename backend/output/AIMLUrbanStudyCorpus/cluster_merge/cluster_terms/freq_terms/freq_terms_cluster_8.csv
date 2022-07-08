@@ -9,3 +9,23 @@ urban design,8,5,13,"[2, 35, 268, 287, 523]"
 housing price,9,2,11,"[2, 411]"
 view image,6,5,11,"[35, 52, 206, 411, 477]"
 urban data,8,3,11,"[86, 367, 411]"
+street quality,8,2,10,"[2, 367]"
+visual quality,8,2,10,"[35, 367]"
+urban street,8,1,9,[35]
+study area,5,4,9,"[35, 206, 474, 595]"
+safety perception,6,2,8,"[154, 376]"
+human perception,4,3,7,"[2, 52, 206]"
+public health,4,3,7,"[35, 367, 595]"
+quantitative measurement,4,3,7,"[52, 367, 477]"
+case study,4,3,7,"[367, 474, 477]"
+objective indicator,5,1,6,[2]
+land use,3,3,6,"[2, 86, 595]"
+design quality,4,2,6,"[2, 523]"
+decision maker,3,3,6,"[2, 376, 411]"
+urban analytics,4,2,6,"[48, 51]"
+heat map,5,1,6,[268]
+planning practice,4,2,6,"[325, 367]"
+visible street,4,2,6,"[325, 411]"
+urban form,5,1,6,[477]
+health purpose,5,1,6,[595]
+subjective perception,4,1,5,[2]

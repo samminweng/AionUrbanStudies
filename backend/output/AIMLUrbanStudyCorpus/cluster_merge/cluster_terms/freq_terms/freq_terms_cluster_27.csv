@@ -9,3 +9,23 @@ consumption data,7,2,9,"[101, 517]"
 performance criterion,7,2,9,"[349, 409]"
 urban planning,4,4,8,"[80, 192, 239, 322]"
 energy performance,5,3,8,"[349, 409, 441]"
+urban scale,4,3,7,"[224, 441, 517]"
+neural network,5,2,7,"[239, 481]"
+multiple performance,5,2,7,"[349, 409]"
+heritage area,5,1,6,[20]
+big data,3,3,6,"[20, 192, 224]"
+deep learning,4,2,6,"[80, 101]"
+residential building,4,2,6,"[101, 517]"
+consumption forecasting,5,1,6,[101]
+learning method,3,3,6,"[192, 441, 481]"
+land use,5,1,6,[239]
+solar radiation,4,2,6,"[349, 409]"
+generative design,4,2,6,"[349, 409]"
+occupant behaviour,4,1,5,[224]
+use change,4,1,5,[239]
+ventilation potential,4,1,5,[322]
+natural ventilation,4,1,5,[322]
+mean absolute,3,2,5,"[322, 517]"
+design parameter,4,1,5,[349]
+parametric modeling,3,2,5,"[349, 409]"
+urban form,3,2,5,"[349, 409]"

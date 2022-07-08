@@ -9,3 +9,23 @@ urban area,8,5,13,"[42, 90, 303, 317, 572]"
 urban planning,6,6,12,"[135, 190, 213, 293, 302, 317]"
 overall accuracy,6,5,11,"[302, 303, 317, 347, 572]"
 stream water,8,1,9,[119]
+water quality,8,1,9,[119]
+development pattern,7,2,9,"[119, 213]"
+case study,4,4,8,"[208, 213, 316, 589]"
+use change,5,3,8,"[208, 316, 524]"
+urban expansion,5,2,7,"[135, 225]"
+population growth,3,3,6,"[135, 208, 213]"
+urban forest,5,1,6,[347]
+land expansion,4,1,5,[90]
+water management,3,2,5,"[190, 344]"
+cover change,3,2,5,"[208, 316]"
+cover map,3,2,5,"[208, 302]"
+slum area,4,1,5,[303]
+impervious surface,3,2,5,"[316, 572]"
+residential land,2,2,4,"[90, 344]"
+big data,2,2,4,"[90, 317]"
+use planning,2,2,4,"[119, 208]"
+material consumption,3,1,4,[135]
+water demand,3,1,4,[190]
+neural network,2,2,4,"[190, 303]"
+predictive model,3,1,4,[190]

@@ -98,11 +98,11 @@ class Evaluation:
                     'cluster': _cluster_no
                 }
                 for index, term in enumerate(terms):
-                    _result['Term' + str(index)] = term['term']
-                    _result['Freq' + str(index)] = term['freq']
-                    _result['Range' + str(index)] = term['range']
-                    _result['DocId' + str(index)] = term['doc_ids']
-                    _result['Score' + str(index)] = term['score']
+                    _result['Term' + str(index)] = " " + term['term']
+                    # _result['Freq' + str(index)] = term['freq']
+                    # _result['Range' + str(index)] = term['range']
+                    # _result['DocId' + str(index)] = term['doc_ids']
+                    # _result['Score' + str(index)] = term['score']
                 _results.append(_result)
             # Write output
             _df = pd.DataFrame(_results)
@@ -258,7 +258,7 @@ class Evaluation:
 if __name__ == '__main__':
     try:
         evl = Evaluation()
-        # evl.sort_article_clusters_by_scores()
+        evl.sort_article_clusters_by_scores()
         evl.evaluate_article_clusters()
         # evl.evaluate_keyword_groups()
     except Exception as err:

@@ -78,21 +78,23 @@ function DocList(docs, cluster, selected_term) {
                 done(result);
             },
             totalNumber: docs.length,
-            pageSize: 5,
+            pageSize: 3,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages',
             callback: function (docs, pagination) {
-                docTable.find('tbody').empty();
+                // docTable.find('tbody').empty();
+                docTable.empty();
                 for (let i = 0; i < docs.length; i++) {
                     const doc = docs[i];
                     // console.log(doc);
-                    const row = $('<tr class="d-flex"></tr>');
-                    // Add the title
-                    const col = $('<td class="col"></td>');
+                    // const row = $('<tr class="d-flex"></tr>');
+                    // // Add the title
+                    // const col = $('<td class="col"></td>');
                     const doc_view = new DocView(doc, selected_term);
-                    col.append(doc_view.get_container());
-                    row.append(col);
-                    docTable.find('tbody').append(row);
+                    // col.append(doc_view.get_container());
+                    // row.append(col);
+                    // docTable.find('tbody').append(doc_view.get_container());
+                    docTable.append(doc_view.get_container());
                 }
             }
         });
@@ -101,10 +103,11 @@ function DocList(docs, cluster, selected_term) {
 
     function _createUI() {
         $('#article_cluster_doc_list').empty();
-        const container = $('<div></div>');
+        const container = $('<div class="small"></div>');
         // A list of cluster documents
-        const doc_table = $('<table class="table table-borderless">' +
-            '<tbody></tbody></table>');
+        // const doc_table = $('<table class="table table-borderless table-sm">' +
+        //     '<tbody></tbody></table>');
+        const doc_table = $('<div class="card-group"></div>');
         const pagination = createPagination(doc_table);
         // Add the table to display the list of documents.
         container.append(createHeading());

@@ -9,3 +9,23 @@ machine learning,4,4,8,"[337, 373, 425, 545]"
 smart card,5,2,7,"[326, 546]"
 pedestrian activity,6,1,7,[428]
 geographical area,5,1,6,[249]
+mobility pattern,4,2,6,"[326, 373]"
+card data,4,2,6,"[326, 546]"
+population distribution,5,1,6,[358]
+truck driver,5,1,6,[425]
+special event,4,1,5,[261]
+urban data,3,2,5,"[326, 428]"
+phone data,4,1,5,[358]
+mobile phone,4,1,5,[358]
+socioeconomic status,4,1,5,[362]
+flow pattern,4,1,5,[395]
+public transportation,3,2,5,"[545, 546]"
+route planning,2,2,4,"[134, 545]"
+land use,2,2,4,"[134, 428]"
+fundamental aspect,2,2,4,"[134, 337]"
+urban area,2,2,4,"[134, 425]"
+social network,2,2,4,"[249, 362]"
+urban planner,2,2,4,"[261, 546]"
+pattern discovery,2,2,4,"[326, 395]"
+transit travel,3,1,4,[326]
+visual analytics,2,2,4,"[326, 546]"

@@ -9,3 +9,23 @@ learning technique,5,5,10,"[58, 121, 386, 564, 580]"
 ethnic heterogeneity,8,1,9,[1]
 spatial lag,8,1,9,[1]
 smart city,7,2,9,"[61, 150]"
+urban form,6,2,8,"[21, 53]"
+residential area,6,2,8,"[21, 68]"
+urban design,5,2,7,"[33, 205]"
+artificial intelligence,4,3,7,"[58, 250, 399]"
+big data,4,3,7,"[64, 109, 150]"
+natural language,4,3,7,"[566, 580, 581]"
+residential stability,5,1,6,[1]
+important variable,5,1,6,[1]
+navigation system,4,2,6,"[12, 246]"
+first step,3,3,6,"[12, 558, 564]"
+land policy,5,1,6,[21]
+random forest,3,3,6,"[21, 56, 369]"
+learning algorithms,3,3,6,"[33, 199, 205]"
+support vector,3,3,6,"[36, 112, 369]"
+mosquito occurrence,5,1,6,[56]
+decision tree,3,3,6,"[64, 112, 369]"
+decision making,4,2,6,"[88, 399]"
+mosquito control,5,1,6,[121]
+educational game,4,2,6,"[566, 581]"
+planning firm,3,3,6,"[566, 580, 581]"

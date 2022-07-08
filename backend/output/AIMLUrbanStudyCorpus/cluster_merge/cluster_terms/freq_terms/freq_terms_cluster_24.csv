@@ -9,3 +9,23 @@ urban area,8,7,15,"[57, 60, 115, 168, 216, 274, 585]"
 machine learning,7,7,14,"[39, 60, 79, 172, 198, 274, 585]"
 temperature data,6,3,9,"[39, 216, 372]"
 urban expansion,7,2,9,"[71, 265]"
+urban vegetation,8,1,9,[372]
+urban surface,5,3,8,"[57, 115, 247]"
+study area,4,4,8,"[57, 71, 79, 274]"
+urban environment,5,3,8,"[60, 216, 585]"
+case study,4,4,8,"[71, 115, 168, 585]"
+urban park,7,1,8,[79]
+urban landscape,4,4,8,"[115, 216, 372, 456]"
+canyon geometry,5,2,7,"[29, 60]"
+green space,4,3,7,"[44, 168, 216]"
+urban canyon,5,1,6,[29]
+urban land,4,2,6,"[44, 172]"
+coverage ratio,3,3,6,"[60, 79, 247]"
+vegetation index,3,3,6,"[60, 115, 456]"
+random forest,3,3,6,"[71, 215, 456]"
+urban forestry,4,1,5,[28]
+european city,3,2,5,"[29, 222]"
+island effect,3,2,5,"[44, 79]"
+land use,4,1,5,[172]
+complex terrain,4,1,5,[198]
+regression model,3,2,5,"[215, 372]"

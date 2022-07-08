@@ -9,3 +9,23 @@ conditioning factor,6,4,10,"[27, 248, 253, 380]"
 study area,6,4,10,"[232, 248, 253, 351]"
 learning technique,5,4,9,"[131, 232, 248, 380]"
 climate change,4,4,8,"[25, 159, 232, 351]"
+model performance,4,4,8,"[81, 176, 248, 380]"
+landslide risk,4,4,8,"[81, 131, 232, 329]"
+rf model,6,2,8,"[248, 329]"
+neural network,4,3,7,"[27, 176, 253]"
+land use,4,3,7,"[81, 380, 514]"
+random forest,4,3,7,"[159, 176, 329]"
+urban flood,5,2,7,"[176, 380]"
+rockfall hazard,6,1,7,[253]
+metropolitan area,4,2,6,"[25, 159]"
+satellite image,3,3,6,"[25, 232, 248]"
+human activity,3,3,6,"[25, 81, 232]"
+natural disaster,3,3,6,"[27, 248, 424]"
+susceptibility evaluation,3,3,6,"[27, 248, 329]"
+landslide inventory,3,3,6,"[81, 248, 329]"
+susceptibility model,3,3,6,"[81, 131, 514]"
+shallow landslide,5,1,6,[131]
+pluvial flooding,4,2,6,"[217, 351]"
+burnt area,5,1,6,[232]
+field survey,3,3,6,"[248, 329, 380]"
+flood risk,5,1,6,[380]

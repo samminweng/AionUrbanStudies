@@ -9,3 +9,23 @@ air quality,6,2,8,"[291, 394]"
 data mining,5,3,8,"[387, 394, 434]"
 case study,4,3,7,"[291, 434, 527]"
 urban governance,4,2,6,"[243, 434]"
+proceeding contain,3,3,6,"[291, 394, 432]"
+iot application,4,2,6,"[387, 527]"
+statistical analysis,3,2,5,"[387, 434]"
+large data,3,2,5,"[387, 451]"
+information system,2,2,4,"[145, 291]"
+autonomous vehicle,2,2,4,"[145, 394]"
+various aspect,2,2,4,"[264, 527]"
+special focus,2,2,4,"[291, 394]"
+sensor data,2,2,4,"[291, 394]"
+sustainable city,2,2,4,"[291, 432]"
+urban air,2,2,4,"[291, 394]"
+sensor network,2,2,4,"[291, 394]"
+data science,3,1,4,[387]
+potential value,2,2,4,"[434, 527]"
+traffic control,3,1,4,[451]
+intelligent transportation,2,1,3,[145]
+transportation system,2,1,3,[145]
+ml technology,2,1,3,[145]
+service infrastructure,2,1,3,[264]
+delivery system,2,1,3,[264]

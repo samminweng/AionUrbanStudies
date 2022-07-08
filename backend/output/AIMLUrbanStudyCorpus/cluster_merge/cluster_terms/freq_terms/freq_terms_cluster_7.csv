@@ -9,3 +9,23 @@ machine learning,5,5,10,"[138, 209, 370, 435, 450]"
 traffic light,7,3,10,"[370, 450, 461]"
 transit mobility,8,1,9,[69]
 route planning,6,2,8,"[63, 138]"
+mobility structure,7,1,8,[69]
+human mobility,7,1,8,[127]
+neural network,4,2,6,"[63, 450]"
+result show,3,3,6,"[63, 307, 461]"
+experimental result,3,3,6,"[69, 127, 307]"
+gps trajectory,5,1,6,[127]
+trajectory data,4,2,6,"[127, 209]"
+transport mode,4,2,6,"[138, 433]"
+dynamic routing,4,2,6,"[138, 450]"
+travel demand,4,2,6,"[138, 233]"
+transportation system,3,3,6,"[209, 433, 435]"
+urban traffic,3,3,6,"[209, 370, 461]"
+reinforcement learning,4,2,6,"[233, 356]"
+light control,4,2,6,"[370, 461]"
+control system,4,2,6,"[370, 461]"
+deep learning,3,2,5,"[63, 450]"
+complex network,4,1,5,[127]
+flow forecasting,4,1,5,[307]
+anomaly detection,4,1,5,[466]
+person detection,4,1,5,[466]

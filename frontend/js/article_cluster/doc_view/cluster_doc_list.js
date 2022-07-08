@@ -1,24 +1,36 @@
-function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
+function ClusterDocList(cluster_no, corpus_data, cluster_data, color, common_terms) {
     const cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
     // Display Top 10 Distinct Terms and grouped key phrases
     function create_cluster_terms_key_phrase_topics(){
         // Create a div to display a list of topic (a link)
-        const view = $('<div></div>');
-        const container = $('<div class="container-sm"></div>');
+        const view = $('<div class="small"></div>');
+        const container = $('<div class="container-sm small"></div>');
         const term_p = $('<div></div>');
-        let cluster_terms = cluster['Terms'].slice(0, 10);
+        const freq_terms = cluster['FreqTerms'];
+        let cluster_terms = [];
+        let count = 0;
+        // Display top 10 key phrases
+        for (let i=0; i<freq_terms.length && count<10; i++) {
+            const term = freq_terms[i];
+            if(common_terms.has(term['term']) && common_terms.get(term['term'])>1){
+                continue;
+            }
+            cluster_terms.push(term);
+            count = count + 1;
+        }
+
         // Sort the terms by its number of docs
         cluster_terms.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
         // Add top 10 cluster terms (each term is a link)
-        for (let i = 0; i<3; i++) {
+        for (let i = 0; i<2; i++) {
             const row = $('<div class="row"></div>');
-            for(let j=0; j<4; j++){
-                let index = i*4 + j;
+            for(let j=0; j<5; j++){
+                let index = i*5 + j;
                 const col = $('<div class="col"></div>');
                 if(index < cluster_terms.length){
                     const term = cluster_terms[index];
-                    const link = $('<button type="button" class="btn btn-link btn">'
+                    const link = $('<button type="button" class="btn btn-link btn-sm">'
                         + term['term'] + ' (' + term['doc_ids'].length + ')' + "</button>");
                     // Click on the link to display the articles associated with topic
                     link.click(function () {
@@ -43,8 +55,9 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
     }
     function _createUI() {
         $('#article_cluster_term_list').empty();
+        const container = $('<div class="small"></div>');
         // Create a div to display
-        const header = $('<div class="h5"></div>');
+        const header = $('<div class="fw-bold"></div>');
         const score = cluster['Score'];
         const heading = $('<div>' +
             '<span style="color: ' +color +'">Abstract Cluster ' + cluster_no +'</span> ' +
@@ -55,9 +68,10 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
             heading.find(".score").addClass('text-danger');
         }
         header.append(heading);
-        $('#article_cluster_term_list').append(header);
+        container.append(header);
         // Create a div to display top 10 Topic of a cluster
-        $('#article_cluster_term_list').append(create_cluster_terms_key_phrase_topics());
+        container.append(create_cluster_terms_key_phrase_topics());
+        $('#article_cluster_term_list').append(container);
         // Create doc list
         const doc_list = new DocList(cluster_docs, cluster, null);
 

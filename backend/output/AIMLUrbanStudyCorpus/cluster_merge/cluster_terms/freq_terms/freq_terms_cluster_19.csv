@@ -9,3 +9,23 @@ housing estate,5,1,6,[91]
 economic mobility,4,1,5,[65]
 estimation model,4,1,5,[136]
 random forest,2,2,4,"[65, 140]"
+result show,2,2,4,"[65, 480]"
+comparative analysis,2,2,4,"[65, 122]"
+urban planner,2,2,4,"[91, 323]"
+population density,2,2,4,"[91, 323]"
+urban data,2,2,4,"[122, 323]"
+community life,3,1,4,[136]
+gps data,3,1,4,[136]
+internal structure,3,1,4,[136]
+behavioral demand,3,1,4,[136]
+decision tree,2,2,4,"[136, 480]"
+urban policy,2,2,4,"[136, 323]"
+urban environment,2,2,4,"[140, 470]"
+community deprivation,3,1,4,[339]
+new company,3,1,4,[480]
+spatial inequality,2,1,3,[65]
+individual measure,2,1,3,[65]
+census tract,2,1,3,[65]
+development scale,2,1,3,[91]
+economic assessment,2,1,3,[91]
+economic sustainability,2,1,3,[91]

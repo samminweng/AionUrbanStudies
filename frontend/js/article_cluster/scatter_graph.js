@@ -1,7 +1,7 @@
 // Create scatter graph
 function ScatterGraph(corpus_data, cluster_data, _select_no) {
     const width = 600;
-    const height = 600;
+    const height = 650;
 
     // Collect all the groups
     const group_data = cluster_data.reduce((pre, cur) => {
