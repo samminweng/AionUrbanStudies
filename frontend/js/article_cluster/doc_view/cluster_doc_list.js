@@ -1,4 +1,4 @@
-function ClusterDocList(cluster_no, corpus_data, cluster_data, color, common_terms) {
+function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
     const cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
     const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
     // Display Top 10 Distinct Terms and grouped key phrases
@@ -8,18 +8,7 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color, common_ter
         const container = $('<div class="container-sm small"></div>');
         const term_p = $('<div></div>');
         const freq_terms = cluster['FreqTerms'];
-        let cluster_terms = [];
-        let count = 0;
-        // Display top 10 key phrases
-        for (let i=0; i<freq_terms.length && count<10; i++) {
-            const term = freq_terms[i];
-            if(common_terms.has(term['term']) && common_terms.get(term['term'])>1){
-                continue;
-            }
-            cluster_terms.push(term);
-            count = count + 1;
-        }
-
+        const cluster_terms = freq_terms.filter(t => cluster['ClusterTerms'].includes(t['term'].toLowerCase()));
         // Sort the terms by its number of docs
         cluster_terms.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
         // Add top 10 cluster terms (each term is a link)

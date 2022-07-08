@@ -347,7 +347,7 @@ class Evaluation:
 if __name__ == '__main__':
     try:
         evl = Evaluation()
-        # evl.sort_article_clusters_by_scores()
+        evl.sort_article_clusters_by_scores()
         evl.find_common_terms_by_clusters()
         # evl.evaluate_article_clusters()
         # evl.evaluate_keyword_groups()
