@@ -29,3 +29,53 @@ terrorist attack,4,2,6,"[117, 561]"
 proceeding contain,3,3,6,"[184, 309, 543]"
 urban space,3,3,6,"[210, 211, 272]"
 traffic incident,5,1,6,[295]
+spatiotemporal pattern,3,2,5,"[3, 104]"
+eye movement,4,1,5,[4]
+movement data,4,1,5,[4]
+commercial district,4,1,5,[22]
+active learning,3,2,5,"[83, 543]"
+varying impact,4,1,5,[104]
+input representation,4,1,5,[110]
+terrorist action,3,2,5,"[117, 561]"
+od flow,4,1,5,[156]
+railway station,4,1,5,[343]
+risk assessment,3,2,5,"[343, 384]"
+mining technique,3,2,5,"[384, 468]"
+opportunistic criminal,4,1,5,[537]
+urban governance,3,1,4,[3]
+data validation,3,1,4,[13]
+district discovery,3,1,4,[22]
+graph convolution,3,1,4,[22]
+convolution network,3,1,4,[22]
+functional region,2,2,4,"[22, 345]"
+previous work,2,2,4,"[30, 537]"
+graph attention,2,2,4,"[30, 273]"
+attention network,2,2,4,"[30, 273]"
+attention mechanism,2,2,4,"[30, 273]"
+traffic data,2,2,4,"[30, 311]"
+previous study,2,2,4,"[32, 257]"
+deep learning,2,2,4,"[32, 156]"
+urban setting,2,2,4,"[32, 345]"
+learning strategy,2,2,4,"[83, 97]"
+neural network,2,2,4,"[83, 146]"
+first phase,2,2,4,"[84, 295]"
+low accuracy,2,2,4,"[84, 311]"
+prediction performance,2,2,4,"[84, 97]"
+optimal store,3,1,4,[97]
+store placement,3,1,4,[97]
+result demonstrate,2,2,4,"[97, 110]"
+gps trajectory,2,2,4,"[104, 156]"
+urban network,3,1,4,[110]
+network path,3,1,4,[110]
+road network,2,2,4,"[110, 133]"
+complex event,2,2,4,"[117, 561]"
+event processing,2,2,4,"[117, 561]"
+spatial clustering,2,2,4,"[133, 311]"
+twitter data,2,2,4,"[133, 295]"
+traffic violation,3,1,4,[146]
+learning model,2,2,4,"[156, 345]"
+base station,3,1,4,[156]
+prediction task,2,2,4,"[156, 388]"
+visual analytics,2,2,4,"[184, 543]"
+recommender system,2,2,4,"[210, 543]"
+public policy,2,2,4,"[210, 273]"

@@ -29,3 +29,53 @@ decision making,4,2,6,"[88, 399]"
 mosquito control,5,1,6,[121]
 educational game,4,2,6,"[566, 581]"
 planning firm,3,3,6,"[566, 580, 581]"
+professional occupation,4,1,5,[1]
+data mining,3,2,5,"[33, 566]"
+feature selection,4,1,5,[36]
+neural network,3,2,5,"[36, 112]"
+previous study,3,2,5,"[56, 332]"
+dengue incidence,4,1,5,[56]
+city pattern,4,1,5,[58]
+densification potential,4,1,5,[68]
+support system,3,2,5,"[88, 414]"
+literature review,3,2,5,"[121, 199]"
+urban data,4,1,5,[205]
+coverage condition,4,1,5,[246]
+iot system,4,1,5,[332]
+lag term,3,1,4,[1]
+college education,3,1,4,[1]
+significant predictor,3,1,4,[1]
+urban planner,2,2,4,"[1, 88]"
+turbulent flow,2,2,4,"[12, 386]"
+visuospatial configuration,3,1,4,[33]
+hot spot,2,2,4,"[33, 369]"
+spot analysis,2,2,4,"[33, 369]"
+case study,2,2,4,"[36, 205]"
+experimental result,2,2,4,"[36, 112]"
+result show,2,2,4,"[36, 246]"
+traditional method,2,2,4,"[36, 250]"
+building structure,3,1,4,[53]
+classification method,2,2,4,"[53, 566]"
+combined influence,3,1,4,[56]
+climate factor,3,1,4,[56]
+government agency,2,2,4,"[56, 61]"
+many application,2,2,4,"[58, 568]"
+air quality,3,1,4,[61]
+air pollution,3,1,4,[61]
+data analytics,2,2,4,"[64, 150]"
+feature extraction,2,2,4,"[64, 580]"
+synthetic minority,2,2,4,"[64, 332]"
+challenging task,2,2,4,"[64, 581]"
+urban area,2,2,4,"[68, 564]"
+intelligent decision,3,1,4,[88]
+new technique,2,2,4,"[88, 205]"
+regional planning,2,2,4,"[109, 173]"
+climate change,2,2,4,"[112, 166]"
+vector machine,2,2,4,"[112, 369]"
+classification task,2,2,4,"[121, 580]"
+urban governance,2,2,4,"[150, 199]"
+sustainable city,3,1,4,[150]
+things system,3,1,4,[150]
+nexus governance,3,1,4,[199]
+positioning performance,3,1,4,[246]
+pdop value,3,1,4,[246]

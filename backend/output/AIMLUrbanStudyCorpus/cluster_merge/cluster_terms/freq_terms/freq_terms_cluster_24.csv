@@ -29,3 +29,53 @@ island effect,3,2,5,"[44, 79]"
 land use,4,1,5,[172]
 complex terrain,4,1,5,[198]
 regression model,3,2,5,"[215, 372]"
+heat hazard,4,1,5,[216]
+lst image,4,1,5,[274]
+vegetation type,4,1,5,[372]
+solar radiation,2,2,4,"[29, 456]"
+spatial analysis,2,2,4,"[39, 115]"
+spatial resolution,2,2,4,"[39, 198]"
+entire city,2,2,4,"[39, 372]"
+satellite data,2,2,4,"[39, 456]"
+land cover,2,2,4,"[44, 57]"
+rapid urbanization,2,2,4,"[44, 57]"
+different land,2,2,4,"[44, 57]"
+thermal environment,3,1,4,[57]
+heat source,3,1,4,[57]
+vegetated area,2,2,4,"[57, 456]"
+urban fabric,3,1,4,[60]
+learning technique,2,2,4,"[60, 79]"
+artificial surface,3,1,4,[71]
+thermal comfort,2,2,4,"[71, 79]"
+cooling effect,2,2,4,"[79, 222]"
+satellite imagery,2,2,4,"[79, 265]"
+difference vegetation,2,2,4,"[115, 456]"
+urban study,2,2,4,"[172, 198]"
+statistical model,2,2,4,"[198, 372]"
+weather station,2,2,4,"[198, 456]"
+tropical climate,2,2,4,"[198, 215]"
+heat exposure,3,1,4,[216]
+temperature difference,2,2,4,"[216, 456]"
+mean absolute,2,2,4,"[216, 274]"
+absolute error,2,2,4,"[216, 274]"
+tree trait,3,1,4,[222]
+urban tree,3,1,4,[222]
+trunk circumference,3,1,4,[222]
+different climate,2,2,4,"[222, 456]"
+architectural pattern,3,1,4,[247]
+neighborhood scale,3,1,4,[247]
+marginal effect,3,1,4,[247]
+mean architecture,3,1,4,[247]
+spatial pattern,2,2,4,"[274, 456]"
+vegetation configuration,3,1,4,[372]
+microsite condition,3,1,4,[585]
+red mason,3,1,4,[585]
+mason bee,3,1,4,[585]
+sun exposure,3,1,4,[585]
+systematic review,2,1,3,[28]
+solar exposure,2,1,3,[29]
+irradiation uniformity,2,1,3,[29]
+surface reflectance,2,1,3,[29]
+arid area,2,1,3,[39]
+mobile measurement,2,1,3,[39]
+dynamic characteristic,2,1,3,[57]

@@ -29,3 +29,53 @@ visible street,4,2,6,"[325, 411]"
 urban form,5,1,6,[477]
 health purpose,5,1,6,[595]
 subjective perception,4,1,5,[2]
+computer vision,3,2,5,"[48, 51]"
+visual exposure,4,1,5,[49]
+data collection,3,2,5,"[51, 157]"
+deep learning,3,2,5,"[52, 157]"
+big data,3,2,5,"[268, 523]"
+physical activity,3,2,5,"[367, 595]"
+visual enclosure,4,1,5,[523]
+objective measure,2,2,4,"[2, 523]"
+street environment,2,2,4,"[2, 595]"
+view index,3,1,4,[2]
+weighted regression,2,2,4,"[2, 52]"
+spatial distribution,2,2,4,"[35, 477]"
+view factor,2,2,4,"[35, 49]"
+random forest,2,2,4,"[35, 49]"
+planning process,2,2,4,"[35, 157]"
+pedestrian emotion,3,1,4,[49]
+data source,2,2,4,"[51, 86]"
+imagery platform,2,2,4,"[51, 86]"
+urban research,3,1,4,[86]
+new opportunity,2,2,4,"[86, 268]"
+city street,2,2,4,"[154, 376]"
+sonic experience,3,1,4,[157]
+urban space,2,2,4,"[157, 477]"
+visual feature,2,2,4,"[206, 376]"
+open source,2,2,4,"[268, 277]"
+evaluation method,2,2,4,"[277, 474]"
+urban planner,2,2,4,"[325, 411]"
+accessed street,2,2,4,"[325, 411]"
+supervised machine,2,2,4,"[367, 474]"
+learning technique,2,2,4,"[376, 534]"
+daily life,2,2,4,"[411, 477]"
+result show,2,2,4,"[411, 529]"
+soundscape assessment,3,1,4,[529]
+pedestrian landscape,3,1,4,[595]
+decision tree,3,1,4,[595]
+analytical model,3,1,4,[595]
+street design,2,1,3,[2]
+visual survey,2,1,3,[2]
+predictive power,2,1,3,[2]
+lidar point,2,1,3,[35]
+point cloud,2,1,3,[35]
+predictive model,2,1,3,[49]
+sustainable city,2,1,3,[52]
+urban feature,2,1,3,[52]
+urban perception,2,1,3,[154]
+visual component,2,1,3,[154]
+collection method,2,1,3,[157]
+individual perception,2,1,3,[206]
+urban context,2,1,3,[277]
+early design,2,1,3,[287]

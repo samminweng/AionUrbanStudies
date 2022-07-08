@@ -29,3 +29,53 @@ material consumption,3,1,4,[135]
 water demand,3,1,4,[190]
 neural network,2,2,4,"[190, 303]"
 predictive model,3,1,4,[190]
+intensity analysis,3,1,4,[208]
+major land,2,2,4,"[208, 302]"
+urban region,2,2,4,"[208, 316]"
+capital city,2,2,4,"[213, 572]"
+limited capacity,2,2,4,"[213, 316]"
+local authority,2,2,4,"[213, 225]"
+image feature,2,2,4,"[213, 302]"
+random forest,2,2,4,"[213, 303]"
+unplanned settlement,3,1,4,[213]
+time series,2,2,4,"[293, 317]"
+spatial distribution,2,2,4,"[293, 347]"
+spatial resolution,2,2,4,"[293, 572]"
+decision tree,2,2,4,"[317, 344]"
+urbanization rate,2,2,4,"[317, 572]"
+storm water,3,1,4,[344]
+western part,2,2,4,"[347, 572]"
+development stage,2,1,3,[90]
+pattern scenario,2,1,3,[119]
+spatial variation,2,1,3,[119]
+satellite data,2,1,3,[135]
+construction material,2,1,3,[135]
+fine scale,2,1,3,[190]
+census block,2,1,3,[190]
+coarse scale,2,1,3,[190]
+eastern part,2,1,3,[213]
+population coverage,2,1,3,[293]
+temporal length,2,1,3,[293]
+data set,2,1,3,[293]
+water consumption,2,1,3,[293]
+socioeconomic function,2,1,3,[293]
+municipal service,2,1,3,[293]
+slum settlement,2,1,3,[302]
+vhr imagery,2,1,3,[302]
+initial land,2,1,3,[302]
+effective image,2,1,3,[302]
+training site,2,1,3,[302]
+cover zone,2,1,3,[303]
+land resource,2,1,3,[303]
+different land,2,1,3,[303]
+surface cover,2,1,3,[316]
+change product,2,1,3,[316]
+cropland area,2,1,3,[317]
+low impact,2,1,3,[344]
+impact development,2,1,3,[344]
+land owner,2,1,3,[344]
+adoption strategy,2,1,3,[344]
+athens agglomeration,2,1,3,[572]
+landsat imagery,2,1,3,[572]
+urban feature,2,1,3,[572]
+intermediate city,1,1,2,[42]

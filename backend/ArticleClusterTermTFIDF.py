@@ -390,7 +390,7 @@ class ArticleClusterTermTFIDF:
                 n_gram_range = 2
                 freq_terms = ArticleClusterTermTFIDFUtility.get_n_gram_freq_terms(docs_per_clusters, cluster_no, n_gram_range)
                 # Get top 10 terms
-                top_freq_terms = freq_terms[:30]
+                top_freq_terms = freq_terms[:80]
                 # Update with frequent terms
                 cluster_term['FreqTerms'] = top_freq_terms
                 # Write output to csv

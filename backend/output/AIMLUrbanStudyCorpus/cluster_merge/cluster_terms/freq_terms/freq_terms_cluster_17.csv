@@ -29,3 +29,53 @@ urban growth,4,3,7,"[171, 458, 475]"
 learning technique,4,3,7,"[230, 320, 569]"
 classification algorithms,4,3,7,"[475, 551, 578]"
 overall classification,4,3,7,"[475, 497, 551]"
+data set,5,2,7,"[551, 576]"
+green roofs,4,2,6,"[11, 361]"
+catchment scale,4,2,6,"[11, 361]"
+classification method,3,3,6,"[11, 374, 458]"
+random forest,3,3,6,"[11, 497, 565]"
+important role,3,3,6,"[72, 230, 578]"
+water body,3,3,6,"[120, 230, 475]"
+high resolution,3,3,6,"[230, 551, 565]"
+satellite data,3,3,6,"[252, 515, 578]"
+use land,4,2,6,"[320, 331]"
+urban planner,3,3,6,"[458, 565, 590]"
+high classification,3,3,6,"[475, 551, 576]"
+coastal area,5,1,6,[569]
+novel approach,3,2,5,"[72, 230]"
+classification map,3,2,5,"[72, 391]"
+use change,3,2,5,"[120, 569]"
+area change,4,1,5,[167]
+nn ge,3,2,5,"[320, 331]"
+test dataset,3,2,5,"[320, 331]"
+classification result,3,2,5,"[361, 565]"
+urban expansion,3,2,5,"[475, 578]"
+landsat data,3,2,5,"[497, 578]"
+data weighting,4,1,5,[551]
+central tendency,4,1,5,[551]
+maximum likelihood,3,2,5,"[576, 578]"
+use classification,4,1,5,[588]
+infrastructure classification,3,1,4,[11]
+study case,2,2,4,"[11, 230]"
+regression tree,2,2,4,"[11, 576]"
+kappa coefficient,2,2,4,"[11, 458]"
+different image,2,2,4,"[11, 551]"
+learning algorithms,2,2,4,"[11, 576]"
+geographical region,3,1,4,[72]
+use planning,2,2,4,"[72, 515]"
+environmental change,2,2,4,"[72, 320]"
+classification technique,2,2,4,"[72, 576]"
+economic value,3,1,4,[120]
+sustainable development,2,2,4,"[120, 497]"
+urbanization process,2,2,4,"[167, 565]"
+new method,2,2,4,"[167, 458]"
+change mapping,2,2,4,"[167, 320]"
+population growth,2,2,4,"[171, 391]"
+hilla city,3,1,4,[171]
+supervised image,2,2,4,"[171, 374]"
+perennial drainage,3,1,4,[230]
+water quality,2,2,4,"[230, 590]"
+decision maker,2,2,4,"[230, 565]"
+urban vegetation,3,1,4,[252]
+extreme learning,2,2,4,"[252, 551]"
+learning machine,2,2,4,"[252, 551]"

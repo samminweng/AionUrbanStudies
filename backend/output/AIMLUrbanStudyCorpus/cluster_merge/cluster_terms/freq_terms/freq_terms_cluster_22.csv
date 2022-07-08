@@ -29,3 +29,53 @@ field measurement,3,2,5,"[94, 105]"
 different season,3,2,5,"[142, 238]"
 sensor data,3,2,5,"[292, 498]"
 social medium,4,1,5,[498]
+deep learning,2,2,4,"[5, 14]"
+learning approach,2,2,4,"[5, 294]"
+root mean,2,2,4,"[5, 94]"
+square error,2,2,4,"[5, 94]"
+residential area,2,2,4,"[5, 229]"
+meteorological factor,2,2,4,"[5, 142]"
+decomposition algorithm,2,2,4,"[14, 218]"
+travel planning,2,2,4,"[14, 218]"
+empirical mode,2,2,4,"[14, 218]"
+adaptive noise,2,2,4,"[14, 218]"
+variational mode,2,2,4,"[14, 218]"
+sample entropy,2,2,4,"[14, 218]"
+empirical analysis,2,2,4,"[14, 218]"
+comparison experiment,2,2,4,"[14, 218]"
+time series,2,2,4,"[14, 17]"
+quality prediction,2,2,4,"[17, 292]"
+geographic information,2,2,4,"[17, 50]"
+information system,2,2,4,"[17, 50]"
+feature selection,2,2,4,"[26, 94]"
+microscale variable,3,1,4,[41]
+street level,2,2,4,"[41, 50]"
+traditional variable,3,1,4,[41]
+mobile measurement,2,2,4,"[50, 292]"
+tree model,2,2,4,"[50, 105]"
+concentration data,2,2,4,"[50, 294]"
+linear model,2,2,4,"[50, 292]"
+overall accuracy,2,2,4,"[82, 94]"
+vegetation barrier,3,1,4,[94]
+fecal sludge,3,1,4,[105]
+prediction performance,2,2,4,"[142, 218]"
+main conclusion,2,2,4,"[218, 238]"
+fine particulate,2,2,4,"[229, 238]"
+monitoring device,2,2,4,"[229, 447]"
+quality monitoring,2,2,4,"[292, 447]"
+big data,2,2,4,"[294, 501]"
+data analysis,2,2,4,"[294, 501]"
+physical sensor,3,1,4,[498]
+urban data,2,2,4,"[498, 501]"
+human mobility,2,1,3,[5]
+memory network,2,1,3,[14]
+temporal prediction,2,1,3,[17]
+training domain,2,1,3,[26]
+dummy model,2,1,3,[26]
+concept drift,2,1,3,[26]
+reliable result,2,1,3,[26]
+empirical model,2,1,3,[41]
+criterion pollutant,2,1,3,[41]
+urban factor,2,1,3,[50]
+co concentration,2,1,3,[50]
+random forest,2,1,3,[82]

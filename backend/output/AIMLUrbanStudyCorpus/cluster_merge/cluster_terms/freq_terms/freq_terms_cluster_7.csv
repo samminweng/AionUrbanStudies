@@ -29,3 +29,53 @@ complex network,4,1,5,[127]
 flow forecasting,4,1,5,[307]
 anomaly detection,4,1,5,[466]
 person detection,4,1,5,[466]
+detection method,4,1,5,[466]
+traffic accident,3,1,4,[63]
+data set,2,2,4,"[63, 382]"
+urban data,2,2,4,"[69, 382]"
+metropolitan area,2,2,4,"[69, 461]"
+network analysis,3,1,4,[127]
+intelligent transportation,2,2,4,"[209, 433]"
+global positioning,2,2,4,"[233, 433]"
+positioning system,2,2,4,"[233, 433]"
+traffic management,2,2,4,"[307, 461]"
+case study,2,2,4,"[307, 461]"
+automated vehicle,2,2,4,"[356, 363]"
+road network,2,2,4,"[370, 461]"
+traffic network,2,2,4,"[370, 461]"
+accident risk,2,1,3,[63]
+urban mobility,2,1,3,[69]
+transit data,2,1,3,[69]
+urban function,2,1,3,[69]
+attributed feature,2,1,3,[69]
+generic paradigm,2,1,3,[127]
+user experience,2,1,3,[138]
+bus data,2,1,3,[138]
+dynamic route,2,1,3,[138]
+last mile,2,1,3,[138]
+nonlinear relationship,2,1,3,[307]
+particle swarm,2,1,3,[307]
+swarm optimization,2,1,3,[307]
+scene decomposition,2,1,3,[356]
+traffic participant,2,1,3,[356]
+spatial area,2,1,3,[363]
+traffic information,2,1,3,[370]
+mode detection,2,1,3,[433]
+expert system,2,1,3,[433]
+intersection agent,2,1,3,[461]
+movement agent,2,1,3,[461]
+public safety,1,1,2,[63]
+travel route,1,1,2,[63]
+road safety,1,1,2,[63]
+safety deployment,1,1,2,[63]
+accident prediction,1,1,2,[63]
+traditional machine,1,1,2,[63]
+short period,1,1,2,[63]
+hour level,1,1,2,[63]
+sparse traffic,1,1,2,[63]
+accident sample,1,1,2,[63]
+learning prediction,1,1,2,[63]
+prediction result,1,1,2,[63]
+memory network,1,1,2,[63]
+multiple input,1,1,2,[63]
+high accident,1,1,2,[63]

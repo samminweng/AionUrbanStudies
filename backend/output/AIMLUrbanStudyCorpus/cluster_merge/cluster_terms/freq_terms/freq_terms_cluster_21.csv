@@ -29,3 +29,53 @@ design strategy,4,1,5,[201]
 regression tree,3,2,5,"[228, 454]"
 regression model,3,2,5,"[453, 512]"
 energy consumption,4,1,5,[495]
+energy resource,4,1,5,[495]
+neural network,4,1,5,[500]
+learning technique,2,2,4,"[10, 228]"
+heat mitigation,2,2,4,"[10, 62]"
+mobility pattern,2,2,4,"[62, 495]"
+climate change,2,2,4,"[62, 421]"
+heat exposure,3,1,4,[62]
+dynamic nature,2,2,4,"[62, 495]"
+human movement,3,1,4,[62]
+heat hazard,3,1,4,[62]
+different function,3,1,4,[102]
+mediterranean climate,3,1,4,[178]
+energy demand,2,2,4,"[178, 495]"
+urban scale,2,2,4,"[178, 201]"
+comfort prediction,2,2,4,"[201, 520]"
+green sidewalk,3,1,4,[201]
+energy modeling,3,1,4,[201]
+green space,2,2,4,"[201, 371]"
+boosted regression,2,2,4,"[228, 454]"
+spatial distribution,3,1,4,[228]
+threshold effect,3,1,4,[338]
+result show,2,2,4,"[338, 500]"
+spatial structure,2,2,4,"[371, 454]"
+socioeconomic characteristic,3,1,4,[431]
+prediction model,2,2,4,"[453, 512]"
+linear regression,2,2,4,"[453, 512]"
+study area,3,1,4,[454]
+urban planner,2,2,4,"[454, 512]"
+cfd model,2,2,4,"[500, 512]"
+natural ventilation,3,1,4,[512]
+thermal exposure,2,1,3,[62]
+movement pattern,2,1,3,[62]
+hazard pattern,2,1,3,[62]
+block carbon,2,1,3,[102]
+statistical energy,2,1,3,[201]
+similar study,2,1,3,[201]
+social implication,2,1,3,[201]
+surface elevation,2,1,3,[228]
+environment element,2,1,3,[338]
+land use,2,1,3,[338]
+thermal environment,2,1,3,[371]
+observation scale,2,1,3,[371]
+lst variation,2,1,3,[371]
+geometric type,2,1,3,[379]
+particle swarm,2,1,3,[421]
+swarm optimization,2,1,3,[421]
+current food,2,1,3,[421]
+island phenomenon,2,1,3,[431]
+land parcel,2,1,3,[431]
+korean peninsula,2,1,3,[453]

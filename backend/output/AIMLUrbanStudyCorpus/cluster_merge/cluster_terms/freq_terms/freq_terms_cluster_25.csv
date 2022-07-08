@@ -29,3 +29,53 @@ service facility,3,2,5,"[335, 350]"
 data science,4,1,5,[406]
 urban form,4,1,5,[508]
 form indicator,4,1,5,[508]
+air pollution,3,1,4,[19]
+remote sensing,2,2,4,"[45, 195]"
+use mix,3,1,4,[45]
+urban planner,2,2,4,"[123, 214]"
+urban future,3,1,4,[181]
+data source,2,2,4,"[181, 214]"
+information system,2,2,4,"[214, 596]"
+physical asset,3,1,4,[214]
+management system,2,2,4,"[214, 596]"
+innovative approach,2,2,4,"[214, 521]"
+policy maker,2,2,4,"[214, 223]"
+global scale,2,2,4,"[223, 406]"
+network connectivity,3,1,4,[227]
+quantitative relationship,3,1,4,[335]
+service network,3,1,4,[335]
+travel carbon,3,1,4,[350]
+public transportation,2,2,4,"[350, 521]"
+crime count,3,1,4,[366]
+climate solution,3,1,4,[406]
+transit ridership,3,1,4,[521]
+mobile monitoring,2,1,3,[19]
+structure pattern,2,1,3,[19]
+sturla class,2,1,3,[19]
+urban landscape,2,1,3,[19]
+trace nutrient,2,1,3,[24]
+use composition,2,1,3,[45]
+body mass,2,1,3,[123]
+mass index,2,1,3,[123]
+collective effect,2,1,3,[123]
+social group,2,1,3,[123]
+use change,2,1,3,[181]
+spatial structure,2,1,3,[195]
+digital twin,2,1,3,[214]
+sustainable evaluation,2,1,3,[214]
+geospatial technology,2,1,3,[214]
+structural schematic,2,1,3,[214]
+dt system,2,1,3,[214]
+analytics phase,2,1,3,[214]
+climate mitigation,2,1,3,[223]
+water distribution,2,1,3,[227]
+geospatial colocation,2,1,3,[227]
+geospatial morphology,2,1,3,[227]
+network analysis,2,1,3,[227]
+household travel,2,1,3,[255]
+relationship model,2,1,3,[335]
+service point,2,1,3,[335]
+travel block,2,1,3,[350]
+hotspot analysis,2,1,3,[350]
+small city,2,1,3,[350]
+city region,2,1,3,[366]

@@ -29,3 +29,53 @@ global positioning,2,2,4,"[111, 400]"
 positioning system,2,2,4,"[111, 400]"
 decision tree,2,2,4,"[111, 279]"
 pseudorange error,3,1,4,[111]
+satellite elevation,2,2,4,"[111, 400]"
+elevation angle,2,2,4,"[111, 400]"
+positioning accuracy,2,2,4,"[111, 278]"
+root mean,2,2,4,"[111, 471]"
+mean square,2,2,4,"[111, 471]"
+square error,2,2,4,"[111, 471]"
+aerial vehicle,2,2,4,"[149, 471]"
+cellular network,2,2,4,"[149, 221]"
+cellular base,2,2,4,"[149, 448]"
+base station,2,2,4,"[149, 446]"
+lte network,2,2,4,"[221, 446]"
+loss model,2,2,4,"[221, 471]"
+result reveal,2,2,4,"[221, 279]"
+global navigation,2,2,4,"[278, 506]"
+navigation satellite,2,2,4,"[278, 506]"
+satellite system,2,2,4,"[278, 506]"
+gnss satellite,2,2,4,"[278, 506]"
+detection technique,2,2,4,"[278, 506]"
+key idea,2,2,4,"[278, 506]"
+low power,2,2,4,"[278, 506]"
+nlos classification,2,2,4,"[278, 506]"
+classification experiment,2,2,4,"[278, 506]"
+correlation data,2,2,4,"[278, 506]"
+different location,2,2,4,"[278, 506]"
+shinjuku area,2,2,4,"[278, 506]"
+received signal,2,2,4,"[279, 518]"
+los signal,2,2,4,"[279, 506]"
+signal propagation,2,2,4,"[279, 400]"
+double difference,2,2,4,"[279, 400]"
+svm model,3,1,4,[284]
+measurement data,2,2,4,"[284, 446]"
+prediction error,2,2,4,"[284, 471]"
+training data,2,2,4,"[400, 471]"
+practical application,2,2,4,"[400, 518]"
+rf fingerprint,3,1,4,[446]
+localization scheme,2,2,4,"[448, 518]"
+prediction performance,2,2,4,"[471, 518]"
+range error,2,1,3,[111]
+reception classification,2,1,3,[111]
+localization technique,2,1,3,[149]
+localization solution,2,1,3,[149]
+uav localization,2,1,3,[149]
+nlos location,2,1,3,[221]
+new method,2,1,3,[279]
+data feature,2,1,3,[279]
+time series,2,1,3,[279]
+rinex level,2,1,3,[279]
+nmea level,2,1,3,[279]
+classification method,2,1,3,[279]
+propagation model,2,1,3,[284]

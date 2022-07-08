@@ -127,8 +127,8 @@ function ScatterGraph(corpus_data, cluster_data, _select_no) {
                     const selected_cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
                     const grouped_clusters = cluster_data.filter(c => c['Group'] === selected_cluster['Group']);
                     // Update the opacity
-                    Plotly.restyle(chart, {opacity: 0.5}, cluster_data.map(c => c['Cluster']-1));
-                    Plotly.restyle(chart, {opacity: 1}, grouped_clusters.map(c => c['Cluster']-1));
+                    // Plotly.restyle(chart, {opacity: 0.5}, cluster_data.map(c => c['Cluster']-1));
+                    // Plotly.restyle(chart, {opacity: 1}, grouped_clusters.map(c => c['Cluster']-1));
                     const list = new ArticleClusterList(corpus_data, cluster_data, grouped_clusters);
                 }
             }

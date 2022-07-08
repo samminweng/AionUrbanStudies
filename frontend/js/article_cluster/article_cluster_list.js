@@ -1,7 +1,6 @@
 // Displays a list view of all article clusters
 function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
-    const common_terms = collectCommonTerms(article_clusters);
-    // console.log(common_terms);
+    const common_terms = article_clusters[0]['CommonTerms'];
     // Get the cluster color by group number
     function get_color(article_cluster) {
         const cluster_no = article_cluster['Cluster'];
@@ -15,35 +14,16 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
         return group_color_plates[group_no][color_index];
     }
 
-    // Collect the common terms from top 10 freq terms
-    function collectCommonTerms(clusters){
-        let common_terms = new Map();
-        for(const cluster of clusters){
-            const freq_terms = cluster['FreqTerms'].slice(0, 10);
-            for(const freq_term of freq_terms){
-                const term = freq_term['term'];
-                let count = 1;
-                if(common_terms.has(term)){
-                    count = common_terms.get(term) + 1;
-                }
-                common_terms.set(term, count);
-            }
-        }
-        return common_terms;
-    }
-
     // Create a common term div
     function createCommonTermDiv(){
         const div = $('<div></div>');
         div.append($('<div class="fw-bold">Common Terms:</div>'));
         const term_list = [];
-        for(const [term, count] of common_terms.entries()){
-            if(count > 1){
-                term_list.push(term);
-            }
+        for(const term of common_terms){
+            term_list.push(term);
         }
         term_list.sort();
-        const term_div = $('<div></div>');
+        const term_div = $('<div class="small p-1"></div>');
         let count = 0;
         for(const term of term_list){
             if(count < term_list.length-1){
@@ -113,7 +93,7 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
             cluster_no  + ' <span style="color:' + color+'">(' + score +')</span></button>');
         btn.button();
         btn.click(function (event) {
-            const doc_list = new ClusterDocList(cluster_no, corpus_data, article_clusters, color, common_terms);
+            const doc_list = new ClusterDocList(cluster_no, corpus_data, article_clusters, color);
             // Highlight the dots of a specific keyword cluster
             const chart = new ScatterGraph(corpus_data, cluster_data, cluster_no);
         });
@@ -127,22 +107,17 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
         }
 
         const term_div = $('<div></div>');
-        const terms = article_cluster['FreqTerms'];
-        let count = 0;
-        // Display top 10 key phrases
-        for (let i=0; i<terms.length && count<10; i++) {
-            const term = terms[i];
-            if(common_terms.has(term['term']) && common_terms.get(term['term'])>1){
-                continue;
-            }
-            if(count === 10){
-                const term_view = $('<span> ' + term['term'] + ' </span>');
+        const cluster_terms = article_cluster['ClusterTerms'];
+        // Display individual frequent terms
+        for (let i=0; i<cluster_terms.length ; i++) {
+            const term = cluster_terms[i];
+            if(i < cluster_terms.length -1){
+                const term_view = $('<span> ' + term + ', </span>');
                 term_div.append(term_view);
             }else{
-                const term_view = $('<span> ' + term['term'] + ', </span>');
+                const term_view = $('<span> ' + term + ' </span>');
                 term_div.append(term_view);
             }
-            count = count + 1;
         }
         article_cluster_view.append($('<td></td>').append(term_div));
 

@@ -29,3 +29,53 @@ input data,3,1,4,[305]
 overall accuracy,2,2,4,"[305, 567]"
 automatic classification,2,2,4,"[305, 315]"
 urban area,2,2,4,"[305, 396]"
+zone classification,3,1,4,[383]
+urban space,2,2,4,"[396, 579]"
+street scene,2,2,4,"[445, 579]"
+social medium,3,1,4,[449]
+aesthetic rating,3,1,4,[455]
+information retrieval,2,2,4,"[482, 538]"
+important reference,2,2,4,"[482, 538]"
+different building,2,2,4,"[482, 567]"
+support vector,2,2,4,"[482, 579]"
+vector machine,2,2,4,"[482, 579]"
+assessment result,2,2,4,"[482, 538]"
+result show,2,2,4,"[482, 538]"
+building type,3,1,4,[567]
+street view,3,1,4,[575]
+decision making,2,1,3,[107]
+variable selection,2,1,3,[107]
+input variable,2,1,3,[107]
+discriminatory power,2,1,3,[107]
+street imagery,2,1,3,[315]
+transportational feature,2,1,3,[315]
+city authority,2,1,3,[315]
+modern approach,2,1,3,[315]
+classification scheme,2,1,3,[315]
+geospatial data,2,1,3,[383]
+classification approach,2,1,3,[383]
+weibo data,2,1,3,[383]
+use analysis,2,1,3,[396]
+various method,2,1,3,[396]
+urban valuation,2,1,3,[445]
+medium photographs,2,1,3,[449]
+content analysis,2,1,3,[449]
+nature photographs,2,1,3,[449]
+classification algorithms,2,1,3,[482]
+feature descriptor,2,1,3,[482]
+city block,2,1,3,[483]
+open space,2,1,3,[483]
+space area,2,1,3,[483]
+use information,2,1,3,[538]
+use map,2,1,3,[538]
+type classification,2,1,3,[567]
+landscape attribute,2,1,3,[567]
+classification result,2,1,3,[567]
+type information,2,1,3,[567]
+environmental landscape,2,1,3,[567]
+sidewalk segment,2,1,3,[575]
+visual gaze,2,1,3,[579]
+gaze analysis,2,1,3,[579]
+model street,2,1,3,[579]
+urban decision,1,1,2,[107]
+selection procedure,1,1,2,[107]

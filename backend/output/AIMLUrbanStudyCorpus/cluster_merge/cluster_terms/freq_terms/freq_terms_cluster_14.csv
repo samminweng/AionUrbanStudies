@@ -29,3 +29,53 @@ water type,4,1,5,[552]
 learning method,2,2,4,"[89, 496]"
 research result,2,2,4,"[106, 301]"
 airborne lidar,2,2,4,"[129, 528]"
+point clouds,2,2,4,"[129, 236]"
+maximum likelihood,3,1,4,[153]
+tree specie,3,1,4,[162]
+specie classification,3,1,4,[162]
+supervised machine,2,2,4,"[162, 478]"
+learning technique,2,2,4,"[236, 528]"
+result show,2,2,4,"[236, 552]"
+cloud classification,2,2,4,"[327, 478]"
+urban development,2,2,4,"[327, 333]"
+data source,2,2,4,"[327, 507]"
+satellite imagery,2,2,4,"[405, 496]"
+object recognition,3,1,4,[478]
+light detection,2,2,4,"[528, 563]"
+multiple class,2,2,4,"[528, 563]"
+support region,3,1,4,[592]
+roof superstructure,2,1,3,[89]
+imbalanced class,2,1,3,[89]
+case study,2,1,3,[106]
+urban mapping,2,1,3,[129]
+urban environment,2,1,3,[162]
+individual tree,2,1,3,[162]
+fusion approach,2,1,3,[162]
+spectral feature,2,1,3,[162]
+reflectance band,2,1,3,[162]
+segmentation framework,2,1,3,[236]
+aerial point,2,1,3,[327]
+deep learning,2,1,3,[327]
+city model,2,1,3,[327]
+semantic class,2,1,3,[327]
+new settlement,2,1,3,[333]
+shape descriptor,2,1,3,[478]
+resolution satellite,2,1,3,[496]
+road infrastructure,2,1,3,[507]
+cloud labelling,2,1,3,[528]
+ensemble method,2,1,3,[563]
+binary classification,2,1,3,[563]
+adaptive data,2,1,3,[592]
+data reduction,2,1,3,[592]
+laser scanner,2,1,3,[592]
+active remote,1,1,2,[89]
+essential tool,1,1,2,[89]
+geoinformation extraction,1,1,2,[89]
+clouds segmentation,1,1,2,[89]
+accurate classification,1,1,2,[89]
+city design,1,1,2,[89]
+superstructure classification,1,1,2,[89]
+low density,1,1,2,[89]
+nonplanar object,1,1,2,[89]
+class problem,1,1,2,[89]
+major advantage,1,1,2,[89]

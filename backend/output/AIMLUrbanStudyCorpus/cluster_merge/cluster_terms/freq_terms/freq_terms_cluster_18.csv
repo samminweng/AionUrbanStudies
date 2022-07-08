@@ -29,3 +29,53 @@ learning approach,3,3,6,"[95, 99, 241]"
 feature vector,4,2,6,"[95, 270]"
 decision making,3,3,6,"[95, 160, 402]"
 potential application,3,3,6,"[99, 160, 270]"
+street view,5,1,6,[185]
+spatial information,4,2,6,"[197, 318]"
+urban area,3,3,6,"[219, 241, 401]"
+street network,4,2,6,"[241, 513]"
+training data,4,2,6,"[290, 318]"
+architectural color,5,1,6,[402]
+urban development,3,2,5,"[7, 164]"
+morphological feature,4,1,5,[95]
+feature extraction,3,2,5,"[95, 163]"
+urban space,4,1,5,[147]
+urban planner,3,2,5,"[160, 164]"
+classification model,3,2,5,"[164, 204]"
+view image,4,1,5,[185]
+information system,3,2,5,"[197, 290]"
+color icon,4,1,5,[402]
+ml algorithms,3,1,4,[7]
+different source,2,2,4,"[15, 365]"
+several challenge,2,2,4,"[15, 160]"
+traditional approach,2,2,4,"[15, 262]"
+environment factor,3,1,4,[34]
+semantic information,2,2,4,"[43, 365]"
+poi data,3,1,4,[43]
+housing inequality,3,1,4,[99]
+image feature,3,1,4,[99]
+result show,2,2,4,"[99, 180]"
+model performance,2,2,4,"[99, 318]"
+urban study,2,2,4,"[126, 185]"
+large number,2,2,4,"[126, 318]"
+learning algorithms,2,2,4,"[147, 180]"
+road network,2,2,4,"[147, 241]"
+information technology,2,2,4,"[160, 197]"
+computational power,2,2,4,"[160, 204]"
+city planning,2,2,4,"[160, 185]"
+future research,2,2,4,"[160, 397]"
+city development,2,2,4,"[163, 270]"
+spatial data,2,2,4,"[164, 401]"
+high resolution,2,2,4,"[180, 577]"
+computer vision,2,2,4,"[197, 397]"
+residential segregation,3,1,4,[219]
+important role,2,2,4,"[263, 591]"
+unstructured address,3,1,4,[263]
+address data,3,1,4,[263]
+ecological environment,3,1,4,[276]
+many application,2,2,4,"[286, 535]"
+image interpretation,3,1,4,[290]
+image classification,2,2,4,"[290, 577]"
+building façades,3,1,4,[397]
+residential infill,2,1,3,[7]
+systematic literature,2,1,3,[15]
+literature review,2,1,3,[15]

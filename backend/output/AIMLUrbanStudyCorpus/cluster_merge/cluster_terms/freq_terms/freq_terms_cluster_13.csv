@@ -29,3 +29,53 @@ study area,3,3,6,"[212, 245, 251]"
 feature selection,4,2,6,"[251, 393]"
 urban expansion,5,1,6,[328]
 synthetic aperture,3,3,6,"[393, 479, 559]"
+aperture radar,3,3,6,"[393, 479, 559]"
+previous research,3,2,5,"[59, 245]"
+population density,3,2,5,"[59, 251]"
+use classification,4,1,5,[78]
+sustainable development,3,2,5,"[130, 144]"
+cellular automaton,3,2,5,"[130, 245]"
+spatial heterogeneity,3,2,5,"[186, 245]"
+geospatial data,3,2,5,"[212, 368]"
+population spatialization,4,1,5,[251]
+kappa coefficient,3,2,5,"[282, 393]"
+image analysis,3,2,5,"[393, 427]"
+deep highway,4,1,5,[479]
+highway unit,4,1,5,[479]
+unit network,4,1,5,[479]
+satellite imagery,2,2,4,"[59, 368]"
+urban attribute,3,1,4,[59]
+social sensing,2,2,4,"[78, 260]"
+sensing data,2,2,4,"[78, 260]"
+great potential,2,2,4,"[78, 193]"
+data source,2,2,4,"[78, 393]"
+learning technique,3,1,4,[96]
+lulc mapping,2,2,4,"[96, 393]"
+learning architecture,2,2,4,"[96, 559]"
+classification task,2,2,4,"[96, 427]"
+cellular automata,2,2,4,"[130, 245]"
+tl model,3,1,4,[144]
+feature extraction,2,2,4,"[144, 393]"
+great challenge,2,2,4,"[186, 479]"
+distribution map,2,2,4,"[186, 212]"
+validation result,2,2,4,"[186, 251]"
+location semantics,3,1,4,[193]
+previous study,2,2,4,"[193, 251]"
+gridded population,2,2,4,"[212, 251]"
+use data,2,2,4,"[212, 245]"
+result show,2,2,4,"[212, 559]"
+regression model,3,1,4,[212]
+population mapping,2,2,4,"[212, 251]"
+decision support,2,2,4,"[245, 260]"
+spatiotemporal neighborhood,3,1,4,[245]
+neighborhood feature,3,1,4,[245]
+census data,2,2,4,"[251, 368]"
+various application,2,2,4,"[260, 393]"
+precision agriculture,2,2,4,"[282, 427]"
+urban area,2,2,4,"[328, 559]"
+monetary poverty,3,1,4,[368]
+classification framework,2,2,4,"[393, 427]"
+optical image,2,2,4,"[393, 479]"
+wide range,2,2,4,"[427, 479]"
+hsi classification,3,1,4,[427]
+experimental result,2,2,4,"[427, 559]"

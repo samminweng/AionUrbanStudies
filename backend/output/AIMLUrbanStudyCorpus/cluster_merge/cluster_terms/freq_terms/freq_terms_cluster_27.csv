@@ -29,3 +29,53 @@ mean absolute,3,2,5,"[322, 517]"
 design parameter,4,1,5,[349]
 parametric modeling,3,2,5,"[349, 409]"
 urban form,3,2,5,"[349, 409]"
+sky view,3,2,5,"[349, 409]"
+view factor,3,2,5,"[349, 409]"
+design decision,3,2,5,"[349, 409]"
+design approach,3,2,5,"[349, 409]"
+performance analysis,4,1,5,[409]
+building energy,4,1,5,[441]
+natural gas,4,1,5,[517]
+historical heritage,3,1,4,[20]
+smart city,3,1,4,[80]
+ensemble forecasting,3,1,4,[101]
+forecasting model,3,1,4,[101]
+floor level,3,1,4,[101]
+ensemble model,3,1,4,[101]
+spatial scale,2,2,4,"[101, 441]"
+prediction accuracy,2,2,4,"[101, 322]"
+climate change,3,1,4,[192]
+change mitigation,3,1,4,[192]
+artificial intelligence,2,2,4,"[192, 481]"
+energy model,2,2,4,"[224, 441]"
+proceeding contain,2,2,4,"[306, 403]"
+special focus,2,2,4,"[306, 403]"
+cfd simulation,3,1,4,[322]
+linear regression,2,2,4,"[322, 517]"
+urban environment,2,2,4,"[322, 349]"
+campus design,2,2,4,"[349, 409]"
+extensive research,2,2,4,"[349, 409]"
+form scenario,2,2,4,"[349, 409]"
+design alternative,2,2,4,"[349, 409]"
+performance modeling,2,2,4,"[349, 409]"
+possible design,2,2,4,"[349, 409]"
+multivariate analysis,2,2,4,"[349, 409]"
+geometric form,2,2,4,"[349, 409]"
+engineering simulation,3,1,4,[441]
+gas use,3,1,4,[517]
+area vitality,2,1,3,[20]
+urban morphology,2,1,3,[20]
+economic development,2,1,3,[20]
+heritage conservation,2,1,3,[20]
+morphological element,2,1,3,[20]
+geospatial data,2,1,3,[20]
+data analysis,2,1,3,[80]
+consumption profile,2,1,3,[101]
+cluster analysis,2,1,3,[101]
+urban data,2,1,3,[224]
+urban land,2,1,3,[239]
+cellular automata,2,1,3,[239]
+neighborhood effect,2,1,3,[239]
+driving factor,2,1,3,[239]
+simulation accuracy,2,1,3,[239]
+land parcel,2,1,3,[239]

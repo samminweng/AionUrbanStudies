@@ -29,3 +29,53 @@ present paper,2,2,4,"[235, 550]"
 store placement,3,1,4,[364]
 geographic feature,3,1,4,[364]
 spatiotemporal pattern,3,1,4,[410]
+digital technology,2,2,4,"[412, 550]"
+green space,3,1,4,[412]
+leisure activity,3,1,4,[417]
+web data,3,1,4,[417]
+urban space,3,1,4,[417]
+public record,3,1,4,[459]
+sns data,3,1,4,[459]
+open access,2,2,4,"[459, 486]"
+access article,2,2,4,"[459, 486]"
+unrestricted use,2,2,4,"[459, 486]"
+original author,2,2,4,"[459, 486]"
+urban planner,2,2,4,"[467, 504]"
+urban location,2,2,4,"[486, 574]"
+decision support,2,2,4,"[486, 571]"
+support tool,2,2,4,"[486, 550]"
+large amount,2,2,4,"[493, 584]"
+data analysis,2,2,4,"[493, 571]"
+visualization technique,2,2,4,"[493, 504]"
+geographic area,2,2,4,"[504, 573]"
+recommender system,2,2,4,"[510, 544]"
+predictive analytics,3,1,4,[562]
+mobility flow,3,1,4,[571]
+mobility data,3,1,4,[571]
+base station,2,2,4,"[573, 574]"
+different city,2,1,3,[235]
+city service,2,1,3,[235]
+spatial information,2,1,3,[258]
+knowledge graph,2,1,3,[336]
+knowledge graphs,2,1,3,[336]
+placement problem,2,1,3,[364]
+consumer study,2,1,3,[364]
+spatiotemporal data,2,1,3,[410]
+cmtf model,2,1,3,[410]
+social study,2,1,3,[412]
+data science,2,1,3,[412]
+subjective data,2,1,3,[412]
+activity potential,2,1,3,[417]
+urban leisure,2,1,3,[417]
+mobility prediction,2,1,3,[459]
+gravity model,2,1,3,[459]
+functional distance,2,1,3,[459]
+urban placeness,2,1,3,[467]
+instagram post,2,1,3,[467]
+urban stakeholder,2,1,3,[486]
+urban neighborhood,2,1,3,[486]
+data set,2,1,3,[493]
+big data,2,1,3,[504]
+poor environment,2,1,3,[504]
+new data,2,1,3,[504]
+behavioral pattern,2,1,3,[542]

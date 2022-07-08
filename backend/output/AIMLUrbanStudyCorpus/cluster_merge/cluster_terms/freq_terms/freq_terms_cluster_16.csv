@@ -29,3 +29,53 @@ growth model,3,2,5,"[182, 299]"
 cellular automaton,3,2,5,"[182, 436]"
 land growth,4,1,5,[256]
 cellular automata,3,2,5,"[299, 494]"
+important factor,3,2,5,"[310, 570]"
+use type,3,2,5,"[426, 570]"
+land planning,3,2,5,"[426, 509]"
+study area,3,2,5,"[436, 570]"
+urban sprawl,4,1,5,[464]
+logistic regression,4,1,5,[570]
+relative influence,4,1,5,[570]
+housing dispersal,3,1,4,[6]
+city worldwide,2,2,4,"[6, 182]"
+spatial pattern,2,2,4,"[6, 114]"
+regional population,3,1,4,[100]
+population forecast,3,1,4,[100]
+small city,3,1,4,[175]
+great importance,2,2,4,"[175, 436]"
+spatiotemporal uncertainty,3,1,4,[182]
+information system,2,2,4,"[182, 426]"
+urban planner,2,2,4,"[182, 553]"
+simulation accuracy,2,2,4,"[256, 436]"
+population distribution,3,1,4,[299]
+urban region,2,2,4,"[299, 464]"
+correlation coefficient,2,2,4,"[299, 582]"
+rapid urbanization,2,2,4,"[310, 426]"
+previous study,2,2,4,"[310, 436]"
+commercial land,2,2,4,"[310, 509]"
+use change,2,2,4,"[348, 553]"
+national policy,3,1,4,[348]
+land management,2,2,4,"[348, 426]"
+derelict site,3,1,4,[352]
+geographic information,2,2,4,"[426, 582]"
+use map,2,2,4,"[426, 570]"
+policy making,2,2,4,"[426, 464]"
+learning technique,2,2,4,"[436, 464]"
+ca model,3,1,4,[436]
+neighborhood effect,2,2,4,"[436, 494]"
+learning method,2,2,4,"[436, 554]"
+decision maker,2,2,4,"[494, 553]"
+construction land,3,1,4,[509]
+distance factor,3,1,4,[570]
+dependent variable,2,2,4,"[570, 594]"
+driving force,3,1,4,[570]
+development zone,3,1,4,[570]
+regional planning,2,1,3,[100]
+demographic rate,2,1,3,[100]
+price prediction,2,1,3,[114]
+prediction model,2,1,3,[114]
+relative importance,2,1,3,[114]
+rlp distribution,2,1,3,[114]
+polish city,2,1,3,[175]
+weighted regression,2,1,3,[175]
+large city,2,1,3,[175]

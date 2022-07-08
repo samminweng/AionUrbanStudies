@@ -29,3 +29,53 @@ aerial imagery,4,2,6,"[378, 444]"
 optical data,5,1,6,[476]
 cloud omission,4,1,5,[74]
 omission error,4,1,5,[74]
+cover map,3,2,5,"[92, 531]"
+unreinforced masonry,4,1,5,[137]
+shape feature,3,2,5,"[289, 378]"
+sar data,4,1,5,[476]
+decision level,4,1,5,[476]
+standard resolution,3,1,4,[8]
+environmental protection,2,2,4,"[74, 92]"
+wide range,2,2,4,"[74, 476]"
+image analysis,2,2,4,"[92, 312]"
+various application,2,2,4,"[92, 285]"
+cover mapping,2,2,4,"[92, 476]"
+accuracy assessment,2,2,4,"[92, 113]"
+change detection,3,1,4,[113]
+urban management,2,2,4,"[113, 443]"
+spatial resolution,2,2,4,"[113, 283]"
+ncbas detection,3,1,4,[113]
+support vector,2,2,4,"[113, 476]"
+vector machine,2,2,4,"[113, 476]"
+masonry building,3,1,4,[137]
+large area,2,2,4,"[285, 452]"
+broad range,2,2,4,"[285, 443]"
+vehicle navigation,2,2,4,"[289, 378]"
+learning method,3,1,4,[289]
+large number,2,2,4,"[289, 312]"
+urban planner,2,2,4,"[312, 444]"
+tree coverage,3,1,4,[312]
+automatic extraction,2,2,4,"[312, 443]"
+challenging task,2,2,4,"[312, 531]"
+lidar data,2,2,4,"[312, 443]"
+time consuming,2,2,4,"[378, 444]"
+tree specie,3,1,4,[437]
+classification method,2,2,4,"[437, 444]"
+spectral feature,2,2,4,"[437, 531]"
+hyperspectral data,2,2,4,"[437, 531]"
+aerial vehicle,2,2,4,"[437, 444]"
+aerial image,3,1,4,[443]
+random forest,2,2,4,"[443, 476]"
+urban greenery,3,1,4,[452]
+integration level,3,1,4,[476]
+input feature,2,1,3,[74]
+total training,2,1,3,[74]
+cloud commission,2,1,3,[74]
+commission error,2,1,3,[74]
+cloud classification,2,1,3,[74]
+classification model,2,1,3,[74]
+small portion,2,1,3,[74]
+building area,2,1,3,[113]
+high confidence,2,1,3,[113]
+urban development,2,1,3,[283]
+environmental quality,2,1,3,[283]

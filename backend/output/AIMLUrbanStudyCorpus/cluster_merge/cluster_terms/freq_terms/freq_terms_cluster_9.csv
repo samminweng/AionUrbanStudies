@@ -29,3 +29,53 @@ perception measure,2,2,4,"[31, 170]"
 quantitative analysis,2,2,4,"[31, 170]"
 visual element,2,2,4,"[77, 429]"
 high accuracy,2,2,4,"[77, 429]"
+vision algorithm,2,2,4,"[170, 280]"
+spatial distribution,2,2,4,"[170, 280]"
+classification model,2,2,4,"[269, 472]"
+city image,3,1,4,[269]
+previous research,2,2,4,"[271, 489]"
+mental health,3,1,4,[271]
+street vitality,3,1,4,[280]
+urban space,2,2,4,"[280, 489]"
+visual perception,2,2,4,"[280, 472]"
+evaluation model,3,1,4,[340]
+key element,3,1,4,[340]
+housing price,3,1,4,[472]
+learning technique,2,2,4,"[472, 489]"
+public perception,2,1,3,[31]
+natural landscape,2,1,3,[31]
+streetscape feature,2,1,3,[77]
+design theory,2,1,3,[77]
+residential district,2,1,3,[170]
+planning policy,2,1,3,[170]
+urban form,2,1,3,[269]
+new city,2,1,3,[269]
+allied design,2,1,3,[271]
+design discipline,2,1,3,[271]
+trained model,2,1,3,[280]
+adversarial scoring,2,1,3,[313]
+scoring framework,2,1,3,[313]
+perception assessment,2,1,3,[313]
+continuous measurement,2,1,3,[340]
+learning algorithms,2,1,3,[340]
+human sense,2,1,3,[429]
+perceptual indicator,2,1,3,[429]
+many discipline,1,1,2,[31]
+technical path,1,1,2,[31]
+novel transfer,1,1,2,[31]
+landsense index,1,1,2,[31]
+panoptic segmentation,1,1,2,[31]
+foreground instance,1,1,2,[31]
+physical perception,1,1,2,[31]
+road area,1,1,2,[31]
+heterogeneous land,1,1,2,[31]
+land use,1,1,2,[31]
+landsense map,1,1,2,[31]
+complex perception,1,1,2,[31]
+large scale,1,1,2,[31]
+regression model,1,1,2,[31]
+area exhibit,1,1,2,[31]
+positive performance,1,1,2,[31]
+industrial scenery,1,1,2,[31]
+psychological feeling,1,1,2,[31]
+green space,1,1,2,[31]

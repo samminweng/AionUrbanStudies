@@ -86,6 +86,95 @@ class Evaluation:
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
 
+    #  Find the common terms
+    def find_common_terms_by_clusters(self):
+        # Get common terms
+        def get_common_terms(_cluster_freq_terms):
+            _common_terms = []
+            for _freq_terms in _cluster_freq_terms:
+                for _freq_term in _freq_terms:
+                    _found = next((ct for ct in _common_terms if ct['term'] == _freq_term), None)
+                    if _found:
+                        _found['freq'] = _found['freq'] + 1
+                    else:
+                        _common_terms.append({'term': _freq_term, 'freq': 1})
+            # Filter out common terms
+            _common_terms = list(map(lambda ct: ct['term'], filter(lambda ct: ct['freq'] > 1, _common_terms)))
+            return _common_terms
+
+        # Collect the common terms from top 10 freq term
+        def collect_common_terms_from_top_10_terms(_group_clusters):
+            try:
+                # Collect the common terms
+                _common_terms = []
+                _cluster_freq_terms = []
+                # Get top 10 terms
+                for _cluster in _group_clusters:
+                    _freq_terms = list(map(lambda t: t['term'].lower(), _cluster['FreqTerms'][:10]))
+                    _cluster_freq_terms.append(_freq_terms)
+                # Filter out common terms
+                _common_terms = get_common_terms(_cluster_freq_terms)
+                _updated_cluster_terms = []
+                # Filter out common terms from cluster terms
+                for _cluster_term in _cluster_freq_terms:
+                    _update_cluster_term = list(filter(lambda t: t not in _common_terms, _cluster_term))
+                    _updated_cluster_terms.append(_update_cluster_term)
+                return _common_terms, _updated_cluster_terms
+            except Exception as _e:
+                print("Error occurred! {err}".format(err=_e))
+
+        try:
+            folder = os.path.join('output', self.args.case_name, self.args.folder)
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups_updated.json')
+            clusters = pd.read_json(path).to_dict("records")
+            updated_clusters = list()
+            for group_no in range(1, 5):
+                try:
+                    group_clusters = list(filter(lambda c: c['Group'] == group_no, clusters))
+                    common_terms, updated_cluster_terms = collect_common_terms_from_top_10_terms(group_clusters)
+                    # Collect 10 ~ 20 terms
+                    for r in [[10, 20], [20, 30], [30, 40], [40, 50], [50, 60], [60, 70], [70, 80]]:
+                        start = r[0]
+                        end = r[1]
+                        index = 0
+                        for updated_cluster_term, cluster in zip(updated_cluster_terms, group_clusters):
+                            freq_terms = list(map(lambda t: t['term'].lower(), cluster['FreqTerms'][start:end]))
+                            updated_cluster_term = updated_cluster_term + freq_terms
+                            updated_cluster_terms[index] = updated_cluster_term[:10]
+                            index = index + 1
+                        common_terms = get_common_terms(updated_cluster_terms) + common_terms
+                        # filter the cluster terms
+                        for index, updated_cluster_term in enumerate(updated_cluster_terms):
+                            updated_cluster_terms[index] = list(filter(lambda t: t not in common_terms, updated_cluster_term))
+                        # Check if each cluster has 10 term
+                        is_full = True
+                        for updated_cluster_term in updated_cluster_terms:
+                            is_full = is_full & len(updated_cluster_term) == 10
+                            # print(updated_cluster_term)
+                        if is_full:
+                            break
+                    # Update the cluster with common terms and its frequent terms
+                    for cluster, updated_cluster_term in zip(group_clusters, updated_cluster_terms):
+                        cluster['CommonTerms'] = common_terms
+                        cluster['ClusterTerms'] = updated_cluster_term
+                        updated_clusters.append(cluster)
+                    # print(updated_clusters)
+                except Exception as e:
+                    print("Error occurred! {err}".format(err=e))
+                    sys.exit(-1)
+            df = pd.DataFrame(updated_clusters, columns=['Group', 'Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds',
+                                                         'Terms', 'CommonTerms', 'ClusterTerms', 'FreqTerms',
+                                                         'KeywordGroups'])
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups_updated.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            # Write article corpus to a json file
+            path = os.path.join(folder,
+                                self.args.case_name + '_cluster_terms_keyword_groups_updated.json')
+            df.to_json(path, orient='records')
+        except Exception as e:
+            print("Error occurred! {err}".format(err=e))
+
+
     # Evaluate the article cluster chart
     def evaluate_article_clusters(self):
         # Get term per abstract cluster
@@ -258,8 +347,9 @@ class Evaluation:
 if __name__ == '__main__':
     try:
         evl = Evaluation()
-        evl.sort_article_clusters_by_scores()
-        evl.evaluate_article_clusters()
+        # evl.sort_article_clusters_by_scores()
+        evl.find_common_terms_by_clusters()
+        # evl.evaluate_article_clusters()
         # evl.evaluate_keyword_groups()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
