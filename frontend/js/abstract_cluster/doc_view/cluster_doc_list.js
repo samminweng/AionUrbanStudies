@@ -4,8 +4,8 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
     // Display Top 10 Distinct Terms and grouped key phrases
     function create_cluster_terms_key_phrase_topics(){
         // Create a div to display a list of topic (a link)
-        const view = $('<div class="small"></div>');
-        const container = $('<div class="container-sm small"></div>');
+        const view = $('<div></div>');
+        const container = $('<div class="container"></div>');
         const term_p = $('<div></div>');
         const freq_terms = cluster['FreqTerms'];
         const cluster_terms = freq_terms.filter(t => cluster['ClusterTerms'].includes(t['term'].toLowerCase()));
@@ -44,7 +44,7 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
     }
     function _createUI() {
         $('#article_cluster_term_list').empty();
-        const container = $('<div class="small"></div>');
+        const container = $('<div></div>');
         // Create a div to display
         const header = $('<div class="fw-bold"></div>');
         const score = cluster['Score'];

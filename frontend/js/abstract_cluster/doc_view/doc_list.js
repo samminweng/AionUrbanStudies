@@ -28,40 +28,47 @@ function DocList(docs, cluster, selected_term) {
 
     // Create a heading to display the number of articles and sort function
     function createHeading(){
+        $('#article_cluster_header').empty();
         let heading_text = "";
         if(selected_term !== null){
             heading_text = "about " + selected_term;
         }
-        const view = $('<div></div>');
-        const container = $('<div class="row"></div>')
+        const container = $('<div class="container-sm"></div>');
+        const row = $('<div class="row"></div>');
+        const col = $('<div class="col-3"></div>');
         // Add heading
-        container.append($('<div class="col"><span class="fw-bold"> ' + docs.length + ' abstract </span>' +
-            '<span>' + heading_text + '</span></div>'));
+        col.append($('<span class="fw-bold"> ' + docs.length + ' abstract </span>' +
+            '<span>' + heading_text + '</span>'));
+        row.append(col);
+        const sort_col = $('<div class="col-6"></div>');
         // Add sort by button
-        const sort_by_div = $('<div>Sort by </div>');
+        sort_col.append($('<span>Sort by </span>'));
         // Sort by citation
-        sort_by_div.append($('<div class="form-check form-check-inline">' +
+        sort_col.append($('<span class="form-check-sm form-check-inline">' +
             '<input class="form-check-input" type="radio" name="sort-btn" value="citation" checked>' +
             '<label class="form-check-label"> Citation </label>' +
-            '</div>'));
+            '</span>'));
         // Sort by year
-        sort_by_div.append($('<div class="form-check form-check-inline">' +
+        sort_col.append($('<span class="form-check-sm form-check-inline">' +
             '<input class="form-check-input" type="radio" name="sort-btn" value="year">' +
             '<label class="form-check-label"> Year </label>' +
-            '</div>'));
-        container.append($('<div class="col"></div>').append(sort_by_div));
-        view.append(container);
-
+            '</span>'));
+        row.append(sort_col);
+        container.append(row);
         // Define onclick event
-        sort_by_div.find('input[name="sort-btn"]').change(function(){
+        sort_col.find('input[name="sort-btn"]').change(function(){
+            sort_col.find('input[name="sort-btn"]').prop('checked', false);
             if(this.value === "year"){
                 sort_docs("Year");
+                sort_col.find('input[value="year"]').prop("checked", true);
             }else{
                 sort_docs('Cited by');
+                sort_col.find('input[value="citation"]').prop("checked", true);
             }
-            _createUI();
+            createDocList();
+            // _createUI();
         });
-        return view;
+        $('#article_cluster_header').append(container);
     }
 
     // Create a pagination to show the documents
@@ -86,34 +93,29 @@ function DocList(docs, cluster, selected_term) {
                 docTable.empty();
                 for (let i = 0; i < docs.length; i++) {
                     const doc = docs[i];
-                    // console.log(doc);
-                    // const row = $('<tr class="d-flex"></tr>');
-                    // // Add the title
-                    // const col = $('<td class="col"></td>');
                     const doc_view = new DocView(doc, selected_term);
-                    // col.append(doc_view.get_container());
-                    // row.append(col);
-                    // docTable.find('tbody').append(doc_view.get_container());
                     docTable.append(doc_view.get_container());
                 }
             }
         });
         return pagination;
     }
-
-    function _createUI() {
+    // Create a list of docs
+    function createDocList(){
         $('#article_cluster_doc_list').empty();
-        const container = $('<div class="small"></div>');
-        // A list of cluster documents
-        // const doc_table = $('<table class="table table-borderless table-sm">' +
-        //     '<tbody></tbody></table>');
+        const container = $('<div></div>');
         const doc_table = $('<div class="card-group"></div>');
         const pagination = createPagination(doc_table);
         // Add the table to display the list of documents.
-        container.append(createHeading());
         container.append(pagination);
         container.append(doc_table);
         $('#article_cluster_doc_list').append(container);
+    }
+
+    // Create header and doc list
+    function _createUI() {
+        createHeading();
+        createDocList();
     }
 
     _createUI();

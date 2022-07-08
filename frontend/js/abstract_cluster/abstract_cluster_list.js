@@ -124,11 +124,7 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
         return article_cluster_view;
     }
 
-
-    // console.log(article_clusters);
-
     function createUI() {
-
         $('#article_cluster_list').empty();
         const container = $('<div class="container-sm small"></div>');
         container.append(createCommonTermDiv());
