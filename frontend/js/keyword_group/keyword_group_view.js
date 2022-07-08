@@ -11,7 +11,7 @@ function KeywordClusterView(keyword_cluster, docs) {
 
     // Display keywords in accordion
     function displayKeywordList() {
-        const keyword_div = $('<div class="container-sm mb-3"></div>');
+        const keyword_div = $('<div class="container-sm small"></div>');
         // Get the number of rows by rounding upto the closest integer
         const num_row = Math.ceil(keywords.length / 3) + 1;
         // Add each key phrase
@@ -49,7 +49,7 @@ function KeywordClusterView(keyword_cluster, docs) {
     function _createUI() {
         $('#keyword_cluster_view').empty();
         // Heading
-        const container = $('<div class="m-3"></div>');
+        const container = $('<div class="container-sm small"></div>');
         const heading = $('<div class="mb-3">' +
                           '<span class="fw-bold" style="color:' + color + '">Keyword Group ' + group_no + ' </span>' +
                           ' (' + score + ') contains ' + keywords.length + ' keywords' + ' across ' + docs.length + ' articles</div>');

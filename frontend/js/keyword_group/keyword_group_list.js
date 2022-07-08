@@ -10,7 +10,7 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         // Create the pagination
         const pagination = $('<div></div>');
         // Create the list
-        const table = $('<table class="table table-sm"></table>');
+        const table = $('<table class="table table-sm small"></table>');
         // Pagination
         pagination.pagination({
             dataSource: function (done) {
@@ -29,7 +29,8 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
                 table.empty();
                 // Add each keyword cluster
                 table.append($('<thead><tr>' +
-                               '<th>Keyword Group</th>' +
+                               '<th>Keyword Group (Score)</th>' +
+                               // '<th>Silhouette Score</th>' +
                                '<th>Keywords</th></tr></thead>'));
                 const table_body = $('<tbody></tbody>');
                 for (let i = 0; i < clusters.length; i++) {
@@ -54,7 +55,7 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         const keyword_cluster_view = $('<tr></tr>');
         const score = parseFloat(keyword_group['score']).toFixed(2);
         // Create a button to show the keyword cluster
-        const btn = $('<button type="button" class="btn btn-link" style="color:' + color+'">' +
+        const btn = $('<button type="button" class="btn btn-link btn-sm" style="color:' + color+'">' +
                         keyword_group['Group']+ ' <span style="color:' + color+'">(' + score +')</span></button>');
         btn.button();
         btn.click(function(event){
@@ -65,31 +66,37 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
             const docs = cluster_docs.filter(d => keyword_cluster['DocIds'].includes(d['DocId']));
             const view = new KeywordClusterView(keyword_groups[group_no-1], docs, color_plates[group_no-1]);
         });
-
         // Add a col to display
         keyword_cluster_view.append($('<td></td>').append(btn));
+
         // Display key phrases
         const keywords = keyword_group['Key-phrases'].sort((a, b) => a.localeCompare(b));
         // Display top 10 key phrases
-        const keyword_div = $('<div class="container-sm small"></div>');
-        const max_size = 6;
-        for(const keyword of keywords.slice(0, max_size)){
-            keyword_div.append($('<div class="btn btn-sm text-truncate text-start" style="width: 200px;">' + keyword + '</div>'));
+        const keyword_div = $('<div class="container-sm"></div>');
+        const max_size = Math.min(21, keywords.length);
+        const sample_keywords = keywords.slice(0, max_size);
+        let row;
+        for(let i =0; i< max_size; i++){
+            const keyword = sample_keywords[i];
+            if(i %3 === 0){
+                row = $('<div class="row"></div>');
+                keyword_div.append(row);
+            }
+            row.append($('<div class="col text-truncate text-start">' + keyword + '</div>'));
         }
         keyword_cluster_view.append($('<td></td>').append(keyword_div));
         // Long list of key phrases
         if(keywords.length > max_size){
             // Create a more btn to view more topics
-            const more_btn = $('<div class="btn btn-sm text-muted text-end">MORE (' + keywords.length + ') ' +
-                '<span class="ui-icon ui-icon-plus"></span></div>');
+            const more_btn = $('<span class="text-muted text-end">MORE (' + keywords.length + ') ' +
+                '<span class="ui-icon ui-icon-plus"></span></span>');
             // Create a few btn
             const less_btn = $('<div class="btn btn-sm text-muted">LESS<span class="ui-icon ui-icon-minus"></span></div>');
             // Display more key phrases
             more_btn.click(function(event){
                 keyword_div.find(".text-truncate").remove();
                 for(const keyword of keywords){
-                    keyword_div.prepend($('<div class="btn btn-sm text-truncate text-start" ' +
-                        'style="width: 200px;">' + keyword + '</div>'));
+                    keyword_div.prepend($('<div class="col text-truncate text-start">' + keyword + '</div>'));
                 }
                 // Display 'less' btn only
                 more_btn.hide();
@@ -98,9 +105,14 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
             // Display top five key phrases
             less_btn.click(function(event){
                 keyword_div.find(".text-truncate").remove();
-                for(const keyword of keywords.slice(0, max_size)){
-                    keyword_div.prepend($('<div class="btn btn-sm text-truncate text-start" ' +
-                        'style="width: 200px;">' + keyword + '</div>'));
+                let row;
+                for(let i =0; i< max_size; i++){
+                    const keyword = sample_keywords[i];
+                    if(i %3 === 0){
+                        row = $('<div class="row"></div>');
+                        keyword_div.prepend(row);
+                    }
+                    row.append($('<div class="col text-truncate text-start">' + keyword + '</div>'));
                 }
                 more_btn.show();
                 less_btn.hide();
@@ -120,11 +132,10 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
 
     function createUI(){
         $('#keyword_cluster_list').empty();
-        const container = $('<div class="container"></div>');
+        const container = $('<div class="container-sm small"></div>');
         // Add header
-        container.append($('<div class="row mb-3">Article Cluster #' + article_cluster_no + '  has ' +
+        container.append($('<div class="row">Abstract Cluster #' + article_cluster_no + '  has ' +
                                                   keyword_groups.length + ' keyword groups</div>'));
-
         container.append(createPagination());
         $('#keyword_cluster_list').append(container);
     }

@@ -1,7 +1,7 @@
 // Create a text view to display the content of the article
 function DocView(doc, keywords, color_no) {
     const class_name = 'keyword_' + color_no;
-    const container = $('<div class="card text-dark bg-light">' +
+    const container = $('<div class="card text-dark bg-light small">' +
         '<div class="card-body">' +
         '<p class="card-text">' +
         '</p>' +
@@ -40,7 +40,7 @@ function DocView(doc, keywords, color_no) {
     function _createUI() {
         const doc_key_phrases = doc['KeyPhrases'];
         // Add BERT-based Key Phrase
-        const key_phrase_div = $('<p class="container border-info">' +
+        const key_phrase_div = $('<p class="container-sm border-info">' +
             '<span class="fw-bold">BERT-driven Keywords: </span>' + doc_key_phrases.join("; ") + '</p>');
         container.find(".card-text").append(key_phrase_div);
         // Add TFIDF terms
@@ -57,7 +57,7 @@ function DocView(doc, keywords, color_no) {
         let abstract_div = $('<div class="col"></div>');
         // const short_abstract = doc['Abstract'].substring(0, 150) + '...';
         abstract_div.append($('<span class="fw-bold">Abstract: </span><span class="abstract">' + doc['Abstract'] + '</span>'));
-        // abstract_div = mark_key_terms(abstract_div, doc_key_phrases, 'key_phrase');
+        abstract_div = mark_key_terms(abstract_div, doc_key_phrases, 'key_phrase');
         abstract_div = mark_key_terms(abstract_div, keywords, class_name);
 
         container.find(".card-text").append(abstract_div);

@@ -26,7 +26,7 @@ function DocList(docs, keywords, color_no){
         // Create the table
         let pagination = $("<div class='mb-3'></div>");
         // Add the table header
-        const doc_list = $('<ul class="list-group list-group-flush"></ul>');
+        const doc_list = $('<div class="card-group"></div>');
         // // Pagination
         pagination.pagination({
             dataSource: function (done) {
@@ -37,7 +37,7 @@ function DocList(docs, keywords, color_no){
                 done(result);
             },
             totalNumber: docs.length,
-            pageSize: 5,
+            pageSize: 3,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, ' +
                 '<%= totalNumber %> articles',
