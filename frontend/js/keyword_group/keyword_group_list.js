@@ -1,7 +1,7 @@
 // Create a view to displays all keyword clusters
 function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
     const article_cluster = cluster_data.find(c => c['Cluster'] === article_cluster_no);
-    const keyword_groups = article_cluster['KeywordGroups'];
+    const keyword_groups = article_cluster['KeywordGroups'].filter(group => group['score'] >0);
     const cluster_docs = corpus_data.filter(d => article_cluster['DocIds'].includes(d['DocId']));
 
     // Create a pagination to show the article clusters
@@ -10,7 +10,7 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         // Create the pagination
         const pagination = $('<div></div>');
         // Create the list
-        const table = $('<table class="table table-sm small"></table>');
+        const table = $('<table class="table table-sm small p-0"></table>');
         // Pagination
         pagination.pagination({
             dataSource: function (done) {
@@ -131,13 +131,13 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
 
 
     function createUI(){
-        $('#keyword_cluster_list').empty();
+        $('#keyword_group_list').empty();
         const container = $('<div class="container-sm small"></div>');
         // Add header
         container.append($('<div class="row">Abstract Cluster #' + article_cluster_no + '  has ' +
                                                   keyword_groups.length + ' keyword groups</div>'));
         container.append(createPagination());
-        $('#keyword_cluster_list').append(container);
+        $('#keyword_group_list').append(container);
     }
 
     createUI();

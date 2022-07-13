@@ -26,7 +26,7 @@ class Evaluation:
         self.corpus = pd.read_json(path).to_dict("records")
 
     # Sort the article clusters to make it consistent with clustered results
-    def sort_article_clusters_by_scores(self):
+    def sort_article_clusters(self):
         # groups = [list(range(1, 8)), list(range(11, 18)), list(range(8, 11)), list(range(18, 32))]
         groups = [
             {"group": 1, "map": {1:7, 2: 2, 3: 1, 4:3, 5: 4, 6: 5, 7:6}},
@@ -173,7 +173,6 @@ class Evaluation:
             df.to_json(path, orient='records')
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
-
 
     # Evaluate the article cluster chart
     def evaluate_article_clusters(self):
@@ -347,9 +346,9 @@ class Evaluation:
 if __name__ == '__main__':
     try:
         evl = Evaluation()
-        evl.sort_article_clusters_by_scores()
-        evl.find_common_terms_by_clusters()
-        # evl.evaluate_article_clusters()
-        # evl.evaluate_keyword_groups()
+        # evl.sort_article_clusters()
+        # evl.find_common_terms_by_clusters()
+        evl.evaluate_article_clusters()
+        evl.evaluate_keyword_groups()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

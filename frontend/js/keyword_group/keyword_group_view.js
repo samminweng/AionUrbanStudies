@@ -3,9 +3,6 @@ function KeywordClusterView(keyword_cluster, docs) {
     const group_no = keyword_cluster['Group'];
     const score = keyword_cluster['score'].toFixed(2);
     const keywords = keyword_cluster['Key-phrases'];
-    // D3 category color pallets
-    // const color_plates = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2",
-    //     "#7f7f7f", "#bcbd22", "#17becf"];
     const color_no = group_no -1;
     const color = color_plates[color_no];
 
@@ -23,9 +20,9 @@ function KeywordClusterView(keyword_cluster, docs) {
                 const col = $('<div class="col-sm border-bottom text-sm-start text-truncate"></div>')
                 if (index < keywords.length) {
                     const keyword = keywords[index];
-                    const btn = $('<button type="button" class="btn btn-link btn-sm">' + keyword+ '</button>');
+                    const btn = $('<a href="#keyword_cluster_view" class="link-primary">' + keyword+ '</a>');
                     // Click the keyword button to display the relevant article
-                    btn.button();
+                    // btn.button();
                     btn.click(function(event){
                        const matched_docs = docs.filter(d => {
                            const article_keywords = d['KeyPhrases'];
@@ -47,16 +44,16 @@ function KeywordClusterView(keyword_cluster, docs) {
 
 
     function _createUI() {
-        $('#keyword_cluster_view').empty();
+        $('#keyword_group_view').empty();
         // Heading
         const container = $('<div class="container-sm small"></div>');
-        const heading = $('<div class="mb-3">' +
+        const heading = $('<div>' +
                           '<span class="fw-bold" style="color:' + color + '">Keyword Group ' + group_no + ' </span>' +
                           ' (' + score + ') contains ' + keywords.length + ' keywords' + ' across ' + docs.length + ' articles</div>');
         // A list of grouped key phrases
         container.append(heading);
         container.append(displayKeywordList());
-        $('#keyword_cluster_view').append(container);
+        $('#keyword_group_view').append(container);
         const doc_list = new DocList(docs, keywords, color_no);
     }
 
