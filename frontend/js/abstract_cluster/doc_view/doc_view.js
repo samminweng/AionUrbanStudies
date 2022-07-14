@@ -38,7 +38,7 @@ function DocView(doc, selected_term) {
         const doc_key_phrases = doc['KeyPhrases'];
         // Add BERT-based Key Phrase
         const key_phrase_div = $('<p class="border-info">' +
-            '<span class="fw-bold">Auto-generated Keywords: </span>' + doc_key_phrases.join("; ") + '</p>');
+            '<span class="fw-bold">Auto-generated Keywords: </span>' + doc_key_phrases.join(", ") + '</p>');
         container.find(".card-text").append(key_phrase_div);
         // // Add TFIDF terms
         // const terms = doc['TFIDFTerms'].map(term => term['term']).slice(0, 5);

@@ -87,17 +87,17 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
             height: height,
             xaxis: {
                 range:x_range,
-                // showgrid: false,
-                // showline: false,
+                showgrid: true,
+                showline: false,
                 zeroline: false,
-                // showticklabels: false
+                showticklabels: false
             },
             yaxis: {
                 range: y_range,
-                // showgrid: false,
-                // showline: false,
+                showgrid: true,
+                showline: false,
                 zeroline: false,
-                // showticklabels: false
+                showticklabels: false
             },
             // Set the graph margin
             margin: {
@@ -124,8 +124,7 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
         };
 
         const config = {
-            displayModeBar: true, // Hide the floating bar
-            modeBarButtonsToRemove: ['pan2d','select2d','lasso2d', 'zoom2d','zoomIn2d','zoomOut2d', 'toImage']
+            displayModeBar: false, // Hide the floating bar
         }
         // Get the cluster number
         Plotly.newPlot('cluster_chart', data_points, layout, config);
