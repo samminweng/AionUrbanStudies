@@ -73,12 +73,12 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
         const keywords = keyword_group['Key-phrases'].sort((a, b) => a.localeCompare(b));
         // Display top 10 key phrases
         const keyword_div = $('<div class="container-sm"></div>');
-        const max_size = Math.min(21, keywords.length);
+        const max_size = Math.min(10, keywords.length);
         const sample_keywords = keywords.slice(0, max_size);
         let row;
         for(let i =0; i< max_size; i++){
             const keyword = sample_keywords[i];
-            if(i %3 === 0){
+            if(i %1 === 0){
                 row = $('<div class="row"></div>');
                 keyword_div.append(row);
             }
@@ -108,7 +108,7 @@ function KeywordClusterList(corpus_data, cluster_data, article_cluster_no){
                 let row;
                 for(let i =0; i< max_size; i++){
                     const keyword = sample_keywords[i];
-                    if(i %3 === 0){
+                    if(i %1 === 0){
                         row = $('<div class="row"></div>');
                         keyword_div.prepend(row);
                     }
