@@ -64,7 +64,7 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
                 list_view.append($('<thead><tr>' +
                     '<th>Abstract Cluster (Score)</th>' +
                     '<th>Abstract Number </th>' +
-                    '<th>Frequent Terms</th>' +
+                    '<th>Unique Terms</th>' +
                     '</tr></thead>'));
                 const table_body = $('<tbody></tbody>');
                 for (let i = 0; i < clusters.length; i++) {
