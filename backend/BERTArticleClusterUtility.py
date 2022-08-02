@@ -1,5 +1,7 @@
 import os
 import logging
+import time
+from datetime import datetime
 from pathlib import Path
 import nltk
 import numpy as np
@@ -153,8 +155,12 @@ class BERTArticleClusterUtility:
         # score = 0 no difference between clusters
         # score = -1 clusters are wrong
         try:
+            # start = datetime.now()
             # Get all the cluster dots
             avg_score = silhouette_score(cluster_vectors, cluster_labels, metric='cosine')
+            # end = datetime.now()
+            # difference = (end - start).total_seconds()
+            # print("Time difference {d} second".format(d=difference))
             return avg_score
         except Exception as err:
             print("Error occurred! {err}".format(err=err))

@@ -420,7 +420,7 @@ if __name__ == '__main__':
         # Re-cluster large cluster into sub-clusters
         iteration = 0
         mdc = BERTArticleCluster(iteration)
-        mdc.get_sentence_vectors(is_load=False)
+        mdc.get_sentence_vectors(is_load=True)
         mdc.run_HDBSCAN_cluster_experiments()
         mdc.summarize_HDBSCAN_cluster_experiment_results()
         mdc.cluster_doc_vectors_with_best_parameter_by_hdbscan()

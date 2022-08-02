@@ -654,6 +654,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/keyword_groups/keyword_cluster_#1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/keyword_groups_summary.csv">
           <value>
             <Attribute>
