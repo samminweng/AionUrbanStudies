@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import sys
 from argparse import Namespace
@@ -164,6 +165,7 @@ class BERTArticleCluster:
                 else:
                     # Run HDBSCAN on raw vectors
                     reduced_vectors = np.vstack(self.text_df['DocVectors'])  # Convert to 2D numpy array
+                start = datetime.now()
                 # Store experiment results
                 results = list()
                 # Experiment HDBSCAN clustering with different parameters
@@ -214,6 +216,9 @@ class BERTArticleCluster:
                                 sys.exit(-1)
                             # print(result)
                             results.append(result)
+                end = datetime.now()
+                difference = (end - start).total_seconds()
+                print("Experiment time difference {d} second".format(d=difference))
                 print("Complete clustering the vectors at dimension = {d}".format(d=dimension))
                 # Output the clustering results of a dimension
                 folder = os.path.join('output', self.args.case_name,  # self.args.cluster_folder,
