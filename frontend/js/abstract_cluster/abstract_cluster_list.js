@@ -57,7 +57,7 @@ function ArticleClusterList(corpus_data, cluster_data, article_clusters) {
             showPageNumbers: false,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, ' +
-                '<%= totalNumber %> article clusters',
+                '<%= totalNumber %> abstract clusters',
             callback: function (clusters, pagination) {
                 list_view.empty();
                 // Add each keyword cluster
