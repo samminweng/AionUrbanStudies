@@ -1,5 +1,6 @@
 # Plots the chart to present our results in the papers
 import copy
+import math
 import os
 import sys
 from argparse import Namespace
@@ -13,6 +14,8 @@ import pandas as pd
 import seaborn as sns
 import plotly.io as pio
 import plotly.figure_factory as ff
+
+from TermKeywordGroupUtility import TermKeywordGroupUtility
 
 
 class Evaluation:
@@ -29,12 +32,12 @@ class Evaluation:
     def sort_article_clusters(self):
         # groups = [list(range(1, 8)), list(range(11, 18)), list(range(8, 11)), list(range(18, 32))]
         groups = [
-            {"group": 1, "map": {1:7, 2: 2, 3: 1, 4:3, 5: 4, 6: 5, 7:6}},
-            {"group": 2, "map": {11:8, 12:14, 13:12, 14:13, 15:11, 16:10, 17: 9}},
-            {"group": 3, "map": {8:17, 9: 16, 10: 15}},
-            {"group": 4, "map": {18: 21, 19: 19, 20: 20, 21:18, 22:23, 23:24, 24:22, 25:26, 26:25,
-                                 27:28, 28:27, 29:31, 30:30, 31:29}},
-             ]
+            {"group": 1, "map": {1: 7, 2: 2, 3: 1, 4: 3, 5: 4, 6: 5, 7: 6}},
+            {"group": 2, "map": {11: 8, 12: 14, 13: 12, 14: 13, 15: 11, 16: 10, 17: 9}},
+            {"group": 3, "map": {8: 17, 9: 16, 10: 15}},
+            {"group": 4, "map": {18: 21, 19: 19, 20: 20, 21: 18, 22: 23, 23: 24, 24: 22, 25: 26, 26: 25,
+                                 27: 28, 28: 27, 29: 31, 30: 30, 31: 29}},
+        ]
         try:
             folder = os.path.join('output', self.args.case_name, self.args.folder)
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups.json')
@@ -145,7 +148,8 @@ class Evaluation:
                         common_terms = get_common_terms(updated_cluster_terms) + common_terms
                         # filter the cluster terms
                         for index, updated_cluster_term in enumerate(updated_cluster_terms):
-                            updated_cluster_terms[index] = list(filter(lambda t: t not in common_terms, updated_cluster_term))
+                            updated_cluster_terms[index] = list(
+                                filter(lambda t: t not in common_terms, updated_cluster_term))
                         # Check if each cluster has 10 term
                         is_full = True
                         for updated_cluster_term in updated_cluster_terms:
@@ -187,10 +191,6 @@ class Evaluation:
                 }
                 for index, term in enumerate(terms):
                     _result['Term' + str(index)] = " " + term['term']
-                    # _result['Freq' + str(index)] = term['freq']
-                    # _result['Range' + str(index)] = term['range']
-                    # _result['DocId' + str(index)] = term['doc_ids']
-                    # _result['Score' + str(index)] = term['score']
                 _results.append(_result)
             # Write output
             _df = pd.DataFrame(_results)
@@ -341,14 +341,102 @@ class Evaluation:
         except Exception as e:
             print("Error occurred! {err}".format(err=e))
 
+    # Evaluate topic coherence score of our keyword group
+    def evaluate_topic_coherence(self):
+        def compute_topic_coherence_score(_cluster_doc_n_grams, _topic_words):
+            # Build a mapping of word and doc ids
+            def _build_word_docIds(_cluster_doc_n_grams, _topic_words):
+                _doc_ids = _cluster_doc_n_grams['DocId']
+                _doc_n_gram = _cluster_doc_n_grams['Ngrams']
+                _word_docIds = {}
+                for _topic_word in _topic_words:
+                    try:
+                        _word_docIds.setdefault(_topic_word, list())
+                        # Get the number of docs containing the word
+                        for _doc in zip(_doc_ids, _doc_n_gram):
+                            _doc_id = _doc[0]
+                            _n_grams = _doc[1]
+                            _words = _topic_word.lower().split()
+                            _found = True
+                            for _word in _words:
+                                _found_word = next((_n_gram for _n_gram in _n_grams if _word.lower() in _n_gram.lower()), None)
+                                if not _found_word:
+                                    _found = False
+                            if _found:
+                                _word_docIds[_topic_word].append(_doc_id)
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                        sys.exit(-1)
+                return _word_docIds
+
+            # # Get doc ids containing both word i and word j
+            def _get_docIds_two_words(_docId_word_i, _docIds_word_j):
+                return [_docId for _docId in _docId_word_i if _docId in _docIds_word_j]
+
+            try:
+                _word_docs = _build_word_docIds(_cluster_doc_n_grams, _topic_words)
+                score = 0
+                count = 0
+                total_count = 10
+                for i in range(0, len(topic_words)):
+                    try:
+                        word_i = topic_words[i]
+                        docs_word_i = _word_docs[word_i]
+                        doc_count_word_i = len(docs_word_i)
+                        if doc_count_word_i > 0 and count < total_count:
+                            for j in range(i + 1, len(topic_words)):
+                                word_j = topic_words[j]
+                                docs_word_j = _word_docs[word_j]
+                                doc_word_i_j = _get_docIds_two_words(docs_word_i, docs_word_j)
+                                doc_count_word_i_j = len(doc_word_i_j)
+                                assert doc_count_word_i_j >= 0
+                                coherence_score = math.log((doc_count_word_i_j + 1) / (1.0 * doc_count_word_i))
+                                score += coherence_score
+                            count = count + 1
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                        sys.exit(-1)
+                avg_score = score / (1.0 * len(topic_words))
+                return avg_score, _word_docs
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+
+
+        try:
+            # Load cluster data
+            path = os.path.join('output', self.args.case_name, self.args.folder,
+                                'AIMLUrbanStudyCorpus_cluster_terms_keyword_groups_updated.json')
+            clusters = pd.read_json(path).to_dict("records")
+            cluster = [cluster for cluster in clusters if cluster['Cluster'] == 22][0]
+            # Load doc_n_grams
+            path = os.path.join('output', self.args.case_name, self.args.folder,
+                                'evaluation', 'doc_n_grams', 'AIMLUrbanStudyCorpus_doc_n_grams.json')
+            doc_n_grams = pd.read_json(path).to_dict("records")
+            cluster_doc_n_grams = [c for c in doc_n_grams if c['Cluster'] == 24][0]
+            print(cluster_doc_n_grams)
+            keyword_groups = cluster['KeywordGroups']
+            print(keyword_groups)
+            for keyword_group in keyword_groups:
+                # Collect 50 keywords
+                topic_words = keyword_group['Key-phrases'][:50]
+                # Sort topic words by alphabetically
+                topic_words.sort()
+                # print(topic_words)
+                topic_coherence_score, word_docs = compute_topic_coherence_score(cluster_doc_n_grams, topic_words)
+                print(topic_coherence_score)
+
+
+        except Exception as e:
+            print("Error occurred! {err}".format(err=e))
 
 # Main entry
 if __name__ == '__main__':
     try:
         evl = Evaluation()
+        evl.evaluate_topic_coherence()
         # evl.sort_article_clusters()
         # evl.find_common_terms_by_clusters()
-        evl.evaluate_article_clusters()
-        evl.evaluate_keyword_groups()
+        # evl.evaluate_article_clusters()
+        # evl.evaluate_keyword_groups()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

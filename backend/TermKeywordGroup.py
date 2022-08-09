@@ -219,6 +219,7 @@ class TermKeywordGroup:
 if __name__ == '__main__':
     try:
         ct = TermKeywordGroup()
+        # ct.derive_n_grams_group_by_clusters()
         ct.produce_individual_keyword_groups()
         ct.combine_cluster_term_and_keyword_group()
     except Exception as err:
