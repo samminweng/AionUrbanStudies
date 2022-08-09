@@ -343,27 +343,21 @@ class Evaluation:
 
     # Evaluate topic coherence score of our keyword group
     def evaluate_topic_coherence(self):
-        def compute_topic_coherence_score(_cluster_doc_n_grams, _topic_words):
+        def compute_topic_coherence_score(_cluster_docs, _topic_words):
             # Build a mapping of word and doc ids
-            def _build_word_docIds(_cluster_doc_n_grams, _topic_words):
-                _doc_ids = _cluster_doc_n_grams['DocId']
-                _doc_n_gram = _cluster_doc_n_grams['Ngrams']
+            def _build_word_docIds(_cluster_docs, _topic_words):
                 _word_docIds = {}
                 for _topic_word in _topic_words:
                     try:
                         _word_docIds.setdefault(_topic_word, list())
                         # Get the number of docs containing the word
-                        for _doc in zip(_doc_ids, _doc_n_gram):
-                            _doc_id = _doc[0]
-                            _n_grams = _doc[1]
-                            _words = _topic_word.lower().split()
-                            _found = True
-                            for _word in _words:
-                                _found_word = next((_n_gram for _n_gram in _n_grams if _word.lower() in _n_gram.lower()), None)
-                                if not _found_word:
-                                    _found = False
-                            if _found:
-                                _word_docIds[_topic_word].append(_doc_id)
+                        for _doc in _cluster_docs:
+                            _doc_id = _doc['DocId']
+                            _candidates = _doc['CandidatePhrases']
+                            for _candidate in _candidates:
+                                if _candidate['key-phrase'].lower() == _topic_word.lower():
+                                    _word_docIds[_topic_word].append(_doc_id)
+                                    break
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
                         sys.exit(-1)
@@ -374,29 +368,28 @@ class Evaluation:
                 return [_docId for _docId in _docId_word_i if _docId in _docIds_word_j]
 
             try:
-                _word_docs = _build_word_docIds(_cluster_doc_n_grams, _topic_words)
-                score = 0
+                _word_docs = _build_word_docIds(_cluster_docs, _topic_words)
+                total_score = 0
+                _total_count = len(_topic_words)
                 count = 0
-                total_count = 10
-                for i in range(0, len(topic_words)):
+                for i in range(1, _total_count):
                     try:
                         word_i = topic_words[i]
                         docs_word_i = _word_docs[word_i]
                         doc_count_word_i = len(docs_word_i)
-                        if doc_count_word_i > 0 and count < total_count:
-                            for j in range(i + 1, len(topic_words)):
-                                word_j = topic_words[j]
-                                docs_word_j = _word_docs[word_j]
-                                doc_word_i_j = _get_docIds_two_words(docs_word_i, docs_word_j)
-                                doc_count_word_i_j = len(doc_word_i_j)
-                                assert doc_count_word_i_j >= 0
-                                coherence_score = math.log((doc_count_word_i_j + 1) / (1.0 * doc_count_word_i))
-                                score += coherence_score
-                            count = count + 1
+                        for j in range(0, i-1):
+                            word_j = topic_words[j]
+                            docs_word_j = _word_docs[word_j]
+                            doc_word_i_j = _get_docIds_two_words(docs_word_i, docs_word_j)
+                            doc_count_word_i_j = len(doc_word_i_j)
+                            assert doc_count_word_i_j >= 0
+                            coherence_score = math.log((doc_count_word_i_j + 1) / (1.0 * len(docs_word_j)))
+                            total_score += coherence_score
+                        count = count + 1
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
                         sys.exit(-1)
-                avg_score = score / (1.0 * len(topic_words))
+                avg_score = 2 * total_score / (1.0 * _total_count * (_total_count-1))
                 return avg_score, _word_docs
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
@@ -410,20 +403,20 @@ class Evaluation:
             cluster = [cluster for cluster in clusters if cluster['Cluster'] == 22][0]
             # Load doc_n_grams
             path = os.path.join('output', self.args.case_name, self.args.folder,
-                                'evaluation', 'doc_n_grams', 'AIMLUrbanStudyCorpus_doc_n_grams.json')
-            doc_n_grams = pd.read_json(path).to_dict("records")
-            cluster_doc_n_grams = [c for c in doc_n_grams if c['Cluster'] == 24][0]
-            print(cluster_doc_n_grams)
+                                'AIMLUrbanStudyCorpus_clusters_updated.json')
+            docs = pd.read_json(path).to_dict("records")
+            cluster_docs = [d for d in docs if d['Cluster'] == 22]
             keyword_groups = cluster['KeywordGroups']
-            print(keyword_groups)
+            total_count = 5
             for keyword_group in keyword_groups:
                 # Collect 50 keywords
-                topic_words = keyword_group['Key-phrases'][:50]
-                # Sort topic words by alphabetically
+                topic_words = keyword_group['Key-phrases']
                 topic_words.sort()
+                # Sort topic words by alphabetically
+                topic_words = topic_words[:total_count]
                 # print(topic_words)
-                topic_coherence_score, word_docs = compute_topic_coherence_score(cluster_doc_n_grams, topic_words)
-                print(topic_coherence_score)
+                topic_coherence_score, word_docs = compute_topic_coherence_score(cluster_docs, topic_words)
+                print(topic_words, topic_coherence_score)
 
 
         except Exception as e:
