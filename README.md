@@ -1,5 +1,6 @@
 # A tool for identifying and visualizing key topics 
-This paper describes an unsupervised, semantic-similarity based topic analyzing tool to detect and visualize the topics in a collection of publication abstracts.
+An unsupervised, semantic-similarity based topic analyzing tool detects and visualizes the topics in a collection of publication abstracts.
+
 By utilizing the pre-trained BERT model, the abstracts are transformed into context vector representation (or embedding). 
 The HDBSCAN clustering algorithm and UMAP dimension reduction technique are used to find the clusters of abstracts based on semantic similarity.
 Keywords are extracted from each abstract and diversified with MMR ranking algorithm.
