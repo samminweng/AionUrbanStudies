@@ -633,6 +633,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/context_vector_topic_coherence_score_results.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/experiments/min_cluster_size/HDBSCAN_cluster_doc_vector_results_20.csv">
           <value>
             <Attribute>
@@ -662,6 +669,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/keyword_groups_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/evaluation/mmr_diversity_result.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -998,6 +1012,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/key_phrase_clusters/level_0/key_phrases_cluster_#21.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/key_phrase_clusters/level_0/key_phrases_cluster_#24.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

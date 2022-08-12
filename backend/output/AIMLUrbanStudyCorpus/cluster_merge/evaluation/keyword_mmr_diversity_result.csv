@@ -1,0 +1,12 @@
+diversity,0_keyword,0_score,1_keyword,1_score,2_keyword,2_score,3_keyword,3_score,4_keyword,4_score
+0.0,urban space,0.5912297368,urban environment,0.5567451715,urban planning and environment auditing,0.5418741703000001,Urban form,0.5185687542,street view pattern,0.5184057951000001
+0.1,urban space,0.5912297368,urban planning and environment auditing,0.5418741703000001,urban environment,0.5567451715,street view pattern,0.5184057951000001,visual exploration,0.4792687893
+0.2,urban space,0.5912297368,urban planning and environment auditing,0.5418741703000001,street view pattern,0.5184057951000001,visual exploration,0.4792687893,urban environment,0.5567451715
+0.3,urban space,0.5912297368,urban planning and environment auditing,0.5418741703000001,visual exploration,0.4792687893,street view pattern,0.5184057951000001,city and region scales,0.4391525388
+0.4,urban space,0.5912297368,interactive visual analytics system,0.3708312809,urban planning and environment auditing,0.5418741703000001,street view pattern,0.5184057951000001,real world datasets,0.32536840440000003
+0.5,urban space,0.5912297368,interactive visual analytics system,0.3708312809,real world datasets,0.32536840440000003,urban planning and environment auditing,0.5418741703000001,street view pattern,0.5184057951000001
+0.6,urban space,0.5912297368,interactive visual analytics system,0.3708312809,domain expert,0.186249733,fine grained detail,0.28582477570000003,real world datasets,0.32536840440000003
+0.7,urban space,0.5912297368,interactive visual analytics system,0.3708312809,domain expert,0.186249733,fine grained detail,0.28582477570000003,current method,0.0053423080000000005
+0.8,urban space,0.5912297368,interactive visual analytics system,0.3708312809,primary contribution,0.0040753186,planner leverage,0.19555842880000002,AOI Explorer,0.1714900732
+0.9,urban space,0.5912297368,current method,0.0053423080000000005,interactive visual analytics system,0.3708312809,domain expert,0.186249733,high quality,0.1271740496
+1.0,urban space,0.5912297368,current method,0.0053423080000000005,interactive visual analytics system,0.3708312809,domain expert,0.186249733,high quality,0.1271740496
