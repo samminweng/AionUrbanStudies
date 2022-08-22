@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/data/AIMLUrbanStudyCorpus/AIMLUrbanStudyCorpus_irrelevant_docs.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/AIMLUrbanStudyCorpus/cluster_0/iteration_0/AIMLUrbanStudyCorpus_cleaned.csv">
           <value>
             <Attribute>
@@ -53,13 +60,6 @@
           </value>
         </entry>
         <entry key="/data/AIMLUrbanStudyCorpus/iteration_0/AIMLUrbanStudyCorpus_cleaned.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/CultureUrbanStudyCorpus/CultureUrbanStudyCorpus_cleaned.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -1201,6 +1201,13 @@
           </value>
         </entry>
         <entry key="/output/AIMLUrbanStudyCorpus/iteration/key_phrases/group_key_phrases/cluster_key_phrases_sub_groups.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus_OpenAIEmbedding/abstract_clustering_phase/iteration_1/doc_vectors/doc_vectors.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
