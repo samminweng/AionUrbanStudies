@@ -10,7 +10,7 @@ import pandas as pd
 # Obtain the cluster results of the best results and extract cluster topics using TF-IDF
 from sentence_transformers import SentenceTransformer
 
-from ArticleClusterTermTFIDFUtility import ArticleClusterTermTFIDFUtility
+from AbstractClusterTermTFIDFUtility import AbstractClusterTermTFIDFUtility
 
 # Set Sentence Transformer path
 sentence_transformers_path = os.path.join('/Scratch', getpass.getuser(), 'SentenceTransformer')
@@ -19,7 +19,7 @@ if os.name == 'nt':
 Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 
-class ArticleClusterTermTFIDF:
+class AbstractClusterTermTFIDF:
     def __init__(self):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
@@ -128,7 +128,7 @@ class ArticleClusterTermTFIDF:
                 file_path = os.path.join(image_folder, 'iteration_' + str(iteration) + ".png")
                 title = 'Iteration = ' + str(iteration)
                 # Visualise the cluster results
-                ArticleClusterTermTFIDFUtility.visualise_cluster_results_by_iteration(title, copied_results, file_path)
+                AbstractClusterTermTFIDFUtility.visualise_cluster_results_by_iteration(title, copied_results, file_path)
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
         # # Sort the results by DocID
@@ -155,7 +155,7 @@ class ArticleClusterTermTFIDF:
         for folder_name in folder_names:
             iterative_folder = os.path.join(folder, folder_name)
             try:
-                ArticleClusterTermTFIDFUtility.update_clustering_scores(iterative_folder, model)
+                AbstractClusterTermTFIDFUtility.update_clustering_scores(iterative_folder, model)
                 # Load the updated iterative clustering summary
                 path = os.path.join(iterative_folder, 'cluster_terms', 'iterative_clusters',
                                     'AIMLUrbanStudyCorpus_iterative_summary.json')
@@ -250,7 +250,7 @@ class ArticleClusterTermTFIDF:
                 .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text),
                       'Score': "mean"})
             # Get top 100 topics (1, 2, 3 grams) for each cluster
-            n_gram_term_list = ArticleClusterTermTFIDFUtility.get_n_gram_tf_idf_terms(docs_per_cluster_df,
+            n_gram_term_list = AbstractClusterTermTFIDFUtility.get_n_gram_tf_idf_terms(docs_per_cluster_df,
                                                                                       term_folder)
             results = []
             for i, cluster in docs_per_cluster_df.iterrows():
@@ -268,13 +268,13 @@ class ArticleClusterTermTFIDF:
                         # Collect top 300 terms
                         cluster_terms = n_gram['terms'][str(cluster_no)][:300]
                         # Create a mapping between the topic and its associated articles (doc)
-                        doc_per_term = ArticleClusterTermTFIDFUtility.group_docs_by_terms(n_gram_range,
+                        doc_per_term = AbstractClusterTermTFIDFUtility.group_docs_by_terms(n_gram_range,
                                                                                           doc_ids, doc_texts,
                                                                                           cluster_terms)
                         n_gram_type = 'Term-' + str(n_gram_range) + '-gram'
                         result[n_gram_type] = doc_per_term
                         n_gram_terms += doc_per_term
-                    result['Term-N-gram'] = ArticleClusterTermTFIDFUtility.merge_n_gram_terms(n_gram_terms)
+                    result['Term-N-gram'] = AbstractClusterTermTFIDFUtility.merge_n_gram_terms(n_gram_terms)
                     results.append(result)
                     print('Derive term of cluster #{no}'.format(no=cluster_no))
                 except Exception as _err:
@@ -341,7 +341,7 @@ class ArticleClusterTermTFIDF:
             docs = pd.read_json(path).to_dict("records")
             folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'article_terms')
             Path(folder).mkdir(parents=True, exist_ok=True)
-            article_terms = ArticleClusterTermTFIDFUtility.get_TFIDF_terms_from_individual_article(docs, folder,
+            article_terms = AbstractClusterTermTFIDFUtility.get_TFIDF_terms_from_individual_article(docs, folder,
                                                                                                    is_load=True)
             # Update each doc with TFIDF terms
             for index, doc in enumerate(docs):
@@ -388,7 +388,7 @@ class ArticleClusterTermTFIDF:
             for cluster_term in cluster_terms:
                 cluster_no = cluster_term['Cluster']
                 n_gram_range = 2
-                freq_terms = ArticleClusterTermTFIDFUtility.get_n_gram_freq_terms(docs_per_clusters, cluster_no, n_gram_range)
+                freq_terms = AbstractClusterTermTFIDFUtility.get_n_gram_freq_terms(docs_per_clusters, cluster_no, n_gram_range)
                 # Get top 10 terms
                 top_freq_terms = freq_terms[:80]
                 # Update with frequent terms
@@ -418,7 +418,7 @@ if __name__ == '__main__':
         # ct.collect_iterative_cluster_results()
         # ct.output_iterative_cluster_results()
         # ct.update_iterative_article_cluster_results()
-        ct = ArticleClusterTermTFIDF()
+        ct = AbstractClusterTermTFIDF()
         ct.collect_article_cluster_results()
         ct.derive_cluster_terms_by_TF_IDF()
         ct.summarize_cluster_terms()

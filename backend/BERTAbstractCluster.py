@@ -20,7 +20,7 @@ import seaborn as sns  # statistical graph library
 import getpass
 
 # Set logging level
-from BERTArticleClusterUtility import BERTArticleClusterUtility
+from BERTAbstractClusterUtility import BERTAbstractClusterUtility
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 # Set NLTK data path
@@ -42,7 +42,7 @@ Path(sentence_transformers_path).mkdir(parents=True, exist_ok=True)
 
 # Cluster the document using BERT model
 # Ref: https://towardsdatascience.com/topic-modeling-with-bert-779f7db187e6
-class BERTArticleCluster:
+class BERTAbstractCluster:
     def __init__(self, _iteration):  # , _cluster_no):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
@@ -208,7 +208,7 @@ class BERTArticleCluster:
                                 if len(cluster_df) > 0:
                                     cluster_labels = cluster_df['clusters'].tolist()
                                     cluster_vectors = np.vstack(cluster_df['vectors'].tolist())
-                                    result['Silhouette_score'] = BERTArticleClusterUtility.compute_Silhouette_score(
+                                    result['Silhouette_score'] = BERTAbstractClusterUtility.compute_Silhouette_score(
                                         cluster_labels,
                                         cluster_vectors)
                             except Exception as _err:
@@ -284,9 +284,9 @@ class BERTArticleCluster:
                 folder = os.path.join(parent_folder, 'experiments', 'images')
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 # Output cluster results to png files
-                BERTArticleClusterUtility.visualise_cluster_results(cluster_labels,
-                                                                    df['x'].tolist(), df['y'].tolist(),
-                                                                    d_result, folder)
+                BERTAbstractClusterUtility.visualise_cluster_results(cluster_labels,
+                                                                     df['x'].tolist(), df['y'].tolist(),
+                                                                     d_result, folder)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -341,9 +341,9 @@ class BERTArticleCluster:
             folder = os.path.join(parent_folder, 'hdbscan_clustering')
             Path(folder).mkdir(parents=True, exist_ok=True)
             # Output cluster results to png
-            BERTArticleClusterUtility.visualise_cluster_results(cluster_labels,
-                                                                cluster_df['x'].tolist(), cluster_df['y'].tolist(),
-                                                                best_result, folder)
+            BERTAbstractClusterUtility.visualise_cluster_results(cluster_labels,
+                                                                 cluster_df['x'].tolist(), cluster_df['y'].tolist(),
+                                                                 best_result, folder)
             # Output condense tree of the best cluster results
             condense_tree = clusters.condensed_tree_
             # Save condense tree to csv
@@ -424,7 +424,7 @@ if __name__ == '__main__':
         # BERTArticleClusterUtility.collect_cluster_as_corpus('AIMLUrbanStudyCorpus', cluster_no)
         # Re-cluster large cluster into sub-clusters
         iteration = 0
-        mdc = BERTArticleCluster(iteration)
+        mdc = BERTAbstractCluster(iteration)
         mdc.get_sentence_vectors(is_load=True)
         mdc.run_HDBSCAN_cluster_experiments()
         mdc.summarize_HDBSCAN_cluster_experiment_results()

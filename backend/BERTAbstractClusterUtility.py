@@ -33,7 +33,7 @@ nltk.data.path.append(nltk_path)
 
 
 # Utility for finding article clusters
-class BERTArticleClusterUtility:
+class BERTAbstractClusterUtility:
     case_name = 'AIMLUrbanStudyCorpus'
     # Static variable
     stop_words = list(stopwords.words('english'))
@@ -67,8 +67,8 @@ class BERTArticleClusterUtility:
 
     @staticmethod
     def visualise_cluster_results_by_methods():
-        _path = os.path.join(BERTArticleClusterUtility.output_path,
-                             BERTArticleClusterUtility.case_name + '_clusters.json')
+        _path = os.path.join(BERTAbstractClusterUtility.output_path,
+                             BERTAbstractClusterUtility.case_name + '_clusters.json')
         cluster_result_df = pd.read_json(_path)
         fig, (ax0, ax1, ax2) = plt.subplots(1, 3)
         # # Visualise
