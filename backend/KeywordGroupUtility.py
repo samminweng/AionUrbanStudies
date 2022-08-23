@@ -23,7 +23,7 @@ class KeywordGroupUtility:
     @staticmethod
     def check_stop_iteration(key_phrase_clusters, total_docs):
         # Get the remaining kp_clusters
-        small_clusters = list(filter(lambda c: len(c['Key-phrases']) < KeywordClusterUtility.threshold, key_phrase_clusters))
+        small_clusters = list(filter(lambda c: len(c['Key-phrases']) < KeywordGroupUtility.threshold, key_phrase_clusters))
         doc_ids = set()
         for r_cluster in small_clusters:
             for doc_id in r_cluster['DocIds']:
@@ -233,11 +233,11 @@ class KeywordGroupUtility:
                 # assert len(vectors) == len(key_phrases), "Inconsistent key phrases and vectors"
                 if len(kp_cluster['Key-phrases']) < 10:
                     continue
-                if len(kp_cluster['Key-phrases']) < KeywordClusterUtility.threshold:
+                if len(kp_cluster['Key-phrases']) < KeywordGroupUtility.threshold:
                     results.append(kp_cluster)
                 else:
                     try:
-                        experiments = KeywordClusterUtility.cluster_key_phrase_experiments_by_HDBSCAN(key_phrases,
+                        experiments = KeywordGroupUtility.cluster_key_phrase_experiments_by_HDBSCAN(key_phrases,
                                                                                                       vectors,
                                                                                                       is_fined_grain=True,
                                                                                                       n_neighbors=len(key_phrases) - 2)
