@@ -361,6 +361,73 @@ class AbstractClusterOpenAI:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+    # Collect all iterative abstract cluster results
+    def collect_iterative_cluster_results(self):
+        folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase)
+        results = list()
+        max_iteration = 9
+        cluster_id = 1
+        corpus = list()
+        # Go through each iteration 1 to last iteration
+        for i in range(1, max_iteration):
+            try:
+                iteration_folder = os.path.join(folder, 'iteration_' + str(i))
+                # Get child folder ordered by name
+                cluster_folders = sorted(os.listdir(iteration_folder))
+                for folder_name in cluster_folders:
+                    cluster_folder = os.path.join(iteration_folder, folder_name)
+                    # print(cluster_folder)
+                    # Get the cluster results
+                    path = os.path.join(cluster_folder, 'hdbscan_experiments', 'cluster_results.json')
+                    # Load the cluster results
+                    cluster_results = pd.read_json(path).to_dict("records")
+                    # Filter out large clusters > 40
+                    cluster_results = list(filter(lambda r: r['count'] < 40, cluster_results))
+                    # Load clustered docs result
+                    path = os.path.join(cluster_folder, 'hdbscan_experiments', 'docs_cluster_results.json')
+                    docs = pd.read_json(path).to_dict("records")
+                    # Get summary of cluster topics
+                    # print(cluster_results)
+                    for cluster_result in cluster_results:
+                        doc_ids = cluster_result['doc_ids']
+                        results.append({
+                            "iteration": i, "cluster": cluster_id, "score": cluster_result['score'],
+                            "count": cluster_result['count'], "doc_ids": cluster_result['doc_ids']
+                        })
+                        # Get the clustered docs
+                        cluster_docs = list(filter(lambda d: d['DocId'] in doc_ids, docs))
+                        # Include to corpus
+                        corpus.extend(cluster_docs)
+                        cluster_id = cluster_id + 1
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+                sys.exit(-1)
+        print(results)
+        # Sort clusters within each group
+        # # Load the results as data frame
+        df = pd.DataFrame(results)
+        # Output cluster results to CSV
+        folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase)
+        Path(folder).mkdir(parents=True, exist_ok=True)
+        path = os.path.join(folder, self.args.case_name + '_iterative_clustering_summary.csv')
+        df.to_csv(path, encoding='utf-8', index=False)
+        path = os.path.join(folder, self.args.case_name + '_iterative_clustering_summary.json')
+        df.to_json(path, orient='records')
+        # Assign clusters to docs
+        for result in results:
+            cluster_id = result['cluster']
+            doc_ids = result['doc_ids']
+            docs = list(filter(lambda d: d['DocId'] in doc_ids, corpus))
+            for doc in docs:
+                doc['Cluster'] = cluster_id
+        corpus = sorted(corpus, key=lambda d: d['Cluster'])
+        # Output doc clusters to corpus
+        df = pd.DataFrame(corpus)
+        path = os.path.join(folder, self.args.case_name + '_clusters.csv')
+        df.to_csv(path, encoding='utf-8', index=False)
+        path = os.path.join(folder, self.args.case_name + '_clusters.json')
+        df.to_json(path, orient='records')
+        # print(df)
 
 # Main entry
 if __name__ == '__main__':
@@ -369,9 +436,10 @@ if __name__ == '__main__':
         iteration = 8
         cluster_no = 3
         ac = AbstractClusterOpenAI(iteration, cluster_no)
-        ac.get_doc_vectors(is_load=True)
-        ac.run_HDBSCAN_cluster_experiments()
-        ac.find_best_HDBSCAN_cluster_result()
-        ac.output_large_clusters_as_corpus()
+        # ac.get_doc_vectors(is_load=True)
+        # ac.run_HDBSCAN_cluster_experiments()
+        # ac.find_best_HDBSCAN_cluster_result()
+        # ac.output_large_clusters_as_corpus()
+        ac.collect_iterative_cluster_results()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
