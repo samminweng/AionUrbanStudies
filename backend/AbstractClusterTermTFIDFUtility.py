@@ -17,7 +17,7 @@ from nltk import sent_tokenize, word_tokenize, pos_tag, ngrams
 from nltk.corpus import stopwords
 from sklearn.metrics import pairwise_distances, silhouette_samples, silhouette_score
 
-from BERTAbstractClusterUtility import BERTAbstractClusterUtility
+from AbstractClusterBERTUtility import AbstractClusterBERTUtility
 
 
 class AbstractClusterTermTFIDFUtility:
@@ -132,7 +132,7 @@ class AbstractClusterTermTFIDFUtility:
             _doc_terms = []
             for _doc_id, _doc_text in zip(_cluster_docs['DocId'], _cluster_docs['Text']):
                 try:
-                    _text = BERTAbstractClusterUtility.preprocess_text(_doc_text.strip())
+                    _text = AbstractClusterBERTUtility.preprocess_text(_doc_text.strip())
                     _sentences = sent_tokenize(_text)
                     _n_gram_terms = AbstractClusterTermTFIDFUtility.generate_n_gram_candidates(_sentences, _n_gram_range)
                     _doc_terms.append({'DocId': _doc_id, 'terms': _n_gram_terms})
@@ -194,10 +194,14 @@ class AbstractClusterTermTFIDFUtility:
 
     # Get topics (n_grams) by using standard TF-IDF and the number of topic is max_length
     @staticmethod
-    def get_n_gram_tf_idf_terms(docs_per_cluster_df, folder):
+    def get_n_gram_tf_idf_terms(docs_per_cluster_df, folder, is_load=False):
         # A folder that stores all the topic results
         temp_folder = os.path.join(folder, 'temp')
         Path(temp_folder).mkdir(parents=True, exist_ok=True)
+        if is_load:
+            path = os.path.join(temp_folder, 'TF-IDF_cluster_n_gram_terms.json')
+            term_list = pd.read_json(path).to_dict("records")
+            return term_list
 
         # Convert the texts of all clusters into a list of document (a list of sentences) to derive n-gram candidates
         def _collect_cluster_docs(_docs_per_cluster_df):
@@ -210,7 +214,7 @@ class AbstractClusterTermTFIDFUtility:
                 for doc_text in doc_texts:
                     try:
                         if isinstance(doc_text, str):
-                            text = BERTAbstractClusterUtility.preprocess_text(doc_text.strip())
+                            text = AbstractClusterBERTUtility.preprocess_text(doc_text.strip())
                             sentences = sent_tokenize(text)
                             doc_list.extend(sentences)
                     except Exception as _err:
@@ -321,7 +325,7 @@ class AbstractClusterTermTFIDFUtility:
         # Step 1. Convert each cluster of documents (one or more articles) into a single document
         docs = _collect_cluster_docs(docs_per_cluster_df)
         terms_list = []
-        for n_gram_range in [1, 2]:
+        for n_gram_range in [2]:
             try:
                 # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
                 freq_matrix = _create_frequency_matrix(docs, n_gram_range)
@@ -403,7 +407,7 @@ class AbstractClusterTermTFIDFUtility:
             for doc_id, doc_text in zip(doc_ids, doc_texts):
                 try:
                     # Convert the preprocessed text to n_grams
-                    sentences = sent_tokenize(BERTAbstractClusterUtility.preprocess_text(doc_text))
+                    sentences = sent_tokenize(AbstractClusterBERTUtility.preprocess_text(doc_text))
                     # Obtain the n-grams from the text
                     n_grams = AbstractClusterTermTFIDFUtility.generate_n_gram_candidates(sentences, n_gram_range)
                     # For each topic, find out the document ids that contain the topic
@@ -503,7 +507,7 @@ class AbstractClusterTermTFIDFUtility:
     def get_TFIDF_terms_from_individual_article(docs, folder, is_load=False):
         # Load the precomputed
         if is_load:
-            path = os.path.join(folder, 'article_TFIDF_terms.json')
+            path = os.path.join(folder, 'abstract_TFIDF_terms.json')
             return pd.read_json(path).to_dict("records")
 
         # Create frequency matrix to track the frequencies of n-grams
@@ -516,7 +520,7 @@ class AbstractClusterTermTFIDFUtility:
                     _doc_text = _doc['Title'] + '. ' + _doc['Abstract']
                     _sentence_list = []
                     try:
-                        _clean_text = BERTAbstractClusterUtility.preprocess_text(_doc_text.strip())
+                        _clean_text = AbstractClusterBERTUtility.preprocess_text(_doc_text.strip())
                         _sentence_list.extend(sent_tokenize(_clean_text))
                     except Exception as _err:
                         print("Error occurred! {err}".format(err=_err))
@@ -611,7 +615,7 @@ class AbstractClusterTermTFIDFUtility:
             return _tf_idf_matrix
 
         n_gram_results = {}
-        for n_gram_range in [1, 2]:
+        for n_gram_range in [2]:
             try:
                 # 2. Create the Frequency matrix of the words in each document (a cluster of articles)
                 freq_matrix = _create_frequency_matrix(docs, n_gram_range)
@@ -629,27 +633,18 @@ class AbstractClusterTermTFIDFUtility:
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
                 sys.exit(-1)
-        sample_docs = [287, 367, 477]
+        # sample_docs = [287, 367, 477]
         Path(os.path.join(folder, 'docs')).mkdir(parents=True, exist_ok=True)
         results = list()
         for index, doc in enumerate(docs):
             try:
                 doc_id = doc['DocId']
-                # Get 1-gram term
-                uni_grams = n_gram_results[1][index]
+                # Get 2-gram term
                 bi_grams = n_gram_results[2][index]
-                n_grams = uni_grams + bi_grams
-                # Sort n_grams by scores and get top 30
-                n_grams = sorted(n_grams, key=lambda t: t['score'], reverse=True)
-                n_grams = n_grams[:30]
-                if doc_id in sample_docs:
-                    df = pd.DataFrame(n_grams[:10])
-                    path = os.path.join(folder, 'docs', 'article_term_' + str(doc_id) + '.csv')
-                    df.to_csv(path, encoding='utf-8', index=False)
-                results.append({'DocId': doc_id, 'N-Grams': n_grams})
+                results.append({'DocId': doc_id, 'Terms': bi_grams})
             except Exception as err:
                 print("Error occurred! {err}".format(err=err))
-        path = os.path.join(folder, 'article_TFIDF_terms.json')
+        path = os.path.join(folder, 'abstract_TFIDF_terms.json')
         df = pd.DataFrame(results)
         df.to_json(path, orient='records')
         return results  # Return a list of dicts

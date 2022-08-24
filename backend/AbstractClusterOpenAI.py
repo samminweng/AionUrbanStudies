@@ -34,13 +34,13 @@ class AbstractClusterOpenAI:
             cluster_folder='cluster_' + str(_cluster_no),
             phase='abstract_clustering_phase',
             path='data',
+            threshold=50,   # Maximal number of abstracts in a cluster
             seed=3,
             n_neighbors=150,
             min_dist=0.0,
             epilson=0.0,
             dimensions=[500, 450, 400, 350, 300, 250, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55,
                         50, 45, 40, 35, 30, 25, 20],
-            min_samples=5,
             min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
         )
         path = os.path.join('data', self.args.case_name + '_' + self.args.embedding_name, self.args.iteration_folder,
@@ -190,7 +190,7 @@ class AbstractClusterOpenAI:
             # print(reduced_vectors)
             # for min_samples in self.args.min_samples:
             epsilon = self.args.epilson
-            min_samples = self.args.min_samples
+            min_samples = 1
             for min_cluster_size in self.args.min_cluster_size:
                 result = {'dimension': dimension,
                           'min_cluster_size': min_cluster_size,
@@ -213,7 +213,8 @@ class AbstractClusterOpenAI:
                     distance_vectors = distances.tolist()
                     # Store the results at least 1 clusters
                     if len(cluster_results) > 1:
-                        cluster_results, avg_score = compute_Silhouette_score(cluster_labels, distance_vectors, cluster_results)
+                        cluster_results, avg_score = compute_Silhouette_score(cluster_labels, distance_vectors,
+                                                                              cluster_results)
                         outlier = next(r for r in cluster_results if r['cluster'] == -1)
                         result['avg_score'] = avg_score
                         result['total_clusters'] = len(cluster_results)
@@ -237,7 +238,8 @@ class AbstractClusterOpenAI:
         # Output cluster results to CSV
         path = os.path.join(folder, 'cluster_doc_vector_results.csv')
         result_df.to_csv(path, encoding='utf-8', index=False, columns=['dimension', 'min_cluster_size',
-                                                                       'avg_score', 'total_clusters', 'outlier', 'cluster_results'])
+                                                                       'avg_score', 'total_clusters', 'outlier',
+                                                                       'cluster_results'])
         path = os.path.join(folder, 'cluster_doc_vector_results.json')
         result_df.to_json(path, orient='records')
 
@@ -270,7 +272,7 @@ class AbstractClusterOpenAI:
                 fig.update_layout(width=600, height=800,
                                   legend=dict(orientation="v"),
                                   margin=dict(l=20, r=20, t=30, b=40))
-                file_name = 'dimension_' + str(_dimension)  + '_min_cluster_size_' + str(_min_cluster_size)
+                file_name = 'dimension_' + str(_dimension) + '_min_cluster_size_' + str(_min_cluster_size)
                 file_path = os.path.join(folder, file_name + ".png")
                 pio.write_image(fig, file_path, format='png')
                 print("Output the images of clustered results to " + file_path)
@@ -329,7 +331,7 @@ class AbstractClusterOpenAI:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    # #Output large clusters (>40) and store as a corpus as input for the next iteration
+    # #Output large clusters (>threshold) and store as a corpus as input for the next iteration
     def output_large_clusters_as_corpus(self):
         try:
             # Get the outliers identified by HDBSCAN
@@ -339,21 +341,22 @@ class AbstractClusterOpenAI:
             # Get the best clustering of silhouette score
             cluster_results = pd.read_json(path).to_dict("records")
             # Get all large clusters
-            large_clusters = list(filter(lambda c: c['count'] >= 40, cluster_results))
+            large_clusters = list(filter(lambda c: c['count'] >= self.args.threshold, cluster_results))
             next_iteration = self.args.iteration + 1
             # Load the docs
             path = os.path.join(folder, 'docs_cluster_results.json')
             docs = pd.read_json(path).to_dict("records")
             # print(large_clusters)
             for cluster in large_clusters:
-                cluster_no = cluster['cluster']
+                cluster_id = cluster['cluster']
                 doc_ids = cluster['doc_ids']
                 cluster_docs = list(filter(lambda d: d['DocId'] in doc_ids, docs))
                 # print(cluster_docs)
                 cluster_docs_df = pd.DataFrame(cluster_docs)
                 # output to data folder
-                folder = os.path.join('data', self.args.case_name + '_' + self.args.embedding_name,  # self.args.cluster_folder,
-                                      'iteration_' + str(next_iteration), 'cluster_' + str(cluster_no))
+                folder = os.path.join('data', self.args.case_name + '_' + self.args.embedding_name,
+                                      # self.args.cluster_folder,
+                                      'iteration_' + str(next_iteration), 'cluster_' + str(cluster_id))
                 Path(folder).mkdir(parents=True, exist_ok=True)
                 path = os.path.join(folder, self.args.case_name + '_cleaned.csv')
                 # Save outlier df to another corpus
@@ -365,11 +368,11 @@ class AbstractClusterOpenAI:
     def collect_iterative_cluster_results(self):
         folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase)
         results = list()
-        max_iteration = 9
+        max_iteration = 4
         cluster_id = 1
         corpus = list()
         # Go through each iteration 1 to last iteration
-        for i in range(1, max_iteration):
+        for i in range(1, max_iteration + 1):
             try:
                 iteration_folder = os.path.join(folder, 'iteration_' + str(i))
                 # Get child folder ordered by name
@@ -382,7 +385,7 @@ class AbstractClusterOpenAI:
                     # Load the cluster results
                     cluster_results = pd.read_json(path).to_dict("records")
                     # Filter out large clusters > 40
-                    cluster_results = list(filter(lambda r: r['count'] < 40, cluster_results))
+                    cluster_results = list(filter(lambda r: r['count'] < self.args.threshold, cluster_results))
                     # Load clustered docs result
                     path = os.path.join(cluster_folder, 'hdbscan_experiments', 'docs_cluster_results.json')
                     docs = pd.read_json(path).to_dict("records")
@@ -403,8 +406,8 @@ class AbstractClusterOpenAI:
                 print("Error occurred! {err}".format(err=_err))
                 sys.exit(-1)
         print(results)
-        # Assign group no to clusters
-        groups = [range(1, 6), range(6, 9), range(9, 12), range(12, 28)]
+        # # Assign group no to clusters
+        groups = [range(1, 6), range(6, 9), range(9, 12), range(12, 25)]
         for i, group in enumerate(groups):
             group_clusters = list(filter(lambda r: r['cluster'] in group, results))
             for cluster in group_clusters:
@@ -418,7 +421,7 @@ class AbstractClusterOpenAI:
         df.to_csv(path, encoding='utf-8', index=False)
         path = os.path.join(folder, self.args.case_name + '_iterative_clustering_summary.json')
         df.to_json(path, orient='records')
-        # Assign clusters to docs
+        # # Assign clusters to docs
         for result in results:
             cluster_id = result['cluster']
             doc_ids = result['doc_ids']
@@ -475,18 +478,21 @@ class AbstractClusterOpenAI:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+
 # Main entry
 if __name__ == '__main__':
     try:
         # Re-cluster large cluster into sub-clusters
-        iteration = 8
-        cluster_no = 3
+        iteration = 4
+        cluster_no = 6
         ac = AbstractClusterOpenAI(iteration, cluster_no)
         # ac.get_doc_vectors(is_load=True)
         # ac.run_HDBSCAN_cluster_experiments()
         # ac.find_best_HDBSCAN_cluster_result()
         # ac.output_large_clusters_as_corpus()
-        # ac.collect_iterative_cluster_results()
+
+        # Aggregate iterative clustering results
+        ac.collect_iterative_cluster_results()
         ac.visualise_abstract_cluster_results()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))

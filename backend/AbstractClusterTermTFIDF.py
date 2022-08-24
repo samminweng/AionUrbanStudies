@@ -2,13 +2,9 @@ import getpass
 import os
 import sys
 from argparse import Namespace
-from functools import reduce
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
-# Obtain the cluster results of the best results and extract cluster topics using TF-IDF
-from sentence_transformers import SentenceTransformer
 
 from AbstractClusterTermTFIDFUtility import AbstractClusterTermTFIDFUtility
 
@@ -30,11 +26,12 @@ class AbstractClusterTermTFIDF:
         )
 
     # Derive the distinct from each cluster of documents
-    def derive_cluster_terms_by_TF_IDF(self):
+    def derive_cluster_terms_by_TFIDF(self):
         try:
-            term_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms')
+            term_folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase, 'TFIDF_terms')
+            Path(term_folder).mkdir(parents=True, exist_ok=True)
             # Get the cluster docs
-            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            path = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
                                 self.args.case_name + '_clusters.json')
             # Load the documents clustered by
             clustered_doc_df = pd.read_json(path)
@@ -42,118 +39,83 @@ class AbstractClusterTermTFIDF:
             clustered_doc_df['Text'] = clustered_doc_df['Title'] + ". " + clustered_doc_df['Abstract']
             # Group the documents and doc_id by clusters
             docs_per_cluster_df = clustered_doc_df.groupby(['Cluster'], as_index=False) \
-                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text),
-                      'Score': "mean"})
-            # Get top 100 topics (1, 2, 3 grams) for each cluster
+                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
+            # Get 2-gram for each cluster
             n_gram_term_list = AbstractClusterTermTFIDFUtility.get_n_gram_tf_idf_terms(docs_per_cluster_df,
-                                                                                      term_folder)
-            results = []
-            for i, cluster in docs_per_cluster_df.iterrows():
+                                                                                       term_folder,
+                                                                                       is_load=False)
+            # Load cluster results
+            path = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
+                                self.args.case_name + '_iterative_clustering_summary.json')
+            cluster_result_df = pd.read_json(path)
+            cluster_result_df['text'] = docs_per_cluster_df['Text']
+            cluster_results = cluster_result_df.to_dict("records")
+            # print(cluster_results)
+            for cluster_result in cluster_results:
                 try:
-                    cluster_no = cluster['Cluster']
-                    score = cluster['Score']
-                    doc_ids = cluster['DocId']
-                    doc_texts = cluster['Text']
-                    result = {"Cluster": cluster_no, "Score": score, 'NumDocs': len(doc_ids), 'DocIds': doc_ids}
-                    n_gram_terms = []
-                    # Collect the topics of 1 gram, 2 gram and 3 gram
-                    for n_gram_range in [1, 2]:
+                    cluster_no = cluster_result['cluster']
+                    doc_ids = cluster_result['doc_ids']
+                    doc_texts = cluster_result['text']
+                    # n_gram_terms = []
+                    # Collect the 2-gram words
+                    for n_gram_range in [2]:
                         n_gram = next(n_gram for n_gram in n_gram_term_list
                                       if n_gram['n_gram'] == n_gram_range)
                         # Collect top 300 terms
                         cluster_terms = n_gram['terms'][str(cluster_no)][:300]
-                        # Create a mapping between the topic and its associated articles (doc)
+                        # Create a mapping between the topic and its associated abstracts (docs)
                         doc_per_term = AbstractClusterTermTFIDFUtility.group_docs_by_terms(n_gram_range,
-                                                                                          doc_ids, doc_texts,
-                                                                                          cluster_terms)
-                        n_gram_type = 'Term-' + str(n_gram_range) + '-gram'
-                        result[n_gram_type] = doc_per_term
-                        n_gram_terms += doc_per_term
-                    result['Term-N-gram'] = AbstractClusterTermTFIDFUtility.merge_n_gram_terms(n_gram_terms)
-                    results.append(result)
+                                                                                           doc_ids, doc_texts,
+                                                                                           cluster_terms)
+                        cluster_result[str(n_gram_range) + '-grams'] = doc_per_term
+                        # n_gram_terms += doc_per_term
+                    # result['Term-N-gram'] = AbstractClusterTermTFIDFUtility.merge_n_gram_terms(n_gram_terms)
+                    # results.append(result)
                     print('Derive term of cluster #{no}'.format(no=cluster_no))
                 except Exception as _err:
                     print("Error occurred! {err}".format(err=_err))
                     sys.exit(-1)
             # Write the result to csv and json file
-            cluster_df = pd.DataFrame(results, columns=['Cluster', 'Score', 'NumDocs', 'DocIds',
-                                                        'Term-1-gram', 'Term-2-gram', 'Term-N-gram'])
-            folder = os.path.join(term_folder, 'TF_IDF_Terms')
+            cluster_df = pd.DataFrame(cluster_results, columns=['cluster', '2-grams'])
+            cluster_df.rename(columns={'2-grams': 'terms'}, inplace=True)
+            folder = os.path.join(term_folder)
             Path(folder).mkdir(parents=True, exist_ok=True)
-            path = os.path.join(folder, 'TF-IDF_cluster_term.csv')
+            path = os.path.join(folder, 'TFIDF_cluster_terms.csv')
             cluster_df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            path = os.path.join(folder, 'TF-IDF_cluster_term.json')
+            path = os.path.join(folder, 'TFIDF_cluster_terms.json')
             cluster_df.to_json(path, orient='records')
             print('Output terms per cluster to ' + path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
-    #  Summarize cluster terms and output to a single file
-    def summarize_cluster_terms(self):
-        def get_cluster_terms(terms, top_n=10):
-            # Get top 10 terms
-            cluster_terms = terms[:top_n]
-            # Sort the cluster terms by number of docs and freq
-            cluster_terms = sorted(cluster_terms, key=lambda t: (len(t['doc_ids']), t['freq']), reverse=True)
-            # print(cluster_terms)
-            return cluster_terms
-
-        try:
-            term_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms')
-            # Load cluster topics
-            path = os.path.join(term_folder, 'TF_IDF_Terms', 'TF-IDF_cluster_term.json')
-            cluster_df = pd.read_json(path)
-            # Write out to csv and json file
-            cluster_df = cluster_df[['Cluster', 'Score', 'NumDocs', 'DocIds', 'Term-N-gram']]
-            cluster_df.rename(columns={'Term-N-gram': 'Terms'}, inplace=True)
-            cluster_df['Terms'] = cluster_df['Terms'].apply(lambda terms: get_cluster_terms(terms, 10))
-            # # Output cluster df to csv or json file
-            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.csv')
-            cluster_df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.json')
-            cluster_df.to_json(path, orient='records')
-            # Output a summary of top 10 Topics of each cluster
-            clusters = cluster_df.to_dict("records")
-            summary_df = cluster_df.copy(deep=True)
-            total = summary_df['NumDocs'].sum()
-            summary_df['Percent'] = list(map(lambda c: c['NumDocs'] / total, clusters))
-            summary_df['Terms'] = list(
-                map(lambda c: ", ".join(list(map(lambda t: t['term'], c['Terms'][:10]))), clusters))
-            summary_df = summary_df.reindex(columns=['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms'])
-            # Output the summary as csv
-            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms_summary.csv')
-            summary_df.to_csv(path, encoding='utf-8', index=False)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
-
-    # Extract distinct term from each article
-    def derive_article_terms_by_TF_IDF(self):
+    # Extract distinct term from each abstract
+    def derive_abstract_terms_by_TFIDF(self):
         try:
             # Load the corpus
-            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            path = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
                                 self.args.case_name + '_clusters.json')
             docs = pd.read_json(path).to_dict("records")
-            folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'article_terms')
+            folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
+                                  'TFIDF_terms', 'abstract_terms')
             Path(folder).mkdir(parents=True, exist_ok=True)
-            article_terms = AbstractClusterTermTFIDFUtility.get_TFIDF_terms_from_individual_article(docs, folder,
-                                                                                                   is_load=True)
+            abstract_terms = AbstractClusterTermTFIDFUtility.get_TFIDF_terms_from_individual_article(docs, folder,
+                                                                                                     is_load=True)
             # Update each doc with TFIDF terms
-            for index, doc in enumerate(docs):
+            for doc, terms in zip(docs, abstract_terms):
                 doc_id = doc['DocId']
-                terms = article_terms[index]
                 assert terms['DocId'] == doc_id, "Cannot find TFIDF terms"
-                doc['TFIDFTerms'] = terms['N-Grams']
+                doc['TFIDFTerms'] = terms['Terms']
             df = pd.DataFrame(docs)
             # Update the corpus with TFIDF terms
-            df = df.reindex(columns=['Cluster', 'DocId', 'Cited by', 'KeyPhrases', 'TFIDFTerms', 'Author Keywords',
-                                     'Title', 'Abstract', 'Year', 'Document Type', 'Authors', 'DOI',
-                                     'Score', 'x', 'y', 'CandidatePhrases'])
-            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            df = df.reindex(columns=['Cluster', 'DocId', 'Cited by', 'Title', 'Author Keywords', 'Abstract',
+                                     'Year', 'Source title', 'Authors', 'DOI', 'Document Type', 'x', 'y',
+                                     'TFIDFTerms'])
+            path = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
                                 self.args.case_name + '_clusters.csv')
             df.to_csv(path, encoding='utf-8', index=False)
             # # # Write to a json file
-            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            path = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
                                 self.args.case_name + '_clusters.json')
             df.to_json(path, orient='records')
             print('Output TFIDF terms per doc to ' + path)
@@ -163,9 +125,10 @@ class AbstractClusterTermTFIDF:
     # Extract frequent terms per abstract cluster
     def derive_freq_terms_per_cluster(self):
         try:
-            term_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster_terms')
+            term_folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name,
+                                       self.args.phase, 'TFIDF_terms')
             # Get the cluster docs
-            path = os.path.join('output', self.args.case_name, self.args.cluster_folder,
+            path = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
                                 self.args.case_name + '_clusters.json')
             # Load the documents clustered by
             clustered_doc_df = pd.read_json(path)
@@ -173,32 +136,28 @@ class AbstractClusterTermTFIDF:
             clustered_doc_df['Text'] = clustered_doc_df['Title'] + ". " + clustered_doc_df['Abstract']
             # Group the documents and doc_id by clusters
             docs_per_cluster_df = clustered_doc_df.groupby(['Cluster'], as_index=False) \
-                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text),
-                      'Score': "mean"})
+                .agg({'DocId': lambda doc_id: list(doc_id), 'Text': lambda text: list(text)})
             docs_per_clusters = docs_per_cluster_df.to_dict("records")
             # Load TF-IDF terms results
-            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.json')
+            path = os.path.join(term_folder, 'TFIDF_cluster_terms.json')
             cluster_terms = pd.read_json(path).to_dict("records")
             # Get top 10 frequent terms (2 grams) within each cluster
-            for cluster_term in cluster_terms:
-                cluster_no = cluster_term['Cluster']
+            for cluster in cluster_terms:
+                cluster_no = cluster['Cluster']
                 n_gram_range = 2
                 freq_terms = AbstractClusterTermTFIDFUtility.get_n_gram_freq_terms(docs_per_clusters, cluster_no, n_gram_range)
-                # Get top 10 terms
-                top_freq_terms = freq_terms[:80]
                 # Update with frequent terms
-                cluster_term['FreqTerms'] = top_freq_terms
+                cluster['FreqTerms'] = freq_terms
                 # Write output to csv
-                df = pd.DataFrame(top_freq_terms)
+                df = pd.DataFrame(freq_terms)
                 folder = os.path.join(term_folder, 'freq_terms')
                 path = os.path.join(folder, 'freq_terms_cluster_' + str(cluster_no) + '.csv')
                 df.to_csv(path, encoding='utf-8', index=False)
             # Write output to csv and json file
-            df = pd.DataFrame(cluster_terms, columns=['Cluster', 'Score', 'NumDocs', 'Percent', 'DocIds', 'Terms',
-                                                      'FreqTerms'])
-            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.csv')
+            df = pd.DataFrame(cluster_terms, columns=['cluster', 'freq_terms'])
+            path = os.path.join(term_folder, self.args.case_name + '_TFIDF_cluster_terms.csv')
             df.to_csv(path, encoding='utf-8', index=False)
-            path = os.path.join(term_folder, self.args.case_name + '_TF-IDF_cluster_terms.json')
+            path = os.path.join(term_folder, self.args.case_name + '_TFIDF_cluster_terms.json')
             df.to_json(path, orient='records')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -208,15 +167,40 @@ class AbstractClusterTermTFIDF:
 if __name__ == '__main__':
     try:
         ct = AbstractClusterTermTFIDF()
-        ct.derive_cluster_terms_by_TF_IDF()
-        # ct.summarize_cluster_terms()
-        # ct.derive_article_terms_by_TF_IDF()
-        # ct.derive_freq_terms_per_cluster()
+        # ct.derive_cluster_terms_by_TFIDF()
+        # ct.derive_abstract_terms_by_TFIDF()
+        ct.derive_freq_terms_per_cluster()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
 
 
 
+# #  Summarize cluster terms and output to a single file
+    # def summarize_cluster_terms(self):
+    #     # Get top
+    #     def get_cluster_terms(terms, top_n=10):
+    #         # Get top 10 terms
+    #         cluster_terms = terms[:top_n]
+    #         # Sort the cluster terms by number of docs and freq
+    #         cluster_terms = sorted(cluster_terms, key=lambda t: (len(t['doc_ids']), t['freq']), reverse=True)
+    #         # print(cluster_terms)
+    #         return cluster_terms
+    #
+    #     try:
+    #         term_folder = os.path.join('output',  self.args.case_name + '_' + self.args.embedding_name,
+    #                                    self.args.phase, 'TFIDF_terms')
+    #         # Load cluster terms
+    #         path = os.path.join(term_folder, 'TFIDF_cluster_term.json')
+    #         cluster_df = pd.read_json(path)
+    #         # Write out to csv and json file
+    #         cluster_df['Terms'] = cluster_df['Terms'].apply(lambda terms: get_cluster_terms(terms, 10))
+    #         # # Output cluster df to csv or json file
+    #         path = os.path.join(term_folder, self.args.case_name + '_TFIDF_cluster_terms.csv')
+    #         cluster_df.to_csv(path, encoding='utf-8', index=False)
+    #         path = os.path.join(term_folder, self.args.case_name + '_TFIDF_cluster_terms.json')
+    #         cluster_df.to_json(path, orient='records')
+    #     except Exception as err:
+    #         print("Error occurred! {err}".format(err=err))
 # Collect all iterative cluster results
     # def collect_iterative_cluster_results(self):
     #     cluster_folder = os.path.join('output', self.args.case_name, self.args.cluster_folder, 'cluster')
