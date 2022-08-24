@@ -3,9 +3,10 @@
 import os
 import sys
 from argparse import Namespace
-from functools import reduce
 from pathlib import Path
-
+import plotly.graph_objects as go
+import plotly.io as pio
+import seaborn as sns
 import hdbscan
 import umap
 from nltk.tokenize import sent_tokenize, word_tokenize
@@ -22,33 +23,36 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 class AbstractClusterOpenAI:
-    def __init__(self, _iteration):
+    def __init__(self, _iteration, _cluster_no):
         self.args = Namespace(
             case_name='AIMLUrbanStudyCorpus',
             embedding_name='OpenAIEmbedding',
             model_name='curie',
             iteration=_iteration,
+            cluster_no=_cluster_no,
             iteration_folder='iteration_' + str(_iteration),
+            cluster_folder='cluster_' + str(_cluster_no),
             phase='abstract_clustering_phase',
             path='data',
+            seed=36,
             n_neighbors=150,
             min_dist=0.0,
             epilson=0.0,
             dimensions=[500, 450, 400, 350, 300, 250, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55,
                         50, 45, 40, 35, 30, 25, 20],
             min_samples=15,
-            # min_samples=[30, 25, 20, 15, 10],
             min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
         )
-        path = os.path.join('data', self.args.case_name, self.args.case_name + '_cleaned.csv')
+        path = os.path.join('data', self.args.case_name + '_' + self.args.embedding_name, self.args.iteration_folder,
+                            self.args.cluster_folder, self.args.case_name + '_cleaned.csv')
         self.text_df = pd.read_csv(path)
         # # # # # Load all document vectors without outliers
         self.text_df['Text'] = self.text_df['Title'] + ". " + self.text_df['Abstract']
         # Filter out dimensions > the length of text df
-        self.args.dimensions = list(filter(lambda d: d < len(self.text_df) - 5 and d != 768, self.args.dimensions))
+        self.args.dimensions = list(filter(lambda d: d < len(self.text_df) - 5, self.args.dimensions))
 
     # Get doc vectors from OpenAI embedding API
-    def get_doc_vectors(self, is_load=False):
+    def get_doc_vectors(self, is_load=True):
         def clean_sentence(_sentences):
             # Preprocess the sentence
             cleaned_sentences = list()  # Skip copy right sentence
@@ -64,32 +68,49 @@ class AbstractClusterOpenAI:
             return cleaned_sentences
 
         try:
-            # Collect all the texts
-            cleaned_texts = list()
-            # Search all the subject words
-            for i, row in self.text_df.iterrows():
-                try:
-                    sentences = clean_sentence(sent_tokenize(row['Text']))  # Clean the sentences
-                    cleaned_text = " ".join(sentences)
-                    cleaned_texts.append(cleaned_text)
-                except Exception as _err:
-                    print("Error occurred! {err}".format(err=_err))
-            self.text_df['CleanText'] = cleaned_texts
-            resp = openai.Embedding.create(
-                input=cleaned_texts,
-                engine="text-similarity-" + self.args.model_name + "-001")
-            doc_embeddings = list()
-            for doc_embedding in resp['data']:
-                doc_embeddings.append(doc_embedding['embedding'])
-            print(doc_embeddings)
-            self.text_df['DocVectors'] = doc_embeddings
-            # Print out the doc vector
-            print(self.text_df)
             folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name,
-                                  'abstract_clustering_phase', self.args.iteration_folder, 'doc_vectors')
-            Path(folder).mkdir(parents=True, exist_ok=True)
-            path = os.path.join(folder, 'doc_vectors.json')
-            self.text_df.to_json(path, orient='records')
+                                  'abstract_clustering_phase', 'doc_vectors')
+            if is_load:
+                path = os.path.join(folder, 'doc_vectors.json')
+                # Load doc vectors
+                doc_vector_df = pd.read_json(path)
+                cluster_doc_ids = self.text_df['DocId'].tolist()
+                cluster_doc_vector = doc_vector_df[doc_vector_df['DocId'].isin(cluster_doc_ids)]
+                # print(cluster_doc_vector)
+                self.text_df['DocVectors'] = cluster_doc_vector['DocVectors'].tolist()
+                # # Print out the doc vector
+                # print(self.text_df)
+                folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name,
+                                      'abstract_clustering_phase', self.args.iteration_folder,
+                                      self.args.cluster_folder, 'doc_vectors')
+                Path(folder).mkdir(parents=True, exist_ok=True)
+                path = os.path.join(folder, 'doc_vectors.json')
+                self.text_df.to_json(path, orient='records')
+            else:
+                # Collect all the texts
+                cleaned_texts = list()
+                # Search all the subject words
+                for i, row in self.text_df.iterrows():
+                    try:
+                        sentences = clean_sentence(sent_tokenize(row['Text']))  # Clean the sentences
+                        cleaned_text = " ".join(sentences)
+                        cleaned_texts.append(cleaned_text)
+                    except Exception as _err:
+                        print("Error occurred! {err}".format(err=_err))
+                self.text_df['CleanText'] = cleaned_texts
+                resp = openai.Embedding.create(
+                    input=cleaned_texts,
+                    engine="text-similarity-" + self.args.model_name + "-001")
+                doc_embeddings = list()
+                for doc_embedding in resp['data']:
+                    doc_embeddings.append(doc_embedding['embedding'])
+                print(doc_embeddings)
+                self.text_df['DocVectors'] = doc_embeddings
+                # Print out the doc vector
+                print(self.text_df)
+                Path(folder).mkdir(parents=True, exist_ok=True)
+                path = os.path.join(folder, 'doc_vectors.json')
+                self.text_df.to_json(path, orient='records')
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
@@ -145,7 +166,7 @@ class AbstractClusterOpenAI:
 
         # Load doc vectors
         folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name,
-                              self.args.phase, self.args.iteration_folder, 'doc_vectors')
+                              self.args.phase, self.args.iteration_folder, self.args.cluster_folder, 'doc_vectors')
         path = os.path.join(folder, 'doc_vectors.json')
         doc_vector_df = pd.read_json(path)
         doc_vectors = doc_vector_df.to_dict("records")
@@ -154,7 +175,6 @@ class AbstractClusterOpenAI:
         # Experiment HDBSCAN clustering with different parameters
         results = list()
         max_score = 0.0
-        best_reduced_vectors = None
         for dimension in self.args.dimensions:
             if dimension <= 500:
                 # Run HDBSCAN on reduced dimensional vectors
@@ -162,7 +182,7 @@ class AbstractClusterOpenAI:
                     n_neighbors=self.args.n_neighbors,
                     min_dist=self.args.min_dist,
                     n_components=dimension,
-                    random_state=42,
+                    random_state=self.args.seed,
                     metric="cosine").fit_transform(doc_vector_df['DocVectors'].tolist())
             else:
                 # Run HDBSCAN on raw vectors
@@ -191,7 +211,8 @@ class AbstractClusterOpenAI:
 
                     # Compute silhouette score for clustered results
                     distance_vectors = distances.tolist()
-                    if len(cluster_results) > 0:
+                    # Store the results at least 1 clusters
+                    if len(cluster_results) > 1:
                         cluster_results, avg_score = compute_Silhouette_score(cluster_labels, distance_vectors, cluster_results)
                         outlier = next(r for r in cluster_results if r['cluster'] == -1)
                         result['avg_score'] = avg_score
@@ -209,28 +230,148 @@ class AbstractClusterOpenAI:
 
         # Output the clustering results of a dimension
         folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
-                              self.args.iteration_folder, 'hdbscan_experiments')
+                              self.args.iteration_folder, self.args.cluster_folder, 'hdbscan_experiments')
         Path(folder).mkdir(parents=True, exist_ok=True)
         # Output the detailed clustering results
         result_df = pd.DataFrame(results)
         # Output cluster results to CSV
-        path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_results.csv')
+        path = os.path.join(folder, 'cluster_doc_vector_results.csv')
         result_df.to_csv(path, encoding='utf-8', index=False, columns=['dimension', 'min_cluster_size',
                                                                        'avg_score', 'total_clusters', 'outlier', 'cluster_results'])
-        path = os.path.join(folder, 'HDBSCAN_cluster_doc_vector_results.json')
+        path = os.path.join(folder, 'cluster_doc_vector_results.json')
         result_df.to_json(path, orient='records')
 
+    # Get the HDBSCAN clustering results with the highest silhouette scores and plots the clustering dot chart
+    def find_best_HDBSCAN_cluster_result(self):
+        def visualise_cluster_results(_docs, _cluster_results, _dimension, _min_cluster_size, _folder):
+            try:
+                df = pd.DataFrame(_docs)
+                # Visualise HDBSCAN clustering results using dot chart
+                colors = sns.color_palette('tab10', n_colors=10).as_hex()
+                marker_size = 8
+                # Plot clustered dots and outliers
+                fig = go.Figure()
+                none_outliers = list(filter(lambda r: r['count'] <= 40, _cluster_results))
+                for _result in none_outliers:
+                    _cluster_no = _result['cluster']
+                    dots = df.loc[df['Cluster'] == _cluster_no, :]
+                    marker_color = colors[_cluster_no]
+                    marker_symbol = 'circle'
+                    name = 'Cluster {no}'.format(no=_cluster_no)
+                    fig.add_trace(go.Scatter(
+                        name=name,
+                        mode='markers',
+                        x=dots['x'].tolist(),
+                        y=dots['y'].tolist(),
+                        marker=dict(line_width=1, symbol=marker_symbol,
+                                    size=marker_size, color=marker_color)
+                    ))
+                # Figure layout
+                fig.update_layout(width=600, height=800,
+                                  legend=dict(orientation="v"),
+                                  margin=dict(l=20, r=20, t=30, b=40))
+                file_name = 'dimension_' + str(_dimension)  + '_min_cluster_size_' + str(_min_cluster_size)
+                file_path = os.path.join(folder, file_name + ".png")
+                pio.write_image(fig, file_path, format='png')
+                print("Output the images of clustered results to " + file_path)
+            except Exception as err:
+                print("Error occurred! {err}".format(err=err))
 
+        try:
+            # Find the best results in each dimension
+            folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
+                                  self.args.iteration_folder, self.args.cluster_folder, 'hdbscan_experiments')
+            # Load experiment results
+            path = os.path.join(folder, 'cluster_doc_vector_results.json')
+            results = pd.read_json(path).to_dict("records")
+            # sort results by scores and min_cluster_size
+            results = sorted(results, key=lambda r: (r['avg_score'], r['min_cluster_size']), reverse=True)
+            # print(results)
+            best_result = results[0]
+            # # Get the highest score of d_results
+            dimension = best_result['dimension']
+            min_cluster_size = best_result['min_cluster_size']
+            cluster_results = best_result['cluster_results']
+            # Sort cluster results by score
+            cluster_results = sorted(cluster_results, key=lambda r: r['score'], reverse=True)
+            reduced_vectors = best_result['reduced_vectors']
+            # Assign cluster results to docs
+            docs = self.text_df.to_dict("records")
+            cluster_id = 1
+            for result in cluster_results:
+                result['cluster'] = cluster_id
+                doc_ids = result['doc_ids']
+                cluster_docs = filter(lambda d: d['DocId'] in doc_ids, docs)
+                for doc in cluster_docs:
+                    doc['Cluster'] = cluster_id
+                cluster_id = cluster_id + 1
+            # print(docs)
+            # Updated doc's x and y from reduced vectors
+            for doc, doc_vectors in zip(docs, reduced_vectors):
+                # Project the doc vectors x, y dimension for visualisation
+                doc['x'] = doc_vectors[0]
+                doc['y'] = doc_vectors[1]
+            visualise_cluster_results(docs, cluster_results, dimension, min_cluster_size, folder)
+            # Output cluster results
+            df = pd.DataFrame(cluster_results)
+            path = os.path.join(folder, 'cluster_results.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'cluster_results.json')
+            df.to_json(path, orient='records')
+            # Output abstract clustering
+            docs_df = pd.DataFrame(docs, columns=['Cluster', 'DocId', 'Cited by', 'Title', 'Author Keywords',
+                                                  'Abstract', 'Year', 'Source title', 'Authors', 'DOI',
+                                                  'Document Type', 'x', 'y'])
+            path = os.path.join(folder, 'docs_cluster_results.csv')
+            docs_df.to_csv(path, encoding='utf-8', index=False)
+            path = os.path.join(folder, 'docs_cluster_results.json')
+            docs_df.to_json(path, orient='records')
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # #Output large clusters (>40) and store as a corpus as input for the next iteration
+    def output_large_clusters_as_corpus(self):
+        try:
+            # Get the outliers identified by HDBSCAN
+            folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase,
+                                  self.args.iteration_folder, self.args.cluster_folder, 'hdbscan_experiments')
+            path = os.path.join(folder, 'cluster_results.json')
+            # Get the best clustering of silhouette score
+            cluster_results = pd.read_json(path).to_dict("records")
+            # Get all large clusters
+            large_clusters = list(filter(lambda c: c['count'] >= 40, cluster_results))
+            next_iteration = self.args.iteration + 1
+            # Load the docs
+            path = os.path.join(folder, 'docs_cluster_results.json')
+            docs = pd.read_json(path).to_dict("records")
+            # print(large_clusters)
+            for cluster in large_clusters:
+                cluster_no = cluster['cluster']
+                doc_ids = cluster['doc_ids']
+                cluster_docs = list(filter(lambda d: d['DocId'] in doc_ids, docs))
+                # print(cluster_docs)
+                cluster_docs_df = pd.DataFrame(cluster_docs)
+                # output to data folder
+                folder = os.path.join('data', self.args.case_name + '_' + self.args.embedding_name,  # self.args.cluster_folder,
+                                      'iteration_' + str(next_iteration), 'cluster_' + str(cluster_no))
+                Path(folder).mkdir(parents=True, exist_ok=True)
+                path = os.path.join(folder, self.args.case_name + '_cleaned.csv')
+                # Save outlier df to another corpus
+                cluster_docs_df.to_csv(path, encoding='utf-8', index=False)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
 
 # Main entry
 if __name__ == '__main__':
     try:
         # Re-cluster large cluster into sub-clusters
-        iteration = 1
-        ac = AbstractClusterOpenAI(iteration)
-        # ac.get_doc_vectors()
-        ac.run_HDBSCAN_cluster_experiments()
-
+        iteration = 2
+        cluster_no = 8
+        ac = AbstractClusterOpenAI(iteration, cluster_no)
+        # ac.get_doc_vectors(is_load=True)
+        # ac.run_HDBSCAN_cluster_experiments()
+        # ac.find_best_HDBSCAN_cluster_result()
+        ac.output_large_clusters_as_corpus()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
