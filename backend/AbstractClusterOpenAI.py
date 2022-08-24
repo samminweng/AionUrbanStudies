@@ -34,7 +34,7 @@ class AbstractClusterOpenAI:
             cluster_folder='cluster_' + str(_cluster_no),
             phase='abstract_clustering_phase',
             path='data',
-            seed=36,
+            seed=3,
             n_neighbors=150,
             min_dist=0.0,
             epilson=0.0,
@@ -366,8 +366,8 @@ class AbstractClusterOpenAI:
 if __name__ == '__main__':
     try:
         # Re-cluster large cluster into sub-clusters
-        iteration = 2
-        cluster_no = 8
+        iteration = 3
+        cluster_no = 3
         ac = AbstractClusterOpenAI(iteration, cluster_no)
         # ac.get_doc_vectors(is_load=True)
         # ac.run_HDBSCAN_cluster_experiments()
