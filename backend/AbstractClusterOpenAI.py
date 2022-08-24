@@ -40,7 +40,7 @@ class AbstractClusterOpenAI:
             epilson=0.0,
             dimensions=[500, 450, 400, 350, 300, 250, 200, 150, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55,
                         50, 45, 40, 35, 30, 25, 20],
-            min_samples=15,
+            min_samples=5,
             min_cluster_size=[10, 15, 20, 25, 30, 35, 40, 45, 50]
         )
         path = os.path.join('data', self.args.case_name + '_' + self.args.embedding_name, self.args.iteration_folder,
@@ -366,12 +366,12 @@ class AbstractClusterOpenAI:
 if __name__ == '__main__':
     try:
         # Re-cluster large cluster into sub-clusters
-        iteration = 3
+        iteration = 8
         cluster_no = 3
         ac = AbstractClusterOpenAI(iteration, cluster_no)
-        # ac.get_doc_vectors(is_load=True)
-        # ac.run_HDBSCAN_cluster_experiments()
-        # ac.find_best_HDBSCAN_cluster_result()
+        ac.get_doc_vectors(is_load=True)
+        ac.run_HDBSCAN_cluster_experiments()
+        ac.find_best_HDBSCAN_cluster_result()
         ac.output_large_clusters_as_corpus()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
