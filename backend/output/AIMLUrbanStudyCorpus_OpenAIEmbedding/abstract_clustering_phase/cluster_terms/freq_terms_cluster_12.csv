@@ -1,0 +1,320 @@
+term,freq,range,score,doc_ids
+urban environment,25,12,37,"[111, 149, 221, 246, 278, 279, 284, 400, 448, 471, 506, 518]"
+nlos signal,10,4,14,"[111, 278, 279, 506]"
+path loss,11,3,14,"[221, 284, 471]"
+machine learning,7,6,13,"[111, 279, 446, 448, 471, 506]"
+gnss signal,5,4,9,"[246, 278, 279, 506]"
+neural network,5,3,8,"[149, 278, 448]"
+nlos multipath,6,2,8,"[278, 506]"
+rf signature,7,1,8,[446]
+gnss positioning,4,3,7,"[278, 279, 506]"
+signal reception,4,2,6,"[111, 400]"
+signal strength,3,3,6,"[111, 400, 448]"
+urban area,3,3,6,"[221, 400, 446]"
+empirical model,3,3,6,"[221, 284, 471]"
+navigation system,4,2,6,"[246, 279]"
+multipath detection,4,2,6,"[278, 506]"
+direct signal,4,2,6,"[278, 506]"
+signal correlation,4,2,6,"[278, 506]"
+support vector,3,3,6,"[279, 400, 506]"
+vector machine,3,3,6,"[279, 400, 506]"
+location information,3,2,5,"[111, 446]"
+position solution,3,2,5,"[111, 246]"
+real time,4,1,5,[149]
+localization problem,3,2,5,"[149, 518]"
+coverage condition,4,1,5,[246]
+multipath signal,3,2,5,"[278, 506]"
+signal correlators,3,2,5,"[278, 506]"
+gnss receiver,3,2,5,"[278, 506]"
+correlation function,3,2,5,"[278, 506]"
+level observation,4,1,5,[279]
+global positioning,2,2,4,"[111, 400]"
+positioning system,2,2,4,"[111, 400]"
+decision tree,2,2,4,"[111, 279]"
+pseudorange error,3,1,4,[111]
+satellite elevation,2,2,4,"[111, 400]"
+elevation angle,2,2,4,"[111, 400]"
+positioning accuracy,2,2,4,"[111, 278]"
+root mean,2,2,4,"[111, 471]"
+mean square,2,2,4,"[111, 471]"
+square error,2,2,4,"[111, 471]"
+aerial vehicle,2,2,4,"[149, 471]"
+cellular network,2,2,4,"[149, 221]"
+cellular base,2,2,4,"[149, 448]"
+base station,2,2,4,"[149, 446]"
+lte network,2,2,4,"[221, 446]"
+loss model,2,2,4,"[221, 471]"
+result reveal,2,2,4,"[221, 279]"
+positioning performance,3,1,4,[246]
+pdop value,3,1,4,[246]
+global navigation,2,2,4,"[278, 506]"
+navigation satellite,2,2,4,"[278, 506]"
+satellite system,2,2,4,"[278, 506]"
+gnss satellite,2,2,4,"[278, 506]"
+detection technique,2,2,4,"[278, 506]"
+key idea,2,2,4,"[278, 506]"
+low power,2,2,4,"[278, 506]"
+nlos classification,2,2,4,"[278, 506]"
+classification experiment,2,2,4,"[278, 506]"
+correlation data,2,2,4,"[278, 506]"
+different location,2,2,4,"[278, 506]"
+shinjuku area,2,2,4,"[278, 506]"
+received signal,2,2,4,"[279, 518]"
+los signal,2,2,4,"[279, 506]"
+signal propagation,2,2,4,"[279, 400]"
+double difference,2,2,4,"[279, 400]"
+svm model,3,1,4,[284]
+measurement data,2,2,4,"[284, 446]"
+prediction error,2,2,4,"[284, 471]"
+training data,2,2,4,"[400, 471]"
+practical application,2,2,4,"[400, 518]"
+rf fingerprint,3,1,4,[446]
+localization scheme,2,2,4,"[448, 518]"
+prediction performance,2,2,4,"[471, 518]"
+range error,2,1,3,[111]
+reception classification,2,1,3,[111]
+localization technique,2,1,3,[149]
+localization solution,2,1,3,[149]
+uav localization,2,1,3,[149]
+nlos location,2,1,3,[221]
+visible satellite,2,1,3,[246]
+whole day,2,1,3,[246]
+north coverage,2,1,3,[246]
+new method,2,1,3,[279]
+data feature,2,1,3,[279]
+time series,2,1,3,[279]
+rinex level,2,1,3,[279]
+nmea level,2,1,3,[279]
+classification method,2,1,3,[279]
+propagation model,2,1,3,[284]
+field measurement,2,1,3,[284]
+code pseudorange,2,1,3,[400]
+fingerprint database,2,1,3,[446]
+estimation accuracy,2,1,3,[446]
+rural environment,2,1,3,[448]
+nlos classifier,2,1,3,[506]
+source localization,2,1,3,[518]
+regression scheme,2,1,3,[518]
+arrival time,2,1,3,[518]
+time difference,2,1,3,[518]
+localization accuracy,2,1,3,[518]
+smart city,1,1,2,[111]
+environment attenuate,1,1,2,[111]
+gps signal,1,1,2,[111]
+case multipath,1,1,2,[111]
+effect cause,1,1,2,[111]
+cause range,1,1,2,[111]
+residual effect,1,1,2,[111]
+recent machine,1,1,2,[111]
+multiple variable,1,1,2,[111]
+gps measurement,1,1,2,[111]
+low accuracy,1,1,2,[111]
+pseudorange residual,1,1,2,[111]
+predicted pseudorange,1,1,2,[111]
+first corrects,1,1,2,[111]
+conventional method,1,1,2,[111]
+integral part,1,1,2,[149]
+military application,1,1,2,[149]
+time manner,1,1,2,[149]
+time localization,1,1,2,[149]
+alternative solution,1,1,2,[149]
+message exchange,1,1,2,[149]
+cellular infrastructure,1,1,2,[149]
+rssi measurement,1,1,2,[149]
+exact optimization,1,1,2,[149]
+optimization technique,1,1,2,[149]
+time calculation,1,1,2,[149]
+dynamic application,1,1,2,[149]
+strong candidate,1,1,2,[149]
+attractive alternative,1,1,2,[149]
+reinforcement learning,1,1,2,[149]
+comparative analysis,1,1,2,[149]
+loss prediction,1,1,2,[221]
+prediction path,1,1,2,[221]
+testing procedure,1,1,2,[221]
+loss dataset,1,1,2,[221]
+simulated result,1,1,2,[221]
+digital terrain,1,1,2,[221]
+terrain model,1,1,2,[221]
+propagation condition,1,1,2,[221]
+algorithms forecast,1,1,2,[221]
+forecast path,1,1,2,[221]
+remarkable accuracy,1,1,2,[221]
+examined algorithms,1,1,2,[221]
+comparison purpose,1,1,2,[221]
+observation condition,1,1,2,[246]
+significant influence,1,1,2,[246]
+final stage,1,1,2,[246]
+future development,1,1,2,[246]
+development trend,1,1,2,[246]
+mathematical fusion,1,1,2,[246]
+fusion model,1,1,2,[246]
+urban coverage,1,1,2,[246]
+result show,1,1,2,[246]
+open sky,1,1,2,[246]
+sky condition,1,1,2,[246]
+positioning continuity,1,1,2,[246]
+signal cause,1,1,2,[278]
+correlation value,1,1,2,[278]
+temporal variation,1,1,2,[278]
+nlos discriminator,1,1,2,[278]
+nlos probability,1,1,2,[278]
+positioning calculation,1,1,2,[278]
+experiment result,1,1,2,[278]
+result indicate,1,1,2,[278]
+discrimination rate,1,1,2,[278]
+signal detection,1,1,2,[279]
+accuracy improvement,1,1,2,[279]
+major problem,1,1,2,[279]
+shadow matching,1,1,2,[279]
+map aid,1,1,2,[279]
+omnidirectional camera,1,1,2,[279]
+camera aid,1,1,2,[279]
+classification problem,1,1,2,[279]
+external hardware,1,1,2,[279]
+autonomous integrity,1,1,2,[279]
+integrity monitoring,1,1,2,[279]
+good accuracy,1,1,2,[279]
+current machine,1,1,2,[279]
+utilize information,1,1,2,[279]
+single epoch,1,1,2,[279]
+signal classification,1,1,2,[279]
+convolution layer,1,1,2,[279]
+short term,1,1,2,[279]
+term memory,1,1,2,[279]
+memory block,1,1,2,[279]
+time domain,1,1,2,[279]
+value domain,1,1,2,[279]
+series feature,1,1,2,[279]
+differenced ambiguity,1,1,2,[279]
+difference phase,1,1,2,[279]
+pseudorange consistency,1,1,2,[279]
+svm classification,1,1,2,[279]
+improved classification,1,1,2,[279]
+classification accuracy,1,1,2,[279]
+signal error,1,1,2,[279]
+significant improvement,1,1,2,[279]
+svm classifier,1,1,2,[279]
+single point,1,1,2,[279]
+point positioning,1,1,2,[279]
+spp test,1,1,2,[279]
+valid solution,1,1,2,[279]
+various receiver,1,1,2,[279]
+receiver type,1,1,2,[279]
+raw observation,1,1,2,[279]
+nmea observation,1,1,2,[279]
+observation output,1,1,2,[279]
+accurate radio,1,1,2,[284]
+radio network,1,1,2,[284]
+network design,1,1,2,[284]
+new radio,1,1,2,[284]
+radio propagation,1,1,2,[284]
+pl prediction,1,1,2,[284]
+measurement campaign,1,1,2,[284]
+mobile network,1,1,2,[284]
+loss information,1,1,2,[284]
+radio signal,1,1,2,[284]
+mhz frequency,1,1,2,[284]
+urban propagation,1,1,2,[284]
+propagation environment,1,1,2,[284]
+model outperforms,1,1,2,[284]
+low prediction,1,1,2,[284]
+reception classifier,1,1,2,[400]
+national marine,1,1,2,[400]
+marine electronics,1,1,2,[400]
+electronics association,1,1,2,[400]
+independent exchange,1,1,2,[400]
+exchange format,1,1,2,[400]
+basic observables,1,1,2,[400]
+classification rate,1,1,2,[400]
+complex signal,1,1,2,[400]
+baseband signal,1,1,2,[400]
+signal processing,1,1,2,[400]
+processing stage,1,1,2,[400]
+autocorrelation function,1,1,2,[400]
+supervised machine,1,1,2,[400]
+difference observable,1,1,2,[400]
+signal type,1,1,2,[400]
+intermediate frequency,1,1,2,[400]
+frequency data,1,1,2,[400]
+sdr measurement,1,1,2,[400]
+fair comparison,1,1,2,[400]
+common ground,1,1,2,[400]
+different place,1,1,2,[400]
+mobile communication,1,1,2,[446]
+communication network,1,1,2,[446]
+user equipment,1,1,2,[446]
+high accuracy,1,1,2,[446]
+efficient cell,1,1,2,[446]
+cell planning,1,1,2,[446]
+network optimization,1,1,2,[446]
+optimization become,1,1,2,[446]
+commercial ues,1,1,2,[446]
+serving base,1,1,2,[446]
+fingerprint method,1,1,2,[446]
+effective localization,1,1,2,[446]
+localization method,1,1,2,[446]
+information beforehand,1,1,2,[446]
+drive test,1,1,2,[446]
+uplink capacity,1,1,2,[446]
+ue battery,1,1,2,[446]
+field experiment,1,1,2,[446]
+several localization,1,1,2,[446]
+localization model,1,1,2,[446]
+fingerprint localization,1,1,2,[446]
+learning approach,1,1,2,[448]
+cellular environment,1,1,2,[448]
+cellular tower,1,1,2,[448]
+rss fingerprint,1,1,2,[448]
+base transceiver,1,1,2,[448]
+transceiver station,1,1,2,[448]
+mathematical model,1,1,2,[448]
+robust clustering,1,1,2,[448]
+clustering ability,1,1,2,[448]
+experimental result,1,1,2,[448]
+mean distance,1,1,2,[448]
+distance localization,1,1,2,[448]
+localization error,1,1,2,[448]
+important role,1,1,2,[471]
+many application,1,1,2,[471]
+high flexibility,1,1,2,[471]
+low cost,1,1,2,[471]
+uav communication,1,1,2,[471]
+fundamental work,1,1,2,[471]
+propagation characteristic,1,1,2,[471]
+multiple route,1,1,2,[471]
+different altitude,1,1,2,[471]
+prediction model,1,1,2,[471]
+trained model,1,1,2,[471]
+test set,1,1,2,[471]
+mean absolute,1,1,2,[471]
+absolute error,1,1,2,[471]
+high prediction,1,1,2,[471]
+prediction accuracy,1,1,2,[471]
+computational efficiency,1,1,2,[471]
+aa scenario,1,1,2,[471]
+different parameter,1,1,2,[471]
+path visibility,1,1,2,[471]
+major positioning,1,1,2,[506]
+code correlation,1,1,2,[506]
+correlation peak,1,1,2,[506]
+nlos correlation,1,1,2,[506]
+actual dataset,1,1,2,[506]
+localization performance,1,1,2,[518]
+time information,1,1,2,[518]
+relative arrival,1,1,2,[518]
+direct time,1,1,2,[518]
+good performance,1,1,2,[518]
+enough number,1,1,2,[518]
+signal power,1,1,2,[518]
+power parameter,1,1,2,[518]
+frequency dependency,1,1,2,[518]
+developed model,1,1,2,[518]
+acceptable prediction,1,1,2,[518]
+desired level,1,1,2,[518]
+classification approach,1,1,2,[518]
+spatial coordinate,1,1,2,[518]
+coordinate value,1,1,2,[518]
+training example,1,1,2,[518]
+receiver location,1,1,2,[518]
+average localization,1,1,2,[518]

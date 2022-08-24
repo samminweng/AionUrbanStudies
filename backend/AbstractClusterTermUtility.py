@@ -20,7 +20,7 @@ from sklearn.metrics import pairwise_distances, silhouette_samples, silhouette_s
 from AbstractClusterBERTUtility import AbstractClusterBERTUtility
 
 
-class AbstractClusterTermTFIDFUtility:
+class AbstractClusterTermUtility:
     # Static variable
     stop_words = list(stopwords.words('english'))
 
@@ -92,7 +92,7 @@ class AbstractClusterTermTFIDFUtility:
                     _word = _n[0]
                     _pos_tag = _n[1]
                     if bool(re.search(r'\d|[^\w]', _word.lower())) or _word.lower() in string.punctuation or \
-                            _word.lower() in AbstractClusterTermTFIDFUtility.stop_words or _pos_tag not in qualified_tags:
+                            _word.lower() in AbstractClusterTermUtility.stop_words or _pos_tag not in qualified_tags:
                         return False
                 # n-gram is qualified
                 return True
@@ -134,7 +134,7 @@ class AbstractClusterTermTFIDFUtility:
                 try:
                     _text = AbstractClusterBERTUtility.preprocess_text(_doc_text.strip())
                     _sentences = sent_tokenize(_text)
-                    _n_gram_terms = AbstractClusterTermTFIDFUtility.generate_n_gram_candidates(_sentences, _n_gram_range)
+                    _n_gram_terms = AbstractClusterTermUtility.generate_n_gram_candidates(_sentences, _n_gram_range)
                     _doc_terms.append({'DocId': _doc_id, 'terms': _n_gram_terms})
                 except Exception as _err:
                     print("Error occurred! {err}".format(err=_err))
@@ -235,7 +235,7 @@ class AbstractClusterTermTFIDFUtility:
                 cluster_no = doc['cluster']  # doc id is the cluster no
                 sentences = doc['doc']
                 freq_table = {}
-                n_grams = AbstractClusterTermTFIDFUtility.generate_n_gram_candidates(sentences, _n_gram_range)
+                n_grams = AbstractClusterTermUtility.generate_n_gram_candidates(sentences, _n_gram_range)
                 for n_gram in n_grams:
                     n_gram_text = n_gram.lower()
                     if n_gram_text in freq_table:
@@ -409,7 +409,7 @@ class AbstractClusterTermTFIDFUtility:
                     # Convert the preprocessed text to n_grams
                     sentences = sent_tokenize(AbstractClusterBERTUtility.preprocess_text(doc_text))
                     # Obtain the n-grams from the text
-                    n_grams = AbstractClusterTermTFIDFUtility.generate_n_gram_candidates(sentences, n_gram_range)
+                    n_grams = AbstractClusterTermUtility.generate_n_gram_candidates(sentences, n_gram_range)
                     # For each topic, find out the document ids that contain the topic
                     for item in topics_per_cluster:
                         try:
@@ -534,7 +534,7 @@ class AbstractClusterTermTFIDFUtility:
             _frequency_matrix = []
             for _sentences in _doc_sentences:
                 _freq_table = {}  # Key: n_gram, Value: frequencies
-                _n_gram_candidates = AbstractClusterTermTFIDFUtility.generate_n_gram_candidates(_sentences,
+                _n_gram_candidates = AbstractClusterTermUtility.generate_n_gram_candidates(_sentences,
                                                                                                _n_gram_range)
                 for _n_gram in _n_gram_candidates:
                     _n_gram_text = _n_gram.lower()  # Lower the word cases to unify the words
