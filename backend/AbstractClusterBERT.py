@@ -416,6 +416,61 @@ class AbstractClusterBERT:
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
 
+        # Collect all the article clusters < 40 articles as a single file
+
+    def collect_article_cluster_results(self):
+        folder = os.path.join('output', self.args.case_name)
+        # Load corpus
+        corpus_path = os.path.join(folder, 'iteration', self.args.case_name + '_clusters.json')
+        corpus = pd.read_json(corpus_path).to_dict("records")
+        folder_names = ['cluster_0', 'cluster_1', 'cluster_2', 'cluster_3', 'iteration', 'cluster_-1']
+        cluster_results = list()
+        article_results = list()
+        current_cluster_no = 1
+        for folder_name in folder_names:
+            try:
+                iterative_folder = os.path.join(folder, folder_name)
+                cluster_path = os.path.join(iterative_folder,
+                                            self.args.case_name + '_cluster_terms_key_phrases_LDA_topics.json')
+                clusters = pd.read_json(cluster_path).to_dict("records")
+                # filter cluster > 40 articles
+                clusters = list(filter(lambda c: len(c['DocIds']) < 40, clusters))
+                for cluster in clusters:
+                    doc_ids = cluster['DocIds']
+                    score = cluster['Score']
+                    # Get all the articles
+                    articles = list(filter(lambda a: a['DocId'] in doc_ids, corpus))
+                    assert len(articles) < 40, "Article cluster > 40"
+                    assert len(articles) > 0, "Article cluster is empty"
+                    assert len(articles) == len(doc_ids), "Article cluster is not matched"
+                    # Update the cluster and articles
+                    for article in articles:
+                        article['Cluster'] = current_cluster_no
+                        article['Score'] = score
+                    article_results = article_results + articles
+                    cluster['Cluster'] = current_cluster_no
+                    current_cluster_no = current_cluster_no + 1
+                # Add the cluster results
+                cluster_results = cluster_results + clusters
+            except Exception as _err:
+                print("Error occurred! {err}".format(err=_err))
+                sys.exit(-1)
+        # Sort article results by DocId
+        article_results = sorted(article_results, key=lambda c: c['DocId'])
+        # Write article corpus
+        articles_df = pd.DataFrame(article_results, columns=['Cluster', 'Score', 'DocId', 'Cited by', 'Year',
+                                                             'Document Type', 'Title', 'Abstract', 'Author Keywords',
+                                                             'Authors', 'DOI', 'x', 'y'])
+        # articles_df = articles_df.rename(columns={"Cluster": "HDBSCAN_Cluster"})
+        out_folder = os.path.join(folder, self.args.cluster_folder)
+        Path(out_folder).mkdir(parents=True, exist_ok=True)
+        # Write article corpus to csv file
+        path = os.path.join(out_folder, self.args.case_name + '_clusters.csv')
+        articles_df.to_csv(path, encoding='utf-8', index=False)
+        # Write article corpus to a json file
+        path = os.path.join(out_folder, self.args.case_name + '_clusters.json')
+        articles_df.to_json(path, orient='records')
+
 
 # Main entry
 if __name__ == '__main__':

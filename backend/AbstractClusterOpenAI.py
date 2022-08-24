@@ -403,7 +403,12 @@ class AbstractClusterOpenAI:
                 print("Error occurred! {err}".format(err=_err))
                 sys.exit(-1)
         print(results)
-        # Sort clusters within each group
+        # Assign group no to clusters
+        groups = [range(1, 6), range(6, 9), range(9, 12), range(12, 28)]
+        for i, group in enumerate(groups):
+            group_clusters = list(filter(lambda r: r['cluster'] in group, results))
+            for cluster in group_clusters:
+                cluster['group'] = i
         # # Load the results as data frame
         df = pd.DataFrame(results)
         # Output cluster results to CSV
@@ -429,6 +434,47 @@ class AbstractClusterOpenAI:
         df.to_json(path, orient='records')
         # print(df)
 
+    # Plot the abstract cluster results
+    def visualise_abstract_cluster_results(self):
+        try:
+            folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase)
+            # Load clustered docs
+            path = os.path.join(folder, self.args.case_name + '_clusters.json')
+            corpus_df = pd.read_json(path)
+            # Load cluster results
+            path = os.path.join(folder, self.args.case_name + '_iterative_clustering_summary.json')
+            cluster_results = pd.read_json(path).to_dict("records")
+            # Visualise HDBSCAN clustering results using dot chart
+            colors = sns.color_palette('Set2', n_colors=4).as_hex()
+            marker_size = 8
+            # Plot clustered dots and outliers
+            fig = go.Figure()
+            for result in cluster_results:
+                cluster_id = result['cluster']
+                dots = corpus_df.loc[corpus_df['Cluster'] == cluster_id, :]
+                group_no = result['group']
+                marker_color = colors[group_no]
+                marker_symbol = 'circle'
+                name = 'Cluster {no}'.format(no=cluster_id)
+                fig.add_trace(go.Scatter(
+                    name=name,
+                    mode='markers',
+                    x=dots['x'].tolist(),
+                    y=dots['y'].tolist(),
+                    marker=dict(line_width=1, symbol=marker_symbol,
+                                size=marker_size, color=marker_color)
+                ))
+            # Figure layout
+            fig.update_layout(width=600, height=800,
+                              legend=dict(orientation="v"),
+                              margin=dict(l=20, r=20, t=30, b=40))
+            file_name = "abstract_cluster_dot_chart"
+            file_path = os.path.join(folder, file_name + ".png")
+            pio.write_image(fig, file_path, format='png')
+            print("Output the images of clustered results to " + file_path)
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
 # Main entry
 if __name__ == '__main__':
     try:
@@ -440,6 +486,7 @@ if __name__ == '__main__':
         # ac.run_HDBSCAN_cluster_experiments()
         # ac.find_best_HDBSCAN_cluster_result()
         # ac.output_large_clusters_as_corpus()
-        ac.collect_iterative_cluster_results()
+        # ac.collect_iterative_cluster_results()
+        ac.visualise_abstract_cluster_results()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
