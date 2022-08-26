@@ -10,4 +10,4 @@ __pycache__/
 # Ignore the temp vector data
 /.idea/runConfigurations/KeyPhrase.xml
 /output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/key_phrase_clusters/level_0/experiments/
-candidate_vectors.json
+/output/AIMLUrbanStudyCorpus_OpenAIEmbedding/keyword_extraction_phase/candidate_vectors/candidate_vectors.json
