@@ -7,12 +7,13 @@ import sys
 from functools import reduce
 
 import numpy as np
+import openai
 from sklearn.metrics.pairwise import cosine_similarity
 import nltk
 import pandas as pd
 from nltk.corpus import stopwords
 from stanza.server import CoreNLPClient
-from BERTArticleClusterUtility import BERTArticleClusterUtility
+from AbstractClusterBERTUtility import AbstractClusterBERTUtility
 
 nltk_path = os.path.join('/Scratch', getpass.getuser(), 'nltk_data')
 nltk.download('stopwords', download_dir=nltk_path)
@@ -23,6 +24,31 @@ nltk.data.path.append(nltk_path)
 # Helper function for keyword cluster
 class KeywordExtractionUtility:
     stop_words = list(stopwords.words('english'))
+
+    # Compute similarity score of keywords to the abstract
+    # Ref:https://openai.com/blog/introducing-text-and-code-embeddings/
+    @staticmethod
+    def compute_similar_score_key_phrases_GPT(doc_vector, candidates, candidate_vectors):
+        try:
+            if len(candidates) == 0:
+                return []
+
+            # Encode cluster doc and keyword candidates into vectors for comparing the similarity
+            # candidate_vectors = model.encode(candidates, convert_to_numpy=True)
+            # Compute the distance of doc vector and each candidate vector
+            distances = cosine_similarity(np.array([doc_vector]), np.array(candidate_vectors))[0].tolist()
+            # Select top key phrases based on the distance score
+            candidate_scores = list()
+            # Get all the candidates sorted by similar score
+            for candidate, distance in zip(candidates, distances):
+                found = next((kp for kp in candidate_scores if kp['candidate'].lower() == candidate.lower()), None)
+                if not found:
+                    candidate_scores.append({'candidate': candidate, 'score': distance})
+            # Sort the phrases by scores
+            candidate_scores = sorted(candidate_scores, key=lambda k: k['score'], reverse=True)
+            return candidate_scores
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
 
     # Find top K key phrase similar to the paper
     # Ref: https://www.sbert.net/examples/applications/semantic-search/README.html
@@ -64,7 +90,7 @@ class KeywordExtractionUtility:
                     pos_tags.append(token.originalText + "_" + token.pos)
                     # sentence_tokens.append(token.originalText)
                 sentence_tagged_text = ' '.join(pos_tags)
-                sentence_tagged_text = sentence_tagged_text.replace(" -_HYPH ", " ")        # Remove the hype
+                sentence_tagged_text = sentence_tagged_text.replace(" -_HYPH ", " ")  # Remove the hype
                 # Use the regular expression to obtain n_gram
                 # Patterns: (1) JJ* plus NN and NN+
                 #           (2) JJ and JJ NN plus NN*
@@ -104,7 +130,7 @@ class KeywordExtractionUtility:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)
 
-    # Get single_word by using standard TF-IDF for each doc in
+    # Get candidate words by using POS patterns for each doc in
     @staticmethod
     def generate_tfidf_terms(cluster_docs, folder):
         # Generate n-gram of a text and avoid stop
@@ -146,7 +172,7 @@ class KeywordExtractionUtility:
             frequency_matrix = []
             for doc in _docs:
                 _doc_id = doc['DocId']  # doc id
-                doc_text = BERTArticleClusterUtility.preprocess_text(doc['Abstract'])
+                doc_text = AbstractClusterBERTUtility.preprocess_text(doc['Abstract'])
                 freq_table = {}
                 candidates = _generate_single_word_candidates(doc_text, _client)
                 for candidate in candidates:
@@ -259,7 +285,7 @@ class KeywordExtractionUtility:
 
     # Get a list of unique key phrases from all papers
     @staticmethod
-    def sort_phrases_by_similar_score(phrase_scores):
+    def sort_candidates_by_similar_score(phrase_scores):
         try:
             # Sort 'phrase list'
             sorted_phrase_list = sorted(phrase_scores, key=lambda p: p['score'], reverse=True)
@@ -281,42 +307,42 @@ class KeywordExtractionUtility:
     # Maximal Marginal Relevance minimizes redundancy and maximizes the diversity of results
     # Ref: https://towardsdatascience.com/keyword-extraction-with-bert-724efca412ea
     @staticmethod
-    def re_rank_phrases_by_maximal_margin_relevance(model, doc_text, phrase_candidates, diversity=0.5, top_k=20):
+    def re_rank_phrases_by_maximal_margin_relevance(doc_vector, candidates, candidate_vectors, diversity=0.5, top_k=20):
         try:
-            top_n = min(20, len(phrase_candidates))
-            doc_vector = model.encode([doc_text], convert_to_numpy=True)
-            phrase_vectors = model.encode(phrase_candidates, show_progress_bar=True, convert_to_numpy=True)
+            top_n = min(top_k, len(candidates))
+            # doc_vector = model.encode([doc_text], convert_to_numpy=True)
+            # phrase_vectors = model.encode(phrase_candidates, show_progress_bar=True, convert_to_numpy=True)
 
             # Extract similarity within words, and between words and the document
-            phrase_doc_similarity = cosine_similarity(phrase_vectors, doc_vector)
-            phrase_similarity = cosine_similarity(phrase_vectors, phrase_vectors)
+            candidate_doc_similarity = cosine_similarity(np.array(candidate_vectors), np.array([doc_vector]))
+            candidate_similarity = cosine_similarity(np.array(candidate_vectors), np.array(candidate_vectors))
 
             # Pick up the most similar phrase
-            most_similar_index = np.argmax(phrase_doc_similarity)
-            # Initialize candidates and already choose best keyword/key phrases
-            key_phrase_idx = [most_similar_index]
-            top_phrases = [{'key-phrase': (phrase_candidates[most_similar_index]),
-                            'score': phrase_doc_similarity[most_similar_index][0]}]
+            most_similar_index = np.argmax(candidate_doc_similarity)
+            # Initialize candidates and already choose the best keyword/key phrases
+            keyword_idx = [most_similar_index]
+            top_keywords = [{'keyword': (candidates[most_similar_index]),
+                             'score': candidate_doc_similarity[most_similar_index][0]}]
             # Get all the remaining index
-            candidate_indexes = list(filter(lambda idx: idx != most_similar_index, range(len(phrase_candidates))))
+            candidate_indexes = list(filter(lambda idx: idx != most_similar_index, range(len(candidates))))
             # Add the other candidate phrase
             for i in range(0, top_n - 1):
                 # Get similarities between doc and candidates
-                candidate_similarities = phrase_doc_similarity[candidate_indexes, :]
+                candidate_similarities = candidate_doc_similarity[candidate_indexes, :]
                 # Get similarity between candidates and a set of extracted key phrases
-                target_similarities = phrase_similarity[candidate_indexes][:, key_phrase_idx]
+                target_similarities = candidate_similarity[candidate_indexes][:, keyword_idx]
                 # Calculate MMR
                 mmr_scores = (1 - diversity) * candidate_similarities - diversity * np.max(target_similarities,
                                                                                            axis=1).reshape(-1, 1)
                 mmr_idx = candidate_indexes[np.argmax(mmr_scores)]
 
                 # Update keywords & candidates
-                top_phrases.append(
-                    {'key-phrase': phrase_candidates[mmr_idx], 'score': phrase_doc_similarity[mmr_idx][0]})
-                key_phrase_idx.append(mmr_idx)
+                top_keywords.append(
+                    {'keyword': candidates[mmr_idx], 'score': candidate_doc_similarity[mmr_idx][0]})
+                keyword_idx.append(mmr_idx)
                 # Remove the phrase at mmr_idx from candidate
                 candidate_indexes = list(filter(lambda idx: idx != mmr_idx, candidate_indexes))
-            return top_phrases
+            return top_keywords
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)

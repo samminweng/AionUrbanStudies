@@ -9,6 +9,5 @@ __pycache__/
 *.npy
 # Ignore the temp vector data
 /.idea/runConfigurations/KeyPhrase.xml
-#/**/cluster/iteration_*/experiments/hdbscan/*
-# /**/cluster/iteration_*/experiments/hdbscan/images/*
 /output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/key_phrase_clusters/level_0/experiments/
+candidate_vectors.json
