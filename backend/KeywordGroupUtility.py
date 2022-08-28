@@ -23,7 +23,8 @@ class KeywordGroupUtility:
     @staticmethod
     def check_stop_iteration(key_phrase_clusters, total_docs):
         # Get the remaining kp_clusters
-        small_clusters = list(filter(lambda c: len(c['Key-phrases']) < KeywordGroupUtility.threshold, key_phrase_clusters))
+        small_clusters = list(
+            filter(lambda c: len(c['Key-phrases']) < KeywordGroupUtility.threshold, key_phrase_clusters))
         doc_ids = set()
         for r_cluster in small_clusters:
             for doc_id in r_cluster['DocIds']:
@@ -109,39 +110,31 @@ class KeywordGroupUtility:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)
 
-    # Cluster key phrases (vectors) using HDBSCAN clustering
+    # Group keyword vectors using HDBSCAN clustering
     @staticmethod
-    def cluster_key_phrase_experiments_by_HDBSCAN(key_phrases, key_phrase_vectors, is_fined_grain=False,
-                                                  n_neighbors=150):
-        def collect_group_results(_results, _group_label):
+    def group_keywords_by_clusters_HDBSCAN(keywords, keyword_vectors, ):
+        def collect_group_results(_keywords, _group_labels):
+            _results = list()
             try:
-                _found = next((r for r in _results if r['group'] == _group_label), None)
-                if not _found:
-                    _found = {'group': _group_label, 'count': 1}
-                    _results.append(_found)
-                else:
-                    _found['count'] += 1
+                for _keyword, _label in zip(_keywords, _group_labels):
+                    _found = next((r for r in _results if r['group'] == _label), None)
+                    if not _found:
+                        _results.append({'group': _label, 'keywords': [_keyword]})
+                    else:
+                        _found['keywords'].append(_keyword)
                 # Sort the results
-                _results = sorted(_results, key=lambda c: (c['count'], c['group']))
+                _results = sorted(_results, key=lambda c: c['group'])
                 return _results
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
-        dimensions = [200, 180, 150, 120, 110] + list(range(100, 5, -1))
-        min_sample_list = list(range(20, 1, -1))
-        min_cluster_size_list = list(range(30, 9, -1))
-        # dimensions = [200, 180, 150, 120] + list(range(100, 15, -5))
-        # min_sample_list = list(range(30, 1, -5))
-        # min_cluster_size_list = list(range(30, 9, -1))
-        # # Different parameter values
-        # if is_fined_grain:
-        #     dimensions = list(range(100, 5, -2))
-        #     min_sample_list = list(range(20, 1, -1))
-
+        min_samples = 5
+        n_neighbors = len(keywords)
+        epsilon = 0.0
+        dimensions = list(range(10, len(keywords)-2, 2))
+        min_cluster_sizes = [10, 15, 20, 25, 30, 35, 40, 45, 50]
         try:
             results = list()
-            # Filter out dimensions > the length of key phrases
-            dimensions = list(filter(lambda d: d < len(key_phrases) - 2, dimensions))
             for dimension in dimensions:
                 # Reduce the doc vectors to specific dimension
                 reduced_vectors = umap.UMAP(
@@ -149,55 +142,56 @@ class KeywordGroupUtility:
                     min_dist=0.0,
                     n_components=dimension,
                     random_state=42,
-                    metric="cosine").fit_transform(key_phrase_vectors)
-                # Get vector dimension
-                epsilon = 0.0
+                    metric="cosine").fit_transform(np.array(keyword_vectors))
                 # Compute the cosine distance/similarity for each doc vectors
                 distances = pairwise_distances(reduced_vectors, metric='cosine')
-                for min_samples in min_sample_list:
-                    for min_cluster_size in min_cluster_size_list:
-                        try:
-                            # Group key phrase vectors using HDBSCAN clustering
-                            cluster_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
-                                                             min_samples=min_samples,
-                                                             cluster_selection_epsilon=epsilon,
-                                                             metric='precomputed').fit_predict(
-                                distances.astype('float64')).tolist()
-                            cluster_results = reduce(lambda pre, cur: collect_group_results(pre, cur),
-                                                     cluster_labels, list())
-                            if len(cluster_results) > 1:
-                                cluster_vectors = distances.tolist()
-                                # Compute the scores for all clustered keywords
-                                # score = BERTArticleClusterUtility.compute_Silhouette_score(cluster_labels,
-                                #                                                            cluster_vectors)
-
-                                avg_score = silhouette_score(cluster_vectors, cluster_labels, metric='cosine')
-                                silhouette_scores = silhouette_samples(cluster_vectors, cluster_labels, metric='cosine')
-                                # Get each individual cluster's score
-                                for cluster_result in cluster_results:
-                                    cluster_no = cluster_result['group']
-                                    cluster_silhouette_vals = silhouette_scores[np.array(cluster_labels) == cluster_no]
-                                    cluster_score = np.mean(cluster_silhouette_vals)
-                                    cluster_result['score'] = cluster_score
-                                # print(cluster_results)
-                                # Output the result
-                                result = {'dimension': dimension,
-                                          'min_samples': str(min_samples),
-                                          'min_cluster_size': min_cluster_size,
-                                          'epsilon': epsilon,
-                                          'score': round(avg_score, 4),
-                                          'cluster_results': cluster_results,
-                                          'cluster_labels': cluster_labels,
-                                          'x': list(map(lambda x: round(x, 2), reduced_vectors[:, 0])),
-                                          'y': list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
-                                          }
-                                results.append(result)
-                            # print(result)
-                        except Exception as err:
-                            print("Error occurred! {err}".format(err=err))
-                            sys.exit(-1)
-                print("[Info] Complete clustering key phrases at dimension {d}".format(d=dimension))
+                for min_cluster_size in min_cluster_sizes:
+                    try:
+                        # Group key phrase vectors using HDBSCAN clustering
+                        group_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
+                                                       min_samples=min_samples,
+                                                       cluster_selection_epsilon=epsilon,
+                                                       metric='precomputed').fit_predict(
+                            distances.astype('float64')).tolist()
+                        group_results = collect_group_results(keywords, group_labels)
+                        if len(group_results) > 1:
+                            cluster_vectors = distances.tolist()
+                            # Compute the scores for all clustered keywords
+                            silhouette_scores = silhouette_samples(cluster_vectors, group_labels, metric='cosine')
+                            overall_scores = list()
+                            # Get each individual cluster's score
+                            for group_result in group_results:
+                                group_id = group_result['group']
+                                group_silhouette_scores = silhouette_scores[np.array(group_labels) == group_id]
+                                group_score = np.mean(group_silhouette_scores)
+                                group_result['score'] = group_score
+                                overall_scores.append(group_score)
+                            # Sorted the group results
+                            group_results = sorted(group_results, key=lambda r: r['score'], reverse=True)
+                            # Renumber the groups
+                            group_id = 1
+                            for group_result in group_results:
+                                group_result['group'] = group_id
+                                group_id = group_id + 1
+                            avg_score = np.average(overall_scores)
+                            # print(cluster_results)
+                            # Output the result
+                            result = {'dimension': dimension,
+                                      'min_cluster_size': min_cluster_size,
+                                      'score': avg_score,
+                                      'group_results': group_results,
+                                      'keywords': keywords,
+                                      'x': list(map(lambda x: round(x, 2), reduced_vectors[:, 0])),
+                                      'y': list(map(lambda y: round(y, 2), reduced_vectors[:, 1]))
+                                      }
+                            results.append(result)
+                        # print(result)
+                    except Exception as err:
+                        print("Error occurred! {err}".format(err=err))
+                        sys.exit(-1)
+                print("[Info] Complete grouping keywords at dimension {d}".format(d=dimension))
             # Return all experiment results
+            assert len(results) > 0     # Make we have one experiment results
             return results
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
@@ -238,9 +232,10 @@ class KeywordGroupUtility:
                 else:
                     try:
                         experiments = KeywordGroupUtility.cluster_key_phrase_experiments_by_HDBSCAN(key_phrases,
-                                                                                                      vectors,
-                                                                                                      is_fined_grain=True,
-                                                                                                      n_neighbors=len(key_phrases) - 2)
+                                                                                                    vectors,
+                                                                                                    is_fined_grain=True,
+                                                                                                    n_neighbors=len(
+                                                                                                        key_phrases) - 2)
                         # # Sort the experiments by sort
                         experiments = sorted(experiments, key=lambda ex: (ex['score'], ex['min_cluster_size']),
                                              reverse=True)
@@ -296,61 +291,61 @@ class KeywordGroupUtility:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)
 
-    # Visualise the keyword clusters
+    # Visualise the keyword groups
     @staticmethod
-    def visualise_keywords_cluster_results(cluster_no, key_phrase_clusters,
-                                           folder):
+    def visualise_keyword_group_results(cluster_no, keyword_groups, folder):
         try:
+            # Filter out the outlier groups (<0)
+            keyword_groups = list(filter(lambda g: g['score'] >= 0, keyword_groups))
             # Visualise HDBSCAN clustering results using dot chart
-            colors = sns.color_palette('tab10', n_colors=len(key_phrase_clusters)).as_hex()
+            colors = sns.color_palette('tab10', n_colors=len(keyword_groups)).as_hex()
             # Plot clustered dots and outliers
             fig = go.Figure()
             scores = list()
             x_pos = list()
             y_pos = list()
-            for kp_cluster in key_phrase_clusters:
-                kp_cluster_no = kp_cluster['Group']
-                score = kp_cluster['score']
+            for keyword_group in keyword_groups:
+                keyword_group_no = keyword_group['group']
+                score = keyword_group['score']
                 scores.append(score)
-                marker_color = colors[kp_cluster_no - 1]
+                marker_color = colors[keyword_group_no - 1]
                 marker_symbol = 'circle'
-                name = 'Keyword Cluster {no}'.format(no=kp_cluster_no)
+                name = 'Keyword Group {no}'.format(no=keyword_group_no)
                 marker_size = 8
                 opacity = 1
                 # Add one keyword clusters
                 fig.add_trace(go.Scatter(
                     name=name,
                     mode='markers',
-                    x=kp_cluster['x'],
-                    y=kp_cluster['y'],
+                    x=keyword_group['x'],
+                    y=keyword_group['y'],
                     marker=dict(line_width=1, symbol=marker_symbol,
                                 size=marker_size, color=marker_color,
                                 opacity=opacity)
                 ))
-                x_pos = x_pos + kp_cluster['x']
-                y_pos = y_pos + kp_cluster['y']
-
+                x_pos = x_pos + keyword_group['x']
+                y_pos = y_pos + keyword_group['y']
             avg_score = np.round(np.mean(scores), decimals=3)
-            title = 'Article Cluster #' + str(cluster_no) + ' score = ' + str(avg_score)
+            title = 'Abstract Cluster #' + str(cluster_no) + ' score = ' + str(avg_score)
 
-            if len(key_phrase_clusters) <= 4:
-                x_max = round(max(x_pos) + 1.5)
-                x_min = round(min(x_pos) - 1.5)
-                y_max = round(max(y_pos) + 1.5)
-                y_min = round(min(y_pos) - 1.5)
-                # Update x, y axis
-                fig.update_layout(xaxis_range=[x_min, x_max],
-                                  yaxis_range=[y_min, y_max])
-                # Figure layout
+            x_center = (np.amax(x_pos) + np.amin(x_pos))/2
+            x_min = min(x_center - 2, np.amin(x_pos))
+            x_max = max(x_center + 2, np.amax(x_pos))
+            y_center = (np.amax(y_pos) + np.amin(y_pos)) / 2
+            y_min = min(y_center - 2, np.amin(y_pos))
+            y_max = max(y_center + 2, np.amax(y_pos))
+            # # Update x, y axis
+            fig.update_layout(xaxis_range=[x_min, x_max],
+                              yaxis_range=[y_min, y_max])
+            # Figure layout
             fig.update_layout(title=title,
                               width=600, height=800,
                               legend=dict(orientation="v"),
                               margin=dict(l=20, r=20, t=30, b=40))
-
-            file_name = 'key_phrases_cluster_#' + str(cluster_no)
+            file_name = 'keyword_groups_cluster_#' + str(cluster_no)
             file_path = os.path.join(folder, file_name + ".png")
             pio.write_image(fig, file_path, format='png')
-            print("Output the images of clustered results to " + file_path)
+            print("Output the images of keyword groups in cluster #" + str(cluster_no) + " " + file_path)
         except Exception as err:
             print("Error occurred! {err}".format(err=err))
             sys.exit(-1)

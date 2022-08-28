@@ -16,6 +16,7 @@
       <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_10/experiments/hdbscan" />
       <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_11/experiments/hdbscan" />
       <excludeFolder url="file://$MODULE_DIR$/output/CultureUrbanStudyCorpus/cluster/iteration_12/experiments/hdbscan" />
+      <excludeFolder url="file://$MODULE_DIR$/output/AIMLUrbanStudyCorpus/cluster_merge/key_phrases/key_phrase_clusters/level_0/experiments" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (tf_gpu)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -177,7 +177,7 @@ class KeywordExtraction:
                         # Check if keyword vector exists
                         found = next((vector for vector in keyword_vectors if vector['keyword'].lower() == keyword), None)
                         if not found:
-                            keyword_vector = next((vector for vector in candidate_vectors
+                            keyword_vector = next((vector['vector'] for vector in candidate_vectors
                                                   if vector['candidate'].lower() == keyword.lower()), None)
                             assert keyword_vector is not None
                             keyword_vectors.append({"keyword": keyword.lower(), "vector": keyword_vector})
