@@ -1235,6 +1235,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus_OpenAIEmbedding/AIMLUrbanStudyCorpus_cluster_terms_keyword_groups.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus_OpenAIEmbedding/AIMLUrbanStudyCorpus_clusters.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus_OpenAIEmbedding/abstract_clustering_phase/AIMLUrbanStudyCorpus_cluster_terms.csv">
           <value>
             <Attribute>

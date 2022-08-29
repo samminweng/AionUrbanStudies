@@ -281,14 +281,105 @@ class KeywordGroup:
             path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups.json')
             cluster_df.to_json(path, orient='records')
             print('Output keyword groups per cluster to ' + path)
+
+        except Exception as err:
+            print("Error occurred! {err}".format(err=err))
+
+    # Find the common terms that appear frequently (more than two abstracts) in a cluster
+    def obtain_common_terms_by_clusters(self):
+        # Collect the common terms from each cluster's frequent terms
+        def collect_common_terms_from_cluster_freq_terms(_grouped_clusters):
+            try:
+                # Collect the common terms
+                _common_terms_dict = {}
+                # Collect the frequencies of each term that appear in the clusters
+                for _cluster in _grouped_clusters:
+                    _cluster_freq_terms = _cluster['unique_terms']
+                    for _term in _cluster_freq_terms:
+                        if _term['term'].lower() not in _common_terms_dict:
+                            _common_terms_dict.setdefault(_term['term'].lower(), 0)
+                        _common_terms_dict[_term['term'].lower()] = _common_terms_dict[_term['term'].lower()] + 1
+                # Filter out common terms
+                _common_terms = list(_term for _term, _freq in _common_terms_dict.items() if _freq > 1)
+                # print(_common_terms)
+                return _common_terms
+            except Exception as _e:
+                print("Error occurred! {err}".format(err=_e))
+
+        try:
+            folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.phase)
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups.json')
+            cluster_df = pd.read_json(path)
+            clusters = cluster_df.to_dict("records")
+            # Get the maximal cluster group
+            max_group = cluster_df['cluster_group'].max()
+            results = list()
+            # Go through each cluster group
+            for cluster_group_no in range(0, max_group + 1):
+                try:
+                    iteration = 1
+                    common_terms = list()
+                    # Get the clusters within the same cluster group
+                    grouped_clusters = list(filter(lambda c: c['cluster_group'] == cluster_group_no, clusters))
+                    # Initialize the cluster's updated_freq_terms
+                    for cluster in grouped_clusters:
+                        cluster['unique_terms'] = cluster['freq_terms'][:10]
+                    # Get the common terms
+                    common_terms = common_terms + collect_common_terms_from_cluster_freq_terms(grouped_clusters)
+                    # Removed duplicated
+                    common_terms = list(dict.fromkeys(common_terms))
+                    is_full = False
+                    while not is_full:
+                        is_full = True
+                        # filter common terms from each cluster
+                        for index, cluster in enumerate(grouped_clusters):
+                            cluster_selected_terms = cluster['unique_terms']
+                            updated_cluster_terms = list(filter(lambda t: t['term'].lower() not in common_terms, cluster_selected_terms))
+                            if len(updated_cluster_terms) < 10:
+                                diff = 10 - len(updated_cluster_terms)
+                                terms = list(map(lambda t: t['term'].lower(), updated_cluster_terms))
+                                # Get the freq terms that do not contain common terms or updated_cluster_terms
+                                remaining_terms = list(filter(lambda t: t['term'].lower() not in common_terms and
+                                                                        t['term'].lower() not in terms,
+                                                              cluster['freq_terms']))
+                                updated_cluster_terms = updated_cluster_terms + remaining_terms[:diff]
+                                is_full = is_full & False
+                            else:
+                                is_full = True
+                            # Each cluster has 10 terms
+                            grouped_clusters[index]['unique_terms'] = updated_cluster_terms
+                            # print(grouped_clusters)
+                        # Start another iteration
+                        print("Start iteration {d} to find the common terms {a}".format(d=iteration,a=common_terms))
+                        iteration = iteration + 1
+                        # # Stop searching common terms
+                        if is_full:
+                            # Update the cluster's common terms
+                            for cluster in grouped_clusters:
+                                cluster['common_terms'] = common_terms
+                                results.append(cluster)
+                            print("Complete finding common terms for cluster group {g}".format(g=cluster_group_no))
+                except Exception as e:
+                    print("Error occurred! {err}".format(err=e))
+                    sys.exit(-1)
+            print(results)
+            folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name)
+            df = pd.DataFrame(results, columns=['iteration', 'cluster_group', 'cluster', 'score', 'count', 'doc_ids',
+                                                'keyword_groups', 'freq_terms', 'unique_terms', 'common_terms'])
+            path = os.path.join(folder, self.args.case_name + '_cluster_terms_keyword_groups.csv')
+            df.to_csv(path, encoding='utf-8', index=False)
+            # Write article corpus to a json file
+            path = os.path.join(folder,
+                                self.args.case_name + '_cluster_terms_keyword_groups.json')
+            df.to_json(path, orient='records')
             # Output the corpus
             path = os.path.join(folder, self.args.case_name + '_clusters.csv')
             self.corpus_df.to_csv(path, encoding='utf-8', index=False)
             path = os.path.join(folder, self.args.case_name + '_clusters.json')
             self.corpus_df.to_json(path, orient='records')
             print('Output docs in the corpus to ' + path)
-        except Exception as err:
-            print("Error occurred! {err}".format(err=err))
+        except Exception as e:
+            print("Error occurred! {err}".format(err=e))
 
 
 # Main entry
@@ -298,6 +389,7 @@ if __name__ == '__main__':
         # Run the keyword grouping experiments
         # kp.experiment_group_keywords()
         # kp.obtain_best_keyword_groupings()
-        kp.combine_cluster_terms_keyword_groups()
+        # kp.combine_cluster_terms_keyword_groups()
+        kp.obtain_common_terms_by_clusters()
     except Exception as err:
         print("Error occurred! {err}".format(err=err))
