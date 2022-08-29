@@ -324,13 +324,13 @@ class KeywordGroup:
                     # Initialize the cluster's updated_freq_terms
                     for cluster in grouped_clusters:
                         cluster['unique_terms'] = cluster['freq_terms'][:10]
-                    # Get the common terms
-                    common_terms = common_terms + collect_common_terms_from_cluster_freq_terms(grouped_clusters)
-                    # Removed duplicated
-                    common_terms = list(dict.fromkeys(common_terms))
                     is_full = False
                     while not is_full:
                         is_full = True
+                        # Get the common terms
+                        common_terms = common_terms + collect_common_terms_from_cluster_freq_terms(grouped_clusters)
+                        # Removed duplicated
+                        common_terms = list(dict.fromkeys(common_terms))
                         # filter common terms from each cluster
                         for index, cluster in enumerate(grouped_clusters):
                             cluster_selected_terms = cluster['unique_terms']

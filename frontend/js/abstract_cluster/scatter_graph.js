@@ -1,39 +1,25 @@
 // Create scatter graph
 function ScatterGraph(corpus_data, cluster_data, _select_no) {
     const width = 600;
-    const height = 650;
-
-    // Collect all the groups
-    const group_data = cluster_data.reduce((pre, cur) => {
-        const _group_no = cur['Group']
+    const height = 600;
+    // Collect all the cluster groups
+    const cluster_groups = cluster_data.reduce((pre, cur) => {
+        const _group_no = cur['cluster_group']
         if(!pre.includes(_group_no)){
             pre.push(_group_no);
         }
         return pre;
     }, []);
-    // console.log(group_data);
-    // Get the cluster color by group number
-    function get_color(article_cluster){
-        const cluster_no = article_cluster['Cluster'];
-        const group_no = article_cluster['Group'];
-        // Get the group colors < group_no
-        let index = 0;
-        for(let i=1; i < group_no; i++){
-            index += group_color_plates[i].length;
-        }
-        let color_index = cluster_no - index - 1;
-        return group_color_plates[group_no][color_index];
-    }
 
     // Convert the json data to Plotly js data format
     function convert_cluster_data_to_data_points() {
         let traces = [];
-        for(const group_no of group_data){
-            const clusters = cluster_data.filter(c => c['Group'] === group_no);
-            const doc_count = clusters.reduce((pre, cur) => pre + cur['DocIds'].length, 0);
+        for(const group_no of cluster_groups){
+            const clusters = cluster_data.filter(c => c['cluster_group'] === group_no);
+            const doc_count = clusters.reduce((pre, cur) => pre + cur['doc_ids'].length, 0);
             // Convert the clustered data into the format for Plotly js chart
             for (const cluster of clusters) {
-                const cluster_no = cluster['Cluster'];
+                const cluster_no = cluster['cluster'];
                 const cluster_docs = corpus_data.filter(d => d['Cluster'] === cluster_no);
                 // const cluster_name = "" + cluster_no;
                 let data_point = {'x': [], 'y': [], 'label': []};
@@ -41,7 +27,7 @@ function ScatterGraph(corpus_data, cluster_data, _select_no) {
                     data_point['x'].push(doc.x);
                     data_point['y'].push(doc.y);
                     data_point['label'].push(
-                        '<b>' + clusters.length + ' abstract clusters</b> in the region contain ' + doc_count + ' articles.'
+                        '<b>' + clusters.length + ' abstract clusters</b> in the region contain ' + doc_count + ' abstracts.'
                     );
                 }
                 // Trace setting
@@ -57,7 +43,7 @@ function ScatterGraph(corpus_data, cluster_data, _select_no) {
                     if(cluster_no === _select_no) {
                         trace['opacity'] = 1;
                     }else{
-                        trace['opacity'] = 0.2;
+                        trace['opacity'] = 0.7;
                     }
                 }
                 traces.push(trace);
@@ -124,12 +110,12 @@ function ScatterGraph(corpus_data, cluster_data, _select_no) {
                 const point = data.points[0];
                 const cluster_no = parseInt(point.data.name);
                 if(cluster_no){
-                    const selected_cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
-                    const grouped_clusters = cluster_data.filter(c => c['Group'] === selected_cluster['Group']);
+                    const selected_cluster = cluster_data.find(c => c['cluster'] === cluster_no);
+                    const grouped_clusters = cluster_data.filter(c => c['cluster_group'] === selected_cluster['cluster_group']);
                     // Update the opacity
-                    Plotly.restyle(chart, {opacity: 0.2}, cluster_data.map(c => c['Cluster']-1));
-                    Plotly.restyle(chart, {opacity: 1}, grouped_clusters.map(c => c['Cluster']-1));
-                    const list = new ArticleClusterList(corpus_data, cluster_data, grouped_clusters);
+                    Plotly.restyle(chart, {opacity: 0.7}, cluster_data.map(c => c['cluster']-1));
+                    Plotly.restyle(chart, {opacity: 1}, grouped_clusters.map(c => c['cluster']-1));
+                    const list = new AbstractClusterList(corpus_data, cluster_data, grouped_clusters);
                 }
             }
         });
