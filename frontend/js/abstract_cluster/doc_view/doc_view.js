@@ -1,7 +1,7 @@
 // Create a text view to display the content of the article
 function DocView(doc, selected_term) {
     const container = $('<div class="card text-dark bg-light small">' +
-        '<div class="card-body">' +
+        '<div class="card-body m-3">' +
         '<div class="card-text">' +
         '</div>' +
         '</div></div>');
@@ -35,16 +35,11 @@ function DocView(doc, selected_term) {
     }
 
     function _createUI() {
-        const doc_key_phrases = doc['KeyPhrases'];
+        const doc_key_phrases = doc['GPTKeywords'];
         // Add BERT-based Key Phrase
         const key_phrase_div = $('<p class="border-info">' +
             '<span class="fw-bold">Auto-generated Keywords: </span>' + doc_key_phrases.join(", ") + '</p>');
         container.find(".card-text").append(key_phrase_div);
-        // // Add TFIDF terms
-        // const terms = doc['TFIDFTerms'].map(term => term['term']).slice(0, 5);
-        // const term_div = $('<p class="container border-info">' +
-        //     '<span class="fw-bold">TFIDF Terms: </span>' + terms.join("; ") + '</p>')
-        // container.find(".card-text").append(term_div);
         // Add the title
         let title_div = $('<div></div>');
         title_div.append($('<span class="fw-bold">Title: </span><span>' + doc['Title'] + '</span>'));

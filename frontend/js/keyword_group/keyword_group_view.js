@@ -1,9 +1,9 @@
 // Create a div to display the grouped key phrases
-function KeywordClusterView(keyword_cluster, docs) {
-    const group_no = keyword_cluster['Group'];
-    const score = keyword_cluster['score'].toFixed(2);
-    const keywords = keyword_cluster['Key-phrases'];
-    const color_no = group_no -1;
+function KeywordClusterView(keyword_group, docs) {
+    const group_no = keyword_group['group'];
+    const score = keyword_group['score'].toFixed(2);
+    const keywords = keyword_group['keywords'];
+    const color_no = group_no - 1;
     const color = color_plates[color_no];
 
     // Display keywords in accordion
@@ -20,12 +20,12 @@ function KeywordClusterView(keyword_cluster, docs) {
                 const col = $('<div class="col-sm border-bottom text-sm-start text-truncate"></div>')
                 if (index < keywords.length) {
                     const keyword = keywords[index];
-                    const btn = $('<a href="#keyword_cluster_view" class="link-primary">' + keyword+ '</a>');
+                    const btn = $('<a href="#keyword_cluster_view" class="link-primary small">' + keyword+ '</a>');
                     // Click the keyword button to display the relevant article
                     // btn.button();
                     btn.click(function(event){
                        const matched_docs = docs.filter(d => {
-                           const article_keywords = d['KeyPhrases'];
+                           const article_keywords = d['GPTKeywords'];
                            const found = article_keywords.find(k => k.toLowerCase() === keyword.toLowerCase());
                            if(found)
                                 return true;
@@ -46,9 +46,9 @@ function KeywordClusterView(keyword_cluster, docs) {
     function _createUI() {
         $('#keyword_group_view').empty();
         // Heading
-        const container = $('<div class="container-sm small"></div>');
+        const container = $('<div class="container-sm"></div>');
         const heading = $('<div>' +
-                          '<span class="fw-bold" style="color:' + color + '">Keyword Group ' + group_no + ' </span>' +
+                          '<span class="fw-bold" style="color:' + color + '">Keyword Group #' + group_no + ' </span>' +
                           ' (' + score + ') contains ' + keywords.length + ' keywords' + ' across ' + docs.length + ' articles</div>');
         // A list of grouped key phrases
         container.append(heading);

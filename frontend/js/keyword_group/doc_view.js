@@ -1,9 +1,9 @@
 // Create a text view to display the content of the article
 function DocView(doc, keywords, color_no) {
     const class_name = 'keyword_' + color_no;
-    const container = $('<div class="card text-dark bg-light small m-0 p-0">' +
+    const container = $('<div class="card text-dark bg-light m-0">' +
         '<div class="card-body small">' +
-        '<p class="card-text">' +
+        '<p class="card-text small m-3">' +
         '</p>' +
         '</div></div>');
     this.get_container = function () {
@@ -36,9 +36,9 @@ function DocView(doc, keywords, color_no) {
     }
 
     function _createUI() {
-        const doc_key_phrases = doc['KeyPhrases'];
+        const doc_key_phrases = doc['GPTKeywords'];
         // Add BERT-based Key Phrase
-        const key_phrase_div = $('<div class="border-info small">' +
+        const key_phrase_div = $('<div class="border-info">' +
             '<span class="fw-bold">Auto-generated Keywords: </span>' + doc_key_phrases.join(", ") + '</div>');
         container.find(".card-text").append(key_phrase_div);
         // // Add TFIDF terms

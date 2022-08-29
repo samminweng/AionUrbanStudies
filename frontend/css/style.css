@@ -142,3 +142,9 @@ tfoot { display:table-footer-group }
 }
 
 
+.my-sidebar {
+    width: 0.1%;
+    /*-ms-flex: 0 0 50px;*/
+    /*flex: 0 0 50px;*/
+    background-color: white;
+}

@@ -21,9 +21,9 @@
 <div class="container">
     <div class="h4">Abstract Cluster Chart</div>
     <div>
-        <span id="total_papers"></span> (related to AI and machine learning on Urban Study) research abstracts are
+        <span id="total_papers"></span> abstracts across machine learning and urban study are
         clustered into abstract clusters using an iterative clustering
-        (BERT-based Sentence Transformer + HDBSCAN clustering), which is an enhancement to
+        (OpenAI GPT-3 Text Embeddings + HDBSCAN clustering), which is an enhancement to
         <a target="_blank" href="https://maartengr.github.io/BERTopic/">BERTopic</a>
     </div>
     <!-- Chart and doc list -->
@@ -37,16 +37,17 @@
                 </div>
             </div>
         </div>
+        <div class="my-sidebar"></div>
         <div class="col border border-3 p-3">
-            <div id="article_cluster_list">
+            <div id="abstract_cluster_list">
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col small">
-            <div id="article_cluster_term_list" class="container-sm m-3"></div>
-            <div id="article_cluster_header" class="container-sm m-3"></div>
-            <div id="article_cluster_doc_list" class="container-sm m-3"></div>
+        <div class="col small mt-3">
+            <div id="abstract_cluster_term_list" class="small"></div>
+            <div id="abstract_cluster_header" class="small p-3"></div>
+            <div id="abstract_cluster_doc_list" class="small"></div>
         </div>
     </div>
     <!-- footer -->

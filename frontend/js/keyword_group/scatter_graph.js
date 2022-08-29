@@ -1,9 +1,9 @@
 // Create scatter graph
-function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_cluster_no) {
+function ScatterGraph(corpus_data, cluster_data, cluster_no, keyword_group_no) {
     const width = 600;
     const height = 600;
-    const article_cluster = cluster_data.find(c => c['Cluster'] === article_cluster_no);
-    const keyword_groups = article_cluster['KeywordGroups'];
+    const abstract_cluster = cluster_data.find(c => c['cluster'] === cluster_no);
+    const keyword_groups = abstract_cluster['keyword_groups'];
     let x_range = [0, 12];
     let y_range = [0, 12];
 
@@ -32,8 +32,8 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
         // Convert the clustered data into the format for Plotly js chart
         for (const keyword_group of keyword_groups) {
             if(keyword_group['score'] >0 ){
-                const group_no = keyword_group['Group'];
-                const keywords = keyword_group['Key-phrases'];
+                const group_no = keyword_group['group'];
+                const keywords = keyword_group['keywords'];
                 const x_pos = keyword_group['x'];
                 const y_pos = keyword_group['y'];
                 const score = keyword_group['score'];
@@ -46,7 +46,7 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
                     data_point['y'].push(y_pos[i]);
                     // Tooltip label displays top 5 topics
                     data_point['label'].push(
-                        '<b>Keyword Cluster ' + group_no + '</b> (' + keywords.length +
+                        '<b>Keyword Group ' + group_no + '</b> (' + keywords.length +
                         ' keywords, ' + score.toFixed(2) + ' score)<br><extra></extra>');
                 }
                 // // Trace setting
@@ -57,8 +57,8 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
                     'hovertemplate': '%{text}', 'opacity': 1
                 };
                 // Update opacity based on the selection
-                if (keyword_cluster_no) {
-                    if (keyword_cluster_no === group_no) {
+                if (keyword_group_no) {
+                    if (keyword_group_no === group_no) {
                         trace['opacity'] = 1;
                     } else {
                         trace['opacity'] = 0.5;
@@ -136,15 +136,14 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
                 const point = data.points[0];
                 const group_no = parseInt(point.data.name);
                 if(group_no){
-                    const keyword_cluster = keyword_clusters.find(c => c['Group'] === group_no);
-                    const other_clusters = keyword_clusters.filter(c => c['Group'] !== group_no);
+                    const keyword_group = keyword_groups.find(c => c['group'] === group_no);
+                    const other_groups = keyword_groups.filter(c => c['group'] !== group_no);
                     // Update the opacity
-                    Plotly.restyle(chart, {opacity: 0.2}, other_clusters.map(c => c['Group']-1));
+                    Plotly.restyle(chart, {opacity: 0.2}, other_groups.map(c => c['group']-1));
                     Plotly.restyle(chart, {opacity: 1}, [group_no-1]);
                     // Display keyword cluster view
-                    const docs = corpus_data.filter(d => keyword_cluster['DocIds'].includes(d['DocId']));
-                    const view = new KeywordClusterView(keyword_cluster, docs);
-
+                    const docs = corpus_data.filter(d => keyword_group['doc_ids'].includes(d['DocId']));
+                    const view = new KeywordClusterView(keyword_group, docs);
                 }
             }
         });
@@ -157,9 +156,9 @@ function ScatterGraph(corpus_data, cluster_data, article_cluster_no, keyword_clu
         $('#cluster_chart').css('width', width).css('height', height);
         drawChart();
         // Display all keyword clusters
-        const view = new KeywordClusterList(corpus_data, cluster_data, article_cluster_no);
+        const view = new KeywordGroupList(corpus_data, cluster_data, cluster_no);
 
-        $('#keyword_cluster_view').empty();
+        $('#keyword_group_view').empty();
         $('#doc_list_view').empty();
     }
 

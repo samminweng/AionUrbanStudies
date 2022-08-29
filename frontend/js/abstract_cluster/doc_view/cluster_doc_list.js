@@ -1,14 +1,13 @@
 function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
-    const cluster = cluster_data.find(c => c['Cluster'] === cluster_no);
-    const cluster_docs = corpus_data.filter(d => cluster['DocIds'].includes(parseInt(d['DocId'])));
+    const cluster = cluster_data.find(c => c['cluster'] === cluster_no);
+    const cluster_docs = corpus_data.filter(d => cluster['doc_ids'].includes(parseInt(d['DocId'])));
     // Display Top 10 Distinct Terms and grouped key phrases
     function create_cluster_terms_key_phrase_topics(){
         // Create a div to display a list of topic (a link)
         const view = $('<div></div>');
         const container = $('<div class="container"></div>');
         const term_p = $('<div></div>');
-        const freq_terms = cluster['FreqTerms'];
-        const cluster_terms = freq_terms.filter(t => cluster['ClusterTerms'].includes(t['term'].toLowerCase()));
+        const cluster_terms = cluster['unique_terms'];
         // Sort the terms by its number of docs
         cluster_terms.sort((a, b) => b['doc_ids'].length - a['doc_ids'].length);
         // Add top 10 cluster terms (each term is a link)
@@ -43,13 +42,13 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
         return view;
     }
     function _createUI() {
-        $('#article_cluster_term_list').empty();
+        $('#abstract_cluster_term_list').empty();
         const container = $('<div></div>');
         // Create a div to display
         const header = $('<div class="fw-bold"></div>');
-        const score = cluster['Score'];
+        const score = cluster['score'];
         const heading = $('<div>' +
-            '<span style="color: ' +color +'">Abstract Cluster ' + cluster_no +'</span> ' +
+            '<span style="color: ' +color +'">Abstract Cluster #' + cluster_no +'</span> ' +
             'has ' + cluster_docs.length + ' abstracts ' +
             'and <span class="score">' + score.toFixed(2) + '</span> score</div>');
 
@@ -60,7 +59,7 @@ function ClusterDocList(cluster_no, corpus_data, cluster_data, color) {
         container.append(header);
         // Create a div to display top 10 Topic of a cluster
         container.append(create_cluster_terms_key_phrase_topics());
-        $('#article_cluster_term_list').append(container);
+        $('#abstract_cluster_term_list').append(container);
         // Create doc list
         const doc_list = new DocList(cluster_docs, cluster, null);
 

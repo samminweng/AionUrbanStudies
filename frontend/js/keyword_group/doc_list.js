@@ -40,7 +40,7 @@ function DocList(docs, keywords, color_no){
             pageSize: 3,
             showNavigator: true,
             formatNavigator: '<span style="color: #f00"><%= currentPage %></span>/<%= totalPage %> pages, ' +
-                '<%= totalNumber %> articles',
+                '<%= totalNumber %> abstracts',
             position: 'top',
             className: 'paginationjs-theme-blue paginationjs-small',
             // showGoInput: true,

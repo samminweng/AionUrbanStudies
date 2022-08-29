@@ -28,7 +28,7 @@ function DocList(docs, cluster, selected_term) {
 
     // Create a heading to display the number of articles and sort function
     function createHeading(){
-        $('#article_cluster_header').empty();
+        $('#abstract_cluster_header').empty();
         let heading_text = "";
         if(selected_term !== null){
             heading_text = "about " + selected_term;
@@ -68,7 +68,7 @@ function DocList(docs, cluster, selected_term) {
             createDocList();
             // _createUI();
         });
-        $('#article_cluster_header').append(container);
+        $('#abstract_cluster_header').append(container);
     }
 
     // Create a pagination to show the documents
@@ -102,14 +102,14 @@ function DocList(docs, cluster, selected_term) {
     }
     // Create a list of docs
     function createDocList(){
-        $('#article_cluster_doc_list').empty();
-        const container = $('<div></div>');
+        $('#abstract_cluster_doc_list').empty();
+        const container = $('<div class="container-sm"></div>');
         const doc_table = $('<div class="card-group"></div>');
         const pagination = createPagination(doc_table);
         // Add the table to display the list of documents.
         container.append(pagination);
         container.append(doc_table);
-        $('#article_cluster_doc_list').append(container);
+        $('#abstract_cluster_doc_list').append(container);
     }
 
     // Create header and doc list
