@@ -29,8 +29,7 @@ class KeywordGroup:
             model_name='curie',
             phase='keyword_grouping_phase',
             previous_phase='keyword_extraction_phase',
-            path='data',
-            diversity=0.5
+            path='data'
         )
         # Load corpus dataset
         path = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name, self.args.previous_phase,
@@ -59,8 +58,8 @@ class KeywordGroup:
         for cluster in self.clusters:
             try:
                 cluster_id = cluster['cluster']
-                # if cluster_id < 17:
-                #     continue
+                if cluster_id != 9:
+                    continue
                 key_phrase_folder = os.path.join('output', self.args.case_name + '_' + self.args.embedding_name,
                                                  self.args.previous_phase, 'doc_keywords')
                 path = os.path.join(key_phrase_folder, 'doc_keyword_cluster_#' + str(cluster_id) + '.json')

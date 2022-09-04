@@ -139,8 +139,8 @@ function ScatterGraph(corpus_data, cluster_data, cluster_no, keyword_group_no) {
                     const keyword_group = keyword_groups.find(c => c['group'] === group_no);
                     const other_groups = keyword_groups.filter(c => c['group'] !== group_no);
                     // Update the opacity
-                    Plotly.restyle(chart, {opacity: 0.2}, other_groups.map(c => c['group']-1));
-                    Plotly.restyle(chart, {opacity: 1}, [group_no-1]);
+                    // Plotly.restyle(chart, {opacity: 0.2}, other_groups.map(c => c['group']-1));
+                    // Plotly.restyle(chart, {opacity: 1}, [group_no-1]);
                     // Display keyword cluster view
                     const docs = corpus_data.filter(d => keyword_group['doc_ids'].includes(d['DocId']));
                     const view = new KeywordClusterView(keyword_group, docs);

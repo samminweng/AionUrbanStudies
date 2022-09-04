@@ -128,7 +128,7 @@ class KeywordGroupUtility:
             except Exception as _err:
                 print("Error occurred! {err}".format(err=_err))
 
-        min_samples = 5
+        # min_samples = 5
         n_neighbors = len(keywords)
         epsilon = 0.0
         dimensions = list(range(10, len(keywords)-2, 2))
@@ -149,7 +149,7 @@ class KeywordGroupUtility:
                     try:
                         # Group key phrase vectors using HDBSCAN clustering
                         group_labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
-                                                       min_samples=min_samples,
+                                                       # min_samples=min_samples,
                                                        cluster_selection_epsilon=epsilon,
                                                        metric='precomputed').fit_predict(
                             distances.astype('float64')).tolist()

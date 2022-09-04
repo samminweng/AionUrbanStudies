@@ -43,7 +43,7 @@ function ScatterGraph(corpus_data, cluster_data, _select_no) {
                     if(cluster_no === _select_no) {
                         trace['opacity'] = 1;
                     }else{
-                        trace['opacity'] = 0.7;
+                        trace['opacity'] = 0.2;
                     }
                 }
                 traces.push(trace);
@@ -113,8 +113,8 @@ function ScatterGraph(corpus_data, cluster_data, _select_no) {
                     const selected_cluster = cluster_data.find(c => c['cluster'] === cluster_no);
                     const grouped_clusters = cluster_data.filter(c => c['cluster_group'] === selected_cluster['cluster_group']);
                     // Update the opacity
-                    Plotly.restyle(chart, {opacity: 0.7}, cluster_data.map(c => c['cluster']-1));
-                    Plotly.restyle(chart, {opacity: 1}, grouped_clusters.map(c => c['cluster']-1));
+                    // Plotly.restyle(chart, {opacity: 0.2}, cluster_data.map(c => c['cluster']-1));
+                    // Plotly.restyle(chart, {opacity: 1}, grouped_clusters.map(c => c['cluster']-1));
                     const list = new AbstractClusterList(corpus_data, cluster_data, grouped_clusters);
                 }
             }
