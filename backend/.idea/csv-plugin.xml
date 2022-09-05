@@ -1277,7 +1277,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus_OpenAIEmbedding/abstract_clustering_phase/iteration_1/cluster/hdbscan_experiments/cluster_doc_vector_results.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/AIMLUrbanStudyCorpus_OpenAIEmbedding/abstract_clustering_phase/iteration_1/cluster/hdbscan_experiments/cluster_results.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/AIMLUrbanStudyCorpus_OpenAIEmbedding/abstract_clustering_phase/iteration_1/hdbscan_experiments/cluster_doc_vector_results.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
