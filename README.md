@@ -24,7 +24,7 @@ This repository contains the source code that is published for the purpose of gi
 2. `keyword_group.html`: keyword group visualisation
 
 **Backend**
-1. `AbstractClusterBERT.py`: convert abstracts to context embeddings using OpenAI API (GPT-3 text similarity embedding model) and find the clusters based on cosine similarities.
+1. `AbstractClusterOpenAI.py`: convert abstracts to context embeddings using OpenAI API (GPT-3 text similarity embedding model) and find the clusters based on cosine similarities.
 2. `AbstractClusterTerm.py`: pick up frequent terms for each abstract cluster
 3. `KeywordExtraction.py`: extract keywords from each abstract using OpenAI API (GPT-3 text similarity embedding model) and MMR ranking algorithm.
 4. `KeywordGroup.py`: group keywords based on semantic similarity to represent the topic
