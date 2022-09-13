@@ -31,10 +31,10 @@ This repository contains the source code that is published for the purpose of gi
 
 **Required Libraries**
 1. `openai`: https://openai.com/api/
-1. `UMAP`: https://umap-learn.readthedocs.io/en/latest/
-2. `HDBSCAN`: https://hdbscan.readthedocs.io/en/latest/index.html
-3. `scikit-learn`: https://scikit-learn.org/stable/
-4. `nltk`: https://www.nltk.org/
-5. `plotly`: https://plotly.com/python/
-6. `stanza`: https://stanfordnlp.github.io/stanza/
+2. `UMAP`: https://umap-learn.readthedocs.io/en/latest/
+3. `HDBSCAN`: https://hdbscan.readthedocs.io/en/latest/index.html
+4. `scikit-learn`: https://scikit-learn.org/stable/
+5. `nltk`: https://www.nltk.org/
+6. `plotly`: https://plotly.com/python/
+7. `stanza`: https://stanfordnlp.github.io/stanza/
 
