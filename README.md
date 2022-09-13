@@ -30,6 +30,7 @@ This repository contains the source code that is published for the purpose of gi
 4. `KeywordGroup.py`: group keywords based on semantic similarity to represent the topic
 
 **Required Libraries**
+1. `openai`: https://openai.com/api/
 1. `UMAP`: https://umap-learn.readthedocs.io/en/latest/
 2. `HDBSCAN`: https://hdbscan.readthedocs.io/en/latest/index.html
 3. `scikit-learn`: https://scikit-learn.org/stable/
