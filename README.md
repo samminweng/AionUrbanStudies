@@ -1,13 +1,9 @@
 # A GPT-based tool for identifying and visualizing key topics 
 An unsupervised, semantic-similarity based topic analyzing tool detects and visualizes the topics in a collection of publication abstracts.
 
-By utilizing the pre-trained GPT-3 (generative pre-trained transformer) model, the abstracts are transformed into context vector representation (or embedding). 
-The HDBSCAN clustering algorithm and UMAP dimension reduction technique are used to find the clusters of abstracts based on semantic similarity.
-Keywords are extracted from each abstract and diversified with MMR ranking algorithm.
-Topics are labeled with groups of keywords in each cluster.
-The clustering results are evaluated using Silhouette Coefficient.
-A case study was conducted to detect key research topics from the abstracts at the intersection of Urban Study and Machine Learning fields.
-A web-based interactive visualization is presented to help examine and investigate the topics.
+By utilizing the pre-trained GPT-3 (generative pre-trained transformer) model, abstracts are transformed into a context vector representation (or embedding). The HDBSCAN clustering algorithm and UMAP dimension reduction technique are used to identify clusters of abstracts based on semantic similarity. Keywords are extracted from each abstract and diversified using the MMR ranking algorithm. Finally, the topics are labeled with groups of keywords in each cluster.
+
+The clustering results are evaluated using Silhouette Coefficient.A case study was conducted to detect key research topics from the abstracts at the intersection of Urban Study and Machine Learning fields. A web-based interactive visualization is presented to help examine and investigate the topics.
 
 Our system operate in an unsupervised manner and does not need to be trained, neither it depends on dictionaries, external-corpus, size of the text or domain.
 
