@@ -36,7 +36,7 @@ This repository contains the source code that is published for the purpose of gi
 
 **Publication**
 
-If you are interested in our project, please cite our paper:
+If you are interested in our project, please kindly cite our paper:
 
 Weng, M.-H.; Wu, S.; Dyer, M. Identification and Visualization of Key Topics in Scientific Publications with Transformer-Based Language Models and Document Clustering Methods. Appl. Sci. 2022, 12, 11220. https://doi.org/10.3390/app122111220
 
